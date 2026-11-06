@@ -1,0 +1,818 @@
+[sup 22:36:51] round 1: 241 ids pending
+[sup 22:36:51] round 1: rendering batch (25 ids): ru.contrast.stress.zamok-1 ru.lex.city.doroga ru.lex.city.kiosk ru.lex.city.metro ru.lex.city.napravo ru.lex.city.nazad ...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.contrast.stress.zamok-1: first-request 1691.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[sup 23:16:51] batch exited rc=124 (timeout or worker error)
+[sup 23:16:51] batch done: 24 clips failed verification
+[sup 23:16:51] round 1: rendering batch (25 ids): ru.lex.comparisons.zachem ru.lex.comparisons.zdorovee ru.lex.experiences.interesno ru.lex.experiences.neudacha ru.lex.ex...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.comparisons.zdorovee: first-request 698.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.comparisons.zachem: first-request 716.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.experiences.interesno: first-request 836.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[sup 23:56:51] batch exited rc=124 (timeout or worker error)
+[sup 23:56:51] batch done: 22 clips failed verification
+[sup 23:56:51] round 1: rendering batch (25 ids): ru.lex.home.teatr ru.lex.instructions.gubka ru.lex.instructions.narezat ru.lex.instructions.nazhat ru.lex.instructions.o...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.home.teatr: first-request 1527.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[sup 00:36:51] batch exited rc=124 (timeout or worker error)
+[sup 00:36:51] batch done: 24 clips failed verification
+[sup 00:36:51] round 1: rendering batch (25 ids): ru.lex.messages2.mechtat ru.lex.messages2.moment ru.lex.messages2.nachalo ru.lex.messages2.navernoe ru.lex.messages2.per...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.navernoe: first-request 1261.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[sup 01:16:52] batch exited rc=124 (timeout or worker error)
+[sup 01:16:52] batch done: 24 clips failed verification
+[sup 01:16:52] round 1: rendering batch (25 ids): ru.lex.pastevents.kupit ru.lex.pastevents.poehat ru.lex.pastevents.poezdka ru.lex.pastevents.pozvonit ru.lex.pastevents....
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.pastevents.zavtra: first-request 862.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[sup 01:56:52] batch exited rc=124 (timeout or worker error)
+[sup 01:56:52] batch done: 24 clips failed verification
+[sup 01:56:52] round 1: rendering batch (25 ids): ru.lex.problems.ustanovit ru.lex.problems.variant ru.lex.problems.zapad2 ru.lex.problems.zapchast ru.lex.routines.chitat...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[sup 02:19:52] round 1: 241 ids pending
+[sup 02:19:52] round 1: rendering batch (25 ids): ru.contrast.stress.zamok-1 ru.lex.city.doroga ru.lex.city.kiosk ru.lex.city.metro ru.lex.city.napravo ru.lex.city.nazad ...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[sup 02:49:07] round 1: 241 ids pending
+[sup 02:49:07] round 1: rendering batch (25 ids): ru.contrast.stress.zamok-1 ru.lex.city.doroga ru.lex.city.kiosk ru.lex.city.metro ru.lex.city.napravo ru.lex.city.nazad ...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.contrast.stress.zamok-1: first-request 320.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.povorot: first-request 20.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.napravo: first-request 50.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.doroga: first-request 12.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.svetofor: first-request 14.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.tramvay: first-request 52.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.metro: first-request 56.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.samol: first-request 14.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.velosiped: first-request 55.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.perekhod: first-request 14.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.passazhir: first-request 18.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.stadion: first-request 165.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.rayon: first-request 35.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.kiosk: first-request 13.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.nazad: first-request 63.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.classroom.bukva: first-request 9.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.classroom.pomogite: first-request 22.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.comparisons.bolshe: first-request 12.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.comparisons.lushche: first-request 15.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.comparisons.slozhnee: first-request 61.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.comparisons.deshevle: first-request 26.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.comparisons.vazhnee: first-request 24.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.comparisons.schastlivee: first-request 14.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.comparisons.veselee: first-request 58.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.comparisons.pojetomu: first-request 201.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+FAILED ru.lex.city.nazad: 6.1 s still exceeds 3.3 s cap after retries (runaway output)
+pack=languages/ru-RU assets=4856 generated=24 reused=0 bytes=366549664
+[sup 03:21:27] batch exited rc=1 (timeout or worker error)
+[sup 03:21:27] batch done: 0 clips failed verification
+[sup 03:21:27] round 1: rendering batch (25 ids): ru.lex.comparisons.zachem ru.lex.comparisons.zdorovee ru.lex.experiences.interesno ru.lex.experiences.neudacha ru.lex.ex...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.comparisons.zdorovee: first-request 16.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.comparisons.zachem: first-request 35.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.experiences.interesno: first-request 17.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.experiences.riskovat: first-request 9.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.experiences.neudacha: first-request 9.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.experiences.uchenik: first-request 10.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.experiences.podskazka: first-request 17.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.experiences.podderzhka: first-request 18.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.family.otec: first-request 8.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.family.rebenok: first-request 53.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.family.muzhchina: first-request 51.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.family.koshka: first-request 12.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.family.sobaka: first-request 16.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.food.karta: first-request 45.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.food.varene: first-request 13.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.food.tvarog: first-request 7.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.food.restoran: first-request 15.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.food.zakaz: first-request 52.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.food.stakan: first-request 116.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.greetings.pozhaluysta: first-request 16.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.home.tarelka: first-request 62.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.home.kovyor: first-request 32.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.home.balkon: first-request 10.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.home.bolnitsa: first-request 103.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.home.muzey: first-request 17.4s ok=True
+FAILED ru.lex.family.muzhchina: 4.6 s still exceeds 4.0 s cap after retries (runaway output)
+FAILED ru.lex.food.zakaz: 3.4 s still exceeds 3.3 s cap after retries (runaway output)
+pack=languages/ru-RU assets=4856 generated=23 reused=0 bytes=366646624
+[sup 03:42:09] batch exited rc=1 (timeout or worker error)
+[sup 03:42:09] batch done: 0 clips failed verification
+[sup 03:42:09] round 1: rendering batch (25 ids): ru.lex.home.teatr ru.lex.instructions.gubka ru.lex.instructions.narezat ru.lex.instructions.nazhat ru.lex.instructions.o...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.home.teatr: first-request 8.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.instructions.zatem: first-request 44.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.instructions.otvyortka: first-request 13.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.instructions.pochinit: first-request 90.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.instructions.otkryt: first-request 18.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.instructions.zakryt: first-request 17.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.instructions.nazhat: first-request 71.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.instructions.narezat: first-request 9.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.instructions.posolit: first-request 14.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.instructions.razogret: first-request 12.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.instructions.pylesos: first-request 14.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.instructions.gubka: first-request 10.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages.ozhidaet: first-request 18.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages.prosit: first-request 21.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages.blagodarnost: first-request 36.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages.zapiska: first-request 50.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages.poluchat: first-request 10.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages.soglasen: first-request 33.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages.priglasit: first-request 38.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages.otkaz: first-request 15.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages.svoboden: first-request 16.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages.udobno: first-request 12.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages.vopros: first-request 12.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.interesovatsya: first-request 17.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.dogadatsya: first-request 40.2s ok=True
+FAILED ru.lex.instructions.pochinit: 6.0 s still exceeds 4.3 s cap after retries (runaway output)
+pack=languages/ru-RU assets=4856 generated=24 reused=0 bytes=367317184
+[sup 03:55:56] batch exited rc=1 (timeout or worker error)
+[sup 03:55:56] batch done: 0 clips failed verification
+[sup 03:55:56] round 1: rendering batch (25 ids): ru.lex.messages2.mechtat ru.lex.messages2.moment ru.lex.messages2.nachalo ru.lex.messages2.navernoe ru.lex.messages2.per...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.navernoe: first-request 11.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.nachalo: first-request 7.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.zagolovok: first-request 15.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.poluchit: first-request 25.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.pereslat: first-request 14.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.sejchas: first-request 45.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.moment: first-request 20.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.zhelat: first-request 56.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.mechtat: first-request 13.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.smeshnoi: first-request 14.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration.okazalos: first-request 58.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration.udalos: first-request 16.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration.udacha: first-request 11.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration.nedolgo: first-request 9.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration.uspokoilsya: first-request 10.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration.rasskazal: first-request 11.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration.porog: first-request 8.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration2.pogoda: first-request 11.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration2.otezd: first-request 8.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration2.priezd: first-request 16.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration2.lyubov: first-request 84.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration2.rassvet: first-request 13.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration2.zakat: first-request 16.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration2.golos: first-request 106.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.pastevents.gulyat: first-request 31.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+pack=languages/ru-RU assets=4856 generated=25 reused=0 bytes=367504864
+[sup 04:09:37] batch done: 0 clips failed verification
+[sup 04:09:37] round 1: rendering batch (25 ids): ru.lex.pastevents.kupit ru.lex.pastevents.poehat ru.lex.pastevents.poezdka ru.lex.pastevents.pozvonit ru.lex.pastevents....
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.pastevents.zavtra: first-request 21.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.pastevents.smotret: first-request 9.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.pastevents.kupit: first-request 9.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.pastevents.vstrechal: first-request 133.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.pastevents.pozvonit: first-request 10.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.pastevents.poehat: first-request 72.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.pastevents.snachala: first-request 7.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.pastevents.poezdka: first-request 15.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.personal.otkuda: first-request 49.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.personal.kanada: first-request 85.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.personal.odinnadtsat: first-request 15.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.personal.sorok: first-request 139.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.personal.mariya: first-request 12.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.personal.kvartira: first-request 12.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.personal.rabota: first-request 11.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.personal.grazhdanstvo: first-request 15.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.problema: first-request 32.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.poprosit: first-request 19.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.namyok: first-request 37.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.nastroit: first-request 10.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.izlishok: first-request 23.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.polnyi: first-request 16.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.pustoi: first-request 12.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.bezopasno: first-request 13.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.opasno: first-request 25.3s ok=True
+pack=languages/ru-RU assets=4856 generated=25 reused=0 bytes=367665184
+[sup 04:24:29] batch done: 0 clips failed verification
+[sup 04:24:29] round 1: rendering batch (25 ids): ru.lex.problems.ustanovit ru.lex.problems.variant ru.lex.problems.zapad2 ru.lex.problems.zapchast ru.lex.routines.chitat...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.variant: first-request 22.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.zapchast: first-request 13.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.ustanovit: first-request 10.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.zapad2: first-request 14.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.routines.chitat: first-request 46.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.routines.ubirat: first-request 9.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.routines.vstrechat: first-request 93.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.routines.zavtra: first-request 64.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.routines.nedelya: first-request 22.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.routines.domoy: first-request 7.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.routines.obed: first-request 12.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.services.menedzher: first-request 16.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.services.sdavat: first-request 11.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.services.vozvrat: first-request 9.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.services.vozvraschat: first-request 295.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.services.zayavit: first-request 16.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.services.pechat: first-request 11.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.services.spravka: first-request 20.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.services.otdel: first-request 35.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.services.sekretar: first-request 15.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.services.prikhoday: first-request 10.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.shopping.dorogoy: first-request 6.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.shopping.bolshoy: first-request 9.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.shopping.korzina: first-request 13.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.shopping.paket: first-request 11.5s ok=True
+pack=languages/ru-RU assets=4856 generated=25 reused=0 bytes=367801984
+[sup 04:40:25] batch done: 0 clips failed verification
+[sup 04:40:25] round 1: rendering batch (25 ids): ru.lex.shopping.remen ru.lex.shopping.sdacha ru.lex.shopping.skidka ru.lex.shopping.sprashivat ru.lex.socialplans.davay2...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.shopping.skidka: first-request 27.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.shopping.sdacha: first-request 12.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.shopping.remen: first-request 9.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.shopping.sprashivat: first-request 69.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.priglasit2: first-request 41.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.otkazatsya: first-request 11.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.dogovorit: first-request 9.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.dogovor: first-request 16.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.posuda: first-request 19.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.zakuska: first-request 9.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.tancevat: first-request 9.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.podskazat: first-request 13.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.davay2: first-request 11.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.mozhet: first-request 15.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.nazad: first-request 19.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.perenesti: first-request 42.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.podtverdit: first-request 19.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.zapisat2: first-request 13.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.pohod: first-request 11.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.progulka: first-request 11.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.socialplans.zabyt: first-request 49.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.summary2.obem: first-request 44.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.timeplans.chetverg: first-request 12.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.timeplans.aprel: first-request 25.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.timeplans.dekabr: first-request 47.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+pack=languages/ru-RU assets=4856 generated=25 reused=0 bytes=368267104
+[sup 04:51:17] batch done: 0 clips failed verification
+[sup 04:51:17] round 1: rendering batch (25 ids): ru.lex.timeplans.godovshchina ru.lex.timeplans.iyun ru.lex.timeplans.oktyabr ru.lex.timeplans.sobratsya ru.lex.timeplans...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.timeplans.yanvar: first-request 12.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.timeplans.iyun: first-request 55.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.timeplans.oktyabr: first-request 16.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.timeplans.godovshchina: first-request 18.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.timeplans.sobratsya: first-request 13.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel.samolyot: first-request 63.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel.platforma: first-request 14.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel.vakzal: first-request 14.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel.peresadka: first-request 45.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel.ostanovka: first-request 14.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel.poezdka: first-request 7.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel.bron: first-request 46.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel.kassir: first-request 17.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel.pasazhir: first-request 108.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel.bagazh: first-request 22.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel.letet: first-request 15.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel.pereezd: first-request 14.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel2.navigator: first-request 16.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel2.ukazatel: first-request 28.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel2.poteryatsya: first-request 14.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel2.predupredit: first-request 63.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel2.rekomendovat: first-request 38.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel2.osvoitsya: first-request 11.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel2.granitsa: first-request 12.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel2.valyuta: first-request 7.6s ok=True
+pack=languages/ru-RU assets=4856 generated=25 reused=0 bytes=368893984
+[sup 05:06:28] batch done: 0 clips failed verification
+[sup 05:06:28] round 1: rendering batch (25 ids): ru.lex.wellbeing.analiz ru.lex.wellbeing.bolit ru.lex.wellbeing.kabinet ru.lex.wellbeing.osmotr ru.lex.wellbeing.prostud...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.cp.p38: first-request 24.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.cp.p39: first-request 55.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.argue4.proschyot: first-request 66.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.city.koncert: first-request 14.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.comparisons.chtoby: first-request 12.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.food.myaso: first-request 29.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.home.mashina: first-request 14.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages.sozvon: first-request 13.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.odnako: first-request 12.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.messages2.mnenie: first-request 29.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration.vyshlo: first-request 266.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration2.dumat: first-request 10.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.wellbeing.bolit: first-request 11.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.wellbeing.zhivot: first-request 175.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.wellbeing.stomatolog: first-request 46.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.wellbeing.analiz: first-request 8.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.wellbeing.prostudit: first-request 121.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.wellbeing.kabinet: first-request 22.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.wellbeing.osmotr: first-request 25.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.workstudy.obyazannost: first-request 26.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.workstudy.pobeda: first-request 14.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.workstudy.proekt: first-request 80.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.workstudy.zadacha: first-request 18.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.workstudy.otchet: first-request 9.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[sup 05:46:28] batch exited rc=124 (timeout or worker error)
+[sup 05:46:29] batch done: 1 clips failed verification
+[sup 05:46:29] round 1: rendering batch (16 ids): ru.lex.problems.sposob ru.lex.problems.summa ru.lex.travel.poezd ru.lex.travel.vagon ru.lex.workstudy.dolzhnost ru.lex.c...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.cp.p29: first-request 28.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.u040: first-request 18.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.u067: first-request 41.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a2.u136: first-request 13.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.b2.u595: first-request 19.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.b2.u779: first-request 11.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.classroom.pishite: first-request 71.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.family.domashniy: first-request 13.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.home.lampa: first-request 17.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.narration.dolgo: first-request 18.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.pastevents.rabotal: first-request 75.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.sposob: first-request 10.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.problems.summa: first-request 42.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel.poezd: first-request 43.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.travel.vagon: first-request 17.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.workstudy.dolzhnost: first-request 14.9s ok=True
+FAILED ru.lex.classroom.pishite: 9.8 s still exceeds 3.6 s cap after retries (runaway output)
+FAILED ru.lex.problems.summa: 4.6 s still exceeds 3.3 s cap after retries (runaway output)
+pack=languages/ru-RU assets=4856 generated=14 reused=0 bytes=369011104
+[sup 06:03:38] batch exited rc=1 (timeout or worker error)
+[sup 06:03:38] batch done: 0 clips failed verification
+[sup 06:03:38] round 2: 1 ids pending
+[sup 06:03:38] round 2: rendering batch (1 ids): ru.lex.workstudy.dostich ...
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.lex.workstudy.dostich: first-request 18.2s ok=True
+pack=languages/ru-RU assets=4856 generated=1 reused=0 bytes=369037984
+[sup 06:04:04] batch done: 0 clips failed verification
+[sup 06:04:04] render phase complete: 0
+0 ids still failed after 2 rounds
+[sup 06:04:04] no clips rendered successfully — skipping audit
+[sup 06:04:04] SUPERVISOR COMPLETE (elapsed 194 min)

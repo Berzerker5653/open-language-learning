@@ -1,0 +1,28 @@
+[2026-11-04T07:20:25-07:00] re-audit finished; selecting round-4 candidates
+[2026-11-04T07:20:25-07:00] round 4 done; re-running close-out
+
+=== 1/4 disposition packet (2026-11-04) ===
+ru-RU: 93 exhausted | round2 pending=0 | structure:gap=66 wrong-syllables=23 vocalization=2 structure:burst=1 near-miss=1
+ja-JP: 145 exhausted | round2 pending=0 | structure:gap=95 wrong-syllables=37 vocalization=6 structure:burst=5 near-miss=2
+rows=238 -> exhausted-2026-11-04.jsonl, EXHAUSTED-2026-11-04.md
+
+=== 2/4 manifest rows vs bytes on disk ===
+ja-JP: 4902 rows | hash/size mismatches 0 | missing files 0
+ru-RU: 4856 rows | hash/size mismatches 0 | missing files 0
+
+=== 3/4 pack gates (the CI invocations) ===
+languages/ja-JP validate: validate(scaffold): 0 error(s), 0 warning(s)
+languages/ja-JP lint: lint: 0 error(s), 0 warning(s)
+languages/ja-JP test: test: 0 error(s), 0 warning(s)
+languages/ru-RU validate: validate(scaffold): 0 error(s), 0 warning(s)
+languages/ru-RU lint: lint: 0 error(s), 0 warning(s)
+languages/ru-RU test: test: 0 error(s), 0 warning(s)
+
+=== 4/4 tallies ===
+round 2 ja: 264 ids run | 119 newly certified | 145 still exhausted
+round 2 ru: 118 ids run | 26 newly certified | 92 still exhausted
+
+staging is a separate, owner-authorized step, e.g.
+  bash scripts/stage-pack-bundle.sh   # see its header for the 0.4.3 recipe
+and the publish provenance must name the recognizer build + model sha
+(gate-identity-2026-10-27.txt).

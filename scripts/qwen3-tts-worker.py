@@ -17,6 +17,7 @@ not this script's concern.
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -48,8 +49,16 @@ def main() -> int:
                 raise ValueError(f"speaker {speaker!r} not in {sorted(speakers)}")
             if languages and language not in languages:
                 raise ValueError(f"language {language!r} unsupported")
+            # Fresh random seed per request (explicit "seed" in the request
+            # pins it): sampling + reseeding is the only way a re-render can
+            # differ; greedy decoding previously replayed identical bad audio.
+            torch.manual_seed(
+                int(req.get("seed", int.from_bytes(os.urandom(4), "big")))
+                & 0x7FFFFFFF)
             wavs, sr = model.generate_custom_voice(
-                text=req["text"], language=language, speaker=speaker)
+                text=req["text"], language=language, speaker=speaker,
+                do_sample=True, temperature=0.9, top_p=0.95, top_k=50,
+                repetition_penalty=1.05)
             out = Path(req["out"])
             out.parent.mkdir(parents=True, exist_ok=True)
             sf.write(str(out), wavs[0], sr, subtype="PCM_16")

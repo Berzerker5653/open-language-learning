@@ -346,3 +346,4 @@ WebKit wasn't able to find a WebVTT encoder. Subtitles handling will be degraded
 ** (lts-desktop:952007): CRITICAL **: 18:03:19.869: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
 
 ** (lts-desktop:952007): CRITICAL **: 18:03:19.870: impl_get_CharacterCount: assertion 'ATK_IS_TEXT (user_data)' failed
+[ELIFECYCLE] Command failed with signal SIGTERM.

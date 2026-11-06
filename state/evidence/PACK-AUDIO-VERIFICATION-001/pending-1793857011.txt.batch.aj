@@ -1,0 +1,16 @@
+ru.lex.problems.sposob
+ru.lex.problems.summa
+ru.lex.travel.poezd
+ru.lex.travel.vagon
+ru.lex.workstudy.dolzhnost
+ru.lex.classroom.pishite
+ru.lex.family.domashniy
+ru.lex.home.lampa
+ru.lex.narration.dolgo
+ru.sent.a1.u040
+ru.sent.a1.u067
+ru.sent.a2.u136
+ru.sent.b2.u595
+ru.sent.b2.u779
+ru.sent.cp.p29
+ru.lex.pastevents.rabotal

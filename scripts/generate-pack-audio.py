@@ -56,6 +56,7 @@ import queue
 import struct
 import subprocess
 import sys
+import time
 import wave
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -420,7 +421,9 @@ def main() -> int:
     free: queue.Queue | None = None
     if args.tts == "qwen3" and pending:
         worker_script = Path(__file__).resolve().parent / "qwen3-tts-worker.py"
-        wenv = {**os.environ, "OMP_NUM_THREADS": "8", "OMP_THREAD_LIMIT": "8"}
+        # OMP>1 triggers catastrophic OpenMP spin-wait on this worker
+        # (minutes/clip); the supervisor's OMP=1 must not be overridden.
+        wenv = {**os.environ, "OMP_NUM_THREADS": "1", "OMP_THREAD_LIMIT": "1", "MKL_NUM_THREADS": "1", "OMP_WAIT_POLICY": "passive"}
         for _ in range(max(1, args.jobs)):
             proc = subprocess.Popen(
                 [str(args.worker_python), str(worker_script),
@@ -467,8 +470,12 @@ def main() -> int:
 
     def synthesize(want: dict) -> dict | str:
         out = pack / want["file"]
+        t_synth = time.time()
         if args.tts == "qwen3":
             answer = qwen_request(want, out)
+            print(f"[gen] {want['id']}: first-request "
+                  f"{time.time() - t_synth:.1f}s ok={answer.get('ok')}",
+                  file=sys.stderr, flush=True)
             if not answer.get("ok"):
                 if out.exists():
                     out.unlink()

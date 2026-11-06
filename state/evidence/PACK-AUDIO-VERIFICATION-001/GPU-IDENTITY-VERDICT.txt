@@ -1,0 +1,15 @@
+REJECT-INFRA (2026-11-05 07:10 MST)
+
+GPU twin path (whisper-gate-gpu.sh: same pinned binary/model/flags, -ng dropped)
+was smoke-tested with a 240-clip stratified identity sample. Result: 8 parallel
+whisper-cli CUDA instances thrashed on concurrent GPU-context init — 0% GPU
+utilization, ~80 clips in 8 hours, processes periodically stalled. Abandoned as
+infrastructure, NOT rejected on correctness: no fail->ok flips were observed in
+the 80 completed clips, but n=80 is below the 150 gate, so no ACCEPT was issued.
+
+Consequence: the CPU-pinned gate (whisper-gate.sh) remains the certification
+path on this box while the 5090 hosts the inference server. A GPU re-audit
+would require either MPS/serialized contexts or a dedicated window — revisit
+only if the corpus size forces it.
+
+Evidence: full-audit-2026-10-28-gpusample/ (sample.log, asr-ru-RU.jsonl n=80).

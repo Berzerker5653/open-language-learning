@@ -1,0 +1,15 @@
+remaining=3440 sample=80 om_shard=1066 wk_shard=481 local_shard=1893
+strata hi=806 lo=467 fail=143
+mkdir: cannot create directory ‘/home/hunter’: Permission denied
+mkdir: cannot create directory ‘/home/hunter’: Permission denied
+mkdir: cannot create directory ‘/home/hunter’: Permission denied
+SHA_VERIFIED hermes-worker-lan
+STARTED hermes-worker-lan sample-ids.txt -> sample-worker.jsonl
+STARTED local resume lane
+REJECT lane=hermes-worker-lan n=0 fail->ok=0 ok->fail=0 other=0 mismatch_rate=1.000
+LANE_hermes-worker-lan_REJECT identity sample failed - shard falls back to local resume
+LOCAL_FALLBACK_STARTED for rejected shards
+Terminated                 nohup setsid python3 "$REPO/scripts/qa-asr.py" --pack "$REPO/languages/ru-RU" --model "$BENCH/ggml-large-v3-turbo.bin" --whisper "$EV/whisper-gate.sh" --lang russian --workers 8 --out "$BASE/asr-ru-RU.jsonl" > "$BASE/asr-ru-RU.log" 2>&1
+Terminated                 python3 "$REPO/scripts/qa-asr.py" --pack "$REPO/languages/ru-RU" --model "$BENCH/ggml-large-v3-turbo.bin" --whisper "$EV/whisper-gate.sh" --lang russian --workers 8 --ids "$FALLBACK" --out "$BASE/asr-ru-RU.jsonl" >> "$BASE/asr-ru-RU.log" 2>&1
+ALL_LANES_DONE Wed Nov  4 08:30:57 AM MST 2026
+merged: +0 lane rows, 0 status conflicts, total rows 1884

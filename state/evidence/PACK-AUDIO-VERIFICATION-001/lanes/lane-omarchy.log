@@ -1,0 +1,6 @@
+/home/aih/.local/bin/espeak-ng
+SHA_VERIFIED omarchy
+SAMPLE_STARTED omarchy
+ACCEPT lane=omarchy- n=80 fail->ok=0 ok->fail=0 other=0 mismatch_rate=0.000
+FULL_LANE_STARTED omarchy
+LANE_COLLECTED omarchy asr-omarchy-.jsonl

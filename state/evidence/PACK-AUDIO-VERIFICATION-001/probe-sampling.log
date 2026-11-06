@@ -1,0 +1,15 @@
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+[gen] ru.contrast.stress.zamok-1: first-request 0.0s ok=False
+[gen] ru.lex.city.doroga: first-request 0.0s ok=False
+FAILED ru.contrast.stress.zamok-1: speaker 'Boris' not in ['aiden', 'dylan', 'eric', 'ono_anna', 'ryan', 'serena', 'sohee', 'uncle_fu', 'vivian']
+FAILED ru.lex.city.doroga: speaker 'Boris' not in ['aiden', 'dylan', 'eric', 'ono_anna', 'ryan', 'serena', 'sohee', 'uncle_fu', 'vivian']
+pack=languages/ru-RU assets=4856 generated=0 reused=0 bytes=369037984
+PROBE-EXIT=1

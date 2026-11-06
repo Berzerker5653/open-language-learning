@@ -1,0 +1,32 @@
+workers=1 (requested 1, MemAvailable 93 GB)
+-- ru-RU: ASR round-trip over every manifest row
+Terminated                 "$PY" "$REPO/scripts/qa-asr.py" --pack "$REPO/languages/$pack" --model "$TURBO" --whisper "$WHISPER" --lang "$lang" --workers "$WORKERS" --out "$OUTDIR/asr-$pack.jsonl" > "$OUTDIR/asr-$pack.log" 2>&1
+FileNotFoundError: [Errno 2] No such file or directory: 'whisper-gate.sh'
+-- reconciliation against the campaign sets
+6796 rows audited | 552 fail the current gate | 365 that no campaign record explains
+  ja.lex.abst.fuyu2  asr=MISMATCH ratio=0.67 segments=PASS heard='うゆう'
+  ja.lex.abst3.youso  asr=MISMATCH ratio=0.67 segments=PASS heard='ようぞ'
+  ja.lex.academic.gouki  asr=MISMATCH ratio=0.67 segments=PASS heard='動き'
+  ja.lex.academic.hikaku2  asr=MISMATCH ratio=0.67 segments=PASS heard='近く!'
+  ja.lex.academic2.meishou  asr=MISMATCH ratio=0.55 segments=PASS heard='めいしゅおぉ'
+  ja.lex.academic2.yohou  asr=MISMATCH ratio=0.67 segments=PASS heard='よほー'
+  ja.lex.admin.hoken-jo  asr=MISMATCH ratio=0.73 segments=PASS heard='保健所。'
+  ja.lex.admin.kyoufu-kin  asr=MISMATCH ratio=0.67 segments=PASS heard='キャーフキン'
+  ja.lex.admin.todoke-sho  asr=MISMATCH ratio=0.73 segments=PASS heard='とどけーしよ'
+  ja.lex.admin2.denki  asr=MISMATCH ratio=0.67 segments=PASS heard='ねんき'
+  ja.lex.admin2.tooka  asr=MISMATCH ratio=0.67 segments=PASS heard='どうか'
+  ja.lex.advice.fukami  asr=MISMATCH ratio=0.67 segments=PASS heard='つかみ'
+  ja.lex.advice2.ki2  asr=MISMATCH ratio=0.67 segments=PASS heard='キー'
+  ja.lex.advice2.michi2  asr=MISMATCH ratio=0.67 segments=PASS heard='ミーチー'
+  ja.lex.advice2.take  asr=MISMATCH ratio=0.5 segments=PASS heard='だけ'
+  ja.lex.art2.chie  asr=MISMATCH ratio=0.0 segments=PASS heard='Cへ'
+  ja.lex.art2.hakai2  asr=MISMATCH ratio=0.57 segments=PASS heard='あっかい!'
+  ja.lex.art2.koen  asr=MISMATCH ratio=0.67 segments=PASS heard='声…'
+  ja.lex.art2.rinen  asr=MISMATCH ratio=0.67 segments=PASS heard='2年'
+  ja.lex.art2.yogen  asr=MISMATCH ratio=0.67 segments=PASS heard='いよげ。'
+  ja.lex.body.fumin  asr=MISMATCH ratio=0.4 segments=PASS heard='海'
+  ja.lex.city.mibai  asr=MISMATCH ratio=0.67 segments=PASS heard='見栄え'
+  ja.lex.communication.bappu  asr=MISMATCH ratio=0.57 segments=PASS heard='あっぷー。'
+  ja.lex.communication.kaiwa  asr=MISMATCH ratio=0.67 segments=PASS heard='貝は?'
+  ja.lex.communication.kuchi  asr=MISMATCH ratio=0.67 segments=PASS heard='くっちぃ'
+fails list: /home/hunter/game-dev/LTS/state/evidence/PACK-AUDIO-VERIFICATION-001/full-audit-2026-10-28/audit-fails.jsonl

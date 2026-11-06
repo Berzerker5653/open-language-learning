@@ -1,0 +1,27 @@
+== applying piper-final winners ==
+SKIP ru.lex.comparisons.iz-za: no candidate wav
+SKIP ru.lex.synthesis4.kolllazh: no candidate wav
+SKIP ru.lex.synthesis4.ssuda: no candidate wav
+SKIP ru.lex.timeplans.iyul: no candidate wav
+applied 159/163 candidates
+== pass 1 ==
+checked=163 passed=159 MISMATCH=4 TIMEOUT=0 WAV-MISSING=0
+FAIL ru.lex.comparisons.iz-za ratio=0.44 said='и́з-за' heard='И-о-з-а!'
+FAIL ru.lex.synthesis4.kolllazh ratio=0.55 said='коллаж' heard='Калаш'
+FAIL ru.lex.timeplans.iyul ratio=0.6 said='ию́ль' heard='И Ю-ЮЛ'
+FAIL ru.lex.synthesis4.ssuda ratio=0.67 said='ссуда' heard='Си-су-да.'
+audit exit=1
+163 checked, 4 failing
+== pass 2 (jitter filter: only clips that fail twice are real) ==
+checked=4 passed=0 MISMATCH=4 TIMEOUT=0 WAV-MISSING=0
+FAIL ru.lex.comparisons.iz-za ratio=0.44 said='и́з-за' heard='И-о-з-а!'
+FAIL ru.lex.synthesis4.kolllazh ratio=0.55 said='коллаж' heard='Калаш'
+FAIL ru.lex.timeplans.iyul ratio=0.6 said='ию́ль' heard='И Ю-ЮЛ'
+FAIL ru.lex.synthesis4.ssuda ratio=0.67 said='ссуда' heard='Си-су-да.'
+audit exit=1
+4 checked, 4 failing
+CERTIFIED REMAINDER: 4
+ru.lex.synthesis4.kolllazh
+ru.lex.timeplans.iyul
+ru.lex.comparisons.iz-za
+ru.lex.synthesis4.ssuda

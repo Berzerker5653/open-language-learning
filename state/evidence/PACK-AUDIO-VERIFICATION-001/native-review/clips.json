@@ -1,0 +1,102 @@
+[
+ {
+  "id": "ru.contrast.stress.muka-0",
+  "text": "му́ка",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.contrast.stress.muka-0.wav"
+ },
+ {
+  "id": "ru.contrast.stress.muka-1",
+  "text": "мука́",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.contrast.stress.muka-1.wav"
+ },
+ {
+  "id": "ru.contrast.stress.zamok-0",
+  "text": "за́мок",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.contrast.stress.zamok-0.wav"
+ },
+ {
+  "id": "ru.contrast.stress.zamok-1",
+  "text": "замо́к",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.contrast.stress.zamok-1.wav"
+ },
+ {
+  "id": "ru.lex.critical3.atlas",
+  "text": "атлас",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.critical3.atlas.wav"
+ },
+ {
+  "id": "ru.lex.cult.zamok",
+  "text": "замок",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.cult.zamok.wav"
+ },
+ {
+  "id": "ru.lex.housing.ogorod",
+  "text": "огород",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.housing.ogorod.wav"
+ },
+ {
+  "id": "ru.lex.synthesis.kruzhok",
+  "text": "кружок",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.synthesis.kruzhok.wav"
+ },
+ {
+  "id": "ru.lex.neg.parafraze",
+  "text": "парафраз",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.neg.parafraze.wav"
+ },
+ {
+  "id": "ru.lex.prof.potencial",
+  "text": "потенциал",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.prof.potencial.wav"
+ },
+ {
+  "id": "ru.lex.food.banan",
+  "text": "бана́н",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.food.banan.wav"
+ },
+ {
+  "id": "ru.lex.argue2.priroda",
+  "text": "природа",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.argue2.priroda.wav"
+ },
+ {
+  "id": "ru.lex.study.mig",
+  "text": "миг",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.study.mig.wav"
+ },
+ {
+  "id": "ru.lex.travel.svetofor",
+  "text": "светофо́р",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.travel.svetofor.wav"
+ },
+ {
+  "id": "ru.lex.family.sumka",
+  "text": "су́мка",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.family.sumka.wav"
+ },
+ {
+  "id": "ru.lex.experiences.bespokoitsya",
+  "text": "беспоко́иться",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.experiences.bespokoitsya.wav"
+ },
+ {
+  "id": "ru.lex.comparisons.vyshe",
+  "text": "вы́ше",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.comparisons.vyshe.wav"
+ },
+ {
+  "id": "ru.lex.argue2.uchyot",
+  "text": "учёт",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.argue2.uchyot.wav"
+ },
+ {
+  "id": "ru.lex.services.podpisat",
+  "text": "подпи́сывать",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.services.podpisat.wav"
+ },
+ {
+  "id": "ru.lex.socialplans.vyhod",
+  "text": "вы́ход",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.socialplans.vyhod.wav"
+ }
+]
