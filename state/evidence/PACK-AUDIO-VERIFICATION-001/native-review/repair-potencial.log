@@ -1,0 +1,13 @@
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+bestof: 1/1 solved, 0 exhausted at K=12
+manifest rows updated: 1; summary -> state/evidence/PACK-AUDIO-VERIFICATION-001/native-review/repair-potencial.jsonl
