@@ -1182,3 +1182,9 @@ session. Gaps stated honestly: handler-level DOM tests are still absent
 by design (node-only vitest, frozen lockfile — no jsdom without an
 owner-approved dependency change); the single-instance behavior itself is
 proven by build + code review, not a headless double-launch.
+
+## 2026-11-06 — BUTTON-AFFORDANCE-001 closed (awaiting visual acceptance)
+Bare `.btn` gained rest/hover/disabled treatments in `packages/ui/src/styles.css`
+(tokens only); contract test `apps/desktop/src/button-affordance.test.ts` pins the
+treatments, the primary-hover override, and the seven-file bare-btn inventory.
+Verification: desktop vitest 314/314 (43 files), ui 10/10, `tsc --noEmit` clean both.

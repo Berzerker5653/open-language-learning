@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-01",
+  "updated": "2026-11-06T06:30:00-07:00",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1900,12 +1900,12 @@
     },
     "BUTTON-AFFORDANCE-001": {
       "task_id": "BUTTON-AFFORDANCE-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Working controls never render as disabled (bare .btn has no styling)",
-      "activity": "idle",
-      "summary": "Plain .btn in packages/ui/src/styles.css sets size only - no background, transparent border, no colour - so Shadowing's Play/Record/Stop (bare btn) look like grey dead text while genuinely disabled siblings look more alive. Root cause of owner finding S-4.",
-      "notes": "Finding S-06 of the 2026-10-21 findings register. bare btn is used across App/settings/words/lesson/hub/onboarding/shadowing; every control needs an explicit variant or plain .btn needs defined rest/hover/disabled treatments, with an affordance-distinction check.",
+      "activity": "awaiting-human-acceptance",
+      "summary": "Plain `.btn` now carries the full affordance treatment: rest (surface bg, --line-strong border, ink, pointer cursor), hover (.btn:hover:not(:disabled) -> surface-sunk bg, --ink-faint border), disabled (0.45 opacity + --ink-soft text + --line border + surface-sunk bg + not-allowed cursor; distinction is not color/opacity-only). Primary/quiet variants unchanged; primary hover specificity verified.",
+      "notes": "Finding S-06 of the 2026-10-21 findings register. bare btn is used across App/settings/words/lesson/hub/onboarding/shadowing; every control needs an explicit variant or plain .btn needs defined rest/hover/disabled treatments, with an affordance-distinction check. || CLOSED 2026-11-06: styles.css .btn/.btn:hover/.btn:disabled updated (tokens only, no new deps). Contract test apps/desktop/src/button-affordance.test.ts (5 tests): rest/hover/disabled treatments pinned, primary-hover override pinned, bare-btn call-site inventory pinned to the seven files (App/hub/lesson/onboarding/settings/shadowing/words). Evidence: apps/desktop vitest 314/314 (43 files) incl. new contract; packages/ui 10/10; tsc --noEmit clean both packages. Owner visual acceptance pending (activity=awaiting-human-acceptance).",
       "evidence": [
         "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md"
       ]

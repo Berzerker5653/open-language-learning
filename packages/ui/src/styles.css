@@ -250,12 +250,19 @@ main {
   min-height: 2.75rem;
   padding: 0.5rem 1.125rem;
   border-radius: var(--radius-sm);
-  border: 1px solid transparent;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+  color: var(--ink);
   font: inherit;
   font-size: 0.9375rem;
   font-weight: 600;
   cursor: pointer;
   text-align: center;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--surface-sunk);
+  border-color: var(--ink-faint);
 }
 
 .btn--primary {
@@ -280,7 +287,10 @@ main {
 }
 
 .btn:disabled {
-  opacity: 0.55;
+  opacity: 0.45;
+  color: var(--ink-soft);
+  border-color: var(--line);
+  background: var(--surface-sunk);
   cursor: not-allowed;
 }
 
