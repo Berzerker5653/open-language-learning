@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-06T06:45:00-07:00",
+  "updated": "2026-11-06T08:05:00-07:00",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1752,11 +1752,11 @@
     },
     "JA-KANJI-MNEMONICS-001": {
       "task_id": "JA-KANJI-MNEMONICS-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Kanji mnemonics match the sourced decomposition they describe",
-      "activity": "idle",
-      "summary": "Re-author or drop the 17 of 84 mnemonics that name an element the sourced radical list no longer contains.",
+      "activity": "awaiting-human-acceptance",
+      "summary": "18 measured mismatches re-authored to sourced elements; vitest checker pins count at 0. b884b77.",
       "notes": "Opened 2026-10-16 as the accepted cost of option A, measured before the decision: 17 of 84 authored mnemonics name an element no longer in the list (国: \"Jade (玉) guarded within walls\" against the new `王 囗 丶`). The mismatch count is a machine check; authoring replacement text is not, and an AI re-write would put more unreviewed prose into a pack whose review queue is already the reason content stays labelled draft.\nUnblocked 2026-10-20 under ADR-0040: AI may re-author the 17 mismatched mnemonics against the sourced decomposition; acceptance is the machine mismatch check 17 -> 0 plus validate/lint, with no claim beyond the pack's declared posture.",
       "last_error": "needs a human content author; no qualified reviewer is assigned (JA-A2-002 / JA-B1-002 / JA-B2-002 are blocked on the same thing)",
       "dependencies": [
@@ -1821,11 +1821,11 @@
     },
     "SETTINGS-PACK-CAPABILITY-001": {
       "task_id": "SETTINGS-PACK-CAPABILITY-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Settings sections are gated by the active pack's declared capabilities, not hardcoded",
-      "activity": "idle",
-      "summary": "Settings currently shows Japanese-specific UI regardless of the active language (the kana keyboard toggle is offered to Russian learners). Gate script/input-method sections on capability metadata declared by the active pack.",
+      "activity": "awaiting-human-acceptance",
+      "summary": "Gate: toggle present iff active pack declares kana scripts (manifest scripts: -> InstalledPack.scripts -> ime.ts gate). 83bed2d.",
       "notes": "Raised by the owner during the 2026-10-21 acceptance sweep (S-1): 'the settings window is hard coded to have japanese settings in it... should this program be modular so the settings match the needs of the language pack being used?' Agreed direction: packs declare capabilities (e.g. scripts: [kana]) in the manifest; the desktop hides/adjusts sections per active pack. First slice is small: one manifest field + one guard for the kana toggle. Whether this rides REL-001 or lands at 1.0.x is an owner scope call.",
       "evidence": []
     },
