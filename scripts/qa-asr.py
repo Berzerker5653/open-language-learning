@@ -208,9 +208,17 @@ def check(pack: Path, model: str, lang: str, whisper: str, row: dict) -> dict:
     except subprocess.TimeoutExpired:
         return {"id": row["id"], "status": "timeout", "text": row["text"]}
     heard = p.stdout.strip()
-    # Gate v3 (see verdict(): v2 stage/vocalization rules + ru phonemic
-    # fold + ja JMDict reading rescue).
-    ok, ratio, reasons, rescued = verdict(row["text"], heard, lang)
+    # A gate/normalization crash on one clip must be a loud, per-row failure —
+    # never an exception that kills the main loop while the executor's
+    # thousands of queued whisper subprocesses keep running as a zombie queue
+    # (that exact failure burned an hour on the 2026-11-06 ja audit: a missing
+    # pykakasi import crashed the first verdict, and the CPU stayed busy with
+    # nothing landing).
+    try:
+        ok, ratio, reasons, rescued = verdict(row["text"], heard, lang)
+    except Exception as e:  # noqa: BLE001 - infra signal, distinct status
+        return {"id": row["id"], "status": "check-error",
+                "error": f"{type(e).__name__}: {e}", "text": row["text"], "heard": heard}
     res = {"id": row["id"], "status": "ok" if ok else "MISMATCH",
            "ratio": round(ratio, 2), "text": row["text"], "heard": heard}
     if reasons:
@@ -255,37 +263,46 @@ def main() -> int:
                   f"{len(rows)} left to check", file=sys.stderr)
         args.out.parent.mkdir(parents=True, exist_ok=True)
     sink = args.out.open("a", encoding="utf-8") if args.out else None
+    print(f"audit start: {len(rows)} rows x {args.workers} workers -> {args.out}",
+          file=sys.stderr, flush=True)
+    ex = cf.ThreadPoolExecutor(max_workers=args.workers)
     try:
-        with cf.ThreadPoolExecutor(max_workers=args.workers) as ex:
-            futs = [ex.submit(check, args.pack, args.model, args.lang, args.whisper, r) for r in rows]
-            for i, f in enumerate(cf.as_completed(futs), 1):
-                res = f.result()
-                results.append(res)
-                if sink:
-                    sink.write(json.dumps(res, ensure_ascii=False) + "\n")
-                    sink.flush()
-                    os.fsync(sink.fileno())
-                if i % 250 == 0:
-                    print(f"... {i}/{len(rows)} checked", file=sys.stderr)
+        futs = [ex.submit(check, args.pack, args.model, args.lang, args.whisper, r) for r in rows]
+        for i, f in enumerate(cf.as_completed(futs), 1):
+            res = f.result()
+            results.append(res)
+            if sink:
+                sink.write(json.dumps(res, ensure_ascii=False) + "\n")
+                sink.flush()
+                os.fsync(sink.fileno())
+            if i % 250 == 0:
+                print(f"... {i}/{len(rows)} checked", file=sys.stderr)
     finally:
+        # Never leave queued work running after the consumer dies.
+        ex.shutdown(wait=False, cancel_futures=True)
         if sink:
             sink.close()
 
     mismatches = [r for r in results if r["status"] == "MISMATCH"]
     timeouts = [r for r in results if r["status"] == "timeout"]
     missing = [r for r in results if r["status"] == "wav-missing"]
+    errors = [r for r in results if r["status"] == "check-error"]
     # MISMATCH (real babble) or WAV-MISSING are genuine failures; TIMEOUT is an
     # infra signal — lower --workers and re-run — and must not fail the pass.
+    # CHECK-ERROR means the gate itself broke (missing dep, fold bug): fail loud.
     print(f"checked={len(results)} "
-          f"passed={len(results) - len(mismatches) - len(timeouts) - len(missing)} "
-          f"MISMATCH={len(mismatches)} TIMEOUT={len(timeouts)} WAV-MISSING={len(missing)}")
+          f"passed={len(results) - len(mismatches) - len(timeouts) - len(missing) - len(errors)} "
+          f"MISMATCH={len(mismatches)} TIMEOUT={len(timeouts)} WAV-MISSING={len(missing)} "
+          f"CHECK-ERROR={len(errors)}")
     for r in sorted(mismatches, key=lambda r: r["ratio"]):
         print(f"FAIL {r['id']} ratio={r.get('ratio')} said={r['text']!r} heard={r.get('heard')!r}")
     for r in timeouts:
         print(f"TIMEOUT {r['id']} (raise the timeout or lower --workers, then re-check)")
     for r in missing:
         print(f"WAV-MISSING {r['id']}")
-    return 1 if (mismatches or missing) else 0
+    for r in errors[:20]:
+        print(f"CHECK-ERROR {r['id']} {r.get('error')}")
+    return 1 if (mismatches or missing or errors) else 0
 
 
 if __name__ == "__main__":
