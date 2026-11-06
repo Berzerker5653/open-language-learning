@@ -12809,14 +12809,19 @@ activities:
 
         // Fresh profile: the scenario is listed but locked, with an
         // actionable reason naming the unmet prerequisite.
+        // SCENARIO-LOCK-COPY-001: the reason names the capability with the
+        // gloss the demo pack itself carries and says where it is
+        // practiced — never the raw content id.
         let list = scenarios::list_at(data, &p.id).unwrap();
         let sc = list.iter().find(|s| s.scenario_id == sid).unwrap();
         assert!(!sc.unlocked);
+        let reason = sc.locked_reason.as_deref().unwrap();
+        assert!(reason.contains("\"hello\""), "{reason}");
+        assert!(!reason.contains("ja.lex.demo"), "{reason}");
         assert!(
-            sc.locked_reason
-                .as_deref()
-                .unwrap()
-                .contains("ja.lex.demo.konnichiwa")
+            sc.unlocks.iter().any(|u| u.contains("First greetings")),
+            "{:?}",
+            sc.unlocks
         );
         assert!(scenarios::start_at(data, &p.id, sid, "sess-locked", &sessions).is_err());
 

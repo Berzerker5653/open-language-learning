@@ -236,15 +236,243 @@ pub fn hard_prereqs_met(
         .all(|p| p.strength != "hard" || prereq_met(derived, p))
 }
 
-/// One unmet hard prerequisite, exactly as the pack's goal map declares it.
+/// One unmet hard prerequisite, rendered for copy: the pack's declared
+/// gate plus the human display data resolved from pack metadata. Deliberately
+/// carries no raw target id — by the time a gate becomes this record, only
+/// the pack-supplied name or an honest fallback may reach the learner
+/// (SCENARIO-LOCK-COPY-001).
 #[derive(Clone, Debug)]
 pub struct UnmetPrereq {
-    pub target: String,
     pub dimension: String,
     pub required_state: String,
     /// True when the target is itself a goal in the same goal map: the gate
     /// is curriculum stage, not a capability the learner can drill.
     pub target_is_goal: bool,
+    /// Learner-facing name resolved from the pack's own content metadata
+    /// (lexicon gloss, grammar concept name, kana label, or the goal map's
+    /// description). `None` when the pack defines no display name; lock copy
+    /// then falls back to a generic honest phrase, never the raw id
+    /// (SCENARIO-LOCK-COPY-001).
+    pub display_name: Option<String>,
+    /// Where the prerequisite is practiced, as a human unit title from the
+    /// pack's curriculum (first unit that references the content, or first
+    /// unit whose goal is this goal). `None` when no unit names it.
+    pub practice_title: Option<String>,
+}
+
+/// SCENARIO-LOCK-COPY-001: pack display data for lock copy, read from the
+/// installed pack's own files — the same raw-pack-data precedent as
+/// `situation_label` and the goals map. Never hardcoded per language: every
+/// name and place is a field the pack itself ships.
+#[derive(Default, Clone)]
+pub struct PackCopyIndex {
+    /// content id -> learner-facing name (lexicon gloss, grammar concept
+    /// name, orthography symbol label)
+    names: HashMap<String, String>,
+    /// content id -> title of the first (teaching-order) unit practicing it
+    practice: HashMap<String, String>,
+    /// goal id -> title of the first unit whose goal_id names it
+    goal_practice: HashMap<String, String>,
+}
+
+impl PackCopyIndex {
+    /// Read lexicon/grammar/orthography names and unit practice hosts from a
+    /// pack root. Missing or malformed pieces are skipped, never fatal: the
+    /// copy falls back to honest generic phrases per id.
+    pub fn load(root: &Path) -> Self {
+        let mut idx = Self::default();
+        for file in data_files(root, "lexicon") {
+            for line in jsonl_lines(&file) {
+                let Ok(doc) = serde_json::from_str::<serde_json::Value>(&line) else {
+                    continue;
+                };
+                let Some(id) = doc.get("id").and_then(|i| i.as_str()) else {
+                    continue;
+                };
+                if let Some(name) = gloss_label(&doc) {
+                    idx.names.entry(id.to_string()).or_insert(name);
+                }
+            }
+        }
+        for file in data_files(root, "grammar") {
+            for line in jsonl_lines(&file) {
+                let Ok(doc) = serde_json::from_str::<serde_json::Value>(&line) else {
+                    continue;
+                };
+                let id = doc.get("id").and_then(|i| i.as_str()).unwrap_or("");
+                if let Some(name) = doc.get("name").and_then(|n| n.as_str()) {
+                    let name = name.trim();
+                    if !id.is_empty() && !name.is_empty() {
+                        idx.names.entry(id.to_string()).or_insert(name.to_string());
+                    }
+                }
+            }
+        }
+        for file in data_files(root, "orthography") {
+            for line in jsonl_lines(&file) {
+                let Ok(doc) = serde_json::from_str::<serde_json::Value>(&line) else {
+                    continue;
+                };
+                let id = doc.get("id").and_then(|i| i.as_str()).unwrap_or("");
+                let symbol = doc.get("symbol").and_then(|s| s.as_str()).unwrap_or("");
+                if id.is_empty() || symbol.is_empty() {
+                    continue;
+                }
+                let script = doc.get("script").and_then(|s| s.as_str()).unwrap_or("");
+                let reading = doc.get("reading").and_then(|s| s.as_str()).unwrap_or("");
+                let mut name = String::new();
+                if !script.is_empty() {
+                    name.push_str(script);
+                    name.push(' ');
+                }
+                name.push_str(symbol);
+                if !reading.is_empty() && reading != symbol {
+                    name.push_str(" (");
+                    name.push_str(reading);
+                    name.push(')');
+                }
+                idx.names.entry(id.to_string()).or_insert(name);
+            }
+        }
+        for file in data_files(root, "curriculum/units") {
+            let Ok(text) = std::fs::read_to_string(&file) else {
+                continue;
+            };
+            let Ok(doc) = serde_yaml::from_str::<serde_yaml::Value>(&text) else {
+                continue;
+            };
+            let title = match doc.get("title").and_then(|t| t.as_str()) {
+                Some(t) if !t.trim().is_empty() => t.trim().to_string(),
+                _ => continue,
+            };
+            if let Some(goal) = doc.get("goal_id").and_then(|g| g.as_str()) {
+                idx.goal_practice
+                    .entry(goal.to_string())
+                    .or_insert_with(|| title.clone());
+            }
+            let refs_of = |seq: Option<&serde_yaml::Value>| -> Vec<String> {
+                seq.and_then(|s| s.as_sequence())
+                    .map(|s| {
+                        s.iter()
+                            .filter_map(|v| v.as_str().map(str::to_string))
+                            .collect()
+                    })
+                    .unwrap_or_default()
+            };
+            let mut refs: Vec<String> = doc
+                .get("activities")
+                .and_then(|a| a.as_sequence())
+                .map(|acts| {
+                    acts.iter()
+                        .flat_map(|a| refs_of(a.get("content_refs")).into_iter())
+                        .collect()
+                })
+                .unwrap_or_default();
+            if let Some(gc) = doc.get("generation_contract") {
+                refs.extend(refs_of(gc.get("allowed_vocab")));
+                refs.extend(refs_of(gc.get("allowed_grammar")));
+            }
+            for r in refs {
+                idx.practice.entry(r).or_insert_with(|| title.clone());
+            }
+        }
+        idx
+    }
+
+    pub fn name(&self, id: &str) -> Option<&str> {
+        self.names.get(id).map(String::as_str)
+    }
+
+    pub fn practice(&self, id: &str) -> Option<&str> {
+        self.practice.get(id).map(String::as_str)
+    }
+
+    pub fn goal_practice(&self, goal_id: &str) -> Option<&str> {
+        self.goal_practice.get(goal_id).map(String::as_str)
+    }
+}
+
+/// Sorted regular files directly under `root/<dir>` (deterministic order:
+/// unit file names carry teaching-order prefixes, so file order is the
+/// pack's own first-taught order).
+fn data_files(root: &Path, dir: &str) -> Vec<std::path::PathBuf> {
+    let mut out: Vec<_> = std::fs::read_dir(root.join(dir))
+        .ok()
+        .into_iter()
+        .flatten()
+        .filter_map(|e| e.ok())
+        .map(|e| e.path())
+        .filter(|p| p.is_file())
+        .collect();
+    out.sort();
+    out
+}
+
+fn jsonl_lines(file: &std::path::Path) -> Vec<String> {
+    std::fs::read_to_string(file)
+        .map(|t| t.lines().map(str::to_string).collect())
+        .unwrap_or_default()
+}
+
+/// Learner-facing name from a lexicon entry's glosses: prefer the app UI
+/// locale's gloss, else any gloss the pack ships; cut at the first clause
+/// boundary and keep it short enough to read inside a lock line.
+fn gloss_label(doc: &serde_json::Value) -> Option<String> {
+    let glosses = doc.get("glosses")?.as_object()?;
+    let list = glosses
+        .get("en-US")
+        .or_else(|| glosses.values().next())
+        .and_then(|v| v.as_array());
+    let first = list?.first()?.as_str()?.trim();
+    let head = first.split(';').next().unwrap_or("").trim();
+    short_label(head, 48)
+}
+
+/// First clause of a pack-declared sentence (goal descriptions read
+/// "Do the thing: the long detail list"), bounded for one-line copy.
+fn short_label(text: &str, max_chars: usize) -> Option<String> {
+    let flat: String = text.split_whitespace().collect::<Vec<_>>().join(" ");
+    let head = flat
+        .split([':', '.'])
+        .next()
+        .unwrap_or("")
+        .trim()
+        .to_string();
+    if head.is_empty() {
+        return None;
+    }
+    if head.chars().count() <= max_chars {
+        return Some(head);
+    }
+    let cut: Vec<usize> = head
+        .char_indices()
+        .take_while(|(i, _)| *i <= max_chars)
+        .map(|(i, _)| i)
+        .collect();
+    let edge = *cut.last()?;
+    let trimmed = head[..edge].trim_end();
+    match trimmed.rfind(' ') {
+        Some(sp) if sp > 12 => Some(format!("{}…", &trimmed[..sp])),
+        _ => Some(format!("{}…", trimmed)),
+    }
+}
+
+/// Process-wide copy index per installed pack version, keyed by the immutable
+/// pack root (the same correctness argument packcache K-63 rests on). A fresh
+/// pack version is a new directory, hence a new key; loads never fail, so
+/// caching is always honest.
+static COPY_CACHE: std::sync::LazyLock<
+    std::sync::Mutex<HashMap<std::path::PathBuf, std::sync::Arc<PackCopyIndex>>>,
+> = std::sync::LazyLock::new(|| std::sync::Mutex::new(HashMap::new()));
+
+fn copy_index(root: &Path) -> std::sync::Arc<PackCopyIndex> {
+    let mut cache = COPY_CACHE.lock().unwrap_or_else(|e| e.into_inner());
+    if let Some(hit) = cache.get(root) {
+        return std::sync::Arc::clone(hit);
+    }
+    let idx = std::sync::Arc::new(PackCopyIndex::load(root));
+    cache.insert(root.to_path_buf(), std::sync::Arc::clone(&idx));
+    idx
 }
 
 /// The goal-graph facts the readiness tier is derived from. Split out from
@@ -309,22 +537,54 @@ pub fn lock_of(unmet: &[UnmetPrereq]) -> (LockKind, String, Vec<String>) {
     (kind, format!("{head}: {}", names.join("; ")), unlocks)
 }
 
+/// SCENARIO-LOCK-COPY-001: the learner-facing name of an unmet prerequisite,
+/// resolved from pack display data — a lexicon gloss, a grammar concept name,
+/// a kana label, or the goal map's own description. When the pack defines no
+/// name, the copy says so generically; the raw id never reaches the learner.
 fn prereq_name(p: &UnmetPrereq) -> String {
     if p.target_is_goal {
-        format!("goal {}", p.target)
+        match &p.display_name {
+            Some(n) => format!("goal \"{n}\""),
+            None => "a later goal of this curriculum".to_string(),
+        }
     } else {
-        format!("{} ({} → {})", p.target, p.dimension, p.required_state)
+        format!(
+            "{} ({} → {})",
+            shown_prereq_name(p),
+            p.dimension,
+            p.required_state
+        )
     }
 }
 
 fn unlock_hint(p: &UnmetPrereq) -> String {
-    if p.target_is_goal {
-        format!("reach goal {} first", p.target)
+    let base = if p.target_is_goal {
+        match &p.display_name {
+            Some(n) => format!("reach \"{n}\" first"),
+            None => "reach a later goal of this curriculum first".to_string(),
+        }
     } else {
         format!(
             "practice {} to {} ({})",
-            p.target, p.required_state, p.dimension
+            shown_prereq_name(p),
+            p.required_state,
+            p.dimension
         )
+    };
+    // Name where the prerequisite is practiced, from the pack's own
+    // curriculum (the first unit that teaches it), when one does.
+    match &p.practice_title {
+        Some(t) => format!("{base} — practiced in \"{t}\""),
+        None => base,
+    }
+}
+
+/// The prerequisite's display name as it appears in a sentence: quoted when
+/// a pack-supplied name resolved, otherwise the honest generic phrase.
+fn shown_prereq_name(p: &UnmetPrereq) -> String {
+    match &p.display_name {
+        Some(n) => format!("\"{n}\""),
+        None => "a skill you have not started yet".to_string(),
     }
 }
 
@@ -358,14 +618,16 @@ fn order_key(s: &ScenarioSummary) -> OrderKey {
 }
 
 /// Gate, label, and readiness for every scenario in one pack, given its
-/// goal map, its scenarios, and the profile's derived mastery. Pure over
-/// pack data — `list_at` feeds it the parsed pack, and the tests can feed
-/// it the real pack files without opening a store.
+/// goal map, its scenarios, the profile's derived mastery, and the pack's
+/// display index (names/practice locations for lock copy). Pure over pack
+/// data — `list_at` feeds it the parsed pack, and the tests can feed it the
+/// real pack files without opening a store.
 pub fn summaries_for<'a>(
     scenarios: impl Iterator<Item = &'a PackScenario>,
     goals: &HashMap<String, crate::PackGoal>,
     derived: &[lts_learner_model::DerivedMastery],
     situation: &dyn Fn(&str) -> Option<String>,
+    copy: &PackCopyIndex,
 ) -> Vec<ScenarioSummary> {
     // Facts first, tier second: "near" is relative to the highest band this
     // profile can already play in this pack, which is only known once every
@@ -391,11 +653,31 @@ pub fn summaries_for<'a>(
         let unmet: Vec<UnmetPrereq> = hard
             .iter()
             .filter(|p| !prereq_met(derived, p))
-            .map(|p| UnmetPrereq {
-                target: p.target.clone(),
-                dimension: p.dimension.clone(),
-                required_state: p.required_state.clone(),
-                target_is_goal: goals.contains_key(&p.target),
+            .map(|p| {
+                let target_is_goal = goals.contains_key(&p.target);
+                // SCENARIO-LOCK-COPY-001: resolve the human name and the
+                // practice host from the pack's own data — the goal map's
+                // description for a stage gate, the content metadata for a
+                // capability gate.
+                let display_name = if target_is_goal {
+                    goals
+                        .get(&p.target)
+                        .and_then(|g| short_label(&g.description, 64))
+                } else {
+                    copy.name(&p.target).map(str::to_string)
+                };
+                let practice_title = if target_is_goal {
+                    copy.goal_practice(&p.target).map(str::to_string)
+                } else {
+                    copy.practice(&p.target).map(str::to_string)
+                };
+                UnmetPrereq {
+                    dimension: p.dimension.clone(),
+                    required_state: p.required_state.clone(),
+                    target_is_goal,
+                    display_name,
+                    practice_title,
+                }
             })
             .collect();
         let in_progress = hard
@@ -408,11 +690,10 @@ pub fn summaries_for<'a>(
         } else if !goal_defined {
             (
                 Some(LockKind::UndefinedGoal),
-                Some(format!(
-                    "not open yet — this pack does not define goal {}",
-                    sc.goal_id
-                )),
-                vec![format!("a pack update that defines goal {}", sc.goal_id)],
+                Some(
+                    "not open yet — this pack does not define a goal for this scenario".to_string(),
+                ),
+                vec!["a pack update that defines this scenario's goal".to_string()],
             )
         } else {
             let (kind, reason, hints) = lock_of(&unmet);
@@ -472,10 +753,8 @@ pub fn list_at(data: &Path, profile_id: &str) -> Result<Vec<ScenarioSummary>, St
         let packs_root = data.join("packs");
         let version = lts_langpack::archive::current_version(&pack_id, &packs_root)
             .ok_or_else(|| format!("pack {pack_id} not installed"))?;
-        let goals_path = packs_root
-            .join(&pack_id)
-            .join(&version)
-            .join("curriculum/goals.yaml");
+        let root = packs_root.join(&pack_id).join(&version);
+        let goals_path = root.join("curriculum/goals.yaml");
         let goals: HashMap<String, crate::PackGoal> = std::fs::read_to_string(&goals_path)
             .ok()
             .and_then(|t| serde_yaml::from_str::<PackGoals>(&t).ok())
@@ -491,6 +770,7 @@ pub fn list_at(data: &Path, profile_id: &str) -> Result<Vec<ScenarioSummary>, St
             &goals,
             &derived,
             &|id| situation_label(data, id),
+            &copy_index(&root),
         ));
     }
     Ok(order_summaries(out))
@@ -1063,12 +1343,68 @@ mod tests {
         }
     }
 
-    fn prereq(target: &str, target_is_goal: bool) -> UnmetPrereq {
+    /// A capability-gate record with no resolved name/place (the fallback
+    /// shape). `_target` names the gate at the call site for readability;
+    /// the record itself carries no raw id.
+    fn prereq(_target: &str, target_is_goal: bool) -> UnmetPrereq {
         UnmetPrereq {
-            target: target.into(),
             dimension: "recall-meaning".into(),
             required_state: "supported".into(),
             target_is_goal,
+            display_name: None,
+            practice_title: None,
+        }
+    }
+
+    /// Copy scanner for leaked pack identifiers: a dotted token with three
+    /// or more segments whose first segment is a short all-lowercase tag
+    /// (`ja.lex.demonstratives.koko`, `x.goal.eat`-family ids). Ordinary
+    /// copy — hyphenated dimension words, decimal-free prose — never
+    /// matches (SCENARIO-LOCK-COPY-001 gate).
+    fn pack_id_like(s: &str) -> Option<String> {
+        let idch = |c: char| c.is_ascii_alphanumeric() || c == '_' || c == '-' || c == '.';
+        let chars: Vec<char> = s.chars().collect();
+        let mut i = 0;
+        while i < chars.len() {
+            if idch(chars[i]) {
+                let start = i;
+                while i < chars.len() && idch(chars[i]) {
+                    i += 1;
+                }
+                let tok: String = chars[start..i].iter().collect();
+                let segs: Vec<&str> = tok.split('.').collect();
+                let first = segs[0];
+                if segs.len() >= 3
+                    && !first.is_empty()
+                    && first.len() <= 4
+                    && first.chars().all(|c| c.is_ascii_lowercase())
+                {
+                    return Some(tok);
+                }
+            } else {
+                i += 1;
+            }
+        }
+        None
+    }
+
+    #[test]
+    fn the_copy_scanner_finds_pack_ids_and_ignores_ordinary_copy() {
+        assert_eq!(
+            pack_id_like("practice ja.lex.demonstratives.koko to supported (recall-meaning)"),
+            Some("ja.lex.demonstratives.koko".to_string())
+        );
+        assert_eq!(
+            pack_id_like("reach goal ru.goal.on-ramp.cyrillic first"),
+            Some("ru.goal.on-ramp.cyrillic".to_string())
+        );
+        for clean in [
+            "not open yet — practice first: \"here\" (recall-meaning → supported)",
+            "practice \"here\" to supported (recall-meaning) — practiced in \"Asking where things are\"",
+            "reach \"Retell simple past events and stories\" first",
+            "a skill you have not started yet",
+        ] {
+            assert_eq!(pack_id_like(clean), None, "{clean} must read as copy");
         }
     }
 
@@ -1276,25 +1612,89 @@ mod tests {
         );
     }
 
+    // SCENARIO-LOCK-COPY-001: the copy names the capability with the name
+    // the pack itself carries, says where it is practiced, and never shows
+    // the raw content id.
     #[test]
-    fn a_content_gate_names_the_capability_and_how_to_unlock_it() {
-        let (kind, reason, unlocks) = lock_of(&[prereq("ja.lex.demonstratives.koko", false)]);
+    fn a_content_gate_names_the_capability_and_where_it_is_practiced() {
+        let p = UnmetPrereq {
+            display_name: Some("here".into()),
+            practice_title: Some("Asking where things are".into()),
+            ..prereq("ja.lex.demonstratives.koko", false)
+        };
+        let (kind, reason, unlocks) = lock_of(&[p]);
         assert_eq!(kind, LockKind::Capability);
         assert!(reason.contains("practice first"), "{reason}");
-        assert!(reason.contains("ja.lex.demonstratives.koko"), "{reason}");
+        assert!(
+            reason.contains("\"here\" (recall-meaning → supported)"),
+            "{reason}"
+        );
         assert_eq!(
             unlocks,
-            ["practice ja.lex.demonstratives.koko to supported (recall-meaning)"]
+            [
+                "practice \"here\" to supported (recall-meaning) — practiced in \"Asking where things are\""
+            ]
         );
+        assert!(!reason.contains("ja.lex.demonstratives.koko"), "{reason}");
+        assert!(pack_id_like(&reason).is_none(), "{reason}");
+        for u in &unlocks {
+            assert!(pack_id_like(u).is_none(), "{u}");
+        }
     }
 
     #[test]
-    fn a_goal_gate_is_labelled_a_later_curriculum_stage() {
-        let (kind, reason, unlocks) = lock_of(&[prereq("ja.goal.a1.ask-location", true)]);
+    fn a_goal_gate_is_labelled_a_later_curriculum_stage_by_its_own_words() {
+        let p = UnmetPrereq {
+            display_name: Some("Retell simple past events and stories".into()),
+            practice_title: Some("Telling yesterday apart".into()),
+            ..prereq("ja.goal.a1.past-stories", true)
+        };
+        let (kind, reason, unlocks) = lock_of(&[p]);
         assert_eq!(kind, LockKind::Stage);
         assert!(reason.contains("later stage"), "{reason}");
-        assert!(reason.contains("goal ja.goal.a1.ask-location"), "{reason}");
-        assert_eq!(unlocks, ["reach goal ja.goal.a1.ask-location first"]);
+        assert!(
+            reason.contains("goal \"Retell simple past events and stories\""),
+            "{reason}"
+        );
+        assert_eq!(
+            unlocks,
+            [
+                "reach \"Retell simple past events and stories\" first — practiced in \"Telling yesterday apart\""
+            ]
+        );
+        assert!(!reason.contains("ja.goal.a1.past-stories"), "{reason}");
+        assert!(pack_id_like(&reason).is_none(), "{reason}");
+        for u in &unlocks {
+            assert!(pack_id_like(u).is_none(), "{u}");
+        }
+    }
+
+    // Fallback (gate c): when no pack metadata names the prerequisite, the
+    // copy says so with a generic honest phrase — never the raw id.
+    #[test]
+    fn an_unnamed_prerequisite_falls_back_to_an_honest_phrase_not_the_id() {
+        let (kind, reason, unlocks) = lock_of(&[prereq("ja.lex.demonstratives.koko", false)]);
+        assert_eq!(kind, LockKind::Capability);
+        assert!(
+            reason.contains("a skill you have not started yet"),
+            "{reason}"
+        );
+        assert!(!reason.contains("ja.lex.demonstratives.koko"), "{reason}");
+        assert_eq!(unlocks.len(), 1);
+        assert!(pack_id_like(&reason).is_none(), "{reason}");
+        for u in &unlocks {
+            assert!(pack_id_like(u).is_none(), "{u}");
+        }
+        // A stage gate with no resolvable goal label reads generically too.
+        let (_, reason, unlocks) = lock_of(&[prereq("ja.goal.a1.past-stories", true)]);
+        assert!(
+            reason.contains("a later goal of this curriculum"),
+            "{reason}"
+        );
+        assert_eq!(unlocks, ["reach a later goal of this curriculum first"]);
+        for s in std::iter::once(reason).chain(unlocks) {
+            assert!(pack_id_like(&s).is_none(), "{s}");
+        }
     }
 
     #[test]
@@ -1330,6 +1730,7 @@ mod tests {
             &goals,
             &[],
             &|_situation| Option::<String>::None,
+            &PackCopyIndex::load(&root),
         ));
         assert!(rows.len() > 1, "the shipped pack offers more than one");
 
@@ -1369,5 +1770,203 @@ mod tests {
                 r.scenario_id
             );
         }
+    }
+
+    /// Gate (a), SCENARIO-LOCK-COPY-001: walk every locked row a fresh
+    /// profile sees against the REAL shipped packs (ja-JP and ru-RU) and
+    /// assert no pack identifier — content id or goal id — reaches the
+    /// learner-facing lock copy or the rendered situation line.
+    #[test]
+    fn a_fresh_profiles_lock_copy_carries_no_raw_ids_in_either_shipped_pack() {
+        for pack in ["ja-JP", "ru-RU"] {
+            let root =
+                Path::new(env!("CARGO_MANIFEST_DIR")).join(format!("../../../languages/{pack}"));
+            let runtime = crate::packcache::runtime(&root).expect("the shipped pack parses");
+            let goals: HashMap<String, crate::PackGoal> = serde_yaml::from_str::<crate::PackGoals>(
+                &std::fs::read_to_string(root.join("curriculum/goals.yaml")).unwrap(),
+            )
+            .expect("the shipped goal map parses")
+            .goals
+            .into_iter()
+            .map(|g| (g.id.clone(), g))
+            .collect();
+            let copy = PackCopyIndex::load(&root);
+            // Situation labels resolve from the pack's own pragmatics file,
+            // as `situation_label` does for an installed pack.
+            let prag: serde_yaml::Value = serde_yaml::from_str(
+                &std::fs::read_to_string(root.join("language/pragmatics.yaml")).unwrap(),
+            )
+            .expect("the shipped pragmatics file parses");
+            let named: HashMap<String, String> = prag
+                .get("situations")
+                .and_then(|s| s.as_sequence())
+                .map(|seq| {
+                    seq.iter()
+                        .filter_map(|s| {
+                            Some((
+                                s.get("id")?.as_str()?.to_string(),
+                                s.get("name")?.as_str()?.to_string(),
+                            ))
+                        })
+                        .collect()
+                })
+                .unwrap_or_default();
+            let rows = summaries_for(
+                runtime.scenarios(),
+                &goals,
+                &[],
+                &|id| named.get(id).cloned(),
+                &copy,
+            );
+
+            // Prerequisite targets from the goal map: none may appear, in
+            // any form, inside a learner-facing string.
+            let targets: Vec<&str> = goals
+                .values()
+                .flat_map(|g| g.prerequisites.iter().map(|p| p.target.as_str()))
+                .collect();
+
+            let locked: Vec<&ScenarioSummary> = rows.iter().filter(|r| !r.unlocked).collect();
+            assert!(
+                !locked.is_empty(),
+                "{pack}: a fresh profile has locked rows to audit"
+            );
+            let mut capability_rows = 0;
+            for r in &locked {
+                let strings: Vec<String> = r
+                    .locked_reason
+                    .clone()
+                    .into_iter()
+                    .chain(r.unlocks.iter().cloned())
+                    .collect();
+                assert!(!strings.is_empty(), "{} names its gate", r.scenario_id);
+                for s in &strings {
+                    if let Some(tok) = pack_id_like(s) {
+                        panic!("{pack}: {} copy leaks pack id {tok}: {s:?}", r.scenario_id);
+                    }
+                    for t in &targets {
+                        assert!(
+                            !s.contains(t),
+                            "{pack}: {} copy {s:?} leaks prereq target {t}",
+                            r.scenario_id
+                        );
+                    }
+                }
+                if r.lock_kind == Some(LockKind::Capability) {
+                    capability_rows += 1;
+                    // Shipped packs carry names for their capability gates,
+                    // so these rows must name the capability itself, not
+                    // fall back to the generic phrase.
+                    assert!(
+                        r.unlocks.iter().all(|u| {
+                            u.contains('"') || !u.contains("a skill you have not started yet")
+                        }),
+                        "{} should name the capability from pack data: {:?}",
+                        r.scenario_id,
+                        r.unlocks
+                    );
+                }
+            }
+            if pack == "ja-JP" {
+                assert!(
+                    capability_rows > 0,
+                    "ja-JP exercises the capability-gate copy path"
+                );
+            }
+            // The list itself: rendered situation lines are copy too.
+            for r in &rows {
+                if let Some(s) = &r.situation {
+                    assert!(
+                        pack_id_like(s).is_none(),
+                        "{pack}: situation copy {s:?} leaks a pack id"
+                    );
+                }
+            }
+        }
+    }
+
+    /// Gate (b), SCENARIO-LOCK-COPY-001: the names and places come from the
+    /// pack's own data — renaming the display fields in a fixture pack
+    /// changes the generated lock copy.
+    #[test]
+    fn renaming_pack_display_data_renames_the_lock_copy() {
+        let tmp = tempfile::tempdir().unwrap();
+        let root = tmp.path();
+        std::fs::create_dir_all(root.join("lexicon")).unwrap();
+        std::fs::create_dir_all(root.join("curriculum/units")).unwrap();
+        let write = |rel: &str, text: &str| {
+            std::fs::write(root.join(rel), text).expect("fixture write");
+        };
+        write(
+            "lexicon/tool.jsonl",
+            "{\"id\":\"x.lex.tool.spoon\",\"forms\":[{\"text\":\"スプーン\"}],\"glosses\":{\"en-US\":[\"spoon\"]}}",
+        );
+        write(
+            "curriculum/units/001-tool.yaml",
+            "id: x.unit.spoon\ngoal_id: x.goal.eat\ntitle: Using the spoon\nactivities:\n- id: x.activity.spoon-read\n  type: encounter-read\n  modality: reading\n  support_level: 5\n  content_refs:\n  - x.lex.tool.spoon\n",
+        );
+        let sc: PackScenario = serde_yaml::from_str(
+            "id: x.scenario.eat\ngoal_id: x.goal.eat\ntitle: Ordering a meal\nnodes: []\nsupport_ladder: []\n",
+        )
+        .expect("fixture scenario");
+        let goals: HashMap<String, crate::PackGoal> = [(
+            "x.goal.eat".to_string(),
+            crate::PackGoal {
+                description: "Talk about eating out".into(),
+                band: Some("on-ramp".into()),
+                review_status: None,
+                id: "x.goal.eat".into(),
+                modalities: vec!["speaking".into()],
+                prerequisites: vec![crate::PackPrereq {
+                    target: "x.lex.tool.spoon".into(),
+                    dimension: "recall-meaning".into(),
+                    required_state: "supported".into(),
+                    strength: "hard".into(),
+                }],
+                required_concepts: vec![],
+                assessment_ids: vec![],
+            },
+        )]
+        .into_iter()
+        .collect();
+        let row = |root: &Path| {
+            let rows = summaries_for(
+                std::iter::once(&sc),
+                &goals,
+                &[],
+                &|_s| Option::<String>::None,
+                &PackCopyIndex::load(root),
+            );
+            rows.into_iter().next().expect("one scenario")
+        };
+
+        let first = row(root);
+        assert!(!first.unlocked);
+        let reason = first.locked_reason.clone().expect("a lock reason");
+        assert!(reason.contains("\"spoon\""), "{reason}");
+        let hint = &first.unlocks[0];
+        assert!(hint.contains("\"spoon\""), "{hint}");
+        assert!(hint.contains("Using the spoon"), "{hint}");
+        assert!(pack_id_like(&reason).is_none(), "{reason}");
+        assert!(pack_id_like(hint).is_none(), "{hint}");
+
+        // Rename what the PACK says, and only the pack data changed.
+        write(
+            "lexicon/tool.jsonl",
+            "{\"id\":\"x.lex.tool.spoon\",\"forms\":[{\"text\":\"フォーク\"}],\"glosses\":{\"en-US\":[\"fork\"]}}",
+        );
+        write(
+            "curriculum/units/001-tool.yaml",
+            "id: x.unit.spoon\ngoal_id: x.goal.eat\ntitle: Forks at dinner\nactivities:\n- id: x.activity.spoon-read\n  type: encounter-read\n  modality: reading\n  support_level: 5\n  content_refs:\n  - x.lex.tool.spoon\n",
+        );
+        let second = row(root);
+        let reason2 = second.locked_reason.clone().expect("a lock reason");
+        assert!(
+            reason2.contains("\"fork\"") && !reason2.contains("spoon"),
+            "{reason2}"
+        );
+        let hint2 = &second.unlocks[0];
+        assert!(hint2.contains("Forks at dinner"), "{hint2}");
+        assert!(pack_id_like(hint2).is_none(), "{hint2}");
     }
 }
