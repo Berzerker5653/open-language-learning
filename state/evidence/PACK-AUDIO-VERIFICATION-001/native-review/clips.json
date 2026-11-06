@@ -98,5 +98,15 @@
   "id": "ru.lex.socialplans.vyhod",
   "text": "вы́ход",
   "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.socialplans.vyhod.wav"
+ },
+ {
+  "id": "ru.lex.synthesis4.kolllazh",
+  "text": "коллаж",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.synthesis4.kolllazh.wav"
+ },
+ {
+  "id": "ru.lex.synthesis4.ssuda",
+  "text": "ссуда",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.synthesis4.ssuda.wav"
  }
 ]

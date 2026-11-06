@@ -61,14 +61,17 @@ async function render(){
   const c = clips[i];
   app.innerHTML = '<div class="prog">' + Object.keys(v).length + ' of ' +
     clips.length + ' reviewed — does this say the word correctly?</div>' +
-    '<div class="word">' + c.text + '</div>' +
-    '<audio controls autoplay src="/clip/' + c.id + '"></audio><br>' +
-    '<button class="up" onclick="vote(\'' + c.id + '\',\'good\')">👍 Sounds right</button>' +
-    '<button class="down" onclick="document.getElementById(\'cm\').style.display=\'block\';' +
-    'document.getElementById(\'send\').style.display=\'inline-block\'">👎 Something\'s off</button>' +
+    '<div class="word"></div>' +
+    '<audio controls autoplay src="/clip/' + encodeURIComponent(c.id) + '"></audio><br>' +
+    '<button class="up" id="up">👍 Sounds right</button>' +
+    '<button class="down" id="down">👎 Something is off</button>' +
     '<div id="cm" style="display:none"><textarea id="note" placeholder="What is wrong? (pronunciation, stress, speed…)"></textarea>' +
-    '<button id="send" style="display:none;background:#8a2727" onclick="vote(\'' + c.id +
-    '\',\'bad\')">Send feedback</button></div>';
+    '<button id="send" style="display:inline-block;background:#8a2727">Send feedback</button></div>';
+  app.querySelector('.word').textContent = c.text;
+  document.getElementById('up').onclick = () => vote(c.id, 'good');
+  document.getElementById('down').onclick = () => {
+    document.getElementById('cm').style.display = 'block'; };
+  document.getElementById('send').onclick = () => vote(c.id, 'bad');
 }
 async function vote(id, verdict){
   const note = document.getElementById('note') ? document.getElementById('note').value : '';
