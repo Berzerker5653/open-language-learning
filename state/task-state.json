@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-06T08:37:36",
+  "updated": "2026-11-06T08:45:51",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1912,14 +1912,15 @@
     },
     "SCENARIO-LOCK-COPY-001": {
       "task_id": "SCENARIO-LOCK-COPY-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Scenario lock reasons speak learner, not content ids",
-      "activity": "idle",
+      "activity": "awaiting-human-acceptance",
       "summary": "Locked scenario rows emit raw ids ('practice ja.lex.demonstratives.koko to supported (speaking)'); a fresh profile sees one playable row plus a wall of ~20 locked tokens.",
       "notes": "Finding S-08 of the 2026-10-21 findings register. Human names come from pack data (engine stays language-neutral) with a pointer to where each prerequisite is practiced.",
       "evidence": [
-        "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md"
+        "commit 885a5f6: PackCopyIndex resolves lock-copy names from pack data (lexicon glosses, grammar names, kana labels, goal-map descriptions); each unmet prereq names the unit practicing it; generic fallback replaces raw ids; UnmetPrereq no longer carries raw id",
+        "controller-verified 2026-11-06: cargo test -p lts-desktop --lib scenarios:: 18/18 at HEAD in clean worktree; agent gates: fmt+clippy clean, audit_learner_copy 0, fresh-profile ja+ru walks assert zero pack-id-shaped tokens, fixture-rename proves pack-derived names; full --lib baseline-diff = no new failures (33-34 pre-existing env failures re bundled assets)"
       ]
     },
     "IME-TOGGLE-UX-001": {
