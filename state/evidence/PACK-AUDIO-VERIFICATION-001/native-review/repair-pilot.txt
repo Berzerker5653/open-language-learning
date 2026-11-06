@@ -1,0 +1,10 @@
+ru.contrast.palatalization.luk-1
+ru.lex.argue2.falshivyy
+ru.lex.argue2.pogreshnost
+ru.lex.argue2.produkt
+ru.lex.argue2.stimul
+ru.lex.argue2.uchyot
+ru.lex.argue3.umerenno
+ru.lex.argue4.os
+ru.lex.city.svetofor
+ru.lex.classroom.povtorite

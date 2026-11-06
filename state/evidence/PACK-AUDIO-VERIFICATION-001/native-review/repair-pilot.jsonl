@@ -1,0 +1,1 @@
+{"id": "ru.contrast.palatalization.luk-1", "attempts": 3, "result": "pass@3", "takes": [{"take": 1, "ratio": 0.29, "reasons": [], "rescued": false, "heard": "Йок."}, {"take": 2, "stage": "segments", "flags": {"gap": {"s": 5.38, "count": 4, "threshold": 0.8}}}, {"take": 3, "ratio": 1.0, "reasons": [], "rescued": false, "heard": "Люк."}]}

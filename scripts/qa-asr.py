@@ -26,6 +26,7 @@ import os
 import re
 import subprocess
 import sys
+import wave
 from pathlib import Path
 
 
@@ -197,6 +198,20 @@ def check(pack: Path, model: str, lang: str, whisper: str, row: dict) -> dict:
     wav = pack / row["file"]
     if not wav.exists():
         return {"id": row["id"], "status": "wav-missing", "text": row["text"]}
+    # Duration-vs-word-length gate (owner audition 2026-11-06): a native
+    # reviewer failed every clip that was stretched/whining/crying and passed
+    # all the short ones — ASR alone passes garbage as long as the word is
+    # understood somewhere inside. Cap scales with syllables (vowel graphemes).
+    try:
+        with wave.open(str(wav), "rb") as w:
+            dur = w.getnframes() / float(w.getframerate())
+        n_syll = len(re.findall(r"[аеёиоуыэюя]", row["text"]))
+        cap = 1.3 + 0.45 * n_syll
+        if dur > cap:
+            return {"id": row["id"], "status": "MISMATCH", "text": row["text"],
+                    "reasons": [f"duration-suspect ({dur:.2f}s > {cap:.2f}s cap)"]}
+    except Exception:
+        pass  # unreadable header: fall through to ASR, don't invent a failure
     # A per-clip timeout is an infra signal (CPU contention from too many
     # workers), NOT evidence of bad audio: record it as a distinct status so a
     # long run survives instead of a single slow clip killing the whole pass.
