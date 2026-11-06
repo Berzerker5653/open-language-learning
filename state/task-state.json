@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-06T08:05:00-07:00",
+  "updated": "2026-11-06T08:25:00-07:00",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1934,12 +1934,12 @@
     },
     "PACK-UPDATE-BANNER-001": {
       "task_id": "PACK-UPDATE-BANNER-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "The pack-update banner names the wrong installed version when several versions coexist",
-      "activity": "idle",
-      "summary": "hub/Home/Settings banner reports the LOWEST installed version when a pack has multiple installed rows: owner device showed 'version 0.2.0 is on this device' with 0.4.2 installed same day (current pointer 0.4.2) and profile selection 0.4.3; installed_packs (packs.rs:1061) emits one entry per row and the catalogue join find (packs.rs:238-241) keeps the first.",
-      "notes": "Found by the 2026-10-21 AT-SPI audit dump of the live hub. Also observed: installing the older catalogue pin (0.4.2) moved the store current pointer down from 0.4.3. Content for the active profile still resolves from the selected on-disk version, so learner content was unaffected - banner wording only.",
+      "activity": "awaiting-human-acceptance",
+      "summary": "Banner installed-version fact = profile selection then current pointer; older installs never downgrade the pointer. fd7f716 + manifest repair 6b3597d.",
+      "notes": "Found by the 2026-10-21 AT-SPI audit dump of the live hub. Also observed: installing the older catalogue pin (0.4.2) moved the store current pointer down from 0.4.3. Content for the active profile still resolves from the selected on-disk version, so learner content was unaffected - banner wording only. || CLOSED 2026-11-06. Targeted suites green; full cargo --lib blocked by host RAM (engine resident), re-run at low load before REL-001. Follow-ups logged in state/notes/PACK-UPDATE-BANNER-001.md.",
       "evidence": [
         "state/evidence/ACC-001/atspi-dumps/audit-2026-10-21.txt"
       ]
