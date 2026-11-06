@@ -72,3 +72,4 @@ tmp/
 # TS build info and audio-QA campaign outputs (2026-10-26 sweep hygiene card)
 *.tsbuildinfo
 qs-r*.jsonl
+tmp/jmdict
