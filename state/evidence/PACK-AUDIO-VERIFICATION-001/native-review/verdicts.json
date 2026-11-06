@@ -1,1 +1,112 @@
-{}
+{
+ "ru.contrast.stress.muka-0": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-06T13:19:56"
+ },
+ "ru.contrast.stress.muka-1": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-06T13:19:58"
+ },
+ "ru.contrast.stress.zamok-0": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-06T13:20:00"
+ },
+ "ru.contrast.stress.zamok-1": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-06T13:20:01"
+ },
+ "ru.lex.critical3.atlas": {
+  "verdict": "bad",
+  "comment": "Stress is kinda being put on both \"A\"'s. Needs firmer stress differentiation",
+  "ts": "2026-11-06T13:22:10"
+ },
+ "ru.lex.cult.zamok": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-06T13:22:12"
+ },
+ "ru.lex.housing.ogorod": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-06T13:22:13"
+ },
+ "ru.lex.synthesis.kruzhok": {
+  "verdict": "bad",
+  "comment": "Last two letters have very prolonged pronunciation. Needs to be shorter",
+  "ts": "2026-11-06T13:23:28"
+ },
+ "ru.lex.neg.parafraze": {
+  "verdict": "bad",
+  "comment": "\"A\" that is stressed is being extended in pronunciation rather being short like its supposed to",
+  "ts": "2026-11-06T13:25:07"
+ },
+ "ru.lex.prof.potencial": {
+  "verdict": "bad",
+  "comment": "firs 8 seconds of audio is just the voice crying. the word is pronounced incorrectly with last vowel being sound \"я\" instead of sound \"A\"",
+  "ts": "2026-11-06T13:29:06"
+ },
+ "ru.lex.food.banan": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-06T13:29:12"
+ },
+ "ru.lex.argue2.priroda": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-06T13:30:30"
+ },
+ "ru.lex.study.mig": {
+  "verdict": "bad",
+  "comment": "\"И\" is tool elongated on pronunciation",
+  "ts": "2026-11-06T13:32:01"
+ },
+ "ru.lex.travel.svetofor": {
+  "verdict": "bad",
+  "comment": "pronunciation is wrong. It skipped the \"O\" after \"т\" and pronounced \"ox' instead of \"Ф\"",
+  "ts": "2026-11-06T13:35:37"
+ },
+ "ru.lex.family.sumka": {
+  "verdict": "bad",
+  "comment": "Technically pronunciation is correct. However the delivery of the word sounds off. Its too stretched. Try pronouncing letters shorter ",
+  "ts": "2026-11-06T13:38:25"
+ },
+ "ru.lex.experiences.bespokoitsya": {
+  "verdict": "bad",
+  "comment": "A lot of weird sounds surrounding the word. It sound like weird accent or whining. The word itself pronounced correctly",
+  "ts": "2026-11-06T14:00:30"
+ },
+ "ru.lex.comparisons.vyshe": {
+  "verdict": "bad",
+  "comment": "the word is pronounced right, but intonation sounds like a question",
+  "ts": "2026-11-06T14:01:16"
+ },
+ "ru.lex.argue2.uchyot": {
+  "verdict": "bad",
+  "comment": "Accent is weird, the word pronounced for too long, vowels needs to be pronounced shorter",
+  "ts": "2026-11-06T14:02:31"
+ },
+ "ru.lex.services.podpisat": {
+  "verdict": "bad",
+  "comment": "unnecessary sound \"я\" in between of \"и\" and \"c\"",
+  "ts": "2026-11-06T14:03:43"
+ },
+ "ru.lex.socialplans.vyhod": {
+  "verdict": "bad",
+  "comment": "accent is weird, the vowels needs to be pronounced shorter",
+  "ts": "2026-11-06T14:04:13"
+ },
+ "ru.lex.synthesis4.kolllazh": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-06T14:04:22"
+ },
+ "ru.lex.synthesis4.ssuda": {
+  "verdict": "bad",
+  "comment": "unnecessary sounds at the beginning, try again",
+  "ts": "2026-11-06T14:05:22"
+ }
+}

@@ -1,0 +1,13 @@
+ru.lex.critical3.atlas
+ru.lex.synthesis.kruzhok
+ru.lex.neg.parafraze
+ru.lex.prof.potencial
+ru.lex.study.mig
+ru.lex.travel.svetofor
+ru.lex.family.sumka
+ru.lex.experiences.bespokoitsya
+ru.lex.comparisons.vyshe
+ru.lex.argue2.uchyot
+ru.lex.services.podpisat
+ru.lex.socialplans.vyhod
+ru.lex.synthesis4.ssuda
