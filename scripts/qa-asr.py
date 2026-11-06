@@ -75,7 +75,7 @@ def ru_phon(s: str) -> str:
     # spelling is not a reliable stress channel, so prosody stays the
     # phoneme/record layer's and the owner's job, not this gate's.
     return " ".join(
-        _ipa_word(w) if re.fullmatch(r"[а-я0-9]+", w) else w
+        _ipa_word(w) if re.fullmatch(r"[а-яё0-9]+", w) else w
         for w in s.split()
     )
 
@@ -88,10 +88,18 @@ def norm(s: str, ja: bool = False) -> str:
     # audio content.
     if ja:
         s = kana(s)
+    # Strip stress marks BEFORE any other normalization: they are not audio
+    # content for the fold (whisper never emits them), and letting them reach
+    # ru_phon as spaces changes the phonemic fold asymmetrically
+    # ("кио́ск"->"kʲiʌɛskɑ" vs "киоск"->"kʲiosk") and fails correct clips.
+    s = s.replace("\u0301", "").replace("\u0300", "")
     out = re.sub(r"\s+", " ", re.sub(r"[^\w\d]+", " ", s.lower())).strip()
     if ja:
         return out.replace(" ", "")
-    return ru_phon("".join(c for c in out if c != "\u0301"))
+    # Russian IPA folding emits syllable spaces inconsistently per word
+    # ("zɑmʌ kɑ" vs "zamok"); word segmentation in whisper output is not
+    # what we verified either (same rationale as the ja space fold).
+    return ru_phon("".join(c for c in out if c != "\u0301")).replace(" ", "")
 
 
 _JA_LEX = None
@@ -132,6 +140,35 @@ def ja_rescue(heard: str, expected: str) -> bool:
     return False
 
 
+def ru_reduce_rescue(heard: str, expected: str) -> bool:
+    # Rescue for correctly-pronounced clips that whisper transcribes
+    # phonetically. Expected text without explicit stress marks means the
+    # stress (and therefore reduction) is unspecified, so compare a fully
+    # reduced fold of both sides: unstressed о->а, е->и (near-hard), word-final
+    # ж->ш devoicing, geminate collapse (ссуда~суда), and epenthetic vowels
+    # are absorbed by the ratio. Known good classes this rescues:
+    #   коллаж -> "Калаш", ссуда -> "Си-су-да."
+    # Text WITH stress marks never takes this path: the marked reading is
+    # authoritative and the main fold is strict on it (замо́к vs "Замайок"
+    # must still fail). Threshold 0.85 is stricter than the main gate's 0.75.
+    def fold(s: str, collapse_geminates: bool) -> str:
+        s = re.sub(r"[^\w\d]+", " ", s.lower()).strip()
+        s = s.replace("ь", "")
+        if collapse_geminates:
+            s = re.sub(r"([а-я])\1", r"\1", s)      # geminates (collapsible variant only)
+        for a, b in (("о", "а"), ("е", "и"), ("ж", "ш")):
+            s = s.replace(a, b)
+        return s.replace(" ", "")
+    scores = []
+    for cg in (False, True):
+        a, b = fold(expected, cg), fold(heard, cg)
+        if a and b and a[0] == b[0]:   # no dropped initial syllable ("город" != "огород")
+            scores.append(1.0 if a == b else difflib.SequenceMatcher(None, a, b).ratio())
+    if not scores:
+        return False
+    return max(scores) >= 0.85
+
+
 def verdict(text: str, heard: str, lang: str):
     """Gate v3 decision for one transcript pair: returns
     (ok, ratio, reasons, rescued). Shared with bake-bestof.py."""
@@ -147,6 +184,10 @@ def verdict(text: str, heard: str, lang: str):
     ok = (a == b or ratio >= 0.75) and not reasons
     rescued = False
     if ja and not ok and not reasons and ja_rescue(heard, text):
+        ok = True
+        rescued = True
+    if lang == "ru" and not ok and not reasons and not re.search(r"[\u0301\u0300]", text) \
+            and ru_reduce_rescue(heard, text):
         ok = True
         rescued = True
     return ok, ratio, reasons, rescued
