@@ -799,6 +799,46 @@ th:last-child {
   }
 }
 
+/* ------------------------------------------- input-mode bubble (IME-TOGGLE-UX-001) */
+/* Pinned to the app chrome so it rides every in-app route; the caller only
+ * renders it while the active pack declares an in-app keyboard. */
+.input-mode-bubble {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 40;
+}
+
+.input-mode-bubble__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
+}
+
+.input-mode-bubble__button[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.input-mode-bubble__button:hover {
+  border-color: var(--accent);
+}
+
+@media (prefers-color-scheme: dark) {
+  .input-mode-bubble__button {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 40%);
+  }
+}
+
 /* ------------------------------------------------------ reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,

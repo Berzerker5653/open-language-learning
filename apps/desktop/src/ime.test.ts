@@ -1,5 +1,14 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { kanaCommit, kanaDisplay, packDeclaresInAppKanaKeyboard, toKana } from "./ime";
+import {
+  inAppKeyboardForScripts,
+  inputModeLabel,
+  kanaCommit,
+  kanaDisplay,
+  packDeclaresInAppKanaKeyboard,
+  ROMAJI_KANA_CONVERTER,
+  toKana,
+} from "./ime";
 
 describe("romaji→kana converter (issue #2 phase 1)", () => {
   it("converts the words the practice runners actually ask for", () => {
@@ -91,4 +100,70 @@ describe("pack-declared gate for the in-app kana keyboard", () => {
   it("a pack declaring nothing grants nothing", () => {
     expect(packDeclaresInAppKanaKeyboard([])).toBe(false);
   });
+});
+
+// IME-TOGGLE-UX-001 acceptance 3: the input layer resolves its converter
+// from pack-declared capability plus the converter registry (kana is phase
+// 1's instance). Adding another script's keyboard is a registry entry plus
+// pack content — no language branch anywhere — and a pack without mapping
+// data resolves nothing: no keyboard, no bubble.
+describe("script-keyed converter registry (IME-TOGGLE-UX-001)", () => {
+  it("resolves the kana converter plus the pack's own declared ids", () => {
+    const kb = inAppKeyboardForScripts([
+      "ja.orth.hiragana",
+      "ja.orth.katakana",
+      "ja.orth.kanji",
+      "ja.orth.latin",
+    ]);
+    expect(kb?.converter.id).toBe("romaji-kana");
+    expect(kb?.declaredScriptIds).toEqual(["ja.orth.hiragana", "ja.orth.katakana"]);
+  });
+
+  it("a pack whose scripts no converter serves resolves no keyboard", () => {
+    expect(inAppKeyboardForScripts(["ru.orth.cyrillic"])).toBeNull();
+    expect(inAppKeyboardForScripts([])).toBeNull();
+  });
+
+  it("resolves on the script, never a language: a non-Japanese pack declaring the script gets the same converter", () => {
+    const kb = inAppKeyboardForScripts(["ryu.orth.katakana"]);
+    expect(kb?.converter).toBe(ROMAJI_KANA_CONVERTER);
+    expect(kb?.declaredScriptIds).toEqual(["ryu.orth.katakana"]);
+  });
+
+  it("the mode label is built from the pack's declared script metadata", () => {
+    const ja = inAppKeyboardForScripts(["ja.orth.hiragana", "ja.orth.katakana"]);
+    if (!ja) throw new Error("kana pack should resolve a keyboard");
+    expect(inputModeLabel(ja)).toBe("romaji → hiragana · katakana");
+    // A hypothetical non-Japanese pack that declares one served script
+    // labels itself with ITS metadata through the same code path.
+    const other = inAppKeyboardForScripts(["xx.orth.katakana"]);
+    if (!other) throw new Error("a pack declaring katakana must resolve a keyboard");
+    expect(inputModeLabel(other)).toBe("romaji → katakana");
+  });
+
+  it("the converter's data drives display and commit", () => {
+    expect(ROMAJI_KANA_CONVERTER.display("konnichiwa")).toBe("こんにちわ");
+    expect(ROMAJI_KANA_CONVERTER.commit("nihon")).toBe("にほん");
+  });
+});
+
+// IME-TOGGLE-UX-001 acceptance 3, pinned structurally: the UI and the
+// input layer must contain no quoted language/script literal — the mode
+// name and the keyboard's existence both come from pack-declared metadata,
+// so a hardcoded language string in these files is a regression. (The
+// converter's own script names live in ime.ts as mapping data, where a
+// new script's keyboard adds its own entry.)
+describe("no language-literal branches in the input UI (IME-TOGGLE-UX-001)", () => {
+  const LANGUAGE_LITERAL =
+    /(["'`])(ja-JP|ru-RU|Japanese|Russian|日本語|hiragana|katakana|cyrillic)\1/i;
+  for (const file of ["App.tsx", "kana-ime.tsx"]) {
+    it(`${file} carries no quoted language or script literal`, () => {
+      const src = readFileSync(new URL(`./${file}`, import.meta.url), "utf8");
+      // Strip /* … */ and // … comments: prose may name languages, code
+      // may not be branched on them.
+      const code = src.replace(/\/\*[\s\S]*?\*\//g, "").replace(/^\s*\/\/.*$/gm, "");
+      const match = code.match(LANGUAGE_LITERAL);
+      expect(match, `found language literal ${match?.[0]} in ${file}`).toBeNull();
+    });
+  }
 });

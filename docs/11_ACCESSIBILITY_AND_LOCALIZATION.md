@@ -86,3 +86,7 @@ Language packs may declare font/script requirements, but do not distribute font 
 Support ruby/furigana semantics, mixed Latin/kana/kanji layout, line wrapping appropriate to Japanese text, and selectable furigana visibility.
 
 Test selectable/copyable text and ruby reading order with the supported screen-reader matrix, avoiding duplicate or nonsensical announcements. Japanese IME composition must not be submitted/scored before composition ends; controls and shortcuts must not intercept ordinary text entry. User-requested furigana remains available, with its use recorded when it changes reading-assessment validity.
+
+## In-app input keyboard
+
+When the active language pack declares a script an in-app keyboard converter serves (manifest `scripts:`), the app chrome shows an input-mode bubble on every in-app screen, and Ctrl+Shift+K (Cmd+Shift+K on macOS) flips the keyboard between the system input method and the in-app one from any screen without opening Settings. The bubble and the shortcut are absent/no-ops when the active pack declares no in-app keyboard — the grant is the pack's own script declaration, never a language check. The bubble's mode label is composed from the active pack's declared script metadata, and mode changes announce through a polite live region.

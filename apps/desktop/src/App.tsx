@@ -67,7 +67,8 @@ import {
   type RomajiMode,
   type KanaKeyboardMode,
 } from "./settings";
-import { packDeclaresInAppKanaKeyboard } from "./ime";
+import { inAppKeyboardForScripts, inputModeLabel, packDeclaresInAppKanaKeyboard } from "./ime";
+import { InputModeBubble } from "./kana-ime";
 import {
   CaptureOwner,
   captureLimitReached,
@@ -1801,6 +1802,53 @@ export function App() {
       setSettingsError(String(e));
     }
   }
+
+  // IME-TOGGLE-UX-001: resolve the active pack's in-app keyboard from its
+  // own manifest `scripts:` plus the converter registry in ime.ts — never
+  // from a locale or a language code. Null means the pack declares no
+  // in-app keyboard: no bubble, no live input layer, and the shortcut
+  // no-ops. The stored per-profile setting names the converter it selects
+  // (phase 1: "romaji-kana" is exactly the converter id), so the layer is
+  // live only when the setting and the pack's declaration agree.
+  const activeKeyboard = useMemo(() => {
+    const record = installed.find((i) => i.pack_id === activeIds[0]);
+    return record ? inAppKeyboardForScripts(record.scripts) : null;
+  }, [installed, activeIds]);
+  const inAppInputOn =
+    activeKeyboard !== null &&
+    kanaKeyboard !== "off" &&
+    activeKeyboard.converter.id === kanaKeyboard;
+
+  // IME-TOGGLE-UX-001 (acceptance 1): the documented in-app shortcut
+  // Ctrl+Shift+K (Cmd+Shift+K on macOS) flips the active pack's in-app
+  // keyboard from any in-app screen, without opening Settings. It writes
+  // the same per-profile setting Settings shows — one value, one write
+  // path, pack capability gating intact — and it no-ops when the active
+  // pack declares no in-app keyboard. The listener sits on window in
+  // capture phase so a focused in-app keyboard field can never eat it, and
+  // `useKanaIME` independently stands down for modified keys.
+  const activeKeyboardRef = useRef(activeKeyboard);
+  useEffect(() => {
+    activeKeyboardRef.current = activeKeyboard;
+  }, [activeKeyboard]);
+  useEffect(() => {
+    if (step !== "done") return;
+    const onKey = (e: KeyboardEvent) => {
+      if (!(e.ctrlKey || e.metaKey) || !e.shiftKey || e.altKey) return;
+      if (e.key.toLowerCase() !== "k" && e.code !== "KeyK") return;
+      const keyboard = activeKeyboardRef.current;
+      if (!keyboard) return;
+      e.preventDefault();
+      e.stopPropagation();
+      void setKanaKeyboardSetting(
+        keyboard.converter.id === kanaKeyboard
+          ? "off"
+          : (keyboard.converter.id as KanaKeyboardMode),
+      );
+    };
+    window.addEventListener("keydown", onKey, true);
+    return () => window.removeEventListener("keydown", onKey, true);
+  }, [step, kanaKeyboard, inv, profileId]);
   async function exportProfileData() {
     if (!inv || !profileId) return;
     setSettingsError(null);
@@ -3492,7 +3540,7 @@ export function App() {
             }}
             onStop={stopAndCheck}
             onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl, true)}
-            kanaInput={kanaKeyboard === "romaji-kana"}
+            kanaInput={inAppInputOn}
           />
         </>
       ) : route === "shadowing" ? (
@@ -3539,7 +3587,7 @@ export function App() {
             gloss: mineGloss,
             source: mineSource,
           }}
-          kanaInput={kanaKeyboard === "romaji-kana"}
+          kanaInput={inAppInputOn}
           onDraftChange={(field, value) =>
             field === "surface"
               ? setMineSurface(value)
@@ -3711,7 +3759,7 @@ export function App() {
               onSubmit={() => void submitWriting()}
               stress={stressEnabled(display)}
               onHint={showWritingHint}
-              kanaInput={kanaKeyboard === "romaji-kana"}
+              kanaInput={inAppInputOn}
             />
           ) : writingError ? (
             // A failed read is an error, never the empty-state story: the
@@ -3884,7 +3932,7 @@ export function App() {
                 }
                 onPlayAudio={playPracticeAudio}
                 playing={clipPlaying}
-                kanaInput={kanaKeyboard === "romaji-kana"}
+                kanaInput={inAppInputOn}
                 heading={
                   practiceTarget.modality === "orthography-recognition"
                     ? "Which one matches?"
@@ -3980,6 +4028,26 @@ export function App() {
           onDismissSessionSummary={() => setSessionOutcome(null)}
         />
       )}
+      {/* IME-TOGGLE-UX-001: the input-mode bubble is pinned to the app
+          chrome (fixed position), so it rides every in-app route. It
+          exists only while the active pack's declared scripts grant an
+          in-app keyboard — a pack that ships no mapping data shows no
+          bubble — and its label comes from that pack's own script
+          metadata, never a language literal. It sits last in content
+          order so a route's own status announcements stay the first
+          status region on the page; screen-reader order follows. */}
+      {activeKeyboard ? (
+        <InputModeBubble
+          on={inAppInputOn}
+          label={inputModeLabel(activeKeyboard)}
+          shortcutHint="Ctrl+Shift+K"
+          onToggle={() =>
+            void setKanaKeyboardSetting(
+              inAppInputOn ? "off" : (activeKeyboard.converter.id as KanaKeyboardMode),
+            )
+          }
+        />
+      ) : null}
     </AppShell>
   );
 }

@@ -250,15 +250,94 @@ export function kanaCommit(buffer: string): string {
 export const IN_APP_KANA_KEYBOARD_SCRIPT_NAMES: readonly string[] = ["hiragana", "katakana"];
 
 /**
- * Whether the active pack's own manifest grants the in-app kana keyboard:
- * true iff the pack declares, in its manifest `scripts:` ids, a script this
- * keyboard can type. The pack decides by declaring scripts — never the app
- * deciding by the pack's locale or a language code — and a pack that
- * declares nothing grants nothing (empty list means false).
+ * IME-TOGGLE-UX-001: the generalized input layer. An in-app keyboard is a
+ * converter plus the script names its mapping data types — the registry
+ * below is the seam. Adding another script's keyboard is a new converter
+ * entry (its own mapping module) and the pack declaring that script in its
+ * manifest `scripts:`; nothing in the engine or UI grows a language branch,
+ * and a pack whose scripts no converter serves ships no keyboard at all.
+ */
+export interface ScriptKeyboardConverter {
+  /** Machine id. It doubles as the per-profile setting value that selects
+   * this converter (phase 1: the stored `kana-keyboard` value
+   * "romaji-kana" is exactly this id), so the setting is converter-keyed
+   * rather than language-keyed. */
+  readonly id: string;
+  /** Script names (last segment of a pack's declared script ids) this
+   * converter's mapping data types. */
+  readonly scriptNames: readonly string[];
+  /** Script the learner types FROM, for the input-mode label. */
+  readonly sourceName: string;
+  /** Live display for the typed buffer: converted text + visible preedit. */
+  display(buffer: string): string;
+  /** Commit (Enter/blur): resolve the pending tail, never drop characters. */
+  commit(buffer: string): string;
+}
+
+/** Phase 1's instance: the romaji→kana converter defined at the top. */
+export const ROMAJI_KANA_CONVERTER: ScriptKeyboardConverter = {
+  id: "romaji-kana",
+  scriptNames: IN_APP_KANA_KEYBOARD_SCRIPT_NAMES,
+  sourceName: "romaji",
+  display: kanaDisplay,
+  commit: kanaCommit,
+};
+
+/** The registry every gate resolves from. Order decides which converter
+ * serves a pack that declares scripts for more than one keyboard. */
+export const IN_APP_KEYBOARD_CONVERTERS: readonly ScriptKeyboardConverter[] = [
+  ROMAJI_KANA_CONVERTER,
+];
+
+/** A pack-granted in-app keyboard: the converter plus the pack's own
+ * declared script ids it serves — the label source, so the UI names the
+ * mode after what the PACK declared, never after a hardcoded language. */
+export interface InAppKeyboard {
+  converter: ScriptKeyboardConverter;
+  declaredScriptIds: string[];
+}
+
+/**
+ * IME-TOGGLE-UX-001 / SETTINGS-PACK-CAPABILITY-001: resolve the in-app
+ * keyboard from the pack's own manifest `scripts:` plus the converter
+ * registry — never from the pack's locale or a language code. A pack that
+ * declares no script any converter serves (or declares nothing) resolves
+ * to null: no keyboard, no bubble, no shortcut effect.
+ */
+export function inAppKeyboardForScripts(scripts: string[]): InAppKeyboard | null {
+  for (const converter of IN_APP_KEYBOARD_CONVERTERS) {
+    const declared = scripts.filter((id) =>
+      converter.scriptNames.includes(id.split(".").pop()?.toLowerCase() ?? ""),
+    );
+    if (declared.length > 0) return { converter, declaredScriptIds: declared };
+  }
+  return null;
+}
+
+/** The script names a pack declared, read off its own ids: "ja.orth.hiragana"
+ * is "hiragana" because the pack's manifest says so. */
+export function scriptMetadataNames(scriptIds: string[]): string[] {
+  const names: string[] = [];
+  for (const id of scriptIds) {
+    const name = id.split(".").pop()?.toLowerCase() ?? "";
+    if (name !== "" && !names.includes(name)) names.push(name);
+  }
+  return names;
+}
+
+/** The input-mode label for a granted keyboard, composed entirely from
+ * converter data and the active pack's declared script metadata. */
+export function inputModeLabel(kb: InAppKeyboard): string {
+  return `${kb.converter.sourceName} → ${scriptMetadataNames(kb.declaredScriptIds).join(" · ")}`;
+}
+
+/**
+ * SETTINGS-PACK-CAPABILITY-001: whether the active pack's own manifest
+ * grants the in-app kana keyboard — true iff the registry resolves a kana
+ * converter from the pack's declared scripts. Now a thin view over the
+ * same resolution every other surface uses.
  */
 export function packDeclaresInAppKanaKeyboard(scripts: string[]): boolean {
-  return scripts.some((id) => {
-    const scriptName = id.split(".").pop()?.toLowerCase() ?? "";
-    return IN_APP_KANA_KEYBOARD_SCRIPT_NAMES.includes(scriptName);
-  });
+  const kb = inAppKeyboardForScripts(scripts);
+  return kb !== null && kb.converter.id === ROMAJI_KANA_CONVERTER.id;
 }
