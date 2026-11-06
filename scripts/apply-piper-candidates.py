@@ -54,11 +54,13 @@ def main():
             row["channels"] = ch
             row["seconds"] = round(frames / sr, 3)
             row["provenance"] = "model-output"
-            row["synthesizer"] = {
-                "runtime": "piper",
-                "model": voice_of.get(row["id"], "piper-ru"),
-                "note": "best-of voice pass 2026-11-05 (multi-voice owner-approved)",
-            }
+            # Media schema: synthesizer allows runtime/model/model_sha256/voice
+            # ONLY (voice required; extra keys fail `pack has N validation
+            # error(s)` at build — regression of 2026-11-05 applies, fixed 2026-11-06).
+            voice = voice_of.get(row["id"], "piper-ru")
+            row["synthesizer"] = {"runtime": "piper", "model": voice, "voice": voice}
+            row["notes"] = (row.get("notes", "").rstrip(". ") +
+                            ". best-of voice pass (multi-voice owner-approved)").lstrip(". ")
             out.append(json.dumps(row, ensure_ascii=False))
             applied += 1
         else:
