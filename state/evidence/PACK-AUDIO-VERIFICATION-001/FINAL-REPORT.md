@@ -34,3 +34,13 @@ Date: 2026-11-06 05:20 MST
 - asr8-final.jsonl (old gate), asr-r1/r2 (round audits), piper-bestof-r1/r2/final.jsonl,
   asr-final-p1/p2 (double-pass jitter filter), asr9-full.jsonl (full pack), asr-final4.jsonl (closing check).
 - bestof3.jsonl (K=8 per-clip attempt records).
+
+## Duration-repair batch round (2026-11-06, owner seal, gate v5 + human-reviewer-driven)
+Duration-repair batch round: applied=221 exhausted=1
+- Scope: 222 human-flagged duration/delivery clips; piper multi-voice best-of
+  (scripts/piper-bestof.py), report native-review/piper-batch-report.jsonl.
+- Winners: 182x ru_RU-ruslan-medium, 39x ru_RU-irina-medium; applied via
+  scripts/apply-piper-batch.py into languages/ru-RU (manifest rewritten, wavs gitignored).
+- Exhausted (1): `ru.lex.comparisons.iz-za` — all 6 piper takes failed ASR/ration
+  (see native-review report row, result=null); stays as pending human re-record item.
+- Gate: cargo test -p lts-desktop --lib russian_contrast -> 1 passed.
