@@ -1188,3 +1188,6 @@ Bare `.btn` gained rest/hover/disabled treatments in `packages/ui/src/styles.css
 (tokens only); contract test `apps/desktop/src/button-affordance.test.ts` pins the
 treatments, the primary-hover override, and the seven-file bare-btn inventory.
 Verification: desktop vitest 314/314 (43 files), ui 10/10, `tsc --noEmit` clean both.
+
+## 2026-11-06 — IME-TOGGLE-UX-001 closed (delegated, controller-verified)
+Commit 4faeb31. Global Ctrl+Shift+K toggle from any in-app route; InputModeBubble pinned in AppShell chrome, present iff the active pack declares a served in-app keyboard, label composed from pack-declared script ids + converter data (no language literals — structural grep test pins this); aria-live mode announcement; converter registry generalizes the input layer (kana = phase 1). Setting value is now the converter id; storage key rename deferred to src-tauri boundary (noted). Controller re-ran typecheck + 22 targeted tests green. Kanban t_f007b3df completed. Owner visual acceptance pending (shortcut + bubble feel).
