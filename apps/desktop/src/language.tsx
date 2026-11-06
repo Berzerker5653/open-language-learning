@@ -20,6 +20,11 @@ export interface InstalledPack {
   trust_state: string;
   /** `capabilities.rtl` from the pack manifest (ADR-0029). */
   rtl: boolean;
+  /** The script ids the pack's own manifest declares (`scripts:`), read off
+   * the installed pack by the host. Feature gates — e.g. whether the in-app
+   * keyboard setting exists (SETTINGS-PACK-CAPABILITY-001) — read these,
+   * never `locale`. An absent manifest yields the empty list. */
+  scripts: string[];
 }
 
 export interface CatalogEntry {

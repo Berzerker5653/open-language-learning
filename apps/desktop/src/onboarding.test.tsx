@@ -14,6 +14,7 @@ const jaOnDevice: InstalledPack = {
   locale: "ja-JP",
   trust_state: "community",
   rtl: false,
+  scripts: ["ja.orth.hiragana", "ja.orth.katakana", "ja.orth.kanji", "ja.orth.latin"],
 };
 
 // The same pack as the wizard sees it: `available_packs_at` reports identity and

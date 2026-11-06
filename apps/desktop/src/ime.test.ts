@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { kanaCommit, kanaDisplay, toKana } from "./ime";
+import { kanaCommit, kanaDisplay, packDeclaresInAppKanaKeyboard, toKana } from "./ime";
 
 describe("romaji→kana converter (issue #2 phase 1)", () => {
   it("converts the words the practice runners actually ask for", () => {
@@ -57,5 +57,38 @@ describe("romaji→kana converter (issue #2 phase 1)", () => {
     expect(kanaDisplay("kon")).toBe("こn"); // trailing n waits for its syllable
     expect(kanaDisplay("konna")).toBe("こんな");
     expect(kanaDisplay("konnichih")).toBe("こんにちh"); // typo: live tail stays raw
+  });
+});
+
+// SETTINGS-PACK-CAPABILITY-001: the grant is the pack's manifest `scripts:`,
+// read back; the gate never inspects a locale or language code.
+describe("pack-declared gate for the in-app kana keyboard", () => {
+  it("grants what the ja-JP reference manifest declares", () => {
+    // languages/ja-JP/manifest.yaml, verbatim.
+    expect(
+      packDeclaresInAppKanaKeyboard([
+        "ja.orth.hiragana",
+        "ja.orth.katakana",
+        "ja.orth.kanji",
+        "ja.orth.latin",
+      ]),
+    ).toBe(true);
+  });
+
+  it("does not grant for the ru-RU reference manifest", () => {
+    // languages/ru-RU/manifest.yaml, verbatim: Cyrillic only.
+    expect(packDeclaresInAppKanaKeyboard(["ru.orth.cyrillic"])).toBe(false);
+  });
+
+  it("grants on the declared script, never on the pack's language", () => {
+    // Any pack that declares a script this keyboard can type gets the grant,
+    // whatever its locale would have been — and a Japanese-locale-shaped id
+    // naming only Kanji/Latin grants nothing.
+    expect(packDeclaresInAppKanaKeyboard(["ryu.orth.katakana"])).toBe(true);
+    expect(packDeclaresInAppKanaKeyboard(["ja.orth.kanji", "ja.orth.latin"])).toBe(false);
+  });
+
+  it("a pack declaring nothing grants nothing", () => {
+    expect(packDeclaresInAppKanaKeyboard([])).toBe(false);
   });
 });

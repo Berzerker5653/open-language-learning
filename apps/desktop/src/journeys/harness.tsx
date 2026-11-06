@@ -368,6 +368,10 @@ interface Pack {
   maturity: string;
   trust_state: string;
   rtl: boolean;
+  /** The manifest `scripts:` ids this pack declares — the same shape the real
+   * manifests carry, and what the in-app keyboard card gates on
+   * (SETTINGS-PACK-CAPABILITY-001). */
+  scripts: string[];
   /** Whether the pack carries character data — the engine's `kanji_available`
    * answer, and the only thing that decides if the hub shows the Kanji card. */
   kanji: boolean;
@@ -419,6 +423,7 @@ const PACKS: Record<string, Pack> = {
     maturity: "community",
     trust_state: "community",
     rtl: false,
+    scripts: ["ja.orth.hiragana", "ja.orth.katakana", "ja.orth.kanji", "ja.orth.latin"],
     kanji: true,
     drills: [
       // The three shapes the shipped ja-JP pack actually contains: a list of
@@ -529,6 +534,7 @@ const PACKS: Record<string, Pack> = {
     maturity: "community",
     trust_state: "community",
     rtl: false,
+    scripts: ["eo.orth.latin"],
     kanji: false,
     drills: [],
     words: [
@@ -573,6 +579,7 @@ const PACKS: Record<string, Pack> = {
     maturity: "experimental",
     trust_state: "community",
     rtl: false,
+    scripts: ["ru.orth.cyrillic"],
     kanji: false,
     drills: [],
     words: [
@@ -1106,6 +1113,7 @@ export class LearnerEngine {
       locale: pack.locale,
       trust_state: pack.trust_state,
       rtl: pack.rtl,
+      scripts: pack.scripts,
     });
   }
 

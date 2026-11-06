@@ -10,6 +10,7 @@ const installed: InstalledPack[] = [
     locale: "ja-JP",
     trust_state: "community",
     rtl: false,
+    scripts: ["ja.orth.hiragana", "ja.orth.katakana", "ja.orth.kanji", "ja.orth.latin"],
   },
   {
     pack_id: "community.example.esperanto",
@@ -18,6 +19,7 @@ const installed: InstalledPack[] = [
     locale: "eo",
     trust_state: "community",
     rtl: false,
+    scripts: ["eo.orth.latin"],
   },
 ];
 
@@ -413,6 +415,7 @@ describe("language panel", () => {
           locale: "ar-MA",
           trust_state: "experimental",
           rtl: true,
+          scripts: ["ar.orth.arabic", "ar.orth.latin"],
         },
       ],
     });

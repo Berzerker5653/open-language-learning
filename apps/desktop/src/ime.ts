@@ -239,3 +239,26 @@ export function kanaDisplay(buffer: string): string {
 export function kanaCommit(buffer: string): string {
   return toKana(buffer, true).kana;
 }
+
+/**
+ * SETTINGS-PACK-CAPABILITY-001: which scripts this keyboard can actually
+ * type. The converter above implements romaji→kana and nothing else, so
+ * these are the script names (the last segment of a pack's declared script
+ * ids) it serves. A keyboard for another script belongs to another module,
+ * and that module names its own scripts here or in its own gate.
+ */
+export const IN_APP_KANA_KEYBOARD_SCRIPT_NAMES: readonly string[] = ["hiragana", "katakana"];
+
+/**
+ * Whether the active pack's own manifest grants the in-app kana keyboard:
+ * true iff the pack declares, in its manifest `scripts:` ids, a script this
+ * keyboard can type. The pack decides by declaring scripts — never the app
+ * deciding by the pack's locale or a language code — and a pack that
+ * declares nothing grants nothing (empty list means false).
+ */
+export function packDeclaresInAppKanaKeyboard(scripts: string[]): boolean {
+  return scripts.some((id) => {
+    const scriptName = id.split(".").pop()?.toLowerCase() ?? "";
+    return IN_APP_KANA_KEYBOARD_SCRIPT_NAMES.includes(scriptName);
+  });
+}

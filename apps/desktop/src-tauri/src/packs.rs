@@ -97,6 +97,12 @@ pub struct InstalledPack {
     /// renderer flips text containers on this, see ADR-0029. Absent means
     /// false, the schema default (`schemas/language-pack-manifest.schema.json`).
     pub rtl: bool,
+    /// The script ids the installed pack's own manifest.yaml declares under
+    /// `scripts:` (SETTINGS-PACK-CAPABILITY-001). The renderer gates
+    /// pack-declared features — e.g. whether the in-app keyboard card exists
+    /// at all — on these, never on `locale`. An absent or unparseable
+    /// manifest yields an empty list: no declared capability, no feature.
+    pub scripts: Vec<String>,
 }
 
 fn is_hex64(s: &str) -> bool {
@@ -1059,7 +1065,7 @@ fn display_for(data: &Path, pack_id: &str, version: &str, trust: &str) -> Instal
         .join(pack_id)
         .join(version)
         .join("manifest.yaml");
-    let (display_name, locale, rtl) = fs::read_to_string(&manifest)
+    let (display_name, locale, rtl, scripts) = fs::read_to_string(&manifest)
         .ok()
         .and_then(|s| serde_yaml::from_str::<serde_yaml::Value>(&s).ok())
         .map(|v| {
@@ -1074,9 +1080,22 @@ fn display_for(data: &Path, pack_id: &str, version: &str, trust: &str) -> Instal
                 .and_then(|c| c.get("rtl"))
                 .and_then(|x| x.as_bool())
                 .unwrap_or(false);
-            (g("display_name"), g("target_locale"), rtl)
+            // SETTINGS-PACK-CAPABILITY-001: the manifest's declared script ids
+            // ride to the renderer verbatim; interpreting them (which scripts
+            // an in-app feature can serve) is the renderer's job, keyed on
+            // script metadata, never on the pack's locale.
+            let scripts = v
+                .get("scripts")
+                .and_then(|x| x.as_sequence())
+                .map(|seq| {
+                    seq.iter()
+                        .filter_map(|s| s.as_str().map(str::to_string))
+                        .collect()
+                })
+                .unwrap_or_default();
+            (g("display_name"), g("target_locale"), rtl, scripts)
         })
-        .unwrap_or_else(|| (pack_id.to_string(), String::new(), false));
+        .unwrap_or_else(|| (pack_id.to_string(), String::new(), false, Vec::new()));
     InstalledPack {
         pack_id: pack_id.into(),
         version: version.into(),
@@ -1084,6 +1103,7 @@ fn display_for(data: &Path, pack_id: &str, version: &str, trust: &str) -> Instal
         locale,
         trust_state: trust.into(),
         rtl,
+        scripts,
     }
 }
 
@@ -1236,6 +1256,46 @@ pub fn switch_pack(data: &Path, profile_id: &str, pack_id: &str) -> Result<(), S
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    // SETTINGS-PACK-CAPABILITY-001: the installed-pack view carries the
+    // manifest's declared script ids to the renderer verbatim, so feature
+    // gates (the in-app keyboard card) read pack-declared metadata instead
+    // of a hardcoded language code.
+    #[test]
+    fn manifest_scripts_travel_with_the_installed_pack_view() {
+        let dir = tempfile::tempdir().unwrap();
+        let write_manifest = |pack_id: &str, yaml: &str| {
+            let p = dir.path().join("packs").join(pack_id).join("0.1.0");
+            fs::create_dir_all(&p).unwrap();
+            fs::write(p.join("manifest.yaml"), yaml).unwrap();
+        };
+        // The ja-JP reference manifest's own shape (languages/ja-JP/manifest.yaml).
+        write_manifest(
+            "org.example.kana",
+            "schema_version: \"0.2\"\ntarget_locale: \"ja-JP\"\nscripts:\n  - \"ja.orth.hiragana\"\n  - \"ja.orth.katakana\"\ncapabilities:\n  rtl: false\n",
+        );
+        // The ru-RU reference manifest's own shape: Cyrillic only, no kana.
+        write_manifest(
+            "org.example.cyrillic",
+            "schema_version: \"0.2\"\ntarget_locale: \"ru-RU\"\nscripts:\n  - \"ru.orth.cyrillic\"\n",
+        );
+
+        let kana = display_for(dir.path(), "org.example.kana", "0.1.0", "community");
+        assert_eq!(
+            kana.scripts,
+            vec![
+                "ja.orth.hiragana".to_string(),
+                "ja.orth.katakana".to_string()
+            ]
+        );
+        let cyrillic = display_for(dir.path(), "org.example.cyrillic", "0.1.0", "community");
+        assert_eq!(cyrillic.scripts, vec!["ru.orth.cyrillic".to_string()]);
+
+        // No manifest, no declared scripts: the empty list is the honest
+        // answer, and the renderer's gate turns the feature off for it.
+        let uninstalled = display_for(dir.path(), "org.example.absent", "0.1.0", "community");
+        assert!(uninstalled.scripts.is_empty());
+    }
 
     fn entry(url: &str) -> PackEntry {
         PackEntry {

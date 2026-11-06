@@ -7,6 +7,7 @@
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { Settings, type SettingsProps } from "./settings";
+import { packDeclaresInAppKanaKeyboard } from "./ime";
 
 const base: SettingsProps = {
   microphoneEnabled: false,
@@ -23,6 +24,7 @@ const base: SettingsProps = {
   onSetRomajiMode: () => {},
   kanaKeyboard: "off",
   onSetKanaKeyboard: () => {},
+  packDeclaresKanaKeyboard: true,
   speechModel: "off",
   speechModels: [
     {
@@ -124,6 +126,44 @@ describe("settings", () => {
     expect(render({ kanaKeyboard: "off" })).not.toMatch(/checked="" value="romaji-kana"/);
     // The scaffold policy's promise: never gates progression.
     expect(render()).toContain("never blocks progression");
+  });
+
+  // SETTINGS-PACK-CAPABILITY-001: the toggle's very existence is the active
+  // pack's own declaration, read from its manifest `scripts:` — never a
+  // language-code or locale check. The script lists below are the manifests'
+  // own values: languages/ja-JP/manifest.yaml and languages/ru-RU/manifest.yaml.
+  it("shows the kana keyboard card iff the active pack declares a script the keyboard can type", () => {
+    const jaManifestScripts = [
+      "ja.orth.hiragana",
+      "ja.orth.katakana",
+      "ja.orth.kanji",
+      "ja.orth.latin",
+    ];
+    const ruManifestScripts = ["ru.orth.cyrillic"];
+
+    // Kana pack: the card and its controls are there.
+    const kana = render({
+      packDeclaresKanaKeyboard: packDeclaresInAppKanaKeyboard(jaManifestScripts),
+    });
+    expect(kana).toContain("Kana keyboard (in-app)");
+    expect(kana).toMatch(/name="kana-keyboard"/);
+
+    // Non-kana pack: the control is absent entirely — not disabled, not hidden
+    // behind a picker; there is nothing to interact with.
+    const cyrillic = render({
+      packDeclaresKanaKeyboard: packDeclaresInAppKanaKeyboard(ruManifestScripts),
+    });
+    expect(cyrillic).not.toContain("Kana keyboard (in-app)");
+    expect(cyrillic).not.toMatch(/name="kana-keyboard"/);
+
+    // A pack declaring no scripts grants nothing either.
+    expect(render({ packDeclaresKanaKeyboard: packDeclaresInAppKanaKeyboard([]) })).not.toContain(
+      "Kana keyboard (in-app)",
+    );
+
+    // Gating one card removes only that card; the rest of Settings is intact.
+    expect(cyrillic).toContain("Romaji (romanisation) display");
+    expect(cyrillic).toContain("Profile data");
   });
 
   it("delete requires a second explicit confirmation before it can fire", () => {

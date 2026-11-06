@@ -94,6 +94,10 @@ export interface SettingsProps {
   /** Stored `kana-keyboard` (get/set_kana_keyboard). */
   kanaKeyboard: KanaKeyboardMode;
   onSetKanaKeyboard(mode: KanaKeyboardMode): void;
+  /** SETTINGS-PACK-CAPABILITY-001: whether the active pack's manifest declares
+   * a script the in-app keyboard can type. False hides the whole card — the
+   * pack's declared metadata decides, never a language-code check. */
+  packDeclaresKanaKeyboard: boolean;
   /** The one speech-model preference app-wide (get/set_speech_model). */
   speechModel: string;
   speechModels: SpeechModelPref[];
@@ -285,33 +289,39 @@ export function Settings(p: SettingsProps) {
           </small>
         </p>
       </div>
-      <div className="card">
-        <h3>Kana keyboard (in-app)</h3>
-        <fieldset>
-          <legend>Type Japanese in the app without changing the system keyboard</legend>
-          {KANA_KEYBOARD_MODES.map((m) => (
-            <label key={m.value} className="radio-row">
-              <input
-                type="radio"
-                name="kana-keyboard"
-                value={m.value}
-                checked={p.kanaKeyboard === m.value}
-                onChange={() => p.onSetKanaKeyboard(m.value)}
-              />{" "}
-              {m.label}
-            </label>
-          ))}
-        </fieldset>
-        <p>
-          <small>
-            Romaji is converted to kana inside the app's own answer fields — nothing is installed
-            and your system layout stays exactly as it is. A platform IME still works when you
-            prefer it: the app steps back while an IME is composing, and turns no key when this is
-            off. Kanji candidates follow the pack's own vocabulary in a later pass; free text
-            outside it stays kana.
-          </small>
-        </p>
-      </div>
+      {/* SETTINGS-PACK-CAPABILITY-001: the card exists only while the active
+          pack's own manifest declares a script this keyboard can type. A
+          Cyrillic-only pack never sees the control, because the pack never
+          granted it — not because the app knows "Russian". */}
+      {p.packDeclaresKanaKeyboard && (
+        <div className="card">
+          <h3>Kana keyboard (in-app)</h3>
+          <fieldset>
+            <legend>Type Japanese in the app without changing the system keyboard</legend>
+            {KANA_KEYBOARD_MODES.map((m) => (
+              <label key={m.value} className="radio-row">
+                <input
+                  type="radio"
+                  name="kana-keyboard"
+                  value={m.value}
+                  checked={p.kanaKeyboard === m.value}
+                  onChange={() => p.onSetKanaKeyboard(m.value)}
+                />{" "}
+                {m.label}
+              </label>
+            ))}
+          </fieldset>
+          <p>
+            <small>
+              Romaji is converted to kana inside the app's own answer fields — nothing is installed
+              and your system layout stays exactly as it is. A platform IME still works when you
+              prefer it: the app steps back while an IME is composing, and turns no key when this is
+              off. Kanji candidates follow the pack's own vocabulary in a later pass; free text
+              outside it stays kana.
+            </small>
+          </p>
+        </div>
+      )}
 
       <div className="card">
         <h3>Profile data</h3>

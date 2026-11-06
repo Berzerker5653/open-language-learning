@@ -67,6 +67,7 @@ import {
   type RomajiMode,
   type KanaKeyboardMode,
 } from "./settings";
+import { packDeclaresInAppKanaKeyboard } from "./ime";
 import {
   CaptureOwner,
   captureLimitReached,
@@ -3339,6 +3340,14 @@ export function App() {
   // installed-pack listing. It steers only pack-text containers, never the
   // banner or route navigation.
   const activeRecord = installed.find((i) => i.pack_id === activeIds[0]);
+  // SETTINGS-PACK-CAPABILITY-001: the in-app kana keyboard setting exists only
+  // while the active pack's own manifest declares a script the keyboard can
+  // type (manifest `scripts:`, plumbed in on the installed-pack record). A pack
+  // that declares no such script — or no pack is active — grants no toggle;
+  // this is the pack's declaration read back, never a language-code check.
+  const packDeclaresKanaKeyboard = activeRecord
+    ? packDeclaresInAppKanaKeyboard(activeRecord.scripts)
+    : false;
   const activePack =
     activeIds[0] && activeClaims
       ? {
@@ -3776,6 +3785,7 @@ export function App() {
             onSetRomajiMode={(m) => void setRomajiSetting(m)}
             kanaKeyboard={kanaKeyboard}
             onSetKanaKeyboard={(m) => void setKanaKeyboardSetting(m)}
+            packDeclaresKanaKeyboard={packDeclaresKanaKeyboard}
             speechModel={speechModel}
             speechModels={speechModels}
             onSelectSpeechModel={(id) => void selectSpeechModel(id)}
