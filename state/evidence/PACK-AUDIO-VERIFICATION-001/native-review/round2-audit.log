@@ -1,0 +1,13 @@
+audit start: 222 rows x 4 workers -> state/evidence/PACK-AUDIO-VERIFICATION-001/native-review/round2-audit.jsonl
+checked=222 passed=221 MISMATCH=1 TIMEOUT=0 WAV-MISSING=0 CHECK-ERROR=0
+Traceback (most recent call last):
+  File "/home/hunter/game-dev/LTS/scripts/qa-asr.py", line 324, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/hunter/game-dev/LTS/scripts/qa-asr.py", line 312, in main
+    for r in sorted(mismatches, key=lambda r: r["ratio"]):
+             ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hunter/game-dev/LTS/scripts/qa-asr.py", line 312, in <lambda>
+    for r in sorted(mismatches, key=lambda r: r["ratio"]):
+                                              ~^^^^^^^^^
+KeyError: 'ratio'

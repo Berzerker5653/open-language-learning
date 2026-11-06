@@ -1,0 +1,1 @@
+{"id": "ru.lex.comparisons.iz-za", "text": "и́з-за", "result": "pass@ru_RU-dmitri-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Исса.", "ratio": 0.5}, {"voice": "ru_RU-irina-medium", "heard": "Исса.", "ratio": 0.5}, {"voice": "ru_RU-dmitri-medium", "heard": "Из-за...", "ratio": 1.0}]}
