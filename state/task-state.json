@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-07T19:40:13",
+  "updated": "2026-11-08T09:14:17",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1939,11 +1939,20 @@
     },
     "WORD-TIMING-001": {
       "task_id": "WORD-TIMING-001",
-      "status": "in_progress",
+      "status": "done",
       "attempts": 1,
       "title": "Word-level clip timings (karaoke highlight, click-to-hear-word)",
-      "activity": "implementing",
-      "summary": "Owner-scoped 2026-11-07 (post-1.0 feature). Spike experiments/word-timing/spike.py: faster-whisper large-v3-turbo CPU int8 + initial_prompt constraint + difflib token alignment = 17/20 ru first-pass; failures are fast-TTS mishearings -> retry ladder + graceful abstain. Scope v1: ru pack sidecar media/words.jsonl; ja deferred (kanji-vs-kana gap)."
+      "activity": "awaiting-human-acceptance",
+      "summary": "Word-level ru clip timings live: sidecar media/words.jsonl covers 4819/4856 ru rows (99.2%; 37 abstains on fast-TTS misheard clips, logged). Pipeline: scripts/generate-word-timings.py (two-pass turbo/large-v3, resumable); app: langpack optional-sidecar overlay + shadowing karaoke highlight + click-to-hear-word. Gates: fmt/clippy green; workspace tests green (2 flaky speech-sidecar probes pass isolated, fail only under parallel load - pre-existing family); TS 343 vitest green. ja deferred (kanji/kana reading gap). Also fixed pre-existing clippy rot (orphaned sentence_word_spans, SpanMatch dead fields, sort_by_key) that had silently red-flagged CI command since the ja-lookup lane.",
+      "evidence": [
+        "state/evidence/WORD-TIMING-001/generate-ru2.log",
+        "state/evidence/WORD-TIMING-001/generate-ru-retry.log",
+        "state/evidence/WORD-TIMING-001/abstains-ru.jsonl",
+        "state/evidence/WORD-TIMING-001/resolved-ru.jsonl",
+        "state/evidence/WORD-TIMING-001/rust-test3.log",
+        "state/evidence/WORD-TIMING-001/clippy3.log",
+        "state/notes/WORD-TIMING-001.md"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

@@ -1,0 +1,3 @@
+carrying 4856 settled ids; 0 left
+generation start (retry pass): 0 rows -> languages/ru-RU/media/words.jsonl (model=large-v3)
+self-check: rows=4856 covered=4712 coverage=97.0% schema_bad=0 monotonicity_bad=0 this_run_ok=0 this_run_abstain=0

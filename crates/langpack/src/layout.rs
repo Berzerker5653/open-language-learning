@@ -27,6 +27,8 @@
 //! kanji/entries.jsonl             kanji                    (one per line)
 //! stories/*.yaml                  story                    (single document)
 //! world/environments.jsonl        environment              (one per line)
+//! media/words.jsonl               (optional word-timing sidecar, WORD-TIMING-001;
+//!                                  one clip per line, parsed data not an asset)
 //! ```
 //!
 //! Schema 0.1 (frozen legacy; the ja-JP draft pack) — only the seven seed

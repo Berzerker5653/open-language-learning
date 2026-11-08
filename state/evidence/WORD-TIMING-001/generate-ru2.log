@@ -1,0 +1,195 @@
+carrying 233 settled ids; 4623 left
+generation start (primary pass): 4623 rows -> languages/ru-RU/media/words.jsonl (model=large-v3-turbo)
+loading large-v3-turbo ...
+ABSTAIN ru.lex.city.metro align-failed@large-v3-turbo
+ABSTAIN ru.lex.city.poezd align-failed@large-v3-turbo
+ABSTAIN ru.lex.city.priyamo align-failed@large-v3-turbo
+ABSTAIN ru.lex.city.vkhod align-failed@large-v3-turbo
+ABSTAIN ru.lex.city.voditel align-failed@large-v3-turbo
+ABSTAIN ru.lex.city.vperyod align-failed@large-v3-turbo
+ABSTAIN ru.lex.city.vykhod align-failed@large-v3-turbo
+ABSTAIN ru.lex.classroom.obyasnite align-failed@large-v3-turbo
+ABSTAIN ru.lex.comparisons.trudnee align-failed@large-v3-turbo
+... 100/4623 settled (91 ok, 9 abstain, 9.8 min)
+ABSTAIN ru.lex.critical.padezh align-failed@large-v3-turbo
+ABSTAIN ru.lex.critical2.zal align-failed@large-v3-turbo
+... 200/4623 settled (189 ok, 11 abstain, 19.0 min)
+ABSTAIN ru.lex.critical3.validaciya align-failed@large-v3-turbo
+ABSTAIN ru.lex.critical3.veshchdok align-failed@large-v3-turbo
+... 300/4623 settled (287 ok, 13 abstain, 28.1 min)
+ABSTAIN ru.lex.cult.epigramma align-failed@large-v3-turbo
+ABSTAIN ru.lex.cult.individ align-failed@large-v3-turbo
+ABSTAIN ru.lex.cult.komizm align-failed@large-v3-turbo
+ABSTAIN ru.lex.cult.korona align-failed@large-v3-turbo
+... 400/4623 settled (383 ok, 17 abstain, 37.1 min)
+... 500/4623 settled (483 ok, 17 abstain, 46.8 min)
+ABSTAIN ru.lex.culture.priz align-failed@large-v3-turbo
+ABSTAIN ru.lex.experiences.iskusstvo align-failed@large-v3-turbo
+ABSTAIN ru.lex.experiences.reshatsya align-failed@large-v3-turbo
+ABSTAIN ru.lex.experiences.sovest align-failed@large-v3-turbo
+... 600/4623 settled (579 ok, 21 abstain, 58.0 min)
+ABSTAIN ru.lex.family.druzya align-failed@large-v3-turbo
+ABSTAIN ru.lex.family.lyubit align-failed@large-v3-turbo
+ABSTAIN ru.lex.family.menya align-failed@large-v3-turbo
+... 700/4623 settled (676 ok, 24 abstain, 67.0 min)
+ABSTAIN ru.lex.food.karta align-failed@large-v3-turbo
+ABSTAIN ru.lex.food.kolbasa align-failed@large-v3-turbo
+ABSTAIN ru.lex.food.med align-failed@large-v3-turbo
+... 800/4623 settled (773 ok, 27 abstain, 76.3 min)
+ABSTAIN ru.lex.future2.balans align-failed@large-v3-turbo
+ABSTAIN ru.lex.future2.rassudok align-failed@large-v3-turbo
+ABSTAIN ru.lex.future2.razlichie align-failed@large-v3-turbo
+ABSTAIN ru.lex.greetings.dobryy-den align-failed@large-v3-turbo
+ABSTAIN ru.lex.home.apteka align-failed@large-v3-turbo
+ABSTAIN ru.lex.home.avtobus align-failed@large-v3-turbo
+ABSTAIN ru.lex.home.bank align-failed@large-v3-turbo
+ABSTAIN ru.lex.home.bolnitsa align-failed@large-v3-turbo
+ABSTAIN ru.lex.home.okno align-failed@large-v3-turbo
+... 900/4623 settled (864 ok, 36 abstain, 85.8 min)
+ABSTAIN ru.lex.housing.ogorod align-failed@large-v3-turbo
+ABSTAIN ru.lex.instructions.gotovo align-failed@large-v3-turbo
+... 1000/4623 settled (962 ok, 38 abstain, 94.9 min)
+ABSTAIN ru.lex.media.ocherk align-failed@large-v3-turbo
+ABSTAIN ru.lex.media.podchik align-failed@large-v3-turbo
+... 1100/4623 settled (1060 ok, 40 abstain, 104.6 min)
+ABSTAIN ru.lex.messages.hochu align-failed@large-v3-turbo
+ABSTAIN ru.lex.messages.kazhetsya align-failed@large-v3-turbo
+ABSTAIN ru.lex.messages.obeshchat align-failed@large-v3-turbo
+ABSTAIN ru.lex.messages.udobno align-failed@large-v3-turbo
+ABSTAIN ru.lex.messages.zanyat align-failed@large-v3-turbo
+ABSTAIN ru.lex.messages2.interesovatsya align-failed@large-v3-turbo
+ABSTAIN ru.lex.messages2.krome-togo align-failed@large-v3-turbo
+ABSTAIN ru.lex.messages2.obyazatelno align-failed@large-v3-turbo
+ABSTAIN ru.lex.messages2.prochitat align-failed@large-v3-turbo
+... 1200/4623 settled (1151 ok, 49 abstain, 113.8 min)
+ABSTAIN ru.lex.messages2.udivlyatsya align-failed@large-v3-turbo
+ABSTAIN ru.lex.messages2.ves align-failed@large-v3-turbo
+ABSTAIN ru.lex.narration.pomnitsya align-failed@large-v3-turbo
+ABSTAIN ru.lex.narration.posledstvie align-failed@large-v3-turbo
+ABSTAIN ru.lex.narration.sperva align-failed@large-v3-turbo
+ABSTAIN ru.lex.narration2.otezd align-failed@large-v3-turbo
+ABSTAIN ru.lex.narration2.paren align-failed@large-v3-turbo
+ABSTAIN ru.lex.narration2.polden align-failed@large-v3-turbo
+ABSTAIN ru.lex.narration2.polnoch align-failed@large-v3-turbo
+ABSTAIN ru.lex.narration2.priezd align-failed@large-v3-turbo
+ABSTAIN ru.lex.narration2.shlyapa align-failed@large-v3-turbo
+... 1300/4623 settled (1240 ok, 60 abstain, 123.2 min)
+ABSTAIN ru.lex.narration2.vokrug align-failed@large-v3-turbo
+ABSTAIN ru.lex.nature.reka align-failed@large-v3-turbo
+... 1400/4623 settled (1338 ok, 62 abstain, 131.9 min)
+ABSTAIN ru.lex.neg.postupitsya align-failed@large-v3-turbo
+... 1500/4623 settled (1437 ok, 63 abstain, 140.5 min)
+ABSTAIN ru.lex.numbers-time.chetyre align-failed@large-v3-turbo
+ABSTAIN ru.lex.numbers-time.devyat align-failed@large-v3-turbo
+... 1600/4623 settled (1535 ok, 65 abstain, 149.1 min)
+ABSTAIN ru.lex.pastevents.otpusk align-failed@large-v3-turbo
+ABSTAIN ru.lex.pastevents.pered align-failed@large-v3-turbo
+ABSTAIN ru.lex.pastevents.potom align-failed@large-v3-turbo
+ABSTAIN ru.lex.pastevents.redko align-failed@large-v3-turbo
+ABSTAIN ru.lex.personal.imya align-failed@large-v3-turbo
+ABSTAIN ru.lex.personal.oni align-failed@large-v3-turbo
+ABSTAIN ru.lex.personal.sorok align-failed@large-v3-turbo
+ABSTAIN ru.lex.personal.universitet align-failed@large-v3-turbo
+ABSTAIN ru.lex.personal.vozrast align-failed@large-v3-turbo
+ABSTAIN ru.lex.problems.beda align-failed@large-v3-turbo
+... 1700/4623 settled (1625 ok, 75 abstain, 158.5 min)
+ABSTAIN ru.lex.problems.tsely align-failed@large-v3-turbo
+ABSTAIN ru.lex.problems2.poyasnenie align-failed@large-v3-turbo
+... 1800/4623 settled (1723 ok, 77 abstain, 167.1 min)
+ABSTAIN ru.lex.prof.avans align-failed@large-v3-turbo
+ABSTAIN ru.lex.prof.hranenie align-failed@large-v3-turbo
+... 1900/4623 settled (1821 ok, 79 abstain, 175.9 min)
+ABSTAIN ru.lex.prof.prosrochka align-failed@large-v3-turbo
+... 2000/4623 settled (1920 ok, 80 abstain, 184.6 min)
+ABSTAIN ru.lex.rel.druzhba align-failed@large-v3-turbo
+ABSTAIN ru.lex.routines.chas align-failed@large-v3-turbo
+... 2100/4623 settled (2018 ok, 82 abstain, 193.1 min)
+ABSTAIN ru.lex.routines.chasto align-failed@large-v3-turbo
+ABSTAIN ru.lex.routines.otdykh align-failed@large-v3-turbo
+... 2200/4623 settled (2116 ok, 84 abstain, 201.8 min)
+... 2300/4623 settled (2216 ok, 84 abstain, 210.4 min)
+ABSTAIN ru.lex.services.aktsiya align-failed@large-v3-turbo
+ABSTAIN ru.lex.services.reshenie align-failed@large-v3-turbo
+ABSTAIN ru.lex.services.schet align-failed@large-v3-turbo
+ABSTAIN ru.lex.services.skidka align-failed@large-v3-turbo
+ABSTAIN ru.lex.services.stoimost align-failed@large-v3-turbo
+ABSTAIN ru.lex.services.usluga align-failed@large-v3-turbo
+ABSTAIN ru.lex.services.vozvraschat align-failed@large-v3-turbo
+... 2400/4623 settled (2309 ok, 91 abstain, 219.4 min)
+ABSTAIN ru.lex.shopping.podarok align-failed@large-v3-turbo
+ABSTAIN ru.lex.shopping.pokupka align-failed@large-v3-turbo
+ABSTAIN ru.lex.shopping.sdacha align-failed@large-v3-turbo
+ABSTAIN ru.lex.shopping.shapka align-failed@large-v3-turbo
+ABSTAIN ru.lex.shopping.staryy align-failed@large-v3-turbo
+... 2500/4623 settled (2404 ok, 96 abstain, 228.4 min)
+ABSTAIN ru.lex.soc.proshenie align-failed@large-v3-turbo
+... 2600/4623 settled (2503 ok, 97 abstain, 237.2 min)
+ABSTAIN ru.lex.socialplans.afisha align-failed@large-v3-turbo
+ABSTAIN ru.lex.socialplans.cvety align-failed@large-v3-turbo
+ABSTAIN ru.lex.socialplans.davay align-failed@large-v3-turbo
+ABSTAIN ru.lex.socialplans.doma align-failed@large-v3-turbo
+ABSTAIN ru.lex.socialplans.pohod align-failed@large-v3-turbo
+ABSTAIN ru.lex.socialplans.vyhod align-failed@large-v3-turbo
+... 2700/4623 settled (2597 ok, 103 abstain, 246.0 min)
+ABSTAIN ru.lex.study.period align-failed@large-v3-turbo
+ABSTAIN ru.lex.study.shkala align-failed@large-v3-turbo
+ABSTAIN ru.lex.study2.mitologiya align-failed@large-v3-turbo
+... 2800/4623 settled (2694 ok, 106 abstain, 254.7 min)
+ABSTAIN ru.lex.study4.soedinenie align-failed@large-v3-turbo
+... 2900/4623 settled (2793 ok, 107 abstain, 263.3 min)
+ABSTAIN ru.lex.style.ellipsis align-failed@large-v3-turbo
+... 3000/4623 settled (2892 ok, 108 abstain, 271.8 min)
+... 3100/4623 settled (2992 ok, 108 abstain, 280.3 min)
+ABSTAIN ru.lex.summary.kontekst align-failed@large-v3-turbo
+ABSTAIN ru.lex.summary.nyuans align-failed@large-v3-turbo
+ABSTAIN ru.lex.summary.zavershenie align-failed@large-v3-turbo
+... 3200/4623 settled (3089 ok, 111 abstain, 288.8 min)
+ABSTAIN ru.lex.synthesis2.plast align-failed@large-v3-turbo
+... 3300/4623 settled (3188 ok, 112 abstain, 297.3 min)
+ABSTAIN ru.lex.synthesis3.konsensus align-failed@large-v3-turbo
+... 3400/4623 settled (3287 ok, 113 abstain, 306.1 min)
+ABSTAIN ru.lex.timeplans.chetverg align-failed@large-v3-turbo
+ABSTAIN ru.lex.timeplans.prazdnik align-failed@large-v3-turbo
+ABSTAIN ru.lex.timeplans.proshlyy align-failed@large-v3-turbo
+ABSTAIN ru.lex.timeplans.tost align-failed@large-v3-turbo
+ABSTAIN ru.lex.travel.perekhod align-failed@large-v3-turbo
+ABSTAIN ru.lex.travel.poezd align-failed@large-v3-turbo
+ABSTAIN ru.lex.travel.poezdka align-failed@large-v3-turbo
+ABSTAIN ru.lex.travel.viza align-failed@large-v3-turbo
+... 3500/4623 settled (3379 ok, 121 abstain, 314.8 min)
+ABSTAIN ru.lex.travel2.ponravilos align-failed@large-v3-turbo
+ABSTAIN ru.lex.travel2.puteshestvennik align-failed@large-v3-turbo
+ABSTAIN ru.lex.travel2.turist align-failed@large-v3-turbo
+ABSTAIN ru.lex.travel2.valyuta align-failed@large-v3-turbo
+ABSTAIN ru.lex.wellbeing.kabinet align-failed@large-v3-turbo
+ABSTAIN ru.lex.wellbeing.pomosh align-failed@large-v3-turbo
+ABSTAIN ru.lex.wellbeing.prostudit align-failed@large-v3-turbo
+ABSTAIN ru.lex.wellbeing.ukol align-failed@large-v3-turbo
+... 3600/4623 settled (3471 ok, 129 abstain, 323.9 min)
+ABSTAIN ru.lex.workstudy.dostich align-failed@large-v3-turbo
+ABSTAIN ru.lex.workstudy.kollega align-failed@large-v3-turbo
+ABSTAIN ru.lex.workstudy.molodoi align-failed@large-v3-turbo
+ABSTAIN ru.lex.workstudy.opyt align-failed@large-v3-turbo
+ABSTAIN ru.lex.workstudy.opytnyi align-failed@large-v3-turbo
+ABSTAIN ru.lex.workstudy.organizator align-failed@large-v3-turbo
+ABSTAIN ru.lex.workstudy.rabota2 align-failed@large-v3-turbo
+... 3700/4623 settled (3564 ok, 136 abstain, 333.0 min)
+... 3800/4623 settled (3664 ok, 136 abstain, 341.5 min)
+... 3900/4623 settled (3764 ok, 136 abstain, 350.1 min)
+ABSTAIN ru.sent.b1.u218 align-failed@large-v3-turbo
+... 4000/4623 settled (3863 ok, 137 abstain, 358.7 min)
+ABSTAIN ru.sent.b1.u280 align-failed@large-v3-turbo
+ABSTAIN ru.sent.b1.u315 align-failed@large-v3-turbo
+... 4100/4623 settled (3961 ok, 139 abstain, 367.5 min)
+... 4200/4623 settled (4061 ok, 139 abstain, 376.1 min)
+ABSTAIN ru.sent.b2.u435 align-failed@large-v3-turbo
+ABSTAIN ru.sent.b2.u441 align-failed@large-v3-turbo
+... 4300/4623 settled (4159 ok, 141 abstain, 384.8 min)
+ABSTAIN ru.sent.b2.u564 align-failed@large-v3-turbo
+... 4400/4623 settled (4258 ok, 142 abstain, 393.4 min)
+... 4500/4623 settled (4358 ok, 142 abstain, 402.0 min)
+ABSTAIN ru.sent.cp.p08 align-failed@large-v3-turbo
+... 4600/4623 settled (4457 ok, 143 abstain, 410.6 min)
+ABSTAIN ru.sent.cp.p27 align-failed@large-v3-turbo
+... 4623/4623 settled (4479 ok, 144 abstain, 412.6 min)
+self-check: rows=4856 covered=4712 coverage=97.0% schema_bad=0 monotonicity_bad=0 this_run_ok=4479 this_run_abstain=144

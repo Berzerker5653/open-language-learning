@@ -6026,6 +6026,10 @@ struct ShadowItem {
     surface: String,
     reading: Option<String>,
     romaji: Option<String>,
+    /// WORD-TIMING-001: in-clip word timings from the pack's optional
+    /// `media/words.jsonl` sidecar; empty when the pack (or this clip) has
+    /// none, and the shadowing surface then renders exactly as before.
+    words: Vec<lts_langpack::WordSpan>,
 }
 
 #[tauri::command]
@@ -6040,9 +6044,23 @@ fn shadowing_items_at(data: &Path, profile_id: &str) -> Result<Vec<ShadowItem>, 
     let pack_id = active.first().ok_or("no active language pack")?;
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
         .ok_or("pack not installed")?;
+    // WORD-TIMING-001: read the same langpack sidecar loader the validator
+    // uses; an absent or corrupt overlay simply means "no timings", which is
+    // the pre-feature render path (install-time validation already flagged
+    // any corrupt file as a parse_error).
+    let sidecar = data
+        .join("packs")
+        .join(pack_id)
+        .join(&version)
+        .join("media/words.jsonl");
+    let timings = std::fs::read_to_string(sidecar)
+        .ok()
+        .and_then(|text| lts_langpack::parse_word_timings(&text).ok())
+        .unwrap_or_default();
     Ok(lexicon_entries(data, pack_id, &version)?
         .into_iter()
         .map(|e| ShadowItem {
+            words: timings.get(&e.id).cloned().unwrap_or_default(),
             content_id: e.id,
             surface: e.surface,
             reading: e.reading,
@@ -6380,6 +6398,12 @@ async fn story_view(profile_id: String, story_id: String) -> Result<StoryView, S
 /// に answers as the particle, not the number "two". With no declared
 /// reading the old K-80 rule stands unchanged (longest surface, id
 /// tie-break).
+/// Reading-free convenience wrapper over the rule above. Every production
+/// caller supplies the sentence's declared reading and calls
+/// `sentence_word_spans_with_reading` directly; this wrapper is exercised by
+/// the K-80 behaviour fixtures, so it is compiled for tests only (a plain
+/// lib build would carry it as dead code).
+#[cfg(test)]
 fn sentence_word_spans<'a>(text: &str, lex: &'a [LexEntry]) -> Vec<&'a LexEntry> {
     span_entries_dedup(&sentence_word_spans_with_reading(text, None, lex))
 }
@@ -6401,9 +6425,19 @@ fn span_entries_dedup<'a>(matches: &[SpanMatch<'a>]) -> Vec<&'a LexEntry> {
 #[derive(Clone)]
 struct SpanMatch<'a> {
     entry: &'a LexEntry,
+    // Built by the production segmenter for every span; consumed today by
+    // the behaviour fixtures that assert span positions and reading
+    // agreement. A plain lib build has no reader for them, so they are
+    // exempt from the dead-code gate rather than deleted (the segmenter
+    // computes them anyway, and removing them would blind the fixtures).
+    #[cfg_attr(not(test), allow(dead_code))]
     /// Character offset of the span within the sentence text.
     start: usize,
+    #[cfg_attr(not(test), allow(dead_code))]
     len: usize,
+    #[cfg_attr(not(test), allow(dead_code))]
+    /// Whether the chosen entry's reading agreed with the sentence's
+    /// declared reading at that spot.
     reading_agrees: bool,
 }
 
@@ -6583,15 +6617,14 @@ fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryV
         // order (K-80) — never every surface that appears as a substring.
         // The sentence's declared reading disambiguates homophone
         // surfaces (JA-FUNCTION-WORD-LOOKUP-001).
-        let known: Vec<LexEntry> =
-            span_entries_dedup(&sentence_word_spans_with_reading(
-                &entry.text,
-                entry.reading.as_deref(),
-                &lex,
-            ))
-            .into_iter()
-            .cloned()
-            .collect();
+        let known: Vec<LexEntry> = span_entries_dedup(&sentence_word_spans_with_reading(
+            &entry.text,
+            entry.reading.as_deref(),
+            &lex,
+        ))
+        .into_iter()
+        .cloned()
+        .collect();
         views.push(StorySentenceView {
             content_id: entry.id.clone(),
             text: entry.text.clone(),
@@ -13629,6 +13662,47 @@ transfer_variants:
     }
 
     #[test]
+    fn shadowing_items_attach_word_timings_only_when_the_sidecar_ships() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
+
+        // Without the sidecar every item carries no spans: the panel renders
+        // exactly as before WORD-TIMING-001.
+        let bare = shadowing_items_at(data, &p.id).unwrap();
+        assert!(bare.iter().all(|i| i.words.is_empty()));
+
+        // With a sidecar, timings travel keyed by clip id; clips the sidecar
+        // does not cover keep no spans.
+        let version =
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &data.join("packs"))
+                .unwrap();
+        std::fs::write(
+            data.join("packs")
+                .join("org.openlanguage.ja-demo")
+                .join(&version)
+                .join("media/words.jsonl"),
+            "{\"id\":\"ja.lex.demo.konnichiwa\",\"words\":[{\"w\":\"こんにちは\",\"s\":0.05,\"e\":0.62}]}\n",
+        )
+        .unwrap();
+        let items = shadowing_items_at(data, &p.id).unwrap();
+        let with = items
+            .iter()
+            .find(|i| i.content_id == "ja.lex.demo.konnichiwa")
+            .expect("bundled lexicon entry");
+        assert_eq!(with.words.len(), 1);
+        assert_eq!(with.words[0].w, "こんにちは");
+        assert!(with.words[0].s < with.words[0].e);
+        assert!(
+            items
+                .iter()
+                .any(|i| i.content_id != "ja.lex.demo.konnichiwa" && i.words.is_empty())
+        );
+    }
+
+    #[test]
     fn cloze_and_dictation_grade_typed_answers_on_correct_dimensions() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
@@ -13851,7 +13925,10 @@ transfer_variants:
         // the particle wins on the closed-class rule.
         assert_eq!(ids("なまえは", "なまえは"), vec!["lex.ha-topic"]);
         // に is read に by either entry: the particle beats the number.
-        assert_eq!(ids("がっこうへ に いきます", "がっこうえ に いきます"), vec!["lex.ni-particle"]);
+        assert_eq!(
+            ids("がっこうへ に いきます", "がっこうえ に いきます"),
+            vec!["lex.ni-particle"]
+        );
         // Without a declared reading the old id-order rule stands
         // (ties break on entry id: lex.ha-tooth sorts first here).
         assert_eq!(
@@ -13878,7 +13955,8 @@ transfer_variants:
         )
         .unwrap();
         let lex = lexicon_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
-        let sentences = sentence_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        let sentences =
+            sentence_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
         let sent = sentences
             .iter()
             .find(|e| e.id == "ja.sent.my-name-wa")
@@ -13915,7 +13993,8 @@ transfer_variants:
         )
         .unwrap();
         let lex = lexicon_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
-        let sentences = sentence_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        let sentences =
+            sentence_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
         for sid in ["ja.sent.wake-up", "ja.sent.go-school", "ja.sent.come-home"] {
             let sent = sentences
                 .iter()
@@ -13927,10 +14006,10 @@ transfer_variants:
                 &lex,
             ))
             .into_iter()
-                    .map(|e| e.id.clone())
-                    .collect();
-                    assert!(
-                        !ids.contains(&"ja.lex.numbers.ni".to_string()),
+            .map(|e| e.id.clone())
+            .collect();
+            assert!(
+                !ids.contains(&"ja.lex.numbers.ni".to_string()),
                 "{sid}: the number 'two' must never answer a particle span: {ids:?}"
             );
         }
@@ -13938,14 +14017,11 @@ transfer_variants:
             .iter()
             .find(|e| e.id == "ja.sent.wake-up")
             .unwrap();
-        let ids: Vec<String> = sentence_word_spans_with_reading(
-            &wake.text,
-            wake.reading.as_deref(),
-            &lex,
-        )
-        .into_iter()
-        .map(|m| m.entry.id.clone())
-        .collect();
+        let ids: Vec<String> =
+            sentence_word_spans_with_reading(&wake.text, wake.reading.as_deref(), &lex)
+                .into_iter()
+                .map(|m| m.entry.id.clone())
+                .collect();
         assert!(
             ids.contains(&"ja.lex.functionword.ni".to_string()),
             "the に span of the wake-up sentence must answer as the particle: {ids:?}"
@@ -13971,11 +14047,25 @@ transfer_variants:
     #[test]
     fn shipped_story_function_word_lookup_report_is_empty() {
         const CLOSED_SURFACES: &[&str] = &[
-            "ました", "でした", "から", "です", "まで", "ます", "は", "に", "を", "が", "の", "へ",
-            "と", "か", "も", "で",
+            "ました",
+            "でした",
+            "から",
+            "です",
+            "まで",
+            "ます",
+            "は",
+            "に",
+            "を",
+            "が",
+            "の",
+            "へ",
+            "と",
+            "か",
+            "も",
+            "で",
         ];
         let mut closed: Vec<&str> = CLOSED_SURFACES.to_vec();
-        closed.sort_by(|a, b| b.chars().count().cmp(&a.chars().count()));
+        closed.sort_by_key(|b| std::cmp::Reverse(b.chars().count()));
         let punct = |c: char| matches!(c, '。' | '、' | '！' | '？' | '・');
 
         let tmp = tempfile::tempdir().unwrap();
@@ -13987,7 +14077,8 @@ transfer_variants:
         )
         .unwrap();
         let lex = lexicon_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
-        let sentences = sentence_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
+        let sentences =
+            sentence_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
         let stories = story_entries(data, "org.openlanguage.ja-jp.reference", &version).unwrap();
         assert!(!stories.is_empty(), "the reference pack must ship stories");
 

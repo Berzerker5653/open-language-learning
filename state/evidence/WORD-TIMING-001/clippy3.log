@@ -1,0 +1,43 @@
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+error: function `sentence_word_spans` is never used
+    --> apps/desktop/src-tauri/src/lib.rs:6401:4
+     |
+6401 | fn sentence_word_spans<'a>(text: &str, lex: &'a [LexEntry]) -> Vec<&'a LexEntry> {
+     |    ^^^^^^^^^^^^^^^^^^^
+     |
+     = note: `-D dead-code` implied by `-D warnings`
+     = help: to override `-D warnings` add `#[expect(dead_code)]` or `#[allow(dead_code)]`
+
+error: fields `start`, `len`, and `reading_agrees` are never read
+    --> apps/desktop/src-tauri/src/lib.rs:6423:5
+     |
+6420 | struct SpanMatch<'a> {
+     |        --------- fields in this struct
+...
+6423 |     start: usize,
+     |     ^^^^^
+6424 |     len: usize,
+     |     ^^^
+6425 |     reading_agrees: bool,
+     |     ^^^^^^^^^^^^^^
+     |
+     = note: `SpanMatch` has a derived impl for the trait `Clone`, but this is intentionally ignored during dead code analysis
+
+error: could not compile `lts-desktop` (lib) due to 2 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: consider using `sort_by_key`
+     --> apps/desktop/src-tauri/src/lib.rs:14052:9
+      |
+14052 |         closed.sort_by(|a, b| b.chars().count().cmp(&a.chars().count()));
+      |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+      |
+      = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#unnecessary_sort_by
+      = note: `-D clippy::unnecessary-sort-by` implied by `-D warnings`
+      = help: to override `-D warnings` add `#[allow(clippy::unnecessary_sort_by)]`
+help: try
+      |
+14052 -         closed.sort_by(|a, b| b.chars().count().cmp(&a.chars().count()));
+14052 +         closed.sort_by_key(|b| std::cmp::Reverse(b.chars().count()));
+      |
+
+error: could not compile `lts-desktop` (lib test) due to 1 previous error

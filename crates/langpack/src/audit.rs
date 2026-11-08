@@ -1087,7 +1087,10 @@ impl Pack {
         if let Ok(entries) = fs::read_dir(self.root().join("media")) {
             for entry in entries.flatten() {
                 let name = entry.file_name().to_string_lossy().into_owned();
-                if name == "manifest.jsonl" {
+                // `manifest.jsonl` carries provenance and `words.jsonl` is a
+                // word-timing overlay (WORD-TIMING-001): both are declared
+                // data under media/, not audio assets needing a manifest row.
+                if name == "manifest.jsonl" || name == "words.jsonl" {
                     continue;
                 }
                 let rel = format!("media/{name}");

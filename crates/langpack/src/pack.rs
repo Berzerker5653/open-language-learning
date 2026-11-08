@@ -6,10 +6,47 @@ use crate::schema::SchemaSet;
 use jsonschema::Validator;
 use lts_domain::{ActivityModality, ContentId, EngineCompat, MasteryState};
 use serde_json::Value;
-use std::collections::{HashMap, HashSet};
+use std::collections::{BTreeMap, HashMap, HashSet};
 use std::fs;
 use std::io;
 use std::path::{Path, PathBuf};
+
+/// One word of a clip's in-clip audio timing (WORD-TIMING-001). `w` is the
+/// exact pack-text token (stress marks preserved); `s`/`e` are seconds within
+/// the clip, monotonic by contract but never relied on by consumers.
+#[derive(Clone, Debug, PartialEq, serde::Deserialize, serde::Serialize)]
+pub struct WordSpan {
+    pub w: String,
+    pub s: f64,
+    pub e: f64,
+}
+
+/// One `media/words.jsonl` row: clip id plus its word spans.
+#[derive(Debug, serde::Deserialize)]
+struct WordRow {
+    id: String,
+    words: Vec<WordSpan>,
+}
+
+/// Parse the optional `media/words.jsonl` sidecar (WORD-TIMING-001): one
+/// `{"id": ..., "words": [{w, s, e}]}` row per clip. The file is an additive
+/// overlay — packs without it load unchanged and yield an empty map. A
+/// malformed row names its line so the failure is locatable.
+pub fn parse_word_timings(text: &str) -> Result<BTreeMap<String, Vec<WordSpan>>, String> {
+    let mut out: BTreeMap<String, Vec<WordSpan>> = BTreeMap::new();
+    for (line, text) in text.lines().enumerate() {
+        if text.trim().is_empty() {
+            continue;
+        }
+        match serde_json::from_str::<WordRow>(text) {
+            Ok(row) => {
+                out.insert(row.id, row.words);
+            }
+            Err(e) => return Err(format!("line {}: {e}", line + 1)),
+        }
+    }
+    Ok(out)
+}
 
 /// Validation posture. Scaffold accepts draft state (unresolved references
 /// as warnings); install additionally enforces promotion gates.
@@ -41,6 +78,9 @@ pub struct Pack {
     unknown_files: Vec<String>,
     parse_errors: Vec<(String, String)>,
     pub(crate) manifest: Option<Value>,
+    /// Word-timing overlay from the optional `media/words.jsonl` sidecar
+    /// (WORD-TIMING-001); packs without the sidecar keep an empty map.
+    word_timings: BTreeMap<String, Vec<WordSpan>>,
 }
 
 /// One mastery requirement inside an environment unlock rule
@@ -76,6 +116,18 @@ impl Pack {
     /// Relative paths of binary media assets.
     pub fn media_files(&self) -> &[String] {
         &self.media
+    }
+
+    /// All word timings loaded from the optional `media/words.jsonl` sidecar,
+    /// keyed by clip id (WORD-TIMING-001). Empty when the pack ships none.
+    pub fn word_timings(&self) -> &BTreeMap<String, Vec<WordSpan>> {
+        &self.word_timings
+    }
+
+    /// Word timings for one clip id, or `None` when the sidecar (or that id)
+    /// is absent — the caller then behaves exactly as before this feature.
+    pub fn word_timings_for(&self, clip_id: &str) -> Option<&[WordSpan]> {
+        self.word_timings.get(clip_id).map(Vec::as_slice)
     }
 
     /// Typed rows of the optional `world/environments.jsonl` collection
@@ -128,6 +180,7 @@ impl Pack {
             unknown_files: Vec::new(),
             parse_errors: Vec::new(),
             manifest: None,
+            word_timings: BTreeMap::new(),
         };
         let mut files = Vec::new();
         collect_files(root, root, &mut files)?;
@@ -144,6 +197,18 @@ impl Pack {
                 }
                 continue;
             };
+            // Word timings (WORD-TIMING-001) are validated data under
+            // `media/`, like the manifest: an overlay keyed by clip id, never
+            // an opaque audio asset. A malformed row surfaces as a
+            // `parse_error` naming its line.
+            if rel == "media/words.jsonl" {
+                let text = fs::read_to_string(root.join(&rel))?;
+                match parse_word_timings(&text) {
+                    Ok(map) => pack.word_timings.extend(map),
+                    Err(msg) => pack.parse_errors.push((rel, msg)),
+                }
+                continue;
+            }
             // Everything under `media/` is an opaque binary asset *except* the
             // manifest, which is validated data: the manifest is what carries
             // audio provenance, so it must be parsed (ADR-0016).

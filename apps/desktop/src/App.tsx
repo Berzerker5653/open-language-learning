@@ -51,6 +51,7 @@ import { playClip } from "./playback";
 import { stressEnabled, type DisplaySettingsView } from "./stress";
 import { ReadingPanel, type Story, type StorySummary } from "./reading";
 import { ShadowingPanel, type ShadowTarget } from "./shadowing";
+import type { WordSpan } from "./word-timing";
 import { MyWordsPanel, type MineItem } from "./words";
 import {
   ScenarioPanel,
@@ -585,6 +586,21 @@ export function App() {
   const [mineNotice, setMineNotice] = useState<string | null>(null);
   const [mineReview, setMineReview] = useState<{ item: MineItem; revealed: boolean } | null>(null);
   const [shadowError, setShadowError] = useState<string | null>(null);
+  // WORD-TIMING-001: the karaoke clock (in-clip seconds, null when nothing
+  // of this clip is playing) plus one retained clip URL per shadowing item.
+  // The retained URL is what makes click-to-hear-word seek the already
+  // loaded clip instead of re-fetching it; it is revoked exactly when the
+  // item or the screen changes.
+  const [shadowTime, setShadowTime] = useState<number | null>(null);
+  const shadowClipRef = useRef<{ contentId: string; url: string } | null>(null);
+  const releaseShadowClip = () => {
+    if (shadowClipRef.current) URL.revokeObjectURL(shadowClipRef.current.url);
+    shadowClipRef.current = null;
+    setShadowTime(null);
+  };
+  useEffect(() => {
+    if (route !== "shadowing") releaseShadowClip();
+  });
 
   useEffect(() => {
     const inv = detectInvoke();
@@ -2556,17 +2572,11 @@ export function App() {
   // speak, play your own recording back. No analysis, no evidence.
   async function openShadowing() {
     setRoute("shadowing");
+    releaseShadowClip();
     const inv = detectInvoke();
     if (!inv || !profileId) return;
     try {
-      setShadowItems(
-        (await inv("shadowing_items", { profileId })) as {
-          content_id: string;
-          surface: string;
-          reading: string | null;
-          romaji: string | null;
-        }[],
-      );
+      setShadowItems((await inv("shadowing_items", { profileId })) as ShadowTarget[]);
       setShadowIdx(0);
       setShadowError(null);
     } catch (e) {
@@ -2574,30 +2584,58 @@ export function App() {
     }
   }
 
-  async function playShadowModel() {
+  /// WORD-TIMING-001: the model clip as a retained object URL, cached per
+  /// shadowing item. The first fetch is the same `speech_audio` path as
+  /// before; click-to-hear-word then seeks this same clip instead of
+  /// refetching (R14 keeps ownership of the URL explicit: one retained clip
+  /// for the current screen, revoked on item/screen change).
+  async function shadowClipUrl(item: ShadowTarget): Promise<string> {
+    const cached = shadowClipRef.current;
+    if (cached && cached.contentId === item.content_id) return cached.url;
     const inv = detectInvoke();
+    if (!inv) throw new Error(NO_ACTIVE_PACK);
+    const req = await packRequest<{ wav_b64: string; source: string }>(
+      inv,
+      selectedPack,
+      "speech_audio",
+      // K-65b: the native side resolves the speakable string from the pack
+      // record. Sending the written form here is what played noise for
+      // kanji-primary entries.
+      { contentId: item.content_id },
+    );
+    if (!req.ok) throw new Error(req.error);
+    const a = req.value;
+    const bytes = Uint8Array.from(atob(a.wav_b64), (c) => c.charCodeAt(0));
+    if (cached) URL.revokeObjectURL(cached.url);
+    const url = URL.createObjectURL(new Blob([bytes], { type: "audio/wav" }));
+    shadowClipRef.current = { contentId: item.content_id, url };
+    return url;
+  }
+
+  async function playShadowModel() {
     const item = shadowItems?.[shadowIdx];
-    if (!inv || !item) return;
+    if (!item) return;
     try {
-      const req = await packRequest<{ wav_b64: string; source: string }>(
-        inv,
-        selectedPack,
-        "speech_audio",
-        // K-65b: the native side resolves the speakable string from the pack
-        // record. Sending the written form here is what played noise for
-        // kanji-primary entries.
-        { contentId: item.content_id },
-      );
-      if (!req.ok) {
-        setAudioMsg(audioFailureMessage(req.error));
-        return;
-      }
-      const a = req.value;
+      const url = await shadowClipUrl(item);
       setAudioMsg(null);
-      const bytes = Uint8Array.from(atob(a.wav_b64), (c) => c.charCodeAt(0));
-      playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
+      playBlobUrl(url, true, { onTime: setShadowTime });
     } catch (e) {
-      setAudioMsg(audioFailureMessage(String(e)));
+      setAudioMsg(audioFailureMessage(e instanceof Error ? e.message : String(e)));
+    }
+  }
+
+  /// WORD-TIMING-001: hear only this word — seek to the span start and pause
+  /// at its end (the clip is a Blob-backed HTMLAudio, so `currentTime` is a
+  /// plain seek; no clip re-request when the model clip is already loaded).
+  async function playShadowWord(span: WordSpan) {
+    const item = shadowItems?.[shadowIdx];
+    if (!item) return;
+    try {
+      const url = await shadowClipUrl(item);
+      setAudioMsg(null);
+      playBlobUrl(url, true, { startAt: span.s, stopAt: span.e, onTime: setShadowTime });
+    } catch (e) {
+      setAudioMsg(audioFailureMessage(e instanceof Error ? e.message : String(e)));
     }
   }
 
@@ -2956,10 +2994,37 @@ export function App() {
     };
   }, [selectedPack]);
 
-  function playBlobUrl(url: string, retained = false) {
+  function playBlobUrl(
+    url: string,
+    retained = false,
+    opts?: { startAt?: number; stopAt?: number; onTime?: (t: number | null) => void },
+  ) {
     const audio = new Audio(url);
-    audio.addEventListener("ended", () => setClipPlaying(false));
-    audio.addEventListener("error", () => setClipPlaying(false));
+    const settle = () => {
+      setClipPlaying(false);
+      opts?.onTime?.(null);
+    };
+    audio.addEventListener("ended", settle);
+    audio.addEventListener("error", settle);
+    // WORD-TIMING-001: the karaoke clock, and click-to-hear-word spans —
+    // seek once metadata is known, pause once the span is past its end.
+    if (opts) {
+      if (opts.startAt !== undefined) {
+        const startAt = opts.startAt;
+        audio.addEventListener("loadedmetadata", () => {
+          audio.currentTime = startAt;
+        });
+      }
+      audio.addEventListener("timeupdate", () => {
+        if (!opts.onTime) return;
+        if (opts.stopAt !== undefined && audio.currentTime >= opts.stopAt) {
+          audio.pause();
+          settle();
+        } else {
+          opts.onTime(audio.currentTime);
+        }
+      });
+    }
     setClipPlaying(true);
     // K-88: honour this profile's output device. If the chosen device has
     // vanished or this webview refuses to route, the system default answers
@@ -3551,6 +3616,7 @@ export function App() {
           audioMsg={audioMsg}
           recording={recording}
           attemptUrl={attemptUrl}
+          playTime={shadowTime}
           onRetry={() => void openShadowing()}
           onOpenSetup={() => void openSettings()}
           onPlayModel={() => void playShadowModel()}
@@ -3559,9 +3625,12 @@ export function App() {
           onPlayAttempt={() => {
             if (attemptUrl) playBlobUrl(attemptUrl, true);
           }}
-          onStep={(delta) =>
-            setShadowIdx((i) => Math.max(0, Math.min((shadowItems?.length ?? 0) - 1, i + delta)))
-          }
+          onPlayWord={(span) => void playShadowWord(span)}
+          onStep={(delta) => {
+            // Changing item retires the retained clip (WORD-TIMING-001).
+            releaseShadowClip();
+            setShadowIdx((i) => Math.max(0, Math.min((shadowItems?.length ?? 0) - 1, i + delta)));
+          }}
         />
       ) : route === "reading" ? (
         <ReadingPanel

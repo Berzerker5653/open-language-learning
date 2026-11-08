@@ -839,6 +839,31 @@ th:last-child {
   }
 }
 
+/* ------------------------------------------- WORD-TIMING-001 karaoke text */
+/* Pack surfaces with word timings render each timed word as a pressable
+   token; the token whose clip span covers the playback clock carries
+   `word--active`. Untimed surfaces never get these classes at all. */
+.word {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.word:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.word--active {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  border-radius: var(--radius-sm);
+}
+
 /* ------------------------------------------------------ reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,

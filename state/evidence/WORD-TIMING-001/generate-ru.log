@@ -1,0 +1,9 @@
+carrying 30 settled ids; 4826 left
+generation start: 4826 rows -> languages/ru-RU/media/words.jsonl (primary=large-v3-turbo int8, retry=large-v3)
+loading large-v3-turbo ...
+... 100/4826 settled (100 ok, 0 abstain, 10.2 min)
+... 200/4826 settled (200 ok, 0 abstain, 19.1 min)
+loading large-v3 ...
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+/home/hunter/.hermes/tools/python-3.14.9+20261021-linux-x64/lib/python3.14/multiprocessing/resource_tracker.py:475: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/mp-clulrp_1'}
+  warnings.warn(

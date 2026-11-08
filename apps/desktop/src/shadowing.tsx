@@ -13,12 +13,16 @@
  */
 import { LatinText, PackText, usePackTextAttrs } from "@openlang/ui";
 import { shadowTargetsState } from "./speech-readiness";
+import { activeTokenIndex, alignSurfaceTokens, type WordSpan } from "./word-timing";
 
 export interface ShadowTarget {
   content_id: string;
   surface: string;
   reading: string | null;
   romaji: string | null;
+  /// WORD-TIMING-001: in-clip word timings from the pack's optional
+  /// `media/words.jsonl` sidecar; absent/empty renders the plain surface.
+  words?: WordSpan[];
 }
 
 export interface ShadowingPanelProps {
@@ -29,6 +33,9 @@ export interface ShadowingPanelProps {
   audioMsg: string | null;
   recording: boolean;
   attemptUrl: string | null;
+  /// WORD-TIMING-001: current in-clip playback clock (seconds), null while
+  /// nothing of this clip is playing. Drives the karaoke highlight.
+  playTime?: number | null;
   onRetry(): void;
   onOpenSetup(): void;
   onPlayModel(): void;
@@ -36,12 +43,22 @@ export interface ShadowingPanelProps {
   onStop(): void;
   onPlayAttempt(): void;
   onStep(delta: number): void;
+  /// WORD-TIMING-001: play only this word's span (click-to-hear-word).
+  onPlayWord?(span: WordSpan): void;
 }
 
 export function ShadowingPanel(p: ShadowingPanelProps) {
   const packAttrs = usePackTextAttrs();
   const current = p.items ? (p.items[p.index] ?? null) : null;
   const total = p.items?.length ?? 0;
+  // WORD-TIMING-001: karaoke only where the sidecar aligned with the surface;
+  // `tokens === null` (no sidecar, or nothing lines up) keeps the plain
+  // pre-feature render byte-for-byte.
+  const tokens =
+    current?.words && current.words.length > 0
+      ? alignSurfaceTokens(current.surface, current.words)
+      : null;
+  const active = tokens ? activeTokenIndex(tokens, p.playTime ?? null) : null;
   return (
     <section aria-label="Shadowing">
       <h1>Shadowing</h1>
@@ -84,9 +101,32 @@ export function ShadowingPanel(p: ShadowingPanelProps) {
         )
       ) : (
         <>
-          <PackText tag="p" className="surface">
-            {current.surface}
-          </PackText>
+          {tokens ? (
+            <PackText tag="p" className="surface">
+              {tokens.map((token, i) => {
+                const cls = i === active ? "word word--active" : "word";
+                return token.span && p.onPlayWord ? (
+                  <button
+                    key={i}
+                    type="button"
+                    className={cls}
+                    aria-label={`Play “${token.span.w}”`}
+                    onClick={() => token.span && p.onPlayWord?.(token.span)}
+                  >
+                    {token.text}
+                  </button>
+                ) : (
+                  <span key={i} className={token.span ? cls : undefined}>
+                    {token.text}
+                  </span>
+                );
+              })}
+            </PackText>
+          ) : (
+            <PackText tag="p" className="surface">
+              {current.surface}
+            </PackText>
+          )}
           {current.reading && (
             <p className="reading" {...packAttrs}>
               {current.reading}
