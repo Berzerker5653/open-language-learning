@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-08T09:14:17",
+  "updated": "2026-11-08T12:52:06",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1953,6 +1953,14 @@
         "state/evidence/WORD-TIMING-001/clippy3.log",
         "state/notes/WORD-TIMING-001.md"
       ]
+    },
+    "WORD-TIMING-002": {
+      "task_id": "WORD-TIMING-002",
+      "status": "in_progress",
+      "attempts": 1,
+      "title": "Word-level clip timings for the ja pack (kana sidecar)",
+      "activity": "implementing",
+      "summary": "Owner: keep pushing overnight (2026-11-08). Spike finding: ja media text is 4904/4911 KANA-only (the kanji gap feared in WORD-TIMING-001 does not exist in media rows) -> direct constrained alignment works with kana folding."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

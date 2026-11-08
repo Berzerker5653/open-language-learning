@@ -39,8 +39,12 @@ def strip_accents(s: str) -> str:
 
 
 def norm(w: str) -> str:
-    """Comparison form of one word: lowercase, combining marks and
-    punctuation stripped (spike's norm, kept identical on both sides)."""
+    """Comparison form of one word: NFKC-kana-folded, lowercase, combining
+    marks and punctuation stripped (spike's norm, kept identical on both
+    sides). NFKC first folds small/half-width kana (ぁ->あ, ﾅ->ナ) so whisper's
+    kana transcription aligns with the pack's kana text (WORD-TIMING-002);
+    it is a no-op for Cyrillic."""
+    w = unicodedata.normalize("NFKC", w)
     w = unicodedata.normalize("NFKD", w.lower())
     w = "".join(c for c in w if not unicodedata.combining(c))
     return re.sub(r"[^\w']+|[']$", "", w, flags=re.UNICODE)

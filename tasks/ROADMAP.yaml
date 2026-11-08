@@ -2514,6 +2514,20 @@ tasks:
     that word; packs lacking timings render unchanged.
   - 'Full gates green: cargo fmt/clippy/test, tsc, vitest, eslint, prettier, pnpm smoke.'
   required_for_desktop_1_0: false
+- id: WORD-TIMING-002
+  milestone: M8
+  priority: P2
+  title: Word-level clip timings for the ja pack (kana sidecar)
+  dependencies:
+  - WORD-TIMING-001
+  read_first:
+  - state/notes/WORD-TIMING-001.md
+  acceptance:
+  - kana-fold token normalization (NFKC small kana, long-vowel mark) so whisper kana output aligns to
+    the kana-only media text; only 7/4911 media rows carry kanji and those may abstain
+  - full ja generation via the same two-pass resumable pipeline; coverage floor 90%; abstains logged
+  - ja sidecar media/words.jsonl committed with reports
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
