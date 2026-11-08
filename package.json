@@ -21,5 +21,11 @@
     "eslint": "10.12.0",
     "prettier": "3.9.9",
     "typescript-eslint": "8.71.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "happy-dom": "^21.0.4",
+      "vitest>happy-dom": ">=21.0.4"
+    }
   }
 }

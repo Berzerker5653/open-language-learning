@@ -8,3 +8,7 @@ minimumReleaseAgeExclude:
 onlyBuiltDependencies:
   - esbuild
   - "@tauri-apps/cli"
+
+overrides:
+  happy-dom: ">=21.0.4"
+  "vitest>happy-dom": ">=21.0.4"
