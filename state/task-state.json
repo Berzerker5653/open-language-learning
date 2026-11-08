@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-06T09:34:08",
+  "updated": "2026-11-07T19:40:13",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -1936,6 +1936,14 @@
       "evidence": [
         "state/evidence/ACC-001/atspi-dumps/audit-2026-10-21.txt"
       ]
+    },
+    "WORD-TIMING-001": {
+      "task_id": "WORD-TIMING-001",
+      "status": "in_progress",
+      "attempts": 1,
+      "title": "Word-level clip timings (karaoke highlight, click-to-hear-word)",
+      "activity": "implementing",
+      "summary": "Owner-scoped 2026-11-07 (post-1.0 feature). Spike experiments/word-timing/spike.py: faster-whisper large-v3-turbo CPU int8 + initial_prompt constraint + difflib token alignment = 17/20 ru first-pass; failures are fast-TTS mishearings -> retry ladder + graceful abstain. Scope v1: ru pack sidecar media/words.jsonl; ja deferred (kanji-vs-kana gap)."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

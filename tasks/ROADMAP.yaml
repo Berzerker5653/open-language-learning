@@ -1,7 +1,7 @@
 schema_version: '1.0'
 project: open-language-learning-platform
-selection_policy: eligible required task in lowest numbered milestone, then priority order, then stable task
-  ID; dependencies must be done; optional work needs explicit owner scope
+selection_policy: eligible required task in lowest numbered milestone, then priority order, then stable
+  task ID; dependencies must be done; optional work needs explicit owner scope
 status_values:
 - blocked
 - ready
@@ -114,12 +114,12 @@ tasks:
   - docs/07_TECHNICAL_ARCHITECTURE.md
   - docs/17_SPEECH_BENCHMARK_PLAN.md
   acceptance:
-  - docs/performance/BUDGETS.yaml defines named OS/hardware tiers, sample lengths, warm/cold scenarios, latency
-    percentiles, memory/disk limits, cancellation, and UI responsiveness measurement.
-  - Provisional budgets are labeled product targets and frozen after baseline spikes, before optimizing providers
-    or running release measurements; actual hardware/model combinations are identified.
-  - Support may be narrowed transparently with compatible alternatives, but thresholds cannot be raised silently
-    to make a failed configuration pass.
+  - docs/performance/BUDGETS.yaml defines named OS/hardware tiers, sample lengths, warm/cold scenarios,
+    latency percentiles, memory/disk limits, cancellation, and UI responsiveness measurement.
+  - Provisional budgets are labeled product targets and frozen after baseline spikes, before optimizing
+    providers or running release measurements; actual hardware/model combinations are identified.
+  - Support may be narrowed transparently with compatible alternatives, but thresholds cannot be raised
+    silently to make a failed configuration pass.
   required_for_desktop_1_0: true
 - id: LIC-001
   milestone: M1
@@ -134,10 +134,10 @@ tasks:
   acceptance:
   - Record an owner-approved source-code license and original-content license before public redistribution;
     include final license files only after compatibility checks.
-  - Application, original curriculum, imported dictionary derivatives, models/voices, media/fonts, and benchmark
-    datasets each have an auditable rights/attribution record.
-  - Access/use conditions are tracked separately from copyright license; restricted research fixtures are fetched
-    permissionably and are not re-hosted.
+  - Application, original curriculum, imported dictionary derivatives, models/voices, media/fonts, and
+    benchmark datasets each have an auditable rights/attribution record.
+  - Access/use conditions are tracked separately from copyright license; restricted research fixtures
+    are fetched permissionably and are not re-hosted.
   - Local implementation and alternative-source research may continue while any owner-only licensing choice
     is pending; release remains blocked.
   required_for_desktop_1_0: true
@@ -146,21 +146,18 @@ tasks:
   priority: P1
   title: Detect pack licences more permissive than their sources
   dependencies:
-  # LIC-001 established the rights records. Measured at this head,
-  # `audit_licenses` performs no licence comparison in either direction: it
-  # checks `unknown_license`, redistribution flags and reference-only claims.
-  # `content_license` is only carried (crates/domain/src/pack.rs) and echoed
-  # into CLI JSON — which is how 0.4.0 published CC-BY-4.0 ja-JP content
-  # derived from CC BY-SA dictionary data. This task adds the first comparison.
   - LIC-001
   read_first:
   - docs/10_LICENSING_AND_PROVENANCE.md
   - docs/PACK_AUTHORING_CONTRACT.md
   - crates/langpack/src/audit.rs
   acceptance:
-  - audit-licenses emits a named finding when a declared content licence grants fewer obligations than a cited source licence imposes, naming record, source id, both licences and the obligation lost.
-  - A synthetic BY-over-BY-SA pack emits the finding; the same pack declaring BY-SA emits none; unknown licence ids are never judged.
-  - Reference packs still clear every gate while the finding is reported, because the terms decision is owner-gated (O-01(a)); promotion of the finding to a blocking severity is a separate owner-gated step.
+  - audit-licenses emits a named finding when a declared content licence grants fewer obligations than
+    a cited source licence imposes, naming record, source id, both licences and the obligation lost.
+  - A synthetic BY-over-BY-SA pack emits the finding; the same pack declaring BY-SA emits none; unknown
+    licence ids are never judged.
+  - Reference packs still clear every gate while the finding is reported, because the terms decision is
+    owner-gated (O-01(a)); promotion of the finding to a blocking severity is a separate owner-gated step.
   - An ADR records the obligation model, the severity choice and the promotion path.
   required_for_desktop_1_0: false
 - id: PACK-001
@@ -177,16 +174,16 @@ tasks:
   - Minimal and Japanese draft manifests parse and validate.
   - Malformed fixtures fail with actionable diagnostics.
   - CLI has machine-readable JSON output.
-  - Publish schemas and conformance fixtures for every shipped logical content type including lexical entries,
-    scripts, phonology, pragmatics, scenarios, assessments, review and provenance records; seed schemas are
-    provisional.
+  - Publish schemas and conformance fixtures for every shipped logical content type including lexical
+    entries, scripts, phonology, pragmatics, scenarios, assessments, review and provenance records; seed
+    schemas are provisional.
   - Stable ID grammar is consistent across docs and schemas, locale/script and engine SemVer compatibility
     is checked semantically, and content generation/review provenance is representable.
   - Every draft unresolved reference is explicit and rejects normal pack build/promotion; handoff scaffold
     validation never confers installation or release eligibility.
-  - Evolve bare prerequisite IDs into versioned target/modality/dimension/state/hard-or-helpful records as
-    defined in docs/03, with migration and fixtures for deferred-modality tracks; the starter goal schema does
-    not yet implement this contract.
+  - Evolve bare prerequisite IDs into versioned target/modality/dimension/state/hard-or-helpful records
+    as defined in docs/03, with migration and fixtures for deferred-modality tracks; the starter goal
+    schema does not yet implement this contract.
   required_for_desktop_1_0: true
 - id: PACK-002
   milestone: M1
@@ -351,10 +348,10 @@ tasks:
   - docs/09_TESTING_AND_ACCEPTANCE.md
   - docs/11_ACCESSIBILITY_AND_LOCALIZATION.md
   acceptance:
-  - docs/assessment/MASTERY_POLICY.yaml specifies evidence eligibility, dimension transitions, support levels,
-    diversity, delay, confidence, and modality-aware prerequisite evaluation with worked fixtures.
-  - Policy marks thresholds as initial implementation hypotheses; memory scheduling does not supply a proficiency
-    rubric.
+  - docs/assessment/MASTERY_POLICY.yaml specifies evidence eligibility, dimension transitions, support
+    levels, diversity, delay, confidence, and modality-aware prerequisite evaluation with worked fixtures.
+  - Policy marks thresholds as initial implementation hypotheses; memory scheduling does not supply a
+    proficiency rubric.
   - Technical failures, abstention, skipped tasks, latency alone, and invalid content never create negative
     linguistic outcomes; elapsed-time memory decay is evaluated separately.
   - Tests cover no-microphone/no-audio tracks, novice and already-known material, supported success, content
@@ -472,14 +469,16 @@ tasks:
   acceptance:
   - languages/ja-JP/review/REVIEW_POLICY.yaml defines reviewer qualifications by review type, review records,
     disagreements, critical fixes, coverage percentages, sampling boundaries, and promotion authority.
-  - docs/assessment/RELEASE_COVERAGE.yaml enumerates a finite A1/A2/B1/B2 capability map with framework edition/descriptors,
-    modalities, linked prerequisites, assessments, transfer/retention rubrics, and review evidence.
-  - All scored targets, core reused instruction, answer variants, and reference pronunciation targets require
-    qualified human review before reference release; sampled lower-risk practice is separated and risk is disclosed.
-  - Missing reviewer capacity or source rights is recorded as an explicit blocker without self-certifying content
-    or contacting third parties without owner authorization.
-  - The coverage map is agreed and versioned before bulk authoring; narrowing mandatory objectives to make
-    gates pass is a scope decision requiring owner approval.
+  - docs/assessment/RELEASE_COVERAGE.yaml enumerates a finite A1/A2/B1/B2 capability map with framework
+    edition/descriptors, modalities, linked prerequisites, assessments, transfer/retention rubrics, and
+    review evidence.
+  - All scored targets, core reused instruction, answer variants, and reference pronunciation targets
+    require qualified human review before reference release; sampled lower-risk practice is separated
+    and risk is disclosed.
+  - Missing reviewer capacity or source rights is recorded as an explicit blocker without self-certifying
+    content or contacting third parties without owner authorization.
+  - The coverage map is agreed and versioned before bulk authoring; narrowing mandatory objectives to
+    make gates pass is a scope decision requiring owner approval.
   required_for_desktop_1_0: true
 - id: ACT-001
   milestone: M4
@@ -514,7 +513,8 @@ tasks:
   read_first:
   - docs/09_TESTING_AND_ACCEPTANCE.md
   acceptance:
-  - Fresh user can complete a small on-ramp Japanese flow with contextual listening/text placeholders and persistence.
+  - Fresh user can complete a small on-ramp Japanese flow with contextual listening/text placeholders
+    and persistence.
   - Restart resumes safely.
   - No streak/heart mechanics exist.
   - End-to-end test covers flow.
@@ -708,7 +708,8 @@ tasks:
 - id: TTS-002
   milestone: M6
   priority: P1
-  title: "TTS distribution variants: bundled, bare, bring-your-own (ADR-0009) — SUPERSEDED by ADR-0024 (K-90): the app ships no runtime TTS, so no TTS variants exist"
+  title: 'TTS distribution variants: bundled, bare, bring-your-own (ADR-0009) — SUPERSEDED by ADR-0024
+    (K-90): the app ships no runtime TTS, so no TTS variants exist'
   dependencies:
   - TTS-001
   read_first:
@@ -717,15 +718,22 @@ tasks:
   - docs/13_RELEASE_AND_DISTRIBUTION.md
   - docs/provenance/tts-candidates.md
   acceptance:
-  - "Two release variants are produced: TTS-bundled (sherpa-onnx + Kokoro + espeak-ng-data staged as payload) and bare (no TTS payload; audio features degrade honestly). Same binary; variants differ in staged resources."
-  - "The TTS variant carries GPL-3.0 obligations for its payload only: espeak-ng source offer, component license texts, and attribution UI entries for espeak-ng (GPLv3), sherpa-onnx (Apache-2.0), ONNX Runtime (MIT), Kokoro (Apache-2.0)."
-  - "The TTS payload is installable into the bare variant as an optional in-app download: directory-capable model catalog entries (multi-file pin, hash verify, atomic activation) with the kokoro export as the first entry."
-  - "Bring-your-own: the bare variant accepts a user-supplied local TTS runtime via documented configuration; absence never blocks non-audio practice."
+  - 'Two release variants are produced: TTS-bundled (sherpa-onnx + Kokoro + espeak-ng-data staged as payload)
+    and bare (no TTS payload; audio features degrade honestly). Same binary; variants differ in staged
+    resources.'
+  - 'The TTS variant carries GPL-3.0 obligations for its payload only: espeak-ng source offer, component
+    license texts, and attribution UI entries for espeak-ng (GPLv3), sherpa-onnx (Apache-2.0), ONNX Runtime
+    (MIT), Kokoro (Apache-2.0).'
+  - 'The TTS payload is installable into the bare variant as an optional in-app download: directory-capable
+    model catalog entries (multi-file pin, hash verify, atomic activation) with the kokoro export as the
+    first entry.'
+  - 'Bring-your-own: the bare variant accepts a user-supplied local TTS runtime via documented configuration;
+    absence never blocks non-audio practice.'
   required_for_desktop_1_0: false
 - id: TTS-003
   milestone: M6
   priority: P1
-  title: "Qwen3-TTS bake-engine adoption and full ja-JP audio re-bake (owner decision 2026-10-10)"
+  title: Qwen3-TTS bake-engine adoption and full ja-JP audio re-bake (owner decision 2026-10-10)
   dependencies:
   - TTS-001
   read_first:
@@ -733,16 +741,19 @@ tasks:
   - docs/05_SPEECH_SYSTEM.md
   - docs/adr/0016-pack-shipped-model-output-audio.md
   acceptance:
-  - "generate-pack-audio.py defaults to the qwen3 backend with CustomVoice speaker ono_anna; kokoro stays selectable for provenance reproduction."
-  - "Every media/manifest.jsonl row for the pack credits runtime qwen3-tts with the model fingerprint and speaker; schema validation reports 0 errors 0 warnings."
-  - "Whisper round-trip spot check on the namae/gemination probes shows the declared reading, and the owner has listened to a sample of re-baked audio."
-  - "Pack version bumped and locally installed for owner verification; publishing stays gated by O-05."
+  - generate-pack-audio.py defaults to the qwen3 backend with CustomVoice speaker ono_anna; kokoro stays
+    selectable for provenance reproduction.
+  - Every media/manifest.jsonl row for the pack credits runtime qwen3-tts with the model fingerprint and
+    speaker; schema validation reports 0 errors 0 warnings.
+  - Whisper round-trip spot check on the namae/gemination probes shows the declared reading, and the owner
+    has listened to a sample of re-baked audio.
+  - Pack version bumped and locally installed for owner verification; publishing stays gated by O-05.
   required_for_desktop_1_0: false
-
 - id: PACK-AUDIO-VERIFICATION-001
   milestone: M6
   priority: P1
-  title: "Language-agnostic verification that every baked pack voice line says its text correctly (owner directive 2026-10-21)"
+  title: Language-agnostic verification that every baked pack voice line says its text correctly (owner
+    directive 2026-10-21)
   dependencies:
   - TTS-003
   read_first:
@@ -750,17 +761,28 @@ tasks:
   - state/evidence/OWNER-SESSION-2026-10-20/SESSION-PACKET.md
   - scripts/qa-asr.py
   acceptance:
-  - "Three machine layers run over every baked asset of every shipping pack: two certify (word-level ASR round-trip scripts/qa-asr.py; ML-free acoustic-structure gate scripts/qa-segments.py for onset bursts, internal gaps, trailing noise, clipping) and one records (phoneme transcript + edit-distance + CTC alignment posterior, scripts/qa-pron.py with scripts/qa_pron_g2p.py - record-only because calibration on the fixtures found no separating threshold; README documents both experiments)."
-  - "The gates are language-agnostic by construction: expected phones and expected nuclei derive from the pack's own text through per-language mapping modules, and an unmapped language ABSTAINS explicitly instead of passing."
-  - "Every certify-layer FAIL is repaired through the ASR-gated bake-repair loop until clean, or carries an explicit recorded owner disposition."
-  - "Regression fixtures for each known defect class (onset burst with internal gaps, epenthetic vowel, inserted segment) are kept and every layer run against them is recorded; the audit record lands in pack provenance and the pack authoring contract documents the verification step."
-  - "The residual defect class that machine layers demonstrably miss (sub-100 ms epenthetic vowels, inserted segments that whisper absorbs) is covered by a systematic owner listening pass with mandatory re-listen of every flagged or repaired clip."
+  - 'Three machine layers run over every baked asset of every shipping pack: two certify (word-level ASR
+    round-trip scripts/qa-asr.py; ML-free acoustic-structure gate scripts/qa-segments.py for onset bursts,
+    internal gaps, trailing noise, clipping) and one records (phoneme transcript + edit-distance + CTC
+    alignment posterior, scripts/qa-pron.py with scripts/qa_pron_g2p.py - record-only because calibration
+    on the fixtures found no separating threshold; README documents both experiments).'
+  - 'The gates are language-agnostic by construction: expected phones and expected nuclei derive from
+    the pack''s own text through per-language mapping modules, and an unmapped language ABSTAINS explicitly
+    instead of passing.'
+  - Every certify-layer FAIL is repaired through the ASR-gated bake-repair loop until clean, or carries
+    an explicit recorded owner disposition.
+  - Regression fixtures for each known defect class (onset burst with internal gaps, epenthetic vowel,
+    inserted segment) are kept and every layer run against them is recorded; the audit record lands in
+    pack provenance and the pack authoring contract documents the verification step.
+  - The residual defect class that machine layers demonstrably miss (sub-100 ms epenthetic vowels, inserted
+    segments that whisper absorbs) is covered by a systematic owner listening pass with mandatory re-listen
+    of every flagged or repaired clip.
   required_for_desktop_1_0: true
-
 - id: TTS-004
   milestone: M6
   priority: P1
-  title: "Remove runtime TTS from the app; packs are the only audio source (owner-approved 2026-10-10, K-90)"
+  title: Remove runtime TTS from the app; packs are the only audio source (owner-approved 2026-10-10,
+    K-90)
   dependencies:
   - TTS-001
   read_first:
@@ -770,26 +792,34 @@ tasks:
   - docs/adr/0024-runtime-tts-removal.md
   - docs/adr/0023-pack-audio-bake-engine-qwen3-tts.md
   acceptance:
-  - "Install-mode coverage guard in crates/langpack: every audio-addressable item (the same enumeration scripts/generate-pack-audio.py targets() produces) requires a manifest row plus a present wav, else install fails with media_asset_missing; fixture-pack test proves it."
-  - "No runtime synthesis code, payload (catalog.json Kokoro/espeak entries, ~375 MB), or TTS status UI remains in the app; the honest 'no audio is available for this item yet' path is the only no-media behavior."
-  - "Recognition (whisper) is untouched. ADR-0009 distribution-variant language superseded by ADR-0024; THIRD-PARTY-NOTICES drops app-bundled TTS attributions; docs/05 and docs/13 updated."
-  - "Full gate stays green: cargo test/clippy/fmt, vitest, langpack test 0/0, smoke-desktop."
+  - 'Install-mode coverage guard in crates/langpack: every audio-addressable item (the same enumeration
+    scripts/generate-pack-audio.py targets() produces) requires a manifest row plus a present wav, else
+    install fails with media_asset_missing; fixture-pack test proves it.'
+  - No runtime synthesis code, payload (catalog.json Kokoro/espeak entries, ~375 MB), or TTS status UI
+    remains in the app; the honest 'no audio is available for this item yet' path is the only no-media
+    behavior.
+  - Recognition (whisper) is untouched. ADR-0009 distribution-variant language superseded by ADR-0024;
+    THIRD-PARTY-NOTICES drops app-bundled TTS attributions; docs/05 and docs/13 updated.
+  - 'Full gate stays green: cargo test/clippy/fmt, vitest, langpack test 0/0, smoke-desktop.'
   required_for_desktop_1_0: false
-
 - id: POLISH-001
   milestone: M6
   priority: P1
-  title: "Pre-publication hardening pass (owner-approved 2026-10-04: polish before publishing)"
+  title: 'Pre-publication hardening pass (owner-approved 2026-10-04: polish before publishing)'
   dependencies:
   - TTS-002
   read_first:
   - docs/13_RELEASE_AND_DISTRIBUTION.md
   - docs/15_AUTONOMOUS_DEVELOPMENT.md
   acceptance:
-  - "Full fast suite green on the Linux reference machine: cargo workspace tests, clippy -D warnings, fmt, tsc, vitest, desktop smoke."
-  - "Failure paths produce honest, actionable messages and are covered by tests: offline/absent catalog, invalid pack import, missing TTS payload, failed or checksum-mismatched model download, unknown model id."
-  - "Startup and plan-generation latency measured and recorded as a baseline artifact in state/evidence."
-  - "UI walkthrough of every route on the reference machine; rough edges found are fixed or filed as new cards."
+  - 'Full fast suite green on the Linux reference machine: cargo workspace tests, clippy -D warnings,
+    fmt, tsc, vitest, desktop smoke.'
+  - 'Failure paths produce honest, actionable messages and are covered by tests: offline/absent catalog,
+    invalid pack import, missing TTS payload, failed or checksum-mismatched model download, unknown model
+    id.'
+  - Startup and plan-generation latency measured and recorded as a baseline artifact in state/evidence.
+  - UI walkthrough of every route on the reference machine; rough edges found are fixed or filed as new
+    cards.
   required_for_desktop_1_0: false
 - id: JA-A1-001
   milestone: M6
@@ -831,17 +861,12 @@ tasks:
   - Listening/speaking/reading/writing tracks are represented where appropriate.
   - Automated curriculum audit passes.
   required_for_desktop_1_0: true
-# Band review gate: this card gates the band-completeness CLAIM for its band (docs/00 release-gate
-# rules, docs/18), not the desktop release path. Owner ruling 2026-10-17, recorded in ADR-0034.
 - id: JA-A1-003
   milestone: M6
   priority: P0
   title: Qualified Japanese content review — A1
   dependencies:
   - JA-A1-002
-  # SPEECH-007 removed from this dependency list 2026-10-08 by ADR-0017 (owner
-  # scope decision: guided-only pronunciation feedback for desktop 1.0). Review
-  # and calibration stay independent ongoing work.
   - REVIEW-001
   read_first:
   - docs/09_TESTING_AND_ACCEPTANCE.md
@@ -854,12 +879,6 @@ tasks:
   - Reference pack trust state advances only if review gate criteria are met.
   - The band coverage and qualified-human review gates defined by REVIEW-001 pass for the exact pack version;
     unresolved mandatory coverage or critical findings keep this task blocked.
-  # Not a desktop-1.0 blocker as of ADR-0017 §2 (owner scope decision 2026-10-08:
-  # unfunded project, exclusively AI-created content). The pack ships at its honest
-  # posture — AI-generated, review-needed — and promotion to validated/verified
-  # still requires human review records via O-02 community review, which the
-  # validator enforces on any status flip. Band coverage and provenance stay
-  # enforced by lint/audit-sources regardless.
   required_for_desktop_1_0: false
 - id: SPEECH-007
   milestone: M6
@@ -884,19 +903,10 @@ tasks:
     changes invalidate eligibility until revalidation.
   - If any feature cannot meet frozen accuracy and coverage limits, it remains guided/reference and cannot
     generate automatic pronunciation mastery.
-  - Stable desktop 1.0 requires at least one high-value Japanese pronunciation contrast to qualify for automatic
-    feedback within a declared useful coverage envelope. If none meets the frozen gates, stable RC remains
-    blocked; guided alpha/beta practice may continue and changing this target requires an explicit owner scope
-    decision.
-  # Owner scope decision 2026-10-08 (ADR-0017) — the explicit change this task's
-  # acceptance text requires: desktop 1.0 ships guided-only pronunciation feedback,
-  # so calibration data is no longer a release blocker. Re-enable by funding the
-  # consented panel in benchmarks/speech/datasets/SOURCING.md; the protocol,
-  # consent instrument and labeler rubric stay in the repo.
-  # Dependency edges into ACC-001 / PERF-002 / PLAT-001 / SEC-001 / REL-001 were removed on
-  # 2026-10-17 so the graph matches docs/00_MASTER_SPEC.md ("`SPEECH-007` is out of the required-for-
-  # 1.0 chain until a consented panel exists") and ADR-0017 §2. The card stays live as optional work
-  # in execution_scope.optional_tasks; shipped speech features are still gated by SPEECH-006.
+  - Stable desktop 1.0 requires at least one high-value Japanese pronunciation contrast to qualify for
+    automatic feedback within a declared useful coverage envelope. If none meets the frozen gates, stable
+    RC remains blocked; guided alpha/beta practice may continue and changing this target requires an explicit
+    owner scope decision.
   required_for_desktop_1_0: false
 - id: K-01
   milestone: M6
@@ -909,8 +919,10 @@ tasks:
   - docs/03_CURRICULUM_AND_MASTERY.md
   - schemas/v0.2/scenario.schema.json
   acceptance:
-  - Scenario list/start/attempt/finish reachable from the app; unlock follows goal hard prereqs via derived mastery, not activity count.
-  - Completion records one scored interaction evidence event per node; no scheduler rows for scenario nodes.
+  - Scenario list/start/attempt/finish reachable from the app; unlock follows goal hard prereqs via derived
+    mastery, not activity count.
+  - Completion records one scored interaction evidence event per node; no scheduler rows for scenario
+    nodes.
   - Dialogue graph, recovery branches, support ladder, and transfer variants come only from pack data.
   required_for_desktop_1_0: false
 - id: K-02
@@ -925,7 +937,8 @@ tasks:
   - docs/assessment/MASTERY_POLICY.yaml
   acceptance:
   - Listening tasks hide the transcript natively (visible transcript disqualifies the evidence).
-  - Audio resolves licensed pack media first, then local synthesis labeled as model output, then an honest error.
+  - Audio resolves licensed pack media first, then local synthesis labeled as model output, then an honest
+    error.
   - Grading records comprehension-listening evidence and its own per-modality scheduler row.
   required_for_desktop_1_0: false
 - id: K-03
@@ -939,9 +952,11 @@ tasks:
   - docs/assessment/JA_ORTHOGRAPHY_POLICY.yaml
   - crates/activity/src/reading.rs
   acceptance:
-  - Furigana/romaji scaffolds follow per-item reading mastery and reader settings; fades at supported state.
+  - Furigana/romaji scaffolds follow per-item reading mastery and reader settings; fades at supported
+    state.
   - Reader gating is script-based, never locale-based; non-Japanese packs keep the plain reading aid.
-  - Revealing a faded scaffold records support level 3 with the concrete reveal action; revealing an already-shown scaffold records none.
+  - Revealing a faded scaffold records support level 3 with the concrete reveal action; revealing an already-shown
+    scaffold records none.
   required_for_desktop_1_0: false
 - id: K-04
   milestone: M6
@@ -955,9 +970,11 @@ tasks:
   - docs/assessment/JA_ORTHOGRAPHY.yaml
   - docs/assessment/JA_ORTHOGRAPHY_POLICY.yaml
   acceptance:
-  - Orthography-unit content records (symbol, reading, romaji, mnemonic) are declarative pack data validated by the pack schema.
-  - Recognize/recall runner modes schedule like vocabulary and feed the kana-literacy-established setting at threshold.
-  - "Engine stays language-neutral: any pack may ship orthography instruction for its script."
+  - Orthography-unit content records (symbol, reading, romaji, mnemonic) are declarative pack data validated
+    by the pack schema.
+  - Recognize/recall runner modes schedule like vocabulary and feed the kana-literacy-established setting
+    at threshold.
+  - 'Engine stays language-neutral: any pack may ship orthography instruction for its script.'
   required_for_desktop_1_0: false
 - id: K-05
   milestone: M6
@@ -980,7 +997,8 @@ tasks:
   read_first:
   - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
   acceptance:
-  - Referenced on-ramp assessment goals exist in the pack and validate; scenario dialogue graph is populated from pack data.
+  - Referenced on-ramp assessment goals exist in the pack and validate; scenario dialogue graph is populated
+    from pack data.
   required_for_desktop_1_0: false
 - id: K-10
   milestone: M6
@@ -993,7 +1011,9 @@ tasks:
   - docs/03_CURRICULUM_AND_MASTERY.md
   - docs/assessment/JA_PHONOLOGY_MODEL.md
   acceptance:
-  - Pack-declared phonological contrasts (`phonology/contrasts.jsonl`) drive a listen-and-choose discrimination runner; scored evidence lands on a dedicated `phonological-discrimination` dimension (perception never grants production dimensions); audio is media-first with model-output labeling.
+  - Pack-declared phonological contrasts (`phonology/contrasts.jsonl`) drive a listen-and-choose discrimination
+    runner; scored evidence lands on a dedicated `phonological-discrimination` dimension (perception never
+    grants production dimensions); audio is media-first with model-output labeling.
   required_for_desktop_1_0: false
 - id: K-11
   milestone: M6
@@ -1005,7 +1025,9 @@ tasks:
   read_first:
   - docs/05_SPEECH_SYSTEM.md
   acceptance:
-  - Packs can declare shadow activities (classify_type family); the app offers a speak-along loop (model audio -> record -> self-compare) that records NO mastery evidence, since no calibrated scorer exists; audio is media-first with model-output labeling.
+  - Packs can declare shadow activities (classify_type family); the app offers a speak-along loop (model
+    audio -> record -> self-compare) that records NO mastery evidence, since no calibrated scorer exists;
+    audio is media-first with model-output labeling.
   required_for_desktop_1_0: false
 - id: K-12
   milestone: M6
@@ -1017,8 +1039,12 @@ tasks:
   - docs/03_CURRICULUM_AND_MASTERY.md
   - docs/assessment/MASTERY_POLICY.yaml
   acceptance:
-  - Packs declare sentence content (`sentences/entries.jsonl`); cloze blanks a declared target in the sentence and grades typed recall as production-writing (target never visible), satisfying docs/03 section 9 typed-recall guidance.
-  - Dictation plays target audio (media-first, model-output labeled) and grades typed transcription on a dedicated `orthographic-encoding` dimension; it never grants production-writing evidence (MASTERY_POLICY lists dictation-of-target as disqualifying for that dimension).
+  - Packs declare sentence content (`sentences/entries.jsonl`); cloze blanks a declared target in the
+    sentence and grades typed recall as production-writing (target never visible), satisfying docs/03
+    section 9 typed-recall guidance.
+  - Dictation plays target audio (media-first, model-output labeled) and grades typed transcription on
+    a dedicated `orthographic-encoding` dimension; it never grants production-writing evidence (MASTERY_POLICY
+    lists dictation-of-target as disqualifying for that dimension).
   required_for_desktop_1_0: false
 - id: K-13
   milestone: M6
@@ -1030,8 +1056,12 @@ tasks:
   read_first:
   - docs/03_CURRICULUM_AND_MASTERY.md
   acceptance:
-  - "Packs declare stories (`stories/*.yaml`: ordered sentence content ids); the app renders an interlinear reader with per-sentence media-first audio and tap-to-lookup (sentence scaffolds + lexicon entries whose surface occurs in the sentence), scaffolds faded by comprehension-reading mastery via the READ-001 reader."
-  - "The mode is FORMATIVE input practice: it records no mastery evidence; grading means ordering sentences by learner-known content, not scoring."
+  - 'Packs declare stories (`stories/*.yaml`: ordered sentence content ids); the app renders an interlinear
+    reader with per-sentence media-first audio and tap-to-lookup (sentence scaffolds + lexicon entries
+    whose surface occurs in the sentence), scaffolds faded by comprehension-reading mastery via the READ-001
+    reader.'
+  - 'The mode is FORMATIVE input practice: it records no mastery evidence; grading means ordering sentences
+    by learner-known content, not scoring.'
   required_for_desktop_1_0: false
 - id: K-14
   milestone: M6
@@ -1042,8 +1072,11 @@ tasks:
   - docs/03_CURRICULUM_AND_MASTERY.md
   - docs/08_DATA_AND_PRIVACY.md
   acceptance:
-  - Learners add any encountered word (surface/reading/gloss) with a source citation to a personal, device-local lexicon (storage migration + CRUD commands); mining from the story reader cites the story content id.
-  - Mined items get their own SRS scheduling (due reviews surfaced in the app, self-graded recall updates the scheduler) and NEVER write mastery evidence or touch pack-content scheduler rows.
+  - Learners add any encountered word (surface/reading/gloss) with a source citation to a personal, device-local
+    lexicon (storage migration + CRUD commands); mining from the story reader cites the story content
+    id.
+  - Mined items get their own SRS scheduling (due reviews surfaced in the app, self-graded recall updates
+    the scheduler) and NEVER write mastery evidence or touch pack-content scheduler rows.
   required_for_desktop_1_0: false
 - id: K-15
   milestone: M6
@@ -1054,8 +1087,12 @@ tasks:
   - docs/03_CURRICULUM_AND_MASTERY.md
   - docs/08_DATA_AND_PRIVACY.md
   acceptance:
-  - Packs declare assessments (`assessments/definitions.jsonl`, goal-linked); the app runs a low-stakes placement pass that builds one practice task per pack assessment from its goal's unit content, with evidence tagged Diagnostic.
-  - Correct diagnostic answers raise mastery state through the normal derivation path, so known foundations unlock via existing prerequisite gating; the diagnostic NEVER fabricates evidence for constructs the learner did not attempt.
+  - Packs declare assessments (`assessments/definitions.jsonl`, goal-linked); the app runs a low-stakes
+    placement pass that builds one practice task per pack assessment from its goal's unit content, with
+    evidence tagged Diagnostic.
+  - Correct diagnostic answers raise mastery state through the normal derivation path, so known foundations
+    unlock via existing prerequisite gating; the diagnostic NEVER fabricates evidence for constructs the
+    learner did not attempt.
   required_for_desktop_1_0: false
 - id: K-16
   milestone: M6
@@ -1065,8 +1102,12 @@ tasks:
   read_first:
   - docs/03_CURRICULUM_AND_MASTERY.md
   acceptance:
-  - Packs declare kanji instruction data (character, meaning/reading prompts, radical decomposition, optional mnemonic story, review_status); the app runs a Heisig/WaniKani-style low-stakes drill (meaning and reading recognition from the character) whose evidence lands on existing dimensions only.
-  - Instruction is gated by the scheduler; newly drilled characters resurface on the scheduler's due date; untaught/unreviewed characters never enter the stream; AI-drafted mnemonics stay `draft`/`review-needed` and are labelled as such in the UI.
+  - Packs declare kanji instruction data (character, meaning/reading prompts, radical decomposition, optional
+    mnemonic story, review_status); the app runs a Heisig/WaniKani-style low-stakes drill (meaning and
+    reading recognition from the character) whose evidence lands on existing dimensions only.
+  - Instruction is gated by the scheduler; newly drilled characters resurface on the scheduler's due date;
+    untaught/unreviewed characters never enter the stream; AI-drafted mnemonics stay `draft`/`review-needed`
+    and are labelled as such in the UI.
   required_for_desktop_1_0: false
 - id: K-20
   milestone: M6
@@ -1078,7 +1119,9 @@ tasks:
   - schemas/README.md
   - tools/AI_LANGUAGE_PACK_AUTHOR_PROMPT.md
   acceptance:
-  - One agent-facing authoring contract document merges the requirements digest (layout contract, schema list, review/provenance rules), a per-unit authoring brief template, and a worked complete-unit example; a CI template for community pack repos runs `langpack validate`/`test` on every change.
+  - One agent-facing authoring contract document merges the requirements digest (layout contract, schema
+    list, review/provenance rules), a per-unit authoring brief template, and a worked complete-unit example;
+    a CI template for community pack repos runs `langpack validate`/`test` on every change.
   required_for_desktop_1_0: false
 - id: K-21
   milestone: M6
@@ -1089,7 +1132,9 @@ tasks:
   - docs/03_CURRICULUM_AND_MASTERY.md
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
-  - Units may declare a machine-checkable generation contract (docs/03 §12 — allowed vocab/grammar references, new-item budget, register, validation method); the validator checks referenced ids exist and the fields are well-formed, so AI-drafted units can be validated against their own declared constraints.
+  - Units may declare a machine-checkable generation contract (docs/03 §12 — allowed vocab/grammar references,
+    new-item budget, register, validation method); the validator checks referenced ids exist and the fields
+    are well-formed, so AI-drafted units can be validated against their own declared constraints.
   required_for_desktop_1_0: false
 - id: K-22
   milestone: M6
@@ -1099,7 +1144,9 @@ tasks:
   read_first:
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
-  - Documented conventions (with template examples) for topic-sharded lexicon files (`lexicon/<topic>.jsonl`) and unit-per-lesson naming; already layout-legal, so no engine change — the convention doc must match what `langpack validate` actually accepts.
+  - Documented conventions (with template examples) for topic-sharded lexicon files (`lexicon/<topic>.jsonl`)
+    and unit-per-lesson naming; already layout-legal, so no engine change — the convention doc must match
+    what `langpack validate` actually accepts.
   required_for_desktop_1_0: false
 - id: K-23
   milestone: M6
@@ -1109,7 +1156,8 @@ tasks:
   read_first:
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
-  - "`curriculum/goals/*.yaml` is accepted alongside the single `curriculum/goals.yaml` (top-level `goals:` array per file, ids deduped across files); existing packs validate unchanged."
+  - '`curriculum/goals/*.yaml` is accepted alongside the single `curriculum/goals.yaml` (top-level `goals:`
+    array per file, ids deduped across files); existing packs validate unchanged.'
   required_for_desktop_1_0: false
 - id: K-24
   milestone: M6
@@ -1119,7 +1167,9 @@ tasks:
   read_first:
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
-  - "`langpack new-unit <pack> <id>` and `langpack new-lexicon <pack> <id>` write schema-valid starter files (status draft, sources placeholder marked for replacement) into the pack directory so an agent authors one lesson at a time with instant `validate` feedback."
+  - '`langpack new-unit <pack> <id>` and `langpack new-lexicon <pack> <id>` write schema-valid starter
+    files (status draft, sources placeholder marked for replacement) into the pack directory so an agent
+    authors one lesson at a time with instant `validate` feedback.'
   required_for_desktop_1_0: false
 - id: K-30
   milestone: M6
@@ -1132,7 +1182,9 @@ tasks:
   - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
   - docs/PACK_AUTHORING_CONTRACT.md
   acceptance:
-  - "languages/ja-JP grows to a kana-first on-ramp: ~30+ units, hundreds of lexicon entries, sentences, kanji, phonology contrasts, and scenario graphs; every item carries generation provenance and draft/review-needed status; `langpack validate`/`test` clean; content remains blocked from install only by LIC-001."
+  - 'languages/ja-JP grows to a kana-first on-ramp: ~30+ units, hundreds of lexicon entries, sentences,
+    kanji, phonology contrasts, and scenario graphs; every item carries generation provenance and draft/review-needed
+    status; `langpack validate`/`test` clean; content remains blocked from install only by LIC-001.'
   required_for_desktop_1_0: false
 - id: K-31
   milestone: M6
@@ -1143,7 +1195,8 @@ tasks:
   read_first:
   - docs/06_JAPANESE_REFERENCE.md
   acceptance:
-  - "Goal graph covers A1-like functional areas (introductions, shopping, food, directions, time, routines) with per-goal assessments and transfer checkpoints; review_status stays draft pending JA-A1-003."
+  - Goal graph covers A1-like functional areas (introductions, shopping, food, directions, time, routines)
+    with per-goal assessments and transfer checkpoints; review_status stays draft pending JA-A1-003.
   required_for_desktop_1_0: false
 - id: K-32
   milestone: M6
@@ -1154,7 +1207,8 @@ tasks:
   read_first:
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
-  - "The desktop default/bundled pack for ja-JP is the authored on-ramp pack once it passes `langpack test`; ja-demo is removed or demoted to a fixture."
+  - The desktop default/bundled pack for ja-JP is the authored on-ramp pack once it passes `langpack test`;
+    ja-demo is removed or demoted to a fixture.
   required_for_desktop_1_0: false
 - id: K-33
   milestone: M6
@@ -1164,7 +1218,8 @@ tasks:
   read_first:
   - docs/11_ACCESSIBILITY_AND_LOCALIZATION.md
   acceptance:
-  - "Automated checks (ARIA semantics on interactive routes, focus order, contrast, reduced-motion) run in CI; the human screen-reader matrix remains an owner gate (O-03)."
+  - Automated checks (ARIA semantics on interactive routes, focus order, contrast, reduced-motion) run
+    in CI; the human screen-reader matrix remains an owner gate (O-03).
   required_for_desktop_1_0: false
 - id: K-34
   milestone: M6
@@ -1174,7 +1229,9 @@ tasks:
   read_first:
   - docs/13_RELEASE_AND_DISTRIBUTION.md
   acceptance:
-  - "Windows/macOS build configurations and CI compile checks exist; runtime behavior is tested on Linux only, and release notes/catalog mark Windows/macOS builds as untested so public users can report issues (owner decision 2026-10-03)."
+  - Windows/macOS build configurations and CI compile checks exist; runtime behavior is tested on Linux
+    only, and release notes/catalog mark Windows/macOS builds as untested so public users can report issues
+    (owner decision 2026-10-03).
   required_for_desktop_1_0: false
 - id: K-35
   milestone: M6
@@ -1185,7 +1242,8 @@ tasks:
   read_first:
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
-  - "`langpack pack` produces installable .lpk artifacts for shipped packs and a catalog/packs.json listing them with hashes/versions; publishing to GitHub remains an owner gate (O-05)."
+  - '`langpack pack` produces installable .lpk artifacts for shipped packs and a catalog/packs.json listing
+    them with hashes/versions; publishing to GitHub remains an owner gate (O-05).'
   required_for_desktop_1_0: false
 - id: K-40
   milestone: M6
@@ -1199,8 +1257,10 @@ tasks:
   - docs/01_PRODUCT_AND_UX.md
   - docs/03_CURRICULUM_AND_MASTERY.md
   acceptance:
-  - Home/progress surfaces the installed pack's goals (not unit counts) with prerequisite structure and per-dimension mastery state.
-  - Goal state derives from derived mastery and assessment evidence only; never activity counts, dates, or streaks.
+  - Home/progress surfaces the installed pack's goals (not unit counts) with prerequisite structure and
+    per-dimension mastery state.
+  - Goal state derives from derived mastery and assessment evidence only; never activity counts, dates,
+    or streaks.
   - Rendering is pack-data-driven (curriculum/goals + assessments); no language-specific hardcoding.
   required_for_desktop_1_0: false
 - id: K-41
@@ -1214,7 +1274,8 @@ tasks:
   - docs/04_LANGUAGE_PACK_SPEC.md
   - docs/11_ACCESSIBILITY_AND_LOCALIZATION.md
   acceptance:
-  - Readings carrying U+0301 stress marks render with the stressed vowel visually highlighted; a user toggle exists.
+  - Readings carrying U+0301 stress marks render with the stressed vowel visually highlighted; a user
+    toggle exists.
   - Highlighting is data-driven (any pack reading with combining stress), not language-specific code.
   required_for_desktop_1_0: false
 - id: K-42
@@ -1242,7 +1303,8 @@ tasks:
   - docs/04_LANGUAGE_PACK_SPEC.md
   - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
   acceptance:
-  - Languages page shows per-pack counts (units/goals/assessments/lexicon), review posture, and provenance sources from installed pack data.
+  - Languages page shows per-pack counts (units/goals/assessments/lexicon), review posture, and provenance
+    sources from installed pack data.
   - Counts and review posture are displayed as author claims; install trust_state is never upgraded.
   required_for_desktop_1_0: false
 - id: K-44
@@ -1255,7 +1317,8 @@ tasks:
   read_first:
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
-  - Lexicon schema supports a phrase entry type with slot info; existing multi-word entries validate without noise.
+  - Lexicon schema supports a phrase entry type with slot info; existing multi-word entries validate without
+    noise.
   - Cloze/recall activities can target the correct token of a phrase entry.
   required_for_desktop_1_0: false
 - id: K-45
@@ -1269,7 +1332,8 @@ tasks:
   - docs/06_JAPANESE_REFERENCE.md
   - docs/03_CURRICULUM_AND_MASTERY.md
   acceptance:
-  - kanji/entries.jsonl expanded beyond the seed with sourced frequency grounding; later-band units introduce kanji forms with furigana readings.
+  - kanji/entries.jsonl expanded beyond the seed with sourced frequency grounding; later-band units introduce
+    kanji forms with furigana readings.
   - All added content labeled draft with provenance records.
   required_for_desktop_1_0: false
 - id: K-46
@@ -1283,7 +1347,8 @@ tasks:
   - docs/performance/BUDGETS.yaml
   - docs/05_SPEECH_SYSTEM.md
   acceptance:
-  - The app detects the hardware tier per PERF-001 named tiers and marks the recommended speech model accordingly; the static recommended marker is removed.
+  - The app detects the hardware tier per PERF-001 named tiers and marks the recommended speech model
+    accordingly; the static recommended marker is removed.
   - Detection failure falls back to the cheapest model with honest copy; no silent behavior change.
   required_for_desktop_1_0: false
 - id: GAME-001
@@ -1313,8 +1378,6 @@ tasks:
   - Routine daily transactions/descriptions include transfer tasks and varied speakers/wording.
   - Curriculum/source/license audits pass.
   required_for_desktop_1_0: true
-# Band review gate: this card gates the band-completeness CLAIM for its band (docs/00 release-gate
-# rules, docs/18), not the desktop release path. Owner ruling 2026-10-17, recorded in ADR-0034.
 - id: JA-A2-002
   milestone: M7
   priority: P0
@@ -1330,14 +1393,6 @@ tasks:
   - Review coverage/evidence meets defined A2 gate and critical issues resolved.
   - The band coverage and qualified-human review gates defined by REVIEW-001 pass for the exact pack version;
     unresolved mandatory coverage or critical findings keep this task blocked.
-  # Not a desktop-1.0 blocker as of ADR-0017 §2 (owner scope decision 2026-10-08:
-  # unfunded project, exclusively AI-created content) — the same ruling already
-  # applied to JA-A1-003. The pack ships at its honest posture (AI-generated,
-  # review-needed) and no surface may imply human review that did not happen;
-  # promotion to validated/verified still requires human review records via O-02,
-  # which the validator enforces on any status flip. Band coverage and public
-  # framework-alignment claims stay enforced by REVIEW-001, lint/audit-sources
-  # and docs/18 regardless of this flag.
   required_for_desktop_1_0: false
 - id: AI-001
   milestone: M8
@@ -1366,13 +1421,11 @@ tasks:
   - docs/03_CURRICULUM_AND_MASTERY.md
   - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
   acceptance:
-  - Connected discourse, common independent situations, repair/clarification, broader reading/listening are
-    covered.
+  - Connected discourse, common independent situations, repair/clarification, broader reading/listening
+    are covered.
   - Translation dependence is materially reduced.
   - Transfer and delayed retention checks exist.
-  required_for_desktop_1_0: false  # owner coverage decision 2026-10-19: the 1.0 bar is reliable A1–A2 in both shipped languages (docs/18); B1 depth is roadmap work
-# Band review gate: this card gates the band-completeness CLAIM for its band (docs/00 release-gate
-# rules, docs/18), not the desktop release path. Owner ruling 2026-10-17, recorded in ADR-0034.
+  required_for_desktop_1_0: false
 - id: JA-B1-002
   milestone: M8
   priority: P0
@@ -1388,10 +1441,6 @@ tasks:
   - Review gate passes with tracked resolutions.
   - The band coverage and qualified-human review gates defined by REVIEW-001 pass for the exact pack version;
     unresolved mandatory coverage or critical findings keep this task blocked.
-  # Not a desktop-1.0 blocker as of ADR-0017 §2 — see the JA-A1-003 / JA-A2-002
-  # notes. Qualified review remains the only route to validated/verified trust
-  # state, and band coverage and public claims stay gated by REVIEW-001,
-  # lint/audit-sources and docs/18.
   required_for_desktop_1_0: false
 - id: JA-B2-001
   milestone: M9
@@ -1406,9 +1455,7 @@ tasks:
   - Declared B2-like capability map has curriculum, scenarios, assessments, and transfer evidence.
   - Broader natural-speed listening and varied text genres are represented.
   - Pragmatics/register coverage is substantially expanded.
-  required_for_desktop_1_0: false  # owner coverage decision 2026-10-19: the 1.0 bar is reliable A1–A2 in both shipped languages (docs/18); B2 depth is roadmap work
-# Band review gate: this card gates the band-completeness CLAIM for its band (docs/00 release-gate
-# rules, docs/18), not the desktop release path. Owner ruling 2026-10-17, recorded in ADR-0034.
+  required_for_desktop_1_0: false
 - id: JA-B2-002
   milestone: M9
   priority: P0
@@ -1422,15 +1469,10 @@ tasks:
   - docs/18_PUBLIC_CLAIMS_AND_SCOPE.md
   acceptance:
   - Review evidence supports any public framework-alignment claims actually made.
-  - If B2 evidence is insufficient, keep stable 1.0 blocked and label previews partial; do not silently shrink
-    the stable target.
+  - If B2 evidence is insufficient, keep stable 1.0 blocked and label previews partial; do not silently
+    shrink the stable target.
   - The band coverage and qualified-human review gates defined by REVIEW-001 pass for the exact pack version;
     unresolved mandatory coverage or critical findings keep this task blocked.
-  # Not a desktop-1.0 blocker as of ADR-0017 §2 — see the JA-A1-003 / JA-A2-002 /
-  # JA-B1-002 notes. The honest-claims half of this task's acceptance still binds:
-  # if B2 evidence is insufficient, a 1.0 build must label its coverage partial
-  # rather than claim B2 (docs/18). Band coverage stays gated by REVIEW-001 and
-  # lint/audit-sources.
   required_for_desktop_1_0: false
 - id: ACC-001
   milestone: M10
@@ -1452,14 +1494,6 @@ tasks:
   priority: P1
   title: AI-oriented language pack authoring kit
   dependencies:
-  # JA-B2-002 (qualified B2 review) dropped as a prerequisite on 2026-10-13: that
-  # task is no longer a desktop-1.0 blocker (ADR-0017 §2) and is unfunded, so
-  # keeping it here left a required-for-1.0 task permanently unreachable. Same
-  # class of edit as ADR-0017 dropping SPEECH-007 from JA-A1-003's dependencies.
-  # The kit documents the authoring and review-record workflow; it does not
-  # require a completed human review to exist, and its own acceptance still
-  # demands a generated conformance pack plus a non-Japanese RTL/multi-script
-  # fixture.
   - PACK-005
   read_first:
   - docs/04_LANGUAGE_PACK_SPEC.md
@@ -1479,8 +1513,6 @@ tasks:
   priority: P0
   title: Measure release performance on supported configurations
   dependencies:
-  # ADR-0039: "supported configurations" are the declared Linux tiers; the
-  # PLAT-001 edge left with the platform scope, not the measurement work.
   - PERF-001
   read_first:
   - docs/07_TECHNICAL_ARCHITECTURE.md
@@ -1488,8 +1520,8 @@ tasks:
   - docs/17_SPEECH_BENCHMARK_PLAN.md
   - docs/adr/0039-linux-only-desktop-1-0.md
   acceptance:
-  - Frozen performance budgets pass on every declared desktop hardware/model tier with repeatable scripts and
-    p50/p95, RAM/VRAM, startup, disk and UI responsiveness evidence.
+  - Frozen performance budgets pass on every declared desktop hardware/model tier with repeatable scripts
+    and p50/p95, RAM/VRAM, startup, disk and UI responsiveness evidence.
   - Cancellation and model failure recovery work under load; no UI/audio thread blocks on inference.
   - Unsupported configurations are explicit in first-run model selection and release notes.
   required_for_desktop_1_0: true
@@ -1506,8 +1538,6 @@ tasks:
   acceptance:
   - Automated builds and critical E2E pass on Linux/Windows/macOS.
   - Speech/model behavior and install paths are documented per platform.
-  # ADR-0039 (2026-10-20): desktop 1.0 supports Linux only; parity returns as a
-  # post-1.0 milestone with real machines or user demand.
   required_for_desktop_1_0: false
 - id: PLAT-002
   milestone: M10
@@ -1559,12 +1589,6 @@ tasks:
   - PLAYBACK-LIFECYCLE-001
   - MIC-TRACK-LIFECYCLE-001
   - PACK-AUDIO-VERIFICATION-001
-  # The A2 authoring card is listed directly here because the release-edge detours through
-  # their band review cards were removed 2026-10-17 (owner ruling, ADR-0034): those review cards gate
-  # the band-completeness claim, not the release path, so REL-001 itself carries the required-card
-  # reachability that tools/validate_handoff.py enforces. The B1/B2 authoring cards were dropped
-  # from this list on 2026-10-19 under the owner's coverage decision (reliable A1–A2 in both
-  # shipped languages is the 1.0 bar, docs/18); they remain roadmap work.
   - JA-A1-002
   - JA-A2-001
   - JA-KANJI-ATTRIBUTION-001
@@ -1581,9 +1605,9 @@ tasks:
   - License/source/model attribution audit is clean.
   - Known limitations and supported claims are documented.
   - No P0/P1 defects remain.
-  - All other tasks marked required_for_desktop_1_0 are done with evidence; REL-001 passes the remaining release
-    gates and records its own evidence before becoming done. Optional AI, mobile, advanced and web tasks do
-    not gate desktop 1.0.
+  - All other tasks marked required_for_desktop_1_0 are done with evidence; REL-001 passes the remaining
+    release gates and records its own evidence before becoming done. Optional AI, mobile, advanced and
+    web tasks do not gate desktop 1.0.
   - Audit reports identify the exact app commit, pack hash, dependency lockfiles, model/provider versions,
     OS and hardware tiers; any affected later change reruns its gates.
   - REL-001 completes a reviewable release candidate; public publishing, signing credentials, store enrollment,
@@ -1594,10 +1618,6 @@ tasks:
   priority: P2
   title: Render right-to-left packs with a direction-aware desktop UI
   dependencies:
-  # Found while satisfying PACK-AI-001's RTL/multi-script acceptance item: the
-  # manifest declares capabilities.rtl and the schema validates it, but no
-  # consumer in apps/desktop reads it, so an RTL pack installs and renders
-  # left-to-right. See state/evidence/PACK-AI-001/NOTES.md.
   - PACK-AI-001
   read_first:
   - docs/04_LANGUAGE_PACK_SPEC.md
@@ -1605,10 +1625,14 @@ tasks:
   - docs/07_TECHNICAL_ARCHITECTURE.md
   - docs/adr/README.md
   acceptance:
-  - An ADR records the direction model (mirrored shell, per-container direction, or bilingual layout) before any UI change.
-  - apps/desktop reads manifest capabilities.rtl so an RTL pack renders right-to-left instead of inheriting left-to-right layout.
-  - Mixed-script packs keep per-block direction, so Arabic content renders right-to-left while romanization and Latin glosses stay left-to-right.
-  - Direction behaviour is asserted by a desktop fixture/component test over a non-Japanese RTL pack, recorded as evidence.
+  - An ADR records the direction model (mirrored shell, per-container direction, or bilingual layout)
+    before any UI change.
+  - apps/desktop reads manifest capabilities.rtl so an RTL pack renders right-to-left instead of inheriting
+    left-to-right layout.
+  - Mixed-script packs keep per-block direction, so Arabic content renders right-to-left while romanization
+    and Latin glosses stay left-to-right.
+  - Direction behaviour is asserted by a desktop fixture/component test over a non-Japanese RTL pack,
+    recorded as evidence.
   required_for_desktop_1_0: false
 - id: SEC-001
   milestone: M10
@@ -1652,15 +1676,14 @@ tasks:
   - docs/07_TECHNICAL_ARCHITECTURE.md
   - docs/13_RELEASE_AND_DISTRIBUTION.md
   acceptance:
-  - Browser build clearly reports unavailable local-native capabilities rather than silently switching privacy
-    modes.
+  - Browser build clearly reports unavailable local-native capabilities rather than silently switching
+    privacy modes.
   - Core reading/listening content remains usable where technically appropriate.
   required_for_desktop_1_0: false
 - id: PACK-DL-ALLOWLIST-001
   milestone: M10
   priority: P1
-  title: >-
-    Pack downloads are host-allowlisted, bounded in size, and count redirects instead of looping
+  title: Pack downloads are host-allowlisted, bounded in size, and count redirects instead of looping
   dependencies:
   - PACK-004
   - PACK-005
@@ -1669,19 +1692,16 @@ tasks:
   - apps/desktop/src-tauri/src/packs.rs
   - docs/07_TECHNICAL_ARCHITECTURE.md
   acceptance:
-  - >-
-    HTTPS + host allowlist + DNS/IP policy are enforced before the first byte, and every redirect hop is
-    re-validated against all three with a bounded hop count.
+  - HTTPS + host allowlist + DNS/IP policy are enforced before the first byte, and every redirect hop
+    is re-validated against all three with a bounded hop count.
   - A size cap aborts a too-large or lying download instead of buffering it.
-  - >-
-    Both pinned catalog entries install through the native transport as a live proof, and no un-pinned
+  - Both pinned catalog entries install through the native transport as a live proof, and no un-pinned
     third-party pack download reaches a user.
   required_for_desktop_1_0: true
 - id: MINE-PLAN-001
   milestone: M10
   priority: P1
-  title: >-
-    Mined items get their own scheduler partition so the plan cannot starve
+  title: Mined items get their own scheduler partition so the plan cannot starve
   dependencies:
   - LEARN-002
   - K-14
@@ -1690,12 +1710,10 @@ tasks:
   - crates/storage/src/mined.rs
   - crates/scheduler/src/planner.rs
   acceptance:
-  - >-
-    Mined-item scheduling state cannot overwrite or be overwritten by content-item state (separate partition
+  - Mined-item scheduling state cannot overwrite or be overwritten by content-item state (separate partition
     or versioned schedule identity).
-  - >-
-    A learner with many mined items still sees due content in the plan, and a plan with zero due content says
-    so honestly.
+  - A learner with many mined items still sees due content in the plan, and a plan with zero due content
+    says so honestly.
   required_for_desktop_1_0: true
 - id: PLAN-SCOPE-001
   milestone: M10
@@ -1709,11 +1727,9 @@ tasks:
   - crates/storage/src/scheduler.rs
   - apps/desktop/src-tauri/src/lib.rs
   acceptance:
-  - >-
-    Plan and mastery lookups filter by pack, by global (mined/support), or by an explicit all-scope query;
+  - Plan and mastery lookups filter by pack, by global (mined/support), or by an explicit all-scope query;
     unscoped scans are documented, bounded, and performance-tested.
-  - >-
-    Switching the studied pack cannot reschedule or expose mastery for content owned by another pack (engine
+  - Switching the studied pack cannot reschedule or expose mastery for content owned by another pack (engine
     coverage).
   required_for_desktop_1_0: true
 - id: SUPPORT-ACCOUNTING-001
@@ -1727,18 +1743,15 @@ tasks:
   - crates/activity/src/support.rs
   - crates/domain/src/mastery.rs
   acceptance:
-  - >-
-    The engine records the support actions the learner used in the attempt group, with a stable vocabulary
+  - The engine records the support actions the learner used in the attempt group, with a stable vocabulary
     shared with the policy file.
-  - >-
-    Recorded actions cannot advance independent or flexible, and the recorded names are exactly the names in
-    docs/assessment/MASTERY_POLICY.yaml.
+  - Recorded actions cannot advance independent or flexible, and the recorded names are exactly the names
+    in docs/assessment/MASTERY_POLICY.yaml.
   required_for_desktop_1_0: true
 - id: EVIDENCE-IDENTITY-001
   milestone: M10
   priority: P1
-  title: >-
-    Evidence identity is a prompt family with an app-issued session id, never an event id
+  title: Evidence identity is a prompt family with an app-issued session id, never an event id
   dependencies:
   - LEARN-002
   read_first:
@@ -1746,12 +1759,10 @@ tasks:
   - crates/activity/src/scenario.rs
   - apps/desktop/src-tauri/src/lib.rs
   acceptance:
-  - >-
-    Evidence keying uses an explicit prompt family plus an app-issued session/run id; no content-derived event
-    id can appear as an evidence key.
-  - >-
-    Scenario and lesson runs produce a bounded evidence set (one per prompt family per session unless an
-    authored stage justifies another), asserted by an engine test.
+  - Evidence keying uses an explicit prompt family plus an app-issued session/run id; no content-derived
+    event id can appear as an evidence key.
+  - Scenario and lesson runs produce a bounded evidence set (one per prompt family per session unless
+    an authored stage justifies another), asserted by an engine test.
   required_for_desktop_1_0: true
 - id: RU-GOAL-PREREQ-001
   milestone: M10
@@ -1765,12 +1776,10 @@ tasks:
   - docs/assessment/RELEASE_COVERAGE_RU.yaml
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
-  - >-
-    The Cyrillic concept ids named as Russian goal prerequisites exist in the shipped pack; an audit enumerates
+  - The Cyrillic concept ids named as Russian goal prerequisites exist in the shipped pack; an audit enumerates
     any dangling goal or concept reference in either pack.
-  - >-
-    A recorded prerequisite outcome moves the gated goal from locked to available; prerequisite state alone
-    never produces that change, and pack content stays free of engine vocabulary.
+  - A recorded prerequisite outcome moves the gated goal from locked to available; prerequisite state
+    alone never produces that change, and pack content stays free of engine vocabulary.
   required_for_desktop_1_0: true
 - id: GOAL-DISPLAY-QUALIFIER-001
   milestone: M10
@@ -1783,16 +1792,14 @@ tasks:
   - apps/desktop/src/home.tsx
   - docs/03_CURRICULUM_AND_MASTERY.md
   acceptance:
-  - >-
-    A multi-concept goal displays the evidence coverage and weakest-link state; a single exemplar
-    cannot move the goal row to an achieved-looking state.
+  - A multi-concept goal displays the evidence coverage and weakest-link state; a single exemplar cannot
+    move the goal row to an achieved-looking state.
   - A test with one strong concept and several unseen ones proves the headline state stays unachieved.
   required_for_desktop_1_0: true
 - id: SPEECH-DISPATCH-001
   milestone: M10
   priority: P1
-  title: >-
-    Speech checks only run the measures the installed runtime instruments, for the pack language
+  title: Speech checks only run the measures the installed runtime instruments, for the pack language
   dependencies:
   - SPEECH-006
   read_first:
@@ -1800,14 +1807,11 @@ tasks:
   - crates/speech-runtime/src/acoustic.rs
   - docs/SPEECH_FEATURE_ROADMAP.md
   acceptance:
-  - >-
-    A declared feature absent from the installed runtime returns an explicit unsupported or
-    not-instrumented abstention before any audio work.
-  - >-
-    Feature IDs and measure IDs are registered identifiers; model/language selection is pack- and
-    profile-scoped, and no uncalibrated or cross-language result is presented as evidence.
-  - >-
-    The UI names the affected feature, the absent capability, and the alternative path, pinned by the
+  - A declared feature absent from the installed runtime returns an explicit unsupported or not-instrumented
+    abstention before any audio work.
+  - Feature IDs and measure IDs are registered identifiers; model/language selection is pack- and profile-scoped,
+    and no uncalibrated or cross-language result is presented as evidence.
+  - The UI names the affected feature, the absent capability, and the alternative path, pinned by the
     pronunciation surface's abstention test.
   required_for_desktop_1_0: true
 - id: AUTHORED-STAGE-001
@@ -1822,11 +1826,9 @@ tasks:
   - apps/desktop/src/lesson.tsx
   - apps/desktop/src-tauri/src/lib.rs
   acceptance:
-  - >-
-    Unit records name stages, their order, and their support relationships; the engine can return an ordered
+  - Unit records name stages, their order, and their support relationships; the engine can return an ordered
     lesson plan with an explicit teaching stage and prompt family.
-  - >-
-    The desktop runs the authored stages in order instead of inferring them; engine and UI tests prove
+  - The desktop runs the authored stages in order instead of inferring them; engine and UI tests prove
     independent practice is reachable after authored scaffolds.
   required_for_desktop_1_0: true
 - id: CONTENT-DEPTH-001
@@ -1842,12 +1844,10 @@ tasks:
   - docs/assessment/CONTENT_TEMPLATE_FINDINGS.md
   - tools/audit_content_templates.py
   acceptance:
-  - >-
-    The highest-frequency templates are audited and the thin B1/B2 and Russian A2-B2 bands gain genuinely new
-    situations, dialogues, register contrasts, and productive tasks, with provenance and review status.
-  - >-
-    Near-duplicate volume is capped and measured; new content is review-pending until qualified human review
-    records it.
+  - The highest-frequency templates are audited and the thin B1/B2 and Russian A2-B2 bands gain genuinely
+    new situations, dialogues, register contrasts, and productive tasks, with provenance and review status.
+  - Near-duplicate volume is capped and measured; new content is review-pending until qualified human
+    review records it.
   required_for_desktop_1_0: true
 - id: ASSESSMENT-RUNNABILITY-001
   milestone: M10
@@ -1861,12 +1861,10 @@ tasks:
   - docs/assessment/RELEASE_COVERAGE.yaml
   - apps/desktop/src-tauri/src/lib.rs
   acceptance:
-  - >-
-    Placement samples exercise the modality and communicative task defined by the rubric; it never substitutes
+  - Placement samples exercise the modality and communicative task defined by the rubric; it never substitutes
     an unrelated ready activity.
-  - >-
-    Published coverage separates rubric definitions, runnable practice, valid evidence, and human review status
-    for Russian and Japanese.
+  - Published coverage separates rubric definitions, runnable practice, valid evidence, and human review
+    status for Russian and Japanese.
   required_for_desktop_1_0: true
 - id: EXPORT-MINED-001
   milestone: M10
@@ -1879,8 +1877,7 @@ tasks:
   - crates/storage/src/export.rs
   - crates/storage/src/mined.rs
   acceptance:
-  - >-
-    A v2 export profile contains mined items, their mastery, their scheduler partition, and their event
+  - A v2 export profile contains mined items, their mastery, their scheduler partition, and their event
     history, with exact round-trip coverage.
   - Migration rules for v1 bundles are explicit; support items never masquerade as pack content.
   required_for_desktop_1_0: true
@@ -1894,9 +1891,8 @@ tasks:
   - crates/storage/src/export.rs
   - apps/desktop/src/settings.tsx
   acceptance:
-  - >-
-    Settings offers restore, explains what it replaces and preserves, and completes in one transaction with
-    rollback or recovery for partial failure.
+  - Settings offers restore, explains what it replaces and preserves, and completes in one transaction
+    with rollback or recovery for partial failure.
   - A test covers overwrite, migration, and collision behaviour for every profile state.
   required_for_desktop_1_0: true
 - id: PLAYBACK-LIFECYCLE-001
@@ -1909,28 +1905,24 @@ tasks:
   - apps/desktop/src/App.tsx
   - apps/desktop/src/playback.ts
   acceptance:
-  - >-
-    Object-URL lifetimes belong to the owning view; leaving and returning to a completed attempt can still play
-    its recording.
+  - Object-URL lifetimes belong to the owning view; leaving and returning to a completed attempt can still
+    play its recording.
   - A failed playback gives a visible retry or alternative path, and an unplayed retained URL is released.
   required_for_desktop_1_0: true
 - id: MIC-TRACK-LIFECYCLE-001
   milestone: M10
   priority: P1
-  title: >-
-    Every capture stream and track is stopped on cancel, submit, navigation, unmount, and limit
+  title: Every capture stream and track is stopped on cancel, submit, navigation, unmount, and limit
   dependencies:
   - SPEECH-005
   read_first:
   - apps/desktop/src/capture.ts
   - apps/desktop/src/App.tsx
   acceptance:
-  - >-
-    Every capture path stops the MediaStream tracks, including the path that submits an already-prepared blob
-    URL.
-  - >-
-    A component or integration test observes track stop on every path (this finding is internal:
-    microphone lifecycle, not a public claim).
+  - Every capture path stops the MediaStream tracks, including the path that submits an already-prepared
+    blob URL.
+  - 'A component or integration test observes track stop on every path (this finding is internal: microphone
+    lifecycle, not a public claim).'
   required_for_desktop_1_0: true
 - id: DOC-CONTRACT-RECONCILE-001
   milestone: M10
@@ -1944,11 +1936,9 @@ tasks:
   - docs/00_MASTER_SPEC.md
   - docs/18_PUBLIC_CLAIMS_AND_SCOPE.md
   acceptance:
-  - >-
-    Onboarding names the actual destinations and capabilities; published release, pack version, review,
+  - Onboarding names the actual destinations and capabilities; published release, pack version, review,
     coverage, and licensing statements are measured from the artifact.
-  - >-
-    The 1.0 course-coverage target is either accepted or amended by the owner (an owner decision), and
+  - The 1.0 course-coverage target is either accepted or amended by the owner (an owner decision), and
     reconciliation stops at docs, task IDs, or an owner-approved ADR.
   required_for_desktop_1_0: false
 - id: BUILD-IDENTITY-FRESHNESS-001
@@ -1960,15 +1950,13 @@ tasks:
   - apps/desktop/src-tauri/build.rs
   - docs/13_RELEASE_AND_DISTRIBUTION.md
   acceptance:
-  - >-
-    Build-identity metadata cannot be stale after a commit or source change, and the test suite does not depend
-    on the dirty-worktree exception.
+  - Build-identity metadata cannot be stale after a commit or source change, and the test suite does not
+    depend on the dirty-worktree exception.
   required_for_desktop_1_0: false
 - id: CAPABILITY-HUB-001
   milestone: M10
   priority: P2
-  title: >-
-    The practice hub advertises only what the current build and pack can do, and says so before the
+  title: The practice hub advertises only what the current build and pack can do, and says so before the
     dead end
   dependencies:
   - UX-001
@@ -1977,12 +1965,10 @@ tasks:
   - apps/desktop/src/settings.tsx
   - docs/18_PUBLIC_CLAIMS_AND_SCOPE.md
   acceptance:
-  - >-
-    The hub and onboarding show capability status from the active build and pack (for example Kanji only where
-    taught), and speech readiness is stated above the controls with a direct fix or alternative.
-  - >-
-    Writing practice reveals the expected form after a miss; guided modes say they are guided; the active task
-    never leaks the expected answer.
+  - The hub and onboarding show capability status from the active build and pack (for example Kanji only
+    where taught), and speech readiness is stated above the controls with a direct fix or alternative.
+  - Writing practice reveals the expected form after a miss; guided modes say they are guided; the active
+    task never leaks the expected answer.
   required_for_desktop_1_0: false
 - id: LEARNER-COPY-HYGIENE-001
   milestone: M10
@@ -1994,9 +1980,8 @@ tasks:
   - apps/desktop/src/onboarding.tsx
   - docs/01_PRODUCT_AND_UX.md
   acceptance:
-  - >-
-    A scan of rendered learner-facing copy finds no internal task IDs, ADR numbers, or review labels; fixture
-    copy is not presented as a user promise.
+  - A scan of rendered learner-facing copy finds no internal task IDs, ADR numbers, or review labels;
+    fixture copy is not presented as a user promise.
   required_for_desktop_1_0: false
 - id: GUIDED-SESSION-001
   milestone: M10
@@ -2009,9 +1994,8 @@ tasks:
   - apps/desktop/src/home.tsx
   - docs/01_PRODUCT_AND_UX.md
   acceptance:
-  - >-
-    One primary begin action starts a session with a clear scope and exit state; one next task is visible and
-    its prerequisite or blocker is explained; pause/resume and an honest finish are defined.
+  - One primary begin action starts a session with a clear scope and exit state; one next task is visible
+    and its prerequisite or blocker is explained; pause/resume and an honest finish are defined.
   - The full queue remains available but is no longer the primary structure.
   required_for_desktop_1_0: false
 - id: CANDO-PROGRESS-001
@@ -2025,9 +2009,8 @@ tasks:
   - apps/desktop/src/home.tsx
   - docs/01_PRODUCT_AND_UX.md
   acceptance:
-  - >-
-    Progress answers what the learner can now do, what changed, and what to do next before showing
-    activity counts; internal IDs, confidence, and mastery labels remain available as detail.
+  - Progress answers what the learner can now do, what changed, and what to do next before showing activity
+    counts; internal IDs, confidence, and mastery labels remain available as detail.
   required_for_desktop_1_0: false
 - id: INSTALL-UX-001
   milestone: M10
@@ -2041,26 +2024,22 @@ tasks:
   - apps/desktop/src-tauri/src/packs.rs
   - crates/langpack/src/archive.rs
   acceptance:
-  - >-
-    Installation reports real progress, can be cancelled, retried, or resumed, and finishes with a receipt
+  - Installation reports real progress, can be cancelled, retried, or resumed, and finishes with a receipt
     naming the version, source, and permissions granted.
   - A pre-archived bundle is specified only after the owner accepts the distribution trade-off.
   required_for_desktop_1_0: false
 - id: CONTRIBUTOR-REVIEW-PACKET-001
   milestone: M10
   priority: P3
-  title: >-
-    A beginner contributor can run one useful check without learning the whole
-    system
+  title: A beginner contributor can run one useful check without learning the whole system
   dependencies:
   - PACK-AI-001
   read_first:
   - CONTRIBUTING.md
   - docs/QUICKSTART_PACK_AUTHORING.md
   acceptance:
-  - >-
-    A beginner can run one check, understand a finding, make a bounded correction, and know what reviewers will
-    examine in five items or fewer.
+  - A beginner can run one check, understand a finding, make a bounded correction, and know what reviewers
+    will examine in five items or fewer.
   - Every command and concept used is discoverable from the contributing route.
   required_for_desktop_1_0: false
 - id: JOURNEY-SUITE-001
@@ -2074,11 +2053,9 @@ tasks:
   - apps/desktop/src/App.test.tsx
   - docs/09_TESTING_AND_ACCEPTANCE.md
   acceptance:
-  - >-
-    The onboarding-to-first-session, pack install-to-practice, speech-abstention, and profile
-    export-to-restore paths are automated end-to-end.
-  - >-
-    The runner is pinned (dom library and native module version), and a failure names the user-visible
+  - The onboarding-to-first-session, pack install-to-practice, speech-abstention, and profile export-to-restore
+    paths are automated end-to-end.
+  - The runner is pinned (dom library and native module version), and a failure names the user-visible
     outcome, not an implementation detail.
   required_for_desktop_1_0: false
 - id: RELEASE-EVIDENCE-001
@@ -2092,18 +2069,15 @@ tasks:
   - docs/13_RELEASE_AND_DISTRIBUTION.md
   - docs/10_LICENSING_AND_PROVENANCE.md
   acceptance:
-  - >-
-    A release record names the commit and artifact checksums, and hands-on evidence states the tested
+  - A release record names the commit and artifact checksums, and hands-on evidence states the tested
     platform, build, and outcome.
-  - >-
-    Pack publication status is reconciled with the catalog and third-party notices, with no claim that
+  - Pack publication status is reconciled with the catalog and third-party notices, with no claim that
     unpublished packs were shipped.
   required_for_desktop_1_0: false
 - id: A11Y-FLOW-001
   milestone: M10
   priority: P2
-  title: >-
-    Route changes carry focus and announcement; empty views carry one action
+  title: Route changes carry focus and announcement; empty views carry one action
   dependencies:
   - UX-001
   - K-33
@@ -2113,26 +2087,19 @@ tasks:
   - apps/desktop/src/a11y.test.tsx
   - docs/11_ACCESSIBILITY_AND_LOCALIZATION.md
   acceptance:
-  - >-
-    Changing route leaves focus and the accessible name of the changed region on the new route's own
-    heading, proven by a mounted interaction test rather than a static render.
-  - >-
-    A view with no active pack offers exactly one next action and prints no time-budget control and no
+  - Changing route leaves focus and the accessible name of the changed region on the new route's own heading,
+    proven by a mounted interaction test rather than a static render.
+  - A view with no active pack offers exactly one next action and prints no time-budget control and no
     zero-count plan summary; loading, error and empty states stay distinguishable.
-  - >-
-    A keyboard-only journey reaches and activates a route's primary action without a trap, and text
-    input never submits in the middle of an IME composition.
-  # The human screen-reader matrix stays with ACC-001 / owner gate O-03; this task
-  # covers only what can be proven in the mounted DOM runtime.
+  - A keyboard-only journey reaches and activates a route's primary action without a trap, and text input
+    never submits in the middle of an IME composition.
   required_for_desktop_1_0: false
 - id: A11Y-RUN-L1-REMEDIATION-001
   milestone: M10
   priority: P0
-  title: >-
-    Fix the six accessibility defects found in the owner Linux/Orca run L1
-    (lesson/step route silence, silent correctness feedback, ambiguous
-    Installed/Remove button names, duplicate pack tag, dead tab stop,
-    playback state)
+  title: Fix the six accessibility defects found in the owner Linux/Orca run L1 (lesson/step route silence,
+    silent correctness feedback, ambiguous Installed/Remove button names, duplicate pack tag, dead tab
+    stop, playback state)
   dependencies:
   - ACC-001
   - A11Y-FLOW-001
@@ -2144,21 +2111,17 @@ tasks:
   - apps/desktop/src/practice.tsx
   - apps/desktop/src/a11y.test.tsx
   acceptance:
-  - >-
-    Lesson pages, activity card transitions and onboarding step changes move focus to their own
-    heading (same pattern as App.tsx route focus), proven by a mounted interaction test.
-  - >-
-    Correctness feedback regions carry polite live semantics so the moment of correctness is
-    announced; playback controls expose pressed/status state; ambiguous 'Installed'/'Remove'
-    button names carry their target; each asserted by focused vitest per the a11y.test.tsx pattern.
+  - Lesson pages, activity card transitions and onboarding step changes move focus to their own heading
+    (same pattern as App.tsx route focus), proven by a mounted interaction test.
+  - Correctness feedback regions carry polite live semantics so the moment of correctness is announced;
+    playback controls expose pressed/status state; ambiguous 'Installed'/'Remove' button names carry their
+    target; each asserted by focused vitest per the a11y.test.tsx pattern.
   required_for_desktop_1_0: true
 - id: IN-APP-IME-001
   milestone: M10
   priority: P2
-  title: >-
-    In-app kana keyboard: romaji→kana typing owned by the app (phase 1 shipped
-    on feature/in-app-ime); phase 2 adds pack-declared input methods and
-    lexicon-backed kanji candidates, phase 3 a native WebKitInputMethodContext
+  title: 'In-app kana keyboard: romaji→kana typing owned by the app (phase 1 shipped on feature/in-app-ime);
+    phase 2 adds pack-declared input methods and lexicon-backed kanji candidates, phase 3 a native WebKitInputMethodContext'
   dependencies:
   - ACC-001
   read_first:
@@ -2166,36 +2129,26 @@ tasks:
   - apps/desktop/src/kana-ime.tsx
   - docs/08_DATA_AND_PRIVACY.md
   acceptance:
-  - >-
-    Packs may declare input methods (capabilities.input_methods) and ship a
-    lexicon; conversion candidates come from pack vocabulary with provenance,
-    never a baked-in word list in the engine.
-  - >-
-    Native IME-context path (WebKitInputMethodContext) verified with an AT
-    (Orca) session: preedit semantics visible, zero system-layout change.
-  - >-
-    Phase 1 plan and decision record: GitHub issue #2
-    (https://github.com/Berzerker5653/open-language-learning/issues/2).
+  - Packs may declare input methods (capabilities.input_methods) and ship a lexicon; conversion candidates
+    come from pack vocabulary with provenance, never a baked-in word list in the engine.
+  - 'Native IME-context path (WebKitInputMethodContext) verified with an AT (Orca) session: preedit semantics
+    visible, zero system-layout change.'
+  - 'Phase 1 plan and decision record: GitHub issue #2 (https://github.com/Berzerker5653/open-language-learning/issues/2).'
   required_for_desktop_1_0: false
 - id: CONTENT-CONFIRM-001
   milestone: M11
   priority: P2
-  title: >-
-    In-app community confirmation of content correctness: attributed user
-    confirmations, never agent self-certification (ADR-0040)
+  title: 'In-app community confirmation of content correctness: attributed user confirmations, never agent
+    self-certification (ADR-0040)'
   dependencies: []
   read_first:
   - docs/adr/0040-ai-only-content-with-community-confirmation.md
   - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
   acceptance:
-  - >-
-    A confirmation is attributed to the profile that gave it, stored locally,
-    included in profile export, and rendered with its attribution; the app
-    shows what users confirmed, never a claim of expert verification.
-  - >-
-    No automatic path marks content checked: only an explicit action by a
-    user fluent in the language creates the mark, and packs keep their
-    declared review posture regardless.
+  - A confirmation is attributed to the profile that gave it, stored locally, included in profile export,
+    and rendered with its attribution; the app shows what users confirmed, never a claim of expert verification.
+  - 'No automatic path marks content checked: only an explicit action by a user fluent in the language
+    creates the mark, and packs keep their declared review posture regardless.'
   required_for_desktop_1_0: false
 - id: RU-MODALITY-PRACTICE-001
   milestone: M10
@@ -2209,16 +2162,13 @@ tasks:
   - docs/assessment/RELEASE_COVERAGE_RU.yaml
   - docs/adr/0017-unfunded-ai-only-posture.md
   acceptance:
-  - >-
-    Measured baseline on 2026-10-15: 818 Russian units declare 1,589 encounter-read, 798 recall, 776
+  - 'Measured baseline on 2026-10-15: 818 Russian units declare 1,589 encounter-read, 798 recall, 776
     cloze, 9 retrieval and 9 listen-and-choose activities, and no speaking activity, against 60 listening
-    and 60 speaking rubric records. This task is not done until every claimed modality has runnable
-    unit activities the planner can actually serve.
-  - >-
-    At least one offline journey per claimed modality executes the declared task type against Russian
+    and 60 speaking rubric records. This task is not done until every claimed modality has runnable unit
+    activities the planner can actually serve.'
+  - At least one offline journey per claimed modality executes the declared task type against Russian
     pack content; guided speaking stays unscored per ADR-0017 and abstains when no runtime model exists.
-  - >-
-    The coverage report keeps rubric definition, runnable practice, valid evidence and review status as
+  - The coverage report keeps rubric definition, runnable practice, valid evidence and review status as
     separate counts, and never lets a rubric count imply enacted practice.
   required_for_desktop_1_0: false
 - id: UPPERBAND-TASK-JOURNEYS-001
@@ -2233,23 +2183,19 @@ tasks:
   - languages/ja-JP/curriculum/units/500-film-language.yaml
   - docs/assessment/RELEASE_COVERAGE_RU.yaml
   acceptance:
-  - >-
-    For a named representative goal per upper band (A2, B1, B2) in each language, the pack declares a
-    runnable task sequence that exercises the capability the goal names, including meaningful input,
-    scaffolded response, independent response, a changed context and delayed reuse.
-  - >-
-    Unit counts and resolved references never appear as evidence of instructional depth; the template
+  - For a named representative goal per upper band (A2, B1, B2) in each language, the pack declares a
+    runnable task sequence that exercises the capability the goal names, including meaningful input, scaffolded
+    response, independent response, a changed context and delayed reuse.
+  - Unit counts and resolved references never appear as evidence of instructional depth; the template
     audit stays in CI and its findings stay reported even when they are not yet fixed.
-  - >-
-    The authored content itself remains pending qualified human review (JA-A2-002 / JA-B1-002 / JA-B2-002
-    and the Russian review queue); completing the task means the tasks exist and run, not that the
-    content is approved.
+  - The authored content itself remains pending qualified human review (JA-A2-002 / JA-B1-002 / JA-B2-002
+    and the Russian review queue); completing the task means the tasks exist and run, not that the content
+    is approved.
   required_for_desktop_1_0: false
 - id: JA-KANJI-ATTRIBUTION-001
   milestone: M10
   priority: P1
-  title: >-
-    The app surfaces the source acknowledgements its installed packs declare
+  title: The app surfaces the source acknowledgements its installed packs declare
   dependencies:
   - UX-001
   read_first:
@@ -2258,20 +2204,14 @@ tasks:
   - third-party/notices/NOTICE.md
   - apps/desktop/src/App.tsx
   acceptance:
-  - >-
-    A learner-reachable surface names every source the installed pack declares (for ja-JP: the EDRDG
+  - 'A learner-reachable surface names every source the installed pack declares (for ja-JP: the EDRDG
     JMdict/JMnedict layer and the KRADFILE decomposition layer) with licence and pinned version, rendered
-    from the pack's own `sources.jsonl` / `licenses.jsonl` rather than from strings compiled into the app.
-  - >-
-    The EDRDG acknowledgement duty is met on the app surface, not only in the repository, and the pack-level
+    from the pack''s own `sources.jsonl` / `licenses.jsonl` rather than from strings compiled into the
+    app.'
+  - The EDRDG acknowledgement duty is met on the app surface, not only in the repository, and the pack-level
     notice in `third-party/notices/NOTICE.md` is cited as the full text.
-  - >-
-    A pack that declares no sources is shown as unattributed, and the app never invents an attribution or a
-    licence claim it cannot read from the pack; the learner-copy audit stays at zero findings.
-  # The duty predates the O-07 re-sourcing: the published ja pack already ships CC BY-SA EDRDG data
-  # with no app-surface acknowledgement. Promoted into the release gate by the owner on 2026-10-17
-  # during the release-readiness review: shipping CC BY-SA data without an in-app acknowledgement is
-  # a licence obligation, so the card is now required_for_desktop_1_0.
+  - A pack that declares no sources is shown as unattributed, and the app never invents an attribution
+    or a licence claim it cannot read from the pack; the learner-copy audit stays at zero findings.
   required_for_desktop_1_0: true
 - id: JA-KANJI-REFRESH-001
   milestone: M10
@@ -2285,16 +2225,13 @@ tasks:
   - languages/ja-JP/sources.jsonl
   - docs/provenance/JA_SOURCE_MATRIX.yaml
   acceptance:
-  - >-
-    The derivation lives in `scripts/` rather than an evidence folder, pins the jmdict-simplified release
+  - The derivation lives in `scripts/` rather than an evidence folder, pins the jmdict-simplified release
     `3.6.2+20260928191014` and the sha256 of every consumed file, and reproduces the shipped `radicals`
     lists byte-for-byte against those pinned inputs.
-  - >-
-    Re-running against newer upstream data prints a drift report (which records change, which characters
+  - Re-running against newer upstream data prints a drift report (which records change, which characters
     disappear) and writes nothing until a human asks; CI never refreshes pack content.
-  - >-
-    The pack `sources.jsonl` pin and the script's pin are one value, so an `audit-sources` failure is a real
-    signal that declared provenance no longer matches shipped data.
+  - The pack `sources.jsonl` pin and the script's pin are one value, so an `audit-sources` failure is
+    a real signal that declared provenance no longer matches shipped data.
   required_for_desktop_1_0: false
 - id: JA-KANJI-DECOMP-UI-001
   milestone: M10
@@ -2306,15 +2243,13 @@ tasks:
   - apps/desktop/src/App.tsx
   - languages/ja-JP/kanji/entries.jsonl
   acceptance:
-  - >-
-    Measured after the O-07 re-sourcing: 22 of 84 cards present the character as its own sole element and
-    23 of 84 contain a non-CJK stroke stand-in (`ノ ハ ヨ |`). The drill states a rule for each case instead
-    of rendering them unexplained, and the rule is written down rather than inferred from the render.
-  - >-
-    The nested-element case (KRADFILE lists every visible element, so `口` appears inside `舌` for `話`) is
-    presented as a decomposition, not as independent components, or is suppressed with a reason.
-  - >-
-    No learner-facing string explains the change by naming a ticket, an ADR or a patch.
+  - 'Measured after the O-07 re-sourcing: 22 of 84 cards present the character as its own sole element
+    and 23 of 84 contain a non-CJK stroke stand-in (`ノ ハ ヨ |`). The drill states a rule for each case
+    instead of rendering them unexplained, and the rule is written down rather than inferred from the
+    render.'
+  - The nested-element case (KRADFILE lists every visible element, so `口` appears inside `舌` for `話`)
+    is presented as a decomposition, not as independent components, or is suppressed with a reason.
+  - No learner-facing string explains the change by naming a ticket, an ADR or a patch.
   required_for_desktop_1_0: false
 - id: JA-KANJI-MNEMONICS-001
   milestone: M10
@@ -2326,15 +2261,11 @@ tasks:
   - languages/ja-JP/kanji/entries.jsonl
   - languages/ja-JP/kanji/a2-topics.jsonl
   acceptance:
-  - >-
-    17 of 84 authored mnemonics name an element the sourced list no longer contains (国: "Jade (玉) guarded
+  - '17 of 84 authored mnemonics name an element the sourced list no longer contains (国: "Jade (玉) guarded
     within walls" against the new `王 囗 丶`). Each is re-authored by a human or dropped, and the mismatch
-    count is measured before and after rather than asserted.
-  - >-
-    An automated check reports the mismatch count so it cannot silently grow; the check does not author
+    count is measured before and after rather than asserted.'
+  - An automated check reports the mismatch count so it cannot silently grow; the check does not author
     replacement text.
-  # Human content authoring: an AI re-write would put unreviewed text into a pack whose review queue is
-  # already the reason content stays labelled draft.
   required_for_desktop_1_0: false
 - id: PACKAGED-AUDIO-CSP-001
   milestone: M10
@@ -2347,12 +2278,10 @@ tasks:
   - apps/desktop/src-tauri/tauri.conf.json
   - apps/desktop/src/playback.ts
   acceptance:
-  - >-
-    A packaged (release, CSP-injected) desktop build plays pack word audio on click
-    without PLAYBACK_FAILED; verified by an owner click on the shipping deb, not a dev run.
-  - >-
-    scripts/finalize-deb.sh fails any finalized deb whose Depends lacks
-    gstreamer1.0-plugins-good, so the WAV-demuxer runtime dependency cannot silently drop.
+  - A packaged (release, CSP-injected) desktop build plays pack word audio on click without PLAYBACK_FAILED;
+    verified by an owner click on the shipping deb, not a dev run.
+  - scripts/finalize-deb.sh fails any finalized deb whose Depends lacks gstreamer1.0-plugins-good, so
+    the WAV-demuxer runtime dependency cannot silently drop.
   required_for_desktop_1_0: true
 - id: SETTINGS-PACK-CAPABILITY-001
   milestone: M10
@@ -2364,10 +2293,8 @@ tasks:
   - apps/desktop/src/App.tsx
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
-  - >-
-    With a non-kana active pack the "Kana keyboard (in-app)" toggle is absent; with a kana
-    pack it appears. The gate reads pack-declared capability metadata (manifest scripts:),
-    never a hardcoded language code.
+  - With a non-kana active pack the "Kana keyboard (in-app)" toggle is absent; with a kana pack it appears.
+    The gate reads pack-declared capability metadata (manifest scripts:), never a hardcoded language code.
   required_for_desktop_1_0: false
 - id: SETTINGS-TEXT-COLLAPSE-001
   milestone: M10
@@ -2378,9 +2305,8 @@ tasks:
   read_first:
   - apps/desktop/src/App.tsx
   acceptance:
-  - >-
-    Each Settings prose block renders as a one-line summary with a native details/summary
-    expander (screen-reader semantics preserved); the full text moves to the docs bundle.
+  - Each Settings prose block renders as a one-line summary with a native details/summary expander (screen-reader
+    semantics preserved); the full text moves to the docs bundle.
   required_for_desktop_1_0: false
 - id: JA-FUNCTION-WORD-LOOKUP-001
   milestone: M10
@@ -2393,15 +2319,11 @@ tasks:
   - languages/ja-JP/stories/first-day.yaml
   - apps/desktop/src-tauri/src/lib.rs
   acceptance:
-  - >-
-    Lookup for は in 「わたしの なまえは タナカです。」 presents the topic particle
-    (declared reading, jmdict-simplified sourcing, draft posture) and never the tooth noun
-    for that span; likewise に must not answer as "two".
-  - >-
-    A repo-side check walks shipped story sentences and reports every closed-class span
-    whose lexicon resolution conflicts with the sentence's own declared reading (surface は
-    against reading wa at that span) or resolves to no entry at all; the report is empty
-    after the fix.
+  - Lookup for は in 「わたしの なまえは タナカです。」 presents the topic particle (declared reading, jmdict-simplified
+    sourcing, draft posture) and never the tooth noun for that span; likewise に must not answer as "two".
+  - A repo-side check walks shipped story sentences and reports every closed-class span whose lexicon
+    resolution conflicts with the sentence's own declared reading (surface は against reading wa at that
+    span) or resolves to no entry at all; the report is empty after the fix.
   required_for_desktop_1_0: false
 - id: SCENARIOS-SECTION-REVIEW-001
   milestone: M10
@@ -2414,15 +2336,12 @@ tasks:
   - apps/desktop/src-tauri/src/scenarios.rs
   - languages/ja-JP/activities/scenarios/a2-comm-answer-phone.yaml
   acceptance:
-  - >-
-    A findings register exists (state/evidence/SCENARIOS-REVIEW-2026-10-21/) enumerating
-    every usability issue found across the Scenarios section — engine semantics, UI
-    affordances, pack scenario content — each with severity, file location and repro,
-    including the owner-reported symptoms (working Shadowing controls that render
-    disabled-looking; support/transfer clicks).
-  - >-
-    Every finding is either registered as a remediation card or explicitly dropped by the
-    owner with a stated reason; the section's acceptance itself remains the owner's.
+  - A findings register exists (state/evidence/SCENARIOS-REVIEW-2026-10-21/) enumerating every usability
+    issue found across the Scenarios section — engine semantics, UI affordances, pack scenario content
+    — each with severity, file location and repro, including the owner-reported symptoms (working Shadowing
+    controls that render disabled-looking; support/transfer clicks).
+  - Every finding is either registered as a remediation card or explicitly dropped by the owner with a
+    stated reason; the section's acceptance itself remains the owner's.
   required_for_desktop_1_0: false
 - id: SCENARIO-INTERACTION-001
   milestone: M10
@@ -2435,14 +2354,11 @@ tasks:
   - apps/desktop/src-tauri/src/scenarios.rs
   - state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md
   acceptance:
-  - >-
-    Each node's rendered action set is a strict superset of the accepted intents
-    (plausible wrong moves included); a wrong click yields not-satisfied and the
-    recovery branch actually renders. A node is satisfied only when its full declared
-    action set is performed.
-  - >-
-    A fully-guided click-through can no longer record independent learner evidence
-    (down-stamp or gate, with tests pinning both paths).
+  - Each node's rendered action set is a strict superset of the accepted intents (plausible wrong moves
+    included); a wrong click yields not-satisfied and the recovery branch actually renders. A node is
+    satisfied only when its full declared action set is performed.
+  - A fully-guided click-through can no longer record independent learner evidence (down-stamp or gate,
+    with tests pinning both paths).
   required_for_desktop_1_0: false
 - id: SCENARIO-TRANSFER-001
   milestone: M10
@@ -2454,11 +2370,9 @@ tasks:
   - apps/desktop/src/scenario.tsx
   - languages/ja-JP/activities/scenarios/a2-comm-answer-phone.yaml
   acceptance:
-  - >-
-    Either every required transfer variant carries a completable payload (variant
-    mini-walk or recall step) and the done flag requires performing it, or the
-    requirement is removed from packs that cannot honour it; marking done by itself
-    never counts, with engine and UI tests.
+  - Either every required transfer variant carries a completable payload (variant mini-walk or recall
+    step) and the done flag requires performing it, or the requirement is removed from packs that cannot
+    honour it; marking done by itself never counts, with engine and UI tests.
   required_for_desktop_1_0: false
 - id: SCENARIO-VIEW-CONSISTENCY-001
   milestone: M10
@@ -2470,12 +2384,10 @@ tasks:
   - apps/desktop/src-tauri/src/scenarios.rs
   - apps/desktop/src/scenario.tsx
   acceptance:
-  - >-
-    A completed transfer's checkmark and counter survive every subsequent view
-    return (attempt, support, recovery) - a Rust test walks the exact sequence.
-  - >-
-    The level-0 "No supports" rung renders as an info line (or undelivered rungs are
-    omitted), never a disabled button apologising for missing content.
+  - A completed transfer's checkmark and counter survive every subsequent view return (attempt, support,
+    recovery) - a Rust test walks the exact sequence.
+  - The level-0 "No supports" rung renders as an info line (or undelivered rungs are omitted), never a
+    disabled button apologising for missing content.
   required_for_desktop_1_0: false
 - id: BUTTON-AFFORDANCE-001
   milestone: M10
@@ -2487,13 +2399,11 @@ tasks:
   - packages/ui/src/styles.css
   - apps/desktop/src/shadowing.tsx
   acceptance:
-  - >-
-    No bare `btn` class remains in markup without a variant, or plain `.btn` gains
-    defined rest/hover/disabled treatments; the Shadowing Play/Record/Stop controls
-    visibly read as clickable while the disabled Previous reads as disabled.
-  - >-
-    Enabled-vs-disabled affordance distinction is asserted (computed-style test or
-    recorded visual proof), covering the seven files that use bare .btn.
+  - No bare `btn` class remains in markup without a variant, or plain `.btn` gains defined rest/hover/disabled
+    treatments; the Shadowing Play/Record/Stop controls visibly read as clickable while the disabled Previous
+    reads as disabled.
+  - Enabled-vs-disabled affordance distinction is asserted (computed-style test or recorded visual proof),
+    covering the seven files that use bare .btn.
   required_for_desktop_1_0: false
 - id: SCENARIO-LOCK-COPY-001
   milestone: M10
@@ -2504,10 +2414,9 @@ tasks:
   read_first:
   - apps/desktop/src-tauri/src/scenarios.rs
   acceptance:
-  - >-
-    Locked rows show human-readable capability names derived from pack data (never
-    hardcoded per language) and name where each prerequisite is practiced; a fresh
-    profile's scenario list contains no raw content ids in learner-facing copy.
+  - Locked rows show human-readable capability names derived from pack data (never hardcoded per language)
+    and name where each prerequisite is practiced; a fresh profile's scenario list contains no raw content
+    ids in learner-facing copy.
   required_for_desktop_1_0: false
 - id: IME-TOGGLE-UX-001
   milestone: M10
@@ -2519,24 +2428,17 @@ tasks:
   - apps/desktop/src/kana-ime.tsx
   - apps/desktop/src/settings.tsx
   acceptance:
-  - >-
-    A documented in-app shortcut flips the active pack's in-app keyboard setting
-    from any screen without opening Settings; the toggle honors pack capability
-    gating (SETTINGS-PACK-CAPABILITY-001).
-  - >-
-    A persistent bubble pinned to the app chrome shows the current input mode on
-    every in-app screen and clicking it flips the keyboard. The mode label derives
-    from the ACTIVE pack's declared script metadata, never hardcoded - owner rule
-    2026-10-21: "this works for any language not just japanese. it wouldn't make
-    sense to have 日本語 if you're learning russian" - and the bubble is absent
-    when the active pack declares no in-app keyboard. Mode changes announce to
-    screen readers.
-  - >-
-    The input layer is generalized: the converter is resolved from pack-declared
-    capability plus mapping data (kana is phase 1's instance; the per-profile
-    setting key may be renamed accordingly at implementation). Adding another
-    script's keyboard is pack content plus a converter with no language branch in
-    engine or UI; a pack without mapping data ships no keyboard and no bubble.
+  - A documented in-app shortcut flips the active pack's in-app keyboard setting from any screen without
+    opening Settings; the toggle honors pack capability gating (SETTINGS-PACK-CAPABILITY-001).
+  - 'A persistent bubble pinned to the app chrome shows the current input mode on every in-app screen
+    and clicking it flips the keyboard. The mode label derives from the ACTIVE pack''s declared script
+    metadata, never hardcoded - owner rule 2026-10-21: "this works for any language not just japanese.
+    it wouldn''t make sense to have 日本語 if you''re learning russian" - and the bubble is absent when the
+    active pack declares no in-app keyboard. Mode changes announce to screen readers.'
+  - 'The input layer is generalized: the converter is resolved from pack-declared capability plus mapping
+    data (kana is phase 1''s instance; the per-profile setting key may be renamed accordingly at implementation).
+    Adding another script''s keyboard is pack content plus a converter with no language branch in engine
+    or UI; a pack without mapping data ships no keyboard and no bubble.'
   required_for_desktop_1_0: false
 - id: PACK-UPDATE-UX-001
   milestone: M10
@@ -2552,23 +2454,18 @@ tasks:
   - state/evidence/RC-0.4.1-2026-10-15/publication-2026-10-16.md
   - state/evidence/RC-0.4.2-2026-10-18/publication-2026-10-18.md
   acceptance:
-  - >-
-    Corrected 2026-10-16 against the code: the affordance exists but is hidden.
-    `apps/desktop/src-tauri/src/packs.rs:238-241` fills `installed_version` per catalogue row and
-    `apps/desktop/src/language.tsx:419-429` renders `Update to v{version}` when it differs from the
-    pin (`language.test.tsx:115`). The gap is discovery and the wizard: `installed_version` has one
-    consumer in `apps/desktop/src`, and `App.tsx:266,842` keep `installedPacks` as pack ids, so
-    `onboarding.tsx:95,200,205` treat any installed version as satisfying the row. The first
-    criterion is that a learner who never opens the pack panel is told an update exists, and that
-    onboarding states the installed version next to the pinned one.
-  - >-
-    The update re-verifies against the new pin before it activates and keeps the previous version in
-    the store for rollback, the invariant already pinned by `crates/langpack/tests/media_upgrade.rs`.
-  - >-
-    A test covers the version-aware state (installed 0.4.0 + catalogue 0.4.1 yields an update state,
-    not "installed"/nothing), so the behaviour cannot silently regress to id-only matching.
-  - >-
-    No learner-facing string names a ticket, ADR or version-migration detail; `tools/audit_learner_copy.py`
+  - 'Corrected 2026-10-16 against the code: the affordance exists but is hidden. `apps/desktop/src-tauri/src/packs.rs:238-241`
+    fills `installed_version` per catalogue row and `apps/desktop/src/language.tsx:419-429` renders `Update
+    to v{version}` when it differs from the pin (`language.test.tsx:115`). The gap is discovery and the
+    wizard: `installed_version` has one consumer in `apps/desktop/src`, and `App.tsx:266,842` keep `installedPacks`
+    as pack ids, so `onboarding.tsx:95,200,205` treat any installed version as satisfying the row. The
+    first criterion is that a learner who never opens the pack panel is told an update exists, and that
+    onboarding states the installed version next to the pinned one.'
+  - The update re-verifies against the new pin before it activates and keeps the previous version in the
+    store for rollback, the invariant already pinned by `crates/langpack/tests/media_upgrade.rs`.
+  - A test covers the version-aware state (installed 0.4.0 + catalogue 0.4.1 yields an update state, not
+    "installed"/nothing), so the behaviour cannot silently regress to id-only matching.
+  - No learner-facing string names a ticket, ADR or version-migration detail; `tools/audit_learner_copy.py`
     stays at 0 findings.
   required_for_desktop_1_0: false
 - id: PACK-UPDATE-BANNER-001
@@ -2582,25 +2479,40 @@ tasks:
   - apps/desktop/src/App.tsx
   - apps/desktop/src/hub.tsx
   acceptance:
-  - >-
-    Measured 2026-10-21 on the owner's device: the hub status line read
-    "Japanese Reference Pack version 0.2.0 is on this device" while the store
-    held 0.2.0/0.2.1/0.4.2/0.4.3, the `current` pointer read 0.4.2, and the
-    active profile selects 0.4.3. Cause: `installed_packs` (packs.rs:1061)
-    returns one row per `pack_installations` row and the catalogue join's
-    `find` (packs.rs:238-241) keeps the first — the lowest — version.
-  - >-
-    The banner's installed side must be the version that profile actually uses
-    (its selection, or the store `current` pointer), not the lowest installed;
-    Home, hub and Settings keep deriving the same fact.
-  - >-
-    Installing an OLDER catalogue version (observed: catalog install of 0.4.2
-    moved the `current` pointer down from 0.4.3) must not silently downgrade
-    the pointer; either refuse with honest copy or move the pointer only when
-    the installed version is newer, and a test pins the chosen behavior.
-  - >-
-    No learner-facing string names a ticket or internal table;
-    `tools/audit_learner_copy.py` stays at 0 findings.
+  - 'Measured 2026-10-21 on the owner''s device: the hub status line read "Japanese Reference Pack version
+    0.2.0 is on this device" while the store held 0.2.0/0.2.1/0.4.2/0.4.3, the `current` pointer read
+    0.4.2, and the active profile selects 0.4.3. Cause: `installed_packs` (packs.rs:1061) returns one
+    row per `pack_installations` row and the catalogue join''s `find` (packs.rs:238-241) keeps the first
+    — the lowest — version.'
+  - The banner's installed side must be the version that profile actually uses (its selection, or the
+    store `current` pointer), not the lowest installed; Home, hub and Settings keep deriving the same
+    fact.
+  - 'Installing an OLDER catalogue version (observed: catalog install of 0.4.2 moved the `current` pointer
+    down from 0.4.3) must not silently downgrade the pointer; either refuse with honest copy or move the
+    pointer only when the installed version is newer, and a test pins the chosen behavior.'
+  - No learner-facing string names a ticket or internal table; `tools/audit_learner_copy.py` stays at
+    0 findings.
+  required_for_desktop_1_0: false
+- id: WORD-TIMING-001
+  milestone: M8
+  priority: P2
+  title: Word-level clip timings (karaoke highlight, click-to-hear-word)
+  dependencies:
+  - PACK-AUDIO-001
+  read_first:
+  - docs/05_SPEECH_SYSTEM.md
+  - experiments/word-timing/spike.py
+  - experiments/word-timing/spike-ru.jsonl
+  - crates/speech-runtime/src/alignment.rs
+  acceptance:
+  - Build-time generator aligns each pack clip to word-level timings (faster-whisper word_timestamps +
+    constrained match against manifest text); failures retry with a bigger model, then abstain gracefully.
+  - 'Timings stored in sidecar media/words.jsonl: {id, words:[{w, s, e}]} where w is the exact pack-text
+    token (stress marks preserved); additive, no media manifest churn.'
+  - langpack exposes optional word timings with a test that a pack without the sidecar still loads.
+  - Listening/shadowing screens highlight the current word during playback and clicking a word plays just
+    that word; packs lacking timings render unchanged.
+  - 'Full gates green: cargo fmt/clippy/test, tsc, vitest, eslint, prettier, pnpm smoke.'
   required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
