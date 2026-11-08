@@ -2498,7 +2498,7 @@ tasks:
   priority: P2
   title: Word-level clip timings (karaoke highlight, click-to-hear-word)
   dependencies:
-  - PACK-AUDIO-001
+  - PACK-AUDIO-VERIFICATION-001
   read_first:
   - docs/05_SPEECH_SYSTEM.md
   - experiments/word-timing/spike.py
@@ -2612,4 +2612,6 @@ execution_scope:
   - PLAT-001
   - CONTENT-CONFIRM-001
   - PACK-UPDATE-BANNER-001
+  - WORD-TIMING-001
+  - WORD-TIMING-002
   public_publication_authorized: false

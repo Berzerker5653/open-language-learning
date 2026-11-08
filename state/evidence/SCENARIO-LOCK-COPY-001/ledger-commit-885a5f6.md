@@ -1,0 +1,1 @@
+commit 885a5f6: PackCopyIndex resolves lock-copy names from pack data (lexicon glosses, grammar names, kana labels, goal-map descriptions); each unmet prereq names the unit practicing it; generic fallback replaces raw ids; UnmetPrereq no longer carries raw id

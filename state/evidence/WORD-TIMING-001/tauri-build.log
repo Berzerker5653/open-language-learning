@@ -1,0 +1,30 @@
+$ tauri build
+        Info Looking up installed tauri packages to check mismatched versions...
+        Warn The bundle identifier "org.openlanguage.app" set in `"tauri.conf.json" identifier` ends with `.app`. This is not recommended because it conflicts with the application bundle extension on macOS.
+     Running beforeBuildCommand `pnpm build`
+$ vite build
+vite v8.3.3 building client environment for production...
+transforming...
+✓ 48 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.46 kB │ gzip:   0.29 kB
+dist/assets/index-BdzGfpn-.css   11.30 kB │ gzip:   2.94 kB
+dist/assets/event-ip2n0V75.js     1.03 kB │ gzip:   0.54 kB
+dist/assets/index-ie6bDoZ4.js   368.41 kB │ gzip: 109.31 kB
+
+✓ built in 430ms
+   Compiling lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack)
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+   Compiling lts-activity v0.1.0 (/home/hunter/game-dev/LTS/crates/activity)
+    Finished `release` profile [optimized] target(s) in 44.51s
+       Built application at: /home/hunter/game-dev/LTS/target/release/lts-desktop
+        Info Patching /home/hunter/game-dev/LTS/target/release/lts-desktop with bundle type information: deb
+    Bundling open-language-learning-platform_0.4.3-alpha.1_amd64.deb (/home/hunter/game-dev/LTS/target/release/bundle/deb/open-language-learning-platform_0.4.3-alpha.1_amd64.deb)
+        Info Patching /home/hunter/game-dev/LTS/target/release/lts-desktop with bundle type information: appimage
+    Bundling open-language-learning-platform_0.4.3-alpha.1_amd64.AppImage (/home/hunter/game-dev/LTS/target/release/bundle/appimage/open-language-learning-platform_0.4.3-alpha.1_amd64.AppImage)
+    Finished 2 bundles at:
+        /home/hunter/game-dev/LTS/target/release/bundle/deb/open-language-learning-platform_0.4.3-alpha.1_amd64.deb (12.06 MiB)
+        /home/hunter/game-dev/LTS/target/release/bundle/appimage/open-language-learning-platform_0.4.3-alpha.1_amd64.AppImage (117.06 MiB)
+
+BUILD_EXIT=0

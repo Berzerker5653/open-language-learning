@@ -1,0 +1,1 @@
+commit 4faeb31: Ctrl+Shift+K global toggle (no-op without declared keyboard), InputModeBubble in AppShell chrome (present iff pack scripts resolve a converter; label from pack script ids + converter data; aria-live role=status), ScriptKeyboardConverter registry in ime.ts (romaji-kana = phase-1 instance), docs/11 shortcut section

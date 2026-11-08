@@ -1,0 +1,1 @@
+controller-verified 2026-11-06: cargo test -p lts-desktop --lib scenarios:: 18/18 at HEAD in clean worktree; agent gates: fmt+clippy clean, audit_learner_copy 0, fresh-profile ja+ru walks assert zero pack-id-shaped tokens, fixture-rename proves pack-derived names; full --lib baseline-diff = no new failures (33-34 pre-existing env failures re bundled assets)

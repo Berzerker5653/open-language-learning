@@ -1,0 +1,14 @@
+{"id": "ja.contrast.gemination.kite-0", "words": [{"w": "きて", "s": 0.0, "e": 0.42}]}
+{"id": "ja.contrast.gemination.kite-1", "words": [{"w": "きって", "s": 0.0, "e": 0.86}]}
+{"id": "ja.contrast.gemination.matta-0", "words": [{"w": "また", "s": 0.0, "e": 0.4}]}
+{"id": "ja.contrast.moraic-nasal.kin-0", "words": [{"w": "きん", "s": 0.0, "e": 1.36}]}
+{"id": "ja.contrast.moraic-nasal.sen-0", "words": [{"w": "せん", "s": 0.0, "e": 0.56}]}
+{"id": "ja.contrast.moraic-nasal.sen-1", "words": [{"w": "せ", "s": 0.0, "e": 0.54}]}
+{"id": "ja.contrast.palatalization.hyaku-0", "words": [{"w": "ひゃく", "s": 0.0, "e": 0.62}]}
+{"id": "ja.contrast.vowel-length.tooi-1", "words": [{"w": "問い", "s": 0.0, "e": 0.38}]}
+{"id": "ja.lex.abst.fuyu2", "words": [{"w": "ふゆう", "s": 0.0, "e": 0.72}]}
+{"id": "ja.lex.abst.kosetsu", "words": [{"w": "こうせつ", "s": 0.0, "e": 1.2}]}
+{"id": "ja.lex.abst.risu2", "words": [{"w": "りくつ", "s": 0.0, "e": 0.74}]}
+{"id": "ja.lex.abst.shomei", "words": [{"w": "しょうめい", "s": 0.0, "e": 0.82}]}
+{"id": "ja.lex.abst.teigi", "words": [{"w": "ていぎ", "s": 0.0, "e": 0.78}]}
+{"id": "ja.lex.abst2.chosa", "words": [{"w": "ちょうさ", "s": 0.0, "e": 0.72}]}

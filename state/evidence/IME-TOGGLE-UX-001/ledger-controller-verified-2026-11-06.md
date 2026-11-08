@@ -1,0 +1,1 @@
+controller-verified 2026-11-06: pnpm typecheck clean; vitest ime.test.ts + ime-mode-bubble.journey.tsx 22/22; agent gates: desktop 46 files/335 tests, ui 10/10, prettier/eslint clean, audit_learner_copy 0 findings

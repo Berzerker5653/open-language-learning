@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-08T12:52:06",
-  "active_task": null,
+  "updated": "2026-11-08",
+  "active_task": "WORD-TIMING-002",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -30,8 +30,8 @@
         "TTS-003"
       ],
       "evidence": [
-        "ru-RU certified 4,856/4,856 (FINAL-REPORT.md, gate v4)",
-        "ja-JP verification retired by owner 2026-11-06: human audio QA Russian-only; partial ja audit snapshot 2,155 rows (2,031 ok/124 flagged) kept unrepaired"
+        "state/evidence/PACK-AUDIO-VERIFICATION-001/ledger-ru-ru-certified-4-856-4-856-final-repor.md",
+        "state/evidence/PACK-AUDIO-VERIFICATION-001/ledger-ja-jp-verification-retired-by-owner-2026.md"
       ],
       "updated": "2026-11-01"
     },
@@ -1813,7 +1813,9 @@
       "activity": "awaiting-human-acceptance",
       "summary": "Gate: toggle present iff active pack declares kana scripts (manifest scripts: -> InstalledPack.scripts -> ime.ts gate). 83bed2d.",
       "notes": "Raised by the owner during the 2026-10-21 acceptance sweep (S-1): 'the settings window is hard coded to have japanese settings in it... should this program be modular so the settings match the needs of the language pack being used?' Agreed direction: packs declare capabilities (e.g. scripts: [kana]) in the manifest; the desktop hides/adjusts sections per active pack. First slice is small: one manifest field + one guard for the kana toggle. Whether this rides REL-001 or lands at 1.0.x is an owner scope call.",
-      "evidence": []
+      "evidence": [
+        "state/evidence/SETTINGS-PACK-CAPABILITY-001/ledger-done-2026-11.md"
+      ]
     },
     "SETTINGS-TEXT-COLLAPSE-001": {
       "task_id": "SETTINGS-TEXT-COLLAPSE-001",
@@ -1834,8 +1836,8 @@
       "summary": "Reading tap-lookup offers the wrong sense for function words: the topic particle は surfaces the tooth noun and に surfaces 'two', because the pack lexicon has no particle entries; closed-class spans need correctly sourced lexicon entries plus a reading-consistency check.",
       "notes": "Found 2026-10-21 by the owner's sweep (packet section 2 item 4 leg 2, finding S-3): the lookup panel under 「わたしの なまえは タナカです。」 listed 'は ha — tooth'. Pack data confirms lexicon/health4.jsonl carries は/tooth as the only は entry and lexicon/numbers has に/two, while particles live only as grammar concepts (ja.grammar.particle.*), invisible to the lexicon-driven panel; the なまえ/まえ half of the check PASSED (K-80 span fix holds on the real surface). Fix is pack content (add sourced particle entries, jmdict-simplified covers them, draft posture unchanged) plus a repo-side check that flags any story-sentence span whose entry conflicts with the sentence's declared reading (surface は vs reading wa at that span) or resolves to no entry. Whether this rides REL-001 or lands at 1.0.x is an owner scope call.",
       "evidence": [
-        "lane commit (main): reading-aware span lookup + 9 jmdict function-word entries + checker; controller-verified lookup 7/7, pack validate 0/0, checker BEFORE=14 AFTER=0",
-        "owner 2026-11-06: ja audio accepted without certification; 6 single-mora particle clips un-audited by policy"
+        "state/evidence/JA-FUNCTION-WORD-LOOKUP-001/ledger-lane-commit-main.md",
+        "state/evidence/JA-FUNCTION-WORD-LOOKUP-001/ledger-owner-2026-11-06.md"
       ]
     },
     "SCENARIOS-SECTION-REVIEW-001": {
@@ -1908,8 +1910,8 @@
       "summary": "Locked scenario rows emit raw ids ('practice ja.lex.demonstratives.koko to supported (speaking)'); a fresh profile sees one playable row plus a wall of ~20 locked tokens.",
       "notes": "Finding S-08 of the 2026-10-21 findings register. Human names come from pack data (engine stays language-neutral) with a pointer to where each prerequisite is practiced.",
       "evidence": [
-        "commit 885a5f6: PackCopyIndex resolves lock-copy names from pack data (lexicon glosses, grammar names, kana labels, goal-map descriptions); each unmet prereq names the unit practicing it; generic fallback replaces raw ids; UnmetPrereq no longer carries raw id",
-        "controller-verified 2026-11-06: cargo test -p lts-desktop --lib scenarios:: 18/18 at HEAD in clean worktree; agent gates: fmt+clippy clean, audit_learner_copy 0, fresh-profile ja+ru walks assert zero pack-id-shaped tokens, fixture-rename proves pack-derived names; full --lib baseline-diff = no new failures (33-34 pre-existing env failures re bundled assets)"
+        "state/evidence/SCENARIO-LOCK-COPY-001/ledger-commit-885a5f6.md",
+        "state/evidence/SCENARIO-LOCK-COPY-001/ledger-controller-verified-2026-11-06.md"
       ]
     },
     "IME-TOGGLE-UX-001": {
@@ -1921,8 +1923,8 @@
       "summary": "Owner proposal 2026-10-21: key-command toggle plus a clickable corner bubble showing the current input mode, on every in-app screen, generalized to ANY language the pack supports - never hardcoded to Japanese (owner: 'wouldn't make sense to have 日本語 if you're learning russian').",
       "notes": "Captured from the owner's item-7 sweep pass (packet section 2 item 7, 'that worked perfectly'): key-command toggle + corner bubble flippable by click. Clarified same day: (1) 'any window' = any window inside the OLLP program - app-chrome bubble, no tray/global-shortcut requirement; (2) 'this works for any language not just japanese. it wouldn't make sense to have 日本語 if you're learning russian' - the bubble label and the keyboard itself are resolved from the ACTIVE pack's declared capability + mapping data; a non-kana pack shows no bubble and no keyboard (ties to SETTINGS-PACK-CAPABILITY-001). Phase 1's kana converter is the instance; generalizing means pack-declared mapping assets + a converter, never a language branch in engine or UI; the per-profile 'kana-keyboard' setting key gets renamed at implementation. Screen-reader announcement of mode changes follows A11Y-FLOW-001 semantics.",
       "evidence": [
-        "commit 4faeb31: Ctrl+Shift+K global toggle (no-op without declared keyboard), InputModeBubble in AppShell chrome (present iff pack scripts resolve a converter; label from pack script ids + converter data; aria-live role=status), ScriptKeyboardConverter registry in ime.ts (romaji-kana = phase-1 instance), docs/11 shortcut section",
-        "controller-verified 2026-11-06: pnpm typecheck clean; vitest ime.test.ts + ime-mode-bubble.journey.tsx 22/22; agent gates: desktop 46 files/335 tests, ui 10/10, prettier/eslint clean, audit_learner_copy 0 findings"
+        "state/evidence/IME-TOGGLE-UX-001/ledger-commit-4faeb31.md",
+        "state/evidence/IME-TOGGLE-UX-001/ledger-controller-verified-2026-11-06.md"
       ]
     },
     "PACK-UPDATE-BANNER-001": {
