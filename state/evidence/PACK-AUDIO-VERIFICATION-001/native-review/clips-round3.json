@@ -1,0 +1,207 @@
+[
+ {
+  "id": "ru.lex.critical3.atlas",
+  "text": "атлас",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.critical3.atlas.wav"
+ },
+ {
+  "id": "ru.lex.synthesis.kruzhok",
+  "text": "кружок",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.synthesis.kruzhok.wav"
+ },
+ {
+  "id": "ru.lex.neg.parafraze",
+  "text": "парафраз",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.neg.parafraze.wav"
+ },
+ {
+  "id": "ru.lex.study.mig",
+  "text": "миг",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.study.mig.wav"
+ },
+ {
+  "id": "ru.lex.travel.svetofor",
+  "text": "светофо́р",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.travel.svetofor.wav"
+ },
+ {
+  "id": "ru.lex.family.sumka",
+  "text": "су́мка",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.family.sumka.wav"
+ },
+ {
+  "id": "ru.lex.experiences.bespokoitsya",
+  "text": "беспоко́иться",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.experiences.bespokoitsya.wav"
+ },
+ {
+  "id": "ru.lex.comparisons.vyshe",
+  "text": "вы́ше",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.comparisons.vyshe.wav"
+ },
+ {
+  "id": "ru.lex.argue2.uchyot",
+  "text": "учёт",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.argue2.uchyot.wav"
+ },
+ {
+  "id": "ru.lex.services.podpisat",
+  "text": "подпи́сывать",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.services.podpisat.wav"
+ },
+ {
+  "id": "ru.lex.socialplans.vyhod",
+  "text": "вы́ход",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.socialplans.vyhod.wav"
+ },
+ {
+  "id": "ru.lex.synthesis4.ssuda",
+  "text": "ссуда",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.synthesis4.ssuda.wav"
+ },
+ {
+  "id": "ru.lex.comparisons.iz-za",
+  "text": "и́з-за",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.comparisons.iz-za.wav"
+ },
+ {
+  "id": "ru.lex.workstudy.opytnyi",
+  "text": "о́пытный",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.workstudy.opytnyi.wav"
+ },
+ {
+  "id": "ru.lex.sci.uyazvimost",
+  "text": "уязвимость",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.sci.uyazvimost.wav"
+ },
+ {
+  "id": "ru.lex.soc.ravnovesnyy",
+  "text": "равновесный",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.soc.ravnovesnyy.wav"
+ },
+ {
+  "id": "ru.sent.b2.u757",
+  "text": "Это ненависть.",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.sent.b2.u757.wav"
+ },
+ {
+  "id": "ru.lex.style.vymaryvat",
+  "text": "вымарывать",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.style.vymaryvat.wav"
+ },
+ {
+  "id": "ru.lex.sci.podtoplenie",
+  "text": "подтопление",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.sci.podtoplenie.wav"
+ },
+ {
+  "id": "ru.sent.b2.u687",
+  "text": "Это разбор.",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.sent.b2.u687.wav"
+ },
+ {
+  "id": "ru.lex.shopping.noski",
+  "text": "носки́",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.shopping.noski.wav"
+ },
+ {
+  "id": "ru.lex.messages.pismo",
+  "text": "письмо́",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.messages.pismo.wav"
+ },
+ {
+  "id": "ru.lex.narration.vspomnilsya",
+  "text": "вспомни́лся",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.narration.vspomnilsya.wav"
+ },
+ {
+  "id": "ru.lex.shopping.nichego",
+  "text": "ничего́",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.shopping.nichego.wav"
+ },
+ {
+  "id": "ru.lex.feelings.nezhnost",
+  "text": "нежность",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.feelings.nezhnost.wav"
+ },
+ {
+  "id": "ru.lex.neg.dumping",
+  "text": "демпинг",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.neg.dumping.wav"
+ },
+ {
+  "id": "ru.lex.synthesis3.ekspert",
+  "text": "эксперт",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.synthesis3.ekspert.wav"
+ },
+ {
+  "id": "ru.lex.sci.perelom",
+  "text": "перелом",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.sci.perelom.wav"
+ },
+ {
+  "id": "ru.lex.services.zayavit",
+  "text": "заявля́ть",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.services.zayavit.wav"
+ },
+ {
+  "id": "ru.lex.argue2.produkt",
+  "text": "продукт",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.argue2.produkt.wav"
+ },
+ {
+  "id": "ru.lex.learning.proiznoshenie",
+  "text": "произношение",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.learning.proiznoshenie.wav"
+ },
+ {
+  "id": "ru.contrast.palatalization.luk-1",
+  "text": "люк",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.contrast.palatalization.luk-1.wav"
+ },
+ {
+  "id": "ru.lex.cult.samosoznanie",
+  "text": "самосознание",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.cult.samosoznanie.wav"
+ },
+ {
+  "id": "ru.lex.food.myaso",
+  "text": "мя́со",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.food.myaso.wav"
+ },
+ {
+  "id": "ru.lex.instructions.instrument",
+  "text": "инструме́нт",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.instructions.instrument.wav"
+ },
+ {
+  "id": "ru.lex.writing2.dorabotka",
+  "text": "доработка",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.writing2.dorabotka.wav"
+ },
+ {
+  "id": "ru.sent.b2.u760",
+  "text": "Это уклад.",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.sent.b2.u760.wav"
+ },
+ {
+  "id": "ru.lex.critical4.nepravda",
+  "text": "неправда",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.critical4.nepravda.wav"
+ },
+ {
+  "id": "ru.lex.messages.zapiska",
+  "text": "запи́ска",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.messages.zapiska.wav"
+ },
+ {
+  "id": "ru.lex.prof.deloproizvodstvo",
+  "text": "делопроизводство",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.prof.deloproizvodstvo.wav"
+ },
+ {
+  "id": "ru.lex.travel2.zabylos",
+  "text": "забы́лось",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.travel2.zabylos.wav"
+ }
+]
