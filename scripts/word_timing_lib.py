@@ -90,6 +90,11 @@ def norm(w: str) -> str:
     w = unicodedata.normalize("NFKC", w)
     w = unicodedata.normalize("NFKD", w.lower())
     w = "".join(c for c in w if not unicodedata.combining(c))
+    if any('\u3041' <= c <= '\u30ff' for c in w):
+        # WORD-TIMING-002: fold the long-vowel mark so whisper's fragmented
+        # "か/ー/る/い" glue and the pack's かるい compare equal; no-op for
+        # kana words without ー and for Cyrillic.
+        w = w.replace("\u30fc", "")
     return re.sub(r"[^\w']+|[']$", "", w, flags=re.UNICODE)
 
 

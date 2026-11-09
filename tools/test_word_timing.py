@@ -147,3 +147,18 @@ def test_duplicate_heard_takes_first_match():
     # timed on the FIRST matched block.
     words = [W("ぶんけん", 0.0, 0.5), W("ぶんけん", 0.7, 1.1)]
     assert wt.align_tokens(words, ["ぶんけん"], duration=1.2) == [(0, 0)]
+
+
+def test_karui_four_fragment_chain_with_long_vowel_fold():
+    # WORD-TIMING-002 (large-v3 observed): かるい heard as か/ー/る/い; the
+    # long-vowel mark is folded by norm() and a 4-fragment chain absorbs.
+    words = [W("か", 0.0, 0.18), W("ー", 0.18, 0.36),
+             W("る", 0.36, 0.54), W("い", 0.54, 0.72)]
+    spans = wt.align_tokens(words, ["かるい"], duration=0.72,
+                            absorb_chain=4, absorb_long=0.9)
+    assert spans == [(0, 3)], spans
+
+
+def test_ru_norm_unaffected_by_long_vowel_fold():
+    assert wt.norm("дождик") == "дождик"
+    assert wt.norm("мука") == "мука"

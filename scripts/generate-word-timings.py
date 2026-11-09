@@ -46,11 +46,17 @@ from word_timing_lib import align_tokens, kana_fold, norm  # noqa: E402
 
 PRIMARY_MODEL = "large-v3-turbo"   # CT2, cached; the spike's workhorse
 RETRY_MODEL = "large-v3"           # slower/heavier; one retry per failing clip
+# WORD-TIMING-002 (ja): turbo HALLUCINATES short ja clips (kenkou.wav heard as
+# 太郎/靖子 person names; kata.wav heard as あった) — cross-validated against
+# the TV-computer large-v3 service, which hears the clips correctly. ja runs
+# large-v3 from the first pass; ru keeps turbo (2026-11-07 ru evidence).
+JA_PRIMARY_MODEL = "large-v3"
 PRIMARY_RATIO, PRIMARY_ABSORB = 0.75, 0.8
 RETRY_RATIO, RETRY_ABSORB = 0.6, 0.75   # relaxed second rung (spike's "relaxed split/merge")
 # WORD-TIMING-002 (ja): whisper heard-ja fragments are mora-level, so an
 # expected token may glue up to 3 fragments (concatenated ratio >= 0.9).
-JA_ABSORB_CHAIN, JA_ABSORB_LONG = 3, 0.9
+# Chain 4: "karui" heard as か/ー/る/い (long-vowel mark as its own token).
+JA_ABSORB_CHAIN, JA_ABSORB_LONG = 4, 0.9
 _JA_EXPECTED_KANJI = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
 
 
@@ -158,7 +164,8 @@ def main() -> int:
         print(f"carrying {len(done)} settled ids; {len(rows)} left", file=sys.stderr, flush=True)
     if args.limit:
         rows = rows[:args.limit]
-    chosen = PRIMARY_MODEL if args.pass_name == "primary" else RETRY_MODEL
+    ja = args.lang == "ja"  # WORD-TIMING-002: model policy + absorb chain
+    chosen = (JA_PRIMARY_MODEL if ja else PRIMARY_MODEL) if args.pass_name == "primary" else RETRY_MODEL
     print(f"generation start ({args.pass_name} pass): {len(rows)} rows -> {out} "
           f"(model={chosen})", file=sys.stderr, flush=True)
 
@@ -171,7 +178,8 @@ def main() -> int:
             models[name] = WhisperModel(name, device="cpu", compute_type="int8")
         return models[name]
 
-    ladder = ((PRIMARY_MODEL, PRIMARY_RATIO, PRIMARY_ABSORB),) if args.pass_name == "primary" \
+    primary_model = JA_PRIMARY_MODEL if ja else PRIMARY_MODEL
+    ladder = ((primary_model, PRIMARY_RATIO, PRIMARY_ABSORB),) if args.pass_name == "primary" \
         else ((RETRY_MODEL, RETRY_RATIO, RETRY_ABSORB),)
     # WORD-TIMING-002 (ja) contract, applied on top of the ru defaults:
     #  * expected-side tokenization: whitespace IS the pack's word
@@ -181,10 +189,9 @@ def main() -> int:
     #    kana text never contains);
     #  * heard side: every ASR token is folded kanji/katakana->hiragana
     #    with pykakasi before alignment (whisper kanji-converts ja output);
-    #  * mora-fragment chains up to 3 absorb at concatenated ratio >= 0.9;
+    #  * mora-fragment chains up to 4 absorb at concatenated ratio >= 0.9;
     #  * kanji-bearing expected rows abstain outright (7/4911 — TTS was fed
     #    kana but a handful of manifest texts kept kanji).
-    ja = args.lang == "ja"
 
     sink = out.open("a", encoding="utf-8")
     asink = abstain_path.open("a", encoding="utf-8")
