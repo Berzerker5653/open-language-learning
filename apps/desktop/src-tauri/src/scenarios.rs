@@ -112,9 +112,12 @@ pub struct LadderView {
     /// True when the CURRENT node carries a support payload at this
     /// level. Packs published before 2026-10-19 (0.4.0–0.4.2) declare
     /// ladder rungs but ship no per-node `support` payloads; for those
-    /// the rung is not pressable: the UI disables it and says why, and
-    /// `support_at` refuses it without consuming it or stamping the
-    /// node's evidence.
+    /// the rung is not pressable: `support_at` refuses it without
+    /// consuming it or stamping the node's evidence. SCENARIO-VIEW-
+    /// CONSISTENCY-001 (finding S-07): level 0 ("No supports" — answer
+    /// unaided) never carries a payload and is not a request; the UI
+    /// renders it as an info line, never as a disabled button
+    /// apologising for missing content.
     pub delivered: bool,
 }
 
@@ -907,7 +910,14 @@ fn view_of(data: &Path, sc: &PackScenario, session: &ScenarioSession) -> Scenari
             .map(|t| TransferView {
                 id: t.id.clone(),
                 description: t.description.clone(),
-                done: false,
+                // SCENARIO-VIEW-CONSISTENCY-001 (finding S-05): the done
+                // flag lives in the session and is read back HERE, in
+                // the one helper every command uses to build a view —
+                // never hardcoded false and re-stamped by only some
+                // callers. A completed transfer's ✓ and the counter
+                // derived from it must survive every later view return
+                // (attempt, support, recovery), not just transfer ones.
+                done: session.transfer_done(&t.id),
                 has_payload: t.payload.is_some(),
             })
             .collect(),
@@ -1175,9 +1185,11 @@ pub fn transfer_answer_at(
     })
 }
 
-/// Rebuild the current view for a session, restamping transfer `done`
-/// flags from the engine — the flag lives in the session, never in the
-/// button press.
+/// Rebuild the current view for a session. Since SCENARIO-VIEW-
+/// CONSISTENCY-001 the transfer `done` flags are read from the session
+/// inside `view_of` itself, so every command path — not just the
+/// transfer ones — restamps them; this helper is only the session-store
+/// accessor that hands a borrowed session to `view_of`.
 fn view_of_for(
     data: &Path,
     sc: &PackScenario,
@@ -1191,9 +1203,6 @@ fn view_of_for(
         .ok_or("no session")?;
     let mut view = view_of(data, sc, session);
     view.support_used = session.support_used_snapshot();
-    for t in &mut view.transfers {
-        t.done = session.transfer_done(&t.id);
-    }
     Ok(view)
 }
 
@@ -2270,6 +2279,175 @@ mod tests {
             "the payload-less variant stays undone forever"
         );
         assert!(view.active_transfer.is_none(), "the card closes when done");
+    }
+
+    /// SCENARIO-VIEW-CONSISTENCY-001 (finding S-05): a completed
+    /// transfer's ✓ and the counter derived from it survive every later
+    /// view return. This walks the EXACT sequence the owner hit —
+    /// perform a transfer, then an attempt (wrong click), then a support
+    /// press, then a recovery branch — rebuilding the view after each
+    /// exactly the way `attempt_at`/`support_at`/`recovery_at` do, and
+    /// pins the done flag and count on every returned view.
+    #[test]
+    fn a_completed_transfer_survives_every_view_return() {
+        use lts_activity::scenario::StepResult;
+        use lts_activity::spec::{
+            LadderStep, NodeSupport, RecoveryBranch, ScenarioNode, TransferPayload, TransferVariant,
+        };
+        let sc = PackScenario {
+            id: "es.scenario.vc".into(),
+            goal_id: "es.goal.vc".into(),
+            title: "View consistency chain".into(),
+            situation: None,
+            register: None,
+            nodes: vec![
+                ScenarioNode {
+                    id: "es.scenario.vc.n0".into(),
+                    prompt: "Open the exchange".into(),
+                    expected_actions: vec!["greet".into()],
+                    action_labels: [
+                        ("greet".to_string(), "Greet them".to_string()),
+                        ("ask-repeat".to_string(), "Ask them to repeat".to_string()),
+                        ("part".to_string(), "Say goodbye".to_string()),
+                    ]
+                    .into_iter()
+                    .collect(),
+                    support: vec![NodeSupport {
+                        level: 3,
+                        kind: "hint".into(),
+                        text: "A small wave and a word fits.".into(),
+                        options: Vec::new(),
+                    }],
+                    next: vec!["es.scenario.vc.n1".into()],
+                    recovery: vec![RecoveryBranch {
+                        id: "es.scenario.vc.n0.repair".into(),
+                        prompt: "You were not understood. Ask them to repeat.".into(),
+                        expected_actions: vec!["ask-repeat".into()],
+                        to: Some("es.scenario.vc.n0".into()),
+                    }],
+                },
+                ScenarioNode {
+                    id: "es.scenario.vc.n1".into(),
+                    prompt: "Close it out".into(),
+                    expected_actions: vec!["part".into()],
+                    action_labels: [("part".to_string(), "Say goodbye".to_string())]
+                        .into_iter()
+                        .collect(),
+                    support: Vec::new(),
+                    next: Vec::new(),
+                    recovery: Vec::new(),
+                },
+            ],
+            support_ladder: vec![
+                LadderStep {
+                    support_level: 0,
+                    description: "No supports".into(),
+                },
+                LadderStep {
+                    support_level: 3,
+                    description: "A hint".into(),
+                },
+            ],
+            transfer_variants_required: 1,
+            transfer_variants: vec![TransferVariant {
+                id: "es.scenario.vc.casual".into(),
+                description: "Greet a friend instead".into(),
+                changed_variable: Some("register".into()),
+                payload: Some(TransferPayload {
+                    kind: "recall".into(),
+                    prompt: "Say hello to your friend.".into(),
+                    expected: vec!["hello".into()],
+                    steps: Vec::new(),
+                }),
+            }],
+        };
+        let data = tempfile::tempdir().expect("tempdir");
+        let mut s = ScenarioSession::begin(&sc, "vc-seq").expect("nodes exist");
+
+        // Exactly what the commands put on the wire: `view_of` plus the
+        // support-used stamp attempt_at/support_at/recovery_at apply.
+        let cmd_view = |s: &ScenarioSession| {
+            let mut v = view_of(data.path(), &sc, s);
+            v.support_used = s.support_used_snapshot();
+            v
+        };
+        let done_rows = |v: &ScenarioView| v.transfers.iter().filter(|t| t.done).count();
+
+        // Perform the transfer payload — the honest path from
+        // SCENARIO-TRANSFER-001 — and see the ✓ on the next view.
+        assert!(matches!(
+            s.start_transfer("es.scenario.vc.casual"),
+            lts_activity::TransferStart::Opened { .. }
+        ));
+        assert_eq!(
+            s.attempt_transfer("hello"),
+            lts_activity::TransferAttempt::Completed
+        );
+        let v = cmd_view(&s);
+        assert_eq!(done_rows(&v), 1, "the earned transfer shows its ✓");
+        assert_eq!(
+            v.transfers
+                .iter()
+                .filter(|t| t.done)
+                .map(|t| t.id.as_str())
+                .collect::<Vec<_>>(),
+            ["es.scenario.vc.casual"]
+        );
+        assert_eq!(v.transfers_required, 1, "the counter denominator holds");
+        // Wire contract the UI needs for S-07: the level-0 "No supports"
+        // rung is present and undelivered — the UI renders it as an info
+        // line, never as a disabled button apologizing for missing content.
+        assert_eq!(
+            v.ladder
+                .iter()
+                .map(|r| (r.support_level, r.delivered))
+                .collect::<Vec<_>>(),
+            vec![(0, false), (3, true)]
+        );
+
+        // (1) attempt: a wrong click (NotSatisfied) rebuilds the view —
+        // the owner's reproduction. The ✓ and the count survive.
+        assert!(matches!(s.attempt("part"), StepResult::NotSatisfied { .. }));
+        let v = cmd_view(&s);
+        assert_eq!(done_rows(&v), 1, "an attempt view must not lose the ✓");
+        assert!(
+            v.transfers
+                .iter()
+                .any(|t| t.id == "es.scenario.vc.casual" && t.done)
+        );
+
+        // (2) support: pressing a delivered rung rebuilds the view.
+        assert_eq!(s.current_node().support[0].level, 3);
+        assert!(s.use_support(3));
+        let v = cmd_view(&s);
+        assert_eq!(done_rows(&v), 1, "a support view must not lose the ✓");
+        assert_eq!(v.support_used, vec![3], "support still registers honestly");
+
+        // (3) recovery: entering a recovery branch rebuilds the view.
+        assert!(s.enter_recovery("es.scenario.vc.n0.repair"));
+        let v = cmd_view(&s);
+        assert_eq!(done_rows(&v), 1, "a recovery view must not lose the ✓");
+        assert_eq!(
+            v.node.prompt, "You were not understood. Ask them to repeat.",
+            "the recovery prompt renders on the same view that keeps the ✓"
+        );
+
+        // Resolving the recovery and advancing the chain keeps it too,
+        // and the store path (view_of_for) agrees with the borrowed path.
+        assert_eq!(
+            s.attempt("ask-repeat"),
+            StepResult::Advanced {
+                to: "es.scenario.vc.n0".into()
+            }
+        );
+        let store: SessionStore = std::sync::Mutex::new(std::collections::HashMap::new());
+        store
+            .lock()
+            .expect("store")
+            .insert(session_key("p-vc", "es.scenario.vc"), s);
+        let v =
+            view_of_for(data.path(), &sc, &store, "p-vc", "es.scenario.vc").expect("session view");
+        assert_eq!(done_rows(&v), 1, "the store path restamps identically");
     }
 
     /// SCENARIO-INTERACTION-001 (S-01/S-02/S-03), end-to-end over the

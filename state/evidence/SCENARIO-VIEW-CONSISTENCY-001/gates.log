@@ -1,0 +1,202 @@
+== cargo fmt --all -- --check ==
+2026-11-08T19:17:33-07:00
+Diff in /home/hunter/game-dev/LTS/apps/desktop/src-tauri/src/scenarios.rs:2315:
+                     support: vec![NodeSupport {
+                         level: 3,
+                         kind: "hint".into(),
+-                        text: "A small wave and a word fits."
+-                            .into(),
++                        text: "A small wave and a word fits.".into(),
+                         options: Vec::new(),
+                     }],
+                     next: vec!["es.scenario.vc.n1".into()],
+Diff in /home/hunter/game-dev/LTS/apps/desktop/src-tauri/src/scenarios.rs:2408:
+ 
+         // (1) attempt: a wrong click (NotSatisfied) rebuilds the view —
+         // the owner's reproduction. The ✓ and the count survive.
+-        assert!(matches!(
+-            s.attempt("part"),
+-            StepResult::NotSatisfied { .. }
+-        ));
++        assert!(matches!(s.attempt("part"), StepResult::NotSatisfied { .. }));
+         let v = cmd_view(&s);
+         assert_eq!(done_rows(&v), 1, "an attempt view must not lose the ✓");
+         assert!(
+Diff in /home/hunter/game-dev/LTS/apps/desktop/src-tauri/src/scenarios.rs:2432:
+         let v = cmd_view(&s);
+         assert_eq!(done_rows(&v), 1, "a recovery view must not lose the ✓");
+         assert_eq!(
+-            v.node.prompt,
+-            "You were not understood. Ask them to repeat.",
++            v.node.prompt, "You were not understood. Ask them to repeat.",
+             "the recovery prompt renders on the same view that keeps the ✓"
+         );
+ 
+Diff in /home/hunter/game-dev/LTS/apps/desktop/src-tauri/src/scenarios.rs:2450:
+             .lock()
+             .expect("store")
+             .insert(session_key("p-vc", "es.scenario.vc"), s);
+-        let v = view_of_for(data.path(), &sc, &store, "p-vc", "es.scenario.vc").expect("session view");
++        let v =
++            view_of_for(data.path(), &sc, &store, "p-vc", "es.scenario.vc").expect("session view");
+         assert_eq!(done_rows(&v), 1, "the store path restamps identically");
+     }
+ 
+exit=1
+== cargo fmt --all -- --check (rerun after fmt) ==
+exit=0
+
+== cargo clippy -q -p lts-activity -p lts-desktop -p lts-langpack --all-targets -- -D warnings ==
+2026-11-08T19:17:39-07:00
+exit=0
+
+== cargo test -p lts-activity ==
+2026-11-08T19:17:47-07:00
+   Compiling lts-activity v0.1.0 (/home/hunter/game-dev/LTS/crates/activity)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.08s
+     Running unittests src/lib.rs (target/debug/deps/lts_activity-c18c5f5fd62a6ebb)
+
+running 16 tests
+test scenario::tests::a_declared_variant_without_payload_can_never_be_completed ... ok
+test scenario::tests::a_node_is_satisfied_only_by_its_full_declared_action_set ... ok
+test scenario::tests::a_guided_click_through_never_stamps_independent_evidence ... ok
+test scenario::tests::a_pack_without_extra_intents_renders_no_invented_distractors ... ok
+test scenario::tests::a_wrong_click_on_a_rendered_distractor_yields_recovery_that_renders ... ok
+test scenario::tests::a_walk_payload_runs_with_full_set_semantics_and_earns_the_transfer ... ok
+test scenario::tests::an_unknown_variant_and_an_empty_payload_open_nothing ... ok
+test scenario::tests::declared_support_above_the_floor_is_preserved ... ok
+test scenario::tests::chain_reached_but_transfer_unmet_is_not_complete ... ok
+test scenario::tests::early_finish_is_partial_not_complete ... ok
+test scenario::tests::full_set_completion_advances_and_terminal_completes ... ok
+test scenario::tests::full_walk_with_transfer_requirement_is_complete ... ok
+test scenario::tests::recall_practice_counts_only_the_accepted_answer ... ok
+test scenario::tests::single_exchange_scenario_completes_exactly ... ok
+test scenario::tests::there_is_no_mark_done_channel_at_all ... ok
+test scenario::tests::the_rendered_set_is_a_strict_superset_of_the_answer_at_every_node ... ok
+
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/reading.rs (target/debug/deps/reading-db62a7d41c315dac)
+
+running 5 tests
+test on_demand_reveal_is_always_available_and_counts_as_support ... ok
+test canonical_text_remains_japanese_script ... ok
+test visibility_responds_to_mastery ... ok
+test visibility_responds_to_settings_and_kana_literacy ... ok
+test reading_evidence_is_independent_from_listening_and_speaking ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/runtime.rs (target/debug/deps/runtime-2fc3118a2d07b0b0)
+
+running 5 tests
+test modality_dimension_mapping_is_conservative ... ok
+test unknown_activity_types_are_rejected ... ok
+test hints_replays_translations_emit_support_evidence ... ok
+test all_four_activity_kinds_render_from_pack_data ... ok
+test correct_with_strong_help_is_not_independent_success ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/scenario.rs (target/debug/deps/scenario-4e923a38161ff32d)
+
+running 5 tests
+test graph_supports_intents_ladder_recovery_and_transfers ... ok
+test evidence_events_record_support_per_node ... ok
+test replaying_a_scenario_is_a_separate_sitting ... ok
+test runtime_is_language_agnostic ... ok
+test ja_seed_first_meeting_graph_runs_end_to_end ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.52s
+
+     Running tests/writing.rs (target/debug/deps/writing-8de9376ca5e31257)
+
+running 5 tests
+test grading_accepts_canonical_and_declared_variants ... ok
+test a_miss_carries_the_form_the_task_asked_for ... ok
+test keyboard_is_the_only_input_surface_no_handwriting_required ... ok
+test hints_are_support_not_answers ... ok
+test writing_evidence_is_distinct_from_recognition ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_activity
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+exit=0
+
+== cargo test -p lts-desktop --lib scenarios ==
+2026-11-08T19:17:50-07:00
+   Compiling lts-activity v0.1.0 (/home/hunter/game-dev/LTS/crates/activity)
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.26s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-4d6619220b22c4b4)
+
+running 22 tests
+test scenarios::tests::a_mixed_gate_stays_the_actionable_one_and_lists_every_rung ... ok
+test scenarios::tests::a_content_gate_names_the_capability_and_where_it_is_practiced ... ok
+test scenarios::tests::a_goal_gate_is_labelled_a_later_curriculum_stage_by_its_own_words ... ok
+test scenarios::tests::an_unnamed_prerequisite_falls_back_to_an_honest_phrase_not_the_id ... ok
+test scenarios::tests::nothing_is_recommended_while_every_scenario_is_locked ... ok
+test scenarios::tests::readiness_is_later_for_an_untouched_later_stage_or_an_undefined_goal ... ok
+test scenarios::tests::readiness_and_lock_kinds_serialize_as_the_ts_union_strings ... ok
+test scenarios::tests::playable_rows_lead_later_stage_rows_in_either_input_order ... ok
+test scenarios::tests::near_rows_sit_between_playable_and_later_rows ... ok
+test scenarios::tests::readiness_is_playable_only_when_the_hard_gate_is_met ... ok
+test scenarios::tests::readiness_is_near_when_the_gate_is_part_open_or_the_same_stage ... ok
+test scenarios::tests::the_copy_scanner_finds_pack_ids_and_ignores_ordinary_copy ... ok
+test scenarios::tests::the_recommendation_is_the_first_playable_row_and_there_is_one ... ok
+test scenarios::tests::a_completed_transfer_survives_every_view_return ... ok
+test scenarios::tests::the_step_result_serde_tags_include_partial_accepted ... ok
+test scenarios::tests::scenario_views_serialize_snake_case_keys ... ok
+test scenarios::tests::within_a_tier_the_band_ladder_then_the_smallest_gate_wins ... ok
+test scenarios::tests::transfer_views_show_payload_availability_and_only_payloads_stamp_done ... ok
+test scenarios::tests::renaming_pack_display_data_renames_the_lock_copy ... ok
+test scenarios::tests::every_shipped_scenario_offers_wrong_moves_and_records_honest_evidence ... ok
+test scenarios::tests::the_shipped_pack_leads_with_an_openable_scenario_for_a_fresh_profile ... ok
+test scenarios::tests::a_fresh_profiles_lock_copy_carries_no_raw_ids_in_either_shipped_pack ... ok
+
+test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 165 filtered out; finished in 1.47s
+
+exit=0
+
+== npx tsc --noEmit ==
+2026-11-08T19:18:04-07:00
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'tsc' --noEmit
+exit=0
+
+== npx vitest run ==
+2026-11-08T19:18:05-07:00
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'vitest' run
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/apps/desktop
+
+
+ Test Files  47 passed (47)
+      Tests  351 passed (351)
+   Start at  19:18:05
+   Duration  2.30s (transform 46%, environment 23%, tests 17%, import 13%, worker 1%)
+
+  Transform  |node| transforming modules took 5.93s · 71% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+
+vitest_exit=0
+
+== non-vacuity check: new Rust test with the fix reverted ==
+cargo test -p lts-desktop --lib scenarios::tests::a_completed_transfer_survives_every_view_return with done hardcoded false again:
+  -> FAILED (panicked at scenarios.rs:2380, 'the earned transfer shows its ✓': 0 != 1)
+fix restored: -> test result: ok. 1 passed; 0 failed
+
+== cargo fmt --all -- --check (final, after revert round-trip) ==
+exit=0
+
+== final targeted suites (rerun after round-trip) ==
+test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 165 filtered out; finished in 1.50s
+
+Controller re-verification (2026-11-08): fmt FMT-OK; clippy -D warnings CLIPPY-OK; cargo test -p lts-desktop --lib scenarios 22 passed/0 failed; npx tsc exit 0; vitest 47 files / 351 tests passed. Lane trusted.

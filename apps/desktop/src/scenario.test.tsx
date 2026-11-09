@@ -223,6 +223,79 @@ describe("scenario panel", () => {
     expect(html).not.toContain('data-testid="scenario-help"');
   });
 
+  // SCENARIO-VIEW-CONSISTENCY-001 (finding S-07): level 0 means "answer
+  // unaided" — not a request, and no pack can ship a payload for it. It
+  // states itself as an info line; the dead disabled button with an
+  // apology is gone from every node.
+  it("renders the level-0 No supports rung as an info line, never a dead button", () => {
+    const html = render({ active });
+    const ladder = html.slice(
+      html.indexOf('<fieldset class="ladder"'),
+      html.indexOf("</fieldset>"),
+    );
+    expect(ladder).toContain("No supports");
+    expect(ladder).toContain("ladder-rung--info");
+    expect(ladder).toContain("answer without help — nothing to press here");
+    // No button at all for level 0: the only ladder button is the
+    // delivered level-3 rung, and it is enabled.
+    expect(ladder.match(/<button/g)).toHaveLength(1);
+    expect(ladder).toContain(">Word bank with hiragana and romaji<");
+    expect(ladder).not.toContain("disabled");
+    // And the apology is never shown for level 0.
+    expect(html).not.toContain("no help content at this level in this pack");
+  });
+
+  // SCENARIO-VIEW-CONSISTENCY-001 (finding S-05): the App replaces the
+  // whole active view after every command. These are the exact post-
+  // command view shapes for attempt, support, and recovery with an
+  // earned transfer: the ✓ and the counter must ride every one of them.
+  it("keeps the earned transfer checkmark and counter through attempt, support, and recovery views", () => {
+    const earned: ScenarioView = {
+      ...active,
+      transfers: [
+        {
+          id: "ja.scenario.demo.first-meeting.formal",
+          description: "Greet a senior colleague",
+          done: true,
+          has_payload: true,
+        },
+      ],
+    };
+    // View return after a wrong attempt (not-satisfied + recovery offered).
+    const afterAttempt = render({
+      active: earned,
+      lastStep: {
+        result: "not-satisfied",
+        recovery: ["ja.activity.demo.sc.repair-repeat"],
+        completed: false,
+      },
+    });
+    expect(afterAttempt).toContain("✓ Greet a senior colleague");
+    expect(afterAttempt).toContain("Transfer variants (1/1)");
+    // View return after a support press (help card open, rung consumed).
+    const afterSupport = render({
+      active: {
+        ...earned,
+        support_used: [3],
+        delivered_help: { kind: "hint", text: "A wave and a word fit.", options: [] },
+      },
+    });
+    expect(afterSupport).toContain("✓ Greet a senior colleague");
+    expect(afterSupport).toContain("Transfer variants (1/1)");
+    // View return after taking a recovery branch (prompt swapped, state kept).
+    const afterRecovery = render({
+      active: {
+        ...earned,
+        node: {
+          ...earned.node,
+          prompt: "You were not understood. Ask them to repeat.",
+        },
+      },
+    });
+    expect(afterRecovery).toContain("✓ Greet a senior colleague");
+    expect(afterRecovery).toContain("Transfer variants (1/1)");
+  });
+
   it("offers pack-declared recovery moves after a failed intent", () => {
     const html = render({
       active,

@@ -63,9 +63,11 @@ export interface ScenarioView {
   situation?: string | null;
   node: ScenarioNodeView;
   /** One support-ladder rung. `delivered` is false when the current
-   * node carries no help payload at this level — a pack that declares
-   * the rung (pre-2026-10-19 packs) cannot honor it here, so the button
-   * is disabled and says why. */
+   * node carries no help payload at this level. SCENARIO-VIEW-
+   * CONSISTENCY-001 (finding S-07): the level-0 rung ("No supports" —
+   * answer unaided) is never a request and never carries a payload, so
+   * it renders as an info line, not a disabled button. An undelivered
+   * rung above level 0 (pre-2026-10-19 packs) is disabled and says why. */
   ladder: { support_level: number; description: string; delivered: boolean }[];
   /** SCENARIO-TRANSFER-001 (finding S-04): one declared transfer variant.
    * `has_payload` is false when the pack ships no completable practice
@@ -302,21 +304,33 @@ export function ScenarioPanel(p: ScenarioPanelProps) {
         )}
         <fieldset className="ladder">
           <legend>Support</legend>
-          {s.ladder.map((l) => (
-            <span key={l.support_level} className="ladder-rung">
-              <button
-                type="button"
-                className="btn btn--quiet"
-                disabled={!l.delivered || s.support_used.includes(l.support_level)}
-                onClick={() => p.onSupport(l.support_level)}
-              >
-                {l.description}
-              </button>
-              {!l.delivered && (
-                <span className="ladder-note">no help content at this level in this pack</span>
-              )}
-            </span>
-          ))}
+          {s.ladder.map((l) =>
+            // SCENARIO-VIEW-CONSISTENCY-001 (finding S-07): level 0
+            // means "answer unaided" — it is not a request, no pack
+            // can ship a payload for it, and it must never render as a
+            // disabled button apologising for missing content. It is
+            // stated as an info line instead.
+            l.support_level === 0 ? (
+              <span key={l.support_level} className="ladder-rung ladder-rung--info">
+                <span className="ladder-rung-label">{l.description}</span>
+                <span className="ladder-note">answer without help — nothing to press here</span>
+              </span>
+            ) : (
+              <span key={l.support_level} className="ladder-rung">
+                <button
+                  type="button"
+                  className="btn btn--quiet"
+                  disabled={!l.delivered || s.support_used.includes(l.support_level)}
+                  onClick={() => p.onSupport(l.support_level)}
+                >
+                  {l.description}
+                </button>
+                {!l.delivered && (
+                  <span className="ladder-note">no help content at this level in this pack</span>
+                )}
+              </span>
+            ),
+          )}
         </fieldset>
         {s.active_transfer && (
           <div aria-live="polite" data-testid="transfer-practice" className="help-card">
