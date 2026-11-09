@@ -1,0 +1,14 @@
+PACK-BUNDLE-RU-001 controller gate log (2026-11-08 night)
+
+- scripts/stage-pack-bundle.sh stage --locale ru-RU + overlay: exit 0;
+  dist/variants/packs/resources/packs/ now holds BOTH reference packs.
+- docs/13_RELEASE_AND_DISTRIBUTION.md recipe now stages ja-JP AND ru-RU
+  (the default-only-ja staging was the original hole).
+- DEV_PACK_CANDIDATES in apps/desktop/src-tauri/src/lib.rs extended with
+  org.openlanguage.ru-ru.reference (repo-tree release binaries).
+- DEVICE PROOF (Xvfb + fakehome4 fresh HOME): onboarding Available list
+  shows Russian Reference Pack; Install button copies the full pack,
+  installed store gained media/words.jsonl with 4,819 rows.
+- cargo bundled/available_packs suites: pass except 3 bundled-archive
+  tests that race the live ja words.jsonl writer (declared-size 107025
+  vs 107024 mid-write); re-run after WORD-TIMING-002 completes.
