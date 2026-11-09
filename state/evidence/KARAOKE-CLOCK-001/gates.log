@@ -1,0 +1,36 @@
+KARAOKE-CLOCK-001 controller gate log (2026-11-08 night)
+
+ROOT CAUSE (device-proven on the OLD binary):
+- Clean-data-dir install carried media/words.jsonl (4,819 rows); sidecar
+  row for the shown clip verified with exact entry id and span 0.0-1.44 s.
+- Audio provably played (PipeWire sink-inputs 0 -> 1 during Play).
+- Pixel sampling: zero accent-soft (#E2EEEB) chip pixels in idle AND
+  mid-playback frames (identical #F5F1E9 regions) -> the karaoke chip
+  never lit. Clock link dead: timeupdate delivered no events on the
+  short blob clip.
+
+FIX (this commit):
+- attachKaraokeClock in word-timing.ts: rAF pump over currentTime,
+  timeupdate kept as second source, startAt seek + stopAt pause kept.
+- Playing state on the shadowing Play button (label + aria-busy).
+
+GATES:
+- npx tsc --noEmit -> clean.
+- npx vitest run src/word-timing.test.tsx -> 11/11 (3 new pump tests,
+  incl. the zero-timeupdate regression pin).
+- npx vitest run (full) -> 47 files / 354 tests.
+- pnpm fmt:check -> all prettier-clean.
+- Rust untouched by this lane; cargo gates run before commit.
+
+DEVICE RE-VERIFY STATUS (honest):
+- Rebuilt release binary contains the fix (Playing label + pump in the
+  built asset; AppDir/binary rebuilt 22:22 after the change).
+- Xvfb re-test environment proved unreliable: the AppImage web process
+  crashed at startup (appsink/autoaudiosink not found -> GLib-CRITICAL;
+  a frozen last-painted frame made all clicks look dead), and the raw
+  binary run degraded differently (focus landed on an editable field on
+  the card; stray keys produced junk text - separate UX smell, filed in
+  notes). Audio never reached PipeWire in the degraded instances.
+- Verdict: unit-level regression pinned; in-webview chip pixel-sample
+  deferred to a clean Xvfb run (env flake, not a code failure). Card
+  stays open until that pixel evidence lands.

@@ -74,3 +74,70 @@ export function activeTokenIndex(tokens: SurfaceToken[], time: number | null): n
 export function playableToken(token: SurfaceToken): token is SurfaceToken & { span: WordSpan } {
   return token.span !== null;
 }
+
+/// Clock pump options: the karaoke clock plus the optional word-span window.
+export interface KaraokeClockOpts {
+  onTime: (t: number | null) => void;
+  startAt?: number;
+  stopAt?: number;
+  /// injectable frame source so the pump is testable without a real rAF
+  requestFrame?: (cb: () => void) => number;
+  cancelFrame?: (id: number) => void;
+}
+
+/// Drive the karaoke clock from an <audio> element.
+///
+/// `timeupdate` alone is not enough: WebKitGTK (and short blob clips in
+/// general) can starve it to zero events before `ended` fires, which left
+/// the karaoke chip never lighting up in the real webview. So the pump
+/// samples `currentTime` at frame rate while the element plays, and keeps
+/// `timeupdate` as a second source. Seeking once to `startAt` and pausing
+/// at `stopAt` implements click-to-hear-word windows.
+/// Returns a disposer that stops the pump.
+export function attachKaraokeClock(audio: HTMLAudioElement, opts: KaraokeClockOpts): () => void {
+  const requestFrame = opts.requestFrame ?? ((cb) => requestAnimationFrame(cb));
+  const cancelFrame = opts.cancelFrame ?? ((id) => cancelAnimationFrame(id));
+  let frame = 0;
+  const stopPump = () => {
+    if (frame !== 0) cancelFrame(frame);
+    frame = 0;
+  };
+  const pastStop = () => {
+    if (opts.stopAt !== undefined && audio.currentTime >= opts.stopAt) {
+      audio.pause();
+      stopPump();
+      opts.onTime(null);
+      return true;
+    }
+    return false;
+  };
+  const pump = () => {
+    frame = 0;
+    if (audio.paused || audio.ended) return;
+    if (pastStop()) return;
+    opts.onTime(audio.currentTime);
+    frame = requestFrame(pump);
+  };
+  const startPump = () => {
+    if (frame === 0) frame = requestFrame(pump);
+  };
+  const handlers: Array<[string, EventListener]> = [
+    ["play", () => startPump()],
+    ["playing", () => startPump()],
+    [
+      "timeupdate",
+      () => {
+        if (!pastStop()) opts.onTime(audio.currentTime);
+      },
+    ],
+    ["pause", stopPump],
+    ["ended", stopPump],
+  ];
+  for (const [ev, fn] of handlers) audio.addEventListener(ev, fn as EventListener);
+  if (opts.startAt !== undefined) {
+    audio.addEventListener("loadedmetadata", () => {
+      audio.currentTime = opts.startAt as number;
+    });
+  }
+  return stopPump;
+}

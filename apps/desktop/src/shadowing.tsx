@@ -45,6 +45,11 @@ export interface ShadowingPanelProps {
   onStep(delta: number): void;
   /// WORD-TIMING-001: play only this word's span (click-to-hear-word).
   onPlayWord?(span: WordSpan): void;
+  /// KARAOKE-CLOCK-001: true while a model/attempt clip of this card is
+  /// audible. The card previously gave no playback feedback at all, which
+  /// made the dark-karaoke bug invisible: learners (and testers) could not
+  /// tell whether Play had done anything.
+  playing?: boolean;
 }
 
 export function ShadowingPanel(p: ShadowingPanelProps) {
@@ -138,8 +143,13 @@ export function ShadowingPanel(p: ShadowingPanelProps) {
             </p>
           )}
           <div className="btn-row">
-            <button type="button" className="btn" onClick={p.onPlayModel}>
-              Play model audio
+            <button
+              type="button"
+              className="btn"
+              onClick={p.onPlayModel}
+              aria-busy={p.playing ? true : undefined}
+            >
+              {p.playing ? "Playing…" : "Play model audio"}
             </button>
             {!p.recording ? (
               <button type="button" className="btn" onClick={p.onRecord}>

@@ -51,7 +51,7 @@ import { playClip } from "./playback";
 import { stressEnabled, type DisplaySettingsView } from "./stress";
 import { ReadingPanel, type Story, type StorySummary } from "./reading";
 import { ShadowingPanel, type ShadowTarget } from "./shadowing";
-import type { WordSpan } from "./word-timing";
+import { attachKaraokeClock, type WordSpan } from "./word-timing";
 import { MyWordsPanel, type MineItem } from "./words";
 import {
   ScenarioPanel,
@@ -3049,23 +3049,15 @@ export function App() {
     };
     audio.addEventListener("ended", settle);
     audio.addEventListener("error", settle);
-    // WORD-TIMING-001: the karaoke clock, and click-to-hear-word spans —
-    // seek once metadata is known, pause once the span is past its end.
-    if (opts) {
-      if (opts.startAt !== undefined) {
-        const startAt = opts.startAt;
-        audio.addEventListener("loadedmetadata", () => {
-          audio.currentTime = startAt;
-        });
-      }
-      audio.addEventListener("timeupdate", () => {
-        if (!opts.onTime) return;
-        if (opts.stopAt !== undefined && audio.currentTime >= opts.stopAt) {
-          audio.pause();
-          settle();
-        } else {
-          opts.onTime(audio.currentTime);
-        }
+    // WORD-TIMING-001: the karaoke clock, and click-to-hear-word spans.
+    // KARAOKE-CLOCK-001: the pump in word-timing.ts drives the clock from
+    // currentTime at frame rate; timeupdate alone left the karaoke chip
+    // dark in the real WebKitGTK webview (starved events on short clips).
+    if (opts?.onTime) {
+      attachKaraokeClock(audio, {
+        onTime: opts.onTime,
+        startAt: opts.startAt,
+        stopAt: opts.stopAt,
       });
     }
     setClipPlaying(true);
@@ -3660,6 +3652,7 @@ export function App() {
           recording={recording}
           attemptUrl={attemptUrl}
           playTime={shadowTime}
+          playing={clipPlaying}
           onRetry={() => void openShadowing()}
           onOpenSetup={() => void openSettings()}
           onPlayModel={() => void playShadowModel()}

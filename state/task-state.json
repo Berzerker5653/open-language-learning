@@ -1985,6 +1985,19 @@
         "state/notes/PACK-BUNDLE-RU-001.md"
       ],
       "updated": "2026-11-08"
+    },
+    "KARAOKE-CLOCK-001": {
+      "task_id": "KARAOKE-CLOCK-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Karaoke clock pumped by frames after WebKitGTK starved timeupdate",
+      "activity": "building",
+      "summary": "Device test proved the karaoke chip stayed dark in the real webview despite audio playing: timeupdate delivered zero events on short blob clips. attachKaraokeClock now samples currentTime at frame rate; playing-state added to the Play button.",
+      "notes": "Found and fixed by the controller during the 2026-11-08 Xvfb UX test. Contract in state/notes/KARAOKE-CLOCK-001.md. Gate: vitest 47/354 incl 3 new pump tests; device pixel-sample re-verify pending on the rebuilt binary.",
+      "evidence": [
+        "state/notes/KARAOKE-CLOCK-001.md"
+      ],
+      "updated": "2026-11-08"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

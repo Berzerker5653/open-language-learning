@@ -2312,6 +2312,26 @@ tasks:
     (verified against a clean data dir), and the shipped bundle docs/13 recipe
     names both locales.
   required_for_desktop_1_0: false
+- id: KARAOKE-CLOCK-001
+  milestone: M10
+  priority: P0
+  title: Karaoke highlight never lit in the real webview (timeupdate starved on short clips)
+  dependencies:
+  - WORD-TIMING-001
+  read_first:
+  - apps/desktop/src/word-timing.ts
+  - apps/desktop/src/App.tsx
+  acceptance:
+  - The karaoke clock is driven by a frame-rate pump over audio.currentTime
+    (attachKaraokeClock), not timeupdate alone; timeupdate stays a second
+    source. Unit tests pin the pump with ZERO timeupdate events, the
+    click-to-hear-word stopAt window, and timeupdate passthrough.
+  - Device-verified on the rebuilt release app on a virtual display, pixel
+    sampling during real model-audio playback shows the accent-soft chip on
+    the timed word (absent before, present during, absent after).
+  - The shadowing Play button gains an honest playing state (Playing… plus
+    aria-busy) so playback feedback exists at all.
+  required_for_desktop_1_0: false
 - id: SETTINGS-TEXT-COLLAPSE-001
   milestone: M10
   priority: P2
@@ -2610,6 +2630,7 @@ execution_scope:
   - SETTINGS-PACK-CAPABILITY-001
   - SETTINGS-TEXT-COLLAPSE-001
   - PACK-BUNDLE-RU-001
+  - KARAOKE-CLOCK-001
   - JA-FUNCTION-WORD-LOOKUP-001
   - SCENARIOS-SECTION-REVIEW-001
   - SCENARIO-INTERACTION-001

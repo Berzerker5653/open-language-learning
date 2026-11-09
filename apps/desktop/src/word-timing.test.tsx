@@ -9,7 +9,12 @@
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { ShadowingPanel, type ShadowTarget } from "./shadowing";
-import { activeTokenIndex, alignSurfaceTokens, type WordSpan } from "./word-timing";
+import {
+  activeTokenIndex,
+  alignSurfaceTokens,
+  attachKaraokeClock,
+  type WordSpan,
+} from "./word-timing";
 
 const words: WordSpan[] = [
   { w: "Привет", s: 0.0, e: 0.5 },
@@ -110,5 +115,113 @@ describe("ShadowingPanel karaoke render", () => {
     expect(render(item([]))).toBe(plain);
     // A sidecar from different text cannot half-highlight this surface.
     expect(render(item([{ w: "до-ёброе", s: 0, e: 1 }]))).toBe(plain);
+  });
+});
+
+/// KARAOKE-CLOCK-001: the regression this device test found — WebKitGTK
+/// delivered zero `timeupdate` events on a short blob clip, so the karaoke
+/// chip stayed dark although audio played. The pump must drive the clock
+/// from currentTime at frame rate, without any timeupdate event at all.
+class FakeMedia {
+  currentTime = 0;
+  paused = true;
+  ended = false;
+  private handlers = new Map<string, Array<() => void>>();
+  addEventListener(ev: string, fn: () => void) {
+    const list = this.handlers.get(ev) ?? [];
+    list.push(fn);
+    this.handlers.set(ev, list);
+  }
+  emit(ev: string) {
+    for (const fn of this.handlers.get(ev) ?? []) fn();
+  }
+  pause() {
+    this.paused = true;
+    this.emit("pause");
+  }
+}
+
+function frameSource() {
+  let queue: Array<() => void> = [];
+  let id = 0;
+  return {
+    requestFrame: (cb: () => void) => {
+      queue.push(cb);
+      return ++id;
+    },
+    cancelFrame: (frame: number) => {
+      void frame;
+    },
+    /// run every frame currently queued (each may enqueue the next)
+    step() {
+      const batch = queue;
+      queue = [];
+      for (const cb of batch) cb();
+    },
+    pending: () => queue.length,
+  };
+}
+
+describe("attachKaraokeClock", () => {
+  it("drives the clock with NO timeupdate events at all (the WebKitGTK starvation bug)", () => {
+    const media = new FakeMedia();
+    const frames = frameSource();
+    const seen: Array<number | null> = [];
+    attachKaraokeClock(media as unknown as HTMLAudioElement, {
+      onTime: (t) => seen.push(t),
+      requestFrame: frames.requestFrame,
+      cancelFrame: frames.cancelFrame,
+    });
+    media.paused = false;
+    media.emit("play");
+    expect(frames.pending()).toBe(1);
+    media.currentTime = 0.4;
+    frames.step();
+    media.currentTime = 0.9;
+    frames.step();
+    expect(seen).toEqual([0.4, 0.9]);
+    media.ended = true;
+    media.emit("ended");
+    media.currentTime = 1.2;
+    frames.step();
+    expect(seen).toEqual([0.4, 0.9]); // pump stopped: no tick after ended
+  });
+
+  it("pauses at stopAt and closes the clock with null (click-to-hear-word window)", () => {
+    const media = new FakeMedia();
+    const frames = frameSource();
+    const seen: Array<number | null> = [];
+    attachKaraokeClock(media as unknown as HTMLAudioElement, {
+      onTime: (t) => seen.push(t),
+      startAt: 0.6,
+      stopAt: 1.0,
+      requestFrame: frames.requestFrame,
+      cancelFrame: frames.cancelFrame,
+    });
+    media.emit("loadedmetadata");
+    expect(media.currentTime).toBe(0.6); // seeked once metadata is known
+    media.paused = false;
+    media.emit("play");
+    media.currentTime = 0.8;
+    frames.step();
+    media.currentTime = 1.05;
+    frames.step();
+    expect(media.paused).toBe(true);
+    expect(seen).toEqual([0.8, null]);
+  });
+
+  it("still honours timeupdate when the webview does deliver it", () => {
+    const media = new FakeMedia();
+    const frames = frameSource();
+    const seen: Array<number | null> = [];
+    attachKaraokeClock(media as unknown as HTMLAudioElement, {
+      onTime: (t) => seen.push(t),
+      requestFrame: frames.requestFrame,
+      cancelFrame: frames.cancelFrame,
+    });
+    media.paused = false;
+    media.currentTime = 0.5;
+    media.emit("timeupdate");
+    expect(seen).toEqual([0.5]);
   });
 });
