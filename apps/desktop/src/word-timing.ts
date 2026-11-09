@@ -87,16 +87,18 @@ export interface KaraokeClockOpts {
 
 /// Drive the karaoke clock from an <audio> element.
 ///
-/// `timeupdate` alone is not enough: WebKitGTK (and short blob clips in
-/// general) can starve it to zero events before `ended` fires, which left
-/// the karaoke chip never lighting up in the real webview. So the pump
-/// samples `currentTime` at frame rate while the element plays, and keeps
-/// `timeupdate` as a second source. Seeking once to `startAt` and pausing
-/// at `stopAt` implements click-to-hear-word windows.
+/// Two webview facts make `timeupdate`-only unreliable: WebKitGTK (and
+/// short blob clips in general) can starve it to zero events before
+/// `ended` fires, and a software-rendered webview (no compositor) never
+/// runs `requestAnimationFrame` at all — both observed on the same
+/// device. So the pump samples `currentTime` on a 100 ms TIMER while the
+/// element plays (timers do not need a compositor), and keeps
+/// `timeupdate` as a second source. Seeking once to `startAt` and
+/// pausing at `stopAt` implements click-to-hear-word windows.
 /// Returns a disposer that stops the pump.
 export function attachKaraokeClock(audio: HTMLAudioElement, opts: KaraokeClockOpts): () => void {
-  const requestFrame = opts.requestFrame ?? ((cb) => requestAnimationFrame(cb));
-  const cancelFrame = opts.cancelFrame ?? ((id) => cancelAnimationFrame(id));
+  const requestFrame = opts.requestFrame ?? ((cb) => window.setTimeout(cb, 100));
+  const cancelFrame = opts.cancelFrame ?? ((id) => window.clearTimeout(id));
   let frame = 0;
   const stopPump = () => {
     if (frame !== 0) cancelFrame(frame);

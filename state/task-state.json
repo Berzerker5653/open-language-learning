@@ -1988,14 +1988,15 @@
     },
     "KARAOKE-CLOCK-001": {
       "task_id": "KARAOKE-CLOCK-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Karaoke clock pumped by frames after WebKitGTK starved timeupdate",
-      "activity": "building",
+      "activity": "idle",
       "summary": "Device test proved the karaoke chip stayed dark in the real webview despite audio playing: timeupdate delivered zero events on short blob clips. attachKaraokeClock now samples currentTime at frame rate; playing-state added to the Play button.",
-      "notes": "Found and fixed by the controller during the 2026-11-08 Xvfb UX test. Contract in state/notes/KARAOKE-CLOCK-001.md. Gate: vitest 47/354 incl 3 new pump tests; device pixel-sample re-verify pending on the rebuilt binary.",
+      "notes": "Closed by the controller on 2026-11-08 night. Timer-pump clock proven live in the real webview (t ticks, active=0, accent-soft chip painted on the word line mid-playback); attach proven by probe (3978/4015). Evidence: state/evidence/KARAOKE-CLOCK-001/gates.log.",
       "evidence": [
-        "state/notes/KARAOKE-CLOCK-001.md"
+        "state/notes/KARAOKE-CLOCK-001.md",
+        "state/evidence/KARAOKE-CLOCK-001/gates.log"
       ],
       "updated": "2026-11-08"
     }

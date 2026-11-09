@@ -13714,6 +13714,20 @@ transfer_variants:
     }
 
     #[test]
+    #[ignore = "controller probe: set LTS_PROBE_DATA_DIR + LTS_PROBE_PROFILE_ID"]
+    fn probe_real_store_word_attachment() {
+        let dir = std::env::var("LTS_PROBE_DATA_DIR").unwrap_or_default();
+        let pid = std::env::var("LTS_PROBE_PROFILE_ID").unwrap_or_default();
+        if dir.is_empty() || pid.is_empty() {
+            panic!("probe needs LTS_PROBE_DATA_DIR and LTS_PROBE_PROFILE_ID");
+        }
+        let items = shadowing_items_at(std::path::Path::new(&dir), &pid).unwrap();
+        let with = items.iter().filter(|i| !i.words.is_empty()).count();
+        eprintln!("PROBE items={} with_words={}", items.len(), with);
+        assert!(with > 0, "NO word timings attached from the real store");
+    }
+
+    #[test]
     fn shadowing_items_attach_word_timings_only_when_the_sidecar_ships() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();

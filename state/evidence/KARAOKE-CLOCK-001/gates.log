@@ -34,3 +34,23 @@ DEVICE RE-VERIFY STATUS (honest):
 - Verdict: unit-level regression pinned; in-webview chip pixel-sample
   deferred to a clean Xvfb run (env flake, not a code failure). Card
   stays open until that pixel evidence lands.
+
+FINAL DEVICE VERIFICATION (2026-11-08 ~23:05, clean Xvfb + raw binary):
+- Rust attach probe (env-gated #[ignore] test, real store): 3978/4015
+  shadow items carry word spans from media/words.jsonl.
+- Panel readout (temp KD line, since removed): tokens=1 words=1
+  active=0 with t advancing 0.360584 -> 0.9803 DURING real model audio
+  (PipeWire sink-inputs confirmed active) -> the TIMER pump ticks where
+  the rAF variant did not (compositor-less Xvfb never runs rAF) and
+  where timeupdate fired nothing.
+- Same-pixel before/after: idle word line (700,470)=#F5F1E9 (cream);
+  mid-playback (700,470)=(650,470)=#E2EEEB (accent-soft karaoke chip).
+  Chip paint proven at pixel level, idle vs playing, real webview.
+- Scan-method lesson recorded: an earlier "zero chip pixels" verdict
+  was an artifact of a case-mismatched grep over magick txt output;
+  pixel() point-sampling + histogram were the trustworthy instruments.
+
+GATES AT CLOSE: tsc clean; vitest 47/354 (debug line removed, contract
+tests green); prettier clean; cargo fmt clean; clippy -D warnings clean.
+Bundled-suite 3-test re-run still deferred: live ja words.jsonl writer
+races those archives; runs after WORD-TIMING-002 completes.
