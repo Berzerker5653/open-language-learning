@@ -76,3 +76,74 @@ def test_duration_slack():
     words = [W("привет", 0.0, 1.5)]
     assert wt.align_tokens(words, ["привет"], duration=1.0) is None
     assert wt.align_tokens(words, ["привет"], duration=1.2) == [(0, 0)]
+
+
+# ---------------------------------------------------------------------------
+# WORD-TIMING-002 (ja kana path). These need pykakasi; run them under
+# ~/.venvs/wordtiming-ja (the ru suite stays green under plain python3 with
+# pykakasi absent — the kana tests then skip via the guards below).
+# ---------------------------------------------------------------------------
+
+def _kana_fold_or_skip():
+    try:
+        return wt.kana_fold("分析")
+    except RuntimeError:
+        return None  # pykakasi not importable in this interpreter
+
+
+def test_kana_fold_heard_kanji_matches_expected_kana():
+    # Contract case 1: whisper kanji-converts heard ja ("ぶんせき" heard as
+    # "分析", even with a kana initial_prompt); pykakasi K2H folds it back
+    # and the aligned expected kana token matches.
+    folded = _kana_fold_or_skip()
+    if folded is None:
+        return
+    assert folded == "ぶんせき"
+    assert wt.kana_fold("ブンセキ") == "ぶんせき"   # katakana heard folds too
+    assert wt.kana_fold("ぶんせき") == "ぶんせき"   # kana-only passes through
+    words = [W(wt.norm(folded), 0.0, 0.6)]
+    spans = wt.align_tokens(words, [wt.norm("ぶんせき")], duration=0.7)
+    assert spans == [(0, 0)]
+
+
+def test_mora_fragment_chain_absorbs_up_to_three():
+    # Contract case 2: whisper chops heard ja into mora chunks ("お ば さん"
+    # for expected おばさん). Chain absorb (ja passes absorb_chain=3) glues
+    # 3 fragments when the concatenated ratio >= 0.9; the ru default
+    # (chain=2) must NOT glue them.
+    words = [W("お", 0.0, 0.15), W("ば", 0.15, 0.3), W("さん", 0.3, 0.6)]
+    want = [wt.norm("おばさん")]  # generator passes norm()ed want tokens
+    spans = wt.align_tokens(words, want, duration=0.7, absorb_chain=3)
+    assert spans == [(0, 2)]
+    assert wt.align_tokens(words, want, duration=0.7) is None
+
+
+def test_three_chain_below_long_threshold_is_abstain():
+    # "ぶん き ん" for ぶんけん: concatenated ratio 0.75 < 0.9 -> abstain,
+    # not a glue at a different word. (The 2-fragment glue is 0.571, also
+    # below the 0.8 absorb threshold.)
+    words = [W("ぶん", 0.0, 0.2), W("き", 0.2, 0.3), W("ん", 0.3, 0.45)]
+    assert wt.align_tokens(words, ["ぶんけん"], duration=0.6,
+                           absorb_chain=3) is None
+
+
+def test_expected_kana_text_segments_into_multiple_tokens():
+    # Contract case 3: expected-side segmentation. The ja pack's word
+    # boundaries ARE its whitespace (658/4911 rows are pre-spaced kana
+    # sentences); pykakasi 2.3.0 wakati adds morpheme boundaries only
+    # across kanji, so kana-only rows segment via whitespace and alignment
+    # must cover several kana tokens at once.
+    want = [wt.norm(t) for t in "でんわを かけます".split()]
+    assert len(want) == 2  # two ja word tokens from one expected-text row
+    assert want[1] == "かけます"
+    words = [W("でんわを", 0.0, 0.5), W("かけ", 0.5, 0.7), W("ます", 0.7, 0.9)]
+    spans = wt.align_tokens(words, want, duration=1.0, absorb_chain=3)
+    assert spans == [(0, 0), (1, 2)]
+
+
+def test_duplicate_heard_takes_first_match():
+    # Contract case 4: short clips are sometimes heard twice; the duplicate
+    # is an ASR-side insert and must not block coverage, and the token is
+    # timed on the FIRST matched block.
+    words = [W("ぶんけん", 0.0, 0.5), W("ぶんけん", 0.7, 1.1)]
+    assert wt.align_tokens(words, ["ぶんけん"], duration=1.2) == [(0, 0)]

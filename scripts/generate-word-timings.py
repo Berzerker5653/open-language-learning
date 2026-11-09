@@ -36,17 +36,22 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from word_timing_lib import align_tokens, norm  # noqa: E402
+from word_timing_lib import align_tokens, kana_fold, norm  # noqa: E402
 
 PRIMARY_MODEL = "large-v3-turbo"   # CT2, cached; the spike's workhorse
 RETRY_MODEL = "large-v3"           # slower/heavier; one retry per failing clip
 PRIMARY_RATIO, PRIMARY_ABSORB = 0.75, 0.8
 RETRY_RATIO, RETRY_ABSORB = 0.6, 0.75   # relaxed second rung (spike's "relaxed split/merge")
+# WORD-TIMING-002 (ja): whisper heard-ja fragments are mora-level, so an
+# expected token may glue up to 3 fragments (concatenated ratio >= 0.9).
+JA_ABSORB_CHAIN, JA_ABSORB_LONG = 3, 0.9
+_JA_EXPECTED_KANJI = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
 
 
 def transcribe(model, wav: Path, text: str, language: str) -> list[dict]:
@@ -59,10 +64,14 @@ def transcribe(model, wav: Path, text: str, language: str) -> list[dict]:
 
 
 def timed_words(row: dict, pieces: list[str], words: list[dict],
-                spans: list[tuple[int, int]]) -> list[dict]:
+                spans: list[tuple[int, int]],
+                single_whole_clip: bool = True) -> list[dict]:
     """Sidecar word list: exact text token + union of its matched ASR spans.
-    A single-word clip covers the whole aligned span (contract v1)."""
-    if len(pieces) == 1:
+    A single-word clip covers the whole aligned span (contract v1). The ja
+    path (WORD-TIMING-002) disables that override: duplicate-heard clips
+    exist in ja, and the contract says timing takes the FIRST matched
+    block, not a span padded with re-heard junk."""
+    if single_whole_clip and len(pieces) == 1:
         spans = [(0, len(words) - 1)]
     return [{"w": p, "s": words[a]["start"], "e": words[b]["end"]}
             for p, (a, b) in zip(pieces, spans)]
@@ -97,12 +106,19 @@ def main() -> int:
                          "OOM on a box already hosting the LLM).")
     ap.add_argument("--out", type=Path,
                     help="sidecar jsonl (default <pack>/media/words.jsonl)")
+    ap.add_argument("--evidence-dir", type=Path,
+                    default=Path("state/evidence/WORD-TIMING-001"),
+                    help="dir holding abstains-<lang>.jsonl / resolved-<lang>.jsonl "
+                         "(WORD-TIMING-002 ja runs land in state/evidence/WORD-TIMING-002)")
+    ap.add_argument("--exclude-ids", type=Path, action="append", default=[],
+                    metavar="JSONL",
+                    help="extra jsonl files whose ids count as settled (fresh pilots: "
+                         "exclude rows an earlier pilot already decided on)")
     args = ap.parse_args()
 
     pack = args.pack
     out = args.out or (pack / "media" / "words.jsonl")
-    abstain_path = (Path("state/evidence/WORD-TIMING-001")
-                    / f"abstains-{args.lang}.jsonl")
+    abstain_path = args.evidence_dir / f"abstains-{args.lang}.jsonl"
     abstain_path.parent.mkdir(parents=True, exist_ok=True)
 
     rows = [json.loads(l) for l in
@@ -123,13 +139,20 @@ def main() -> int:
                     done.add(json.loads(l)["id"])
     if args.pass_name == "retry":
         # Retry pass targets only clips the primary pass abstained on — and
-        # loads only the heavy model (never both at once).
+        # loads only the heavy model (never both at once). Kanji-expected
+        # rows abstain by contract, so the heavy model would never fix them.
         abstain_ids = set()
         if abstain_path.exists():
             for l in abstain_path.read_text(encoding="utf-8").splitlines():
                 if l.strip():
                     abstain_ids.add(json.loads(l)["id"])
-        rows = [r for r in rows if r["id"] in abstain_ids]
+        rows = [r for r in rows if r["id"] in abstain_ids
+                and not _JA_EXPECTED_KANJI.search(r["text"])]
+    for f in args.exclude_ids:  # fresh pilots: skip rows an older pilot settled
+        if f.exists():
+            for l in f.read_text(encoding="utf-8").splitlines():
+                if l.strip():
+                    done.add(json.loads(l)["id"])
     if done:
         rows = [r for r in rows if r["id"] not in done]
         print(f"carrying {len(done)} settled ids; {len(rows)} left", file=sys.stderr, flush=True)
@@ -150,6 +173,18 @@ def main() -> int:
 
     ladder = ((PRIMARY_MODEL, PRIMARY_RATIO, PRIMARY_ABSORB),) if args.pass_name == "primary" \
         else ((RETRY_MODEL, RETRY_RATIO, RETRY_ABSORB),)
+    # WORD-TIMING-002 (ja) contract, applied on top of the ru defaults:
+    #  * expected-side tokenization: whitespace IS the pack's word
+    #    segmentation for kana (658/4911 ja rows are pre-spaced kana
+    #    sentences; pykakasi 2.3.0 wakati does not resegment kana-only text,
+    #    it only adds morpheme boundaries across kanji, which this pack's
+    #    kana text never contains);
+    #  * heard side: every ASR token is folded kanji/katakana->hiragana
+    #    with pykakasi before alignment (whisper kanji-converts ja output);
+    #  * mora-fragment chains up to 3 absorb at concatenated ratio >= 0.9;
+    #  * kanji-bearing expected rows abstain outright (7/4911 — TTS was fed
+    #    kana but a handful of manifest texts kept kanji).
+    ja = args.lang == "ja"
 
     sink = out.open("a", encoding="utf-8")
     asink = abstain_path.open("a", encoding="utf-8")
@@ -163,14 +198,31 @@ def main() -> int:
             want = [norm(p) for p in pieces]
             result = None   # (words, spans) on success
             reason = ""
+            if ja and _JA_EXPECTED_KANJI.search(row["text"]):
+                # Contract: kanji-bearing expected rows may abstain — the
+                # pack's kana-vs-kanji mismatch is structural, no model
+                # fixes it. Log and move on (retry pass filters these out).
+                reason = "expected-kanji"
+                if args.pass_name == "primary":
+                    asink.write(json.dumps(
+                        {"id": row["id"], "reason": reason, "text": row["text"]},
+                        ensure_ascii=False) + "\n")
+                    asink.flush(); os.fsync(asink.fileno())
+                    n_abstain += 1
+                    print(f"ABSTAIN {row['id']} {reason}", file=sys.stderr, flush=True)
+                continue
             try:
                 for model_name, r, ab in ladder:
                     words = transcribe(get_model(model_name), wav, row["text"], args.lang)
+                    if ja:  # heard side: kanji/katakana -> hiragana
+                        words = [dict(w, w=kana_fold(w["w"])) for w in words]
                     if not words:
                         reason = "empty-transcript"
                         continue
                     spans = align_tokens(words, want, duration=row.get("seconds"),
-                                         ratio=r, absorb=ab)
+                                         ratio=r, absorb=ab,
+                                         absorb_chain=JA_ABSORB_CHAIN if ja else 2,
+                                         absorb_long=JA_ABSORB_LONG)
                     if spans is not None:
                         result = (words, spans)
                         reason = f"aligned:{model_name}"
@@ -179,7 +231,8 @@ def main() -> int:
             except Exception as e:  # noqa: BLE001 — infra signal per clip, keep the run alive
                 reason = f"transcribe-error: {type(e).__name__}: {e}"
             if result is not None:
-                line = {"id": row["id"], "words": timed_words(row, pieces, *result)}
+                line = {"id": row["id"],
+                        "words": timed_words(row, pieces, *result, single_whole_clip=not ja)}
                 bad = check_schema(line)
                 if bad:  # a bug in this script must never poison the sidecar
                     line = {"id": row["id"], "words": None}

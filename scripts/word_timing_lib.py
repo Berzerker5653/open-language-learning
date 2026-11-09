@@ -19,6 +19,49 @@ import difflib
 import re
 import unicodedata
 
+# WORD-TIMING-002 (ja): whisper fragments heard ja into mora-level word
+# tokens ("ぶん けん"), so one expected token may need to absorb a CHAIN of
+# adjacent ASR fragments. Contract: chains up to 3, and unlike the 2-fragment
+# absorb (threshold ABSORB=0.8) a 3-fragment glue must reach a stricter
+# concatenated ratio (ABSORB_LONG=0.9) — longer glues are more coincidental.
+# The ru path keeps absorb_chain=2 and is byte-identical to WORD-TIMING-001.
+ABSORB_CHAIN = 2
+ABSORB_LONG = 0.9
+
+# pykakasi instance for kana folding, built lazily (pykakasi is only
+# installed in the ja interpreter, ~/.venvs/wordtiming-ja).
+_KAKASI = None
+
+# kanji (incl. ext-A) or katakana: the only scripts the kana fold touches.
+_FOLD_NEEDED = re.compile(r"[\u30a1-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]")
+
+
+def kana_fold(s: str) -> str:
+    """Fold a heard ASR token to hiragana (WORD-TIMING-002 contract:
+    pykakasi K2H/E2H/J2H — whisper kanji-converts its ja transcription,
+    hearing "ぶんせき" as "分析", even with a kana initial_prompt).
+
+    Uses the modern pykakasi.Kakasi API; joining each morpheme's `hira`
+    field is exactly the K2H+E2H+J2H fold the legacy setMode('K','H') /
+    setMode('E','H') / setMode('J','H') calls produce (pykakasi >= 2.1
+    deprecated the 3-mode setMode('K2H') string form; the 2-arg legacy
+    call still works but warns). Kana-only tokens are returned unchanged
+    without paying for a conversion. Raises RuntimeError if pykakasi is
+    not importable in this interpreter.
+    """
+    global _KAKASI
+    if not _FOLD_NEEDED.search(s):
+        return s
+    if _KAKASI is None:
+        try:
+            import pykakasi  # noqa: PLC0415
+        except ImportError as e:  # pragma: no cover
+            raise RuntimeError(
+                "kana_fold needs pykakasi (run ja generation under "
+                "~/.venvs/wordtiming-ja)") from e
+        _KAKASI = pykakasi.Kakasi()
+    return "".join(m["hira"] for m in _KAKASI.convert(s))
+
 # Tuned on the WORD-TIMING spike (experiments/word-timing/spike-ru.jsonl):
 # turbo pass needs RATIO (per-token) 0.75 and ABSORB (token vs two adjacent
 # ASR words glued together, e.g. whisper's "до" + "ёброе" for доброе) 0.8.
@@ -66,6 +109,8 @@ def align_tokens(
     duration: float | None = None,
     ratio: float = RATIO,
     absorb: float = ABSORB,
+    absorb_chain: int = ABSORB_CHAIN,
+    absorb_long: float = ABSORB_LONG,
 ) -> list[tuple[int, int]] | None:
     """Constrained fuzzy token match: one span (first..last ASR word index,
     inclusive) per expected token, or None if the clip's alignment must be
@@ -100,6 +145,10 @@ def align_tokens(
         elif tag == "replace":
             # Greedy left-to-right: try a 1:1 fuzzy hit first, then the
             # split-absorb (one expected token == two adjacent ASR words).
+            # WORD-TIMING-002 (ja): `absorb_chain` extends the glue to up to
+            # 3 fragments (whisper hears ja as mora chunks: "お ば さん"),
+            # with a stricter concatenated ratio (`absorb_long`) for glues
+            # longer than 2. ru keeps chain=2 and is unchanged.
             jj = j1
             for i in range(i1, i2):
                 if jj >= j2:
@@ -107,13 +156,21 @@ def align_tokens(
                 if difflib.SequenceMatcher(None, want_tokens[i], got[jj]).ratio() >= ratio:
                     spans[i] = (jj, jj)
                     jj += 1
-                elif (jj + 1 < j2
-                      and difflib.SequenceMatcher(
-                          None, want_tokens[i], got[jj] + got[jj + 1]).ratio() >= absorb):
-                    spans[i] = (jj, jj + 1)
-                    jj += 2
                 else:
-                    jj += 1  # ASR-side junk; skip it, the token stays unmatched
+                    glued = False
+                    for k in range(2, absorb_chain + 1):
+                        if jj + k > j2:
+                            break
+                        thr = absorb if k == 2 else absorb_long
+                        if difflib.SequenceMatcher(
+                                None, want_tokens[i],
+                                "".join(got[jj:jj + k])).ratio() >= thr:
+                            spans[i] = (jj, jj + k - 1)
+                            jj += k
+                            glued = True
+                            break
+                    if not glued:
+                        jj += 1  # ASR-side junk; skip it, the token stays unmatched
         # "delete" (expected token with zero ASR words) and leftover gaps
         # leave spans[i] = None and fail coverage below.
     if any(s is None for s in spans):
