@@ -2296,6 +2296,22 @@ tasks:
   - With a non-kana active pack the "Kana keyboard (in-app)" toggle is absent; with a kana pack it appears.
     The gate reads pack-declared capability metadata (manifest scripts:), never a hardcoded language code.
   required_for_desktop_1_0: false
+- id: PACK-BUNDLE-RU-001
+  milestone: M10
+  priority: P1
+  title: Bundle the certified ru-RU reference pack (staging defaulted to ja only)
+  dependencies:
+  - PACK-AUDIO-VERIFICATION-001
+  read_first:
+  - scripts/stage-pack-bundle.sh
+  - docs/13_RELEASE_AND_DISTRIBUTION.md
+  acceptance:
+  - scripts/stage-pack-bundle.sh stages BOTH reference packs (ja-JP and ru-RU)
+    into the bundle resources set; BUNDLED.yaml lists both.
+  - A fresh-install onboarding offers Russian Reference Pack alongside Japanese
+    (verified against a clean data dir), and the shipped bundle docs/13 recipe
+    names both locales.
+  required_for_desktop_1_0: false
 - id: SETTINGS-TEXT-COLLAPSE-001
   milestone: M10
   priority: P2
@@ -2593,6 +2609,7 @@ execution_scope:
   - RELEASE-EVIDENCE-001
   - SETTINGS-PACK-CAPABILITY-001
   - SETTINGS-TEXT-COLLAPSE-001
+  - PACK-BUNDLE-RU-001
   - JA-FUNCTION-WORD-LOOKUP-001
   - SCENARIOS-SECTION-REVIEW-001
   - SCENARIO-INTERACTION-001

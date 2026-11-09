@@ -236,10 +236,10 @@ scripts/generate-pack-audio.py            # languages/ja-JP only: a fresh
                                           # validation with media_unbuilt
                                           # (committed manifest, gitignored
                                           # .wav bytes — ADR-0016)
-scripts/stage-pack-bundle.sh stage        # validate --mode install, refuse
-                                          # on any error, then copy the pack
-                                          # source dir into dist/variants/
-                                          # packs/resources/packs/<pack-id>
+scripts/stage-pack-bundle.sh stage --locale ja-JP   # validate --mode install, refuse
+scripts/stage-pack-bundle.sh stage --locale ru-RU   # both reference packs (PACK-BUNDLE-RU-001:
+                                          # a default-only run staged ja alone, so fresh
+                                          # installs never offered Russian)
 scripts/stage-pack-bundle.sh overlay      # re-validate every staged pack,
                                           # emit dist/variants/
                                           # tauri.pack.json

@@ -165,12 +165,22 @@ fn manifest_rtl(pack_dir: &Path) -> bool {
 /// The dev-tree candidate table, named for reuse: production
 /// `bundled_packs()` and the K-59 dev-precedence test read the same
 /// table — one source of truth for the dev candidates.
-const DEV_PACK_CANDIDATES: [(&str, &str, &str, &str); 2] = [
+const DEV_PACK_CANDIDATES: [(&str, &str, &str, &str); 3] = [
     (
         "org.openlanguage.ja-jp.reference",
         "ja-JP",
         "experimental",
         "languages/ja-JP",
+    ),
+    // PACK-BUNDLE-RU-001: the ru-RU reference pack (4,856/4,856 certified
+    // audio, word-timing sidecar) was missing here, so repo-tree builds -
+    // including the release binary run against the tree - never offered
+    // Russian on a fresh install.
+    (
+        "org.openlanguage.ru-ru.reference",
+        "ru-RU",
+        "experimental",
+        "languages/ru-RU",
     ),
     (
         "org.openlanguage.eo-demo",

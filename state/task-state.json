@@ -1972,6 +1972,19 @@
       "title": "Word-level clip timings for the ja pack (kana sidecar)",
       "activity": "implementing",
       "summary": "Owner: keep pushing overnight (2026-11-08). Spike finding: ja media text is 4904/4911 KANA-only (the kanji gap feared in WORD-TIMING-001 does not exist in media rows) -> direct constrained alignment works with kana folding."
+    },
+    "PACK-BUNDLE-RU-001": {
+      "task_id": "PACK-BUNDLE-RU-001",
+      "status": "ready",
+      "attempts": 1,
+      "title": "Bundle the certified ru-RU reference pack (staging defaulted to ja only)",
+      "activity": "idle",
+      "summary": "Fresh installs never offer Russian: bundle staging (docs/13 + stage-pack-bundle default) only staged ja-JP, so BUNDLED.yaml lacks org.openlanguage.ru-ru.reference despite the pack being fully certified.",
+      "notes": "Found by the controller during the 2026-11-08 UX test on a clean data dir. Contract in state/notes/PACK-BUNDLE-RU-001.md: stage both reference packs, BUNDLED.yaml lists both, fresh onboarding offers Russian, overlay re-validates all staged packs.",
+      "evidence": [
+        "state/notes/PACK-BUNDLE-RU-001.md"
+      ],
+      "updated": "2026-11-08"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
