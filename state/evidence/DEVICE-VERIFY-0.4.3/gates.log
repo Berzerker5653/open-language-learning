@@ -1,0 +1,59 @@
+# DEVICE-VERIFY-0.4.3 — full verification pass on the shipped release build
+Date: 2026-11-09. Owner could not test personally; verification delegated to the
+agent's computer-use path (Xvfb + xdotool + screenshots + pixel measurement,
+per adversarial-ux-test/references/headless-desktop-apps.md).
+Binary: target/release/lts-desktop + AppImage from the same tauri build
+(0.4.3-alpha.1, HEAD 33d8a77+). Two fresh fake-HOME installs (verify-home,
+fold-home). Real catalog installs.
+
+## Verified (all on-device, screenshots in this dir)
+
+1. Onboarding end-to-end at 1920x1080 (dv-01..dv-07)
+   - Welcome: name placeholder "e.g. Alex" present (dv-01).
+   - Name typed via xdotool arrives EXACTLY ("Hi Big Mick", dv-07) — earlier
+     mangling was harness-side, not app.
+   - Language step: Russian Reference Pack listed; Install writes 332 MB store;
+     version line reads "Version 0.4.3 is on this device. That matches the
+     version the catalogue lists." (dv-04) — live catalog + .lpk install path
+     proven.
+   - Microphone step: skippable (dv-06); onboarding reaches Today (dv-07).
+
+2. Karaoke word highlight — PROVEN IN RELEASE BUILD (dv-10..dv-16, fr-1..fr-8)
+   - clip ru.lex.argue.utverzhdenie, sidecar window s=0.0 e=1.44 (0.4.3 store).
+   - Burst capture at ~0.25 s spacing around a Play click: .word--active chip
+     (#E2EEEB, 2,091 px, bbox exactly the word line X612-720 Y423-448):
+     fr-1:0 -> fr-2..fr-6:2091 -> fr-7/fr-8:0. Chip lights DURING the word
+     window and clears after playback. Click path AND keyboard path both work.
+   - Earlier same-night "broken" readings were measurement errors: wrong crop
+     band (buttons, not word line) + import latency. Positive controls per
+     skill caught it. Lesson re-confirmed, geometry now pinned in screenshots.
+
+3. Honest playing state: button reads "Playing…" mid-play (zoom-button-B/C).
+
+4. Writing mode Russian pack: "Show reading" / "Show transliteration" — no
+   romaji leak (dv-19). Fix 33d8a77 confirmed in shipped binary.
+
+5. Primary-action fold at 1366x768 (fold-01..fold-05):
+   - Welcome: input + Create + notice fully visible (fold-01).
+   - Language: all three pack rows + Continue + Skip visible (fold-02b, -03).
+   - Microphone: Enable/Skip visible (fold-04).
+   - Today: "Start today's plan — 5 activities, about 5 minutes" fully
+     visible (fold-05).
+   CTA fold finding from the original persona walk does NOT reproduce in the
+   current build at either viewport. UX-PERSONA-001 acceptance item 3 done.
+
+## Persona finds this pass (logged, not blocking)
+- Microphone-step copy ends in a confusing clause: 'saying "yes" to the
+  microphone never leaves you to find the downloads on your own.' (feeds
+  UX-PERSONA-001 copy rewrite).
+- Today plan list titles are cryptic ("First look? (Letter name a (а),
+  uppercase.)", "First looks") — learner cannot tell what each activity is.
+  (feeds UX-PERSONA-001).
+- Harness artifacts (NOT product defects): xdotool coordinate drift on the
+  768p walk required recalibration; no webview crashes this pass.
+
+## Verdict
+Shipped 0.4.3-alpha.1 build passes the full fresh-install journey, the
+karaoke/clock core, the honest playing state, locale-correct labels, and CTA
+visibility at 1080p and 768p. Remaining UX-PERSONA-001 scope is copy rewrite
+only (maturity tags, privacy bullets, plan-list titles).

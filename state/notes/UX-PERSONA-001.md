@@ -37,3 +37,8 @@ pack step).
   answer input. No product defect; input is labeled and graded.
 - Mouse-coordinate drift in the harness produced false "button does
   nothing" readings; keyboard Tab+space activation is the reliable path.
+
+## 2026-11-09 device-verify pass (see state/evidence/DEVICE-VERIFY-0.4.3/gates.log)
+- CTA-fold acceptance item DONE: no primary action below fold at 1920x1080 or 1366x768 in the current build (fold-01..fold-05).
+- Two more copy findings for this card: (a) microphone-step copy ends in the confusing clause about saying yes to the microphone and finding downloads on your own; (b) Today plan-list item titles are cryptic (First look? / First looks variants).
+- Remaining scope: maturity-tag rewrite, privacy-bullet restatement, plan-item title clarity. Name placeholder + transliteration + Playing state + fold all verified fixed in the shipped 0.4.3-alpha.1 build.

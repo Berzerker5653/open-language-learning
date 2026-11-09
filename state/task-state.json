@@ -2023,7 +2023,8 @@
       "status": "ready",
       "attempts": 1,
       "evidence": [
-        "state/notes/UX-PERSONA-001.md"
+        "state/notes/UX-PERSONA-001.md",
+        "state/evidence/DEVICE-VERIFY-0.4.3/gates.log"
       ]
     }
   },
