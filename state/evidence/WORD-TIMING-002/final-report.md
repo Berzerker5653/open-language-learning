@@ -22,3 +22,6 @@ SAFETY OF SHIPPED OVERLAY: every banked line passed verified token alignment
 (0.6..1.0) + schema; abstained clips render as plain (no highlight) by
 contract — wrong-highlight risk is bounded, zero correctness risk to audio.
 ru remains 99.2%.
+
+## Owner decision (2026-11-09)
+Owner reviewed the convergence report and chose to HOLD: 55.6% ja coverage stands as shipped; WORD-TIMING-003 forced-alignment stays owner-gated/blocked, no heavyweight dependency installed. Explicit stopping point.
