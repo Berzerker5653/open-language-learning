@@ -119,6 +119,14 @@ describe("onboarding", () => {
     expect(html).not.toContain("email");
   });
 
+  it("the profile-name field shows an example, not a blank void (persona-run finding)", () => {
+    const html = render({});
+    // The grumpy-learner walk stalled on an empty unlabeled-feeling field;
+    // a placeholder names the expectation without replacing the label.
+    expect(html).toContain('id="profile-name"');
+    expect(html).toContain('placeholder="e.g. Alex"');
+  });
+
   it("offers the Japanese pack for selection and installation", () => {
     const html = render({ step: "packs" });
     expect(html).toContain("Japanese — demo lexicon");

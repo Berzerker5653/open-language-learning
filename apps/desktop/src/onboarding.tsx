@@ -182,6 +182,7 @@ export function Onboarding(p: OnboardingProps) {
             <input
               id="profile-name"
               type="text"
+              placeholder="e.g. Alex"
               value={p.profileName}
               onChange={(e) => p.onProfileName(e.target.value)}
             />
