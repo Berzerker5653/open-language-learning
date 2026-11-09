@@ -2332,6 +2332,22 @@ tasks:
   - The shadowing Play button gains an honest playing state (Playing… plus
     aria-busy) so playback feedback exists at all.
   required_for_desktop_1_0: false
+- id: WORD-TIMING-003
+  milestone: M10
+  priority: P2
+  title: Japanese word timings via phoneme-level forced alignment (MFA-class), not ASR token matching
+  dependencies:
+  - WORD-TIMING-002
+  owner_gate: "New heavyweight local dependency (forced-aligner + Japanese acoustic model) — owner decision required before any install."
+  read_first:
+  - state/evidence/WORD-TIMING-002/final-report.md
+  - scripts/word_timing_lib.py
+  acceptance:
+  - A forced-alignment path over the 2,182 unsettled ja clips reaches >=85%
+    additional coverage WITHOUT weakening the alignment proof (phoneme
+    posteriors, not difflib token ratios), with abstain honesty preserved.
+  - Same sidecar contract v1; no media manifest churn; ru path untouched.
+  required_for_desktop_1_0: false
 - id: SETTINGS-TEXT-COLLAPSE-001
   milestone: M10
   priority: P2
@@ -2652,4 +2668,5 @@ execution_scope:
   - PACK-UPDATE-BANNER-001
   - WORD-TIMING-001
   - WORD-TIMING-002
+  - WORD-TIMING-003
   public_publication_authorized: false

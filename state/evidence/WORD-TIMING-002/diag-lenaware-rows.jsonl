@@ -1,0 +1,75 @@
+{"id": "ja.lex.media2.ronsa", "text": "ろんさ", "heard": "も ん さ", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.5]}
+{"id": "ja.lex.urban2.hiroba", "text": "ひろば", "heard": "こう ば", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.5]}
+{"id": "ja.lex.politics2.hoshu", "text": "ほしゅ", "heard": "ほ っ し ゅ", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.5]}
+{"id": "ja.lex.travel2.kakaku", "text": "かかく", "heard": "こ、 こ、 こ、 こ、 こ、 こ、 こ、 こ、 こ、 こ、 こ、 こ", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.0]}
+{"id": "ja.lex.work2.keiri", "text": "けいり", "heard": "け へ り", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.5]}
+{"id": "ja.lex.story.nanika", "text": "なにか", "heard": "な、 な に か …", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.5]}
+{"id": "ja.lex.narrative.kioku", "text": "きおく", "heard": "ひ よ く", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.5]}
+{"id": "ja.lex.philosophy2.izen", "text": "いぜん", "heard": "あ ほ い ぜ ん?", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.5]}
+{"id": "ja.lex.travel2.egaku", "text": "えがく", "heard": "い が く", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.5]}
+{"id": "ja.lex.questions.donna", "text": "どんな", "heard": "あ、 ど んな …", "strict_ok": false, "lenaware_support": true, "maxlen": 3, "ratios": [0.8]}
+{"id": "ja.lex.food-drink.banana", "text": "バナナ", "heard": "ば な な", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.0]}
+{"id": "ja.lex.film2.mado", "text": "まど", "heard": "まだ …", "strict_ok": false, "lenaware_support": false, "maxlen": 2, "ratios": [0.5]}
+{"id": "ja.lex.tech2.chigai", "text": "ちがい", "heard": "あ、 ち が い", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.5]}
+{"id": "ja.lex.philosophy2.seigi", "text": "せいぎ", "heard": "せ ー ぎ", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.5]}
+{"id": "ja.lex.narrative.tsuki", "text": "つき", "heard": "す き", "strict_ok": false, "lenaware_support": false, "maxlen": 2, "ratios": [0.67]}
+{"id": "ja.lex.rel.tsuui", "text": "あい", "heard": "はい", "strict_ok": false, "lenaware_support": false, "maxlen": 2, "ratios": [0.5]}
+{"id": "ja.lex.reg2.shi", "text": "し", "heard": "C", "strict_ok": false, "lenaware_support": false, "maxlen": 1, "ratios": [0.0]}
+{"id": "ja.lex.story2.te2", "text": "て", "heard": "ち ゅ", "strict_ok": false, "lenaware_support": false, "maxlen": 1, "ratios": [0.0]}
+{"id": "ja.lex.film2.on", "text": "おん", "heard": "う ーん …", "strict_ok": false, "lenaware_support": false, "maxlen": 2, "ratios": [0.67]}
+{"id": "ja.lex.cult2.seiji2", "text": "せいじ", "heard": "あ は、 せ い じ", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.5]}
+{"id": "ja.lex.media.toron", "text": "とろん", "heard": "と る ん", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.5]}
+{"id": "ja.lex.history2.koseki", "text": "こせき", "heard": "しょう かん", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.0]}
+{"id": "ja.lex.edu4.menta", "text": "メンター", "heard": "め ん たー", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.0]}
+{"id": "ja.lex.cult.kouchi", "text": "こうち", "heard": "こ っち", "strict_ok": false, "lenaware_support": false, "maxlen": 3, "ratios": [0.5]}
+{"id": "ja.lex.play2.mura", "text": "むら", "heard": "ぬ ら ぁ", "strict_ok": false, "lenaware_support": false, "maxlen": 2, "ratios": [0.67]}
+{"id": "ja.lex.communication.honyaku", "text": "ほんやく", "heard": "あ ん や く", "strict_ok": false, "lenaware_support": false, "maxlen": 4, "ratios": [0.4]}
+{"id": "ja.lex.urban.kouchiku", "text": "こうちく", "heard": "ああ、 こう ち く", "strict_ok": false, "lenaware_support": false, "maxlen": 4, "ratios": [0.67]}
+{"id": "ja.sent.cultural-film", "text": "にほん の ふくしょく を べんきょう しました。", "heard": "に ー ほ ん の ふ く しょ く を べ ん き ょ う し ました。", "strict_ok": false, "lenaware_support": false, "maxlen": 5, "ratios": [0.5, 1.0, 0.57, 1.0, 0.33, 0.86]}
+{"id": "ja.lex.formal2.tenjikan", "text": "てんじかん", "heard": "せ ん じ か ん", "strict_ok": false, "lenaware_support": false, "maxlen": 5, "ratios": [0.33]}
+{"id": "ja.lex.academic2.kyouyuu", "text": "きょうゆう", "heard": "き ょ う ゆ う", "strict_ok": false, "lenaware_support": false, "maxlen": 5, "ratios": [0.33]}
+{"id": "ja.sent.recovery-onsen", "text": "りかばりーに おんせんへ いきます。", "heard": "り か ば り ー に お ん せ ん へ い きます。", "strict_ok": false, "lenaware_support": false, "maxlen": 5, "ratios": [0.33, 0.33, 0.86]}
+{"id": "ja.lex.culture2.hanayome", "text": "はなよめ", "heard": "あ な よ め", "strict_ok": false, "lenaware_support": false, "maxlen": 4, "ratios": [0.4]}
+{"id": "ja.lex.culture.bon-odori", "text": "ぼんおどり", "heard": "ぼ ーん お ど り", "strict_ok": false, "lenaware_support": false, "maxlen": 5, "ratios": [0.33]}
+{"id": "ja.lex.city.haraimasu", "text": "はらいだす", "heard": "ふつ い だ す", "strict_ok": false, "lenaware_support": false, "maxlen": 5, "ratios": [0.33]}
+{"id": "ja.lex.history2.kento", "text": "けんとう", "heard": "き ゅ んと", "strict_ok": false, "lenaware_support": false, "maxlen": 4, "ratios": [0.67]}
+{"id": "ja.lex.med2.kouron", "text": "こうろん", "heard": "こ ろ ん", "strict_ok": false, "lenaware_support": false, "maxlen": 4, "ratios": [0.4]}
+{"id": "ja.lex.art2.shiminkou", "text": "しみんこう", "heard": "し み ん こ", "strict_ok": false, "lenaware_support": false, "maxlen": 5, "ratios": [0.33]}
+{"id": "ja.sent.environmental-justice", "text": "せいぎ の もんだい を べんきょう しました。", "heard": "せ い ぎ の も んだ い を べ ん き ょ う し ました。", "strict_ok": false, "lenaware_support": false, "maxlen": 5, "ratios": [0.5, 1.0, 0.67, 1.0, 0.33, 0.86]}
+{"id": "ja.lex.science.uchuu", "text": "うちゅう", "heard": "ん ー、 う ちゅう", "strict_ok": false, "lenaware_support": true, "maxlen": 4, "ratios": [0.86]}
+{"id": "ja.sent.causation-correlation", "text": "げんいん と かんけい を べんきょう しました。", "heard": "け ん い んと か ん け い を べ ん き ょ う し ました。", "strict_ok": false, "lenaware_support": false, "maxlen": 5, "ratios": [0.4, 0.67, 0.4, 1.0, 0.33, 0.86]}
+{"id": "ja.lex.history3.taiou", "text": "たいおう", "heard": "た よ ー", "strict_ok": false, "lenaware_support": false, "maxlen": 4, "ratios": [0.4]}
+{"id": "ja.sent.polite-disagree", "text": "こうたん する とき ことば を えらびます。", "heard": "ほ う た ん す る と き こ と ば を え ら び ます。", "strict_ok": false, "lenaware_support": false, "maxlen": 5, "ratios": [0.4, 0.67, 0.67, 0.5, 1.0, 0.57]}
+{"id": "ja.lex.med.kenkou", "text": "けんこう", "heard": "け っ こう", "strict_ok": false, "lenaware_support": false, "maxlen": 4, "ratios": [0.67]}
+{"id": "ja.lex.psych.rounen", "text": "ろうねん", "heard": "かぜ ろ を ね", "strict_ok": false, "lenaware_support": false, "maxlen": 4, "ratios": [0.4]}
+{"id": "ja.sent.medical-advance", "text": "ちりょう の ぶんせき を かきました。", "heard": "し り ょ う の ぶ ん せ き を か き ました", "strict_ok": false, "lenaware_support": false, "maxlen": 5, "ratios": [0.4, 1.0, 0.4, 1.0, 0.75]}
+{"id": "ja.lex.abst2.hohou", "text": "ほうほう", "heard": "お ほ ほ ほ", "strict_ok": false, "lenaware_support": false, "maxlen": 4, "ratios": [0.4]}
+{"id": "ja.lex.edu.iwakai", "text": "えんかい", "heard": "へ ん か い", "strict_ok": false, "lenaware_support": false, "maxlen": 4, "ratios": [0.4]}
+{"id": "ja.sent.dislike-coffee", "text": "コーヒーが きらいです", "heard": "こ ーひ ー が き らい です", "strict_ok": false, "lenaware_support": false, "maxlen": 5, "ratios": [0.5, 0.57]}
+{"id": "ja.lex.politics.shugiin", "text": "しゅうぎん", "heard": "し ゅ う ぎ ん", "strict_ok": false, "lenaware_support": false, "maxlen": 5, "ratios": [0.33]}
+{"id": "ja.lex.verbs.kakimasu", "text": "かきます", "heard": "びょう きます", "strict_ok": false, "lenaware_support": true, "maxlen": 4, "ratios": [0.86]}
+{"id": "ja.lex.food.chuushoku", "text": "ちゅうしょく", "heard": "ち ち ゅ う しょ く", "strict_ok": false, "lenaware_support": false, "maxlen": 6, "ratios": [0.5]}
+{"id": "ja.sent.a2.pay.clerk-fee-applies", "text": "てすうりょうがかかります。", "heard": "て す う り ょ う が か か ります。", "strict_ok": false, "lenaware_support": false, "maxlen": 12, "ratios": [0.4]}
+{"id": "ja.sent.a2.shop.clerk-one-moment", "text": "ちょっとおまちください。", "heard": "ちょっと お ま ち ください。", "strict_ok": false, "lenaware_support": false, "maxlen": 11, "ratios": [0.53]}
+{"id": "ja.sent.a2.lostfound.fill-report", "text": "このようしになまえとじゅうしょをかいてください。", "heard": "この よう し にな ま え と じ ゅ う しょ を か いて ください。", "strict_ok": false, "lenaware_support": false, "maxlen": 23, "ratios": [0.3]}
+{"id": "ja.sent.university-system", "text": "だいがくいん の にゅうし を けんきゅう しています。", "heard": "だ い が く い ん の に ゅ う し を け ん き ゅ う し て います。", "strict_ok": false, "lenaware_support": false, "maxlen": 6, "ratios": [0.29, 1.0, 0.4, 1.0, 0.33, 0.75]}
+{"id": "ja.sent.a2.post.how-heavy", "text": "おもさはどれくらいですか。", "heard": "じゅう さ は ど れ く らい ですか。", "strict_ok": false, "lenaware_support": false, "maxlen": 12, "ratios": [0.4]}
+{"id": "ja.lex.communication.sns", "text": "えすえぬえす", "heard": "す え ぬ え す", "strict_ok": false, "lenaware_support": false, "maxlen": 6, "ratios": [0.29]}
+{"id": "ja.lex.env.kankyou-hozen", "text": "かんきょうほぜん", "heard": "あ ん き ょ う ほ ぜ ん?", "strict_ok": false, "lenaware_support": false, "maxlen": 8, "ratios": [0.22]}
+{"id": "ja.lex.ling2.honyakusha", "text": "ほんやくしゃ", "heard": "ほ ん や く しゃ", "strict_ok": false, "lenaware_support": false, "maxlen": 6, "ratios": [0.5]}
+{"id": "ja.sent.family-photo", "text": "かぞくしゃしんを とります。", "heard": "か ぞ く しゃ し ん を と ります。", "strict_ok": false, "lenaware_support": false, "maxlen": 8, "ratios": [0.4, 0.86]}
+{"id": "ja.sent.a2.post.send-to-tokyo", "text": "とうきょうへおくります。", "heard": "ひがし きょう へ お く ります。", "strict_ok": false, "lenaware_support": false, "maxlen": 11, "ratios": [0.43]}
+{"id": "ja.sent.dont-understand", "text": "すみません、わかりません", "heard": "す み ません、 わか り ません", "strict_ok": false, "lenaware_support": false, "maxlen": 11, "ratios": [0.43]}
+{"id": "ja.lex.ent.nyuusu-bangumi", "text": "にゅーすばんぐみ", "heard": "に ゅ ー す ばん くみ", "strict_ok": false, "lenaware_support": false, "maxlen": 7, "ratios": [0.44]}
+{"id": "ja.lex.admin2.kurejito", "text": "クレジットカード", "heard": "く れ じ っと か ーど", "strict_ok": false, "lenaware_support": false, "maxlen": 7, "ratios": [0.0]}
+{"id": "ja.expr.introduction.hajimemashite", "text": "はじめまして", "heard": "は じ め ま して", "strict_ok": false, "lenaware_support": false, "maxlen": 6, "ratios": [0.5]}
+{"id": "ja.sent.a2.city.stamp", "text": "きってをいちまいください。", "heard": "せつ って を い ち ま い ください。", "strict_ok": false, "lenaware_support": false, "maxlen": 12, "ratios": [0.5]}
+{"id": "ja.sent.a2.cafe.strong-or-weak", "text": "こーひーはこくがありますか。", "heard": "は あ、 こ ーひ ー は こ く が あります か。", "strict_ok": false, "lenaware_support": false, "maxlen": 11, "ratios": [0.53]}
+{"id": "ja.lex.edu.kenkyuu-hi", "text": "けんきゅうひ", "heard": "け ん き ゅ う ひ", "strict_ok": false, "lenaware_support": false, "maxlen": 6, "ratios": [0.29]}
+{"id": "ja.sent.praise-words", "text": "ぶちょうに しょうほうの ことばを もらいました。", "heard": "ぶ ちょ う に し ょ う ほ う の こ と ば を も ら いました。", "strict_ok": false, "lenaware_support": false, "maxlen": 6, "ratios": [0.57, 0.29, 0.4, 0.8]}
+{"id": "ja.sent.culture-shock", "text": "ぶんかしょっく で うれしい ことも ありました。", "heard": "ぶ ん か しょ っ く で う れ しい こ と も あ りました。", "strict_ok": false, "lenaware_support": false, "maxlen": 7, "ratios": [0.44, 1.0, 0.67, 0.5, 0.89]}
+{"id": "ja.sent.explain-choice", "text": "じゆう に えらびました。", "heard": "じゆう に せん び ました。", "strict_ok": false, "lenaware_support": true, "maxlen": 6, "ratios": [1.0, 1.0, 0.67]}
+{"id": "ja.sent.gym-training", "text": "じむで とれーにんぐを します。", "heard": "じ む で と れ ー に ん ぐ を し ます。", "strict_ok": false, "lenaware_support": false, "maxlen": 6, "ratios": [0.5, 0.29, 0.8]}
+{"id": "ja.lex.env2.footprint", "text": "フットプリント", "heard": "ふ っと ぷ り んと", "strict_ok": false, "lenaware_support": false, "maxlen": 7, "ratios": [0.0]}
+{"id": "ja.lex.work2.jigyounushi", "text": "じぎょうぬし", "heard": "じ ぎ ょ う ぬ し", "strict_ok": false, "lenaware_support": false, "maxlen": 6, "ratios": [0.29]}
+{"id": "ja.sent.a2.pharmacy.pharmacist-later", "text": "またあとででんわします。", "heard": "また あと で で ん わ します。", "strict_ok": false, "lenaware_support": false, "maxlen": 11, "ratios": [0.43]}
