@@ -15,6 +15,7 @@
  * renderable in tests.
  */
 
+import type { ReactNode } from "react";
 import type { Microphone, SpeakerOutput } from "./capture";
 import { megabytes, type AlignerStatus, type DeviceTier } from "./language";
 export type RomajiMode = "auto" | "always" | "off";
@@ -206,6 +207,33 @@ export function speechReadiness(
   return `${mic} ${model} ${alignerLine(aligner)}`;
 }
 
+/**
+ * SETTINGS-TEXT-COLLAPSE-001: Settings prose folded, never cut. Each prose
+ * block shows a faithful one-line summary behind a native `<details>`/
+ * `<summary>` disclosure — the platform disclosure widget, so screen-reader
+ * semantics come from the element itself, not from JS or ARIA re-invention.
+ * The full canonical prose always renders inside the expander and is mirrored
+ * verbatim in the docs bundle (docs/18_PUBLIC_CLAIMS_AND_SCOPE.md, "Settings
+ * prose"); the app copy and the docs text are the same text, so collapsing
+ * hides length, never information.
+ */
+function ProseNote(p: {
+  /** Faithful one-line lead-in shown while collapsed. */
+  summary: string;
+  /** Preserves a journey-test hook on the full-text node. */
+  testid?: string;
+  children: ReactNode;
+}) {
+  return (
+    <details className="prose-note">
+      <summary>{p.summary}</summary>
+      <p>
+        <small {...(p.testid ? { "data-testid": p.testid } : {})}>{p.children}</small>
+      </p>
+    </details>
+  );
+}
+
 export function Settings(p: SettingsProps) {
   return (
     <section aria-label="Settings">
@@ -227,14 +255,12 @@ export function Settings(p: SettingsProps) {
           />{" "}
           Allow microphone access for speaking activities
         </label>
-        <p>
-          <small>
-            The setting is enforced: while it is off, the app never asks the system for microphone
-            access — pressing Record shows a note pointing here instead. Speaking activities
-            abstain; reading, writing, listening, and every other activity work without a
-            microphone, and turning this off never blocks progress.
-          </small>
-        </p>
+        <ProseNote summary="The setting is enforced: while it is off, the app never asks the system for microphone access.">
+          The setting is enforced: while it is off, the app never asks the system for microphone
+          access — pressing Record shows a note pointing here instead. Speaking activities abstain;
+          reading, writing, listening, and every other activity work without a microphone, and
+          turning this off never blocks progress.
+        </ProseNote>
         <label htmlFor="mic-device">
           Microphone to record from
           <select
@@ -250,13 +276,17 @@ export function Settings(p: SettingsProps) {
             ))}
           </select>
         </label>
-        <p>
-          <small>
-            {p.microphoneDevices.length === 0
-              ? "There is nothing to list yet: the browser only reveals microphone names after you allow microphone access once. Recording from the system default works until then."
-              : "The choice is stored for this profile. If the chosen microphone is unplugged, the app says so and records from the system default for that one recording instead of switching silently."}
-          </small>
-        </p>
+        <ProseNote
+          summary={
+            p.microphoneDevices.length === 0
+              ? "Microphone names appear once you allow access; recording from the system default works until then."
+              : "The chosen microphone is stored for this profile, with an honest fallback to the system default."
+          }
+        >
+          {p.microphoneDevices.length === 0
+            ? "There is nothing to list yet: the browser only reveals microphone names after you allow microphone access once. Recording from the system default works until then."
+            : "The choice is stored for this profile. If the chosen microphone is unplugged, the app says so and records from the system default for that one recording instead of switching silently."}
+        </ProseNote>
         <p>
           <button id="mic-detect" type="button" onClick={p.onDetectMicrophones}>
             Detect microphones
@@ -281,13 +311,11 @@ export function Settings(p: SettingsProps) {
             </label>
           ))}
         </fieldset>
-        <p>
-          <small>
-            Romaji is a temporary scaffold: content is stored in Japanese script, and Auto fades
-            romanisation as reading grows. Your choice is honored everywhere and never blocks
-            progression.
-          </small>
-        </p>
+        <ProseNote summary="Romaji is a temporary scaffold: Auto fades it as reading grows, and the choice never blocks progression.">
+          Romaji is a temporary scaffold: content is stored in Japanese script, and Auto fades
+          romanisation as reading grows. Your choice is honored everywhere and never blocks
+          progression.
+        </ProseNote>
       </div>
       {/* SETTINGS-PACK-CAPABILITY-001: the card exists only while the active
           pack's own manifest declares a script this keyboard can type. A
@@ -311,29 +339,25 @@ export function Settings(p: SettingsProps) {
               </label>
             ))}
           </fieldset>
-          <p>
-            <small>
-              Romaji is converted to kana inside the app's own answer fields — nothing is installed
-              and your system layout stays exactly as it is. A platform IME still works when you
-              prefer it: the app steps back while an IME is composing, and turns no key when this is
-              off. Kanji candidates follow the pack's own vocabulary in a later pass; free text
-              outside it stays kana.
-            </small>
-          </p>
+          <ProseNote summary="Romaji is converted to kana inside the app's own answer fields — nothing is installed and your system layout stays exactly as it is.">
+            Romaji is converted to kana inside the app's own answer fields — nothing is installed
+            and your system layout stays exactly as it is. A platform IME still works when you
+            prefer it: the app steps back while an IME is composing, and turns no key when this is
+            off. Kanji candidates follow the pack's own vocabulary in a later pass; free text
+            outside it stays kana.
+          </ProseNote>
         </div>
       )}
 
       <div className="card">
         <h3>Profile data</h3>
-        <p>
-          <small>
-            The privacy notice promises you can export or delete your local profile data at any time
-            — both are here, and switching profiles starts here too. Switching only leaves the
-            current profile; it deletes nothing. An export is a readable JSON file holding your
-            profile, settings, learning evidence, saved words, and review schedule. Recording
-            metadata is not included, and no audio is ever part of an export.
-          </small>
-        </p>
+        <ProseNote summary="Export, restore, and switching all live here; an export is a readable JSON file, and no audio is ever part of one.">
+          The privacy notice promises you can export or delete your local profile data at any time —
+          both are here, and switching profiles starts here too. Switching only leaves the current
+          profile; it deletes nothing. An export is a readable JSON file holding your profile,
+          settings, learning evidence, saved words, and review schedule. Recording metadata is not
+          included, and no audio is ever part of an export.
+        </ProseNote>
         <div className="btn-row">
           <button type="button" className="btn" onClick={p.onExport}>
             Export profile data
@@ -410,13 +434,14 @@ export function Settings(p: SettingsProps) {
               {counted(p.restoreOutcome.goals, "goal")}, and{" "}
               {counted(p.restoreOutcome.scheduled_items, "scheduled review")}.
             </p>
-            <p>
-              <small data-testid="settings-restore-note">
-                A restore reads a backup you exported. Nothing changed until you confirmed, the
-                restore always creates a new profile instead of replacing the one you use, and a
-                backup this version cannot read is refused rather than guessed at.
-              </small>
-            </p>
+            <ProseNote
+              summary="A restore reads a backup you exported and always creates a new profile — never a replacement."
+              testid="settings-restore-note"
+            >
+              A restore reads a backup you exported. Nothing changed until you confirmed, the
+              restore always creates a new profile instead of replacing the one you use, and a
+              backup this version cannot read is refused rather than guessed at.
+            </ProseNote>
           </div>
         )}
         {p.switchArmed ? (
@@ -435,12 +460,13 @@ export function Settings(p: SettingsProps) {
             </button>
           </div>
         )}
-        <p>
-          <small data-testid="settings-switch-note">
-            Switching deletes nothing: each profile keeps its own progress, saved words, and
-            settings, and waits for you in the picker.
-          </small>
-        </p>
+        <ProseNote
+          summary="Switching deletes nothing: each profile keeps its own data and waits for you in the picker."
+          testid="settings-switch-note"
+        >
+          Switching deletes nothing: each profile keeps its own progress, saved words, and settings,
+          and waits for you in the picker.
+        </ProseNote>
         {p.deleteArmed ? (
           <div role="group" aria-label="Delete confirmation" className="btn-row">
             <button type="button" className="btn btn--primary" onClick={p.onConfirmDelete}>
@@ -457,12 +483,13 @@ export function Settings(p: SettingsProps) {
             </button>
           </div>
         )}
-        <p>
-          <small data-testid="settings-delete-note">
-            Deleting removes this profile and all of its learning data on this device, and cannot be
-            undone. The app asks for one explicit confirmation before anything is deleted.
-          </small>
-        </p>
+        <ProseNote
+          summary="Deleting is final: one explicit confirmation, then all of the profile's local data on this device is gone."
+          testid="settings-delete-note"
+        >
+          Deleting removes this profile and all of its learning data on this device, and cannot be
+          undone. The app asks for one explicit confirmation before anything is deleted.
+        </ProseNote>
       </div>
 
       <div className="card">
@@ -492,27 +519,23 @@ export function Settings(p: SettingsProps) {
             ))}
           </select>
         </label>
-        <p>
-          <small>
-            This is the app&apos;s one speech-model preference; the models themselves are listed
-            below with their sizes, licenses, and downloads.
-          </small>
-        </p>
+        <ProseNote summary="This is the app's one speech-model preference; the models themselves are listed below with sizes, licenses, and downloads.">
+          This is the app&apos;s one speech-model preference; the models themselves are listed below
+          with their sizes, licenses, and downloads.
+        </ProseNote>
 
         <h4>Speech recognition &amp; pronunciation</h4>
-        <p>
-          <small>
-            Optional. These local models feed the speech-based checks — pronunciation alignment and
-            dictation recognition — or you can turn them off above. They run entirely on this
-            device; nothing is uploaded. Pronunciation feedback is <em>guided only</em> (no
-            automatic scoring or mastery) until it has been calibrated. For pronunciation feedback
-            the model sizes give the same result — pick one your device can comfortably run. Larger
-            models mainly help future listening/recognition features, not pronunciation accuracy.
-            {p.deviceTier
-              ? ` This device was detected as the ${p.deviceTier.tier} tier (${p.deviceTier.cores} cores, ${Math.round(p.deviceTier.total_ram_mb)} MB RAM).`
-              : " This device's tier could not be detected, so no model is recommended — pick one your device can comfortably run."}
-          </small>
-        </p>
+        <ProseNote summary="Optional, fully on-device models: nothing is uploaded, feedback is guided only, and model size never changes pronunciation accuracy.">
+          Optional. These local models feed the speech-based checks — pronunciation alignment and
+          dictation recognition — or you can turn them off above. They run entirely on this device;
+          nothing is uploaded. Pronunciation feedback is <em>guided only</em> (no automatic scoring
+          or mastery) until it has been calibrated. For pronunciation feedback the model sizes give
+          the same result — pick one your device can comfortably run. Larger models mainly help
+          future listening/recognition features, not pronunciation accuracy.
+          {p.deviceTier
+            ? ` This device was detected as the ${p.deviceTier.tier} tier (${p.deviceTier.cores} cores, ${Math.round(p.deviceTier.total_ram_mb)} MB RAM).`
+            : " This device's tier could not be detected, so no model is recommended — pick one your device can comfortably run."}
+        </ProseNote>
 
         {p.speechModels.length > 0 && (
           <ul className="pack-list">
@@ -567,45 +590,56 @@ export function Settings(p: SettingsProps) {
                 ))}
               </select>
             </label>
-            <p>
-              <small>
-                {p.playbackOutputs.length === 0
-                  ? "There is nothing to list yet: the system has not revealed any output names. Playback follows the system sound settings until it does."
-                  : "The choice is stored for this profile: model audio and your own recordings play on it. If the device disappears, that one clip plays on the system default instead of failing."}
-              </small>
-            </p>
+            <ProseNote
+              summary={
+                p.playbackOutputs.length === 0
+                  ? "No output names revealed yet: playback follows the system sound settings until it does."
+                  : "The output choice is stored for this profile, with a system-default fallback for any single clip."
+              }
+            >
+              {p.playbackOutputs.length === 0
+                ? "There is nothing to list yet: the system has not revealed any output names. Playback follows the system sound settings until it does."
+                : "The choice is stored for this profile: model audio and your own recordings play on it. If the device disappears, that one clip plays on the system default instead of failing."}
+            </ProseNote>
           </div>
         ) : (
-          <p data-playback-route="system">
-            <small>
-              This runtime cannot direct playback to a chosen device, so there is no picker here —
-              the system sound settings decide where audio plays.
-            </small>
-          </p>
+          <details className="prose-note">
+            <summary>This runtime follows the system sound settings for playback.</summary>
+            <p data-playback-route="system">
+              <small>
+                This runtime cannot direct playback to a chosen device, so there is no picker here —
+                the system sound settings decide where audio plays.
+              </small>
+            </p>
+          </details>
         )}
       </div>
 
       <div className="card">
         <h3>Speech runtimes</h3>
-        <p>
-          <small>
-            The engines this build ships and can load — honest status, not a choice. Pronunciation
-            feedback and dictation recognition also need a recognition runtime: where it is absent,
-            those checks abstain, and choosing or downloading a model does not change that.
-          </small>
-        </p>
+        <ProseNote summary="The engines this build ships and can load — honest status, not a choice.">
+          The engines this build ships and can load — honest status, not a choice. Pronunciation
+          feedback and dictation recognition also need a recognition runtime: where it is absent,
+          those checks abstain, and choosing or downloading a model does not change that.
+        </ProseNote>
       </div>
 
       <div className="card">
         <h3>About this build</h3>
         {p.buildIdentity ? (
-          <p className="meta" data-build-commit={p.buildIdentity.commit}>
-            Version <strong>{p.buildIdentity.version}</strong>, commit{" "}
-            <strong>{p.buildIdentity.commit}</strong>
-            {p.buildIdentity.dirty ? " (built from a modified working tree)" : ""}. Please quote
-            both lines when you report a platform problem — a report that names only "the latest
-            version" cannot be matched to a build.
-          </p>
+          <>
+            <p className="meta" data-build-commit={p.buildIdentity.commit}>
+              Version <strong>{p.buildIdentity.version}</strong>, commit{" "}
+              <strong>{p.buildIdentity.commit}</strong>
+              {p.buildIdentity.dirty ? " (built from a modified working tree)" : ""}.
+            </p>
+            {/* The version and commit stay visible — they are the data a report
+                needs; only the instruction around them folds. */}
+            <ProseNote summary="When you report a platform problem, quote both lines above.">
+              Please quote both lines when you report a platform problem — a report that names only
+              "the latest version" cannot be matched to a build.
+            </ProseNote>
+          </>
         ) : (
           <p className="meta">Loading build information…</p>
         )}

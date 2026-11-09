@@ -1,0 +1,25 @@
+# SETTINGS-TEXT-COLLAPSE-001 gate log — 2026-11-08T18:28:48-07:00
+
+## Baseline (pre-change)
+cd apps/desktop && npx vitest run:  Test Files  47 passed (47) / Tests  343 passed (343)
+cd apps/desktop && npx tsc --noEmit:  exit 0
+
+## Post-change gates (run from the stated cwd)
+1) cd apps/desktop && npx tsc --noEmit
+   exit: 0
+2) cd apps/desktop && npx vitest run
+    Test Files  47 passed (47)
+         Tests  344 passed (344)
+3) npx prettier --check apps/desktop/src/settings.tsx apps/desktop/src/settings.test.tsx packages/ui/src/styles.css docs/18_PUBLIC_CLAIMS_AND_SCOPE.md
+   Checking formatting...
+   All matched files use Prettier code style!
+   exit: 0
+4) npx eslint apps/desktop/src/settings.tsx apps/desktop/src/settings.test.tsx
+   exit: 0
+
+## Files changed by this lane (git status; scenario.tsx is the concurrent scenario lane, untouched here)
+ M apps/desktop/src/scenario.tsx
+ M apps/desktop/src/settings.test.tsx
+ M apps/desktop/src/settings.tsx
+ M docs/18_PUBLIC_CLAIMS_AND_SCOPE.md
+ M packages/ui/src/styles.css

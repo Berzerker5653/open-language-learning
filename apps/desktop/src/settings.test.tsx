@@ -538,4 +538,62 @@ describe("settings", () => {
       "On this device now: 1 saved word, 1 recorded attempt, 1 goal, and 1 scheduled review.",
     );
   });
+
+  // SETTINGS-TEXT-COLLAPSE-001: every Settings prose block collapses to a
+  // faithful one-line summary behind a native <details>/<summary> disclosure
+  // (screen-reader semantics come from the elements themselves), and the full
+  // prose — mirrored in docs/18 "Settings prose" — stays in the DOM inside the
+  // expander. Collapsing hides length; it never cuts information.
+  it("collapses each prose block into a native details/summary expander with the full text inside", () => {
+    const html = render();
+    // One native disclosure per prose block, and every disclosure carries a
+    // summary — no JS toggle, no ARIA re-invention.
+    const disclosures = html.match(/<details class="prose-note">/g) ?? [];
+    expect(disclosures.length).toBe(12);
+    expect((html.match(/<summary>/g) ?? []).length).toBe(disclosures.length);
+    // Collapsed by default: the expander starts closed, the learner opts in.
+    expect(html).not.toMatch(/<details[^>]*\sopen/);
+    // Every disclosure's summary is a single line of text — a lead-in, not a
+    // paragraph: one sentence, no second sentence to hide the fold behind.
+    const summaries = [...html.matchAll(/<summary>([\s\S]*?)<\/summary>/g)].map((m) =>
+      (m[1] ?? "").trim(),
+    );
+    for (const s of summaries) {
+      expect(s.length).toBeLessThan(140);
+      expect(s.endsWith(".")).toBe(true);
+      expect(`${s}. `).not.toMatch(/\.\s+\S.*\./s);
+    }
+    // Faithful summaries render as the summary of their own block.
+    expect(html).toContain(
+      "<summary>The setting is enforced: while it is off, the app never asks the system for microphone access.</summary>",
+    );
+    expect(html).toContain(
+      "<summary>Switching deletes nothing: each profile keeps its own data and waits for you in the picker.</summary>",
+    );
+    // The full text of every block is still in the DOM inside the expander,
+    // with the journey-test hooks preserved on the full-text nodes.
+    expect(html).toContain("Speaking activities abstain; reading, writing, listening");
+    expect(html).toContain("each profile keeps its own progress, saved words, and settings");
+    expect(html).toContain('data-testid="settings-switch-note"');
+    expect(html).toContain('data-testid="settings-delete-note"');
+    expect(html).toContain('data-playback-route="system"');
+    // The conditional restore note collapses too, hooks and all.
+    const done = render({
+      restoreOutcome: {
+        profile_id: "prof-x",
+        display_name: "Hunter",
+        events: 1,
+        goals: 1,
+        saved_words: 1,
+        scheduled_items: 1,
+        warnings: [],
+      },
+    });
+    expect((done.match(/<details class="prose-note">/g) ?? []).length).toBe(13);
+    expect(done).toContain('data-testid="settings-restore-note"');
+    // The build identity itself never folds — only the instruction around it.
+    expect(done.indexOf('data-build-commit="172d2a2"')).toBeLessThan(
+      done.indexOf("<summary>When you report a platform problem"),
+    );
+  });
 });

@@ -426,6 +426,30 @@ legend {
   margin: 1rem 0;
 }
 
+/* SETTINGS-TEXT-COLLAPSE-001: folded prose behind a native details/summary
+   disclosure. The collapsed summary reads exactly like the `small` prose it
+   stands in for, so folding changes length, not style; the expanded body is
+   the same `small` text unchanged. Keyboard focus rides the global
+   :focus-visible rule; no JS, no custom widget. */
+details.prose-note {
+  margin: 0 0 0.75rem;
+  max-width: 70ch;
+}
+
+details.prose-note > summary {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+details.prose-note[open] > summary {
+  margin-bottom: 0.4rem;
+}
+
+details.prose-note > p {
+  margin-bottom: 0;
+}
+
 .empty {
   border: 1px dashed var(--line-strong);
   border-radius: var(--radius);
