@@ -12,3 +12,5 @@ PACK-BUNDLE-RU-001 controller gate log (2026-11-08 night)
 - cargo bundled/available_packs suites: pass except 3 bundled-archive
   tests that race the live ja words.jsonl writer (declared-size 107025
   vs 107024 mid-write); re-run after WORD-TIMING-002 completes.
+
+DEFERRED ITEM RESOLVED (2026-11-09): bundled suite re-run with the ja writer finished: 8 passed / 0 failed (82s) — the earlier 107025-vs-107024 mismatch was the writer race, not a defect.
