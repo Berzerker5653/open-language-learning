@@ -1,0 +1,4 @@
+$ cargo run -q -p lts-langpack-cli -- build languages/ru-RU -o dist/rc-0.4.3/ru-ru-reference-0.4.3.lpk
+built dist/rc-0.4.3/ru-ru-reference-0.4.3.lpk (268517933 bytes)
+sha256 dbfb63c3afb8987ad625a9e40816bbf5bf0c0ac0df8012ab96e0429772ac6544
+EXIT=0

@@ -1,0 +1,3 @@
+archive: dist/rc-0.4.3/ja-jp-reference-0.4.3.lpk
+bytes=292899604
+90e6ab7928134399766d6b3da4338b3d3a6f972bf5eecec45495fa333da6fc4e  dist/rc-0.4.3/ja-jp-reference-0.4.3.lpk

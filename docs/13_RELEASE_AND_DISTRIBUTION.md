@@ -504,6 +504,8 @@ machine: unauthenticated `GET` of the raw catalog returns 200,
 
 | release tag | asset | bytes | sha256 | immutable |
 | --- | --- | --- | --- | --- |
+| `org.openlanguage.ja-jp.reference-0.4.3` | `ja-jp-reference-0.4.3.lpk` | 292,899,604 | `90e6ab7928134399766d6b3da4338b3d3a6f972bf5eecec45495fa333da6fc4e` | yes |
+| `org.openlanguage.ru-ru.reference-0.4.3` | `ru-ru-reference-0.4.3.lpk` | 268,517,933 | `dbfb63c3afb8987ad625a9e40816bbf5bf0c0ac0df8012ab96e0429772ac6544` | yes |
 | `org.openlanguage.ja-jp.reference-0.4.2` | `ja-jp-reference-0.4.2.lpk` | 318,724,406 | `b03cf88671d86de2c4ef481c07b16fcb2725f0dcd61a71df0e2182a63d764a81` | yes |
 | `org.openlanguage.ru-ru.reference-0.4.2` | `ru-ru-reference-0.4.2.lpk` | 318,491,600 | `3b3dc25694b60f899f675982721df23b7c5bb7a3471f0457298ae0e1e38386d4` | yes |
 | `org.openlanguage.ja-jp.reference-0.4.1` | `ja-jp-reference-0.4.1.lpk` | 318,722,747 | `e697ee92f6602c3373ebe5910f0dfbee8e50edcb3e9a25b2890efba5a5964690` | yes |
@@ -560,6 +562,31 @@ The same gate re-broke the moment the manifests named 0.4.2 while the catalog st
 pinned 0.4.1 — run `39155073665`, `rust` and `desktop-smoke`, by design — and the
 published 0.4.2 pair satisfies it again
 (`state/evidence/RC-0.4.2-2026-10-18/build-rc-0.4.2.sh:10-11`).
+
+**Published reference-pack provenance (2026-11-09).** The certified pair is live at
+`0.4.3`: `org.openlanguage.ja-jp.reference-0.4.3` and `org.openlanguage.ru-ru.reference-0.4.3`.
+The candidate was built by `state/evidence/RC-0.4.3-2026-11-09/build-rc-0.4.3.sh` from the
+tracked tree at `60b5779` (pack-version bump; the only tree delta at build time was the
+build script itself, untracked until after the run — recorded `dirty_paths=1`); every gate
+(validate, lint, test, audit-curriculum/lexicon/licenses/sources, build, inspect, install
+round-trip) exited 0, with manifest-row/member delta 0 on both packs
+(`…/SUMMARY.txt`). What 0.4.3 carries over the published 0.4.2 pair: the November certified
+audio repair campaign — member accounting vs 0.4.2 shows 1,973 ja and 1,572 ru media members
+with new bytes, exactly the re-baked/Piper-repaired/resynced clips recorded row-by-row in
+`languages/*/media/manifest.jsonl` by `23871bf`, the `ja-b00..b10` best-of batches,
+`6d22be4` (manifest resync from re-baked media) and `1d4d48f` (function-word clips), all
+re-audited under gate v5 — plus the optional word-timing sidecar `media/words.jsonl`
+(one new member per pack; ru 4,819 rows = 99.2% coverage, ja 2,729 rows = 55.6% with the
+abstain ledger of `state/evidence/WORD-TIMING-002/` — abstained clips render plain by
+contract) and the tracked scenario/content files (ja member total 5,865 → 5,876, ru 5,789 →
+5,790; identical-by-hash members: 3,892 ja, 4,217 ru — full per-member lists in
+`…/diff-042-to-043-*.txt`). Install round-trip proved the sidecar lands in the store
+(`…/install-*.txt` second block; the first block of each file is a stale append from an
+aborted PATH-less first launch and is superseded by the second). GitHub's computed
+`sha256:` digest for each asset equals the local sha256 and the catalog pin; both releases
+read back non-draft, non-prerelease, `isImmutable: true`
+(`…/upload-transcript.txt`). The 0.4.2 pair stays published and immutable as the rollback
+target for installed 0.4.2 stores.
 
 **Licensing paper corrected after publication.** The published ja-JP 0.4.0
 archive carries three `licenses.jsonl` records. The tree now carries five: the

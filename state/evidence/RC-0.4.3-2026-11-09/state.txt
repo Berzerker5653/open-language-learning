@@ -1,0 +1,10 @@
+HEAD=60b5779cc57de4c1aea681458ff48e58855f8c1d
+dirty_paths=1
+?? state/evidence/RC-0.4.3-2026-11-09/
+--- manifests as shipped ---
+7dbd7891eb5899a73c3ad4e47e6326b4b12dc6f03b0a8172af9565a3c52736b6  languages/ja-JP/manifest.yaml
+version: "0.4.3"
+  content_license: "CC-BY-SA-4.0"
+5258e916a486fba7916490569184f4d12af3f7f849bdeaf175116e20bdb81e4c  languages/ru-RU/manifest.yaml
+version: "0.4.3"
+  content_license: "CC0-1.0"

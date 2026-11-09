@@ -1,0 +1,4 @@
+$ cargo run -q -p lts-langpack-cli -- audit-sources languages/ru-RU
+info[unused_source] sources.jsonl/2: source "ru-batch-70ec683-20f994d" is not referenced by any content record
+audit-sources: 0 error(s), 0 warning(s)
+EXIT=0

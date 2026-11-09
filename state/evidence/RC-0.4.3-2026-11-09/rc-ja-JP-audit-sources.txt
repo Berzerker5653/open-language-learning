@@ -1,0 +1,7 @@
+$ cargo run -q -p lts-langpack-cli -- audit-sources languages/ja-JP
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+audit-sources: 0 error(s), 0 warning(s)
+EXIT=0

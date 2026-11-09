@@ -1,0 +1,4 @@
+$ cargo run -q -p lts-langpack-cli -- build languages/ja-JP -o dist/rc-0.4.3/ja-jp-reference-0.4.3.lpk
+built dist/rc-0.4.3/ja-jp-reference-0.4.3.lpk (292899604 bytes)
+sha256 90e6ab7928134399766d6b3da4338b3d3a6f972bf5eecec45495fa333da6fc4e
+EXIT=0

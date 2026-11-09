@@ -1,0 +1,11 @@
+find: ‘dist/rc-0.4.3/store-ru-RU’: No such file or directory
+store layout: 
+current pointer: 
+find: ‘dist/rc-0.4.3/store-ru-RU’: No such file or directory
+media files in installed tree: 0
+find: ‘dist/rc-0.4.3/store-ru-RU’: No such file or directory
+sidecar in installed tree: 0
+store layout: dist/rc-0.4.3/store-ru-RU/org.openlanguage.ru-ru.reference dist/rc-0.4.3/store-ru-RU/org.openlanguage.ru-ru.reference/0.4.3 dist/rc-0.4.3/store-ru-RU/org.openlanguage.ru-ru.reference/current 
+current pointer: 0.4.3
+media files in installed tree: 4856
+sidecar in installed tree: 1

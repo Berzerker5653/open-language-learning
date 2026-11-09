@@ -1,0 +1,148 @@
+HEAD=60b5779cc57de4c1aea681458ff48e58855f8c1d
+dirty_paths=1
+?? state/evidence/RC-0.4.3-2026-11-09/
+--- manifests as shipped ---
+7dbd7891eb5899a73c3ad4e47e6326b4b12dc6f03b0a8172af9565a3c52736b6  languages/ja-JP/manifest.yaml
+version: "0.4.3"
+  content_license: "CC-BY-SA-4.0"
+5258e916a486fba7916490569184f4d12af3f7f849bdeaf175116e20bdb81e4c  languages/ru-RU/manifest.yaml
+version: "0.4.3"
+  content_license: "CC0-1.0"
+rc-ja-JP-validate                            exit=0
+rc-ja-JP-lint                                exit=0
+rc-ja-JP-test                                exit=0
+rc-ja-JP-audit-curriculum                    exit=0
+rc-ja-JP-audit-lexicon                       exit=0
+rc-ja-JP-audit-licenses                      exit=0
+rc-ja-JP-audit-sources                       exit=0
+rc-build-ja-JP                               exit=0
+archive: dist/rc-0.4.3/ja-jp-reference-0.4.3.lpk
+bytes=292899604
+90e6ab7928134399766d6b3da4338b3d3a6f972bf5eecec45495fa333da6fc4e  dist/rc-0.4.3/ja-jp-reference-0.4.3.lpk
+rc-inspect-ja-JP                             exit=0
+archive members=5876 media_members=4911
+manifest_rows=4911 media_members=4911 delta=0
+words_sidecar_member=1
+published 0.4.2 members = 5865   candidate 0.4.3 members = 5876
+identical (size+hash)   = 3892
+added in 0.4.3:
+103724 09b0faaa351a media/ja.lex.health2.unsou.wav
+103724 124aa084f427 media/ja.sent.article-summary.wav
+103724 20723a8f6083 media/ja.lex.communication.kikikata.wav
+103724 2780f131ca9c media/ja.sent.a2.pay.card-possible.wav
+103724 2e0fd54cb0e9 media/ja.lex.society.horei.wav
+103724 3561f06fc1e1 media/ja.lex.economy.saiyou.wav
+103724 46c148b27cb7 media/ja.lex.politics2.shuyuu.wav
+103724 6e38c36bd93e media/ja.lex.society4.kyouchou.wav
+103724 6eaf73beb259 media/ja.lex.transport.tooi.wav
+103724 a807c79029ce media/ja.lex.rel1.renraku.wav
+103724 c1471a77898e media/ja.lex.leisure.geemu.wav
+103724 d12840a6bc81 media/ja.lex.lit2.shoseki.wav
+103724 d1cd05215210 media/ja.lex.play2.tsubo.wav
+103724 ead88f7bd1e1 media/ja.sent.rest-today.wav
+103724 eb0e809eb847 media/ja.lex.food.ramen.wav
+107564 00dc41d527ec media/ja.sent.what-is-this.wav
+107564 0a96f3a66e30 media/ja.lex.advice2.hashi2.wav
+107564 0d8a90d460b7 media/ja.lex.city2.kaban.wav
+107564 11465591a228 media/ja.lex.work2.keiyaku-sho.wav
+107564 18d946ec7849 media/ja.lex.lit.roman-shugi.wav
+107564 1bc08e606619 media/ja.sent.a2.phone.answer-self.wav
+107564 28f2de2bb2ba media/ja.lex.critique.sns.wav
+107564 2d09addddea6 media/ja.lex.culture.tsuuke.wav
+107564 333b34463786 media/ja.lex.communication.seion.wav
+107564 3460bed8214d media/ja.lex.politics.seikan.wav
+107564 3c27575c9da8 media/ja.lex.law.shikkou.wav
+107564 428420135c88 media/ja.lex.med.houkenryou.wav
+107564 52e127db0627 media/ja.sent.parliament-debate.wav
+107564 79e1eb4e8622 media/ja.lex.film.kyaku.wav
+107564 7c623bdfebaa media/ja.sent.a2.phone.voicemail-gone.wav
+107564 92a0b02dcc40 media/ja.lex.urban.kouchiku.wav
+107564 9464d68fd143 media/ja.lex.advice2.iikae.wav
+107564 9ce09fcd16c4 media/ja.lex.edu.kohai.wav
+107564 9d7b3d697188 media/ja.sent.global-health.wav
+107564 a627772018b2 media/ja.lex.global2.koso.wav
+107564 c8794cf9638e media/ja.sent.a2.reserve.seki-available.wav
+107564 d97396aa1015 media/ja.lex.debate.kentei.wav
+rc-install-ja-JP                             exit=0
+find: ‘dist/rc-0.4.3/store-ja-JP’: No such file or directory
+store layout: 
+current pointer: 
+find: ‘dist/rc-0.4.3/store-ja-JP’: No such file or directory
+media files in installed tree: 0
+find: ‘dist/rc-0.4.3/store-ja-JP’: No such file or directory
+rc-ru-RU-validate                            exit=0
+rc-ru-RU-lint                                exit=0
+rc-ru-RU-test                                exit=0
+rc-ru-RU-audit-curriculum                    exit=0
+rc-ru-RU-audit-lexicon                       exit=0
+rc-ru-RU-audit-licenses                      exit=0
+rc-ru-RU-audit-sources                       exit=0
+rc-build-ru-RU                               exit=0
+archive: dist/rc-0.4.3/ru-ru-reference-0.4.3.lpk
+bytes=268517933
+dbfb63c3afb8987ad625a9e40816bbf5bf0c0ac0df8012ab96e0429772ac6544  dist/rc-0.4.3/ru-ru-reference-0.4.3.lpk
+rc-inspect-ru-RU                             exit=0
+archive members=5790 media_members=4856
+manifest_rows=4856 media_members=4856 delta=0
+words_sidecar_member=1
+published 0.4.2 members = 5789   candidate 0.4.3 members = 5790
+identical (size+hash)   = 4217
+added in 0.4.3:
+101324 04590a1e1ca3 media/ru.lex.cult.genealogiya.wav
+102284 596fae401742 media/ru.lex.future.povliyaet.wav
+103724 005ade903598 media/ru.lex.sci.szhiganie.wav
+103724 0d59021e821e media/ru.lex.personal.otkuda.wav
+103724 0e0d75856f73 media/ru.lex.argue4.obdumannyy.wav
+103724 275eade0f4e0 media/ru.sent.a2.u192.wav
+103724 2ad2513c193f media/ru.lex.feelings.sarkazm.wav
+103724 33a91adb28cb media/ru.lex.instructions.vnimatelno.wav
+103724 54e9b67fdfc5 media/ru.lex.synthesis2.etyud.wav
+103724 59907d6f0d07 media/ru.lex.media.kanal.wav
+103724 5b928a6326b2 media/ru.lex.shopping.skidka.wav
+103724 5c71a944bd21 media/ru.lex.culture.zritel.wav
+103724 7be451f65dc8 media/ru.sent.cp.p34.wav
+103724 917eca895083 media/ru.lex.style.peripetiya.wav
+103724 98b935626f2e media/ru.lex.study.mgnovenie.wav
+103724 ad85ecbe63c4 media/ru.lex.prof.vneshstatnyy.wav
+103724 af2545acfcc3 media/ru.lex.problems.kvitantsiya.wav
+103724 c3593de4bfdf media/ru.lex.messages.zanyat.wav
+103724 cedef5d30b82 media/ru.sent.b2.u704.wav
+103724 df62a986b894 media/ru.lex.food.ovoshchi.wav
+103724 f5965c8355e3 media/ru.lex.routines.prosypatsya.wav
+107564 02568f69e055 media/ru.lex.critical2.agressiya.wav
+107564 0dbb7bb664f4 media/ru.lex.argue.otsenivat.wav
+107564 1f97a59c1ea1 media/ru.sent.b2.u550.wav
+107564 52204f86ecc2 media/ru.sent.b2.u727.wav
+107564 56c5cfeb4da9 media/ru.lex.opinions.illustraciya.wav
+107564 58d14541a008 media/ru.lex.argue.storonnik.wav
+107564 7c7fa8946d0e media/ru.lex.sci.perekluchatel.wav
+107564 aef97a587690 media/ru.lex.services.usloviya.wav
+107564 c1184108507e media/ru.lex.argue4.liniya.wav
+107564 c4da43130e93 media/ru.lex.summary.yavlenie.wav
+107564 d6de50830bce media/ru.lex.sci.zakonomernyy.wav
+107564 dc09f5ea0e65 media/ru.sent.cp.p08.wav
+107564 e27705920b89 media/ru.lex.neg.priostranovka.wav
+107564 ebf792cb62c0 media/ru.sent.a2.u136.wav
+107564 f1df6f82ddf1 media/ru.lex.travel.pasazhir.wav
+108044 0a1336f570e0 media/ru.sent.b2.u624.wav
+rc-install-ru-RU                             exit=0
+find: ‘dist/rc-0.4.3/store-ru-RU’: No such file or directory
+store layout: 
+current pointer: 
+find: ‘dist/rc-0.4.3/store-ru-RU’: No such file or directory
+media files in installed tree: 0
+find: ‘dist/rc-0.4.3/store-ru-RU’: No such file or directory
+rc-draft-catalog                             exit=0
+      "license": "CC-BY-SA-4.0",
+      "pack_id": "org.openlanguage.ja-jp.reference",
+      "sha256": "90e6ab7928134399766d6b3da4338b3d3a6f972bf5eecec45495fa333da6fc4e",
+      "size_bytes": 292899604,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.3/ja-jp-reference-0.4.3.lpk",
+      "version": "0.4.3"
+      "license": "CC0-1.0",
+      "pack_id": "org.openlanguage.ru-ru.reference",
+      "sha256": "dbfb63c3afb8987ad625a9e40816bbf5bf0c0ac0df8012ab96e0429772ac6544",
+      "size_bytes": 268517933,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.3/ru-ru-reference-0.4.3.lpk",
+      "version": "0.4.3"
+RC_043_DONE
