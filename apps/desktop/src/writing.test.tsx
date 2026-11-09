@@ -108,4 +108,23 @@ describe("writing practice surface", () => {
     );
     expect(hit).not.toContain("writing-expected");
   });
+
+  it("the romanization hint noun follows the pack language (UX audit)", () => {
+    const base = {
+      task: { item_id: "ru.lex.demo.slovo", prompt_text: "слово" },
+      draft: "",
+      graded: false,
+      correct: false,
+      onDraft: () => {},
+      onSubmit: () => {},
+      onHint: () => {},
+    };
+    const japanese = renderToStaticMarkup(<WritingPractice {...base} />);
+    expect(japanese).toContain("Show romaji");
+    const russian = renderToStaticMarkup(
+      <WritingPractice {...base} romanizationNoun="transliteration" />,
+    );
+    expect(russian).toContain("Show transliteration");
+    expect(russian).not.toContain("Show romaji");
+  });
 });

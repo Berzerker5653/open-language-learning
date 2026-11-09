@@ -3863,6 +3863,11 @@ export function App() {
               onDraft={setWritingDraft}
               onSubmit={() => void submitWriting()}
               stress={stressEnabled(display)}
+              romanizationNoun={
+                (activeRecord?.locale ?? "").toLowerCase().startsWith("ru")
+                  ? "transliteration"
+                  : "romaji"
+              }
               onHint={showWritingHint}
               kanaInput={inAppInputOn}
             />

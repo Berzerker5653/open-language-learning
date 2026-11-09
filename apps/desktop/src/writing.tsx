@@ -33,6 +33,10 @@ export interface WritingPracticeProps {
   /// Issue #2 phase 1: in-app kana keyboard (see practice.tsx); the label
   /// stays honest — a platform IME remains supported either way.
   kanaInput?: boolean;
+  /// UX audit (fake-home persona run): "romaji" is Japanese-specific
+  /// vocabulary; a Russian learner's romanized hint is a transliteration.
+  /// The noun in the hint button label follows the pack's language.
+  romanizationNoun?: string;
 }
 
 export function WritingPractice(p: WritingPracticeProps) {
@@ -79,7 +83,7 @@ export function WritingPractice(p: WritingPracticeProps) {
           Show reading
         </button>
         <button type="button" className="btn btn--quiet" onClick={() => p.onHint("romaji")}>
-          Show romaji
+          Show {p.romanizationNoun ?? "romaji"}
         </button>
         <button
           type="submit"
