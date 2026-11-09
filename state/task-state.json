@@ -1886,15 +1886,17 @@
     },
     "SCENARIO-VIEW-CONSISTENCY-001": {
       "task_id": "SCENARIO-VIEW-CONSISTENCY-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Scenario view keeps completed transfers; dead support rungs stop being buttons",
       "activity": "idle",
       "summary": "Completed transfers visually reset to 0/N after any action/support click (only transfer_at re-stamps done in the returned view), and the level-0 'No supports' ladder rung is a permanently disabled button on every node.",
       "notes": "Findings S-05/S-07 of the 2026-10-21 findings register; repro sequence in the findings doc. One helper stamps transfer_done in every view-returning command plus a Rust test walking the sequence.",
       "evidence": [
-        "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md"
-      ]
+        "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md",
+        "state/evidence/SCENARIO-VIEW-CONSISTENCY-001/gates.log"
+      ],
+      "updated": "2026-11-08"
     },
     "BUTTON-AFFORDANCE-001": {
       "task_id": "BUTTON-AFFORDANCE-001",
