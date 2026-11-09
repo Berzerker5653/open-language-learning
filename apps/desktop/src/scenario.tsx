@@ -74,7 +74,7 @@ export interface ScenarioView {
 }
 
 export interface ScenarioStepResult {
-  result: "advanced" | "completed" | "not-satisfied";
+  result: "advanced" | "completed" | "partial-accepted" | "not-satisfied";
   recovery: string[];
   completed: boolean;
 }
@@ -197,6 +197,11 @@ export function ScenarioPanel(p: ScenarioPanelProps) {
         {p.lastStep?.result === "advanced" && (
           <p aria-live="polite" className="verdict verdict--correct">
             That worked — the conversation moved on.
+          </p>
+        )}
+        {p.lastStep?.result === "partial-accepted" && (
+          <p aria-live="polite" className="verdict verdict--correct">
+            That fits — this moment isn&apos;t finished yet. Keep going with what is left.
           </p>
         )}
         {s.delivered_help && (

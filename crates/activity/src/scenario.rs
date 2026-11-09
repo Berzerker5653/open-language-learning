@@ -11,18 +11,43 @@ use lts_domain::{ContentId, EventId, ProfileId, Score, SupportLevel};
 use lts_learner_model::AttemptDraft;
 use serde::Serialize;
 
-/// Result of an intent attempt at the current node.
+/// Result of an intent attempt at the active prompt.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum StepResult {
-    /// Intent accepted; moved to the next node (or recovery target).
+    /// The node's FULL declared action set was performed; moved to the
+    /// next node (or recovery target). (SCENARIO-INTERACTION-001: a
+    /// single accepted click no longer satisfies a multi-action node.)
     Advanced { to: String },
-    /// Intent accepted at the final node; scenario chain complete.
+    /// The full action set was performed at the final node; the
+    /// scenario chain is complete.
     Completed,
+    /// Intent accepted, but the node declares more actions than the
+    /// learner has performed. `remaining` counts what is still owed
+    /// before the node is satisfied. (SCENARIO-INTERACTION-001)
+    PartialAccepted { remaining: usize },
     /// Intent not among the node's accepted actions. `recovery` lists
-    /// pack-defined recovery branch ids the learner can take.
+    /// pack-defined recovery branch ids the learner can take. Reached
+    /// by clicking a rendered distractor — the decision set is wider
+    /// than the answer, so this path is live, not dead content.
     NotSatisfied { recovery: Vec<String> },
 }
+
+/// SCENARIO-INTERACTION-001 (finding S-03): scenario decisions are made
+/// by picking from on-screen wording that includes the right answer, so
+/// a click-through is a recognition task, not unaided retrieval. Node
+/// evidence is therefore never stamped better than this support level:
+/// MASTERY_POLICY 0.2.0 caps the `independent` stage at support level 1,
+/// so a stamp at 2 (the bottom of the `supported` band, 2-3) keeps
+/// guided scenario clicks OUT of independent/flexible mastery while the
+/// earned Correct score still counts. Lift this floor when pack work
+/// (S-01) puts real target-language retrieval into the prompts.
+pub const GUIDED_SCENARIO_SUPPORT_FLOOR: u8 = 2;
+
+/// SCENARIO-INTERACTION-001: how many distractor intents a node's
+/// rendered decision set carries at most. Deterministic (pack
+/// declaration order) so the same pack data renders the same choices.
+pub const MAX_SCENARIO_DISTRACTORS: usize = 4;
 
 /// Per-node record for evidence and review.
 #[derive(Debug, Clone, Serialize)]
@@ -66,6 +91,10 @@ pub struct ScenarioSession {
     attempts: u32,
     records: Vec<NodeRecord>,
     transfers: Vec<String>,
+    // SCENARIO-INTERACTION-001: accepted intents already performed at
+    // the current node. A node is satisfied only when its full declared
+    // `expected_actions` set is in here.
+    node_actions_done: Vec<String>,
     // U08: set only when an accepted intent closed the chain's terminal
     // node; finish() turns this plus the transfer gate into `completed`.
     chain_complete: bool,
@@ -86,6 +115,7 @@ impl ScenarioSession {
             attempts: 0,
             records: Vec::new(),
             transfers: Vec::new(),
+            node_actions_done: Vec::new(),
             chain_complete: false,
         })
     }
@@ -108,6 +138,60 @@ impl ScenarioSession {
                 (n.prompt.as_str(), &n.expected_actions)
             }
         }
+    }
+
+    /// SCENARIO-INTERACTION-001 (finding S-02): plausible wrong moves to
+    /// render alongside the accepted intents — every intent the scenario
+    /// declares anywhere (other nodes' actions, any node's recovery
+    /// actions) that the ACTIVE prompt does not accept. Pack data only,
+    /// in pack declaration order, deduped and capped at
+    /// [`MAX_SCENARIO_DISTRACTORS`], so the same pack always offers the
+    /// same set. When the pack declares nothing beyond the answer, the
+    /// set is empty and the engine cannot invent distractors — that is a
+    /// pack-authoring gap, never invented content.
+    pub fn distractor_actions(&self) -> Vec<String> {
+        let accepted = self.active_prompt().1;
+        let mut out: Vec<String> = Vec::new();
+        for n in self.scenario.nodes.iter() {
+            for a in n
+                .expected_actions
+                .iter()
+                .chain(n.recovery.iter().flat_map(|r| r.expected_actions.iter()))
+            {
+                if accepted.iter().any(|x| x == a) || out.contains(a) {
+                    continue;
+                }
+                out.push(a.clone());
+                if out.len() >= MAX_SCENARIO_DISTRACTORS {
+                    return out;
+                }
+            }
+        }
+        out
+    }
+
+    /// The FULL set rendered at the active prompt: accepted intents plus
+    /// distractors — a strict superset of the answer whenever the pack
+    /// declares more intents than this prompt accepts. Deterministically
+    /// interleaved (distractor first) so the answer is not simply the
+    /// first button. Free-navigation prompts (empty accepted set accept
+    /// any attempt) render no set.
+    pub fn decision_set(&self) -> Vec<String> {
+        let accepted = self.active_prompt().1;
+        if accepted.is_empty() {
+            return Vec::new();
+        }
+        let distractors = self.distractor_actions();
+        let mut out = Vec::with_capacity(accepted.len() + distractors.len());
+        for i in 0..std::cmp::max(accepted.len(), distractors.len()) {
+            if let Some(d) = distractors.get(i) {
+                out.push(d.clone());
+            }
+            if let Some(a) = accepted.get(i) {
+                out.push(a.clone());
+            }
+        }
+        out
     }
 
     /// Take a pack-declared support ladder step (level must be declared
@@ -179,9 +263,14 @@ impl ScenarioSession {
 
         let (accepted, next_first, recovery_ids) = {
             let node = self.current_node();
+            // SCENARIO-INTERACTION-001: an accepted intent only
+            // contributes to satisfaction through the performed-set
+            // check below. An empty expected_actions set accepts any
+            // attempt (free navigation).
+            let accepted = node.expected_actions.is_empty()
+                || node.expected_actions.iter().any(|a| a == intent);
             (
-                node.expected_actions.is_empty()
-                    || node.expected_actions.iter().any(|a| a == intent),
+                accepted,
                 node.next.first().cloned(),
                 node.recovery
                     .iter()
@@ -195,14 +284,39 @@ impl ScenarioSession {
             };
         }
 
-        // Node satisfied: record and advance along the first edge.
+        // Count this intent once; re-clicks of an already-performed
+        // accepted action never double-count toward the set.
+        if !self.node_actions_done.iter().any(|a| a == intent) {
+            self.node_actions_done.push(intent.to_string());
+        }
+        let remaining: usize = {
+            let node = self.current_node();
+            node.expected_actions
+                .iter()
+                .filter(|a| !self.node_actions_done.contains(*a))
+                .count()
+        };
+        if remaining > 0 {
+            // Correct move, node not yet satisfied: the learner still
+            // owes this node's declared actions before it advances.
+            return StepResult::PartialAccepted { remaining };
+        }
+
+        // Node satisfied by its FULL declared action set: record and
+        // advance along the first edge. SCENARIO-INTERACTION-001
+        // (finding S-03): the stamp is floored — a label-guided
+        // decision is never recorded better than the `supported` band.
         self.records.push(NodeRecord {
             node_id: self.current.clone(),
-            support_level: self.support_level().value(),
+            support_level: self
+                .support_level()
+                .value()
+                .max(GUIDED_SCENARIO_SUPPORT_FLOOR),
             attempts: self.attempts,
             succeeded: true,
         });
         self.support_used.clear();
+        self.node_actions_done.clear();
         self.attempts = 0;
         match next_first {
             Some(next) => {
@@ -299,7 +413,13 @@ impl ScenarioSession {
                     outcome.scenario_id, outcome.session_id, rec.node_id
                 ))
                 .support(
-                    SupportLevel::new(rec.support_level).unwrap_or_else(SupportLevel::independent),
+                    // SCENARIO-INTERACTION-001 (finding S-03): defense in
+                    // depth — even a NodeRecord written without the stamp
+                    // floor can never emit an `independent` scenario
+                    // event (MASTERY_POLICY 0.2.0 caps independent-stage
+                    // credit at support level 1).
+                    SupportLevel::new(rec.support_level.max(GUIDED_SCENARIO_SUPPORT_FLOOR))
+                        .unwrap_or_else(SupportLevel::independent),
                     Vec::new(),
                 )
                 .scored(if rec.succeeded {
@@ -446,5 +566,315 @@ mod tests {
         assert_eq!(out.exchanges_total, 1);
         assert_eq!(out.nodes.len(), 1);
         assert_eq!(out.transfers_required, 0);
+    }
+
+    // ------------------------------------------------------------------
+    // SCENARIO-INTERACTION-001: distractor action sets, full-set
+    // completion, honest evidence.
+    // ------------------------------------------------------------------
+
+    /// A node with a FULL set of two accepted actions, a recovery branch,
+    /// and other nodes whose intents become distractors.
+    fn decision_pack() -> PackScenario {
+        let nodes = vec![
+            ScenarioNode {
+                id: "es.scenario.dec.n0".into(),
+                prompt: "Open the exchange".into(),
+                expected_actions: vec!["greet".into(), "give-name".into()],
+                action_labels: [
+                    ("greet".to_string(), "Greet them".to_string()),
+                    ("give-name".to_string(), "Say your name".to_string()),
+                    ("ask-repeat".to_string(), "Ask them to repeat".to_string()),
+                ]
+                .into_iter()
+                .collect(),
+                support: Vec::new(),
+                next: vec!["es.scenario.dec.n1".into()],
+                recovery: vec![RecoveryBranch {
+                    id: "es.scenario.dec.n0.repair".into(),
+                    prompt: "Ask them to repeat".into(),
+                    expected_actions: vec!["ask-repeat".into()],
+                    to: Some("es.scenario.dec.n0".into()),
+                }],
+            },
+            ScenarioNode {
+                id: "es.scenario.dec.n1".into(),
+                prompt: "Ask them something back".into(),
+                expected_actions: vec!["ask-back".into()],
+                action_labels: [("ask-back".to_string(), "Ask them a question".to_string())]
+                    .into_iter()
+                    .collect(),
+                support: Vec::new(),
+                next: vec!["es.scenario.dec.n2".into()],
+                recovery: Vec::new(),
+            },
+            ScenarioNode {
+                id: "es.scenario.dec.n2".into(),
+                prompt: "Close it out".into(),
+                expected_actions: vec!["part".into()],
+                action_labels: [("part".to_string(), "Say goodbye".to_string())]
+                    .into_iter()
+                    .collect(),
+                support: Vec::new(),
+                next: Vec::new(),
+                recovery: Vec::new(),
+            },
+        ];
+        PackScenario {
+            id: "es.scenario.dec".into(),
+            goal_id: "es.goal.dec".into(),
+            title: "Decision chain".into(),
+            situation: None,
+            register: None,
+            nodes,
+            support_ladder: vec![
+                LadderStep {
+                    support_level: 0,
+                    description: "independent".into(),
+                },
+                LadderStep {
+                    support_level: 3,
+                    description: "hint".into(),
+                },
+            ],
+            transfer_variants_required: 0,
+            transfer_variants: Vec::new(),
+        }
+    }
+
+    #[test]
+    fn the_rendered_set_is_a_strict_superset_of_the_answer_at_every_node() {
+        let scenario = decision_pack();
+        let mut s = ScenarioSession::begin(&scenario, "sess-superset").unwrap();
+        let declared: Vec<String> = scenario
+            .nodes
+            .iter()
+            .flat_map(|n| {
+                n.expected_actions
+                    .iter()
+                    .chain(n.recovery.iter().flat_map(|r| r.expected_actions.iter()))
+            })
+            .cloned()
+            .collect();
+        let mut checked_nodes = 0;
+        // Visit each node by walking the chain; at every node the
+        // rendered decision set must be a strict superset.
+        for node_id in [
+            "es.scenario.dec.n0",
+            "es.scenario.dec.n1",
+            "es.scenario.dec.n2",
+        ] {
+            assert_eq!(s.current_node().id, node_id);
+            let accepted = s.active_prompt().1.to_vec();
+            let set = s.decision_set();
+            // Every accepted intent is present exactly once.
+            for a in &accepted {
+                assert_eq!(
+                    set.iter().filter(|x| *x == a).count(),
+                    1,
+                    "{a} exactly once"
+                );
+            }
+            // Strict superset: this pack declares other nodes' intents,
+            // so distractors must be present at every node.
+            assert!(
+                set.len() > accepted.len(),
+                "node {node_id} rendered only the answer: {set:?}"
+            );
+            // Distractors are pack-declared, never invented.
+            for x in &set {
+                assert!(declared.contains(x), "{x} is not a pack-declared intent");
+            }
+            // At least one distractor is a plausible wrong move: another
+            // node's declared action.
+            let distractors: Vec<&String> = set.iter().filter(|x| !accepted.contains(x)).collect();
+            assert!(!distractors.is_empty(), "{node_id}: no wrong options");
+            checked_nodes += 1;
+            // Advance with the node's FULL accepted set.
+            for a in &accepted {
+                s.attempt(a);
+            }
+        }
+        assert_eq!(checked_nodes, 3);
+    }
+
+    #[test]
+    fn a_wrong_click_on_a_rendered_distractor_yields_recovery_that_renders() {
+        let scenario = decision_pack();
+        let mut s = ScenarioSession::begin(&scenario, "sess-wrong").unwrap();
+        let set = s.decision_set();
+        let accepted = s.active_prompt().1.to_vec();
+        let distractor = set.iter().find(|x| !accepted.contains(x)).unwrap().clone();
+        // The distractor is rendered precisely because clicking it is a
+        // real possibility: the node does not accept it.
+        let wrong = s.attempt(&distractor);
+        let StepResult::NotSatisfied { recovery } = wrong else {
+            panic!("a distractor click must not satisfy: {wrong:?}");
+        };
+        // The pack-defined recovery branch is offered (this is what the
+        // UI's Recovery moves group renders — dead content no more).
+        assert_eq!(recovery, vec!["es.scenario.dec.n0.repair".to_string()]);
+        assert!(s.enter_recovery("es.scenario.dec.n0.repair"));
+        let (prompt, r_accepted) = s.active_prompt();
+        assert_eq!(prompt, "Ask them to repeat");
+        assert_eq!(r_accepted, &["ask-repeat".to_string()]);
+        // Even at the recovery prompt the rendered set is wider than the
+        // answer: main-line moves stay visible as wrong options.
+        let r_set = s.decision_set();
+        assert!(r_set.len() > r_accepted.len(), "{r_set:?}");
+        assert!(r_set.contains(&"ask-repeat".to_string()));
+        let r_distractor = r_set
+            .iter()
+            .find(|x| !r_accepted.contains(x))
+            .unwrap()
+            .clone();
+        assert!(matches!(
+            s.attempt(&r_distractor),
+            StepResult::NotSatisfied { .. }
+        ));
+        assert_eq!(
+            s.attempt("ask-repeat"),
+            StepResult::Advanced {
+                to: "es.scenario.dec.n0".into()
+            }
+        );
+    }
+
+    #[test]
+    fn a_node_is_satisfied_only_by_its_full_declared_action_set() {
+        let scenario = decision_pack();
+        let mut s = ScenarioSession::begin(&scenario, "sess-fullset").unwrap();
+        // n0 declares TWO actions: one accepted click is correct but
+        // does NOT advance — the node still owes its set.
+        assert_eq!(
+            s.attempt("greet"),
+            StepResult::PartialAccepted { remaining: 1 }
+        );
+        assert_eq!(s.current_node().id, "es.scenario.dec.n0");
+        // No node evidence exists until the node is satisfied.
+        // Re-clicking the same accepted intent never double-counts.
+        assert_eq!(
+            s.attempt("greet"),
+            StepResult::PartialAccepted { remaining: 1 }
+        );
+        // A wrong click while the set is owed still fails honestly.
+        assert!(matches!(s.attempt("part"), StepResult::NotSatisfied { .. }));
+        assert_eq!(
+            s.attempt("give-name"),
+            StepResult::Advanced {
+                to: "es.scenario.dec.n1".into()
+            }
+        );
+        // Only now does the satisfied node count as one record.
+        let out = s.finish();
+        assert_eq!(
+            out.nodes.len(),
+            1,
+            "only the fully performed node is evidence"
+        );
+        assert_eq!(out.nodes[0].node_id, "es.scenario.dec.n0");
+    }
+
+    #[test]
+    fn full_set_completion_advances_and_terminal_completes() {
+        let scenario = decision_pack();
+        let mut s = ScenarioSession::begin(&scenario, "sess-advance").unwrap();
+        assert_eq!(
+            s.attempt("greet"),
+            StepResult::PartialAccepted { remaining: 1 }
+        );
+        assert_eq!(
+            s.attempt("give-name"),
+            StepResult::Advanced {
+                to: "es.scenario.dec.n1".into()
+            }
+        );
+        // n1 declares one action: full-set semantics keep it one click.
+        assert_eq!(
+            s.attempt("ask-back"),
+            StepResult::Advanced {
+                to: "es.scenario.dec.n2".into()
+            }
+        );
+        assert_eq!(s.attempt("part"), StepResult::Completed);
+        let out = s.finish();
+        assert!(out.completed);
+        assert_eq!(out.nodes.len(), 3);
+    }
+
+    #[test]
+    fn a_guided_click_through_never_stamps_independent_evidence() {
+        // S-03 down-stamp path: a learner who presses NO support rung
+        // and clicks every rendered answer is a click-through — the
+        // evidence is never better than the `supported` band, so
+        // MASTERY_POLICY 0.2.0 (independent stage caps support at
+        // level 1) can never read these events as independent.
+        let scenario = decision_pack();
+        let mut s = ScenarioSession::begin(&scenario, "sess-guided").unwrap();
+        s.attempt("greet");
+        s.attempt("give-name");
+        s.attempt("ask-back");
+        s.attempt("part");
+        let out = s.finish();
+        assert_eq!(out.nodes.len(), 3);
+        for rec in &out.nodes {
+            assert!(
+                rec.support_level >= GUIDED_SCENARIO_SUPPORT_FLOOR,
+                "{} stamped independent: {}",
+                rec.node_id,
+                rec.support_level
+            );
+        }
+        let events = ScenarioSession::evidence_events(
+            &out,
+            "org.openlanguage.test",
+            "0.1.0",
+            &lts_domain::ProfileId::new("profile-guided"),
+            |i| format!("2026-11-08T00:00:0{i}Z"),
+        );
+        assert_eq!(events.len(), 3);
+        for ev in &events {
+            assert!(
+                ev.support_level.value() >= GUIDED_SCENARIO_SUPPORT_FLOOR,
+                "{}: guided scenario event stamped level {}",
+                ev.event_id.as_str(),
+                ev.support_level.value()
+            );
+            assert!(
+                ev.support_level.value() <= 3,
+                "down-stamp must land in the `supported` band, not invent worse levels"
+            );
+        }
+    }
+
+    #[test]
+    fn declared_support_above_the_floor_is_preserved() {
+        // The floor never OVER-states: a learner who really pressed
+        // ladder level 3 keeps level 3 on that node's evidence.
+        let scenario = decision_pack();
+        let mut s = ScenarioSession::begin(&scenario, "sess-floor").unwrap();
+        assert!(s.use_support(3));
+        s.attempt("greet");
+        s.attempt("give-name");
+        s.attempt("ask-back");
+        s.attempt("part");
+        let out = s.finish();
+        assert_eq!(out.nodes[0].support_level, 3, "used support survives");
+        assert_eq!(
+            out.nodes[1].support_level, GUIDED_SCENARIO_SUPPORT_FLOOR,
+            "later nodes keep the floor"
+        );
+    }
+
+    #[test]
+    fn a_pack_without_extra_intents_renders_no_invented_distractors() {
+        // The engine never invents content: a single-node pack declares
+        // nothing to distract with, and the decision set equals the
+        // accepted set. Strict supersets are a property of pack data
+        // that declares more moves than the node accepts.
+        let scenario = chain(1, 0);
+        let s = ScenarioSession::begin(&scenario, "sess-alone").unwrap();
+        assert_eq!(s.distractor_actions(), Vec::<String>::new());
+        assert_eq!(s.decision_set(), vec!["go0".to_string()]);
     }
 }

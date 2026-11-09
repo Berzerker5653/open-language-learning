@@ -13080,8 +13080,25 @@ activities:
         let view = scenarios::start_at(data, &p.id, sid, "sess-1", &sessions).unwrap();
         // U07: the wire carries intent + learner-facing label; the pack's
         // own action_labels must be the label, never the token.
-        assert_eq!(view.node.actions[0].intent, "greeting");
-        assert_eq!(view.node.actions[0].label, "Greet them back");
+        // SCENARIO-INTERACTION-001 (S-01/S-02): the rendered set is a
+        // strict superset of the answer — distractors are interleaved,
+        // so no button position may be assumed to be the answer.
+        let greeting = view
+            .node
+            .actions
+            .iter()
+            .find(|a| a.intent == "greeting")
+            .expect("the accepted intent is rendered");
+        assert_eq!(greeting.label, "Greet them back");
+        assert!(
+            view.node.actions.iter().any(|a| a.intent != "greeting"),
+            "the decision set renders wrong moves too: {:?}",
+            view.node
+                .actions
+                .iter()
+                .map(|a| &a.intent)
+                .collect::<Vec<_>>()
+        );
         // U07: the ladder wire states which rungs this pack can honor at
         // this node: level 0 ("No supports") carries no payload, while
         // rungs 3 and 5 are backed by per-node `support` entries.
@@ -13135,8 +13152,11 @@ activities:
         assert_eq!(out.nodes_completed, 2);
         assert!(out.transfer_requirement_met);
 
-        // One scored interaction event per completed node, with the
-        // support actually used at that node (3 at open, 0 at ask-name).
+        // One scored interaction event per completed node. SCENARIO-
+        // INTERACTION-001 (S-03): the event never reads better than the
+        // guided-evidence floor — 3 at open (support actually used),
+        // and the ask-name node floors at `supported` (2), never
+        // independent (0).
         let events = store.evidence_for_profile(&p.id).unwrap();
         let inter: Vec<_> = events
             .iter()
@@ -13153,7 +13173,7 @@ activities:
             e.targets
                 .iter()
                 .any(|t| t.as_str() == "ja.activity.demo.sc.ask-name")
-                && e.support_level.value() == 0
+                && e.support_level.value() == lts_activity::GUIDED_SCENARIO_SUPPORT_FLOOR
         }));
 
         // R03: a second sitting of the same scenario is a fresh
@@ -13329,8 +13349,12 @@ transfer_variants:
         let out = scenarios::finish_at(data, &p.id, sid, &sessions).unwrap();
         assert_eq!(out.nodes_completed, 2);
 
-        // Evidence: both nodes are recorded WITHOUT a support stamp — the
-        // refused press left no trace in the stored event.
+        // Evidence: the refused press left no trace — neither the
+        // phantom 3/5 stamp nor support_used. SCENARIO-INTERACTION-001
+        // (S-03): what these nodes DO carry is the guided-evidence
+        // floor: a label-guided scenario click is never stamped
+        // independent, so both events sit at the floor, nowhere near
+        // the refused 3/5.
         let events = store.evidence_for_profile(&p.id).unwrap();
         let inter: Vec<_> = events
             .iter()
@@ -13339,8 +13363,11 @@ transfer_variants:
         assert_eq!(inter.len(), 2);
         let levels: Vec<u8> = inter.iter().map(|e| e.support_level.value()).collect();
         assert!(
-            levels.iter().all(|v| *v == 0),
-            "no node evidence may carry a support stamp: {levels:?}"
+            levels
+                .iter()
+                .all(|v| *v == lts_activity::GUIDED_SCENARIO_SUPPORT_FLOOR),
+            "a refused rung must not stamp the phantom 3/5; nodes carry only \
+             the guided-evidence floor: {levels:?}"
         );
     }
 

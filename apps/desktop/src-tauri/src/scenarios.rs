@@ -95,8 +95,12 @@ pub struct ActionView {
 pub struct NodeView {
     pub id: String,
     pub prompt: String,
-    /// U07: pack-declared intents the learner can attempt at this prompt.
-    /// An empty list means free response (any attempt advances).
+    /// U07: one respond button per entry. SCENARIO-INTERACTION-001:
+    /// this is the engine's decision set — the accepted intents PLUS
+    /// distractor intents the scenario declares elsewhere — so the
+    /// rendered set is a strict superset of the answer whenever the
+    /// pack offers wrong moves. An empty list means free response
+    /// (any attempt advances).
     pub actions: Vec<ActionView>,
     pub recovery: Vec<RecoveryView>,
 }
@@ -810,8 +814,27 @@ pub(crate) fn situation_label(data: &Path, id: &str) -> Option<String> {
     None
 }
 
+/// Learner-facing wording for a rendered intent: the current node's own
+/// label first, else any label the pack carries for that intent on
+/// another node (distractors are pack-declared moves, so their wording
+/// ships with the pack too), else the generic word. The raw intent token
+/// is never a label (U07).
+fn action_label(
+    sc: &PackScenario,
+    node: &lts_activity::spec::ScenarioNode,
+    intent: &str,
+) -> String {
+    if let Some(l) = node.action_labels.get(intent) {
+        return l.clone();
+    }
+    if let Some(l) = sc.nodes.iter().find_map(|n| n.action_labels.get(intent)) {
+        return l.clone();
+    }
+    "Respond".to_string()
+}
+
 fn view_of(data: &Path, sc: &PackScenario, session: &ScenarioSession) -> ScenarioView {
-    let (prompt, actions) = session.active_prompt();
+    let (prompt, _) = session.active_prompt();
     let node = session.current_node();
     ScenarioView {
         scenario_id: sc.id.clone(),
@@ -823,15 +846,18 @@ fn view_of(data: &Path, sc: &PackScenario, session: &ScenarioSession) -> Scenari
         node: NodeView {
             id: node.id.clone(),
             prompt: prompt.to_string(),
-            actions: actions
+            // SCENARIO-INTERACTION-001 (findings S-01/S-02): the button
+            // set is the engine's decision set — accepted intents PLUS
+            // distractor intents the scenario declares elsewhere — never
+            // the answer list alone. A distractor click yields
+            // not-satisfied, which is what makes the recovery branches
+            // below live content instead of dead pack data.
+            actions: session
+                .decision_set()
                 .iter()
                 .map(|intent| ActionView {
                     intent: intent.clone(),
-                    label: node
-                        .action_labels
-                        .get(intent.as_str())
-                        .cloned()
-                        .unwrap_or_else(|| "Respond".to_string()),
+                    label: action_label(sc, node, intent),
                 })
                 .collect(),
             recovery: node
@@ -957,6 +983,10 @@ pub fn attempt_at(
     let (name, recovery, completed) = match &result {
         Advanced { .. } => ("advanced", Vec::new(), false),
         Completed => ("completed", Vec::new(), true),
+        // SCENARIO-INTERACTION-001: a correct move on a node that still
+        // owes actions of its full declared set. The UI stays on the
+        // node; the remaining buttons keep rendering.
+        PartialAccepted { .. } => ("partial-accepted", Vec::new(), false),
         NotSatisfied { recovery } => ("not-satisfied", recovery.clone(), false),
     };
     let mut view = view_of(data, &sc, session);
@@ -1968,5 +1998,209 @@ mod tests {
         let hint2 = &second.unlocks[0];
         assert!(hint2.contains("Forks at dinner"), "{hint2}");
         assert!(pack_id_like(hint2).is_none(), "{hint2}");
+    }
+
+    // SCENARIO-INTERACTION-001: the wire gains `partial-accepted` — the
+    // UI branches on these strings, so the serde tag is contract.
+    #[test]
+    fn the_step_result_serde_tags_include_partial_accepted() {
+        use lts_activity::scenario::StepResult;
+        let v =
+            serde_json::to_value(StepResult::PartialAccepted { remaining: 2 }).expect("serializes");
+        let keys: Vec<String> = v
+            .as_object()
+            .expect("tagged object")
+            .keys()
+            .cloned()
+            .collect();
+        assert_eq!(keys, ["partial-accepted"]);
+    }
+
+    /// SCENARIO-INTERACTION-001 (S-01/S-02/S-03), end-to-end over the
+    /// REAL shipped packs: at every node of every shipped scenario the
+    /// rendered button set is a strict superset of the accepted answer,
+    /// a rendered distractor click fails and the pack's recovery branch
+    /// renders, the node advances only on its full declared set, and the
+    /// resulting evidence is down-stamped — never independent.
+    #[test]
+    fn every_shipped_scenario_offers_wrong_moves_and_records_honest_evidence() {
+        use lts_activity::scenario::StepResult;
+        for pack in ["ja-JP", "ru-RU"] {
+            let root =
+                Path::new(env!("CARGO_MANIFEST_DIR")).join(format!("../../../languages/{pack}"));
+            let runtime = crate::packcache::runtime(&root).expect("the shipped pack parses");
+            let data = tempfile::tempdir().unwrap(); // no installed packs: situation falls back
+            for sc in runtime.scenarios() {
+                let declared: Vec<String> = sc
+                    .nodes
+                    .iter()
+                    .flat_map(|n| {
+                        n.expected_actions
+                            .iter()
+                            .chain(n.recovery.iter().flat_map(|r| r.expected_actions.iter()))
+                    })
+                    .cloned()
+                    .collect();
+                let mut s = ScenarioSession::begin(sc, "guided-walk").expect("nodes exist");
+                loop {
+                    let node_id = s.current_node().id.clone();
+                    let accepted = s.current_node().expected_actions.clone();
+                    assert!(
+                        !accepted.is_empty(),
+                        "{pack}/{node_id}: an empty action set accepts everything — \
+                         no wrong click is possible (finding S-01)"
+                    );
+                    let view = view_of(data.path(), sc, &s);
+                    let rendered: Vec<String> =
+                        view.node.actions.iter().map(|a| a.intent.clone()).collect();
+                    // Superset: every accepted intent is a button...
+                    for a in &accepted {
+                        assert!(
+                            rendered.contains(a),
+                            "{pack}/{node_id}: accepted intent {a} not rendered"
+                        );
+                    }
+                    // ...and a STRICT one: plausible wrong moves are
+                    // rendered too (all pack-declared, never invented).
+                    assert!(
+                        rendered.len() > accepted.len(),
+                        "{pack}/{node_id}: rendered set is the answer itself: {rendered:?}"
+                    );
+                    for intent in &rendered {
+                        assert!(
+                            declared.contains(intent),
+                            "{pack}/{node_id}: rendered intent {intent} is not pack-declared"
+                        );
+                    }
+                    // Buttons carry the pack's wording, never the raw token.
+                    for a in &view.node.actions {
+                        assert!(
+                            !a.label.is_empty() && a.label != a.intent,
+                            "{pack}/{node_id}: {intent:?} rendered its raw token",
+                            intent = a.intent
+                        );
+                    }
+                    // A rendered distractor is a live wrong move: it
+                    // fails, and the recovery branch content renders.
+                    let distractor = rendered
+                        .iter()
+                        .find(|x| !accepted.contains(x))
+                        .unwrap()
+                        .clone();
+                    let StepResult::NotSatisfied { recovery } = s.attempt(&distractor) else {
+                        panic!("{pack}/{node_id}: distractor {distractor} was accepted");
+                    };
+                    let after_wrong = view_of(data.path(), sc, &s);
+                    let branch_ids: Vec<String> = s
+                        .current_node()
+                        .recovery
+                        .iter()
+                        .map(|r| r.id.clone())
+                        .collect();
+                    assert_eq!(recovery, branch_ids, "the wire names the pack's branches");
+                    assert_eq!(
+                        after_wrong
+                            .node
+                            .recovery
+                            .iter()
+                            .map(|r| r.id.clone())
+                            .collect::<Vec<_>>(),
+                        branch_ids,
+                        "{pack}/{node_id}: the Recovery moves group has nothing to render"
+                    );
+                    if !branch_ids.is_empty() {
+                        // Recovery actually resolves back to its target,
+                        // so the rendered branch is real content.
+                        assert!(s.enter_recovery(&branch_ids[0]));
+                        let r_actions = s.active_prompt().1.to_vec();
+                        assert!(
+                            !r_actions.is_empty(),
+                            "shipped recovery branches declare a move"
+                        );
+                        let target = s.current_node().recovery[0]
+                            .to
+                            .clone()
+                            .unwrap_or_else(|| node_id.clone());
+                        assert_eq!(
+                            s.attempt(&r_actions[0]),
+                            StepResult::Advanced { to: target }
+                        );
+                    }
+                    if s.current_node().id != node_id {
+                        // A recovery edge routed elsewhere: re-evaluate
+                        // the node we actually landed on next.
+                        continue;
+                    }
+                    // Satisfaction needs the FULL declared set: at a
+                    // multi-action node the first accepted click must
+                    // report PartialAccepted, never advance.
+                    if accepted.len() > 1 {
+                        let StepResult::PartialAccepted { remaining } = s.attempt(&accepted[0])
+                        else {
+                            panic!(
+                                "{pack}/{node_id}: one of {} clicks advanced",
+                                accepted.len()
+                            );
+                        };
+                        assert_eq!(remaining, accepted.len() - 1);
+                    }
+                    // Finish the node's set; the final click either
+                    // advances or completes the chain.
+                    let mut final_r = StepResult::Completed;
+                    for (i, a) in accepted.iter().enumerate() {
+                        let got = s.attempt(a);
+                        if i + 1 < accepted.len() {
+                            assert!(
+                                matches!(got, StepResult::PartialAccepted { .. }),
+                                "{pack}/{node_id}: owed action reported {got:?}"
+                            );
+                        } else {
+                            final_r = got;
+                        }
+                    }
+                    match final_r {
+                        StepResult::Completed => break,
+                        StepResult::Advanced { .. } => continue,
+                        other => {
+                            panic!("{pack}/{node_id}: full set must finish the node, got {other:?}")
+                        }
+                    }
+                }
+                // U08: completion also needs the transfer gate — the
+                // walk performs the pack-required variants so the chain
+                // assertion below measures the interaction, not the gate.
+                for v in sc
+                    .transfer_variants
+                    .iter()
+                    .take(sc.transfer_variants_required as usize)
+                {
+                    assert!(s.complete_transfer(&v.id));
+                }
+                let out = s.finish();
+                assert!(
+                    out.completed,
+                    "{pack}: a full guided walk completes its chain"
+                );
+                // Down-stamp path over real pack content: finish_at
+                // feeds exactly these events to the store — none may
+                // read as independent evidence (S-03).
+                let events = ScenarioSession::evidence_events(
+                    &out,
+                    pack,
+                    "0.0.0-test",
+                    &lts_domain::ProfileId::new("guided-profile"),
+                    |i| format!("2026-11-08T00:00:0{i}Z"),
+                );
+                assert_eq!(events.len(), sc.nodes.len());
+                for ev in &events {
+                    assert!(
+                        ev.support_level.value() >= lts_activity::GUIDED_SCENARIO_SUPPORT_FLOOR,
+                        "{pack}: guided click-through event stamped level {} — independent \
+                         evidence from labels is what finding S-03 forbids",
+                        ev.support_level.value()
+                    );
+                }
+            }
+        }
     }
 }

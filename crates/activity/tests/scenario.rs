@@ -18,8 +18,31 @@ fn load(pack: &str, scenario_file_contains: &str) -> PackScenario {
         .expect("scenario instance")
 }
 
-fn walk(session: &mut ScenarioSession, intents: &[&str]) -> Vec<StepResult> {
-    intents.iter().map(|i| session.attempt(i)).collect()
+/// Perform a node's FULL declared action set (SCENARIO-INTERACTION-001)
+/// and return the final step result. Correct-but-incomplete clicks must
+/// report PartialAccepted on the way.
+fn complete_node(session: &mut ScenarioSession) -> StepResult {
+    let acts: Vec<String> = session.current_node().expected_actions.clone();
+    assert!(
+        !acts.is_empty(),
+        "fixture nodes declare at least one action"
+    );
+    let last = acts.len() - 1;
+    let mut final_r: Option<StepResult> = None;
+    for (i, a) in acts.iter().enumerate() {
+        let got = session.attempt(a);
+        if i < last {
+            assert_eq!(
+                got,
+                StepResult::PartialAccepted {
+                    remaining: last - i
+                }
+            );
+        } else {
+            final_r = Some(got);
+        }
+    }
+    final_r.expect("non-empty action set")
 }
 
 #[test]
@@ -54,15 +77,21 @@ fn graph_supports_intents_ladder_recovery_and_transfers() {
     assert!(!s.use_support(5));
     assert_eq!(s.support_level().value(), 3);
 
-    // Success edges: greeting advances, name-question completes.
-    let results = walk(&mut s, &["greeting", "name-question"]);
+    // Success edges need the FULL declared set (SCENARIO-INTERACTION-001):
+    // the open node declares greeting AND self-introduction, so the
+    // first is accepted but leaves the node owed one action.
     assert_eq!(
-        results[0],
+        s.attempt("greeting"),
+        StepResult::PartialAccepted { remaining: 1 }
+    );
+    assert_eq!(
+        s.attempt("self-introduction"),
         StepResult::Advanced {
             to: "es.activity.intro.meeting.ask-name".into()
         }
     );
-    assert_eq!(results[1], StepResult::Completed);
+    // The ask-name node declares a single action: one click completes.
+    assert_eq!(s.attempt("name-question"), StepResult::Completed);
 
     // Transfer variants: only pack-declared ids count; requirement met.
     assert!(!s.complete_transfer("es.scenario.intro.nonexistent"));
@@ -72,7 +101,8 @@ fn graph_supports_intents_ladder_recovery_and_transfers() {
     let out = s.finish();
     assert_eq!(out.nodes.len(), 2);
     assert_eq!(out.nodes[0].support_level, 3);
-    assert_eq!(out.nodes[0].attempts, 3); // wrong + recovery + greeting
+    // wrong + recovery + greeting + self-introduction
+    assert_eq!(out.nodes[0].attempts, 4);
     assert!(out.transfer_requirement_met);
 }
 
@@ -81,8 +111,8 @@ fn evidence_events_record_support_per_node() {
     let scenario = load("valid-full", "intro.yaml");
     let mut s = ScenarioSession::begin(&scenario, "sess-1").unwrap();
     s.use_support(3);
-    s.attempt("greeting");
-    s.attempt("name-question");
+    complete_node(&mut s); // open: greeting + self-introduction
+    complete_node(&mut s); // ask-name: name-question
     let out = s.finish();
     let events = ScenarioSession::evidence_events(
         &out,
@@ -93,7 +123,11 @@ fn evidence_events_record_support_per_node() {
     );
     assert_eq!(events.len(), 2);
     assert_eq!(events[0].support_level.value(), 3);
-    assert_eq!(events[1].support_level.value(), 0);
+    // SCENARIO-INTERACTION-001 (finding S-03): the ask-name node had no
+    // ladder pressed, but a label-guided scenario click is never stamped
+    // independent — it floors at the `supported` band so the
+    // independent-stage rule (support ≤ 1) cannot consume it.
+    assert_eq!(events[1].support_level.value(), 2);
     assert_eq!(
         events[0].modality,
         lts_domain::ActivityModality::Interaction
@@ -137,13 +171,10 @@ fn runtime_is_language_agnostic() {
             StepResult::Advanced { to: first.clone() }
         );
 
-        // The pack's accepted intents walk the graph to completion.
-        let node = s.current_node();
-        let ok = node.expected_actions[0].clone();
-        assert!(matches!(s.attempt(&ok), StepResult::Advanced { .. }));
-        let node = s.current_node();
-        let ok2 = node.expected_actions[0].clone();
-        assert_eq!(s.attempt(&ok2), StepResult::Completed);
+        // The pack's accepted intents walk the graph to completion —
+        // every node on its FULL declared set (SCENARIO-INTERACTION-001).
+        assert!(matches!(complete_node(&mut s), StepResult::Advanced { .. }));
+        assert_eq!(complete_node(&mut s), StepResult::Completed);
         let variant = scenario.transfer_variants[0].id.clone();
         assert!(s.complete_transfer(&variant));
         assert!(s.transfer_requirement_met());
@@ -184,7 +215,10 @@ fn ja_seed_first_meeting_graph_runs_end_to_end() {
     // Support ladder: only declared levels (0/3/5) are accepted.
     assert!(s.use_support(3));
     assert!(!s.use_support(1));
-    // Walk the greeting chain to completion.
+    // Walk the greeting chain to completion. SCENARIO-INTERACTION-001:
+    // single-action nodes take one click; the introduce node declares a
+    // FULL set (state-first-meeting + state-name) and only advances once
+    // both are performed.
     assert_eq!(
         s.attempt("respond-greeting"),
         StepResult::Advanced {
@@ -193,6 +227,10 @@ fn ja_seed_first_meeting_graph_runs_end_to_end() {
     );
     assert_eq!(
         s.attempt("state-first-meeting"),
+        StepResult::PartialAccepted { remaining: 1 }
+    );
+    assert_eq!(
+        s.attempt("state-name"),
         StepResult::Advanced {
             to: "ja.scenario.first-meeting.greeting.close".into()
         }
@@ -220,8 +258,8 @@ fn replaying_a_scenario_is_a_separate_sitting() {
     let scenario = load("valid-full", "intro.yaml");
     let run = |session: &str| -> Vec<String> {
         let mut s = ScenarioSession::begin(&scenario, session).unwrap();
-        s.attempt("greeting");
-        s.attempt("name-question");
+        complete_node(&mut s); // open: greeting + self-introduction
+        complete_node(&mut s); // ask-name: name-question
         let out = s.finish();
         ScenarioSession::evidence_events(
             &out,
