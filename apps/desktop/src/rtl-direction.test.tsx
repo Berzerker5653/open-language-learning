@@ -173,6 +173,7 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
         onSupport={() => {}}
         onRecovery={() => {}}
         onTransfer={() => {}}
+        onTransferAnswer={() => {}}
         onFinish={() => {}}
         onBack={() => {}}
       />,

@@ -885,6 +885,142 @@ fn pack_without_declared_help_promise_is_exempt_from_u07() {
     }
 }
 
+// --- SCENARIO-TRANSFER-001 (finding S-04): a transfer requirement is
+// a promise of practice, not a checkbox gate. A scenario requiring N
+// transfers must carry completable payloads on at least N variants;
+// packs that cannot honour it must set the requirement to 0. ---
+
+fn transfer_scenario(required: u32, variants: &str) -> String {
+    format!(
+        "\
+id: es.scenario.tr.honest
+goal_id: es.goal.intro.greet
+title: Buy a stamp
+nodes:
+- id: es.scenario.tr.honest.open
+  prompt: Ask for a stamp.
+  expected_actions: [ask-stamp]
+  next: []
+support_ladder:
+- support_level: 0
+  description: No supports
+transfer_variants_required: {required}
+{variants}"
+    )
+}
+
+const TR_VARIANT_NO_PAYLOAD: &str = "\
+transfer_variants:
+- id: es.scenario.tr.honest.friend
+  description: Ask a friend instead
+";
+const TR_VARIANT_RECALL: &str = "\
+transfer_variants:
+- id: es.scenario.tr.honest.friend
+  description: Ask a friend instead
+  payload:
+    kind: recall
+    prompt: Ask a friend for a stamp, casually.
+    expected:
+    - Stamp, please?
+";
+const TR_TWO_VARIANTS_ONE_PAYLOAD: &str = "\
+transfer_variants:
+- id: es.scenario.tr.honest.friend
+  description: Ask a friend instead
+  payload:
+    kind: recall
+    prompt: Ask a friend for a stamp, casually.
+    expected:
+    - Stamp, please?
+- id: es.scenario.tr.honest.clerk
+  description: Ask a different clerk
+";
+
+#[test]
+fn a_transfer_requirement_without_payloads_is_rejected() {
+    for mode in [Mode::Scaffold, Mode::Install] {
+        let (_tmp, pack) = pack_with_scenario(&transfer_scenario(2, TR_VARIANT_NO_PAYLOAD), true);
+        let diags = pack.validate(mode, None);
+        let hits: Vec<&lts_langpack::Diagnostic> = diags
+            .iter()
+            .filter(|d| d.code == "scenario_transfer_payload_missing")
+            .collect();
+        assert_eq!(
+            hits.len(),
+            1,
+            "exactly one payload-gap error ({mode:?}): {diags:?}"
+        );
+        assert_eq!(hits[0].severity, Severity::Error);
+        assert!(
+            hits[0]
+                .message
+                .contains("requires 2 transfer variant(s) but only 0"),
+            "{}",
+            hits[0].message
+        );
+        assert!(
+            hits[0].path.ends_with("transfer_variants_required"),
+            "{}",
+            hits[0].path
+        );
+    }
+}
+
+#[test]
+fn a_partially_payloaded_requirement_is_still_a_gap() {
+    // Required 2, two variants, ONE payload: the second required
+    // transfer is still a checkbox — rejected.
+    for mode in [Mode::Scaffold, Mode::Install] {
+        let (_tmp, pack) =
+            pack_with_scenario(&transfer_scenario(2, TR_TWO_VARIANTS_ONE_PAYLOAD), true);
+        let diags = pack.validate(mode, None);
+        let hits: Vec<&lts_langpack::Diagnostic> = diags
+            .iter()
+            .filter(|d| d.code == "scenario_transfer_payload_missing")
+            .collect();
+        assert_eq!(hits.len(), 1, "({mode:?}): {diags:?}");
+        assert!(
+            hits[0].message.contains("but only 1"),
+            "{}",
+            hits[0].message
+        );
+    }
+}
+
+#[test]
+fn payloads_behind_every_required_transfer_validate_clean() {
+    // Branch A: a pack that carries the practice may keep the promise.
+    for mode in [Mode::Scaffold, Mode::Install] {
+        let (_tmp, pack) = pack_with_scenario(&transfer_scenario(1, TR_VARIANT_RECALL), true);
+        let diags = pack.validate(mode, None);
+        assert!(
+            !diags
+                .iter()
+                .any(|d| d.code == "scenario_transfer_payload_missing"),
+            "({mode:?}): {diags:?}"
+        );
+        assert_eq!(error_count(&diags), 0, "({mode:?}): {diags:?}");
+    }
+}
+
+#[test]
+fn a_removed_requirement_validates_clean() {
+    // Branch B: requirement 0 with payload-less description-only
+    // variants is honest — nothing is promised, nothing is gated.
+    for mode in [Mode::Scaffold, Mode::Install] {
+        let (_tmp, pack) = pack_with_scenario(&transfer_scenario(0, TR_VARIANT_NO_PAYLOAD), true);
+        let diags = pack.validate(mode, None);
+        assert!(
+            !diags
+                .iter()
+                .any(|d| d.code == "scenario_transfer_payload_missing"),
+            "({mode:?}): {diags:?}"
+        );
+        assert_eq!(error_count(&diags), 0, "({mode:?}): {diags:?}");
+    }
+}
+
 #[test]
 fn manifest_rejects_non_boolean_scenario_help() {
     let tmp = fixture_copy();

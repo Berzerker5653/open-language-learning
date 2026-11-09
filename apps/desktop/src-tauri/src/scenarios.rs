@@ -134,6 +134,24 @@ pub struct TransferView {
     pub id: String,
     pub description: String,
     pub done: bool,
+    /// SCENARIO-TRANSFER-001 (finding S-04): whether this pack ships a
+    /// completable payload behind the variant. False means display-only:
+    /// the engine refuses it, the UI never offers a press, and the
+    /// requirement behind it must have been removed — there is no
+    /// checkbox completion path anymore.
+    pub has_payload: bool,
+}
+
+/// SCENARIO-TRANSFER-001: the transfer practice currently open. Recall
+/// renders a prompt + free-text answer; walk renders the step's button
+/// set exactly like a main-chain node.
+#[derive(Serialize)]
+pub struct ActiveTransferView {
+    pub variant_id: String,
+    /// "recall" | "walk" — the UI branches on this.
+    pub mode: String,
+    pub prompt: String,
+    pub actions: Vec<ActionView>,
 }
 
 #[derive(Serialize)]
@@ -149,6 +167,11 @@ pub struct ScenarioView {
     /// U07: set only by `support_at`, from the rung's payload; None on
     /// every other command so stale help never lingers on a new prompt.
     pub delivered_help: Option<HelpView>,
+    /// SCENARIO-TRANSFER-001: set whenever a transfer payload is in
+    /// progress (opened by `transfer_at`, advanced by
+    /// `transfer_answer_at`), so the practice prompt survives every view
+    /// rebuild and exists only while it is being performed.
+    pub active_transfer: Option<ActiveTransferView>,
 }
 
 #[derive(Serialize)]
@@ -885,6 +908,7 @@ fn view_of(data: &Path, sc: &PackScenario, session: &ScenarioSession) -> Scenari
                 id: t.id.clone(),
                 description: t.description.clone(),
                 done: false,
+                has_payload: t.payload.is_some(),
             })
             .collect(),
         transfers_required: sc.transfer_variants_required,
@@ -892,6 +916,19 @@ fn view_of(data: &Path, sc: &PackScenario, session: &ScenarioSession) -> Scenari
         // U07: help is delivered by `support_at` only; every other
         // command shows a fresh (or advanced) prompt, so no stale card.
         delivered_help: None,
+        // SCENARIO-TRANSFER-001: the open transfer practice, if any, is
+        // part of every view so it survives attempts and support presses.
+        active_transfer: session.active_transfer_prompt().map(
+            |(variant_id, mode, prompt, actions)| ActiveTransferView {
+                variant_id,
+                mode: mode.to_string(),
+                prompt,
+                actions: actions
+                    .into_iter()
+                    .map(|(intent, label)| ActionView { intent, label })
+                    .collect(),
+            },
+        ),
     }
 }
 
@@ -1071,6 +1108,20 @@ pub fn recovery_at(
     Ok(view)
 }
 
+/// SCENARIO-TRANSFER-001: result of one transfer-practice answer. The
+/// UI branches on `result` (same string tags as the step view) and only
+/// ever sees `done: true` when the payload was actually performed.
+#[derive(Serialize)]
+pub struct TransferAnswerView {
+    pub result: String,
+    pub done: bool,
+    pub view: ScenarioView,
+}
+
+/// SCENARIO-TRANSFER-001 (finding S-04): pressing a transfer variant no
+/// longer marks it done — it OPENS the variant's practice payload. The
+/// engine refuses payload-less variants outright, so no command sequence
+/// can stamp a transfer the learner has not performed.
 pub fn transfer_at(
     data: &Path,
     profile_id: &str,
@@ -1079,17 +1130,66 @@ pub fn transfer_at(
     sessions: &SessionStore,
 ) -> Result<ScenarioView, String> {
     let (_, sc) = with_session(sessions, profile_id, scenario_id, data, |s| {
-        if s.complete_transfer(variant_id) {
-            Ok(())
-        } else {
-            Err("unknown transfer variant".to_string())
+        match s.start_transfer(variant_id) {
+            lts_activity::TransferStart::Opened { .. } => Ok(()),
+            lts_activity::TransferStart::UnknownVariant => {
+                Err("unknown transfer variant".to_string())
+            }
+            lts_activity::TransferStart::NoPayload => {
+                Err("this pack declares no practice payload for that transfer variant".to_string())
+            }
+            lts_activity::TransferStart::AlreadyDone => Ok(()),
         }
     })?;
+    let view = view_of_for(data, &sc, sessions, profile_id, scenario_id)?;
+    Ok(view)
+}
+
+/// Answer the transfer practice currently open: a typed recall answer
+/// or a walk-step intent. Only completing the payload sets `done`.
+pub fn transfer_answer_at(
+    data: &Path,
+    profile_id: &str,
+    scenario_id: &str,
+    answer: &str,
+    sessions: &SessionStore,
+) -> Result<TransferAnswerView, String> {
+    let (attempt, sc) = with_session(sessions, profile_id, scenario_id, data, |s| {
+        Ok::<_, String>(s.attempt_transfer(answer))
+    })?;
+    use lts_activity::TransferAttempt::*;
+    let (name, done) = match &attempt {
+        Completed => ("completed", true),
+        Advanced { .. } => ("advanced", false),
+        PartialAccepted { .. } => ("partial-accepted", false),
+        NotSatisfied => ("not-satisfied", false),
+        NoActiveTransfer => {
+            return Err("no transfer practice is open — press a transfer variant first".into());
+        }
+    };
+    let view = view_of_for(data, &sc, sessions, profile_id, scenario_id)?;
+    Ok(TransferAnswerView {
+        result: name.to_string(),
+        done,
+        view,
+    })
+}
+
+/// Rebuild the current view for a session, restamping transfer `done`
+/// flags from the engine — the flag lives in the session, never in the
+/// button press.
+fn view_of_for(
+    data: &Path,
+    sc: &PackScenario,
+    sessions: &SessionStore,
+    profile_id: &str,
+    scenario_id: &str,
+) -> Result<ScenarioView, String> {
     let mut guard = sessions.lock().map_err(|_| "session store poisoned")?;
     let session = guard
         .get_mut(&session_key(profile_id, scenario_id))
         .ok_or("no session")?;
-    let mut view = view_of(data, &sc, session);
+    let mut view = view_of(data, sc, session);
     view.support_used = session.support_used_snapshot();
     for t in &mut view.transfers {
         t.done = session.transfer_done(&t.id);
@@ -1230,6 +1330,7 @@ mod tests {
                 id: "transfer-1".into(),
                 description: "Say it to a friend".into(),
                 done: false,
+                has_payload: true,
             }],
             transfers_required: 1,
             support_used: vec![1],
@@ -1237,6 +1338,12 @@ mod tests {
                 kind: "model".into(),
                 text: "こんにちは。".into(),
                 options: Vec::new(),
+            }),
+            active_transfer: Some(ActiveTransferView {
+                variant_id: "transfer-1".into(),
+                mode: "recall".into(),
+                prompt: "Say it to your friend instead.".into(),
+                actions: Vec::new(),
             }),
         };
         let mut keys: Vec<String> = serde_json::to_value(&view)
@@ -1250,6 +1357,7 @@ mod tests {
         assert_eq!(
             keys,
             [
+                "active_transfer",
                 "delivered_help",
                 "ladder",
                 "node",
@@ -1296,6 +1404,30 @@ mod tests {
             .collect();
         help_keys.sort();
         assert_eq!(help_keys, ["kind", "options", "text"]);
+
+        // SCENARIO-TRANSFER-001 (finding S-04): every transfer row carries
+        // `has_payload` — the UI only offers a press when the pack can
+        // actually perform the transfer, and the open-practice card
+        // branches on `mode`. These keys are wire contract.
+        let transfer = serde_json::to_value(&view.transfers[0]).expect("transfer serializes");
+        let mut transfer_keys: Vec<String> = transfer
+            .as_object()
+            .expect("transfer is an object")
+            .keys()
+            .cloned()
+            .collect();
+        transfer_keys.sort();
+        assert_eq!(transfer_keys, ["description", "done", "has_payload", "id"]);
+        let practice = serde_json::to_value(view.active_transfer.as_ref().expect("practice open"))
+            .expect("active transfer serializes");
+        let mut practice_keys: Vec<String> = practice
+            .as_object()
+            .expect("active transfer is an object")
+            .keys()
+            .cloned()
+            .collect();
+        practice_keys.sort();
+        assert_eq!(practice_keys, ["actions", "mode", "prompt", "variant_id"]);
 
         // U08: the finish view carries the honest totals; the TS side
         // branches on `completed`, so both keys are wire contract.
@@ -2016,6 +2148,130 @@ mod tests {
         assert_eq!(keys, ["partial-accepted"]);
     }
 
+    /// SCENARIO-TRANSFER-001 (finding S-04): view-level semantics. The
+    /// wire says which variants are performable, carries the open
+    /// practice, and the done flag only ever tracks payload completion —
+    /// no press, answer, or rebuild can stamp it otherwise.
+    #[test]
+    fn transfer_views_show_payload_availability_and_only_payloads_stamp_done() {
+        use lts_activity::spec::{LadderStep, TransferPayload, TransferVariant};
+        let sc = PackScenario {
+            id: "x.scenario.tw".into(),
+            goal_id: "x.goal.tw".into(),
+            title: "One exchange".into(),
+            situation: None,
+            register: None,
+            nodes: vec![lts_activity::spec::ScenarioNode {
+                id: "x.scenario.tw.open".into(),
+                prompt: "Ask for the time".into(),
+                expected_actions: vec!["ask-time".into()],
+                action_labels: Default::default(),
+                support: Vec::new(),
+                next: Vec::new(),
+                recovery: Vec::new(),
+            }],
+            support_ladder: vec![LadderStep {
+                support_level: 0,
+                description: "No supports".into(),
+            }],
+            transfer_variants_required: 1,
+            transfer_variants: vec![
+                // The old pack shape: description only. Display-only —
+                // the engine refuses it and nothing can stamp it.
+                TransferVariant {
+                    id: "x.scenario.tw.decoration".into(),
+                    description: "Ask a different stranger".into(),
+                    changed_variable: None,
+                    payload: None,
+                },
+                // The honest shape: a recall the learner must answer.
+                TransferVariant {
+                    id: "x.scenario.tw.casual".into(),
+                    description: "Ask a friend, casually".into(),
+                    changed_variable: Some("register".into()),
+                    payload: Some(TransferPayload {
+                        kind: "recall".into(),
+                        prompt: "Ask your friend what time it is.".into(),
+                        expected: vec!["What time is it?".into()],
+                        steps: Vec::new(),
+                    }),
+                },
+            ],
+        };
+        let data = tempfile::tempdir().expect("tempdir");
+        let mut s = ScenarioSession::begin(&sc, "transfer-views").expect("nodes exist");
+
+        let view = view_of(data.path(), &sc, &s);
+        assert!(
+            !view.transfers[0].has_payload,
+            "a description-only variant must not look performable"
+        );
+        assert!(view.transfers[1].has_payload);
+        assert!(view.active_transfer.is_none());
+        assert!(!view.transfers.iter().any(|t| t.done));
+
+        // Refusal: opening a payload-less variant is an error upstream
+        // and changes nothing here.
+        assert_eq!(
+            s.start_transfer("x.scenario.tw.decoration"),
+            lts_activity::TransferStart::NoPayload
+        );
+        let view = view_of(data.path(), &sc, &s);
+        assert!(view.active_transfer.is_none());
+        assert!(!view.transfers.iter().any(|t| t.done));
+
+        // Opening a real payload shows the practice — and is not a done.
+        assert!(matches!(
+            s.start_transfer("x.scenario.tw.casual"),
+            lts_activity::TransferStart::Opened { .. }
+        ));
+        let view = view_of(data.path(), &sc, &s);
+        let practice = view.active_transfer.as_ref().expect("practice open");
+        assert_eq!(practice.variant_id, "x.scenario.tw.casual");
+        assert_eq!(practice.mode, "recall");
+        assert_eq!(practice.prompt, "Ask your friend what time it is.");
+        assert!(practice.actions.is_empty(), "recall is free text");
+        assert!(
+            !view.transfers.iter().any(|t| t.done),
+            "opening practice never stamps done"
+        );
+
+        // A wrong answer keeps the practice open and stamps nothing.
+        assert_eq!(
+            s.attempt_transfer("wrong words"),
+            lts_activity::TransferAttempt::NotSatisfied
+        );
+        let view = view_of(data.path(), &sc, &s);
+        assert!(view.active_transfer.is_some(), "retry stays possible");
+        assert!(!view.transfers.iter().any(|t| t.done));
+
+        // The accepted answer is the ONLY thing that stamps the flag.
+        // Hand the session to a store and rebuild the view the way the
+        // commands do (`view_of_for` restamps done from the engine).
+        assert_eq!(
+            s.attempt_transfer("  what time is it? "),
+            lts_activity::TransferAttempt::Completed
+        );
+        let store: SessionStore = std::sync::Mutex::new(std::collections::HashMap::new());
+        store
+            .lock()
+            .expect("store")
+            .insert(session_key("p-tw", "x.scenario.tw"), s);
+        let view =
+            view_of_for(data.path(), &sc, &store, "p-tw", "x.scenario.tw").expect("session view");
+        let done = view
+            .transfers
+            .iter()
+            .find(|t| t.id == "x.scenario.tw.casual")
+            .expect("variant row");
+        assert!(done.done, "the flag tracks payload completion");
+        assert!(
+            !view.transfers[0].done,
+            "the payload-less variant stays undone forever"
+        );
+        assert!(view.active_transfer.is_none(), "the card closes when done");
+    }
+
     /// SCENARIO-INTERACTION-001 (S-01/S-02/S-03), end-to-end over the
     /// REAL shipped packs: at every node of every shipped scenario the
     /// rendered button set is a strict superset of the accepted answer,
@@ -2166,15 +2422,57 @@ mod tests {
                         }
                     }
                 }
-                // U08: completion also needs the transfer gate — the
-                // walk performs the pack-required variants so the chain
-                // assertion below measures the interaction, not the gate.
+                // U08: completion also needs the transfer gate — the walk
+                // PERFORMS the pack-required variants (SCENARIO-TRANSFER-001:
+                // payloads only; shipped packs must carry payloads behind
+                // any requirement, or the requirement must be 0), so the
+                // chain assertion below measures the interaction, not a
+                // checkbox.
                 for v in sc
                     .transfer_variants
                     .iter()
                     .take(sc.transfer_variants_required as usize)
                 {
-                    assert!(s.complete_transfer(&v.id));
+                    let payload = v
+                        .payload
+                        .as_ref()
+                        .unwrap_or_else(|| panic!("{pack}/{}: a REQUIRED transfer carries no payload — the pack is violating scenario_transfer_payload_missing", v.id));
+                    match payload.kind.as_str() {
+                        "recall" => {
+                            assert!(matches!(
+                                s.start_transfer(&v.id),
+                                lts_activity::TransferStart::Opened { .. }
+                            ));
+                            assert_eq!(
+                                s.attempt_transfer(&payload.expected[0]),
+                                lts_activity::TransferAttempt::Completed
+                            );
+                        }
+                        "walk" => {
+                            assert!(matches!(
+                                s.start_transfer(&v.id),
+                                lts_activity::TransferStart::Opened { .. }
+                            ));
+                            let mut final_r = lts_activity::TransferAttempt::NotSatisfied;
+                            for step in payload.steps.iter() {
+                                for (i, a) in step.expected_actions.iter().enumerate() {
+                                    let got = s.attempt_transfer(a);
+                                    let last = i + 1 == step.expected_actions.len();
+                                    if last {
+                                        final_r = got;
+                                    } else {
+                                        assert!(matches!(
+                                            got,
+                                            lts_activity::TransferAttempt::PartialAccepted { .. }
+                                        ));
+                                    }
+                                }
+                            }
+                            assert_eq!(final_r, lts_activity::TransferAttempt::Completed);
+                        }
+                        other => panic!("{pack}/{}: unknown payload kind {other:?}", v.id),
+                    }
+                    assert!(s.transfer_done(&v.id));
                 }
                 let out = s.finish();
                 assert!(

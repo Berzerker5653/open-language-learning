@@ -86,6 +86,7 @@ const scenario: ScenarioPanelProps = {
   onSupport: () => {},
   onRecovery: () => {},
   onTransfer: () => {},
+  onTransferAnswer: () => {},
   onFinish: () => {},
   onBack: () => {},
 };

@@ -535,6 +535,15 @@ impl Pack {
                             &inst.value,
                             &mut diags,
                         );
+                        // SCENARIO-TRANSFER-001 (finding S-04): a transfer
+                        // requirement is only honest if the pack carries a
+                        // completable payload behind the required variants.
+                        scenario_transfer_guarantees(
+                            &inst.file,
+                            &inst.pointer,
+                            &inst.value,
+                            &mut diags,
+                        );
                     }
                 }
                 "orthography" => {
@@ -1266,6 +1275,44 @@ fn scenario_help_guarantees(file: &str, base: &str, doc: &Value, diags: &mut Vec
                 }
             }
         }
+    }
+}
+
+/// SCENARIO-TRANSFER-001 (finding S-04): `transfer_variants_required` is
+/// a promise that the learner can actually DO the transfers, not a
+/// checkbox gate. In the same gated regime as the U07 help guarantees
+/// (`inst.v2 && help_guarantee_declared`), a scenario requiring N
+/// transfer variants must declare at least N variants carrying a
+/// completable `payload` (recall or walk). A pack that cannot honour
+/// the requirement must set it to 0 — the requirement, not the
+/// practice, is what comes off.
+fn scenario_transfer_guarantees(file: &str, base: &str, doc: &Value, diags: &mut Vec<Diagnostic>) {
+    let scenario_id = doc.get("id").and_then(Value::as_str).unwrap_or("");
+    let required = doc
+        .get("transfer_variants_required")
+        .and_then(Value::as_u64)
+        .unwrap_or(0);
+    if required == 0 {
+        return;
+    }
+    let variants = array(doc, "transfer_variants");
+    let with_payload = variants
+        .iter()
+        .filter(|(_, v)| v.get("payload").and_then(Value::as_object).is_some())
+        .count();
+    if (with_payload as u64) < required {
+        diags.push(Diagnostic::new(
+            file,
+            format!("{base}/transfer_variants_required"),
+            "scenario_transfer_payload_missing",
+            format!(
+                "scenario {scenario_id:?} requires {required} transfer variant(s) but only \
+                 {with_payload} carry a completable payload — a transfer is practice, not a \
+                 checkbox (finding S-04): add recall/walk payloads to the required variants, \
+                 or remove the requirement"
+            ),
+            Severity::Error,
+        ));
     }
 }
 

@@ -49,3 +49,10 @@ transfer_variants:
   - id: "ja.scenario.b1.service.station"
     description: "Same problem at the station ticket office"
     changed_variable: "location"
+    # SCENARIO-TRANSFER-001: required transfers carry a completable payload.
+    payload:
+      kind: "recall"
+      prompt: "At the station ticket office: explain that your ticket is wrong and ask for help."
+      expected:
+        - "きっぷがまちがっています。なおしてください。"
+        - "kippu ga machigatte imasu. naoshite kudasai."

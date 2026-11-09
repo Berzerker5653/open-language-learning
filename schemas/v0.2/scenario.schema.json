@@ -87,7 +87,84 @@
         "properties": {
           "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
           "description": { "type": "string", "minLength": 1 },
-          "changed_variable": { "type": "string", "minLength": 1 }
+          "changed_variable": { "type": "string", "minLength": 1 },
+          "payload": {
+            "type": "object",
+            "description": "SCENARIO-TRANSFER-001 (finding S-04): the practice a transfer variant actually consists of. A variant without a payload is display-only and can never be completed; packs that REQUIRE transfers must carry payloads (pack.rs `scenario_transfer_payload_missing`).",
+            "additionalProperties": false,
+            "required": ["kind", "prompt"],
+            "properties": {
+              "kind": { "enum": ["recall", "walk"] },
+              "prompt": { "type": "string", "minLength": 1 },
+              "expected": {
+                "type": "array",
+                "description": "recall: accepted wordings for the free-text answer (matched trimmed and case-folded).",
+                "minItems": 1,
+                "items": { "type": "string", "minLength": 1 }
+              },
+              "steps": {
+                "type": "array",
+                "description": "walk: a mini exchange graph run with the same full-declared-set rules as the main chain.",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["id", "prompt"],
+                  "properties": {
+                    "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+                    "prompt": { "type": "string", "minLength": 1 },
+                    "expected_actions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+                    "action_labels": {
+                      "type": "object",
+                      "additionalProperties": { "type": "string", "minLength": 1 }
+                    },
+                    "support": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": ["level", "kind", "text"],
+                        "properties": {
+                          "level": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/supportLevel" },
+                          "kind": { "enum": ["hint", "model", "gloss", "choices"] },
+                          "text": { "type": "string", "minLength": 1 },
+                          "options": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+                        }
+                      }
+                    },
+                    "next": {
+                      "type": "array",
+                      "items": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
+                    },
+                    "recovery": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": ["id", "prompt"],
+                        "properties": {
+                          "id": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" },
+                          "prompt": { "type": "string", "minLength": 1 },
+                          "expected_actions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+                          "to": { "$ref": "https://openlanguage.invalid/schemas/v0.2/common.schema.json#/$defs/contentId" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "allOf": [
+              {
+                "if": { "properties": { "kind": { "const": "recall" } }, "required": ["kind"] },
+                "then": { "required": ["expected"] }
+              },
+              {
+                "if": { "properties": { "kind": { "const": "walk" } }, "required": ["kind"] },
+                "then": { "required": ["steps"] }
+              }
+            ]
+          }
         }
       }
     }

@@ -7975,6 +7975,8 @@ fn scenario_transfer(
     variant_id: String,
     sessions: tauri::State<'_, scenarios::SessionStore>,
 ) -> Result<scenarios::ScenarioView, String> {
+    // SCENARIO-TRANSFER-001: a press OPENS the variant's practice payload
+    // (recall or mini-walk); it can no longer mark anything done.
     scenarios::transfer_at(
         &data_dir(),
         &profile_id,
@@ -7982,6 +7984,18 @@ fn scenario_transfer(
         &variant_id,
         &sessions,
     )
+}
+
+#[tauri::command]
+fn scenario_transfer_answer(
+    profile_id: String,
+    scenario_id: String,
+    answer: String,
+    sessions: tauri::State<'_, scenarios::SessionStore>,
+) -> Result<scenarios::TransferAnswerView, String> {
+    // SCENARIO-TRANSFER-001: the ONLY path that completes a transfer —
+    // answering the practice payload that is currently open.
+    scenarios::transfer_answer_at(&data_dir(), &profile_id, &scenario_id, &answer, &sessions)
 }
 
 #[tauri::command]
@@ -8474,6 +8488,7 @@ pub fn run() {
             scenario_support,
             scenario_recovery,
             scenario_transfer,
+            scenario_transfer_answer,
             scenario_finish,
             contrast_audio,
             shadowing_items,

@@ -217,6 +217,36 @@ pub struct TransferVariant {
     pub description: String,
     #[serde(default)]
     pub changed_variable: Option<String>,
+    /// SCENARIO-TRANSFER-001 (finding S-04): the practice this variant
+    /// actually consists of. A variant WITHOUT a payload is display-only
+    /// and can never be completed — `ScenarioSession` refuses it and the
+    /// semantic validator (lts_langpack, `scenario_transfer_payload_missing`)
+    /// refuses any pack that requires more transfers than its declared
+    /// variants carry payloads for.
+    #[serde(default)]
+    pub payload: Option<TransferPayload>,
+}
+
+/// SCENARIO-TRANSFER-001: a completable transfer payload. Two shapes,
+/// both real practice, never a checkbox:
+/// - `recall`: the learner restates the changed situation in one answer
+///   matched against `expected` (trimmed, case-folded; pack may declare
+///   several accepted wordings).
+/// - `walk`: a mini exchange graph (`steps`, the same `ScenarioNode`
+///   shape and full-declared-set satisfaction rules as the main chain);
+///   completing its terminal step completes the transfer.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct TransferPayload {
+    /// "recall" | "walk" (schema-enum; anything else is not performable).
+    pub kind: String,
+    /// Learner-facing prompt opening the practice.
+    pub prompt: String,
+    /// recall: accepted answers, non-empty (schema-enforced for payloads).
+    #[serde(default)]
+    pub expected: Vec<String>,
+    /// walk: the mini graph, non-empty (schema-enforced for payloads).
+    #[serde(default)]
+    pub steps: Vec<ScenarioNode>,
 }
 
 #[derive(Debug, Clone, Deserialize)]

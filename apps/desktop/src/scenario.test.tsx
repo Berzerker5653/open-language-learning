@@ -31,6 +31,7 @@ const active: ScenarioView = {
       id: "ja.scenario.demo.first-meeting.formal",
       description: "Greet a senior colleague",
       done: false,
+      has_payload: true,
     },
   ],
   transfers_required: 1,
@@ -75,6 +76,7 @@ const base: ScenarioPanelProps = {
   onSupport: () => {},
   onRecovery: () => {},
   onTransfer: () => {},
+  onTransferAnswer: () => {},
   onFinish: () => {},
   onBack: () => {},
 };
@@ -232,6 +234,116 @@ describe("scenario panel", () => {
     });
     expect(html).toContain('aria-label="Recovery moves"');
     expect(html).toContain("Ask them to repeat");
+  });
+
+  // SCENARIO-TRANSFER-001 (finding S-04): a transfer is practice, never
+  // a checkbox completion. The markup contract: only variants with a
+  // payload are pressable, an unpressable one says why, the ✓ only ever
+  // renders when the engine reports `done`, and the practice card exists
+  // only while a payload is being performed.
+  it("never renders a pressable checkbox for a payload-less transfer", () => {
+    const html = render({
+      active: {
+        ...active,
+        transfers: [
+          {
+            id: "ja.scenario.demo.first-meeting.formal",
+            description: "Greet a senior colleague",
+            done: false,
+            has_payload: false,
+          },
+        ],
+      },
+    });
+    expect(html).toContain('disabled=""');
+    expect(html).toContain("this pack carries no practice content for that transfer");
+    expect(html).not.toContain("✓");
+  });
+
+  it("shows a done checkmark only when the engine says the payload was performed", () => {
+    // Pressable but not done: no ✓ anywhere — a press only opens the
+    // payload; the flag lives in the engine.
+    const before = render({ active });
+    expect(before).not.toContain("✓");
+    expect(before).toContain("Transfer variants (0/1)");
+    // Engine-stamped done: the ✓ and the counter follow the flag.
+    const after = render({
+      active: {
+        ...active,
+        transfers: [
+          {
+            id: "ja.scenario.demo.first-meeting.formal",
+            description: "Greet a senior colleague",
+            done: true,
+            has_payload: true,
+          },
+        ],
+      },
+    });
+    expect(after).toContain("✓ Greet a senior colleague");
+    expect(after).toContain("Transfer variants (1/1)");
+  });
+
+  it("opens recall practice with a prompt and answer form instead of marking done", () => {
+    const html = render({
+      active: {
+        ...active,
+        active_transfer: {
+          variant_id: "ja.scenario.demo.first-meeting.formal",
+          mode: "recall",
+          prompt: "Greet a senior colleague: say hello and ask their name.",
+          actions: [],
+        },
+      },
+    });
+    expect(html).toContain('data-testid="transfer-practice"');
+    expect(html).toContain("Greet a senior colleague: say hello and ask their name.");
+    expect(html).toContain('aria-label="Your answer"');
+    expect(html).toContain(">Answer<");
+    // The open practice card is not a done: no ✓ until the engine says so.
+    expect(html).not.toContain("✓");
+  });
+
+  it("renders walk practice as labelled respond buttons, never intent tokens", () => {
+    const html = render({
+      active: {
+        ...active,
+        active_transfer: {
+          variant_id: "ja.scenario.demo.first-meeting.formal",
+          mode: "walk",
+          prompt: "Greet a senior colleague in the office.",
+          actions: [
+            { intent: "bow-greet", label: "Bow and greet formally" },
+            { intent: "ask-time", label: "Ask the time" },
+          ],
+        },
+      },
+    });
+    expect(html).toContain('aria-label="Ways to respond (transfer)"');
+    expect(html).toContain(">Bow and greet formally<");
+    expect(html).toContain('data-intent="bow-greet"');
+    expect(html).not.toContain(">bow-greet<");
+    expect(html).not.toContain("✓");
+  });
+
+  it("surfaces a failed transfer answer honestly, without fake progress", () => {
+    const html = render({
+      active: {
+        ...active,
+        active_transfer: {
+          variant_id: "ja.scenario.demo.first-meeting.formal",
+          mode: "recall",
+          prompt: "Greet a senior colleague.",
+          actions: [],
+        },
+      },
+      transferResult: "not-satisfied",
+    });
+    expect(html).toContain("verdict verdict--retry");
+    expect(html).toContain("Try again");
+    // Nothing counted: no ✓, counter unmoved.
+    expect(html).not.toContain("✓");
+    expect(html).toContain("Transfer variants (0/1)");
   });
 
   // U08: an early end is saved practice, not a completed scenario. The

@@ -451,6 +451,9 @@ export function App() {
   const [scenarioStep, setScenarioStep] = useState<ScenarioStepResult | null>(null);
   const [scenarioOutcome, setScenarioOutcome] = useState<ScenarioOutcomeView | null>(null);
   const [scenarioError, setScenarioError] = useState<string | null>(null);
+  // SCENARIO-TRANSFER-001: verdict of the last answer to the open
+  // transfer practice; the engine decides it, the UI only displays it.
+  const [scenarioTransferResult, setScenarioTransferResult] = useState<string | null>(null);
   const [practiceAudio, setPracticeAudio] = useState<{ wavB64: string; source: string } | null>(
     null,
   );
@@ -956,12 +959,33 @@ export function App() {
                 '[aria-label="Scenario"] fieldset.transfers button',
               ) as HTMLButtonElement | null;
               if (transfer) {
-                transfer.click();
-                await waitUntil(() => (transfer.textContent ?? "").includes("✓"), 2000);
-                await inv("smoke_ack", {
-                  note: `scenario-transfer:${scen.scenario_id}:${(transfer.textContent ?? "").includes("✓") ? "done" : "no-visible-change"}`,
-                });
+                if (transfer.disabled) {
+                  // SCENARIO-TRANSFER-001: a variant without a practice
+                  // payload is honest dead content by design — it is
+                  // never pressable.
+                  await inv("smoke_ack", {
+                    note: `scenario-transfer:${scen.scenario_id}:no-payload`,
+                  });
+                } else {
+                  transfer.click();
+                  // A press OPENS practice (SCENARIO-TRANSFER-001); it
+                  // never stamps a ✓ by itself. Report which happened.
+                  await waitUntil(
+                    () =>
+                      document.querySelector('[data-testid="transfer-practice"]') !== null ||
+                      (transfer.textContent ?? "").includes("✓"),
+                    120,
+                  );
+                  const opened =
+                    document.querySelector('[data-testid="transfer-practice"]') !== null;
+                  const done = (transfer.textContent ?? "").includes("✓");
+                  await inv("smoke_ack", {
+                    note: `scenario-transfer:${scen.scenario_id}:${opened ? "practice-opened" : done ? "done" : "no-visible-change"}`,
+                  });
+                }
               } else {
+                // Branch-B packs (SCENARIO-TRANSFER-001): the section is
+                // gone because nothing is required that cannot be done.
                 await inv("smoke_ack", {
                   note: `scenario-transfer:${scen.scenario_id}:none-offered`,
                 });
@@ -2924,6 +2948,9 @@ export function App() {
   async function transferScenario(variantId: string) {
     if (!inv || !profileId || !scenarioActive) return;
     setScenarioError(null);
+    // SCENARIO-TRANSFER-001: this opens the variant's practice payload;
+    // it never marks a transfer done.
+    setScenarioTransferResult(null);
     try {
       setScenarioActive(
         (await inv("scenario_transfer", {
@@ -2932,6 +2959,22 @@ export function App() {
           variantId,
         })) as ScenarioView,
       );
+    } catch (e) {
+      setScenarioError(String(e));
+    }
+  }
+
+  async function transferAnswerScenario(answer: string) {
+    if (!inv || !profileId || !scenarioActive) return;
+    setScenarioError(null);
+    try {
+      const res = (await inv("scenario_transfer_answer", {
+        profileId,
+        scenarioId: scenarioActive.scenario_id,
+        answer,
+      })) as { result: string; done: boolean; view: ScenarioView };
+      setScenarioTransferResult(res.result);
+      setScenarioActive(res.view);
     } catch (e) {
       setScenarioError(String(e));
     }
@@ -3869,6 +3912,8 @@ export function App() {
           onSupport={(level) => void supportScenario(level)}
           onRecovery={(id) => void recoveryScenario(id)}
           onTransfer={(id) => void transferScenario(id)}
+          onTransferAnswer={(answer) => void transferAnswerScenario(answer)}
+          transferResult={scenarioTransferResult}
           onFinish={() => void finishScenario()}
           onBack={() => void openScenarios()}
         />

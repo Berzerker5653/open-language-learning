@@ -41,3 +41,11 @@ transfer_variants:
   - id: "es.scenario.intro.meeting.formal"
     description: "Greet a senior executive"
     changed_variable: "register"
+    # SCENARIO-TRANSFER-001: the variant carries real practice — a recall
+    # the learner must answer before the transfer counts.
+    payload:
+      kind: "recall"
+      prompt: "Say hello to a senior executive, formally: greet them and give your name."
+      expected:
+        - "Buenos días. Me llamo Alex."
+        - "buenos días, me llamo alex"

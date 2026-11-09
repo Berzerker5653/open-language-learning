@@ -3,7 +3,7 @@
 //!    branches, and transfer variants;
 //! 2. no Japanese-specific branch logic in the runtime.
 
-use lts_activity::{PackScenario, ScenarioSession, StepResult};
+use lts_activity::{PackScenario, ScenarioSession, StepResult, TransferAttempt, TransferStart};
 use lts_langpack::Pack;
 use std::path::PathBuf;
 
@@ -93,9 +93,30 @@ fn graph_supports_intents_ladder_recovery_and_transfers() {
     // The ask-name node declares a single action: one click completes.
     assert_eq!(s.attempt("name-question"), StepResult::Completed);
 
-    // Transfer variants: only pack-declared ids count; requirement met.
-    assert!(!s.complete_transfer("es.scenario.intro.nonexistent"));
-    assert!(s.complete_transfer("es.scenario.intro.meeting.formal"));
+    // Transfer variants (SCENARIO-TRANSFER-001): an unknown variant is
+    // refused; a declared one opens its payload, and only performing the
+    // payload meets the requirement. A wrong recall answer counts nothing.
+    assert_eq!(
+        s.start_transfer("es.scenario.intro.nonexistent"),
+        TransferStart::UnknownVariant
+    );
+    assert!(!s.transfer_requirement_met());
+    let opened = s.start_transfer("es.scenario.intro.meeting.formal");
+    assert!(
+        matches!(&opened, TransferStart::Opened { mode, .. } if mode == "recall"),
+        "{opened:?}"
+    );
+    // Opening the payload is not completing it.
+    assert!(!s.transfer_requirement_met());
+    assert_eq!(
+        s.attempt_transfer("just a bare done click"),
+        TransferAttempt::NotSatisfied
+    );
+    assert!(!s.transfer_requirement_met());
+    assert_eq!(
+        s.attempt_transfer("Buenos días. Me llamo Alex."),
+        TransferAttempt::Completed
+    );
     assert!(s.transfer_requirement_met());
 
     let out = s.finish();
@@ -175,8 +196,22 @@ fn runtime_is_language_agnostic() {
         // every node on its FULL declared set (SCENARIO-INTERACTION-001).
         assert!(matches!(complete_node(&mut s), StepResult::Advanced { .. }));
         assert_eq!(complete_node(&mut s), StepResult::Completed);
+        // SCENARIO-TRANSFER-001 over both languages with the SAME code:
+        // the transfer is earned by answering the payload's recall, never
+        // by a flag. The accepted wording comes from the pack itself.
         let variant = scenario.transfer_variants[0].id.clone();
-        assert!(s.complete_transfer(&variant));
+        let accepted = scenario.transfer_variants[0]
+            .payload
+            .as_ref()
+            .expect("required variants carry payloads")
+            .expected[0]
+            .clone();
+        let opened = s.start_transfer(&variant);
+        assert!(
+            matches!(&opened, TransferStart::Opened { mode, .. } if mode == "recall"),
+            "{opened:?}"
+        );
+        assert_eq!(s.attempt_transfer(&accepted), TransferAttempt::Completed);
         assert!(s.transfer_requirement_met());
     }
 }
@@ -195,7 +230,9 @@ fn ja_seed_first_meeting_graph_runs_end_to_end() {
         .map(|i| serde_json::from_value(i.value.clone()).unwrap())
         .expect("seed first-meeting scenario");
     assert_eq!(scenario.nodes.len(), 3);
-    assert_eq!(scenario.transfer_variants_required, 2);
+    // SCENARIO-TRANSFER-001 (S-04): shipped draft packs no longer claim
+    // a transfer requirement they cannot honour.
+    assert_eq!(scenario.transfer_variants_required, 0);
 
     let mut s = ScenarioSession::begin(&scenario, "sess-ja").unwrap();
     // Wrong intent at the opening node names the pack-defined repair.
@@ -236,16 +273,29 @@ fn ja_seed_first_meeting_graph_runs_end_to_end() {
         }
     );
     assert_eq!(s.attempt("say-closing"), StepResult::Completed);
-    // Transfer requirement: both declared variants needed.
-    assert!(s.complete_transfer("ja.scenario.first-meeting.greeting.classmate"));
-    assert!(!s.transfer_requirement_met());
-    assert!(s.complete_transfer("ja.scenario.first-meeting.greeting.neighbour"));
-    assert!(s.transfer_requirement_met());
+    // SCENARIO-TRANSFER-001 (finding S-04), branch B for this shipped
+    // pack: the drafts carry no completable payload, so the requirement
+    // was removed (0) rather than kept as a checkbox gate. The declared
+    // variant descriptions survive, but the engine refuses to open one —
+    // no click sequence can stamp a transfer here.
+    assert_eq!(scenario.transfer_variants_required, 0);
+    assert_eq!(
+        s.start_transfer("ja.scenario.first-meeting.greeting.classmate"),
+        TransferStart::NoPayload
+    );
+    assert_eq!(
+        s.attempt_transfer("done"),
+        TransferAttempt::NoActiveTransfer
+    );
+    assert!(!s.transfer_done("ja.scenario.first-meeting.greeting.classmate"));
 
     let out = s.finish();
     assert_eq!(out.nodes.len(), 3);
     assert!(out.nodes.iter().all(|n| n.succeeded));
+    // With the requirement honestly removed, the completed walk completes:
+    // 0 required is met by construction, not by a decorative flag.
     assert!(out.transfer_requirement_met);
+    assert!(out.completed);
 }
 
 /// Review finding R03: the same scenario run twice must not share event ids

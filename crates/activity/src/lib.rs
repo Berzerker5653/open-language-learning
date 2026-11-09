@@ -24,13 +24,13 @@ pub use reading::{
     is_kana_only, render_reading_display, script_of,
 };
 pub use scenario::{
-    GUIDED_SCENARIO_SUPPORT_FLOOR, MAX_SCENARIO_DISTRACTORS, NodeRecord, ScenarioOutcome,
-    ScenarioSession, StepResult,
+    ActiveTransferPrompt, GUIDED_SCENARIO_SUPPORT_FLOOR, MAX_SCENARIO_DISTRACTORS, NodeRecord,
+    ScenarioOutcome, ScenarioSession, StepResult, TransferAttempt, TransferStart,
 };
 pub use spec::{
     ActivityError, ActivityKind, ActivityRuntime, PackActivity, PackModality, PackScenario,
-    PackUnit, RenderedActivity, RenderedPrompt, RenderedScenario, SupportOption, classify_type,
-    dimension_for,
+    PackUnit, RenderedActivity, RenderedPrompt, RenderedScenario, SupportOption, TransferPayload,
+    TransferVariant, classify_type, dimension_for,
 };
 pub use support::{SupportAction, SupportLedger};
 pub use writing::{

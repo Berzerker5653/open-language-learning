@@ -5,6 +5,7 @@
  * never branches on language content.
  */
 
+import { useState } from "react";
 import { PackText, usePackTextAttrs } from "@openlang/ui";
 
 /** K-75 readiness tier, derived natively from the pack goal map plus
@@ -66,11 +67,30 @@ export interface ScenarioView {
    * the rung (pre-2026-10-19 packs) cannot honor it here, so the button
    * is disabled and says why. */
   ladder: { support_level: number; description: string; delivered: boolean }[];
-  transfers: { id: string; description: string; done: boolean }[];
+  /** SCENARIO-TRANSFER-001 (finding S-04): one declared transfer variant.
+   * `has_payload` is false when the pack ships no completable practice
+   * behind the variant: it is display-only, the button is disabled and
+   * says why — there is no checkbox completion path anymore. `done` only
+   * ever arrives from the engine after the payload was performed. */
+  transfers: {
+    id: string;
+    description: string;
+    done: boolean;
+    has_payload?: boolean;
+  }[];
   transfers_required: number;
   support_used: number[];
   /** U07: set only by the support command, from the rung's payload. */
   delivered_help?: ScenarioHelpView | null;
+  /** SCENARIO-TRANSFER-001: the transfer practice currently open.
+   * "recall" renders a free-text answer, "walk" renders the step's
+   * respond buttons. Present only while the practice is being done. */
+  active_transfer?: {
+    variant_id: string;
+    mode: "recall" | "walk";
+    prompt: string;
+    actions: ScenarioActionView[];
+  } | null;
 }
 
 export interface ScenarioStepResult {
@@ -100,11 +120,16 @@ export interface ScenarioPanelProps {
   lastStep: ScenarioStepResult | null;
   outcome: ScenarioOutcomeView | null;
   error: string | null;
+  /** SCENARIO-TRANSFER-001: the verdict of the last answer to the open
+   * transfer practice ("not-satisfied" | "partial-accepted" |
+   * "advanced"); null when no answer has been given yet. */
+  transferResult?: string | null;
   onStart(id: string): void;
   onAttempt(intent: string): void;
   onSupport(level: number): void;
   onRecovery(id: string): void;
   onTransfer(id: string): void;
+  onTransferAnswer(answer: string): void;
   onFinish(): void;
   onBack(): void;
 }
@@ -136,6 +161,33 @@ const HELP_HEADINGS: Record<ScenarioHelpView["kind"], string> = {
   gloss: "Meaning support",
   choices: "Possible replies",
 };
+
+/** SCENARIO-TRANSFER-001: the free-text answer form for a recall
+ * payload. Submitting hands the words to the engine — the UI never
+ * decides whether a transfer was done, and the answer box alone is not
+ * a done: the ✓ arrives only when the rebuilt view says so. */
+function TransferAnswerForm({ onAnswer }: { onAnswer: (answer: string) => void }) {
+  const [answer, setAnswer] = useState("");
+  return (
+    <form
+      className="btn-row"
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (answer.trim() !== "") onAnswer(answer);
+      }}
+    >
+      <input
+        type="text"
+        aria-label="Your answer"
+        value={answer}
+        onChange={(e) => setAnswer(e.target.value)}
+      />
+      <button type="submit" className="btn btn--primary">
+        Answer
+      </button>
+    </form>
+  );
+}
 
 export function ScenarioPanel(p: ScenarioPanelProps) {
   const packAttrs = usePackTextAttrs();
@@ -266,21 +318,69 @@ export function ScenarioPanel(p: ScenarioPanelProps) {
             </span>
           ))}
         </fieldset>
+        {s.active_transfer && (
+          <div aria-live="polite" data-testid="transfer-practice" className="help-card">
+            <h3>Transfer practice</h3>
+            <p className="help-body" {...packAttrs}>
+              {s.active_transfer.prompt}
+            </p>
+            {p.transferResult === "not-satisfied" && (
+              <p className="verdict verdict--retry">
+                That didn&apos;t fit the new setting. Try again — a transfer only counts when you
+                have done it.
+              </p>
+            )}
+            {p.transferResult === "partial-accepted" && (
+              <p aria-live="polite" className="verdict verdict--correct">
+                That fits — this step isn&apos;t finished yet. Keep going with what is left.
+              </p>
+            )}
+            {s.active_transfer.mode === "walk" && s.active_transfer.actions.length > 0 && (
+              <div role="group" aria-label="Ways to respond (transfer)" className="btn-row">
+                {s.active_transfer.actions.map((a) => (
+                  <button
+                    key={a.intent}
+                    type="button"
+                    className="btn btn--quiet"
+                    data-intent={a.intent}
+                    onClick={() => p.onTransferAnswer(a.intent)}
+                  >
+                    <PackText>{a.label}</PackText>
+                  </button>
+                ))}
+              </div>
+            )}
+            {s.active_transfer.mode === "recall" && (
+              <TransferAnswerForm onAnswer={p.onTransferAnswer} />
+            )}
+          </div>
+        )}
         {s.transfers_required > 0 && (
           <fieldset className="transfers">
             <legend>
               Transfer variants ({s.transfers.filter((t) => t.done).length}/{s.transfers_required})
             </legend>
             {s.transfers.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                className="btn btn--quiet"
-                disabled={t.done}
-                onClick={() => p.onTransfer(t.id)}
-              >
-                {t.done ? `✓ ${t.description}` : t.description}
-              </button>
+              <span key={t.id} className="transfer-row">
+                <button
+                  type="button"
+                  className="btn btn--quiet"
+                  // SCENARIO-TRANSFER-001 (finding S-04): a press opens
+                  // the variant's practice payload — it can no longer
+                  // mark a transfer done. A variant without a payload
+                  // is never pressable: the engine refuses it, and the
+                  // UI says why instead of offering a dead checkbox.
+                  disabled={!t.has_payload || t.done}
+                  onClick={() => p.onTransfer(t.id)}
+                >
+                  {t.done ? `✓ ${t.description}` : t.description}
+                </button>
+                {!t.has_payload && !t.done && (
+                  <span className="transfer-note">
+                    this pack carries no practice content for that transfer
+                  </span>
+                )}
+              </span>
             ))}
           </fieldset>
         )}

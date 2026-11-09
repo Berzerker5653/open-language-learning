@@ -68,7 +68,13 @@ support_ladder:
   description: Model response in Japanese script with romaji scaffold
 - support_level: 5
   description: Full suggested wording including a first-language gloss
-transfer_variants_required: 2
+# SCENARIO-TRANSFER-001 (finding S-04): the transfer requirement is removed —
+# these drafts carry no completable practice payload for the variants, and the
+# engine never accepts a checkbox click as a transfer. Re-declare with
+# recall/walk payloads when qualified-reviewable content lands (validator code:
+# scenario_transfer_payload_missing). The descriptions below are kept as the
+# authored intent for that pass.
+transfer_variants_required: 0
 transfer_variants:
 - id: ja.scenario.a2.shop.find-item.bookstore
   description: "Looking for a specific book in a bookstore"

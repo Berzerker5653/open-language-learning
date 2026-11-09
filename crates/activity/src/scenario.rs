@@ -6,7 +6,7 @@
 //! transfer variants. It contains NO language-specific branch logic:
 //! every decision is a function of pack data (acceptance criterion 2).
 
-use crate::spec::{PackScenario, RecoveryBranch, ScenarioNode};
+use crate::spec::{LadderStep, PackScenario, RecoveryBranch, ScenarioNode};
 use lts_domain::{ContentId, EventId, ProfileId, Score, SupportLevel};
 use lts_learner_model::AttemptDraft;
 use serde::Serialize;
@@ -48,6 +48,73 @@ pub const GUIDED_SCENARIO_SUPPORT_FLOOR: u8 = 2;
 /// rendered decision set carries at most. Deterministic (pack
 /// declaration order) so the same pack data renders the same choices.
 pub const MAX_SCENARIO_DISTRACTORS: usize = 4;
+
+/// SCENARIO-TRANSFER-001: outcome of opening a transfer variant's
+/// practice payload.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum TransferStart {
+    /// The payload opened: prompt to render, mode to branch on, and —
+    /// for a walk — the current step's rendered decision set.
+    Opened {
+        mode: String,
+        prompt: String,
+        actions: Vec<String>,
+    },
+    /// Not a variant this pack declares.
+    UnknownVariant,
+    /// Declared, but this pack ships no performable payload: the variant
+    /// is display-only and can never be completed by any action.
+    NoPayload,
+    /// Already performed in this session; performing it again is not a
+    /// second credit.
+    AlreadyDone,
+}
+
+/// SCENARIO-TRANSFER-001: outcome of answering the open transfer
+/// practice. `Completed` is the only outcome that counts the transfer.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum TransferAttempt {
+    /// The payload was performed (accepted recall answer, or the walk's
+    /// terminal step satisfied): the transfer now counts.
+    Completed,
+    /// Walk: a step was satisfied by its full declared set and the mini
+    /// chain moved on.
+    Advanced { to: String },
+    /// Walk: a correct move at a step that still owes actions of its set.
+    PartialAccepted { remaining: usize },
+    /// Wrong answer or intent: the practice stays open, nothing counts.
+    NotSatisfied,
+    /// No practice is open — answers arrive only through an opened
+    /// payload, never as a standalone "mark done" channel.
+    NoActiveTransfer,
+}
+
+/// One in-progress transfer practice for view rebuilds: variant id,
+/// mode, prompt, and rendered actions as intent+label pairs. Kept as a
+/// named alias to stay under clippy's type-complexity bar.
+pub type ActiveTransferPrompt = (String, &'static str, String, Vec<(String, String)>);
+
+/// One in-progress transfer payload. The walk nests a full nested
+/// session, hence the indirection.
+enum TransferRun {
+    Recall {
+        variant: String,
+        prompt: String,
+    },
+    Walk {
+        variant: String,
+        mini: Box<ScenarioSession>,
+    },
+}
+
+/// Recall answers compare trimmed and case-folded — close enough for
+/// typed free input without pretending to full morphology. Packs list
+/// every accepted wording they want to honour.
+fn normalize_recall(s: &str) -> String {
+    s.trim().to_lowercase()
+}
 
 /// Per-node record for evidence and review.
 #[derive(Debug, Clone, Serialize)]
@@ -95,6 +162,10 @@ pub struct ScenarioSession {
     // the current node. A node is satisfied only when its full declared
     // `expected_actions` set is in here.
     node_actions_done: Vec<String>,
+    // SCENARIO-TRANSFER-001: a transfer payload the learner is currently
+    // performing. It only exists while practice is open; the transfer
+    // lands in `transfers` only when the payload is completed.
+    active_transfer: Option<TransferRun>,
     // U08: set only when an accepted intent closed the chain's terminal
     // node; finish() turns this plus the transfer gate into `completed`.
     chain_complete: bool,
@@ -116,6 +187,7 @@ impl ScenarioSession {
             records: Vec::new(),
             transfers: Vec::new(),
             node_actions_done: Vec::new(),
+            active_transfer: None,
             chain_complete: false,
         })
     }
@@ -332,19 +404,180 @@ impl ScenarioSession {
         }
     }
 
-    /// Mark a transfer variant as performed (must be pack-declared).
-    pub fn complete_transfer(&mut self, variant_id: &str) -> bool {
-        if self
+    /// SCENARIO-TRANSFER-001 (finding S-04): the old `complete_transfer`
+    /// "mark as performed" path is GONE — a bare done flag was a checkbox
+    /// gate with zero practice behind it. Transfers are now performed
+    /// through `start_transfer` + `attempt_transfer`, which only count
+    /// when the variant's payload (recall answer or mini-walk) is
+    /// actually done.
+    ///
+    /// SCENARIO-TRANSFER-001: open a variant's practice payload. Only a
+    /// declared variant that carries a performable payload can be opened;
+    /// a payload-less variant is display-only and is refused (`NoPayload`),
+    /// so a pack can never present a decorative gate. `Opened` carries the
+    /// mode ("recall" | "walk"), the prompt to render, and — for a walk —
+    /// the current step's rendered decision set (accepted intents plus
+    /// distractors, same rules as the main chain).
+    pub fn start_transfer(&mut self, variant_id: &str) -> TransferStart {
+        if self.transfers.iter().any(|t| t == variant_id) {
+            return TransferStart::AlreadyDone;
+        }
+        let variant = match self
             .scenario
             .transfer_variants
             .iter()
-            .any(|v| v.id == variant_id)
-            && !self.transfers.contains(&variant_id.to_string())
+            .find(|v| v.id == variant_id)
         {
-            self.transfers.push(variant_id.to_string());
-            true
-        } else {
-            false
+            Some(v) => v.clone(),
+            None => return TransferStart::UnknownVariant,
+        };
+        let payload = match variant.payload {
+            Some(p) => p,
+            None => return TransferStart::NoPayload,
+        };
+        match payload.kind.as_str() {
+            "recall" if !payload.expected.is_empty() => {
+                self.active_transfer = Some(TransferRun::Recall {
+                    variant: variant.id.clone(),
+                    prompt: payload.prompt.clone(),
+                });
+                TransferStart::Opened {
+                    mode: "recall".into(),
+                    prompt: payload.prompt,
+                    actions: Vec::new(),
+                }
+            }
+            "walk" if !payload.steps.is_empty() => {
+                // Reuse the full graph runtime: the mini chain gets the
+                // exact same full-declared-set satisfaction, distractor,
+                // and terminal-completion semantics as the main walk.
+                let mini = PackScenario {
+                    id: format!("{}:transfer", variant.id),
+                    goal_id: self.scenario.goal_id.clone(),
+                    title: variant.description.clone(),
+                    situation: None,
+                    register: None,
+                    nodes: payload.steps.clone(),
+                    support_ladder: vec![LadderStep {
+                        support_level: 0,
+                        description: "no supports".into(),
+                    }],
+                    transfer_variants_required: 0,
+                    transfer_variants: Vec::new(),
+                };
+                let run = ScenarioSession::begin(
+                    &mini,
+                    &format!("{}:transfer:{}", self.session_id, variant.id),
+                );
+                match run {
+                    Some(mini) => {
+                        let mini = Box::new(mini);
+                        let prompt = mini.current_node().prompt.clone();
+                        let actions = mini.decision_set();
+                        self.active_transfer = Some(TransferRun::Walk {
+                            variant: variant.id.clone(),
+                            mini,
+                        });
+                        TransferStart::Opened {
+                            mode: "walk".into(),
+                            prompt,
+                            actions,
+                        }
+                    }
+                    None => TransferStart::NoPayload,
+                }
+            }
+            // A payload that declares no recall answers or no walk steps
+            // cannot be performed; treat it as no payload (the validator
+            // rejects those shapes for 0.2 packs that make the promise).
+            _ => TransferStart::NoPayload,
+        }
+    }
+
+    /// Answer the open transfer practice (a recall string, or a walk step
+    /// intent). Only the payload's completion conditions ever count the
+    /// transfer; a wrong answer stays open for retry and counts nothing.
+    pub fn attempt_transfer(&mut self, answer: &str) -> TransferAttempt {
+        let run = match self.active_transfer.take() {
+            Some(r) => r,
+            None => return TransferAttempt::NoActiveTransfer,
+        };
+        match run {
+            TransferRun::Recall { variant, prompt } => {
+                let expected = self
+                    .scenario
+                    .transfer_variants
+                    .iter()
+                    .find(|v| v.id == variant)
+                    .and_then(|v| v.payload.as_ref())
+                    .map(|p| p.expected.clone())
+                    .unwrap_or_default();
+                let said = normalize_recall(answer);
+                if !said.is_empty() && expected.iter().any(|e| normalize_recall(e) == said) {
+                    self.transfers.push(variant);
+                    TransferAttempt::Completed
+                } else {
+                    self.active_transfer = Some(TransferRun::Recall { variant, prompt });
+                    TransferAttempt::NotSatisfied
+                }
+            }
+            TransferRun::Walk { mut mini, variant } => {
+                let result = mini.attempt(answer);
+                match result {
+                    StepResult::Completed => {
+                        self.transfers.push(variant);
+                        TransferAttempt::Completed
+                    }
+                    StepResult::Advanced { to } => {
+                        self.active_transfer = Some(TransferRun::Walk { mini, variant });
+                        TransferAttempt::Advanced { to }
+                    }
+                    StepResult::PartialAccepted { remaining } => {
+                        self.active_transfer = Some(TransferRun::Walk { mini, variant });
+                        TransferAttempt::PartialAccepted { remaining }
+                    }
+                    StepResult::NotSatisfied { .. } => {
+                        self.active_transfer = Some(TransferRun::Walk { mini, variant });
+                        TransferAttempt::NotSatisfied
+                    }
+                }
+            }
+        }
+    }
+
+    /// The transfer practice currently open, for honest view rebuilds:
+    /// (variant id, mode, prompt, rendered actions as intent+label
+    /// pairs — label from the step's `action_labels`, generic fallback,
+    /// never the raw token). `None` when no practice is in progress —
+    /// a transfer is only ever on screen while it is being performed.
+    pub fn active_transfer_prompt(&self) -> Option<ActiveTransferPrompt> {
+        match &self.active_transfer {
+            Some(TransferRun::Recall { variant, prompt }) => {
+                Some((variant.clone(), "recall", prompt.clone(), Vec::new()))
+            }
+            Some(TransferRun::Walk { variant, mini }) => {
+                let actions = mini
+                    .decision_set()
+                    .into_iter()
+                    .map(|intent| {
+                        let label = mini
+                            .scenario
+                            .nodes
+                            .iter()
+                            .find_map(|n| n.action_labels.get(&intent))
+                            .cloned()
+                            .unwrap_or_else(|| "Respond".to_string());
+                        (intent, label)
+                    })
+                    .collect();
+                Some((
+                    variant.clone(),
+                    "walk",
+                    mini.current_node().prompt.clone(),
+                    actions,
+                ))
+            }
+            None => None,
         }
     }
 
@@ -443,7 +676,7 @@ impl ScenarioSession {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::spec::{LadderStep, ScenarioNode, TransferVariant};
+    use crate::spec::{LadderStep, RecoveryBranch, ScenarioNode, TransferPayload, TransferVariant};
 
     /// A linear chain of `n` exchange nodes with a pack-declared transfer
     /// requirement, built from data so the U08 semantics are pinned without
@@ -469,6 +702,15 @@ mod tests {
                 id: format!("es.scenario.u08.v{i}"),
                 description: format!("Transfer {i}"),
                 changed_variable: None,
+                // SCENARIO-TRANSFER-001: required variants in this fixture
+                // carry real payloads — a pack that requires a transfer
+                // must be able to complete one.
+                payload: Some(TransferPayload {
+                    kind: "recall".into(),
+                    prompt: format!("Restate exchange {i} elsewhere"),
+                    expected: vec![format!("do v{i}")],
+                    steps: Vec::new(),
+                }),
             })
             .collect();
         PackScenario {
@@ -534,7 +776,17 @@ mod tests {
             }
         );
         assert_eq!(s.attempt("go2"), StepResult::Completed);
-        assert!(s.complete_transfer("es.scenario.u08.v0"));
+        // SCENARIO-TRANSFER-001: the transfer is earned by performing its
+        // payload, never by a flag.
+        assert_eq!(
+            s.start_transfer("es.scenario.u08.v0"),
+            TransferStart::Opened {
+                mode: "recall".into(),
+                prompt: "Restate exchange 0 elsewhere".into(),
+                actions: Vec::new(),
+            }
+        );
+        assert_eq!(s.attempt_transfer("do v0"), TransferAttempt::Completed);
         let out = s.finish();
         assert!(out.completed);
         assert_eq!(out.exchanges_total, 3);
@@ -566,6 +818,204 @@ mod tests {
         assert_eq!(out.exchanges_total, 1);
         assert_eq!(out.nodes.len(), 1);
         assert_eq!(out.transfers_required, 0);
+    }
+
+    // ------------------------------------------------------------------
+    // SCENARIO-TRANSFER-001 (finding S-04): transfers are practice, not
+    // checkbox clicks. There is no mark-done channel; only performing a
+    // payload ever counts a transfer, and a payload-less variant can
+    // never be counted at all.
+    // ------------------------------------------------------------------
+
+    #[test]
+    fn there_is_no_mark_done_channel_at_all() {
+        // The session API cannot stamp a transfer: an answer with no
+        // open payload is refused, and nothing counts without practice
+        // — the checkbox era is over by construction.
+        let scenario = chain(2, 1);
+        let mut s = ScenarioSession::begin(&scenario, "sess-nomark").unwrap();
+        assert_eq!(
+            s.attempt_transfer("I did it"),
+            TransferAttempt::NoActiveTransfer
+        );
+        assert!(!s.transfer_done("es.scenario.u08.v0"));
+        // Even finishing right after a complete chain walk leaves the
+        // requirement unmet until the payload is performed.
+        s.attempt("go0");
+        assert_eq!(s.attempt("go1"), StepResult::Completed);
+        let out = s.finish();
+        assert!(!out.transfer_requirement_met);
+        assert!(
+            !out.completed,
+            "chain without transfer practice is not complete"
+        );
+    }
+
+    #[test]
+    fn a_declared_variant_without_payload_can_never_be_completed() {
+        // Old packs (published before this card) declare variants with
+        // only a description: the engine refuses to open one, so no
+        // sequence of clicks can satisfy the requirement — honest
+        // refusal beats a decorative gate.
+        let mut scenario = chain(2, 1);
+        scenario.transfer_variants[0].payload = None;
+        let mut s = ScenarioSession::begin(&scenario, "sess-nopayload").unwrap();
+        assert_eq!(
+            s.start_transfer("es.scenario.u08.v0"),
+            TransferStart::NoPayload
+        );
+        assert_eq!(
+            s.attempt_transfer("anything"),
+            TransferAttempt::NoActiveTransfer
+        );
+        assert!(!s.transfer_done("es.scenario.u08.v0"));
+        assert!(!s.transfer_requirement_met());
+    }
+
+    #[test]
+    fn recall_practice_counts_only_the_accepted_answer() {
+        let scenario = chain(2, 1);
+        let mut s = ScenarioSession::begin(&scenario, "sess-recall").unwrap();
+        assert_eq!(
+            s.start_transfer("es.scenario.u08.v0"),
+            TransferStart::Opened {
+                mode: "recall".into(),
+                prompt: "Restate exchange 0 elsewhere".into(),
+                actions: Vec::new(),
+            }
+        );
+        // Opening the payload is not completing it.
+        assert!(!s.transfer_done("es.scenario.u08.v0"));
+        // Wrong and empty answers stay open and count nothing...
+        assert_eq!(s.attempt_transfer("nope"), TransferAttempt::NotSatisfied);
+        assert_eq!(s.attempt_transfer("   "), TransferAttempt::NotSatisfied);
+        assert!(!s.transfer_done("es.scenario.u08.v0"));
+        assert!(!s.transfer_requirement_met());
+        // ...the practice stays open, surfaced for the view...
+        assert_eq!(
+            s.active_transfer_prompt()
+                .map(|(id, mode, prompt, _)| (id, mode.to_string(), prompt)),
+            Some((
+                "es.scenario.u08.v0".into(),
+                "recall".into(),
+                "Restate exchange 0 elsewhere".into()
+            ))
+        );
+        // ...and the accepted answer (trimmed + case-folded) completes it.
+        assert_eq!(s.attempt_transfer("  Do V0 "), TransferAttempt::Completed);
+        assert!(s.transfer_done("es.scenario.u08.v0"));
+        assert!(s.transfer_requirement_met());
+        // Re-performing an earned transfer earns no second credit.
+        assert_eq!(
+            s.start_transfer("es.scenario.u08.v0"),
+            TransferStart::AlreadyDone
+        );
+        assert!(s.active_transfer_prompt().is_none());
+    }
+
+    #[test]
+    fn an_unknown_variant_and_an_empty_payload_open_nothing() {
+        let scenario = chain(2, 1);
+        let mut s = ScenarioSession::begin(&scenario, "sess-unknown").unwrap();
+        assert_eq!(
+            s.start_transfer("es.scenario.u08.nope"),
+            TransferStart::UnknownVariant
+        );
+        assert!(s.active_transfer_prompt().is_none());
+        // A "payload" with no answers to give is not performable data.
+        let mut emptied = chain(2, 1);
+        if let Some(p) = emptied.transfer_variants[0].payload.as_mut() {
+            p.expected.clear();
+        }
+        let mut s2 = ScenarioSession::begin(&emptied, "sess-empty-payload").unwrap();
+        assert_eq!(
+            s2.start_transfer("es.scenario.u08.v0"),
+            TransferStart::NoPayload
+        );
+    }
+
+    /// A two-step mini-walk: step a owes a FULL set of two moves,
+    /// step b is the terminal single move.
+    fn walk_payload() -> TransferPayload {
+        TransferPayload {
+            kind: "walk".into(),
+            prompt: "Do it again in the new setting".into(),
+            expected: Vec::new(),
+            steps: vec![
+                ScenarioNode {
+                    id: "es.scenario.u08.v0.a".into(),
+                    prompt: "Open it in the new setting".into(),
+                    expected_actions: vec!["say-hi".into(), "give-role".into()],
+                    action_labels: Default::default(),
+                    support: Vec::new(),
+                    next: vec!["es.scenario.u08.v0.b".into()],
+                    recovery: Vec::new(),
+                },
+                ScenarioNode {
+                    id: "es.scenario.u08.v0.b".into(),
+                    prompt: "Close it out".into(),
+                    expected_actions: vec!["part".into()],
+                    action_labels: Default::default(),
+                    support: Vec::new(),
+                    next: Vec::new(),
+                    recovery: Vec::new(),
+                },
+            ],
+        }
+    }
+
+    #[test]
+    fn a_walk_payload_runs_with_full_set_semantics_and_earns_the_transfer() {
+        let mut scenario = chain(2, 1);
+        scenario.transfer_variants[0].payload = Some(walk_payload());
+        let mut s = ScenarioSession::begin(&scenario, "sess-walk").unwrap();
+        let start = s.start_transfer("es.scenario.u08.v0");
+        let TransferStart::Opened {
+            mode,
+            prompt,
+            actions,
+        } = start
+        else {
+            panic!("a walk payload must open: {start:?}");
+        };
+        assert_eq!(mode, "walk");
+        assert_eq!(prompt, "Open it in the new setting");
+        // Same decision-set rule as the main chain: the other step's
+        // move is rendered as a plausible wrong option.
+        assert_eq!(actions, vec!["part", "say-hi", "give-role"]);
+        // The view-facing pair names every button with a label, never
+        // the raw token.
+        let rendered = s.active_transfer_prompt().expect("walk is open").3;
+        assert!(
+            rendered
+                .iter()
+                .all(|(intent, label)| !intent.is_empty() && !label.is_empty()),
+            "{rendered:?}"
+        );
+        // Starting is not completing.
+        assert!(!s.transfer_done("es.scenario.u08.v0"));
+        // Full-set semantics inside the mini-walk: one of two moves is
+        // accepted but owes the rest.
+        assert_eq!(
+            s.attempt_transfer("say-hi"),
+            TransferAttempt::PartialAccepted { remaining: 1 }
+        );
+        // A distractor click fails honestly and the walk stays open.
+        assert_eq!(s.attempt_transfer("part"), TransferAttempt::NotSatisfied);
+        assert!(!s.transfer_done("es.scenario.u08.v0"));
+        // Finish the step: the mini-walk advances.
+        assert_eq!(
+            s.attempt_transfer("give-role"),
+            TransferAttempt::Advanced {
+                to: "es.scenario.u08.v0.b".into()
+            }
+        );
+        // The terminal move completes the mini-walk AND counts the
+        // transfer — nothing else ever does.
+        assert_eq!(s.attempt_transfer("part"), TransferAttempt::Completed);
+        assert!(s.transfer_done("es.scenario.u08.v0"));
+        assert!(s.transfer_requirement_met());
+        assert!(s.active_transfer_prompt().is_none());
     }
 
     // ------------------------------------------------------------------

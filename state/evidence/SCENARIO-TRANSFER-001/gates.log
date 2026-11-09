@@ -1,0 +1,35 @@
+SCENARIO-TRANSFER-001 — controller verification (2026-11-08)
+
+Lane child hit its iteration cap mid-gates (reported tsc RED on two
+test fixtures missing the new required onTransferAnswer prop).
+Controller finished the lane: added the two fixture props
+(a11y.test.tsx, rtl-direction.test.tsx), applied rustfmt, and fixed a
+clippy type_complexity error in crates/activity/src/scenario.rs with a
+named `ActiveTransferPrompt` type alias (also re-exported from lib.rs).
+
+Controller-run gates (working tree; background lts-ja writer active —
+see race note):
+- cargo fmt --all -- --check                       -> FMT-OK
+- cargo clippy -q -p lts-activity -p lts-desktop -p lts-langpack
+  --all-targets -- -D warnings                     -> CLIPPY-OK (exit 0)
+- cargo test -p lts-activity (unit + all integration binaries)
+  -> 16 + 5 + 5 + 5 + 5 + 0 passed; 0 failed (36 total)
+- cargo test -p lts-langpack                       -> 19 suites, all "test result: ok"
+- cargo test -p lts-desktop --lib scenarios        -> 21 passed; 165 filtered out
+- apps/desktop npx tsc --noEmit                    -> exit 0
+- apps/desktop npx vitest run                      -> 47 files / 349 tests passed
+
+Race note: full --lib desktop runs race the live lts-ja-* unit rewriting
+languages/ja-JP/media/words.jsonl (decompression-bomb size drift);
+targeted scenario/langpack/activity suites are the honest gate for this
+lane, identical to the SCENARIO-INTERACTION-001 methodology.
+
+Design decision recorded: all 18 shipped ja-JP scenarios took the
+card's second branch (transfer_variants_required 2 -> 0, in-file
+comments citing FINDINGS S-04) because authoring 36 fresh unreviewed
+target-language payloads onto draft packs violates the repo's
+draft-content convention; ru-RU already required 0. The payload
+machinery (recall/walk), schema, and validator error
+`scenario_transfer_payload_missing` ship in the engine so future packs
+CAN carry real transfer practice; the `complete_transfer` mark-done
+channel was deleted outright (no checkbox path exists at all).
