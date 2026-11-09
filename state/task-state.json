@@ -1872,15 +1872,17 @@
     },
     "SCENARIO-TRANSFER-001": {
       "task_id": "SCENARIO-TRANSFER-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Transfer variants require real practice payloads, not checkbox clicks",
       "activity": "idle",
       "summary": "transfer_at/complete_transfer mark a declared variant done on a single click with no payload; transfer_variants_required:2 is met by two checkbox clicks - engagement maximizable without learning.",
       "notes": "Finding S-04 of the 2026-10-21 findings register. Either variant payloads become completable content (mini-walk or recall step) or the requirement drops from packs that cannot honour it.",
       "evidence": [
-        "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md"
-      ]
+        "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md",
+        "state/evidence/SCENARIO-TRANSFER-001/gates.log"
+      ],
+      "updated": "2026-11-08"
     },
     "SCENARIO-VIEW-CONSISTENCY-001": {
       "task_id": "SCENARIO-VIEW-CONSISTENCY-001",
