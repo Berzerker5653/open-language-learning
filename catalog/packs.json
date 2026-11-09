@@ -10,14 +10,9 @@
       "min_sdk_version": "0.1.0",
       "pack_id": "org.openlanguage.ja-jp.reference",
       "review_status": "community",
-      "tested_platforms": [
-        "linux"
-      ],
+      "tested_platforms": ["linux"],
       "community_confirmed_platforms": [],
-      "untested_platforms": [
-        "windows",
-        "macos"
-      ],
+      "untested_platforms": ["windows", "macos"],
       "sha256": "90e6ab7928134399766d6b3da4338b3d3a6f972bf5eecec45495fa333da6fc4e",
       "size_bytes": 292899604,
       "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.3/ja-jp-reference-0.4.3.lpk",
@@ -31,27 +26,17 @@
       "min_sdk_version": "0.1.0",
       "pack_id": "org.openlanguage.ru-ru.reference",
       "review_status": "community",
-      "tested_platforms": [
-        "linux"
-      ],
+      "tested_platforms": ["linux"],
       "community_confirmed_platforms": [],
-      "untested_platforms": [
-        "windows",
-        "macos"
-      ],
+      "untested_platforms": ["windows", "macos"],
       "sha256": "dbfb63c3afb8987ad625a9e40816bbf5bf0c0ac0df8012ab96e0429772ac6544",
       "size_bytes": 268517933,
       "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.3/ru-ru-reference-0.4.3.lpk",
       "version": "0.4.3"
     }
   ],
-  "tested_platforms": [
-    "linux"
-  ],
+  "tested_platforms": ["linux"],
   "community_confirmed_platforms": [],
-  "untested_platforms": [
-    "windows",
-    "macos"
-  ],
+  "untested_platforms": ["windows", "macos"],
   "platform_note": "Three-way platform status (ADR-0015, docs/13 PLAT-001): tested_platforms is maintainer/owner-run runtime evidence (Linux only today); community_confirmed_platforms comes only from human runtime reports in docs/platform/PLATFORM_REPORTS.yaml bound to the exact app build and archive sha256; everything else is untested. Downloads for untested platforms may exist, but they are labeled untested. Any rebuild of the app or the pack invalidates a confirmation."
 }

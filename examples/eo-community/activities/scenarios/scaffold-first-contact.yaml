@@ -34,3 +34,11 @@ transfer_variants:
   - id: "eo.scenario.scaffold-first-contact.formal"
     description: "Same contact in a formal setting"
     changed_variable: "register"
+    # SCENARIO-TRANSFER-001 (finding S-04): the scaffold demonstrates the REAL
+    # contract — a required transfer carries a completable payload.
+    payload:
+      kind: recall
+      prompt: "Say what you are doing (learning this language) addressed to an official you have never met."
+      expected:
+        - "Mi lernas tiun ĉi lingvon."
+        - "Mi lernas tiun ĉi lingvon"

@@ -73,12 +73,16 @@ impl Store {
     }
 
     pub fn evidence_count(&self, profile_id: &str) -> Result<u64, Error> {
+        // rusqlite 0.41 (RUSTSEC-2026-0459 fix) dropped the u64 FromSql impl;
+        // COUNT(*) is an i64 at the SQLite level, so read the honest type and
+        // convert fallibly.
         self.conn
             .query_row(
                 "SELECT COUNT(*) FROM evidence_events WHERE profile_id = ?1",
                 params![profile_id],
-                |r| r.get(0),
+                |r| r.get::<_, i64>(0),
             )
+            .map(|n| u64::try_from(n).unwrap_or(u64::MAX))
             .map_err(Error::from)
     }
 

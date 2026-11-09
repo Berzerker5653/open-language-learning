@@ -13173,6 +13173,18 @@ activities:
             &sessions,
         )
         .unwrap();
+        // SCENARIO-TRANSFER-001: opening the practice is not completing
+        // it. The walk satisfies the requirement only when the learner
+        // completes the pack-declared payload.
+        let ans = scenarios::transfer_answer_at(
+            data,
+            &p.id,
+            sid,
+            "おはようございます。おなまえは。",
+            &sessions,
+        )
+        .unwrap();
+        assert!(ans.done, "the payload-backed answer completes the rung");
         let out = scenarios::finish_at(data, &p.id, sid, &sessions).unwrap();
         assert_eq!(out.nodes_completed, 2);
         assert!(out.transfer_requirement_met);
@@ -13363,16 +13375,30 @@ transfer_variants:
         );
         let step = scenarios::attempt_at(data, &p.id, sid, "name-question", &sessions).unwrap();
         assert_eq!(step.result, "completed");
-        scenarios::transfer_at(
+        // SCENARIO-TRANSFER-001: a payload-free transfer rung is refused
+        // the same way a payload-free ladder rung is — the pack, not the
+        // learner, is missing the practice. The refusal must not void
+        // the completed walk.
+        let err = match scenarios::transfer_at(
             data,
             &p.id,
             sid,
             "ja.scenario.demo.first-meeting.formal",
             &sessions,
-        )
-        .unwrap();
+        ) {
+            Ok(_) => panic!("a payload-free transfer rung must be refused"),
+            Err(e) => e,
+        };
+        assert!(
+            err.contains("no practice payload"),
+            "the error must name the pack: {err}"
+        );
         let out = scenarios::finish_at(data, &p.id, sid, &sessions).unwrap();
         assert_eq!(out.nodes_completed, 2);
+        assert!(
+            !out.transfer_requirement_met,
+            "a refused rung never satisfies the transfer requirement"
+        );
 
         // Evidence: the refused press left no trace — neither the
         // phantom 3/5 stamp nor support_used. SCENARIO-INTERACTION-001
