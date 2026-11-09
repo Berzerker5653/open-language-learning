@@ -2348,6 +2348,26 @@ tasks:
     posteriors, not difflib token ratios), with abstain honesty preserved.
   - Same sidecar contract v1; no media manifest churn; ru path untouched.
   required_for_desktop_1_0: false
+- id: UX-PERSONA-001
+  milestone: M10
+  priority: P2
+  title: Grumpy-learner persona findings - pack-maturity jargon, privacy-copy jargon, CTA fold verification
+  dependencies:
+  - PACK-BUNDLE-RU-001
+  read_first:
+  - state/notes/UX-PERSONA-001.md
+  acceptance:
+  - Pack-list maturity tags (experimental / unreviewed / community) are
+    rewritten in learner language, with a one-line meaning on demand
+    (details/summary), vitest copy pins.
+  - Welcome-step privacy bullets name concrete things instead of internal
+    terms ("answers and help you asked for" not "learning evidence,
+    support use, timing"); vitest copy pins.
+  - Every wizard step's primary action verified visible at 1920x1080 AND
+    1366x768 under the Xvfb device harness; screenshots into evidence dir.
+  - The already-fixed findings (name placeholder 463fa12, Playing state,
+    Show transliteration 33d8a77) stay green in the same run.
+  required_for_desktop_1_0: false
 - id: SETTINGS-TEXT-COLLAPSE-001
   milestone: M10
   priority: P2
@@ -2669,4 +2689,5 @@ execution_scope:
   - WORD-TIMING-001
   - WORD-TIMING-002
   - WORD-TIMING-003
+  - UX-PERSONA-001
   public_publication_authorized: false

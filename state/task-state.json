@@ -2018,6 +2018,13 @@
       "updated": "2026-10-20",
       "activity": "idle",
       "notes": "Owner-gated: forced-aligner is a new heavyweight local dependency. Evidence for why ASR cannot reach the floor: state/evidence/WORD-TIMING-002/final-report.md."
+    },
+    "UX-PERSONA-001": {
+      "status": "ready",
+      "attempts": 1,
+      "evidence": [
+        "state/notes/UX-PERSONA-001.md"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
