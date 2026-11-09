@@ -1819,13 +1819,16 @@
     },
     "SETTINGS-TEXT-COLLAPSE-001": {
       "task_id": "SETTINGS-TEXT-COLLAPSE-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Settings prose blocks collapse to one-line summaries with expanders",
       "activity": "idle",
       "summary": "Settings forces heavy scrolling past long prose blocks users do not need per visit; fold each to a one-line summary plus a disclosure expander, moving full text to the docs bundle.",
       "notes": "Raised by the owner during the 2026-10-21 acceptance sweep (S-2). Use native details/summary semantics so screen-reader access is preserved; nothing user-facing removed. Whether this rides REL-001 or lands at 1.0.x is an owner scope call.",
-      "evidence": []
+      "evidence": [
+        "state/evidence/SETTINGS-TEXT-COLLAPSE-001/gates.log"
+      ],
+      "updated": "2026-11-08"
     },
     "JA-FUNCTION-WORD-LOOKUP-001": {
       "task_id": "JA-FUNCTION-WORD-LOOKUP-001",
@@ -1855,15 +1858,17 @@
     },
     "SCENARIO-INTERACTION-001": {
       "task_id": "SCENARIO-INTERACTION-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Scenario decisions demand retrieval - distractor action sets, full-set completion, honest evidence",
       "activity": "idle",
       "summary": "Shipped scenarios are click-through toys: the rendered buttons ARE the expected answers, one click completes multi-action nodes, failure (and all 21 recovery branches) is unreachable, and the guided clicks stamp independent learner evidence.",
       "notes": "Findings S-01/S-02/S-03 of state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md, from the owner's 2026-10-21 rejection of the section. Machine counts: 0/21 scenarios can fail; 21 recovery branches unreachable; 0/21 scenarios put target-language text in prompts (only two nodes embed any Japanese at all). Fix spans engine (distractor decision sets, full-set satisfaction, evidence gating) and pack content (target-language prompts). Evidence inflation touches the learner model product-wide, so this is P1 regardless of whether the section itself ships.",
       "evidence": [
-        "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md"
-      ]
+        "state/evidence/SCENARIOS-REVIEW-2026-10-21/FINDINGS.md",
+        "state/evidence/SCENARIO-INTERACTION-001/gates.log"
+      ],
+      "updated": "2026-11-08"
     },
     "SCENARIO-TRANSFER-001": {
       "task_id": "SCENARIO-TRANSFER-001",

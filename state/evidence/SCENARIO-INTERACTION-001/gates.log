@@ -1,0 +1,21 @@
+SCENARIO-INTERACTION-001 — controller verification (2026-11-08)
+
+Lane report claimed green; controller re-ran gates independently in the
+working tree (background ja word-timing writer active — see race note):
+
+- cargo fmt --all -- --check                -> FMT-OK (exit 0)
+- cargo clippy -q -p lts-activity -p lts-desktop -p lts-langpack
+  --all-targets -- -D warnings              -> exit 0, zero warnings
+- cargo test -p lts-activity --test scenario      -> 5 passed; 0 failed
+- cargo test -p lts-activity --lib scenario       -> 11 passed; 0 failed
+- cargo test -p lts-desktop --lib scenario        -> 22 passed; 0 failed
+  (163 filtered out)
+- apps/desktop: npx tsc --noEmit            -> TSC-OK (exit 0)
+- apps/desktop: npx vitest run src/scenario.test.tsx src/settings.test.tsx
+  -> 2 files / 36 tests passed
+
+Race note: lane's workspace-wide run showed 30 lts-desktop failures, all
+'decompression bomb: media/words.jsonl expanded ... declared ...' — the
+live lts-ja-primary2 unit rewriting languages/ja-JP/media/words.jsonl
+mid-test. Zero scenario-related failures; targeted scenario suites above
+are the honest gate for this lane. Full logs: this directory.
