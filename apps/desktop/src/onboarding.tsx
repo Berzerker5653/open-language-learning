@@ -35,6 +35,30 @@ export type OnboardingStep =
   "resume" | "welcome" | "packs" | "microphone" | "speech-setup" | "done";
 
 /**
+ * UX-PERSONA-001: the pack-list maturity tag is written in learner language.
+ * The engine's trust-state words (experimental / community / validated /
+ * verified / reference) name a policy the learner has no referent for; the
+ * label below says what the learner gets, and MATURITY_MEANINGS keeps the
+ * exact policy meaning one expander away. An unknown value falls back to the
+ * raw tag — the row never invents a claim the pack did not make.
+ */
+export const MATURITY_LABELS: Record<string, string> = {
+  experimental: "made by us, still being checked",
+  community: "volunteer-made, we have not checked it",
+  validated: "checked by language reviewers",
+  verified: "fully reviewed and tested",
+  reference: "our own maintained full course",
+};
+
+const MATURITY_MEANINGS: [string, string][] = [
+  ["experimental", "Built by us; the content may still have mistakes because the checking is not finished."],
+  ["community", "Made by volunteers; the automatic checks pass, but we have not checked the content ourselves."],
+  ["validated", "Passed structure audits, and a human reviewer has sampled the content."],
+  ["verified", "A defined amount of the content has been reviewed, and the speech checks pass."],
+  ["reference", "Our own maintained course for this language."],
+];
+
+/**
  * One part of the speech stack (K-72): the sherpa runtime, the Japanese
  * voice, and recognition. Names are container-chosen; sizes are the
  * catalog's pinned bytes, so the download cost is honest up front.
@@ -245,7 +269,7 @@ export function Onboarding(p: OnboardingProps) {
                         radio's accessible name via the label text; exposing
                         it again as child text made it read twice. */}
                     <span aria-hidden="true">
-                      ({pack.locale}, {pack.maturity})
+                      ({pack.locale}, {MATURITY_LABELS[pack.maturity] ?? pack.maturity})
                     </span>
                   </label>
                   <button
@@ -291,15 +315,30 @@ export function Onboarding(p: OnboardingProps) {
               );
             })}
           </fieldset>
-          <p>
-            <small>
-              A pack you already downloaded can be located here: it goes through the same validation
-              as a catalog install, and once it is on this device you can select it without
-              installing anything else. You can also import packs or change the language you are
-              learning later from the Language packs section of Settings. This never changes the
-              app&apos;s own interface language.
-            </small>
-          </p>
+          {/* UX-PERSONA-001: the learner-facing label on each row is the plain
+              outcome; the exact policy meaning stays one expander away. The
+              import/change-later guidance folds into the same disclosure —
+              a second always-visible block pushed the footer below the fold
+              at 1366x768 (fold acceptance, acceptance item 3). */}
+          <details className="maturity-meanings">
+            <summary>What the labels on the pack rows mean</summary>
+            <ul>
+              {MATURITY_MEANINGS.map(([tag, meaning]) => (
+                <li key={tag}>
+                  <strong>{MATURITY_LABELS[tag]}</strong> — {meaning}
+                </li>
+              ))}
+            </ul>
+            <p>
+              <small>
+                A pack you already downloaded can be located here: it goes through the same
+                validation as a catalog install, and once it is on this device you can select it
+                without installing anything else. You can also import packs or change the language
+                you are learning later from the Language packs section of Settings. This never
+                changes the app&apos;s own interface language.
+              </small>
+            </p>
+          </details>
           <input
             type="file"
             accept=".lpk"
@@ -340,10 +379,10 @@ export function Onboarding(p: OnboardingProps) {
         <div className="card">
           <h1>Microphone (optional)</h1>
           <p>
-            Speaking activities need a microphone, but it is never required. You can skip this and
-            enable it later in Settings; skipping never blocks progress. Enabling it continues to a
-            speech setup step — saying "yes" to the microphone never leaves you to find the
-            downloads on your own.
+            Speaking activities need a microphone, but it is never required. Skip it and everything
+            stays text-only — you can turn the microphone on later in Settings, and skipping never
+            blocks progress. If you turn it on, the next step offers the speech downloads for you,
+            so there is nothing to hunt for yourself.
           </p>
           <div className="btn-row">
             <button type="button" className="btn btn--primary" onClick={p.onEnableMic}>

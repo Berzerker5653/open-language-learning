@@ -109,7 +109,7 @@ describe("export then restore (journey d)", () => {
 
     // And the restored plan is live, not a transcript: the first activity
     // opens the pack's own encounter for the same content.
-    await app.click(app.button(app.section("First look"), "how do you do (first meeting)"));
+    await app.click(app.button(app.section("Meet something new"), "how do you do (first meeting)"));
     expect(app.section("Lesson").textContent).toContain("はじめまして");
     expect(app.engine.lastArgsFor("lesson_plan")).toEqual({
       profileId: "profile-2",

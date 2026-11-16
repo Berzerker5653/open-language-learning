@@ -44,11 +44,11 @@ describe("focus lands on the heading of every new screen (F-01)", () => {
 
     // Opening a plan row lands on the lesson page: a fresh h1 inside
     // #main has focus. (The plan card's own controls do not.)
-    const firstLook = app.section("First look");
+    const firstLook = app.section("Meet something new");
     const row = [...firstLook.querySelectorAll("button")].find((b) =>
       (b.textContent ?? "").includes("Write it"),
     );
-    if (!row) throw new Error('"First look" offers no "Write it" row');
+    if (!row) throw new Error('"Meet something new" offers no "Write it" row');
     await app.click(row);
     await app.settle();
     const lessonHeading = focusedHeading();

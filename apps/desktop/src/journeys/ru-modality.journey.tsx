@@ -31,7 +31,7 @@ const RU_SENTENCE = "Перед отправкой письма сверьте �
 
 /** The startable plan row in `group` whose verb (the RUNNABLE_MODALITIES
  * label) names the runner that will serve it. */
-function planRow(app: Mounted, verb: string, group = "First look"): HTMLButtonElement {
+function planRow(app: Mounted, verb: string, group = "Meet something new"): HTMLButtonElement {
   const scope = app.section(group);
   const found = [...scope.querySelectorAll("button")].find((b) =>
     (b.textContent ?? "").includes(verb),

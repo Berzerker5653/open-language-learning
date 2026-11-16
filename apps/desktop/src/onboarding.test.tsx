@@ -130,7 +130,7 @@ describe("onboarding", () => {
   it("offers the Japanese pack for selection and installation", () => {
     const html = render({ step: "packs" });
     expect(html).toContain("Japanese — demo lexicon");
-    expect(html).toContain("(ja-JP, community)");
+    expect(html).toContain("(ja-JP, volunteer-made, we have not checked it)");
     expect(html).toContain(">Install<");
     // Continue is gated until a pack is selected and installed.
     expect(html).toContain("disabled");
@@ -305,7 +305,7 @@ describe("onboarding", () => {
       installed: [{ ...jaOnDevice, pack_id: "org.openlanguage.imported-ja" }],
     });
     expect(html).toContain("Imported Japanese pack");
-    expect(html).toContain("(ja-JP, community)");
+    expect(html).toContain("(ja-JP, volunteer-made, we have not checked it)");
     // The install control becomes an honest done-state: labeled, locked.
     expect(html).toMatch(/disabled=""[^>]*>\s*Installed</);
     // No install click needed: Continue is live and the explanatory note is gone.
@@ -393,5 +393,81 @@ describe("onboarding", () => {
     expect(html).not.toContain("catalogue lists");
     expect(html).not.toContain("matches the version");
     expect(html).not.toContain("Update to v");
+  });
+});
+
+// UX-PERSONA-001: the persona walk's copy findings, pinned so the rewritten
+// learner language cannot drift back to internal vocabulary.
+describe("onboarding copy — learner-language rewrites (UX-PERSONA-001)", () => {
+  it("pack rows carry learner-language maturity labels, not policy words", () => {
+    const packs: PackCandidate[] = [
+      { ...jaCandidate, maturity: "reference" },
+      {
+        pack_id: "org.openlanguage.ru-demo",
+        display_name: "Russian demo",
+        locale: "ru-RU",
+        maturity: "experimental",
+        rtl: false,
+      },
+      {
+        pack_id: "org.openlanguage.eo-demo",
+        display_name: "Esperanto — original demo",
+        locale: "eo",
+        maturity: "community",
+        rtl: false,
+      },
+    ];
+    const html = render({ step: "packs", packs });
+    expect(html).toContain("(ja-JP, our own maintained full course)");
+    expect(html).toContain("(ru-RU, made by us, still being checked)");
+    expect(html).toContain("(eo, volunteer-made, we have not checked it)");
+    // The raw policy word never rides the row itself.
+    expect(html).not.toContain("(ja-JP, reference)");
+    expect(html).not.toContain("(eo, community)");
+  });
+
+  it("an unknown maturity tag falls back to the raw value, never an invented claim", () => {
+    const html = render({ step: "packs", packs: [{ ...jaCandidate, maturity: "beta" }] });
+    expect(html).toContain("(ja-JP, beta)");
+  });
+
+  it("the exact policy meaning stays one expander away (details/summary semantics)", () => {
+    const html = render({ step: "packs" });
+    expect(html).toContain("<details");
+    expect(html).toContain("<summary>What the labels on the pack rows mean</summary>");
+    expect(html).toContain("the automatic checks pass, but we have not checked the content ourselves");
+    expect(html).toContain("the checking is not finished");
+  });
+
+  it("the microphone step states the offer plainly, with no dangling clause", () => {
+    const html = render({ step: "microphone" });
+    expect(html).toContain("Skip it and everything");
+    expect(html).toContain("the next step offers the speech downloads for you");
+    // The persona trip: the old clause ended on "find the downloads on your
+    // own" with no antecedent a learner could follow.
+    expect(html).not.toContain("on your own");
+  });
+
+  it("welcome privacy bullets name concrete things, not ledger terms", () => {
+    // The welcome step's points come from `privacy_notice` in
+    // src-tauri/src/lib.rs; these strings mirror that source exactly, and the
+    // Rust test privacy_notice_names_concrete_things_not_ledger_terms pins
+    // the source itself. Keep the two in step.
+    const html = render({
+      notice: {
+        title: "Your data stays on this device",
+        points: [
+          "No account, no sign-up, no network required. Profiles are local.",
+          "Your answers, the help you ask for, and how long things take are saved on this device only — nothing is sent anywhere.",
+          "The microphone is optional. You can skip it now and enable it later; skipping never blocks progress.",
+          "With the microphone on, audio is handled on this device. Any option that would send audio to another service only turns on after you switch it on yourself and see a clear notice on screen.",
+          "You can export or delete your local profile data at any time.",
+        ],
+      },
+    });
+    expect(html).toContain("Your answers, the help you ask for");
+    expect(html).toContain("saved on this device only");
+    expect(html).not.toContain("Learning evidence");
+    expect(html).not.toContain("support use");
   });
 });

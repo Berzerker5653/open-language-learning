@@ -100,11 +100,19 @@ fn privacy_notice() -> PrivacyNotice {
         title: "Your data stays on this device".into(),
         points: vec![
             "No account, no sign-up, no network required. Profiles are local.".into(),
-            "Learning evidence (answers, support use, timing) is stored only in a local database."
+            // UX-PERSONA-001: the old bullet carried this repo's ledger terms
+            // ("learning evidence", "support use"); the claims are the same,
+            // now named as the concrete things a learner recognizes.
+            "Your answers, the help you ask for, and how long things take are saved on this device \
+             only — nothing is sent anywhere."
                 .into(),
             "The microphone is optional. You can skip it now and enable it later; skipping never blocks progress."
                 .into(),
-            "If the microphone is enabled, audio is processed locally by default. Any provider that uploads audio requires your explicit enablement plus an on-screen notice first."
+            // Same policy, said in learner terms: local by default, and an
+            // opt-in plus an on-screen notice before anything leaves the device.
+            "With the microphone on, audio is handled on this device. Any option that would send \
+             audio to another service only turns on after you switch it on yourself and see a \
+             clear notice on screen."
                 .into(),
             "You can export or delete your local profile data at any time."
                 .into(),
@@ -8521,6 +8529,24 @@ pub fn run() {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// UX-PERSONA-001: the welcome-step privacy bullets must name concrete
+    /// learner things, not this repo's ledger terms. The claims stay: local
+    /// storage only, microphone optional, local processing by default,
+    /// opt-in + on-screen notice before any upload, export/delete available.
+    #[test]
+    fn privacy_notice_names_concrete_things_not_ledger_terms() {
+        let notice = privacy_notice();
+        let joined = notice.points.join("\n");
+        assert!(!joined.contains("Learning evidence"));
+        assert!(!joined.contains("learning evidence"));
+        assert!(!joined.contains("support use"));
+        assert!(joined.contains("Your answers, the help you ask for"));
+        assert!(joined.contains("saved on this device"));
+        assert!(joined.contains("audio is handled on this device"));
+        assert!(joined.contains("see a clear notice on screen"));
+        assert!(joined.contains("export or delete your local profile data"));
+    }
 
     /// The perf commands are measurement-only and harness-gated: with the
     /// smoke/perf env absent (i.e. every learner process) they must refuse,

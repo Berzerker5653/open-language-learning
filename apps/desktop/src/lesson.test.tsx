@@ -219,7 +219,7 @@ describe("LessonEncounter", () => {
     expect(html).toContain("こんにちは");
     expect(html).toContain("konnichiwa");
     expect(html).toContain("hello");
-    expect(html).toContain("First look");
+    expect(html).toContain("Meet something new");
   });
 
   it("shows the pack's grammar explanation instead of the app inventing one", () => {

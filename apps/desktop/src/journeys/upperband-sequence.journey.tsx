@@ -42,7 +42,7 @@ const J3 = "Утром она была на работе, а вечером пи
 
 /** The startable plan row in `group` whose verb (the RUNNABLE_MODALITIES
  * label) names the runner that will serve it. */
-function planRow(app: Mounted, verb: string, group = "First look"): HTMLButtonElement {
+function planRow(app: Mounted, verb: string, group = "Meet something new"): HTMLButtonElement {
   const scope = app.section(group);
   const found = [...scope.querySelectorAll("button")].find((b) =>
     (b.textContent ?? "").includes(verb),
@@ -53,7 +53,7 @@ function planRow(app: Mounted, verb: string, group = "First look"): HTMLButtonEl
 
 /** The plan row presenting `text` — how the changed-context sentence's row
  * is picked when two rows share one verb. */
-function planRowFor(app: Mounted, text: string, group = "First look"): HTMLButtonElement {
+function planRowFor(app: Mounted, text: string, group = "Meet something new"): HTMLButtonElement {
   const scope = app.section(group);
   const found = [...scope.querySelectorAll("button")].find((b) =>
     (b.textContent ?? "").includes(text),

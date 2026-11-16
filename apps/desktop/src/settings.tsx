@@ -355,8 +355,8 @@ export function Settings(p: SettingsProps) {
           The privacy notice promises you can export or delete your local profile data at any time —
           both are here, and switching profiles starts here too. Switching only leaves the current
           profile; it deletes nothing. An export is a readable JSON file holding your profile,
-          settings, learning evidence, saved words, and review schedule. Recording metadata is not
-          included, and no audio is ever part of an export.
+          settings, your answers and the help you asked for, saved words, and review schedule.
+          Recording metadata is not included, and no audio is ever part of an export.
         </ProseNote>
         <div className="btn-row">
           <button type="button" className="btn" onClick={p.onExport}>

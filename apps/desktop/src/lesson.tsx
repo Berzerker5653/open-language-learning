@@ -69,7 +69,7 @@ export interface LessonPlan {
 }
 
 export const STAGE_LABEL: Record<string, string> = {
-  encounter: "First look",
+  encounter: "Meet something new",
   interaction: "Use it in conversation",
   scaffolded: "With support",
   independent: "On your own",
@@ -148,7 +148,7 @@ export function LessonEncounter({
           data-runner={stage.runner ?? "none"}
           key={stage.activity_id}
         >
-          <h2>{STAGE_LABEL[stage.stage_kind] ?? "First look"}</h2>
+          <h2>{STAGE_LABEL[stage.stage_kind] ?? "Meet something new"}</h2>
           <p className="meta lesson__runner">
             {stage.runner
               ? `Served by the ${stage.runner} runner.`

@@ -79,7 +79,7 @@ describe("first run (journey a)", () => {
     expect(app.text('[aria-label="Practice"] h1')).toBe("Hi Alex");
     expect(app.text(".plan-summary")).toBe("2 activities · about 3 minutes");
     expect(app.text('[aria-label="First steps"]')).toContain("how do you do (first meeting)");
-    const planItem = app.button(app.section("First look"), "how do you do (first meeting)");
+    const planItem = app.button(app.section("Meet something new"), "how do you do (first meeting)");
     expect(planItem.textContent).toContain("Recall");
 
     // The first session: the pack's authored encounter teaches the word before

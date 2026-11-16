@@ -51,7 +51,7 @@ describe("home", () => {
     expect(html).toContain("Hi Hunter");
     // K-66 (ADR-0020 §1): items carry the engine's own kind, and Home
     // groups under it; the per-item reason stays as the why.
-    expect(html).toContain("First look");
+    expect(html).toContain("Meet something new");
     expect(html).toContain("Keep it sticking");
     expect(html).toContain("Nothing is recorded until you do one of these.");
     expect(html).toContain("Due for review");
@@ -243,7 +243,7 @@ describe("home", () => {
     );
     // Introduction (the unseen half) always leads the page, even when
     // the scheduler interleaves kinds in its own ordering.
-    expect(html.indexOf('aria-label="First look"')).toBeLessThan(
+    expect(html.indexOf('aria-label="Meet something new"')).toBeLessThan(
       html.indexOf('aria-label="Keep it sticking"'),
     );
   });

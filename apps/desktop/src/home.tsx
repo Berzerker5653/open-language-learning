@@ -97,7 +97,10 @@ const REASON_LABELS: Record<PlannedItem["reason"], string> = {
  * guess made off the reason text.
  */
 const KIND_LABELS: Record<FirstRunStep["kind"], string> = {
-  introduction: "First look",
+  // UX-PERSONA-001: "First look" read as a cryptic item title in the
+  // persona walk; the label now says what the group is, in the ADR-0020
+  // §2 words the grouping already follows.
+  introduction: "Meet something new",
   review: "Keep it sticking",
   practice: "Practise it",
 };
