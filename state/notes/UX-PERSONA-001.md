@@ -42,3 +42,18 @@ pack step).
 - CTA-fold acceptance item DONE: no primary action below fold at 1920x1080 or 1366x768 in the current build (fold-01..fold-05).
 - Two more copy findings for this card: (a) microphone-step copy ends in the confusing clause about saying yes to the microphone and finding downloads on your own; (b) Today plan-list item titles are cryptic (First look? / First looks variants).
 - Remaining scope: maturity-tag rewrite, privacy-bullet restatement, plan-item title clarity. Name placeholder + transliteration + Playing state + fold all verified fixed in the shipped 0.4.3-alpha.1 build.
+
+## 2026-11-16 close-out (agent burst, cron lts-driver)
+All four owned findings landed and are pinned:
+1. Maturity jargon -> learner outcomes on pack rows (`MATURITY_LABELS`), exact
+   policy meaning one `<details>` expander away; unknown tags fall back raw.
+2. Privacy bullets restated in learner words (incl. the Rust `privacy_notice`
+   source, pinned by a new Rust test); Settings export blurb swept too.
+3. Microphone-step clause rewritten plainly.
+4. Plan-list titles: "First look" -> "Meet something new" (ADR-0020's own
+   words), all 10 test/journey pins updated.
+Fold re-verify (acceptance item 3): PASS at 1920x1080 + 1366x768 for every
+wizard step; first pass REGRESSED the 768 fold (expander + always-visible
+import paragraph pushed the footer out) -> guidance folded into the same
+disclosure, re-pass clean. Evidence + harness lessons:
+`state/evidence/UX-PERSONA-001/fold-recheck-gates.log` + `fold-recheck.py`.

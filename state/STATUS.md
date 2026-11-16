@@ -1200,3 +1200,6 @@ Fiancé reviews Russian only; Japanese pack audio is accepted on trust. Stood do
 
 ## 2026-11-06 — Owner policy: platform parity is community-sourced
 No Windows/macOS machines in the lab. PLAT-001 stays blocked as in-house work; platform status comes from community user reports (consistent with ADR-0015). SPEECH-007 explained + confirmed parked per ADR-0017 (guided-only for 1.0).
+
+## 2026-11-16 — UX-PERSONA-001 closed (agent burst): jargon sweep + fold PASS at both heights
+Maturity tags now read as learner outcomes with the policy meaning one expander away; privacy bullets + microphone clause + plan-item titles rewritten in plain words (all pinned: 5 new vitest copy pins, 1 Rust source pin). First fold re-pass REGRESSED the 1366x768 footer (expander + always-on import paragraph) -> guidance merged into the disclosure; re-pass PASS at 1920x1080 + 1366x768 every step, typed name lands end-to-end ("Hi Alex"). Gates: vitest 47/361, tsc/clippy/fmt clean, audit_learner_copy 0. Owner: visual acceptance rides the hands-on pass. Harness lessons (Wayland leak, window pinning, XTEST mouse) in `state/evidence/UX-PERSONA-001/fold-recheck-gates.log`.

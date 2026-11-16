@@ -1,0 +1,42 @@
+UX-PERSONA-001 — gates + fold re-verify (2026-11-16 agent run)
+
+Unit gates (all actually run):
+- pnpm typecheck: clean
+- pnpm test: 47 files / 361 tests passed (5 new copy pins; one existing
+  anti-"up to date" pin rejected the first wording — label rephrased, pin kept)
+- cargo fmt --all --check: exit 0
+- cargo clippy -p lts-desktop --all-targets -- -D warnings: clean
+- cargo test -p lts-desktop --lib privacy_notice: 1 passed
+- tools/audit_learner_copy.py: 0 findings
+- pnpm tauri build (release): exit 0; target/release/lts-desktop rebuilt 14:36
+
+Fold re-verify (driver: fold-recheck.py, this dir; frames foldr-*.png):
+Harness lessons (recorded so the next pass does not re-learn them):
+1. The env MUST strip WAYLAND_DISPLAY/XDG_SESSION_TYPE: Tauri takes the real
+   Wayland session otherwise and silently ignores Xvfb's DISPLAY (zero windows
+   on the private display).
+2. No WM on Xvfb => the window opens at Tauri's default 1100x720; the fold
+   test must pin it with `xdotool windowsize <wid> W H` or it measures the
+   wrong box.
+3. Focused-footer-button key activation (Return/Space via XTEST) is ignored by
+   WebKitGTK in this harness; use XTEST mouse on the driver's own display.
+
+Frames at true 1920x1080 AND 1366x768 (window at 0,0):
+- 01/01b welcome: rewritten privacy bullets render fully; typed name lands
+  ("Alex" -> "Hi Alex" on the landing screen). Create fully above fold.
+- 02 packs: learner maturity tags render — "(ja-JP, our own maintained full
+  course)" / "(ru-RU, made by us, still being checked)" / "(eo, volunteer-made,
+  we have not checked it)"; Continue + Skip for now fully above fold. NOTE:
+  the first pass FAILED the 768 fold — the new expander plus the always-visible
+  import paragraph pushed the footer below the window edge; fix folded that
+  guidance into the same disclosure, re-pass is clean.
+- 03/04 microphone: rewritten clause renders ("...the next step offers the
+  speech downloads for you, so there is nothing to hunt for yourself");
+  Enable microphone + Skip for now fully above fold at both heights.
+- 05 post-wizard: skip path lands directly on the Today view ("Hi Alex");
+  both notice cards + Choose a language button fully visible at both heights
+  (the 4th stepper step is the completion transition itself).
+
+Result: acceptance item 3 (explicit two-height fold pass, every wizard step)
+PASS. UI-visible changes => activity awaiting-human-acceptance for the owner's
+hands-on pass.
