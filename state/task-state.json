@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-17",
-  "active_task": null,
+  "active_task": "STORY-AUTHOR-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2043,6 +2043,14 @@
         "state/notes/CONTENT-CONFIRM-001.md"
       ],
       "updated": "2026-11-16"
+    },
+    "STORY-AUTHOR-001": {
+      "task_id": "STORY-AUTHOR-001",
+      "status": "in_progress",
+      "attempts": 0,
+      "title": "Level-graded RU stories with story-owned sentences (STORY-AUTHOR-001)",
+      "activity": "active",
+      "summary": "Owner-scoped 2026-11-17: 16-story slate (4 per level A1-B2, one each B2=5), vocab-budgeted against per-level drill pools; plan in state/notes/STORY-AUTHOR-001.md. Author A1 first, owner auditions before mass authoring."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

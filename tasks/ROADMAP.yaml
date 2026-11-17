@@ -2624,6 +2624,7 @@ tasks:
   read_first:
   - state/notes/READING-STORY-UX-001.md
   - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  - state/notes/STORY-AUTHOR-001.md
   acceptance:
   - each ru story is a written narrative with a beginning/middle/end, sentences are story-owned new ids (no content-parity shard reuse), 5-10 sentences forming one paragraph flow
   - sentences carry declared readings; audio baked with the pack narrator through the existing pipeline and ASR gate
