@@ -2038,7 +2038,7 @@
       "title": "In-app community confirmation of content correctness (ADR-0040)",
       "activity": "awaiting-human-acceptance",
       "summary": "Opening card: attributed per-profile content confirmations in storage migration v6, export bundle v3, confirm/unconfirm IPC, attribution + toggle in the graded-reading lookup panel. | Implemented and gate-verified 2026-11-17; awaiting owner in-app acceptance.",
-      "notes": "Contract frozen in state/notes/CONTENT-CONFIRM-001.md before any implementation code (task-card-first).",
+      "notes": "Contract frozen in state/notes/CONTENT-CONFIRM-001.md before any implementation code (task-card-first). Owner live trial 2026-11-17: clicked the confirm buttons truthfully, but reports the reading UX as a whole does not make sense (no true story/paragraph, no click-the-word dictionary lookup, 4 clicks per sentence, mixed narrators). Feature mechanics accepted; the reading experience needs redesign first — see state/notes/READING-STORY-UX-001.md.",
       "evidence": [
         "state/notes/CONTENT-CONFIRM-001.md"
       ],
