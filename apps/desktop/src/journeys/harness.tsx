@@ -925,6 +925,48 @@ const PACKS: Record<string, Pack> = {
   },
 };
 
+/** CONTENT-CONFIRM-001: a graded-reading story for the JA fixture pack,
+ * composed exactly the way lib.rs `story_view_at` composes one — sentence
+ * views with their looked-up lexicon rows. Journey ids, never real pack
+ * ids. */
+const JA_STORY = {
+  id: "ja.story.journeys.confirmation",
+  title: "A quiet morning",
+  description: null as string | null,
+  status: "community",
+  sentences: [
+    {
+      content_id: "ja.sent.journeys.confirm.1",
+      text: "きょうしつ に ほん が おいてある",
+      furigana: null as string | null,
+      romaji: null as string | null,
+      faded_by_mastery: false,
+      gloss: "A book has been left in the classroom.",
+      status: "community",
+      known: [
+        {
+          id: "ja.lex.journeys.classroom",
+          surface: "きょうしつ",
+          reading: null as string | null,
+          romaji: "kyoushitsu",
+          gloss: "classroom",
+          status: "community",
+        },
+      ],
+    },
+    {
+      content_id: "ja.sent.journeys.confirm.2",
+      text: "あした また きます",
+      furigana: null as string | null,
+      romaji: null as string | null,
+      faded_by_mastery: false,
+      gloss: "I will come again tomorrow.",
+      status: "community",
+      known: [],
+    },
+  ],
+};
+
 interface Profile {
   id: string;
   display_name: string;
@@ -957,6 +999,10 @@ type Scenario = {
     schedule?: Scheduled[];
   }[];
   installed?: string[];
+  /** CONTENT-CONFIRM-001: confirmation marks already on the device, so a
+   * journey can see a mark it did NOT give (only the giver's own "Undo"
+   * may retract). */
+  confirmations?: { profileId: string; packId: string; contentId: string; at: string }[];
   /** Each listed command fails loudly on its FIRST call and answers
    * normally after: for journeys that exercise degraded-read paths. */
   failOnce?: string[];
@@ -998,6 +1044,14 @@ export class LearnerEngine {
     }[]
   >();
   private nextMine = 1;
+  /** CONTENT-CONFIRM-001: attributed confirmation marks, mirroring the
+   * `content_confirmations` table — one row per (profile, pack, content). */
+  private confirmRows: {
+    profile_id: string;
+    pack_id: string;
+    content_id: string;
+    at: string;
+  }[] = [];
   private nextCallback = 1;
   private nextListener = 1;
   private readonly failOnceList: string[] = [];
@@ -1030,6 +1084,14 @@ export class LearnerEngine {
   constructor(scenario: Scenario = {}) {
     this.failOnceList = scenario.failOnce ?? [];
     this.delayOnceList = scenario.delayOnce ?? [];
+    for (const c of scenario.confirmations ?? []) {
+      this.confirmRows.push({
+        profile_id: c.profileId,
+        pack_id: c.packId,
+        content_id: c.contentId,
+        at: c.at,
+      });
+    }
     for (const id of scenario.installed ?? []) this.install(id);
     for (const seed of scenario.profiles ?? []) {
       const active = seed.active ?? null;
@@ -1115,6 +1177,19 @@ export class LearnerEngine {
       rtl: pack.rtl,
       scripts: pack.scripts,
     });
+  }
+
+  /** CONTENT-CONFIRM-001: the attribution join, mirroring
+   * `content_confirmations()` — display names from the profile records,
+   * oldest mark first. */
+  private marksFor(packId: string, contentId: string): { display_name: string; at: string }[] {
+    return this.confirmRows
+      .filter((r) => r.pack_id === packId && r.content_id === contentId)
+      .map((r) => ({
+        display_name: this.profiles.get(r.profile_id)?.display_name ?? r.profile_id,
+        at: r.at,
+      }))
+      .sort((a, b) => a.at.localeCompare(b.at));
   }
 
   private profile(id: unknown): Profile {
@@ -1382,6 +1457,82 @@ export class LearnerEngine {
       case "active_pack": {
         const p = this.profile(args.profileId);
         return p.active ? [p.active] : [];
+      }
+      case "story_list": {
+        const p = this.profile(args.profileId);
+        if (p.active !== JA) return [];
+        return [
+          {
+            id: JA_STORY.id,
+            title: JA_STORY.title,
+            description: JA_STORY.description,
+            status: JA_STORY.status,
+            sentence_count: JA_STORY.sentences.length,
+          },
+        ];
+      }
+      case "story_view": {
+        const p = this.profile(args.profileId);
+        const packId = p.active;
+        if (packId !== JA || String(args.storyId) !== JA_STORY.id) {
+          throw "story not found";
+        }
+        // One attribution read for every content id the view renders,
+        // exactly as `story_view_at` does: sentences plus their looked-up
+        // lexicon rows. Absent key = nobody has confirmed it.
+        const confirmations: Record<string, { display_name: string; at: string }[]> = {};
+        for (const id of [
+          ...JA_STORY.sentences.map((s) => s.content_id),
+          ...JA_STORY.sentences.flatMap((s) => s.known.map((w) => w.id)),
+        ]) {
+          const marks = this.marksFor(packId, id);
+          if (marks.length > 0) confirmations[id] = marks;
+        }
+        return {
+          id: JA_STORY.id,
+          title: JA_STORY.title,
+          status: JA_STORY.status,
+          sentences: JA_STORY.sentences.map((s) => ({
+            ...s,
+            known: s.known.map((w) => ({ ...w })),
+          })),
+          confirmations,
+        };
+      }
+      case "story_audio":
+        // The fixture story ships no media: the honest engine miss, the
+        // same one a pack without the asset takes (MEDIA_MISSING_CODE).
+        throw "media-asset-missing: This pack does not ship audio for this item, and the app never synthesizes speech, so there is nothing to play.";
+      case "content_confirm": {
+        const p = this.profile(args.profileId);
+        if (!p.active) {
+          throw "no active language pack — confirm content inside a pack you have installed";
+        }
+        const contentId = String(args.contentId);
+        const exists = this.confirmRows.some(
+          (r) => r.profile_id === p.id && r.pack_id === p.active && r.content_id === contentId,
+        );
+        if (!exists) {
+          this.confirmRows.push({
+            profile_id: p.id,
+            pack_id: p.active,
+            content_id: contentId,
+            at: new Date().toISOString(),
+          });
+        }
+        return { content_id: contentId, confirmed_by: this.marksFor(p.active, contentId) };
+      }
+      case "content_unconfirm": {
+        const p = this.profile(args.profileId);
+        if (!p.active) {
+          throw "no active language pack — confirm content inside a pack you have installed";
+        }
+        const contentId = String(args.contentId);
+        // Only the giver's own mark is ever touched.
+        this.confirmRows = this.confirmRows.filter(
+          (r) => !(r.profile_id === p.id && r.pack_id === p.active && r.content_id === contentId),
+        );
+        return { content_id: contentId, confirmed_by: this.marksFor(p.active, contentId) };
       }
       case "switch_pack": {
         const p = this.profile(args.profileId);

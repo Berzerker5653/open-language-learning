@@ -8,6 +8,7 @@
 //! - evidence is append-only: corrections reference prior events and
 //!   duplicate event ids are rejected, so retries cannot double-count.
 
+mod confirm;
 mod error;
 mod evidence;
 mod export;
@@ -18,6 +19,7 @@ mod packs;
 mod profile;
 mod scheduler;
 
+pub use confirm::{ConfirmedBy, ContentConfirmation};
 pub use error::Error;
 pub use evidence::{NewRecording, Recording};
 pub use export::{

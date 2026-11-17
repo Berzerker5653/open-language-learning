@@ -6387,6 +6387,10 @@ struct StoryView {
     title: String,
     sentences: Vec<StorySentenceView>,
     status: String,
+    /// CONTENT-CONFIRM-001: attribution for every content id on this
+    /// view (sentences and the lexicon entries in the lookup panel),
+    /// keyed by content id. Absent key = nobody has confirmed it yet.
+    confirmations: std::collections::BTreeMap<String, Vec<ConfirmedByName>>,
 }
 
 #[tauri::command]
@@ -6654,11 +6658,28 @@ fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryV
             status: entry.status.clone(),
         });
     }
+    // CONTENT-CONFIRM-001: one attribution read for every content id this
+    // view renders — sentences plus the looked-up lexicon entries. A read
+    // failure surfaces as an error, never as silence that could pose as
+    // "nobody confirmed this".
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let mut confirmations = std::collections::BTreeMap::new();
+    for id in views.iter().flat_map(|v| {
+        std::iter::once(v.content_id.clone()).chain(v.known.iter().map(|w| w.id.clone()))
+    }) {
+        let marks = store
+            .content_confirmations(pack_id, &id)
+            .map_err(|e| e.to_string())?;
+        if !marks.is_empty() {
+            confirmations.insert(id, confirmed_by_names(marks));
+        }
+    }
     Ok(StoryView {
         id: story.id,
         title: story.title,
         sentences: views,
         status: story.status,
+        confirmations,
     })
 }
 
@@ -6695,6 +6716,117 @@ struct MinedItemView {
 
 fn is_mined_item(item_id: &str) -> bool {
     item_id.starts_with("mine-")
+}
+
+// ---- CONTENT-CONFIRM-001 (ADR-0040): attributed content confirmations ----
+//
+// The only "checked by" mark this project will ever have: an explicit
+// toggle by a learner who reads the language, attributed to their profile,
+// device-local. Nothing here writes to a pack file, an installation's
+// trust_state, or any review record — packs keep their declared posture
+// regardless (acceptance 2, pinned by a storage-side test).
+
+#[derive(Debug, Serialize)]
+struct ConfirmedByName {
+    display_name: String,
+    at: String,
+}
+
+fn confirmed_by_names(marks: Vec<lts_storage::ConfirmedBy>) -> Vec<ConfirmedByName> {
+    marks
+        .into_iter()
+        .map(|m| ConfirmedByName {
+            display_name: m.display_name,
+            at: m.created_at,
+        })
+        .collect()
+}
+
+/// The confirmation state after a confirm/unconfirm click: who now stands
+/// behind this item. The renderer shows names, never a "verified" claim.
+#[derive(Debug, Serialize)]
+struct ConfirmationState {
+    content_id: String,
+    confirmed_by: Vec<ConfirmedByName>,
+}
+
+#[tauri::command]
+async fn content_confirm(
+    profile_id: String,
+    content_id: String,
+) -> Result<ConfirmationState, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        content_confirm_at(&data_dir(), &profile_id, &content_id)
+    })
+    .await
+    .map_err(|e| format!("content-confirm failed: {e}"))?
+}
+
+fn content_confirm_at(
+    data: &Path,
+    profile_id: &str,
+    content_id: &str,
+) -> Result<ConfirmationState, String> {
+    let pack_id = active_pack_id(data, profile_id)?;
+    let content_id = checked_unit(content_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map_err(|e| e.to_string())?;
+    let created_at = rfc3339_utc(now.as_secs());
+    let id = format!("cc-{}-{}", now.as_secs(), now.subsec_nanos());
+    store
+        .confirm_content(profile_id, &pack_id, &content_id, &id, &created_at)
+        .map_err(|e| e.to_string())?;
+    let marks = store
+        .content_confirmations(&pack_id, &content_id)
+        .map_err(|e| e.to_string())?;
+    Ok(ConfirmationState {
+        content_id,
+        confirmed_by: confirmed_by_names(marks),
+    })
+}
+
+#[tauri::command]
+async fn content_unconfirm(
+    profile_id: String,
+    content_id: String,
+) -> Result<ConfirmationState, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        content_unconfirm_at(&data_dir(), &profile_id, &content_id)
+    })
+    .await
+    .map_err(|e| format!("content-unconfirm failed: {e}"))?
+}
+
+fn content_unconfirm_at(
+    data: &Path,
+    profile_id: &str,
+    content_id: &str,
+) -> Result<ConfirmationState, String> {
+    let pack_id = active_pack_id(data, profile_id)?;
+    let content_id = checked_unit(content_id)?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    store
+        .remove_content_confirmation(profile_id, &pack_id, &content_id)
+        .map_err(|e| e.to_string())?;
+    let marks = store
+        .content_confirmations(&pack_id, &content_id)
+        .map_err(|e| e.to_string())?;
+    Ok(ConfirmationState {
+        content_id,
+        confirmed_by: confirmed_by_names(marks),
+    })
+}
+
+/// The pack the learner's practice actually reads: the first active
+/// selection, never a guessed one (D7 rule). Confirmation marks belong to
+/// content in this pack.
+fn active_pack_id(data: &Path, profile_id: &str) -> Result<String, String> {
+    let active = packs::active_pack(data, profile_id)?;
+    active.first().cloned().ok_or_else(|| {
+        "no active language pack — confirm content inside a pack you have installed".to_string()
+    })
 }
 
 #[tauri::command]
@@ -8516,6 +8648,8 @@ pub fn run() {
             story_audio,
             listening_audio,
             mine_add,
+            content_confirm,
+            content_unconfirm,
             mine_list,
             mine_remove,
             mine_due,
@@ -14290,6 +14424,69 @@ transfer_variants:
             report.is_empty(),
             "{} closed-class span(s) mis-resolved in shipped stories",
             report.len()
+        );
+    }
+
+    #[test]
+    fn content_confirmations_are_attributed_and_rendered_in_the_story_view() {
+        // CONTENT-CONFIRM-001 (ADR-0040): explicit marks, attributed,
+        // rendered in the view, retractable, and pack posture untouched.
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
+
+        let st = content_confirm_at(data, &p.id, "ja.sent.demo.obasan-aunt").unwrap();
+        assert_eq!(st.confirmed_by.len(), 1);
+        assert_eq!(st.confirmed_by[0].display_name, "Hunter");
+        assert_eq!(st.content_id, "ja.sent.demo.obasan-aunt");
+
+        // A repeat click can never fabricate a second mark.
+        let again = content_confirm_at(data, &p.id, "ja.sent.demo.obasan-aunt").unwrap();
+        assert_eq!(again.confirmed_by.len(), 1);
+
+        // Word-level marks ride the same path.
+        content_confirm_at(data, &p.id, "ja.lex.demo.obasan").unwrap();
+
+        // The story view renders attribution for both kinds of item.
+        let v = story_view_at(data, &p.id, "ja.story.demo.first-meeting").unwrap();
+        assert!(v.confirmations.contains_key("ja.sent.demo.obasan-aunt"));
+        assert!(v.confirmations.contains_key("ja.lex.demo.obasan"));
+
+        // Retract: the learner's own mark goes, the attribution goes with it.
+        let st = content_unconfirm_at(data, &p.id, "ja.sent.demo.obasan-aunt").unwrap();
+        assert!(st.confirmed_by.is_empty());
+        let v = story_view_at(data, &p.id, "ja.story.demo.first-meeting").unwrap();
+        assert!(!v.confirmations.contains_key("ja.sent.demo.obasan-aunt"));
+        assert!(v.confirmations.contains_key("ja.lex.demo.obasan"));
+
+        // A malformed id is refused before anything is written.
+        assert!(content_confirm_at(data, &p.id, "../evil").is_err());
+
+        // No active pack: a refusal naming the cause, never a guessed pack.
+        let solo = create_local_profile(data, "Solo").unwrap();
+        let err = content_confirm_at(data, &solo.id, "ja.lex.demo.obasan").unwrap_err();
+        assert!(err.contains("no active language pack"), "{err}");
+
+        // Pack posture is byte-unchanged by the whole exercise (acceptance 2).
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let state: String = store
+            .conn()
+            .query_row(
+                "SELECT trust_state FROM pack_installations LIMIT 1",
+                [],
+                |r| r.get(0),
+            )
+            .unwrap();
+        assert!(!state.is_empty());
+        assert_eq!(
+            store
+                .content_confirmations("org.openlanguage.ja-demo", "ja.lex.demo.obasan")
+                .unwrap()
+                .len(),
+            1,
+            "the mark belongs to the pack the learner was reading"
         );
     }
 

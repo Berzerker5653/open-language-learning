@@ -40,11 +40,22 @@ export interface StorySentence {
   known: StoryWord[];
 }
 
+/** CONTENT-CONFIRM-001 (ADR-0040): one learner's attributed confirmation
+ * mark, exactly as `story_view` reports it. Display names only — the app
+ * never claims verification, expertise, or review (docs/18). */
+export interface ConfirmedByName {
+  display_name: string;
+  at: string;
+}
+
 export interface Story {
   id: string;
   title: string;
   sentences: StorySentence[];
   status: string;
+  /// CONTENT-CONFIRM-001: attribution keyed by content id (sentences and
+  /// looked-up words). Absent/empty means nobody has confirmed that item.
+  confirmations?: Record<string, ConfirmedByName[]>;
 }
 
 export interface ReadingPanelProps {
@@ -53,14 +64,47 @@ export interface ReadingPanelProps {
   /// `content_id` of the sentence whose word lookup is open, else null.
   storyLookup: string | null;
   storyError: string | null;
+  /// Display name of the signed-in profile — the learner's OWN marks are
+  /// the only ones the toggle can retract (the engine scopes it by
+  /// profile id; the name match only picks the button's label).
+  profileName: string;
   onOpenStory(id: string): void;
   onBack(): void;
   onPlaySentence(contentId: string): void;
   onToggleLookup(contentId: string): void;
   onMine(surface: string, reading: string | null, gloss: string): void;
+  onConfirm(contentId: string): void;
+  onUnconfirm(contentId: string): void;
 }
 
 export function ReadingPanel(p: ReadingPanelProps) {
+  // CONTENT-CONFIRM-001: the only "checked by" surface in the app. The
+  // mark is created ONLY by this explicit button click (acceptance 2),
+  // and the copy says "confirmed by <names>" — never verified, expert,
+  // or reviewed (docs/18).
+  const marksFor = (contentId: string): ConfirmedByName[] =>
+    p.storyActive?.confirmations?.[contentId] ?? [];
+  const confirmControl = (contentId: string) => {
+    const marks = marksFor(contentId);
+    const mine = marks.some((c) => c.display_name === p.profileName);
+    return (
+      <>
+        <button
+          type="button"
+          className="btn btn--quiet"
+          aria-pressed={mine}
+          onClick={() => (mine ? p.onUnconfirm(contentId) : p.onConfirm(contentId))}
+        >
+          {mine ? "Undo" : "This looks right"}
+        </button>
+        {marks.length > 0 && (
+          <span className="notice">
+            {"Confirmed by " + marks.map((c) => c.display_name).join(", ")}
+          </span>
+        )}
+      </>
+    );
+  };
   return (
     <section aria-label="Graded reading">
       <h1>
@@ -120,6 +164,15 @@ export function ReadingPanel(p: ReadingPanelProps) {
                   </small>
                 </p>
               )}
+              {marksFor(s.content_id).length > 0 && (
+                <p className="notice">
+                  {"Confirmed by " +
+                    marksFor(s.content_id)
+                      .map((c) => c.display_name)
+                      .join(", ") +
+                    "."}
+                </p>
+              )}
               {p.storyLookup === s.content_id && (
                 <div role="group" aria-label="Word lookup">
                   {s.gloss && (
@@ -127,6 +180,7 @@ export function ReadingPanel(p: ReadingPanelProps) {
                       <LatinText>{s.gloss}</LatinText>
                     </p>
                   )}
+                  <p className="btn-row">{confirmControl(s.content_id)}</p>
                   {s.known.length === 0 ? (
                     <p className="empty">No pack words match this sentence yet.</p>
                   ) : (
@@ -161,6 +215,8 @@ export function ReadingPanel(p: ReadingPanelProps) {
                           >
                             Mine
                           </button>
+                          {"  "}
+                          {confirmControl(w.id)}
                         </li>
                       ))}
                     </ul>

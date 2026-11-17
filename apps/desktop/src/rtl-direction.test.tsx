@@ -234,6 +234,9 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
         onPlaySentence={() => {}}
         onToggleLookup={() => {}}
         onMine={() => {}}
+        profileName="Test"
+        onConfirm={() => {}}
+        onUnconfirm={() => {}}
         {...overrides}
       />
     );

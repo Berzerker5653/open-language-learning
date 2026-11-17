@@ -2775,6 +2775,34 @@ export function App() {
     }
   }
 
+  // CONTENT-CONFIRM-001 (ADR-0040): the ONLY way a confirmation mark is
+  // ever created — this explicit click. The engine resolves the pack from
+  // the profile's active selection, attributes the mark to the profile,
+  // and answers with who now stands behind the item; we splice that
+  // attribution straight back into the open view.
+  async function toggleContentConfirm(contentId: string) {
+    const inv = detectInvoke();
+    if (!inv || !profileId || !storyActive) return;
+    const marks = storyActive.confirmations?.[contentId] ?? [];
+    const mine = marks.some((c) => c.display_name === displayName);
+    try {
+      const res = (await inv(mine ? "content_unconfirm" : "content_confirm", {
+        profileId,
+        contentId,
+      })) as { content_id: string; confirmed_by: { display_name: string; at: string }[] };
+      setStoryActive((prev) =>
+        prev
+          ? {
+              ...prev,
+              confirmations: { ...(prev.confirmations ?? {}), [contentId]: res.confirmed_by },
+            }
+          : prev,
+      );
+    } catch (e) {
+      setStoryError(String(e));
+    }
+  }
+
   async function removeMine(id: string) {
     const inv = detectInvoke();
     if (!inv || !profileId) return;
@@ -3679,6 +3707,9 @@ export function App() {
           onPlaySentence={(id) => void playStoryAudio(id)}
           onToggleLookup={(id) => setStoryLookup(storyLookup === id ? null : id)}
           onMine={(surface, reading, gloss) => void mineFromStory(surface, reading, gloss)}
+          profileName={displayName}
+          onConfirm={(id) => void toggleContentConfirm(id)}
+          onUnconfirm={(id) => void toggleContentConfirm(id)}
         />
       ) : route === "words" ? (
         <MyWordsPanel

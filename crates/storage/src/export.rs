@@ -11,8 +11,8 @@
 
 use crate::error::Error;
 use crate::{
-    ContentVersion, LearnerGoal, MasterySnapshot, MinedItem, PackInstallation, Profile, Recording,
-    SchedulerRecord, Setting, Store,
+    ContentConfirmation, ContentVersion, LearnerGoal, MasterySnapshot, MinedItem, PackInstallation,
+    Profile, Recording, SchedulerRecord, Setting, Store,
 };
 use lts_domain::{EvidenceCorrection, EvidenceEvent};
 use rusqlite::params;
@@ -21,9 +21,11 @@ use std::collections::HashMap;
 
 /// Bump when the bundle shape changes; import rejects unknown versions.
 /// Version 2 added the learner's saved words (`mined_items`, review
-/// finding R05). Version 1 bundles stay importable under the explicit
-/// compatibility rule in `import_profile`: they simply carry no saved words.
-pub const EXPORT_FORMAT_VERSION: u32 = 2;
+/// finding R05). Version 3 added the learner's content confirmations
+/// (`content_confirmations`, CONTENT-CONFIRM-001). Version 1 and 2
+/// bundles stay importable under the explicit compatibility rule in
+/// `import_profile`: they simply carry no such rows.
+pub const EXPORT_FORMAT_VERSION: u32 = 3;
 
 /// Oldest bundle version this build understands.
 pub const MIN_SUPPORTED_FORMAT_VERSION: u32 = 1;
@@ -48,6 +50,11 @@ pub struct ExportBundle {
     /// they import as an empty list rather than failing.
     #[serde(default)]
     pub mined_items: Vec<MinedItem>,
+    /// Marks this learner explicitly gave on pack content (ADR-0040).
+    /// Version 1/2 bundles have no such field; they import as an empty
+    /// list. Attribution travels: the row names the importing profile.
+    #[serde(default)]
+    pub content_confirmations: Vec<ContentConfirmation>,
     /// Opt-in: `None` unless explicitly requested at export time.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recordings: Option<Vec<Recording>>,
@@ -126,6 +133,7 @@ impl Store {
             mastery_snapshots: self.latest_mastery(profile_id)?,
             scheduler_state: self.scheduler_state(profile_id)?,
             mined_items: self.mined_items(profile_id)?,
+            content_confirmations: self.profile_content_confirmations(profile_id)?,
             recordings,
         })
     }
@@ -307,6 +315,18 @@ impl Store {
                 sc.item_id = fresh.clone();
             }
             self.save_scheduler_state(target_id, &sc)?;
+        }
+        // Confirmation marks (CONTENT-CONFIRM-001): ids are global like
+        // every other row here, so a same-store restore re-issues them;
+        // the row is re-attributed to the importing profile, which is
+        // the person the mark belongs to in this store.
+        for c in &bundle.content_confirmations {
+            let fresh = self.fresh_id(&c.id, target_id, "content_confirmations", "id")?;
+            self.conn.execute(
+                "INSERT INTO content_confirmations(id, profile_id, pack_id, content_id, created_at)
+                 VALUES (?1,?2,?3,?4,?5)",
+                params![fresh, target_id, c.pack_id, c.content_id, c.created_at],
+            )?;
         }
         // Recordings are opt-in on both sides: only present in the
         // bundle if the exporter asked, only written if present.

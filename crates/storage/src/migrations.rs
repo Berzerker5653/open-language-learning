@@ -16,10 +16,14 @@
 
 //! 3. `evidence_events.failure_reason` (LEARN-001 technical-failure
 //!    representation).
+//! 4. `mined_items` — learner-owned sentence-mined words (K-14).
+//! 5. `+mined` scheduler tag partition (review finding R02).
+//! 6. `content_confirmations` — attributed per-profile content marks
+//!    (CONTENT-CONFIRM-001, ADR-0040).
 use crate::error::Error;
 use rusqlite::{Connection, Transaction, TransactionBehavior};
 
-pub const SCHEMA_VERSION: i64 = 5;
+pub const SCHEMA_VERSION: i64 = 6;
 
 struct Migration {
     version: i64,
@@ -185,6 +189,25 @@ UPDATE scheduler_state
  WHERE item_id LIKE 'mine-%' AND scheduler = 'fsrs-spike-0.1.0';
 ",
     },
+    Migration {
+        version: 6,
+        sql: "
+-- CONTENT-CONFIRM-001 (ADR-0040): the only \"checked by\" mark that exists
+-- on this project. One learner's explicit confirmation of one content
+-- item in one pack, attributed through the profile FK. UNIQUE on the
+-- triple: a repeat click can never fabricate a second mark, and
+-- deleting the profile deletes its marks (attribution travels with the
+-- person, not the pack).
+CREATE TABLE content_confirmations (
+  id TEXT PRIMARY KEY,
+  profile_id TEXT NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+  pack_id TEXT NOT NULL,
+  content_id TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  UNIQUE(profile_id, pack_id, content_id)
+);
+",
+    },
 ];
 
 pub(crate) fn migrate(conn: &Connection) -> Result<(), Error> {
@@ -304,7 +327,9 @@ mod tests {
         // marker, the ledger row, and the rows the migration must rewrite.
         conn.execute_batch(
             "PRAGMA user_version = 4;
-             DELETE FROM schema_migrations WHERE version = 5;",
+             DELETE FROM schema_migrations WHERE version = 5;
+             DELETE FROM schema_migrations WHERE version = 6;
+             DROP TABLE IF EXISTS content_confirmations;",
         )
         .unwrap();
         conn.execute(
@@ -368,6 +393,14 @@ mod tests {
             3 => conn
                 .query_row(
                     "SELECT COUNT(*) FROM pragma_table_info('evidence_events') WHERE name = 'failure_reason'",
+                    [],
+                    |r| r.get::<_, i64>(0),
+                )
+                .unwrap()
+                    == 1,
+            6 => conn
+                .query_row(
+                    "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = 'content_confirmations'",
                     [],
                     |r| r.get::<_, i64>(0),
                 )

@@ -349,10 +349,11 @@ fn version_1_bundles_remain_importable_without_saved_words() {
     let bundle = src
         .export_profile(&pid, "2026-10-04T00:00:00Z", &ExportOptions::default())
         .unwrap();
-    assert_eq!(bundle.format_version, 2, "exports write the current format");
+    assert_eq!(bundle.format_version, 3, "exports write the current format");
     let mut doc = serde_json::to_value(&bundle).unwrap();
     doc["format_version"] = json!(1);
     doc.as_object_mut().unwrap().remove("mined_items");
+    doc.as_object_mut().unwrap().remove("content_confirmations");
 
     let dst = Store::in_memory().unwrap();
     let legacy: lts_storage::ExportBundle = serde_json::from_str(&doc.to_string()).unwrap();
@@ -513,4 +514,108 @@ fn failed_import_names_the_import_error() {
     assert!(text.contains("poisoned import"), "{text}");
     // The attempt unwound completely: no half-imported profile remains.
     assert!(dst.list_profiles().unwrap().is_empty());
+}
+
+/// CONTENT-CONFIRM-001: a version 2 bundle (no `content_confirmations`
+/// field at all) stays importable and honestly carries no marks.
+#[test]
+fn version_2_bundles_remain_importable_without_confirmations() {
+    let src = Store::in_memory().unwrap();
+    let pid = seed(&src);
+    src.confirm_content(
+        &pid,
+        "org.openlanguage.test",
+        "es.sent.greet.hola",
+        "cc-1",
+        "2026-10-03T00:00:00Z",
+    )
+    .unwrap();
+    let bundle = src
+        .export_profile(&pid, "2026-10-04T00:00:00Z", &ExportOptions::default())
+        .unwrap();
+    assert_eq!(
+        bundle.content_confirmations.len(),
+        1,
+        "the v3 export carries the mark"
+    );
+    let mut doc = serde_json::to_value(&bundle).unwrap();
+    doc["format_version"] = json!(2);
+    doc.as_object_mut().unwrap().remove("content_confirmations");
+
+    let dst = Store::in_memory().unwrap();
+    let legacy: lts_storage::ExportBundle = serde_json::from_str(&doc.to_string()).unwrap();
+    assert!(legacy.content_confirmations.is_empty());
+    let new_id = dst
+        .import_profile(&legacy, &ImportMode::NewProfile)
+        .expect("a version 2 bundle stays importable");
+    assert_eq!(
+        dst.mined_items(&new_id).unwrap().len(),
+        2,
+        "the rest of the record still restores"
+    );
+    assert!(
+        dst.profile_content_confirmations(&new_id)
+            .unwrap()
+            .is_empty(),
+        "a version 2 bundle carries no marks to restore"
+    );
+}
+
+/// CONTENT-CONFIRM-001: confirmations travel with the learner — export
+/// carries them, import re-attributes them to the importing profile, and a
+/// same-store restore re-issues their ids without disturbing the original.
+#[test]
+fn confirmations_travel_with_their_learner() {
+    let src = Store::in_memory().unwrap();
+    let pid = seed(&src);
+    src.confirm_content(
+        &pid,
+        "org.openlanguage.test",
+        "es.sent.greet.hola",
+        "cc-1",
+        "2026-10-03T00:00:00Z",
+    )
+    .unwrap();
+    src.confirm_content(
+        &pid,
+        "org.openlanguage.test",
+        "es.lex.greet.hola",
+        "cc-2",
+        "2026-10-03T00:01:00Z",
+    )
+    .unwrap();
+    let bundle = src
+        .export_profile(&pid, "2026-10-04T00:00:00Z", &ExportOptions::default())
+        .unwrap();
+
+    // Fresh store: the marks arrive under the imported profile.
+    let dst = Store::in_memory().unwrap();
+    let copy = dst
+        .import_profile(&bundle, &ImportMode::NewProfile)
+        .unwrap();
+    let restored = dst.profile_content_confirmations(&copy).unwrap();
+    assert_eq!(restored.len(), 2);
+    assert!(restored.iter().all(|c| c.profile_id == copy));
+    assert_eq!(
+        dst.content_confirmations("org.openlanguage.test", "es.lex.greet.hola")
+            .unwrap()
+            .len(),
+        1,
+        "attribution renders from the imported profile"
+    );
+
+    // Same store: the original's marks are untouched and the copy gets
+    // its own rows (ids re-issued, both profiles attributed).
+    let copy2 = src
+        .import_profile(&bundle, &ImportMode::NewProfile)
+        .unwrap();
+    assert_eq!(src.profile_content_confirmations(&pid).unwrap().len(), 2);
+    assert_eq!(src.profile_content_confirmations(&copy2).unwrap().len(), 2);
+    assert_eq!(
+        src.content_confirmations("org.openlanguage.test", "es.sent.greet.hola")
+            .unwrap()
+            .len(),
+        2,
+        "both the original learner and the copy hold a mark"
+    );
 }
