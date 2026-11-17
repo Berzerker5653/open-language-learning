@@ -2036,9 +2036,9 @@
       "status": "done",
       "attempts": 1,
       "title": "In-app community confirmation of content correctness (ADR-0040)",
-      "activity": "awaiting-human-acceptance",
+      "activity": "idle",
       "summary": "Opening card: attributed per-profile content confirmations in storage migration v6, export bundle v3, confirm/unconfirm IPC, attribution + toggle in the graded-reading lookup panel. | Implemented and gate-verified 2026-11-17; awaiting owner in-app acceptance.",
-      "notes": "Contract frozen in state/notes/CONTENT-CONFIRM-001.md before any implementation code (task-card-first). Owner live trial 2026-11-17: clicked the confirm buttons truthfully, but reports the reading UX as a whole does not make sense (no true story/paragraph, no click-the-word dictionary lookup, 4 clicks per sentence, mixed narrators). Feature mechanics accepted; the reading experience needs redesign first — see state/notes/READING-STORY-UX-001.md.",
+      "notes": "Contract frozen in state/notes/CONTENT-CONFIRM-001.md before any implementation code (task-card-first). Owner live trial 2026-11-17: clicked the confirm buttons truthfully, but reports the reading UX as a whole does not make sense (no true story/paragraph, no click-the-word dictionary lookup, 4 clicks per sentence, mixed narrators). Feature mechanics accepted; the reading experience needs redesign first — see state/notes/READING-STORY-UX-001.md. | OWNER ACCEPTED 2026-11-17: 'The buttons worked' — the confirm mechanic itself is accepted. The separate reading-experience complaints in the same feedback are NOT defects of this card; they are tracked as the reading-UX card family (VOICE-CONSISTENCY-001, STORY-AUTHOR-001, READER-FLOW-001, VOCAB-BUILDER-001 in tasks/ROADMAP.yaml, design in state/notes/READING-STORY-UX-001.md).",
       "evidence": [
         "state/notes/CONTENT-CONFIRM-001.md"
       ],

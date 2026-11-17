@@ -2600,6 +2600,59 @@ tasks:
   - full ja generation via the same two-pass resumable pipeline; coverage floor 90%; abstains logged
   - ja sidecar media/words.jsonl committed with reports
   required_for_desktop_1_0: false
+- id: VOICE-CONSISTENCY-001
+  milestone: M8
+  priority: P1
+  title: One narrator per story — re-bake the 40 off-voice RU sentences and gate voice consistency at bake
+  dependencies: []
+  read_first:
+  - state/notes/READING-STORY-UX-001.md
+  acceptance:
+  - all ru pack sentence audio uses the pack narrator (ono_anna); zero piper-runtime rows remain in media/manifest.jsonl sentence entries
+  - re-baked clips pass the same whisper ASR round-trip gate as the CONTENT bake and loudness normalization
+  - generate-pack-audio.py gains a voice-consistency guard: a fresh sentence row whose voice differs from the pack's declared narrator is rejected with an explicit error, not written
+  - pack version bumped through the PACK-VERSION-BUMP procedure and deployed; owner hears one narrator per story
+- id: STORY-AUTHOR-001
+  milestone: M8
+  priority: P1
+  title: Real continuous stories — replace sentence re-bundles with written paragraph narratives
+  dependencies: []
+  read_first:
+  - state/notes/READING-STORY-UX-001.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - each ru story is a written narrative with a beginning/middle/end, sentences are story-owned new ids (no content-parity shard reuse), 5-10 sentences forming one paragraph flow
+  - sentences carry declared readings; audio baked with the pack narrator through the existing pipeline and ASR gate
+  - stories stay draft-status under ADR-0040 until in-app confirmations accumulate; no content gate weakened
+- id: READER-FLOW-001
+  milestone: M8
+  priority: P1
+  title: Kindle-style reader — flowing paragraphs, one-tap sentence audio, word-tap dictionary card with word audio
+  dependencies:
+  - STORY-AUTHOR-001
+  read_first:
+  - state/notes/READING-STORY-UX-001.md
+  - apps/desktop/src/reading.tsx
+  acceptance:
+  - story renders as continuous paragraph text (not a button column); tapping a sentence plays it in one interaction
+  - tapping any word opens a card at the word: gloss, pack-entry status, and the word's audio slice from media/words.jsonl alignment
+  - ru word taps resolve inflected forms to pack lemmas via a build-time lemmatizer table committed into the pack (no runtime network, deterministic, tested)
+  - unknown (off-pack) words open a clearly-labeled card from an offline auxiliary lexicon (candidate: kaikki.org machine-readable Wiktionary, license-checked) with Mine action; the primary pack lexicon stays separate and trusted
+  - three-interaction budget: word tap -> card + word audio; sentence tap -> sentence audio
+- id: VOCAB-BUILDER-001
+  milestone: M8
+  priority: P2
+  title: Automatic vocabulary builder — every word lookup logged with its context sentence, feeding review
+  dependencies:
+  - READER-FLOW-001
+  read_first:
+  - state/notes/READING-STORY-UX-001.md
+  - state/notes/CONTENT-CONFIRM-001.md
+  acceptance:
+  - each word-tap lookup auto-records (surface, lemma, story, sentence id, time) in per-profile storage reusing the confirm-ledger pattern (new event type, export bundle covered)
+  - looked-up words enter the existing review/mine pipeline without a manual Mine step; drills replay the original context sentence
+  - manual Mine still works until the owner retires it; no lookup data leaves the device
+
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
