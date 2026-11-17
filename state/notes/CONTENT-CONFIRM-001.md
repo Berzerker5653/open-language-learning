@@ -99,3 +99,15 @@ point of use plus the export bundle satisfy the acceptance wording.
   render, callbacks fire), prettier/eslint on touched files.
 - `tools/audit_learner_copy.py` 0 findings.
 - `tools/validate_handoff.py --require-explicit-ledger-records` PASS.
+
+## Gate results 2026-11-17 (all run on GamingPC)
+
+- cargo test -p lts-storage: pass (confirm.rs 6/6 incl. idempotent confirm, attribution join,
+  cascade on profile delete, migration v6 ledger; export_import round-trip incl. v2-bundle import).
+- cargo test -p lts-desktop --lib: 188 passed, 0 failed, 2 ignored.
+- apps/desktop: tsc --noEmit clean; vitest 368/368 (49 files); prettier + eslint clean on touched files.
+- cargo fmt --all --check: clean. cargo clippy --workspace --all-targets -- -D warnings: clean.
+- tools/audit_learner_copy.py: 0 findings. tools/validate_handoff.py --require-explicit-ledger-records: PASS
+  (pre-existing WARN for optional IN-APP-IME-001 ledger record, unrelated to this lane).
+- Commits: d5292bf (implementation), 7b6e749 (pack audio rows touched en route).
+- Pending: owner in-app acceptance (confirm/unconfirm toggle + attribution in graded-reading lookup panel).

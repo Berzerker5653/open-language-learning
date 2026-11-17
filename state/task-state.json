@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-16",
+  "updated": "2026-11-17",
   "active_task": "CONTENT-CONFIRM-001",
   "tasks": {
     "TTS-003": {
@@ -2033,11 +2033,11 @@
     },
     "CONTENT-CONFIRM-001": {
       "task_id": "CONTENT-CONFIRM-001",
-      "status": "in_progress",
+      "status": "done",
       "attempts": 1,
       "title": "In-app community confirmation of content correctness (ADR-0040)",
-      "activity": "active",
-      "summary": "Opening card: attributed per-profile content confirmations in storage migration v6, export bundle v3, confirm/unconfirm IPC, attribution + toggle in the graded-reading lookup panel.",
+      "activity": "awaiting-human-acceptance",
+      "summary": "Opening card: attributed per-profile content confirmations in storage migration v6, export bundle v3, confirm/unconfirm IPC, attribution + toggle in the graded-reading lookup panel. | Implemented and gate-verified 2026-11-17; awaiting owner in-app acceptance.",
       "notes": "Contract frozen in state/notes/CONTENT-CONFIRM-001.md before any implementation code (task-card-first).",
       "evidence": [
         "state/notes/CONTENT-CONFIRM-001.md"
