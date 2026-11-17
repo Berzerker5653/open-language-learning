@@ -2602,15 +2602,17 @@ tasks:
   required_for_desktop_1_0: false
 - id: VOICE-CONSISTENCY-001
   milestone: M8
-  priority: P1
-  title: One narrator per story — re-bake the 40 off-voice RU sentences and gate voice consistency at bake
+  priority: P2
+  title: One narrator per story for listen mode — re-bake the 40 off-voice RU sentences and gate voice consistency at bake
+  # Owner clarification 2026-11-17: voice uniformity is a LISTEN-mode requirement only;
+  # word-level drill/lookup audio may be any voice. Not on the reading-exercise critical path.
   dependencies: []
   read_first:
   - state/notes/READING-STORY-UX-001.md
   acceptance:
   - all ru pack sentence audio uses the pack narrator (ono_anna); zero piper-runtime rows remain in media/manifest.jsonl sentence entries
   - re-baked clips pass the same whisper ASR round-trip gate as the CONTENT bake and loudness normalization
-  - generate-pack-audio.py gains a voice-consistency guard: a fresh sentence row whose voice differs from the pack's declared narrator is rejected with an explicit error, not written
+  - "generate-pack-audio.py gains a voice-consistency guard: a fresh sentence row whose voice differs from the pack's declared narrator is rejected with an explicit error, not written"
   - pack version bumped through the PACK-VERSION-BUMP procedure and deployed; owner hears one narrator per story
 - id: STORY-AUTHOR-001
   milestone: M8
@@ -2634,11 +2636,12 @@ tasks:
   - state/notes/READING-STORY-UX-001.md
   - apps/desktop/src/reading.tsx
   acceptance:
-  - story renders as continuous paragraph text (not a button column); tapping a sentence plays it in one interaction
-  - tapping any word opens a card at the word: gloss, pack-entry status, and the word's audio slice from media/words.jsonl alignment
+  - story renders as continuous paragraph text (not a button column); the primary interaction is selecting/highlighting a word, never a queue of sentence-playback buttons
+  - "selecting a word opens a card at the word: gloss, pack-entry status, and a play button that hears just that word (slice from media/words.jsonl timestamps or baked word clip); voice uniformity of these snippets is explicitly not required (owner 2026-11-17: different voice is fine for word lookups)"
+  - reading mode does not depend on continuous narration; story narration belongs to a separate listen mode (STORY-LISTEN-001)
   - ru word taps resolve inflected forms to pack lemmas via a build-time lemmatizer table committed into the pack (no runtime network, deterministic, tested)
-  - unknown (off-pack) words open a clearly-labeled card from an offline auxiliary lexicon (candidate: kaikki.org machine-readable Wiktionary, license-checked) with Mine action; the primary pack lexicon stays separate and trusted
-  - three-interaction budget: word tap -> card + word audio; sentence tap -> sentence audio
+  - "unknown (off-pack) words open a clearly-labeled card from an offline auxiliary lexicon (candidate: kaikki.org machine-readable Wiktionary, license-checked) with Mine action; the primary pack lexicon stays separate and trusted"
+  - "three-interaction budget: word tap -> card + word audio; sentence tap -> sentence audio"
 - id: VOCAB-BUILDER-001
   milestone: M8
   priority: P2
@@ -2652,6 +2655,20 @@ tasks:
   - each word-tap lookup auto-records (surface, lemma, story, sentence id, time) in per-profile storage reusing the confirm-ledger pattern (new event type, export bundle covered)
   - looked-up words enter the existing review/mine pipeline without a manual Mine step; drills replay the original context sentence
   - manual Mine still works until the owner retires it; no lookup data leaves the device
+
+- id: STORY-LISTEN-001
+  milestone: M8
+  priority: P3
+  title: Listen mode — continuous story narration in one narrator's voice, separate from the reading exercise
+  dependencies:
+  - VOICE-CONSISTENCY-001
+  - STORY-AUTHOR-001
+  read_first:
+  - state/notes/READING-STORY-UX-001.md
+  acceptance:
+  - one explicit listen control per story plays the whole story as continuous audio; one narrator per story, enforced by the bake voice gate
+  - leaving listen mode returns to the paragraph reader; lookups made while reading and while listening both log to the vocabulary builder
+  required_for_desktop_1_0: false
 
 execution_scope:
   default_goal: desktop-1.0-release-candidate

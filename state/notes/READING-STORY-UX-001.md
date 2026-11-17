@@ -79,6 +79,20 @@ Phase C — Vocabulary Builder analogue (fits existing machinery):
   CONTEXT SENTENCE, like Kindle flashcards.
 - Keep manual "Mine" until Phase C lands; then Mine becomes optional.
 
+## Owner clarification (2026-11-17, same day as feedback)
+Reading and listening are DIFFERENT modes with different audio rules:
+- Reading exercise = the learner reads; they highlight/select a word they
+  don't know -> definition appears -> optional play button hears THAT word.
+  A different-sounding voice for word snippets does not matter.
+- Continuous story narration = LISTENING, not reading, and there the whole
+  story must be one voice.
+Design consequence: the reader's primary interaction is word selection +
+definition + word audio (word-level timestamps already exist in
+`media/words.jsonl`). Sentence/story narration is a separate, later
+"listen mode" whose only hard requirement is one narrator per story.
+The 40-clip re-bake (VOICE-CONSISTENCY-001) serves listen mode and stays
+worth doing, but is NOT on the critical path for the reading exercise.
+
 ## Explicitly NOT doing
 - No implementation yet (owner: research first).
 - Not deleting the sentence-shard stories until replacement narratives
