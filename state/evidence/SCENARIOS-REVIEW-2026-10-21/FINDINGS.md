@@ -151,3 +151,12 @@ depth is a pack-authoring follow-up (REVIEW-001 queue discipline applies).
 Whether any of these ride `REL-001` is the owner's scope call; the review
 card itself completes when this register is accepted and every finding is
 registered or dropped. The section's acceptance remains the owner's.
+
+## Owner dispositions (2026-11-17, one-word chat ruling)
+- **S-01 (scenario buttons ARE the answers; one accepted intent advances):
+  KEEP AS-IS.** Owner ruling: "buttons guide beginners" — the design is
+  ratified, not a defect. Any follow-up card that would remove or gate the
+  suggested-answer affordance is OUT unless the owner re-opens it.
+- S-02..S-10: dispositions will be collected as one-word 1-3-1 briefs via
+  the nightly UX sweep (owner will not run manual test passes; agents
+  role-play the user and fix mechanically-fixable findings directly).
