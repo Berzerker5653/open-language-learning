@@ -11,3 +11,9 @@ Slow copies regressed on лесть/тень (atempo smears ь -> 'Теянь') 
 Native audition page: 127.0.0.1:8793, 26 clips (word / фраза / медленно per word),
 verdicts -> verdicts-r16.jsonl. omarchy artifacts: ~/lts-qa/r16/ (r16-gate.json,
 r16-finalists.json, 52 wavs).
+
+## R17 correction (owner: "fix the issue, not make clips slow")
+atempo-slowed clips BANNED from shipping — sound artificial. Matrix now: qwen3 (bare+phrase)
+vs Silero baya/xenia, all natural pace, 35 candidates on :8793. Silero gate: xenia nails
+пыль/есть/весь; день/тень/цепь/щель/лесть/боль fail on Silero too (whisper: Чинь/Сэп/Шель/Листь).
+Best machine candidates remain qwen3 phrase clips.
