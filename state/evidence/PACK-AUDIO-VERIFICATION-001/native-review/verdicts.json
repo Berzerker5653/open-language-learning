@@ -1,0 +1,32 @@
+{
+ "yey-reroll": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T09:44:19"
+ },
+ "iyul-qwen": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T09:44:23"
+ },
+ "iyul-irina": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T09:44:25"
+ },
+ "spektakl-1": {
+  "verdict": "bad",
+  "comment": "Soft sign is not used ",
+  "ts": "2026-11-17T09:44:40"
+ },
+ "spektakl-2": {
+  "verdict": "bad",
+  "comment": "Soft sign is not used ",
+  "ts": "2026-11-17T09:44:49"
+ },
+ "spektakl-3": {
+  "verdict": "bad",
+  "comment": "Soft sign is not used ",
+  "ts": "2026-11-17T09:45:03"
+ }
+}

@@ -382,3 +382,14 @@ piper voice — espeak folds to ɭ); IPA-phoneme override renders garbage
 PASSED take 3 (gate ratio 0.8 but heard 'Ильюль' — quality judged human).
 Round-6 queue = 6 candidate clips (2 x её/июль variants, 3 for спектакль)
 in the GUI; first 👍 per word ships.
+
+## 2026-11-17 round-6 RESULT + final state of the 81
+Round-6 native picks: её (piper irina re-roll) GOOD -> applied; июль GOOD on
+both candidates -> shipped the Qwen take-3 (matches gate lineage; reference
+large-v3 had heard the piper one as "Июнь", reviewer accepted both - the
+non-confident one is dropped). спектакль: ALL THREE piper candidates rejected
+by the native reviewer ("soft sign is not used") - confirms the G2P class
+finding; Qwen re-bake k=8 running (lts-r7, trim/spektakl-qwen.jsonl) for a
+final single-clip round-7. If Qwen exhausts at 8: owner call - keep the old
+clip vs re-author the content item (e.g. teach the phrase form where the
+soft sign sits mid-word).
