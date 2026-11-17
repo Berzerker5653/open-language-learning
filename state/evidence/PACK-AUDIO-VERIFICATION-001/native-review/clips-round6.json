@@ -1,0 +1,32 @@
+[
+ {
+  "id": "yey-reroll",
+  "text": "её — вариант A (новый дубль)",
+  "wav": "/home/hunter/game-dev/LTS/state/evidence/PACK-AUDIO-VERIFICATION-001/round6/ru.lex.family.yey__ru_RU-irina-medium.wav"
+ },
+ {
+  "id": "iyul-qwen",
+  "text": "июль — вариант B",
+  "wav": "/home/hunter/game-dev/LTS/state/evidence/PACK-AUDIO-VERIFICATION-001/round6/iyul-qwen.wav"
+ },
+ {
+  "id": "iyul-irina",
+  "text": "июль — вариант A (женский голос)",
+  "wav": "/home/hunter/game-dev/LTS/state/evidence/PACK-AUDIO-VERIFICATION-001/round6/iyul-irina.wav"
+ },
+ {
+  "id": "spektakl-1",
+  "text": "спектакль — вариант 1",
+  "wav": "/home/hunter/game-dev/LTS/state/evidence/PACK-AUDIO-VERIFICATION-001/round6/ru.lex.socialplans.spektakl__ru_RU-irina-medium.wav"
+ },
+ {
+  "id": "spektakl-2",
+  "text": "спектакль — вариант 2",
+  "wav": "/home/hunter/game-dev/LTS/state/evidence/PACK-AUDIO-VERIFICATION-001/round6/ru.lex.socialplans.spektakl__ru_RU-denis-medium.wav"
+ },
+ {
+  "id": "spektakl-3",
+  "text": "спектакль — вариант 3",
+  "wav": "/home/hunter/game-dev/LTS/state/evidence/PACK-AUDIO-VERIFICATION-001/round6/ru.lex.socialplans.spektakl__ru_RU-irina-medium__ls1.2.wav"
+ }
+]

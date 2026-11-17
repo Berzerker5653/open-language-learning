@@ -370,3 +370,15 @@ random 20 of the 81 replacements (round5-sample-ids.json), GUI relaunched on
 8791. Her 12-word zip from the morning is superseded by round-5 (its words are
 among the 81 and were re-rendered clean too) — one queue, not two.
 Next: owner's go for §5 republish (0.4.3 packs rebuild) once the spot check passes.
+
+## 2026-11-16 round-5 RESULT (native spot-check of 20 replacements): 17 good / 3 bad
+All three bad are one CLASS: soft-sign palatalization (её heard "э" not "ё";
+июль + спектакль unclear/missing ь). ASR gate is BLIND to this class (it
+passed "Июнь" against июля́ at 0.75) — human is the only judge for ь clarity.
+Round-6 repair: piper multi-voice + length_scale renders; piper G2P CANNOT
+say final -ЛЬ (reference large-v3 on TV box heard "И он/Ил/Июнь" for every
+piper voice — espeak folds to ɭ); IPA-phoneme override renders garbage
+(letters read as English). Qwen re-bake: её exhausted again at 4; ИЮЛЬ
+PASSED take 3 (gate ratio 0.8 but heard 'Ильюль' — quality judged human).
+Round-6 queue = 6 candidate clips (2 x её/июль variants, 3 for спектакль)
+in the GUI; first 👍 per word ships.

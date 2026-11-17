@@ -1,0 +1,102 @@
+{
+ "ru.lex.travel2.zabota": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:05:26"
+ },
+ "ru.lex.shopping.marka": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:05:27"
+ },
+ "ru.lex.nature.solnce": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:05:29"
+ },
+ "ru.lex.timeplans.sentyabr": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:05:30"
+ },
+ "ru.contrast.stress.muka-1": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:05:33"
+ },
+ "ru.lex.family.yey": {
+  "verdict": "bad",
+  "comment": "The second soun is stressed e not ё",
+  "ts": "2026-11-16T20:06:11"
+ },
+ "ru.lex.instructions.itog": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:06:13"
+ },
+ "ru.lex.travel.kassa": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:06:15"
+ },
+ "ru.lex.home.more": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:06:16"
+ },
+ "ru.lex.instructions.peremeshat": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:06:18"
+ },
+ "ru.lex.travel2.razocharovatsya": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:06:19"
+ },
+ "ru.lex.timeplans.zapisat": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:06:21"
+ },
+ "ru.lex.city.skameyka": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:06:22"
+ },
+ "ru.lex.workstudy.kollega": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:06:23"
+ },
+ "ru.lex.wellbeing.zapisat": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:06:25"
+ },
+ "ru.lex.timeplans.iyul": {
+  "verdict": "bad",
+  "comment": "Ль should be pronounced clearer ",
+  "ts": "2026-11-16T20:06:47"
+ },
+ "ru.lex.family.koshka": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:06:48"
+ },
+ "ru.lex.narration2.polnoch": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:06:49"
+ },
+ "ru.lex.comparisons.dorozhe": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-16T20:06:51"
+ },
+ "ru.lex.socialplans.spektakl": {
+  "verdict": "bad",
+  "comment": "The last two letters supposed to sound like \"ль\" and it sounds like regular \"л\"",
+  "ts": "2026-11-16T20:08:04"
+ }
+}
