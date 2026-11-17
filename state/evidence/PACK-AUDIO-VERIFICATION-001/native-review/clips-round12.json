@@ -1,0 +1,37 @@
+[
+ {
+  "id": "sp-I",
+  "text": "I — полный мягкий Л, вариант 1",
+  "wav": "/home/hunter/.hermes/cache/scratch/spektakl-piper/sp-ruslan-gen-sm20.wav"
+ },
+ {
+  "id": "sp-J",
+  "text": "J — полный мягкий Л, вариант 2",
+  "wav": "/home/hunter/.hermes/cache/scratch/spektakl-piper/sp-ruslan-gen-sat.wav"
+ },
+ {
+  "id": "sp-K",
+  "text": "K — полный мягкий Л, вариант 3",
+  "wav": "/home/hunter/.hermes/cache/scratch/spektakl-piper/sp-ruslan-gen-sp20.wav"
+ },
+ {
+  "id": "sp-L",
+  "text": "L — Силеро v5, женский голос 1",
+  "wav": "/home/hunter/.hermes/cache/scratch/sil56-baya.wav"
+ },
+ {
+  "id": "sp-M",
+  "text": "M — Силеро v5, женский голос 2",
+  "wav": "/home/hunter/.hermes/cache/scratch/sil56-xenia.wav"
+ },
+ {
+  "id": "sp-N",
+  "text": "N — Кокоро RU, голос Маша",
+  "wav": "/home/hunter/.hermes/cache/scratch/kooru-masha.wav"
+ },
+ {
+  "id": "sp-O",
+  "text": "O — Кокоро RU, голос Света",
+  "wav": "/home/hunter/.hermes/cache/scratch/kooru-sveta.wav"
+ }
+]

@@ -1,0 +1,22 @@
+[
+ {
+  "id": "sp-E",
+  "text": "E — D чуть короче (40 мс)",
+  "wav": "/home/hunter/.hermes/cache/scratch/spektakl-piper/sp-ruslan-t40.wav"
+ },
+ {
+  "id": "sp-F",
+  "text": "F — D короче (70 мс)",
+  "wav": "/home/hunter/.hermes/cache/scratch/spektakl-piper/sp-ruslan-t70.wav"
+ },
+ {
+  "id": "sp-G",
+  "text": "G — D короче (100 мс)",
+  "wav": "/home/hunter/.hermes/cache/scratch/spektakl-piper/sp-ruslan-t100.wav"
+ },
+ {
+  "id": "sp-H",
+  "text": "H — D совсем коротко (130 мс)",
+  "wav": "/home/hunter/.hermes/cache/scratch/spektakl-piper/sp-ruslan-t130.wav"
+ }
+]

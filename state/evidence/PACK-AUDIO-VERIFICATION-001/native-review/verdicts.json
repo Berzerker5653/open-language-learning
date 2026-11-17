@@ -28,5 +28,50 @@
   "verdict": "bad",
   "comment": "Soft sign is not used ",
   "ts": "2026-11-17T09:45:03"
+ },
+ "spektakl-final": {
+  "verdict": "good",
+  "comment": "Added unnecessary sound \"у\"",
+  "ts": "2026-11-17T10:32:54"
+ },
+ "spektakl-A": {
+  "verdict": "bad",
+  "comment": "Second vowel pronounced wrong",
+  "ts": "2026-11-17T10:56:33"
+ },
+ "spektakl-B": {
+  "verdict": "bad",
+  "comment": "SEC md vowel pronounced wrong",
+  "ts": "2026-11-17T10:56:45"
+ },
+ "spektakl-C": {
+  "verdict": "bad",
+  "comment": "Second vowel pronounced wrong",
+  "ts": "2026-11-17T11:02:11"
+ },
+ "spektakl-D": {
+  "verdict": "bad",
+  "comment": "Last consonant pronounced soft ",
+  "ts": "2026-11-17T11:02:44"
+ },
+ "sp-E": {
+  "verdict": "bad",
+  "comment": "L with soft sign is not pronounced at all it ends at k so to much got cut off?",
+  "ts": "2026-11-17T11:09:28"
+ },
+ "sp-F": {
+  "verdict": "bad",
+  "comment": "Same thing got cut off at the end",
+  "ts": "2026-11-17T11:09:52"
+ },
+ "sp-G": {
+  "verdict": "bad",
+  "comment": "Dropped the k in the word and also does not have the l",
+  "ts": "2026-11-17T11:10:34"
+ },
+ "sp-H": {
+  "verdict": "bad",
+  "comment": "K missing and l dropped ",
+  "ts": "2026-11-17T11:10:49"
  }
 }
