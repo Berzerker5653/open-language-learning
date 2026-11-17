@@ -3731,6 +3731,13 @@ fn pack_claims_at(data: &Path) -> Result<Vec<PackClaims>, String> {
     let packs_root = data.join("packs");
     let mut out = Vec::new();
     for inst in store.installations().map_err(|e| e.to_string())? {
+        // PACK-VERSION-BUMP-001: a version bump leaves one store row per
+        // installed version, but claims render keyed by pack_id — two rows
+        // for one pack is a duplicate React key in Settings. One card per
+        // pack, at the version the device pointer actually serves.
+        if out.iter().any(|o: &PackClaims| o.pack_id == inst.pack_id) {
+            continue;
+        }
         let version = match lts_langpack::archive::current_version(&inst.pack_id, &packs_root) {
             Some(v) => v,
             None => continue,
@@ -11830,6 +11837,45 @@ activities:
             assert_eq!(b.locked, a.locked);
             assert_eq!(b.dimensions, a.dimensions, "no drift from volume");
         }
+    }
+
+    /// PACK-VERSION-BUMP-001: installing a new pack version leaves BOTH
+    /// version rows in the store (0.4.2 and 0.4.3 for one pack). Claims
+    /// must be one entry per pack, never one per row: the Settings panel
+    /// keys its claim cards by pack_id, and two entries render as a
+    /// duplicate React key (`Encountered two children with the same key`).
+    #[test]
+    fn claims_are_one_entry_per_pack_even_with_two_installed_versions() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
+        // Simulate the older row a version bump leaves behind.
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        store
+            .record_installation(&lts_storage::PackInstallation {
+                pack_id: "org.openlanguage.ja-jp.reference".into(),
+                version: "0.0.9".into(),
+                installed_at: rfc3339_utc(now_secs()),
+                trust_state: "community".into(),
+            })
+            .unwrap();
+        drop(store);
+
+        let claims = pack_claims_at(data).unwrap();
+        let ja: Vec<_> = claims
+            .iter()
+            .filter(|c| c.pack_id == "org.openlanguage.ja-jp.reference")
+            .collect();
+        assert_eq!(ja.len(), 1, "one claims card per pack, not per version row");
+        // The card reflects the live pointer version, not the stale row.
+        assert_eq!(
+            ja[0].version,
+            lts_langpack::archive::current_version(
+                "org.openlanguage.ja-jp.reference",
+                &data.join("packs")
+            )
+            .unwrap()
+        );
     }
 
     /// K-43 acceptance: the claims panel derives entirely from the

@@ -29,3 +29,14 @@ version > profile selection version, call `switch_pack(profileId, packId)`
 (reuses current_version path, tears down session state safely via
 switchLearning in App.tsx). Add a desktop test: update installed 0.4.2 ->
 0.4.3, existing profile selection becomes 0.4.3 after clicking update.
+
+## Fixed same day: the duplicate React key (built)
+The console error `Encountered two children with the same key,
+'org.openlanguage.ru-ru.reference'` has the same underlying state: a version
+bump leaves one `pack_installations` row per installed version.
+`pack_claims_at` iterated store rows, so Settings received two claims cards
+per pack, keyed by `pack_id` -> React collision (same for ja-JP).
+Fix: `pack_claims_at` now emits one card per pack, at the version the device
+pointer serves. Regression test
+`claims_are_one_entry_per_pack_even_with_two_installed_versions` (red before
+the fix, green after). The version-selection UX gap above stays open.
