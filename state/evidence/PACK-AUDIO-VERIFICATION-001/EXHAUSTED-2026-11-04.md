@@ -339,3 +339,22 @@ Listening batches: 25, 25, 25, 25, 25, 20 (6 batches of up to 25).
 | ja.sent.today-monday | きょうは げつようびです | 12 takes, round2=exhausted | r1 t1 structure: burst(runs=1,ms=20); r1 t2 asr 0.70 "今日は月曜日です"; r1 t3 asr 0.70 "今日は月曜日です"; r1 t4 structure: burst(runs=1,ms=40); r1 t5 asr 0.70 "今日は月曜日です"; r1 t6 asr 0.70 "今日は月曜日です"; r2 t1 asr 0.64 "ふぅ、今日は月曜日です。"; r2 t2 asr 0.70 "今日は月曜日です"; r2 t3 asr 0.70 "今日は月曜日です"; r2 t4 asr 0.70 "今日は月曜日です"; r... |
 | ja.sent.wake-up | まいにち じゅうじにおきます | 12 takes, round2=exhausted | r1 t1 asr 0.69 "毎日10時に起きます"; r1 t2 asr 0.69 "毎日10時に起きます"; r1 t3 asr 0.69 "毎日10時に起きます"; r1 t4 asr 0.69 "毎日10時に起きます。"; r1 t5 structure: gap(s=1.26,count=1,threshold=0.8); r1 t6 asr 0.69 "毎日10時に起きます"; r2 t1 asr 0.69 "毎日10時に起きます"; r2 t2 asr 0.69 "毎日10時に起きます"; r2 t3 asr 0.69 "毎日10時に起きます"; r2 t4 struct... |
 | ja.sent.weather-good | きょうは てんきが いいです | 12 takes, round2=exhausted | r1 t1 asr 0.72 "今日は天気がいいです"; r1 t2 structure: burst(runs=1,ms=80); r1 t3 structure: gap(s=1.76,count=1,threshold=0.8); r1 t4 structure: burst(runs=1,ms=80) gap(s=1.36,count=1,threshold=0.8); r1 t5 asr 0.72 "今日は天気がいいです。"; r1 t6 structure: gap(s=0.92,count=1,threshold=0.8); r2 t1 structure: gap(s=1... |
+
+
+---
+## 2026-11-16 re-investigation (owner: "is there something in common with the 81?")
+YES, and it changed the plan:
+- The 81 ru residue is measurably SIMPLER than the pack average (2.5 vs 3.3
+  syllables, fewer consonant clusters) — not a hard-word problem.
+- 61/81 carry cause structure:gap. Silence-trim probe (scripts/trim-silence-wavs.py,
+  20-clip sample on Omarchy): leading/trailing silence is 0-8 ms — clips are
+  already edge-tight, so the gap is INTERNAL (voice pauses mid-word). Trim lever = no-op.
+- The Piper ladder (scripts/piper-bestof.py, 4 voices x2 rolls) on the CURRENT
+  gate certified 9/9 of the 10-id pilot (mostly ratio 1.0). The prior "exhausted"
+  verdicts against piper candidates were an OLD qa-asr.py copy on Omarchy
+  (pre-2026-11-05 stress-strip fix): доро́же heard exactly, scored 0.46.
+  Omarchy scripts/qa-asr.py re-synced; re-scoring stored heard flipped 7/9.
+- Full 81-id piper pass launched as systemd user unit lts-piper on Omarchy
+  (trim/bestof81.jsonl checkpoint; candidates trim/cand/). Apply = replace
+  wav + atomic manifest row rewrite + pack-build test; human (native ru)
+  audition of the actual candidates is the final disposition — GUI round-5.
