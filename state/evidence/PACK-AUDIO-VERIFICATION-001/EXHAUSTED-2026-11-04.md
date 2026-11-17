@@ -358,3 +358,15 @@ YES, and it changed the plan:
   (trim/bestof81.jsonl checkpoint; candidates trim/cand/). Apply = replace
   wav + atomic manifest row rewrite + pack-build test; human (native ru)
   audition of the actual candidates is the final disposition — GUI round-5.
+
+## 2026-11-16 campaign RESULT: 81/81 certified clean, applied same day
+lts-piper unit on Omarchy finished: **81 pass / 0 failed** (first or second
+piper take in most cases; bestof81.jsonl + candidates preserved in
+piper-cand-2026-11-16/). Applied inline: wav replaced + manifest row rewritten
+(sha/bytes/sr + piper synthesizer + notes provenance chain); pack-build check
+(russian_contrast, 1 passed) + validate_handoff (2069 files) green.
+Human disposition remains per policy as a SPOT CHECK only: round-5 queue =
+random 20 of the 81 replacements (round5-sample-ids.json), GUI relaunched on
+8791. Her 12-word zip from the morning is superseded by round-5 (its words are
+among the 81 and were re-rendered clean too) — one queue, not two.
+Next: owner's go for §5 republish (0.4.3 packs rebuild) once the spot check passes.

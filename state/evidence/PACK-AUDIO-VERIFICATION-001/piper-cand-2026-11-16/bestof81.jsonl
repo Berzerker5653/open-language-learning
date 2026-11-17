@@ -1,0 +1,81 @@
+{"id": "ru.contrast.stress.muka-1", "text": "мука́", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Ну-ка.", "ratio": 0.5}, {"voice": "ru_RU-irina-medium", "heard": "Мука.", "ratio": 1.0}]}
+{"id": "ru.lex.city.etazh", "text": "эта́ж", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "этаж.", "ratio": 1.0}]}
+{"id": "ru.lex.city.podezd", "text": "подъе́зд", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Вадик ест.", "ratio": 0.56}, {"voice": "ru_RU-irina-medium", "heard": "Подъезд.", "ratio": 1.0}]}
+{"id": "ru.lex.city.skameyka", "text": "скаме́йка", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "скамейкам.", "ratio": 0.84}]}
+{"id": "ru.lex.city.tramvay", "text": "трамва́й", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "трамвай", "ratio": 1.0}]}
+{"id": "ru.lex.comparisons.bolshe", "text": "бо́льше", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Вообще.", "ratio": 0.0}, {"voice": "ru_RU-irina-medium", "heard": "Больше.", "ratio": 1.0}]}
+{"id": "ru.lex.comparisons.dorozhe", "text": "доро́же", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "дороже.", "ratio": 1.0}]}
+{"id": "ru.lex.comparisons.proshche", "text": "про́ще", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Проще.", "ratio": 1.0}]}
+{"id": "ru.lex.experiences.proryv", "text": "проры́в", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Прорыв.", "ratio": 1.0}]}
+{"id": "ru.lex.family.delo", "text": "де́ло", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "делом.", "ratio": 0.91}]}
+{"id": "ru.lex.family.koshka", "text": "ко́шка", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "кошка,", "ratio": 1.0}]}
+{"id": "ru.lex.family.sosed", "text": "сосе́д", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "сосед.", "ratio": 1.0}]}
+{"id": "ru.lex.family.yey", "text": "ее́", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "И я", "ratio": 0.29}, {"voice": "ru_RU-irina-medium", "heard": "ее.", "ratio": 1.0}]}
+{"id": "ru.lex.food.desert", "text": "десе́рт", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Здесь все.", "ratio": 0.56}, {"voice": "ru_RU-irina-medium", "heard": "Десерт.", "ratio": 1.0}]}
+{"id": "ru.lex.food.kefir", "text": "кефи́р", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Геким.", "ratio": 0.43}, {"voice": "ru_RU-irina-medium", "heard": "Кефир.", "ratio": 1.0}]}
+{"id": "ru.lex.home.komod", "text": "комо́д", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "комод.", "ratio": 1.0}]}
+{"id": "ru.lex.home.magazin", "text": "магази́н", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Магазин.", "ratio": 1.0}]}
+{"id": "ru.lex.home.more", "text": "мо́ре", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Море.", "ratio": 1.0}]}
+{"id": "ru.lex.instructions.itog", "text": "ито́г", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Итог.", "ratio": 1.0}]}
+{"id": "ru.lex.instructions.peremeshat", "text": "перемеша́ть", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "перемешать.", "ratio": 1.0}]}
+{"id": "ru.lex.instructions.sobrat", "text": "собра́ть", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Собрать!", "ratio": 1.0}]}
+{"id": "ru.lex.instructions.zamenit", "text": "замени́ть", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "заменить.", "ratio": 1.0}]}
+{"id": "ru.lex.media.hashteg", "text": "хештег", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Гештек.", "ratio": 0.8}]}
+{"id": "ru.lex.messages.hochu", "text": "хоте́ть", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Отеть.", "ratio": 0.92}]}
+{"id": "ru.lex.messages.nabirat", "text": "набира́ть", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "набирать.", "ratio": 1.0}]}
+{"id": "ru.lex.messages.skazat", "text": "сказа́ть", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "сказать", "ratio": 1.0}]}
+{"id": "ru.lex.messages.sms", "text": "смс", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Продолжение следует...", "ratio": 0.14}, {"voice": "ru_RU-irina-medium", "heard": "Эсэмос.", "ratio": 0.83}]}
+{"id": "ru.lex.messages2.abzac", "text": "абза́ц", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Абузатся.", "ratio": 0.71}, {"voice": "ru_RU-irina-medium", "heard": "Абзац.", "ratio": 1.0}]}
+{"id": "ru.lex.messages2.rasskaz", "text": "расска́з", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Рассказ.", "ratio": 1.0}]}
+{"id": "ru.lex.narration.dolgo", "text": "до́лго", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Долго.", "ratio": 1.0}]}
+{"id": "ru.lex.narration.porog", "text": "поро́г", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Парок!", "ratio": 0.8}]}
+{"id": "ru.lex.narration.zabor", "text": "забо́р", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Забо.", "ratio": 0.44}, {"voice": "ru_RU-irina-medium", "heard": "Забор.", "ratio": 1.0}]}
+{"id": "ru.lex.narration2.odezhda", "text": "оде́жда", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Одежда.", "ratio": 1.0}]}
+{"id": "ru.lex.narration2.polnoch", "text": "по́лночь", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Болначи!", "ratio": 0.59}, {"voice": "ru_RU-irina-medium", "heard": "Полночь.", "ratio": 1.0}]}
+{"id": "ru.lex.narration2.solntse", "text": "со́лнце", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Солнце.", "ratio": 1.0}]}
+{"id": "ru.lex.narration2.zakat", "text": "зака́т", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "закат", "ratio": 1.0}]}
+{"id": "ru.lex.nature.cvetok", "text": "цвето́к", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Светок.", "ratio": 0.93}]}
+{"id": "ru.lex.nature.ptica", "text": "пти́ца", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Птица.", "ratio": 1.0}]}
+{"id": "ru.lex.nature.ryba", "text": "ры́ба", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Рюма.", "ratio": 0.44}, {"voice": "ru_RU-irina-medium", "heard": "Рыба.", "ratio": 1.0}]}
+{"id": "ru.lex.nature.solnce", "text": "со́лнце", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Солнце.", "ratio": 1.0}]}
+{"id": "ru.lex.pastevents.chasto", "text": "ча́сто", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Часто.", "ratio": 1.0}]}
+{"id": "ru.lex.pastevents.potom", "text": "пото́м", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Потом.", "ratio": 1.0}]}
+{"id": "ru.lex.problems.namyok", "text": "наме́к", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Намек.", "ratio": 1.0}]}
+{"id": "ru.lex.problems.oshibka", "text": "оши́бка", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Ошибка.", "ratio": 1.0}]}
+{"id": "ru.lex.problems.polnyi", "text": "по́лный", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Полный.", "ratio": 1.0}]}
+{"id": "ru.lex.problems.rashchyot", "text": "расче́т", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Расчат.", "ratio": 0.8}]}
+{"id": "ru.lex.problems.tsely", "text": "це́лый", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Сырли.", "ratio": 0.33}, {"voice": "ru_RU-irina-medium", "heard": "целый.", "ratio": 1.0}]}
+{"id": "ru.lex.problems.zashchita", "text": "защи́та", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Защита.", "ratio": 1.0}]}
+{"id": "ru.lex.routines.gotovit", "text": "гото́вить", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Готовить.", "ratio": 1.0}]}
+{"id": "ru.lex.routines.rabotat", "text": "рабо́тать", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Работать.", "ratio": 1.0}]}
+{"id": "ru.lex.routines.zvonit", "text": "звони́ть", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Звоните.", "ratio": 0.94}]}
+{"id": "ru.lex.sci.bresh", "text": "брешь", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Вылез", "ratio": 0.18}, {"voice": "ru_RU-irina-medium", "heard": "Бреш.", "ratio": 1.0}]}
+{"id": "ru.lex.services.anketa", "text": "анке́та", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Анкета.", "ratio": 1.0}]}
+{"id": "ru.lex.services.klient", "text": "клие́нт", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Клиент.", "ratio": 1.0}]}
+{"id": "ru.lex.services.prikaz", "text": "прика́з", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Приказ.", "ratio": 1.0}]}
+{"id": "ru.lex.shopping.marka", "text": "ма́рка", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Марка.", "ratio": 1.0}]}
+{"id": "ru.lex.shopping.rubashka", "text": "руба́шка", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Рубашка.", "ratio": 1.0}]}
+{"id": "ru.lex.shopping.stoit", "text": "стои́т", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Стойт.", "ratio": 0.6}, {"voice": "ru_RU-irina-medium", "heard": "Саид.", "ratio": 0.67}, {"voice": "ru_RU-dmitri-medium", "heard": "Флит.", "ratio": 0.4}, {"voice": "ru_RU-denis-medium", "heard": "Поехали!", "ratio": 0.14}, {"voice": "ru_RU-ruslan-medium", "heard": "Стой!", "ratio": 0.44}, {"voice": "ru_RU-irina-medium", "heard": "Стоит.", "ratio": 1.0}]}
+{"id": "ru.lex.shopping.tovar", "text": "това́р", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "До новых встреч!", "ratio": 0.19}, {"voice": "ru_RU-irina-medium", "heard": "Това.", "ratio": 0.44}, {"voice": "ru_RU-dmitri-medium", "heard": "Та-па!", "ratio": 0.44}, {"voice": "ru_RU-denis-medium", "heard": "Та-ва!", "ratio": 0.67}, {"voice": "ru_RU-ruslan-medium", "heard": "товар.", "ratio": 1.0}]}
+{"id": "ru.lex.socialplans.anons", "text": "ано́нс", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Анонс.", "ratio": 1.0}]}
+{"id": "ru.lex.socialplans.napitok", "text": "напи́ток", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Напиток.", "ratio": 1.0}]}
+{"id": "ru.lex.socialplans.spektakl", "text": "спекта́кль", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "спектакл", "ratio": 0.78}]}
+{"id": "ru.lex.synthesis2.feleton", "text": "фельетон", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Предитон.", "ratio": 0.5}, {"voice": "ru_RU-irina-medium", "heard": "Филитон.", "ratio": 0.74}]}
+{"id": "ru.lex.synthesis4.kolllazh", "text": "коллаж", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Калаш.", "ratio": 0.55}]}
+{"id": "ru.lex.synthesis4.ssuda", "text": "ссуда", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Сюда.", "ratio": 0.6}, {"voice": "ru_RU-irina-medium", "heard": "Суды.", "ratio": 0.67}, {"voice": "ru_RU-dmitri-medium", "heard": "Сюда.", "ratio": 0.6}, {"voice": "ru_RU-denis-medium", "heard": "Сауды!", "ratio": 0.6}, {"voice": "ru_RU-ruslan-medium", "heard": "Сюда.", "ratio": 0.6}, {"voice": "ru_RU-irina-medium", "heard": "Суда.", "ratio": 0.67}]}
+{"id": "ru.lex.timeplans.iyul", "text": "ию́ль", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "и", "ratio": 0.0}, {"voice": "ru_RU-irina-medium", "heard": "Июнь.", "ratio": 0.75}]}
+{"id": "ru.lex.timeplans.noyabr", "text": "ноя́брь", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Ноябрь.", "ratio": 1.0}]}
+{"id": "ru.lex.timeplans.sentyabr", "text": "сентя́брь", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Синьтеабра.", "ratio": 0.73}, {"voice": "ru_RU-irina-medium", "heard": "Сентябрь.", "ratio": 1.0}]}
+{"id": "ru.lex.timeplans.zapisat", "text": "запи́сываться", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "записываться.", "ratio": 1.0}]}
+{"id": "ru.lex.travel.kassa", "text": "ка́сса", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Пласса.", "ratio": 0.73}, {"voice": "ru_RU-irina-medium", "heard": "Пасса.", "ratio": 0.8}]}
+{"id": "ru.lex.travel2.preodolet", "text": "преодоле́ть", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "преодолеть.", "ratio": 1.0}]}
+{"id": "ru.lex.travel2.rasstroitsya", "text": "расстро́иться", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "расстроиться.", "ratio": 1.0}]}
+{"id": "ru.lex.travel2.razocharovatsya", "text": "разочарова́ться", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "разочароваться.", "ratio": 1.0}]}
+{"id": "ru.lex.travel2.zabota", "text": "забо́та", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Забота?", "ratio": 1.0}]}
+{"id": "ru.lex.travel2.zhalko", "text": "жа́лко", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Жалко.", "ratio": 1.0}]}
+{"id": "ru.lex.wellbeing.ploho", "text": "пло́хо", "result": "pass@ru_RU-irina-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Офа.", "ratio": 0.25}, {"voice": "ru_RU-irina-medium", "heard": "Плохо.", "ratio": 1.0}]}
+{"id": "ru.lex.wellbeing.ukol", "text": "уко́л", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Кукол.", "ratio": 0.67}, {"voice": "ru_RU-irina-medium", "heard": "Окул.", "ratio": 0.5}, {"voice": "ru_RU-dmitri-medium", "heard": "Плохо.", "ratio": 0.22}, {"voice": "ru_RU-denis-medium", "heard": "Пока!", "ratio": 0.25}, {"voice": "ru_RU-ruslan-medium", "heard": "укол.", "ratio": 1.0}]}
+{"id": "ru.lex.wellbeing.zapisat", "text": "запи́сывать", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "записывать", "ratio": 1.0}]}
+{"id": "ru.lex.workstudy.kollega", "text": "колле́га", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "коллега.", "ratio": 1.0}]}
+{"id": "ru.sent.cp.p20", "text": "Ма́ма вари́т ка́шу у́тром.", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Мама варит кашу утром.", "ratio": 1.0}]}
+{"id": "ru.sent.cp.p21", "text": "Со́лнце све́тит я́рко.", "result": "pass@ru_RU-ruslan-medium", "tried": [{"voice": "ru_RU-ruslan-medium", "heard": "Солнце светит ярко.", "ratio": 1.0}]}

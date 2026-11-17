@@ -1,0 +1,407 @@
+[
+ {
+  "id": "ru.lex.city.etazh",
+  "text": "эта́ж",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.city.etazh.wav"
+ },
+ {
+  "id": "ru.lex.city.podezd",
+  "text": "подъе́зд",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.city.podezd.wav"
+ },
+ {
+  "id": "ru.lex.city.skameyka",
+  "text": "скаме́йка",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.city.skameyka.wav"
+ },
+ {
+  "id": "ru.lex.city.tramvay",
+  "text": "трамва́й",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.city.tramvay.wav"
+ },
+ {
+  "id": "ru.lex.comparisons.bolshe",
+  "text": "бо́льше",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.comparisons.bolshe.wav"
+ },
+ {
+  "id": "ru.lex.comparisons.dorozhe",
+  "text": "доро́же",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.comparisons.dorozhe.wav"
+ },
+ {
+  "id": "ru.lex.comparisons.proshche",
+  "text": "про́ще",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.comparisons.proshche.wav"
+ },
+ {
+  "id": "ru.lex.experiences.proryv",
+  "text": "проры́в",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.experiences.proryv.wav"
+ },
+ {
+  "id": "ru.lex.family.delo",
+  "text": "де́ло",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.family.delo.wav"
+ },
+ {
+  "id": "ru.lex.family.koshka",
+  "text": "ко́шка",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.family.koshka.wav"
+ },
+ {
+  "id": "ru.lex.family.sosed",
+  "text": "сосе́д",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.family.sosed.wav"
+ },
+ {
+  "id": "ru.lex.family.yey",
+  "text": "ее́",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.family.yey.wav"
+ },
+ {
+  "id": "ru.lex.food.desert",
+  "text": "десе́рт",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.food.desert.wav"
+ },
+ {
+  "id": "ru.lex.food.kefir",
+  "text": "кефи́р",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.food.kefir.wav"
+ },
+ {
+  "id": "ru.lex.home.komod",
+  "text": "комо́д",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.home.komod.wav"
+ },
+ {
+  "id": "ru.lex.home.magazin",
+  "text": "магази́н",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.home.magazin.wav"
+ },
+ {
+  "id": "ru.lex.home.more",
+  "text": "мо́ре",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.home.more.wav"
+ },
+ {
+  "id": "ru.lex.instructions.itog",
+  "text": "ито́г",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.instructions.itog.wav"
+ },
+ {
+  "id": "ru.lex.instructions.peremeshat",
+  "text": "перемеша́ть",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.instructions.peremeshat.wav"
+ },
+ {
+  "id": "ru.lex.instructions.sobrat",
+  "text": "собра́ть",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.instructions.sobrat.wav"
+ },
+ {
+  "id": "ru.lex.instructions.zamenit",
+  "text": "замени́ть",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.instructions.zamenit.wav"
+ },
+ {
+  "id": "ru.lex.media.hashteg",
+  "text": "хеште́г",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.media.hashteg.wav"
+ },
+ {
+  "id": "ru.lex.messages.hochu",
+  "text": "хоте́ть",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.messages.hochu.wav"
+ },
+ {
+  "id": "ru.lex.messages.nabirat",
+  "text": "набира́ть",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.messages.nabirat.wav"
+ },
+ {
+  "id": "ru.lex.messages.skazat",
+  "text": "сказа́ть",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.messages.skazat.wav"
+ },
+ {
+  "id": "ru.lex.messages.sms",
+  "text": "смс",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.messages.sms.wav"
+ },
+ {
+  "id": "ru.lex.messages2.abzac",
+  "text": "абза́ц",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.messages2.abzac.wav"
+ },
+ {
+  "id": "ru.lex.messages2.rasskaz",
+  "text": "расска́з",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.messages2.rasskaz.wav"
+ },
+ {
+  "id": "ru.lex.narration.dolgo",
+  "text": "до́лго",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.narration.dolgo.wav"
+ },
+ {
+  "id": "ru.lex.narration.porog",
+  "text": "поро́г",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.narration.porog.wav"
+ },
+ {
+  "id": "ru.lex.narration.zabor",
+  "text": "забо́р",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.narration.zabor.wav"
+ },
+ {
+  "id": "ru.lex.narration2.odezhda",
+  "text": "оде́жда",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.narration2.odezhda.wav"
+ },
+ {
+  "id": "ru.lex.narration2.polnoch",
+  "text": "по́лночь",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.narration2.polnoch.wav"
+ },
+ {
+  "id": "ru.lex.narration2.solntse",
+  "text": "со́лнце",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.narration2.solntse.wav"
+ },
+ {
+  "id": "ru.lex.narration2.zakat",
+  "text": "зака́т",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.narration2.zakat.wav"
+ },
+ {
+  "id": "ru.lex.pastevents.potom",
+  "text": "пото́м",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.pastevents.potom.wav"
+ },
+ {
+  "id": "ru.lex.problems.namyok",
+  "text": "наме́к",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.problems.namyok.wav"
+ },
+ {
+  "id": "ru.lex.problems.oshibka",
+  "text": "оши́бка",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.problems.oshibka.wav"
+ },
+ {
+  "id": "ru.lex.problems.polnyi",
+  "text": "по́лный",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.problems.polnyi.wav"
+ },
+ {
+  "id": "ru.lex.problems.rashchyot",
+  "text": "расче́т",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.problems.rashchyot.wav"
+ },
+ {
+  "id": "ru.lex.problems.tsely",
+  "text": "це́лый",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.problems.tsely.wav"
+ },
+ {
+  "id": "ru.lex.problems.zashchita",
+  "text": "защи́та",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.problems.zashchita.wav"
+ },
+ {
+  "id": "ru.lex.routines.gotovit",
+  "text": "гото́вить",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.routines.gotovit.wav"
+ },
+ {
+  "id": "ru.lex.routines.rabotat",
+  "text": "рабо́тать",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.routines.rabotat.wav"
+ },
+ {
+  "id": "ru.lex.routines.zvonit",
+  "text": "звони́ть",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.routines.zvonit.wav"
+ },
+ {
+  "id": "ru.lex.sci.bresh",
+  "text": "брешь",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.sci.bresh.wav"
+ },
+ {
+  "id": "ru.lex.services.anketa",
+  "text": "анке́та",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.services.anketa.wav"
+ },
+ {
+  "id": "ru.lex.services.klient",
+  "text": "клие́нт",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.services.klient.wav"
+ },
+ {
+  "id": "ru.lex.services.prikaz",
+  "text": "прика́з",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.services.prikaz.wav"
+ },
+ {
+  "id": "ru.lex.shopping.marka",
+  "text": "ма́рка",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.shopping.marka.wav"
+ },
+ {
+  "id": "ru.lex.shopping.rubashka",
+  "text": "руба́шка",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.shopping.rubashka.wav"
+ },
+ {
+  "id": "ru.lex.shopping.stoit",
+  "text": "стои́т",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.shopping.stoit.wav"
+ },
+ {
+  "id": "ru.lex.shopping.tovar",
+  "text": "това́р",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.shopping.tovar.wav"
+ },
+ {
+  "id": "ru.lex.socialplans.anons",
+  "text": "ано́нс",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.socialplans.anons.wav"
+ },
+ {
+  "id": "ru.lex.socialplans.napitok",
+  "text": "напи́ток",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.socialplans.napitok.wav"
+ },
+ {
+  "id": "ru.lex.socialplans.spektakl",
+  "text": "спекта́кль",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.socialplans.spektakl.wav"
+ },
+ {
+  "id": "ru.lex.synthesis2.feleton",
+  "text": "фельето́н",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.synthesis2.feleton.wav"
+ },
+ {
+  "id": "ru.lex.synthesis4.ssuda",
+  "text": "ссу́да",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.synthesis4.ssuda.wav"
+ },
+ {
+  "id": "ru.lex.timeplans.iyul",
+  "text": "ию́ль",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.timeplans.iyul.wav"
+ },
+ {
+  "id": "ru.lex.timeplans.noyabr",
+  "text": "ноя́брь",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.timeplans.noyabr.wav"
+ },
+ {
+  "id": "ru.lex.timeplans.sentyabr",
+  "text": "сентя́брь",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.timeplans.sentyabr.wav"
+ },
+ {
+  "id": "ru.lex.timeplans.zapisat",
+  "text": "запи́сываться",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.timeplans.zapisat.wav"
+ },
+ {
+  "id": "ru.lex.travel.kassa",
+  "text": "ка́сса",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.travel.kassa.wav"
+ },
+ {
+  "id": "ru.lex.travel2.preodolet",
+  "text": "преодоле́ть",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.travel2.preodolet.wav"
+ },
+ {
+  "id": "ru.lex.travel2.rasstroitsya",
+  "text": "расстро́иться",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.travel2.rasstroitsya.wav"
+ },
+ {
+  "id": "ru.lex.travel2.razocharovatsya",
+  "text": "разочарова́ться",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.travel2.razocharovatsya.wav"
+ },
+ {
+  "id": "ru.lex.travel2.zabota",
+  "text": "забо́та",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.travel2.zabota.wav"
+ },
+ {
+  "id": "ru.lex.travel2.zhalko",
+  "text": "жа́лко",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.travel2.zhalko.wav"
+ },
+ {
+  "id": "ru.lex.wellbeing.ploho",
+  "text": "пло́хо",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.wellbeing.ploho.wav"
+ },
+ {
+  "id": "ru.lex.wellbeing.ukol",
+  "text": "уко́л",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.wellbeing.ukol.wav"
+ },
+ {
+  "id": "ru.lex.wellbeing.zapisat",
+  "text": "запи́сывать",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.wellbeing.zapisat.wav"
+ },
+ {
+  "id": "ru.lex.workstudy.kollega",
+  "text": "колле́га",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.workstudy.kollega.wav"
+ },
+ {
+  "id": "ru.sent.cp.p20",
+  "text": "Ма́ма вари́т ка́шу у́тром.",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.sent.cp.p20.wav"
+ },
+ {
+  "id": "ru.sent.cp.p21",
+  "text": "Со́лнце све́тит я́рко.",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.sent.cp.p21.wav"
+ },
+ {
+  "id": "ru.contrast.stress.muka-1",
+  "text": "мука́",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.contrast.stress.muka-1.wav"
+ },
+ {
+  "id": "ru.lex.nature.cvetok",
+  "text": "цвето́к",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.nature.cvetok.wav"
+ },
+ {
+  "id": "ru.lex.nature.ptica",
+  "text": "пти́ца",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.nature.ptica.wav"
+ },
+ {
+  "id": "ru.lex.nature.ryba",
+  "text": "ры́ба",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.nature.ryba.wav"
+ },
+ {
+  "id": "ru.lex.nature.solnce",
+  "text": "со́лнце",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.nature.solnce.wav"
+ },
+ {
+  "id": "ru.lex.pastevents.chasto",
+  "text": "ча́сто",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.pastevents.chasto.wav"
+ },
+ {
+  "id": "ru.lex.synthesis4.kolllazh",
+  "text": "колла́ж",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.synthesis4.kolllazh.wav"
+ }
+]

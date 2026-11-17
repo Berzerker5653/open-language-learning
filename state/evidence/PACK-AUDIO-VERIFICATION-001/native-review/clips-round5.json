@@ -1,0 +1,102 @@
+[
+ {
+  "id": "ru.lex.travel2.zabota",
+  "text": "забо́та",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.travel2.zabota.wav"
+ },
+ {
+  "id": "ru.lex.shopping.marka",
+  "text": "ма́рка",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.shopping.marka.wav"
+ },
+ {
+  "id": "ru.lex.nature.solnce",
+  "text": "со́лнце",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.nature.solnce.wav"
+ },
+ {
+  "id": "ru.lex.timeplans.sentyabr",
+  "text": "сентя́брь",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.timeplans.sentyabr.wav"
+ },
+ {
+  "id": "ru.contrast.stress.muka-1",
+  "text": "мука́",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.contrast.stress.muka-1.wav"
+ },
+ {
+  "id": "ru.lex.family.yey",
+  "text": "ее́",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.family.yey.wav"
+ },
+ {
+  "id": "ru.lex.instructions.itog",
+  "text": "ито́г",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.instructions.itog.wav"
+ },
+ {
+  "id": "ru.lex.travel.kassa",
+  "text": "ка́сса",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.travel.kassa.wav"
+ },
+ {
+  "id": "ru.lex.home.more",
+  "text": "мо́ре",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.home.more.wav"
+ },
+ {
+  "id": "ru.lex.instructions.peremeshat",
+  "text": "перемеша́ть",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.instructions.peremeshat.wav"
+ },
+ {
+  "id": "ru.lex.travel2.razocharovatsya",
+  "text": "разочарова́ться",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.travel2.razocharovatsya.wav"
+ },
+ {
+  "id": "ru.lex.timeplans.zapisat",
+  "text": "запи́сываться",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.timeplans.zapisat.wav"
+ },
+ {
+  "id": "ru.lex.city.skameyka",
+  "text": "скаме́йка",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.city.skameyka.wav"
+ },
+ {
+  "id": "ru.lex.workstudy.kollega",
+  "text": "колле́га",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.workstudy.kollega.wav"
+ },
+ {
+  "id": "ru.lex.wellbeing.zapisat",
+  "text": "запи́сывать",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.wellbeing.zapisat.wav"
+ },
+ {
+  "id": "ru.lex.timeplans.iyul",
+  "text": "ию́ль",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.timeplans.iyul.wav"
+ },
+ {
+  "id": "ru.lex.family.koshka",
+  "text": "ко́шка",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.family.koshka.wav"
+ },
+ {
+  "id": "ru.lex.narration2.polnoch",
+  "text": "по́лночь",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.narration2.polnoch.wav"
+ },
+ {
+  "id": "ru.lex.comparisons.dorozhe",
+  "text": "доро́же",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.comparisons.dorozhe.wav"
+ },
+ {
+  "id": "ru.lex.socialplans.spektakl",
+  "text": "спекта́кль",
+  "wav": "/home/hunter/game-dev/LTS/languages/ru-RU/media/ru.lex.socialplans.spektakl.wav"
+ }
+]
