@@ -2601,6 +2601,7 @@ tasks:
   - ja sidecar media/words.jsonl committed with reports
   required_for_desktop_1_0: false
 - id: VOICE-CONSISTENCY-001
+  required_for_desktop_1_0: false
   milestone: M8
   priority: P2
   title: One narrator per story for listen mode — re-bake the 40 off-voice RU sentences and gate voice consistency at bake
@@ -2615,6 +2616,7 @@ tasks:
   - "generate-pack-audio.py gains a voice-consistency guard: a fresh sentence row whose voice differs from the pack's declared narrator is rejected with an explicit error, not written"
   - pack version bumped through the PACK-VERSION-BUMP procedure and deployed; owner hears one narrator per story
 - id: STORY-AUTHOR-001
+  required_for_desktop_1_0: false
   milestone: M8
   priority: P1
   title: Real continuous stories — replace sentence re-bundles with written paragraph narratives
@@ -2627,6 +2629,7 @@ tasks:
   - sentences carry declared readings; audio baked with the pack narrator through the existing pipeline and ASR gate
   - stories stay draft-status under ADR-0040 until in-app confirmations accumulate; no content gate weakened
 - id: READER-FLOW-001
+  required_for_desktop_1_0: false
   milestone: M8
   priority: P1
   title: Kindle-style reader — flowing paragraphs, one-tap sentence audio, word-tap dictionary card with word audio
@@ -2643,6 +2646,7 @@ tasks:
   - "unknown (off-pack) words open a clearly-labeled card from an offline auxiliary lexicon (candidate: kaikki.org machine-readable Wiktionary, license-checked) with Mine action; the primary pack lexicon stays separate and trusted"
   - "three-interaction budget: word tap -> card + word audio; sentence tap -> sentence audio"
 - id: VOCAB-BUILDER-001
+  required_for_desktop_1_0: false
   milestone: M8
   priority: P2
   title: Automatic vocabulary builder — every word lookup logged with its context sentence, feeding review
@@ -2760,4 +2764,9 @@ execution_scope:
   - WORD-TIMING-002
   - WORD-TIMING-003
   - UX-PERSONA-001
+  - VOICE-CONSISTENCY-001
+  - STORY-AUTHOR-001
+  - READER-FLOW-001
+  - VOCAB-BUILDER-001
+  - STORY-LISTEN-001
   public_publication_authorized: false

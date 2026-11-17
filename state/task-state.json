@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-17",
-  "active_task": "CONTENT-CONFIRM-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
