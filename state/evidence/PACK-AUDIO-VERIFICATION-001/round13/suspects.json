@@ -1,0 +1,1178 @@
+[
+ {
+  "id": "ru.lex.instructions.gvozd",
+  "word": "гвоздь",
+  "syll": 1,
+  "seconds": 1.68,
+  "sps": 1.68
+ },
+ {
+  "id": "ru.contrast.voicing.zhsh-1",
+  "word": "шить",
+  "syll": 1,
+  "seconds": 1.68,
+  "sps": 1.68
+ },
+ {
+  "id": "ru.lex.study4.shchel",
+  "word": "щель",
+  "syll": 1,
+  "seconds": 1.6,
+  "sps": 1.6
+ },
+ {
+  "id": "ru.lex.timeplans.zhdat",
+  "word": "ждать",
+  "syll": 1,
+  "seconds": 1.52,
+  "sps": 1.52
+ },
+ {
+  "id": "ru.contrast.voicing.zhsh-0",
+  "word": "жить",
+  "syll": 1,
+  "seconds": 1.52,
+  "sps": 1.52
+ },
+ {
+  "id": "ru.lex.routines.noch",
+  "word": "ночь",
+  "syll": 1,
+  "seconds": 1.44,
+  "sps": 1.44
+ },
+ {
+  "id": "ru.lex.style.lest",
+  "word": "лесть",
+  "syll": 1,
+  "seconds": 1.36,
+  "sps": 1.36
+ },
+ {
+  "id": "ru.lex.numbers-time.pyat",
+  "word": "пять",
+  "syll": 1,
+  "seconds": 1.36,
+  "sps": 1.36
+ },
+ {
+  "id": "ru.lex.messages2.ves",
+  "word": "весь",
+  "syll": 1,
+  "seconds": 1.36,
+  "sps": 1.36
+ },
+ {
+  "id": "ru.lex.style.tkan",
+  "word": "ткань",
+  "syll": 1,
+  "seconds": 1.28,
+  "sps": 1.28
+ },
+ {
+  "id": "ru.lex.numbers-time.shest",
+  "word": "шесть",
+  "syll": 1,
+  "seconds": 1.28,
+  "sps": 1.28
+ },
+ {
+  "id": "ru.lex.housing.pyl",
+  "word": "пыль",
+  "syll": 1,
+  "seconds": 1.28,
+  "sps": 1.28
+ },
+ {
+  "id": "ru.lex.socialplans.zhdem",
+  "word": "ждать",
+  "syll": 1,
+  "seconds": 1.2,
+  "sps": 1.2
+ },
+ {
+  "id": "ru.lex.pastevents.znat",
+  "word": "знать",
+  "syll": 1,
+  "seconds": 1.2,
+  "sps": 1.2
+ },
+ {
+  "id": "ru.lex.wellbeing.spat",
+  "word": "спать",
+  "syll": 1,
+  "seconds": 1.12,
+  "sps": 1.12
+ },
+ {
+  "id": "ru.lex.routines.myt",
+  "word": "мыть",
+  "syll": 1,
+  "seconds": 1.12,
+  "sps": 1.12
+ },
+ {
+  "id": "ru.lex.family.est",
+  "word": "есть",
+  "syll": 1,
+  "seconds": 1.12,
+  "sps": 1.12
+ },
+ {
+  "id": "ru.lex.critical.svyaz",
+  "word": "связь",
+  "syll": 1,
+  "seconds": 1.12,
+  "sps": 1.12
+ },
+ {
+  "id": "ru.lex.city.zdes",
+  "word": "здесь",
+  "syll": 1,
+  "seconds": 1.12,
+  "sps": 1.12
+ },
+ {
+  "id": "ru.lex.numbers-time.devyat",
+  "word": "девять",
+  "syll": 2,
+  "seconds": 2.16,
+  "sps": 1.08
+ },
+ {
+  "id": "ru.lex.culture.zritel",
+  "word": "зритель",
+  "syll": 2,
+  "seconds": 2.16,
+  "sps": 1.08
+ },
+ {
+  "id": "ru.lex.argue.sudite",
+  "word": "судить",
+  "syll": 2,
+  "seconds": 2.16,
+  "sps": 1.08
+ },
+ {
+  "id": "ru.lex.problems.trudnost",
+  "word": "трудность",
+  "syll": 2,
+  "seconds": 2.08,
+  "sps": 1.04
+ },
+ {
+  "id": "ru.lex.home.dver",
+  "word": "дверь",
+  "syll": 1,
+  "seconds": 1.04,
+  "sps": 1.04
+ },
+ {
+  "id": "ru.lex.future2.strast",
+  "word": "страсть",
+  "syll": 1,
+  "seconds": 1.04,
+  "sps": 1.04
+ },
+ {
+  "id": "ru.lex.family.lyubit",
+  "word": "любить",
+  "syll": 2,
+  "seconds": 2.08,
+  "sps": 1.04
+ },
+ {
+  "id": "ru.lex.pastevents.sdelat",
+  "word": "сделать",
+  "syll": 2,
+  "seconds": 2.0,
+  "sps": 1.0
+ },
+ {
+  "id": "ru.lex.messages2.vspomnit",
+  "word": "вспомнить",
+  "syll": 2,
+  "seconds": 2.0,
+  "sps": 1.0
+ },
+ {
+  "id": "ru.lex.future2.vzvesit",
+  "word": "взвесить",
+  "syll": 2,
+  "seconds": 2.0,
+  "sps": 1.0
+ },
+ {
+  "id": "ru.lex.cult.zalost",
+  "word": "жалость",
+  "syll": 2,
+  "seconds": 2.0,
+  "sps": 1.0
+ },
+ {
+  "id": "ru.lex.respect.gran2",
+  "word": "грань",
+  "syll": 1,
+  "seconds": 0.99,
+  "sps": 0.99
+ },
+ {
+  "id": "ru.lex.workstudy.dostich",
+  "word": "достичь",
+  "syll": 2,
+  "seconds": 1.92,
+  "sps": 0.96
+ },
+ {
+  "id": "ru.lex.study2.moschnost",
+  "word": "мощность",
+  "syll": 2,
+  "seconds": 1.92,
+  "sps": 0.96
+ },
+ {
+  "id": "ru.lex.routines.spat",
+  "word": "спать",
+  "syll": 1,
+  "seconds": 0.96,
+  "sps": 0.96
+ },
+ {
+  "id": "ru.lex.messages2.mechtat",
+  "word": "мечтать",
+  "syll": 2,
+  "seconds": 1.92,
+  "sps": 0.96
+ },
+ {
+  "id": "ru.lex.housing.snyat",
+  "word": "снять",
+  "syll": 1,
+  "seconds": 0.96,
+  "sps": 0.96
+ },
+ {
+  "id": "ru.lex.cult.spes",
+  "word": "спесь",
+  "syll": 1,
+  "seconds": 0.96,
+  "sps": 0.96
+ },
+ {
+  "id": "ru.lex.critical.model",
+  "word": "модель",
+  "syll": 2,
+  "seconds": 1.92,
+  "sps": 0.96
+ },
+ {
+  "id": "ru.lex.argue3.otnud",
+  "word": "отнюдь",
+  "syll": 2,
+  "seconds": 1.92,
+  "sps": 0.96
+ },
+ {
+  "id": "ru.contrast.voicing.bp-0",
+  "word": "бить",
+  "syll": 1,
+  "seconds": 0.96,
+  "sps": 0.96
+ },
+ {
+  "id": "ru.contrast.palatalization.brat-1",
+  "word": "брать",
+  "syll": 1,
+  "seconds": 0.96,
+  "sps": 0.96
+ },
+ {
+  "id": "ru.lex.pastevents.zhit",
+  "word": "жить",
+  "syll": 1,
+  "seconds": 0.92,
+  "sps": 0.92
+ },
+ {
+  "id": "ru.lex.style.byl",
+  "word": "быль",
+  "syll": 1,
+  "seconds": 0.88,
+  "sps": 0.88
+ },
+ {
+  "id": "ru.lex.study4.smes",
+  "word": "смесь",
+  "syll": 1,
+  "seconds": 0.88,
+  "sps": 0.88
+ },
+ {
+  "id": "ru.lex.sci.vnedryat",
+  "word": "внедрять",
+  "syll": 2,
+  "seconds": 1.76,
+  "sps": 0.88
+ },
+ {
+  "id": "ru.lex.routines.chistit",
+  "word": "чистить",
+  "syll": 2,
+  "seconds": 1.76,
+  "sps": 0.88
+ },
+ {
+  "id": "ru.lex.numbers-time.sem",
+  "word": "семь",
+  "syll": 1,
+  "seconds": 0.88,
+  "sps": 0.88
+ },
+ {
+  "id": "ru.lex.numbers-time.nol",
+  "word": "ноль",
+  "syll": 1,
+  "seconds": 0.88,
+  "sps": 0.88
+ },
+ {
+  "id": "ru.lex.nature.dozhd",
+  "word": "дождь",
+  "syll": 1,
+  "seconds": 0.88,
+  "sps": 0.88
+ },
+ {
+  "id": "ru.lex.narration2.grust",
+  "word": "грусть",
+  "syll": 1,
+  "seconds": 0.88,
+  "sps": 0.88
+ },
+ {
+  "id": "ru.lex.instructions.otkryt",
+  "word": "открыть",
+  "syll": 2,
+  "seconds": 1.76,
+  "sps": 0.88
+ },
+ {
+  "id": "ru.lex.feelings.plakat",
+  "word": "плакать",
+  "syll": 2,
+  "seconds": 1.76,
+  "sps": 0.88
+ },
+ {
+  "id": "ru.lex.family.veshch",
+  "word": "вещь",
+  "syll": 1,
+  "seconds": 0.88,
+  "sps": 0.88
+ },
+ {
+  "id": "ru.lex.critical4.chush",
+  "word": "чушь",
+  "syll": 1,
+  "seconds": 0.88,
+  "sps": 0.88
+ },
+ {
+  "id": "ru.lex.critical.nit",
+  "word": "нить",
+  "syll": 1,
+  "seconds": 0.88,
+  "sps": 0.88
+ },
+ {
+  "id": "ru.lex.style.bestaktnost",
+  "word": "бестактность",
+  "syll": 3,
+  "seconds": 2.56,
+  "sps": 0.85
+ },
+ {
+  "id": "ru.lex.future.dopuskat",
+  "word": "допускать",
+  "syll": 3,
+  "seconds": 2.56,
+  "sps": 0.85
+ },
+ {
+  "id": "ru.lex.feelings.oshchat",
+  "word": "ощущать",
+  "syll": 3,
+  "seconds": 2.56,
+  "sps": 0.85
+ },
+ {
+  "id": "ru.lex.problems.vernut",
+  "word": "вернуть",
+  "syll": 2,
+  "seconds": 1.68,
+  "sps": 0.84
+ },
+ {
+  "id": "ru.lex.home.krovat",
+  "word": "кровать",
+  "syll": 2,
+  "seconds": 1.68,
+  "sps": 0.84
+ },
+ {
+  "id": "ru.lex.argue.verit",
+  "word": "верить",
+  "syll": 2,
+  "seconds": 1.68,
+  "sps": 0.84
+ },
+ {
+  "id": "ru.lex.pastevents.pisat",
+  "word": "писать",
+  "syll": 2,
+  "seconds": 1.64,
+  "sps": 0.82
+ },
+ {
+  "id": "ru.lex.messages2.prochitat",
+  "word": "прочитать",
+  "syll": 3,
+  "seconds": 2.41,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.summary.rech2",
+  "word": "речь",
+  "syll": 1,
+  "seconds": 0.8,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.style.vstavlyat",
+  "word": "вставлять",
+  "syll": 2,
+  "seconds": 1.6,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.style.szhatost",
+  "word": "сжатость",
+  "syll": 2,
+  "seconds": 1.6,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.study2.cep",
+  "word": "цепь",
+  "syll": 1,
+  "seconds": 0.8,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.routines.den",
+  "word": "день",
+  "syll": 1,
+  "seconds": 0.8,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.respect.derzost",
+  "word": "дерзость",
+  "syll": 2,
+  "seconds": 1.6,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.personal.dvadtsat",
+  "word": "двадцать",
+  "syll": 2,
+  "seconds": 1.6,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.pastevents.kupit",
+  "word": "купить",
+  "syll": 2,
+  "seconds": 1.6,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.pastevents.delat",
+  "word": "делать",
+  "syll": 2,
+  "seconds": 1.6,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.media.set2",
+  "word": "сеть",
+  "syll": 1,
+  "seconds": 0.8,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.media.lozh",
+  "word": "ложь",
+  "syll": 1,
+  "seconds": 0.8,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.learning.slovar",
+  "word": "словарь",
+  "syll": 2,
+  "seconds": 1.6,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.instructions.derzhat",
+  "word": "держать",
+  "syll": 2,
+  "seconds": 1.6,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.food.pit",
+  "word": "пить",
+  "syll": 1,
+  "seconds": 0.8,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.argue3.chut",
+  "word": "чуть",
+  "syll": 1,
+  "seconds": 0.8,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.contrast.voicing.bp-1",
+  "word": "пить",
+  "syll": 1,
+  "seconds": 0.8,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.style.dotoshnost",
+  "word": "дотошность",
+  "syll": 3,
+  "seconds": 2.4,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.socialplans.priglasit2",
+  "word": "пригласить",
+  "syll": 3,
+  "seconds": 2.4,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.soc.sekretnost",
+  "word": "секретность",
+  "syll": 3,
+  "seconds": 2.4,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.city.voditel",
+  "word": "водитель",
+  "syll": 3,
+  "seconds": 2.4,
+  "sps": 0.8
+ },
+ {
+  "id": "ru.lex.summary.kratkost",
+  "word": "краткость",
+  "syll": 2,
+  "seconds": 1.52,
+  "sps": 0.76
+ },
+ {
+  "id": "ru.lex.style.sveryat",
+  "word": "сверять",
+  "syll": 2,
+  "seconds": 1.52,
+  "sps": 0.76
+ },
+ {
+  "id": "ru.lex.style.ceremonnost",
+  "word": "церемонность",
+  "syll": 4,
+  "seconds": 3.04,
+  "sps": 0.76
+ },
+ {
+  "id": "ru.lex.routines.pisat",
+  "word": "писать",
+  "syll": 2,
+  "seconds": 1.52,
+  "sps": 0.76
+ },
+ {
+  "id": "ru.lex.rel.posetitel",
+  "word": "посетитель",
+  "syll": 4,
+  "seconds": 3.04,
+  "sps": 0.76
+ },
+ {
+  "id": "ru.lex.experiences.sovest",
+  "word": "совесть",
+  "syll": 2,
+  "seconds": 1.52,
+  "sps": 0.76
+ },
+ {
+  "id": "ru.lex.cult.obshchnost",
+  "word": "общность",
+  "syll": 2,
+  "seconds": 1.52,
+  "sps": 0.76
+ },
+ {
+  "id": "ru.lex.argue2.slichat",
+  "word": "сличать",
+  "syll": 2,
+  "seconds": 1.52,
+  "sps": 0.76
+ },
+ {
+  "id": "ru.lex.family.mat",
+  "word": "мать",
+  "syll": 1,
+  "seconds": 0.75,
+  "sps": 0.75
+ },
+ {
+  "id": "ru.lex.wellbeing.otdyhat",
+  "word": "отдыхать",
+  "syll": 3,
+  "seconds": 2.24,
+  "sps": 0.75
+ },
+ {
+  "id": "ru.lex.soc.dejstvennost",
+  "word": "действенность",
+  "syll": 3,
+  "seconds": 2.24,
+  "sps": 0.75
+ },
+ {
+  "id": "ru.lex.services.stoimost",
+  "word": "стоимость",
+  "syll": 3,
+  "seconds": 2.24,
+  "sps": 0.75
+ },
+ {
+  "id": "ru.lex.messages.obeshchat",
+  "word": "обещать",
+  "syll": 3,
+  "seconds": 2.24,
+  "sps": 0.75
+ },
+ {
+  "id": "ru.lex.cult.narodnost",
+  "word": "народность",
+  "syll": 3,
+  "seconds": 2.24,
+  "sps": 0.75
+ },
+ {
+  "id": "ru.lex.argue2.otchetnost",
+  "word": "отчётность",
+  "syll": 3,
+  "seconds": 2.24,
+  "sps": 0.75
+ },
+ {
+  "id": "ru.lex.critical3.legitimnost",
+  "word": "легитимность",
+  "syll": 4,
+  "seconds": 2.96,
+  "sps": 0.74
+ },
+ {
+  "id": "ru.lex.synthesis4.vedomost",
+  "word": "ведомость",
+  "syll": 3,
+  "seconds": 2.16,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.prof.utverdit",
+  "word": "утвердить",
+  "syll": 3,
+  "seconds": 2.16,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.feelings.vyglyadet",
+  "word": "выглядеть",
+  "syll": 3,
+  "seconds": 2.16,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.wellbeing.bol",
+  "word": "боль",
+  "syll": 1,
+  "seconds": 0.72,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.style.smyagchat",
+  "word": "смягчать",
+  "syll": 2,
+  "seconds": 1.44,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.study2.slabost",
+  "word": "слабость",
+  "syll": 2,
+  "seconds": 1.44,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.study.tret",
+  "word": "треть",
+  "syll": 1,
+  "seconds": 0.72,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.socialplans.gost",
+  "word": "гость",
+  "syll": 1,
+  "seconds": 0.72,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.services.pechat",
+  "word": "печать",
+  "syll": 2,
+  "seconds": 1.44,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.routines.zhit",
+  "word": "жить",
+  "syll": 1,
+  "seconds": 0.72,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.routines.vstrechat",
+  "word": "встречать",
+  "syll": 2,
+  "seconds": 1.44,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.problems2.podat",
+  "word": "подать",
+  "syll": 2,
+  "seconds": 1.44,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.pastevents.smotret",
+  "word": "смотреть",
+  "syll": 2,
+  "seconds": 1.44,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.narration2.ten",
+  "word": "тень",
+  "syll": 1,
+  "seconds": 0.72,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.narration2.mysl",
+  "word": "мысль",
+  "syll": 1,
+  "seconds": 0.72,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.narration2.dozd",
+  "word": "дождь",
+  "syll": 1,
+  "seconds": 0.72,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.narration.yunost",
+  "word": "юность",
+  "syll": 2,
+  "seconds": 1.44,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.home.obuv",
+  "word": "обувь",
+  "syll": 2,
+  "seconds": 1.44,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.food.sol",
+  "word": "соль",
+  "syll": 1,
+  "seconds": 0.72,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.cult.prinadlezhnost",
+  "word": "принадлежность",
+  "syll": 4,
+  "seconds": 2.88,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.critical4.mnogoznachnost",
+  "word": "многозначность",
+  "syll": 4,
+  "seconds": 2.88,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.comparisons.sravnit",
+  "word": "сравнить",
+  "syll": 2,
+  "seconds": 1.44,
+  "sps": 0.72
+ },
+ {
+  "id": "ru.lex.style.sarkastichnost",
+  "word": "саркастичность",
+  "syll": 4,
+  "seconds": 2.8,
+  "sps": 0.7
+ },
+ {
+  "id": "ru.lex.problems.ispravit",
+  "word": "исправить",
+  "syll": 3,
+  "seconds": 2.08,
+  "sps": 0.69
+ },
+ {
+  "id": "ru.lex.wellbeing.sovet",
+  "word": "советовать",
+  "syll": 4,
+  "seconds": 2.72,
+  "sps": 0.68
+ },
+ {
+  "id": "ru.lex.style.cherstost",
+  "word": "черствость",
+  "syll": 2,
+  "seconds": 1.36,
+  "sps": 0.68
+ },
+ {
+  "id": "ru.lex.routines.vstavat",
+  "word": "вставать",
+  "syll": 2,
+  "seconds": 1.36,
+  "sps": 0.68
+ },
+ {
+  "id": "ru.lex.prof.skrepit",
+  "word": "скрепить",
+  "syll": 2,
+  "seconds": 1.36,
+  "sps": 0.68
+ },
+ {
+  "id": "ru.lex.pastevents.vstrechal",
+  "word": "встречать",
+  "syll": 2,
+  "seconds": 1.36,
+  "sps": 0.68
+ },
+ {
+  "id": "ru.lex.opinions.tochnost",
+  "word": "точность",
+  "syll": 2,
+  "seconds": 1.36,
+  "sps": 0.68
+ },
+ {
+  "id": "ru.lex.narration2.paren",
+  "word": "парень",
+  "syll": 2,
+  "seconds": 1.36,
+  "sps": 0.68
+ },
+ {
+  "id": "ru.lex.messages.slushat",
+  "word": "слушать",
+  "syll": 2,
+  "seconds": 1.36,
+  "sps": 0.68
+ },
+ {
+  "id": "ru.lex.instructions.detal",
+  "word": "деталь",
+  "syll": 2,
+  "seconds": 1.36,
+  "sps": 0.68
+ },
+ {
+  "id": "ru.lex.cult.hrabrost",
+  "word": "храбрость",
+  "syll": 2,
+  "seconds": 1.36,
+  "sps": 0.68
+ },
+ {
+  "id": "ru.lex.cult.artel",
+  "word": "артель",
+  "syll": 2,
+  "seconds": 1.36,
+  "sps": 0.68
+ },
+ {
+  "id": "ru.lex.prof.zaverit",
+  "word": "заверить",
+  "syll": 3,
+  "seconds": 2.03,
+  "sps": 0.68
+ },
+ {
+  "id": "ru.lex.neg.priostranovit",
+  "word": "приостановить",
+  "syll": 5,
+  "seconds": 3.36,
+  "sps": 0.67
+ },
+ {
+  "id": "ru.lex.summary2.uroven",
+  "word": "уровень",
+  "syll": 3,
+  "seconds": 2.0,
+  "sps": 0.67
+ },
+ {
+  "id": "ru.lex.sci.opolzen",
+  "word": "оползень",
+  "syll": 3,
+  "seconds": 2.0,
+  "sps": 0.67
+ },
+ {
+  "id": "ru.lex.neg.pregradit",
+  "word": "преградить",
+  "syll": 3,
+  "seconds": 2.0,
+  "sps": 0.67
+ },
+ {
+  "id": "ru.lex.messages2.utochit",
+  "word": "уточнить",
+  "syll": 3,
+  "seconds": 2.0,
+  "sps": 0.67
+ },
+ {
+  "id": "ru.lex.messages2.otpravit",
+  "word": "отправить",
+  "syll": 3,
+  "seconds": 2.0,
+  "sps": 0.67
+ },
+ {
+  "id": "ru.lex.instructions.vyklyuchit",
+  "word": "выключить",
+  "syll": 3,
+  "seconds": 2.0,
+  "sps": 0.67
+ },
+ {
+  "id": "ru.lex.cult.obraznost",
+  "word": "образность",
+  "syll": 3,
+  "seconds": 2.0,
+  "sps": 0.67
+ },
+ {
+  "id": "ru.lex.argue2.poddelat",
+  "word": "подделать",
+  "syll": 3,
+  "seconds": 2.0,
+  "sps": 0.67
+ },
+ {
+  "id": "ru.lex.travel.bron",
+  "word": "бронь",
+  "syll": 1,
+  "seconds": 0.662,
+  "sps": 0.66
+ },
+ {
+  "id": "ru.lex.writing.kopirovat",
+  "word": "копировать",
+  "syll": 4,
+  "seconds": 2.64,
+  "sps": 0.66
+ },
+ {
+  "id": "ru.lex.style.pridirchivost",
+  "word": "придирчивость",
+  "syll": 4,
+  "seconds": 2.64,
+  "sps": 0.66
+ },
+ {
+  "id": "ru.lex.problems.poprosit",
+  "word": "попросить",
+  "syll": 3,
+  "seconds": 1.98,
+  "sps": 0.66
+ },
+ {
+  "id": "ru.lex.neg.dominirovat",
+  "word": "доминировать",
+  "syll": 5,
+  "seconds": 3.28,
+  "sps": 0.66
+ },
+ {
+  "id": "ru.lex.writing2.poyasnit",
+  "word": "пояснить",
+  "syll": 3,
+  "seconds": 1.92,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.writing.stil",
+  "word": "стиль",
+  "syll": 1,
+  "seconds": 0.64,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.travel2.rekomendovat",
+  "word": "рекомендовать",
+  "syll": 5,
+  "seconds": 3.2,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.travel2.ponravilos",
+  "word": "понравилось",
+  "syll": 4,
+  "seconds": 2.56,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.travel.kontrol",
+  "word": "контроль",
+  "syll": 2,
+  "seconds": 1.28,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.travel.ehat",
+  "word": "ехать",
+  "syll": 2,
+  "seconds": 1.28,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.style.vypuklost",
+  "word": "выпуклость",
+  "syll": 3,
+  "seconds": 1.92,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.style.smeshivat",
+  "word": "смешивать",
+  "syll": 3,
+  "seconds": 1.92,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.style.falsh",
+  "word": "фальшь",
+  "syll": 1,
+  "seconds": 0.64,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.study.okruzhnost",
+  "word": "окружность",
+  "syll": 3,
+  "seconds": 1.92,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.respect.skromnost",
+  "word": "скромность",
+  "syll": 2,
+  "seconds": 1.28,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.numbers-time.vosem",
+  "word": "восемь",
+  "syll": 2,
+  "seconds": 1.28,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.housing.zatopit",
+  "word": "затопить",
+  "syll": 3,
+  "seconds": 1.92,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.family.doch",
+  "word": "дочь",
+  "syll": 1,
+  "seconds": 0.64,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.culture.rol",
+  "word": "роль",
+  "syll": 1,
+  "seconds": 0.64,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.cult.trusost",
+  "word": "трусость",
+  "syll": 2,
+  "seconds": 1.28,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.argue.tsirovat",
+  "word": "цитировать",
+  "syll": 4,
+  "seconds": 2.56,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.argue.kompetentnost",
+  "word": "компетентность",
+  "syll": 4,
+  "seconds": 2.56,
+  "sps": 0.64
+ },
+ {
+  "id": "ru.lex.critical.vzaimosvyaz",
+  "word": "взаимосвязь",
+  "syll": 4,
+  "seconds": 2.51,
+  "sps": 0.63
+ }
+]
