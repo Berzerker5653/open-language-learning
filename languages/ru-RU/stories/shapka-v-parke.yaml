@@ -1,0 +1,20 @@
+id: ru.story.a1.shapka-v-parke
+status: draft
+title: "Ша́пка в са́ду"
+description: "In the garden on an autumn day: someone in a coat, a child in a hat, and a hat left on a bench."
+sentences:
+  - ru.sent.a1.shapka-v-parke.u001
+  - ru.sent.a1.shapka-v-parke.u002
+  - ru.sent.a1.shapka-v-parke.u003
+  - ru.sent.a1.shapka-v-parke.u004
+  - ru.sent.a1.shapka-v-parke.u005
+  - ru.sent.a1.shapka-v-parke.u006
+sources:
+  - ru-original
+notes: "STORY-AUTHOR-001 A1 batch (2026-11-17); present-tense only, <=2 new lemmas per story (pymorphy-verified against ru.sent.a1 pool); human review required"
+generation:
+  method: ai-assisted
+  tool: hermes
+  model: qwen3.8-flash-next-iq3_s
+  date: '2026-11-17'
+  notes: "ai-drafted; human review required"
