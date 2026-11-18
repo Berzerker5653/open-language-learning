@@ -66,6 +66,30 @@ Authoring is independent per level → driver lane can do one level per burst
 then owner auditions A1 stories before A2–B2 are mass-authored).
 
 
+## A2 batch COMPLETE + B1 resume recipe (controller, 2026-11-18 ~15:45)
+
+A2 LANDED: 4 stories, 26 sentences, 4 lexicon entries, 30 clips baked and ASR-certified
+(28 pass round 1 + 2 pass round 2), validate/lint languages/ru-RU 0 errors, budget check
+2/3+3/3+2/3+1/3 exit 0. Evidence: state/evidence/STORY-AUTHOR-001/a2-bake/gates.log.
+
+B1 RESUME RECIPE (next burst; do not re-derive):
+1. Author 4 B1 stories per the slate above (kluch-ot-dachi, internet-v-derevne,
+   pismo-ne-temu, noch-v-poezde): 7-9 sentences each, complex sentences +
+   conditionals, <=4 new lemmas/story vs the B1 drill pool; sentence ids
+   ru.sent.b1.<slug>.NNN; story YAML + lexicon ids romanized ([a-z0-9._-]).
+2. Budget-check on GamingPC with ~/.venvs/vocab/bin/python tools/vocab-budget-check.py
+   (pymorphy3 now installed there; stories.json input shape = the A2 recipe in the
+   mid-flight section below).
+3. Bake on omarchy: copy source files there, then run the loop in a FRESH DIR
+   (see gates.log ENV TRIAGE: stale qa-rN.jsonl in ~/LTS root poisons resume)
+   with LANG='russian' (generate rejects 'ru'), keep a pristine ids copy
+   (the loop rewrites its IDS file in place), fish shell -> launcher script.
+4. scp wavs + manifest rows back, sha-verify per row, then
+   cargo run -p lts-langpack-cli -- validate languages/ru-RU -> expect 0 errors
+   (the 6 'package' schema rows were fixed as a chore 2026-11-18 — baseline is now 0).
+5. Commit content lane, then ledger (task-state + this notes file + KANBAN row).
+6. B2 batch last (8-10 sentences; participles/gerunds, subjunctive; <=6 new lemmas).
+
 ## A2 batch mid-flight state + resume recipe (controller, 2026-11-18 ~14:00)
 The 13:34 burst drafted the A2 batch then hit its iteration limit mid-verification. Controller triage since:
 - DRAFTED (uncommitted, working tree): 4 stories (`avtobus-ne-prishol`, `sosed-s-gitarioy`, `rybalka-zimoy`, `telefon-v-taksi`), 26 sentences appended to sentences/entries.jsonl, 4 lexicon entries in lexicon/stories202611.jsonl, 4 story YAMLs, tools/vocab-budget-check.py (all budgets pass: 2/3, 3/3, 2/3, 1/3 new lemmas).
