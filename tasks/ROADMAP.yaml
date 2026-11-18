@@ -2675,6 +2675,49 @@ tasks:
   - leaving listen mode returns to the paragraph reader; lookups made while reading and while listening both log to the vocabulary builder
   required_for_desktop_1_0: false
 
+- id: ERR-SRS-LOOP-001
+  milestone: M8
+  priority: P1
+  title: Error memory loop — detected production errors become per-form review cards and a recurrence signal (industry-wide open gap, 2026-11 competitive research)
+  dependencies: []
+  read_first:
+  - docs/competitor-systems-deep-dive-2026-11.md
+  - state/notes/CONTENT-CONFIRM-001.md
+  acceptance:
+  - dictation, speaking-check, and composition mismatches against the pymorphy-expected form are classified (case / aspect / stress / agreement / wrong word) and appended to a per-profile error ledger (surface, lemma, error class, context sentence id, timestamp)
+  - after an error is surfaced the learner is explicitly offered a per-form review card (never silently created); accepted cards schedule through the existing SRS and drill the exact form replayed in its context sentence
+  - recurrence counts across sessions feed personalize_progression as an input signal only; existing caps and no-calibration-claims rule preserved
+  - ledger is local-only, covered by the profile export bundle, and survives migrations; no new network calls
+- id: READABILITY-GATE-001
+  milestone: M8
+  priority: P1
+  title: Known-words readability gate — generated/sentence content never contains more than one unknown lemma (Russio/NuanceDeck discipline)
+  dependencies: []
+  read_first:
+  - docs/competitor-systems-deep-dive-2026-11.md
+  - docs/PACK_AUTHORING_CONTRACT.md
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  acceptance:
+  - authoring-time validator checks every story/lesson sentence against the pack's declared band lexicon and rejects sentences with more than one lemma outside it, naming the offending lemma in the reason code
+  - the runtime generator loop regenerates rejected sentences with the offending word as an explicit negative hint; violations are logged in pack build evidence
+  - for the owner's profile, the known-lexicon source is the local confirm/mine ledger (a word is known once confirmed); a cold profile falls back to the pack band list
+  - the gate is deterministic and tested with golden sentences; existing pack structure validation stays unchanged
+- id: GRAMMAR-LABELS-001
+  milestone: M8
+  priority: P1
+  title: Always-on grammar labels in interlinear reading — case and role under nouns, aspect and tense under verbs, stress on every word (NuanceDeck's signature UX)
+  dependencies: []
+  read_first:
+  - apps/desktop/src/reading.tsx
+  - docs/competitor-systems-deep-dive-2026-11.md
+  - docs/04_LANGUAGE_PACK_SPEC.md
+  acceptance:
+  - "ru interlinear story text shows, under each inflected word, stress marking plus a compact grammar label (noun/adjective: case+number; verb: aspect+tense) by default, with a global toggle to hide labels"
+  - labels are precomputed at pack build time from pymorphy (committed into the pack, no runtime network) with a golden-sentence test for the six cases and aspect pairs
+  - missing labels degrade silently to stress-only without layout shift; ja reading layout (furigana) is untouched
+  - labels stay legible at the reader's current density budget; long labels abbreviate (gen.sg style) with tap-for-full-form via the existing word card
+  required_for_desktop_1_0: false
+
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -2770,4 +2813,7 @@ execution_scope:
   - READER-FLOW-001
   - VOCAB-BUILDER-001
   - STORY-LISTEN-001
+  - ERR-SRS-LOOP-001
+  - READABILITY-GATE-001
+  - GRAMMAR-LABELS-001
   public_publication_authorized: false
