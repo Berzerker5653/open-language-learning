@@ -128,6 +128,23 @@ ignore = [
     # >= 0.20, or dropping the gtk3 stack.
     "RUSTSEC-2024-0429",
 
+    # RUSTSEC-2026-0543 chrono 0.4.45 - unmaintained (advisory 2026-09-14),
+    # no vulnerability claimed and no patched version listed (0.4.45 is the
+    # newest release). Recorded NOT-APPLICABLE, not accepted exposure: the
+    # crate does not resolve into any build graph of this workspace.
+    # Measured 2026-11-18: `cargo tree --workspace -i chrono` AND
+    # `cargo tree --workspace --target all -i chrono` both print
+    # `warning: nothing to print.` — chrono appears in Cargo.lock only as a
+    # candidate OPTIONAL dependency of serde_with 3.24.0 (its `chrono`
+    # feature, which no workspace member enables) under tauri-utils 2.10.1 <-
+    # tauri 2.12.1 / tauri-build 2.7.1 [build-dependencies]. No chrono build
+    # artifact exists in target/*/deps (grep count 0). The entry exists only
+    # because cargo-audit scans lockfile entries, not feature-resolved graphs.
+    # Removable when the lock entry is pruned (e.g. a serde_with release
+    # dropping the optional chrono candidate) without re-pinning the rest of
+    # the lock.
+    "RUSTSEC-2026-0543",
+
     # RUSTSEC-2026-0381 webpki-roots 0.26.11 - the advisory (2026-10-19,
     # distrusted emSign intermediates in the bundled root program) flags any
     # webpki-roots below 1.0.10. But 0.26.11 carries NO root data itself:

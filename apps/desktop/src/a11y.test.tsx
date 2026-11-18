@@ -340,7 +340,9 @@ describe("automated accessibility audit (ACC-001 auto portion)", () => {
   it("names pack actions with their pack and speaks the tag line (F-04)", () => {
     const languageStep = renderToStaticMarkup(<Onboarding {...onboarding} step="packs" />);
     expect(languageStep).toContain('aria-label="Install Japanese demo (ja-JP)"');
-    expect(languageStep).toContain('aria-hidden="true">(ja-JP, volunteer-made, we have not checked it)');
+    expect(languageStep).toContain(
+      'aria-hidden="true">(ja-JP, volunteer-made, we have not checked it)',
+    );
   });
 
   it("live regions pre-exist their content (WCAG 4.1.3 timing rule)", () => {

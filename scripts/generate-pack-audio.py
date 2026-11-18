@@ -32,6 +32,14 @@ Rules this script enforces:
     row's notes record what was applied. Reused (hash-matched) files are
     never touched, so the manifest and the bytes on disk can never drift.
     Disable with `--no-normalize`.
+  * Voice consistency (VOICE-CONSISTENCY-001): when the pack declares a
+    narrator in `media/narrator.json`, a fresh SENTENCE row (asset id
+    containing `.sent.`) whose synthesizer runtime+voice differ from the
+    declaration is REFUSED — the error names the asset, the declared
+    narrator and the rejected synthesizer, no row is written and the prior
+    row stays untouched. Word/drill and contrast clips are never guarded
+    (owner rule 2026-11-17: only stories/listen audio needs one narrator).
+    Packs without `media/narrator.json` (e.g. ja-JP) behave as before.
 
 Engine: the default backend is Qwen3-TTS CustomVoice (owner locked it in
 2026-10-10 after the four-engine bake-off; see docs/provenance/qwen3-tts-adoption.md).
@@ -166,6 +174,71 @@ def trim_edges(path: Path, margin_ms: int = 150) -> str | None:
             "<%dh" % (stop - start), *samples[start:stop]))
     cut_ms = int((head + (len(rms) - tail)) * 10)
     return f"trimmed {cut_ms} ms head/tail silence"
+
+
+# VOICE-CONSISTENCY-001: continuous narration (story/sentence clips) must
+# stay in ONE narrator's voice per pack — the owner hears an alternating
+# voice mid-story as "read by different people". The pack declares its
+# narrator in `media/narrator.json`; sentence asset ids are the ones
+# carrying the `.sent.` component (`ru.sent.cp.p37` style). Word/drill and
+# contrast clips are deliberately NOT guarded — owner rule 2026-11-17: only
+# stories/listen audio needs one narrator; word/drill audio may be any voice.
+SENTENCE_MARK = ".sent."
+
+
+def load_narrator(pack: Path) -> dict | None:
+    """Read the pack's declared narrator from `media/narrator.json`.
+
+    Returns the declaration dict, or None when the sidecar is absent (packs
+    without a declaration behave exactly as before — e.g. the ja pack).
+    Raises ValueError on malformed content: the caller must refuse loudly
+    rather than silently bake under an unverifiable narrator contract.
+    """
+    path = pack / "media" / "narrator.json"
+    if not path.exists():
+        return None
+    try:
+        data = json.loads(path.read_text())
+    except (OSError, json.JSONDecodeError) as exc:
+        raise ValueError(
+            f"media/narrator.json is unreadable or malformed: {exc}"
+        ) from exc
+    if (
+        not isinstance(data, dict)
+        or not isinstance(data.get("runtime"), str)
+        or not isinstance(data.get("voice"), str)
+    ):
+        raise ValueError(
+            "media/narrator.json must be an object with string 'runtime' "
+            f"and 'voice' keys, got: {data!r}"
+        )
+    return data
+
+
+def narrator_conflict(declared: dict | None, asset_id: str, synth: dict) -> str | None:
+    """Error message when a fresh row would break the pack's declared narrator.
+
+    Pure decision: `declared` is the parsed media/narrator.json (None when
+    absent), `asset_id` the asset about to get a row, `synth` the exact
+    synthesizer dict this run would record. Only `.sent.` (sentence) assets
+    are guarded; the identity compared is the row's runtime+voice pair.
+    Returns a self-contained error naming the id, the declared narrator and
+    the rejected synthesizer, or None when the asset may be written.
+    """
+    if declared is None or SENTENCE_MARK not in asset_id:
+        return None
+    want = {"runtime": synth.get("runtime"), "voice": synth.get("voice")}
+    have = {"runtime": declared.get("runtime"), "voice": declared.get("voice")}
+    if want == have:
+        return None
+    return (
+        f"narrator-conflict {asset_id}: media/narrator.json declares the "
+        f"pack narrator as {json.dumps(have, ensure_ascii=False)}, but this "
+        f"run would write synthesizer {json.dumps(want, ensure_ascii=False)}; "
+        f"refusing the row (VOICE-CONSISTENCY-001: continuous narration "
+        f"keeps one voice, re-bake with the declared engine/speaker or "
+        f"update media/narrator.json)"
+    )
 
 
 def speak_choice(declared: str | None, written: str) -> tuple[str, str]:
@@ -359,6 +432,14 @@ def main() -> int:
     args = ap.parse_args()
 
     pack = args.pack
+    # VOICE-CONSISTENCY-001: refuse to even start a run whose narrator
+    # declaration cannot be trusted — a malformed sidecar must stop the
+    # bake loudly instead of silently baking under no contract.
+    try:
+        declared_narrator = load_narrator(pack)
+    except ValueError as exc:
+        print(f"NARRATOR-CONFLICT: {exc}", file=sys.stderr)
+        return 2
     runtime = args.vendor / RUNTIME / "bin" / "sherpa-onnx-offline-tts"
     model_dir = args.vendor / args.payload
     wants = targets(pack)
@@ -404,9 +485,22 @@ def main() -> int:
             "speed": args.speed,
         }
     pending: list[dict] = []
+    refused: list[str] = []
     for want in wants:
         out = pack / want["file"]
         prior = previous.get(want["id"])
+        # VOICE-CONSISTENCY-001: a sentence row whose synthesizer identity
+        # differs from the declared narrator is refused BEFORE synthesis and
+        # before any row is written — synthesis would only produce audio that
+        # may not ship (and --force would wipe the existing wav). The prior
+        # row, if any, carries over untouched.
+        conflict = narrator_conflict(declared_narrator, want["id"], synth)
+        if conflict:
+            print(conflict, file=sys.stderr)
+            refused.append(want["id"])
+            if prior:
+                rows.append(prior)
+            continue
         # Bytes, synthesizer AND the recorded spoken text must all still match
         # what this run would record; see reusable().
         if reusable(prior, out, synth, want, args.force):
@@ -559,10 +653,13 @@ def main() -> int:
     rows.sort(key=lambda r: r["id"])
     manifest_path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rows))
     total = sum(r["bytes"] for r in rows)
-    print(f"pack={pack} assets={len(rows)} generated={generated} reused={reused} bytes={total}")
+    print(
+        f"pack={pack} assets={len(rows)} generated={generated} reused={reused} "
+        f"refused={len(refused)} bytes={total}"
+    )
     for failure in failures:
         print(f"FAILED {failure}", file=sys.stderr)
-    return 1 if failures else 0
+    return 1 if (failures or refused) else 0
 
 
 if __name__ == "__main__":

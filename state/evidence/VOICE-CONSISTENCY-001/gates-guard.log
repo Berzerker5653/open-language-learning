@@ -1,0 +1,17 @@
+test_sentence_row_under_off_voice_synth_is_refused (scripts.test_voice_guard.EndToEndGuardTest.test_sentence_row_under_off_voice_synth_is_refused) ... ok
+test_absent_sidecar_is_None (scripts.test_voice_guard.LoadNarratorTest.test_absent_sidecar_is_None) ... ok
+test_malformed_json_raises (scripts.test_voice_guard.LoadNarratorTest.test_malformed_json_raises) ... ok
+test_missing_identity_keys_raise (scripts.test_voice_guard.LoadNarratorTest.test_missing_identity_keys_raise) ... ok
+test_non_object_raises (scripts.test_voice_guard.LoadNarratorTest.test_non_object_raises) ... ok
+test_valid_sidecar_parses (scripts.test_voice_guard.LoadNarratorTest.test_valid_sidecar_parses) ... ok
+test_extra_synthesizer_keys_are_not_part_of_the_identity (scripts.test_voice_guard.NarratorConflictTest.test_extra_synthesizer_keys_are_not_part_of_the_identity) ... ok
+test_no_declaration_means_no_guard (scripts.test_voice_guard.NarratorConflictTest.test_no_declaration_means_no_guard) ... ok
+test_non_sentence_mismatch_is_never_guarded (scripts.test_voice_guard.NarratorConflictTest.test_non_sentence_mismatch_is_never_guarded) ... ok
+test_sentence_match_is_clean (scripts.test_voice_guard.NarratorConflictTest.test_sentence_match_is_clean) ... ok
+test_sentence_mismatch_errors_and_names_the_id (scripts.test_voice_guard.NarratorConflictTest.test_sentence_mismatch_errors_and_names_the_id) ... ok
+test_voice_only_mismatch_is_caught (scripts.test_voice_guard.NarratorConflictTest.test_voice_only_mismatch_is_caught) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.002s
+
+OK

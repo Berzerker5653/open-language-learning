@@ -358,6 +358,10 @@ jobs:
       - run: python tools/validate_handoff.py --require-explicit-ledger-records
       - run: python -m unittest discover -s tools -p 'test_validate_handoff.py'
       - run: python scripts/test_generate_pack_audio.py
+      # VOICE-CONSISTENCY-001: the bake-time narrator guard - a fresh sentence
+      # row whose runtime+voice differ from the pack's media/narrator.json is
+      # refused. Pure decision + sidecar reading path; no TTS, cargo, network.
+      - run: python scripts/test_voice_guard.py
       # CI-AUDIO: hermetic regression test for the restore path the rust jobs
       # and desktop-smoke depend on (synthetic pack + local archive, no
       # network/cargo).

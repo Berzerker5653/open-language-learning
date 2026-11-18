@@ -435,7 +435,9 @@ describe("onboarding copy — learner-language rewrites (UX-PERSONA-001)", () =>
     const html = render({ step: "packs" });
     expect(html).toContain("<details");
     expect(html).toContain("<summary>What the labels on the pack rows mean</summary>");
-    expect(html).toContain("the automatic checks pass, but we have not checked the content ourselves");
+    expect(html).toContain(
+      "the automatic checks pass, but we have not checked the content ourselves",
+    );
     expect(html).toContain("the checking is not finished");
   });
 

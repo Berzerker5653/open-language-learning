@@ -51,8 +51,14 @@ export const MATURITY_LABELS: Record<string, string> = {
 };
 
 const MATURITY_MEANINGS: [string, string][] = [
-  ["experimental", "Built by us; the content may still have mistakes because the checking is not finished."],
-  ["community", "Made by volunteers; the automatic checks pass, but we have not checked the content ourselves."],
+  [
+    "experimental",
+    "Built by us; the content may still have mistakes because the checking is not finished.",
+  ],
+  [
+    "community",
+    "Made by volunteers; the automatic checks pass, but we have not checked the content ourselves.",
+  ],
   ["validated", "Passed structure audits, and a human reviewer has sampled the content."],
   ["verified", "A defined amount of the content has been reviewed, and the speech checks pass."],
   ["reference", "Our own maintained course for this language."],
