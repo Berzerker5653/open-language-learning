@@ -2688,6 +2688,7 @@ tasks:
   - after an error is surfaced the learner is explicitly offered a per-form review card (never silently created); accepted cards schedule through the existing SRS and drill the exact form replayed in its context sentence
   - recurrence counts across sessions feed personalize_progression as an input signal only; existing caps and no-calibration-claims rule preserved
   - ledger is local-only, covered by the profile export bundle, and survives migrations; no new network calls
+  required_for_desktop_1_0: false
 - id: READABILITY-GATE-001
   milestone: M8
   priority: P1
@@ -2702,6 +2703,7 @@ tasks:
   - the runtime generator loop regenerates rejected sentences with the offending word as an explicit negative hint; violations are logged in pack build evidence
   - for the owner's profile, the known-lexicon source is the local confirm/mine ledger (a word is known once confirmed); a cold profile falls back to the pack band list
   - the gate is deterministic and tested with golden sentences; existing pack structure validation stays unchanged
+  required_for_desktop_1_0: false
 - id: GRAMMAR-LABELS-001
   milestone: M8
   priority: P1
