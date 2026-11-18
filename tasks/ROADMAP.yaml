@@ -2638,6 +2638,7 @@ tasks:
   - STORY-AUTHOR-001
   read_first:
   - state/notes/READING-STORY-UX-001.md
+  - state/notes/WORD-CARD-AUDIO-001.md
   - apps/desktop/src/reading.tsx
   acceptance:
   - story renders as continuous paragraph text (not a button column); the primary interaction is selecting/highlighting a word, never a queue of sentence-playback buttons
