@@ -2719,6 +2719,47 @@ tasks:
   - missing labels degrade silently to stress-only without layout shift; ja reading layout (furigana) is untouched
   - labels stay legible at the reader's current density budget; long labels abbreviate (gen.sg style) with tap-for-full-form via the existing word card
   required_for_desktop_1_0: false
+- id: UI-HYGIENE-001
+  milestone: M8
+  priority: P2
+  title: Learner-facing hygiene pass — container alignment, copy/token leaks, profile chooser cleanup (visual-ui-audit U1/U2/U13)
+  dependencies: []
+  read_first:
+  - docs/visual-ui-audit-2026-11.md
+  acceptance:
+  - one content-width container token is shared by header, cards, and lists so left edges align at every breakpoint; segmented-control selected state is clearly visible
+  - no raw identifiers (pack/lexicon tokens, activity ids) or implementation jargon render in learner-facing surfaces; the AI-content honesty line renders as a small designed badge, not prose in the greeting area
+  - profile chooser lists only real profiles (fixtures archived/hidden, duplicates deduped) as aligned cards showing pack, last-studied, and one-line state (due count, band); tools/audit_learner_copy.py gains a raw-token-leak check that the gate runs
+  - existing copy-audit and handoff validation stay green
+  required_for_desktop_1_0: false
+- id: SESSION-CHROME-001
+  milestone: M8
+  priority: P2
+  title: In-session chrome + SRS transparency — progress bar, step counter, time budget, and next-interval preview on review grades (visual-ui-audit U3/U6)
+  dependencies: []
+  read_first:
+  - docs/visual-ui-audit-2026-11.md
+  acceptance:
+  - every activity type shows a thin session progress bar with n-of-N and a running time estimate; session end shows a plain summary card (activities done, time, forms surfaced) with no XP/streak mechanics
+  - review grade buttons display the predicted next interval from the existing FSRS state; the review queue header expresses dues as a time budget (~minutes)
+  - no scoring language appears on guided/formative activities; the graded/formative distinction is encoded as a badge on mode cards, not prose only
+  - desktop vitest + cargo lib tests cover the new chrome components
+  required_for_desktop_1_0: false
+- id: PROGRESS-STATS-001
+  milestone: M8
+  priority: P2
+  title: Progress instruments — per-goal modality progress bars, readable goal references, and a memory stats strip (visual-ui-audit U7/U14)
+  dependencies:
+  - SESSION-CHROME-001
+  read_first:
+  - docs/visual-ui-audit-2026-11.md
+  - docs/03_CURRICULUM_AND_MASTERY.md
+  acceptance:
+  - each capability goal shows per-modality progress bars (0-100% of the modality gate, sourced from derived mastery state) instead of only textual not-started states
+  - Grows-with references render the human label of the driving item with the raw id available via the existing word/goal card, never inline
+  - a stats strip (due today, ~minutes, per-band retention, 12-week activity calendar) sits above the capability tree; all data is local n=1 and labeled as an instrument, not a grade or certificate
+  - charts are dependency-free SVG (no new runtime deps) and pass the a11y contrast audit
+  required_for_desktop_1_0: false
 
 execution_scope:
   default_goal: desktop-1.0-release-candidate
@@ -2818,4 +2859,7 @@ execution_scope:
   - ERR-SRS-LOOP-001
   - READABILITY-GATE-001
   - GRAMMAR-LABELS-001
+  - UI-HYGIENE-001
+  - SESSION-CHROME-001
+  - PROGRESS-STATS-001
   public_publication_authorized: false
