@@ -30,7 +30,7 @@ Langua's reviewer (the most complete AI tutor on the market): *"the correction h
 
 ### G3. Russian hard-parts surfacing at point of need
 Cases, aspect, stress = the Russian bottleneck per every source; Duolingo Russian plateaus early and isn't B2; NuanceDeck proves demand for stress-on-every-word + case-brackets-under-every-sentence (cards only, no speaking, no course).
-- LTS's interlinear layer is the perfect delivery vehicle: stress marks, case labels, aspect pair links inline in stories and conversation transcripts. Nobody combines this with voice.
+- LTS's interlinear layer is the perfect delivery vehicle: stress marks, case labels, aspect pair links inline in stories and conversation transcripts. Nobody combines this with voice. **Correction 2026-11-17:** the reading half of this combo now exists (NuanceDeck, Russio — see `competitor-systems-deep-dive-2026-11.md`); only the *voice* half of the combination is still ours.
 
 ### G4. Instant grammar explanation ("why did the ending change?")
 Duolingo made Explain My Answer FREE Jan 2026 — it's commodity UX now. Pimsleur's biggest stated weakness is exactly this (can produce endings, can't explain them).
