@@ -1,0 +1,177 @@
+{
+ "w1": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:32:47"
+ },
+ "w2": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:33:09"
+ },
+ "w3": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:33:12"
+ },
+ "w4": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:33:20"
+ },
+ "w5": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:33:55"
+ },
+ "w6": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:34:01"
+ },
+ "w7": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:34:02"
+ },
+ "w8": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:34:04"
+ },
+ "w9": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:34:10"
+ },
+ "w10": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:34:39"
+ },
+ "w11": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:34:41"
+ },
+ "w12": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:34:42"
+ },
+ "w13": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:34:50"
+ },
+ "w14": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:35:09"
+ },
+ "w15": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:35:12"
+ },
+ "w16": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:35:16"
+ },
+ "w17": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:35:20"
+ },
+ "w18": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:35:21"
+ },
+ "w19": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:35:23"
+ },
+ "w20": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:36:07"
+ },
+ "w21": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:36:16"
+ },
+ "w22": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:36:20"
+ },
+ "w23": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:36:24"
+ },
+ "w24": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:36:25"
+ },
+ "w25": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:36:29"
+ },
+ "w26": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:36:30"
+ },
+ "w27": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:36:32"
+ },
+ "w28": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:36:40"
+ },
+ "w29": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:36:47"
+ },
+ "w30": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:36:49"
+ },
+ "w31": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:36:50"
+ },
+ "w32": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:36:55"
+ },
+ "w33": {
+  "verdict": "bad",
+  "comment": "",
+  "ts": "2026-11-17T17:37:00"
+ },
+ "w34": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:37:04"
+ },
+ "w35": {
+  "verdict": "good",
+  "comment": "",
+  "ts": "2026-11-17T17:37:06"
+ }
+}

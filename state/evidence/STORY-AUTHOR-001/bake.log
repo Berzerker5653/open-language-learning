@@ -1,0 +1,86 @@
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.kot-doma.u002: first-request 38.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.kot-doma.u003: first-request 45.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.kot-doma.u004: first-request 56.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.kot-doma.u005: first-request 48.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.kot-doma.u006: first-request 55.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.moy-den.u001: first-request 54.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.moy-den.u002: first-request 27.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.moy-den.u003: first-request 49.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.kot-doma.u001: first-request 152.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.moy-den.u004: first-request 45.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.moy-den.u005: first-request 44.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.shapka-v-parke.u001: first-request 33.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.shapka-v-parke.u002: first-request 40.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.shapka-v-parke.u005: first-request 34.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.moy-den.u006: first-request 87.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.shapka-v-parke.u003: first-request 62.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.shapka-v-parke.u004: first-request 77.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.podarok-dlya-mamy.u001: first-request 35.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.shapka-v-parke.u006: first-request 54.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.podarok-dlya-mamy.u003: first-request 32.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ru.sent.a1.podarok-dlya-mamy.u004: first-request 42.8s ok=True
+[gen] ru.sent.a1.podarok-dlya-mamy.u002: first-request 72.2s ok=True
+[gen] ru.sent.a1.podarok-dlya-mamy.u006: first-request 28.5s ok=True
+[gen] ru.sent.a1.podarok-dlya-mamy.u005: first-request 55.1s ok=True
+pack=languages/ru-RU assets=4880 generated=24 reused=0 bytes=328628704

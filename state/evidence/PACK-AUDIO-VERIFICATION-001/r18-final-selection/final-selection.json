@@ -1,0 +1,47 @@
+{
+  "щель": {
+    "clip": "ru.lex.study4.shchel",
+    "source": "silero baya",
+    "whisper": "Шель ✓"
+  },
+  "лесть": {
+    "clip": "ru.lex.style.lest",
+    "source": "silero baya",
+    "whisper": "Листь (flag only; owner-approved)"
+  },
+  "весь": {
+    "clip": "ru.lex.messages2.ves",
+    "source": "silero baya (swapped: whisper hears весь)",
+    "whisper": "весь ✓"
+  },
+  "пыль": {
+    "clip": "ru.lex.housing.pyl",
+    "source": "silero xenia (swapped: whisper hears Пыль)",
+    "whisper": "Пыль ✓"
+  },
+  "есть": {
+    "clip": "ru.lex.family.est",
+    "source": "silero baya",
+    "whisper": "Есть ✓"
+  },
+  "цепь": {
+    "clip": "ru.lex.study2.cep",
+    "source": "silero xenia (only owner-approved take)",
+    "whisper": "Сэп (flag only; owner-approved)"
+  },
+  "день": {
+    "clip": "ru.lex.routines.den",
+    "source": "qwen3 bare",
+    "whisper": "День ✓"
+  },
+  "боль": {
+    "clip": "ru.lex.wellbeing.bol",
+    "source": "silero baya",
+    "whisper": "Боли (ь→и ASR quirk; owner-approved)"
+  },
+  "тень": {
+    "clip": "ru.lex.narration2.ten",
+    "source": "qwen3 bare",
+    "whisper": "Тень ✓"
+  }
+}
