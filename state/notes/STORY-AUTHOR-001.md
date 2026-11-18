@@ -64,3 +64,17 @@ one narrator per story (pack narrator ono_anna; STORY-LISTEN-001 gate).
 Authoring is independent per level → driver lane can do one level per burst
 (A1 first: smallest vocab pool, fastest to validate the format end-to-end,
 then owner auditions A1 stories before A2–B2 are mass-authored).
+
+
+## A2 batch mid-flight state + resume recipe (controller, 2026-11-18 ~14:00)
+The 13:34 burst drafted the A2 batch then hit its iteration limit mid-verification. Controller triage since:
+- DRAFTED (uncommitted, working tree): 4 stories (`avtobus-ne-prishol`, `sosed-s-gitarioy`, `rybalka-zimoy`, `telefon-v-taksi`), 26 sentences appended to sentences/entries.jsonl, 4 lexicon entries in lexicon/stories202611.jsonl, 4 story YAMLs, tools/vocab-budget-check.py (all budgets pass: 2/3, 3/3, 2/3, 1/3 new lemmas).
+- FIXED by controller: the 4 lexicon ids were Cyrillic (pack grammar is [a-z0-9._-]) -> romanized slugs fonar/gitara/lunka/sidene; A1 cloze capital bugs (ru.sent.a1.kot-doma.u003, ru.sent.a1.podarok-dlya-mamy.u004) -> targets now match sentence-initial "Чашка"/"Чек" (cloze checks are verbatim `text.contains(target)` — sentence-initial targets must be capitalized).
+- Remaining validate errors are ONLY: 6 pre-existing manifest synthesizer 'package' schema rows (older campaign artifacts, not this lane) + media_asset_missing x30 = this lane's unbaked ids.
+
+RESUME ORDER for the next burst (do not re-derive):
+1. Bake 30 clips (26 sentences ru.sent.a2.<slug>.uNNN + 4 lexicon ru.lex.stories202611.{fonar,gitara,lunka,sidene}) on omarchy exactly as the A1 batch did — see state/evidence/STORY-AUTHOR-001/bake.log for the working invocation (`generate-pack-audio.py --tts qwen3 --speaker ono_anna`, voice guard will enforce narrator).
+2. ASR gate via qa-asr.py round-trip + scripts/bake-repair-loop.sh for failures (soft-sign rules from the R15-R18 native rulings apply to word clips).
+3. Copy manifest rows ONLY back into the pack tree (wavs stay gitignored), re-run `cargo run -p lts-langpack-cli -- validate languages/ru-RU` -> expect only the 6 pre-existing 'package' rows.
+4. Commit as ONE lane: story YAMLs + entries.jsonl (incl. the controller cloze fixes) + lexicon + tool + evidence dir + ledger update (STORY-AUTHOR-001 stays in_progress; B1 batch next).
+5. Story clips remain word-timing substrate only (reading-first directive): no listen-mode UI work.
