@@ -1,0 +1,6 @@
+Pack 0.4.4 publication record — 2026-11-18 (owner O-05 standing + same-day instruction)
+release: https://github.com/Berzerker5653/open-language-learning/releases/tag/org.openlanguage.ru-ru.reference-0.4.4
+asset: ru-ru-reference-0.4.4.lpk  size 275899591  sha256 e3ec51db5fa038e5ea62712c779e0fca12509ffe699b646b3556159982da2f00
+built deterministic from commit 475f657 via scripts/build-catalog.sh
+verified: gh release download re-fetch -> sha256 + size match catalog/packs.json entry byte-exact
+voice-guard gates at build: test_voice_guard.py 12/12, generate-pack-audio 11/11, validate/lint 0 errors (2026-11-18)
