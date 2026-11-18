@@ -73,5 +73,40 @@
   "verdict": "bad",
   "comment": "K missing and l dropped ",
   "ts": "2026-11-17T11:10:49"
+ },
+ "sp-I": {
+  "verdict": "bad",
+  "comment": "This is also cut off ",
+  "ts": "2026-11-17T15:51:52"
+ },
+ "sp-J": {
+  "verdict": "bad",
+  "comment": "Cut off",
+  "ts": "2026-11-17T15:52:10"
+ },
+ "sp-K": {
+  "verdict": "bad",
+  "comment": "Cut off",
+  "ts": "2026-11-17T15:52:15"
+ },
+ "sp-L": {
+  "verdict": "bad",
+  "comment": "The word sounds correct now but it's slowed way down",
+  "ts": "2026-11-17T15:53:09"
+ },
+ "sp-M": {
+  "verdict": "bad",
+  "comment": "Correct but slow",
+  "ts": "2026-11-17T15:54:00"
+ },
+ "sp-N": {
+  "verdict": "bad",
+  "comment": "Doesn't say the soft sign",
+  "ts": "2026-11-17T15:54:23"
+ },
+ "sp-O": {
+  "verdict": "bad",
+  "comment": "Missing soft sign",
+  "ts": "2026-11-17T15:59:20"
  }
 }
