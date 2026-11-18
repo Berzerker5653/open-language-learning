@@ -1,0 +1,49 @@
+STORY-AUTHOR-001 A2 batch — controller re-verification gates (2026-11-18, ~15:45 MST)
+
+Controller ran every gate personally after the omarchy bake; none of these
+numbers are the bake run's self-report.
+
+LANE CONTENT RE-VERIFIED
+- 4 story YAMLs (avtobus-ne-prishol, sosed-s-gitarioy, rybalka-zimoy,
+  telefon-v-taksi), 26 sentences appended to sentences/entries.jsonl
+  (incl. the 2 controller A1 cloze-capital fixes), 4 lexicon entries
+  (lexicon/stories202611.jsonl, romanized ids fonar/gitara/lunka/sidene).
+
+1. tools/vocab-budget-check.py (venv ~/.venvs/vocab, pymorphy3 freshly
+   installed on GamingPC — the tool had no interpreter on this box):
+   OK avtobus 2/3 [тишина, фонарь]; OK sosed 3/3 [гитара, тихий, шум];
+   OK rybalka 2/3 [лунка, река]; OK telefon 1/3 [телефон]. EXIT 0.
+
+2. Bake: scripts/bake-repair-loop.sh languages/ru-RU russian a2ids.txt 4
+   on omarchy (isolated dir ~/LTS/a2b, fresh log names). generate-pack-audio.py
+   qwen3/ono_anna, jobs=4: 30/30 generated (pack=... assets=4910 generated=30
+   refused=0 — narrator guard active). ASR round-trip (qa-asr.py, whisper
+   large-v3-turbo): round 1 checked=30 passed=28 MISMATCH=2; round 2 re-bake
+   of the 2 mismatches: 2/2 pass. LOOP-END rounds=2 remaining=0.
+
+3. Wav copy-back + byte verification on GamingPC: 30/30 sha256 match their
+   manifest rows (verified=30 bad=0 missing=0).
+
+4. cargo run -p lts-langpack-cli -- validate languages/ru-RU: 0 error(s),
+   EXIT 0 (after the chore fix below; pre-fix it was 6 pre-existing
+   synthesizer.package schema rows carried in from unpushed campaign
+   commits — fixed in the chore commit preceding this lane).
+   lint languages/ru-RU: 0 error(s), EXIT 0.
+
+5. cargo test -p lts-langpack: all test binaries ok, 0 failed.
+
+ENV TRIAGE NOTES (why the first bake attempt was garbage — do not repeat):
+- ~/LTS root on omarchy still holds this morning's ja-campaign qa-rN.*/
+  repair-rN.* files; qa-asr.py's resume carried 1627 settled JA rows into
+  the new run and the loop then wrote 1455 JA ids into the IDS file.
+  ALWAYS run the loop in a fresh directory with fresh log/ids names.
+- bake-repair-loop.sh passes one LANG to generate (--language) AND to
+  whisper: generate needs the NAME 'russian' ('ru' = language unsupported);
+  whisper accepts the name too. Launch: russian.
+- The loop rewrites its IDS file in place; keep a pristine ids copy.
+- Remote launch on omarchy: fish shell — backgrounding needs the launcher
+  in a script file (bash a2-launch.sh), not an inline `cmd &` over ssh.
+
+DEFERRED: 0.4.3 pack republish (owner gate, rides the next release action) —
+until then CI cannot restore the 54 story clips (24 A1 + 30 A2) from the
+published archives and the repaired campaign rows' shas predate the archives.

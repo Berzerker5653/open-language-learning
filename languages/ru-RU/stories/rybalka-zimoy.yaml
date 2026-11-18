@@ -1,0 +1,20 @@
+id: ru.story.a2.rybalka-zimoy
+status: draft
+title: "Рыбалка зимой"
+description: "A winter trip to the river catches no fish but plenty of stories; the ride home is cold and happy."
+sentences:
+  - ru.sent.a2.rybalka-zimoy.u001
+  - ru.sent.a2.rybalka-zimoy.u002
+  - ru.sent.a2.rybalka-zimoy.u003
+  - ru.sent.a2.rybalka-zimoy.u004
+  - ru.sent.a2.rybalka-zimoy.u005
+  - ru.sent.a2.rybalka-zimoy.u006
+sources:
+  - ru-original
+notes: "STORY-AUTHOR-001 A2 batch (2026-11-18); past tense with basic aspect pairs and motion verbs; 4 new lemmas (зима, друг, река, лунка) with lexicon entries, budget-checked by tools/vocab-budget-check.py; human review required"
+generation:
+  method: ai-assisted
+  tool: hermes
+  model: qwen3.8-flash-next-iq3_s
+  date: '2026-11-18'
+  notes: "ai-drafted; human review required"

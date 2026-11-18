@@ -1,0 +1,20 @@
+id: ru.story.a2.sosed-s-gitarioy
+status: draft
+title: "Сосед с одной гитарой"
+description: "The new neighbor's guitar is loud every evening; instead of a complaint it becomes the whole building's new plan."
+sentences:
+  - ru.sent.a2.sosed-s-gitarioy.u001
+  - ru.sent.a2.sosed-s-gitarioy.u002
+  - ru.sent.a2.sosed-s-gitarioy.u003
+  - ru.sent.a2.sosed-s-gitarioy.u004
+  - ru.sent.a2.sosed-s-gitarioy.u005
+  - ru.sent.a2.sosed-s-gitarioy.u006
+sources:
+  - ru-original
+notes: "STORY-AUTHOR-001 A2 batch (2026-11-18); past tense with basic aspect pairs and motion verbs; 3 new lemmas (сосед, гитара, шум) with lexicon entries, budget-checked by tools/vocab-budget-check.py; human review required"
+generation:
+  method: ai-assisted
+  tool: hermes
+  model: qwen3.8-flash-next-iq3_s
+  date: '2026-11-18'
+  notes: "ai-drafted; human review required"

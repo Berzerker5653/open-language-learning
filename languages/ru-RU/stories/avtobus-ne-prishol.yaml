@@ -1,0 +1,21 @@
+id: ru.story.a2.avtobus-ne-prishol
+status: draft
+title: "Автобус не пришёл"
+description: "Waiting for the bus turns into a long evening ride home through the city lights — an unexpectedly good evening."
+sentences:
+  - ru.sent.a2.avtobus-ne-prishol.u001
+  - ru.sent.a2.avtobus-ne-prishol.u002
+  - ru.sent.a2.avtobus-ne-prishol.u003
+  - ru.sent.a2.avtobus-ne-prishol.u004
+  - ru.sent.a2.avtobus-ne-prishol.u005
+  - ru.sent.a2.avtobus-ne-prishol.u006
+  - ru.sent.a2.avtobus-ne-prishol.u007
+sources:
+  - ru-original
+notes: "STORY-AUTHOR-001 A2 batch (2026-11-18); past tense with basic aspect pairs and motion verbs; 2 new lemmas (фонарь, тишина) with lexicon entries, budget-checked by tools/vocab-budget-check.py; human review required"
+generation:
+  method: ai-assisted
+  tool: hermes
+  model: qwen3.8-flash-next-iq3_s
+  date: '2026-11-18'
+  notes: "ai-drafted; human review required"

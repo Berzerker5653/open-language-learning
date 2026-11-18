@@ -1,0 +1,6 @@
+== round 1: 30 assets
+round 1 result: checked=30 passed=28 MISMATCH=2 TIMEOUT=0 WAV-MISSING=0 CHECK-ERROR=0
+== round 2: 2 assets
+round 2 result: checked=2 passed=2 MISMATCH=0 TIMEOUT=0 WAV-MISSING=0 CHECK-ERROR=0
+LOOP-END rounds=2 remaining=0
+A2B3-EXIT-$? A2B3-DONE
