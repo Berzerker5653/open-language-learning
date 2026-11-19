@@ -1,0 +1,20 @@
+STORY-AUTHOR-001 B2 batch (final 5 of 17-story slate) — controller gate record (2026-11-19 ~00:00-01:50 MST)
+
+Content authored by 00:00 driver burst; bake + copy-back + commit run by controller.
+- 5 B2 stories: aukcion-odnoy-kartiny, perevodchik-vse-pereputal, gorod-bez-karty,
+  dva-bileta-v-odin-teatr, spor-o-budushchem; 40 sentences ru.sent.b2.* (participles/
+  gerunds/irrealis), 25 new + 9 retro lexicon entries.
+- Checker bug fixed in-lane (vocab-budget-check prefix-glue clause silently skipped
+  words starting with glue surface forms); all 12 old-batch stories re-verified OK
+  under strict checker; 9 retro glosses added (doska/tsvet/ogon/karman/internet/
+  vstretitsya/kupe/poimat/ulybatsya).
+- Cloze fix: ru.sent.b2.aukcion-odnoy-kartiny.u008 empty cloze_targets -> ["написал"]
+  (verbatim-present).
+- ORPHAN PURGED: ru.lex.stories202611.paknut was a wrong-lemma entry (lexicon record
+  for па́хнуть "to smell" filed under пакнут; word appears in NO story; its dict-clip
+  bake ran away >4s cap). Entry removed; no manifest row ever added.
+- Bake: omarchy systemd unit lts-b2b, 73 assets (74 minus purged paknut),
+  bake-repair-loop 4 rounds -> EXIT-0 (all converged, ASR round-trip + segments +
+  phoneme gates); 73/73 wavs sha256+bytes verified 1:1 against manifest rows on
+  copy-back; manifest 4945 -> 5018 rows.
+- Gates: lts-langpack-cli validate 0/0; lint 0/0; cargo test -p lts-langpack all ok.
