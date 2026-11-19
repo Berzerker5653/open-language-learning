@@ -2073,12 +2073,16 @@
       ]
     },
     "GRAMMAR-LABELS-001": {
-      "status": "review",
+      "status": "done",
       "attempts": 1,
       "evidence": [
-        "state/evidence/GRAMMAR-LABELS-001/controller-gates-2026-11-19.md"
+        "state/evidence/GRAMMAR-LABELS-001/controller-gates-2026-11-19.md",
+        "state/evidence/GRAMMAR-LABELS-001/qa-2026-11-19/QA-REPORT.md",
+        "state/evidence/GRAMMAR-LABELS-001/qa-2026-11-19/labels-off-zoom.png",
+        "state/evidence/GRAMMAR-LABELS-001/qa-2026-11-19/reader-labels-zoom.png",
+        "state/evidence/GRAMMAR-LABELS-001/qa-2026-11-19/word-card-cheloveku.jpg"
       ],
-      "updated": "2026-11-19",
+      "updated": "2026-11-19T10:40:00-07:00",
       "notes": "Authored across 2026-11-19 03:00/06:00/09:00 driver bursts; controller re-ran full gate battery and committed. review = owner hands-on (grammar labels visible in reading, Display-settings toggle works)."
     }
   },
