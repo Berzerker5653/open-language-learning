@@ -1,0 +1,14 @@
+STORY-AUTHOR-001 — owner acceptance record (2026-11-19 09:50 MST, Telegram)
+
+Owner: "Yes I accept all stories. We shouldn't require my approval for things like
+this. If I can't confirm it then you are the expert."
+
+Standing rule adopted: content-quality acceptance for material the owner cannot
+personally verify (foreign-language text/stories) is an agent call — decided, not
+asked; kept reversible (stories stay status:draft per ADR-0040; in-app 👍/👎
+confirmations remain the learner-facing promotion gate).
+Scope: covers content acceptance ONLY. Release/publish actions (pack republish
+O-05, app releases) keep their owner gate unchanged.
+
+All 17 slate stories (4×A1, 4×A2, 4×B1, 5×B2) are ACCEPTED by owner decision,
+sight-unseen, with this record as the acceptance evidence. Card -> done.
