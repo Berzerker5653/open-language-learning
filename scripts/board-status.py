@@ -42,6 +42,24 @@ def load_records(path=STATE):
 def main():
     d, recs = load_records()
     st = Counter(t.get("status", "unknown") for t in recs)
+    # Milestone progress (joined from ROADMAP) — owner-facing view.
+    mstat = {}
+    try:
+        import yaml
+        road = yaml.safe_load(open("tasks/ROADMAP.yaml"))
+        m_of = {t["id"]: t.get("milestone", "(none)") for t in road.get("tasks", [])}
+        for t in recs:
+            m = m_of.get(t.get("id"), "(none)")
+            mstat.setdefault(m, [0, 0])
+            mstat[m][1] += 1
+            if t.get("status") == "done":
+                mstat[m][0] += 1
+    except Exception:
+        pass
+    if mstat:
+        print("milestones:", ", ".join(
+            f"{m}:{d}/{tot}" for m, (d, tot) in
+            sorted(mstat.items(), key=lambda kv: -kv[1][1])))
     out = {
         "updated": d.get("updated"),
         "release_candidate": d.get("current_release_candidate"),
