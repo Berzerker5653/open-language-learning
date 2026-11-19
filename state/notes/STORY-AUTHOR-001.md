@@ -102,3 +102,11 @@ RESUME ORDER for the next burst (do not re-derive):
 3. Copy manifest rows ONLY back into the pack tree (wavs stay gitignored), re-run `cargo run -p lts-langpack-cli -- validate languages/ru-RU` -> expect only the 6 pre-existing 'package' rows.
 4. Commit as ONE lane: story YAMLs + entries.jsonl (incl. the controller cloze fixes) + lexicon + tool + evidence dir + ledger update (STORY-AUTHOR-001 stays in_progress; B1 batch next).
 5. Story clips remain word-timing substrate only (reading-first directive): no listen-mode UI work.
+
+## B2 RESUME RECIPE (controller, 2026-11-18 23:30 — the numbered recipe the B1 row references)
+Slate accounting: the slate is **17 stories** (A1 4 + A2 4 + B1 4 + B2 5). 12 landed. B2 is the LAST batch — after it, STORY-AUTHOR-001 content is complete pending owner acceptance; do not invent more stories.
+1. Author the 5 B2 stories per the slate rows above (slugs: aukcion-odnoy-kartiny, perevodchik-vse-pereputal, gorod-bez-karty, dva-bileta-v-odin-teatr, spor-o-budushchem): 8-10 sentences each, participles/gerunds/subjunctive/abstract register, new-lemma budget <=6/story, ids `ru.sent.st.<slug>.NN`, status: draft. Lexicon entries with zalizniak-2010 (c39322c) stress verification; lexicon/sentence ids must be `[a-z0-9._-]` only (romanize, never Cyrillic).
+2. Bake ON OMARCHY ONLY (ssh omarchy, user aih, ~/LTS clone): fresh b2b dir (never reuse dirs), generate-pack-audio qwen3/ono_anna, qa-asr round-trip, bake-repair-loop for failures, bake-bestof --k 8 as last resort; exhausted ids flagged, never shipped. scp wavs back; sha256+bytes must match manifest rows 1:1 before proceeding (~35 clips/hr sustained).
+3. Cloze targets must appear VERBATIM (capitalized forms for capitalized targets) in the sentence text; run vocab-budget-check (exit 0), lts-langpack-cli validate + lint, cargo test -p lts-langpack.
+4. Commit content lane + ledger lane (evidence under state/evidence/STORY-AUTHOR-001/b2-bake/). `python3 tools/validate_handoff.py --require-explicit-ledger-records` MUST PASS un-piped before push. After B2 commits, mark the card review (owner acceptance + 0.4.5 republish are owner-gated, not agent-doable) and promote READER-FLOW-001 into `now`.
+
