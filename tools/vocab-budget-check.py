@@ -44,7 +44,16 @@ CORE = ("быть идти ехать ждать искать найти ска�
         "если бы без через туда тогда то будто чуть часто любой другой первый "
         "второй третий четвёртый четыре трудно час город бабушка далеко старый "
         "высокий открыть поставить поднять увидеть встретить сделать рассказать "
-        "рассказывать никто кто спать уснуть целый наш спрашивать").split()
+        "рассказывать никто кто спать уснуть целый наш спрашивать "
+        # B2 batch glue (controller 2026-11-19): closed-class/quantifier glue
+        # plus A1-frequency basic verbs/nouns/adjectives that the drill pools
+        # simply never listed; counted content words still get lexicon entries.
+        "сам двое трое сюда дважды предложить молчать молча делить "
+        "разделить настоящий громкий честно учитель уметь бутерброд общий "
+        "который тихий тихо начать начинать становиться подумать узнать "
+        "построить продать приезжать уезжать мешать прийтись пусть решить "
+        "заметить официант одинаковый наконец открывать рада "
+        "переводить перевести перевод").split()
 
 def lemmas(forms):
     return {mp.parse(f)[0].normal_form for f in forms if re.fullmatch(r"[а-яё-]+", f)}
@@ -91,8 +100,14 @@ def main():
             for w in words(text):
                 for part in w.split("-"):
                     lem = mp.parse(part)[0].normal_form
-                    if lem in cumul[lvl] or lem in skip or any(
-                            part.startswith(w) for w in FUNC + CORE):
+                    # NOTE (controller fix 2026-11-19): the previous
+                    # `any(part.startswith(w) for w in FUNC + CORE)` clause
+                    # silently skipped ANY word whose surface merely started
+                    # with a glue surface form (а- words via "а", подарок via
+                    # "по", аукцион, крошечный, коллекционер, интернет...),
+                    # inflating every batch's OK verdict. Lemma-based skip
+                    # below already covers real inflected glue forms.
+                    if lem in cumul[lvl] or lem in skip:
                         continue
                     new.setdefault(lem, []).append(part)
         limit = BUDGET[lvl]
