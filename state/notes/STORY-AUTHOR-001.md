@@ -110,3 +110,9 @@ Slate accounting: the slate is **17 stories** (A1 4 + A2 4 + B1 4 + B2 5). 12 la
 3. Cloze targets must appear VERBATIM (capitalized forms for capitalized targets) in the sentence text; run vocab-budget-check (exit 0), lts-langpack-cli validate + lint, cargo test -p lts-langpack.
 4. Commit content lane + ledger lane (evidence under state/evidence/STORY-AUTHOR-001/b2-bake/). `python3 tools/validate_handoff.py --require-explicit-ledger-records` MUST PASS un-piped before push. After B2 commits, mark the card review (owner acceptance + 0.4.5 republish are owner-gated, not agent-doable) and promote READER-FLOW-001 into `now`.
 
+
+## B2 BAKE STATUS (controller, 2026-11-19 01:25 — supersedes step B2-2 until cleared)
+- B2 content is DRAFTED in the working tree (5 story yamls, +40 sentences incl. u008 cloze fixed to "написал", +34 lexicon incl. 9 retro glosses; vocab-budget strict all OK; validate = 1 error = the 74 unbaked ids). UNCOMMITTED by design until the bake lands.
+- The 74-clip bake runs ON OMARCHY as systemd user unit `lts-b2b` (dir ~/LTS/b2b, ids b2b/b2ids.txt, 4 rounds, log b2b/b2-loop.log, completion marker b2b/CHAIN.done). Started 01:25, ETA ~03:30-04:00.
+- 03:00 burst: DO NOT start a new bake and DO NOT touch the content lane. If `ssh omarchy test -e ~/LTS/b2b/CHAIN.done` fails, just report "b2 chain running, commit deferred" and end (controller handles copy-back/commit; the controller is watching CHAIN.done).
+- Copy-back after CHAIN.done: scp wavs for the 74 ids + take manifest rows for those ids from omarchy manifest.jsonl; verify sha256+bytes 1:1; append rows to local media/manifest.jsonl; validate/lint 0 errors; cargo test -p lts-langpack; then commit per the recipe (chore tool-fix lane, content lane, ledger lane). Card -> review when done (owner acceptance + 0.4.5 are owner-gated).
