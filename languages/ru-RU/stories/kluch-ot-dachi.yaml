@@ -1,0 +1,22 @@
+id: ru.story.b1.kluch-ot-dachi
+status: draft
+title: "Ключ от дачи"
+description: "A small key in the pocket of an old jacket leads two friends to a house by the river — and to the grandmother who waited for them all day."
+sentences:
+  - ru.sent.b1.kluch-ot-dachi.u001
+  - ru.sent.b1.kluch-ot-dachi.u002
+  - ru.sent.b1.kluch-ot-dachi.u003
+  - ru.sent.b1.kluch-ot-dachi.u004
+  - ru.sent.b1.kluch-ot-dachi.u005
+  - ru.sent.b1.kluch-ot-dachi.u006
+  - ru.sent.b1.kluch-ot-dachi.u007
+  - ru.sent.b1.kluch-ot-dachi.u008
+sources:
+  - ru-original
+notes: "STORY-AUTHOR-001 B1 batch (2026-11-18); complex sentences plus irrealis conditionals (если бы + past); no new lemmas, budget-checked by tools/vocab-budget-check.py; human review required"
+generation:
+  method: ai-assisted
+  tool: hermes
+  model: qwen3.8-flash-next-iq3_s
+  date: '2026-11-18'
+  notes: "ai-drafted; human review required"

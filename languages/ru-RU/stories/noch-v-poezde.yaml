@@ -1,0 +1,22 @@
+id: ru.story.b1.noch-v-poezde
+status: draft
+title: "Ночь в поезде"
+description: "One night in a train compartment: four travellers tell four stories and part like old friends."
+sentences:
+  - ru.sent.b1.noch-v-poezde.u001
+  - ru.sent.b1.noch-v-poezde.u002
+  - ru.sent.b1.noch-v-poezde.u003
+  - ru.sent.b1.noch-v-poezde.u004
+  - ru.sent.b1.noch-v-poezde.u005
+  - ru.sent.b1.noch-v-poezde.u006
+  - ru.sent.b1.noch-v-poezde.u007
+  - ru.sent.b1.noch-v-poezde.u008
+sources:
+  - ru-original
+notes: "STORY-AUTHOR-001 B1 batch (2026-11-18); relative clauses, irrealis conditional, sequence words; 2 new lemmas (зонтик, музыкант) with lexicon entries, budget-checked by tools/vocab-budget-check.py; human review required"
+generation:
+  method: ai-assisted
+  tool: hermes
+  model: qwen3.8-flash-next-iq3_s
+  date: '2026-11-18'
+  notes: "ai-drafted; human review required"

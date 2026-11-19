@@ -1,0 +1,21 @@
+id: ru.story.b1.pismo-ne-temu
+status: draft
+title: "Письмо не тому адресату"
+description: "A letter to grandma carries the wrong address and starts a pen-friendship better than any plan."
+sentences:
+  - ru.sent.b1.pismo-ne-temu.u001
+  - ru.sent.b1.pismo-ne-temu.u002
+  - ru.sent.b1.pismo-ne-temu.u003
+  - ru.sent.b1.pismo-ne-temu.u004
+  - ru.sent.b1.pismo-ne-temu.u005
+  - ru.sent.b1.pismo-ne-temu.u006
+  - ru.sent.b1.pismo-ne-temu.u007
+sources:
+  - ru-original
+notes: "STORY-AUTHOR-001 B1 batch (2026-11-18); irrealis conditional plus relative clauses; no new lemmas, budget-checked by tools/vocab-budget-check.py; human review required"
+generation:
+  method: ai-assisted
+  tool: hermes
+  model: qwen3.8-flash-next-iq3_s
+  date: '2026-11-18'
+  notes: "ai-drafted; human review required"
