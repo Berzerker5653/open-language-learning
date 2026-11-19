@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-19",
-  "active_task": null,
+  "active_task": "READER-FLOW-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2084,6 +2084,19 @@
       ],
       "updated": "2026-11-19T10:40:00-07:00",
       "notes": "Authored across 2026-11-19 03:00/06:00/09:00 driver bursts; controller re-ran full gate battery and committed. review = owner hands-on (grammar labels visible in reading, Display-settings toggle works)."
+    },
+    "READER-FLOW-001": {
+      "task_id": "READER-FLOW-001",
+      "status": "in_progress",
+      "attempts": 0,
+      "title": "Kindle-style reader — flowing paragraphs, one-tap sentence audio, word-tap dictionary card with word audio",
+      "activity": "lanes E (engine/backend) + F (frontend) delegated per frozen contract in state/notes/READER-FLOW-001.md",
+      "summary": "Opened 2026-11-19 for the driver burst. Contract frozen in state/notes/READER-FLOW-001.md: media/lemmas.jsonl build-time RU lemmatizer sidecar (scripts/build-morphology-table.py, pymorphy3 pinned), word_card + story_word_audio src-tauri commands, paragraph-flow reading.tsx with word-tap card and sentence-tap audio. kaikki.org off-pack lexicon slice DEFERRED (honest not-in-pack card meanwhile). Builds on STORY-AUTHOR-001 A1 substrate (landed 54651a8).",
+      "notes": "Disjoint file sets: Lane E = crates/langpack + apps/desktop/src-tauri + scripts/build-morphology-table.py + languages/ru-RU/media/lemmas.jsonl; Lane F = apps/desktop/src (reading.tsx, App.tsx, tests). Voice uniformity of word snippets explicitly not required (owner 2026-11-17). aux kaikki lexicon + logging are separate follow-ups (VOCAB-BUILDER-001 for logging).",
+      "updated": "2026-11-19",
+      "evidence": [
+        "state/evidence/READER-FLOW-001/gates.log"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

@@ -1,0 +1,5 @@
+READER-FLOW-001 controller gate log (appended by each controller pass)
+
+2026-11-19 open (driver burst):
+- card opened in ledger; contract frozen in state/notes/READER-FLOW-001.md
+- baseline validate_handoff run before lanes (see below)
