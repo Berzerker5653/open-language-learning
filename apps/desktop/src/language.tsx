@@ -10,7 +10,7 @@
 import { PackText } from "@openlang/ui";
 import { progressLine, type EngineProgress } from "./progress";
 
-import type { DisplaySettingsView } from "./stress";
+import { grammarLabelsEnabled, type DisplaySettingsView } from "./stress";
 
 export interface InstalledPack {
   pack_id: string;
@@ -140,6 +140,9 @@ export interface LanguagePanelProps {
   /// K-41: stress-mark visibility (display setting; null until loaded).
   display: DisplaySettingsView | null;
   onSelectStressMode(mode: "auto" | "on" | "off"): void;
+  /// GRAMMAR-LABELS-001: global show/hide for the compact interlinear
+  /// grammar labels in graded reading (display setting; on by default).
+  onToggleGrammarLabels(on: boolean): void;
   /// K-43: per-pack content claims (null until loaded).
   claims: PackClaims[] | null;
   /// K-62: the stage a long install reported, or null when nothing is running.
@@ -439,6 +442,27 @@ export function LanguagePanel(p: LanguagePanelProps) {
             {m === "auto" ? "Automatic" : m === "on" ? "Always highlight" : "Off"}
           </button>
         ))}
+      </div>
+
+      {/* GRAMMAR-LABELS-001: one global toggle for the compact grammar
+          labels under words in graded reading — on by default, display-only
+          like every other control in this section. */}
+      <div role="group" aria-label="Grammar labels">
+        <p>
+          <small>
+            Show compact grammar labels (case and number under nouns, aspect and tense under verbs)
+            under words in graded reading. Only packs that ship label data show them; words without
+            a label stay clean.
+          </small>
+        </p>
+        <button
+          type="button"
+          className="btn btn--quiet"
+          aria-pressed={grammarLabelsEnabled(p.display)}
+          onClick={() => p.onToggleGrammarLabels(!grammarLabelsEnabled(p.display))}
+        >
+          {grammarLabelsEnabled(p.display) ? "Shown" : "Hidden"}
+        </button>
       </div>
 
       <h2>Community catalog</h2>

@@ -28,6 +28,46 @@ struct WordRow {
     words: Vec<WordSpan>,
 }
 
+/// GRAMMAR-LABELS-001: one token's compact learner label (noun/adjective:
+/// case+number; verb: aspect+tense) precomputed at pack build time by
+/// `scripts/build-grammar-labels.py`. `token` is the raw whitespace token
+/// exactly as the sentence text splits it (punctuation intact), so the
+/// app can verify alignment before attaching the label.
+#[derive(Debug, Clone, PartialEq, serde::Deserialize)]
+pub struct GrammarLabel {
+    #[serde(rename = "t")]
+    pub token: String,
+    #[serde(rename = "l")]
+    pub label: String,
+}
+
+/// One `media/labels.jsonl` row: sentence id plus its labeled tokens.
+#[derive(Debug, serde::Deserialize)]
+struct LabelRow {
+    id: String,
+    tokens: Vec<GrammarLabel>,
+}
+
+/// Parse the optional `media/labels.jsonl` sidecar (GRAMMAR-LABELS-001):
+/// one sentence per line, labeled tokens in sentence order. Follows the
+/// `parse_word_timings` posture exactly — a malformed row is an error
+/// naming its line, never a half-trusted overlay.
+pub fn parse_grammar_labels(text: &str) -> Result<BTreeMap<String, Vec<GrammarLabel>>, String> {
+    let mut out: BTreeMap<String, Vec<GrammarLabel>> = BTreeMap::new();
+    for (line, text) in text.lines().enumerate() {
+        if text.trim().is_empty() {
+            continue;
+        }
+        match serde_json::from_str::<LabelRow>(text) {
+            Ok(row) => {
+                out.insert(row.id, row.tokens);
+            }
+            Err(e) => return Err(format!("line {}: {e}", line + 1)),
+        }
+    }
+    Ok(out)
+}
+
 /// Parse the optional `media/words.jsonl` sidecar (WORD-TIMING-001): one
 /// `{"id": ..., "words": [{w, s, e}]}` row per clip. The file is an additive
 /// overlay — packs without it load unchanged and yield an empty map. A
@@ -81,6 +121,9 @@ pub struct Pack {
     /// Word-timing overlay from the optional `media/words.jsonl` sidecar
     /// (WORD-TIMING-001); packs without the sidecar keep an empty map.
     word_timings: BTreeMap<String, Vec<WordSpan>>,
+    /// Grammar-label overlay from the optional `media/labels.jsonl` sidecar
+    /// (GRAMMAR-LABELS-001); packs without the sidecar keep an empty map.
+    grammar_labels: BTreeMap<String, Vec<GrammarLabel>>,
 }
 
 /// One mastery requirement inside an environment unlock rule
@@ -128,6 +171,19 @@ impl Pack {
     /// is absent — the caller then behaves exactly as before this feature.
     pub fn word_timings_for(&self, clip_id: &str) -> Option<&[WordSpan]> {
         self.word_timings.get(clip_id).map(Vec::as_slice)
+    }
+
+    /// All grammar labels loaded from the optional `media/labels.jsonl`
+    /// sidecar, keyed by sentence id (GRAMMAR-LABELS-001). Empty when the
+    /// pack ships none — the reader then renders bare text.
+    pub fn grammar_labels(&self) -> &BTreeMap<String, Vec<GrammarLabel>> {
+        &self.grammar_labels
+    }
+
+    /// Grammar labels for one sentence id, or `None` when the sidecar (or
+    /// that id) is absent.
+    pub fn grammar_labels_for(&self, sentence_id: &str) -> Option<&[GrammarLabel]> {
+        self.grammar_labels.get(sentence_id).map(Vec::as_slice)
     }
 
     /// Typed rows of the optional `world/environments.jsonl` collection
@@ -181,6 +237,7 @@ impl Pack {
             parse_errors: Vec::new(),
             manifest: None,
             word_timings: BTreeMap::new(),
+            grammar_labels: BTreeMap::new(),
         };
         let mut files = Vec::new();
         collect_files(root, root, &mut files)?;
@@ -205,6 +262,17 @@ impl Pack {
                 let text = fs::read_to_string(root.join(&rel))?;
                 match parse_word_timings(&text) {
                     Ok(map) => pack.word_timings.extend(map),
+                    Err(msg) => pack.parse_errors.push((rel, msg)),
+                }
+                continue;
+            }
+            // Grammar labels (GRAMMAR-LABELS-001) are the same posture:
+            // validated data under `media/`, an overlay keyed by sentence
+            // id, never an asset needing a manifest row.
+            if rel == "media/labels.jsonl" {
+                let text = fs::read_to_string(root.join(&rel))?;
+                match parse_grammar_labels(&text) {
+                    Ok(map) => pack.grammar_labels.extend(map),
                     Err(msg) => pack.parse_errors.push((rel, msg)),
                 }
                 continue;

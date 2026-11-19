@@ -29,6 +29,8 @@
 //! world/environments.jsonl        environment              (one per line)
 //! media/words.jsonl               (optional word-timing sidecar, WORD-TIMING-001;
 //!                                  one clip per line, parsed data not an asset)
+//! media/labels.jsonl              (optional grammar-label sidecar, GRAMMAR-LABELS-001;
+//!                                  one sentence per line, parsed data not an asset)
 //! media/narrator.json             (optional narrator declaration, VOICE-CONSISTENCY-001;
 //!                                  {"runtime": ..., "voice": ...}, parsed data not an asset)
 //! ```

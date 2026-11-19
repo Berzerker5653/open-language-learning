@@ -48,7 +48,7 @@ import { PracticeRunner, type PracticeTaskView } from "./practice";
 import { LessonEncounter, drillStageId, stagePositionLabel, type LessonPlan } from "./lesson";
 import { describeKanjiDecomposition } from "./kanji-decomposition";
 import { playClip } from "./playback";
-import { stressEnabled, type DisplaySettingsView } from "./stress";
+import { grammarLabelsEnabled, stressEnabled, type DisplaySettingsView } from "./stress";
 import { ReadingPanel, type Story, type StorySummary } from "./reading";
 import { ShadowingPanel, type ShadowTarget } from "./shadowing";
 import { attachKaraokeClock, type WordSpan } from "./word-timing";
@@ -1698,6 +1698,26 @@ export function App() {
       // The engine did not answer, so `display` never changed — the toggle
       // on screen still shows the real stored value. Say the write failed.
       setSettingsError(`The stress-mark setting could not be saved: ${String(e)}`);
+    }
+  }
+
+  // GRAMMAR-LABELS-001: the one global show/hide for the interlinear
+  // grammar labels (display setting only — grading and scheduling never
+  // see it). The stress-mode key is sent unchanged so the write cannot
+  // clobber it.
+  async function setGrammarLabelsSetting(on: boolean) {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
+      setDisplay(
+        (await inv("set_display_settings", {
+          profileId,
+          stressMode: display?.stress_mode ?? "auto",
+          grammarLabels: on,
+        })) as DisplaySettingsView,
+      );
+    } catch (e) {
+      setSettingsError(`The grammar-label setting could not be saved: ${String(e)}`);
     }
   }
 
@@ -3708,6 +3728,7 @@ export function App() {
           onToggleLookup={(id) => setStoryLookup(storyLookup === id ? null : id)}
           onMine={(surface, reading, gloss) => void mineFromStory(surface, reading, gloss)}
           profileName={displayName}
+          grammarLabels={grammarLabelsEnabled(display)}
           onConfirm={(id) => void toggleContentConfirm(id)}
           onUnconfirm={(id) => void toggleContentConfirm(id)}
         />
@@ -3959,6 +3980,7 @@ export function App() {
             onImport={(b64) => void importPack(b64)}
             display={display}
             onSelectStressMode={(m) => void setStressMode(m)}
+            onToggleGrammarLabels={(on) => void setGrammarLabelsSetting(on)}
             claims={claims}
             progress={engineProgress}
             outcome={installOutcome}

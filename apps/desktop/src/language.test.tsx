@@ -146,6 +146,7 @@ function render(over: Partial<Parameters<typeof LanguagePanel>[0]> = {}) {
       onImport={() => {}}
       display={{ stress_mode: "auto", pack_has_stress: false }}
       onSelectStressMode={() => {}}
+      onToggleGrammarLabels={() => {}}
       claims={null}
       {...over}
     />,
@@ -461,5 +462,33 @@ describe("language panel", () => {
     expect(region).not.toContain("http");
     // The pointer to the full notice list is unconditional.
     expect(region).toContain("third-party/notices/NOTICE.md");
+  });
+
+  it("offers one global grammar-label toggle, on by default (GRAMMAR-LABELS-001)", () => {
+    const groupOf = (html: string): string => {
+      const i = html.indexOf('aria-label="Grammar labels"');
+      expect(i).toBeGreaterThan(-1);
+      const end = html.indexOf("<h2", i);
+      return html.slice(i, end === -1 ? undefined : end);
+    };
+    // Unset display (not yet loaded) and an explicit true both render the
+    // control as pressed: labels are shown by default, the toggle hides.
+    for (const display of [
+      null,
+      { stress_mode: "auto" as const, pack_has_stress: false },
+      { stress_mode: "auto" as const, pack_has_stress: false, grammar_labels: true },
+    ]) {
+      const group = groupOf(render({ display }));
+      expect(group).toContain('aria-pressed="true"');
+      expect(group).toContain(">Shown<");
+      expect(group).not.toContain(">Hidden<");
+    }
+    const group = groupOf(
+      render({
+        display: { stress_mode: "auto", pack_has_stress: false, grammar_labels: false },
+      }),
+    );
+    expect(group).toContain('aria-pressed="false"');
+    expect(group).toContain(">Hidden<");
   });
 });

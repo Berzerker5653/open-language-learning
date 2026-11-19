@@ -10,7 +10,7 @@
  */
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
-import { type ReadingPanelProps, type Story, ReadingPanel } from "./reading";
+import { ReadingPanel, expandGrammarLabel, type ReadingPanelProps, type Story } from "./reading";
 
 const STORY: Story = {
   id: "ja.story.test.confirm",
@@ -35,6 +35,7 @@ const STORY: Story = {
           status: "community",
         },
       ],
+      labels: [],
     },
   ],
   confirmations: {
@@ -53,6 +54,7 @@ function base(over: Partial<ReadingPanelProps>): ReadingPanelProps {
     storyLookup: "ja.sent.test.one", // lookup open: the panel body renders
     storyError: null,
     profileName: "Carla",
+    grammarLabels: true,
     onOpenStory: noop,
     onBack: noop,
     onPlaySentence: noop,
@@ -111,5 +113,91 @@ describe("content confirmation surface (CONTENT-CONFIRM-001)", () => {
     const html = render({ storyLookup: null });
     expect(html).toContain("Confirmed by Ana, Bruno");
     expect(count(html, "This looks right")).toBe(0);
+  });
+});
+
+/* GRAMMAR-LABELS-001 — interlinear grammar labels in the reader. The
+ * compact label rides under its token, the full-form expansion rides the
+ * lookup card, the global toggle hides labels, uncovered tokens (and ja
+ * furigana text) stay exactly as before — silent degradation, no layout
+ * shift. */
+describe("interlinear grammar labels (GRAMMAR-LABELS-001)", () => {
+  const RU_SENT = "ru.sent.test.labels";
+  const RU: Story = {
+    id: "ru.story.test.labels",
+    title: "Хлеб",
+    status: "draft",
+    sentences: [
+      {
+        content_id: RU_SENT,
+        text: "Он купил хлеба вчера",
+        furigana: null,
+        romaji: null,
+        faded_by_mastery: false,
+        gloss: "He bought some bread yesterday.",
+        status: "draft",
+        known: [],
+        labels: [
+          { token: "Он", label: "nom.sg" },
+          { token: "купил", label: "perf.past" },
+          { token: "хлеба", label: "gen.sg" },
+        ],
+      },
+    ],
+  };
+  const ru = (over: Partial<ReadingPanelProps> = {}) =>
+    render({ storyActive: RU, storyLookup: RU_SENT, ...over });
+
+  it("labels sit under their tokens; uncovered tokens keep an empty placeholder", () => {
+    const html = ru();
+    expect(count(html, 'class="il-token"')).toBe(4);
+    expect(html).toContain(">nom.sg<");
+    expect(html).toContain(">perf.past<");
+    expect(html).toContain(">gen.sg<");
+    // "вчера" carries no sidecar label — the empty same-height placeholder
+    // keeps the line box uniform: degradation with no layout shift.
+    expect(count(html, 'class="il-label il-label--empty"')).toBe(1);
+  });
+
+  it("the lookup card expands compact labels to full forms", () => {
+    const html = ru();
+    expect(html).toContain("Grammar in this sentence:");
+    expect(html).toContain("genitive singular");
+    expect(html).toContain("perfective past");
+    expect(html).toContain("nominative singular");
+  });
+
+  it("the global toggle off renders the bare pre-feature text", () => {
+    const html = ru({ grammarLabels: false });
+    expect(html).not.toContain("il-token");
+    expect(html).not.toContain("gen.sg");
+    expect(html).toContain("Он купил хлеба вчера");
+  });
+
+  it("ja furigana text is never rerouted through the interlinear path", () => {
+    const jaLabeled: Story = {
+      ...STORY,
+      sentences: [
+        {
+          content_id: "ja.sent.test.one",
+          text: "教室 に 本 が おいてある",
+          furigana: "きょうしつ に ほん が おいてある",
+          romaji: null,
+          faded_by_mastery: false,
+          gloss: "A book has been left in the classroom.",
+          status: "community",
+          known: [],
+          labels: [{ token: "ほん", label: "nom.sg" }],
+        },
+      ],
+    };
+    const html = render({ storyActive: jaLabeled, storyLookup: "ja.sent.test.one" });
+    expect(html).not.toContain("il-token");
+    expect(html).toContain("<ruby>");
+  });
+
+  it("unknown label atoms render verbatim rather than vanishing", () => {
+    expect(expandGrammarLabel("nom.pl")).toBe("nominative plural");
+    expect(expandGrammarLabel("dub.dat")).toBe("dub dative");
   });
 });

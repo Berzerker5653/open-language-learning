@@ -953,6 +953,7 @@ const JA_STORY = {
           status: "community",
         },
       ],
+      labels: [],
     },
     {
       content_id: "ja.sent.journeys.confirm.2",
@@ -963,6 +964,7 @@ const JA_STORY = {
       gloss: "I will come again tomorrow.",
       status: "community",
       known: [],
+      labels: [],
     },
   ],
 };

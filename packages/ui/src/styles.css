@@ -515,6 +515,31 @@ details.prose-note > p {
   text-underline-offset: 3px;
 }
 
+/* GRAMMAR-LABELS-001: compact interlinear grammar labels under inflected
+   words in graded reading. The token rides its own inline-block so the
+   label sits on its own micro-line beneath it; tokens the sidecar does
+   not cover carry an empty placeholder of the same height, so a labeled
+   sentence has one uniform line box and hiding labels (or a missing
+   label) never shifts layout. Token spacing is explicit because the
+   interlinear split removes the source whitespace between inline-blocks. */
+.il-token {
+  display: inline-block;
+  margin-inline-end: 0.25em;
+}
+
+.il-label {
+  display: block;
+  font-size: 0.6875rem;
+  line-height: 1.1;
+  font-weight: 400;
+  color: var(--ink-faint);
+  white-space: nowrap;
+}
+
+.il-label--empty::before {
+  content: "\200b";
+}
+
 /* ------------------------------------------------------------- stepper */
 .stepper {
   counter-reset: step;

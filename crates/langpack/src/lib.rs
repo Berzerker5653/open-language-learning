@@ -14,4 +14,6 @@ pub mod pack;
 pub mod schema;
 
 pub use diagnose::{Diagnostic, Severity};
-pub use pack::{Instance, Mode, Pack, WordSpan, parse_word_timings};
+pub use pack::{
+    GrammarLabel, Instance, Mode, Pack, WordSpan, parse_grammar_labels, parse_word_timings,
+};

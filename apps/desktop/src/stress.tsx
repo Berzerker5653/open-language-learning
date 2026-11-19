@@ -12,6 +12,17 @@ export type StressMode = "auto" | "on" | "off";
 export interface DisplaySettingsView {
   stress_mode: StressMode;
   pack_has_stress: boolean;
+  /**
+   * GRAMMAR-LABELS-001: global show/hide for the compact interlinear
+   * grammar labels in graded reading. The engine always sends it; it is
+   * optional here so older fixtures stay valid, and an absent value
+   * reads as ON — the card's default is labels shown, toggle to hide.
+   */
+  grammar_labels?: boolean;
+}
+
+export function grammarLabelsEnabled(settings: DisplaySettingsView | null): boolean {
+  return settings?.grammar_labels ?? true;
 }
 
 export function stressEnabled(settings: DisplaySettingsView | null): boolean {

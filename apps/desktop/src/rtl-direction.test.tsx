@@ -210,6 +210,7 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
             status: "draft",
           },
         ],
+        labels: [],
       },
     ],
   };
@@ -235,6 +236,7 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
         onToggleLookup={() => {}}
         onMine={() => {}}
         profileName="Test"
+        grammarLabels={true}
         onConfirm={() => {}}
         onUnconfirm={() => {}}
         {...overrides}

@@ -1309,6 +1309,11 @@ fn pack_has_stress_marks(data: &Path, pack_id: &str, version: &str) -> bool {
 struct DisplaySettings {
     stress_mode: String,
     pack_has_stress: bool,
+    /// GRAMMAR-LABELS-001: global show/hide for the interlinear grammar
+    /// labels. ON by default (the card's acceptance: labels by default, a
+    /// toggle to hide). Display-only, exactly like `stress_mode` — grading
+    /// and scheduling never consult it.
+    grammar_labels: bool,
 }
 
 #[tauri::command]
@@ -1335,6 +1340,15 @@ fn display_settings_at(data: &Path, profile_id: &str) -> Result<DisplaySettings,
     Ok(DisplaySettings {
         stress_mode,
         pack_has_stress,
+        // GRAMMAR-LABELS-001: unset means ON — labels are shown by default
+        // and the toggle hides them. A non-bool stored value falls back to
+        // the default, same posture as an invalid stress-mode.
+        grammar_labels: store
+            .get_setting(profile_id, "grammar-labels")
+            .ok()
+            .flatten()
+            .and_then(|v| v.as_bool())
+            .unwrap_or(true),
     })
 }
 
@@ -1342,17 +1356,33 @@ fn display_settings_at(data: &Path, profile_id: &str) -> Result<DisplaySettings,
 fn set_display_settings(
     profile_id: String,
     stress_mode: String,
+    grammar_labels: Option<bool>,
 ) -> Result<DisplaySettings, String> {
-    let mode = match stress_mode.as_str() {
+    set_display_settings_at(&data_dir(), &profile_id, &stress_mode, grammar_labels)
+}
+
+fn set_display_settings_at(
+    data: &Path,
+    profile_id: &str,
+    stress_mode: &str,
+    grammar_labels: Option<bool>,
+) -> Result<DisplaySettings, String> {
+    let mode = match stress_mode {
         "on" | "off" | "auto" => stress_mode,
         _ => return Err("stress-mode must be auto, on, or off".to_string()),
     };
-    let data = data_dir();
     let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
     store
-        .set_setting(&profile_id, "stress-mode", &serde_json::json!(mode))
+        .set_setting(profile_id, "stress-mode", &serde_json::json!(mode))
         .map_err(|e| e.to_string())?;
-    display_settings_at(&data, &profile_id)
+    // GRAMMAR-LABELS-001: an omitted `grammar_labels` leaves the stored
+    // choice alone, so the existing stress-mode caller stays valid.
+    if let Some(on) = grammar_labels {
+        store
+            .set_setting(profile_id, "grammar-labels", &serde_json::json!(on))
+            .map_err(|e| e.to_string())?;
+    }
+    display_settings_at(data, profile_id)
 }
 
 // ---------------------------------------------------------------------------
@@ -6386,6 +6416,19 @@ struct StorySentenceView {
     /// tap-to-lookup panel. Substring matching is script-agnostic;
     /// lookup is an aid, never evidence.
     known: Vec<LexEntry>,
+    /// GRAMMAR-LABELS-001: compact per-token grammar labels from the
+    /// optional `media/labels.jsonl` sidecar, in sentence order. The
+    /// token is the raw whitespace token (punctuation intact) so the
+    /// reader can verify alignment; packs without the sidecar (or rows
+    /// without a label) simply render bare text.
+    labels: Vec<SentenceTokenLabel>,
+}
+
+/// One labeled token of a story sentence (GRAMMAR-LABELS-001).
+#[derive(Serialize)]
+struct SentenceTokenLabel {
+    token: String,
+    label: String,
 }
 
 #[derive(Serialize)]
@@ -6621,6 +6664,18 @@ fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryV
         .ok_or("unknown story")?;
     let sentences = sentence_entries(data, pack_id, &version)?;
     let lex = lexicon_entries(data, pack_id, &version).unwrap_or_default();
+    // GRAMMAR-LABELS-001: read the same declared-data sidecar posture the
+    // word-timing overlay uses — an absent or corrupt sidecar simply means
+    // "no labels", which is the pre-feature render path.
+    let grammar_labels = std::fs::read_to_string(
+        data.join("packs")
+            .join(pack_id)
+            .join(&version)
+            .join("media/labels.jsonl"),
+    )
+    .ok()
+    .and_then(|text| lts_langpack::parse_grammar_labels(&text).ok())
+    .unwrap_or_default();
     let mut views = Vec::new();
     for sid in &story.sentences {
         let Some(entry) = sentences.iter().find(|e| e.id == *sid) else {
@@ -6663,6 +6718,17 @@ fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryV
             gloss: entry.gloss.clone(),
             known,
             status: entry.status.clone(),
+            labels: grammar_labels
+                .get(sid.as_str())
+                .map(|rows| {
+                    rows.iter()
+                        .map(|r| SentenceTokenLabel {
+                            token: r.token.clone(),
+                            label: r.label.clone(),
+                        })
+                        .collect()
+                })
+                .unwrap_or_default(),
         });
     }
     // CONTENT-CONFIRM-001: one attribution read for every content id this
@@ -12218,6 +12284,34 @@ activities:
             "auto",
             "invalid stored values fall back to auto"
         );
+
+        // GRAMMAR-LABELS-001: the interlinear-label toggle defaults ON,
+        // persists when turned off, and falls back to ON on junk values —
+        // the same data-driven posture as stress-mode.
+        assert!(
+            display_settings_at(data, &p.id).unwrap().grammar_labels,
+            "labels are shown by default"
+        );
+        let s = set_display_settings_at(data, &p.id, "auto", Some(false)).unwrap();
+        assert!(!s.grammar_labels);
+        assert!(
+            !display_settings_at(data, &p.id).unwrap().grammar_labels,
+            "the toggle persists"
+        );
+        // A stress-mode-only update (the existing frontend call shape)
+        // must not reset the label choice.
+        set_display_settings_at(data, &p.id, "on", None).unwrap();
+        assert!(
+            !display_settings_at(data, &p.id).unwrap().grammar_labels,
+            "omitting grammar_labels leaves the stored choice alone"
+        );
+        store
+            .set_setting(&p.id, "grammar-labels", &serde_json::json!("bogus"))
+            .unwrap();
+        assert!(
+            display_settings_at(data, &p.id).unwrap().grammar_labels,
+            "invalid stored values fall back to the default (on)"
+        );
     }
 
     /// SETTINGS-001: Settings-surface commands. The microphone decision
@@ -14470,6 +14564,53 @@ transfer_variants:
             report.is_empty(),
             "{} closed-class span(s) mis-resolved in shipped stories",
             report.len()
+        );
+    }
+
+    #[test]
+    fn story_view_carries_grammar_labels_only_when_the_sidecar_ships() {
+        // GRAMMAR-LABELS-001 end-to-end wiring: the reader's sentence view
+        // exposes the `media/labels.jsonl` overlay keyed by sentence id;
+        // a pack without the sidecar keeps every sentence label-free —
+        // the pre-feature render path, exactly like words.jsonl before it.
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
+
+        let bare = story_view_at(data, &p.id, "ja.story.demo.first-meeting").unwrap();
+        assert!(bare.sentences.iter().all(|s| s.labels.is_empty()));
+
+        let version =
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &data.join("packs"))
+                .unwrap();
+        std::fs::write(
+            data.join("packs")
+                .join("org.openlanguage.ja-demo")
+                .join(&version)
+                .join("media/labels.jsonl"),
+            concat!(
+                "{\"id\":\"ja.sent.demo.obasan-aunt\",\"tokens\":[",
+                "{\"t\":\"おばさん\",\"l\":\"nom.sg\"}]}\n",
+            ),
+        )
+        .unwrap();
+        let v = story_view_at(data, &p.id, "ja.story.demo.first-meeting").unwrap();
+        let covered = v
+            .sentences
+            .iter()
+            .find(|s| s.content_id == "ja.sent.demo.obasan-aunt")
+            .unwrap();
+        assert_eq!(covered.labels.len(), 1);
+        assert_eq!(covered.labels[0].token, "おばさん");
+        assert_eq!(covered.labels[0].label, "nom.sg");
+        // Sentences the sidecar does not cover stay bare — degradation,
+        // never a half-trusted overlay.
+        assert!(
+            v.sentences
+                .iter()
+                .any(|s| s.content_id != "ja.sent.demo.obasan-aunt" && s.labels.is_empty())
         );
     }
 
