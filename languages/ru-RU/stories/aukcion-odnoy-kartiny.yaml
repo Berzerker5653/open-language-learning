@@ -1,0 +1,22 @@
+id: ru.story.b2.aukcion-odnoy-kartiny
+status: draft
+title: "Аукцион одной картины"
+description: "Two collectors fight over one forest landscape at a tiny auction — and the painter, present in the hall, knows exactly why the paint still smells of morning."
+sentences:
+  - ru.sent.b2.aukcion-odnoy-kartiny.u001
+  - ru.sent.b2.aukcion-odnoy-kartiny.u002
+  - ru.sent.b2.aukcion-odnoy-kartiny.u003
+  - ru.sent.b2.aukcion-odnoy-kartiny.u004
+  - ru.sent.b2.aukcion-odnoy-kartiny.u005
+  - ru.sent.b2.aukcion-odnoy-kartiny.u006
+  - ru.sent.b2.aukcion-odnoy-kartiny.u007
+  - ru.sent.b2.aukcion-odnoy-kartiny.u008
+sources:
+  - ru-original
+notes: "STORY-AUTHOR-001 B2 batch (2026-11-19); participles/gerunds and irrealis conditionals; 5 new lemmas (аукцион, коллекционер, лот, пахнуть, расти) glossed in lexicon/stories202611.jsonl; budget-checked strict; human review required"
+generation:
+  method: ai-assisted
+  tool: hermes
+  model: qwen3.8-flash-next-iq3_s
+  date: '2026-11-19'
+  notes: "ai-drafted; human review required"

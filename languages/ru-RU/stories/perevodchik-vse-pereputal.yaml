@@ -1,0 +1,22 @@
+id: ru.story.b2.perevodchik-vse-pereputal
+status: draft
+title: "Переводчик всё перепутал"
+description: "A nervous interpreter at a conference turns a talk about frozen prices into a tale about frozen berries — and the hall loves every minute of it."
+sentences:
+  - ru.sent.b2.perevodchik-vse-pereputal.u001
+  - ru.sent.b2.perevodchik-vse-pereputal.u002
+  - ru.sent.b2.perevodchik-vse-pereputal.u003
+  - ru.sent.b2.perevodchik-vse-pereputal.u004
+  - ru.sent.b2.perevodchik-vse-pereputal.u005
+  - ru.sent.b2.perevodchik-vse-pereputal.u006
+  - ru.sent.b2.perevodchik-vse-pereputal.u007
+  - ru.sent.b2.perevodchik-vse-pereputal.u008
+sources:
+  - ru-original
+notes: "STORY-AUTHOR-001 B2 batch (2026-11-19); language farce; 5 new lemmas (конференция, переводчик, докладчик, импровизировать, ягода) glossed; budget-checked strict; human review required"
+generation:
+  method: ai-assisted
+  tool: hermes
+  model: qwen3.8-flash-next-iq3_s
+  date: '2026-11-19'
+  notes: "ai-drafted; human review required"
