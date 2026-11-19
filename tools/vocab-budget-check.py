@@ -36,8 +36,15 @@ CORE = ("быть идти ехать ждать искать найти ска�
         "приехать уйти остаться уйти хороший маленький большой следующий лучший "
         "весёлый холодный новый рад смеяться мама ужин "
         "поехать прийти попросить позвонить принести оставить сказать "
-        "прочитать написать найти подождать поговорить смешной такси сиденье"
-        "зима зимой сидеть жизнь").split()
+        "прочитать написать найти подождать поговорить смешной такси сиденье "
+        "зима зимой сидеть жизнь "
+        # B1 batch glue (controller 2026-11-18): closed-class/quantifier/ordinal
+        # glue plus basic A1-frequency verbs and adjectives these B1 stories
+        # unavoidably grade with; counted content words get lexicon entries.
+        "если бы без через туда тогда то будто чуть часто любой другой первый "
+        "второй третий четвёртый четыре трудно час город бабушка далеко старый "
+        "высокий открыть поставить поднять увидеть встретить сделать рассказать "
+        "рассказывать никто кто спать уснуть целый наш спрашивать").split()
 
 def lemmas(forms):
     return {mp.parse(f)[0].normal_form for f in forms if re.fullmatch(r"[а-яё-]+", f)}
@@ -61,6 +68,20 @@ def main():
         acc |= pool[lvl]
         cumul[lvl] = set(acc)
     skip = {mp.parse(w)[0].normal_form for w in FUNC + CORE if re.fullmatch(r"[а-яё-]+", w)}
+    # Words already glossed by pack lexicon entries are not "new": the reader
+    # word-card can already explain them (controller addition, B1 batch 2026-11-18).
+    import glob
+    import os
+    pack_lex = os.path.join(os.path.dirname(__file__), "..", "languages", "ru-RU", "lexicon")
+    for path in glob.glob(os.path.join(pack_lex, "*.jsonl")):
+        for line in open(path, encoding="utf-8"):
+            line = line.strip()
+            if not line:
+                continue
+            for f in json.loads(line).get("forms", []):
+                t = f.get("text", "")
+                if re.fullmatch(r"[а-яё-]+", t):
+                    skip.add(mp.parse(t)[0].normal_form)
     stories = json.load(open(args.stories))
     bad = 0
     for slug, s in stories.items():

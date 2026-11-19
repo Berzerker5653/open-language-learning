@@ -1,0 +1,66 @@
+STORY-AUTHOR-001 B1 batch — controller gate record (2026-11-18 ~19:00-20:05 MST burst)
+
+All numbers below were run or re-run by the controller personally, on the
+tree exactly as committed in this lane.
+
+LANE CONTENT
+- 4 B1 stories: kluch-ot-dachi, internet-v-derevne, pismo-ne-temu,
+  noch-v-poezde (stories/<slug>.yaml; ids ru.story.b1.<slug>).
+- 30 story-owned sentences appended to sentences/entries.jsonl
+  (ru.sent.b1.<slug>.uNNN, status draft). Two lane cloze bugs fixed before
+  commit: quote-initial "Никто" (verbatim contains rule), "девочкой"->"девочка"
+  case mismatch — validate then reported 0 cloze errors.
+- 5 new lexicon lemmas (lexicon/stories202611.jsonl): ded (дед), derevnya
+  (деревня), znayushchiy (знающий), zontik (зонтик), muzykant (музыкант).
+  Stress verified against a fresh clone of gramdict/zalizniak-2010 at the
+  pinned commit c39322cb50aec024dd46aa182796520f77bf3dab (git rev-parse HEAD
+  matched): дед (unmarked), дере́вня, зна́ющий, зо́нтик, музыка́нт.
+
+1. tools/vocab-budget-check.py (~/.venvs/vocab):
+   OK kluch-ot-dachi (b1): 0/4; OK internet-v-derevne (b1): 3/4
+   [дед, деревня, знающий]; OK pismo-ne-temu (b1): 0/4; OK noch-v-poezde (b1):
+   2/4 [зонтик, музыкант]. EXIT 0.
+   Tool changes landed in this lane (B1 batch):
+   a) skip lemmas already glossed by pack lexicon entries (the reader
+      word-card can already explain them — principled "not new" rule);
+   b) a commented B1 glue whitelist (closed-class/ordinals/basic A1 verbs);
+   c) FIXED pre-existing bug: missing trailing spaces on CORE string
+      continuation lines glued words together ("сиденьезима",
+      "рассказатьрассказывать") so those words silently failed to skip.
+
+2. Bake on omarchy, fresh isolated dir ~/LTS/b1b (fresh ids/log names per the
+   A2 ENV-triage rules), launcher script, LANG='russian':
+   scripts/bake-repair-loop.sh /home/aih/LTS/languages/ru-RU russian b1ids.txt 4
+   - round 1: generated=35 refused=0 (narrator guard active),
+     ASR checked=35 passed=33 MISMATCH=2; qa-segments flags joined round 2.
+   - round 2: 6 assets, checked=6 passed=6.
+   - round 3: 2 assets, checked=2 passed=2.
+   - round 4: 1 asset, checked=1 passed=1; LOOP-END remaining=1 — the single
+     survivor was a qa-segments STRUCTURE flag on
+     ru.sent.b1.noch-v-poezde.u002 (0.88 s inter-segment gap vs 0.8 s
+     threshold), not a pronunciation mismatch.
+   - single forced re-bake of that id + both gates re-run with fresh names:
+     qa-segments 0 FLAG, ASR checked=1 passed=1. 35/35 certified clean.
+   - manifest on omarchy reached 4945 rows (4910 + 35).
+
+3. Copy-back to GamingPC: 35 manifest rows appended, 35 wavs rsynced,
+   per-row byte verification: verified=35 bad=0 missing=0
+   (sha256+bytes per manifest row, controller-run over every row).
+
+4. cargo run -p lts-langpack-cli -- validate languages/ru-RU:
+   validate(scaffold): 0 error(s), 0 warning(s)  [manifest 4945 rows]
+   lint languages/ru-RU: 0 error(s), 0 warning(s).
+
+5. cargo test -p lts-langpack: every test binary ok, 0 failed.
+
+NOT TOUCHED: 9 pre-existing omarchy manifest rows with sha drift vs the repo
+(narration2/style/study ids) — deliberately not copied back; the bake only
+touched --only ids.
+
+DEFERRED (owner gate, not this lane's verification): the published 0.4.4
+archives pin 4910 manifest rows; the tree now declares 4945, so CI's
+"Restore reference-pack audio (published archives)" step will refuse the 35
+new story rows until the owner republishes the ru pack (gate O-05; rides the
+next release action). Story clips remain word-timing substrate only
+(reading-first directive). B2 batch (5 stories, <=6 new lemmas) is next per
+state/notes/STORY-AUTHOR-001.md.
