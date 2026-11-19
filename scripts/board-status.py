@@ -16,17 +16,26 @@ STATE = "state/task-state.json"
 def load_records(path=STATE):
     d = json.load(open(path))
     raw = d.get("tasks") or []
-    recs = [t for t in raw if isinstance(t, dict)]
-    ids = [t for t in raw if isinstance(t, str)]
-    # If dicts missing but IDs present, fall back to ROADMAP.yaml titles.
-    if not recs and ids:
+    if isinstance(raw, dict):
+        # id -> record map (current schema)
+        recs = [{"id": k, **v} for k, v in raw.items() if isinstance(v, dict)]
+        ids = [k for k, v in raw.items() if not isinstance(v, dict)]
+    else:
+        recs = [t for t in raw if isinstance(t, dict)]
+        ids = [t for t in raw if isinstance(t, str)]
+    # ID-only entries: enrich with ROADMAP titles.
+    if ids:
         try:
             import yaml
             road = yaml.safe_load(open("tasks/ROADMAP.yaml"))
             by_id = {t["id"]: t for t in road.get("tasks", [])}
-            recs = [by_id.get(i, {"id": i, "status": "unknown"}) for i in ids]
+            for i in ids:
+                r = by_id.get(i, {})
+                recs.append({"id": i, "status": "unknown",
+                             "title": r.get("title"), "notes": ""})
         except Exception:
-            recs = [{"id": i, "status": "unknown"} for i in ids]
+            recs.extend({"id": i, "status": "unknown", "title": None, "notes": ""}
+                        for i in ids)
     return d, recs
 
 
@@ -47,7 +56,10 @@ def main():
             for t in recs
             if t.get("status") == "blocked"
         ],
-        "multi_attempt": [t.get("id") for t in recs if (t.get("attempts") or 0) > 1],
+        "multi_attempt": [
+            t.get("id") for t in recs
+            if isinstance(t.get("attempts"), int) and t["attempts"] > 1
+        ],
     }
     if "--json" in sys.argv:
         print(json.dumps(out, indent=1))
