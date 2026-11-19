@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-18",
+  "updated": "2026-11-19",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -2070,6 +2070,15 @@
       "evidence": [
         "state/evidence/VOICE-CONSISTENCY-001/publish-0.4.4.txt"
       ]
+    },
+    "GRAMMAR-LABELS-001": {
+      "status": "review",
+      "attempts": 1,
+      "evidence": [
+        "state/evidence/GRAMMAR-LABELS-001/controller-gates-2026-11-19.md"
+      ],
+      "updated": "2026-11-19",
+      "notes": "Authored across 2026-11-19 03:00/06:00/09:00 driver bursts; controller re-ran full gate battery and committed. review = owner hands-on (grammar labels visible in reading, Display-settings toggle works)."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
