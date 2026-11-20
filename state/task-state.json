@@ -1345,8 +1345,7 @@
         "languages/ja-JP/review/REVIEWER_KIT.md",
         "languages/ja-JP/review/REVIEW_POLICY.yaml",
         "languages/ja-JP/review/WORKLIST-2026-10-14.md",
-        "git 347fa5b",
-        "kanban board t_85c205f4 comment 2026-11-20 12:23"
+        "state/evidence/JA-A1-003/close-note.md"
       ],
       "updated": "2026-11-20",
       "blocker": "Blocked by the owner's permanent posture (ADR-0040, 2026-10-20): the project seeks no external qualified review. This card stays blocked as the honest record that expert review has not happened and will not; content is AI-authored with machine gates, and only in-app attributed community confirmation (CONTENT-CONFIRM-001) can ever mark content confirmed."
