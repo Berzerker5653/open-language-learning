@@ -2103,6 +2103,20 @@
       "evidence": [
         "state/evidence/READER-FLOW-001/gates.log"
       ]
+    },
+    "READABILITY-GATE-001": {
+      "status": "done",
+      "attempts": 1,
+      "evidence": [
+        "state/evidence/READABILITY-GATE-001/gates.log",
+        "state/evidence/READABILITY-GATE-001/pack-run/summary.json",
+        "state/evidence/READABILITY-GATE-001/pack-run/violations.jsonl",
+        "state/evidence/READABILITY-GATE-001/regeneration-requests.jsonl",
+        "state/notes/READABILITY-GATE-001.md"
+      ],
+      "summary": "Authoring-time readability gate shipped (tools/readability-gate.py, venv pymorphy3): every lesson/story sentence checked against the declared band lexicon (glue whitelist + cumulative drill pools + band-tagged lexicon + confirm/mine ledger layering; cold profile falls back to band list); >1 unknown distinct lemma rejects naming the lemmas; regeneration requests carry the offending lemmas as negative hints and --recheck closes the loop; violations logged as pack-build evidence. 10 golden tests green; first real-pack run: 945 sentences/20 stories, 94 honest findings (evidence committed; band-tagging/regeneration follow-ups noted, gate not yet CI-blocking).",
+      "notes": "ru-only lane (JMDict ja follow-up card noted in state/notes/READABILITY-GATE-001.md); non-ru exits 2, never silent pass. Follow-up data lane: band-tag ru lexicon entries for the 94 findings' lemmas or regenerate flagged sentences via regeneration-requests.jsonl.",
+      "updated": "2026-11-20"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
