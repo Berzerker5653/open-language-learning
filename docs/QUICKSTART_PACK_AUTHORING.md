@@ -137,6 +137,16 @@ langpack audit-licenses my-pack    # redistribution gates + attribution report
 `validate --mode install` additionally enforces promotion gates
 (non-empty licenses/sources, resolved references, license clearance).
 
+Authoring aids (shipped, but **not** part of the seven CLI gates above —
+`langpack test` does not run them): `tools/vocab-budget-check.py` budgets
+new-vocabulary density per band, and `tools/readability-gate.py`
+(READABILITY-GATE-001) rejects any lesson/story sentence carrying more than
+one lemma outside the declared band lexicon (glue-word whitelist shared with
+vocab-budget-check; a learner profile's confirmed/mined ledger can be supplied
+via `--known-db` so known words do not count against the budget). Run both
+while drafting story/sentence content; both emit reason codes naming the
+offending lemmas.
+
 ## 4. Full conformance gate
 
 ```sh
