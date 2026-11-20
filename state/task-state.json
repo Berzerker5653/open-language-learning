@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-19",
+  "updated": "2026-11-20",
   "active_task": "READER-FLOW-001",
   "tasks": {
     "TTS-003": {
@@ -1378,7 +1378,7 @@
       "title": "Qualified Japanese content review — B1",
       "activity": "idle",
       "summary": "B1 band coverage and correctness judged by a qualified human reviewer under the REVIEW-001 gate, for one named pack version.",
-      "notes": "Recorded 2026-10-15 (REL-001 recheck). Previously ROADMAP-only. The 2026-10-14 worklist closes review finding R12 for `ja.goal.b1.work-professional` with complete task journeys, and states in its own baseline that 155 of 198 B1 units cited only the object particle before that change and that the on-ramp band units remain unreviewed — the draft content is ready for a reviewer, not reviewed. [owner decision 2026-11-19: content-review cards reclassified per 2026-11-19 acceptance-autonomy rule: qualified review is agent-performed with evidence files, reversible; release/publish gates unchanged.] [owner decision 2026-11-19: content-review owner gate LIFTED (agent-performed review per acceptance-autonomy rule); remains blocked only on prerequisite authoring card JA-B1-001 — set ready when that closes.]",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck). Previously ROADMAP-only. The 2026-10-14 worklist closes review finding R12 for `ja.goal.b1.work-professional` with complete task journeys, and states in its own baseline that 155 of 198 B1 units cited only the object particle before that change and that the on-ramp band units remain unreviewed — the draft content is ready for a reviewer, not reviewed. [owner decision 2026-11-19: content-review cards reclassified per 2026-11-19 acceptance-autonomy rule: qualified review is agent-performed with evidence files, reversible; release/publish gates unchanged.] [owner decision 2026-11-19: content-review owner gate LIFTED (agent-performed review per acceptance-autonomy rule); remains blocked only on prerequisite authoring card JA-B1-001 — set ready when that closes.] [2026-11-20: prerequisite JA-B1-001 closed (b3693bc); all ROADMAP deps done — planner can release this review card.]",
       "dependencies": [
         "JA-B1-001",
         "REVIEW-001"
@@ -1529,22 +1529,25 @@
     },
     "JA-B1-001": {
       "task_id": "JA-B1-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Author B1-like independent-use Japanese coverage",
       "activity": "idle",
-      "summary": "Connected discourse, common independent situations, repair and clarification, broader reading and listening, materially reduced translation dependence, and transfer plus delayed-retention checks.",
-      "notes": "Recorded 2026-10-15: required for desktop 1.0, previously ROADMAP-only. The member-level accounting of the 0.4.1 candidate shows what actually exists at B1: three new units (`820-b1j-work-notice`, `821-b1j-work-notice-call`, `822-b1j-work-notice-revision`) and the new scenario/sentence files; every pack gate exits 0. That is a draft increment, not B1 coverage: the acceptance criteria about reduced translation dependence and delayed-retention evidence are unmet, and the band's review record (JA-B1-002) does not exist. Owner coverage decision 2026-10-19: reliable A1–A2 in both shipped languages is the 1.0 bar (docs/18), so this B-level depth task is roadmap work, not a 1.0 release gate; it stays blocked pending content work and qualified review regardless. [2026-11-19: no owner gate ever existed on this authoring card — ledger-record artifact from 2026-10-15 recheck; released to ready.]",
+      "summary": "B1 band increment: new goal ja.goal.b1.repair-clarification with transfer+retention assessments, units 823-826 each claiming a full input/scaffolded/independent/transfer/reuse sequence, 12 baked and ASR-content-checked B1 sentences (repair/clarification, connected discourse, news reading). Increment activities are support_level {0:9,1:13,2:4} — no translation-scaffolded activity >=3; legacy band's 197 level-5 activities flagged for JA-B1-002 review rather than silently rewritten.",
+      "notes": "Recorded 2026-10-15: required for desktop 1.0, previously ROADMAP-only. The member-level accounting of the 0.4.1 candidate shows what actually exists at B1: three new units (`820-b1j-work-notice`, `821-b1j-work-notice-call`, `822-b1j-work-notice-revision`) and the new scenario/sentence files; every pack gate exits 0. That is a draft increment, not B1 coverage: the acceptance criteria about reduced translation dependence and delayed-retention evidence are unmet, and the band's review record (JA-B1-002) does not exist. Owner coverage decision 2026-10-19: reliable A1–A2 in both shipped languages is the 1.0 bar (docs/18), so this B-level depth task is roadmap work, not a 1.0 release gate; it stays blocked pending content work and qualified review regardless. [2026-11-19: no owner gate ever existed on this authoring card — ledger-record artifact from 2026-10-15 recheck; released to ready.] [2026-11-20: closed by lane commit b3693bc. Band measurement before/after in state/evidence/JA-B1-001/band-metrics.md; gates battery (validate/lint/audit-*/test) all 0 errors 0 warnings in gates.log; 12/12 audio clips content-checked by whisper (asr-content.jsonl), one kana defect caught and re-baked. Acceptance wording 'materially reduced translation dependence' is evidenced for the increment and the 5 task-sequence units; the band-wide support_level-5 cleanup and the B1 review (JA-B1-002) remain open — that card's prerequisites are now all done.]",
       "dependencies": [
         "JA-A2-002",
         "GAME-001"
       ],
       "evidence": [
-        "languages/ja-JP/curriculum/units/820-b1j-work-notice.yaml",
-        "state/evidence/RC-0.4.1-2026-10-15/diff-ja-JP.txt"
+        "languages/ja-JP/curriculum/units/823-b1j-repair-clarify.yaml",
+        "languages/ja-JP/curriculum/units/825-b1j-discourse-connect.yaml",
+        "languages/ja-JP/sentences/b1-independent-2026-11-20.jsonl",
+        "state/evidence/JA-B1-001/band-metrics.md",
+        "state/evidence/JA-B1-001/gates.log",
+        "state/evidence/JA-B1-001/asr-content.jsonl"
       ],
-      "updated": "2026-10-19",
-      "blocker": "Depends on the A2 band review (JA-A2-002, blocked by BLK-REVIEW-CAPACITY); the B1 acceptance evidence itself (translation independence, delayed retention) has not been produced."
+      "updated": "2026-11-20"
     },
     "JA-B2-001": {
       "task_id": "JA-B2-001",
