@@ -1538,6 +1538,10 @@ export class LearnerEngine {
             gloss: null,
             status: null,
             in_pack: false,
+            aux_word: null,
+            aux_gloss: null,
+            aux_pos: null,
+            aux_source: null,
           };
         }
         return {
@@ -1548,6 +1552,10 @@ export class LearnerEngine {
           gloss: hit.gloss,
           status: hit.status,
           in_pack: true,
+          aux_word: null,
+          aux_gloss: null,
+          aux_pos: null,
+          aux_source: null,
         };
       }
       case "story_word_audio":

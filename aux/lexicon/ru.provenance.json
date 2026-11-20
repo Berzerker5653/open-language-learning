@@ -1,0 +1,13 @@
+{
+  "format_version": 1,
+  "attribution": "Definitions from Wiktionary via kaikki.org (CC BY-SA / GFDL)",
+  "license": "CC-BY-SA + GFDL (Wiktionary terms; kaikki.org redistribution)",
+  "source_url": "https://kaikki.org/dictionary/Russian/kaikki.org-dictionary-Russian.jsonl",
+  "source_license_page": "https://kaikki.org/dictionary/",
+  "source_size_bytes": 948499874,
+  "source_sha256": "9078947aa21ed33ccfe9ada814fa70605c282a26bc0b7d60e388865da17984b7",
+  "slice_sha256": "44287c8ab7fa7e11e8ccf19af21bb0087fa6f94f2f1119e67c1361dd2cd6269a",
+  "rows": 405825,
+  "slicer": "lang_code=ru; pos not ending in 'redirect'; headword normalizes to a lowercase single-token Cyrillic word without 'ъ' (internal hyphens kept); entries tagged proper-noun/surname/given-name/patronymic/toponym/place-name/ethnonym or archaic/obsolete/historical/dated/dialect(al) are refused; at most 3 sense glosses (first per sense), whitespace-collapsed, truncated to 200 chars on a word boundary; inflected Cyrillic surfaces (no 'ъ') kept as lookup forms (dedup, sorted, cap 12); homographs merged; rows sorted by headword UTF-8 byte order",
+  "note": "The raw kaikki input is not committed (size); --check proves the committed slice matches this pinned sha256 and its own shape. Re-running --write on the pinned input is byte-identical."
+}

@@ -70,6 +70,10 @@ const CLASSROOM_CARD: WordCardView = {
   gloss: "classroom",
   status: "community",
   in_pack: true,
+  aux_word: null,
+  aux_gloss: null,
+  aux_pos: null,
+  aux_source: null,
 };
 
 function base(over: Partial<ReadingPanelProps>): ReadingPanelProps {
@@ -149,6 +153,10 @@ describe("paragraph reader structure (READER-FLOW-001)", () => {
       gloss: null,
       status: null,
       in_pack: false,
+      aux_word: null,
+      aux_gloss: null,
+      aux_pos: null,
+      aux_source: null,
     });
     expect(html).toContain("not in your pack yet");
     expect(html).toContain(">Mine</button>");
@@ -157,6 +165,30 @@ describe("paragraph reader structure (READER-FLOW-001)", () => {
     expect(html).toContain(">ほん<");
     expect(html).not.toContain(">classroom<");
     expect(html).not.toContain(">in your pack");
+  });
+
+  it("an off-pack token the offline aux lexicon covers gets the clearly labeled aux card", () => {
+    const html = withCard("подарка", {
+      query: "подарка",
+      lemma: null,
+      surface: null,
+      reading: null,
+      gloss: null,
+      status: null,
+      in_pack: false,
+      aux_word: "подарок",
+      aux_gloss: "present, gift",
+      aux_pos: "noun",
+      aux_source: "Wiktionary via kaikki.org (CC BY-SA / GFDL)",
+    });
+    // The aux answer is shown, labeled, and attributed (ShareAlike).
+    expect(html).toContain("present, gift");
+    expect(html).toContain("auxiliary dictionary");
+    expect(html).toContain("kaikki.org");
+    expect(html).toContain(">подарок<");
+    // Mine stays offered; the card never claims pack membership.
+    expect(html).toContain(">Mine</button>");
+    expect(html).not.toContain("in your pack (");
   });
 
   it("the card shows the lemma line only when the engine resolved one", () => {
@@ -168,6 +200,10 @@ describe("paragraph reader structure (READER-FLOW-001)", () => {
       gloss: "bread (some)",
       status: "draft",
       in_pack: true,
+      aux_word: null,
+      aux_gloss: null,
+      aux_pos: null,
+      aux_source: null,
     });
     expect(withLemma).toContain("dictionary form:");
     expect(withLemma).toContain(">хлеб<");

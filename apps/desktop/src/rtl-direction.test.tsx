@@ -243,6 +243,10 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
             gloss: "your condition",
             status: "draft",
             in_pack: true,
+            aux_word: null,
+            aux_gloss: null,
+            aux_pos: null,
+            aux_source: null,
           },
         }}
         wordAudioAvailable={false}

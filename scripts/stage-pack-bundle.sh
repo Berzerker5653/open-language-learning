@@ -332,6 +332,16 @@ do_overlay() {
     else
       fail overlay "no BUNDLED.yaml sidecar under $PACK_ROOT: 'stage' writes it; refusing to emit an overlay the runtime would fail closed on"
     fi
+    # READER-FLOW-001 off-pack slice: the offline auxiliary lexicon rides
+    # along with the bundle, or a shipped pack-bundled build cannot answer
+    # an off-pack word offline (aux_rows() in lib.rs reads
+    # <resource_dir>/aux/lexicon beside the staged packs). An absent
+    # aux/lexicon degrades honestly to no-aux cards, same as the runtime.
+    if [[ -d aux/lexicon ]]; then
+      printf '      ,\n      "%s": "aux/lexicon"\n' "$(realpath aux/lexicon)"
+    else
+      say "no aux/lexicon in the repo tree: this bundle ships without the offline auxiliary lexicon"
+    fi
     printf '    }\n  }\n}\n'
   } >"$tmp"
   mv "$tmp" "$out"

@@ -112,3 +112,46 @@ NFC.
 ## Evidence
 Controller writes `state/evidence/READER-FLOW-001/gates.log` (own re-runs +
 race notes); task-state points at that path only.
+
+## OFF-PACK SLICE (landed 2026-11-20) — kaikki.org aux lexicon
+License check (done, not assumed): kaikki.org publishes its Wiktionary
+extraction "under the same licenses as Wiktionary — both CC-BY-SA and
+GFDL" (https://kaikki.org/dictionary/, "Copyright and license", accessed
+2026-11-20). Redistribution with attribution is allowed; ShareAlike keeps
+the derived slice CC-BY-SA/GFDL, which is why it stays a SEPARATE file
+from the MIT pack lexicon ("separate and trusted" holds). Attribution
+text: "Definitions from Wiktionary via kaikki.org (CC BY-SA / GFDL)" —
+displayed on every aux card, recorded in the slice provenance +
+`aux/lexicon/README.md`.
+
+- Builder: `scripts/build-aux-lexicon.py --write --input <kaikki.jsonl>`
+  / `--check`. Input: kaikki.org Russian dictionary (enwiktionary
+  extraction, English glosses), 948,499,874 B, sha256
+  9078947aa21ed33ccfe9ada814fa70605c282a26bc0b7d60e388865da17984b7
+  (pinned in `aux/lexicon/ru.provenance.json`; raw input not committed —
+  `--check` proves the committed slice matches the pin and is
+  internally valid; wired into `scripts/ci.sh`).
+- Slice: `aux/lexicon/ru.jsonl`, 405,825 headword rows (72 MB
+  git-tracked; trim candidates if size ever matters: frequency-ranked
+  selection would be its own card). Rules in provenance.slicer:
+  ru-only, no redirects/proper names/archaic/dialectal entries, no
+  hard-sign forms, ≤3 sense glosses truncated at 200 chars, ≤12
+  inflected lookup forms, byte-order deterministic.
+- Wire: `WordCardView` gains `aux_word/aux_gloss/aux_pos/aux_source`,
+  set only when the pack lexicon missed AND the slice answered. Pack
+  fields never carry aux answers; the frontend renders the aux branch
+  under its own label with the attribution inline; Mine stays offered.
+- Contract extension: a sidecar-resolved lemma now stays on the
+  off-pack card (pack's own lemmatizer truth) where the old text said
+  "everything else None" — the pack-lexicon-vouched fields (surface,
+  reading, gloss, status) still stay None. Existing rust test updated
+  to assert the new contract.
+- Lookup: `word_card_at` → pack lexicon miss → target_locale subtag
+  names `aux/lexicon/<lang>.jsonl`; candidates: `<data>/aux/lexicon/`,
+  repo tree (dev), bundle resource `aux/lexicon` (stage-pack-bundle.sh
+  overlay now maps it). Headword/inflected surface of the query first,
+  then the sidecar lemma. No file → honest bare card (ja today: no ja
+  slice). Never network.
+- Tests: 14 python (synthetic entries + write/check roundtrip), 3 rust
+  (labeled aux card, lemma-routed hit, no-slice degradation), 1 vitest
+  (labeled render + attribution + Mine).

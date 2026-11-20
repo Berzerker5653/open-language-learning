@@ -117,6 +117,10 @@ fi
 .venv/bin/python -m unittest discover -s scripts -p 'test_new_pack.py'
 .venv/bin/python -m unittest discover -s scripts -p 'test_derive_kanji_radicals.py'
 .venv/bin/python -m unittest discover -s scripts -p 'test_voice_guard.py'
+# READER-FLOW-001 off-pack slice: unit tests + committed-slice integrity
+# (provenance-pinned sha256; the raw kaikki input is not committed).
+.venv/bin/python -m unittest discover -s scripts -p 'test_build_aux_lexicon.py'
+.venv/bin/python scripts/build-aux-lexicon.py --check
 .venv/bin/python tools/audit_content_templates.py languages/ja-JP languages/ru-RU
 .venv/bin/python -m unittest discover -s tools -p 'test_audit_content_templates.py'
 .venv/bin/python tools/audit_learner_copy.py

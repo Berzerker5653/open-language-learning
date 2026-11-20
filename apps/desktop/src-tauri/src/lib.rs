@@ -6768,13 +6768,16 @@ async fn story_audio(profile_id: String, sentence_id: String) -> Result<SpeechAu
     .map_err(|e| format!("story-audio failed: {e}"))?
 }
 
-/// READER-FLOW-001 (Lane E): the reader word card. The token is the raw
-/// form the learner tapped; resolution is offline-only — the pack's
-/// optional `media/lemmas.jsonl` sidecar (printed form → dictionary
-/// form, built by scripts/build-morphology-table.py) plus the pack
-/// lexicon. An off-pack word is an honest `in_pack: false` card, never
-/// a guess: the kaikki.org aux-lexicon card is a later slice of this
-/// card, and no external dictionary is ever called (offline-first).
+/// READER-FLOW-001 (Lane E + off-pack slice): the reader word card. The
+/// token is the raw form the learner tapped; resolution is offline-only
+/// — the pack's optional `media/lemmas.jsonl` sidecar (printed form →
+/// dictionary form, built by scripts/build-morphology-table.py) plus
+/// the pack lexicon. An off-pack word gets the honest `in_pack: false`
+/// card, optionally extended by the OFFLINE auxiliary lexicon slice
+/// (`aux/lexicon/<lang>.jsonl`, kaikki.org/Wiktionary, license-checked)
+/// whose fields travel separately and are labeled by `aux_source` — the
+/// pack lexicon stays primary and trusted. No external dictionary is
+/// ever called (offline-first).
 #[derive(Serialize)]
 struct WordCardView {
     query: String,
@@ -6784,6 +6787,13 @@ struct WordCardView {
     gloss: Option<String>,
     status: Option<String>,
     in_pack: bool,
+    // READER-FLOW-001 off-pack slice: set only when the pack lexicon
+    // missed AND the offline aux slice answered. Distinct fields keep a
+    // Wiktionary gloss from ever masquerading as a pack gloss.
+    aux_word: Option<String>,
+    aux_gloss: Option<String>,
+    aux_pos: Option<String>,
+    aux_source: Option<String>,
 }
 
 /// norm-token (READER-FLOW-001 wire contract): remove every U+0301
@@ -6843,6 +6853,76 @@ fn lemma_rows(data: &Path, pack_id: &str, version: &str) -> Vec<LemmaRow> {
         .unwrap_or_default()
 }
 
+/// READER-FLOW-001 off-pack slice: one row of the offline auxiliary
+/// lexicon. Built by `scripts/build-aux-lexicon.py` from kaikki.org's
+/// machine-readable Wiktionary extraction (CC BY-SA / GFDL — license
+/// checked and pinned in `aux/lexicon/ru.provenance.json`). The slice
+/// is consulted ONLY after the pack lexicon misses, never merges into
+/// pack lexicon or scheduling paths, and its rows are always rendered
+/// under their own `AUX_SOURCE` label.
+#[derive(Debug, Clone, serde::Deserialize)]
+struct AuxRow {
+    word: String,
+    #[serde(default)]
+    pos: Vec<String>,
+    #[serde(default)]
+    glosses: Vec<String>,
+    #[serde(default)]
+    forms: Vec<String>,
+}
+
+/// The attribution every aux card carries (the same text the slice's
+/// provenance records; ShareAlike requires naming the source).
+const AUX_SOURCE: &str = "Wiktionary via kaikki.org (CC BY-SA / GFDL)";
+
+/// The language subtag the pack's manifest declares (`ja-JP` -> `ja`),
+/// reusing `pack_target_locale`'s manifest read. An unknown locale
+/// simply means "no aux file to name", never a guess.
+fn aux_lang(data: &Path, pack_id: &str, version: &str) -> Option<String> {
+    let locale = pack_target_locale(&data.join("packs").join(pack_id).join(version)).ok()?;
+    let sub = locale.split('-').next()?.trim().to_lowercase();
+    (!sub.is_empty()).then_some(sub)
+}
+
+/// Read the aux slice for one language. Candidate order: the learner
+/// data dir (a replaceable installed copy), then the repo tree (dev
+/// builds, same CARGO_MANIFEST_DIR resolution as the dev pack
+/// candidates), then the staged resources beside a pack-bundled build's
+/// `packs/` root. Same tolerance posture as `lemma_rows`: absent or
+/// corrupt means no aux rows and the honest bare card; no network.
+fn aux_rows(data: &Path, lang: &str) -> Vec<AuxRow> {
+    let name = format!("{lang}.jsonl");
+    let mut candidates = vec![data.join("aux").join("lexicon").join(&name)];
+    candidates.push(
+        PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../../../aux/lexicon")
+            .join(&name),
+    );
+    if let Some(packs_root) = BUNDLED_PACKS.get().and_then(|p| p.parent()) {
+        candidates.push(packs_root.join("aux/lexicon").join(&name));
+    }
+    candidates
+        .iter()
+        .find_map(|path| std::fs::read_to_string(path).ok())
+        .map(|text| {
+            text.lines()
+                .filter_map(|line| serde_json::from_str::<AuxRow>(line).ok())
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
+/// One aux row for the tapped token: headword or inflected form of the
+/// norm-token first, else the sidecar-resolved lemma. First hit in the
+/// slice's deterministic byte order — no scoring, no guessing.
+fn aux_hit<'a>(rows: &'a [AuxRow], query: &str, lemma: Option<&str>) -> Option<&'a AuxRow> {
+    let find = |key: &str| {
+        rows.iter()
+            .find(|r| r.word == key || r.forms.iter().any(|f| f == key))
+    };
+    find(query).or_else(|| lemma.and_then(find))
+}
+
 #[tauri::command]
 async fn word_card(
     profile_id: String,
@@ -6899,20 +6979,39 @@ fn word_card_at(
             gloss: Some(e.gloss),
             status: Some(e.status),
             in_pack: true,
+            // The pack lexicon answered: the aux slice is never consulted.
+            aux_word: None,
+            aux_gloss: None,
+            aux_pos: None,
+            aux_source: None,
         }),
-        None => Ok(WordCardView {
-            query,
-            // "No pack word => in_pack false, everything else None"
-            // (READER-FLOW-001): a lemma with no pack entry behind it
-            // cannot be glossed or played, so a half-resolved card
-            // would lie about pack coverage.
-            lemma: None,
-            surface: None,
-            reading: None,
-            gloss: None,
-            status: None,
-            in_pack: false,
-        }),
+        None => {
+            // READER-FLOW-001 off-pack slice: before falling back to the
+            // bare honest card, try the offline auxiliary lexicon. The
+            // aux fields stay separately labeled; a Wiktionary gloss
+            // never sits in a pack field.
+            let aux = aux_lang(data, pack_id, &version)
+                .map(|lang| aux_rows(data, &lang))
+                .and_then(|rows| aux_hit(&rows, &query, lemma.as_deref()).cloned());
+            Ok(WordCardView {
+                query,
+                // The sidecar lemma is the pack's own lemmatizer truth
+                // (pymorphy3 table built at pack build time), so it
+                // stays on the card even with no pack entry behind it —
+                // the card names the dictionary form. What stays None
+                // is everything only the pack lexicon can vouch for.
+                lemma,
+                surface: None,
+                reading: None,
+                gloss: None,
+                status: None,
+                in_pack: false,
+                aux_word: aux.as_ref().map(|r| r.word.clone()),
+                aux_gloss: aux.as_ref().and_then(|r| r.glosses.first().cloned()),
+                aux_pos: aux.as_ref().and_then(|r| r.pos.first().cloned()),
+                aux_source: aux.as_ref().map(|_| AUX_SOURCE.to_string()),
+            })
+        }
     }
 }
 
@@ -14426,9 +14525,11 @@ transfer_variants:
     }
 
     /// READER-FLOW-001: a token with no sidecar row and no lexicon entry
-    /// is an honest `in_pack: false` card — and a sidecar row whose
-    /// lemma has no lexicon entry behind it stays out-of-pack too (no
-    /// half-resolved card claiming coverage the pack does not have).
+    /// is an honest `in_pack: false` card. A sidecar row whose lemma has
+    /// no lexicon entry behind it stays out-of-pack too — but the pack's
+    /// own lemmatizer lemma stays on the card (the card names the
+    /// dictionary form; off-pack slice contract extension 2026-11-20):
+    /// what stays None is every pack-lexicon-vouched field.
     #[test]
     fn word_card_reports_off_pack_words_as_not_in_pack() {
         let tmp = tempfile::tempdir().unwrap();
@@ -14444,18 +14545,106 @@ transfer_variants:
         )
         .unwrap();
 
-        // No row, no entry: everything None, in_pack false.
+        // No row, no entry: everything None, in_pack false. (The fixture
+        // manifest deliberately carries no target_locale, so the aux
+        // slice has no language to name — these assertions stay
+        // hermetic regardless of the committed ru slice.)
         let bare = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "квоцквц").unwrap();
         assert!(!bare.in_pack);
         assert_eq!(bare.query, "квоцквц");
         assert!(bare.lemma.is_none() && bare.gloss.is_none() && bare.surface.is_none());
+        assert!(bare.aux_gloss.is_none() && bare.aux_source.is_none());
 
         // Row resolves a lemma, but the pack has no entry for it: the
-        // card stays honest about pack coverage (contract: "no pack word
-        // => in_pack false, everything else None").
+        // card stays honest about pack coverage while still naming the
+        // dictionary form the pack's own sidecar resolved.
         let lemma_only = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "молока").unwrap();
         assert!(!lemma_only.in_pack);
-        assert!(lemma_only.lemma.is_none() && lemma_only.gloss.is_none());
+        assert_eq!(lemma_only.lemma.as_deref(), Some("молоко"));
+        assert!(lemma_only.gloss.is_none() && lemma_only.surface.is_none());
+    }
+
+    /// READER-FLOW-001 off-pack slice: an off-pack token the offline aux
+    /// lexicon covers (here via an inflected form) gets a clearly
+    /// labeled aux card — gloss + headword + source attribution — while
+    /// every pack-vouched field stays None and `in_pack` stays false.
+    #[test]
+    fn word_card_off_pack_token_gets_the_labeled_aux_card() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let root = data
+            .join("packs")
+            .join("org.openlanguage.ru-fixture")
+            .join("0.1.0");
+        // This test gives the fixture a target_locale so the aux lookup
+        // has a language to name, and installs an aux slice into the
+        // learner data dir (the first read candidate) to stay hermetic.
+        let mut manifest = std::fs::read_to_string(root.join("manifest.yaml")).unwrap();
+        manifest.push_str("target_locale: \"ru-RU\"\n");
+        std::fs::write(root.join("manifest.yaml"), manifest).unwrap();
+        std::fs::create_dir_all(data.join("aux/lexicon")).unwrap();
+        std::fs::write(
+            data.join("aux/lexicon/ru.jsonl"),
+            "{\"word\":\"подарок\",\"pos\":[\"noun\"],\"glosses\":[\"present, gift\"],\"forms\":[\"подарка\",\"подарку\"]}\n",
+        )
+        .unwrap();
+
+        let card = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "подарка").unwrap();
+        assert!(!card.in_pack);
+        assert_eq!(card.aux_word.as_deref(), Some("подарок"));
+        assert_eq!(card.aux_gloss.as_deref(), Some("present, gift"));
+        assert_eq!(card.aux_pos.as_deref(), Some("noun"));
+        assert_eq!(card.aux_source.as_deref(), Some(AUX_SOURCE));
+        // No pack field ever carries an aux answer.
+        assert!(card.surface.is_none() && card.gloss.is_none() && card.status.is_none());
+    }
+
+    /// READER-FLOW-001 off-pack slice: the aux lookup also reaches the
+    /// slice through the sidecar-resolved lemma, and a pack locale with
+    /// no slice file degrades to the honest bare card (no guess, no
+    /// network).
+    #[test]
+    fn word_card_aux_lookup_goes_through_the_lemma_and_degrades_without_a_slice() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let root = data
+            .join("packs")
+            .join("org.openlanguage.ru-fixture")
+            .join("0.1.0");
+        std::fs::write(
+            root.join("media/lemmas.jsonl"),
+            "{\"surface\":\"молока\",\"lemma\":\"молоко\",\"tag\":\"NOUN,inan,masc sing,gent\"}\n",
+        )
+        .unwrap();
+        let mut manifest = std::fs::read_to_string(root.join("manifest.yaml")).unwrap();
+        manifest.push_str("target_locale: \"ru-RU\"\n");
+        std::fs::write(root.join("manifest.yaml"), manifest).unwrap();
+        std::fs::create_dir_all(data.join("aux/lexicon")).unwrap();
+        std::fs::write(
+            data.join("aux/lexicon/ru.jsonl"),
+            "{\"word\":\"молоко\",\"pos\":[\"noun\"],\"glosses\":[\"milk\"],\"forms\":[\"молока\"]}\n",
+        )
+        .unwrap();
+
+        // The tapped form is not a slice surface; the pack sidecar
+        // resolves the lemma, and the lemma finds the aux row.
+        let via_lemma = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "молока").unwrap();
+        assert!(!via_lemma.in_pack);
+        assert_eq!(via_lemma.lemma.as_deref(), Some("молоко"));
+        assert_eq!(via_lemma.aux_gloss.as_deref(), Some("milk"));
+        assert_eq!(via_lemma.aux_source.as_deref(), Some(AUX_SOURCE));
+
+        // A locale with no slice anywhere (qq) gets the honest bare
+        // card: still no pack membership claim, no invented gloss.
+        let mut manifest = std::fs::read_to_string(root.join("manifest.yaml")).unwrap();
+        manifest = manifest.replace("target_locale: \"ru-RU\"", "target_locale: \"qq-QQ\"");
+        std::fs::write(root.join("manifest.yaml"), manifest).unwrap();
+        let bare = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "молока").unwrap();
+        assert!(!bare.in_pack);
+        assert!(bare.aux_gloss.is_none() && bare.aux_source.is_none());
+        assert_eq!(bare.lemma.as_deref(), Some("молоко"));
     }
 
     /// READER-FLOW-001: the contract's lexicon match includes the direct

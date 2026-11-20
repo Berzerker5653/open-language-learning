@@ -109,7 +109,10 @@ export interface Story {
 /** READER-FLOW-001 wire shape of the `word_card` command's answer, mirrored
  * exactly: everything None except `query` and `in_pack` when the token is
  * not in the pack — the frontend then renders the honest "not in your pack
- * yet" card instead of inventing a gloss. */
+ * yet" card instead of inventing a gloss. The off-pack slice adds the aux
+ * fields: set together only when the offline auxiliary lexicon (Wiktionary
+ * via kaikki.org, CC BY-SA) answered; they render under their own label
+ * and never masquerade as pack data. */
 export interface WordCardView {
   query: string;
   lemma: string | null;
@@ -118,6 +121,10 @@ export interface WordCardView {
   gloss: string | null;
   status: string | null;
   in_pack: boolean;
+  aux_word: string | null;
+  aux_gloss: string | null;
+  aux_pos: string | null;
+  aux_source: string | null;
 }
 
 /** The open word card: which sentence's which raw token, plus the engine's
@@ -361,6 +368,27 @@ export function ReadingPanel(p: ReadingPanelProps) {
               <p className="word-lemma">
                 <LatinText locale="en">dictionary form: </LatinText>
                 <PackText tag="span">{card.lemma}</PackText>
+              </p>
+            )}
+          </>
+        ) : card.aux_gloss ? (
+          <>
+            {/* READER-FLOW-001 off-pack slice: the offline auxiliary
+                lexicon answered. Clearly labeled, attribution inline
+                (ShareAlike), never claiming pack membership. */}
+            <p className="word-gloss">
+              <LatinText locale="en">{card.aux_gloss}</LatinText>
+            </p>
+            <p className="meta">
+              <LatinText locale="en">
+                not in your pack — offline auxiliary dictionary
+                {card.aux_source ? ` (${card.aux_source})` : ""}
+              </LatinText>
+            </p>
+            {card.aux_word && (
+              <p className="word-lemma">
+                <LatinText locale="en">dictionary form: </LatinText>
+                <PackText tag="span">{card.aux_word}</PackText>
               </p>
             )}
           </>
