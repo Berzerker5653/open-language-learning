@@ -1,0 +1,12 @@
+ja.sent.b1-repair-osshatte-itadakasu
+ja.sent.b1-repair-kikoemasendeshita
+ja.sent.b1-repair-iimashita-to-iu-imika
+ja.sent.b1-repair-yasashii-nihongo-de
+ja.sent.b1-repair-ukagatte-mo-iidesuka
+ja.sent.b1-repair-tsumari-iinchigaindesuka
+ja.sent.b1-disc-mazu-sorekara
+ja.sent.b1-disc-kara-maeniawanakatta
+ja.sent.b1-disc-keredo-wakarimasendeshita
+ja.sent.b1-disc-ni-yori-chigaimasu
+ja.sent.b1-news-hatsuden-tomattemasu
+ja.sent.b1-news-genjyou-tenkyuu

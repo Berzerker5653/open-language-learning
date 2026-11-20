@@ -1,0 +1,93 @@
+# ai-assisted draft unit (JA-B1-001 B1 band increment: repair/clarification coverage); content refs are pack data; qualified review pending (JA-B1-002).
+id: ja.unit.b1-repair-clarify
+goal_id: ja.goal.b1.repair-clarification
+title: "Keeping the line open: repair and confirmation"
+summary: "B1 conversation repair with polite request forms: もういちど おっしゃって いただけますか, うかがっても いいですか, and つまり paraphrase-checking."
+estimated_minutes: 10
+# ADR-0037: this unit claims its task sequence end to end; transfer and reuse stages are the band's transfer/delayed-reuse checks.
+task_sequence:
+  input: ja.activity.b1-repair-enc
+  scaffolded: ja.activity.b1-repair-cloze
+  independent: ja.activity.b1-repair-write
+  transfer: ja.activity.b1-repair-paraphrase-check
+  reuse: ja.activity.b1-repair-recall-later
+activities:
+- id: ja.activity.b1-repair-enc
+  type: encounter-read
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.sent.b1-repair-osshatte-itadakasu
+  - ja.sent.b1-repair-kikoemasendeshita
+  - ja.sent.b1-repair-iimashita-to-iu-imika
+  - ja.lex.ling2.imi2
+- id: ja.activity.b1-repair-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.grammar.b1.keigo-kenjo-intro
+  - ja.grammar.b1.keigo-soncho-intro
+  - ja.grammar.b1.te-itadakimasu
+  - ja.grammar.politeness.register
+- id: ja.activity.b1-repair-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.b1-repair-osshatte-itadakasu
+  - ja.sent.b1-repair-yasashii-nihongo-de
+  - ja.sent.b1-repair-ukagatte-mo-iidesuka
+- id: ja.activity.b1-repair-recall-seeded
+  type: recall-choice
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.sent.b1-repair-osshatte-itadakasu
+  - ja.sent.b1-repair-ukagatte-mo-iidesuka
+  - ja.grammar.b1.keigo-soncho-intro
+- id: ja.activity.b1-repair-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b1-repair-kikoemasendeshita
+  - ja.sent.b1-repair-yasashii-nihongo-de
+  - ja.lex.ling2.imi2
+- id: ja.activity.b1-repair-paraphrase-check
+  type: recall-choice
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.sent.b1-repair-tsumari-iinchigaindesuka
+  - ja.sent.b1-repair-iimashita-to-iu-imika
+- id: ja.activity.b1-repair-recall-later
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b1-repair-tsumari-iinchigaindesuka
+  - ja.sent.b1-repair-osshatte-itadakasu
+generation_contract:
+  allowed_vocab:
+  - ja.sent.b1-repair-osshatte-itadakasu
+  - ja.sent.b1-repair-kikoemasendeshita
+  - ja.sent.b1-repair-iimashita-to-iu-imika
+  - ja.sent.b1-repair-yasashii-nihongo-de
+  - ja.sent.b1-repair-ukagatte-mo-iidesuka
+  - ja.sent.b1-repair-tsumari-iinchigaindesuka
+  - ja.lex.ling2.imi2
+  allowed_grammar:
+  - ja.grammar.b1.keigo-kenjo-intro
+  - ja.grammar.b1.keigo-soncho-intro
+  - ja.grammar.b1.te-itadakimasu
+  - ja.grammar.politeness.register
+  new_item_budget: 2
+  register:
+  - ja.register.polite-neutral
+  expected_interpretations:
+  - 'Repair moves in polite talk: honorific おっしゃって for the speaker''s words, humble うかがう for own asking, ていただけますか requests, つまり for paraphrase confirmation; taught chunks only.'
+  prohibited_ambiguity:
+  - Do not use humble うかがう for the listener's speaking act; that side is honorific おっしゃる (see b1.keigo-soncho-intro).
+  target_proficiency: B1
+  validation_method: choice

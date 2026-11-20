@@ -1,0 +1,88 @@
+# ai-assisted draft unit (JA-B1-001 B1 band increment: repair/clarification in the office); content refs are pack data; qualified review pending (JA-B1-002).
+id: ja.unit.b1-repair-workplace
+goal_id: ja.goal.b1.repair-clarification
+title: "Office clarification: confirming details politely"
+summary: "B1 workplace clarification: re-asking a name (うかがっても いいですか) and confirming meeting details with つまり, on top of the notice/request chunks from the work-notice unit."
+estimated_minutes: 9
+# ADR-0037: task sequence claimed end to end; the transfer stage reuses repair forms in the office situation.
+task_sequence:
+  input: ja.activity.b1-repair-work-enc
+  scaffolded: ja.activity.b1-repair-work-cloze
+  independent: ja.activity.b1-repair-work-write
+  transfer: ja.activity.b1-repair-work-confirm
+  reuse: ja.activity.b1-repair-work-recall-later
+activities:
+- id: ja.activity.b1-repair-work-enc
+  type: encounter-read
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.sent.b1-repair-ukagatte-mo-iidesuka
+  - ja.sent.b1-repair-tsumari-iinchigaindesuka
+  - ja.sent.office-notice-time
+  - ja.lex.work.kaigi
+- id: ja.activity.b1-repair-work-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.grammar.b1.keigo-kenjo-intro
+  - ja.grammar.b1.te-itadakimasu
+  - ja.grammar.politeness.register
+- id: ja.activity.b1-repair-work-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.b1-repair-ukagatte-mo-iidesuka
+  - ja.sent.b1-repair-tsumari-iinchigaindesuka
+- id: ja.activity.b1-repair-work-recall-seeded
+  type: recall-choice
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.sent.b1-repair-tsumari-iinchigaindesuka
+  - ja.sent.office-room-reserve
+- id: ja.activity.b1-repair-work-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b1-repair-ukagatte-mo-iidesuka
+  - ja.sent.office-notice-time
+  - ja.lex.work.kaigi
+- id: ja.activity.b1-repair-work-confirm
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b1-repair-tsumari-iinchigaindesuka
+  - ja.sent.office-room-reserve
+- id: ja.activity.b1-repair-work-recall-later
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b1-repair-ukagatte-mo-iidesuka
+  - ja.sent.b1-repair-osshatte-itadakasu
+generation_contract:
+  allowed_vocab:
+  - ja.sent.b1-repair-ukagatte-mo-iidesuka
+  - ja.sent.b1-repair-tsumari-iinchigaindesuka
+  - ja.sent.b1-repair-osshatte-itadakasu
+  - ja.sent.office-notice-time
+  - ja.sent.office-room-reserve
+  - ja.lex.work.kaigi
+  allowed_grammar:
+  - ja.grammar.b1.keigo-kenjo-intro
+  - ja.grammar.b1.te-itadakimasu
+  - ja.grammar.politeness.register
+  new_item_budget: 2
+  register:
+  - ja.register.polite-neutral
+  expected_interpretations:
+  - 'Office clarification: re-asking a name with うかがっても いいですか and checking a detail with つまり ... ですね; taught chunks only.'
+  prohibited_ambiguity:
+  - Do not append ですね to assert a fact unknown to the listener; it checks shared understanding.
+  target_proficiency: B1
+  validation_method: choice

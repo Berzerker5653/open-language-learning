@@ -1,0 +1,12 @@
+{"id": "ja.sent.b1-disc-kara-maeniawanakatta", "text": "じこが あったので、でんしゃが とまりました。だから、かいぎに まにあいませんでした。", "heard": "事故があったので、電車が止まりました。だから会議に間に合いませんでした。", "rc": 0, "err": ""}
+{"id": "ja.sent.b1-disc-keredo-wakarimasendeshita", "text": "べんきょうしました。けれど、テストの こたえが わかりませんでした。", "heard": "勉強しました。けれど、テストの答えが分かりませんでした。", "rc": 0, "err": ""}
+{"id": "ja.sent.b1-disc-mazu-sorekara", "text": "まず しりょうを つくって、それから ぎじゅつの れんしゅうを します。", "heard": "まず資料を作って、それから技術の練習をします。", "rc": 0, "err": ""}
+{"id": "ja.sent.b1-disc-ni-yori-chigaimasu", "text": "かんじの かきかたは、くに により ちがいます。", "heard": "漢字の書き方は国により違います", "rc": 0, "err": ""}
+{"id": "ja.sent.b1-news-genjyou-tenkyuu", "text": "しんぶん の きじを よんで、しゃかい の げんじょうを べんきょうしました。", "heard": "新聞の記事を読んで社会の現状を勉強しました", "rc": 0, "err": ""}
+{"id": "ja.sent.b1-news-hatsuden-tomattemasu", "text": "ふういの ため、でんきの はつでんが とまっています。", "heard": "台風のため電気の発電が止まっています", "rc": 0, "err": "", "note": "re-baked after kana fix ふうい->たいふう"}
+{"id": "ja.sent.b1-repair-iimashita-to-iu-imika", "text": "たいへんだった、と いう いみ ですか。", "heard": "大変だったという意味ですか?", "rc": 0, "err": ""}
+{"id": "ja.sent.b1-repair-kikoemasendeshita", "text": "すみません、かいぎの おんせいが よく きこえませんでした。", "heard": "すみません会議の音声がよく聞こえませんでした", "rc": 0, "err": ""}
+{"id": "ja.sent.b1-repair-osshatte-itadakasu", "text": "もういちど おっしゃって いただけますか。", "heard": "もう一度おっしゃっていただけますか?", "rc": 0, "err": ""}
+{"id": "ja.sent.b1-repair-tsumari-iinchigaindesuka", "text": "つまり、あした の かいぎは やめた、と いう こと ですね。", "heard": "つまり、明日の会議はやめた、ということですね。", "rc": 0, "err": ""}
+{"id": "ja.sent.b1-repair-ukagatte-mo-iidesuka", "text": "すみません、もういちど おなまえを うかがっても いいですか。", "heard": "すみません、もう一度お名前を伺ってもいいですか?", "rc": 0, "err": ""}
+{"id": "ja.sent.b1-repair-yasashii-nihongo-de", "text": "もう すこし やさしい にほんごで 言って いただけますか。", "heard": "もう少し優しい日本語で言っていただけますか。", "rc": 0, "err": ""}

@@ -1,0 +1,12 @@
+{"id": "ja.sent.b1-disc-keredo-wakarimasendeshita", "status": "MISMATCH", "text": "べんきょうしました。けれど、テストの こたえが わかりませんでした。", "reasons": ["duration-suspect (5.04s > 1.30s cap)"]}
+{"id": "ja.sent.b1-disc-kara-maeniawanakatta", "status": "MISMATCH", "text": "じこが あったので、でんしゃが とまりました。だから、かいぎに まにあいませんでした。", "reasons": ["duration-suspect (7.92s > 1.30s cap)"]}
+{"id": "ja.sent.b1-disc-mazu-sorekara", "status": "MISMATCH", "text": "まず しりょうを つくって、それから ぎじゅつの れんしゅうを します。", "reasons": ["duration-suspect (5.60s > 1.30s cap)"]}
+{"id": "ja.sent.b1-disc-ni-yori-chigaimasu", "status": "MISMATCH", "text": "かんじの かきかたは、くに により ちがいます。", "reasons": ["duration-suspect (3.44s > 1.30s cap)"]}
+{"id": "ja.sent.b1-news-hatsuden-tomattemasu", "status": "MISMATCH", "text": "ふういの ため、でんきの はつでんが とまっています。", "reasons": ["duration-suspect (4.96s > 1.30s cap)"]}
+{"id": "ja.sent.b1-news-genjyou-tenkyuu", "status": "MISMATCH", "text": "しんぶん の きじを よんで、しゃかい の げんじょうを べんきょうしました。", "reasons": ["duration-suspect (5.76s > 1.30s cap)"]}
+{"id": "ja.sent.b1-repair-iimashita-to-iu-imika", "status": "MISMATCH", "text": "たいへんだった、と いう いみ ですか。", "reasons": ["duration-suspect (4.72s > 1.30s cap)"]}
+{"id": "ja.sent.b1-repair-osshatte-itadakasu", "status": "MISMATCH", "text": "もういちど おっしゃって いただけますか。", "reasons": ["duration-suspect (4.80s > 1.30s cap)"]}
+{"id": "ja.sent.b1-repair-kikoemasendeshita", "status": "MISMATCH", "text": "すみません、かいぎの おんせいが よく きこえませんでした。", "reasons": ["duration-suspect (5.04s > 1.30s cap)"]}
+{"id": "ja.sent.b1-repair-ukagatte-mo-iidesuka", "status": "MISMATCH", "text": "すみません、もういちど おなまえを うかがっても いいですか。", "reasons": ["duration-suspect (5.12s > 1.30s cap)"]}
+{"id": "ja.sent.b1-repair-tsumari-iinchigaindesuka", "status": "MISMATCH", "text": "つまり、あした の かいぎは やめた、と いう こと ですね。", "reasons": ["duration-suspect (4.72s > 1.30s cap)"]}
+{"id": "ja.sent.b1-repair-yasashii-nihongo-de", "status": "MISMATCH", "text": "もう すこし やさしい にほんごで 言って いただけますか。", "reasons": ["duration-suspect (4.24s > 1.30s cap)"]}

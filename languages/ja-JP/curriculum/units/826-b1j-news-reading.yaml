@@ -1,0 +1,70 @@
+# ai-assisted draft unit (JA-B1-001 B1 band increment: broader reading — news-style notices); content refs are pack data; qualified review pending (JA-B1-002).
+id: ja.unit.b1-news-reading
+goal_id: ja.goal.b1.media-news
+title: "Reading short notices: typhoon and current situation"
+summary: "B1 broader reading: news-style short notice (ため nominal cause, ています resultant state) and a society-current-situation sentence, with independent written recall."
+estimated_minutes: 9
+# ADR-0037: task sequence claimed end to end; independent recall at support_level 0 carries the reduced-translation-dependence claim for this unit.
+task_sequence:
+  input: ja.activity.b1-news-enc
+  scaffolded: ja.activity.b1-news-cloze
+  independent: ja.activity.b1-news-write
+  transfer: ja.activity.b1-news-choice
+  reuse: ja.activity.b1-news-recall-later
+activities:
+- id: ja.activity.b1-news-enc
+  type: encounter-read
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.sent.b1-news-hatsuden-tomattemasu
+  - ja.sent.b1-news-genjyou-tenkyuu
+- id: ja.activity.b1-news-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.grammar.b1.te-shimau
+  - ja.grammar.b1.sou-da
+- id: ja.activity.b1-news-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.b1-news-hatsuden-tomattemasu
+  - ja.sent.b1-news-genjyou-tenkyuu
+- id: ja.activity.b1-news-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b1-news-hatsuden-tomattemasu
+- id: ja.activity.b1-news-choice
+  type: recall-choice
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.sent.b1-news-genjyou-tenkyuu
+  - ja.sent.b1-news-hatsuden-tomattemasu
+- id: ja.activity.b1-news-recall-later
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b1-news-genjyou-tenkyuu
+generation_contract:
+  allowed_vocab:
+  - ja.sent.b1-news-hatsuden-tomattemasu
+  - ja.sent.b1-news-genjyou-tenkyuu
+  allowed_grammar:
+  - ja.grammar.b1.te-shimau
+  - ja.grammar.b1.sou-da
+  new_item_budget: 2
+  register:
+  - ja.register.polite-neutral
+  expected_interpretations:
+  - 'Notice-style reading: nominal ため cause, resultant ています state after a completion (とまる), learning a current situation from print; taught chunks only.'
+  prohibited_ambiguity:
+  - Do not read とまっています as a one-time past stop; it reports an ongoing halted state.
+  target_proficiency: B1
+  validation_method: choice

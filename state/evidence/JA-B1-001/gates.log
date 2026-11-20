@@ -1,0 +1,46 @@
+== validate ==
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 0 warning(s)
+exit=0
+== lint ==
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+lint: 0 error(s), 0 warning(s)
+exit=0
+== audit-curriculum ==
+audit-curriculum: 0 error(s), 0 warning(s)
+exit=0
+== audit-lexicon ==
+audit-lexicon: 0 error(s), 0 warning(s)
+exit=0
+== audit-licenses ==
+audit-licenses: 0 error(s), 0 warning(s)
+exit=0
+== audit-sources ==
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+audit-sources: 0 error(s), 0 warning(s)
+exit=0
+== test ==
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+test: 0 error(s), 0 warning(s)
+exit=0
+
+== audio bake + ASR gate note (2026-11-20) ==
+- 12/12 new sentence clips rendered (unit lts-jab1-bake, qwen3-tts/ono_anna, OMP=1, --jobs 1; bake.log).
+- qa-asr full verdict: 12 rows flagged duration-suspect with a 1.30s cap. This is a gate-tool artifact for ja:
+  the cap formula in scripts/qa-asr.py counts CYRILLIC vowel graphemes only, so any ja sentence scores 0 syllables.
+  Corpus comparison (this lane): new clips mean 0.214 s/mora vs shipped ja corpus mean 0.206 (n=831, p90 0.289) —
+  delivery pacing is normal. Content half of the gate re-checked directly (asr-content.jsonl): whisper
+  (large-v3-turbo) hears the expected sentence in 12/12 clips; one real content defect found and fixed by this
+  loop (kana ふうい -> たいふう, re-baked, re-heard clean). No gate script was edited. Owner policy note:
+  ja audio accepted on trust (no full ja ASR audits) — this lane ran only the 12 new clips for defect triage.

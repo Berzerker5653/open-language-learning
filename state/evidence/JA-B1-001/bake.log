@@ -1,0 +1,47 @@
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b1-repair-osshatte-itadakasu: first-request 38.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b1-repair-kikoemasendeshita: first-request 40.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b1-repair-iimashita-to-iu-imika: first-request 41.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b1-repair-yasashii-nihongo-de: first-request 34.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b1-repair-ukagatte-mo-iidesuka: first-request 40.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b1-repair-tsumari-iinchigaindesuka: first-request 37.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b1-disc-mazu-sorekara: first-request 44.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b1-disc-kara-maeniawanakatta: first-request 63.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b1-disc-keredo-wakarimasendeshita: first-request 41.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b1-disc-ni-yori-chigaimasu: first-request 27.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b1-news-hatsuden-tomattemasu: first-request 39.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b1-news-genjyou-tenkyuu: first-request 46.2s ok=True
+pack=languages/ja-JP assets=4923 generated=12 reused=0 refused=0 bytes=375863652
+BAKE-DONE exit=0
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b1-news-hatsuden-tomattemasu: first-request 51.8s ok=True
+pack=languages/ja-JP assets=4923 generated=1 reused=0 refused=0 bytes=375848292

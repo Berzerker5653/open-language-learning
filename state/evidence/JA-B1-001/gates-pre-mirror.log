@@ -1,0 +1,43 @@
+== validate ==
+warning[dependency_graph_mismatch] grammar/dependencies.yaml: content prerequisite ja.goal.b1.repair-clarification -> ja.goal.b1.health-wellness missing from dependencies.yaml mirror
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 1 warning(s)
+exit=0
+== lint ==
+warning[dependency_graph_mismatch] grammar/dependencies.yaml: content prerequisite ja.goal.b1.repair-clarification -> ja.goal.b1.health-wellness missing from dependencies.yaml mirror
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+warning[dependency_graph_mismatch] grammar/dependencies.yaml: content prerequisite ja.goal.b1.repair-clarification -> ja.goal.b1.health-wellness missing from dependencies.yaml mirror
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+lint: 0 error(s), 2 warning(s)
+exit=1
+== audit-curriculum ==
+warning[dependency_graph_mismatch] grammar/dependencies.yaml: content prerequisite ja.goal.b1.repair-clarification -> ja.goal.b1.health-wellness missing from dependencies.yaml mirror
+audit-curriculum: 0 error(s), 1 warning(s)
+exit=0
+== audit-lexicon ==
+audit-lexicon: 0 error(s), 0 warning(s)
+exit=0
+== audit-licenses ==
+audit-licenses: 0 error(s), 0 warning(s)
+exit=0
+== audit-sources ==
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+audit-sources: 0 error(s), 0 warning(s)
+exit=0
+== test ==
+warning[dependency_graph_mismatch] grammar/dependencies.yaml: content prerequisite ja.goal.b1.repair-clarification -> ja.goal.b1.health-wellness missing from dependencies.yaml mirror
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+warning[dependency_graph_mismatch] grammar/dependencies.yaml: content prerequisite ja.goal.b1.repair-clarification -> ja.goal.b1.health-wellness missing from dependencies.yaml mirror
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+test: 0 error(s), 2 warning(s)
+note: 2 warning(s); promotion gates still pass
+exit=0
