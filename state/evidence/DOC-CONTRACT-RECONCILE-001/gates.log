@@ -1,0 +1,3 @@
+DOC-CONTRACT-RECONCILE-001 gate log — 2026-11-20
+Docs-only card: no Rust/TS surface touched, so LANE tier = the handoff validator.
+$ .venv/bin/python tools/validate_handoff.py --require-explicit-ledger-records

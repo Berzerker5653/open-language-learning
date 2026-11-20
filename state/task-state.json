@@ -1178,16 +1178,18 @@
     },
     "DOC-CONTRACT-RECONCILE-001": {
       "task_id": "DOC-CONTRACT-RECONCILE-001",
-      "status": "blocked",
-      "attempts": 1,
+      "status": "done",
+      "attempts": 2,
       "title": "Onboarding and specification claims match the shipped system",
       "activity": "idle",
-      "summary": "Docs and claims that a human has to arbitrate are staged for owner decision: the pack license metadata, the ADRs awaiting acceptance, and the coverage wording that overstates what the desktop can reach.",
-      "notes": "Owner decision outstanding; not self-certified by an agent (AGENTS: AI cannot clear a human gate). The wrong claim about `Independent` reachability is corrected in this ledger; the remaining reconciliations (CC-BY-3.0 pack metadata under a CC-BY-4.0 label, ADR-0026/0028/0029/0030/0031 acceptance, O-03, O-06, O-07, O-08) are owner-only. Add to the owner queue: republishing both packs at 0.4.1 (the licence-metadata fix, O-01b) must also bake the 18 journey rows added on 2026-10-14; until then ADR-0032 keeps those wavs tracked and the tree is deliberately ahead of the pinned archive by 8 ja + 10 ru rows. Update 2026-10-19: the owner answered the coverage question — reliable A1–A2 in both shipped languages is the 1.0 bar — and it is recorded in docs/18; the B1/B2 depth tasks (JA-B1-001, JA-B2-001) are roadmap again, not release gates. Still blocked on the owner's hands-on acceptance pass and the release evidence trail.",
+      "summary": "Doc-vs-shipped reconciliation shipped: README pack pins (ja 0.4.3 / ru 0.4.5), pack sizes (290 MB archives / ~380 MB audio), coverage re-measured (ja 77/801/4,641; ru 60/818/3,248), goal counts 77/60, open-gate count corrected to 1-of-67 (only REL-001), QUICKSTART now names the shipped authoring aids (readability-gate, vocab-budget-check) as non-CLI-gate tools; task-state current_release_candidate prose rewritten to measured facts. Owner hands-on pass stays with RELEASE-EVIDENCE-001/REL-001.",
+      "notes": "Attempt 2 (2026-11-20, board card t_45b51fe7): every public claim re-measured from artifacts — pack manifests vs catalog pins vs gh release list, curriculum counts, review posture (all content records draft; the 2026-11 band reviews were owner-delegated AGENT reviews, promote nothing), gate count (66/67 required closed). Fix list in state/evidence/DOC-CONTRACT-RECONCILE-001/audit-2026-11-20.md. Coverage target bullet already satisfied by the owner's 2026-10-19 decision in docs/18. The remaining owner-only items (hands-on artifact pass, release decision, republish O-06) live on REL-001/RELEASE-EVIDENCE-001 and were never this card's acceptance.",
       "dependencies": [],
-      "evidence": [],
-      "updated": "2026-10-19",
-      "blocker": "Owner decision outstanding; not self-certified by an agent (AGENTS: AI cannot clear a human gate)."
+      "evidence": [
+        "state/evidence/DOC-CONTRACT-RECONCILE-001/audit-2026-11-20.md",
+        "state/evidence/DOC-CONTRACT-RECONCILE-001/gates.log"
+      ],
+      "updated": "2026-11-20"
     },
     "BUILD-IDENTITY-FRESHNESS-001": {
       "task_id": "BUILD-IDENTITY-FRESHNESS-001",
@@ -2179,5 +2181,5 @@
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
-  "current_release_candidate": "v0.4.2 (published 2026-10-18; state/evidence/RC-0.4.2-2026-10-18/). Both pack manifests declare 0.4.2 and `catalog/packs.json` pins both 0.4.2 archives by size and SHA-256; the 0.4.1 and 0.4.0 releases stay live as rollback targets. The app artifact is still 0.4.0-alpha.1 — no app release (O-06). Nothing in the build consumes this field; it is documentation."
+  "current_release_candidate": "Packs: ja-JP 0.4.3 (published 2026-11-09) and ru-RU 0.4.5 (published 2026-11-20) — manifests and catalog/packs.json pins agree (re-measured 2026-11-20, state/evidence/DOC-CONTRACT-RECONCILE-001/audit-2026-11-20.md); the 0.4.4/0.4.2/0.4.1/0.4.0 releases stay live as immutable rollback targets. App: newest published artifact is still open-language-learning-platform-0.4.0-alpha.1 (2026-10-13, Linux pre-release); code identity is 0.4.3-alpha.1 and unpublished — next-artifact decision is owner action O-06. Nothing in the build consumes this field; it is documentation."
 }
