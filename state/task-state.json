@@ -1397,7 +1397,7 @@
       "title": "Qualified Japanese content review — B2",
       "activity": "idle",
       "summary": "B2 band coverage and correctness judged by a qualified human reviewer under the REVIEW-001 gate; gates every public framework-alignment claim and blocks stable 1.0 if evidence is insufficient.",
-      "notes": "Recorded 2026-10-15 (REL-001 recheck). This is the dependency that four required release cards share (ACC-001, SEC-001, PLAT-001, PERF-002): while it had no ledger entry, all four derived as ready, which no release gate should silently permit. The B2 journey work (R12, `ja.goal.b2.film-analysis`) is drafted and gated at `draft`; the review verdict is the missing part. [owner decision 2026-11-19: content-review cards reclassified per 2026-11-19 acceptance-autonomy rule: qualified review is agent-performed with evidence files, reversible; release/publish gates unchanged.] [owner decision 2026-11-19: content-review owner gate LIFTED (agent-performed review per acceptance-autonomy rule); remains blocked only on prerequisite authoring card JA-B2-001 — set ready when that closes.]",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck). This is the dependency that four required release cards share (ACC-001, SEC-001, PLAT-001, PERF-002): while it had no ledger entry, all four derived as ready, which no release gate should silently permit. The B2 journey work (R12, `ja.goal.b2.film-analysis`) is drafted and gated at `draft`; the review verdict is the missing part. [owner decision 2026-11-19: content-review cards reclassified per 2026-11-19 acceptance-autonomy rule: qualified review is agent-performed with evidence files, reversible; release/publish gates unchanged.] [owner decision 2026-11-19: content-review owner gate LIFTED (agent-performed review per acceptance-autonomy rule); remains blocked only on prerequisite authoring card JA-B2-001 — set ready when that closes.] [2026-11-20: prerequisite authoring card JA-B2-001 closed (1127730) — B2 increment evidence in state/evidence/JA-B2-001/. Card remains blocked per ADR-0040 posture: this project seeks no external qualified review; AI-authored content carries machine gates only.]",
       "dependencies": [
         "JA-B2-001",
         "REVIEW-001"
@@ -1551,22 +1551,22 @@
     },
     "JA-B2-001": {
       "task_id": "JA-B2-001",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Author B2-like Japanese reference coverage",
       "activity": "idle",
-      "summary": "A declared B2-like capability map with curriculum, scenarios, assessments and transfer evidence; broader natural-speed listening and varied text genres; substantially expanded pragmatics and register coverage.",
-      "notes": "Recorded 2026-10-15: required for desktop 1.0 and the deepest content hole on the release path. The 0.4.1 accounting adds three B2 units (`823-b2j-film-opinion`, `824-b2j-film-with-friends`, `825-b2j-film-revision`) and one pragmatics file change; nothing else at B2 was authored this cycle. `state/evidence/O-06-2026-10-10/owner-report.md` and the R12 content-template audit record the counted thinness at the upper bands, and `languages/ja-JP/review/WORKLIST-2026-10-14.md` lists the B2 items as `draft` awaiting review. Owner coverage decision 2026-10-19: reliable A1–A2 in both shipped languages is the 1.0 bar (docs/18), so this B-level depth task is roadmap work, not a 1.0 release gate; it stays blocked pending content work and qualified review regardless. [2026-11-19: no owner gate ever existed on this authoring card — ledger-record artifact from 2026-10-15 recheck; released to ready.]",
+      "summary": "B2 register-shift increment authored 2026-11-20: new goal ja.goal.b2.register-shift (prereq b1.repair-clarification, mirrored in grammar/dependencies.yaml), 4 task-sequence units (827-830) covering polite/hedged phone register, formal written genre, plain-register tones and honorific awareness, 1 client-call scenario, 2 assessments (transfer: one message in two registers; retention: fresh production at SRS interval without translation support), and 12 audio-backed B2 sentences spanning four text genres (notice, editorial, business phone, casual debate), all baked qwen3-tts/ono_anna and whisper content-checked 12/12 (one real defect caught and re-taken: dropped topic は). Increment activities {0:8, 1:10, 2:6} — zero translation-scaffolded >=3; B2 task_sequence coverage 1 -> 5 units. Commit 1127730.",
+      "notes": "Recorded 2026-10-15: required for desktop 1.0 and the deepest content hole on the release path. The 0.4.1 accounting adds three B2 units (`823-b2j-film-opinion`, `824-b2j-film-with-friends`, `825-b2j-film-revision`) and one pragmatics file change; nothing else at B2 was authored this cycle. `state/evidence/O-06-2026-10-10/owner-report.md` and the R12 content-template audit record the counted thinness at the upper bands, and `languages/ja-JP/review/WORKLIST-2026-10-14.md` lists the B2 items as `draft` awaiting review. Owner coverage decision 2026-10-19: reliable A1–A2 in both shipped languages is the 1.0 bar (docs/18), so this B-level depth task is roadmap work, not a 1.0 release gate; it stays blocked pending content work and qualified review regardless. [2026-11-19: no owner gate ever existed on this authoring card — ledger-record artifact from 2026-10-15 recheck; released to ready.]\n[2026-11-20 JA-B2-001 executed: register-shift goal + genre-diverse listening set landed per band-metrics acceptance mapping; the 11-goal B2 map now has end-to-end curriculum under a second goal. Register concept was orphaned before; 8 activities now teach register choice directly.]",
       "dependencies": [
         "JA-B1-002"
       ],
       "evidence": [
-        "languages/ja-JP/curriculum/units/823-b2j-film-opinion.yaml",
-        "languages/ja-JP/review/WORKLIST-2026-10-14.md",
-        "docs/assessment/RELEASE_COVERAGE.yaml"
+        "state/evidence/JA-B2-001/gates.log",
+        "state/evidence/JA-B2-001/band-metrics.md",
+        "state/evidence/JA-B2-001/asr-content.jsonl",
+        "state/evidence/JA-B2-001/bake.log"
       ],
-      "updated": "2026-10-19",
-      "blocker": "Depends on the B1 band review (JA-B1-002, blocked); the B2 capability map and its transfer/listening evidence are not authored to acceptance."
+      "updated": "2026-11-20"
     },
     "REL-001": {
       "task_id": "REL-001",
