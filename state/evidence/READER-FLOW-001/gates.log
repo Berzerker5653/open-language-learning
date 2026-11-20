@@ -31,3 +31,27 @@ never trusting the burst report):
 - Card stays in_progress per contract (deferred: off-pack kaikki aux
   lexicon slice; off-pack words render honest "not in your pack yet").
 - Push + CI conclusion appended after the push lands.
+
+2026-11-20 13:19 controller pass (off-pack slice, board worker):
+- Collision noted: attempts 1-3 of this card were reclaimed/timed out; the
+  timed-out attempt's lane WIP (full kaikki aux implementation, written
+  13:13-13:16) sat uncommitted in the tree and overwrote this worker's
+  duplicate mid-session patch. Sibling's superset adopted (forms lookup,
+  sidecar-lemma routing); NOT re-implemented, NOT re-run of their battery.
+- Controller personally re-ran every gate on the final tree (file mtimes
+  13:13-13:16, no live writers at re-run time):
+  cargo fmt --all --check exit 0;
+  cargo test -p lts-desktop --lib word_card: 5 passed / 0 failed;
+  cargo clippy -p lts-desktop --all-targets -- -D warnings exit 0
+  (the 13:15 systemd unit's clippy invocation was malformed —
+  'unexpected argument -D' — it never ran; re-run clean here);
+  npx tsc --noEmit exit 0; npx vitest run: 382 passed / 0 failed;
+  .venv python -m unittest scripts/test_build_aux_lexicon.py: Ran 14, OK;
+  .venv python scripts/build-aux-lexicon.py --check: slice matches
+  provenance, 405,825 rows.
+- Slice committed (72 MB git-tracked, provenance-pinned kaikki.org data;
+  license CC BY-SA / GFDL checked at build time, attribution in
+  provenance + README + every aux card — AGENTS.md third-party-data
+  clause satisfied).
+- Deferred (release tier, not a lane blocker): pack-bundle stage with the
+  aux/lexicon overlay mapping + device smoke of a bundled build.
