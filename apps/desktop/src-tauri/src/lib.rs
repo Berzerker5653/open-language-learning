@@ -6768,6 +6768,294 @@ async fn story_audio(profile_id: String, sentence_id: String) -> Result<SpeechAu
     .map_err(|e| format!("story-audio failed: {e}"))?
 }
 
+/// READER-FLOW-001 (Lane E): the reader word card. The token is the raw
+/// form the learner tapped; resolution is offline-only — the pack's
+/// optional `media/lemmas.jsonl` sidecar (printed form → dictionary
+/// form, built by scripts/build-morphology-table.py) plus the pack
+/// lexicon. An off-pack word is an honest `in_pack: false` card, never
+/// a guess: the kaikki.org aux-lexicon card is a later slice of this
+/// card, and no external dictionary is ever called (offline-first).
+#[derive(Serialize)]
+struct WordCardView {
+    query: String,
+    lemma: Option<String>,
+    surface: Option<String>,
+    reading: Option<String>,
+    gloss: Option<String>,
+    status: Option<String>,
+    in_pack: bool,
+}
+
+/// norm-token (READER-FLOW-001 wire contract): remove every U+0301
+/// combining acute, lowercase, strip leading/trailing characters that
+/// are not Unicode letters. The Python build side
+/// (`scripts/build-morphology-table.py::norm_token`) applies the same
+/// rule plus NFC; pack text is authored NFC, so the Rust side is honest
+/// without a normalization table.
+fn norm_token(raw: &str) -> String {
+    let lowered: String = raw
+        .chars()
+        .filter(|c| *c != '\u{301}')
+        .flat_map(|c| c.to_lowercase())
+        .collect();
+    let start = lowered
+        .char_indices()
+        .find_map(|(i, c)| c.is_alphabetic().then_some(i))
+        .unwrap_or(lowered.len());
+    let end = lowered
+        .char_indices()
+        .rev()
+        .find_map(|(i, c)| c.is_alphabetic().then_some(i + c.len_utf8()))
+        .unwrap_or(start);
+    lowered[start..end].to_string()
+}
+
+/// One `media/lemmas.jsonl` row (READER-FLOW-001): the norm-token
+/// surface key, pymorphy3's normal form, and its grammeme string. The
+/// tag ships with the row for future card copy ("genitive of …"); the
+/// view here does not surface it yet.
+#[derive(Debug, serde::Deserialize)]
+struct LemmaRow {
+    surface: String,
+    lemma: String,
+    #[allow(dead_code)]
+    tag: String,
+}
+
+/// Read the pack's optional lemmatizer sidecar. Same posture as the
+/// words.jsonl reader in `shadowing_items_at`: an absent or corrupt
+/// overlay simply means "no lemma rows" — the card degrades to a direct
+/// lexicon surface match (the ja path), and install-time validation
+/// already flags any corrupt file as a parse_error.
+fn lemma_rows(data: &Path, pack_id: &str, version: &str) -> Vec<LemmaRow> {
+    let sidecar = data
+        .join("packs")
+        .join(pack_id)
+        .join(version)
+        .join("media/lemmas.jsonl");
+    std::fs::read_to_string(sidecar)
+        .ok()
+        .map(|text| {
+            text.lines()
+                .filter_map(|line| serde_json::from_str::<LemmaRow>(line).ok())
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
+#[tauri::command]
+async fn word_card(
+    profile_id: String,
+    sentence_id: String,
+    token: String,
+) -> Result<WordCardView, String> {
+    // Lexicon parsing is the ~250 ms path (K-63-follow); keep it off the
+    // main thread like every other pack-reading command.
+    tauri::async_runtime::spawn_blocking(move || {
+        word_card_at(&data_dir(), &profile_id, &sentence_id, &token)
+    })
+    .await
+    .map_err(|e| format!("word-card failed: {e}"))?
+}
+
+fn word_card_at(
+    data: &Path,
+    profile_id: &str,
+    sentence_id: &str,
+    token: &str,
+) -> Result<WordCardView, String> {
+    // The sentence id is the card's context (and the Mine citation it
+    // will carry); it must still be a well-formed content id before any
+    // pack read happens.
+    checked_unit(sentence_id)?;
+    let query = norm_token(token);
+    if query.is_empty() {
+        return Err("empty word query".into());
+    }
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    // Sidecar rows are keyed by the norm-token itself (the build writes
+    // normalized keys), so the lookup is exact.
+    let lemma = lemma_rows(data, pack_id, &version)
+        .into_iter()
+        .find(|r| r.surface == query)
+        .map(|r| r.lemma);
+    // Lexicon match per the frozen contract: the printed form OR the
+    // resolved lemma, both compared under norm-token.
+    let entry = lexicon_entries(data, pack_id, &version)?
+        .into_iter()
+        .find(|e| {
+            let surface = norm_token(&e.surface);
+            surface == query || lemma.as_deref().is_some_and(|l| surface == norm_token(l))
+        });
+    match entry {
+        Some(e) => Ok(WordCardView {
+            query,
+            lemma,
+            surface: Some(e.surface),
+            reading: e.reading,
+            gloss: Some(e.gloss),
+            status: Some(e.status),
+            in_pack: true,
+        }),
+        None => Ok(WordCardView {
+            query,
+            // "No pack word => in_pack false, everything else None"
+            // (READER-FLOW-001): a lemma with no pack entry behind it
+            // cannot be glossed or played, so a half-resolved card
+            // would lie about pack coverage.
+            lemma: None,
+            surface: None,
+            reading: None,
+            gloss: None,
+            status: None,
+            in_pack: false,
+        }),
+    }
+}
+
+/// Minimal reader for the pack's baked clips: sliceable audio must be
+/// little-endian 16-bit mono PCM in a RIFF/WAVE container; anything
+/// else is an honest error, never a silent reinterpretation.
+fn read_wav_pcm16_mono(bytes: &[u8]) -> Result<(u32, Vec<i16>), String> {
+    let malformed = || "pack clip is not 16-bit mono PCM WAV".to_string();
+    if bytes.len() < 12 || &bytes[0..4] != b"RIFF" || &bytes[8..12] != b"WAVE" {
+        return Err(malformed());
+    }
+    let u32le = |b: &[u8]| u32::from_le_bytes([b[0], b[1], b[2], b[3]]);
+    let mut pos = 12usize;
+    let mut rate: Option<u32> = None;
+    let mut data: Option<&[u8]> = None;
+    while pos + 8 <= bytes.len() {
+        let id = &bytes[pos..pos + 4];
+        let size = u32le(&bytes[pos + 4..pos + 8]) as usize;
+        let body = pos + 8;
+        if body + size > bytes.len() {
+            return Err(malformed());
+        }
+        match id {
+            b"fmt " => {
+                if size < 16 {
+                    return Err(malformed());
+                }
+                let format = u16::from_le_bytes([bytes[body], bytes[body + 1]]);
+                let channels = u16::from_le_bytes([bytes[body + 2], bytes[body + 3]]);
+                let bits = u16::from_le_bytes([bytes[body + 14], bytes[body + 15]]);
+                if format != 1 || channels != 1 || bits != 16 {
+                    return Err(malformed());
+                }
+                rate = Some(u32le(&bytes[body + 4..body + 8]));
+            }
+            b"data" => data = Some(&bytes[body..body + size]),
+            _ => {}
+        }
+        // RIFF chunks are word-aligned (pad byte after odd sizes).
+        pos = body + size + (size % 2);
+    }
+    let (rate, data) = rate.zip(data).ok_or_else(malformed)?;
+    let samples = data
+        .chunks_exact(2)
+        .map(|b| i16::from_le_bytes([b[0], b[1]]))
+        .collect();
+    Ok((rate, samples))
+}
+
+/// Emit the sliced PCM as a fresh, valid 16-bit mono WAV at the clip's
+/// own sample rate (the contract's "valid WAV" the frontend just plays).
+fn write_wav_pcm16_mono(rate: u32, samples: &[i16]) -> Vec<u8> {
+    let data_len = samples.len() * 2;
+    let mut out = Vec::with_capacity(44 + data_len);
+    out.extend_from_slice(b"RIFF");
+    out.extend_from_slice(&(36 + data_len as u32).to_le_bytes());
+    out.extend_from_slice(b"WAVE");
+    out.extend_from_slice(b"fmt ");
+    out.extend_from_slice(&16u32.to_le_bytes());
+    out.extend_from_slice(&1u16.to_le_bytes()); // PCM
+    out.extend_from_slice(&1u16.to_le_bytes()); // mono
+    out.extend_from_slice(&rate.to_le_bytes());
+    out.extend_from_slice(&(rate * 2).to_le_bytes()); // byte rate
+    out.extend_from_slice(&2u16.to_le_bytes()); // block align
+    out.extend_from_slice(&16u16.to_le_bytes()); // bits per sample
+    out.extend_from_slice(b"data");
+    out.extend_from_slice(&(data_len as u32).to_le_bytes());
+    for s in samples {
+        out.extend_from_slice(&s.to_le_bytes());
+    }
+    out
+}
+
+/// READER-FLOW-001 (Lane E): hear the exact printed word form. The clip
+/// resolves exactly like `dictation_audio_at` (media-first, declared
+/// provenance); the span comes from the `media/words.jsonl` timing
+/// sidecar (WORD-TIMING-001), and the audio is the PCM slice
+/// `s − 0.05 s .. e + 0.05 s`, clamped to the clip — no per-form baked
+/// clips and no runtime TTS (TTS-004). A word with no span fails
+/// cleanly naming the word, so the frontend renders no play button
+/// rather than guessing (WORD-CARD-AUDIO-001).
+#[tauri::command]
+async fn story_word_audio(
+    profile_id: String,
+    sentence_id: String,
+    token: String,
+) -> Result<SpeechAudio, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        story_word_audio_at(&data_dir(), &profile_id, &sentence_id, &token)
+    })
+    .await
+    .map_err(|e| format!("story-word-audio failed: {e}"))?
+}
+
+fn story_word_audio_at(
+    data: &Path,
+    profile_id: &str,
+    sentence_id: &str,
+    token: &str,
+) -> Result<SpeechAudio, String> {
+    checked_unit(sentence_id)?;
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    // The sentence must exist in the pack — same honesty rule as
+    // `dictation_audio_at`: an unknown id stays an unknown, never a
+    // guessed file read.
+    if !sentence_entries(data, pack_id, &version)?
+        .into_iter()
+        .any(|e| e.id == sentence_id)
+    {
+        return Err("unknown sentence target".into());
+    }
+    let pack_dir = data.join("packs").join(pack_id).join(&version);
+    let bytes = std::fs::read(pack_dir.join("media").join(format!("{sentence_id}.wav")))
+        .map_err(|_| media_missing_error())?;
+    let timings = std::fs::read_to_string(pack_dir.join("media/words.jsonl"))
+        .ok()
+        .and_then(|text| lts_langpack::parse_word_timings(&text).ok())
+        .unwrap_or_default();
+    let query = norm_token(token);
+    let span = timings
+        .get(sentence_id)
+        .and_then(|spans| spans.iter().find(|w| norm_token(&w.w) == query))
+        .ok_or_else(|| format!("no word timing for {token} in this sentence clip"))?;
+    let (rate, samples) = read_wav_pcm16_mono(&bytes)?;
+    // ±50 ms of breathing room around the span, clamped to the clip,
+    // rounded to sample boundaries.
+    let total = samples.len() as f64 / rate as f64;
+    let start = ((span.s - 0.05).clamp(0.0, total) * rate as f64).round() as usize;
+    let end = ((span.e + 0.05).clamp(0.0, total).max(span.s - 0.05) * rate as f64).round() as usize;
+    let start = start.min(samples.len());
+    let end = end.clamp(start, samples.len());
+    let wav = write_wav_pcm16_mono(rate, &samples[start..end]);
+    use base64::Engine;
+    let source = declared_media_provenance(&pack_dir, sentence_id).unwrap_or("licensed-recording");
+    Ok(SpeechAudio {
+        wav_b64: base64::engine::general_purpose::STANDARD.encode(wav),
+        source,
+    })
+}
+
 /// K-14: sentence mining — the learner's own lexicon with source
 /// citations. Language-agnostic engine feature (not pack data). Mined
 /// items get their own SRS rows (`mine-*` item ids) and NEVER write
@@ -8719,6 +9007,8 @@ pub fn run() {
             story_list,
             story_view,
             story_audio,
+            word_card,
+            story_word_audio,
             listening_audio,
             mine_add,
             content_confirm,
@@ -14092,6 +14382,161 @@ transfer_variants:
                 .iter()
                 .any(|i| i.content_id != "ja.lex.demo.konnichiwa" && i.words.is_empty())
         );
+    }
+
+    /// READER-FLOW-001: the card names it — хле́ба (authored stress,
+    /// genitive) resolves through the committed lemmas sidecar to хлеб,
+    /// and the lexicon entry found VIA the lemma supplies the gloss,
+    /// reading and status on the card.
+    #[test]
+    fn word_card_resolves_an_inflected_ru_form_to_its_lemma() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let root = data
+            .join("packs")
+            .join("org.openlanguage.ru-fixture")
+            .join("0.1.0");
+        std::fs::write(
+            root.join("media/lemmas.jsonl"),
+            "{\"surface\":\"хлеба\",\"lemma\":\"хлеб\",\"tag\":\"NOUN,inan,masc sing,gent\"}\n",
+        )
+        .unwrap();
+        // The pack lexicon holds the dictionary form, not the inflected
+        // one — the card must reach the entry through the resolved lemma.
+        let lex = root.join("lexicon/entries.jsonl");
+        let mut text = std::fs::read_to_string(&lex).unwrap();
+        text.push_str(
+            "{\"id\":\"ru.lex.fixture.hleb\",\"forms\":[{\"text\":\"хлеб\",\"is_primary\":true}],\
+             \"readings\":[{\"text\":\"хлеб\",\"script\":\"Cyrillic\"}],\
+             \"glosses\":{\"en\":[\"bread\"]},\"status\":\"approved\"}\n",
+        );
+        std::fs::write(&lex, text).unwrap();
+
+        let card = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "хле́ба").unwrap();
+        // `query` is the norm-token sent (stress gone), NOT the lemma —
+        // the lemma travels in its own field.
+        assert_eq!(card.query, "хлеба");
+        assert_eq!(card.lemma.as_deref(), Some("хлеб"));
+        assert_eq!(card.surface.as_deref(), Some("хлеб"));
+        assert_eq!(card.reading.as_deref(), Some("хлеб"));
+        assert_eq!(card.gloss.as_deref(), Some("bread"));
+        assert_eq!(card.status.as_deref(), Some("approved"));
+        assert!(card.in_pack);
+    }
+
+    /// READER-FLOW-001: a token with no sidecar row and no lexicon entry
+    /// is an honest `in_pack: false` card — and a sidecar row whose
+    /// lemma has no lexicon entry behind it stays out-of-pack too (no
+    /// half-resolved card claiming coverage the pack does not have).
+    #[test]
+    fn word_card_reports_off_pack_words_as_not_in_pack() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let root = data
+            .join("packs")
+            .join("org.openlanguage.ru-fixture")
+            .join("0.1.0");
+        std::fs::write(
+            root.join("media/lemmas.jsonl"),
+            "{\"surface\":\"молока\",\"lemma\":\"молоко\",\"tag\":\"NOUN,inan,masc sing,gent\"}\n",
+        )
+        .unwrap();
+
+        // No row, no entry: everything None, in_pack false.
+        let bare = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "квоцквц").unwrap();
+        assert!(!bare.in_pack);
+        assert_eq!(bare.query, "квоцквц");
+        assert!(bare.lemma.is_none() && bare.gloss.is_none() && bare.surface.is_none());
+
+        // Row resolves a lemma, but the pack has no entry for it: the
+        // card stays honest about pack coverage (contract: "no pack word
+        // => in_pack false, everything else None").
+        let lemma_only = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "молока").unwrap();
+        assert!(!lemma_only.in_pack);
+        assert!(lemma_only.lemma.is_none() && lemma_only.gloss.is_none());
+    }
+
+    /// READER-FLOW-001: the contract's lexicon match includes the direct
+    /// printed-form branch (the ja path needs no lemmas.jsonl): a token
+    /// the sidecar does not cover still resolves via its surface.
+    #[test]
+    fn word_card_matches_the_lexicon_surface_directly_without_a_lemma_row() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        // The RU-shaped fixture lexicon ships "хорошо" (approved, good).
+        let card = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "Хорошо.").unwrap();
+        assert_eq!(card.query, "хорошо");
+        assert!(card.in_pack);
+        assert!(card.lemma.is_none(), "no sidecar row, no invented lemma");
+        assert_eq!(card.gloss.as_deref(), Some("good"));
+    }
+
+    /// READER-FLOW-001 / WORD-CARD-AUDIO-001: the exact printed form is
+    /// sliced from the sentence clip — span ± 50 ms, clamped to the clip,
+    /// re-emitted as a valid 16-bit mono WAV at the clip's own rate; a
+    /// word with no span fails cleanly naming the word.
+    #[test]
+    fn story_word_audio_slices_the_word_span_from_the_sentence_clip() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let root = data
+            .join("packs")
+            .join("org.openlanguage.ru-fixture")
+            .join("0.1.0");
+        let rate = 22050u32;
+        let clip: Vec<i16> = vec![0; (rate as usize) * 2]; // 2.0 s
+        std::fs::write(
+            root.join("media/ru.sent.fixture.privet-mir.wav"),
+            write_wav_pcm16_mono(rate, &clip),
+        )
+        .unwrap();
+
+        // Clip present but no timing sidecar at all: clean failure.
+        let none =
+            story_word_audio_at(data, &p.id, "ru.sent.fixture.privet-mir", "привет").unwrap_err();
+        assert!(none.contains("привет"), "error must name the word: {none}");
+
+        std::fs::write(
+            root.join("media/words.jsonl"),
+            "{\"id\":\"ru.sent.fixture.privet-mir\",\"words\":[\
+             {\"w\":\"Привет,\",\"s\":0.5,\"e\":1.0},{\"w\":\"мир!\",\"s\":1.8,\"e\":1.95}]}\n",
+        )
+        .unwrap();
+
+        use base64::Engine;
+        let decode_secs = |a: &SpeechAudio| -> f64 {
+            let bytes = base64::engine::general_purpose::STANDARD
+                .decode(&a.wav_b64)
+                .unwrap();
+            let (r, samples) = read_wav_pcm16_mono(&bytes).unwrap();
+            assert_eq!(r, rate, "the slice keeps the clip's sample rate");
+            samples.len() as f64 / r as f64
+        };
+
+        // Interior span: [0.5−0.05, 1.0+0.05] = 0.6 s exactly.
+        let a = story_word_audio_at(data, &p.id, "ru.sent.fixture.privet-mir", "привет").unwrap();
+        assert_eq!(a.source, "licensed-recording"); // manifest-declared path
+        let secs = decode_secs(&a);
+        assert!(
+            (secs - 0.6).abs() <= 3.0 / rate as f64,
+            "slice must be span ±50 ms: {secs}"
+        );
+
+        // End-clamped span: [1.8−0.05, min(2.0, 2.0)] = 0.25 s (clamped).
+        let b = story_word_audio_at(data, &p.id, "ru.sent.fixture.privet-mir", "мир!").unwrap();
+        let secs = decode_secs(&b);
+        assert!(
+            (secs - 0.25).abs() <= 3.0 / rate as f64,
+            "slice must clamp at the clip end: {secs}"
+        );
+
+        // A word with no span fails cleanly, naming the word.
+        let e = story_word_audio_at(data, &p.id, "ru.sent.fixture.privet-mir", "кота").unwrap_err();
+        assert!(e.contains("кота"), "error must name the word: {e}");
     }
 
     #[test]

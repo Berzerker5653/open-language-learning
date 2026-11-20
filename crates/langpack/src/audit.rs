@@ -1089,7 +1089,9 @@ impl Pack {
                 let name = entry.file_name().to_string_lossy().into_owned();
                 // `manifest.jsonl` carries provenance, `words.jsonl` is a
                 // word-timing overlay (WORD-TIMING-001), `labels.jsonl` is a
-                // grammar-label overlay (GRAMMAR-LABELS-001), and `narrator.json`
+                // grammar-label overlay (GRAMMAR-LABELS-001), `lemmas.jsonl`
+                // is a lemmatizer overlay (READER-FLOW-001, built by
+                // scripts/build-morphology-table.py), and `narrator.json`
                 // declares the pack's single narrator for sentence audio
                 // (VOICE-CONSISTENCY-001, read only by the bake tool): all
                 // are declared data under media/, not audio assets needing
@@ -1097,6 +1099,7 @@ impl Pack {
                 if name == "manifest.jsonl"
                     || name == "words.jsonl"
                     || name == "labels.jsonl"
+                    || name == "lemmas.jsonl"
                     || name == "narrator.json"
                 {
                     continue;
@@ -1244,4 +1247,47 @@ fn build_report(instances: &[crate::pack::Instance]) -> Vec<AttributionEntry> {
     }
     report.sort_by(|a, b| a.source_id.cmp(&b.source_id));
     report
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::pack::Mode;
+    use std::path::PathBuf;
+
+    /// READER-FLOW-001: `media/lemmas.jsonl` — the lemmatizer sidecar built
+    /// by scripts/build-morphology-table.py — is declared data under media/,
+    /// not an unlisted asset (same whitelist as words.jsonl/labels.jsonl;
+    /// mirrors the labels.jsonl check in tests/grammar_labels.rs).
+    #[test]
+    fn lemmas_sidecar_needs_no_manifest_row() {
+        fn copy_dir(from: &std::path::Path, to: &std::path::Path) {
+            fs::create_dir_all(to).expect("create dir");
+            for entry in fs::read_dir(from).expect("read dir").flatten() {
+                let dest = to.join(entry.file_name());
+                if entry.file_type().map(|t| t.is_dir()).unwrap_or(false) {
+                    copy_dir(&entry.path(), &dest);
+                } else {
+                    fs::copy(entry.path(), &dest).expect("copy file");
+                }
+            }
+        }
+        let tmp = tempfile::tempdir().unwrap();
+        let fixture = PathBuf::from(env!("CARGO_MANIFEST_DIR"))
+            .join("../../tests/fixtures/packs/valid-minimal");
+        copy_dir(&fixture, tmp.path());
+        fs::write(
+            tmp.path().join("media/lemmas.jsonl"),
+            "{\"surface\":\"хлеба\",\"lemma\":\"хлеб\",\"tag\":\"NOUN,inan,masc sing,gent\"}\n",
+        )
+        .expect("write sidecar");
+        let pack = Pack::load_dir(tmp.path()).expect("load pack");
+        let diags = pack.validate(Mode::Scaffold, None);
+        assert!(
+            !diags
+                .iter()
+                .any(|d| d.code == "media_unlisted" && d.file.contains("lemmas")),
+            "lemmas.jsonl needs no manifest row: {diags:?}"
+        );
+    }
 }

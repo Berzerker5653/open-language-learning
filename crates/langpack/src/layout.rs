@@ -31,6 +31,8 @@
 //!                                  one clip per line, parsed data not an asset)
 //! media/labels.jsonl              (optional grammar-label sidecar, GRAMMAR-LABELS-001;
 //!                                  one sentence per line, parsed data not an asset)
+//! media/lemmas.jsonl              (optional lemmatizer sidecar, READER-FLOW-001;
+//!                                  one surface form per line, parsed data not an asset)
 //! media/narrator.json             (optional narrator declaration, VOICE-CONSISTENCY-001;
 //!                                  {"runtime": ..., "voice": ...}, parsed data not an asset)
 //! ```
