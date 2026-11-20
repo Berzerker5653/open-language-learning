@@ -1,0 +1,63 @@
+{"id": "ja.lex.admin.jushou-todoke", "score": 0.5418, "fit": 0.7032, "via": "forced-align"}
+{"id": "ja.lex.admin.kessaku", "score": 0.6747, "fit": 0.6699, "via": "forced-align"}
+{"id": "ja.lex.admin.kin-yuu", "score": 0.9342, "fit": 0.8966, "via": "forced-align"}
+{"id": "ja.lex.admin.mibungou", "score": 0.4482, "fit": 0.7777, "via": "forced-align"}
+{"id": "ja.lex.admin.nyuusatsu", "score": 0.7539, "fit": 0.7514, "via": "forced-align"}
+{"id": "ja.lex.admin.taishu-kin", "score": 0.5484, "fit": 0.6807, "via": "forced-align"}
+{"id": "ja.lex.body.fukatsu", "score": 0.827, "fit": 0.827, "via": "forced-align"}
+{"id": "ja.lex.body.fukkyuu", "score": 0.8384, "fit": 0.8413, "via": "forced-align"}
+{"id": "ja.lex.body.junyou", "score": 0.3046, "fit": 0.6289, "reason": "low-posterior:0.3046", "text": "きそくせい"}
+{"id": "ja.lex.body.kaffa", "score": 0.8895, "fit": 0.8033, "via": "forced-align"}
+{"id": "ja.lex.body.shoumyou", "score": 0.7696, "fit": 0.8352, "via": "forced-align"}
+{"id": "ja.lex.body.taisha", "score": 0.4025, "fit": 0.6054, "via": "forced-align"}
+{"id": "ja.lex.city.kanen", "score": 0.8131, "fit": 0.8181, "via": "forced-align"}
+{"id": "ja.lex.ent.joju", "score": 0.3398, "fit": 0.6403, "reason": "low-posterior:0.3398", "text": "じゅこう"}
+{"id": "ja.lex.ent.taimu", "score": 0.8777, "fit": 0.9278, "via": "forced-align"}
+{"id": "ja.lex.food.houshi", "score": 0.951, "fit": 0.9789, "via": "forced-align"}
+{"id": "ja.lex.food.tsukemono", "score": 0.2734, "fit": 0.6826, "reason": "low-posterior:0.2734", "text": "つけもの"}
+{"id": "ja.lex.rel.aishi", "score": 0.4952, "fit": 0.7289, "via": "forced-align"}
+{"id": "ja.lex.rel.jijou-betsu", "score": 0.8344, "fit": 0.9243, "via": "forced-align"}
+{"id": "ja.lex.rel.kazoku-no-uni", "score": 0.6612, "fit": 0.7511, "via": "forced-align"}
+{"id": "ja.lex.rel.kokoro-bazuka", "score": 0.6215, "fit": 0.8316, "via": "forced-align"}
+{"id": "ja.lex.rel.kyoudai-shita", "score": 0.5185, "fit": 0.6163, "via": "forced-align"}
+{"id": "ja.lex.rel.kyoudai-ue", "score": 0.8579, "fit": 0.8464, "via": "forced-align"}
+{"id": "ja.lex.rel.obaa-chan", "score": 0.8263, "fit": 0.8257, "via": "forced-align"}
+{"id": "ja.lex.rel.omoide-bako", "score": 0.5026, "fit": 0.7163, "via": "forced-align"}
+{"id": "ja.lex.rel.omoide-no-hi", "score": 0.614, "fit": 0.8007, "via": "forced-align"}
+{"id": "ja.lex.rel.omoide-no-hito", "score": 0.3603, "fit": 0.6389, "via": "forced-align"}
+{"id": "ja.lex.rel.omoide-no-ki", "score": 0.9725, "fit": 0.9721, "via": "forced-align"}
+{"id": "ja.lex.rel.omoide-no-kioku", "score": 0.5773, "fit": 0.8052, "via": "forced-align"}
+{"id": "ja.lex.rel.omoide-no-machi", "score": 0.9634, "fit": 0.9446, "via": "forced-align"}
+{"id": "ja.lex.rel.omoide-no-sora", "score": 0.5154, "fit": 0.7144, "via": "forced-align"}
+{"id": "ja.lex.rel.omoide-no-tabi", "score": 0.9375, "fit": 0.9254, "via": "forced-align"}
+{"id": "ja.lex.rel.omoide-no-uta", "score": 0.4622, "fit": 0.7512, "via": "forced-align"}
+{"id": "ja.lex.rel.tsuui", "score": 0.4741, "fit": 0.6079, "via": "forced-align"}
+{"id": "ja.lex.rel.yori-modosu", "score": 0.7377, "fit": 0.6828, "via": "forced-align"}
+{"id": "ja.lex.shopping.fukuban", "score": 0.4084, "fit": 0.667, "via": "forced-align"}
+{"id": "ja.lex.shopping.keshi", "score": 0.3874, "fit": 0.5571, "via": "forced-align"}
+{"id": "ja.lex.shopping.mon", "score": 0.8462, "fit": 0.8855, "via": "forced-align"}
+{"id": "ja.lex.shopping.shouhyou", "score": 0.7214, "fit": 0.8605, "via": "forced-align"}
+{"id": "ja.lex.sports.joutairyoku", "score": 0.2965, "fit": 0.7342, "reason": "low-posterior:0.2965", "text": "ちじゅうりょく"}
+{"id": "ja.lex.sports.kessan", "score": 0.8639, "fit": 0.9105, "via": "forced-align"}
+{"id": "ja.lex.sports.onsen-tou", "score": 0.5745, "fit": 0.7508, "via": "forced-align"}
+{"id": "ja.lex.sports.taekwondo", "score": 0.5734, "fit": 0.8733, "via": "forced-align"}
+{"id": "ja.lex.weather2.kijitsu", "score": 0.9263, "fit": 0.9212, "via": "forced-align"}
+{"id": "ja.lex.weather2.naga", "score": 0.9836, "fit": 0.9892, "via": "forced-align"}
+{"id": "ja.lex.weather2.naru", "score": 0.8532, "fit": 0.7929, "via": "forced-align"}
+{"id": "ja.lex.weather2.yuki-yinga", "score": 0.4803, "fit": 0.8493, "via": "forced-align"}
+{"id": "ja.lex.weather2.yukidoke", "score": 0.6638, "fit": 0.7965, "via": "forced-align"}
+{"id": "ja.sent.address-registration", "score": 0.5329, "fit": 0.729, "via": "forced-align"}
+{"id": "ja.sent.call-police", "score": 0.8353, "fit": 0.8632, "via": "forced-align"}
+{"id": "ja.sent.check-balance", "score": 0.5519, "fit": 0.7945, "via": "forced-align"}
+{"id": "ja.sent.city-hall", "score": 0.7736, "fit": 0.8735, "via": "forced-align"}
+{"id": "ja.sent.describe-symptom", "score": 0.6344, "fit": 0.914, "via": "forced-align"}
+{"id": "ja.sent.eat-fruit", "score": 0.8782, "fit": 0.9385, "via": "forced-align"}
+{"id": "ja.sent.explain-grammar", "score": 0.29, "fit": 0.7352, "reason": "low-posterior:0.2900", "text": "ぶんぽうを せつめいします。"}
+{"id": "ja.sent.health-check", "score": 0.6086, "fit": 0.7425, "via": "forced-align"}
+{"id": "ja.sent.insurance-card", "score": 0.7835, "fit": 0.8253, "via": "forced-align"}
+{"id": "ja.sent.keep-receipt", "score": 0.5538, "fit": 0.8024, "via": "forced-align"}
+{"id": "ja.sent.on-sale", "score": 0.6691, "fit": 0.8572, "via": "forced-align"}
+{"id": "ja.sent.pay-bill", "score": 0.466, "fit": 0.7029, "via": "forced-align"}
+{"id": "ja.sent.quarrel-reconcile", "score": 0.6389, "fit": 0.9057, "via": "forced-align"}
+{"id": "ja.sent.recovery-onsen", "score": 0.7735, "fit": 0.865, "via": "forced-align"}
+{"id": "ja.sent.take-prevention", "score": 0.737, "fit": 0.8686, "via": "forced-align"}

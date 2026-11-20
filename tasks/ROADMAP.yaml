@@ -1408,6 +1408,21 @@ tasks:
   - The 63 invalidated reading-paired audio assets re-baked via scripts/generate-pack-audio.py;
     langpack validate/lint/test/audit-* on languages/ja-JP all 0 errors at commit.
   required_for_desktop_1_0: false
+- id: JA-A2-002-FIX-001b
+  milestone: M7
+  priority: P0
+  title: Regenerate word-timing sidecar rows for the 63 re-baked A2 clips
+  dependencies:
+  - JA-A2-002-FIX-001
+  read_first:
+  - state/evidence/JA-A2-002-FIX-001/retiming-targets.txt
+  - scripts/align-word-timings.py
+  acceptance:
+  - Word-timing rows for exactly the 63 target ids regenerated against the new wavs using the
+    WORD-TIMING-003 forced-alignment infra, with the sidecar contract v1 unchanged.
+  - Per-clip abstention is acceptable (plain-playback fallback) and unaligned guesses forbidden;
+    langpack validate/test on languages/ja-JP at 0 errors at commit.
+  required_for_desktop_1_0: false
 - id: AI-001
   milestone: M8
   priority: P1
@@ -2792,6 +2807,7 @@ execution_scope:
   - JA-A1-003
   - JA-A2-002
   - JA-A2-002-FIX-001
+  - JA-A2-002-FIX-001b
   - JA-B1-002
   - JA-B2-002
   - JA-B1-001

@@ -1,0 +1,58 @@
+{"id": "ja.lex.admin.jushou-todoke", "words": [{"w": "とうきょとどけ", "s": 0.16, "e": 1.1}]}
+{"id": "ja.lex.admin.kessaku", "words": [{"w": "ざんだか", "s": 1.0, "e": 1.18}]}
+{"id": "ja.lex.admin.kin-yuu", "words": [{"w": "よきん", "s": 0.46, "e": 1.74}]}
+{"id": "ja.lex.admin.mibungou", "words": [{"w": "みぶんしょう", "s": 0.1, "e": 1.02}]}
+{"id": "ja.lex.admin.nyuusatsu", "words": [{"w": "しゅうにゅう", "s": 2.4, "e": 2.62}]}
+{"id": "ja.lex.admin.taishu-kin", "words": [{"w": "しゅっきん", "s": 0.18, "e": 0.7}]}
+{"id": "ja.lex.body.fukatsu", "words": [{"w": "べんぴ", "s": 1.88, "e": 1.98}]}
+{"id": "ja.lex.body.fukkyuu", "words": [{"w": "かふく", "s": 1.36, "e": 2.62}]}
+{"id": "ja.lex.body.kaffa", "words": [{"w": "せき", "s": 0.24, "e": 0.7}]}
+{"id": "ja.lex.body.shoumyou", "words": [{"w": "しょうじょう", "s": 1.16, "e": 2.06}]}
+{"id": "ja.lex.body.taisha", "words": [{"w": "けっせき", "s": 0.08, "e": 0.86}]}
+{"id": "ja.lex.city.kanen", "words": [{"w": "ことし", "s": 0.34, "e": 1.18}]}
+{"id": "ja.lex.ent.taimu", "words": [{"w": "たいむ", "s": 0.08, "e": 0.7}]}
+{"id": "ja.lex.food.houshi", "words": [{"w": "にこみ", "s": 0.16, "e": 1.42}]}
+{"id": "ja.lex.rel.aishi", "words": [{"w": "あいじょう", "s": 0.14, "e": 1.1}]}
+{"id": "ja.lex.rel.jijou-betsu", "words": [{"w": "すききらい", "s": 0.26, "e": 1.58}]}
+{"id": "ja.lex.rel.kazoku-no-uni", "words": [{"w": "かぞくたんい", "s": 0.1, "e": 1.1}]}
+{"id": "ja.lex.rel.kokoro-bazuka", "words": [{"w": "こころづかい", "s": 0.1, "e": 2.22}]}
+{"id": "ja.lex.rel.kyoudai-shita", "words": [{"w": "したのこ", "s": 0.14, "e": 0.7}]}
+{"id": "ja.lex.rel.kyoudai-ue", "words": [{"w": "うえのこ", "s": 0.38, "e": 1.26}]}
+{"id": "ja.lex.rel.obaa-chan", "words": [{"w": "おばあちゃん", "s": 0.38, "e": 1.42}]}
+{"id": "ja.lex.rel.omoide-bako", "words": [{"w": "あるばむ", "s": 0.24, "e": 1.02}]}
+{"id": "ja.lex.rel.omoide-no-hi", "words": [{"w": "とくべつなひ", "s": 0.08, "e": 1.34}]}
+{"id": "ja.lex.rel.omoide-no-hito", "words": [{"w": "たいせつなひと", "s": 0.08, "e": 1.02}]}
+{"id": "ja.lex.rel.omoide-no-ki", "words": [{"w": "じっか", "s": 0.9, "e": 1.5}]}
+{"id": "ja.lex.rel.omoide-no-kioku", "words": [{"w": "きおく", "s": 0.08, "e": 0.78}]}
+{"id": "ja.lex.rel.omoide-no-machi", "words": [{"w": "ふるさと", "s": 1.02, "e": 1.98}]}
+{"id": "ja.lex.rel.omoide-no-sora", "words": [{"w": "ゆうやけ", "s": 0.14, "e": 1.5}]}
+{"id": "ja.lex.rel.omoide-no-tabi", "words": [{"w": "たび", "s": 1.4, "e": 2.22}]}
+{"id": "ja.lex.rel.omoide-no-uta", "words": [{"w": "うた", "s": 0.12, "e": 0.54}]}
+{"id": "ja.lex.rel.tsuui", "words": [{"w": "ついとう", "s": 0.24, "e": 0.94}]}
+{"id": "ja.lex.rel.yori-modosu", "words": [{"w": "なかなおり", "s": 0.14, "e": 1.1}]}
+{"id": "ja.lex.shopping.fukuban", "words": [{"w": "なふだ", "s": 0.16, "e": 0.86}]}
+{"id": "ja.lex.shopping.keshi", "words": [{"w": "けしごむ", "s": 0.08, "e": 0.7}]}
+{"id": "ja.lex.shopping.mon", "words": [{"w": "ぶん", "s": 0.84, "e": 1.5}]}
+{"id": "ja.lex.shopping.shouhyou", "words": [{"w": "ねふだ", "s": 0.32, "e": 1.9}]}
+{"id": "ja.lex.sports.kessan", "words": [{"w": "けっか", "s": 0.18, "e": 0.86}]}
+{"id": "ja.lex.sports.onsen-tou", "words": [{"w": "おんせんにゅうよく", "s": 0.2, "e": 1.34}]}
+{"id": "ja.lex.sports.taekwondo", "words": [{"w": "てこんどー", "s": 0.08, "e": 1.26}]}
+{"id": "ja.lex.weather2.kijitsu", "words": [{"w": "せいてん", "s": 1.5, "e": 2.3}]}
+{"id": "ja.lex.weather2.naga", "words": [{"w": "ながさ", "s": 0.12, "e": 1.1}]}
+{"id": "ja.lex.weather2.naru", "words": [{"w": "なる", "s": 0.18, "e": 0.62}]}
+{"id": "ja.lex.weather2.yuki-yinga", "words": [{"w": "ゆきげしき", "s": 0.18, "e": 2.06}]}
+{"id": "ja.lex.weather2.yukidoke", "words": [{"w": "ゆきどけ", "s": 0.12, "e": 1.42}]}
+{"id": "ja.sent.address-registration", "words": [{"w": "とうきょとどけ", "s": 0.08, "e": 0.98}, {"w": "を", "s": 1.08, "e": 1.1}, {"w": "だします。", "s": 1.14, "e": 1.74}]}
+{"id": "ja.sent.call-police", "words": [{"w": "こうばんに", "s": 1.22, "e": 1.8}, {"w": "でんわを", "s": 1.88, "e": 2.32}, {"w": "かけます。", "s": 2.38, "e": 2.94}]}
+{"id": "ja.sent.check-balance", "words": [{"w": "ざんだかを", "s": 0.08, "e": 0.78}, {"w": "かくにんします。", "s": 0.88, "e": 2.06}]}
+{"id": "ja.sent.city-hall", "words": [{"w": "くやくしょで", "s": 0.08, "e": 1.1}, {"w": "てつづきを", "s": 1.82, "e": 2.7}, {"w": "します。", "s": 2.82, "e": 3.58}]}
+{"id": "ja.sent.describe-symptom", "words": [{"w": "きょう、せなかが", "s": 0.08, "e": 2.6}, {"w": "いたいです。", "s": 2.72, "e": 3.58}]}
+{"id": "ja.sent.eat-fruit", "words": [{"w": "バナナを", "s": 0.08, "e": 0.84}, {"w": "たべます。", "s": 0.96, "e": 2.22}]}
+{"id": "ja.sent.health-check", "words": [{"w": "まいねん", "s": 0.1, "e": 0.66}, {"w": "いちど", "s": 1.3, "e": 1.62}, {"w": "けんしんを", "s": 1.7, "e": 2.32}, {"w": "します。", "s": 2.4, "e": 2.86}]}
+{"id": "ja.sent.insurance-card", "words": [{"w": "ほけんしょうを", "s": 1.2, "e": 1.96}, {"w": "みせます。", "s": 2.06, "e": 2.86}]}
+{"id": "ja.sent.keep-receipt", "words": [{"w": "れいしゅうしょを", "s": 0.14, "e": 1.6}, {"w": "とっておきます。", "s": 1.74, "e": 2.54}]}
+{"id": "ja.sent.on-sale", "words": [{"w": "この", "s": 0.06, "e": 0.4}, {"w": "ふくは", "s": 0.52, "e": 0.92}, {"w": "せーるです。", "s": 1.18, "e": 2.38}]}
+{"id": "ja.sent.pay-bill", "words": [{"w": "せいきゅうしょを", "s": 0.26, "e": 1.22}, {"w": "はらいます。", "s": 1.32, "e": 2.06}]}
+{"id": "ja.sent.quarrel-reconcile", "words": [{"w": "けんかの", "s": 0.08, "e": 0.82}, {"w": "あと、なかなおりします。", "s": 0.96, "e": 4.62}]}
+{"id": "ja.sent.recovery-onsen", "words": [{"w": "りかばりーのため", "s": 0.08, "e": 1.4}, {"w": "おんせんへ", "s": 1.76, "e": 2.28}, {"w": "いきます。", "s": 2.36, "e": 2.94}]}
+{"id": "ja.sent.take-prevention", "words": [{"w": "よげんのために", "s": 0.12, "e": 1.24}, {"w": "たいくを", "s": 1.34, "e": 1.88}, {"w": "します。", "s": 1.96, "e": 2.46}]}

@@ -1,0 +1,8 @@
+unsettled=63 missing_wav=0 strata={'no-prior': 63} targets=63
+Loading weights:   0%|          | 0/423 [00:00<?, ?it/s]Loading weights: 100%|██████████| 423/423 [00:00<00:00, 38656.76it/s]
+/home/aih/align/venv/lib/python3.12/site-packages/ctc_forced_aligner/alignment_utils.py:133: UserWarning: The given buffer is not writable, and PyTorch does not support non-writable tensors. This means you can write to the underlying (supposedly non-writable) buffer using the tensor. You may want to copy the buffer to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/utils/tensor_new.cpp:1568.)
+  return torch.frombuffer(out, dtype=torch.int16).flatten().to(dtype).to(device) / 32768.0
+63/63 ok=58 abstain=5 (0.15s/clip, 0.2 min)
+scores: n=63 min=0.2734 median=0.6612 max=0.9836
+run done: ok=58 abstain=5
+DONE
