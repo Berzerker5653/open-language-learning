@@ -1,0 +1,29 @@
+{"id": "ja.contrast.gemination.kite-0", "score": 0.4729, "via": "forced-align"}
+{"id": "ja.contrast.gemination.kite-1", "score": 0.7427, "via": "forced-align"}
+{"id": "ja.contrast.gemination.matta-0", "score": 0.9741, "via": "forced-align"}
+{"id": "ja.contrast.gemination.matta-1", "score": 0.9793, "via": "forced-align"}
+{"id": "ja.contrast.moraic-nasal.kin-0", "score": 0.8543, "via": "forced-align"}
+{"id": "ja.contrast.moraic-nasal.kin-1", "score": 0.7618, "via": "forced-align"}
+{"id": "ja.contrast.moraic-nasal.sen-0", "score": 0.7356, "via": "forced-align"}
+{"id": "ja.contrast.moraic-nasal.sen-1", "score": 0.8462, "via": "forced-align"}
+{"id": "ja.contrast.palatalization.hyaku-0", "score": 0.707, "via": "forced-align"}
+{"id": "ja.contrast.vowel-length.tooi-0", "score": 0.9363, "via": "forced-align"}
+{"id": "ja.contrast.vowel-length.tooi-1", "score": 0.7001, "via": "forced-align"}
+{"id": "ja.lex.weather2.aki", "score": 0.7775, "via": "forced-align"}
+{"id": "ja.sent.corpus-linguistics", "score": null, "reason": "unmapped-mora", "text": "ぶんしょ の ぶんせき を しました。"}
+{"id": "ja.sent.a2.post.want-to-send", "score": null, "reason": "unmapped-mora", "text": "にもつをおくりたいです。"}
+{"id": "ja.lex.time.ashita", "score": 0.5995, "via": "forced-align"}
+{"id": "ja.lex.edu2.fukushuu", "score": 0.2321, "reason": "low-posterior:0.2321", "text": "ふくしゅう"}
+{"id": "ja.lex.culture2.tsutsumi", "score": 0.5054, "via": "forced-align"}
+{"id": "ja.lex.communication.intoneeshon", "score": 0.5609, "via": "forced-align"}
+{"id": "ja.lex.env4.ikou", "score": 0.5753, "via": "forced-align"}
+{"id": "ja.lex.play2.hi", "score": 0.83, "via": "forced-align"}
+{"id": "ja.lex.play2.kaze", "score": 0.8176, "via": "forced-align"}
+{"id": "ja.lex.shopping.satsu", "score": 0.4244, "via": "forced-align"}
+{"id": "ja.sent.moon-over-mountain", "score": null, "reason": "unmapped-mora", "text": "やまの 上に つきが でます。"}
+{"id": "ja.sent.a2.pay.when-deadline", "score": null, "reason": "unmapped-mora", "text": "いつまでに払いますか。"}
+{"id": "ja.sent.daily-schedule", "score": null, "reason": "unmapped-mora", "text": "毎日 にってい を かきます。"}
+{"id": "ja.sent.b2reg-ba-nyuujou", "score": null, "reason": "unmapped-mora", "text": "きそく を まもれば、だれでも にゅうじょう できます。"}
+{"id": "ja.sent.b1-repair-osshatte-itadakasu", "score": null, "reason": "unmapped-mora", "text": "もういちど おっしゃって いただけますか。"}
+{"id": "ja.sent.b1-repair-iimashita-to-iu-imika", "score": null, "reason": "unmapped-mora", "text": "たいへんだった、と いう いみ ですか。"}
+{"id": "ja.lex.abst2.chosa", "score": 0.4403, "via": "forced-align"}

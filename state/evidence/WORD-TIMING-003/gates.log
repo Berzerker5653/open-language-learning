@@ -1,0 +1,24 @@
+WORD-TIMING-003 lane gates (controller-run, 2026-11-20, commit-time)
+
+Scope touched: scripts/align-word-timings.py (new), languages/ja-JP/media/words.jsonl
+(data merge), state/evidence/WORD-TIMING-003/*, state/notes/WORD-TIMING-003.md.
+No Rust/TS source touched -> cargo/tsc/vitest not applicable at this lane tier.
+
+1. python3 -m py_compile scripts/align-word-timings.py -> exit 0.
+2. Corpus romanizer sweep (post katakana-fold/punctuation/latin fixes): 4,935/4,935
+   manifest texts romanize clean except 8 kanji rows pykakasi cannot fold
+   (expected-kanji abstains; none inside the unsettled target set). exit 0.
+3. Probe (omarchy unit lts-wt3-probe6, stratified 29 + contrast cross-scores):
+   ok=28 abstain=1 (only low-posterior 0.2321); conf accepted min 0.424 ->
+   floor 0.35 sits in the clean gap. Contrast matrix caveat in close-out.md.
+4. Full aligner run (omarchy unit lts-wt3-full2, CPU, OMP 8): 2,210 targets,
+   ok=1,997 (90.36% >= 85% acceptance floor), abstain=213 ALL low-posterior,
+   0 structural failures. ~0.15 s/clip; zero GamingPC/TV compute.
+   (Prior unit lts-wt3-full1 stopped at 85.5% with 115 unmapped-mora — traced
+   to the +0x20 katakana-fold corruption; fix history in close-out.md.)
+5. Merge integrity (post-append, full 4,722-line words.jsonl):
+   WORD-TIMING-001 check_schema: 0 violations; duplicate ids: 0;
+   spans beyond clip duration+0.3s slack: 0; span duration p5/median/p95 =
+   0.06/0.58/1.46 s. ru pack untouched; media manifest untouched.
+6. tools/validate_handoff.py --require-explicit-ledger-records: see appended line.
+RESULT: HANDOFF VALIDATION PASSED (2137 data files checked), exit 0, pre-existing WARNs only.

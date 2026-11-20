@@ -1,0 +1,57 @@
+[
+ {
+  "pair": "ja.contrast.gemination.kite",
+  "metric": "fit",
+  "own_a": 0.6246357395027501,
+  "cross_a": 0.5648463026694921,
+  "own_b": 0.9021683229345392,
+  "cross_b": 0.9107152050969108,
+  "conf_a": 0.4729296678699681,
+  "conf_b": 0.7427488849903233,
+  "verdict": "WRONG"
+ },
+ {
+  "pair": "ja.contrast.gemination.matta",
+  "metric": "fit",
+  "own_a": 0.9565780053765133,
+  "cross_a": 0.8704328026827859,
+  "own_b": 0.9586382822269129,
+  "cross_b": 0.9347942845293556,
+  "conf_a": 0.9741080354396955,
+  "conf_b": 0.979259934141599,
+  "verdict": "correct"
+ },
+ {
+  "pair": "ja.contrast.moraic-nasal.kin",
+  "metric": "fit",
+  "own_a": 0.8542885698371566,
+  "cross_a": 0.8929219520830243,
+  "own_b": 0.7617592300935391,
+  "cross_b": 0.6836193357385107,
+  "conf_a": 0.8542885698371566,
+  "conf_b": 0.7617592300935391,
+  "verdict": "WRONG"
+ },
+ {
+  "pair": "ja.contrast.moraic-nasal.sen",
+  "metric": "fit",
+  "own_a": 0.7356322724907872,
+  "cross_a": 0.8169557519559494,
+  "own_b": 0.8462312863860069,
+  "cross_b": 0.7737768675884603,
+  "conf_a": 0.7356322724907872,
+  "conf_b": 0.8462312863860069,
+  "verdict": "WRONG"
+ },
+ {
+  "pair": "ja.contrast.vowel-length.tooi",
+  "metric": "fit",
+  "own_a": 0.913037372173359,
+  "cross_a": 0.9560326203912548,
+  "own_b": 0.784238510816125,
+  "cross_b": 0.6516301322563768,
+  "conf_a": 0.9363486268899527,
+  "conf_b": 0.7001174669690378,
+  "verdict": "WRONG"
+ }
+]

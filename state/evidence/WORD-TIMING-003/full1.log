@@ -1,0 +1,34 @@
+unsettled=2210 missing_wav=0 strata={'align-failed@large-v3': 1593, 'align-failed@large-v3-turbo': 568, 'empty-transcript': 3, 'expected-kanji': 7, 'no-prior': 39} targets=2210
+Loading weights:   0%|          | 0/423 [00:00<?, ?it/s]Loading weights: 100%|██████████| 423/423 [00:00<00:00, 24392.53it/s]
+/home/aih/align/venv/lib/python3.12/site-packages/ctc_forced_aligner/alignment_utils.py:133: UserWarning: The given buffer is not writable, and PyTorch does not support non-writable tensors. This means you can write to the underlying (supposedly non-writable) buffer using the tensor. You may want to copy the buffer to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/utils/tensor_new.cpp:1568.)
+  return torch.frombuffer(out, dtype=torch.int16).flatten().to(dtype).to(device) / 32768.0
+contrast ja.contrast.gemination.kite: own_fit_a=0.6246357395027501 cross_fit_a=0.5648463026694921 own_fit_b=0.9021683229345392 cross_fit_b=0.9107152050969108 WRONG
+contrast ja.contrast.gemination.matta: own_fit_a=0.9565780053765133 cross_fit_a=0.8704328026827859 own_fit_b=0.9586382822269129 cross_fit_b=0.9347942845293556 correct
+contrast ja.contrast.moraic-nasal.kin: own_fit_a=0.8542885698371566 cross_fit_a=0.8929219520830243 own_fit_b=0.7617592300935391 cross_fit_b=0.6836193357385107 WRONG
+contrast ja.contrast.moraic-nasal.sen: own_fit_a=0.7356322724907872 cross_fit_a=0.8169557519559494 own_fit_b=0.8462312863860069 cross_fit_b=0.7737768675884603 WRONG
+contrast ja.contrast.vowel-length.tooi: own_fit_a=0.913037372173359 cross_fit_a=0.9560326203912548 own_fit_b=0.784238510816125 cross_fit_b=0.6516301322563768 WRONG
+100/2210 ok=82 abstain=18 (0.13s/clip, 0.2 min)
+200/2210 ok=171 abstain=29 (0.13s/clip, 0.4 min)
+300/2210 ok=253 abstain=47 (0.13s/clip, 0.7 min)
+400/2210 ok=324 abstain=76 (0.13s/clip, 0.9 min)
+500/2210 ok=393 abstain=107 (0.13s/clip, 1.1 min)
+600/2210 ok=476 abstain=124 (0.13s/clip, 1.3 min)
+700/2210 ok=563 abstain=137 (0.13s/clip, 1.5 min)
+800/2210 ok=653 abstain=147 (0.13s/clip, 1.7 min)
+900/2210 ok=740 abstain=160 (0.13s/clip, 1.9 min)
+1000/2210 ok=824 abstain=176 (0.13s/clip, 2.1 min)
+1100/2210 ok=911 abstain=189 (0.13s/clip, 2.4 min)
+1200/2210 ok=990 abstain=210 (0.13s/clip, 2.6 min)
+1300/2210 ok=1067 abstain=233 (0.13s/clip, 2.8 min)
+1400/2210 ok=1154 abstain=246 (0.13s/clip, 3.0 min)
+1500/2210 ok=1241 abstain=259 (0.13s/clip, 3.2 min)
+1600/2210 ok=1333 abstain=267 (0.13s/clip, 3.5 min)
+1700/2210 ok=1419 abstain=281 (0.13s/clip, 3.7 min)
+1800/2210 ok=1513 abstain=287 (0.14s/clip, 4.1 min)
+1900/2210 ok=1605 abstain=295 (0.14s/clip, 4.4 min)
+2000/2210 ok=1698 abstain=302 (0.14s/clip, 4.8 min)
+2100/2210 ok=1790 abstain=310 (0.15s/clip, 5.1 min)
+2200/2210 ok=1879 abstain=321 (0.15s/clip, 5.4 min)
+2210/2210 ok=1889 abstain=321 (0.15s/clip, 5.5 min)
+scores: n=2094 min=0.0670 median=0.6303 max=0.9861
+run done: ok=1889 abstain=321

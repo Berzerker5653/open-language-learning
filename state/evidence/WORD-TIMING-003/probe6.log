@@ -1,0 +1,40 @@
+unsettled=2210 missing_wav=0 strata={'align-failed@large-v3': 1593, 'align-failed@large-v3-turbo': 568, 'empty-transcript': 3, 'expected-kanji': 7, 'no-prior': 39} targets=29
+Loading weights:   0%|          | 0/423 [00:00<?, ?it/s]Loading weights: 100%|██████████| 423/423 [00:00<00:00, 22748.07it/s]
+/home/aih/align/venv/lib/python3.12/site-packages/ctc_forced_aligner/alignment_utils.py:133: UserWarning: The given buffer is not writable, and PyTorch does not support non-writable tensors. This means you can write to the underlying (supposedly non-writable) buffer using the tensor. You may want to copy the buffer to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/utils/tensor_new.cpp:1568.)
+  return torch.frombuffer(out, dtype=torch.int16).flatten().to(dtype).to(device) / 32768.0
+contrast ja.contrast.gemination.kite: own_fit_a=0.6246357395027501 cross_fit_a=0.5648463026694921 own_fit_b=0.9021683229345392 cross_fit_b=0.9107152050969108 WRONG
+contrast ja.contrast.gemination.matta: own_fit_a=0.9565780053765133 cross_fit_a=0.8704328026827859 own_fit_b=0.9586382822269129 cross_fit_b=0.9347942845293556 correct
+contrast ja.contrast.moraic-nasal.kin: own_fit_a=0.8542885698371566 cross_fit_a=0.8929219520830243 own_fit_b=0.7617592300935391 cross_fit_b=0.6836193357385107 WRONG
+contrast ja.contrast.moraic-nasal.sen: own_fit_a=0.7356322724907872 cross_fit_a=0.8169557519559494 own_fit_b=0.8462312863860069 cross_fit_b=0.7737768675884603 WRONG
+contrast ja.contrast.vowel-length.tooi: own_fit_a=0.913037372173359 cross_fit_a=0.9560326203912548 own_fit_b=0.784238510816125 cross_fit_b=0.6516301322563768 WRONG
+1/29 ok=1 abstain=0 (0.10s/clip, 0.0 min)
+2/29 ok=2 abstain=0 (0.12s/clip, 0.0 min)
+3/29 ok=3 abstain=0 (0.11s/clip, 0.0 min)
+4/29 ok=4 abstain=0 (0.12s/clip, 0.0 min)
+5/29 ok=5 abstain=0 (0.12s/clip, 0.0 min)
+6/29 ok=6 abstain=0 (0.12s/clip, 0.0 min)
+7/29 ok=7 abstain=0 (0.12s/clip, 0.0 min)
+8/29 ok=8 abstain=0 (0.12s/clip, 0.0 min)
+9/29 ok=9 abstain=0 (0.12s/clip, 0.0 min)
+10/29 ok=10 abstain=0 (0.12s/clip, 0.0 min)
+11/29 ok=11 abstain=0 (0.12s/clip, 0.0 min)
+12/29 ok=12 abstain=0 (0.12s/clip, 0.0 min)
+13/29 ok=13 abstain=0 (0.13s/clip, 0.0 min)
+14/29 ok=14 abstain=0 (0.13s/clip, 0.0 min)
+15/29 ok=15 abstain=0 (0.13s/clip, 0.0 min)
+16/29 ok=15 abstain=1 (0.13s/clip, 0.0 min)
+17/29 ok=16 abstain=1 (0.13s/clip, 0.0 min)
+18/29 ok=17 abstain=1 (0.13s/clip, 0.0 min)
+19/29 ok=18 abstain=1 (0.13s/clip, 0.0 min)
+20/29 ok=19 abstain=1 (0.13s/clip, 0.0 min)
+21/29 ok=20 abstain=1 (0.13s/clip, 0.0 min)
+22/29 ok=21 abstain=1 (0.13s/clip, 0.0 min)
+23/29 ok=22 abstain=1 (0.13s/clip, 0.0 min)
+24/29 ok=23 abstain=1 (0.13s/clip, 0.1 min)
+25/29 ok=24 abstain=1 (0.13s/clip, 0.1 min)
+26/29 ok=25 abstain=1 (0.14s/clip, 0.1 min)
+27/29 ok=26 abstain=1 (0.14s/clip, 0.1 min)
+28/29 ok=27 abstain=1 (0.15s/clip, 0.1 min)
+29/29 ok=28 abstain=1 (0.15s/clip, 0.1 min)
+scores: n=29 min=0.2321 median=0.7356 max=0.9793
+run done: ok=28 abstain=1
