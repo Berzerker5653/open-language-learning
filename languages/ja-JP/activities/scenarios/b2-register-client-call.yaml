@@ -1,0 +1,82 @@
+# ai-assisted draft scenario (JA-B2-001 B2 register-shift, client phone call); wording pending qualified review.
+id: ja.scenario.b2.register.client-call
+goal_id: ja.goal.b2.register-shift
+title: "Calling a client's office in polite register"
+situation: ja.situation.phone-call
+register: ja.register.polite-neutral
+nodes:
+- id: ja.scenario.b2.register.client-call.boss
+  prompt: "You phone another company and ask the receptionist whether the department head is in. Use the honorific question form."
+  expected_actions:
+  - ask-boss-honorific
+  - give-your-name
+  action_labels:
+    ask-boss-honorific: "Ask with いらっしゃいますか"
+    give-your-name: "Say who is calling"
+  support:
+    - level: 3
+      kind: model
+      text: "しゃちょう は いま いらっしゃいますか。 (shachou wa ima irassharimasu ka.)"
+    - level: 5
+      kind: gloss
+      text: "Honorific いらっしゃる (irassharu) elevates the person asked about; いらっしゃいますか politely questions their presence. Keep polite forms throughout this call — plain forms belong with friends, not clients."
+  next:
+  - ja.scenario.b2.register.client-call.availability
+  recovery:
+  - id: ja.scenario.b2.register.client-call.repair-unclear
+    prompt: "The receptionist did not catch your question. Repeat it using the honorific verb."
+    expected_actions:
+    - ask-boss-honorific
+    to: ja.scenario.b2.register.client-call.boss
+- id: ja.scenario.b2.register.client-call.availability
+  prompt: "The head reaches the phone and asks when you can meet. Answer formally that tomorrow is fine at any time."
+  expected_actions:
+  - answer-formal
+  - emphasize-anytime
+  action_labels:
+    answer-formal: "Answer with the formal polite verb ございます"
+    emphasize-anytime: "Say any time works"
+  support:
+    - level: 3
+      kind: model
+      text: "あした なら、いつでも だいじょうぶ ございます。 (ashita nara, itsudemo daijoubu gozaimasu.)"
+    - level: 5
+      kind: gloss
+      text: "ございます (gozaimasu) is the formal polite verb used with clients; なら frames 'if it is tomorrow'. だいじょうぶ です alone is polite but less formal; plain 大丈夫だ would be too casual for this call."
+  next:
+  - ja.scenario.b2.register.client-call.propose
+- id: ja.scenario.b2.register.client-call.propose
+  prompt: "Suggest a concrete time without pressing, then close the call politely."
+  expected_actions:
+  - propose-softly
+  - close-call
+  action_labels:
+    propose-softly: "Suggest next Wednesday with いかがでしょうか"
+    close-call: "Close with the standard polite request phrase"
+  support:
+    - level: 3
+      kind: model
+      text: "つぎの すいようび は いかが でしょうか。よろしく おねがい いたします。 (tsugi no suiyoubi wa ika ga dou deshou ka. yoroshiku onegai itashimasu.)"
+    - level: 5
+      kind: gloss
+      text: "いかがでしょうか (ika ga dou deshou ka) proposes softly — 'how about…?' — instead of ordering a time. よろしく おねがい いたします is the fixed polite closing ('I look forward to working with you')."
+  next: []
+# support payloads and action labels: ai-drafted 2026-11-20 (JA-B2-001); qualified human review required (JA-B2-002 posture).
+support_ladder:
+- support_level: 0
+  description: No supports
+- support_level: 3
+  description: Model response in Japanese script with romaji scaffold
+- support_level: 5
+  description: Full suggested wording including a first-language gloss
+# SCENARIO-TRANSFER-001 (finding S-04): transfer requirement removed — these drafts
+# carry no completable practice payload for the variants; kept as authored intent
+# for a later recall/walk pass (validator: scenario_transfer_payload_missing).
+transfer_variants_required: 0
+transfer_variants:
+- id: ja.scenario.b2.register.client-call.coworker-polite
+  description: "The same scheduling call to a colleague you address politely rather than a client"
+  changed_variable: "relationship and formality level"
+- id: ja.scenario.b2.register.client-call.friend-casual
+  description: "Asking the same availability question of a friend in plain casual forms"
+  changed_variable: "relationship and register"

@@ -1,0 +1,54 @@
+== validate ==
+error[schema] activities/scenarios/b2-register-client-call.yaml: "support_ladder" is a required property
+error[schema] activities/scenarios/b2-register-client-call.yaml: "transfer_variants_required" is a required property
+error[schema] activities/scenarios/b2-register-client-call.yaml: Additional properties are not allowed ('generation' was unexpected)
+error[media_asset_missing] media/manifest.jsonl: 12 audio-addressable item(s) have no media manifest row, so the app has no audio to play for them and nothing synthesizes at read time (ADR-0024): ja.sent.b2reg-anou-mouichido-onegai, ja.sent.b2reg-ashita-itsudemo-gozaimasu, ja.sent.b2reg-ba-nyuujou, ja.sent.b2reg-houhou-ni-yotte, ja.sent.b2reg-jouhou-dake-dewa, ja.sent.b2reg-mono-da-shijou, ja.sent.b2reg-mono-ka-seigi, ja.sent.b2reg-shinjitsu-toiu-mono (first 8 shown); regenerate with scripts/generate-pack-audio.py
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+warning[media_unlisted] media/manifest.jsonl: media/ja.sent.b2reg-houhou-ni-yotte.wav exists in the pack but no manifest row declares it, so its provenance would have to be inferred from file presence (ADR-0016)
+warning[media_unlisted] media/manifest.jsonl: media/ja.sent.b2reg-jouhou-dake-dewa.wav exists in the pack but no manifest row declares it, so its provenance would have to be inferred from file presence (ADR-0016)
+validate(scaffold): 4 error(s), 2 warning(s)
+exit=1
+== lint ==
+error[schema] activities/scenarios/b2-register-client-call.yaml: "support_ladder" is a required property
+error[schema] activities/scenarios/b2-register-client-call.yaml: "transfer_variants_required" is a required property
+error[schema] activities/scenarios/b2-register-client-call.yaml: Additional properties are not allowed ('generation' was unexpected)
+error[media_asset_missing] media/manifest.jsonl: 12 audio-addressable item(s) have no media manifest row, so the app has no audio to play for them and nothing synthesizes at read time (ADR-0024): ja.sent.b2reg-anou-mouichido-onegai, ja.sent.b2reg-ashita-itsudemo-gozaimasu, ja.sent.b2reg-ba-nyuujou, ja.sent.b2reg-houhou-ni-yotte, ja.sent.b2reg-jouhou-dake-dewa, ja.sent.b2reg-mono-da-shijou, ja.sent.b2reg-mono-ka-seigi, ja.sent.b2reg-shinjitsu-toiu-mono (first 8 shown); regenerate with scripts/generate-pack-audio.py
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+warning[media_unlisted] media/manifest.jsonl: media/ja.sent.b2reg-houhou-ni-yotte.wav exists in the pack but no manifest row declares it, so its provenance would have to be inferred from file presence (ADR-0016)
+warning[media_unlisted] media/manifest.jsonl: media/ja.sent.b2reg-jouhou-dake-dewa.wav exists in the pack but no manifest row declares it, so its provenance would have to be inferred from file presence (ADR-0016)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+lint: 4 error(s), 2 warning(s)
+exit=1
+== audit-curriculum ==
+audit-curriculum: 0 error(s), 0 warning(s)
+exit=0
+== audit-lexicon ==
+audit-lexicon: 0 error(s), 0 warning(s)
+exit=0
+== audit-licenses ==
+audit-licenses: 0 error(s), 0 warning(s)
+exit=0
+== audit-sources ==
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+audit-sources: 0 error(s), 0 warning(s)
+exit=0
+== test ==
+error[schema] activities/scenarios/b2-register-client-call.yaml: "support_ladder" is a required property
+error[schema] activities/scenarios/b2-register-client-call.yaml: "transfer_variants_required" is a required property
+error[schema] activities/scenarios/b2-register-client-call.yaml: Additional properties are not allowed ('generation' was unexpected)
+error[media_asset_missing] media/manifest.jsonl: 12 audio-addressable item(s) have no media manifest row, so the app has no audio to play for them and nothing synthesizes at read time (ADR-0024): ja.sent.b2reg-anou-mouichido-onegai, ja.sent.b2reg-ashita-itsudemo-gozaimasu, ja.sent.b2reg-ba-nyuujou, ja.sent.b2reg-houhou-ni-yotte, ja.sent.b2reg-jouhou-dake-dewa, ja.sent.b2reg-mono-da-shijou, ja.sent.b2reg-mono-ka-seigi, ja.sent.b2reg-shinjitsu-toiu-mono (first 8 shown); regenerate with scripts/generate-pack-audio.py
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+warning[media_unlisted] media/manifest.jsonl: media/ja.sent.b2reg-houhou-ni-yotte.wav exists in the pack but no manifest row declares it, so its provenance would have to be inferred from file presence (ADR-0016)
+warning[media_unlisted] media/manifest.jsonl: media/ja.sent.b2reg-jouhou-dake-dewa.wav exists in the pack but no manifest row declares it, so its provenance would have to be inferred from file presence (ADR-0016)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+test: 4 error(s), 2 warning(s)
+exit=1

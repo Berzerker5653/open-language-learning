@@ -1,0 +1,78 @@
+# ai-assisted draft unit (JA-B2-001 B2 register-shift increment: plain-register opinions); content refs are pack data; qualified review pending (JA-B2-002).
+id: ja.unit.b2-register-casual-opinions
+goal_id: ja.goal.b2.register-shift
+title: "Plain-register opinions: ものだ, わけだ, ものか"
+summary: "B2 casual register: general-tendency ものだ, conclusion わけだ, and strong-denial ものか among colleagues and debate, with independent production."
+estimated_minutes: 9
+# ADR-0037: this unit claims the b2 register-shift task sequence end to end.
+task_sequence:
+  input: ja.activity.b2reg-casual-enc
+  scaffolded: ja.activity.b2reg-casual-cloze
+  independent: ja.activity.b2reg-casual-write
+  transfer: ja.activity.b2reg-casual-choice
+  reuse: ja.activity.b2reg-casual-recall-later
+activities:
+- id: ja.activity.b2reg-casual-enc
+  type: encounter-read
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.sent.b2reg-mono-da-shijou
+  - ja.sent.b2reg-mono-ka-seigi
+  - ja.sent.b2reg-wake-da-saiban
+- id: ja.activity.b2reg-casual-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.grammar.b2.mono-da
+  - ja.grammar.b2.wake-da
+  - ja.grammar.b2.mono-ka
+  - ja.grammar.politeness.register
+- id: ja.activity.b2reg-casual-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.b2reg-mono-da-shijou
+  - ja.sent.b2reg-mono-ka-seigi
+- id: ja.activity.b2reg-casual-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b2reg-wake-da-saiban
+- id: ja.activity.b2reg-casual-choice
+  type: recall-choice
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.sent.b2reg-mono-da-shijou
+  - ja.sent.b2reg-mono-ka-seigi
+  - ja.grammar.b2.mono-da
+  - ja.grammar.b2.mono-ka
+- id: ja.activity.b2reg-casual-recall-later
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b2reg-mono-ka-seigi
+generation_contract:
+  allowed_vocab:
+  - ja.sent.b2reg-mono-da-shijou
+  - ja.sent.b2reg-mono-ka-seigi
+  - ja.sent.b2reg-wake-da-saiban
+  allowed_grammar:
+  - ja.grammar.b2.mono-da
+  - ja.grammar.b2.wake-da
+  - ja.grammar.b2.mono-ka
+  - ja.grammar.politeness.register
+  new_item_budget: 2
+  register:
+  - ja.register.plain-casual
+  expected_interpretations:
+  - 'Plain-register opinion moves: ものだ states a general tendency, わけだ draws the explaining conclusion, ものか flatly refuses; these sentence-final tones are casual, for colleagues and debate, not clients.'
+  prohibited_ambiguity:
+  - ものか is strong denial ('no way I would…'), not the question のものか 'is it the thing that…'.
+  target_proficiency: B2
+  validation_method: choice

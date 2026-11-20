@@ -1,0 +1,74 @@
+# ai-assisted draft unit (JA-B2-001 B2 register-shift increment: polite phone register); content refs are pack data; qualified review pending (JA-B2-002).
+id: ja.unit.b2-register-polite-phone
+goal_id: ja.goal.b2.register-shift
+title: "Phone register: polite and hedged forms for clients"
+summary: "B2 register work: formal polite ございます, hedged あのう-request, and soft proposal いかがでしょうか, with independent production and scenario transfer."
+estimated_minutes: 9
+# ADR-0037: this unit claims the b2 register-shift task sequence end to end.
+task_sequence:
+  input: ja.activity.b2reg-phone-enc
+  scaffolded: ja.activity.b2reg-phone-cloze
+  independent: ja.activity.b2reg-phone-write
+  transfer: ja.activity.b2reg-phone-scenario
+  reuse: ja.activity.b2reg-phone-recall-later
+activities:
+- id: ja.activity.b2reg-phone-enc
+  type: encounter-read
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.sent.b2reg-ashita-itsudemo-gozaimasu
+  - ja.sent.b2reg-anou-mouichido-onegai
+  - ja.sent.b2reg-suiyoubi-ikaga
+- id: ja.activity.b2reg-phone-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.grammar.politeness.register
+  - ja.grammar.b1.keigo-soncho-intro
+- id: ja.activity.b2reg-phone-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.b2reg-ashita-itsudemo-gozaimasu
+  - ja.sent.b2reg-suiyoubi-ikaga
+- id: ja.activity.b2reg-phone-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b2reg-anou-mouichido-onegai
+- id: ja.activity.b2reg-phone-scenario
+  type: retrieval
+  modality: speaking
+  support_level: 2
+  scenario_id: ja.scenario.b2.register.client-call
+  content_refs:
+  - ja.sent.b2reg-ashita-itsudemo-gozaimasu
+  - ja.sent.b2reg-suiyoubi-ikaga
+  - ja.grammar.politeness.register
+- id: ja.activity.b2reg-phone-recall-later
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b2reg-suiyoubi-ikaga
+generation_contract:
+  allowed_vocab:
+  - ja.sent.b2reg-ashita-itsudemo-gozaimasu
+  - ja.sent.b2reg-anou-mouichido-onegai
+  - ja.sent.b2reg-suiyoubi-ikaga
+  allowed_grammar:
+  - ja.grammar.politeness.register
+  - ja.grammar.b1.keigo-soncho-intro
+  new_item_budget: 2
+  register:
+  - ja.register.polite-neutral
+  expected_interpretations:
+  - 'Client-facing phone moves: formal ございます for availability, あのう hedge before re-requesting, いかがでしょうか soft time proposal; taught chunks only.'
+  prohibited_ambiguity:
+  - ございます is the formal polite copula, not a distinct vocabulary word.
+  target_proficiency: B2
+  validation_method: choice

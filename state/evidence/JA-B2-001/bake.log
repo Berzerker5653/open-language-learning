@@ -1,0 +1,37 @@
+BAKE-START 2026-11-20T12:50:44-07:00
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b2reg-houhou-ni-yotte: first-request 42.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b2reg-jouhou-dake-dewa: first-request 44.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b2reg-shinjitsu-toiu-mono: first-request 106.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b2reg-soncho-okaeshi: first-request 36.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b2reg-ashita-itsudemo-gozaimasu: first-request 27.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b2reg-anou-mouichido-onegai: first-request 36.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b2reg-suiyoubi-ikaga: first-request 20.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b2reg-soncho-irassharimasu: first-request 29.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b2reg-mono-da-shijou: first-request 31.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b2reg-mono-ka-seigi: first-request 17.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b2reg-wake-da-saiban: first-request 31.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.b2reg-ba-nyuujou: first-request 28.1s ok=True
+pack=languages/ja-JP assets=4935 generated=12 reused=0 refused=0 bytes=377968500
+BAKE-DONE exit=0 2026-11-20T12:59:09-07:00

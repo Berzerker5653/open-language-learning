@@ -1,0 +1,12 @@
+{"id": "ja.sent.b2reg-houhou-ni-yotte", "text": "ほうほう によって けっか が かわります。", "heard": "方法によって結果が変わります。", "rc": 0, "err": ""}
+{"id": "ja.sent.b2reg-jouhou-dake-dewa", "text": "じょうほう だけでは はんのう が ぶそく です。", "heard": "情報だけでは反応が不足です", "rc": 0.053, "err": "", "adjudication": "content correct: whisper heard 情報だけでは反応が不足です; fold diff is pykakasi dictionary reading 不足->ふそく vs pack kana ぶそく"}
+{"id": "ja.sent.b2reg-shinjitsu-toiu-mono", "text": "しんじつ と いう もの は ふくざつ です。", "heard": "真実というものは複雑です", "rc": 0.0, "err": "", "note": "re-taken: first take lost the topic は (whisper heard no は in two transcriptions); retake heard complete"}
+{"id": "ja.sent.b2reg-soncho-okaeshi", "text": "ぶちょう が おかえしに なりました。", "heard": "部長がお返しになりました", "rc": 0, "err": ""}
+{"id": "ja.sent.b2reg-ashita-itsudemo-gozaimasu", "text": "あした なら、いつでも だいじょうぶ ございます。", "heard": "明日なら、いつでも大丈夫ございます。", "rc": 0, "err": ""}
+{"id": "ja.sent.b2reg-anou-mouichido-onegai", "text": "あのう、もういちど おねがい できますか。", "heard": "あのー、もう一度お願いできますか?", "rc": 0.059, "err": "", "adjudication": "content correct: heard あのー vs written あのう is the same interjection (long-vowel spelling variant)"}
+{"id": "ja.sent.b2reg-suiyoubi-ikaga", "text": "つぎの すいようび は いかが でしょうか。", "heard": "次の水曜日はいかがでしょうか。", "rc": 0, "err": ""}
+{"id": "ja.sent.b2reg-soncho-irassharimasu", "text": "しゃちょう は いま いらっしゃいますか。", "heard": "社長は今いらっしゃいますか?", "rc": 0, "err": ""}
+{"id": "ja.sent.b2reg-mono-da-shijou", "text": "しじょう は じき に ふくすう の へんか を ふくむ もの だよ。", "heard": "市場は時期に複数の変化を含むものだよ", "rc": 0, "err": ""}
+{"id": "ja.sent.b2reg-mono-ka-seigi", "text": "せいぎ を すてる ものか。", "heard": "正義を捨てるものか", "rc": 0, "err": ""}
+{"id": "ja.sent.b2reg-wake-da-saiban", "text": "はんけつ が ふくすう あれば、さいばん が ながい わけ です。", "heard": "判決が複数あれば裁判が長いわけです。", "rc": 0, "err": ""}
+{"id": "ja.sent.b2reg-ba-nyuujou", "text": "きそく を まもれば、だれでも にゅうじょう できます。", "heard": "規則を守れば誰でも入場できます", "rc": 0, "err": ""}

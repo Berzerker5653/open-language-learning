@@ -1,0 +1,76 @@
+# ai-assisted draft unit (JA-B2-001 B2 register-shift increment: honorific awareness at the office + scenario transfer); content refs are pack data; qualified review pending (JA-B2-002).
+id: ja.unit.b2-register-honorific-office
+goal_id: ja.goal.b2.register-shift
+title: "Honorific awareness: reporting about superiors"
+summary: "B2 pragmatics: 尊敬語 forms おかえしになる and いらっしゃる in office reporting, independent production, and the client-call scenario as changed-context transfer."
+estimated_minutes: 9
+# ADR-0037: this unit claims the b2 register-shift task sequence end to end;
+# the client-call scenario (ja.scenario.b2.register.client-call) is this goal's
+# changed-context transfer — the register demands of a client call versus the
+# colleague sentences above carry the transfer claim.
+task_sequence:
+  input: ja.activity.b2reg-hon-enc
+  scaffolded: ja.activity.b2reg-hon-cloze
+  independent: ja.activity.b2reg-hon-write
+  transfer: ja.activity.b2reg-hon-scenario
+  reuse: ja.activity.b2reg-hon-recall-later
+activities:
+- id: ja.activity.b2reg-hon-enc
+  type: encounter-read
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.sent.b2reg-soncho-okaeshi
+  - ja.sent.b2reg-soncho-irassharimasu
+- id: ja.activity.b2reg-hon-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.grammar.b1.keigo-soncho-intro
+  - ja.grammar.politeness.register
+- id: ja.activity.b2reg-hon-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.b2reg-soncho-okaeshi
+  - ja.sent.b2reg-soncho-irassharimasu
+- id: ja.activity.b2reg-hon-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b2reg-soncho-okaeshi
+- id: ja.activity.b2reg-hon-scenario
+  type: retrieval
+  modality: speaking
+  support_level: 2
+  scenario_id: ja.scenario.b2.register.client-call
+  content_refs:
+  - ja.sent.b2reg-soncho-irassharimasu
+  - ja.sent.b2reg-ashita-itsudemo-gozaimasu
+  - ja.grammar.b1.keigo-soncho-intro
+- id: ja.activity.b2reg-hon-recall-later
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b2reg-soncho-irassharimasu
+generation_contract:
+  allowed_vocab:
+  - ja.sent.b2reg-soncho-okaeshi
+  - ja.sent.b2reg-soncho-irassharimasu
+  - ja.sent.b2reg-ashita-itsudemo-gozaimasu
+  allowed_grammar:
+  - ja.grammar.b1.keigo-soncho-intro
+  - ja.grammar.politeness.register
+  new_item_budget: 2
+  register:
+  - ja.register.polite-neutral
+  expected_interpretations:
+  - 'Honorific awareness: elevate the third party you report or ask about with いらっしゃる / おかえしになる, keep polite-neutral forms on client calls; taught chunks only.'
+  prohibited_ambiguity:
+  - Honorifics elevate the OTHER party (superior, client); they are not used to elevate one's own actions.
+  target_proficiency: B2
+  validation_method: choice

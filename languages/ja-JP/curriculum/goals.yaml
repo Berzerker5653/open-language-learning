@@ -1549,6 +1549,38 @@ goals:
       tool: hermes
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-11-20'
+  - id: ja.goal.b2.register-shift
+    description: 'Shift register for one message: plain casual forms with friends, polite and hedged forms on the phone, formal written style in notices, with honorific awareness for superior/client contexts.'
+    band: B2
+    framework_refs: []
+    contexts:
+    - ja.situation.classroom
+    modalities:
+    - listening
+    - speaking
+    - reading
+    - writing
+    prerequisites:
+    - target: ja.goal.b1.repair-clarification
+      dimension: grammar-controlled
+      required_state: independent
+      strength: hard
+    required_concepts:
+    - ja.lex.ling2.hyougen
+    - ja.lex.ling2.imi2
+    assessment_ids:
+    - ja.assess.b2-register-shift
+    - ja.assess.b2-register-shift-retention
+    transfer_required: true
+    sources:
+    - jf-standard
+    - ai-drafted-extension
+    review_status: draft
+    generation:
+      method: ai-assisted
+      tool: hermes
+      model: strata/qwen3.8-flash-next-iq3_s
+      date: '2026-11-20'
   - id: ja.goal.b2.politics-governance
     description: 'Discuss politics and governance: elections, parties, policy, and public debate.'
     band: B2

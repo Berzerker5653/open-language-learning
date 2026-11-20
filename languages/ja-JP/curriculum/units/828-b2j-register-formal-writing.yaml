@@ -1,0 +1,80 @@
+# ai-assisted draft unit (JA-B2-001 B2 register-shift increment: formal written style); content refs are pack data; qualified review pending (JA-B2-002).
+id: ja.unit.b2-register-formal-writing
+goal_id: ja.goal.b2.register-shift
+title: "Formal written style: notices and commentary"
+summary: "B2 genre work: announcement により / ば forms and editorial alone-limit and と definition frames, independent written production, choice-based transfer."
+estimated_minutes: 9
+# ADR-0037: this unit claims the b2 register-shift task sequence end to end.
+task_sequence:
+  input: ja.activity.b2reg-formal-enc
+  scaffolded: ja.activity.b2reg-formal-cloze
+  independent: ja.activity.b2reg-formal-write
+  transfer: ja.activity.b2reg-formal-choice
+  reuse: ja.activity.b2reg-formal-recall-later
+activities:
+- id: ja.activity.b2reg-formal-enc
+  type: encounter-read
+  modality: reading
+  support_level: 2
+  content_refs:
+  - ja.sent.b2reg-houhou-ni-yotte
+  - ja.sent.b2reg-jouhou-dake-dewa
+  - ja.sent.b2reg-ba-nyuujou
+  - ja.sent.b2reg-shinjitsu-toiu-mono
+- id: ja.activity.b2reg-formal-grammar
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.grammar.b2.ni-yotte
+  - ja.grammar.b2.dake-dewa
+  - ja.grammar.b1.ba-formal
+  - ja.grammar.b2.toiu-mono
+- id: ja.activity.b2reg-formal-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.b2reg-houhou-ni-yotte
+  - ja.sent.b2reg-ba-nyuujou
+- id: ja.activity.b2reg-formal-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b2reg-shinjitsu-toiu-mono
+- id: ja.activity.b2reg-formal-choice
+  type: recall-choice
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ja.sent.b2reg-jouhou-dake-dewa
+  - ja.sent.b2reg-houhou-ni-yotte
+  - ja.grammar.b2.dake-dewa
+  - ja.grammar.b2.ni-yotte
+- id: ja.activity.b2reg-formal-recall-later
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.b2reg-ba-nyuujou
+generation_contract:
+  allowed_vocab:
+  - ja.sent.b2reg-houhou-ni-yotte
+  - ja.sent.b2reg-jouhou-dake-dewa
+  - ja.sent.b2reg-ba-nyuujou
+  - ja.sent.b2reg-shinjitsu-toiu-mono
+  allowed_grammar:
+  - ja.grammar.b2.ni-yotte
+  - ja.grammar.b2.dake-dewa
+  - ja.grammar.b1.ba-formal
+  - ja.grammar.b2.toiu-mono
+  new_item_budget: 2
+  register:
+  - ja.register.polite-neutral
+  expected_interpretations:
+  - 'Written formal moves: により marks means, まもれば formal condition in a notice, だけでは marks insufficiency, というもの frames a definition-style claim; taught chunks only.'
+  prohibited_ambiguity:
+  - により here marks means or basis, not the agent of a passive.
+  target_proficiency: B2
+  validation_method: choice

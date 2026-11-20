@@ -234,6 +234,11 @@ prerequisite_edges:
   dimension: grammar-controlled
   required_state: independent
   strength: hard
+- from: ja.goal.b2.register-shift
+  to: ja.goal.b1.repair-clarification
+  dimension: grammar-controlled
+  required_state: independent
+  strength: hard
 - from: ja.goal.b1.health-wellness
   to: ja.goal.b1.storytelling
   dimension: grammar-controlled

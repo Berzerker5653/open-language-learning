@@ -1,0 +1,12 @@
+ja.sent.b2reg-houhou-ni-yotte
+ja.sent.b2reg-jouhou-dake-dewa
+ja.sent.b2reg-shinjitsu-toiu-mono
+ja.sent.b2reg-soncho-okaeshi
+ja.sent.b2reg-ashita-itsudemo-gozaimasu
+ja.sent.b2reg-anou-mouichido-onegai
+ja.sent.b2reg-suiyoubi-ikaga
+ja.sent.b2reg-soncho-irassharimasu
+ja.sent.b2reg-mono-da-shijou
+ja.sent.b2reg-mono-ka-seigi
+ja.sent.b2reg-wake-da-saiban
+ja.sent.b2reg-ba-nyuujou
