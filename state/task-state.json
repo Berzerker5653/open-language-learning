@@ -2090,10 +2090,10 @@
       "status": "in_progress",
       "attempts": 0,
       "title": "Kindle-style reader — flowing paragraphs, one-tap sentence audio, word-tap dictionary card with word audio",
-      "activity": "lanes E (engine/backend) + F (frontend) delegated per frozen contract in state/notes/READER-FLOW-001.md",
       "summary": "Opened 2026-11-19 for the driver burst. Contract frozen in state/notes/READER-FLOW-001.md: media/lemmas.jsonl build-time RU lemmatizer sidecar (scripts/build-morphology-table.py, pymorphy3 pinned), word_card + story_word_audio src-tauri commands, paragraph-flow reading.tsx with word-tap card and sentence-tap audio. kaikki.org off-pack lexicon slice DEFERRED (honest not-in-pack card meanwhile). Builds on STORY-AUTHOR-001 A1 substrate (landed 54651a8).",
       "notes": "Disjoint file sets: Lane E = crates/langpack + apps/desktop/src-tauri + scripts/build-morphology-table.py + languages/ru-RU/media/lemmas.jsonl; Lane F = apps/desktop/src (reading.tsx, App.tsx, tests). Voice uniformity of word snippets explicitly not required (owner 2026-11-17). aux kaikki lexicon + logging are separate follow-ups (VOCAB-BUILDER-001 for logging).",
-      "updated": "2026-11-19",
+      "activity": "lanes E+F committed gate-green 2026-11-20 (c319080, de3ea26; controller re-ran every gate personally). Card stays in_progress: kaikki off-pack lexicon slice deferred per contract.",
+      "updated": "2026-11-20",
       "evidence": [
         "state/evidence/READER-FLOW-001/gates.log"
       ]

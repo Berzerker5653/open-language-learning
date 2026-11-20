@@ -3,3 +3,31 @@ READER-FLOW-001 controller gate log (appended by each controller pass)
 2026-11-19 open (driver burst):
 - card opened in ledger; contract frozen in state/notes/READER-FLOW-001.md
 - baseline validate_handoff run before lanes (see below)
+
+2026-11-20 09:00 controller takeover (previous burst left both lanes
+UNCOMMITTED with an empty gate log; re-verified every gate personally,
+never trusting the burst report):
+- no concurrent writers at start (only owner review servers up; no
+  cargo/bake processes running).
+- Lane E (commit c319080): cargo fmt --all --check OK;
+  cargo clippy -p lts-langpack --all-targets -- -D warnings exit 0;
+  cargo clippy -p lts-desktop --all-targets -- -D warnings exit 0;
+  cargo test -p lts-langpack green incl.
+  audit::tests::lemmas_sidecar_needs_no_manifest_row;
+  cargo test -p lts-desktop --lib 194 passed / 0 failed (incl.
+  word_card_resolves_an_inflected_ru_form_to_its_lemma (хле́ба→хлеб),
+  word_card_reports_off_pack_words_as_not_in_pack,
+  word_card_matches_the_lexicon_surface_directly_without_a_lemma_row,
+  story_word_audio_slices_the_word_span_from_the_sentence_clip);
+  .venv/bin/python -m unittest scripts.test_build_morphology_table:
+  11 OK; .venv/bin/python scripts/build-morphology-table.py --check:
+  committed lemmas.jsonl (1,423 rows) matches regeneration;
+  langpack-cli validate languages/ru-RU: 0 error(s) 0 warning(s);
+  langpack-cli test languages/ru-RU: 0 error(s) 0 warning(s).
+- Lane F (commit de3ea26): npx tsc --noEmit clean; npx vitest run
+  49 files / 381 tests passed; tools/audit_learner_copy.py findings 0.
+- validate_handoff --require-explicit-ledger-records: PASSED
+  (pre-existing optional-task WARNs only).
+- Card stays in_progress per contract (deferred: off-pack kaikki aux
+  lexicon slice; off-pack words render honest "not in your pack yet").
+- Push + CI conclusion appended after the push lands.
