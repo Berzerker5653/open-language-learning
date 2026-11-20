@@ -1,0 +1,61 @@
+# JA-A2-002 band review record — pack org.openlanguage.ja-jp.reference v0.4.3
+# policy_version: 1.0.0 (languages/ja-JP/review/REVIEW_POLICY.yaml)
+# date: 2026-11-20
+record_id: ja-a2-band-review-2026-11-20
+policy_version: "1.0.0"
+coverage_version: "1.0.0"
+band: A2
+pack_version: "0.4.3"
+card: JA-A2-002
+worklist_note: >
+  languages/ja-JP/review/WORKLIST-2026-10-14.md rows in A2 scope are covered
+  by the full per-item pass below (every referenced item was reviewed, not
+  just worklist-flagged ones); findings here supersede/confirm earlier flags.
+
+reviewer:
+  name: hermes-default agent
+  reviewer_category: ai-assisted
+  qualification_basis: >
+    Owner decision 2026-11-19 (acceptance-autonomy rule, recorded in
+    state/task-state.json JA-A2-002 notes): qualified review for content
+    cards is agent-performed with evidence files, reversible; release/publish
+    gates unchanged.
+  honesty_note: >
+    The agent is NOT a qualified human reviewer in the REVIEW_POLICY
+    qualification categories. All 865 per-item records are `ai-assisted`.
+    Per promotion_authority, ai-assisted records never promote content: no
+    item status was flipped; the pack keeps its honest posture.
+
+population_reviewed:
+  units: 113           # every unit whose goal_id is an A2 goal (10 goals)
+  activities: 692
+  lexicon: 658         # every ja.lex.* referenced by A2 units
+  sentences: 224       # every ja.sent.* referenced by A2 units
+  grammar_concepts: 5  # ja.grammar.* referenced (4 new rows + 1 A1-covered)
+  assessments: 10      # every assessment bound to an A2 goal
+  already_reviewed_by_A1_pass: 32   # shared items keep their A1 rows; not duplicated
+  new_records: 865     # languages/ja-JP/reviews.jsonl rows rev-2026-11-20-a2-*
+review_scope: linguistic (form/reading/gloss/naturalness) + pedagogical (task validity, rubric, level fit); audio LISTENING not performable by an agent (K-65 open).
+
+verdicts:
+  approved: 765
+  approved_with_notes: 20
+  changes_requested: 80   # 39 P1 + 41 P2 defects; fixes NOT applied in this run
+defects_found: 80
+defects_fixed_this_card: 0   # honest split: review card finds, fix card fixes+bakes audio
+fix_queue: corrections + per-clip audio re-bake (~80 assets) handed to follow-up card JA-A2-002-FIX-001
+
+machine_gates:  # on the exact reviewed tree
+  langpack_validate_scaffold: "0 errors (pre and post row-write)"
+  langpack_lint: "0 errors (pre and post row-write)"
+  langpack_test_install: "0 errors — incl. K-65 media audit of the tree incl. the JA-A1-003 re-bakes"
+  audits: "curriculum/lexicon/licenses/sources all 0 errors (see a1-takeover-gates.log)"
+
+trust_state_verdict:
+  advanced: false
+  reason: >
+    The band review is COMPLETE as a record, but the band now carries 39
+    unresolved P1 defects by the reviewer's own verdicts — the review gate
+    for pack trust cannot pass on this evidence alone. Promotion stays
+    human-gated and unchanged; the pack ships at its honest AI-draft posture.
+    The A2 trust-state decision is: NOT clean until the fix queue lands.
