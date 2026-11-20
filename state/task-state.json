@@ -2164,6 +2164,19 @@
         "state/evidence/JA-A2-FIX-001b/align-run.log"
       ],
       "updated": "2026-11-20"
+    },
+    "GLOSSARY-001": {
+      "status": "blocked",
+      "attempts": 1,
+      "last_error": "AGENTS.md link blocked by the protected agent-instruction-file guard in a headless kanban run: the write approval prompt timed out with no user present, and retrying via another path is forbidden. GLOSSARY.md itself is shipped; the exact one-hunk AGENTS.md edit is preserved verbatim in state/notes/GLOSSARY-001.md.",
+      "evidence": [
+        "state/evidence/GLOSSARY-001/gates.log",
+        "state/notes/GLOSSARY-001.md"
+      ],
+      "blocker": "One hunk in protected AGENTS.md (Domain language heading + GLOSSARY.md link) needs an explicit owner approval or a manual owner apply; everything else on the card is committed on main.",
+      "summary": "GLOSSARY.md shipped at repo root: 20 domain terms (band, pack, card, board, lane, burst, takeover-commit, resume recipe, ledger, evidence, notes, gate tiers, sidecar, bake, certified clean, republish, honest, owner gate, posture, word card, parked), one per line, each <=25 words, every definition grounded by grep in existing docs/, tasks/ and state/notes/ wording; 31 lines (<120). 'frontier' deliberately omitted (never used in repo vocabulary; repo-wide grep hit only aux-lexicon data rows) with the omission recorded in-file.",
+      "notes": "Follow-up when AGENTS.md hunk lands: flip this record to done per the resume recipe in state/notes/GLOSSARY-001.md.",
+      "updated": "2026-11-20"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

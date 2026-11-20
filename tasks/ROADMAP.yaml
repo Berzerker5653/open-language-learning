@@ -2790,6 +2790,19 @@ tasks:
   - a stats strip (due today, ~minutes, per-band retention, 12-week activity calendar) sits above the capability tree; all data is local n=1 and labeled as an instrument, not a grade or certificate
   - charts are dependency-free SVG (no new runtime deps) and pass the a11y contrast audit
   required_for_desktop_1_0: false
+- id: GLOSSARY-001
+  milestone: M8
+  priority: P2
+  title: Domain language file — GLOSSARY.md defining project vocabulary exactly as docs, tasks and notes use it
+  dependencies: []
+  read_first:
+  - AGENTS.md
+  - docs/19_PROJECT_FILE_ARCHITECTURE.md
+  acceptance:
+  - GLOSSARY.md sits at the repo root, stays under 120 lines, one term per line, each definition 25 words or fewer
+  - every definition reuses wording already present in docs/, tasks/ROADMAP.yaml, tasks/KANBAN.md or state/notes/ — no invented vocabulary
+  - GLOSSARY.md is linked from AGENTS.md under a Domain language heading
+  required_for_desktop_1_0: false
 
 execution_scope:
   default_goal: desktop-1.0-release-candidate
@@ -2894,4 +2907,5 @@ execution_scope:
   - UI-HYGIENE-001
   - SESSION-CHROME-001
   - PROGRESS-STATS-001
+  - GLOSSARY-001
   public_publication_authorized: false

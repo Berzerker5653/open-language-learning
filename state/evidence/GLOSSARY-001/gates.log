@@ -1,0 +1,65 @@
+GLOSSARY-001 gate log — 2026-11-20, worker t_f5595847 (documentation-only card; no code touched)
+
+1. GLOSSARY.md shape
+   $ wc -l GLOSSARY.md
+   31 lines (acceptance: <120).
+   Per-entry word count check (python: split each "- **term** — def" line,
+   count definition words): over-25-word entries: [] (all 20 <= 25 words).
+
+2. Vocabulary grounding (definitions reuse existing repo wording; greps run
+   over docs/, tasks/KANBAN.md, tasks/ROADMAP.yaml, state/notes/):
+   - band ............ docs/18 (band vocabulary, "If a band is partial, say partial"),
+                       docs/04 (same band vocabulary)
+   - pack ............ docs/04_LANGUAGE_PACK_SPEC.md, catalog/packs.json restore step
+   - card / board .... tasks/KANBAN.md "cards that map to roadmap tasks carry their ID",
+                       columns now/next/later/owner
+   - lane ............ state/notes/READER-FLOW-001.md ("engine lane and the app lane run
+                       on strictly disjoint file sets")
+   - burst ........... tasks/KANBAN.md ("03:00+06:00+09:00 bursts"), notes resume recipes
+                       "(next burst; do not re-derive)"
+   - takeover-commit . tasks/KANBAN.md ("controller takeover-commit of the dead
+                       JA-A1-003 lane ... verified before landing")
+   - resume recipe ... state/notes/STORY-AUTHOR-001.md, WORD-TIMING-003.md
+   - ledger .......... docs/15 + ADR-0033 (explicit ledger records),
+                       tools/validate_handoff.py --require-explicit-ledger-records
+   - evidence ........ docs/15 "state/evidence/<task>/ — logs/reports"; validator
+                       requires existing file paths
+   - sidecar ......... state/notes/READER-FLOW-001.md ("new optional pack sidecar"),
+                       WORD-TIMING-001.md ("packs without the sidecar must load unchanged")
+   - bake / re-bake .. scripts/generate-pack-audio.py, scripts/bake-repair-loop.sh,
+                       KANBAN "re-baked" rows with manifest sha verification
+   - certified clean . tasks/KANBAN.md ("965 certified clean", "4,434/4,856 certified
+                       clean"), ASR round-trip audits
+   - republish ....... KANBAN "republish (§5)... owner gate O-05"
+   - honest .......... state/notes/READER-FLOW-001.md ("honest bare card",
+                       "honest 'not in your pack yet' card"), docs/04 ("honest refusal
+                       ... never a silent no-op"), WORD-TIMING-003 ("honest low-posterior
+                       abstains")
+   - owner gate ...... KANBAN O-01..O-09 rows, state/notes/TTS-001.md "## Owner gates"
+   - posture ......... ADR-0017, docs/18 ("content posture is AI-created"),
+                       "never self-certified" across KANBAN rows
+   - word card ....... state/notes/WORD-CARD-AUDIO-001.md (locked contract: printed
+                       form + stress + lemma + gloss + grammar line; PLAY = exact form
+                       sliced from the sentence clip)
+   - parked .......... KANBAN "parking-2026-11-01" row ("parked to later, work at a
+                       later time")
+
+3. "frontier" — deliberately NOT defined.
+   $ rg -i frontier tasks/ state/notes/ state/task-state.json AGENTS.md docs/
+   -> only matches: aux/lexicon/ru.jsonl data rows (Russian dictionary glosses).
+   The term belongs to the agent model-routing policy outside this repo; defining
+   it would invent repo vocabulary, which the card forbids. Omission recorded
+   in-file under "Not defined here".
+
+4. Ledger validation (after ROADMAP card + optional_tasks entry + task-state record):
+   $ python3 -c "yaml.safe_load(tasks/ROADMAP.yaml)"
+   yaml ok; GLOSSARY-001 in tasks: True; in optional_tasks: True
+   $ python3 tools/validate_handoff.py --require-explicit-ledger-records
+   HANDOFF VALIDATION PASSED (2142 data files checked)  [exit 0]
+   GLOSSARY-001 absent from the "optional task has no explicit ledger record"
+   warnings; all WARN lines are pre-existing for other optional tasks.
+
+5. Lane-tier note: no code, tests, or frontend files touched — cargo/tsc gates
+   not applicable. AGENTS.md link gate: NOT runnable by this worker (protected
+   file, approval timed out headless) — see state/notes/GLOSSARY-001.md; card
+   blocked with that one step outstanding.
