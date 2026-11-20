@@ -1,0 +1,105 @@
+{
+  "gate": "READABILITY-GATE-001",
+  "pack": "languages/ru-RU",
+  "locale": "ru-RU",
+  "sentences_checked": 945,
+  "stories_checked": 20,
+  "ledger_known_source": "pack band list (cold profile)",
+  "rejections": 94,
+  "band_undeclared": 0,
+  "regeneration_requests": 94
+}
+REJECT ru.sent.a1.moy-den.u003 (a1): readability_unknown_lemma:завтрак,яйцо
+REJECT ru.sent.a2.avtobus-ne-prishol.u004 (a2): readability_unknown_lemma:тишина,фонарь
+REJECT ru.sent.a2.sosed-s-gitarioy.u002 (a2): readability_unknown_lemma:гитара,сосед,шум
+REJECT ru.sent.a2.sosed-s-gitarioy.u004 (a2): readability_unknown_lemma:давать,сосед
+REJECT ru.sent.a2.telefon-v-taksi.u006 (a2): readability_unknown_lemma:сосед,телефон
+REJECT ru.sent.b1.internet-v-derevne.u001 (b1): readability_unknown_lemma:деревня,интернет
+REJECT ru.sent.b1.internet-v-derevne.u004 (b1): readability_unknown_lemma:антенна,выше,дед,интернет
+REJECT ru.sent.b1.internet-v-derevne.u005 (b1): readability_unknown_lemma:антенна,выйти
+REJECT ru.sent.b1.kluch-ot-dachi.u001 (b1): readability_unknown_lemma:карман,ключ,купить,куртка
+REJECT ru.sent.b1.kluch-ot-dachi.u002 (b1): readability_unknown_lemma:дверь,ключ
+REJECT ru.sent.b1.kluch-ot-dachi.u004 (b1): readability_unknown_lemma:ключ,река,стоить
+REJECT ru.sent.b1.kluch-ot-dachi.u008 (b1): readability_unknown_lemma:история,купить,куртка
+REJECT ru.sent.b1.noch-v-poezde.u001 (b1): readability_unknown_lemma:купе,ночью,сосед
+REJECT ru.sent.b1.noch-v-poezde.u002 (b1): readability_unknown_lemma:давать,история
+REJECT ru.sent.b1.noch-v-poezde.u003 (b1): readability_unknown_lemma:поймать,сосед
+REJECT ru.sent.b1.noch-v-poezde.u004 (b1): readability_unknown_lemma:имя,музыкант
+REJECT ru.sent.b1.noch-v-poezde.u005 (b1): readability_unknown_lemma:зонтик,спасибо
+REJECT ru.sent.b1.noch-v-poezde.u006 (b1): readability_unknown_lemma:девочка,ничего,тетрадь,улыбаться
+REJECT ru.sent.b1.pismo-ne-temu.u002 (b1): readability_unknown_lemma:гора,месяц
+REJECT ru.sent.b1.pismo-ne-temu.u003 (b1): readability_unknown_lemma:добрый,собака
+REJECT ru.sent.b1.pismo-ne-temu.u005 (b1): readability_unknown_lemma:месяц,твой
+REJECT ru.sent.b1.pismo-ne-temu.u006 (b1): readability_unknown_lemma:встретиться,почта
+REJECT ru.sent.b2.aukcion-odnoy-kartiny.u001 (b2): readability_unknown_lemma:аукцион,лес,лот,местный,продавать
+REJECT ru.sent.b2.aukcion-odnoy-kartiny.u002 (b2): readability_unknown_lemma:два,коллекционер,слушать,спорить
+REJECT ru.sent.b2.aukcion-odnoy-kartiny.u004 (b2): readability_unknown_lemma:быстро,молоток,расти
+REJECT ru.sent.b2.aukcion-odnoy-kartiny.u005 (b2): readability_unknown_lemma:спорить,стать
+REJECT ru.sent.b2.aukcion-odnoy-kartiny.u007 (b2): readability_unknown_lemma:вернуть,вчерашний,краска,пахнуть
+REJECT ru.sent.b2.aukcion-odnoy-kartiny.u008 (b2): readability_unknown_lemma:зал,художник
+REJECT ru.sent.b2.dva-bileta-v-odin-teatr.u001 (b2): readability_unknown_lemma:кассир,оказаться,ряд
+REJECT ru.sent.b2.dva-bileta-v-odin-teatr.u002 (b2): readability_unknown_lemma:встретиться,конкурс,мечтать,пенсионер,получить,спектакль
+REJECT ru.sent.b2.dva-bileta-v-odin-teatr.u003 (b2): readability_unknown_lemma:корешок,место,ряд
+REJECT ru.sent.b2.dva-bileta-v-odin-teatr.u005 (b2): readability_unknown_lemma:акт,место,пенсионер
+REJECT ru.sent.b2.dva-bileta-v-odin-teatr.u006 (b2): readability_unknown_lemma:антракт,спектакль,фойе
+REJECT ru.sent.b2.dva-bileta-v-odin-teatr.u007 (b2): readability_unknown_lemma:пенсионер,ряд,сорок
+REJECT ru.sent.b2.dva-bileta-v-odin-teatr.u008 (b2): readability_unknown_lemma:закрыть,занавес,оказаться,ряд
+REJECT ru.sent.b2.gorod-bez-karty.u003 (b2): readability_unknown_lemma:заблудиться,лавка,ответить,торговка,турист
+REJECT ru.sent.b2.gorod-bez-karty.u004 (b2): readability_unknown_lemma:обедать,прилавок,турист
+REJECT ru.sent.b2.gorod-bez-karty.u005 (b2): readability_unknown_lemma:доказывать,книга,лавка,хозяйка
+REJECT ru.sent.b2.gorod-bez-karty.u006 (b2): readability_unknown_lemma:выключиться,испугаться,показать,телефон,турист,электронный
+REJECT ru.sent.b2.gorod-bez-karty.u007 (b2): readability_unknown_lemma:забыть,лавка,турист
+REJECT ru.sent.b2.perevodchik-vse-pereputal.u001 (b2): readability_unknown_lemma:волноваться,конференция,переводчик,слово
+REJECT ru.sent.b2.perevodchik-vse-pereputal.u002 (b2): readability_unknown_lemma:докладчик,заморозить,ягода
+REJECT ru.sent.b2.perevodchik-vse-pereputal.u004 (b2): readability_unknown_lemma:вкусный,интересный,тема
+REJECT ru.sent.b2.perevodchik-vse-pereputal.u005 (b2): readability_unknown_lemma:импровизировать,нужный,переводчик,слово
+REJECT ru.sent.b2.perevodchik-vse-pereputal.u006 (b2): readability_unknown_lemma:ничего,понимать
+REJECT ru.sent.b2.perevodchik-vse-pereputal.u007 (b2): readability_unknown_lemma:гость,переводчик,страна
+REJECT ru.sent.b2.perevodchik-vse-pereputal.u008 (b2): readability_unknown_lemma:оказаться,переводчик,ягода
+REJECT ru.sent.b2.spor-o-budushchem.u001 (b2): readability_unknown_lemma:будущее,вокруг,кафе,спорить,университет
+REJECT ru.sent.b2.spor-o-budushchem.u002 (b2): readability_unknown_lemma:машина,утверждать,физик
+REJECT ru.sent.b2.spor-o-budushchem.u003 (b2): readability_unknown_lemma:возразить,машина,поэтесса,согласиться,сомневаться
+REJECT ru.sent.b2.spor-o-budushchem.u004 (b2): readability_unknown_lemma:будущее,стол
+REJECT ru.sent.b2.spor-o-budushchem.u005 (b2): readability_unknown_lemma:пока,стол,счёт
+REJECT ru.sent.b2.spor-o-budushchem.u006 (b2): readability_unknown_lemma:оказаться,спорить,справедливость,счёт
+REJECT ru.sent.b2.spor-o-budushchem.u008 (b2): readability_unknown_lemma:будущее,десять,минута,счёт,теория,устоять
+REJECT ru.sent.cp.p01 (a2): readability_unknown_lemma:ру,сский,учить,яз
+REJECT ru.sent.cp.p02 (a2): readability_unknown_lemma:звать,нна
+REJECT ru.sent.cp.p03 (a2): readability_unknown_lemma:вета,де,ла,твой
+REJECT ru.sent.cp.p04 (a2): readability_unknown_lemma:добро,ловать,пожий
+REJECT ru.sent.cp.p05 (a2): readability_unknown_lemma:йной,споко,чи
+REJECT ru.sent.cp.p06 (a2): readability_unknown_lemma:вставать,тром
+REJECT ru.sent.cp.p07 (a2): readability_unknown_lemma:зу,чистить
+REJECT ru.sent.cp.p08 (a2): readability_unknown_lemma:душа,ет,принить,тром
+REJECT ru.sent.cp.p09 (a2): readability_unknown_lemma:завтрак,ку,хна
+REJECT ru.sent.cp.p10 (a2): readability_unknown_lemma:выхий,дит,ма,одева,ться
+REJECT ru.sent.cp.p11 (a2): readability_unknown_lemma:вять,де,начин,рок,ться,часо
+REJECT ru.sent.cp.p12 (a2): readability_unknown_lemma:гу,ет,кни,открыв,тель,учить
+REJECT ru.sent.cp.p13 (a2): readability_unknown_lemma:бум,ге,й,ручко
+REJECT ru.sent.cp.p14 (a2): readability_unknown_lemma:классный,л,мната,сто,стой
+REJECT ru.sent.cp.p15 (a2): readability_unknown_lemma:гу,интер,кни,сновать,чита
+REJECT ru.sent.cp.p16 (a2): readability_unknown_lemma:са,хара
+REJECT ru.sent.cp.p17 (a2): readability_unknown_lemma:вку,жий,све,сный
+REJECT ru.sent.cp.p18 (a2): readability_unknown_lemma:еди,жка,ло,м,п,су
+REJECT ru.sent.cp.p19 (a2): readability_unknown_lemma:мёд,па,хло,ябнуть
+REJECT ru.sent.cp.p20 (a2): readability_unknown_lemma:варя,ка,ма,тром,шу
+REJECT ru.sent.cp.p21 (a2): readability_unknown_lemma:лнце,рко,све,тит
+REJECT ru.sent.cp.p22 (a2): readability_unknown_lemma:г,годень,лодно,сие,хо
+REJECT ru.sent.cp.p23 (a2): readability_unknown_lemma:ве,дождь,м,тереть
+REJECT ru.sent.cp.p24 (a2): readability_unknown_lemma:быв,гроза,ет,ле
+REJECT ru.sent.cp.p25 (a2): readability_unknown_lemma:годень,ден,лодно,сие,хо
+REJECT ru.sent.cp.p26 (a2): readability_unknown_lemma:зелёный,ле,су
+REJECT ru.sent.cp.p27 (a2): readability_unknown_lemma:заря,поить,пти,цы
+REJECT ru.sent.cp.p28 (a2): readability_unknown_lemma:глубый,кай,река,широ
+REJECT ru.sent.cp.p29 (a2): readability_unknown_lemma:ве,ленькай,ма,птичка,тке
+REJECT ru.sent.cp.p30 (a2): readability_unknown_lemma:див,шка
+REJECT ru.sent.cp.p31 (a2): readability_unknown_lemma:гуля,ет,ка,парка,соб
+REJECT ru.sent.cp.p32 (a2): readability_unknown_lemma:длить,нный,ус,шея,шки
+REJECT ru.sent.cp.p33 (a2): readability_unknown_lemma:йог,купить,л,лочный,льчик,ма,мо,рт
+REJECT ru.sent.cp.p34 (a2): readability_unknown_lemma:ба,батон,ит,лько,ско,сто,хле
+REJECT ru.sent.cp.p35 (a2): readability_unknown_lemma:ка,кты,пла,прод,рточка,чу
+REJECT ru.sent.cp.p36 (a2): readability_unknown_lemma:откра,рабо,рынок,таять,тром,тый
+REJECT ru.sent.cp.p37 (a2): readability_unknown_lemma:го,лодной,локо,мо,рячий,фе,хо
+REJECT ru.sent.cp.p38 (a2): readability_unknown_lemma:вочко,де,ет,н,налив,стака
+REJECT ru.sent.cp.p39 (a2): readability_unknown_lemma:иц,ма,нака,пим,сла,сыр
+REJECT ru.sent.cp.p40 (a2): readability_unknown_lemma:вечеро,м,пи,рог

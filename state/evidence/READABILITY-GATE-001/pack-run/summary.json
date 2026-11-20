@@ -1,0 +1,11 @@
+{
+  "gate": "READABILITY-GATE-001",
+  "pack": "languages/ru-RU",
+  "locale": "ru-RU",
+  "sentences_checked": 945,
+  "stories_checked": 20,
+  "ledger_known_source": "pack band list (cold profile)",
+  "rejections": 94,
+  "band_undeclared": 0,
+  "regeneration_requests": 94
+}

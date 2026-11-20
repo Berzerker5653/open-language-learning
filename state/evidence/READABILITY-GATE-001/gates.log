@@ -1,0 +1,62 @@
+=== READABILITY-GATE-001 lane gates (run by card worker, 2026-11-20) ===
+
+$ .venv/bin/python -m py_compile tools/readability-gate.py tools/test_readability_gate.py
+OK
+
+$ .venv/bin/python -m unittest tools.test_readability_gate -v
+test_band_undeclared_is_honest_diagnostic (tools.test_readability_gate.GateTests.test_band_undeclared_is_honest_diagnostic) ... ok
+test_cold_profile_falls_back_to_band_list (tools.test_readability_gate.GateTests.test_cold_profile_falls_back_to_band_list) ... ok
+test_confirmed_content_its_lemmas_known (tools.test_readability_gate.GateTests.test_confirmed_content_its_lemmas_known) ... ok
+test_deterministic_output (tools.test_readability_gate.GateTests.test_deterministic_output) ... /home/hunter/game-dev/LTS/tools/test_readability_gate.py:175: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/hunter/.hermes/cache/scratch/tmpq5h9b5gs/e1/violations.jsonl' mode='r' encoding='utf-8'>
+  encoding="utf-8").read(),
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/home/hunter/game-dev/LTS/tools/test_readability_gate.py:177: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/hunter/.hermes/cache/scratch/tmpq5h9b5gs/e2/violations.jsonl' mode='r' encoding='utf-8'>
+  encoding="utf-8").read())
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_explicit_band_covers_cp_shard (tools.test_readability_gate.GateTests.test_explicit_band_covers_cp_shard) ... ok
+test_mined_word_becomes_known (tools.test_readability_gate.GateTests.test_mined_word_becomes_known) ... ok
+test_non_ru_pack_refuses (tools.test_readability_gate.GateTests.test_non_ru_pack_refuses) ... ok
+test_recheck_loop_rejects_reoffender_with_updated_hints (tools.test_readability_gate.GateTests.test_recheck_loop_rejects_reoffender_with_updated_hints) ... ok
+test_regeneration_request_carries_negative_hints (tools.test_readability_gate.GateTests.test_regeneration_request_carries_negative_hints) ... /home/hunter/game-dev/LTS/tools/test_readability_gate.py:104: ResourceWarning: unclosed file <_io.TextIOWrapper name='/home/hunter/.hermes/cache/scratch/tmpi9m6_f3q/requests.jsonl' mode='r' encoding='utf-8'>
+  rows = [json.loads(l) for l in open(req, encoding="utf-8")]
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+ok
+test_rejects_two_unknowns_naming_lemmas (tools.test_readability_gate.GateTests.test_rejects_two_unknowns_naming_lemmas) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 2.040s
+
+OK
+
+$ .venv/bin/python tools/readability-gate.py --pack languages/ru-RU --band a2 --evidence-out state/evidence/READABILITY-GATE-001/pack-run --requests-out state/evidence/READABILITY-GATE-001/regeneration-requests.jsonl
+{
+  "gate": "READABILITY-GATE-001",
+  "pack": "languages/ru-RU",
+  "locale": "ru-RU",
+  "sentences_checked": 945,
+  "stories_checked": 20,
+  "ledger_known_source": "pack band list (cold profile)",
+  "rejections": 94,
+  "band_undeclared": 0,
+  "regeneration_requests": 94
+}
+REJECT ru.sent.a1.moy-den.u003 (a1): readability_unknown_lemma:завтрак,яйцо
+REJECT ru.sent.a2.avtobus-ne-prishol.u004 (a2): readability_unknown_lemma:тишина,фонарь
+REJECT ru.sent.a2.sosed-s-gitarioy.u002 (a2): readability_unknown_lemma:гитара,сосед,шум
+exit=1 (violations exist — gate is not yet a CI blocker; 94 findings are authoring work: band-tag lexicon entries or regenerate)
+
+$ .venv/bin/python tools/readability-gate.py --pack languages/ru-RU --band a2 --known-db ~/.local/share/openlang/profiles.db --profile prof-c4094898-...-8e57f39cb710 --pack-id org.openlanguage.ru-ru.reference  (owner 'Hunter' ledger path)
+note: ledger empty for this profile — cold profile, fell back to the pack band list
+{
+  "gate": "READABILITY-GATE-001",
+  "pack": "languages/ru-RU",
+  "locale": "ru-RU",
+  "sentences_checked": 945,
+  "stories_checked": 20,
+  "ledger_known_source": "pack band list (cold profile)",
+  "rejections": 94,
+  "band_undeclared": 0,
+  "regeneration_requests": 94
+}
+note: Hunter has no ru mined/confirm rows yet — the 'cold profile' fallback line is the ledger path proving its own fallback rule on the REAL store schema; mined/confirm semantics are golden-tested against the real column names (test_mined_word_becomes_known, test_confirmed_content_its_lemmas_known).

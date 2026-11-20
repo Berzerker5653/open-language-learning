@@ -1,0 +1,94 @@
+{"band": "a1", "kind": "unknown_lemma", "lemmas": ["завтрак", "яйцо"], "source": "ru.sent.a1.moy-den.u003", "text": "Завтрак: каша, яйцо и чай."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["тишина", "фонарь"], "source": "ru.sent.a2.avtobus-ne-prishol.u004", "text": "Вечером кругом были только фонари и тишина."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["гитара", "сосед", "шум"], "source": "ru.sent.a2.sosed-s-gitarioy.u002", "text": "У соседа есть гитара, и каждый вечер у нас шум."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["давать", "сосед"], "source": "ru.sent.a2.sosed-s-gitarioy.u004", "text": "Потом я попросила соседа: давай тише."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["сосед", "телефон"], "source": "ru.sent.a2.telefon-v-taksi.u006", "text": "Это был наш сосед: он нашёл телефон на сиденье."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["деревня", "интернет"], "source": "ru.sent.b1.internet-v-derevne.u001", "text": "Я поехал в деревню: у меня была одна проблема — без интернета я не мог работать."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["антенна", "выше", "дед", "интернет"], "source": "ru.sent.b1.internet-v-derevne.u004", "text": "Мой дед сказал: «Если поднять антенну выше, интернет придёт и к нам»."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["антенна", "выйти"], "source": "ru.sent.b1.internet-v-derevne.u005", "text": "Я подумал, что это шутка, но мы вышли на улицу и подняли антенну вместе."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["карман", "ключ", "купить", "куртка"], "source": "ru.sent.b1.kluch-ot-dachi.u001", "text": "Однажды мой друг купил старую куртку и нашёл в её кармане маленький ключ."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["дверь", "ключ"], "source": "ru.sent.b1.kluch-ot-dachi.u002", "text": "Этот ключ не открывал ни одну дверь в нашем доме."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["ключ", "река", "стоить"], "source": "ru.sent.b1.kluch-ot-dachi.u004", "text": "Мы принесли ключ продавцу, и он сказал: «Это ключ от того дома, он стоит за рекой»."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["история", "купить", "куртка"], "source": "ru.sent.b1.kluch-ot-dachi.u008", "text": "Если бы мы не купили ту куртку, я бы никогда не рассказал эту историю."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["купе", "ночью", "сосед"], "source": "ru.sent.b1.noch-v-poezde.u001", "text": "Ночью я ехала в поезде в другой город, и в купе уже сидели четыре соседа."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["давать", "история"], "source": "ru.sent.b1.noch-v-poezde.u002", "text": "Спать было трудно, и тогда кто-то сказал: «Давайте каждый расскажет историю — так мы быстрее уснём»."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["поймать", "сосед"], "source": "ru.sent.b1.noch-v-poezde.u003", "text": "Первый сосед рассказал про рыбу, которую он чуть не поймал сам."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["имя", "музыкант"], "source": "ru.sent.b1.noch-v-poezde.u004", "text": "Второй рассказывал про город, где все улицы — это имена музыкантов."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["зонтик", "спасибо"], "source": "ru.sent.b1.noch-v-poezde.u005", "text": "Третий рассказал, что однажды дал свой зонтик одной девушке, но всё ещё ждёт спасибо."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["девочка", "ничего", "тетрадь", "улыбаться"], "source": "ru.sent.b1.noch-v-poezde.u006", "text": "Четвёртой была девочка: она ничего не рассказывала, только улыбалась и писала письма в своей тетради."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["гора", "месяц"], "source": "ru.sent.b1.pismo-ne-temu.u002", "text": "Письмо ушло в другой город, и через месяц мне написал новый друг: он живёт далеко, в горах."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["добрый", "собака"], "source": "ru.sent.b1.pismo-ne-temu.u003", "text": "Его письма были смешные и добрые: он писал про свою работу и про свою собаку."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["месяц", "твой"], "source": "ru.sent.b1.pismo-ne-temu.u005", "text": "Теперь я пишу ему каждый месяц, и бабушка смеётся: «А где твоё первое письмо?»."}
+{"band": "b1", "kind": "unknown_lemma", "lemmas": ["встретиться", "почта"], "source": "ru.sent.b1.pismo-ne-temu.u006", "text": "Однажды он приехал в наш город, и мы встретились рядом с почтой, где он когда-то нашёл моё письмо."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["аукцион", "лес", "лот", "местный", "продавать"], "source": "ru.sent.b2.aukcion-odnoy-kartiny.u001", "text": "На аукционе маленького города продавали один лот: картину с лесом, написанную местным мастером."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["два", "коллекционер", "слушать", "спорить"], "source": "ru.sent.b2.aukcion-odnoy-kartiny.u002", "text": "Два коллекционера спорили, не слушая ни цен, ни друг друга."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["быстро", "молоток", "расти"], "source": "ru.sent.b2.aukcion-odnoy-kartiny.u004", "text": "Цена росла быстро, и продавец поднял молоток."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["спорить", "стать"], "source": "ru.sent.b2.aukcion-odnoy-kartiny.u005", "text": "Второй предложил не спорить и стал ждать."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["вернуть", "вчерашний", "краска", "пахнуть"], "source": "ru.sent.b2.aukcion-odnoy-kartiny.u007", "text": "Через день картину вернули продавцу: краска пахла вчерашним утром."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["зал", "художник"], "source": "ru.sent.b2.aukcion-odnoy-kartiny.u008", "text": "Художник из зала только сказал: «Я знал, что картина новая; я написал её сегодня утром»."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["кассир", "оказаться", "ряд"], "source": "ru.sent.b2.dva-bileta-v-odin-teatr.u001", "text": "Кассир в театре по ошибке продал один ряд дважды — и оба билета оказались настоящими."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["встретиться", "конкурс", "мечтать", "пенсионер", "получить", "спектакль"], "source": "ru.sent.b2.dva-bileta-v-odin-teatr.u002", "text": "Вечером у входа встретились двое: пенсионер, который всю жизнь мечтал об этом спектакле, и студентка, получившая билет в конкурсе за лучший рассказ о театре."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["корешок", "место", "ряд"], "source": "ru.sent.b2.dva-bileta-v-odin-teatr.u003", "text": "Оба корешка были одинаковые: тот же ряд, те же места."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["акт", "место", "пенсионер"], "source": "ru.sent.b2.dva-bileta-v-odin-teatr.u005", "text": "Пенсионер подумал и предложил разделить вечер: первый акт сидеть на её месте, второй акт — на его месте."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["антракт", "спектакль", "фойе"], "source": "ru.sent.b2.dva-bileta-v-odin-teatr.u006", "text": "В антракте, гуляя в фойе, они узнали, что спектакль для каждого идёт по-своему."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["пенсионер", "ряд", "сорок"], "source": "ru.sent.b2.dva-bileta-v-odin-teatr.u007", "text": "Студентка сидела в ряду, которого не было уже сорок лет, а пенсионер — в ряду, которого ещё не было."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["закрыть", "занавес", "оказаться", "ряд"], "source": "ru.sent.b2.dva-bileta-v-odin-teatr.u008", "text": "Когда занавес закрыл сцену, оба ряда оказались одним, и весь театр долго молчал, а потом начал смеяться."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["заблудиться", "лавка", "ответить", "торговка", "турист"], "source": "ru.sent.b2.gorod-bez-karty.u003", "text": "Однажды заблудившийся турист искал адрес; торговка только ответила: «Города нет. Но моя лавка работает весь день»."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["обедать", "прилавок", "турист"], "source": "ru.sent.b2.gorod-bez-karty.u004", "text": "Через час турист обедал за прилавком — в городе, которого нет ни на одной карте."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["доказывать", "книга", "лавка", "хозяйка"], "source": "ru.sent.b2.gorod-bez-karty.u005", "text": "У хозяйки лавки все чеки были в книге: каждый чек доказывал, что город есть."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["выключиться", "испугаться", "показать", "телефон", "турист", "электронный"], "source": "ru.sent.b2.gorod-bez-karty.u006", "text": "Если бы турист показал этот город на электронной карте, телефон испугался бы и выключился сам."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["забыть", "лавка", "турист"], "source": "ru.sent.b2.gorod-bez-karty.u007", "text": "К зиме турист работал в лавке и забыл дорогу в другие города."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["волноваться", "конференция", "переводчик", "слово"], "source": "ru.sent.b2.perevodchik-vse-pereputal.u001", "text": "На большой конференции переводчик, волнуясь, перевёл слово «заседание» как «праздник»."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["докладчик", "заморозить", "ягода"], "source": "ru.sent.b2.perevodchik-vse-pereputal.u002", "text": "Докладчик говорил о заморозке цен, а люди думали про замороженные ягоды."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["вкусный", "интересный", "тема"], "source": "ru.sent.b2.perevodchik-vse-pereputal.u004", "text": "Но все молчали: новая тема казалась всем вкусной и интересной."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["импровизировать", "нужный", "переводчик", "слово"], "source": "ru.sent.b2.perevodchik-vse-pereputal.u005", "text": "Переводчик, не найдя в словаре ни одного нужного слова, начал импровизировать."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["ничего", "понимать"], "source": "ru.sent.b2.perevodchik-vse-pereputal.u006", "text": "К концу доклада люди не понимали ничего, но смеялись всё громче."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["гость", "переводчик", "страна"], "source": "ru.sent.b2.perevodchik-vse-pereputal.u007", "text": "Гости из другой страны пришли к переводчику с настоящим текстом доклада."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["оказаться", "переводчик", "ягода"], "source": "ru.sent.b2.perevodchik-vse-pereputal.u008", "text": "Оказалось, что весь доклад был про ягоды, и переводчик честно переводил… про цены."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["будущее", "вокруг", "кафе", "спорить", "университет"], "source": "ru.sent.b2.spor-o-budushchem.u001", "text": "В кафе у университета трое спорили о будущем и мешали всем вокруг кофе и бутербродами."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["машина", "утверждать", "физик"], "source": "ru.sent.b2.spor-o-budushchem.u002", "text": "«Машины, думающие быстрее нас, заменят всех учителей», — утверждал физик."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["возразить", "машина", "поэтесса", "согласиться", "сомневаться"], "source": "ru.sent.b2.spor-o-budushchem.u003", "text": "«Если бы машины умели сомневаться, я бы согласилась», — возразила поэтесса."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["будущее", "стол"], "source": "ru.sent.b2.spor-o-budushchem.u004", "text": "Третий, молчавший весь вечер, сказал, что будущее уже сидит за их столом, просто его ещё не заметили."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["пока", "стол", "счёт"], "source": "ru.sent.b2.spor-o-budushchem.u005", "text": "Спор становился всё громче, пока официант молча не поставил на стол общий счёт."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["оказаться", "спорить", "справедливость", "счёт"], "source": "ru.sent.b2.spor-o-budushchem.u006", "text": "Счёт оказался один на троих, и спорить пришлось уже о справедливости."}
+{"band": "b2", "kind": "unknown_lemma", "lemmas": ["будущее", "десять", "минута", "счёт", "теория", "устоять"], "source": "ru.sent.b2.spor-o-budushchem.u008", "text": "Через десять минут все делили счёт на троих и смеялись, и ни одна теория будущего не устояла."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["ру", "сский", "учить", "яз"], "source": "ru.sent.cp.p01", "text": "Я учу́ ру́сский язы́к."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["звать", "нна"], "source": "ru.sent.cp.p02", "text": "Меня́ зову́т А́нна."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["вета", "де", "ла", "твой"], "source": "ru.sent.cp.p03", "text": "При́вет! Как твои́ де́ла?"}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["добро", "ловать", "пожий"], "source": "ru.sent.cp.p04", "text": "Добро́ пожа́ловать!"}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["йной", "споко", "чи"], "source": "ru.sent.cp.p05", "text": "Споко́йной но́чи!"}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["вставать", "тром"], "source": "ru.sent.cp.p06", "text": "Я встаю́ у́тром."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["зу", "чистить"], "source": "ru.sent.cp.p07", "text": "Я чищу́ зу́бы."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["душа", "ет", "принить", "тром"], "source": "ru.sent.cp.p08", "text": "Она́ принима́ет душ у́тром."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["завтрак", "ку", "хна"], "source": "ru.sent.cp.p09", "text": "Мы завтрака́ем в ку́хне."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["выхий", "дит", "ма", "одева", "ться"], "source": "ru.sent.cp.p10", "text": "Он одева́ется и выхо́дит из до́ма."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["вять", "де", "начин", "рок", "ться", "часо"], "source": "ru.sent.cp.p11", "text": "У́рок начина́ется в де́вять часо́в."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["гу", "ет", "кни", "открыв", "тель", "учить"], "source": "ru.sent.cp.p12", "text": "Учи́тель открыва́ет кни́гу."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["бум", "ге", "й", "ручко"], "source": "ru.sent.cp.p13", "text": "Я пишу́ ручко́й на бума́ге."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["классный", "л", "мната", "сто", "стой"], "source": "ru.sent.cp.p14", "text": "Сто́л стои́т в классной ко́мнате."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["гу", "интер", "кни", "сновать", "чита"], "source": "ru.sent.cp.p15", "text": "Мы чита́ем интере́сную кни́гу."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["са", "хара"], "source": "ru.sent.cp.p16", "text": "Я люблю́ чай без са́хара."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["вку", "жий", "све", "сный"], "source": "ru.sent.cp.p17", "text": "Хлеб све́жий и вку́сный."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["еди", "жка", "ло", "м", "п", "су"], "source": "ru.sent.cp.p18", "text": "Мы еди́м су́п ло́жкой."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["мёд", "па", "хло", "ябнуть"], "source": "ru.sent.cp.p19", "text": "Ябло́ко па́хло мёдом."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["варя", "ка", "ма", "тром", "шу"], "source": "ru.sent.cp.p20", "text": "Ма́ма вари́т ка́шу у́тром."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["лнце", "рко", "све", "тит"], "source": "ru.sent.cp.p21", "text": "Со́лнце све́тит я́рко."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["г", "годень", "лодно", "сие", "хо"], "source": "ru.sent.cp.p22", "text": "Се́годня хо́лодно и сне́г идёт."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["ве", "дождь", "м", "тереть"], "source": "ru.sent.cp.p23", "text": "За окно́м дождь и ве́тер."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["быв", "гроза", "ет", "ле"], "source": "ru.sent.cp.p24", "text": "Ле́том быва́ет гроза́."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["годень", "ден", "лодно", "сие", "хо"], "source": "ru.sent.cp.p25", "text": "Се́годня хо́лодно, на́дену пальто́."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["зелёный", "ле", "су"], "source": "ru.sent.cp.p26", "text": "В ле́су тихо и зелено́."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["заря", "поить", "пти", "цы"], "source": "ru.sent.cp.p27", "text": "Пти́цы пою́т на заре́."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["глубый", "кай", "река", "широ"], "source": "ru.sent.cp.p28", "text": "Река́ широ́кая и глубо́кая."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["ве", "ленькай", "ма", "птичка", "тке"], "source": "ru.sent.cp.p29", "text": "На ве́тке сиди́т ма́ленькая птичка."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["див", "шка"], "source": "ru.sent.cp.p30", "text": "Ко́шка спит на дива́не."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["гуля", "ет", "ка", "парка", "соб"], "source": "ru.sent.cp.p31", "text": "Соба́ка гуля́ет в парке."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["длить", "нный", "ус", "шея", "шки"], "source": "ru.sent.cp.p32", "text": "У на́шей ко́шки дли́нные усы́."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["йог", "купить", "л", "лочный", "льчик", "ма", "мо", "рт"], "source": "ru.sent.cp.p33", "text": "Ма́льчик купи́л мо́лочный йогу́рт."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["ба", "батон", "ит", "лько", "ско", "сто", "хле"], "source": "ru.sent.cp.p34", "text": "Ско́лько сто́ит батон хле́ба?"}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["ка", "кты", "пла", "прод", "рточка", "чу"], "source": "ru.sent.cp.p35", "text": "Я пла́чу за проду́кты ка́рточкой."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["откра", "рабо", "рынок", "таять", "тром", "тый"], "source": "ru.sent.cp.p36", "text": "Откры́тый рынок рабо́тает у́тром."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["го", "лодной", "локо", "мо", "рячий", "фе", "хо"], "source": "ru.sent.cp.p37", "text": "Ко́фе го́рячий, а мо́локо хо́лодное."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["вочко", "де", "ет", "н", "налив", "стака"], "source": "ru.sent.cp.p38", "text": "Де́вочка налива́ет сок в стака́н."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["иц", "ма", "нака", "пим", "сла", "сыр"], "source": "ru.sent.cp.p39", "text": "Наку́пим сыра́, ма́сла и я́иц."}
+{"band": "a2", "kind": "unknown_lemma", "lemmas": ["вечеро", "м", "пи", "рог"], "source": "ru.sent.cp.p40", "text": "Вечеро́м мы пи́ем чай с пи́рогом."}
