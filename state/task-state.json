@@ -2180,6 +2180,70 @@
       "summary": "GLOSSARY.md shipped at repo root: 20 domain terms (band, pack, card, board, lane, burst, takeover-commit, resume recipe, ledger, evidence, notes, gate tiers, sidecar, bake, certified clean, republish, honest, owner gate, posture, word card, parked), one per line, each <=25 words, every definition grounded by grep in existing docs/, tasks/ and state/notes/ wording; 31 lines (<120). 'frontier' deliberately omitted (never used in repo vocabulary; repo-wide grep hit only aux-lexicon data rows) with the omission recorded in-file.",
       "notes": "AGENTS.md Domain-language hunk applied by agent with owner present in chat 2026-11-20 (protected-file step); card closed same day.",
       "updated": "2026-11-20"
+    },
+    "JA-B1-003": {
+      "task_id": "JA-B1-003",
+      "title": "Qualified Japanese content review — B1 legacy band",
+      "status": "done",
+      "attempts": 1,
+      "updated": "2026-11-20",
+      "dependencies": [
+        "JA-B1-002",
+        "REVIEW-001"
+      ],
+      "evidence": [
+        "state/evidence/JA-B1-003/findings-2026-11-20.md",
+        "state/evidence/JA-B1-003/band-review-record.yaml",
+        "state/evidence/JA-B1-003/gates.log",
+        "state/evidence/JA-B1-003/lexicon-defects-candidate-list.jsonl"
+      ],
+      "summary": "Legacy B1 band review executed 2026-11-20 (agent review seat per owner decision 2026-11-19): 1,183 ai-assisted per-item verdicts over 13 legacy goals, 198 units/1,182 activities census, 971 lexicon, 156 audio-backed sentences, 42 grammar concepts, 1 work-notice scenario - 849 approved, 33 approved-with-notes, 301 changes-requested (193 P1, 86 P2). Headline: form/gloss corruption in ~24 percent of legacy B1 lexicon entries (learner-visible, mirrored in 51 sentences); work-notice increment (820-822) reviewed clean. No pack content rewritten, no status flipped; corrections decomposed into JA-B1-003-FIX-001/002 + JA-B1-003-JOURNEYS-001.",
+      "notes": "Follow-up of JA-B1-002 scope boundary (legacy 198-unit B1 band). Verdict ids rev-2026-11-20-b1leg-001..1183 in languages/ja-JP/reviews.jsonl. Batch judging method and honesty limits in findings. Gates: pack battery 7/7 exit 0, 0 errors 0 warnings (gates.log)."
+    },
+    "JA-B1-003-FIX-001": {
+      "task_id": "JA-B1-003-FIX-001",
+      "title": "Correct the 238 legacy B1 lexicon defects and 12 grammar example defects",
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-20",
+      "dependencies": [
+        "JA-B1-003"
+      ],
+      "evidence": [
+        "state/evidence/JA-B1-003/findings-2026-11-20.md"
+      ],
+      "summary": "Created by JA-B1-003: correct every changes-requested legacy B1 lexicon row (per-row proposed fixes in reviews.jsonl notes and state/evidence/JA-B1-003/lexicon-defects-candidate-list.jsonl) plus 12 defective grammar examples. Ids and draft status untouched.",
+      "notes": "Files: languages/ja-JP/lexicon/*.jsonl + grammar/concepts.jsonl only - disjoint from FIX-002."
+    },
+    "JA-B1-003-FIX-002": {
+      "task_id": "JA-B1-003-FIX-002",
+      "title": "Rewrite the 51 defective legacy B1 sentences and re-bake their audio",
+      "status": "blocked",
+      "attempts": 0,
+      "updated": "2026-11-20",
+      "dependencies": [
+        "JA-B1-003-FIX-001"
+      ],
+      "evidence": [
+        "state/evidence/JA-B1-003/findings-2026-11-20.md"
+      ],
+      "summary": "Created by JA-B1-003: rewrite 32 P1 + 19 P2 legacy B1 sentences around corrected vocabulary (ids preserved), re-bake reading-paired clips via scripts/generate-pack-audio.py, ASR content-check, re-align word-timing rows (WORD-TIMING-003 contract).",
+      "notes": "Held pending prerequisite JA-B1-003-FIX-001 (lexicon corrections must land before sentence rewrites reuse corrected words). Board parent edge enforces ordering and auto-resumes; no human action needed. Files: languages/ja-JP/sentences/*.jsonl + media/manifest.jsonl + media/words.jsonl + wavs."
+    },
+    "JA-B1-003-JOURNEYS-001": {
+      "task_id": "JA-B1-003-JOURNEYS-001",
+      "title": "De-scaffold and re-journey the legacy B1 activity band",
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-20",
+      "dependencies": [
+        "JA-B1-003"
+      ],
+      "evidence": [
+        "state/evidence/JA-B1-003/findings-2026-11-20.md"
+      ],
+      "summary": "Created by JA-B1-003: reduce the 197 support_level-5 legacy activities toward B1 independence, add task journeys per legacy goal, move 155 object-wo-only generation grammar contracts to real concept sets; measure band distribution before/after.",
+      "notes": "Authoring card per ADR-0037 + R12 lineage (UPPERBAND-TASK-JOURNEYS-001). Files: curriculum/units/*.yaml."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

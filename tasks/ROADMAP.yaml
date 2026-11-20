@@ -1471,6 +1471,68 @@ tasks:
   - The band coverage and qualified-human review gates defined by REVIEW-001 pass for the exact pack version;
     unresolved mandatory coverage or critical findings keep this task blocked.
   required_for_desktop_1_0: false
+- id: JA-B1-003
+  milestone: M8
+  priority: P0
+  title: Qualified Japanese content review — B1 legacy band
+  dependencies:
+  - JA-B1-002
+  - REVIEW-001
+  read_first:
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  - state/evidence/JA-B1-001/band-metrics.md
+  acceptance:
+  - Every legacy B1 band goal, unit/activity census, and referenced lexicon/sentence/grammar record
+    carries an ai-assisted per-item verdict in languages/ja-JP/reviews.jsonl.
+  - Defects flagged per docs/09 severity and decomposed into correction cards; the review card itself
+    rewrites no pack content and flips no status.
+  required_for_desktop_1_0: false
+- id: JA-B1-003-FIX-001
+  milestone: M8
+  priority: P0
+  title: Correct the 238 legacy B1 lexicon defects and 12 grammar example defects
+  dependencies:
+  - JA-B1-003
+  read_first:
+  - state/evidence/JA-B1-003/findings-2026-11-20.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - All 238 changes-requested lexicon rows and the 12 defective grammar examples corrected in place,
+    content ids and draft status untouched.
+  - langpack validate/lint/audit-*/test on languages/ja-JP all exit 0 with 0 errors at commit.
+  required_for_desktop_1_0: false
+- id: JA-B1-003-FIX-002
+  milestone: M8
+  priority: P0
+  title: Rewrite the 51 defective legacy B1 sentences and re-bake their audio
+  dependencies:
+  - JA-B1-003-FIX-001
+  read_first:
+  - state/evidence/JA-B1-003/findings-2026-11-20.md
+  - docs/16_CONTENT_AUTHORING_AND_REVIEW.md
+  acceptance:
+  - All 51 changes-requested legacy B1 sentences rewritten around corrected vocabulary, with text,
+    reading, romaji, gloss and cloze targets consistent and ids preserved.
+  - Reading-paired clips re-baked via scripts/generate-pack-audio.py and ASR content-checked,
+    word-timing sidecar rows re-aligned per the WORD-TIMING-003 contract;
+    langpack validate/test on languages/ja-JP at 0 errors at commit.
+  required_for_desktop_1_0: false
+- id: JA-B1-003-JOURNEYS-001
+  milestone: M8
+  priority: P1
+  title: De-scaffold and re-journey the legacy B1 activity band
+  dependencies:
+  - JA-B1-003
+  read_first:
+  - state/evidence/JA-B1-003/findings-2026-11-20.md
+  - state/evidence/UPPERBAND-TASK-JOURNEYS-001/ACCEPTANCE.md
+  acceptance:
+  - The 197 support_level-5 legacy B1 activities reduced toward B1 independence per ADR-0037, with
+    per-goal task journeys and generation grammar contracts moved off the object-wo-only baseline.
+  - Band support_level distribution measured before/after into state/evidence;
+    langpack audit-curriculum/test at 0 errors at commit.
+  required_for_desktop_1_0: false
 - id: JA-B2-001
   milestone: M9
   priority: P0
@@ -2822,6 +2884,10 @@ execution_scope:
   - JA-A2-002-FIX-001
   - JA-A2-002-FIX-001b
   - JA-B1-002
+  - JA-B1-003
+  - JA-B1-003-FIX-001
+  - JA-B1-003-FIX-002
+  - JA-B1-003-JOURNEYS-001
   - JA-B2-002
   - JA-B1-001
   - JA-B2-001

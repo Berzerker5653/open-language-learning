@@ -1,0 +1,73 @@
+# JA-B1-003 band review record — pack org.openlanguage.ja-jp.reference v0.4.3
+# policy_version: 1.0.0 (languages/ja-JP/review/REVIEW_POLICY.yaml)
+# date: 2026-11-20
+record_id: ja-b1-legacy-band-review-2026-11-20
+policy_version: "1.0.0"
+coverage_version: "1.0.0"
+band: "B1 (legacy population: everything not covered by JA-B1-002's b3693bc increment)"
+pack_version: "0.4.3"
+pack_manifest_sha256: 7dbd7891eb5899a73c3ad4e47e6326b4b12dc6f03b0a8172af9565a3c52736b6
+card: JA-B1-003
+
+reviewer:
+  name: hermes-default agent
+  reviewer_category: ai-assisted
+  qualification_basis: >
+    Owner decision 2026-11-19 (acceptance-autonomy rule): qualified review for
+    content cards is agent-performed with evidence files, reversible;
+    release/publish gates unchanged.
+  honesty_note: >
+    The agent is NOT a qualified human reviewer in the REVIEW_POLICY
+    qualification categories. All 1,183 records are `ai-assisted` and never
+    promote content: no item status flipped, pack posture unchanged.
+
+population_reviewed:
+  goals: 13
+  units: 198
+  activities: 1182
+  lexicon: 971
+  sentences: 156
+  grammar_concepts: 42
+  scenarios: 1
+  total_records: 1183
+review_scope: "linguistic (form/reading/romaji/gloss/naturalness/cloze/lexicon validity) + pedagogical (scaffolding levels, generation contracts, task journeys) + audio-backed record cross-verification (0 manifest drift); audio LISTENING not agent-performable and remains open"
+
+outcome_counts:
+  approved: 849
+  approved-with-notes: 33
+  changes-requested: 301
+
+findings:
+  P0: []
+  P1_open: 193   # 161 lexicon form/gloss corruption or nonexistent words + 32 sentences teaching them
+  P2_open: 86    # 55 lexicon misleading glosses + 19 sentence defects + 12 grammar example defects
+  P3_noted: 35   # style/scaffold notes (romaji scaffold style, opaque ids, kanji intrusions, goal contexts)
+  headline: >
+    Dominant class is form-to-gloss corruption (homophone/letter-swap collisions,
+    garbled/nonexistent words) at ~24 percent of legacy B1 lexicon entries; the
+    same source-contamination class JA-A1-003 found at A1, at much larger scale.
+    Every flagged row was individually adjudicated by the reviewing agent;
+    band-level scaffolding verdict: 197 support_level-5 activities and 155
+    object-wo-only grammar contracts confirmed as authoring debt (flagged,
+    card-decomposed, not silently rewritten).
+  per_item_detail: "reviews.jsonl notes + lexicon-defects-candidate-list.jsonl"
+
+audio_verdict: >
+  No audio touched by this card. 156 legacy clips match their (defective)
+  readings; FIX-002 rewrites change readings and own the re-bake + ASR content
+  check + word-timing re-alignment (A2 FIX-001/001b pattern).
+
+machine_gates:
+  see: state/evidence/JA-B1-003/gates.log
+
+trust_state_verdict:
+  advanced: false
+  reason: >
+    Promotion requires human review records; agent records never promote.
+    CARD gates pass under the 2026-11-19 owner reclassification; reversible.
+
+open_items_not_closed_here:
+  - "JA-B1-003-FIX-001: 238 lexicon corrections + 12 grammar example fixes"
+  - "JA-B1-003-FIX-002: 51 sentence rewrites + audio re-bake + ASR + word-timing"
+  - "JA-B1-003-JOURNEYS-001: legacy-band de-scaffolding + task journeys + grammar contracts"
+  - "Human native-speaker pass over ja prose and audio (standing owner policy item)"

@@ -1,0 +1,238 @@
+{"id": "ja.lex.advice.sagen", "sev": "P2", "issue": "苦言 (くげん) means reproof/criticism (as in 苦言を呈す), not general 'advice'", "proposed_fix": "GLS=constructive criticism; reproof (for 'advice' use 助言 or 忠告)"}
+{"id": "ja.lex.advice.ato", "sev": "P3", "issue": "bare あと is a noun meaning trace/mark/back; the 'after' sense requires あとで", "proposed_fix": "use forms=あとで rd=あとで, or GLS=trace; mark"}
+{"id": "ja.lex.advice.fumei", "sev": "P2", "issue": "不明 means 'unknown, unclear' (な-form), not 'obscurity'", "proposed_fix": "GLS=unknown; unclear"}
+{"id": "ja.lex.advice.mei", "sev": "P1", "issue": "kanji 姪 means 'niece'; the めい meaning 'name' is written 名", "proposed_fix": "forms=めい/名"}
+{"id": "ja.lex.advice.koutai", "sev": "P3", "issue": "bare kana だいたい reads as 大体 'roughly'; 'alternative' is 代替", "proposed_fix": "add kanji: forms=だいたい/代替"}
+{"id": "ja.lex.advice.hatsu", "sev": "P1", "issue": "はつ alone is not a word for 'utterance' (発 is a counter / discharge element); intended word is 発言", "proposed_fix": "forms=はつげん/発言 rd=はつげん GLS=utterance; statement"}
+{"id": "ja.lex.advice.shouko", "sev": "P1", "issue": "form/rd しょうさ does not mean 'reference' (照査=inspection); slug shouko indicates 参考 (さんこう)", "proposed_fix": "forms=さんこう/参考 rd=さんこう GLS=reference"}
+{"id": "ja.lex.advice.koudan", "sev": "P1", "issue": "こうたん meaning 'assertion' does not exist (こうたん matches only 荒誕 'wild nonsense', different meaning)", "proposed_fix": "replace with forms=しゅちょう/主張 rd=しゅちょう GLS=assertion"}
+{"id": "ja.lex.advice.ketai", "sev": "P1", "issue": "けたい does not exist as 'undignified'; 気高い is read けだかい and means noble/haughty — the gloss reverses the meaning", "proposed_fix": "replace with forms=けだかい/気高い rd=けだかい GLS=noble; high-minded"}
+{"id": "ja.lex.advice2.suusei", "sev": "P1", "issue": "すうせい as 'persuasion' does not exist (趨勢 suusei = trend; 大成 = success)", "proposed_fix": "replace with forms=せっとく/説得 rd=せっとく GLS=persuasion"}
+{"id": "ja.lex.advice2.youchuu", "sev": "P1", "issue": "ようちょう as 'negotiation' does not exist", "proposed_fix": "replace with forms=こうしょう/交渉 rd=こうしょう GLS=negotiation"}
+{"id": "ja.lex.advice2.kokuhan", "sev": "P1", "issue": "黒斑 (こくはん) means 'black spot, blemish', not 'warning'", "proposed_fix": "replace with forms=けいこく/警告 rd=けいこく GLS=warning"}
+{"id": "ja.lex.advice2.kyoushou", "sev": "P2", "issue": "協商 (きょうしょう) means agreement/entente, not compromise", "proposed_fix": "GLS=agreement; entente (for 'compromise' use だきょう/妥協)"}
+{"id": "ja.lex.advice2.tsubo2", "sev": "P3", "issue": "壺/つぼ is a pot/jar/vase, not specifically a 'garden pot'", "proposed_fix": "GLS=pot; jar; vase"}
+{"id": "ja.lex.advice2.inoko2", "sev": "P1", "issue": "いのこ does not exist as a word for 'child'", "proposed_fix": "replace with forms=こ/子 (GLS=child) or こども (GLS=children)"}
+{"id": "ja.lex.advice2.tetsudo", "sev": "P1", "issue": "kanji 鉄道 means 'railway'; gloss 'to help out' belongs to 手伝う, which is read てつだう (short vowel)", "proposed_fix": "forms=てつだう/手伝う rd=てつだう GLS=to help"}
+{"id": "ja.lex.culture.nenchuu", "sev": "P2", "issue": "年中 means 'all year round / year in general', not 'annual'", "proposed_fix": "GLS=all year round; year-round"}
+{"id": "ja.lex.culture.koge", "sev": "P1", "issue": "'craft' is 工芸, read こうげい; こうげ does not exist with this meaning", "proposed_fix": "forms=こうげい/工芸 rd=こうげい GLS=craft"}
+{"id": "ja.lex.culture.teaji", "sev": "P1", "issue": "てあい is not 'help' (手合い = that sort / match); intended 手伝い/手助け", "proposed_fix": "replace with forms=てだすけ/手助け rd=てだすけ GLS=help"}
+{"id": "ja.lex.culture.saiho", "sev": "P1", "issue": "さいほう corresponds to 再訪 'revisit'; it does not mean 'worship'", "proposed_fix": "replace with forms=れいはい/礼拝 rd=れいはい GLS=worship"}
+{"id": "ja.lex.culture.minzoku", "sev": "P3", "issue": "民族 = ethnic group/people; 'folk' alone is a dangling adjective-style gloss", "proposed_fix": "GLS=ethnic group; people"}
+{"id": "ja.lex.culture.fuhaku", "sev": "P1", "issue": "bare はく is not a word for 'exhibition'", "proposed_fix": "replace with forms=てんじ/展示 rd=てんじ GLS=exhibition, or 展覧会 (てんらんかい)"}
+{"id": "ja.lex.culture.shaji", "sev": "P1", "issue": "匙 (しゃじ) means 'spoon'; 'castle' is 城 (しろ/じょう)", "proposed_fix": "replace with forms=しろ/城 rd=しろ GLS=castle"}
+{"id": "ja.lex.culture.denkyou", "sev": "P1", "issue": "伝教 does not mean 'inheritance' (it is a Buddhist propagation term, as in 伝教大師)", "proposed_fix": "replace with forms=でんしょう/伝承 rd=でんしょう GLS=transmission (of traditions); for property inheritance use 相続"}
+{"id": "ja.lex.culture.youraku", "sev": "P1", "issue": "reading ようやく is the adverb 'at last'; 要約 'summary' is read ようやく (long o)", "proposed_fix": "forms=ようやく/要約 rd=ようやく"}
+{"id": "ja.lex.culture.tsuuke", "sev": "P1", "issue": "つうかく is not a word for 'fluency' (痛覚 = sense of pain)", "proposed_fix": "replace with forms=りゅうちょう/流暢 rd=りゅうちょう GLS=fluency; fluent"}
+{"id": "ja.lex.culture.shinko-zai", "sev": "P1", "issue": "しんこうざい does not exist as a word for 'article of faith'", "proposed_fix": "replace with forms=しんこうのたいしょう/信仰の対象 GLS=object of faith/worship"}
+{"id": "ja.lex.culture2.zashiki", "sev": "P3", "issue": "座敷 is a tatami reception room; the 'seat' sense belongs to 座 alone", "proposed_fix": "GLS=tatami room"}
+{"id": "ja.lex.culture2.douhankai", "sev": "P1", "issue": "同窓会 (どうかんかい) is an alumni reunion, not a 'drinking party'", "proposed_fix": "GLS=alumni reunion (for drinking party use のみかい)"}
+{"id": "ja.lex.culture2.kansen", "sev": "P1", "issue": "かんせん does not exist as 'greeting card'", "proposed_fix": "replace with forms=ねんがじょう/年賀状 rd=ねんがじょう GLS=greeting card"}
+{"id": "ja.lex.culture2.noshi", "sev": "P2", "issue": "kanji 伸し (stretching/sidestroke) is wrong for gift noshi — it is written 熨斗; 'gift label' gloss is imprecise", "proposed_fix": "forms=のし/熨斗 GLS=noshi (ceremonial strip attached to a gift)"}
+{"id": "ja.lex.culture2.shugo", "sev": "P1", "issue": "酒豪 (しゅごう) means 'heavy drinker', not 'congratulation'", "proposed_fix": "replace with forms=しゅくが/祝賀 rd=しゅくが GLS=congratulation"}
+{"id": "ja.lex.culture2.engi", "sev": "P1", "issue": "えんぎ as 'engagement' does not exist (縁起 えんぎ = luck); engagement is 婚約", "proposed_fix": "replace with forms=こんやく/婚約 rd=こんやく GLS=engagement"}
+{"id": "ja.lex.culture2.hassou", "sev": "P1", "issue": "発想 (はっそう) means 'idea, conception, way of thinking', not 'interpretation'", "proposed_fix": "GLS=idea; conception (interpretation is already covered by debate.kaishaku)"}
+{"id": "ja.lex.culture2.kousatsu", "sev": "P1", "issue": "'observation' is 観察, read かんさつ; こうさつ with this meaning does not exist", "proposed_fix": "forms=かんさつ/観察 rd=かんさつ GLS=observation"}
+{"id": "ja.lex.debate.yoto", "sev": "P3", "issue": "与党 specifically means the ruling party, not just 'party'", "proposed_fix": "GLS=ruling party"}
+{"id": "ja.lex.debate.koryo", "sev": "P1", "issue": "こうりょう does not exist as 'talented'", "proposed_fix": "replace with forms=ゆうしゅう/優秀 rd=ゆうしゅう GLS=talented; outstanding"}
+{"id": "ja.lex.debate.kansa", "sev": "P2", "issue": "監査 (かんさ) means audit/inspection, not 'observation'", "proposed_fix": "GLS=audit; inspection (observation is かんさつ/観察)"}
+{"id": "ja.lex.debate.kento", "sev": "P1", "issue": "県都 means 'prefectural capital'; no word for 'hardship' reads けんと", "proposed_fix": "replace with forms=くろう/苦労 rd=くろう GLS=hardship"}
+{"id": "ja.lex.debate.jundo", "sev": "P1", "issue": "純銅 (じゅんどう) means 'pure copper'; 'order' is 順序 (じゅんじょ, already in pack)", "proposed_fix": "GLS=pure copper, or replace with じゅんじょ/順序 GLS=order"}
+{"id": "ja.lex.debate.jissai", "sev": "P2", "issue": "実際 is 'in fact / in reality' (adv/noun); 'facts' is 事実 (じじつ)", "proposed_fix": "GLS=in fact; reality"}
+{"id": "ja.lex.debate.shojitsu", "sev": "P1", "issue": "しょうじつ/証実 does not exist; 'truth' is 真実 (しんじつ)", "proposed_fix": "replace with forms=しんじつ/真実 rd=しんじつ GLS=truth"}
+{"id": "ja.lex.debate.ronsou", "sev": "P2", "issue": "form 相談 (そうだん) means 'consultation', not 'discussion'; id ronsou suggests 論争 (ろんそう)", "proposed_fix": "GLS=consultation, or replace word with ろんそう/論争 GLS=argument; controversy"}
+{"id": "ja.lex.debate.hifun", "sev": "P1", "issue": "悲憤 (ひふん) means 'indignation, resentment'; 'criticism' is 批判 (ひはん)", "proposed_fix": "replace with forms=ひはん/批判 rd=ひはん GLS=criticism"}
+{"id": "ja.lex.debate.fusan", "sev": "P1", "issue": "ひにん does not exist for negation; 'negation' is 否定 (ひてい)", "proposed_fix": "replace with forms=ひてい/否定 rd=ひてい GLS=negation"}
+{"id": "ja.lex.debate.joretsu", "sev": "P1", "issue": "序列 means ranking/order of precedence, not 'inferior'", "proposed_fix": "GLS=order of precedence; ranking (for 'inferior' use れっとう/劣等)"}
+{"id": "ja.lex.debate.ronzetsu", "sev": "P2", "issue": "論説 means editorial/commentary, not 'argument'", "proposed_fix": "GLS=editorial; commentary (for 'argument' use しゅちょう/主張 or ろんてん/論点)"}
+{"id": "ja.lex.debate.kika", "sev": "P1", "issue": "'mechanism' is 機構, read きこう; rd きか is wrong", "proposed_fix": "forms=きこう/機構 rd=きこう GLS=mechanism"}
+{"id":"ja.lex.debate2.seisu","sev":"P1","issue":"整数 (せいすう) means 'integer', not 'positive number' (that is 正数 せいすう)","proposed_fix":"Change gloss to 'integer'"}
+{"id":"ja.lex.debate2.yosan2","sev":"P2","issue":"予算 (よさん) primary meaning is 'budget'; gloss 'estimate' alone is misleading","proposed_fix":"Change gloss to 'budget'"}
+{"id":"ja.lex.debate2.shutten2","sev":"P2","issue":"焦点 (しょうてん) means 'focus'; gloss 'issue' fits 論点 (ろんてん) better","proposed_fix":"Gloss 'focus; point at issue', or swap in ろんてん/論点 for 'issue'"}
+{"id":"ja.lex.debate2.akari2","sev":"P1","issue":"じあかり/地明かり is not a real Japanese word","proposed_fix":"Use あかり/明かり gloss 'light; lighting'"}
+{"id":"ja.lex.debate2.kaisou2","sev":"P1","issue":"かいそう (構想) means 'conception, planning', not 'brainstorm'","proposed_fix":"Gloss 'conception; plan', or use ブレスト/ブレインストーミング for 'brainstorm'"}
+{"id":"ja.lex.debate2.kyara","sev":"P1","issue":"伽羅 (きゃら) is agarwood (incense); 'character' is キャラ in katakana with no kanji — kanji+gloss teach a false pairing","proposed_fix":"Change form to キャラ (no kanji), gloss 'character'"}
+{"id":"ja.lex.debate2.gou","sev":"P3","issue":"化合 (かごう) is specifically 'chemical combination'; bare 'combination' collides with 合同/複合","proposed_fix":"Change gloss to 'chemical combination'"}
+{"id":"ja.lex.debate2.danraku","sev":"P1","issue":"段落 (だんらく) means 'paragraph', not 'fall' — gloss is a kanji-sense collision artifact (段+落)","proposed_fix":"Change gloss to 'paragraph' (matches entry ja.lex.edu2.danshaku)"}
+{"id":"ja.lex.edu.kenkai","sev":"P1","issue":"No word けんかい meaning 'luncheon meeting'","proposed_fix":"Use ちゅうしょくかい/昼食会 gloss 'luncheon meeting'"}
+{"id":"ja.lex.edu.aijo","sev":"P2","issue":"'harmony' is a wrong extra sense of 愛情 (that is 調和)","proposed_fix":"Remove '; harmony' from gloss"}
+{"id":"ja.lex.edu.wakamatsu","sev":"P1","issue":"若松 (わかまつ) is a place name / young pine; it does not mean 'young employee'","proposed_fix":"Use わかて/若手 gloss 'junior/young staff'"}
+{"id":"ja.lex.edu.shokunin","sev":"P2","issue":"'occupation' is a wrong extra sense of 職人 (that is 職業 しょくぎょう)","proposed_fix":"Remove '; occupation' from gloss"}
+{"id":"ja.lex.edu.kaihou","sev":"P2","issue":"かいほう (会報) means 'newsletter/bulletin', not 'report' (報告 is ほうこく)","proposed_fix":"Change gloss to 'newsletter; bulletin'"}
+{"id":"ja.lex.edu.kai-ken","sev":"P1","issue":"かいけん does not mean 'membership dues'; that is 会費 (かいひ); 会員権 (かいけんこう) means 'membership right'","proposed_fix":"Use かいひ/会費 gloss 'membership dues'"}
+{"id":"ja.lex.edu.kounai","sev":"P2","issue":"こうない = 構内 'premises/grounds'; 'within the company' is 社内, read ないしゃ","proposed_fix":"Use ないしゃ/社内 gloss 'within the company'"}
+{"id":"ja.lex.edu.shokuba-ryou","sev":"P1","issue":"しょくばりょう is not a real compound for 'workplace etiquette'","proposed_fix":"Use まなー/マナー gloss 'manners; etiquette' (or 職場マナー)"}
+{"id":"ja.lex.edu.kaihen","sev":"P1","issue":"かいへん = 改変 'alteration/modification', not 'reply'","proposed_fix":"Use へんとう/返答 gloss 'reply'"}
+{"id":"ja.lex.edu.tsuujou","sev":"P1","issue":"通常 (つうじょう) means 'usual/regular'; 'mail; correspondence' is 通信 (つうしん)","proposed_fix":"Change form/reading to つうしん/通信 gloss 'mail; correspondence'"}
+{"id":"ja.lex.edu.denwa-ban","sev":"P1","issue":"電話番 (でんわばん) is not 'phone number'","proposed_fix":"Use でんわばんごう/電話番号 gloss 'phone number'"}
+{"id":"ja.lex.edu.kachou","sev":"P1","issue":"No word かちょう meaning 'satisfaction'","proposed_fix":"Drop (satisfied by まんぞく/満足 in the pack) or replace with かいちょう/快調 'feeling fine'"}
+{"id":"ja.lex.edu.jugyou-ryaku","sev":"P1","issue":"じゅぎょうりゃく is not a word; looks mangled from 授業料 (じゅぎょうりょう) 'tuition'","proposed_fix":"Use じゅぎょうりょう/授業料 gloss 'tuition (fee)'"}
+{"id":"ja.lex.edu.shishou","sev":"P2","issue":"師匠 (ししょう) means 'master/mentor' (arts, trades, sports), not academic 'supervisor; advisor'","proposed_fix":"Gloss 'master; mentor', or use しどうかいん/指導教官 for an academic supervisor"}
+{"id":"ja.lex.edu2.sentai","sev":"P1","issue":"船体 (せんたい) means 'ship hull', not 'topic selection'","proposed_fix":"Use せんたく/選択 gloss 'selection'"}
+{"id":"ja.lex.edu2.ronshu","sev":"P3","issue":"Form is ろんぽう (論法 'way/mode of arguing') while gloss 'argument; reasoning' fits 論旨/論理 better; slug 'ronshu' suggests 論旨","proposed_fix":"Use ろんし/論旨 gloss 'gist of the argument', or gloss ろんぽう as 'line/mode of argument'"}
+{"id":"ja.lex.edu2.kenji","sev":"P1","issue":"No word けんじ meaning 'evidence'","proposed_fix":"Use しょうこ/証拠 gloss 'evidence'"}
+{"id":"ja.lex.edu2.kronji","sev":"P1","issue":"くろんじ is not a Japanese word","proposed_fix":"Use はんしょう/反証 gloss 'counter-evidence'"}
+{"id":"ja.lex.edu2.zensho","sev":"P1","issue":"ぜんしょ (前書 = legal petition/statement) does not mean 'previous section'; that is 前章 (ぜんしょう)","proposed_fix":"Change form to ぜんしょう/前章 gloss 'previous chapter/section'"}
+{"id":"ja.lex.edu2.ryuji","sev":"P1","issue":"りゅうじ is not a word for 'schedule'","proposed_fix":"Use にってい/日程 gloss 'schedule'"}
+{"id":"ja.lex.edu2.rissho","sev":"P1","issue":"りっしょ is not a word for 'document' (立証, read りっしょう, means 'proof')","proposed_fix":"Use しょるい/書類 gloss 'documents'"}
+{"id":"ja.lex.edu2.denja","sev":"P1","issue":"Garbled entry: 田舎 is read いなか ('countryside') and never means 'email'","proposed_fix":"Use でんしメール/電子メール gloss 'email'"}
+{"id":"ja.lex.edu2.mouhibiki","sev":"P1","issue":"もうひき is not a word for 'quotation'","proposed_fix":"Use いんよう/引用 gloss 'quotation; citing'"}
+{"id":"ja.lex.edu2.shicho","sev":"P2","issue":"しちょう (視聴/試聴) means 'watching/previewing (media)'; gloss 'library viewing' is unclear and misleading","proposed_fix":"Change gloss to 'viewing; watching (a video)'"}
+{"id":"ja.lex.edu2.kashu-sho","sev":"P2","issue":"かしゅしょう matches no real word for 'library card' (貸出所 would be かしだしじょ 'lending counter')","proposed_fix":"Use としょかんりようけん/図書館利用券 gloss 'library card'"}
+{"id":"ja.lex.edu2.kenta","sev":"P1","issue":"検討 is read けんと; form けんた has wrong kana","proposed_fix":"Correct form/reading to けんと/検討 gloss 'consideration; examination'"}
+{"id":"ja.lex.edu2.houtei","sev":"P1","issue":"ほうてい = 法廷 'courtroom' or 法定 'statutory' — not 'definition' (that is 定義, already in the pack)","proposed_fix":"Drop the duplicate or re-gloss as ほうてい/法廷 'court (of law)'"}
+{"id":"ja.lex.edu2.senkyuu","sev":"P1","issue":"せんきゅう is not a word for 'area; region'","proposed_fix":"Use ちいき/地域 gloss 'area; region'"}
+{"id":"ja.lex.edu2.gengou","sev":"P1","issue":"元号 (げんごう) means 'era name' (e.g. Reiwa), not 'word combination'","proposed_fix":"Change gloss to 'era name'"}
+{"id":"ja.lex.edu2.yakku","sev":"P1","issue":"やっく is not a word for 'dictionary'","proposed_fix":"Use じしょ/辞書 gloss 'dictionary'"}
+{"id":"ja.lex.edu2.yakuseki","sev":"P1","issue":"やくせき is not a word for 'translation'","proposed_fix":"Use ほんやく/翻訳 gloss 'translation'"}
+{"id":"ja.lex.edu2.chukai","sev":"P2","issue":"仲介 (ちゅうかい) means 'mediation/intermediary role', not language 'interpretation' (that is 通訳)","proposed_fix":"Change gloss to 'mediation; intermediary role'"}
+{"id":"ja.lex.edu2.fuyuujunou","sev":"P1","issue":"ふゆうじゅんのう is not a word for 'popularization'","proposed_fix":"Use ふっきゅう/普及 gloss 'popularization; dissemination'"}
+{"id":"ja.lex.edu2.chushi","sev":"P1","issue":"ちゅうし = 注視 'fixed gaze' or 中止 'cancellation'; 'note; annotation' is 注釈 (ちゅうしゃ)","proposed_fix":"Use ちゅうしゃ/注釈 gloss 'note; annotation'"}
+{"id":"ja.lex.emotion.ousetsu","sev":"P1","issue":"そうせい is not a word for 'gregarious'","proposed_fix":"Use しゃこうてき/社交的 gloss 'gregarious; sociable'"}
+{"id":"ja.lex.emotion.kenmei","sev":"P3","issue":"懸命 (けんめい) means 'all-out/desperately' more than 'conscientious'","proposed_fix":"Gloss 'earnest; all-out', or use せいじつ/誠実 for 'conscientious'"}
+{"id":"ja.lex.emotion.ki-kokochi","sev":"P2","issue":"着心地 specifically means 'how clothing feels'; gloss 'sensation' defines a different word (感覚)","proposed_fix":"Gloss 'comfort/feel (of clothing)', or use 心地 (きごこち) 'feeling'"}
+{"id":"ja.lex.emotion.ki-gamae","sev":"P1","issue":"気前 (きまえ) means 'generosity/disposition (with money)', not 'mental readiness' (that is 気構え, きがまえ)","proposed_fix":"Gloss 'generosity; disposition', or use きがまえ/気構え 'mental readiness'"}
+{"id":"ja.lex.emotion.ki-oku","sev":"P1","issue":"記憶 (きおく) means 'memory', not 'consideration'","proposed_fix":"Change gloss to 'memory'"}
+{"id":"ja.lex.emotion.chikara-zuku","sev":"P2","issue":"力強い means 'strong/powerful/vigorous'; gloss 'encouraging' is off-target","proposed_fix":"Change gloss to 'strong; vigorous'"}
+{"id":"ja.lex.emotion.genkotsu","sev":"P2","issue":"拳骨 means 'fist; box on the ear', not 'scolding' (that is 説教)","proposed_fix":"Change gloss to 'fist; hit'"}
+{"id":"ja.lex.emotion.shougi","sev":"P1","issue":"将棋 (しょうぎ) is the board game shogi, not 'apology'","proposed_fix":"Use しゃざい/謝罪 or わび/詫び gloss 'apology'"}
+{"id":"ja.lex.emotion.mottai","sev":"P2","issue":"もったい is not used standalone to mean 'cherishing' in modern Japanese","proposed_fix":"Use もったいない gloss 'wasteful; too good to waste', or たいせつ/大切 'precious; cherish'"}
+{"id":"ja.lex.emotion.yamashii","sev":"P2","issue":"やましい means 'having something to hide / feeling one's conscience is uneasy', not general 'ashamed'","proposed_fix":"Change gloss to 'feeling guilty; shady'"}
+{"id":"ja.lex.emotion.joutou","sev":"P1","issue":"上等 (じょうとう) means 'first-rate/superior', not 'running account' (that is 掛け/つけ)","proposed_fix":"Change gloss to 'first-rate; superior'"}
+{"id":"ja.lex.emotion.shouki","sev":"P1","issue":"しょうき is not a word for 'encouragement'","proposed_fix":"Use しょうれい/奨励 gloss 'encouragement'"}
+{"id":"ja.lex.emotion.shoujin","sev":"P1","issue":"しょうじん is not a word for 'exhortation'","proposed_fix":"Use しょうれい/奨励 gloss 'encouragement; exhortation'"}
+{"id":"ja.lex.emotion.akui","sev":"P1","issue":"Form/reading たい is wrong — 'ulterior motive' is 悪意, read あくい","proposed_fix":"Change form to あくい/悪意 gloss 'ulterior motive; malice'"}
+{"id":"ja.lex.emotion.tenko","sev":"P1","issue":"てんこう = 転校 'school transfer' / 転向 'change of course'; 'turning point' is 転機 (てんき)","proposed_fix":"Use てんき/転機 gloss 'turning point'"}
+{"id":"ja.lex.emotion2.kibune","sev":"P1","issue":"きぶね/木槽 is not a word for 'temperament'","proposed_fix":"Use きしつ/気質 gloss 'temperament'"}
+{"id":"ja.lex.emotion2.seika","sev":"P2","issue":"成否 (せいひ) means 'success or failure'; gloss 'success' alone is misleading","proposed_fix":"Gloss 'success or failure', or use せいこう/成功 for 'success'"}
+{"id":"ja.lex.emotion2.jikkuri","sev":"P2","issue":"じっくり glossed 'closely'; core meaning is doing something slowly and thoroughly/taking one's time","proposed_fix":"GLS=slowly and thoroughly; take one's time"}
+{"id":"ja.lex.emotion2.kagayaki","sev":"P3","issue":"輝き glossed 'glitter'; 輝き is radiance/brilliance (glitter is ピカピカ/ラメ)","proposed_fix":"GLS=radiance; brilliance; shine"}
+{"id":"ja.lex.env.puratsu","sev":"P1","issue":"ぷらつ does not exist; 'plate' is プレート (purēto)","proposed_fix":"forms=プレート rd=ぷれーと GLS=plate"}
+{"id":"ja.lex.env.ene","sev":"P2","issue":"えね is only a bound/colloquial abbreviation (as in 省エネ); the standalone word for 'energy' is エネルギー","proposed_fix":"forms=エネルギー rd=えねるぎー GLS=energy"}
+{"id":"ja.lex.env.seita","sev":"P1","issue":"せいた/背板 (backboard/backplate) does not mean ecosystem; ecosystem is 生態系","proposed_fix":"forms=せいたいけい/生態系 rd=せいたいけい GLS=ecosystem"}
+{"id":"ja.lex.env.eco-kuruma","sev":"P3","issue":"エコくるま is not the established term; the word is エコカー","proposed_fix":"forms=エコカー rd=えこかー"}
+{"id":"ja.lex.env.kiko","sev":"P2","issue":"き alone is not used as a free noun for 'machine'; it is a suffix/bound element — machine is 機械","proposed_fix":"forms=きかい/機械 rd=きかい GLS=machine"}
+{"id":"ja.lex.env.ene-ki","sev":"P1","issue":"えねき does not exist in Japanese; 'power plant' is 発電所","proposed_fix":"forms=はつでんしょ/発電所 rd=はつでんしょ GLS=power plant"}
+{"id":"ja.lex.env.koushou","sev":"P1","issue":"こうしょう is not a word meaning emission; emission is 排出(量)","proposed_fix":"forms=はいしゅつ/排出 rd=はいしゅつ GLS=emission"}
+{"id":"ja.lex.env.hoan","sev":"P1","issue":"法案 means 'bill' (draft law), not 'plan'; gloss teaches a false meaning","proposed_fix":"GLS=bill (proposed law)"}
+{"id":"ja.lex.env.seisi","sev":"P1","issue":"せいし does not mean cleanliness; cleanliness is 清潔 (せいけつ)","proposed_fix":"forms=せいけつ/清潔 rd=せいけつ GLS=cleanliness"}
+{"id":"ja.lex.env2.mizu-bubun","sev":"P3","issue":"forms みずしげん/水資源 and gloss are fine; slug (mizu-bubun) is stale metadata only","proposed_fix":"rename slug to mizu-shigen"}
+{"id":"ja.lex.env2.resucha","sev":"P1","issue":"れすちゃ ('leftover tea') does not exist in Japanese","proposed_fix":"forms=ざっぱん/残飯 rd=ざっぱん GLS=leftover food; or のこりもの"}
+{"id":"ja.lex.env2.bousai-houzu","sev":"P2","issue":"ぼうさいほうじ is not an established compound; 'disaster preparedness' is 防災 alone (ぼうさい)","proposed_fix":"forms=ぼうさい/防災 rd=ぼうさい GLS=disaster preparedness"}
+{"id":"ja.lex.env2.shinan","sev":"P1","issue":"しぼる (絞る, to wring/strain) has nothing to do with 'drill'; drill (training) is 訓練","proposed_fix":"forms=くんれん/訓練 rd=くんれん GLS=drill (training)"}
+{"id":"ja.lex.env2.yokei","sev":"P1","issue":"よれい does not exist; 'warning' is 警報 (けいほう) or 警告 (けいこく)","proposed_fix":"forms=けいほう/警報 rd=けいほう GLS=warning"}
+{"id":"ja.lex.env2.bousui","sev":"P2","issue":"防水 means 'waterproofing' (e.g. waterproof spray); 'flood prevention' is 水防/洪水対策 — gloss misleading outside the narrow flood-defense usage","proposed_fix":"GLS=waterproof(ing)"}
+{"id":"ja.lex.env2.nouhin","sev":"P1","issue":"納品 (のうひん) means 'delivery of goods', not 'farm product'; farm product is 農産物 (のうさんぶつ) — form and gloss are two different words mashed together","proposed_fix":"forms=のうさんぶつ/農産物 rd=のうさんぶつ GLS=farm product; or keep 納品 with GLS=delivery"}
+{"id":"ja.lex.health2.seikatsu2","sev":"P2","issue":"せいかつし is the slug but forms=せいかつし (生活者) would mean 'consumer'; 'lifestyle' is 生活 or ライフスタイル — if 生活 was meant the form has an extra し","proposed_fix":"forms=せいかつ/生活 GLS=lifestyle (or keep 生活者 with GLS=consumer)"}
+{"id":"ja.lex.health2.jousho","sev":"P1","issue":"情緒 (じょうしょ) means 'emotions/atmosphere', not 'hot water'; hot water is お湯/湯","proposed_fix":"forms=おゆ/湯 rd=おゆ GLS=hot water"}
+{"id":"ja.lex.health2.taikyuu","sev":"P1","issue":"ふきゅう (不況) means 'recession', not 'rest'; rest is 休息/休養","proposed_fix":"forms=きゅうそく/休息 rd=きゅうそく GLS=rest"}
+{"id":"ja.lex.health2.koku2","sev":"P1","issue":"こく does not mean 'meal'; meal is 食事 (しょくじ) (the existing word コク means richness of flavor)","proposed_fix":"forms=しょくじ/食事 rd=しょくじ GLS=meal"}
+{"id":"ja.lex.health2.tanpaku","sev":"P2","issue":"kanji 淡白 means 'light/indifferent'; protein is 蛋白(質) — wrong kanji form attached to a correct kana reading","proposed_fix":"forms=たんぱく/蛋白質 (or たんぱくしつ/蛋白質) GLS=protein"}
+{"id":"ja.lex.health2.junou","sev":"P1","issue":"受納 (acceptance, rare) does not mean 'flexible'; flexible is 柔軟 (じゅうなん) — the entry looks like a 柔軟/受納 mixup","proposed_fix":"forms=じゅうなん/柔軟 rd=じゅうなん GLS=flexible"}
+{"id":"ja.lex.health2.kinyu","sev":"P1","issue":"新湯 (fresh bathwater, rare trade term) is not 'bath'; bath is 入浴/風呂","proposed_fix":"forms=にゅうよく/入浴 rd=にゅうよく GLS=bath"}
+{"id":"ja.lex.health2.kessha","sev":"P1","issue":"結社 (けっしゃ, society/association) does not mean 'facility'; facility is 施設 (しせつ)","proposed_fix":"forms=しせつ/施設 rd=しせつ GLS=facility"}
+{"id":"ja.lex.health2.fuka","sev":"P2","issue":"ふか alone is not a free noun for 'depth'; the word is 深さ (ふかさ) (ふか- occurs in compounds)","proposed_fix":"forms=ふかさ/深さ rd=ふかさ GLS=depth"}
+{"id":"ja.lex.health2.shinryou2","sev":"P1","issue":"診療 means 'medical examination and treatment', not 'counseling'; gloss defines a different concept (counseling = カウンセリング)","proposed_fix":"GLS=medical examination and treatment (or change form to カウンセリング GLS=counseling)"}
+{"id":"ja.lex.health2.kessan3","sev":"P2","issue":"決算期 means 'fiscal period / end of settlement period', not 'accounting' (that is 会計)","proposed_fix":"GLS=fiscal period; end of financial year"}
+{"id":"ja.lex.health2.gakkai","sev":"P3","issue":"学会 is specifically an academic society/conference; bare gloss 'association' is too vague","proposed_fix":"GLS=academic society; academic conference"}
+{"id":"ja.lex.health2.chouryou","sev":"P1","issue":"跳梁 (ちょうりょう) means 'rampage'; it does not mean 'portion' — gloss and kanji are from unrelated words","proposed_fix":"forms=ぶんりょう/分量 rd=ぶんりょう GLS=portion"}
+{"id":"ja.lex.health2.seka","sev":"P3","issue":"せか is not an independent element; the combining form is 世界- (せかい-) — bare せか will not occur to learners","proposed_fix":"forms=世界- (せかい-) used as prefix, e.g. 世界一流; or drop the line"}
+{"id":"ja.lex.health2.tsuuka2","sev":"P1","issue":"つうか is not 'communication'; communication is 通信 (つうしん) or コミュニケーション","proposed_fix":"forms=つうしん/通信 rd=つうしん GLS=communication"}
+{"id":"ja.lex.health3.taizen2","sev":"P1","issue":"たんぜん does not exist as a Japanese word for 'full'","proposed_fix":"forms=まんたん/満タン GLS=full (tank); or ぜんたい/全体 GLS=whole"}
+{"id":"ja.lex.health3.kyoubu","sev":"P1","issue":"休部 (きゅうぶ) is not 'club'; club is クラブ/倶楽部 (くらぶ) — wrong kanji attached","proposed_fix":"forms=くらぶ/クラブ rd=くらぶ GLS=club"}
+{"id":"ja.lex.health3.junren","sev":"P1","issue":"じゅんれん does not exist; practice/training is 訓練 (くんれん) — likely 訓→準 garble","proposed_fix":"forms=くんれん/訓練 rd=くんれん GLS=practice; training"}
+{"id":"ja.lex.health3.taikyu2","sev":"P1","issue":"耐久 (たいきゅう) means 'durability/endurance', not 'absence'; absence is 欠席 (けっせき)","proposed_fix":"forms=けっせき/欠席 rd=けっせき GLS=absence"}
+{"id":"ja.lex.health3.choushin","sev":"P1","issue":"長身 (ちょうしん) means 'tall stature', not 'dieting'; dieting is ダイエット","proposed_fix":"forms=ダイエット rd=ダイエット GLS=dieting"}
+{"id":"ja.lex.health3.uebi","sev":"P1","issue":"うえび does not exist in Japanese ('upper')","proposed_fix":"if upper/lower body: forms=じょうはんしん/上半身 GLS=upper body; else うえ/上 GLS=upper part"}
+{"id":"ja.lex.health3.ureba","sev":"P1","issue":"うれば does not exist in Japanese ('lower')","proposed_fix":"if upper/lower body: forms=かはんしん/下半身 GLS=lower body; else した/下 GLS=lower part"}
+{"id":"ja.lex.health3.koukai2","sev":"P2","issue":"こうかい (公開) means 'making public / open to the public', not a 'public session' as such","proposed_fix":"GLS=open to the public; public viewing"}
+{"id":"ja.lex.health3.hanko","sev":"P1","issue":"はんこう is not 'stamp'; stamp/seal is はんこ (判子/印鑑); はんこう (犯行/反抗) means criminal act/rebellion","proposed_fix":"forms=はんこ/判子 rd=はんこ GLS=stamp; seal"}
+{"id":"ja.lex.health3.hankou","sev":"P2","issue":"反抗 means 'rebellion/defiance/resistance', not 'countering' (対抗); gloss misleading, and reading collides with the hanko line above","proposed_fix":"GLS=rebellion; defiance"}
+{"id":"ja.lex.media.head","sev":"P2","issue":"ヘッド means 'head', not 'headline'; headline is 見出し or ヘッドライン — form likely truncated","proposed_fix":"forms=ヘッドライン rd=へっどらいん GLS=headline"}
+{"id":"ja.lex.media.hassha","sev":"P1","issue":"はっしゃ is 発射 'launching (a rocket/bullet)', not 'broadcasting'; broadcasting is 放送 or 発信 (はっしん)","proposed_fix":"forms=はっしん/発信 rd=はっしん GLS=broadcasting; sending (information)"}
+{"id":"ja.lex.media.toron","sev":"P1","issue":"とろん is not 'debate'; debate is 討論 (とうろん)","proposed_fix":"forms=とうろん/討論 rd=とうろん GLS=debate"}
+{"id":"ja.lex.media.hadan","sev":"P1","issue":"しべん does not exist as 'speculation'; speculation is 推測 (すいそく) or 憶測 (おくそく)","proposed_fix":"forms=すいそく/推測 rd=すいそく GLS=speculation"}
+{"id":"ja.lex.media.gijou","sev":"P1","issue":"議場 (ぎじょう) means 'legislative chamber (the room)', not 'circumstances' — gloss defines a different word (状況)","proposed_fix":"forms=じょうきょう/状況 rd=じょうきょう GLS=circumstances; situation"}
+{"id":"ja.lex.media.kaga","sev":"P1","issue":"かか does not exist as 'fire'; fire (blaze) is 火事 (かじ)","proposed_fix":"forms=かじ/火事 rd=かじ GLS=fire (blaze)"}
+{"id":"ja.lex.media.fukkyuu-saigai","sev":"P2","issue":"復旧 comes after 災害 in the real compound: 災害復旧 (さいがいふっきゅう); ふっきゅうさいがい is reversed and unattested","proposed_fix":"forms=さいがいふっきゅう/災害復旧 rd=さいがいふっきゅう GLS=disaster recovery"}
+{"id":"ja.lex.media.maruke","sev":"P1","issue":"Forms まーけ is a colloquial shortening of マーケティング (marketing); 'market' is マーケット/市場 — form and gloss define different words","proposed_fix":"Retitle as まーけてぃんぐ/マーケティング GLS=marketing, or change forms to まーけっと/マーケット for 'market'"}
+{"id":"ja.lex.media2.ronsa","sev":"P1","issue":"Form ろんさ does not exist in Japanese; no word with that reading means 'discussion'","proposed_fix":"Replace with ぎろん/議論 (or とうろん/討論) GLS=discussion"}
+{"id":"ja.lex.media2.kaiken","sev":"P1","issue":"Kana かいけん corresponds to 会見 (press conference/interview); it never means 'opinion; experience'","proposed_fix":"Replace with けんかい/見解 GLS=opinion; view"}
+{"id":"ja.lex.media2.sesaku","sev":"P1","issue":"Form せさく does not exist; no Japanese word with that reading means 'current affairs'","proposed_fix":"Replace with じじ/時事 GLS=current affairs"}
+{"id":"ja.lex.media2.taaron","sev":"P1","issue":"Form たあろん is garbled; no such word exists","proposed_fix":"Replace with たいあん/対案 GLS=counter-proposal (counter-argument sense already covered by media2.hanron 反論)"}
+{"id":"ja.lex.media2.kouchou","sev":"P1","issue":"こうちょう does not mean 'advantage; pros' (こうちょう matches 好調 'going well'); advantage is 長所=ちょうしょ — reading likely garbled","proposed_fix":"Replace with ちょうしょ/長所 rd=ちょうしょ GLS=advantage; strong point"}
+{"id":"ja.lex.society.kinben","sev":"P1","issue":"Wrong gloss: 勤勉/きんべん means diligence, hard work — not abstinence (abstinence = 禁欲)","proposed_fix":"GLS=diligence; hard work"}
+{"id":"ja.lex.society.yimu","sev":"P1","issue":"Form いむ does not mean 'obligation'; obligation is 義務=ぎむ (already present as society.gimu) — garbled duplicate","proposed_fix":"Delete the entry, or replace with せきにん/責任 GLS=responsibility"}
+{"id":"ja.lex.society.riso","sev":"P1","issue":"Form りぞ does not exist; neighbor is 隣 (となり) or 隣人 (りんじん)","proposed_fix":"Replace with りんじん/隣人 rd=りんじん GLS=neighbor"}
+{"id":"ja.lex.society.hatsuyaku","sev":"P1","issue":"Word 初役 does not exist; form is garbled — role is 役割=やくわり","proposed_fix":"Replace with やくわり/役割 rd=やくわり GLS=role"}
+{"id":"ja.lex.society2.yuuutsu","sev":"P1","issue":"Forms/rd ゆうかん does not match 'worry' or the slug yuuutsu; likely garbled 憂鬱=ゆううつ (gloom, depression)","proposed_fix":"forms=ゆううつ/憂鬱 rd=ゆううつ GLS=gloom; depression"}
+{"id":"ja.lex.society2.chuga","sev":"P1","issue":"Form ちゅうが does not exist; congestion is 渋滞=じゅうたい","proposed_fix":"Replace with じゅうたい/渋滞 rd=じゅうたい GLS=congestion; traffic jam"}
+{"id":"ja.lex.society2.houchi","sev":"P1","issue":"Form ほうち corresponds to 放置 (leaving something undone/neglect); 'public order' is 治安=ちあん — gloss defines a different word","proposed_fix":"Replace with ちあん/治安 rd=ちあん GLS=public order"}
+{"id":"ja.lex.society2.kensei","sev":"P1","issue":"Wrong gloss: 憲政/けんせい means constitutional government, not 'policy' (policy = 政策=せいさく)","proposed_fix":"Replace with せいさく/政策 rd=せいさく GLS=policy"}
+{"id":"ja.lex.society2.kyuugyou","sev":"P1","issue":"Wrong gloss: 休業/きゅうぎょう means (temporary) closure or leave of absence, not unemployment (= 失業=しつぎょう)","proposed_fix":"Replace with しつぎょう/失業 rd=しつぎょう GLS=unemployment, or fix GLS=business closure; leave"}
+{"id":"ja.lex.society2.sedai","sev":"P1","issue":"Kanji form 盛大 (grand, splendid) is the wrong homophone; 'generation' is 世代 (same reading せいだい)","proposed_fix":"forms=せいだい/世代 rd=せいだい GLS=generation"}
+{"id":"ja.lex.society2.akusei","sev":"P1","issue":"Garbled entry: form あこう means nothing close to 'accusation' (あこう≈悪行 misdeed / slug akusei≈悪性 malignancy)","proposed_fix":"Replace with こくはつ/告発 rd=こくはつ GLS=accusation"}
+{"id":"ja.lex.society2.houfuku","sev":"P1","issue":"Wrong gloss: 報復/ほうふく means retaliation, revenge — not 'response'","proposed_fix":"GLS=retaliation; revenge (if 'response' intended use おうとう/応答)"}
+{"id":"ja.lex.society2.koufuku","sev":"P1","issue":"こうふく is attested only as 幸福 (happiness); 'public welfare' is not a meaning of this word (that sense is 福祉=ふくし, already in pack)","proposed_fix":"forms=こうふく/幸福 rd=こうふく GLS=happiness"}
+{"id":"ja.lex.story.keimatsu","sev":"P1","issue":"Wrong word: 本末=ほんまつ means 'beginning and end / root and branches' (本末転倒), not 'ending'; the word is 結末=けつまつ (matching the slug)","proposed_fix":"forms=けつまつ/結末 rd=けつまつ GLS=ending"}
+{"id":"ja.lex.story2.kikkai","sev":"P1","issue":"Form and kanji both wrong: opportunity = 機会=きかい (no geminated っ); 奇怪=きかい means 'strangeness, mystery'","proposed_fix":"forms=きかい/機会 rd=きかい GLS=opportunity"}
+{"id":"ja.lex.story2.fukkyaku","sev":"P1","issue":"Garbled word: ふっきゃく/腹脚 does not exist; revival = 復活=ふっかつ","proposed_fix":"forms=ふっかつ/復活 rd=ふっかつ GLS=revival"}
+{"id":"ja.lex.story2.dokugeki","sev":"P1","issue":"Form どくげき does not exist; monologue = 独白=どくはく (monologue play = 一人芝居)","proposed_fix":"Replace with どくはく/独白 rd=どくはく GLS=monologue"}
+{"id":"ja.lex.story2.hairon","sev":"P1","issue":"Form はいろん does not exist; plagiarism = 剽窃=ひょうせつ (colloquial パクリ)","proposed_fix":"Replace with ひょうせつ/剽窃 rd=ひょうせつ GLS=plagiarism"}
+{"id":"ja.lex.story2.yokai","sev":"P1","issue":"Wrong pairing: 誘拐/ゆうかい means kidnapping — not 'spirit'; the intended word is 妖怪=ようかい (as the slug says)","proposed_fix":"forms=ようかい/妖怪 rd=ようかい GLS=spirit; monster"}
+{"id":"ja.lex.tech.debisu","sev":"P1","issue":"Wrong kana form: device is デバイス (でばいす); でびす is not a word","proposed_fix":"forms=でばいす/デバイス rd=でばいす GLS=device"}
+{"id":"ja.lex.media.koumin","sev":"P2","issue":"公民 is mostly a bound modifier (公民館 etc.); teaching it standalone as 'citizen' is misleading — plain 'citizen' is 市民 (already in pack as society2.shimin)","proposed_fix":"Retitle gloss as 'the public; citizenry' or replace entry with しみん/市民"}
+{"id":"ja.lex.media.media-habits","sev":"P2","issue":"めでぃあはびつ is an ad-hoc katakana mash-up, not an attested Japanese word","proposed_fix":"Replace with メディアの利用 (メディアのりよう) GLS=media use/habits, or drop the entry"}
+{"id":"ja.lex.media2.ronsetsu","sev":"P2","issue":"Gloss 'argumentative writing' defines 論説文; 論説 alone means editorial/commentary article","proposed_fix":"GLS=editorial; commentary article"}
+{"id":"ja.lex.society.horei","sev":"P3","issue":"'Ordinance' alone is 条例=じょうれい; 法令 means laws and regulations collectively","proposed_fix":"GLS=laws and regulations"}
+{"id":"ja.lex.media2.tsushin","sev":"P3","issue":"'News' sense only occurs in compounds (通信社); core meaning of 通信 is correspondence/communications","proposed_fix":"GLS=communications; correspondence"}
+{"id":"ja.lex.society2.kinmu","sev":"P2","issue":"'Labor service' is misleading (connotes forced labor); 勤務 = working at one's post","proposed_fix":"GLS=work; attendance at work"}
+{"id":"ja.lex.society2.hosei","sev":"P2","issue":"The natural word at ほうせい is 法制 (legal system); legislation proper = 立法=りっぽう — gloss likely defines a different word","proposed_fix":"Replace with りっぽう/立法 rd=りっぽう GLS=legislation, or set GLS=legal system with kanji 法制"}
+{"id":"ja.lex.society2.yakuin","sev":"P2","issue":"Misleading gloss: 役員 = officer/board member of an organization; public official is 公務員=こうむいん","proposed_fix":"GLS=officer; board member; executive"}
+{"id":"ja.lex.society2.kandou","sev":"P2","issue":"'Excitement' is misleading: 感動 = being emotionally moved/touched (excitement = 興奮=こうふん)","proposed_fix":"GLS=being moved; deep emotion"}
+{"id":"ja.lex.story.kaze3","sev":"P2","issue":"かぜ/風 means wind in general; 'breeze' is a specific subtype (そよかぜ)","proposed_fix":"GLS=wind"}
+{"id":"ja.lex.story.anna","sev":"P2","issue":"Kanji form 安和 is spurious — あんな has no standard kanji spelling","proposed_fix":"Drop the 安和 form; keep forms=あんな"}
+{"id":"ja.lex.story2.tenkan2","sev":"P2","issue":"Gloss 'turn' is misleading: 展開=てんかい means development, unfolding","proposed_fix":"GLS=development; unfolding"}
+{"id":"ja.lex.tech.purinto","sev":"P3","issue":"Katakana form ぷりんた is off-standard; printer is normally プリンター (プリンタ variant acceptable)","proposed_fix":"forms=ぷりんたー/プリンター"}
+{"id":"ja.lex.tech.bug","sev":"P1","issue":"Kanji form 馬具 means 'horse tack/harness' (homophone of バグ); it is not a written form of 'bug'","proposed_fix":"Remove 馬具; use forms=ばぐ/バグ"}
+{"id":"ja.lex.tech2.koi","sev":"P1","issue":"こい does not mean 'malfunction'; no such word/meaning exists (likely garbled 故障)","proposed_fix":"Replace with forms=こしょう/故障, rd=こしょう"}
+{"id":"ja.lex.tech2.ryuuri","sev":"P1","issue":"流離 (りゅうり) means 'wandering/vagrancy', not 'flow'; gloss defines a different concept","proposed_fix":"Either gloss as 'wandering; uprooted life' or replace word with りゅうどう/流動 for 'flow'"}
+{"id":"ja.lex.tech2.senzu","sev":"P1","issue":"線図 (せんず) means 'diagram/line chart', not 'anxiety'; gloss defines a different word","proposed_fix":"Gloss as 'diagram; chart', or replace word with ふあん/不安 for 'anxiety'"}
+{"id":"ja.lex.tech2.kosei","sev":"P1","issue":"No word こうせい means 'cost-performance'; that concept is コスパ or 費用対効果","proposed_fix":"Replace with forms=こすぱ, rd=こすぱ, GLS=cost-performance"}
+{"id":"ja.lex.tech2.koui","sev":"P1","issue":"こうい (行為) means 'act/deed', not 'performance'; 'performance/efficacy' is こうか (効果)","proposed_fix":"Replace with forms=こうか/効果, rd=こうか, GLS=performance; effect"}
+{"id":"ja.lex.tech2.kikan","sev":"P1","issue":"きかい (機械) means 'machine'; 'mechanism' is 機構 read きこう — reading/gloss mismatch","proposed_fix":"Either forms=きこう/機構 GLS=mechanism, or keep きかい/機械 GLS=machine"}
+{"id":"ja.lex.tech2.onkyou","sev":"P1","issue":"音響 (おんきょう) means 'sound/acoustics', not 'remote control'","proposed_fix":"Replace with forms=りもこん, rd=りもこん, GLS=remote control"}
+{"id":"ja.lex.tech2.forumu","sev":"P1","issue":"ふぉーむ is the reading of 'form', not 'forum'; forum is フォーラム","proposed_fix":"Replace forms/rd with ふぉーらむ (フォーラム), GLS=forum"}
+{"id":"ja.lex.tech2.shinko","sev":"P1","issue":"しんこう does not mean 'relationship' (standard word しんこう = 信仰 'faith'); meaning is wrong","proposed_fix":"Replace with forms=かんけい/関係 or 関係性 GLS=relationship, or gloss as 'faith' with 信仰"}
+{"id":"ja.lex.tech2.saisei","sev":"P1","issue":"さいかふ/再下付 is garbled and does not mean 'renewal'; renewal is 更新","proposed_fix":"Replace with forms=こうしん/更新, rd=こうしん, GLS=renewal"}
+{"id":"ja.lex.tech2.hanare","sev":"P2","issue":"Form はがれ means 'peeling/flaking'; gloss 'separation' matches はなれ (離れ), indicating wrong form (slug is hanare)","proposed_fix":"Replace with forms=はなれ/離れ, rd=はなれ, GLS=separation"}
+{"id":"ja.lex.travel.itinerari","sev":"P1","issue":"イティネラリ is not an established Japanese word (looks like truncated Italian); itinerary in Japanese is 旅程","proposed_fix":"Replace with forms=りてい/旅程, rd=りてい, GLS=itinerary"}
+{"id":"ja.lex.travel.henkyo","sev":"P1","issue":"へんきょう is wrong reading for 'change'; 変更 is へんこう (へんきょう/辺境 means 'frontier/backwater')","proposed_fix":"Replace forms/rd with へんこう and add kanji 変更"}
+{"id":"ja.lex.travel.azukaru","sev":"P2","issue":"Gloss 'to entrust' is the opposite direction (預ける); 預かる means to take charge of/hold on behalf of someone","proposed_fix":"GLS=to take charge of; to hold (for someone)"}
+{"id":"ja.lex.travel.taihen","sev":"P1","issue":"Form/reading せいかん does not mean 'tough'; the intended word is 大変 (たいへん) per slug","proposed_fix":"Replace forms/rd with たいへん and kanji 大変"}
+{"id":"ja.lex.travel.shin","sev":"P2","issue":"しん alone (親) means 'parent', not 'close friend'; 'close friend' is 親友 (しんゆう)","proposed_fix":"Replace with forms=しんゆう/親友, rd=しんゆう, GLS=close friend"}
+{"id":"ja.lex.travel.nyukan","sev":"P1","issue":"Neither きゅうかん nor にゅうかん is a word for (border) customs; customs is 税関/通関","proposed_fix":"Replace with forms=ぜいかん/税関, rd=ぜいかん, GLS=customs"}
+{"id":"ja.lex.travel2.hikou-min","sev":"P1","issue":"ひこうみん is not a word; evacuee is 避難民 (ひなんみん)","proposed_fix":"Replace with forms=ひなんみん/避難民, rd=ひなんみん, GLS=evacuee"}
+{"id":"ja.lex.travel2.kiki","sev":"P3","issue":"危機 (きき) means 'crisis/emergency', not 'danger' (danger is 危険/きけん)","proposed_fix":"GLS=crisis (or replace word with きけん/危険 GLS=danger)"}
+{"id":"ja.lex.travel2.tenkan","sev":"P2","issue":"転換 (てんかん) means 'conversion/switching'; travel 'transfer' is 乗り換え or 接続","proposed_fix":"Replace with forms=のりかえ/乗り換え, rd=のりかえ, GLS=transfer; or GLS=conversion"}
+{"id":"ja.lex.travel2.kyoka-sho","sev":"P1","issue":"教科書 (きょうかしょ) means 'textbook'; permission slip is 許可証 (きょかしょ) — kanji/gloss collision","proposed_fix":"Replace with forms=きょかしょ/許可証, rd=きょかしょ, GLS=permission slip; or keep 教科書 with GLS=textbook"}
+{"id":"ja.lex.travel2.mimai","sev":"P2","issue":"'Inquiry visit' is misleading; 見舞い is a get-well/condolence visit to the sick or afflicted","proposed_fix":"GLS=visit (to the sick); get-well call"}
+{"id":"ja.lex.travel2.issho","sev":"P3","issue":"一緒 means 'together', not 'togetherness' (abstract noun)","proposed_fix":"GLS=together"}
+{"id":"ja.lex.travel2.gaido","sev":"P1","issue":"がどう (外道) means 'heretic/nonsense'; guided tour is ガイドツアー (がいどつあー)","proposed_fix":"Replace forms/rd with がいどつあー (ガイドツアー), GLS=guided tour"}
+{"id":"ja.lex.travel2.meguri","sev":"P3","issue":"めぐり ('circuit') occurs mainly as the suffix 〜巡り (e.g. 京都巡り), rarely as a standalone noun","proposed_fix":"Gloss as '〜巡り suffix: tour of ~; circuit' with usage note"}
+{"id":"ja.lex.travel2.keihaku","sev":"P1","issue":"らいはく is not a word; 'stay' is 滞在 (たいざい) or 宿泊","proposed_fix":"Replace with forms=たいざい/滞在, rd=たいざい, GLS=stay"}
+{"id":"ja.lex.travel2.nyuuryoku","sev":"P1","issue":"入力 (にゅうりょく) means '(data) entry/input'; 'income' is 収入 (しゅうにゅう)","proposed_fix":"Replace with forms=しゅうにゅう/収入, rd=しゅうにゅう, GLS=income; or keep 入力 with GLS=input/entry"}
+{"id":"ja.lex.travel2.keikou","sev":"P1","issue":"傾向 (けいこう) means 'trend/tendency', not 'route'; route is 経路 (けいろ) or ルート","proposed_fix":"Replace with forms=けいろ/経路, rd=けいろ, GLS=route; or keep 傾向 with GLS=tendency"}
+{"id":"ja.lex.travel2.engaki","sev":"P1","issue":"えんがき is not a word; round-trip ticket is 往復切符 (おうふくきっぷ)","proposed_fix":"Replace with forms=おうふくきっぷ/往復切符, rd=おうふくきっぷ, GLS=round-trip ticket"}
+{"id":"ja.lex.travel2.ryouga","sev":"P1","issue":"りょう does not mean 'currency'; currency is 通貨 (つうか)","proposed_fix":"Replace with forms=つうか/通貨, rd=つうか, GLS=currency"}
+{"id":"ja.lex.work2.shoubei","sev":"P1","issue":"舂米/しょうべい means 'pounding rice' and is not 'negotiation'; negotiation is 交渉 (こうしょう)","proposed_fix":"Replace with forms=こうしょう/交渉, rd=こうしょう, GLS=negotiation"}
+{"id":"ja.lex.work2.kouryaku","sev":"P3","issue":"攻略 (こうりゃく) means 'beating/clearing (a game)' or 'strategizing against'; 'strategy' per se is 戦略 (せんりゃく)","proposed_fix":"GLS=beating; clearing (a game); or replace with せんりゃく/戦略 GLS=strategy"}
+{"id":"ja.lex.work2.tanpin","sev":"P1","issue":"単品 (たんぴん) means 'single/individual item', not 'shortage'; shortage/stockout is 欠品 (けっぴん) or 不足 (ふそく)","proposed_fix":"Replace with forms=けっぴん/欠品, rd=けっぴん, GLS=shortage; or keep 単品 with GLS=single item"}
+{"id":"ja.lex.work2.keiri","sev":"P1","issue":"経理 (けいり) means 'accounting/bookkeeping', not 'profit'; profit is 利益 (りえき) — letter-swap collision","proposed_fix":"Replace with forms=りえき/利益, rd=りえき, GLS=profit; or keep 経理 with GLS=accounting"}
+{"id":"ja.lex.work2.baibai","sev":"P3","issue":"売買 means 'trade/buying and selling'; 'sales' alone is imprecise (sales is 販売)","proposed_fix":"GLS=trade; buying and selling"}
+{"id":"ja.lex.work2.hanrei","sev":"P1","issue":"判例 (はんれい) means 'legal precedent'; counterexample is 反例 — homophone collision, gloss contradicts kanji","proposed_fix":"Replace kanji with 反例 for 'counterexample', or keep 判例 with GLS=legal precedent"}
+{"id":"ja.lex.work2.buchou","sev":"P2","issue":"部長 is a department/division head — above 課長; 'section chief' is 課長, so gloss is reversed with the かちょう entry","proposed_fix":"GLS=department head; division manager"}
+{"id":"ja.lex.work2.kacho","sev":"P2","issue":"課長 is a section chief — below 部長; 'department chief' is 部長, so gloss is reversed with the ぶちょう entry","proposed_fix":"forms=かちょう/課長, GLS=section chief"}
+{"id":"ja.lex.work2.roushi","sev":"P1","issue":"労使 (ろうし) means 'labor and management (labor-management)'; labor union is 労働組合/労組 (ろうそ)","proposed_fix":"Replace with forms=ろうどうくみあい/労働組合, rd=ろうどうくみあい, GLS=labor union"}
+{"id":"ja.lex.work2.shouhou","sev":"P1","issue":"商用 (しょうよう) means 'commercial use', not 'praise'; praise is 称揚 (homophone) — kanji/gloss collision","proposed_fix":"Replace kanji with 称揚 for 'praise', or keep 商用 with GLS=commercial use"}
+{"id":"ja.lex.work2.kouchiku","sev":"P1","issue":"構築 (こうちく) means 'building/construction (of a system)'; accumulation is 蓄積 (ちくせき) — letter-swap collision","proposed_fix":"Replace with forms=ちくせき/蓄積, rd=ちくせき, GLS=accumulation; or keep 構築 with GLS=construction/building up"}
