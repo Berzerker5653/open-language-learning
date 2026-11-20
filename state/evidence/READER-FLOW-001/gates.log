@@ -55,3 +55,19 @@ never trusting the burst report):
   clause satisfied).
 - Deferred (release tier, not a lane blocker): pack-bundle stage with the
   aux/lexicon overlay mapping + device smoke of a bundled build.
+
+2026-11-20 13:35 CI conclusion for push b3b61fc (run 44810466838):
+- RED, but NOT this slice: schemas job (incl. new aux lexicon CI lines:
+  test_build_aux_lexicon.py + build-aux-lexicon.py --check) PASSED.
+- Failing: rust-conformance, desktop-smoke, rust-test shards 1-4,
+  windows compile — every one dies on the SAME 11 ja-JP validate errors
+  (24 new JA-B1/B2 sentences with no media manifest rows + lexicon
+  reading mismatches). `cargo run -p lts-langpack-cli -- validate
+  languages/ja-JP` on this exact tree locally: 0 errors. Cause: CI's
+  "Restore reference-pack audio (published archives)" step restores the
+  pack's manifest/audio from the published 0.4.3 archives pinned in
+  catalog/packs.json, which predate today's merged JA pack lanes
+  (b366055..1127730). Known archive-drift shape (owner-gated fix =
+  republish updated pack archives; see lts CI blame triage). No lane
+  change can make these jobs green; republish decision belongs to the
+  owner.
