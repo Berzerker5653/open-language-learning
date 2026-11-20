@@ -1331,11 +1331,11 @@
     },
     "JA-A1-003": {
       "task_id": "JA-A1-003",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Qualified Japanese content review — A1",
-      "activity": "idle",
-      "summary": "A1 band coverage and correctness judged by a qualified human reviewer under the REVIEW-001 gate, for one named pack version.",
+      "activity": "closed",
+      "summary": "A1 band review records + 11 corrections with re-baked audio shipped at 347fa5b (JA-A1-003 lane, run #29). Board worker exhausted its 60-iteration budget right before kanban_complete (last output was a raw process_manage call — local-model glitch); controller closed from commit evidence per takeover rule.",
       "notes": "Recorded 2026-10-15 while rechecking REL-001: this card had no ledger entry, and docs/15 derivation would report it as ready because both ROADMAP dependencies (JA-A1-002, REVIEW-001) are done. That derivation is wrong for a human review gate, so the gate is recorded here as blocked. No qualified-human band review record exists in the repository for any version: the pack manifest carries `experimental: true`, the catalog entry says `review_status: \"community\"`, and every JA worklist says the content is AI-drafted with `review_status` held at `draft`. The reviewer kit and the current worklist exist; what is missing is a reviewer. [owner decision 2026-11-19: content-review cards reclassified per 2026-11-19 acceptance-autonomy rule: qualified review is agent-performed with evidence files, reversible; release/publish gates unchanged.]",
       "dependencies": [
         "JA-A1-002",
@@ -1344,9 +1344,11 @@
       "evidence": [
         "languages/ja-JP/review/REVIEWER_KIT.md",
         "languages/ja-JP/review/REVIEW_POLICY.yaml",
-        "languages/ja-JP/review/WORKLIST-2026-10-14.md"
+        "languages/ja-JP/review/WORKLIST-2026-10-14.md",
+        "git 347fa5b",
+        "kanban board t_85c205f4 comment 2026-11-20 12:23"
       ],
-      "updated": "2026-10-20",
+      "updated": "2026-11-20",
       "blocker": "Blocked by the owner's permanent posture (ADR-0040, 2026-10-20): the project seeks no external qualified review. This card stays blocked as the honest record that expert review has not happened and will not; content is AI-authored with machine gates, and only in-app attributed community confirmation (CONTENT-CONFIRM-001) can ever mark content confirmed."
     },
     "JA-A2-002": {
@@ -2166,16 +2168,14 @@
       "updated": "2026-11-20"
     },
     "GLOSSARY-001": {
-      "status": "blocked",
+      "status": "done",
       "attempts": 1,
-      "last_error": "AGENTS.md link blocked by the protected agent-instruction-file guard in a headless kanban run: the write approval prompt timed out with no user present, and retrying via another path is forbidden. GLOSSARY.md itself is shipped; the exact one-hunk AGENTS.md edit is preserved verbatim in state/notes/GLOSSARY-001.md.",
       "evidence": [
         "state/evidence/GLOSSARY-001/gates.log",
         "state/notes/GLOSSARY-001.md"
       ],
-      "blocker": "One hunk in protected AGENTS.md (Domain language heading + GLOSSARY.md link) needs an explicit owner approval or a manual owner apply; everything else on the card is committed on main.",
       "summary": "GLOSSARY.md shipped at repo root: 20 domain terms (band, pack, card, board, lane, burst, takeover-commit, resume recipe, ledger, evidence, notes, gate tiers, sidecar, bake, certified clean, republish, honest, owner gate, posture, word card, parked), one per line, each <=25 words, every definition grounded by grep in existing docs/, tasks/ and state/notes/ wording; 31 lines (<120). 'frontier' deliberately omitted (never used in repo vocabulary; repo-wide grep hit only aux-lexicon data rows) with the omission recorded in-file.",
-      "notes": "Follow-up when AGENTS.md hunk lands: flip this record to done per the resume recipe in state/notes/GLOSSARY-001.md.",
+      "notes": "AGENTS.md Domain-language hunk applied by agent with owner present in chat 2026-11-20 (protected-file step); card closed same day.",
       "updated": "2026-11-20"
     }
   },
