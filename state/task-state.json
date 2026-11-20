@@ -1351,22 +1351,25 @@
     },
     "JA-A2-002": {
       "task_id": "JA-A2-002",
-      "status": "ready",
-      "attempts": 1,
+      "status": "done",
+      "attempts": 2,
       "title": "Qualified Japanese content review — A2",
       "activity": "idle",
-      "summary": "A2 band coverage and correctness judged by a qualified human reviewer under the REVIEW-001 gate, for one named pack version.",
-      "notes": "Recorded 2026-10-15 (REL-001 recheck). Previously ROADMAP-only, so derivation reported readiness from JA-A2-001 and REVIEW-001. Same gate as JA-A1-003: no band review verdict is recorded anywhere in the repository. [owner decision 2026-11-19: content-review cards reclassified per 2026-11-19 acceptance-autonomy rule: qualified review is agent-performed with evidence files, reversible; release/publish gates unchanged.]",
+      "summary": "A2 band review completed 2026-11-20 as ai-assisted per owner decision 2026-11-19: 865 per-item records (765 approved, 20 with notes, 80 changes-requested — 39 P1 + 41 P2 defects found in the older K-45-era batches and plain ja.sent A2 set). No content corrected and no status flipped in this card; corrections + audio re-bake handed to follow-up card JA-A2-002-FIX-001. Band verdict: NOT clean until fix queue lands; pack posture unchanged.",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck). Previously ROADMAP-only, so derivation reported readiness from JA-A2-001 and REVIEW-001. Same gate as JA-A1-003: no band review verdict is recorded anywhere in the repository. [owner decision 2026-11-19: content-review cards reclassified per 2026-11-19 acceptance-autonomy rule: qualified review is agent-performed with evidence files, reversible; release/publish gates unchanged.] [JA-A2-002 executed 2026-11-20: the owner reclassification provided the review seat, replacing the ADR-0040 blocked posture for this card; ADR-0040 still governs promotion — ai-assisted records never promote content.]",
       "dependencies": [
         "JA-A2-001",
         "REVIEW-001"
       ],
       "evidence": [
         "languages/ja-JP/review/REVIEWER_KIT.md",
-        "languages/ja-JP/review/WORKLIST-2026-10-14.md"
+        "languages/ja-JP/review/WORKLIST-2026-10-14.md",
+        "state/evidence/JA-A2-002/band-review-record.yaml",
+        "state/evidence/JA-A2-002/findings-2026-11-20.md",
+        "state/evidence/JA-A2-002/gates.log",
+        "state/evidence/JA-A2-002/a1-takeover-gates.log"
       ],
-      "updated": "2026-10-20",
-      "blocker": "Blocked by the owner's permanent posture (ADR-0040, 2026-10-20): the project seeks no external qualified review. This card stays blocked as the honest record that expert review has not happened and will not; content is AI-authored with machine gates, and only in-app attributed community confirmation (CONTENT-CONFIRM-001) can ever mark content confirmed."
+      "updated": "2026-11-20"
     },
     "JA-B1-002": {
       "task_id": "JA-B1-002",
