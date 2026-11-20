@@ -1,0 +1,33 @@
+SESSION-CHROME-001 lane gates (worker-run, 2026-11-20, commit-time)
+
+Scope touched: apps/desktop/src-tauri/src/lib.rs, apps/desktop/src/
+{App,home,hub,words,session-chrome,session-chrome.test}.tsx,
+packages/ui/src/styles.css. Sibling WORD-TIMING-003 lane takeover-
+committed separately (f95a9ee/dc46953) after independent verification
+(4,722 lines parse, ids unique + manifest-resolved, spans in-clip
+monotonic).
+
+1. cargo fmt --all --check                -> exit 0 (fmt2.log)
+2. cargo test -p lts-desktop --lib
+   srs_interval_preview                   -> exit 0 (test-srs-preview2.log)
+   First battery (run before the fix below) failed with
+   'cannot find macro __cmd__srs_interval_preview' -> cause: attempt 3's
+   last turn failed to apply the #[tauri::command] attribute (logged in
+   board events); applied at this pass, re-ran cleanly.
+3. cargo clippy -p lts-desktop --all-targets -- -D warnings
+                                          -> exit 0 (clippy3.log)
+   (First two clippy attempts exited 1 on MY battery's syntax bug:
+   '-D warnings' before '--' is an unexpected argument; never reached
+   the linter. Corrected syntax above.)
+4. npx tsc --noEmit (apps/desktop)        -> exit 0
+5. npx vitest run (apps/desktop, whole package incl. 15 new
+   session-chrome tests)                  -> 50 files / 397 tests passed
+   One lane-test fix at this pass (test-side only, intent preserved,
+   copy unchanged): attempt 3's 'no formative card promises a score'
+   test had (a) a blurb slice leaking into the next card, whose badge
+   CLASS NAME contains 'grade', and (b) a negation regex that rejected
+   honest disclaimers ('nothing is scored or saved'). Now: slice bounded
+   at </li>; score vocabulary allowed only inside an explicitly
+   negated sentence. See state/notes/SESSION-CHROME-001.md.
+
+validate_handoff.py result recorded in the ledger commit (run before it).

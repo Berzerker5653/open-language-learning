@@ -1,0 +1,172 @@
+    Blocking waiting for file lock on build directory
+   Compiling aws-lc-sys v0.45.0
+   Compiling x11-dl v2.21.0
+   Compiling libdbus-sys v0.2.7
+   Compiling glib-sys v0.18.1
+   Compiling gobject-sys v0.18.0
+   Compiling gio-sys v0.18.1
+   Compiling gdk-sys v0.18.2
+   Compiling cairo-sys-rs v0.18.2
+   Compiling pango-sys v0.18.0
+   Compiling gdk-pixbuf-sys v0.18.0
+   Compiling atk-sys v0.18.2
+   Compiling javascriptcore-rs-sys v1.1.1
+   Compiling soup3-sys v0.5.0
+   Compiling gtk-sys v0.18.2
+   Compiling gdkx11-sys v0.18.2
+   Compiling gtk v0.18.2
+   Compiling webkit2gtk-sys v2.0.2
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+   Compiling wry v0.57.0
+   Compiling dbus v0.9.12
+   Compiling glib v0.18.5
+   Compiling gdkwayland-sys v0.18.2
+   Compiling aws-lc-rs v1.18.1
+   Compiling rustls v0.23.46
+   Compiling gio v0.18.4
+   Compiling cairo-rs v0.18.5
+   Compiling atk v0.18.2
+   Compiling javascriptcore-rs v1.1.2
+   Compiling rustls-webpki v0.103.16
+   Compiling tokio-rustls v0.26.6
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling ureq v2.12.1
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.13.5
+   Compiling jsonschema v0.58.5
+   Compiling gdk-pixbuf v0.18.5
+   Compiling pango v0.18.3
+   Compiling soup3 v0.5.0
+   Compiling lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack)
+   Compiling lts-activity v0.1.0 (/home/hunter/game-dev/LTS/crates/activity)
+   Compiling gdk v0.18.2
+   Compiling gdkx11 v0.18.2
+   Compiling webkit2gtk v2.0.2
+   Compiling tao v0.37.1
+   Compiling muda v0.20.0
+   Compiling tauri-runtime v2.12.1
+   Compiling tauri-runtime-wry v2.12.1
+   Compiling tauri v2.12.1
+   Compiling tauri-plugin-single-instance v2.5.2
+error: cannot find macro `__tauri_command_name_srs_interval_preview` in this scope
+    --> apps/desktop/src-tauri/src/lib.rs:9087:25
+     |
+1774 |   #[tauri::command]
+     |   ----------------- similarly named macro `__tauri_command_name_profile_import_preview` defined here
+...
+9087 |           .invoke_handler(tauri::generate_handler![
+     |  _________________________^
+9088 | |             app_mode,
+9089 | |             build_identity,
+9090 | |             smoke_ack,
+...    |
+9178 | |             srs_interval_preview,
+9179 | |         ])
+     | |_________^
+     |
+     = note: this error originates in the macro `tauri::generate_handler` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: a macro with a similar name exists
+     |
+9087 -         .invoke_handler(tauri::generate_handler![
+9088 -             app_mode,
+9089 -             build_identity,
+9090 -             smoke_ack,
+9091 -             privacy_notice,
+9092 -             available_packs,
+9093 -             install_pack,
+9094 -             create_profile,
+9095 -             list_profiles,
+9096 -             resume_profile,
+9097 -             complete_onboarding,
+9098 -             home_state,
+9099 -             practice_plan,
+9100 -             first_run_steps,
+9101 -             progress_summary,
+9102 -             available_models,
+9103 -             install_model,
+9104 -             aligner_status,
+9105 -             delete_model,
+9106 -             get_speech_model,
+9107 -             set_speech_model,
+9108 -             recommended_speech_model,
+9109 -             pronunciation_check,
+9110 -             pronunciation_demo,
+9111 -             perf_asr_setup,
+9112 -             perf_asr_attempt,
+9113 -             dictation_check,
+9114 -             dictation_target,
+9115 -             reference_audio,
+9116 -             speech_audio,
+9117 -             world_state,
+9118 -             goal_map,
+9119 -             display_settings,
+9120 -             set_display_settings,
+9121 -             get_microphone_enabled,
+9122 -             set_microphone_enabled,
+9123 -             get_microphone_device,
+9124 -             set_microphone_device,
+9125 -             get_playback_device,
+9126 -             set_playback_device,
+9127 -             get_romaji_mode,
+9128 -             set_romaji_mode,
+9129 -             get_kana_keyboard,
+9130 -             set_kana_keyboard,
+9131 -             profile_export,
+9132 -             profile_import_preview,
+9133 -             profile_import,
+9134 -             profile_delete,
+9135 -             pack_claims,
+9136 -             catalog_packs,
+9137 -             install_catalog_pack,
+9138 -             cancel_pack_install,
+9139 -             import_pack,
+9140 -             installed_packs,
+9141 -             active_pack,
+9142 -             switch_pack,
+9143 -             writing_task,
+9144 -             writing_submit,
+9145 -             practice_task,
+9146 -             practice_submit,
+9147 -             lesson_plan,
+9148 -             placement_plan,
+9149 -             placement_coverage,
+9150 -             placement_submit,
+9151 -             kanji_list,
+9152 -             kanji_available,
+9153 -             scenario_list,
+9154 -             scenario_start,
+9155 -             scenario_attempt,
+9156 -             scenario_support,
+9157 -             scenario_recovery,
+9158 -             scenario_transfer,
+9159 -             scenario_transfer_answer,
+9160 -             scenario_finish,
+9161 -             contrast_audio,
+9162 -             shadowing_items,
+9163 -             dictation_audio,
+9164 -             story_list,
+9165 -             story_view,
+9166 -             story_audio,
+9167 -             word_card,
+9168 -             story_word_audio,
+9169 -             listening_audio,
+9170 -             mine_add,
+9171 -             content_confirm,
+9172 -             content_unconfirm,
+9173 -             mine_list,
+9174 -             mine_remove,
+9175 -             mine_due,
+9176 -             mine_new,
+9177 -             mine_grade,
+9178 -             srs_interval_preview,
+9179 -         ])
+9087 +         .invoke_handler(__tauri_command_name_profile_import_preview)
+     |
+
+error: cannot find macro `__cmd__srs_interval_preview` in this scope
+    --> apps/desktop/src-tauri/src/lib.rs:9178:13
+     |
+9178 |             srs_interval_preview,
+     |             ^^^^^^^^^^^^^^^^^^^^
+
+error: could not compile `lts-desktop` (lib test) due to 2 previous errors

@@ -12,6 +12,19 @@
 import { PackText, usePackTextAttrs } from "@openlang/ui";
 import { useKanaIME } from "./kana-ime";
 
+/**
+ * SESSION-CHROME-001 (U6, Quizlet/Anki idiom): a grade button states the
+ * interval the scheduler predicts for it. The number is the engine's own
+ * FSRS prediction converted to a readable unit; the "~" keeps it marked
+ * as a prediction, and callers render nothing when there is no state.
+ */
+export function previewIntervalLabel(seconds: number): string {
+  if (!Number.isFinite(seconds) || seconds <= 0) return "soon";
+  if (seconds < 3600) return `back in ~${Math.max(1, Math.round(seconds / 60))} min`;
+  if (seconds < 86_400) return `back in ~${Math.round(seconds / 3600)} h`;
+  return `back in ~${Math.round(seconds / 86_400)} days`;
+}
+
 export interface MineItem {
   id: string;
   surface: string;
@@ -43,6 +56,11 @@ export interface MyWordsPanelProps {
   onStartNewReview(): void;
   onStartReview(): void;
   onReveal(): void;
+  /// SESSION-CHROME-001 (U6): the FSRS scheduler's predicted next interval
+  /// (seconds) for each grade button, read from the item's existing state
+  /// via `srs_interval_preview`. Null/undefined means the scheduler has no
+  /// state for this item yet — the buttons then show no interval at all.
+  intervalPreview?: { again_seconds: number; good_seconds: number } | null;
   /// Issue #2 phase 1: in-app kana keyboard for the surface/reading fields.
   kanaInput?: boolean;
 }
@@ -94,9 +112,21 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
               <div className="btn-row">
                 <button type="button" className="btn" onClick={() => p.onGrade(false)}>
                   I knew it
+                  {p.intervalPreview ? (
+                    <span className="grade-preview">
+                      {" "}
+                      — {previewIntervalLabel(p.intervalPreview.good_seconds)}
+                    </span>
+                  ) : null}
                 </button>
                 <button type="button" className="btn btn--quiet" onClick={() => p.onGrade(true)}>
                   Again
+                  {p.intervalPreview ? (
+                    <span className="grade-preview">
+                      {" "}
+                      — {previewIntervalLabel(p.intervalPreview.again_seconds)}
+                    </span>
+                  ) : null}
                 </button>
               </div>
             </>

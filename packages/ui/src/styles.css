@@ -924,3 +924,66 @@ th:last-child {
     scroll-behavior: auto !important;
   }
 }
+
+/* ------------------------------------------------ SESSION-CHROME-001 */
+/* In-session chrome (visual-ui-audit U3): a thin bar plus n-of-N and a
+   remaining-time estimate, mounted above every activity route while a
+   session runs. Accent is reserved for progress semantics only. */
+.session-chrome {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0 0 1rem;
+}
+
+.session-bar {
+  flex: 1 1 auto;
+  height: 0.5rem;
+  background: var(--surface-sunk);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.session-bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+}
+
+.session-chrome-meta {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+/* U6: dues expressed as a time budget, and the predicted interval
+   printed inside a review grade button. */
+.plan-due-budget {
+  margin: 0.1rem 0 0.5rem;
+  color: var(--ink-soft);
+}
+
+.grade-preview {
+  color: var(--ink-soft);
+  font-weight: 400;
+}
+
+/* U3: the graded/formative distinction as a badge on hub mode cards. */
+.mode-grade-badge {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  background: var(--surface-sunk);
+}
+
+.mode-grade-badge--graded {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}

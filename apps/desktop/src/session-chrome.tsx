@@ -1,0 +1,66 @@
+/**
+ * SESSION-CHROME-001 (visual-ui-audit U3): the thin in-session chrome that
+ * rides every activity route while a bounded session is running — a slim
+ * progress bar, an "n of N" step count, and a remaining-time estimate.
+ *
+ * Honesty rules, mirroring the session panel's contract in home.tsx:
+ * - `total` is the queue snapshot taken when the session began, so the
+ *   count never drifts under the learner when the plan re-plans.
+ * - The time estimate comes from the engine's own per-item `est_seconds`
+ *   (docs/01: the planner already prices every activity). An absent
+ *   estimate renders NO time at all — never a fabricated number.
+ * - No XP, streak, streak-guilt, or reward language anywhere (ADR-0002).
+ */
+
+export interface SessionChromeProps {
+  /** Activities finished so far in this session. */
+  done: number;
+  /** Snapshot size fixed when the session began. */
+  total: number;
+  /**
+   * Engine-estimated seconds still to work (remaining planned items,
+   * including the one currently open). Null when the engine has not
+   * priced the rest — the chrome then shows no time figure.
+   */
+  remainingSeconds: number | null;
+  status?: "running" | "paused";
+}
+
+/**
+ * "~X min left" from an engine estimate. A zero/unknown estimate renders
+ * nothing rather than promising "0 minutes"; any positive estimate rounds
+ * to whole minutes with a floor of 1, and is marked as an estimate.
+ */
+export function remainingTimeLabel(seconds: number | null): string | null {
+  if (seconds === null || seconds <= 0) return null;
+  return `~${Math.max(1, Math.round(seconds / 60))} min left`;
+}
+
+export function SessionChrome(p: SessionChromeProps) {
+  if (p.total <= 0) return null;
+  const done = Math.min(p.done, p.total);
+  const pct = Math.round((done / p.total) * 100);
+  // The step the learner is in right now; once everything is done the
+  // counter parks at N of N rather than promising an N+1th step.
+  const step = Math.min(done + 1, p.total);
+  const remaining = remainingTimeLabel(p.remainingSeconds);
+  return (
+    <div className="session-chrome" data-session-chrome aria-label="Session progress">
+      <div
+        className="session-bar"
+        role="progressbar"
+        aria-valuenow={done}
+        aria-valuemin={0}
+        aria-valuemax={p.total}
+        aria-label={`${done} of ${p.total} activities done`}
+      >
+        <span className="session-bar-fill" style={{ width: `${pct}%` }} />
+      </div>
+      <p className="session-chrome-meta">
+        {p.status === "paused" ? "Session paused — " : ""}
+        {step} of {p.total}
+        {remaining ? ` · ${remaining}` : ""}
+      </p>
+    </div>
+  );
+}

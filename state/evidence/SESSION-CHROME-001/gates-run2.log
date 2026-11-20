@@ -1,0 +1,5 @@
+fmt2 exit 0
+test2 exit 0
+clippy2 exit 1
+ALLDONE
+clippy3 exit 0

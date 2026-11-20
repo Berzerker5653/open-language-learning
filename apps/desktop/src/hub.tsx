@@ -19,11 +19,26 @@ export type HubMode =
   | "kanji"
   | "placement";
 
-export const HUB_MODES: { id: HubMode; label: string; blurb: string }[] = [
+/**
+ * SESSION-CHROME-001 (U3 acceptance): the graded/formative distinction is a
+ * badge on the mode card, not prose the learner has to parse out of a
+ * blurb. `graded` means the screen returns an explicit right/wrong verdict
+ * for answers; `formative` means it gives feedback without a verdict and
+ * no scoring language. Each entry matches what that route actually does.
+ */
+export type ModeGradeKind = "graded" | "formative";
+
+export const HUB_MODES: {
+  id: HubMode;
+  label: string;
+  blurb: string;
+  gradeKind: ModeGradeKind;
+}[] = [
   {
     id: "pronunciation",
     label: "Pronunciation",
     blurb: "Hear the difference between similar words; guided feedback on your attempts.",
+    gradeKind: "formative",
   },
   {
     // I03: the card says what the screen actually asks. This mode is
@@ -32,6 +47,7 @@ export const HUB_MODES: { id: HubMode; label: string; blurb: string }[] = [
     id: "dictation",
     label: "Speaking",
     blurb: "Read a sentence aloud and see what the local model heard. Guided: nothing is graded.",
+    gradeKind: "formative",
   },
   {
     // I03: the promise matches the check — a written answer compared with the
@@ -39,31 +55,41 @@ export const HUB_MODES: { id: HubMode; label: string; blurb: string }[] = [
     id: "writing",
     label: "Writing",
     blurb: "Write the answer the pack asks for; a miss shows the form it expected.",
+    gradeKind: "graded",
   },
   {
     id: "scenarios",
     label: "Scenarios",
     blurb: "Guided conversations with support and recovery moves.",
+    // The engine judges each scenario step and the transfer attempt, so the
+    // card says what the screen does instead of leaving it implicit.
+    gradeKind: "graded",
   },
   {
     id: "shadowing",
     label: "Shadowing",
     blurb: "Speak along with model audio. Formative: nothing is scored or saved.",
+    gradeKind: "formative",
   },
   {
     id: "reading",
+    // U3 honesty: "graded" here used to mean level-matched, which reads as
+    // scoring on a formative card. Say what it means and badge the kind.
     label: "Reading",
-    blurb: "Graded stories with tap-to-look-up words. Formative.",
+    blurb: "Stories matched to your level, with tap-to-look-up words. Formative.",
+    gradeKind: "formative",
   },
   {
     id: "kanji",
     label: "Kanji",
     blurb: "Meaning and reading drills for kanji you have met.",
+    gradeKind: "graded",
   },
   {
     id: "placement",
     label: "Placement",
     blurb: "Optional low-stakes check of what you already know.",
+    gradeKind: "graded",
   },
 ];
 
@@ -115,6 +141,12 @@ export function PracticeHub({
             <button type="button" className="btn" onClick={() => onOpen(m.id)}>
               {m.label}
             </button>
+            <span
+              className={`mode-grade-badge mode-grade-badge--${m.gradeKind}`}
+              data-grade-kind={m.gradeKind}
+            >
+              {m.gradeKind === "graded" ? "Graded" : "Formative"}
+            </span>
             <span className="meta"> — {m.blurb}</span>
           </li>
         ))}

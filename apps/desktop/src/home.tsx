@@ -70,6 +70,10 @@ export interface SessionView {
   done: number;
   /** Planned activities this build cannot run; never counted as done. */
   notRunnable: number;
+  /// SESSION-CHROME-001: the engine's own estimate (summed `est_seconds`
+  /// over the items still to work, including the open one). Null means the
+  /// estimate is unavailable and the chrome shows no time figure.
+  remainingSeconds?: number | null;
 }
 
 export interface SessionOutcomeView {
@@ -77,6 +81,13 @@ export interface SessionOutcomeView {
   total: number;
   reason: "finished" | "stopped";
   notRunnable: number;
+  /// SESSION-CHROME-001 (U3): whole minutes actually spent in the session,
+  /// measured from wall time — not an estimate. Null when nothing ran.
+  minutes?: number | null;
+  /// Pack surfaces (word/phrase forms) the session put in front of the
+  /// learner, in the order they were shown. Presentation only: seeing a
+  /// form is not evidence of knowing it.
+  forms?: string[];
 }
 
 export const BUDGET_PRESETS = [5, 10, 20, 30];
@@ -110,6 +121,18 @@ const PLAN_KIND_ORDER: PlannedItem["kind"][] = ["introduction", "review"];
 
 /** ADR-0020 §4: first-run guidance is the first three steps, no more. */
 const FIRST_RUN_MAX = 3;
+
+/**
+ * SESSION-CHROME-001: the end-of-session summary lists the forms the
+ * session surfaced. Long sessions are capped so the card stays a card;
+ * the cap is stated honestly rather than the list silently truncating.
+ */
+const FORMS_CAP = 12;
+
+export function summarizeForms(forms: string[]): string {
+  const head = forms.slice(0, FORMS_CAP).join(", ");
+  return forms.length > FORMS_CAP ? `${head}, … (${forms.length} in all)` : head;
+}
 
 /**
  * D2: every modality the engine has a typed practice runner for must be
@@ -313,6 +336,18 @@ export function Home(p: HomeProps) {
               ? ` ${p.sessionOutcome.notRunnable} planned activity has no practice screen in this build yet.`
               : ""}
           </p>
+          {p.sessionOutcome.minutes != null ? (
+            <p className="meta session-time">
+              {p.sessionOutcome.minutes < 1
+                ? "Under a minute on the activities."
+                : `About ${p.sessionOutcome.minutes} minutes on the activities.`}
+            </p>
+          ) : null}
+          {(p.sessionOutcome.forms ?? []).length > 0 ? (
+            <p className="meta session-forms">
+              Forms you saw: {summarizeForms(p.sessionOutcome.forms!)}
+            </p>
+          ) : null}
           {p.onDismissSessionSummary ? (
             <div className="btn-row">
               <button type="button" className="btn btn--quiet" onClick={p.onDismissSessionSummary}>
@@ -375,6 +410,19 @@ export function Home(p: HomeProps) {
             return (
               <section key={kind} className="plan-group" aria-label={KIND_LABELS[kind]}>
                 <h2>{KIND_LABELS[kind]}</h2>
+                {kind === "review" ? (
+                  // U6 (SESSION-CHROME-001): dues as a time budget, from the
+                  // engine's own per-item estimates — the same numbers the
+                  // session plan prices, not a new guess.
+                  <p className="meta plan-due-budget">
+                    {items.length} due · about{" "}
+                    {Math.max(
+                      1,
+                      Math.round(items.reduce((s, it) => s + it.est_seconds, 0) / 60),
+                    )}{" "}
+                    min
+                  </p>
+                ) : null}
                 {kind === "introduction" ? (
                   <p>
                     <small>Nothing is recorded until you do one of these.</small>

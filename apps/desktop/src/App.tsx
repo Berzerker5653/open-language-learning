@@ -10,6 +10,7 @@ import {
   type ProfileSummary,
 } from "./onboarding";
 import { PracticeHub, type HubMode } from "./hub";
+import { SessionChrome } from "./session-chrome";
 import {
   Home,
   type PackUpdate,
@@ -446,6 +447,10 @@ export function App() {
     done: number;
     notRunnable: number;
   } | null>(null);
+  // SESSION-CHROME-001: start instant of the running session, for the
+  // measured time the end-of-session summary reports. Not persisted — a
+  // session is for this sitting, and its clock is too.
+  const sessionStartedAtRef = useRef<number | null>(null);
   const [scenarioList, setScenarioList] = useState<ScenarioSummaryView[]>([]);
   const [scenarioActive, setScenarioActive] = useState<ScenarioView | null>(null);
   const [scenarioStep, setScenarioStep] = useState<ScenarioStepResult | null>(null);
@@ -599,6 +604,33 @@ export function App() {
   const [mineError, setMineError] = useState<string | null>(null);
   const [mineNotice, setMineNotice] = useState<string | null>(null);
   const [mineReview, setMineReview] = useState<{ item: MineItem; revealed: boolean } | null>(null);
+  // SESSION-CHROME-001 (U6): the scheduler's predicted next interval for
+  // the two grade buttons, read from the item's existing state. Null = no
+  // preview fetched (or the fetch failed), and the buttons show no number.
+  const [minePreview, setMinePreview] = useState<{
+    again_seconds: number;
+    good_seconds: number;
+  } | null>(null);
+  useEffect(() => {
+    const inv = detectInvoke();
+    if (!inv || !profileId || !mineReview) {
+      setMinePreview(null);
+      return;
+    }
+    let live = true;
+    void inv("srs_interval_preview", { profileId, itemId: mineReview.item.id })
+      .then((v) => {
+        if (live) setMinePreview(v as { again_seconds: number; good_seconds: number });
+      })
+      .catch(() => {
+        // A failed preview degrades to plain buttons — the grades
+        // themselves work exactly as before.
+        if (live) setMinePreview(null);
+      });
+    return () => {
+      live = false;
+    };
+  }, [mineReview?.item.id, profileId]);
   const [shadowError, setShadowError] = useState<string | null>(null);
   // WORD-TIMING-001: the karaoke clock (in-clip seconds, null when nothing
   // of this clip is playing) plus one retained clip URL per shadowing item.
@@ -2306,7 +2338,17 @@ export function App() {
     const q = sessionQueueRef.current;
     setSession(
       q && status
-        ? { status, total: q.items.length, done: q.done, notRunnable: q.notRunnable }
+        ? {
+            status,
+            total: q.items.length,
+            done: q.done,
+            notRunnable: q.notRunnable,
+            // SESSION-CHROME-001 (U3): remaining time is the engine's own
+            // price for the items still to work, including the open one.
+            remainingSeconds: q.items
+              .slice(q.index)
+              .reduce((s, it) => s + it.est_seconds, 0),
+          }
         : null,
     );
   }
@@ -2316,12 +2358,22 @@ export function App() {
     const notRunnable = plan.items.length - runnable.length;
     if (runnable.length === 0) {
       // Nothing this build can run: name that instead of opening a loop.
-      setSessionOutcome({ done: 0, total: plan.items.length, reason: "finished", notRunnable });
+      setSessionOutcome({
+        done: 0,
+        total: plan.items.length,
+        reason: "finished",
+        notRunnable,
+        minutes: null,
+        forms: [],
+      });
       return;
     }
     const first = runnable[0];
     if (!first) return; // the empty case above already covers this
     sessionQueueRef.current = { items: runnable, index: 0, done: 0, notRunnable };
+    // SESSION-CHROME-001: wall time measured across the whole session,
+    // reported in the summary as time actually spent — never an estimate.
+    sessionStartedAtRef.current = Date.now();
     setSessionOutcome(null);
     publishSession("running");
     await openPractice(first);
@@ -2341,27 +2393,47 @@ export function App() {
       await openPractice(next);
       return;
     }
-    const outcome: SessionOutcomeView = {
-      done: q.done,
-      total: q.items.length + q.notRunnable,
-      reason: "finished",
-      notRunnable: q.notRunnable,
-    };
+    const outcome = sessionOutcomeFrom(q, "finished");
     sessionQueueRef.current = null;
+    sessionStartedAtRef.current = null;
     setSession(null);
     setSessionOutcome(outcome);
+  }
+
+  /// SESSION-CHROME-001 (U3): the end-of-session card. Time is measured
+  /// wall clock, never re-estimated; forms are the surfaces the finished
+  /// items put in front of the learner, deduped in first-seen order.
+  function sessionOutcomeFrom(
+    q: { items: PlannedItem[]; done: number; notRunnable: number },
+    reason: "finished" | "stopped",
+  ): SessionOutcomeView {
+    const start = sessionStartedAtRef.current;
+    const minutes = start === null ? null : Math.round((Date.now() - start) / 60_000);
+    const seen = new Set<string>();
+    const forms: string[] = [];
+    for (const it of q.items.slice(0, Math.min(q.done, q.items.length))) {
+      const s = it.surface;
+      if (s && !seen.has(s)) {
+        seen.add(s);
+        forms.push(s);
+      }
+    }
+    return {
+      done: q.done,
+      total: q.items.length + q.notRunnable,
+      reason,
+      notRunnable: q.notRunnable,
+      minutes,
+      forms,
+    };
   }
 
   function closeSession(reason: "stopped") {
     const q = sessionQueueRef.current;
     if (!q) return;
-    const outcome: SessionOutcomeView = {
-      done: q.done,
-      total: q.items.length + q.notRunnable,
-      reason,
-      notRunnable: q.notRunnable,
-    };
+    const outcome = sessionOutcomeFrom(q, reason);
     sessionQueueRef.current = null;
+    sessionStartedAtRef.current = null;
     setSession(null);
     setSessionOutcome(outcome);
     setPracticeTarget(null);
@@ -3696,6 +3768,18 @@ export function App() {
           {playbackError}
         </p>
       ) : null}
+      {/* SESSION-CHROME-001 (U3): the thin in-session chrome rides every
+          activity route while a bounded session runs, so the learner
+          always sees how far into the session they are and roughly how
+          much longer it holds. */}
+      {session ? (
+        <SessionChrome
+          done={session.done}
+          total={session.total}
+          remainingSeconds={session.remainingSeconds ?? null}
+          status={session.status}
+        />
+      ) : null}
       {route === "hub" ? (
         <PracticeHub
           onOpen={openMode}
@@ -3810,6 +3894,7 @@ export function App() {
         <MyWordsPanel
           items={mineItems}
           review={mineReview}
+          intervalPreview={minePreview}
           error={mineError}
           notice={mineNotice}
           draft={{

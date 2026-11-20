@@ -1,0 +1,9 @@
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.22s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-d61b0657df16a667)
+
+running 1 test
+test tests::srs_interval_preview_matches_the_grade_it_prices ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 198 filtered out; finished in 2.38s
+

@@ -7518,6 +7518,65 @@ fn mine_grade_at(
     Ok(due_at)
 }
 
+/// SESSION-CHROME-001 (visual-ui-audit U6): the interval the scheduler
+/// WOULD give for each grade button on an open review card. `mine_grade`
+/// grades Again/Good only, so those are the only honest buttons to price,
+/// and the prediction comes from the same `FsrsSpike` the grade itself
+/// will apply — preview and verdict can never disagree. Reads only;
+/// writes nothing.
+#[derive(serde::Serialize)]
+struct SrsIntervalPreview {
+    again_seconds: f64,
+    good_seconds: f64,
+}
+
+#[tauri::command]
+fn srs_interval_preview(profile_id: String, item_id: String) -> Result<SrsIntervalPreview, String> {
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map_err(|e| e.to_string())?
+        .as_secs();
+    srs_interval_preview_at(&data_dir(), &profile_id, &item_id, now)
+}
+
+fn srs_interval_preview_at(
+    data: &Path,
+    profile_id: &str,
+    item_id: &str,
+    now_secs: u64,
+) -> Result<SrsIntervalPreview, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    // The same row `mine_grade` reads (whichever scheduler tag owns the
+    // item), so the preview prices exactly the state the grade will use.
+    // No row is not an error: a first review has no prior state, and the
+    // spike's initial-state prediction is what the grade would produce.
+    let prior = store
+        .scheduler_state(profile_id)
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .find(|r| r.item_id == item_id)
+        .map(|r| serde_json::from_str::<lts_scheduler::ItemState>(&r.params_json))
+        .transpose()
+        .map_err(|e| e.to_string())?;
+    let spike = lts_scheduler::FsrsSpike::default();
+    let again = lts_scheduler::Scheduler::review(
+        &spike,
+        prior.as_ref(),
+        lts_scheduler::Rating::Again,
+        now_secs as i64,
+    );
+    let good = lts_scheduler::Scheduler::review(
+        &spike,
+        prior.as_ref(),
+        lts_scheduler::Rating::Good,
+        now_secs as i64,
+    );
+    Ok(SrsIntervalPreview {
+        again_seconds: again.interval_days * 86_400.0,
+        good_seconds: good.interval_days * 86_400.0,
+    })
+}
+
 /// K-04: once every kana-script orthography unit the active pack
 /// teaches has reached at least `supported` recognition mastery, mark
 /// kana literacy established (JA_ORTHOGRAPHY_POLICY romaji_fade rule:
@@ -9117,6 +9176,7 @@ pub fn run() {
             mine_due,
             mine_new,
             mine_grade,
+            srs_interval_preview,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
@@ -15342,6 +15402,79 @@ transfer_variants:
         // FORMATIVE ONLY: reading records no evidence at all.
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
         assert!(store.evidence_for_profile(&p.id).unwrap().is_empty());
+    }
+
+    // SESSION-CHROME-001 (U6): the grade-button interval preview is the same
+    // FsrsSpike decision the grade itself will make — same state, same
+    // ratings — and it never writes anything.
+    #[test]
+    fn srs_interval_preview_matches_the_grade_it_prices() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
+        let item = mine_add_at(
+            data,
+            &p.id,
+            "ねこ".to_string(),
+            None,
+            Some("cat".to_string()),
+            "ja.story.demo.first-meeting".to_string(),
+        )
+        .unwrap();
+
+        let now = 1_800_000_000_u64;
+        // A word with no schedule still gets an honest preview: the spike's
+        // initial-state prediction, which is exactly what the first grade
+        // would produce.
+        let fresh = srs_interval_preview_at(data, &p.id, &item.id, now).unwrap();
+        let spike = lts_scheduler::FsrsSpike::default();
+        let want_again = lts_scheduler::Scheduler::review(
+            &spike,
+            None,
+            lts_scheduler::Rating::Again,
+            now as i64,
+        );
+        let want_good =
+            lts_scheduler::Scheduler::review(&spike, None, lts_scheduler::Rating::Good, now as i64);
+        assert_eq!(fresh.again_seconds, want_again.interval_days * 86_400.0);
+        assert_eq!(fresh.good_seconds, want_good.interval_days * 86_400.0);
+        assert!(fresh.again_seconds > 0.0 && fresh.good_seconds > 0.0);
+        assert!(
+            fresh.again_seconds < fresh.good_seconds,
+            "\"Again\" must never promise a longer wait than \"I knew it\""
+        );
+
+        // After a grade the preview reads the persisted state, so it prices
+        // the schedule the learner is actually on.
+        mine_grade_at(data, &p.id, &item.id, false).unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let row = store
+            .scheduler_state(&p.id)
+            .unwrap()
+            .into_iter()
+            .find(|r| r.item_id == item.id)
+            .unwrap();
+        let state: lts_scheduler::ItemState = serde_json::from_str(&row.params_json).unwrap();
+        let after = srs_interval_preview_at(data, &p.id, &item.id, now).unwrap();
+        let want_good = lts_scheduler::Scheduler::review(
+            &spike,
+            Some(&state),
+            lts_scheduler::Rating::Good,
+            now as i64,
+        );
+        assert_eq!(after.good_seconds, want_good.interval_days * 86_400.0);
+
+        // Preview is read-only: the persisted row is untouched.
+        let row2 = store
+            .scheduler_state(&p.id)
+            .unwrap()
+            .into_iter()
+            .find(|r| r.item_id == item.id)
+            .unwrap();
+        assert_eq!(row.params_json, row2.params_json);
+        assert_eq!(row.due_at, row2.due_at);
     }
 
     #[test]
