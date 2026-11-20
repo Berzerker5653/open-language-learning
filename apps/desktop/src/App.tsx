@@ -49,7 +49,7 @@ import { LessonEncounter, drillStageId, stagePositionLabel, type LessonPlan } fr
 import { describeKanjiDecomposition } from "./kanji-decomposition";
 import { playClip } from "./playback";
 import { grammarLabelsEnabled, stressEnabled, type DisplaySettingsView } from "./stress";
-import { ReadingPanel, type Story, type StorySummary } from "./reading";
+import { ReadingPanel, type Story, type StorySummary, type WordCardView } from "./reading";
 import { ShadowingPanel, type ShadowTarget } from "./shadowing";
 import { attachKaraokeClock, type WordSpan } from "./word-timing";
 import { MyWordsPanel, type MineItem } from "./words";
@@ -578,7 +578,18 @@ export function App() {
   const [shadowIdx, setShadowIdx] = useState(0);
   const [storyList, setStoryList] = useState<StorySummary[]>([]);
   const [storyActive, setStoryActive] = useState<Story | null>(null);
-  const [storyLookup, setStoryLookup] = useState<string | null>(null);
+  // READER-FLOW-001: the word card open inside the reading paragraph —
+  // which sentence, which raw token, and the `word_card` answer (`card`
+  // null while loading) — plus the word-audio blob URL when
+  // `story_word_audio` answered; null audio means no Play button.
+  const [storyWord, setStoryWord] = useState<{
+    sentenceId: string;
+    token: string;
+    card: WordCardView | null;
+    audioUrl: string | null;
+  } | null>(null);
+  const storyWordGenRef = useRef<{ sentenceId: string; token: string } | null>(null);
+  const storyWordAudioRef = useRef<string | null>(null);
   const [storyError, setStoryError] = useState<string | null>(null);
   const [mineItems, setMineItems] = useState<MineItem[]>([]);
   const [mineSurface, setMineSurface] = useState("");
@@ -1234,7 +1245,7 @@ export function App() {
     setShadowIdx(0);
     setStoryList([]);
     setStoryActive(null);
-    setStoryLookup(null);
+    closeStoryWordCard();
     setPronDemo(null);
     setPronResult(null);
     setDictSentence(null);
@@ -2688,7 +2699,7 @@ export function App() {
   async function openReading() {
     setRoute("reading");
     setStoryActive(null);
-    setStoryLookup(null);
+    closeStoryWordCard();
     const inv = detectInvoke();
     if (!inv || !profileId) return;
     try {
@@ -2704,7 +2715,7 @@ export function App() {
     if (!inv || !profileId) return;
     try {
       setStoryActive((await inv("story_view", { profileId, storyId: id })) as typeof storyActive);
-      setStoryLookup(null);
+      closeStoryWordCard();
       setStoryError(null);
     } catch (e) {
       setStoryError(String(e));
@@ -2724,6 +2735,66 @@ export function App() {
     } catch (e) {
       setStoryError(audioFailureMessage(String(e)));
     }
+  }
+
+  // READER-FLOW-001: the word tap opens the card at that exact token.
+  // `word_card` carries the lookup (and the honest off-pack answer);
+  // `story_word_audio` answers whether the engine can slice that exact word
+  // form out of the sentence clip — when it misses, the card simply has no
+  // Play button, the app never guesses word audio.
+  async function openStoryWordCard(sentenceId: string, token: string) {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    closeStoryWordCard();
+    storyWordGenRef.current = { sentenceId, token };
+    setStoryWord({ sentenceId, token, card: null, audioUrl: null });
+    const current = () => {
+      const gen = storyWordGenRef.current;
+      return gen !== null && gen.sentenceId === sentenceId && gen.token === token;
+    };
+    try {
+      const card = (await inv("word_card", { profileId, sentenceId, token })) as WordCardView;
+      if (current()) {
+        setStoryWord((prev) => (prev ? { ...prev, card } : prev));
+      }
+    } catch (e) {
+      if (current()) setStoryError(String(e));
+    }
+    try {
+      const a = (await inv("story_word_audio", { profileId, sentenceId, token })) as {
+        wav_b64: string;
+        source: string;
+      };
+      const bytes = Uint8Array.from(atob(a.wav_b64), (c) => c.charCodeAt(0));
+      const url = URL.createObjectURL(new Blob([bytes], { type: "audio/wav" }));
+      if (current()) {
+        storyWordAudioRef.current = url;
+        setStoryWord((prev) => (prev ? { ...prev, audioUrl: url } : prev));
+      } else {
+        URL.revokeObjectURL(url);
+      }
+    } catch {
+      // No audio for this word form: the card renders no Play button.
+    }
+  }
+
+  function playStoryWordAudio(sentenceId: string, token: string) {
+    const wc = storyWord;
+    if (wc && wc.sentenceId === sentenceId && wc.token === token && wc.audioUrl) {
+      // Retained: the clip belongs to the open card, not to one playback;
+      // `closeStoryWordCard` releases the URL (R14 one-shot rules do not
+      // own a URL this screen keeps for replays).
+      playBlobUrl(wc.audioUrl, true);
+    }
+  }
+
+  function closeStoryWordCard() {
+    if (storyWordAudioRef.current) {
+      URL.revokeObjectURL(storyWordAudioRef.current);
+      storyWordAudioRef.current = null;
+    }
+    storyWordGenRef.current = null;
+    setStoryWord(null);
   }
 
   // K-14: learner-owned lexicon. Mined words are device-local, cited,
@@ -2772,7 +2843,7 @@ export function App() {
     }
   }
 
-  async function mineFromStory(surface: string, reading: string | null, gloss: string) {
+  async function mineFromStory(surface: string, reading: string | null, gloss: string | null) {
     const inv = detectInvoke();
     if (!inv || !profileId || !storyActive) return;
     try {
@@ -3720,12 +3791,15 @@ export function App() {
         <ReadingPanel
           storyList={storyList}
           storyActive={storyActive}
-          storyLookup={storyLookup}
           storyError={storyError}
           onOpenStory={(id) => void openStory(id)}
           onBack={() => void openReading()}
           onPlaySentence={(id) => void playStoryAudio(id)}
-          onToggleLookup={(id) => setStoryLookup(storyLookup === id ? null : id)}
+          wordCard={storyWord}
+          wordAudioAvailable={storyWord !== null && storyWord.audioUrl !== null}
+          onWordTap={(id, token) => void openStoryWordCard(id, token)}
+          onWordPlay={(id, token) => playStoryWordAudio(id, token)}
+          onWordClose={closeStoryWordCard}
           onMine={(surface, reading, gloss) => void mineFromStory(surface, reading, gloss)}
           profileName={displayName}
           grammarLabels={grammarLabelsEnabled(display)}

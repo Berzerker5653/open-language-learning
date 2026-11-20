@@ -228,12 +228,27 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
           },
         ]}
         storyActive={arabicStory}
-        storyLookup="ar.sentence.1"
         storyError={null}
         onOpenStory={() => {}}
         onBack={() => {}}
         onPlaySentence={() => {}}
-        onToggleLookup={() => {}}
+        wordCard={{
+          sentenceId: "ar.sentence.1",
+          token: "حالك؟",
+          card: {
+            query: "حالك",
+            lemma: null,
+            surface: "حالك",
+            reading: null,
+            gloss: "your condition",
+            status: "draft",
+            in_pack: true,
+          },
+        }}
+        wordAudioAvailable={false}
+        onWordTap={() => {}}
+        onWordPlay={() => {}}
+        onWordClose={() => {}}
         onMine={() => {}}
         profileName="Test"
         grammarLabels={true}
@@ -244,13 +259,15 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
     );
   }
 
-  it("flips story titles, sentences and looked-up words, but not the reading prose", () => {
+  it("flips story titles, the paragraph and looked-up words, but not the reading prose", () => {
     const html = shell("rtl", "ar-MA", readingPanel());
     // Story title inside the app's own h1: the heading stays, the run flips.
     expect(html).toContain('<h1><span dir="rtl" lang="ar-MA">السلام عليكم</span></h1>');
-    // Sentence surface (Ruby renders bare text, so the container carries it).
-    expect(html).toContain('<span dir="rtl" lang="ar-MA">كيف حالك؟</span>');
-    // Looked-up pack word flips with the sentence it came from.
+    // The flowing paragraph is the pack-text container: it carries the
+    // direction, and the sentence spans and word buttons inherit it.
+    expect(html).toContain('<p dir="rtl" lang="ar-MA" class="reader-paragraph">');
+    expect(html).toContain('<span class="sentence">');
+    // The looked-up pack word in the open card flips with the pack.
     expect(html).toContain('<span dir="rtl" lang="ar-MA">حالك</span>');
     // Romaji and the English gloss stay readable inside the RTL block.
     expect(html).toContain('<span dir="ltr" lang="en">kayfa haluk?</span>');
@@ -260,14 +277,10 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
   });
 
   it("names each story in the pack direction and leaves an LTR pack unflipped", () => {
-    const listHtml = shell("rtl", "ar-MA", readingPanel({ storyActive: null, storyLookup: null }));
+    const listHtml = shell("rtl", "ar-MA", readingPanel({ storyActive: null }));
     expect(listHtml).toContain('<span dir="rtl" lang="ar-MA">السلام عليكم</span> (1)');
     const japaneseStory: Story = { ...arabicStory, title: "はじめまして", sentences: [] };
-    const jaHtml = shell(
-      "ltr",
-      "ja-JP",
-      readingPanel({ storyActive: japaneseStory, storyLookup: null }),
-    );
+    const jaHtml = shell("ltr", "ja-JP", readingPanel({ storyActive: japaneseStory }));
     expect(jaHtml).toContain('<span lang="ja-JP">はじめまして</span>');
     expect(jaHtml).not.toContain('dir="rtl"');
   });

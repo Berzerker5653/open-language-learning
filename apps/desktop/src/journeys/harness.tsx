@@ -969,6 +969,17 @@ const JA_STORY = {
   ],
 };
 
+/** READER-FLOW-001 norm-token (wire contract, mirrored exactly): remove
+ * U+0301, lowercase, strip leading/trailing non-letters, NFC. */
+function normWireToken(token: string): string {
+  return token
+    .replace(/\u0301/g, "")
+    .toLowerCase()
+    .replace(/^[^\p{L}]+/u, "")
+    .replace(/[^\p{L}]+$/u, "")
+    .normalize("NFC");
+}
+
 interface Profile {
   id: string;
   display_name: string;
@@ -1505,6 +1516,46 @@ export class LearnerEngine {
         // The fixture story ships no media: the honest engine miss, the
         // same one a pack without the asset takes (MEDIA_MISSING_CODE).
         throw "media-asset-missing: This pack does not ship audio for this item, and the app never synthesizes speech, so there is nothing to play.";
+      // READER-FLOW-001 wire mirror. `word_card` resolves the norm-token
+      // against the story's pack lexicon rows (mirroring the engine's
+      // norm(entry.surface) == norm(token) match; the RU lemmas-table leg
+      // is a pack sidecar the ja fixture does not carry), answering the
+      // exact WordCardView shape. No row => in_pack false and everything
+      // else null — the frontend's honest "not in your pack yet" card.
+      case "word_card": {
+        const p = this.profile(args.profileId);
+        if (p.active !== JA || String(args.sentenceId) === "") throw "story not found";
+        const sentence = JA_STORY.sentences.find((s) => s.content_id === String(args.sentenceId));
+        if (!sentence) throw "story not found";
+        const query = normWireToken(String(args.token));
+        const hit = sentence.known.find((w) => normWireToken(w.surface) === query);
+        if (!hit) {
+          return {
+            query,
+            lemma: null,
+            surface: null,
+            reading: null,
+            gloss: null,
+            status: null,
+            in_pack: false,
+          };
+        }
+        return {
+          query,
+          lemma: null,
+          surface: hit.surface,
+          reading: hit.reading,
+          gloss: hit.gloss,
+          status: hit.status,
+          in_pack: true,
+        };
+      }
+      case "story_word_audio":
+        // The fixture story ships no media at all, so there is no sentence
+        // clip to slice a word from — the same honest miss `story_audio`
+        // takes, and the frontend renders no Play button rather than
+        // guessing audio.
+        throw "word-audio-missing: This pack does not ship audio for this word, and the app never synthesizes speech, so there is nothing to play.";
       case "content_confirm": {
         const p = this.profile(args.profileId);
         if (!p.active) {

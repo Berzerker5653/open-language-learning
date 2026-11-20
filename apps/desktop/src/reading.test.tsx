@@ -1,16 +1,31 @@
 /**
- * CONTENT-CONFIRM-001 (ADR-0040) — component pin for the confirmation
- * surface in the graded-reading lookup panel. What must hold visually:
- * the explicit toggle exists for sentences and for looked-up words,
- * attribution renders as "Confirmed by <names>" from the view's own data,
- * the signed-in learner sees "Undo" only where their own mark stands, and
- * the panel never uses a verification/expertise/review claim (docs/18).
- * The mounted click-through (callbacks actually firing against the
- * engine) is pinned by src/journeys/content-confirm.journey.tsx.
+ * READER-FLOW-001 — component pin for the continuous paragraph reader,
+ * carrying the CONTENT-CONFIRM-001 (ADR-0040) confirmation surface and the
+ * GRAMMAR-LABELS-001 interlinear contract into the new structure.
+ *
+ * What must hold visually: the story body is ONE flowing paragraph of
+ * sentence spans with inline word buttons (never a button column); the word
+ * card renders gloss, pack status, the lemma line when resolved, Mine, and a
+ * Play button ONLY when word audio exists (off-pack words get the honest
+ * "not in your pack yet" line, never an invented gloss); the confirmation
+ * toggle stays a quiet control at the sentence tail and inside the word
+ * card, attribution renders as "Confirmed by <names>", only the signed-in
+ * learner's own mark turns into "Undo", and the panel never uses a
+ * verification/expertise/review claim (docs/18).
+ * The mounted click-through (callbacks firing against the engine, the
+ * word_card/story_word_audio wire) is pinned by
+ * src/journeys/content-confirm.journey.tsx.
  */
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
-import { ReadingPanel, expandGrammarLabel, type ReadingPanelProps, type Story } from "./reading";
+import {
+  ReadingPanel,
+  expandGrammarLabel,
+  normToken,
+  type ReadingPanelProps,
+  type Story,
+  type WordCardView,
+} from "./reading";
 
 const STORY: Story = {
   id: "ja.story.test.confirm",
@@ -46,19 +61,33 @@ const STORY: Story = {
   },
 };
 
+/** The `word_card` answer for the classroom word, in the wire shape. */
+const CLASSROOM_CARD: WordCardView = {
+  query: "きょうしつ",
+  lemma: null,
+  surface: "きょうしつ",
+  reading: null,
+  gloss: "classroom",
+  status: "community",
+  in_pack: true,
+};
+
 function base(over: Partial<ReadingPanelProps>): ReadingPanelProps {
   const noop = () => {};
   return {
     storyList: [],
     storyActive: STORY,
-    storyLookup: "ja.sent.test.one", // lookup open: the panel body renders
     storyError: null,
     profileName: "Carla",
     grammarLabels: true,
+    wordCard: null,
+    wordAudioAvailable: false,
     onOpenStory: noop,
     onBack: noop,
     onPlaySentence: noop,
-    onToggleLookup: noop,
+    onWordTap: noop,
+    onWordPlay: noop,
+    onWordClose: noop,
     onMine: noop,
     onConfirm: noop,
     onUnconfirm: noop,
@@ -69,14 +98,102 @@ function base(over: Partial<ReadingPanelProps>): ReadingPanelProps {
 const render = (over: Partial<ReadingPanelProps> = {}) =>
   renderToStaticMarkup(<ReadingPanel {...base(over)} />);
 
+/** The card open at a tapped token of the ja test story. */
+const withCard = (
+  token: string,
+  card: WordCardView | null,
+  over: Partial<ReadingPanelProps> = {},
+) =>
+  render({
+    wordCard: { sentenceId: "ja.sent.test.one", token, card },
+    ...over,
+  });
+
 const count = (haystack: string, needle: string) => haystack.split(needle).length - 1;
 
-describe("content confirmation surface (CONTENT-CONFIRM-001)", () => {
-  it("offers the explicit toggle for the sentence and for each looked-up word", () => {
+describe("paragraph reader structure (READER-FLOW-001)", () => {
+  it("renders the story body as one flowing paragraph, not a button column", () => {
     const html = render();
-    // Sentence toggle sits with the gloss in the lookup; the word gets its
-    // own beside "Mine". Two items, two toggles; Ana's mark never turns a
-    // stranger's button into "Undo".
+    expect(count(html, 'class="reader-paragraph"')).toBe(1);
+    expect(count(html, 'class="sentence"')).toBe(1);
+    // Every whitespace token is an inline word button, whitespace-joined.
+    expect(count(html, 'class="word"')).toBe(5);
+    expect(html).toContain('</button> <button type="button" class="word">');
+  });
+
+  it("the quiet CONTENT-CONFIRM control rides the sentence tail, not the sentence itself", () => {
+    const html = render();
+    // The sentence span is a plain span (its non-word area plays audio);
+    // the toggle is a small control in the tail, after the last word.
+    expect(html).toContain('<span class="sentence">');
+    expect(html).toContain('<span class="sentence-tail">');
+    expect(count(html, "This looks right")).toBe(1);
+  });
+
+  it("the card opens at the tapped word with gloss, pack status, and Mine", () => {
+    const html = withCard("きょうしつ", CLASSROOM_CARD);
+    expect(html).toContain('aria-label="Word card"');
+    expect(html).toContain(">Mine</button>");
+    expect(html).toContain("classroom");
+    expect(html).toContain("in your pack");
+    // The tapped token's word button carries the active marker.
+    expect(html).toContain('class="word word--active"');
+  });
+
+  it("an off-pack token gets the honest card — no invented gloss, Mine still offered", () => {
+    const html = withCard("ほん", {
+      query: "ほん",
+      lemma: null,
+      surface: null,
+      reading: null,
+      gloss: null,
+      status: null,
+      in_pack: false,
+    });
+    expect(html).toContain("not in your pack yet");
+    expect(html).toContain(">Mine</button>");
+    // The tapped headword falls back to the raw token; no pack fields leak
+    // (the sentence gloss rides the tail, not the card).
+    expect(html).toContain(">ほん<");
+    expect(html).not.toContain(">classroom<");
+    expect(html).not.toContain(">in your pack");
+  });
+
+  it("the card shows the lemma line only when the engine resolved one", () => {
+    const withLemma = withCard("хлеба", {
+      query: "хлеба",
+      lemma: "хлеб",
+      surface: "хле́ба",
+      reading: null,
+      gloss: "bread (some)",
+      status: "draft",
+      in_pack: true,
+    });
+    expect(withLemma).toContain("dictionary form:");
+    expect(withLemma).toContain(">хлеб<");
+    const withoutLemma = withCard("きょうしつ", CLASSROOM_CARD);
+    expect(withoutLemma).not.toContain("dictionary form:");
+  });
+
+  it("the Play button renders only when word audio actually exists", () => {
+    const noAudio = withCard("きょうしつ", CLASSROOM_CARD);
+    expect(noAudio).not.toContain(">Play</button>");
+    const audio = withCard("きょうしつ", CLASSROOM_CARD, { wordAudioAvailable: true });
+    expect(audio).toContain(">Play</button>");
+  });
+
+  it("normToken mirrors the wire contract: acute stripped, cased lowered, edges cut", () => {
+    expect(normToken("хле́ба,")).toBe("хлеба");
+    expect(normToken("(Добрый!)")).toBe("добрый");
+  });
+});
+
+describe("content confirmation surface (CONTENT-CONFIRM-001)", () => {
+  it("offers the explicit toggle for the sentence tail and for a looked-up word", () => {
+    // Sentence toggle sits quiet at the tail; the word card carries its
+    // own. Two items, two toggles; Ana's mark never turns a stranger's
+    // button into "Undo".
+    const html = withCard("きょうしつ", CLASSROOM_CARD);
     expect(count(html, "This looks right")).toBe(2);
     expect(html).toContain(">Mine</button>");
     expect(html).not.toContain(">Undo</button>");
@@ -87,14 +204,14 @@ describe("content confirmation surface (CONTENT-CONFIRM-001)", () => {
   });
 
   it("shows Undo only where the signed-in learner's own mark stands", () => {
-    const html = render({ profileName: "Ana" });
+    const html = withCard("きょうしつ", CLASSROOM_CARD, { profileName: "Ana" });
     expect(html).toContain(">Undo</button>");
     // The word row carries no mark from Ana — that toggle is still explicit.
     expect(count(html, "This looks right")).toBe(1);
   });
 
   it("shows no attribution line where nobody has confirmed", () => {
-    const html = render({
+    const html = withCard("きょうしつ", CLASSROOM_CARD, {
       profileName: "Carla",
       storyActive: { ...STORY, confirmations: {} },
     });
@@ -103,24 +220,26 @@ describe("content confirmation surface (CONTENT-CONFIRM-001)", () => {
   });
 
   it("never claims verification, expertise, or review (docs/18)", () => {
-    expect(render({ profileName: "Ana" })).not.toMatch(/verif|expert|review/i);
+    expect(withCard("きょうしつ", CLASSROOM_CARD, { profileName: "Ana" })).not.toMatch(
+      /verif|expert|review/i,
+    );
   });
 
-  it("shows sentence attribution even with no lookup open", () => {
-    // Attribution rides the sentence row always; only the toggle lives in
-    // the lookup. A learner browsing without opening anything still sees
-    // who stood behind each sentence.
-    const html = render({ storyLookup: null });
+  it("shows sentence attribution with no word card open", () => {
+    // Attribution and the quiet toggle ride the sentence tail always. A
+    // learner browsing without tapping anything still sees who stood
+    // behind each sentence and can confirm without opening a card.
+    const html = render();
     expect(html).toContain("Confirmed by Ana, Bruno");
-    expect(count(html, "This looks right")).toBe(0);
+    expect(count(html, "This looks right")).toBe(1);
   });
 });
 
-/* GRAMMAR-LABELS-001 — interlinear grammar labels in the reader. The
- * compact label rides under its token, the full-form expansion rides the
- * lookup card, the global toggle hides labels, uncovered tokens (and ja
- * furigana text) stay exactly as before — silent degradation, no layout
- * shift. */
+/* GRAMMAR-LABELS-001 — interlinear grammar labels in the paragraph reader.
+ * The compact label rides under its token inside the word button, the
+ * full-form expansion rides the word card, the global toggle hides labels,
+ * uncovered tokens (and ja furigana text) stay exactly as before — silent
+ * degradation, no layout shift. */
 describe("interlinear grammar labels (GRAMMAR-LABELS-001)", () => {
   const RU_SENT = "ru.sent.test.labels";
   const RU: Story = {
@@ -145,12 +264,12 @@ describe("interlinear grammar labels (GRAMMAR-LABELS-001)", () => {
       },
     ],
   };
-  const ru = (over: Partial<ReadingPanelProps> = {}) =>
-    render({ storyActive: RU, storyLookup: RU_SENT, ...over });
+  const ru = (over: Partial<ReadingPanelProps> = {}) => render({ storyActive: RU, ...over });
+  const ruCard = (token: string) => ru({ wordCard: { sentenceId: RU_SENT, token, card: null } });
 
-  it("labels sit under their tokens; uncovered tokens keep an empty placeholder", () => {
+  it("labels sit under their tokens inside the word buttons; uncovered tokens keep an empty placeholder", () => {
     const html = ru();
-    expect(count(html, 'class="il-token"')).toBe(4);
+    expect(count(html, 'class="word il-token"')).toBe(4);
     expect(html).toContain(">nom.sg<");
     expect(html).toContain(">perf.past<");
     expect(html).toContain(">gen.sg<");
@@ -159,19 +278,23 @@ describe("interlinear grammar labels (GRAMMAR-LABELS-001)", () => {
     expect(count(html, 'class="il-label il-label--empty"')).toBe(1);
   });
 
-  it("the lookup card expands compact labels to full forms", () => {
-    const html = ru();
-    expect(html).toContain("Grammar in this sentence:");
-    expect(html).toContain("genitive singular");
-    expect(html).toContain("perfective past");
-    expect(html).toContain("nominative singular");
+  it("the word card expands the tapped token's compact label to its full form", () => {
+    expect(ruCard("хлеба")).toContain("Grammar in this sentence:");
+    expect(ruCard("хлеба")).toContain("genitive singular");
+    expect(ruCard("купил")).toContain("perfective past");
+    expect(ruCard("Он")).toContain("nominative singular");
+    // A token the sidecar does not cover carries no grammar line.
+    expect(ruCard("вчера")).not.toContain("Grammar in this sentence:");
   });
 
-  it("the global toggle off renders the bare pre-feature text", () => {
+  it("the global toggle off renders bare word buttons — no labels at all", () => {
     const html = ru({ grammarLabels: false });
     expect(html).not.toContain("il-token");
     expect(html).not.toContain("gen.sg");
-    expect(html).toContain("Он купил хлеба вчера");
+    // The same four tokens, as plain word buttons.
+    expect(count(html, 'class="word"')).toBe(4);
+    expect(html).toContain(">Он<");
+    expect(html).toContain(">вчера<");
   });
 
   it("ja furigana text is never rerouted through the interlinear path", () => {
@@ -191,9 +314,14 @@ describe("interlinear grammar labels (GRAMMAR-LABELS-001)", () => {
         },
       ],
     };
-    const html = render({ storyActive: jaLabeled, storyLookup: "ja.sent.test.one" });
+    const html = render({ storyActive: jaLabeled });
     expect(html).not.toContain("il-token");
+    // Ruby still renders inside the sentence spans — now one <ruby> per
+    // kanji word, annotating the whole word.
     expect(html).toContain("<ruby>");
+    expect(html).toContain("<ruby>教室<rp>(</rp><rt>きょうしつ</rt><rp>)</rp></ruby>");
+    // The words stay tappable buttons.
+    expect(count(html, 'class="word"')).toBe(5);
   });
 
   it("unknown label atoms render verbatim rather than vanishing", () => {
