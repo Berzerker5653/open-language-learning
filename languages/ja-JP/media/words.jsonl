@@ -1087,7 +1087,6 @@
 {"id": "ja.lex.communication.pasuwa-do", "words": [{"w": "ぱすわーど", "s": 0.0, "e": 1.0}]}
 {"id": "ja.lex.leisure.anime", "words": [{"w": "あにめ", "s": 0.0, "e": 0.3}]}
 {"id": "ja.lex.leisure.asobimasu", "words": [{"w": "あそびます", "s": 0.0, "e": 0.7}]}
-{"id": "ja.lex.leisure.basuketta", "words": [{"w": "ばすけっと", "s": 0.0, "e": 0.94}]}
 {"id": "ja.lex.communication.romaji", "words": [{"w": "ろーまじ", "s": 0.0, "e": 2.16}]}
 {"id": "ja.lex.leisure.dekakemasu", "words": [{"w": "でかけます", "s": 0.0, "e": 1.72}]}
 {"id": "ja.lex.communication.setsumei", "words": [{"w": "せつめい", "s": 0.0, "e": 0.94}]}
@@ -1121,7 +1120,6 @@
 {"id": "ja.lex.critique.jinken", "words": [{"w": "じんけん", "s": 0.0, "e": 0.84}]}
 {"id": "ja.lex.critique.kakushin", "words": [{"w": "かくしん", "s": 0.0, "e": 0.34}]}
 {"id": "ja.lex.leisure.supootsu", "words": [{"w": "すぽーつ", "s": 0.0, "e": 1.22}]}
-{"id": "ja.lex.leisure.tabehou", "words": [{"w": "たべほう", "s": 0.0, "e": 0.74}]}
 {"id": "ja.lex.critique.kankei3", "words": [{"w": "かんけい", "s": 0.0, "e": 0.52}]}
 {"id": "ja.lex.leisure.tenisu", "words": [{"w": "てにす", "s": 0.0, "e": 0.24}]}
 {"id": "ja.lex.critique.kyouiku2", "words": [{"w": "きょういく", "s": 0.0, "e": 0.78}]}
@@ -2248,7 +2246,6 @@
 {"id": "ja.lex.time.shuu", "words": [{"w": "しゅう", "s": 0.0, "e": 0.68}]}
 {"id": "ja.lex.time.yoru", "words": [{"w": "よる", "s": 0.0, "e": 0.58}]}
 {"id": "ja.lex.transport.annai", "words": [{"w": "あんない", "s": 0.0, "e": 0.68}]}
-{"id": "ja.lex.transport.chakubatsu", "words": [{"w": "ちゃくばつ", "s": 0.0, "e": 1.26}]}
 {"id": "ja.lex.transport.ekimae", "words": [{"w": "えきまえ", "s": 0.0, "e": 0.76}]}
 {"id": "ja.lex.transport.fune", "words": [{"w": "ふね", "s": 0.0, "e": 0.46}]}
 {"id": "ja.lex.transport.hayai", "words": [{"w": "はやい", "s": 0.0, "e": 0.28}]}
@@ -2399,7 +2396,6 @@
 {"id": "ja.lex.work.kitto", "words": [{"w": "きっと", "s": 0.0, "e": 0.52}]}
 {"id": "ja.lex.work.kyoushi", "words": [{"w": "きょうし", "s": 0.0, "e": 0.44}]}
 {"id": "ja.lex.work.naraimasu", "words": [{"w": "ならわす", "s": 0.0, "e": 0.82}]}
-{"id": "ja.lex.work.nobun", "words": [{"w": "のぶん", "s": 0.0, "e": 0.46}]}
 {"id": "ja.lex.work.oshiemasu", "words": [{"w": "おしえま", "s": 0.0, "e": 0.84}]}
 {"id": "ja.lex.work.saigo", "words": [{"w": "さいご", "s": 0.0, "e": 0.34}]}
 {"id": "ja.lex.work.saisho", "words": [{"w": "さいしょ", "s": 0.0, "e": 0.7}]}

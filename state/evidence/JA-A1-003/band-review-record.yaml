@@ -1,0 +1,88 @@
+# JA-A1-003 band review record — pack org.openlanguage.ja-jp.reference v0.4.3
+# policy_version: 1.0.0 (languages/ja-JP/review/REVIEW_POLICY.yaml)
+# date: 2026-11-20
+record_id: ja-a1-band-review-2026-11-20
+policy_version: "1.0.0"
+coverage_version: "1.0.0"
+band: A1 (with on-ramp pre-A1 coverage-map objectives included)
+pack_version: "0.4.3"
+pack_manifest_sha256: 7dbd7891eb5899a73c3ad4e47e6326b4b12dc6f03b0a8172af9565a3c52736b6
+card: JA-A1-003
+worklist: languages/ja-JP/review/WORKLIST-2026-10-05.md (28 A1-relevant rows adjudicated)
+
+reviewer:
+  name: hermes-default agent
+  reviewer_category: ai-assisted
+  qualification_basis: >
+    Owner decision 2026-11-19 (acceptance-autonomy rule, recorded in
+    state/task-state.json JA-A1-003 notes): qualified review for content
+    cards is agent-performed with evidence files, reversible; release/publish
+    gates unchanged. This record supersedes the ADR-0040 "never done" posture
+    for this card only as an owner scope decision on the review seat.
+  honesty_note: >
+    The agent is NOT a qualified human reviewer in the REVIEW_POLICY
+    qualification categories. All 631 per-item records are recorded as
+    `ai-assisted`. Per promotion_authority, ai-assisted records never promote
+    content: no item status was flipped; the pack keeps its honest posture
+    (AI-generated, draft-labeled, ADR-0014 disclosure). `validated`/`verified`
+    remain gated on human records enforced by the validator.
+
+population_reviewed:  # full-review core per REVIEW_POLICY coverage section
+  # Counts include the second-run gap-fill pass: +22 lexicon, +10 sentences,
+  # +5 on-ramp assessments that the first run's scoping had missed.
+  sentences: 102       # every ja.sent.* referenced by the 79 A1-band units
+  lexicon: 416         # every ja.lex.* referenced by A1 units
+  kanji: 56            # every ja.kanji.* in the A1 set (readings verified)
+  assessments: 26      # every assessment bound to an A1 goal + on-ramp (incl. rubric criteria)
+  grammar_concepts: 31 # concept framing + example sentences
+  total_records: 631   # languages/ja-JP/reviews.jsonl, one row per item
+review_scope: linguistic (form/reading/gloss/naturalness) + pedagogical (task validity, rubric, level fit); technical audio LISTENING not performable by an agent and remains open (see open_items)
+
+findings:
+  P0: []
+  P1_resolved:  # fixed in this commit; audio re-baked for affected clips
+    - ja.sent.interview-prep: romaji token 'intabyuu' in learner-facing text/reading/cloze
+    - ja.sent.finish-work: 始業 (start of work) contradicted gloss 'Work hours end'
+    - ja.lex.leisure.ryoushuu: りょうしゅう is not a word with this meaning -> りょこう
+    - ja.lex.leisure.tabehou: たべほう is not a word -> たべあるき
+    - ja.lex.transport.chakubatsu: ちゃくばつ is not a word -> とうちゃく (到着)
+    - ja.lex.work.hakkou: はっこう does not mean mailing -> はっそう (発送)
+    - ja.lex.work.nobun: kanji radical 攵 ('nobun') misfiled in lexicon as 'notebook' -> のーと
+    - ja.lex.work.shigyou: gloss 'working hours' contradicts 始業 semantics
+  P2_resolved:
+    - ja.sent.play-soccer: さっかーを あそびます not idiomatic -> ともだちと さっかーを します
+    - ja.lex.leisure.basuketta: standalone ばすけっと unattested -> ばすけっとぼーる
+    - ja.lex.work.taishita: 大した reads たいした (no rendaku); gloss pattern 大した…ない
+  P3_noted:  # style, not corrected
+    - pack-wide katakana-word style: hiragana + ー (にゅーす, こんさーと, こーち) mixed with katakana (ペン); inconsistent but systematic; needs an owner style decision
+    - ja.sent.my-father-teacher: reading field omits a space present in text (harmless)
+
+worklist_2026_10_05_adjudication:
+  rows_in_A1_scope: 28
+  confirmed_defects_fixed: 11   # the P1/P2 list above (the 10-05 row for apato/saakaa/pikunikku forms were already repaired on 2026-10-05+ commits)
+  adjudicated_correct: 17       # gloss-divergence/not-in-jmdict noise: JMdict headword-match artifacts (あります→'allyl', 歩きます→'alkyl', 嫌いの na-adj sense, いただきます/ごちそうさま functional glosses, suru-compounds, 決心します, 注目します, 完了します, 完全に, 紹介します, 歌い general sense)
+
+machine_gates:  # on the exact reviewed tree
+  langpack_validate: "0 errors after re-bake (10 errors pre-bake were the K-65 reading-pairing gate firing on my own text corrections — resolved by regenerating the 10 clips, not by weakening the gate)"
+  langpack_lint: "0 errors"
+  coverage_map_gates: "on-ramp 5/5 and A1 15/15 objectives each map to an existing goal + unit + assessment record"
+  curriculum_audit: "see gates.log"
+
+trust_state_verdict:
+  advanced: false
+  reason: >
+    REVIEW-001 acceptance is conditional: the reference pack's trust state
+    advances ONLY if the review gate criteria are met. Promotion
+    (validated/verified) requires human review records that the validator
+    enforces; an agent review, however thorough, does not create one. The
+    coverage gate passes for v0.4.3 and no unresolved P0/P1 remains, so the
+    CARD's gates pass under the 2026-11-19 owner reclassification; the pack's
+    posture is unchanged and honestly labeled. Reversible: if a qualified
+    human or community reviewer later endorses these exact records, they may
+    flip status with qualifying reviews.jsonl rows per REVIEWER_KIT.
+
+open_items_not_closed_here:
+  - "Human listening check of reference audio (8 K-65 contrast items + the 10 re-baked clips) — agent cannot listen; owner audio policy 2026-11-06 accepts ja audio on machine gates + trust"
+  - "Media archive drift: 10 manifest rows now carry hashes newer than the published pack archives. Next pack publication (owner-gated) must re-bake/rebuild; CI audio-restore against the pinned published archive fails for these ids until then"
+  - "media/words.jsonl timing rows for 4 changed lexicon forms removed (stale word strings); karaoke timing for those clips regenerates via the word-timing pipeline at next release"
+  - "Non-A1 residue of the same defect classes (higher-band units 528/648 reference their own intabyuu-family ids; A2 journeys use legitimate りょうしゅうしょ receipts): not touched under an A1 band review"
