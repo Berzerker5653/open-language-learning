@@ -75,6 +75,6 @@ generation_contract:
   expected_interpretations:
   - 'Discourse linkage: まず then sequencing, だから drawing a result from the prior sentence, けれど contrasting it, により marking variation; taught chunks only.'
   prohibited_ambiguity:
-  - Do not open a reply to a superior with だから; plain peer reasoning (polite framing is だから/それで softened, see politeness register).
+  - Do not open a reply to a superior with だから; frame the reasoning with それで or ですから in polite settings (see politeness register).
   target_proficiency: B1
   validation_method: choice

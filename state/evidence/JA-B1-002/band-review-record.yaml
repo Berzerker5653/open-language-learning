@@ -1,0 +1,74 @@
+# JA-B1-002 band review record — pack org.openlanguage.ja-jp.reference v0.4.3
+# policy_version: 1.0.0 (languages/ja-JP/review/REVIEW_POLICY.yaml)
+# date: 2026-11-20
+record_id: ja-b1-increment-review-2026-11-20
+policy_version: "1.0.0"
+coverage_version: "1.0.0"
+band: B1 (scoped to the 2026-11-20 independent-use increment authored at b3693bc / JA-B1-001)
+pack_version: "0.4.3"
+pack_manifest_sha256: 7dbd7891eb5899a73c3ad4e47e6326b4b12dc6f03b0a8172af9565a3c52736b6
+card: JA-B1-002
+
+reviewer:
+  name: hermes-default agent
+  reviewer_category: ai-assisted
+  qualification_basis: >
+    Owner decision 2026-11-19 (acceptance-autonomy rule, recorded in
+    state/task-state.json JA-B1-002 notes): qualified review for content
+    cards is agent-performed with evidence files, reversible; release/publish
+    gates unchanged.
+  honesty_note: >
+    The agent is NOT a qualified human reviewer in the REVIEW_POLICY
+    qualification categories. All 19 per-item records are recorded as
+    `ai-assisted`. ai-assisted records never promote content: no item status
+    was flipped; the pack keeps its honest posture (AI-generated,
+    draft-labeled, ADR-0014 disclosure). `validated`/`verified` remain gated
+    on human records enforced by the validator.
+
+population_reviewed:
+  goal: 1              # ja.goal.b1.repair-clarification
+  units: 4             # 823-826 (26 activities, task_sequence checked end to end)
+  sentences: 12        # sentences/b1-independent-2026-11-20.jsonl
+  audio_backed_records: 12   # media/manifest.jsonl rows cross-checked vs reading + ASR evidence
+  assessments: 2       # transfer + delayed-retention rubrics
+  total_records: 19    # languages/ja-JP/reviews.jsonl rows rev-2026-11-20-b1-001..019
+review_scope: linguistic (form/reading/romaji/gloss/naturalness/cloze) + pedagogical (task-sequence validity, generation contract, rubric criteria, level fit) + audio-backed record cross-verification; technical audio LISTENING not performable by an agent and remains open (see open_items)
+
+outcome_counts:
+  approved: 11
+  approved-with-notes: 5
+  changes-requested: 3   # all corrected in this same lane (see findings)
+
+findings:
+  P0: []
+  P1: []
+  P2_resolved:
+    - ja.sent.b1-disc-kara-maeniawanakatta: kanji 合 mixed into all-kana text, contradicting reading field and manifest/ASR string
+    - ja.sent.b1-news-genjyou-tenkyuu: romaji 'shinbon' for しんぶん (shinbun) + kanji 読 vs all-kana reading
+  P3_resolved:
+    - ja.sent.b1-disc-ni-yori-chigaimasu: kanji 国 vs reading くに (all-kana band consistency)
+  P3_noted:
+    - goal contexts under-declared (classroom only vs office unit); assessments writing-only vs speaking modality declared
+    - ja.unit.b1-news-reading allowed_grammar (てしまう/そうだ) unused by its sentences; taught devices are ため/ています — re-target ids next authoring pass
+    - id-slug/content drift on three sentence ids (opaque ids; referenced by manifest+unit refs; untouched)
+
+audio_verdict: all 3 corrections are orthography-only — clips were baked from the reading field (already the corrected kana), so pronunciation is unchanged and no re-bake was needed; JA-B1-001 ASR round-trip evidence (12/12) remains the audio content proof.
+
+machine_gates:  # on the exact reviewed tree, pack-scoped (LANE tier)
+  langpack_validate: "0 errors, 0 warnings"
+  langpack_lint: "0 errors, 0 warnings"
+  langpack_test_install_mode: "0 errors, 0 warnings (audio coverage + hashes verified after corrections)"
+  audits: "audit-curriculum/lexicon/licenses/sources all 0 errors"
+  see: state/evidence/JA-B1-002/gates.log
+
+trust_state_verdict:
+  advanced: false
+  reason: >
+    Promotion (validated/verified) requires human review records that the
+    validator enforces; an agent review does not create one. The CARD's gates
+    pass under the 2026-11-19 owner reclassification; the pack posture is
+    unchanged and honestly labeled. Reversible per the same owner rule.
+
+open_items_not_closed_here:
+  - "Legacy B1 band (198 pre-increment units incl. 197 support_level-5 activities, work-notice units 820-822) — follow-up board card created"
+  - "Human listening check of the 12 B1 clips (owner ja-audio trust policy 2026-11-06 stands)"
