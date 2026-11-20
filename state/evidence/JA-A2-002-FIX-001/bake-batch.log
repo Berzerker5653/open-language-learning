@@ -1,0 +1,164 @@
+START 2026-11-20T14:38:04-07:00
+target count: 62
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.call-police: first-request 30.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.city-hall: first-request 37.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.pay-bill: first-request 18.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.on-sale: first-request 20.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.describe-symptom: first-request 30.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.take-prevention: first-request 21.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.health-check: first-request 27.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.explain-grammar: first-request 36.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.recovery-onsen: first-request 27.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.quarrel-reconcile: first-request 39.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.check-balance: first-request 17.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.keep-receipt: first-request 61.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.insurance-card: first-request 24.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.address-registration: first-request 15.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.admin.kin-yuu: first-request 15.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.admin.kessaku: first-request 14.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.admin.nyuusatsu: first-request 32.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.admin.mibungou: first-request 11.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.admin.jushou-todoke: first-request 38.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.admin.taishu-kin: first-request 61.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.body.shoumyou: first-request 40.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.body.fukkyuu: first-request 22.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.body.junyou: first-request 10.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.body.kaffa: first-request 6.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.body.taisha: first-request 8.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.body.fukatsu: first-request 60.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.city.kanen: first-request 10.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.ent.taimu: first-request 6.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.ent.joju: first-request 7.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.food.houshi: first-request 51.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.food.tsukemono: first-request 7.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.obaa-chan: first-request 12.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.yori-modosu: first-request 10.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.tsuui: first-request 8.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.kokoro-bazuka: first-request 19.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.kazoku-no-uni: first-request 10.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.kyoudai-ue: first-request 11.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.kyoudai-shita: first-request 6.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.jijou-betsu: first-request 13.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.aishi: first-request 10.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.omoide-bako: first-request 9.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.omoide-no-kioku: first-request 80.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.omoide-no-tabi: first-request 19.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.omoide-no-uta: first-request 5.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.omoide-no-hi: first-request 12.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.omoide-no-machi: first-request 40.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.omoide-no-hito: first-request 9.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.omoide-no-ki: first-request 13.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.rel.omoide-no-sora: first-request 13.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.shopping.shouhyou: first-request 16.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.shopping.fukuban: first-request 40.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.shopping.keshi: first-request 30.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.shopping.mon: first-request 13.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.sports.onsen-tou: first-request 47.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.sports.taekwondo: first-request 26.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.sports.joutairyoku: first-request 12.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.sports.kessan: first-request 8.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.weather2.kijitsu: first-request 38.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.weather2.yukidoke: first-request 12.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.weather2.yuki-yinga: first-request 40.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.weather2.naga: first-request 95.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.lex.weather2.naru: first-request 6.1s ok=True
+pack=languages/ja-JP assets=4935 generated=59 reused=0 refused=0 bytes=377987700
+FAILED ja.lex.admin.jushou-todoke: 5.0 s still exceeds 3.6 s cap after retries (runaway output)
+FAILED ja.lex.rel.omoide-no-machi: 4.2 s still exceeds 3.0 s cap after retries (runaway output)
+FAILED ja.lex.shopping.keshi: 10.4 s still exceeds 3.0 s cap after retries (runaway output)
+gen rc=1
+A2FIX-BAKE-DONE rc=1

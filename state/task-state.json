@@ -2120,6 +2120,31 @@
       "summary": "Authoring-time readability gate shipped (tools/readability-gate.py, venv pymorphy3): every lesson/story sentence checked against the declared band lexicon (glue whitelist + cumulative drill pools + band-tagged lexicon + confirm/mine ledger layering; cold profile falls back to band list); >1 unknown distinct lemma rejects naming the lemmas; regeneration requests carry the offending lemmas as negative hints and --recheck closes the loop; violations logged as pack-build evidence. 10 golden tests green; first real-pack run: 945 sentences/20 stories, 94 honest findings (evidence committed; band-tagging/regeneration follow-ups noted, gate not yet CI-blocking).",
       "notes": "ru-only lane (JMDict ja follow-up card noted in state/notes/READABILITY-GATE-001.md); non-ru exits 2, never silent pass. Follow-up data lane: band-tag ru lexicon entries for the 94 findings' lemmas or regenerate flagged sentences via regeneration-requests.jsonl.",
       "updated": "2026-11-20"
+    },
+    "SESSION-CHROME-001": {
+      "status": "done",
+      "attempts": 2,
+      "evidence": [
+        "state/evidence/SESSION-CHROME-001/gates.log",
+        "state/evidence/SESSION-CHROME-001/test-srs-preview2.log",
+        "state/evidence/SESSION-CHROME-001/clippy2.log",
+        "state/notes/SESSION-CHROME-001.md"
+      ],
+      "summary": "Session chrome shipped: SessionChrome component (progressbar + n-of-N step + engine-sourced ~min-remaining, no-estimate renders no time) mounted app-wide during bounded sessions; end-of-session card states done, MEASURED wall-clock minutes, and a forms-surfaced list (cap 12 stated honestly); review-group header prices dues in minutes from the planner's own est_seconds; grade buttons show the FSRS predicted next interval via new read-only srs_interval_preview command whose cargo test pins preview == the FsrsSpike decision the grade itself applies; hub mode cards carry graded/formative badges with de-jargoned Reading copy. Desktop vitest 50 files / 397 tests green incl. 15 new session-chrome tests; cargo fmt/test/clippy green at commit.",
+      "notes": "Preview prices Again/Good only (the ratings mine_grade implements); extend SrsIntervalPreview if Hard/Easy ship. sessionStartedAtRef deliberately unpersisted: abandoned sitting reports minutes null. Two bugs caught at controller pass: missing #[tauri::command] on srs_interval_preview (attempt-3's last patch failed silently) and attempt-3's own new formative-copy test had blurb-slice + negation-regex bugs (fixed test-side only; copy unchanged, intent preserved).",
+      "updated": "2026-11-20"
+    },
+    "JA-A2-002-FIX-001": {
+      "status": "done",
+      "attempts": 2,
+      "evidence": [
+        "state/evidence/JA-A2-002-FIX-001/ledger-note.md",
+        "state/evidence/JA-A2-002-FIX-001/gates.log",
+        "state/evidence/JA-A2-002-FIX-001/bake-batch.log"
+      ],
+      "summary": "All 80 changes-requested A2 review rows corrected in place (1:1 review-id to content-id mapping in the ledger note; content ids untouched): form/reading/gloss/text fixes across 11 lexicon files + sentences/entries.jsonl. All 63 invalidated reading-paired audio assets re-baked via scripts/generate-pack-audio.py (qwen3-tts/ono_anna; 3 first-batch runaway-output failures certified on individual re-rolls; every manifest row sha256-verified against the on-disk wav). 62 stale word-timing rows in media/words.jsonl removed (clips fall back to plain playback; refresh follow-up card created). Review verdicts left unflipped as historical record. Gates: langpack validate/lint/audit-curriculum/audit-lexicon/audit-licenses/audit-sources/test on languages/ja-JP all exit 0, 0 errors 0 warnings.",
+      "notes": "Pack version not bumped (0.4.3 stays; bump is coupled to owner-gated archive republish — published-archive drift already flagged at READER-FLOW-001 close). Word-timing refresh for the 63 re-baked clips is a follow-up card (WT-3 MMS-alignment infra). omoide-no-machi late correction (coinage cluster -> ふるさと) included in the 80.",
+      "updated": "2026-11-20"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
