@@ -1,0 +1,710 @@
+--- ru-RU: PUBLISHED 0.4.3 (PUBLISHED/CATALOG-PINNED) -> CANDIDATE 0.4.5 (bytes + 12-hex hash + path) ---
+published 0.4.3 members = 5790   candidate 0.4.5 members = 5973
+identical (size+hash)   = 5660
+added in 0.4.5:
+103724 5cedb12c79d6 media/ru.sent.a1.shapka-v-parke.u002.wav
+1046 167208d4a697 stories/dva-bileta-v-odin-teatr.yaml
+1070 c2efe1f9ecf7 stories/perevodchik-vse-pereputal.yaml
+1071 23d3c5f2e9d5 stories/aukcion-odnoy-kartiny.yaml
+107564 b7e7940d8d2a media/ru.sent.a2.telefon-v-taksi.u007.wav
+107564 c4385941dd60 media/ru.sent.a1.podarok-dlya-mamy.u004.wav
+107564 e32a3b4acc11 media/ru.lex.stories202611.fonar.wav
+111404 c8b1c3c27685 media/ru.sent.b1.u372.wav
+11308 a9c506e110dd media/ru.lex.home.more.wav
+115244 087ae23db3e3 media/ru.sent.a2.rybalka-zimoy.u006.wav
+115244 42bdc0c96665 media/ru.sent.a2.rybalka-zimoy.u005.wav
+115244 74876b575f08 media/ru.sent.a1.kot-doma.u003.wav
+115244 d02d608c9654 media/ru.sent.a1.moy-den.u004.wav
+119084 0b9b42392393 media/ru.lex.stories202611.dokladchik.wav
+119084 65474b35e967 media/ru.sent.a2.avtobus-ne-prishol.u001.wav
+119084 65dd88ab2425 media/ru.lex.stories202611.gitara.wav
+120979 ab940ffa50da media/lemmas.jsonl
+126764 6a96145b6ce3 media/ru.sent.a1.moy-den.u003.wav
+130604 5c21e0ca6c99 media/ru.sent.b1.kluch-ot-dachi.u002.wav
+130604 a2e08d737bcb media/ru.lex.stories202611.kupe.wav
+13356 f0d92edda784 media/ru.lex.problems.polnyi.wav
+134444 03a427fece37 media/ru.lex.stories202611.aukcion.wav
+138284 65a672760ae1 media/ru.sent.a1.kot-doma.u006.wav
+138284 6b47f29bcac8 media/ru.sent.a1.moy-den.u001.wav
+138284 b0381dd39f80 media/ru.sent.cp.p39.wav
+142124 1c5b5431219e media/ru.sent.a1.shapka-v-parke.u006.wav
+142124 f527755f75e9 media/ru.sent.b1.internet-v-derevne.u006.wav
+14380 28dddb13b612 media/ru.lex.narration.porog.wav
+145964 35f1214c1352 media/ru.sent.a1.kot-doma.u004.wav
+145964 610d9017587d media/ru.lex.stories202611.vozrazit.wav
+145964 755da9b786ae media/ru.lex.stories202611.zanaves.wav
+145964 b65a802744c8 media/ru.sent.b2.aukcion-odnoy-kartiny.u004.wav
+145964 d59c4eaab9ab media/ru.lex.stories202611.perevodchik.wav
+145964 ee3f7c719a0e media/ru.sent.cp.p21.wav
+145964 efee69b56e7f media/ru.sent.a1.moy-den.u005.wav
+14892 0a5613349396 media/ru.lex.experiences.proryv.wav
+153644 0fb05af67dc4 media/ru.sent.cp.p01.wav
+153644 3e3f7ca0d895 media/ru.sent.a2.telefon-v-taksi.u005.wav
+153644 5eb14e41196c media/ru.sent.b2.gorod-bez-karty.u007.wav
+153644 f98ea11ac1a7 media/ru.sent.a2.sosed-s-gitarioy.u001.wav
+15404 8e2f4280f56c media/ru.lex.family.delo.wav
+161324 d2bdde5c9cf9 media/ru.sent.a2.sosed-s-gitarioy.u002.wav
+16428 899c558a2401 media/ru.lex.shopping.tovar.wav
+165164 7609f40bd2e5 media/ru.sent.a1.moy-den.u006.wav
+165164 778cf25f1df4 media/ru.sent.cp.p02.wav
+165164 fa83b6ab7384 media/ru.sent.a1.shapka-v-parke.u003.wav
+169004 7ab011601286 media/ru.sent.b2.aukcion-odnoy-kartiny.u003.wav
+169004 e66043ba0d92 media/ru.sent.a2.rybalka-zimoy.u003.wav
+16940 a83edbba418b media/ru.lex.pastevents.potom.wav
+17452 4e1fb88bb7ec media/ru.lex.city.etazh.wav
+17452 a948af5de595 media/ru.lex.instructions.itog.wav
+17452 ea37f614913f media/ru.lex.workstudy.kollega.wav
+176684 5a2c3b29d0b2 media/ru.sent.a1.podarok-dlya-mamy.u005.wav
+176684 6440f14a5e8f media/ru.sent.a2.rybalka-zimoy.u002.wav
+17964 6920f5cc1eb4 media/ru.lex.home.komod.wav
+180524 62c4ab3d4527 media/ru.sent.a2.sosed-s-gitarioy.u006.wav
+180524 c595a629cbbe media/ru.sent.a2.avtobus-ne-prishol.u007.wav
+18476 8b12c28ef7fe media/ru.lex.family.koshka.wav
+18476 e66a5d16411e media/ru.lex.narration.dolgo.wav
+188204 60442ec1b1de media/ru.sent.b1.kluch-ot-dachi.u007.wav
+188204 b7161435928c media/ru.sent.a2.avtobus-ne-prishol.u004.wav
+18988 e78c0d221ca4 media/ru.lex.wellbeing.ukol.wav
+192044 7be578619b63 media/ru.lex.stories202611.poetessa.wav
+192044 85222e003213 media/ru.sent.a2.telefon-v-taksi.u003.wav
+192044 fe9f6f54e278 media/ru.sent.a1.shapka-v-parke.u004.wav
+19500 4afa483ddb24 media/ru.lex.travel2.zhalko.wav
+195884 8bbb9d0b3c13 media/ru.sent.a2.telefon-v-taksi.u004.wav
+195884 a80331c3038c media/ru.sent.b1.pismo-ne-temu.u001.wav
+199724 5319e103582a media/ru.sent.a2.avtobus-ne-prishol.u003.wav
+199724 613d0f135d3e media/ru.sent.b1.internet-v-derevne.u003.wav
+199724 e83f855982f1 media/ru.sent.b1.internet-v-derevne.u002.wav
+20012 d01e4bf67d79 media/ru.lex.shopping.marka.wav
+20012 ea5dcb6290dd media/ru.lex.socialplans.anons.wav
+203564 477ed4fdcbed media/ru.sent.b2.dva-bileta-v-odin-teatr.u003.wav
+203564 8e07842c787e media/ru.sent.b2.aukcion-odnoy-kartiny.u007.wav
+203564 8e2018073c6e media/ru.sent.a2.sosed-s-gitarioy.u003.wav
+20524 6cccede7d214 media/ru.lex.comparisons.proshche.wav
+207404 62035c7f7279 media/ru.sent.a1.podarok-dlya-mamy.u002.wav
+207404 afe9ed7353c9 media/ru.sent.b1.noch-v-poezde.u004.wav
+207404 cb83adacbbc4 media/ru.sent.b1.kluch-ot-dachi.u006.wav
+207404 e3aea7a2aad3 media/ru.sent.a2.sosed-s-gitarioy.u005.wav
+21036 2100f47fed3b media/ru.lex.problems.namyok.wav
+21036 3fbae32cb7b6 media/ru.lex.services.klient.wav
+21044 2665995e5199 media/ru.lex.housing.pyl.wav
+211244 25d845cb9b03 media/ru.sent.a2.avtobus-ne-prishol.u002.wav
+211244 c507cc7970ed media/ru.sent.b2.aukcion-odnoy-kartiny.u005.wav
+211244 f64c853031df media/ru.sent.a1.kot-doma.u005.wav
+21548 36bd2fad783e media/ru.lex.pastevents.chasto.wav
+21548 de8b348182ae media/ru.lex.messages.hochu.wav
+21548 f4969f7980f4 media/ru.lex.services.prikaz.wav
+218924 883971f6e64e media/ru.sent.b1.kluch-ot-dachi.u008.wav
+218924 afe8481adf36 media/ru.sent.a2.rybalka-zimoy.u001.wav
+22060 0ef4c1610282 media/ru.lex.narration2.odezhda.wav
+22060 6e25892babfd media/ru.lex.routines.zvonit.wav
+22060 70f5647cdcd5 media/ru.lex.media.hashteg.wav
+22060 7aba5af4eb09 media/ru.lex.synthesis4.kolllazh.wav
+22060 d997bbbe69a3 media/ru.lex.nature.ptica.wav
+22244 2fbd865d27c7 media/ru.lex.wellbeing.bol.wav
+222764 1eec8d70f58f media/ru.sent.a2.avtobus-ne-prishol.u005.wav
+222764 7e488ef028c1 media/ru.sent.cp.p28.wav
+222764 9baf4961605d media/ru.sent.b1.pismo-ne-temu.u004.wav
+222764 f2118d13186d media/ru.sent.b2.perevodchik-vse-pereputal.u002.wav
+22572 130403cb7747 media/ru.lex.family.sosed.wav
+22572 3c845fa335eb media/ru.lex.messages.nabirat.wav
+22572 4de7a2befdd9 media/ru.lex.nature.cvetok.wav
+230444 27a8c30652e0 media/ru.sent.b2.gorod-bez-karty.u004.wav
+230444 dec85cb183a8 media/ru.sent.b2.perevodchik-vse-pereputal.u007.wav
+230444 ecab52718601 media/ru.sent.b2.gorod-bez-karty.u002.wav
+23084 45e8bae384cc media/ru.lex.nature.solnce.wav
+23084 fba5d75b99d1 media/ru.lex.narration2.zakat.wav
+234284 4a647ccba8ff media/ru.sent.a2.sosed-s-gitarioy.u004.wav
+23444 85c6e48cb904 media/ru.lex.study2.cep.wav
+23596 0ad6dde90651 media/ru.lex.problems.rashchyot.wav
+23596 253dbf85a9b6 media/ru.lex.services.anketa.wav
+23596 ad7dcde9bbe7 media/ru.lex.narration2.solntse.wav
+23596 af8e52badf92 media/ru.lex.instructions.sobrat.wav
+238124 489a4087f217 media/ru.sent.b1.noch-v-poezde.u003.wav
+238124 71bb025eb355 media/ru.sent.b2.perevodchik-vse-pereputal.u005.wav
+238124 ccdcb00738d0 media/ru.sent.b2.aukcion-odnoy-kartiny.u002.wav
+24044 cd2a352667a9 media/ru.lex.family.est.wav
+24044 e68f5e18398f media/ru.lex.messages2.ves.wav
+24108 326df305fe4d media/ru.lex.comparisons.dorozhe.wav
+24108 bfdd2d3726d3 media/ru.lex.timeplans.noyabr.wav
+24108 c6849838a6d4 media/ru.lex.routines.gotovit.wav
+241964 0b3fedda9b8b media/ru.sent.b2.spor-o-budushchem.u006.wav
+241964 0ce9953f87b5 media/ru.sent.b2.dva-bileta-v-odin-teatr.u004.wav
+24620 14b3f97a35db media/ru.lex.travel2.zabota.wav
+24620 5789c9f79e8b media/ru.lex.home.magazin.wav
+24620 62b125bf4a22 media/ru.lex.problems.oshibka.wav
+249644 72ce9a5918c8 media/ru.sent.cp.p20.wav
+249644 dab9276ec65d media/ru.sent.b2.perevodchik-vse-pereputal.u004.wav
+25132 1c2d66ea5d66 media/ru.lex.city.tramvay.wav
+253484 5b2685444629 media/ru.sent.b2.perevodchik-vse-pereputal.u001.wav
+253484 93c27e21633c media/ru.sent.a2.rybalka-zimoy.u004.wav
+253484 d571fcebc5ad media/ru.sent.a2.telefon-v-taksi.u001.wav
+253484 ed5704cdeb51 media/ru.sent.b2.spor-o-budushchem.u007.wav
+253484 f24d87d384dd media/ru.sent.b2.aukcion-odnoy-kartiny.u006.wav
+25644 5978ad907641 media/ru.lex.wellbeing.ploho.wav
+257324 b4900d04cd3b media/ru.sent.b1.noch-v-poezde.u001.wav
+25844 f321a825542a media/ru.lex.study4.shchel.wav
+261164 1a615b8aaefc media/ru.sent.b1.kluch-ot-dachi.u001.wav
+261164 1f6692317013 media/ru.sent.b1.internet-v-derevne.u004.wav
+261164 8e830f394ad2 media/ru.sent.b2.perevodchik-vse-pereputal.u003.wav
+26156 21ef2b356442 media/ru.lex.messages.skazat.wav
+26156 653833f0a5be media/ru.lex.family.yey.wav
+26156 d9efca15b579 media/ru.lex.shopping.stoit.wav
+265004 1be9b279ee79 media/ru.sent.b1.pismo-ne-temu.u007.wav
+265004 4f7cf86232cc media/ru.sent.b1.pismo-ne-temu.u003.wav
+265004 73500e9242a3 media/ru.sent.b1.internet-v-derevne.u001.wav
+265004 a3f41aaf37d3 media/ru.sent.b2.spor-o-budushchem.u003.wav
+26668 b944fdfe9381 media/ru.lex.city.skameyka.wav
+268844 2981c9f3af0c media/ru.sent.b1.kluch-ot-dachi.u003.wav
+268844 381189902044 media/ru.sent.b1.noch-v-poezde.u005.wav
+268844 f943c33a5f31 media/ru.sent.b1.internet-v-derevne.u005.wav
+26924 e3c1255b2444 media/ru.lex.routines.den.wav
+27180 494399c35abf media/ru.lex.messages2.rasskaz.wav
+27180 4a3971be29f1 media/ru.lex.travel2.preodolet.wav
+27180 6b5d202c9037 media/ru.lex.sci.bresh.wav
+27180 8b2f935aa42a media/ru.lex.socialplans.napitok.wav
+27644 3a37090acbeb media/ru.lex.style.lest.wav
+276524 74f0d0e80d88 media/ru.sent.b2.gorod-bez-karty.u008.wav
+276524 7562fa06c96a media/ru.sent.b1.pismo-ne-temu.u005.wav
+276524 7845c077544c media/ru.sent.b1.kluch-ot-dachi.u005.wav
+27692 3c2cec7c75fe media/ru.lex.instructions.zamenit.wav
+27692 d5f0312d2f07 media/ru.lex.instructions.peremeshat.wav
+280364 3e66ba9c1e44 media/ru.sent.b2.gorod-bez-karty.u005.wav
+280364 b8a57aefd916 media/ru.sent.b2.aukcion-odnoy-kartiny.u001.wav
+28204 05427e09e6f0 media/ru.lex.routines.rabotat.wav
+28204 67a9dbf3b355 media/ru.lex.shopping.rubashka.wav
+28204 e7f0d8a1b3a3 media/ru.lex.travel.kassa.wav
+28204 f1c7799d8215 media/ru.contrast.stress.muka-1.wav
+284204 1d5643438c2d media/ru.lex.stories202611.improvizirovat.wav
+284204 b49b05a9805a media/ru.sent.b2.perevodchik-vse-pereputal.u006.wav
+28716 273a0e203171 media/ru.lex.problems.zashchita.wav
+288044 781db70847e8 media/ru.sent.b1.noch-v-poezde.u007.wav
+288044 e504b37db858 media/ru.sent.b2.spor-o-budushchem.u001.wav
+291884 575bfa2cadb0 media/ru.sent.b2.spor-o-budushchem.u008.wav
+291884 77b2ac91e954 media/ru.sent.b2.spor-o-budushchem.u005.wav
+29228 018837648a22 media/ru.lex.food.kefir.wav
+295724 045577234f86 media/ru.sent.b2.gorod-bez-karty.u006.wav
+295724 17d585569b67 media/ru.sent.a2.avtobus-ne-prishol.u006.wav
+295724 f0bddba95e5e media/ru.sent.b1.pismo-ne-temu.u006.wav
+299564 62a9b1168427 media/ru.sent.a2.telefon-v-taksi.u002.wav
+299564 aa0aefc01d8a media/ru.sent.b2.dva-bileta-v-odin-teatr.u006.wav
+30252 343dd6868939 media/ru.lex.nature.ryba.wav
+30252 b8fc0c5e5d8f media/ru.lex.problems.tsely.wav
+30252 d609030512a3 media/ru.lex.synthesis4.ssuda.wav
+307244 47153abe09f5 media/ru.sent.b2.dva-bileta-v-odin-teatr.u007.wav
+31276 d2b883079458 media/ru.lex.comparisons.bolshe.wav
+314924 5ec02f72782a media/ru.sent.a2.telefon-v-taksi.u006.wav
+314924 c4a13e501f19 media/ru.sent.b2.dva-bileta-v-odin-teatr.u001.wav
+31788 d39c9973a325 media/ru.lex.narration.zabor.wav
+322604 3a0f86f44fbc media/ru.sent.b2.perevodchik-vse-pereputal.u008.wav
+322604 64ace330d8e2 media/ru.sent.b1.pismo-ne-temu.u002.wav
+32812 30d89b62fcd8 media/ru.lex.food.desert.wav
+330284 cd4bbf4428c2 media/ru.sent.b2.spor-o-budushchem.u002.wav
+337964 e39ea7b670df media/ru.sent.b1.kluch-ot-dachi.u004.wav
+34348 8a4913bb6e4a media/ru.lex.city.podezd.wav
+34348 973f268fddf6 media/ru.lex.wellbeing.zapisat.wav
+34348 dae636090fcb media/ru.lex.synthesis2.feleton.wav
+345644 f9c446992aef media/ru.sent.b2.spor-o-budushchem.u004.wav
+34604 1e48af1525b7 media/ru.lex.stories202611.lot.wav
+34604 da28f045c133 media/ru.lex.stories202611.ded.wav
+34860 f1786eb1d05f media/ru.lex.narration2.polnoch.wav
+349484 aee88565b625 media/ru.sent.b2.dva-bileta-v-odin-teatr.u005.wav
+357164 1e7a2f6e818a media/ru.sent.b2.gorod-bez-karty.u001.wav
+357164 ff68908b27c5 media/ru.sent.b2.aukcion-odnoy-kartiny.u008.wav
+357422 60b400d954de sentences/entries.jsonl
+361004 651c0b9a53ca media/ru.sent.b1.noch-v-poezde.u006.wav
+36328 1ae8db60e573 lexicon/stories202611.jsonl
+36396 582be5ac0d20 media/ru.lex.travel2.rasstroitsya.wav
+372524 c5769a632851 media/ru.sent.b1.noch-v-poezde.u002.wav
+372524 ea0c66196148 media/ru.sent.b1.noch-v-poezde.u008.wav
+37932 d6d44b7b1672 media/ru.lex.messages2.abzac.wav
+380204 57d2f070feaa media/ru.sent.b2.dva-bileta-v-odin-teatr.u008.wav
+38444 8e2335c1a8e4 media/ru.lex.travel2.razocharovatsya.wav
+38444 db3c833c7a43 media/ru.lex.messages.sms.wav
+38444 e63f8f11d650 media/ru.lex.narration2.ten.wav
+387884 44634d2f2588 media/ru.sent.b1.internet-v-derevne.u007.wav
+38956 2fcf43dc4a71 media/ru.lex.timeplans.sentyabr.wav
+39468 08b243951468 media/ru.lex.timeplans.zapisat.wav
+4060682 6cebc87d9879 media/manifest.jsonl
+42284 4a2f8d5a8278 media/ru.lex.stories202611.foye.wav
+430124 3afc346d5741 media/ru.sent.b2.gorod-bez-karty.u003.wav
+46 c2c57ad6b724 media/narrator.json
+46124 4462af46e184 media/ru.sent.b2.u494.wav
+46124 cb2278049577 media/ru.lex.stories202611.prilavok.wav
+464684 e7ccf503316b media/ru.sent.b2.dva-bileta-v-odin-teatr.u002.wav
+49964 24ab76a23d8f media/ru.sent.b2.u504.wav
+49964 3f785ce8469f media/ru.lex.timeplans.iyul.wav
+49964 68698e8fba64 media/ru.sent.a1.u085.wav
+49964 8ad0389979e2 media/ru.lex.stories202611.muzykant.wav
+49964 cf620360b054 media/ru.lex.stories202611.lunka.wav
+49964 f25e131df923 media/ru.sent.a2.u143.wav
+53804 557f76a0cdc6 media/ru.lex.stories202611.lavka.wav
+53804 6beebce335bd media/ru.sent.b2.u471.wav
+56684 00f21db65b05 media/ru.sent.b1.u336.wav
+57644 5d3d39c53398 media/ru.sent.b2.u508.wav
+57644 8aeaf36b8843 media/ru.lex.stories202611.poimat.wav
+57644 8b7c27e5fc1f media/ru.sent.b1.u317.wav
+57644 b566038366d7 media/ru.lex.stories202611.pensioner.wav
+57644 dc83b0ce98fb media/ru.lex.socialplans.spektakl.wav
+57644 f467e03dc2fb media/ru.sent.b1.u255.wav
+61484 1429088d3b37 media/ru.sent.b2.u798.wav
+61484 34dbbdd71559 media/ru.lex.stories202611.yagoda.wav
+61484 409d536f5242 media/ru.lex.stories202611.sidene.wav
+61484 593f317fafd8 media/ru.lex.stories202611.internet.wav
+61484 8f0508db632b media/ru.lex.stories202611.derevnya.wav
+61484 f17614a6c4ac media/ru.lex.stories202611.ulybatsya.wav
+65324 09882f975032 media/ru.sent.b2.u503.wav
+65324 51fc5bdb699e media/ru.lex.stories202611.antrakt.wav
+65324 7e208306f910 media/ru.sent.b1.u342.wav
+65324 a60602fca7e3 media/ru.sent.b1.u279.wav
+65324 d04de09b7b3b media/ru.lex.stories202611.kollektsioner.wav
+691 4c823cd0d266 stories/moy-den.yaml
+69164 20b47da3a409 media/ru.sent.a2.u155.wav
+69164 318ac5c049b9 media/ru.lex.stories202611.karman.wav
+69164 383e1b0e7451 media/ru.sent.b2.u712.wav
+69164 4b3e3cb30890 media/ru.lex.stories202611.konferentsiya.wav
+69164 6b70e16dd986 media/ru.lex.stories202611.znayushchiy.wav
+69164 da3f61de3a2f media/ru.sent.a1.moy-den.u002.wav
+69164 f74934c31e31 media/ru.sent.b1.u355.wav
+719 5428b364fddc stories/kot-doma.yaml
+727 9d4d3bc46f95 manifest.yaml
+73004 28d5a072c9ad media/ru.lex.stories202611.vstretitsya.wav
+73004 2ba747ecb85c media/ru.sent.a1.u031.wav
+73004 30ba45ed5e98 media/ru.sent.b2.u511.wav
+73004 3a484f654fd0 media/ru.lex.stories202611.ustoyat.wav
+73004 75ac255451e5 media/ru.sent.b2.u760.wav
+73004 8b0bdde790ae media/ru.sent.b2.u490.wav
+73004 bdf80a232cbd media/ru.lex.stories202611.koreshok.wav
+73004 fdbc24cb8eb3 media/ru.lex.stories202611.vyklyuchitsya.wav
+748 474745b9ae77 stories/shapka-v-parke.yaml
+76844 13f3de1febb5 media/ru.sent.on-ramp.anna-introduction.wav
+76844 5b9e619b312c media/ru.sent.a1.kot-doma.u001.wav
+76844 8d6943b7d102 media/ru.sent.b1.u247.wav
+792 94db5068ab5a stories/podarok-dlya-mamy.yaml
+80684 458993056e95 media/ru.sent.a1.shapka-v-parke.u005.wav
+80684 5f438a20f91e media/ru.lex.stories202611.fizik.wav
+80684 a4c118783390 media/ru.sent.a1.podarok-dlya-mamy.u006.wav
+80684 a5b22953c80e media/ru.sent.b1.u248.wav
+80684 b19b6a25d707 media/ru.lex.stories202611.torgovka.wav
+808 15b59bd71a3a stories/pismo-ne-temu.yaml
+831 fe82e8fe2077 stories/rybalka-zimoy.yaml
+83564 2bc7dae1d5ff media/ru.lex.stories202611.zontik.wav
+84524 2ed10e49bc6c media/ru.lex.stories202611.khozyayka.wav
+84524 51de75339834 media/ru.lex.stories202611.ogon.wav
+84524 77c80dd57053 media/ru.sent.a1.podarok-dlya-mamy.u003.wav
+84524 77ca3f3f1c42 media/ru.sent.a1.shapka-v-parke.u001.wav
+84524 9e4b11a47b4a media/ru.sent.b2.u459.wav
+873 07aa84171b69 stories/sosed-s-gitarioy.yaml
+882 021f0ceb6404 stories/telefon-v-taksi.yaml
+88364 329d9321279e media/ru.sent.b1.u343.wav
+88364 4d0ef2130f3e media/ru.sent.b2.u483.wav
+88364 b72c7b3f28ca media/ru.lex.stories202611.doska.wav
+88364 d6d81bc34c78 media/ru.sent.a1.podarok-dlya-mamy.u001.wav
+887 006c74a9cfb3 stories/noch-v-poezde.yaml
+900 87b07856e60d stories/kluch-ot-dachi.yaml
+911 636abe7998cd stories/spor-o-budushchem.yaml
+913 51fd7ca0f809 stories/avtobus-ne-prishol.yaml
+921 f8c2fc57154f stories/gorod-bez-karty.yaml
+92204 caca704807fc media/ru.sent.b2.u757.wav
+92204 e9c1e6788c50 media/ru.sent.b2.u806.wav
+934 0610ec373c50 stories/internet-v-derevne.yaml
+96044 098015c8f741 media/ru.lex.stories202611.utverzhdat.wav
+96044 336500a7c70b media/ru.lex.stories202611.rasti.wav
+96044 b0913cb03c60 media/ru.sent.b2.u687.wav
+96044 c1256d6b2fa5 media/ru.sent.b2.u512.wav
+96044 da342e984321 media/ru.sent.cp.p18.wav
+96418 17d8431025c9 media/labels.jsonl
+99884 5b8db1609060 media/ru.sent.b2.u737.wav
+99884 bf1724bd00ea media/ru.sent.a1.kot-doma.u002.wav
+99884 c5e9e56472be media/ru.lex.stories202611.tsvet.wav
+removed in 0.4.5:
+138284 11865ef3a2ce media/ru.sent.cp.p20.wav
+14380 a15c503e41df media/ru.lex.problems.polnyi.wav
+16428 14cbee6868e9 media/ru.lex.shopping.tovar.wav
+16428 36bfb2aedc50 media/ru.lex.travel.kassa.wav
+16940 22930c5589bf media/ru.lex.pastevents.potom.wav
+17452 ec62a837818f media/ru.lex.family.yey.wav
+176684 201fb4ee3128 media/ru.sent.cp.p21.wav
+17964 9a6355284828 media/ru.lex.city.etazh.wav
+18476 a5de6822efcf media/ru.lex.narration.porog.wav
+18988 9c7719360a97 media/ru.lex.family.delo.wav
+19500 15a3e572fe42 media/ru.lex.travel2.zhalko.wav
+19500 7a0fad21fa12 media/ru.lex.comparisons.dorozhe.wav
+20012 6990fcfe5ead media/ru.lex.instructions.itog.wav
+20012 f1274b9e6d01 media/ru.lex.messages.hochu.wav
+20524 2216cf38d732 media/ru.lex.home.komod.wav
+20524 77605ba8fb14 media/ru.lex.problems.namyok.wav
+20524 9ed38648cb89 media/ru.lex.wellbeing.ploho.wav
+21548 0cb6ce846e1c media/ru.lex.pastevents.chasto.wav
+21548 6e3d7309cea0 media/ru.lex.shopping.marka.wav
+22060 9973c08cc000 media/ru.lex.shopping.stoit.wav
+22572 1200da4b99ab media/ru.lex.narration2.zakat.wav
+22572 830bdb2d5ee7 media/ru.lex.services.anketa.wav
+23596 88a306277252 media/ru.lex.wellbeing.ukol.wav
+24108 1ba42ac9a391 media/ru.lex.narration2.odezhda.wav
+24108 2c87a67e484d media/ru.lex.problems.rashchyot.wav
+24108 461790c558f1 media/ru.lex.messages2.rasskaz.wav
+24108 62267382ca04 media/ru.lex.travel2.preodolet.wav
+24108 cb3c940e8c5c media/ru.lex.home.magazin.wav
+24108 e664ae16f68a media/ru.lex.narration2.solntse.wav
+24108 f1ce5a2f8f3d media/ru.lex.travel2.zabota.wav
+24620 261174c63b83 media/ru.lex.timeplans.iyul.wav
+24620 a8eb5dd69282 media/ru.lex.shopping.rubashka.wav
+25132 916396c7651a media/ru.lex.timeplans.noyabr.wav
+25132 b5d138d95e0b media/ru.lex.instructions.sobrat.wav
+25644 4f344bead7d7 media/ru.lex.family.sosed.wav
+25644 5988eec00d60 media/ru.lex.routines.gotovit.wav
+25644 a67eb25e686c media/ru.lex.family.koshka.wav
+25644 edd81aa3d893 media/ru.lex.nature.cvetok.wav
+26156 2c2b3291217f media/ru.lex.nature.solnce.wav
+26156 9f602a13d754 media/ru.sent.b1.u317.wav
+26668 8f46955795fb media/ru.lex.sci.bresh.wav
+26668 fef38ee9b546 media/ru.lex.messages.skazat.wav
+27180 4415fbc6f90b media/ru.lex.problems.zashchita.wav
+27180 822da8d4e459 media/ru.lex.instructions.zamenit.wav
+27180 a76f80477175 media/ru.lex.routines.zvonit.wav
+27180 b0ef005bd3ac media/ru.lex.problems.oshibka.wav
+27692 b9a737b93431 media/ru.lex.routines.rabotat.wav
+28204 60fbe2650acf media/ru.lex.synthesis4.ssuda.wav
+28204 77366e5b5a03 media/ru.contrast.stress.muka-1.wav
+28204 f61717965f9d media/ru.sent.on-ramp.anna-introduction.wav
+283551 1292da071e49 sentences/entries.jsonl
+29228 10c3a883cb0a media/ru.lex.socialplans.spektakl.wav
+29228 90217336323d media/ru.lex.workstudy.kollega.wav
+29228 97bee41156f7 media/ru.lex.experiences.proryv.wav
+29740 03fb8415ad1a media/ru.lex.nature.ryba.wav
+30252 3a9366d7a8fe media/ru.lex.problems.tsely.wav
+30764 85629e8d0d5c media/ru.lex.narration.zabor.wav
+30764 f8939e61a398 media/ru.lex.food.kefir.wav
+31276 3163b3d666ea media/ru.sent.a2.u143.wav
+31276 640a7a368d3a media/ru.lex.media.hashteg.wav
+31276 e6d01ed2a2a1 media/ru.sent.b2.u483.wav
+31788 503971fe9461 media/ru.lex.wellbeing.zapisat.wav
+31788 7b37c2de75a0 media/ru.lex.home.more.wav
+31788 bf84c0622493 media/ru.lex.narration2.polnoch.wav
+31788 c28815317413 media/ru.lex.travel2.rasstroitsya.wav
+32300 5577f61d89ce media/ru.lex.food.desert.wav
+32812 b26c66604460 media/ru.lex.socialplans.anons.wav
+33324 49f6823fdebf media/ru.sent.b1.u279.wav
+33324 cbb55d37733c media/ru.lex.comparisons.proshche.wav
+33836 15de8e448ba9 media/ru.sent.b2.u459.wav
+33836 dfd46d4911d0 media/ru.sent.b1.u247.wav
+34348 6764939fc33e media/ru.lex.instructions.peremeshat.wav
+34604 6cf50ee421c2 media/ru.lex.wellbeing.bol.wav
+34604 712cab224ed4 media/ru.lex.narration2.ten.wav
+34860 54b59446d3fe media/ru.lex.comparisons.bolshe.wav
+34860 a617a168f254 media/ru.sent.b1.u255.wav
+34860 f049c94990a1 media/ru.lex.synthesis2.feleton.wav
+35372 9ef35361b3c4 media/ru.lex.messages.sms.wav
+35372 d13f27e40037 media/ru.lex.nature.ptica.wav
+37420 1c538ecd8a4a media/ru.lex.timeplans.sentyabr.wav
+37420 77b5e8d28e3a media/ru.lex.messages2.abzac.wav
+37932 73d31528580b media/ru.sent.b2.u503.wav
+38444 335b55a7831a media/ru.lex.study2.cep.wav
+38444 93cdf951e997 media/ru.sent.a2.u155.wav
+38444 e38bbacd616a media/ru.lex.routines.den.wav
+38956 0e56e413d23a media/ru.lex.travel2.razocharovatsya.wav
+38956 7e94df062654 media/ru.sent.a1.u031.wav
+3903616 fde02e7f6a37 media/manifest.jsonl
+39468 98e2d0a93389 media/ru.sent.b2.u471.wav
+39468 e7c6babdbd84 media/ru.lex.timeplans.zapisat.wav
+39980 98f30838c349 media/ru.sent.b1.u248.wav
+39980 b20223c84442 media/ru.sent.b1.u343.wav
+41004 734df8587ba2 media/ru.sent.b2.u737.wav
+41004 cec9ed9590a0 media/ru.sent.b2.u687.wav
+42028 2228b49fd8f6 media/ru.sent.a1.u085.wav
+42028 82a9b3d54f46 media/ru.sent.b2.u494.wav
+42284 9b076c897694 media/ru.lex.city.podezd.wav
+43052 bf469134591a media/ru.sent.b2.u712.wav
+43564 aea8593bdb9f media/ru.sent.b1.u342.wav
+44588 236865735989 media/ru.sent.b2.u798.wav
+44588 2c81419a6cf7 media/ru.sent.b2.u757.wav
+44588 6c26a201b1d2 media/ru.sent.b2.u511.wav
+45612 8828380155a5 media/ru.sent.b2.u508.wav
+47148 8657258fb012 media/ru.sent.b2.u760.wav
+47148 c3f23ae9a7d9 media/ru.sent.b2.u504.wav
+47660 6142bb4a7992 media/ru.sent.b1.u336.wav
+48684 0ae2779eee02 media/ru.sent.b1.u355.wav
+49964 7edade21cf00 media/ru.lex.city.skameyka.wav
+51244 c1680f368815 media/ru.sent.b2.u490.wav
+52268 d684182a3dab media/ru.sent.b2.u806.wav
+53804 6d4d3ac525b8 media/ru.lex.synthesis4.kolllazh.wav
+53804 92c432d760dd media/ru.lex.family.est.wav
+55340 0e6bf5cc4eea media/ru.sent.b1.u372.wav
+55340 34c5bee0bc24 media/ru.sent.b2.u512.wav
+57644 5cc3c1c40d43 media/ru.lex.messages.nabirat.wav
+61484 76ea955dffca media/ru.lex.housing.pyl.wav
+65324 aa1881e3ddd8 media/ru.lex.messages2.ves.wav
+65324 c868a4971c8d media/ru.lex.style.lest.wav
+68140 b2a4cadd4021 media/ru.sent.cp.p02.wav
+69164 a2531dff7fb5 media/ru.sent.cp.p28.wav
+72236 6f42d9544e54 media/ru.sent.cp.p01.wav
+727 5258e916a486 manifest.yaml
+73004 023180ad0e77 media/ru.lex.services.klient.wav
+73004 41423a86a461 media/ru.lex.narration.dolgo.wav
+76844 4f2d9b26d49c media/ru.lex.study4.shchel.wav
+80684 345aebaf53f4 media/ru.lex.city.tramvay.wav
+80940 550e85d55bc2 media/ru.sent.cp.p18.wav
+88108 1834b6b653a4 media/ru.sent.cp.p39.wav
+96044 866b9c6a0147 media/ru.lex.services.prikaz.wav
+99884 cddb8d2627ab media/ru.lex.socialplans.napitok.wav
+present on both sides with different bytes:
+  manifest.yaml
+    0.4.5: 727 5258e916a486 manifest.yaml.n    0.4.3: 727 9d4d3bc46f95 manifest.yaml
+  media/manifest.jsonl
+    0.4.5: 3903616 fde02e7f6a37 media/manifest.jsonl.n    0.4.3: 4060682 6cebc87d9879 media/manifest.jsonl
+  media/ru.contrast.stress.muka-1.wav
+    0.4.5: 28204 77366e5b5a03 media/ru.contrast.stress.muka-1.wav.n    0.4.3: 28204 f1c7799d8215 media/ru.contrast.stress.muka-1.wav
+  media/ru.lex.city.etazh.wav
+    0.4.5: 17964 9a6355284828 media/ru.lex.city.etazh.wav.n    0.4.3: 17452 4e1fb88bb7ec media/ru.lex.city.etazh.wav
+  media/ru.lex.city.podezd.wav
+    0.4.5: 42284 9b076c897694 media/ru.lex.city.podezd.wav.n    0.4.3: 34348 8a4913bb6e4a media/ru.lex.city.podezd.wav
+  media/ru.lex.city.skameyka.wav
+    0.4.5: 49964 7edade21cf00 media/ru.lex.city.skameyka.wav.n    0.4.3: 26668 b944fdfe9381 media/ru.lex.city.skameyka.wav
+  media/ru.lex.city.tramvay.wav
+    0.4.5: 80684 345aebaf53f4 media/ru.lex.city.tramvay.wav.n    0.4.3: 25132 1c2d66ea5d66 media/ru.lex.city.tramvay.wav
+  media/ru.lex.comparisons.bolshe.wav
+    0.4.5: 34860 54b59446d3fe media/ru.lex.comparisons.bolshe.wav.n    0.4.3: 31276 d2b883079458 media/ru.lex.comparisons.bolshe.wav
+  media/ru.lex.comparisons.dorozhe.wav
+    0.4.5: 19500 7a0fad21fa12 media/ru.lex.comparisons.dorozhe.wav.n    0.4.3: 24108 326df305fe4d media/ru.lex.comparisons.dorozhe.wav
+  media/ru.lex.comparisons.proshche.wav
+    0.4.5: 33324 cbb55d37733c media/ru.lex.comparisons.proshche.wav.n    0.4.3: 20524 6cccede7d214 media/ru.lex.comparisons.proshche.wav
+  media/ru.lex.experiences.proryv.wav
+    0.4.5: 29228 97bee41156f7 media/ru.lex.experiences.proryv.wav.n    0.4.3: 14892 0a5613349396 media/ru.lex.experiences.proryv.wav
+  media/ru.lex.family.delo.wav
+    0.4.5: 18988 9c7719360a97 media/ru.lex.family.delo.wav.n    0.4.3: 15404 8e2f4280f56c media/ru.lex.family.delo.wav
+  media/ru.lex.family.est.wav
+    0.4.5: 53804 92c432d760dd media/ru.lex.family.est.wav.n    0.4.3: 24044 cd2a352667a9 media/ru.lex.family.est.wav
+  media/ru.lex.family.koshka.wav
+    0.4.5: 25644 a67eb25e686c media/ru.lex.family.koshka.wav.n    0.4.3: 18476 8b12c28ef7fe media/ru.lex.family.koshka.wav
+  media/ru.lex.family.sosed.wav
+    0.4.5: 25644 4f344bead7d7 media/ru.lex.family.sosed.wav.n    0.4.3: 22572 130403cb7747 media/ru.lex.family.sosed.wav
+  media/ru.lex.family.yey.wav
+    0.4.5: 17452 ec62a837818f media/ru.lex.family.yey.wav.n    0.4.3: 26156 653833f0a5be media/ru.lex.family.yey.wav
+  media/ru.lex.food.desert.wav
+    0.4.5: 32300 5577f61d89ce media/ru.lex.food.desert.wav.n    0.4.3: 32812 30d89b62fcd8 media/ru.lex.food.desert.wav
+  media/ru.lex.food.kefir.wav
+    0.4.5: 30764 f8939e61a398 media/ru.lex.food.kefir.wav.n    0.4.3: 29228 018837648a22 media/ru.lex.food.kefir.wav
+  media/ru.lex.home.komod.wav
+    0.4.5: 20524 2216cf38d732 media/ru.lex.home.komod.wav.n    0.4.3: 17964 6920f5cc1eb4 media/ru.lex.home.komod.wav
+  media/ru.lex.home.magazin.wav
+    0.4.5: 24108 cb3c940e8c5c media/ru.lex.home.magazin.wav.n    0.4.3: 24620 5789c9f79e8b media/ru.lex.home.magazin.wav
+  media/ru.lex.home.more.wav
+    0.4.5: 31788 7b37c2de75a0 media/ru.lex.home.more.wav.n    0.4.3: 11308 a9c506e110dd media/ru.lex.home.more.wav
+  media/ru.lex.housing.pyl.wav
+    0.4.5: 61484 76ea955dffca media/ru.lex.housing.pyl.wav.n    0.4.3: 21044 2665995e5199 media/ru.lex.housing.pyl.wav
+  media/ru.lex.instructions.itog.wav
+    0.4.5: 20012 6990fcfe5ead media/ru.lex.instructions.itog.wav.n    0.4.3: 17452 a948af5de595 media/ru.lex.instructions.itog.wav
+  media/ru.lex.instructions.peremeshat.wav
+    0.4.5: 34348 6764939fc33e media/ru.lex.instructions.peremeshat.wav.n    0.4.3: 27692 d5f0312d2f07 media/ru.lex.instructions.peremeshat.wav
+  media/ru.lex.instructions.sobrat.wav
+    0.4.5: 25132 b5d138d95e0b media/ru.lex.instructions.sobrat.wav.n    0.4.3: 23596 af8e52badf92 media/ru.lex.instructions.sobrat.wav
+  media/ru.lex.instructions.zamenit.wav
+    0.4.5: 27180 822da8d4e459 media/ru.lex.instructions.zamenit.wav.n    0.4.3: 27692 3c2cec7c75fe media/ru.lex.instructions.zamenit.wav
+  media/ru.lex.media.hashteg.wav
+    0.4.5: 31276 640a7a368d3a media/ru.lex.media.hashteg.wav.n    0.4.3: 22060 70f5647cdcd5 media/ru.lex.media.hashteg.wav
+  media/ru.lex.messages.hochu.wav
+    0.4.5: 20012 f1274b9e6d01 media/ru.lex.messages.hochu.wav.n    0.4.3: 21548 de8b348182ae media/ru.lex.messages.hochu.wav
+  media/ru.lex.messages.nabirat.wav
+    0.4.5: 57644 5cc3c1c40d43 media/ru.lex.messages.nabirat.wav.n    0.4.3: 22572 3c845fa335eb media/ru.lex.messages.nabirat.wav
+  media/ru.lex.messages.skazat.wav
+    0.4.5: 26668 fef38ee9b546 media/ru.lex.messages.skazat.wav.n    0.4.3: 26156 21ef2b356442 media/ru.lex.messages.skazat.wav
+  media/ru.lex.messages.sms.wav
+    0.4.5: 35372 9ef35361b3c4 media/ru.lex.messages.sms.wav.n    0.4.3: 38444 db3c833c7a43 media/ru.lex.messages.sms.wav
+  media/ru.lex.messages2.abzac.wav
+    0.4.5: 37420 77b5e8d28e3a media/ru.lex.messages2.abzac.wav.n    0.4.3: 37932 d6d44b7b1672 media/ru.lex.messages2.abzac.wav
+  media/ru.lex.messages2.rasskaz.wav
+    0.4.5: 24108 461790c558f1 media/ru.lex.messages2.rasskaz.wav.n    0.4.3: 27180 494399c35abf media/ru.lex.messages2.rasskaz.wav
+  media/ru.lex.messages2.ves.wav
+    0.4.5: 65324 aa1881e3ddd8 media/ru.lex.messages2.ves.wav.n    0.4.3: 24044 e68f5e18398f media/ru.lex.messages2.ves.wav
+  media/ru.lex.narration.dolgo.wav
+    0.4.5: 73004 41423a86a461 media/ru.lex.narration.dolgo.wav.n    0.4.3: 18476 e66a5d16411e media/ru.lex.narration.dolgo.wav
+  media/ru.lex.narration.porog.wav
+    0.4.5: 18476 a5de6822efcf media/ru.lex.narration.porog.wav.n    0.4.3: 14380 28dddb13b612 media/ru.lex.narration.porog.wav
+  media/ru.lex.narration.zabor.wav
+    0.4.5: 30764 85629e8d0d5c media/ru.lex.narration.zabor.wav.n    0.4.3: 31788 d39c9973a325 media/ru.lex.narration.zabor.wav
+  media/ru.lex.narration2.odezhda.wav
+    0.4.5: 24108 1ba42ac9a391 media/ru.lex.narration2.odezhda.wav.n    0.4.3: 22060 0ef4c1610282 media/ru.lex.narration2.odezhda.wav
+  media/ru.lex.narration2.polnoch.wav
+    0.4.5: 31788 bf84c0622493 media/ru.lex.narration2.polnoch.wav.n    0.4.3: 34860 f1786eb1d05f media/ru.lex.narration2.polnoch.wav
+  media/ru.lex.narration2.solntse.wav
+    0.4.5: 24108 e664ae16f68a media/ru.lex.narration2.solntse.wav.n    0.4.3: 23596 ad7dcde9bbe7 media/ru.lex.narration2.solntse.wav
+  media/ru.lex.narration2.ten.wav
+    0.4.5: 34604 712cab224ed4 media/ru.lex.narration2.ten.wav.n    0.4.3: 38444 e63f8f11d650 media/ru.lex.narration2.ten.wav
+  media/ru.lex.narration2.zakat.wav
+    0.4.5: 22572 1200da4b99ab media/ru.lex.narration2.zakat.wav.n    0.4.3: 23084 fba5d75b99d1 media/ru.lex.narration2.zakat.wav
+  media/ru.lex.nature.cvetok.wav
+    0.4.5: 25644 edd81aa3d893 media/ru.lex.nature.cvetok.wav.n    0.4.3: 22572 4de7a2befdd9 media/ru.lex.nature.cvetok.wav
+  media/ru.lex.nature.ptica.wav
+    0.4.5: 35372 d13f27e40037 media/ru.lex.nature.ptica.wav.n    0.4.3: 22060 d997bbbe69a3 media/ru.lex.nature.ptica.wav
+  media/ru.lex.nature.ryba.wav
+    0.4.5: 29740 03fb8415ad1a media/ru.lex.nature.ryba.wav.n    0.4.3: 30252 343dd6868939 media/ru.lex.nature.ryba.wav
+  media/ru.lex.nature.solnce.wav
+    0.4.5: 26156 2c2b3291217f media/ru.lex.nature.solnce.wav.n    0.4.3: 23084 45e8bae384cc media/ru.lex.nature.solnce.wav
+  media/ru.lex.pastevents.chasto.wav
+    0.4.5: 21548 0cb6ce846e1c media/ru.lex.pastevents.chasto.wav.n    0.4.3: 21548 36bd2fad783e media/ru.lex.pastevents.chasto.wav
+  media/ru.lex.pastevents.potom.wav
+    0.4.5: 16940 22930c5589bf media/ru.lex.pastevents.potom.wav.n    0.4.3: 16940 a83edbba418b media/ru.lex.pastevents.potom.wav
+  media/ru.lex.problems.namyok.wav
+    0.4.5: 20524 77605ba8fb14 media/ru.lex.problems.namyok.wav.n    0.4.3: 21036 2100f47fed3b media/ru.lex.problems.namyok.wav
+  media/ru.lex.problems.oshibka.wav
+    0.4.5: 27180 b0ef005bd3ac media/ru.lex.problems.oshibka.wav.n    0.4.3: 24620 62b125bf4a22 media/ru.lex.problems.oshibka.wav
+  media/ru.lex.problems.polnyi.wav
+    0.4.5: 14380 a15c503e41df media/ru.lex.problems.polnyi.wav.n    0.4.3: 13356 f0d92edda784 media/ru.lex.problems.polnyi.wav
+  media/ru.lex.problems.rashchyot.wav
+    0.4.5: 24108 2c87a67e484d media/ru.lex.problems.rashchyot.wav.n    0.4.3: 23596 0ad6dde90651 media/ru.lex.problems.rashchyot.wav
+  media/ru.lex.problems.tsely.wav
+    0.4.5: 30252 3a9366d7a8fe media/ru.lex.problems.tsely.wav.n    0.4.3: 30252 b8fc0c5e5d8f media/ru.lex.problems.tsely.wav
+  media/ru.lex.problems.zashchita.wav
+    0.4.5: 27180 4415fbc6f90b media/ru.lex.problems.zashchita.wav.n    0.4.3: 28716 273a0e203171 media/ru.lex.problems.zashchita.wav
+  media/ru.lex.routines.den.wav
+    0.4.5: 38444 e38bbacd616a media/ru.lex.routines.den.wav.n    0.4.3: 26924 e3c1255b2444 media/ru.lex.routines.den.wav
+  media/ru.lex.routines.gotovit.wav
+    0.4.5: 25644 5988eec00d60 media/ru.lex.routines.gotovit.wav.n    0.4.3: 24108 c6849838a6d4 media/ru.lex.routines.gotovit.wav
+  media/ru.lex.routines.rabotat.wav
+    0.4.5: 27692 b9a737b93431 media/ru.lex.routines.rabotat.wav.n    0.4.3: 28204 05427e09e6f0 media/ru.lex.routines.rabotat.wav
+  media/ru.lex.routines.zvonit.wav
+    0.4.5: 27180 a76f80477175 media/ru.lex.routines.zvonit.wav.n    0.4.3: 22060 6e25892babfd media/ru.lex.routines.zvonit.wav
+  media/ru.lex.sci.bresh.wav
+    0.4.5: 26668 8f46955795fb media/ru.lex.sci.bresh.wav.n    0.4.3: 27180 6b5d202c9037 media/ru.lex.sci.bresh.wav
+  media/ru.lex.services.anketa.wav
+    0.4.5: 22572 830bdb2d5ee7 media/ru.lex.services.anketa.wav.n    0.4.3: 23596 253dbf85a9b6 media/ru.lex.services.anketa.wav
+  media/ru.lex.services.klient.wav
+    0.4.5: 73004 023180ad0e77 media/ru.lex.services.klient.wav.n    0.4.3: 21036 3fbae32cb7b6 media/ru.lex.services.klient.wav
+  media/ru.lex.services.prikaz.wav
+    0.4.5: 96044 866b9c6a0147 media/ru.lex.services.prikaz.wav.n    0.4.3: 21548 f4969f7980f4 media/ru.lex.services.prikaz.wav
+  media/ru.lex.shopping.marka.wav
+    0.4.5: 21548 6e3d7309cea0 media/ru.lex.shopping.marka.wav.n    0.4.3: 20012 d01e4bf67d79 media/ru.lex.shopping.marka.wav
+  media/ru.lex.shopping.rubashka.wav
+    0.4.5: 24620 a8eb5dd69282 media/ru.lex.shopping.rubashka.wav.n    0.4.3: 28204 67a9dbf3b355 media/ru.lex.shopping.rubashka.wav
+  media/ru.lex.shopping.stoit.wav
+    0.4.5: 22060 9973c08cc000 media/ru.lex.shopping.stoit.wav.n    0.4.3: 26156 d9efca15b579 media/ru.lex.shopping.stoit.wav
+  media/ru.lex.shopping.tovar.wav
+    0.4.5: 16428 14cbee6868e9 media/ru.lex.shopping.tovar.wav.n    0.4.3: 16428 899c558a2401 media/ru.lex.shopping.tovar.wav
+  media/ru.lex.socialplans.anons.wav
+    0.4.5: 32812 b26c66604460 media/ru.lex.socialplans.anons.wav.n    0.4.3: 20012 ea5dcb6290dd media/ru.lex.socialplans.anons.wav
+  media/ru.lex.socialplans.napitok.wav
+    0.4.5: 99884 cddb8d2627ab media/ru.lex.socialplans.napitok.wav.n    0.4.3: 27180 8b2f935aa42a media/ru.lex.socialplans.napitok.wav
+  media/ru.lex.socialplans.spektakl.wav
+    0.4.5: 29228 10c3a883cb0a media/ru.lex.socialplans.spektakl.wav.n    0.4.3: 57644 dc83b0ce98fb media/ru.lex.socialplans.spektakl.wav
+  media/ru.lex.study2.cep.wav
+    0.4.5: 38444 335b55a7831a media/ru.lex.study2.cep.wav.n    0.4.3: 23444 85c6e48cb904 media/ru.lex.study2.cep.wav
+  media/ru.lex.study4.shchel.wav
+    0.4.5: 76844 4f2d9b26d49c media/ru.lex.study4.shchel.wav.n    0.4.3: 25844 f321a825542a media/ru.lex.study4.shchel.wav
+  media/ru.lex.style.lest.wav
+    0.4.5: 65324 c868a4971c8d media/ru.lex.style.lest.wav.n    0.4.3: 27644 3a37090acbeb media/ru.lex.style.lest.wav
+  media/ru.lex.synthesis2.feleton.wav
+    0.4.5: 34860 f049c94990a1 media/ru.lex.synthesis2.feleton.wav.n    0.4.3: 34348 dae636090fcb media/ru.lex.synthesis2.feleton.wav
+  media/ru.lex.synthesis4.kolllazh.wav
+    0.4.5: 53804 6d4d3ac525b8 media/ru.lex.synthesis4.kolllazh.wav.n    0.4.3: 22060 7aba5af4eb09 media/ru.lex.synthesis4.kolllazh.wav
+  media/ru.lex.synthesis4.ssuda.wav
+    0.4.5: 28204 60fbe2650acf media/ru.lex.synthesis4.ssuda.wav.n    0.4.3: 30252 d609030512a3 media/ru.lex.synthesis4.ssuda.wav
+  media/ru.lex.timeplans.iyul.wav
+    0.4.5: 24620 261174c63b83 media/ru.lex.timeplans.iyul.wav.n    0.4.3: 49964 3f785ce8469f media/ru.lex.timeplans.iyul.wav
+  media/ru.lex.timeplans.noyabr.wav
+    0.4.5: 25132 916396c7651a media/ru.lex.timeplans.noyabr.wav.n    0.4.3: 24108 bfdd2d3726d3 media/ru.lex.timeplans.noyabr.wav
+  media/ru.lex.timeplans.sentyabr.wav
+    0.4.5: 37420 1c538ecd8a4a media/ru.lex.timeplans.sentyabr.wav.n    0.4.3: 38956 2fcf43dc4a71 media/ru.lex.timeplans.sentyabr.wav
+  media/ru.lex.timeplans.zapisat.wav
+    0.4.5: 39468 e7c6babdbd84 media/ru.lex.timeplans.zapisat.wav.n    0.4.3: 39468 08b243951468 media/ru.lex.timeplans.zapisat.wav
+  media/ru.lex.travel.kassa.wav
+    0.4.5: 16428 36bfb2aedc50 media/ru.lex.travel.kassa.wav.n    0.4.3: 28204 e7f0d8a1b3a3 media/ru.lex.travel.kassa.wav
+  media/ru.lex.travel2.preodolet.wav
+    0.4.5: 24108 62267382ca04 media/ru.lex.travel2.preodolet.wav.n    0.4.3: 27180 4a3971be29f1 media/ru.lex.travel2.preodolet.wav
+  media/ru.lex.travel2.rasstroitsya.wav
+    0.4.5: 31788 c28815317413 media/ru.lex.travel2.rasstroitsya.wav.n    0.4.3: 36396 582be5ac0d20 media/ru.lex.travel2.rasstroitsya.wav
+  media/ru.lex.travel2.razocharovatsya.wav
+    0.4.5: 38956 0e56e413d23a media/ru.lex.travel2.razocharovatsya.wav.n    0.4.3: 38444 8e2335c1a8e4 media/ru.lex.travel2.razocharovatsya.wav
+  media/ru.lex.travel2.zabota.wav
+    0.4.5: 24108 f1ce5a2f8f3d media/ru.lex.travel2.zabota.wav.n    0.4.3: 24620 14b3f97a35db media/ru.lex.travel2.zabota.wav
+  media/ru.lex.travel2.zhalko.wav
+    0.4.5: 19500 15a3e572fe42 media/ru.lex.travel2.zhalko.wav.n    0.4.3: 19500 4afa483ddb24 media/ru.lex.travel2.zhalko.wav
+  media/ru.lex.wellbeing.bol.wav
+    0.4.5: 34604 6cf50ee421c2 media/ru.lex.wellbeing.bol.wav.n    0.4.3: 22244 2fbd865d27c7 media/ru.lex.wellbeing.bol.wav
+  media/ru.lex.wellbeing.ploho.wav
+    0.4.5: 20524 9ed38648cb89 media/ru.lex.wellbeing.ploho.wav.n    0.4.3: 25644 5978ad907641 media/ru.lex.wellbeing.ploho.wav
+  media/ru.lex.wellbeing.ukol.wav
+    0.4.5: 23596 88a306277252 media/ru.lex.wellbeing.ukol.wav.n    0.4.3: 18988 e78c0d221ca4 media/ru.lex.wellbeing.ukol.wav
+  media/ru.lex.wellbeing.zapisat.wav
+    0.4.5: 31788 503971fe9461 media/ru.lex.wellbeing.zapisat.wav.n    0.4.3: 34348 973f268fddf6 media/ru.lex.wellbeing.zapisat.wav
+  media/ru.lex.workstudy.kollega.wav
+    0.4.5: 29228 90217336323d media/ru.lex.workstudy.kollega.wav.n    0.4.3: 17452 ea37f614913f media/ru.lex.workstudy.kollega.wav
+  media/ru.sent.a1.u031.wav
+    0.4.5: 38956 7e94df062654 media/ru.sent.a1.u031.wav.n    0.4.3: 73004 2ba747ecb85c media/ru.sent.a1.u031.wav
+  media/ru.sent.a1.u085.wav
+    0.4.5: 42028 2228b49fd8f6 media/ru.sent.a1.u085.wav.n    0.4.3: 49964 68698e8fba64 media/ru.sent.a1.u085.wav
+  media/ru.sent.a2.u143.wav
+    0.4.5: 31276 3163b3d666ea media/ru.sent.a2.u143.wav.n    0.4.3: 49964 f25e131df923 media/ru.sent.a2.u143.wav
+  media/ru.sent.a2.u155.wav
+    0.4.5: 38444 93cdf951e997 media/ru.sent.a2.u155.wav.n    0.4.3: 69164 20b47da3a409 media/ru.sent.a2.u155.wav
+  media/ru.sent.b1.u247.wav
+    0.4.5: 33836 dfd46d4911d0 media/ru.sent.b1.u247.wav.n    0.4.3: 76844 8d6943b7d102 media/ru.sent.b1.u247.wav
+  media/ru.sent.b1.u248.wav
+    0.4.5: 39980 98f30838c349 media/ru.sent.b1.u248.wav.n    0.4.3: 80684 a5b22953c80e media/ru.sent.b1.u248.wav
+  media/ru.sent.b1.u255.wav
+    0.4.5: 34860 a617a168f254 media/ru.sent.b1.u255.wav.n    0.4.3: 57644 f467e03dc2fb media/ru.sent.b1.u255.wav
+  media/ru.sent.b1.u279.wav
+    0.4.5: 33324 49f6823fdebf media/ru.sent.b1.u279.wav.n    0.4.3: 65324 a60602fca7e3 media/ru.sent.b1.u279.wav
+  media/ru.sent.b1.u317.wav
+    0.4.5: 26156 9f602a13d754 media/ru.sent.b1.u317.wav.n    0.4.3: 57644 8b7c27e5fc1f media/ru.sent.b1.u317.wav
+  media/ru.sent.b1.u336.wav
+    0.4.5: 47660 6142bb4a7992 media/ru.sent.b1.u336.wav.n    0.4.3: 56684 00f21db65b05 media/ru.sent.b1.u336.wav
+  media/ru.sent.b1.u342.wav
+    0.4.5: 43564 aea8593bdb9f media/ru.sent.b1.u342.wav.n    0.4.3: 65324 7e208306f910 media/ru.sent.b1.u342.wav
+  media/ru.sent.b1.u343.wav
+    0.4.5: 39980 b20223c84442 media/ru.sent.b1.u343.wav.n    0.4.3: 88364 329d9321279e media/ru.sent.b1.u343.wav
+  media/ru.sent.b1.u355.wav
+    0.4.5: 48684 0ae2779eee02 media/ru.sent.b1.u355.wav.n    0.4.3: 69164 f74934c31e31 media/ru.sent.b1.u355.wav
+  media/ru.sent.b1.u372.wav
+    0.4.5: 55340 0e6bf5cc4eea media/ru.sent.b1.u372.wav.n    0.4.3: 111404 c8b1c3c27685 media/ru.sent.b1.u372.wav
+  media/ru.sent.b2.u459.wav
+    0.4.5: 33836 15de8e448ba9 media/ru.sent.b2.u459.wav.n    0.4.3: 84524 9e4b11a47b4a media/ru.sent.b2.u459.wav
+  media/ru.sent.b2.u471.wav
+    0.4.5: 39468 98e2d0a93389 media/ru.sent.b2.u471.wav.n    0.4.3: 53804 6beebce335bd media/ru.sent.b2.u471.wav
+  media/ru.sent.b2.u483.wav
+    0.4.5: 31276 e6d01ed2a2a1 media/ru.sent.b2.u483.wav.n    0.4.3: 88364 4d0ef2130f3e media/ru.sent.b2.u483.wav
+  media/ru.sent.b2.u490.wav
+    0.4.5: 51244 c1680f368815 media/ru.sent.b2.u490.wav.n    0.4.3: 73004 8b0bdde790ae media/ru.sent.b2.u490.wav
+  media/ru.sent.b2.u494.wav
+    0.4.5: 42028 82a9b3d54f46 media/ru.sent.b2.u494.wav.n    0.4.3: 46124 4462af46e184 media/ru.sent.b2.u494.wav
+  media/ru.sent.b2.u503.wav
+    0.4.5: 37932 73d31528580b media/ru.sent.b2.u503.wav.n    0.4.3: 65324 09882f975032 media/ru.sent.b2.u503.wav
+  media/ru.sent.b2.u504.wav
+    0.4.5: 47148 c3f23ae9a7d9 media/ru.sent.b2.u504.wav.n    0.4.3: 49964 24ab76a23d8f media/ru.sent.b2.u504.wav
+  media/ru.sent.b2.u508.wav
+    0.4.5: 45612 8828380155a5 media/ru.sent.b2.u508.wav.n    0.4.3: 57644 5d3d39c53398 media/ru.sent.b2.u508.wav
+  media/ru.sent.b2.u511.wav
+    0.4.5: 44588 6c26a201b1d2 media/ru.sent.b2.u511.wav.n    0.4.3: 73004 30ba45ed5e98 media/ru.sent.b2.u511.wav
+  media/ru.sent.b2.u512.wav
+    0.4.5: 55340 34c5bee0bc24 media/ru.sent.b2.u512.wav.n    0.4.3: 96044 c1256d6b2fa5 media/ru.sent.b2.u512.wav
+  media/ru.sent.b2.u687.wav
+    0.4.5: 41004 cec9ed9590a0 media/ru.sent.b2.u687.wav.n    0.4.3: 96044 b0913cb03c60 media/ru.sent.b2.u687.wav
+  media/ru.sent.b2.u712.wav
+    0.4.5: 43052 bf469134591a media/ru.sent.b2.u712.wav.n    0.4.3: 69164 383e1b0e7451 media/ru.sent.b2.u712.wav
+  media/ru.sent.b2.u737.wav
+    0.4.5: 41004 734df8587ba2 media/ru.sent.b2.u737.wav.n    0.4.3: 99884 5b8db1609060 media/ru.sent.b2.u737.wav
+  media/ru.sent.b2.u757.wav
+    0.4.5: 44588 2c81419a6cf7 media/ru.sent.b2.u757.wav.n    0.4.3: 92204 caca704807fc media/ru.sent.b2.u757.wav
+  media/ru.sent.b2.u760.wav
+    0.4.5: 47148 8657258fb012 media/ru.sent.b2.u760.wav.n    0.4.3: 73004 75ac255451e5 media/ru.sent.b2.u760.wav
+  media/ru.sent.b2.u798.wav
+    0.4.5: 44588 236865735989 media/ru.sent.b2.u798.wav.n    0.4.3: 61484 1429088d3b37 media/ru.sent.b2.u798.wav
+  media/ru.sent.b2.u806.wav
+    0.4.5: 52268 d684182a3dab media/ru.sent.b2.u806.wav.n    0.4.3: 92204 e9c1e6788c50 media/ru.sent.b2.u806.wav
+  media/ru.sent.cp.p01.wav
+    0.4.5: 72236 6f42d9544e54 media/ru.sent.cp.p01.wav.n    0.4.3: 153644 0fb05af67dc4 media/ru.sent.cp.p01.wav
+  media/ru.sent.cp.p02.wav
+    0.4.5: 68140 b2a4cadd4021 media/ru.sent.cp.p02.wav.n    0.4.3: 165164 778cf25f1df4 media/ru.sent.cp.p02.wav
+  media/ru.sent.cp.p18.wav
+    0.4.5: 80940 550e85d55bc2 media/ru.sent.cp.p18.wav.n    0.4.3: 96044 da342e984321 media/ru.sent.cp.p18.wav
+  media/ru.sent.cp.p20.wav
+    0.4.5: 138284 11865ef3a2ce media/ru.sent.cp.p20.wav.n    0.4.3: 249644 72ce9a5918c8 media/ru.sent.cp.p20.wav
+  media/ru.sent.cp.p21.wav
+    0.4.5: 176684 201fb4ee3128 media/ru.sent.cp.p21.wav.n    0.4.3: 145964 ee3f7c719a0e media/ru.sent.cp.p21.wav
+  media/ru.sent.cp.p28.wav
+    0.4.5: 69164 a2531dff7fb5 media/ru.sent.cp.p28.wav.n    0.4.3: 222764 7e488ef028c1 media/ru.sent.cp.p28.wav
+  media/ru.sent.cp.p39.wav
+    0.4.5: 88108 1834b6b653a4 media/ru.sent.cp.p39.wav.n    0.4.3: 138284 b0381dd39f80 media/ru.sent.cp.p39.wav
+  media/ru.sent.on-ramp.anna-introduction.wav
+    0.4.5: 28204 f61717965f9d media/ru.sent.on-ramp.anna-introduction.wav.n    0.4.3: 76844 13f3de1febb5 media/ru.sent.on-ramp.anna-introduction.wav
+  sentences/entries.jsonl
+    0.4.5: 283551 1292da071e49 sentences/entries.jsonl.n    0.4.3: 357422 60b400d954de sentences/entries.jsonl
+

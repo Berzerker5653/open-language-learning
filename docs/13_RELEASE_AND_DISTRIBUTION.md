@@ -588,6 +588,19 @@ read back non-draft, non-prerelease, `isImmutable: true`
 (`…/upload-transcript.txt`). The 0.4.2 pair stays published and immutable as the rollback
 target for installed 0.4.2 stores.
 
+**ru-RU 0.4.5 published 2026-11-20** (owner instruction 2026-11-20; archive refresh,
+ru-only — the ja-JP 0.4.3 pin is unchanged). Built by `state/evidence/RC-0.4.5-2026-11-20/build-rc-0.4.5.sh`
+from HEAD 369aaba (seven gates exit 0; archive 294,200,156 bytes, sha256
+`735df7035cd27ec780945dd494a7a32bb8cae2a05799f2228bef64782c2f0bf5`; manifest rows 5,018 == media members
+5,018 delta 0; `words.jsonl` sidecar member present; install round-trip verified;
+accounting vs the published 0.4.3 members: +183 members — the 17-story STORY-AUTHOR-001 slate audio and
+the voice-consistency rebake rows; see `diff-043-to-045-ru-RU.txt`). GitHub asset digest equals the
+catalog pin (immutable release, non-draft, non-prerelease). Why: the previously pinned 0.4.4 archive was
+built 2026-11-18 15:48 MST and predates the final five stories (committed 2026-11-19 01:44 MST, 108
+audio-addressable items), so every CI audio-restore leg validated stale rows (`media_asset_missing`).
+Lesson banked: a pack build must be followed by a content freeze for that release — 0.4.4 was current
+for nine hours. The 0.4.4 and 0.4.3 ru archives stay published and immutable as rollback targets.
+
 **Licensing paper corrected after publication.** The published ja-JP 0.4.0
 archive carries three `licenses.jsonl` records. The tree now carries five: the
 baked-audio record was corrected to name the Qwen3-TTS bake engine (ADR-0023; the

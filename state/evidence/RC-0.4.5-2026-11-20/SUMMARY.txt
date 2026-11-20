@@ -1,0 +1,78 @@
+HEAD=369aaba6d3a63e867693eb371c3533065539551a
+dirty_paths=1
+?? state/evidence/RC-0.4.5-2026-11-20/
+--- manifests as shipped ---
+7dbd7891eb5899a73c3ad4e47e6326b4b12dc6f03b0a8172af9565a3c52736b6  languages/ja-JP/manifest.yaml
+version: "0.4.3"
+  content_license: "CC-BY-SA-4.0"
+9d4d3bc46f959f296ce27bc97052aae1dd19e69dd4bc549ea1c38a713e706d05  languages/ru-RU/manifest.yaml
+version: "0.4.5"
+  content_license: "CC0-1.0"
+rc-ru-RU-validate                            exit=0
+rc-ru-RU-lint                                exit=0
+rc-ru-RU-test                                exit=0
+rc-ru-RU-audit-curriculum                    exit=0
+rc-ru-RU-audit-lexicon                       exit=0
+rc-ru-RU-audit-licenses                      exit=0
+rc-ru-RU-audit-sources                       exit=0
+rc-build-ru-RU                               exit=0
+archive: dist/rc-0.4.5/ru-ru-reference-0.4.5.lpk
+bytes=294200156
+735df7035cd27ec780945dd494a7a32bb8cae2a05799f2228bef64782c2f0bf5  dist/rc-0.4.5/ru-ru-reference-0.4.5.lpk
+rc-inspect-ru-RU                             exit=0
+archive members=5973 media_members=5018
+manifest_rows=5018 media_members=5018 delta=0
+words_sidecar_member=1
+published 0.4.3 members = 5790   candidate 0.4.5 members = 5973
+identical (size+hash)   = 5660
+added in 0.4.5:
+103724 5cedb12c79d6 media/ru.sent.a1.shapka-v-parke.u002.wav
+1046 167208d4a697 stories/dva-bileta-v-odin-teatr.yaml
+1070 c2efe1f9ecf7 stories/perevodchik-vse-pereputal.yaml
+1071 23d3c5f2e9d5 stories/aukcion-odnoy-kartiny.yaml
+107564 b7e7940d8d2a media/ru.sent.a2.telefon-v-taksi.u007.wav
+107564 c4385941dd60 media/ru.sent.a1.podarok-dlya-mamy.u004.wav
+107564 e32a3b4acc11 media/ru.lex.stories202611.fonar.wav
+111404 c8b1c3c27685 media/ru.sent.b1.u372.wav
+11308 a9c506e110dd media/ru.lex.home.more.wav
+115244 087ae23db3e3 media/ru.sent.a2.rybalka-zimoy.u006.wav
+115244 42bdc0c96665 media/ru.sent.a2.rybalka-zimoy.u005.wav
+115244 74876b575f08 media/ru.sent.a1.kot-doma.u003.wav
+115244 d02d608c9654 media/ru.sent.a1.moy-den.u004.wav
+119084 0b9b42392393 media/ru.lex.stories202611.dokladchik.wav
+119084 65474b35e967 media/ru.sent.a2.avtobus-ne-prishol.u001.wav
+119084 65dd88ab2425 media/ru.lex.stories202611.gitara.wav
+120979 ab940ffa50da media/lemmas.jsonl
+126764 6a96145b6ce3 media/ru.sent.a1.moy-den.u003.wav
+130604 5c21e0ca6c99 media/ru.sent.b1.kluch-ot-dachi.u002.wav
+130604 a2e08d737bcb media/ru.lex.stories202611.kupe.wav
+13356 f0d92edda784 media/ru.lex.problems.polnyi.wav
+134444 03a427fece37 media/ru.lex.stories202611.aukcion.wav
+138284 65a672760ae1 media/ru.sent.a1.kot-doma.u006.wav
+138284 6b47f29bcac8 media/ru.sent.a1.moy-den.u001.wav
+138284 b0381dd39f80 media/ru.sent.cp.p39.wav
+142124 1c5b5431219e media/ru.sent.a1.shapka-v-parke.u006.wav
+142124 f527755f75e9 media/ru.sent.b1.internet-v-derevne.u006.wav
+14380 28dddb13b612 media/ru.lex.narration.porog.wav
+145964 35f1214c1352 media/ru.sent.a1.kot-doma.u004.wav
+145964 610d9017587d media/ru.lex.stories202611.vozrazit.wav
+145964 755da9b786ae media/ru.lex.stories202611.zanaves.wav
+145964 b65a802744c8 media/ru.sent.b2.aukcion-odnoy-kartiny.u004.wav
+145964 d59c4eaab9ab media/ru.lex.stories202611.perevodchik.wav
+145964 ee3f7c719a0e media/ru.sent.cp.p21.wav
+145964 efee69b56e7f media/ru.sent.a1.moy-den.u005.wav
+14892 0a5613349396 media/ru.lex.experiences.proryv.wav
+153644 0fb05af67dc4 media/ru.sent.cp.p01.wav
+rc-install-ru-RU                             exit=0
+store layout: dist/rc-0.4.5/store-ru-RU/org.openlanguage.ru-ru.reference dist/rc-0.4.5/store-ru-RU/org.openlanguage.ru-ru.reference/0.4.5 dist/rc-0.4.5/store-ru-RU/org.openlanguage.ru-ru.reference/current 
+current pointer: 0.4.5
+media files in installed tree: 5018
+sidecar in installed tree: 1
+rc-draft-catalog                             exit=0
+      "license": "CC0-1.0",
+      "pack_id": "org.openlanguage.ru-ru.reference",
+      "sha256": "735df7035cd27ec780945dd494a7a32bb8cae2a05799f2228bef64782c2f0bf5",
+      "size_bytes": 294200156,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.5/ru-ru-reference-0.4.5.lpk",
+      "version": "0.4.5"
+RC_045_DONE

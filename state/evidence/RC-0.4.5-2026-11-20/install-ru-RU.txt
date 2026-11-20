@@ -1,0 +1,4 @@
+store layout: dist/rc-0.4.5/store-ru-RU/org.openlanguage.ru-ru.reference dist/rc-0.4.5/store-ru-RU/org.openlanguage.ru-ru.reference/0.4.5 dist/rc-0.4.5/store-ru-RU/org.openlanguage.ru-ru.reference/current 
+current pointer: 0.4.5
+media files in installed tree: 5018
+sidecar in installed tree: 1

@@ -1,0 +1,4 @@
+$ cargo run -q -p lts-langpack-cli -- catalog dist/rc-0.4.5/ru-ru-reference-0.4.5.lpk --file dist/rc-0.4.5/packs.json --url-template https://github.com/Berzerker5653/open-language-learning/releases/download/{pack_id}-{version}/{filename} --platform-reports docs/platform/PLATFORM_REPORTS.yaml
+catalog: dist/rc-0.4.5/ru-ru-reference-0.4.5.lpk -> org.openlanguage.ru-ru.reference v0.4.5
+wrote dist/rc-0.4.5/packs.json (1 entries)
+EXIT=0

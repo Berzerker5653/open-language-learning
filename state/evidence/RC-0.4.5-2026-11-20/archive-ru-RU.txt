@@ -1,0 +1,3 @@
+archive: dist/rc-0.4.5/ru-ru-reference-0.4.5.lpk
+bytes=294200156
+735df7035cd27ec780945dd494a7a32bb8cae2a05799f2228bef64782c2f0bf5  dist/rc-0.4.5/ru-ru-reference-0.4.5.lpk
