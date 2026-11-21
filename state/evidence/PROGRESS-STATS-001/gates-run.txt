@@ -1,0 +1,10 @@
+fmt exit=0
+clippy-storage exit=1
+test-storage exit=0
+clippy-desktop exit=1
+test-desktop exit=0
+clippy-storage exit=0
+clippy-desktop exit=101
+final-fmt exit=0
+final-clippy-desktop exit=0
+final-test-desktop exit=0

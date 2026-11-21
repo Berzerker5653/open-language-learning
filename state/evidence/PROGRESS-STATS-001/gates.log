@@ -1,0 +1,37 @@
+PROGRESS-STATS-001 — controller gate battery (run 101 takeover, 2026-11-21)
+
+Context: board run 100 died at the 80/80 iteration budget with the FULL lane
+implemented but uncommitted; its only evidence file was a clippy.log from a
+malformed invocation (`cargo clippy -p X --all-targets -D warnings` — flag
+must sit after `--`). Run 101 re-ran every gate personally; raw logs are in
+this directory (fmt.log, test-storage.log, test-desktop.log,
+clippy-storage.log, clippy-desktop.log, gates-run.txt tally).
+
+LANE-tier battery, all green at the commit tree:
+- cargo fmt --all --check                         exit 0
+- cargo clippy -p lts-storage --all-targets -- -D warnings   exit 0
+- cargo test  -p lts-storage                      exit 0 (all suites ok)
+- cargo clippy -p lts-desktop --all-targets -- -D warnings   exit 0 (after controller fixes below)
+- cargo test  -p lts-desktop                      exit 0 — 211 passed, 0 failed, 2 ignored;
+  targeted tests present and ok:
+    tests::gate_progress_averages_concept_ladder_weights ... ok
+    tests::memory_stats_reports_only_this_profiles_local_data ... ok
+    tests::world_unlocks_follow_pack_declared_capabilities ... ok
+- npx tsc --noEmit  (apps/desktop)                exit 0
+- npx vitest run    (apps/desktop)                exit 0 — 53 files / 426 tests passed
+  (includes the new memory-stats suite and updated home/harness fixtures)
+
+Controller fixes applied on top of the dead run before commit:
+1. lib.rs:4307 clippy::useless_conversion — `u64::from(due_today as u64)`
+   reduced to `(due_today as u64)`.
+2. lib.rs:4351 clippy::unnecessary_sort_by — bands sort_by -> sort_by_key.
+Both re-verified by a clean fmt + clippy + full `cargo test -p lts-desktop`
+pass (unit lts-ps-final-r104; tally lines final-* in gates-run.txt).
+
+Deferred: none. No screenshots — the a11y contract is test-asserted
+(role=progressbar + aria-valuenow/min/max + human label in home.test.tsx and
+memory-stats.test.tsx), matching how SessionChrome is tested.
+
+Race notes: tree held only this card's lane (verified via git status at
+takeover); stray untracked c1.png/c4.png at the repo root predate this card
+(10:14, before the first run started) and were left untouched.

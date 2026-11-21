@@ -2386,6 +2386,22 @@
       ],
       "summary": "Card premise (\"0 min left\" at session start) re-verified against the two dogfood screenshots and does not reproduce — both read \"1 of 9 · ~9 min left\" under tesseract psm7/8/13 + digit whitelist + 8x glyph vision. Fixed the real gaps the card named: remaining-time derivation extracted from App publishSession into tested remainingPlanSeconds (full queue at start, drops completed, unpriced→hidden, ~1 floor), and new planMinutesLabel kills the producible \"about 0 minutes\" in the plan summary and begin CTA (unpriced→no figure, <30s→\"under a minute\", singular \"about 1 minute\"). 8 new vitest tests; tsc 0; full frontend suite 52 files / 420 tests green; 0 new prettier deltas.",
       "notes": "Frontend-only lane: session-chrome.tsx, home.tsx, App.tsx + their tests. No crates touched, no cargo gates. home.tsx and session-chrome.test.tsx are pre-existing prettier-dirty at HEAD; lane hunks prettier-clean, rest left alone. \"1 activities\" plural grammar left out of scope deliberately."
+    },
+    "PROGRESS-STATS-001": {
+      "task_id": "PROGRESS-STATS-001",
+      "title": "Progress instruments — per-goal modality progress bars, readable grows-with references, memory stats strip (visual-ui-audit U7/U14)",
+      "status": "done",
+      "attempts": 1,
+      "updated": "2026-11-21",
+      "dependencies": [
+        "SESSION-CHROME-001"
+      ],
+      "evidence": [
+        "state/evidence/PROGRESS-STATS-001/gates.log",
+        "state/evidence/PROGRESS-STATS-001/gates-run.txt"
+      ],
+      "summary": "Shipped all four acceptance bullets: engine-derived progress_pct per goal dimension (mean concept ladder weight, unseen=0) drawn as dependency-free SVG role=progressbar bars in GoalMap; world_state 'missing' references upgraded to WorldMissing{target,modality,label} with labels resolved from the active pack's lexicon (raw id never rendered inline); new memory_stats command (due today, engine-priced minutes, per-band mean FSRS retrievability with honest abstention, 12-week evidence-event calendar via new Store::evidence_event_days) rendered as MemoryStatsStrip above the GoalMap, framed as n=1 instruments not grades; zero new runtime deps, a11y semantics test-asserted. Board run 100 died at 80/80 with the lane complete but uncommitted; run 101 re-ran the whole LANE battery personally and fixed two clippy nits (useless_conversion, unnecessary_sort_by) before commit.",
+      "notes": "Lanes: apps/desktop/src-tauri/src/lib.rs (goal_map/memory_stats/world_state + 3 targeted tests), crates/storage (evidence_event_days), apps/desktop/src frontend (home, memory-stats, App) + tests, packages/ui/src/styles.css. Battery: fmt 0; clippy+test green for lts-storage and lts-desktop (211 passed incl. targeted tests); tsc 0; vitest 53 files / 426 tests."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
