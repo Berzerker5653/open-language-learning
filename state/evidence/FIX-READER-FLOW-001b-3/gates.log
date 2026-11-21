@@ -1,0 +1,21 @@
+== FIX-READER-FLOW-001b-3 gates (clean worktree at 48c5aa1 + 57388d2 change) ==
+2026-11-21T01:37:34-07:00
+--- npx tsc --noEmit (apps/desktop) ---
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'tsc' --noEmit
+exit=0
+--- npx vitest run src/reading.test.tsx ---
+ Test Files  1 passed (1)
+      Tests  21 passed (21)
+exit=0
+--- cargo fmt -p lts-desktop --check ---
+exit=0
+--- cargo test -p lts-desktop aux ---
+running 3 tests
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 203 filtered out; finished in 1.97s
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+RUST-GATES-DONE
+--- cargo clippy -p lts-desktop --all-targets -- -D warnings ---
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 6.27s
+CLIPPY-EXIT=0

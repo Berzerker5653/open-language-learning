@@ -1,0 +1,29 @@
+   Compiling lts-domain v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-19c148d5-work/crates/domain)
+   Compiling lts-security v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-19c148d5-work/crates/security)
+   Compiling lts-speech-api v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-19c148d5-work/crates/speech-api)
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/.hermes/cache/scratch/lts-19c148d5-work/apps/desktop/src-tauri)
+   Compiling lts-speech-runtime v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-19c148d5-work/crates/speech-runtime)
+   Compiling lts-langpack v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-19c148d5-work/crates/langpack)
+   Compiling lts-learner-model v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-19c148d5-work/crates/learner-model)
+   Compiling lts-world v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-19c148d5-work/crates/world)
+   Compiling lts-scheduler v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-19c148d5-work/crates/scheduler)
+   Compiling lts-storage v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-19c148d5-work/crates/storage)
+   Compiling lts-activity v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-19c148d5-work/crates/activity)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 18.10s
+     Running unittests src/lib.rs (/home/hunter/game-dev/LTS/target/debug/deps/lts_desktop-d61b0657df16a667)
+
+running 3 tests
+test tests::word_card_off_pack_token_gets_the_labeled_aux_card ... ok
+test tests::word_card_aux_lookup_goes_through_the_lemma_and_degrades_without_a_slice ... ok
+test tests::word_card_parses_the_aux_slice_once_not_per_tap ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 203 filtered out; finished in 1.97s
+
+     Running unittests src/main.rs (/home/hunter/game-dev/LTS/target/debug/deps/lts_desktop-a4c3ad5518921483)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+TEST-EXIT=0
+RUST-GATES-DONE
