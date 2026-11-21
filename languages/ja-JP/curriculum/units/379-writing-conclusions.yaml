@@ -4,6 +4,21 @@ goal_id: ja.goal.b1.comparison-debate
 title: writing conclusions
 summary: B1 language for writing conclusions.
 estimated_minutes: 6
+# ADR-0037 task journey (JA-B1-003-JOURNEYS-001): input/scaffolded/independent
+# are this unit's stages; transfer is the next unit's listening check (context
+# change proven by the sentences this goal's units share); reuse is the goal's
+# phase-gated revision unit 841.
+task_sequence:
+  input: ja.activity.writing-conclusions-enc
+  scaffolded: ja.activity.writing-conclusions-cloze0
+  independent: ja.activity.writing-conclusions-enc-write
+  transfer: ja.activity.review-posts-listen
+  reuse: ja.activity.debate-rev-write
+# ADR-0022 phase gate: this unit's lesson surfaces after the previous
+# journey unit's content reached `supported`.
+requires_unit:
+- unit: ja.unit.conceding-points
+  state: supported
 generation_contract:
   allowed_vocab:
   - ja.lex.debate.koukan
@@ -14,22 +29,24 @@ generation_contract:
   - ja.sent.meeting-starts
   - ja.sent.reply-email
   allowed_grammar:
-  - ja.grammar.b1.shitsumon-ni-kotae
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.verb.polite-masu
   - ja.grammar.particle.object-wo
+  - ja.grammar.particle.possessive-no
   new_item_budget: 6
   validation_method: choice
 activities:
 - id: ja.activity.writing-conclusions-enc
   type: encounter-read
   modality: reading
-  support_level: 5
+  support_level: 2
   content_refs:
   - ja.lex.debate.koukan
   - ja.lex.debate.kairyou2
   - ja.lex.debate.ketsuron2
   - ja.lex.debate.saisho2
   - ja.lex.debate.saigo2
-  - ja.grammar.b1.shitsumon-ni-kotae
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.writing-conclusions-listen
@@ -42,7 +59,7 @@ activities:
   - ja.lex.debate.ketsuron2
   - ja.lex.debate.saisho2
   - ja.lex.debate.saigo2
-  - ja.grammar.b1.shitsumon-ni-kotae
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.writing-conclusions-match
@@ -55,7 +72,7 @@ activities:
   - ja.lex.debate.ketsuron2
   - ja.lex.debate.saisho2
   - ja.lex.debate.saigo2
-  - ja.grammar.b1.shitsumon-ni-kotae
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.writing-conclusions-speak
@@ -68,7 +85,7 @@ activities:
   - ja.lex.debate.ketsuron2
   - ja.lex.debate.saisho2
   - ja.lex.debate.saigo2
-  - ja.grammar.b1.shitsumon-ni-kotae
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.writing-conclusions-cloze0
@@ -82,4 +99,11 @@ activities:
   modality: writing
   support_level: 2
   content_refs:
+  - ja.sent.reply-email
+- id: ja.activity.writing-conclusions-enc-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.meeting-starts
   - ja.sent.reply-email
