@@ -44,7 +44,9 @@ describe("progress reads in the learner's order (journey f)", () => {
     // labels are detail under the answers.
     const detail = app.section("Progress");
     expect(detail.textContent).toContain("Recorded detail");
-    expect(detail.textContent).toContain("ja.lex.demo.obaasan");
+    // UI-HYGIENE-001: the detail table shows human words, never raw ids.
+    expect(detail.textContent).not.toContain("ja.lex.demo.obaasan");
+    expect(detail.textContent).toMatch(/obaasan/i);
     expect(answers.compareDocumentPosition(detail) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     // The goal map is no longer the page's headline either.
     expect(

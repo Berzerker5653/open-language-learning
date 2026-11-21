@@ -54,8 +54,11 @@
   --radius: 8px;
   --radius-sm: 6px;
   --shadow: 0 1px 2px rgb(36 31 24 / 0.05);
-  --page-max: 46rem;
-  --bar-max: 62rem;
+  /* UI-HYGIENE-001 (visual-ui-audit U1): one content-width token shared
+     by the header bar, the page column, and the card/list containers
+     inside it, so their left edges align at every breakpoint. Readable
+     measure stays per-element (p at 70ch etc.). */
+  --content-max: 46rem;
 }
 
 /* ------------------------------------------------------------------ base */
@@ -166,7 +169,7 @@ header {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem 1.25rem;
-  max-width: var(--bar-max);
+  max-width: var(--content-max);
   margin-inline: auto;
   padding: 0.5rem 1.25rem;
   min-height: 3.5rem;
@@ -236,7 +239,7 @@ main {
 }
 
 .page {
-  max-width: var(--page-max);
+  max-width: var(--content-max);
   margin-inline: auto;
   padding: 1.75rem 1.25rem 4rem;
 }
@@ -334,9 +337,12 @@ main {
 }
 
 .seg-btn[aria-pressed="true"] {
-  background: var(--accent-soft);
-  color: var(--accent-ink);
-  box-shadow: inset 0 0 0 1.5px var(--accent);
+  /* UI-HYGIENE-001 (U1): selected segment reads at a glance — solid
+     fill, not a tint; text colour is supplementary, aria-pressed is
+     the semantic state. */
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
 }
 
 /* ---------------------------------------------------------------- forms */
@@ -503,6 +509,66 @@ details.prose-note > p {
   color: var(--accent-ink);
   border-color: var(--accent);
   background: var(--accent-soft);
+}
+
+/* UI-HYGIENE-001 (visual-ui-audit U2): the AI-content honesty line is a
+   small monospace badge (NuanceDeck idiom), not greeting prose; the
+   tooltip carries the full policy. */
+.badge--mono {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.pack-posture-badge {
+  vertical-align: middle;
+  cursor: help;
+}
+
+/* UI-HYGIENE-001 (visual-ui-audit U13): the profile chooser renders one
+   aligned card per real profile — initials avatar, pack line, last
+   studied, one-line state. Cards align on the shared content width. */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 0.75rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-bottom: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+
+.profile-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+}
+
+.profile-name {
+  font-size: 1.05rem;
+}
+
+.profile-card .btn-row {
+  margin-top: 0.35rem;
 }
 
 /* K-41: stressed-vowel highlight (data-driven; color supplementary,

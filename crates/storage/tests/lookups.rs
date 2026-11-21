@@ -102,7 +102,10 @@ fn lookups_belong_to_the_person_and_cascade_on_profile_delete() {
 #[test]
 fn migration_v8_adds_the_lookup_table_and_mined_context_column() {
     let store = Store::in_memory().unwrap();
-    assert_eq!(store.schema_version().unwrap(), 8);
+    // v8 artifacts land on a schema at head; later migrations (v9+)
+    // legitimately move the version stamp, so pin to SCHEMA_VERSION.
+    assert_eq!(store.schema_version().unwrap(), lts_storage::SCHEMA_VERSION);
+    assert!(store.schema_version().unwrap() >= 8, "v8 has been applied");
     // The mined_items context column exists and defaults NULL for rows
     // written without it (manual Mine keeps working unchanged).
     let p = profile(&store);

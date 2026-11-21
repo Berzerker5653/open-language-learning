@@ -572,6 +572,16 @@ fn switch_pack(profile_id: String, pack_id: String) -> Result<(), String> {
 struct ProfileInfo {
     id: String,
     display_name: String,
+    // UI-HYGIENE-001 (visual-ui-audit U13): the chooser renders one aligned
+    // card per real profile, so the listing carries the pack it studies,
+    // that pack's entry band, the due count, and the last studied stamp.
+    // A failed sub-read yields None (the card omits that line) — the
+    // chooser never invents a state the engine could not read.
+    pack: Option<String>,
+    band: Option<String>,
+    due_count: Option<usize>,
+    last_studied: Option<String>,
+    hidden: bool,
 }
 
 /// Create the local profile (no account).
@@ -583,6 +593,11 @@ fn create_local_profile(data: &Path, display_name: &str) -> Result<ProfileInfo, 
     Ok(ProfileInfo {
         id: profile.id,
         display_name: profile.display_name,
+        pack: None,
+        band: None,
+        due_count: None,
+        last_studied: None,
+        hidden: profile.hidden,
     })
 }
 
@@ -595,15 +610,83 @@ fn create_profile(display_name: String) -> Result<ProfileInfo, String> {
 /// picker. Restart must never re-run onboarding for an existing user.
 fn list_profiles_at(data: &Path) -> Result<Vec<ProfileInfo>, String> {
     let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
-    Ok(store
-        .list_profiles()
-        .map_err(|e| e.to_string())?
+    let profiles = store.list_profiles().map_err(|e| e.to_string())?;
+    let now_rfc = rfc3339_utc(now_secs());
+    let installed = packs::installed_packs(data);
+    let packs_root = data.join("packs");
+    Ok(profiles
         .into_iter()
-        .map(|p| ProfileInfo {
-            id: p.id,
-            display_name: p.display_name,
+        .map(|p| {
+            let selected = store.selected_packs(&p.id).unwrap_or_default();
+            let (pack, band) = selected
+                .first()
+                .map(|(pack_id, version)| {
+                    let name = installed
+                        .iter()
+                        .find(|i| &i.pack_id == pack_id && &i.version == version)
+                        .map(|i| i.display_name.clone())
+                        .or_else(|| {
+                            installed
+                                .iter()
+                                .find(|i| &i.pack_id == pack_id)
+                                .map(|i| i.display_name.clone())
+                        });
+                    let band = lts_langpack::archive::current_version(pack_id, &packs_root)
+                        .and_then(|v| pack_entry_band(&packs_root.join(pack_id).join(v)));
+                    (name, band)
+                })
+                .unwrap_or((None, None));
+            let due_count = match store.due_items(&p.id, lts_scheduler::SPIKE_VERSION, &now_rfc) {
+                Ok(spike) => store
+                    .due_items(&p.id, lts_scheduler::MINED_SCHEDULER, &now_rfc)
+                    .map(|mined| spike.len() + mined.len())
+                    .ok(),
+                Err(_) => None,
+            };
+            ProfileInfo {
+                id: p.id.clone(),
+                display_name: p.display_name,
+                pack,
+                band,
+                due_count,
+                last_studied: store.last_evidence_at(&p.id).ok().flatten(),
+                hidden: p.hidden,
+            }
         })
         .collect())
+}
+
+/// The lowest band the pack's own goal files declare, in ladder order —
+/// the band a fresh learner in that pack starts in. Pack data only, no
+/// mastery derivation: the chooser lists profiles cheaply.
+fn pack_entry_band(root: &Path) -> Option<String> {
+    let mut bands: Vec<String> = Vec::new();
+    for path in pack_goal_files(root) {
+        let Ok(text) = std::fs::read_to_string(&path) else {
+            continue;
+        };
+        let Ok(parsed) = serde_yaml::from_str::<PackGoals>(&text) else {
+            continue;
+        };
+        for g in parsed.goals {
+            if let Some(b) = g.band {
+                if !bands.contains(&b) {
+                    bands.push(b);
+                }
+            }
+        }
+    }
+    bands.sort_by_key(|b| band_sort_key(Some(b)));
+    bands.into_iter().next()
+}
+
+#[tauri::command]
+fn set_profile_hidden(profile_id: String, hidden: bool) -> Result<(), String> {
+    let store =
+        lts_storage::Store::open(data_dir().join("profiles.db")).map_err(|e| e.to_string())?;
+    store
+        .set_profile_hidden(&profile_id, hidden)
+        .map_err(|e| e.to_string())
 }
 
 /// Validate a resume target before the UI commits to it.
@@ -616,8 +699,13 @@ fn resume_profile_at(data: &Path, profile_id: &str) -> Result<ProfileInfo, Strin
         .find(|p| p.id == profile_id)
         .ok_or("unknown profile")?;
     Ok(ProfileInfo {
-        id: profile.id,
+        id: profile.id.clone(),
         display_name: profile.display_name,
+        pack: None,
+        band: None,
+        due_count: None,
+        last_studied: None,
+        hidden: profile.hidden,
     })
 }
 
@@ -9737,6 +9825,7 @@ pub fn run() {
             create_profile,
             list_profiles,
             resume_profile,
+            set_profile_hidden,
             complete_onboarding,
             home_state,
             practice_plan,

@@ -12,6 +12,10 @@ pub struct Profile {
     pub id: String,
     pub display_name: String,
     pub created_at: String,
+    /// UI-HYGIENE-001: an archived profile stays on disk with all its
+    /// evidence but is not offered in the chooser.
+    #[serde(default)]
+    pub hidden: bool,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -49,19 +53,21 @@ impl Store {
             id,
             display_name: display_name.to_string(),
             created_at: created_at.to_string(),
+            hidden: false,
         })
     }
 
     pub fn get_profile(&self, id: &str) -> Result<Option<Profile>, Error> {
         self.conn
             .query_row(
-                "SELECT id, display_name, created_at FROM profiles WHERE id = ?1",
+                "SELECT id, display_name, created_at, hidden FROM profiles WHERE id = ?1",
                 params![id],
                 |r| {
                     Ok(Profile {
                         id: r.get(0)?,
                         display_name: r.get(1)?,
                         created_at: r.get(2)?,
+                        hidden: r.get::<_, i64>(3)? != 0,
                     })
                 },
             )
@@ -70,17 +76,47 @@ impl Store {
     }
 
     pub fn list_profiles(&self) -> Result<Vec<Profile>, Error> {
-        let mut stmt = self
-            .conn
-            .prepare("SELECT id, display_name, created_at FROM profiles ORDER BY created_at, id")?;
+        let mut stmt = self.conn.prepare(
+            "SELECT id, display_name, created_at, hidden FROM profiles
+                 ORDER BY created_at, id",
+        )?;
         let rows = stmt.query_map([], |r| {
             Ok(Profile {
                 id: r.get(0)?,
                 display_name: r.get(1)?,
                 created_at: r.get(2)?,
+                hidden: r.get::<_, i64>(3)? != 0,
             })
         })?;
         rows.collect::<Result<_, _>>().map_err(Error::from)
+    }
+
+    /// UI-HYGIENE-001: when this profile last practised — the newest
+    /// evidence event's timestamp, RFC 3339 UTC, or None when it has
+    /// never produced evidence.
+    pub fn last_evidence_at(&self, profile_id: &str) -> Result<Option<String>, Error> {
+        let row: Option<Option<String>> = self
+            .conn
+            .query_row(
+                "SELECT MAX(occurred_at) FROM evidence_events WHERE profile_id = ?1",
+                params![profile_id],
+                |r| r.get(0),
+            )
+            .optional()?;
+        Ok(row.flatten())
+    }
+
+    /// UI-HYGIENE-001: archive a profile out of the chooser (or bring it
+    /// back). Data is never deleted by this flag.
+    pub fn set_profile_hidden(&self, id: &str, hidden: bool) -> Result<(), Error> {
+        let n = self.conn.execute(
+            "UPDATE profiles SET hidden = ?2 WHERE id = ?1",
+            params![id, i64::from(hidden)],
+        )?;
+        if n == 0 {
+            return Err(Error::NotFound(id.to_string()));
+        }
+        Ok(())
     }
 
     /// Insert or replace a settings key. Values are JSON; the app layer

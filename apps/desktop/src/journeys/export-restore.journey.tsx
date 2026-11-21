@@ -97,11 +97,18 @@ describe("export then restore (journey d)", () => {
     );
 
     // Switch to what was restored — same name, different profile.
+    // UI-HYGIENE-001: the chooser renders cards; both Dans stay visible
+    // (each carries recorded state), and the Continue button resumes one.
     await app.click(app.button(app.section("Settings"), "Switch profile…"));
     await app.click(app.button(app.section("Switch profile confirmation"), "Yes, switch profile"));
-    const rows = [...document.querySelectorAll('[aria-label="Profiles"] button')];
-    expect(rows.map((r) => r.textContent)).toEqual(["Dana", "Dana"]);
-    await app.click(rows[1]!);
+    const cards = [...document.querySelectorAll('[aria-label="Profiles"] .profile-card')];
+    expect(cards.map((c) => c.querySelector(".profile-name")?.textContent)).toEqual([
+      "Dana",
+      "Dana",
+    ]);
+    const secondContinue = cards[1]?.querySelector("button.btn--primary");
+    if (!secondContinue) throw new Error("the restored Dana offered no Continue button");
+    await app.click(secondContinue);
 
     // The learner lands on a plan that reads exactly as the old one did.
     expect(app.engine.lastArgsFor("home_state")).toEqual({ profileId: "profile-2" });

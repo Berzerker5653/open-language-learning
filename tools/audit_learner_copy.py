@@ -19,8 +19,14 @@ assertion about behaviour, not copy a learner sees.
 
 Identifier families tracked: the ticket ids used across this repo (K-n, BLK-n,
 W-n, RT-n, TTS-n, LEARN-n), ADR numbers, owner decisions (O-0n), pack/release
-and ledger gate ids (PACK-n, REL-n, ACC-n, SEC-n, REVIEW-n, RL-n), and the
-per-language content gates (JA-XXn, RU-XXn).
+and ledger gate ids (PACK-n, REL-n, ACC-n, SEC-n, REVIEW-n, RL-n), the
+per-language content gates (JA-XXn, RU-XXn), and — since UI-HYGIENE-001
+(visual-ui-audit U13) — raw content tokens: dotted/colon pack ids such as
+`ja.lex.demo.obaasan` or `ru.sent.b2`, which must never reach a learner's
+eyes as copy (surfaces render human labels instead).
+
+Journey harnesses (`src/**/journeys/`) are skipped like tests: they are
+developer drivers that hand ids to the engine, not rendered copy.
 
 What this tool does NOT claim: an id-free surface is not a claim that the copy
 is clear, age-appropriate, accessible or pedagogically correct. That judgement
@@ -34,7 +40,7 @@ import re
 import sys
 from pathlib import Path
 
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 
 DEFAULT_ROOTS = ["apps/desktop/src", "packages/ui/src"]
 
@@ -56,6 +62,9 @@ ID_RE = re.compile(
     r"|RL-\d+"
     r"|JA-[A-Z]{2}\d+"
     r"|RU-[A-Z]{2}\d+"
+    # Raw content tokens (UI-HYGIENE-001): a 2-letter language prefix with
+    # two or more dotted/colon-joined segments, e.g. ja.lex.demo.obaasan.
+    r"|[a-z]{2}(?:[.:][a-z0-9_-]+){2,}"
     r")\b"
 )
 
@@ -191,6 +200,9 @@ def audit_roots(roots):
             raise SystemExit(f"error: not a source directory: {root}")
         for path in sorted(p.rglob("*.ts*")):
             if ".test." in path.name or ".spec." in path.name:
+                skipped += 1
+                continue
+            if "journeys" in path.parts:
                 skipped += 1
                 continue
             if path.suffix not in (".ts", ".tsx"):

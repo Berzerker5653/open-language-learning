@@ -1352,10 +1352,21 @@ export class LearnerEngine {
           ],
         };
       case "list_profiles":
-        return [...this.profiles.values()].map((p) => ({
-          id: p.id,
-          display_name: p.display_name,
-        })) satisfies ProfileSummary[];
+        // UI-HYGIENE-001: the chooser wire carries the same state the real
+        // engine fills — studied pack, due count, last-practised stamp — so
+        // journey fixtures exercise the cards the learner actually sees.
+        return [...this.profiles.values()].map((p) => {
+          const firstPack = p.installs[0];
+          return {
+            id: p.id,
+            display_name: p.display_name,
+            pack: firstPack ? this.installed.get(firstPack)?.display_name ?? null : null,
+            band: null,
+            due_count: p.installs.length ? p.schedule.length : null,
+            last_studied: p.events ? new Date(Date.now() - 2 * 86_400_000).toISOString() : null,
+            hidden: false,
+          };
+        }) satisfies ProfileSummary[];
       case "create_profile": {
         const id = `profile-${this.nextProfile++}`;
         this.profiles.set(id, {
@@ -2204,7 +2215,11 @@ export async function mountApp(engine: LearnerEngine): Promise<Mounted> {
     button: (scope, label) => {
       const root = typeof scope === "string" ? mounted.section(scope) : scope;
       const buttons = [...root.querySelectorAll("button")];
-      const labels = buttons.map((b) => (b.textContent ?? "").trim());
+      // The accessible name counts as part of the label: a chooser card's
+      // Continue button is addressed by the learner-visible profile name.
+      const labels = buttons.map((b) =>
+        `${(b.textContent ?? "").trim()} ${(b.getAttribute("aria-label") ?? "").trim()}`.trim(),
+      );
       // An exact label wins; failing that, the first control whose text
       // carries it — a plan row leads with its reason ("New material"), and
       // the word the learner will practise comes after it.

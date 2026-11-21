@@ -414,8 +414,12 @@ describe("progress", () => {
         ]}
       />,
     );
-    expect(html).toContain("comprehension-reading");
-    expect(html).toContain("production-writing");
+    // UI-HYGIENE-001: the skill column shows human labels, never kebab
+    // dimension names.
+    expect(html).toContain("Reading");
+    expect(html).toContain("Write it");
+    expect(html).not.toContain("comprehension-reading");
+    expect(html).not.toContain("production-writing");
     expect(html).toContain("independent");
     expect(html).toContain("62%");
     expect(html).toContain("10%");
@@ -501,7 +505,10 @@ describe("goal map", () => {
     expect(html).toContain("supported");
     expect(html).toContain("not started");
     expect(html).toContain("locked");
-    expect(html).toContain("ja.orth.hira.a (comprehension-reading → independent)");
+    // UI-HYGIENE-001: a prerequisite is spoken in human words; the raw
+    // content id never reaches the learner.
+    expect(html).toContain("independent in Reading");
+    expect(html).not.toContain("ja.orth.hira.a");
     // Owner 2026-10-07: per-item draft badges are retired; posture is
     // stated once at pack level, never per goal.
     expect(html).not.toContain("draft content");
@@ -573,10 +580,12 @@ describe("goal map", () => {
     );
     expect(html).toContain('data-state="unseen"');
     expect(html).toContain('data-coverage="1/4"');
-    expect(html).toContain("1 of 4 concepts have evidence");
-    expect(html).toContain("ja.grammar.demo.adjectives");
-    // The strong concept is named as the exemplar, not as the goal's state.
-    expect(html).toContain("strongest (ja.grammar.demo.adjectives) is independent");
+    // UI-HYGIENE-001: R09 stays honest — coverage and the weakest
+    // aggregate headline the learner sees; the exemplar's raw pack id
+    // is gone.
+    expect(html).toContain("1 of 4 parts have evidence");
+    expect(html).toContain("one part is already independent");
+    expect(html).not.toContain("ja.grammar.demo.adjectives");
   });
 
   it("is honest when no pack goals exist", () => {

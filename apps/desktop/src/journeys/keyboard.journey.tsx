@@ -61,9 +61,15 @@ describe("keyboard-only route walk", () => {
     // the screen — that is what makes it usable as an escape hatch.
     expect(tabStops()[0]).toBe(document.querySelector('a[href="#main"]'));
 
-    // Tab to the resume picker and Enter: Lee's profile.
+    // Tab to the resume picker and Enter: Lee's profile. UI-HYGIENE-001:
+    // the chooser card's tab-reachable control is the Continue button,
+    // addressed by its accessible name ("Continue Lee").
     const stops = tabStops();
-    const lee = stops.find((el) => el.textContent?.trim() === "Lee");
+    const lee = stops.find(
+      (el) =>
+        el.textContent?.trim() === "Lee" ||
+        (el.getAttribute("aria-label") ?? "").includes("Lee"),
+    );
     if (!lee) throw new Error("the resume picker offered no tab-reachable profile");
     await press(lee);
 

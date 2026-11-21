@@ -36,7 +36,8 @@ describe("a language change refreshes the learner context (U02)", () => {
     // Today answers from the Russian pack; open one of its plan rows so a
     // live old-pack card exists before the switch.
     const home = app.section("Practice");
-    expect(home.textContent).toContain("ru.sent.b2");
+    // UI-HYGIENE-001: plan rows carry human words, never raw ids.
+    expect(home.textContent).not.toMatch(/\bru\.(sent|lex|activity)\./);
     const writeRow = [...home.querySelectorAll("button")].find((b) =>
       (b.textContent ?? "").includes("Write it"),
     );
@@ -65,7 +66,7 @@ describe("a language change refreshes the learner context (U02)", () => {
     expect(today.textContent).toContain("what to practice now");
     expect(app.text('[aria-label="Practice"] h1')).toBe("Hi Sam");
     expect(today.textContent).toContain("はじめまして");
-    expect(today.textContent).not.toContain("ru.sent.b2");
+    expect(today.textContent).not.toMatch(/\bru\.(sent|lex|activity)\./);
 
     // U04: no stale other-language target survives the switch. Re-entering
     // Speaking refetches, and the answer is the Japanese pool's sentence.
@@ -85,7 +86,7 @@ describe("a language change refreshes the learner context (U02)", () => {
     await app.click(app.button(app.section("Routes"), "Settings"));
     await app.click(app.button(app.section("Language packs"), "Learn this"));
     expect(engine.lastArgsFor("switch_pack")).toEqual({ profileId: "sam", packId: RU });
-    expect(app.section("Practice").textContent).toContain("ru.sent.b2");
+    expect(app.section("Practice").textContent).not.toMatch(/\bru\.(sent|lex|activity)\./);
     expect(count("kanji_available")).toBe(3);
     expect(count("home_state")).toBe(3);
   });

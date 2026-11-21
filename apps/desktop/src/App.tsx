@@ -326,6 +326,9 @@ export function App() {
   const [packsUnknown, setPacksUnknown] = useState(false);
   const [profileName, setProfileName] = useState("");
   const [profiles, setProfiles] = useState<ProfileSummary[]>([]);
+  // UI-HYGIENE-001: archived profiles stay out of the chooser unless the
+  // learner asks to see them (so they can be un-archived).
+  const [chooserShowHidden, setChooserShowHidden] = useState(false);
   const [profileId, setProfileId] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState("");
   const [budget, setBudget] = useState(5);
@@ -1671,6 +1674,18 @@ export function App() {
 
   // K-05: resume an existing local profile at launch. The native side
   // validates the id; nothing is sent off this device.
+  // UI-HYGIENE-001: archive a chooser profile (a test run or an old
+  // experiment) without deleting any of its data.
+  async function toggleProfileHidden(id: string, hidden: boolean) {
+    if (!inv) return;
+    try {
+      await inv("set_profile_hidden", { profileId: id, hidden });
+      setProfiles((await inv("list_profiles")) as ProfileSummary[]);
+    } catch (e) {
+      setOnboardError(`Could not update this profile: ${String(e)}`);
+    }
+  }
+
   async function resumeProfile(id: string) {
     setOnboardError(null);
     if (!inv) return;
@@ -3689,6 +3704,9 @@ export function App() {
           profiles={profiles}
           onResume={(id) => void resumeProfile(id)}
           onCreateNew={() => setStep("welcome")}
+          showHiddenProfiles={chooserShowHidden}
+          onShowHiddenProfiles={setChooserShowHidden}
+          onToggleHidden={(id, hidden) => void toggleProfileHidden(id, hidden)}
           error={onboardError}
           progress={engineProgress}
           installing={installingPack}

@@ -80,6 +80,42 @@ class AuditTests(unittest.TestCase):
     def test_clean_copy_scans_clean(self):
         self.assertEqual(self.scan({"panel.tsx": CLEAN}), [])
 
+    def test_a_raw_content_token_in_learner_copy_is_a_finding(self):
+        # UI-HYGIENE-001 (visual-ui-audit U13): pack/lexicon tokens must
+        # not render as copy, in JSX text or in a string literal.
+        source = """
+export function ProgressPanel() {
+  const note = "You last practised ja.lex.demo.obaasan yesterday.";
+  return (
+    <p>Recorded detail for ru.sent.b2.</p>
+  );
+}
+"""
+        findings = self.scan({"panel.tsx": source})
+        ids = sorted(f["id"] for f in findings)
+        self.assertEqual(ids, ["ja.lex.demo.obaasan", "ru.sent.b2"])
+        kinds = {f["id"]: f["kind"] for f in findings}
+        self.assertEqual(kinds["ja.lex.demo.obaasan"], "string")
+        self.assertEqual(kinds["ru.sent.b2"], "jsx-text")
+
+    def test_a_token_in_wiring_not_copy_is_not_a_finding(self):
+        source = """
+export function PlanRow() {
+  return (
+    <button data-content="ja.lex.demo.obaasan" className="ru.sent.b2-row">
+      Listen and type
+    </button>
+  );
+}
+"""
+        self.assertEqual(self.scan({"row.tsx": source}), [])
+
+    def test_journey_harnesses_are_outside_the_learner_surface(self):
+        with tempfile.TemporaryDirectory() as td:
+            write_tree(td, {"src/journeys/harness.tsx": DIRTY})
+            scanned, skipped, found = alc.audit_roots([td])
+            self.assertEqual((scanned, skipped, found), (0, 1, []))
+
     def test_the_gate_exit_code_follows_the_findings(self):
         with tempfile.TemporaryDirectory() as dirty, tempfile.TemporaryDirectory() as clean:
             write_tree(dirty, {"panel.tsx": DIRTY})

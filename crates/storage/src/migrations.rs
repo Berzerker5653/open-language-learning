@@ -22,11 +22,13 @@
 //!    (CONTENT-CONFIRM-001, ADR-0040).
 //! 7. `error_ledger` + `error_review_cards` — the error memory loop
 //!    (ERR-SRS-LOOP-001).
+//! 9. `profiles.hidden` — archived profiles stay on disk but leave the
+//!    chooser (UI-HYGIENE-001, visual-ui-audit U13).
 
 use crate::error::Error;
 use rusqlite::{Connection, Transaction, TransactionBehavior};
 
-pub const SCHEMA_VERSION: i64 = 8;
+pub const SCHEMA_VERSION: i64 = 9;
 
 struct Migration {
     version: i64,
@@ -278,6 +280,17 @@ CREATE INDEX idx_word_lookups_profile_surface
 ALTER TABLE mined_items ADD COLUMN context_sentence_id TEXT;
 ",
     },
+    Migration {
+        version: 9,
+        sql: "
+-- UI-HYGIENE-001 (visual-ui-audit U13): archived profiles. A hidden
+-- profile keeps every row it owns (evidence, scheduler state, exports)
+-- but leaves the learner-facing chooser: automated test runs and old
+-- experiments must never read as real people. 0/false is the default,
+-- so every existing profile stays visible.
+ALTER TABLE profiles ADD COLUMN hidden INTEGER NOT NULL DEFAULT 0;
+",
+    },
 ];
 
 pub(crate) fn migrate(conn: &Connection) -> Result<(), Error> {
@@ -401,11 +414,13 @@ mod tests {
              DELETE FROM schema_migrations WHERE version = 6;
              DELETE FROM schema_migrations WHERE version = 7;
              DELETE FROM schema_migrations WHERE version = 8;
+             DELETE FROM schema_migrations WHERE version = 9;
              DROP TABLE IF EXISTS error_review_cards;
              DROP TABLE IF EXISTS error_ledger;
              DROP TABLE IF EXISTS content_confirmations;
              DROP TABLE IF EXISTS word_lookups;
-             ALTER TABLE mined_items DROP COLUMN context_sentence_id;",
+             ALTER TABLE mined_items DROP COLUMN context_sentence_id;
+             ALTER TABLE profiles DROP COLUMN hidden;",
         )
         .unwrap();
         conn.execute(
@@ -512,6 +527,17 @@ mod tests {
                     )
                     .unwrap()
                         == 1
+            }
+            9 => {
+                // UI-HYGIENE-001: the archived-profile flag — the column
+                // itself is the artifact of v9.
+                conn.query_row(
+                    "SELECT COUNT(*) FROM pragma_table_info('profiles') WHERE name = 'hidden'",
+                    [],
+                    |r| r.get::<_, i64>(0),
+                )
+                .unwrap()
+                    == 1
             }
             _ => panic!("v{version} has no schema artifact"),
         }

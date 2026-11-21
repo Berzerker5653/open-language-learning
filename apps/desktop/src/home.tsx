@@ -154,6 +154,60 @@ export const RUNNABLE_MODALITIES: Record<string, string> = {
   "production-speaking": "Say it aloud",
 };
 
+/**
+ * UI-HYGIENE-001 (visual-ui-audit U2): engine dimension names are
+ * implementation vocabulary; every learner-facing surface shows a human
+ * label. An unrecognised dimension is still readable — the kebab is
+ * spaced out rather than shown as a token, so a pack can never put raw
+ * jargon on screen by naming a modality we have not met.
+ */
+const MODALITY_LABELS: Record<string, string> = {
+  ...RUNNABLE_MODALITIES,
+  "comprehension-reading": "Reading",
+  "recall-form": "Recall the form",
+  listening: "Listening",
+  speaking: "Speaking",
+  reading: "Reading",
+  writing: "Writing",
+  interaction: "Interaction",
+};
+
+export function modalityLabel(modality: string): string {
+  return MODALITY_LABELS[modality.trim().toLowerCase()] ?? modality.replace(/[-_]/g, " ");
+}
+
+/**
+ * UI-HYGIENE-001: content ids (pack/lexicon tokens) must not render raw.
+ * When the engine could not resolve a human label, the token's own name
+ * segment is shown spaced out — a readable word, never the id.
+ */
+const TOKEN_NOISE_SEGMENTS = new Set([
+  "lex",
+  "gram",
+  "grammar",
+  "orth",
+  "kana",
+  "hira",
+  "kata",
+  "kanji",
+  "demo",
+  "vocab",
+  "phon",
+  "morph",
+  "cur",
+  "scene",
+  "story",
+]);
+
+function humanizeToken(id: string): string {
+  const segments = id.split(/[.:#/]+/).filter(Boolean);
+  const named = segments.filter(
+    (s) => !TOKEN_NOISE_SEGMENTS.has(s.toLowerCase()) && !/^[a-z]{2}$/.test(s),
+  );
+  const word = (named.length > 0 ? named[named.length - 1] : segments.pop()) ?? id;
+  return word.replace(/[-_]/g, " ").replace(/^./, (c) => c.toUpperCase());
+}
+
 export interface WorldEnvironment {
   id: string;
   display_name: string;
@@ -242,8 +296,17 @@ export function Home(p: HomeProps) {
       ) : null}
       {p.noPack || p.packsUnknown ? null : <p className="prompt">what to practice now</p>}
       {p.activePack ? (
+        // UI-HYGIENE-001 (U2): the AI-honesty line is a designed badge,
+        // not greeting prose — the posture is a standing fact about the
+        // material, and the tooltip carries the full policy in one line.
         <p className="meta pack-posture">
-          <PackText tag="strong">{p.activePack.name}</PackText> — {p.activePack.posture}
+          <PackText tag="strong">{p.activePack.name}</PackText>{" "}
+          <span
+            className="badge badge--mono pack-posture-badge"
+            title="Content in this pack is machine-drafted. The posture states how far human review has actually gone; it never affects your practice or progress."
+          >
+            {p.activePack.posture}
+          </span>
         </p>
       ) : p.packsUnknown ? (
         <p className="notice" role="status">
@@ -439,7 +502,12 @@ export function Home(p: HomeProps) {
                             {item.surface}
                           </PackText>
                         ) : (
-                          <code>{item.content_id}</code>
+                          // UI-HYGIENE-001: a plan row with no surface word
+                          // still never shows the raw content id — the id's
+                          // readable name segment stands in.
+                          <span className="plan-surface">
+                            {humanizeToken(item.content_id)}
+                          </span>
                         )}
                         {item.gloss && <LatinText>{item.gloss}</LatinText>}
                       </>
@@ -504,7 +572,17 @@ export function Home(p: HomeProps) {
                 ) : (
                   <>
                     <span className="badge">locked</span>
-                    <span className="meta">grows with: {e.missing.join(", ")}</span>
+                    <span className="meta">
+                      grows with:{" "}
+                      {e.missing
+                        .map((note) => {
+                          const parts = note.match(/^([a-z][a-z-]*) of (.+)$/);
+                          return parts?.[1] && parts[2]
+                            ? `${modalityLabel(parts[1])} in “${humanizeToken(parts[2])}”`
+                            : humanizeToken(note);
+                        })
+                        .join(", ")}
+                    </span>
                   </>
                 )}
               </li>
@@ -518,6 +596,11 @@ export function Home(p: HomeProps) {
 
 export interface ProgressRow {
   content_id: string;
+  /// UI-HYGIENE-001: the human label the engine resolved for this content
+  /// (the word itself) when it lives in the active pack's lexicon. Null
+  /// when unresolvable; the table then shows the token's readable name
+  /// segment, never the raw id.
+  label?: string | null;
   dimension: string;
   state: string;
   confidence: number;
@@ -561,7 +644,10 @@ export function CanDoSummary(p: {
           {canDo.map(({ goal, modalities }) => (
             <li key={goal.id} data-goal={goal.id}>
               <PackText tag="strong">{goal.description}</PackText>
-              <span className="meta"> used in practice: {modalities.join(", ")}</span>
+              <span className="meta">
+                {" "}
+                used in practice: {modalities.map(modalityLabel).join(", ")}
+              </span>
             </li>
           ))}
         </ul>
@@ -608,8 +694,9 @@ export function ProgressView({ rows }: { rows: ProgressRow[] }) {
     <section aria-label="Progress">
       <h2>Recorded detail</h2>
       <p>
-        The numbers behind those answers: internal ids, confidence, and mastery labels. Each skill
-        grows independently — reading does not imply speaking.
+        The numbers behind those answers: what you practised, which skill it trains, the state on
+        record, and how sure the record is. Each skill grows independently — reading does not imply
+        speaking.
       </p>
       {rows.length === 0 ? (
         <p className="empty">No evidence yet. Practice to see capability differences here.</p>
@@ -618,8 +705,8 @@ export function ProgressView({ rows }: { rows: ProgressRow[] }) {
           <table>
             <thead>
               <tr>
-                <th>Content</th>
-                <th>Dimension</th>
+                <th>What you practised</th>
+                <th>Skill</th>
                 <th>State</th>
                 <th>Confidence</th>
               </tr>
@@ -629,11 +716,11 @@ export function ProgressView({ rows }: { rows: ProgressRow[] }) {
                 list.map((row) => (
                   <tr key={`${content}#${row.dimension}`}>
                     <td>
-                      <code>{content}</code>
+                      <strong>{row.label ?? humanizeToken(row.content_id)}</strong>
                     </td>
-                    <td>{row.dimension}</td>
+                    <td>{modalityLabel(row.dimension)}</td>
                     <td>
-                      {row.state}{" "}
+                      {STATE_LABELS[row.state] ?? row.state}{" "}
                       {row.needs_refresh ? <span className="badge">needs refresh</span> : null}
                     </td>
                     <td>{Math.round(row.confidence * 100)}%</td>
@@ -772,7 +859,7 @@ export function GoalMap({ goals }: { goals: GoalCard[] }) {
                             key={d.modality}
                             data-coverage={`${d.concepts_seen}/${d.concepts_total}`}
                           >
-                            <span className="meta">{d.modality}</span>{" "}
+                            <span className="meta">{modalityLabel(d.modality)}</span>{" "}
                             <span data-state={d.state}>{STATE_LABELS[d.state] ?? d.state}</span>
                             {/* R09: the headline state is the weakest declared
                                 concept, so a goal with one strong concept and
@@ -780,11 +867,14 @@ export function GoalMap({ goals }: { goals: GoalCard[] }) {
                                 The furthest concept is named as an exemplar
                                 and the remaining coverage is stated. */}
                             {d.concepts_total > 1 && d.state !== d.best_state ? (
+                              // UI-HYGIENE-001: the furthest concept is
+                              // named by its readable word (R09 kept the
+                              // coverage honest); the raw pack id stays out
+                              // of the learner's view.
                               <span className="meta">
                                 {" "}
-                                — {d.concepts_seen} of {d.concepts_total} concepts have evidence;
-                                the strongest ({d.exemplar}) is{" "}
-                                {STATE_LABELS[d.best_state] ?? d.best_state}
+                                — {d.concepts_seen} of {d.concepts_total} parts have evidence; one
+                                part is already {STATE_LABELS[d.best_state] ?? d.best_state}
                               </span>
                             ) : null}
                           </li>
@@ -800,8 +890,18 @@ export function GoalMap({ goals }: { goals: GoalCard[] }) {
                               <>
                                 Grows with ({done} of {hard.length} met):{" "}
                                 {missing
-                                  .map((p) => `${p.target} (${p.dimension} → ${p.required_state})`)
-                                  .join(", ")}
+                                  .map((pre) => {
+                                    // UI-HYGIENE-001: a prerequisite names
+                                    // a capability by its human description
+                                    // (goals carry every goal in this
+                                    // pack); never the raw goal or content
+                                    // id, and never a kebab dimension.
+                                    const named = goals.find((g) => g.id === pre.target);
+                                    const state =
+                                      STATE_LABELS[pre.required_state] ?? pre.required_state;
+                                    return `${named ? `“${named.description}”` : "another capability"} — ${state} in ${modalityLabel(pre.dimension)}`;
+                                  })
+                                  .join("; ")}
                               </>
                             );
                           })()}
