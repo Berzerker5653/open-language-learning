@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-21",
-  "active_task": "VOCAB-BUILDER-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2289,14 +2289,15 @@
       "updated": "2026-11-20"
     },
     "VOCAB-BUILDER-001": {
-      "status": "in_progress",
+      "status": "done",
       "attempts": 2,
       "title": "Automatic vocabulary builder - every word lookup logged with its context sentence, feeding review",
-      "summary": "",
-      "notes": "Takeover card t_cd2a7687 (fresh budget after t_771af11d circuit-break). Audit: the full frozen contract (migration v8 word_lookups + mined context column, lookups.rs, export v5, desktop word_card story_id + auto-log/auto-mine + in_review, frontend reading.tsx/App.tsx/words.tsx drill context + play) is already merged on main via the 28e9e30 sweep; takeover commits the residual migrations.rs doc-comment hunk and re-runs the LANE gates as close evidence. Merged lane not re-implemented, only gated.",
+      "summary": "VOCAB-BUILDER-001: automatic vocabulary builder shipped \u2014 every reader word-tap appends to the append-only word_lookups ledger (migration v8: surface, sidecar lemma or honest NULL, story_id, context sentence_id, time; per-profile, cascade on delete) and auto-mines into the existing review pipeline via the manual-Mine surface rule; repeat taps fold into the original mined row and keep its SRS anchor (K-61/K-14); mined_items gains context_sentence_id (COALESCE fold, NULL for manual mines). Word cards gain in_review ('In My words', no mastery claim); My-words drill shows the tap's context sentence and replays it via story_audio. Export bundle v5 (word_lookups travels with the learner; v4 bundles import unchanged, fresh-id discipline on import). Lane was merged on main via the 28e9e30 sweep; this takeover closed it by committing the residual migrations.rs doc-comment hunk (7ef10da) and re-running the LANE gates green.",
+      "notes": "Takeover t_cd2a7687 after t_771af11d circuit-break. Audit found the full frozen contract already on main (swept into mislabeled 28e9e30); per takeover rule the merged lane was NOT re-implemented \u2014 closed from commit evidence + fresh LANE-gate runs. Gates: fmt 0; clippy -p lts-storage -p lts-desktop --all-targets -D warnings 0; cargo test -p lts-storage 0 (incl. lookups append/cascade/migration-v8/fold + export v5 round-trip + v4 import); cargo test -p lts-desktop --lib scoped word_card/word_tap/lookup/mine-context/off-pack 17 passed (auto-log+review entry, repeat-tap anchor, off-pack log+mine, malformed story id refused, drill context render); tsc 0; vitest 50 files/401 tests 0. Root-level npx shims are invalid \u2014 frontend gates must run in apps/desktop (logged).",
       "updated": "2026-11-21",
       "evidence": [
-        "state/notes/VOCAB-BUILDER-001.md"
+        "state/notes/VOCAB-BUILDER-001.md",
+        "state/evidence/VOCAB-BUILDER-001/gates.log"
       ]
     },
     "UI-HYGIENE-001": {

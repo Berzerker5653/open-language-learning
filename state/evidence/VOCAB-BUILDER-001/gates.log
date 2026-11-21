@@ -1,0 +1,312 @@
+## cargo fmt --all --check [2026-11-21T07:18:53-07:00]
+exit=0
+## cargo clippy -p lts-storage -p lts-desktop --all-targets -- -D warnings [2026-11-21T07:18:53-07:00]
+    Checking lts-storage v0.1.0 (/home/hunter/game-dev/LTS/crates/storage)
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2.78s
+exit=0
+## cargo test -p lts-storage [2026-11-21T07:18:56-07:00]
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.10s
+     Running unittests src/lib.rs (target/debug/deps/lts_storage-1b0ecd0dcbc44824)
+
+running 6 tests
+test migrations::tests::migrations_are_sequential_and_complete_history ... ok
+test tests::in_memory_store_migrates_to_head ... ok
+test migrations::tests::mined_scheduler_rows_are_partitioned_on_upgrade ... ok
+test migrations::tests::failed_migration_rolls_back_both_ddl_and_version ... ok
+test migrations::tests::concurrent_migrators_agree_on_one_file ... ok
+test migrations::tests::migrate_retries_once_when_the_write_lock_is_held ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.92s
+
+     Running tests/concurrency.rs (target/debug/deps/concurrency-b433e92b7f48d521)
+
+running 1 test
+test two_stores_on_one_file_never_lose_a_write ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.70s
+
+     Running tests/confirm.rs (target/debug/deps/confirm-3fa6647ea9820db5)
+
+running 6 tests
+test migration_six_lands_the_confirmations_table ... ok
+test a_confirmation_never_touches_pack_posture ... ok
+test unconfirm_only_removes_the_callers_own_mark ... ok
+test confirm_is_idempotent_and_keeps_the_original_row ... ok
+test confirmations_are_attributed_by_profile_display_name ... ok
+test confirmations_cascade_with_the_profile_that_gave_them ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/error_ledger.rs (target/debug/deps/error_ledger-97fba219baa9fa7b)
+
+running 6 tests
+test ledger_appends_repeats_and_counts_recurrence_by_context ... ok
+test accept_is_idempotent_and_the_card_anchors_to_the_original ... ok
+test ledger_and_cards_delete_with_the_person ... ok
+test same_store_restore_reissues_ids_and_keeps_card_linkage ... ok
+test a_pre_v4_bundle_still_imports_and_carries_no_error_rows ... ok
+test export_v4_round_trips_the_ledger_and_cards ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/export_import.rs (target/debug/deps/export_import-3c2fae168ea11658)
+
+running 12 tests
+test restoring_into_the_same_store_keeps_every_observation ... ok
+test a_failed_import_leaves_existing_data_exactly_as_it_was ... ok
+test unknown_bundle_versions_are_rejected ... ok
+test round_trip_preserves_evidence_mastery_inputs_and_settings ... ok
+test version_2_bundles_remain_importable_without_confirmations ... ok
+test recordings_are_opt_in_to_export ... ok
+test failed_import_names_the_import_error ... ok
+test lookups_and_mined_context_travel_with_their_learner ... ok
+test version_4_bundles_remain_importable_without_lookups ... ok
+test version_1_bundles_remain_importable_without_saved_words ... ok
+test confirmations_travel_with_their_learner ... ok
+test import_never_silently_overwrites_an_existing_profile ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/lookups.rs (target/debug/deps/lookups-1924c24d8c25542a)
+
+running 5 tests
+test lookup_log_appends_every_tap_oldest_first ... ok
+test lemma_is_optional_and_stays_honest_without_sidecar_data ... ok
+test lookups_belong_to_the_person_and_cascade_on_profile_delete ... ok
+test migration_v8_adds_the_lookup_table_and_mined_context_column ... ok
+test lookup_mine_after_manual_mine_folds_context_into_the_original_row ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/store.rs (target/debug/deps/store-32487d2a84db0787)
+
+running 11 tests
+test remove_mined_rolls_back_when_the_srs_delete_fails ... ok
+test set_active_pack_is_all_or_nothing ... ok
+test scheduler_write_boundary_refuses_noncanonical_due_at ... ok
+test delete_profile_removes_app_owned_learner_data ... ok
+test settings_goals_and_pack_records_round_trip ... ok
+test no_audio_blobs_and_no_recordings_by_default ... ok
+test profile_created_without_account_or_network ... ok
+test mined_items_crud_and_cascade ... ok
+test duplicate_mined_surface_keeps_the_original_row_and_srs_history ... ok
+test evidence_survives_restart_and_rejects_duplicate_ids ... ok
+test migrations_apply_forward_from_initial_schema ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.62s
+
+   Doc-tests lts_storage
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+exit=0
+## cargo test -p lts-desktop --lib -- word_card word_tap lookup mine_list_renders off_pack [2026-11-21T07:18:59-07:00]
+   Compiling lts-storage v0.1.0 (/home/hunter/game-dev/LTS/crates/storage)
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.53s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-d61b0657df16a667)
+
+running 17 tests
+test tests::reading_aware_span_lookup_prefers_closed_class_homophones ... ok
+test tests::story_lookup_returns_spans_not_substrings ... ok
+test tests::word_card_refuses_a_malformed_story_id_before_logging ... ok
+test tests::off_pack_word_tap_also_logs_and_mines_the_token ... ok
+test tests::word_card_off_pack_token_gets_the_labeled_aux_card ... ok
+test tests::word_card_resolves_an_inflected_ru_form_to_its_lemma ... ok
+test tests::word_card_matches_the_lexicon_surface_directly_without_a_lemma_row ... ok
+test tests::story_reader_shows_scaffolds_and_lookup_without_evidence ... ok
+test tests::word_card_aux_lookup_goes_through_the_lemma_and_degrades_without_a_slice ... ok
+test tests::word_card_reports_off_pack_words_as_not_in_pack ... ok
+test tests::mine_list_renders_the_drill_context_for_lookup_mined_words ... ok
+test tests::word_tap_auto_logs_the_lookup_and_enters_the_review_pipeline ... ok
+test tests::word_card_parses_the_aux_slice_once_not_per_tap ... ok
+test tests::reading_aware_lookup_of_a_ni_particle_span_never_answers_two has been running for over 60 seconds
+test tests::reading_aware_lookup_of_the_self_intro_shows_the_topic_particle_not_the_tooth has been running for over 60 seconds
+test tests::reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior has been running for over 60 seconds
+test tests::shipped_story_function_word_lookup_report_is_empty has been running for over 60 seconds
+test tests::reading_aware_lookup_of_the_self_intro_shows_the_topic_particle_not_the_tooth ... ok
+test tests::reading_aware_lookup_of_a_ni_particle_span_never_answers_two ... ok
+test tests::reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior ... ok
+test tests::shipped_story_function_word_lookup_report_is_empty ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 189 filtered out; finished in 84.85s
+
+exit=0
+## npx tsc --noEmit [2026-11-21T07:20:27-07:00]
+npm notice run open-language-learning-platform@0.1.0 npx
+npm notice run 'tsc' --noEmit
+Version 6.0.3
+tsc: The TypeScript Compiler - Version 6.0.3
+
+COMMON COMMANDS
+
+  tsc
+  Compiles the current project (tsconfig.json in the working directory.)
+
+  tsc app.ts util.ts
+  Ignoring tsconfig.json, compiles the specified files with default compiler options.
+
+  tsc -b
+  Build a composite project in the working directory.
+
+  tsc --init
+  Creates a tsconfig.json with the recommended settings in the working directory.
+
+  tsc -p ./path/to/tsconfig.json
+  Compiles the TypeScript project located at the specified path.
+
+  tsc --help --all
+  An expanded version of this information, showing all possible compiler options
+
+  tsc --noEmit
+  tsc --target esnext
+  Compiles the current project, with additional settings.
+
+COMMAND LINE FLAGS
+
+--help, -h
+Print this message.
+
+--watch, -w
+Watch input files.
+
+--all
+Show all compiler options.
+
+--version, -v
+Print the compiler's version.
+
+--init
+Initializes a TypeScript project and creates a tsconfig.json file.
+
+--project, -p
+Compile the project given the path to its configuration file, or to a folder with a 'tsconfig.json'.
+
+--showConfig
+Print the final configuration instead of building.
+
+--ignoreConfig
+Ignore the tsconfig found and build with commandline options and files.
+
+--build, -b
+Build one or more projects and their dependencies, if out of date
+
+COMMON COMPILER OPTIONS
+
+--pretty
+Enable color and formatting in TypeScript's output to make compiler errors easier to read.
+type: boolean
+default: true
+
+--declaration, -d
+Generate .d.ts files from TypeScript and JavaScript files in your project.
+type: boolean
+default: `false`, unless `composite` is set
+
+--declarationMap
+Create sourcemaps for d.ts files.
+type: boolean
+default: false
+
+--emitDeclarationOnly
+Only output d.ts files and not JavaScript files.
+type: boolean
+default: false
+
+--sourceMap
+Create source map files for emitted JavaScript files.
+type: boolean
+default: false
+
+--noEmit
+Disable emitting files from a compilation.
+type: boolean
+default: false
+
+--target, -t
+Set the JavaScript language version for emitted JavaScript and include compatible library declarations.
+one of: es6/es2015, es2016, es2017, es2018, es2019, es2020, es2021, es2022, es2023, es2024, es2025, esnext
+default: es2025
+
+--module, -m
+Specify what module code is generated.
+one of: commonjs, es6/es2015, es2020, es2022, esnext, node16, node18, node20, nodenext, preserve
+default: undefined
+
+--lib
+Specify a set of bundled library declaration files that describe the target runtime environment.
+one or more: es5, es6/es2015, es7/es2016, es2017, es2018, es2019, es2020, es2021, es2022, es2023, es2024, es2025, esnext, dom, dom.iterable, dom.asynciterable, webworker, webworker.importscripts, webworker.iterable, webworker.asynciterable, scripthost, es2015.core, es2015.collection, es2015.generator, es2015.iterable, es2015.promise, es2015.proxy, es2015.reflect, es2015.symbol, es2015.symbol.wellknown, es2016.array.include, es2016.intl, es2017.arraybuffer, es2017.date, es2017.object, es2017.sharedmemory, es2017.string, es2017.intl, es2017.typedarrays, es2018.asyncgenerator, es2018.asynciterable/esnext.asynciterable, es2018.intl, es2018.promise, es2018.regexp, es2019.array, es2019.object, es2019.string, es2019.symbol/esnext.symbol, es2019.intl, es2020.bigint/esnext.bigint, es2020.date, es2020.promise, es2020.sharedmemory, es2020.string, es2020.symbol.wellknown, es2020.intl, es2020.number, es2021.promise, es2021.string, es2021.weakref/esnext.weakref, es2021.intl, es2022.array, es2022.error, es2022.intl, es2022.object, es2022.string, es2022.regexp, es2023.array, es2023.collection, es2023.intl, es2024.arraybuffer, es2024.collection, es2024.object/esnext.object, es2024.promise, es2024.regexp/esnext.regexp, es2024.sharedmemory, es2024.string/esnext.string, es2025.collection, es2025.float16/esnext.float16, es2025.intl, es2025.iterator/esnext.iterator, es2025.promise/esnext.promise, es2025.regexp, esnext.array, esnext.collection, esnext.date, esnext.decorators, esnext.disposable, esnext.error, esnext.intl, esnext.sharedmemory, esnext.temporal, esnext.typedarrays, decorators, decorators.legacy
+default: undefined
+
+--allowJs
+Allow JavaScript files to be a part of your program. Use the 'checkJs' option to get errors from these files.
+type: boolean
+default: `false`, unless `checkJs` is set
+
+--checkJs
+Enable error reporting in type-checked JavaScript files.
+type: boolean
+default: false
+
+--jsx
+Specify what JSX code is generated.
+one of: preserve, react, react-native, react-jsx, react-jsxdev
+default: undefined
+
+--outFile
+Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output.
+
+--outDir
+Specify an output folder for all emitted files.
+
+--removeComments
+Disable emitting comments.
+type: boolean
+default: false
+
+--strict
+Enable all strict type-checking options.
+type: boolean
+default: true
+
+--types
+Specify type package names to be included without being referenced in a source file.
+
+--esModuleInterop
+Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility.
+type: boolean
+default: true
+
+You can learn about all of the compiler options at https://aka.ms/tsc
+
+exit=1
+## npx vitest run [2026-11-21T07:20:27-07:00]
+npm notice run open-language-learning-platform@0.1.0 npx
+npm notice run 'vitest' run
+sh: line 1: vitest: command not found
+exit=127
+## (root-level npx attempts above are invalid shims; rerun from apps/desktop per UI-HYGIENE precedent)
+## npx tsc --noEmit (cwd apps/desktop) [2026-11-21T07:20:38-07:00]
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'tsc' --noEmit
+exit=0
+## npx vitest run (cwd apps/desktop) [2026-11-21T07:20:38-07:00]
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'vitest' run
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/apps/desktop
+
+
+ Test Files  50 passed (50)
+      Tests  401 passed (401)
+   Start at  07:20:39
+   Duration  1.73s (transform 43%, environment 25%, tests 18%, import 12%, worker 1%)
+
+  Transform  |node| transforming modules took 4.52s · 71% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+
+exit=0
