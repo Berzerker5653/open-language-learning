@@ -2781,6 +2781,20 @@ tasks:
   - recurrence counts across sessions feed personalize_progression as an input signal only; existing caps and no-calibration-claims rule preserved
   - ledger is local-only, covered by the profile export bundle, and survives migrations; no new network calls
   required_for_desktop_1_0: false
+- id: FIX-ERR-SRS-LOOP-001-1
+  milestone: M8
+  priority: P1
+  title: Fix review defects D1/D2/D5 of the error memory loop — unique ledger ids per mismatch, honest case-only classification, no empty-submission rows
+  dependencies:
+  - ERR-SRS-LOOP-001
+  read_first:
+  - state/evidence/REVIEW-ERR-SRS-LOOP-001/review.md
+  acceptance:
+  - "D1 — one dictation sentence with N mismatched pairs appends N distinct error_ledger rows and yields N offers (ledger ids are unique per record; no PRIMARY KEY collision swallowed silently)."
+  - "D2 — case-only differences (norm_form lowercases; producers do not case-fold) never produce a stress claim; they route to Other / no offer, and the code comment matches actual behaviour."
+  - "D5 — an empty composition submission records no ledger row and yields no offer (non-attempts are not wrong-word errors)."
+  - "LANE gates green: fmt; cargo test -p lts-activity --lib form_errors; cargo test -p lts-storage --test error_ledger; scoped desktop lib tests; clippy -p lts-activity -p lts-desktop --all-targets -- -D warnings."
+  required_for_desktop_1_0: false
 - id: READABILITY-GATE-001
   milestone: M8
   priority: P1
@@ -2984,6 +2998,7 @@ execution_scope:
   - VOCAB-BUILDER-001
   - STORY-LISTEN-001
   - ERR-SRS-LOOP-001
+  - FIX-ERR-SRS-LOOP-001-1
   - READABILITY-GATE-001
   - GRAMMAR-LABELS-001
   - UI-HYGIENE-001
