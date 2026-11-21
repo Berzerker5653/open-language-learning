@@ -4,6 +4,21 @@ goal_id: ja.goal.b1.health-wellness
 title: sleep habits
 summary: B1 language for sleep habits.
 estimated_minutes: 6
+# ADR-0037 task journey (JA-B1-003-JOURNEYS-001): input/scaffolded/independent
+# are this unit's stages; transfer is the next unit's listening check (context
+# change proven by the sentences this goal's units share); reuse is the goal's
+# phase-gated revision unit 842.
+task_sequence:
+  input: ja.activity.sleep-habits-enc
+  scaffolded: ja.activity.sleep-habits-cloze0
+  independent: ja.activity.sleep-habits-enc-write
+  transfer: ja.activity.balanced-nutrition-listen
+  reuse: ja.activity.wellness-rev-write
+# ADR-0022 phase gate: this unit's lesson surfaces after the previous
+# journey unit's content reached `supported`.
+requires_unit:
+- unit: ja.unit.wellness-routines
+  state: supported
 generation_contract:
   allowed_vocab:
   - ja.lex.health2.nebuki
@@ -15,6 +30,11 @@ generation_contract:
   - ja.sent.meeting-starts
   - ja.sent.reply-email
   allowed_grammar:
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.particle.possessive-no
+  - ja.grammar.particle.de-means
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.verb.polite-masu
   - ja.grammar.particle.object-wo
   new_item_budget: 6
   validation_method: choice
@@ -22,7 +42,7 @@ activities:
 - id: ja.activity.sleep-habits-enc
   type: encounter-read
   modality: reading
-  support_level: 5
+  support_level: 2
   content_refs:
   - ja.lex.health2.nebuki
   - ja.lex.health2.koku2
@@ -83,3 +103,11 @@ activities:
   support_level: 2
   content_refs:
   - ja.sent.meeting-starts
+- id: ja.activity.sleep-habits-enc-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.sleep-habit
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
