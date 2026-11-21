@@ -4,6 +4,21 @@ goal_id: ja.goal.b1.travel-extended
 title: travel budgeting
 summary: B1 language for travel budgeting.
 estimated_minutes: 6
+# ADR-0037 task journey (JA-B1-003-JOURNEYS-001): input/scaffolded/independent
+# are this unit's stages; transfer is the next unit's listening check (context
+# change proven by the sentences this goal's units share); reuse is the goal's
+# phase-gated revision unit 838.
+task_sequence:
+  input: ja.activity.travel-budgeting-enc
+  scaffolded: ja.activity.travel-budgeting-cloze0
+  independent: ja.activity.travel-budgeting-enc-write
+  transfer: ja.activity.route-changes-listen
+  reuse: ja.activity.extended-rev-write
+# ADR-0022 phase gate: this unit's lesson surfaces after the previous
+# journey unit's content reached `supported`.
+requires_unit:
+- unit: ja.unit.lost-belongings
+  state: supported
 generation_contract:
   allowed_vocab:
   - ja.lex.travel2.ryougae
@@ -16,13 +31,17 @@ generation_contract:
   - ja.sent.reply-email
   allowed_grammar:
   - ja.grammar.particle.object-wo
+  - ja.grammar.particle.de-means
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.particle.possessive-no
   new_item_budget: 6
   validation_method: choice
 activities:
 - id: ja.activity.travel-budgeting-enc
   type: encounter-read
   modality: reading
-  support_level: 5
+  support_level: 2
   content_refs:
   - ja.lex.travel2.ryougae
   - ja.lex.travel2.ryoukin
@@ -83,3 +102,11 @@ activities:
   support_level: 2
   content_refs:
   - ja.sent.meeting-starts
+- id: ja.activity.travel-budgeting-enc-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.travel-budget
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email

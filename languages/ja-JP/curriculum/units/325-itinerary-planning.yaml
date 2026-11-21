@@ -4,6 +4,16 @@ goal_id: ja.goal.b1.travel-extended
 title: itinerary planning
 summary: B1 language for itinerary planning.
 estimated_minutes: 6
+# ADR-0037 task journey (JA-B1-003-JOURNEYS-001): input/scaffolded/independent
+# are this unit's stages; transfer is the next unit's listening check (context
+# change proven by the sentences this goal's units share); reuse is the goal's
+# phase-gated revision unit 838.
+task_sequence:
+  input: ja.activity.itinerary-planning-enc
+  scaffolded: ja.activity.itinerary-planning-cloze0
+  independent: ja.activity.itinerary-planning-enc-write
+  transfer: ja.activity.booking-problems-listen
+  reuse: ja.activity.extended-rev-write
 generation_contract:
   allowed_vocab:
   - ja.lex.travel.itinerari
@@ -16,13 +26,17 @@ generation_contract:
   - ja.sent.reply-email
   allowed_grammar:
   - ja.grammar.particle.object-wo
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.verb.te-form-connect
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.particle.possessive-no
   new_item_budget: 6
   validation_method: choice
 activities:
 - id: ja.activity.itinerary-planning-enc
   type: encounter-read
   modality: reading
-  support_level: 5
+  support_level: 2
   content_refs:
   - ja.lex.travel.itinerari
   - ja.lex.travel.henkyo
@@ -83,3 +97,11 @@ activities:
   support_level: 2
   content_refs:
   - ja.sent.meeting-starts
+- id: ja.activity.itinerary-planning-enc-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.itinerary-plan
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email

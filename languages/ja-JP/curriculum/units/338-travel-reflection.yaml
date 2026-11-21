@@ -4,6 +4,21 @@ goal_id: ja.goal.b1.travel-extended
 title: travel reflection
 summary: B1 language for travel reflection.
 estimated_minutes: 6
+# ADR-0037 task journey (JA-B1-003-JOURNEYS-001): input/scaffolded/independent
+# are this unit's stages; transfer is the next unit's listening check (context
+# change proven by the sentences this goal's units share); reuse is the goal's
+# phase-gated revision unit 838.
+task_sequence:
+  input: ja.activity.travel-reflection-enc
+  scaffolded: ja.activity.travel-reflection-cloze0
+  independent: ja.activity.travel-reflection-enc-write
+  transfer: ja.activity.postcard-writing-listen
+  reuse: ja.activity.extended-rev-write
+# ADR-0022 phase gate: this unit's lesson surfaces after the previous
+# journey unit's content reached `supported`.
+requires_unit:
+- unit: ja.unit.route-changes
+  state: supported
 generation_contract:
   allowed_vocab:
   - ja.lex.travel2.kaisou
@@ -14,22 +29,24 @@ generation_contract:
   - ja.sent.meeting-starts
   - ja.sent.reply-email
   allowed_grammar:
-  - ja.grammar.b1.darou
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.verb.polite-masu
   - ja.grammar.particle.object-wo
+  - ja.grammar.particle.possessive-no
   new_item_budget: 6
   validation_method: choice
 activities:
 - id: ja.activity.travel-reflection-enc
   type: encounter-read
   modality: reading
-  support_level: 5
+  support_level: 2
   content_refs:
   - ja.lex.travel2.kaisou
   - ja.lex.travel2.yaruki
   - ja.lex.travel2.seichou
   - ja.lex.travel2.kaizen
   - ja.lex.travel2.hatsuken
-  - ja.grammar.b1.darou
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.travel-reflection-listen
@@ -42,7 +59,7 @@ activities:
   - ja.lex.travel2.seichou
   - ja.lex.travel2.kaizen
   - ja.lex.travel2.hatsuken
-  - ja.grammar.b1.darou
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.travel-reflection-match
@@ -55,7 +72,7 @@ activities:
   - ja.lex.travel2.seichou
   - ja.lex.travel2.kaizen
   - ja.lex.travel2.hatsuken
-  - ja.grammar.b1.darou
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.travel-reflection-speak
@@ -68,7 +85,7 @@ activities:
   - ja.lex.travel2.seichou
   - ja.lex.travel2.kaizen
   - ja.lex.travel2.hatsuken
-  - ja.grammar.b1.darou
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.travel-reflection-cloze0
@@ -82,4 +99,11 @@ activities:
   modality: writing
   support_level: 2
   content_refs:
+  - ja.sent.reply-email
+- id: ja.activity.travel-reflection-enc-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.meeting-starts
   - ja.sent.reply-email
