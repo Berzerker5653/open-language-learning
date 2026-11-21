@@ -1,0 +1,77 @@
+# ai-assisted draft unit (JA-B1-003-JOURNEYS-001: delayed-reuse stage closing the legacy B1
+# education-academic journey family 235-249); content refs are existing pack data; qualified
+# review pending.
+id: ja.unit.education-academic-revision
+goal_id: ja.goal.b1.education-academic
+title: "Review: education academic language"
+summary: Delayed reuse of the sentences shared across the education academic journey units, plus unit sentences.
+estimated_minutes: 7
+# K-70/ADR-0022 phase gate: the revision surfaces only after the journey units' content
+# reached `supported`; this is the reuse stage named by every unit's task_sequence, and the
+# transfer target for the last unit.
+requires_unit:
+- unit: ja.unit.university-system
+  state: supported
+- unit: ja.unit.application-essay
+  state: supported
+- unit: ja.unit.lecture-notes
+  state: supported
+- unit: ja.unit.seminar-discussion
+  state: supported
+- unit: ja.unit.citation-basics
+  state: supported
+- unit: ja.unit.choosing-topic
+  state: supported
+- unit: ja.unit.essay-structure
+  state: supported
+- unit: ja.unit.argument-paragraphs
+  state: supported
+- unit: ja.unit.study-abroad-plans
+  state: supported
+- unit: ja.unit.scholarship-writing
+  state: supported
+- unit: ja.unit.academic-email
+  state: supported
+- unit: ja.unit.exam-strategy
+  state: supported
+- unit: ja.unit.library-research
+  state: supported
+- unit: ja.unit.academic-presentation
+  state: supported
+- unit: ja.unit.degree-conversations
+  state: supported
+activities:
+- id: ja.activity.academic-rev-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.academic-rev-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.academic-rev-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+generation_contract:
+  allowed_vocab:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  - ja.lex.edu.shingaku
+  - ja.lex.edu.daigakuin
+  allowed_grammar:
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.particle.object-wo
+  - ja.grammar.particle.possessive-no
+  new_item_budget: 2
+  validation_method: choice
