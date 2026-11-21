@@ -2350,6 +2350,22 @@
       ],
       "summary": "D3 shipped: offers render on dictation/writing verdicts with an explicit accept button (error_review_accept); the Form reviews drill queue over error_review_queue grades via error_review_grade; never-silent pinned by component + journey tests (zero accept calls until the click). D4 shipped: pack_sentence_text resolves lexicon ids to the row primary form, comment honest. Pre-reveal drill blanks the drilled form out of the context sentence (spoiler bug caught by this card tests).",
       "notes": "Board card t_53cd64f8. Builds on merged UI-HYGIENE-001 (115f1bc) and FIX-ERR-SRS-LOOP-001-1 (05a8384). Wire shapes additive only — DictationResult/WritingGrade Rust fields already exist; TS interfaces gain optional fields."
+    },
+    "FIX-DESKTOP-LIB-ROT-001": {
+      "task_id": "FIX-DESKTOP-LIB-ROT-001",
+      "title": "Classify the 37 pre-existing lts-desktop lib failures flagged by FIX-READER-FLOW-001b-1 — environment noise vs real rot",
+      "status": "done",
+      "attempts": 0,
+      "updated": "2026-11-21",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/FIX-DESKTOP-LIB-ROT-001/gates.log",
+        "state/evidence/FIX-DESKTOP-LIB-ROT-001/test-main-tree-HEAD.log",
+        "state/evidence/FIX-DESKTOP-LIB-ROT-001/test-worktree-HEAD.log",
+        "state/evidence/FIX-DESKTOP-LIB-ROT-001/worktree-failures.txt"
+      ],
+      "summary": "Zero real rot. The flagged 37 failures are environment noise: measured in a scratch worktree where the 4,935 gitignored ja-JP wavs are absent, and pack-archive bakes refuse missing declared media by design (ADR-0016/ADR-0024). Main-tree full lib suite green at 56ee3e8 (207 passed / 0 failed / 2 ignored, exit 0, unpiped); same HEAD in a clean worktree reds exactly that family (38 = 37 + 1 suite-growth), all panics trace to the media-absence guards. No engine/validator/test change needed or made.",
+      "notes": "Board card t_765fb6ab. Upstream evidence never recorded the 37 NAMES (process gap) - reconstructed by worktree-vs-main failure-set diff. Honest expectation: cargo test -p lts-desktop --lib is green only where bundle media is on disk (main tree or CI after the media-restore step)."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

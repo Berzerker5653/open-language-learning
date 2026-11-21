@@ -1,0 +1,53 @@
+FIX-DESKTOP-LIB-ROT-001 — classification of the 37 flagged lts-desktop lib failures (board t_765fb6ab)
+HEAD under verification: 56ee3e8 (tree clean; code content identical to 3251b04 for Rust sources)
+
+== Verdict ==
+ZERO real rot. The flagged 37-failure set is ENVIRONMENT NOISE: it was measured in a scratch
+worktree, where the gitignored bundle media (languages/*/media/*.wav, 4,935 ja-JP files) is
+absent, and the pack-archive builders deliberately refuse to bake a pack whose declared media
+is missing (ADR-0016 / ADR-0024). In any tree that has the media (the main working tree, or CI
+after the "Restore reference-pack audio (published archives)" step), the FULL lib suite is green.
+No engine, validator, or test change was needed or made — this card ships evidence only.
+
+== Gate runs (this card, unpiped exit codes recorded inside the logs) ==
+1) cargo test -p lts-desktop --lib   — MAIN TREE @ 56ee3e8:
+   test result: ok. 207 passed; 0 failed; 2 ignored — exit 0
+   Full output: test-main-tree-HEAD.log (201s wall; media present: 4,935 wavs on disk)
+2) cargo test -p lts-desktop --lib   — CLEAN SCRATCH WORKTREE at the SAME HEAD
+   (git worktree add scratch/lts-desktoplibrot 56ee3e8, shared CARGO_TARGET_DIR; media wavs = 2):
+   test result: FAILED. 169 passed; 38 failed; 2 ignored — failure names in worktree-failures.txt
+
+== Failure-set reconciliation ==
+Flagged run (FIX-READER-FLOW-001b-1, worktree lts-fixreader001b1, 7ba4df0 era): 167 passed / 37 FAILED,
+finished in 21.70s. This card's worktree run: 169 passed / 38 FAILED, finished in 21.88s.
+Same family, same near-instant runtime (pack-load refusals fail fast, unlike the 201s media-present
+run), one extra failure because the suite grew since (new tests from 3251b04 etc. join the same
+media-dependent family). The upstream evidence never recorded the 37 NAMES (process gap); the
+worktree reconstruction above reproduces the family exactly.
+
+== Per-failure classification (all 38) ==
+- 35 x panic: "no generated audio is present, so this archive could only ship a silent pack:
+  run scripts/generate-pack-audio.py first (ADR-0016; the on-demand synthesis fallback this
+  used to tolerate was removed by ADR-0024)" — archive bake refuses a silent pack.
+- 2 x panic: "pack has 4935 validation error(s); ... media/ja.contrast.gemination.kite-0.wav is
+  declared by the media manifest and absent while other declared assets are present: the media
+  build is partial" — the 4935 count == exactly the wavs missing in the worktree.
+- 1 x dictation_check_matches_spoken_target: engine-error assertion, downstream of the same
+  unavailable pack.
+Family names match the upstream description ("ja-pack/plan/provenance/pronunciation tests"):
+bundled_japanese_pack_installs_and_records, provenance_payload_covers_every_installed_pack_verbatim,
+pronunciation_demo_comes_from_pack_contrasts, a_fresh_ja_jp_plan_is_all_introductions..., goal_map_*,
+plan_generation_stays_fast_on_the_reference_pack, etc. (full list: worktree-failures.txt).
+
+== Why this is noise, not a defect ==
+The media-missing refusal is BY DESIGN (silent packs are a shipped-quality hazard; ADR-0024
+removed the fallback that used to tolerate it). CI restores the wavs from the published archives
+pinned in catalog/packs.json before running these targets. A git worktree without that restore
+step is not a supported environment for the bundled-pack fixtures.
+
+== Honest CI/agent expectation going forward ==
+- `cargo test -p lts-desktop --lib` is green ONLY where the 4,935 ja-JP (+ ru-RU) wavs are on disk:
+  the main working tree or CI after the media-restore step. In a bare worktree expect exactly this
+  ~38-test family red — compare failure SETS, never counts (per lts-concurrent-lane-commits).
+- Future cards must record the failing test NAMES in gates.log, not only the count (the gap that
+  forced this reconstruction).

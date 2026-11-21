@@ -2811,6 +2811,19 @@ tasks:
   - "D4 — the pack_sentence_text lexicon-context promise is made honest: a lexicon id (ru.lex.*) either resolves to its lexicon row's form text or the comment states the deferral; comment and behaviour must match."
   - "LANE gates green: npx tsc --noEmit; npx vitest run; cargo fmt --all --check; cargo clippy -p lts-desktop --all-targets -- -D warnings; scoped cargo test where lib.rs is touched."
   required_for_desktop_1_0: false
+- id: FIX-DESKTOP-LIB-ROT-001
+  milestone: M8
+  priority: P1
+  title: Classify the 37 pre-existing lts-desktop lib failures flagged by FIX-READER-FLOW-001b-1 — environment noise vs real rot
+  dependencies: []
+  read_first:
+  - state/evidence/FIX-READER-FLOW-001b-1/NOTES.md
+  - state/evidence/FIX-READER-FLOW-001b-1/gates.log
+  acceptance:
+  - "Reproduce the failure set in a clean scratch worktree at HEAD (shared CARGO_TARGET_DIR) and capture the FULL failing test names, never tail-truncated."
+  - "Classify each failure as environment noise (gitignored bundle media absent, CI restores it) or real rot from the 9a25202-era semantic changes; real rot gets tests asserting the new contract, never weakened engines or validators."
+  - "The main-tree cargo test -p lts-desktop --lib is green at HEAD with an unpiped exit code, and the env-noise subset is listed exactly with its mechanism under state/evidence/FIX-DESKTOP-LIB-ROT-001/ so CI expectations stay honest."
+  required_for_desktop_1_0: false
 - id: READABILITY-GATE-001
   milestone: M8
   priority: P1
@@ -3016,6 +3029,7 @@ execution_scope:
   - ERR-SRS-LOOP-001
   - FIX-ERR-SRS-LOOP-001-1
   - FIX-ERR-SRS-LOOP-001-2
+  - FIX-DESKTOP-LIB-ROT-001
   - READABILITY-GATE-001
   - GRAMMAR-LABELS-001
   - UI-HYGIENE-001
