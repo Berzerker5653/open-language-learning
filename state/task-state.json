@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-20",
-  "active_task": "VOCAB-BUILDER-001",
+  "updated": "2026-11-21",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2282,12 +2282,12 @@
       "updated": "2026-11-20"
     },
     "VOCAB-BUILDER-001": {
-      "status": "in_progress",
-      "attempts": 1,
+      "status": "blocked",
+      "attempts": 2,
       "title": "Automatic vocabulary builder - every word lookup logged with its context sentence, feeding review",
       "summary": "",
-      "notes": "Opened on the VOCAB-BUILDER-001 board run after takeover-committing sibling ERR-SRS-LOOP-001 (9a25202). Frozen contract in state/notes/VOCAB-BUILDER-001.md: word_lookups append-only ledger (migration v8), word_card gains story_id + auto record_word_lookup + auto add_mined with context_sentence_id, export v5, drill replays context sentence via pack_sentence_text/story_audio.",
-      "updated": "2026-11-20",
+      "notes": "Board card t_771af11d circuit-broke (2x iteration budget 60/60) with NO commits; planner marked blocked 2026-11-21 and cleared active_task. Frozen contract + resume recipe: state/notes/VOCAB-BUILDER-001.md. Fresh-budget takeover card t_cd2a7687 depends on UI-HYGIENE-001 takeover t_7984526c (shared dirty files incl. apps/desktop/src-tauri/src/lib.rs). Possible lane WIP may still sit uncommitted in the tree - takeover worker triages it, never reverts.",
+      "updated": "2026-11-21",
       "evidence": [
         "state/notes/VOCAB-BUILDER-001.md"
       ]
