@@ -1,0 +1,43 @@
+License for the aux/lexicon data slices (NOT the repository's Apache-2.0)
+=========================================================================
+
+The JSONL lexicon slices in this directory (ru.jsonl and any future
+<lang>.jsonl) are third-party derivative data. They are NOT covered by
+the Apache-2.0 license at the repository root and must never be treated
+as Apache-2.0, MIT, or project-original content.
+
+Source: kaikki.org's machine-readable Russian dictionary (an extraction
+of English Wiktionary via wiktextract),
+https://kaikki.org/dictionary/Russian/kaikki.org-dictionary-Russian.jsonl.
+kaikki.org publishes its data "under the same licenses as Wiktionary -
+both CC-BY-SA and GFDL" (https://kaikki.org/dictionary/, section
+"Copyright and license", accessed 2026-11-20).
+
+Accordingly, these slices are offered under either of the following, at
+the reuser's option:
+
+1. Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA
+   4.0):
+       deed:       https://creativecommons.org/licenses/by-sa/4.0/
+       legal code: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+
+2. The GNU Free Documentation License, Version 1.3 or any later version
+   published by the Free Software Foundation; with no Invariant
+   Sections, no Front-Cover Texts, and no Back-Cover Texts:
+       https://www.gnu.org/licenses/fdl-1.3.html
+
+Required attribution (the notice the app renders on every auxiliary
+word card):
+
+    Definitions from Wiktionary via kaikki.org (CC BY-SA / GFDL)
+
+ShareAlike consequence - why this slice is a separate file: any
+redistribution, rehosting, or derivative of these slices (including
+selection or arrangement of rows) must carry the same license and the
+attribution notice above. This is exactly why the slices are never
+merged into the pack lexicon or any Apache/MIT-licensed part of this
+repository.
+
+The source URL, source sha256/size, slice sha256 and the slicer rules
+are pinned in ru.provenance.json; `scripts/build-aux-lexicon.py
+--check` re-verifies the slice against that provenance in CI.

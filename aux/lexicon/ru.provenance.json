@@ -2,6 +2,7 @@
   "format_version": 1,
   "attribution": "Definitions from Wiktionary via kaikki.org (CC BY-SA / GFDL)",
   "license": "CC-BY-SA + GFDL (Wiktionary terms; kaikki.org redistribution)",
+  "license_file": "aux/lexicon/LICENSE-AUX",
   "source_url": "https://kaikki.org/dictionary/Russian/kaikki.org-dictionary-Russian.jsonl",
   "source_license_page": "https://kaikki.org/dictionary/",
   "source_size_bytes": 948499874,

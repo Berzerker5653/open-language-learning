@@ -16,6 +16,10 @@ trusted.
   kaikki.org (CC BY-SA / GFDL)". Every aux card displays it; the slice
   itself is a derivative work licensed CC-BY-SA/GFDL, which is exactly
   why it is never merged into the MIT-licensed pack lexicon.
+- License text ships here: `LICENSE-AUX`. The repository root LICENSE is
+  Apache-2.0 and does NOT cover these slices — they stay CC BY-SA 4.0 /
+  GFDL (at the reuser's option). `build-aux-lexicon.py --check` fails if
+  the file is absent or stops naming both licenses.
 - Provenance: `ru.provenance.json` pins the source URL, source sha256,
   slice sha256 and the slicer rules; `--check` (wired into
   `scripts/ci.sh`) proves the committed file still matches.

@@ -6,6 +6,7 @@ from __future__ import annotations
 import importlib.util
 import json
 import os
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -100,9 +101,11 @@ class Check(unittest.TestCase):
             with open(inp, "w", encoding="utf-8") as f:
                 for e in [entry("собака", forms=["соба́ки"]), entry("кот")]:
                     f.write(json.dumps(e, ensure_ascii=False) + "\n")
-            old_out, old_prov = B.OUT, B.PROVENANCE
+            shutil.copy(B.LICENSE_AUX, os.path.join(tmp, "LICENSE-AUX"))
+            old_out, old_prov, old_lic = B.OUT, B.PROVENANCE, B.LICENSE_AUX
             B.OUT = os.path.join(tmp, "ru.jsonl")
             B.PROVENANCE = os.path.join(tmp, "ru.provenance.json")
+            B.LICENSE_AUX = os.path.join(tmp, "LICENSE-AUX")
             try:
                 self.assertEqual(B.do_write(inp), 0)
                 self.assertEqual(B.do_check(), 0)
@@ -110,11 +113,40 @@ class Check(unittest.TestCase):
                 first = open(B.OUT, "rb").read()
                 self.assertEqual(B.do_write(inp), 0)
                 self.assertEqual(open(B.OUT, "rb").read(), first)
+                # a CC-BY-SA/GFDL derivative in an Apache-2.0 repo must
+                # ship its license text next to the slice (FIX-001b-2)
+                os.remove(B.LICENSE_AUX)
+                self.assertEqual(B.do_check(), 1)
+                shutil.copy(old_lic, B.LICENSE_AUX)
+                self.assertEqual(B.do_check(), 0)
                 with open(B.OUT, "a", encoding="utf-8") as f:
                     f.write(json.dumps(entry("кот"), ensure_ascii=False) + "\n")
                 self.assertEqual(B.do_check(), 1)
             finally:
-                B.OUT, B.PROVENANCE = old_out, old_prov
+                B.OUT, B.PROVENANCE, B.LICENSE_AUX = old_out, old_prov, old_lic
+
+
+class LicenseShips(unittest.TestCase):
+    def test_committed_repo_ships_license_aux(self):
+        self.assertTrue(
+            os.path.exists(B.LICENSE_AUX),
+            "aux/lexicon/LICENSE-AUX missing — the kaikki slice is a "
+            "CC-BY-SA/GFDL derivative, not the repo's Apache-2.0",
+        )
+
+    def test_license_aux_names_both_licenses_and_excludes_apache(self):
+        text = open(B.LICENSE_AUX, encoding="utf-8").read()
+        for needle in (
+            "Creative Commons Attribution-ShareAlike",
+            "GNU Free Documentation License",
+            "Apache-2.0",
+            B.ATTRIBUTION,
+        ):
+            self.assertIn(needle, text)
+
+    def test_provenance_points_at_the_license_file(self):
+        prov = json.load(open(B.PROVENANCE, encoding="utf-8"))
+        self.assertEqual(prov.get("license_file"), "aux/lexicon/LICENSE-AUX")
 
 
 if __name__ == "__main__":

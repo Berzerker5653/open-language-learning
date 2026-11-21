@@ -26,7 +26,9 @@ data; same input file -> byte-identical slice. The raw input is NOT
 committed (948 MB); `--write` records its sha256/size/URL in
 `aux/lexicon/ru.provenance.json` together with the slice sha256, so
 `--check` (no input needed, CI-safe) proves the committed slice is the
-tool's output for the pinned input and is internally valid.
+tool's output for the pinned input, is internally valid, and ships the
+CC-BY-SA/GFDL license text (aux/lexicon/LICENSE-AUX) that the Apache-2.0
+repo root does not cover it with.
 
 Slice rules (all recorded verbatim in provenance.slicer):
     - entry kept when lang_code == "ru", pos does not end in "redirect",
@@ -67,6 +69,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AUX_DIR = os.path.join(ROOT, "aux", "lexicon")
 OUT = os.path.join(AUX_DIR, "ru.jsonl")
 PROVENANCE = os.path.join(AUX_DIR, "ru.provenance.json")
+LICENSE_AUX = os.path.join(AUX_DIR, "LICENSE-AUX")
 
 SOURCE_URL = "https://kaikki.org/dictionary/Russian/kaikki.org-dictionary-Russian.jsonl"
 SOURCE_LICENSE = "CC-BY-SA + GFDL (Wiktionary terms; kaikki.org redistribution)"
@@ -245,6 +248,7 @@ def do_write(input_path: str) -> int:
         "format_version": 1,
         "attribution": ATTRIBUTION,
         "license": SOURCE_LICENSE,
+        "license_file": "aux/lexicon/LICENSE-AUX",
         "source_url": SOURCE_URL,
         "source_license_page": SOURCE_PAGE,
         "source_size_bytes": os.path.getsize(input_path),
@@ -291,6 +295,25 @@ def do_check() -> int:
     if not os.path.exists(OUT) or not os.path.exists(PROVENANCE):
         print("FAIL: aux slice or provenance missing", file=sys.stderr)
         return 1
+    # FIX-READER-FLOW-001b-2: the slice is a CC-BY-SA/GFDL derivative of
+    # kaikki.org data; the repo root LICENSE is Apache-2.0, so the slice
+    # must ship its own license text or a downstream reuser has no
+    # on-disk signal it is not Apache.
+    if not os.path.exists(LICENSE_AUX):
+        print(
+            "FAIL: aux/lexicon/LICENSE-AUX missing — the slice is a "
+            "CC-BY-SA/GFDL derivative, not the repo's Apache-2.0",
+            file=sys.stderr,
+        )
+        return 1
+    lic = open(LICENSE_AUX, encoding="utf-8").read()
+    for needle in (
+        "Creative Commons Attribution-ShareAlike",
+        "GNU Free Documentation License",
+    ):
+        if needle not in lic:
+            print(f"FAIL: LICENSE-AUX never names '{needle}'", file=sys.stderr)
+            return 1
     prov = json.load(open(PROVENANCE, encoding="utf-8"))
     content = open(OUT, encoding="utf-8").read()
     digest = hashlib.sha256(content.encode("utf-8")).hexdigest()
