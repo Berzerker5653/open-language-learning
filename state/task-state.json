@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-20",
-  "active_task": null,
+  "active_task": "CODING-STANDARDS-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2247,6 +2247,15 @@
       ],
       "summary": "Legacy B1 band de-scaffolded + re-journeyed, all 13 legacy goals (195 legacy units): task_sequence per ADR-0037 with engine-runnable roles and shared-pair transfer proofs; linear requires_unit gates; 195->0 support_level-5 encounter scaffolds, one new lv0 recall/writing stage per unit; 155 object-wo-only contracts -> sentence-verified concept sets; 18+12 false b1.* grammar refs replaced with subject-ga; 10 phase-gated revision units (235, 831-842). Run 1 goals work-professional/media-news/storytelling (123b304, 0d83733); run 2 goals education-academic..health-wellness (0d2e8c5..d567649). No status flips, no publishing; ai-assisted draft posture unchanged.",
       "notes": "Authoring card per ADR-0037 + R12 lineage (UPPERBAND-TASK-JOURNEYS-001). Files: curriculum/units/*.yaml."
+    },
+    "CODING-STANDARDS-001": {
+      "status": "in_progress",
+      "attempts": 1,
+      "evidence": [
+        "state/notes/CODING-STANDARDS-001.md"
+      ],
+      "summary": "Card opened: CODING_STANDARDS.md checklist contract frozen in notes (sources, <=80 lines, machine-vs-judgement split, protected AGENTS.md hunk preserved).",
+      "notes": "Docs-only card. AGENTS.md link is the protected-file step; hunk + resume recipe in state/notes/CODING-STANDARDS-001.md."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

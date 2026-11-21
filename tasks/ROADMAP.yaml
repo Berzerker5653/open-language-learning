@@ -2865,6 +2865,22 @@ tasks:
   - every definition reuses wording already present in docs/, tasks/ROADMAP.yaml, tasks/KANBAN.md or state/notes/ — no invented vocabulary
   - GLOSSARY.md is linked from AGENTS.md under a Domain language heading
   required_for_desktop_1_0: false
+- id: CODING-STANDARDS-001
+  milestone: M8
+  priority: P2
+  title: Reviewer-enforceable coding standard file — CODING_STANDARDS.md checklist a cold reviewer can apply to any diff
+  dependencies: []
+  read_first:
+  - AGENTS.md
+  - CONTRIBUTING.md
+  - docs/09_TESTING_AND_ACCEPTANCE.md
+  - .github/workflows/ci.yml
+  acceptance:
+  - CODING_STANDARDS.md sits at the repo root and stays under 80 lines as a checklist
+  - machine-enforced rules are named by their gate only, never re-explained; the file's substance is the judgement-call list a reviewer flags
+  - every named gate corresponds to a real job or command in ci.yml, scripts/ci.sh or the langpack CLI
+  - CODING_STANDARDS.md is linked from AGENTS.md under a Coding standard heading
+  required_for_desktop_1_0: false
 
 execution_scope:
   default_goal: desktop-1.0-release-candidate
@@ -2974,4 +2990,5 @@ execution_scope:
   - SESSION-CHROME-001
   - PROGRESS-STATS-001
   - GLOSSARY-001
+  - CODING-STANDARDS-001
   public_publication_authorized: false
