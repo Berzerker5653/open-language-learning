@@ -1,0 +1,50 @@
+# JA-B1-003-FIX-001 LANE gate battery (2026-11-21 13:2x UTC, board run 73)
+# Commands: cargo run -q -p lts-langpack-cli -- {validate,lint,audit-curriculum,
+# audit-lexicon,audit-licenses,audit-sources,test} languages/ja-JP
+# Pre-battery manifest verification (python, all 238 candidate ids from
+# state/evidence/JA-B1-003/lexicon-defects-candidate-list.jsonl):
+#   manifest rows present: 238/238; sha256(row)==sha256(on-disk wav): 238/238;
+#   row text == declared kana reading: 238/238; bytes>0: 238/238.
+#   13 ids freshly re-baked first (bake3 unit + 1 single-clip retry):
+#   ja.lex.emotion.shoujin, ja.lex.health3.kyoubu, ja.lex.work2.keiri (bake1 cap
+#   failures), ja.lex.advice.{ato,hatsu,shouko,koudan,ketai},
+#   ja.lex.advice2.{suusei,youchuu,kokuhan,inoko2}, ja.lex.edu2.kenji (wav/row drift).
+#   words.jsonl: 4,575 rows (143 stale timing rows removed per lane plan).
+# Battery raw log follows (unit lts-b1fix-batt; crates already built -> fast).
+== validate ==
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 0 warning(s)
+exit=0
+== lint ==
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+lint: 0 error(s), 0 warning(s)
+exit=0
+== audit-curriculum ==
+audit-curriculum: 0 error(s), 0 warning(s)
+exit=0
+== audit-lexicon ==
+audit-lexicon: 0 error(s), 0 warning(s)
+exit=0
+== audit-licenses ==
+audit-licenses: 0 error(s), 0 warning(s)
+exit=0
+== audit-sources ==
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+audit-sources: 0 error(s), 0 warning(s)
+exit=0
+== test ==
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+test: 0 error(s), 0 warning(s)
+exit=0
+BATTERY_DONE

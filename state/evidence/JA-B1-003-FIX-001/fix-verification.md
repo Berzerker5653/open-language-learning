@@ -75,3 +75,34 @@ Independent re-check of the applied lane against
   (`ja.lex.advice.ato` -> あとで, `ja.lex.edu2.kenji` -> しょうこ).
 - The lane remains uncommitted pending bake completion; gate battery + review-record
   append + ledger close follow the numbered recipe in `state/notes/JA-B1-003-FIX-001.md`.
+
+## Takeover close-out (third worker, 2026-11-21, board run 73)
+
+- Lane content landed on main WITHOUT this card's label: sibling commit `28e9e30`
+  ("docs(agents): link coding standard checklist") swept the whole working tree
+  (`git add -A` pattern) and carried: all 25 corrected lexicon files, the 12 rewritten
+  grammar rows, the manifest rewrite (156 stale rows out, 151 re-bake rows in) and the
+  143 `words.jsonl` deletions. Independent re-verification at takeover: diff
+  `28e9e30^..28e9e30` over the lexicon shows EXACTLY the 237 candidate rows changed
+  (plus the documented `ja.lex.env2.mizu-bubun` no-op), `id`/`status: draft`/
+  `generation` invariants intact on every row, and exactly the 12 flagged grammar rows
+  changed. No re-apply was needed; the earlier "lane WIP vanished from the tree"
+  alarm was this commit, not data loss.
+- Manifest/disk drift found at takeover: 10 candidate wavs (`ja.lex.advice.ato`,
+  `ja.lex.advice.hatsu`, `ja.lex.advice.shouko`, `ja.lex.advice.koudan`,
+  `ja.lex.advice.ketai`, `ja.lex.advice2.suusei`, `ja.lex.advice2.youchuu`,
+  `ja.lex.advice2.kokuhan`, `ja.lex.advice2.inoko2`, `ja.lex.edu2.kenji`) had on-disk
+  bytes != their committed manifest rows (byte-size mismatch vs the bake-recorded
+  rows; cause not pinpointed — first wave of the bake1 unit, wavs untouched since
+  2026-11-20 17:06). Plus 3 ids with no manifest row and runaway garbage wavs on disk
+  (`ja.lex.emotion.shoujin`, `ja.lex.health3.kyoubu`, `ja.lex.work2.keiri` — the real
+  bake1 `FAILED` ids; the earlier wake note misnamed them). Remediation: all 13
+  re-baked fresh via unit `lts-b1fix-bake3`
+  (`generate-pack-audio.py --pack languages/ja-JP --force --only x13`, log
+  `~/.hermes/cache/scratch/bake-b1legfix1c.log`), then sha256-vs-disk + text==declared
+  reading re-verified for all 238 candidate ids (see `gates.log`).
+- Review-record deviation (documented): fix-verification records use
+  `rev-2026-11-21-b1legfix1-001..250` with `outcome: approved` (schema-valid; these
+  verify corrections already applied and re-checked — `changes-requested` would assert
+  an outstanding objection). Attribution honesty unchanged: ai-assisted, no promotion,
+  all items stay `draft`.
