@@ -46,6 +46,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
 | readability-gate | pack, qa | **CLOSED gate-green 2026-11-20** — deterministic authoring gate `tools/readability-gate.py`: sentences checked vs declared band lexicon (glue whitelist shared with vocab-budget-check + cumulative drill pools + band-tagged lexicon entries + owner confirm/mine ledger layering; cold profile = band list); >1 distinct unknown lemma → REJECT naming the lemmas; regeneration requests carry them as explicit negative hints, `--recheck` closes the loop with updated hints; violations logged as pack-build evidence. ru-only (ja JMDict follow-up); 10 golden tests green incl. ledger semantics vs real store columns. First real-pack run: 945 sents / 20 stories, 94 findings — evidence committed as data/authoring follow-ups (band-tag or regenerate); gate not yet CI-blocking. | `READABILITY-GATE-001` |
+| vocab-builder | ux, storage | After reader-flow: every lookup auto-logs (surface, lemma, story, sentence id) into the confirm-ledger pattern; looked-up words enter review without manual Mine. | `VOCAB-BUILDER-001` |
 
 ## next — 2026-11-18 OWNER-USABLE queue (authoritative ordering; `next` rows dated earlier are historical unless re-promoted here)
 
@@ -60,7 +61,6 @@ Goal: the owner can actually use the app daily. One card at a time, top to botto
 | grammar-labels | ux, pack | Interlinear labels: case+number under nouns, aspect+tense under verbs, stress everywhere; precomputed at pack build via pymorphy, golden-sentence tests, graceful degradation. | `GRAMMAR-LABELS-001` |
 | readability-gate | pack, qa | Authoring-time validator: ≤1 unknown lemma/sentence vs band lexicon; regeneration loop with negative hint; owner profile's known-lexicon from the confirm/mine ledger. | `READABILITY-GATE-001` |
 | ui-hygiene | ux, docs | Container-width token alignment, zero raw ids/jargon in learner surfaces, profile chooser cleanup (visual-ui-audit U1/U2/U13). | `UI-HYGIENE-001` |
-| vocab-builder | ux, storage | After reader-flow: every lookup auto-logs (surface, lemma, story, sentence id) into the confirm-ledger pattern; looked-up words enter review without manual Mine. | `VOCAB-BUILDER-001` |
 | story-listen | ux, pack | After voice-consistency: one explicit listen control per story, continuous one-narrator audio, back to paragraph reader on exit. | `STORY-LISTEN-001` |
 | progress-stats | ux | After session-chrome: per-goal modality progress bars, human labels for references, dependency-free SVG stats strip (due today, ~minutes, retention, 12-wk calendar). | `PROGRESS-STATS-001` |
 

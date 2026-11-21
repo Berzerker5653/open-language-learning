@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-20",
-  "active_task": null,
+  "active_task": "VOCAB-BUILDER-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2280,6 +2280,17 @@
       "summary": "ERR-SRS-LOOP-001: error memory loop shipped — pymorphy-sidecar form-error classifier (case/aspect/stress/agreement/wrong-word + honest other/no-claim) in lts-activity; per-profile error_ledger + accepted-only error_review_cards in storage (migration v7, export bundle v4 round-trip, pre-v4 import compat); explicit per-form review OFFERS on dictation/speaking-check misses and composition grading (never silent), accepted cards scheduled via the existing FSRS path under the fsrs-spike-0.1.0+error partition and drilled with their exact context sentence; recurrence feeds personalize_progression INPUT ONLY, capped at 3 and tie-break-only (no-calibration-claims preserved). Local-only, no new network calls.",
       "notes": "Attempt 1 (board timeout) left the lane uncommitted; attempt 2 verified it, fixed 4 real gate defects (record_error arity, 6 stale DictationAttempt fixtures, move-after-move, ErrorSink refactor for too_many_arguments x2) and 2 card-mandated assertion updates (export v4, migration history v7). Desktop suite green in HEAD worktree + lane files (main tree red only from a sibling lane's uncommitted ja-JP pack WIP: 154 audio-addressable items with manifest rows removed — errors name ja.lex.* content, zero lane files involved).",
       "updated": "2026-11-20"
+    },
+    "VOCAB-BUILDER-001": {
+      "status": "in_progress",
+      "attempts": 1,
+      "title": "Automatic vocabulary builder - every word lookup logged with its context sentence, feeding review",
+      "summary": "",
+      "notes": "Opened on the VOCAB-BUILDER-001 board run after takeover-committing sibling ERR-SRS-LOOP-001 (9a25202). Frozen contract in state/notes/VOCAB-BUILDER-001.md: word_lookups append-only ledger (migration v8), word_card gains story_id + auto record_word_lookup + auto add_mined with context_sentence_id, export v5, drill replays context sentence via pack_sentence_text/story_audio.",
+      "updated": "2026-11-20",
+      "evidence": [
+        "state/notes/VOCAB-BUILDER-001.md"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
