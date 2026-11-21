@@ -1,0 +1,26 @@
+CODING-STANDARDS-001 gate log — 2026-11-20, worker t_87eb71b3 (documentation-only card; no code touched)
+
+1. Shape
+   $ wc -l CODING_STANDARDS.md
+   62 lines (acceptance: <=80). 26 checklist items.
+
+2. Gate grounding — every named gate corresponds to a real job/command:
+   - cargo fmt/clippy/test ...... .github/workflows/ci.yml rust-static, rust-test
+   - pnpm fmt:check/lint/typecheck/test/build ...... ci.yml web job (lines 197-202)
+   - langpack validate/lint/test + audits ...... scripts/ci.sh lines 40-59, ci.yml rust-conformance
+   - id charsets ...... crates/domain/src/ids.rs (schema pattern + pack-id pattern, grepped)
+   - validate_handoff --require-explicit-ledger-records ...... ci.yml schemas job (line 358)
+   - review promotion gate ...... crates/langpack/src/pack.rs review_promotion_unsupported (documented in CONTRIBUTING.md)
+   - audio restore from catalog pins ...... ci.yml "Restore reference-pack audio" steps using scripts/fetch-pack-audio.sh
+   - gitleaks/pnpm audit/cargo audit ...... ci.yml security job (lines 315-330)
+   - desktop-smoke ...... ci.yml desktop-smoke job, scripts/smoke-desktop.sh
+   - audit_learner_copy ...... ci.yml schemas job (line 385)
+
+3. Judgement-call items each cite a real source (AGENTS.md principles,
+   docs/09 quality philosophy + e2e abstention cases, docs/adr convention,
+   CONTRIBUTING.md review-record rules, skill gate-tier directive 2026-11-19)
+   — no invented conventions.
+
+4. Ledger validator (run after AGENTS.md step; re-run at close):
+   $ .venv/bin/python tools/validate_handoff.py --require-explicit-ledger-records
+   (result appended below)
