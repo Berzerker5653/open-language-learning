@@ -2,6 +2,20 @@
 
 Docs-only card, run 2026-11-20 (board worker t_87eb71b3).
 
+## Status 2026-11-20 (worker run t_87eb71b3): shipped except one protected-file hunk
+
+- `CODING_STANDARDS.md` authored at repo root at commit `722b7bc`: 62 lines
+  (<=80), 26 checklist items; machine-gate section names only real jobs /
+  commands (grounding in `state/evidence/CODING-STANDARDS-001/gates.log`),
+  judgement-call section cites AGENTS.md / docs/09 / CONTRIBUTING.md /
+  docs/adr conventions.
+- Card + roadmap opened at `b34028d` (ROADMAP entry, optional_tasks list,
+  task-state record `in_progress`, this notes file).
+- The AGENTS.md edit was attempted and hard-blocked by the protected-file
+  guard ("approval prompt timed out without a user response") in this
+  headless kanban worker — same as GLOSSARY-001. Not retried via any other
+  path. That hunk is the remaining step; the card stays blocked on it.
+
 ## Contract
 
 - `CODING_STANDARDS.md` at repo root, **<= 80 lines**, checklist shape.
@@ -20,19 +34,29 @@ Docs-only card, run 2026-11-20 (board worker t_87eb71b3).
   the guard forbids rerouting). Same protected-file step as GLOSSARY-001:
   the hunk is preserved below; the owner-present chat session applies it.
 
-## Exact AGENTS.md hunk (if the worker's edit was blocked)
+## Exact AGENTS.md hunk (worker's edit was blocked; owner-present session applies)
 
 ```markdown
 ## Coding standard
 
-Before reviewing or committing any diff, work the checklist in [CODING_STANDARDS.md](CODING_STANDARDS.md): machine-enforced gates are named, not re-explained; the reviewer's job is the judgement-call list.
+Before reviewing or committing any diff, work the checklist in [CODING_STANDARDS.md](CODING_STANDARDS.md): machine-enforced gates are named there, not re-explained; the reviewer's job is the judgement-call list.
 ```
+
+Insert immediately after the `## Domain language` section's paragraph, before
+the `## Scope and source trust` heading.
 
 ## Resume recipe
 
-1. Do NOT re-derive CODING_STANDARDS.md if it is already at main
-   (`git log --oneline -1 -- CODING_STANDARDS.md`).
-2. Apply the hunk above to AGENTS.md with owner present, commit as
+1. Do NOT rewrite or re-derive CODING_STANDARDS.md — it is committed at main
+   (`git log --oneline -1 -- CODING_STANDARDS.md` → `722b7bc`).
+2. Apply the hunk above to AGENTS.md (owner approval, or owner applies it
+   directly), commit as
    `docs(agents): link CODING_STANDARDS.md under Coding standard (CODING-STANDARDS-001)`.
-3. Flip task-state CODING-STANDARDS-001 to done (keep evidence paths), move
-   the KANBAN.md row to a done row, ledger commit, then board-complete.
+3. Append the validate_handoff result to `state/evidence/CODING-STANDARDS-001/gates.log`:
+   `.venv/bin/python tools/validate_handoff.py --require-explicit-ledger-records`
+   (must PASS with the task-state `evidence` paths extended to gates.log).
+4. Flip task-state CODING-STANDARDS-001 `in_progress` → `done`
+   (`active_task` → null; evidence = notes + gates.log; status note in
+   `notes` field), add a done row to `tasks/KANBAN.md`, flip the
+   `tasks/KANBAN.md` board row if present, ledger commit, then
+   `hermes kanban unblock t_87eb71b3` + complete (controller close path).

@@ -21,6 +21,15 @@ CODING-STANDARDS-001 gate log — 2026-11-20, worker t_87eb71b3 (documentation-o
    CONTRIBUTING.md review-record rules, skill gate-tier directive 2026-11-19)
    — no invented conventions.
 
-4. Ledger validator (run after AGENTS.md step; re-run at close):
+4. Ledger validator (run 2026-11-20 at block time, card in_progress; re-run
+   at close after the AGENTS.md step):
    $ .venv/bin/python tools/validate_handoff.py --require-explicit-ledger-records
-   (result appended below)
+   HANDOFF VALIDATION PASSED (2158 data files checked) — pre-existing WARNs
+   only (ERR-SRS-LOOP-001 / UI-HYGIENE-001 / PROGRESS-STATS-001 optional
+   tasks with no explicit ledger record; predates this card).
+
+5. Protected-file step: patch attempt on AGENTS.md hard-blocked by the
+   guard ("approval prompt timed out without a user response"), not retried
+   via any other path. Hunk + resume recipe preserved in
+   state/notes/CODING-STANDARDS-001.md (GLOSSARY-001 pattern). Card blocked
+   on that single owner-present step.

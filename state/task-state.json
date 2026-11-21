@@ -2252,10 +2252,11 @@
       "status": "in_progress",
       "attempts": 1,
       "evidence": [
-        "state/notes/CODING-STANDARDS-001.md"
+        "state/notes/CODING-STANDARDS-001.md",
+        "state/evidence/CODING-STANDARDS-001/gates.log"
       ],
-      "summary": "Card opened: CODING_STANDARDS.md checklist contract frozen in notes (sources, <=80 lines, machine-vs-judgement split, protected AGENTS.md hunk preserved).",
-      "notes": "Docs-only card. AGENTS.md link is the protected-file step; hunk + resume recipe in state/notes/CODING-STANDARDS-001.md."
+      "summary": "CODING_STANDARDS.md shipped at main (722b7bc): 62-line reviewer checklist, machine gates named only (26 items grounded in ci.yml/ci.sh/ids.rs), judgement-call list consolidated from AGENTS.md/docs/09/CONTRIBUTING.md. Remaining: protected AGENTS.md Coding-standard link — worker edit hard-blocked, hunk+resume recipe preserved in notes.",
+      "notes": "Blocked on the protected-file step only (same shape as GLOSSARY-001). Owner-present session applies the notes hunk, runs validate_handoff, flips done per resume recipe."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
