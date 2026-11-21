@@ -108,3 +108,30 @@ exit: 0
   [task-sequence-no-context-change] unit ja.unit.b2-register-casual-opinions (band b2): transfer activity ja.activity.b2reg-casual-choice names no scenario_id and lives in this unit
   [task-sequence-no-reuse] unit ja.unit.b2-register-casual-opinions (band b2): delayed reuse unproven: reuse activity ja.activity.b2reg-casual-recall-later names an activity of this unit
   [task-sequence-no-reuse] unit ja.unit.b2-register-honorific-office (band b2): delayed reuse unproven: reuse activity ja.activity.b2reg-hon-recall-later names an activity of this unit
+== lane-gate battery B (worktree at aa629cd + this run's 96 unit files: goals environment, travel-extended, emotions-personality, advice-opinion, comparison-debate, health-wellness; same restored-media worktree) ==
+2026-11-20T17:17:45-07:00
+===== langpack validate =====
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 0 warning(s)
+exit: 0
+===== langpack lint =====
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+lint: 0 error(s), 0 warning(s)
+exit: 0
+===== langpack audit-curriculum =====
+audit-curriculum: 0 error(s), 0 warning(s)
+exit: 0
+===== langpack test =====
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+test: 0 error(s), 0 warning(s)
+exit: 0
+===== content-template task-sequence audit, findings mentioning this set's units =====
+ZERO findings on lane units

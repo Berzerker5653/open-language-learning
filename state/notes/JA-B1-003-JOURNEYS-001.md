@@ -86,12 +86,12 @@ health-wellness — 15 legacy units each):
 - [x] technology (265-279 + 834 revision) — run 2
 - [x] culture-tradition (280-294 + 835 revision) — run 2
 - [x] society-rules (295-309 + 836 revision) — run 2
-- [ ] environment
-- [ ] travel-extended
-- [ ] emotions-personality
-- [ ] advice-opinion
-- [ ] comparison-debate
-- [ ] health-wellness
+- [x] environment (310-324 + 837) — run 2, band COMPLETE
+- [x] travel-extended (325-339 + 838) — run 2, band COMPLETE
+- [x] emotions-personality (340-354 + 839) — run 2, band COMPLETE
+- [x] advice-opinion (355-369 + 840) — run 2, band COMPLETE
+- [x] comparison-debate (370-384 + 841) — run 2, band COMPLETE
+- [x] health-wellness (400-414 + 842) — run 2, band COMPLETE
 
 ## Run 2 addendum (2026-11-20): the transform is scripted
 
@@ -108,3 +108,10 @@ worktree stays dirty from the previous set; media survives, it is gitignored).
 Grammar-detector honesty: conservative romaji-token patterns, ai-assisted
 grading; bogus b1.* concepts were never in the units' sentences (all 12 run-2
 replacements verified sentence-by-sentence by the script's assertion).
+
+
+## Band closed (2026-11-20 run 2)
+All 13 legacy goals journeyed; card done. Residual known gaps deliberately
+out of scope: 821/822 work-notice units keep their legacy support_level-5
+activity (scenario-band shape, reviewed clean in JA-B1-003); grammar lists are
+ai-assisted romaji-detected (native-speaker pass still open per standing item).

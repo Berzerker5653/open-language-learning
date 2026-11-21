@@ -70,3 +70,28 @@ units, outside the legacy 15-unit families), wo-only contracts 72,
 support_level-0 activities 119.
 Remaining legacy goals: environment, travel-extended, emotions-personality,
 advice-opinion, comparison-debate, health-wellness (6 x 15 units).
+
+## Run 2 (2026-11-20, goal-set B) — band COMPLETE
+Goals environment (310-324 + 837), travel-extended (325-339 + 838),
+emotions-personality (340-354 + 839), advice-opinion (355-369 + 840),
+comparison-debate (370-384 + 841), health-wellness (400-414 + 842):
+90 units re-shaped + 6 revision units. Same shape as goal-set A.
+False grammar refs replaced with subject-ga: 318/319 (shieki-ukemi, ni-yotte);
+327/328/334/338 (nai-u-de, toi-toka, te-shimau, darou); 344/348/352 (ni-kuru,
+wake-da, hou-ga-yoi); 357/365/368 (to-omoimasu, to-itara-domo, ni-chuui);
+378/379/382 (ni-yori, shitsumon-ni-kotae, yori-mo); 407/408/414 (nagara, mazu,
+ni-tsurete). wo-only contracts in these goals: 72 -> 0.
+Battery B: validate/lint/audit-curriculum/test 0/0, zero task-sequence audit
+findings on lane units. Commit-hygiene note: the first staging pass mixed goal
+ranges; all six set-B commits were rebuilt (reset --mixed to aa629cd, exact
+file lists re-committed as b3085c9..d567649; content of the tree is
+identical, verified 96 files changed / 2977 insertions vs the first pass).
+
+Final band counters (units whose goal_id is a legacy B1 goal, incl. revision +
+work-notice units): 195/195 legacy 15-unit-family units now task_seq-gated,
+wo-only generation contracts in the legacy families: 0, support_level-5 in the
+legacy families: 0 (the 2 remaining lv5 sit in the 821/822 work-notice
+scenario units, out of this card's legacy scope), support_level-0 recall/writing
+stages: 13+90+... per-goal 15 each. All 13 legacy goals: journeys + contracts +
+de-scaffold done; 10 revision units created (235, 831-842... 831/832 run-1,
+833-842 run-2).
