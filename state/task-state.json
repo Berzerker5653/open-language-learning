@@ -2203,14 +2203,16 @@
     "JA-B1-003-FIX-001": {
       "task_id": "JA-B1-003-FIX-001",
       "title": "Correct the 238 legacy B1 lexicon defects and 12 grammar example defects",
-      "status": "ready",
+      "status": "done",
       "attempts": 0,
-      "updated": "2026-11-20",
+      "updated": "2026-11-21",
       "dependencies": [
         "JA-B1-003"
       ],
       "evidence": [
-        "state/evidence/JA-B1-003/findings-2026-11-20.md"
+        "state/evidence/JA-B1-003/findings-2026-11-20.md",
+        "state/evidence/JA-B1-003-FIX-001/fix-verification.md",
+        "state/evidence/JA-B1-003-FIX-001/gates.log"
       ],
       "summary": "Created by JA-B1-003: correct every changes-requested legacy B1 lexicon row (per-row proposed fixes in reviews.jsonl notes and state/evidence/JA-B1-003/lexicon-defects-candidate-list.jsonl) plus 12 defective grammar examples. Ids and draft status untouched.",
       "notes": "Files: languages/ja-JP/lexicon/*.jsonl + grammar/concepts.jsonl only - disjoint from FIX-002."
