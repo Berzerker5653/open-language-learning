@@ -1,0 +1,69 @@
+BUILD-DEFAULT-CP-001 — controller gate log (2026-11-21, run on GamingPC, lane tier)
+
+All results below were executed for this card; the systemd chain ran
+`bash /home/hunter/.hermes/cache/scratch/lts-bdcp001-gates.sh` (unit
+lts-bdcp001b) and its full output is `gates-chain.log` in this directory.
+
+## Chain results (unit lts-bdcp001b)
+
+- frontend (pnpm --filter @openlang/desktop build): PASS — fresh dist for embedding
+- cargo fmt --all --check: PASS
+- cargo check -p lts-desktop --all-targets  (DEFAULT now = custom-protocol): PASS
+- cargo clippy -p lts-desktop --all-targets -- -D warnings (default mode): PASS
+- cargo clippy -p lts-desktop --all-targets --no-default-features -- -D warnings (CI/dev mode): PASS
+- cargo test -p lts-desktop --lib (default features): PASS — 207 passed / 0 failed / 2 ignored
+  in 198.65 s — matches the FIX-DESKTOP-LIB-ROT-001 baseline (207/0/2) exactly.
+- cargo build --release -p lts-desktop: PASS
+- launch spot-check: see below.
+
+## Acceptance: embedded release binary launches without network
+
+`LTS_DATA_DIR=<tmp> LTS_SMOKE_FILE=<marker> xvfb-run -a ... ./target/release/lts-desktop`
+with port 1420 verified FREE before launch. exit=0 and
+`release-embedded-launch-marker.txt` shows: `smoke-ok home-rendered`,
+13 `smoke-ok route:` acks, `goal-map-assert 77`, `smoke-ok routes-complete:5`.
+The UI served from the embedded `frontendDist` — no dev server existed.
+
+Harness incident (documented, not a product defect): the FIRST spot-check
+attempt produced an empty marker because the single-instance plugin refused the
+probe while the owner's PRE-FIX `target/release/lts-desktop` dogfood instance
+(PID 913088, showing the reported connection-error screen) was still open.
+That stale pre-fix instance was closed; the re-run passed as above. Also note:
+headless launches on this box need `source scripts/tauri-env.sh` (user-local
+webkit2gtk sysroot) — the first unit version missed it; the smoke/preview
+scripts already source it.
+
+## Acceptance: `tauri dev` still dev-mode
+
+`tauri-dev-features.log` (verbose `tauri dev -v`, killed after capture; watcher-ignore spam stripped, port
+1420 free after teardown) line 8:
+
+    Running [tauri_cli::interface::rust::desktop] DevCommand (`cargo  run --no-default-features --color always --`)
+
+The pinned CLI 2.12.1 `dev_options` auto-passes `--no-default-features` and
+re-enables only default features that do NOT map to `tauri/custom-protocol`
+(cross-checked against the docs.rs source of the shipped crate). This crate's
+only default feature IS custom-protocol, so dev builds compile exactly as
+before the flip.
+
+## Frontend gates (controller-run, this session)
+
+- pnpm typecheck (tsc --noEmit): clean
+- pnpm test (vitest run): 412 passed (412)
+
+## Ledger validator
+
+python3 tools/validate_handoff.py --require-explicit-ledger-records:
+HANDOFF VALIDATION PASSED (only pre-existing warnings). Card is board-owned
+(no ROADMAP entry), so closure is evidence-based; the planner reconciles the
+board from these commits.
+
+## CI-shape note
+
+rust-static/rust-test/ci.sh gain explicit `--no-default-features`: required
+because embedding on a fresh checkout (gitignored dist) panics tauri-build
+codegen; lts-desktop is the only workspace crate with [features], so the flag
+changes no other crate's graph — these jobs stay byte-identical to the pre-flip
+compiles. The default-ON path is gated by platform-compile (pnpm build then
+cargo check -p lts-desktop --all-targets) and desktop-smoke (tauri build,
+which embeds today too).
