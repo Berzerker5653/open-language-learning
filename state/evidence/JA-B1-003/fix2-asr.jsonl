@@ -1,0 +1,50 @@
+{"id": "ja.sent.compromise-write", "status": "ok", "ratio": 0.8333333333333334, "text": "きょうしょう の けっか が いち しました。", "heard": "長章の結果が1位しました。", "mora": 15, "duration": 5.2}
+{"id": "ja.sent.booking-change", "status": "ok", "ratio": 1.0, "text": "よやく の へんこう で とまどい が ありました。", "heard": "予約の変更で戸惑いがありました", "mora": 19, "duration": 3.2}
+{"id": "ja.sent.community-worry", "status": "ok", "ratio": 1.0, "text": "この ちほう の こうつう で ゆううつ な きぶん になりました。", "heard": "この地方の交通で憂鬱な気分になりました", "mora": 25, "duration": 5.92}
+{"id": "ja.sent.border-docs", "status": "ok", "ratio": 1.0, "text": "にゅうこく しょうめいしょ を ていし しました。", "heard": "入国証明書を停止しました。", "mora": 17, "duration": 2.72}
+{"id": "ja.sent.ceremony-congrats", "status": "ok", "ratio": 1.0, "text": "しゅくが の かい で はなよめ に いろが ふえました。", "heard": "祝賀の会で花嫁に色が増えました", "mora": 20, "duration": 3.2}
+{"id": "ja.sent.apology", "status": "ok", "ratio": 0.9696969696969697, "text": "じこ の しゃざい を まじめ に かきました。", "heard": "この謝罪を真面目に書きました", "mora": 16, "duration": 2.72}
+{"id": "ja.sent.decision-essay", "status": "ok", "ratio": 1.0, "text": "さくしゃ の こと を かきました。", "heard": "作者のことを書きました", "mora": 12, "duration": 2.32}
+{"id": "ja.sent.diet-culture", "status": "ok", "ratio": 1.0, "text": "ダイエット の こと を はなしました。", "heard": "ダイエットのことを話しました。", "mora": 14, "duration": 2.72}
+{"id": "ja.sent.debate-basics", "status": "ok", "ratio": 1.0, "text": "ろんせつ を よんで じゅんび しました。", "heard": "論説を呼んで準備しました。", "mora": 15, "duration": 2.56}
+{"id": "ja.sent.craft-washi", "status": "ok", "ratio": 0.9285714285714286, "text": "わし を てで つくる こうげい です。", "heard": "足を手で作る工芸です。", "mora": 14, "duration": 4.32}
+{"id": "ja.sent.debate-point", "status": "ok", "ratio": 1.0, "text": "ろんそう で たいあん を だす のが とくい です。", "heard": "論争で対案を出すのが得意です", "mora": 19, "duration": 4.64}
+{"id": "ja.sent.device-daily", "status": "ok", "ratio": 1.0, "text": "すまほ と ぱそこん が まいにち の でばいす です。", "heard": "スマホとパソコンが毎日のデバイスです", "mora": 20, "duration": 6.16}
+{"id": "ja.sent.essay-observation", "status": "ok", "ratio": 1.0, "text": "かんさつ と きじゅつ で ぶんか を あらわします。", "heard": "観察、時述で文化を表します", "mora": 19, "duration": 4.4}
+{"id": "ja.sent.encouragement", "status": "ok", "ratio": 1.0, "text": "しょうれい の ことば で ちから が でました。", "heard": "奨励の言葉で力が出ました", "mora": 17, "duration": 3.28}
+{"id": "ja.sent.fact-speculation", "status": "ok", "ratio": 1.0, "text": "じじつ と すいそく を くべつ して かきます。", "heard": "事実と推測を区別して書きます", "mora": 18, "duration": 3.44}
+{"id": "ja.sent.empathy", "status": "ok", "ratio": 1.0, "text": "ぶんしょう を おぼえる のに きおく が ひつよう です。", "heard": "文章を覚えるのに記憶が必要です。", "mora": 21, "duration": 3.68}
+{"id": "ja.sent.evidence-conclusion", "status": "ok", "ratio": 1.0, "text": "しょうこ が あれば けつろん が つよいです。", "heard": "証拠があれば結論が強いです", "mora": 17, "duration": 3.52}
+{"id": "ja.sent.energy-wind", "status": "ok", "ratio": 0.8571428571428571, "text": "ふうりょく を つかって でんき を つくります。", "heard": "浴を使って電気を作ります。", "mora": 18, "duration": 7.68}
+{"id": "ja.sent.fitness-club", "status": "ok", "ratio": 1.0, "text": "くらぶ の かいいん に なりました。", "heard": "クラブの会員になりました", "mora": 14, "duration": 2.0}
+{"id": "ja.sent.gentle-persuade", "status": "ok", "ratio": 1.0, "text": "せっとく する のに やさしい ことば を つかいました。", "heard": "説得するのに優しい言葉を使いました", "mora": 22, "duration": 3.92}
+{"id": "ja.sent.itinerary-plan", "status": "ok", "ratio": 0.7804878048780488, "text": "りてい を つくって しゅくはく を よやく しました。", "heard": "理程を作って宿は区を予約しました", "mora": 20, "duration": 4.8}
+{"id": "ja.sent.guided-tour", "status": "ok", "ratio": 0.9230769230769231, "text": "がいどつあー で ふうけい を たのしみました。", "heard": "「ガイドツアー」って風景を楽しみました。", "mora": 19, "duration": 4.48}
+{"id": "ja.sent.food-waste", "status": "ok", "ratio": 1.0, "text": "フードロス を へらす ために ぶんりょう を ちゅうい して います。", "heard": "フードロスを減らすために分量を注意しています", "mora": 25, "duration": 4.4}
+{"id": "ja.sent.grievance-box", "status": "ok", "ratio": 1.0, "text": "ふまんいれ の はなし が ちゅうしょくかい で でました。", "heard": "不満入れの話が昼食会で出ました。", "mora": 21, "duration": 3.76}
+{"id": "ja.sent.library-card", "status": "ok", "ratio": 1.0, "text": "としょかんりようけん で 3さつ まで かりられます。", "heard": "図書管理要件で3冊まで借りられます", "mora": 20, "duration": 4.08}
+{"id": "ja.sent.news-discuss", "status": "ok", "ratio": 1.0, "text": "ニュース の じょうきょう について ともだち と はなしました。", "heard": "ニュースの状況について友達と話しました。", "mora": 23, "duration": 4.88}
+{"id": "ja.sent.narrative-structure", "status": "ok", "ratio": 1.0, "text": "ものがたり の けつまつ を かきました。", "heard": "物語の結末を書きました", "mora": 16, "duration": 3.12}
+{"id": "ja.sent.network-message", "status": "ok", "ratio": 0.9090909090909091, "text": "しゅうかい の おり に せんせい と あいさつ しました。", "heard": "集会の檻に先生と挨拶しました", "mora": 21, "duration": 3.2}
+{"id": "ja.sent.opinion-before-decision", "status": "ok", "ratio": 1.0, "text": "けっていの まえに いけん を いいます。", "heard": "決定の前に意見を言います", "mora": 16, "duration": 3.76}
+{"id": "ja.sent.news-morning", "status": "ok", "ratio": 1.0, "text": "まいあさ しんぶん の へっどらいん を よみます。", "heard": "毎朝新聞のヘッドラインを読みます", "mora": 20, "duration": 4.0}
+{"id": "ja.sent.personal-essay", "status": "ok", "ratio": 1.0, "text": "おんがく が だいすき です。", "heard": "音楽が大好きです。", "mora": 11, "duration": 3.6}
+{"id": "ja.sent.polite-disagree", "status": "ok", "ratio": 0.972972972972973, "text": "しゅちょう する とき ことば を えらびます。", "heard": "しゅうちょうするときことばをえらびます", "mora": 16, "duration": 5.28}
+{"id": "ja.sent.pride-craft", "status": "ok", "ratio": 1.0, "text": "わし の こうげい に ほこり を かんじます。", "heard": "わしの工芸に誇りを感じます", "mora": 17, "duration": 4.0}
+{"id": "ja.sent.pros-cons", "status": "ok", "ratio": 0.926829268292683, "text": "ゆうり な ところ と ふり な ところ を かきました。", "heard": "きゅうりなところとふりなところをかきました", "mora": 20, "duration": 5.76}
+{"id": "ja.sent.pollution-problem", "status": "ok", "ratio": 0.8571428571428571, "text": "こうじょう の はいしゅつ が もんだい です。", "heard": "工場の和紙質が問題です", "mora": 16, "duration": 2.4}
+{"id": "ja.sent.rating-system", "status": "ok", "ratio": 1.0, "text": "まつり の かいそう を ともだち と たてました。", "heard": "祭りの階層を友達と建てました", "mora": 19, "duration": 4.56}
+{"id": "ja.sent.remote-control", "status": "ok", "ratio": 1.0, "text": "りもこん で でんき を けします。", "heard": "リモコンで電気を消します。", "mora": 13, "duration": 2.08}
+{"id": "ja.sent.sleep-habit", "status": "ok", "ratio": 0.9411764705882353, "text": "ねぶき を こらえて べんきょう しました。", "heard": "寝拭きをこらえて勉強しました", "mora": 16, "duration": 2.88}
+{"id": "ja.sent.support-reception", "status": "ok", "ratio": 1.0, "text": "でんわ で しえん の うけつけ を しました。", "heard": "電話…で、支援の受付をしました。", "mora": 17, "duration": 4.88}
+{"id": "ja.sent.shrine-visit", "status": "ok", "ratio": 0.8292682926829268, "text": "じんじゃ で れいはい して、おみず を のみました。", "heard": "神社、てりゃえはい、してお水を飲みました。", "mora": 19, "duration": 5.04}
+{"id": "ja.sent.suspense-build", "status": "ok", "ratio": 1.0, "text": "きょうみ の ある ばめん で はらはら しました。", "heard": "興味のある場面でハラハラしました。", "mora": 18, "duration": 3.28}
+{"id": "ja.sent.senpai-help", "status": "ok", "ratio": 1.0, "text": "せんぱいに しごとば の まなー を おしえて もらいました。", "heard": "先輩に仕事場のマナーを教えてもらいました。", "mora": 24, "duration": 4.88}
+{"id": "ja.sent.tech-problem-fix", "status": "ok", "ratio": 0.926829268292683, "text": "こしょう を なおす のに 1じかん かかりました。", "heard": "故障を直すのに一時間かかりました", "mora": 18, "duration": 4.56}
+{"id": "ja.sent.topic-choice", "status": "ok", "ratio": 1.0, "text": "テーマ の せんたく に 2しゅうかん かかりました。", "heard": "テーマの選択に2週間かかりました。", "mora": 19, "duration": 4.72}
+{"id": "ja.sent.voting-candidate", "status": "ok", "ratio": 0.9523809523809523, "text": "こうほ の せいさく を きいて とうひょう しました。", "heard": "孔子の政策を聞いて投票しました", "mora": 20, "duration": 5.6}
+{"id": "ja.sent.union-talks", "status": "ok", "ratio": 1.0, "text": "ろうし で ろうどう じょうけん の はなしあい を します。", "heard": "労使で、労働条件の話し合いをします。", "mora": 22, "duration": 4.49}
+{"id": "ja.sent.water-issue", "status": "ok", "ratio": 1.0, "text": "この ちほう の みずしげん が じゅうよう です。", "heard": "この地方の水資源が重要です", "mora": 18, "duration": 2.8}
+{"id": "ja.sent.use-evidence", "status": "ok", "ratio": 0.9411764705882353, "text": "じつさい の こと は あとで しらべました。", "heard": "実際のことは後で調べました。", "mora": 17, "duration": 2.88}
+{"id": "ja.sent.write-dialogue", "status": "ok", "ratio": 0.875, "text": "かいわ の ことば を みみ で ききました。", "heard": "テイヤの言葉を耳で聞きました", "mora": 16, "duration": 2.8}
+{"id": "ja.sent.write-ending", "status": "ok", "ratio": 0.896551724137931, "text": "けつまつ は かいぎ で きめました。", "heard": "結末は買い食いで決めました", "mora": 14, "duration": 3.76}

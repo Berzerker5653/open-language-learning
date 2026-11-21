@@ -1,0 +1,111 @@
+/bin/sh: line 1: sox: command not found
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.opinion-before-decision: first-request 38.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.union-talks: first-request 53.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.grievance-box: first-request 31.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.senpai-help: first-request 41.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.network-message: first-request 27.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.topic-choice: first-request 39.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.evidence-conclusion: first-request 29.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.library-card: first-request 34.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.news-morning: first-request 33.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.fact-speculation: first-request 28.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.news-discuss: first-request 40.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.debate-point: first-request 39.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.device-daily: first-request 51.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.tech-problem-fix: first-request 38.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.support-reception: first-request 40.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.remote-control: first-request 17.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.craft-washi: first-request 36.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.shrine-visit: first-request 42.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.pride-craft: first-request 33.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.ceremony-congrats: first-request 26.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.essay-observation: first-request 36.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.community-worry: first-request 49.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.voting-candidate: first-request 47.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.energy-wind: first-request 64.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.pollution-problem: first-request 20.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.water-issue: first-request 23.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.food-waste: first-request 37.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.itinerary-plan: first-request 48.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.booking-change: first-request 26.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.border-docs: first-request 24.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.guided-tour: first-request 37.7s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.empathy: first-request 31.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.apology: first-request 22.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.encouragement: first-request 27.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.polite-disagree: first-request 44.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.gentle-persuade: first-request 33.0s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.compromise-write: first-request 43.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.pros-cons: first-request 48.4s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.debate-basics: first-request 21.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.use-evidence: first-request 24.1s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.rating-system: first-request 38.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.decision-essay: first-request 19.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.narrative-structure: first-request 25.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.suspense-build: first-request 27.3s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.write-dialogue: first-request 23.5s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.write-ending: first-request 31.6s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.personal-essay: first-request 29.9s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.sleep-habit: first-request 24.2s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.fitness-club: first-request 17.8s ok=True
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[gen] ja.sent.diet-culture: first-request 22.8s ok=True
+pack=languages/ja-JP assets=4935 generated=50 reused=0 refused=0 bytes=379725780
+BAKE2_DONE
