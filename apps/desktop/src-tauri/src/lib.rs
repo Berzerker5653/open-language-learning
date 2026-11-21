@@ -7077,13 +7077,58 @@ fn aux_lang(data: &Path, pack_id: &str, version: &str) -> Option<String> {
     (!sub.is_empty()).then_some(sub)
 }
 
-/// Read the aux slice for one language. Candidate order: the learner
-/// data dir (a replaceable installed copy), then the repo tree (dev
-/// builds, same CARGO_MANIFEST_DIR resolution as the dev pack
+/// FIX-READER-FLOW-001b-1: the aux slice parsed ONCE into a lookup
+/// index. The old `aux_rows` re-read and re-deserialized the whole
+/// 72 MB / 405k-row ru slice on every off-pack tap (the `lemma_rows`
+/// precedent it copied was sized for a 1.4k-row sidecar) and then
+/// linear-scanned it; off-pack taps are the common reading case. The
+/// index maps every surface/form key to its row slot; insert-if-absent
+/// preserves the "first hit in the slice's deterministic byte order"
+/// rule exactly, and lookups become O(1).
+struct AuxIndex {
+    rows: Vec<AuxRow>,
+    by_key: std::collections::HashMap<String, usize>,
+}
+
+struct AuxCacheEntry {
+    len: u64,
+    modified: Option<std::time::SystemTime>,
+    index: std::sync::Arc<AuxIndex>,
+}
+
+static AUX_INDEX_CACHE: std::sync::OnceLock<
+    std::sync::Mutex<std::collections::HashMap<PathBuf, AuxCacheEntry>>,
+> = std::sync::OnceLock::new();
+
+/// Test-only per-path rebuild counter backing the "second tap does not
+/// re-read the slice" gate; keyed by the resolved file path so parallel
+/// tests with their own data dirs never observe each other's counts.
+#[cfg(test)]
+static AUX_INDEX_BUILDS: std::sync::OnceLock<
+    std::sync::Mutex<std::collections::HashMap<PathBuf, usize>>,
+> = std::sync::OnceLock::new();
+
+#[cfg(test)]
+fn aux_index_build_count(path: &Path) -> usize {
+    let counts =
+        AUX_INDEX_BUILDS.get_or_init(|| std::sync::Mutex::new(std::collections::HashMap::new()));
+    *counts
+        .lock()
+        .unwrap_or_else(|e| e.into_inner())
+        .get(path)
+        .unwrap_or(&0)
+}
+
+fn aux_cache() -> &'static std::sync::Mutex<std::collections::HashMap<PathBuf, AuxCacheEntry>> {
+    AUX_INDEX_CACHE.get_or_init(|| std::sync::Mutex::new(std::collections::HashMap::new()))
+}
+
+/// Locate the aux slice for one language. Candidate order is unchanged:
+/// the learner data dir (a replaceable installed copy), then the repo
+/// tree (dev builds, same CARGO_MANIFEST_DIR resolution as the dev pack
 /// candidates), then the staged resources beside a pack-bundled build's
-/// `packs/` root. Same tolerance posture as `lemma_rows`: absent or
-/// corrupt means no aux rows and the honest bare card; no network.
-fn aux_rows(data: &Path, lang: &str) -> Vec<AuxRow> {
+/// `packs/` root.
+fn aux_slice_path(data: &Path, lang: &str) -> Option<(PathBuf, std::fs::Metadata)> {
     let name = format!("{lang}.jsonl");
     let mut candidates = vec![data.join("aux").join("lexicon").join(&name)];
     candidates.push(
@@ -7096,23 +7141,76 @@ fn aux_rows(data: &Path, lang: &str) -> Vec<AuxRow> {
     }
     candidates
         .iter()
-        .find_map(|path| std::fs::read_to_string(path).ok())
-        .map(|text| {
-            text.lines()
-                .filter_map(|line| serde_json::from_str::<AuxRow>(line).ok())
-                .collect()
-        })
-        .unwrap_or_default()
+        .find_map(|path| path.metadata().ok().map(|meta| (path.clone(), meta)))
+}
+
+fn aux_parse_index(path: &Path) -> Option<std::sync::Arc<AuxIndex>> {
+    let text = std::fs::read_to_string(path).ok()?;
+    let mut index = AuxIndex {
+        rows: Vec::new(),
+        by_key: std::collections::HashMap::new(),
+    };
+    for line in text.lines() {
+        let Ok(row) = serde_json::from_str::<AuxRow>(line) else {
+            continue;
+        };
+        let slot = index.rows.len();
+        index.rows.push(row);
+        let row = &index.rows[slot];
+        index.by_key.entry(row.word.clone()).or_insert(slot);
+        for form in &row.forms {
+            index.by_key.entry(form.clone()).or_insert(slot);
+        }
+    }
+    #[cfg(test)]
+    {
+        let counts = AUX_INDEX_BUILDS
+            .get_or_init(|| std::sync::Mutex::new(std::collections::HashMap::new()));
+        *counts
+            .lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .entry(path.to_path_buf())
+            .or_insert(0) += 1;
+    }
+    Some(std::sync::Arc::new(index))
+}
+
+/// The aux index for one language, parsed once and cached across taps.
+/// The cache entry carries the file's stat fingerprint (len + mtime),
+/// so replacing an installed slice in place is picked up by the next
+/// tap. Same tolerance posture as `lemma_rows`: absent or corrupt means
+/// no aux rows and the honest bare card; no network.
+fn aux_index(data: &Path, lang: &str) -> Option<std::sync::Arc<AuxIndex>> {
+    let (path, meta) = aux_slice_path(data, lang)?;
+    let cache = aux_cache();
+    {
+        let map = cache.lock().unwrap_or_else(|e| e.into_inner());
+        if let Some(entry) = map.get(&path) {
+            if entry.len == meta.len() && entry.modified == meta.modified().ok() {
+                return Some(entry.index.clone());
+            }
+        }
+    }
+    // Parse happens outside the lock so a cold build never blocks other
+    // reader commands; a double build under concurrent taps is harmless
+    // (last insert wins, both return equal indices).
+    let index = aux_parse_index(&path)?;
+    cache.lock().unwrap_or_else(|e| e.into_inner()).insert(
+        path,
+        AuxCacheEntry {
+            len: meta.len(),
+            modified: meta.modified().ok(),
+            index: index.clone(),
+        },
+    );
+    Some(index)
 }
 
 /// One aux row for the tapped token: headword or inflected form of the
 /// norm-token first, else the sidecar-resolved lemma. First hit in the
 /// slice's deterministic byte order — no scoring, no guessing.
-fn aux_hit<'a>(rows: &'a [AuxRow], query: &str, lemma: Option<&str>) -> Option<&'a AuxRow> {
-    let find = |key: &str| {
-        rows.iter()
-            .find(|r| r.word == key || r.forms.iter().any(|f| f == key))
-    };
+fn aux_hit<'a>(index: &'a AuxIndex, query: &str, lemma: Option<&str>) -> Option<&'a AuxRow> {
+    let find = |key: &str| index.by_key.get(key).map(|&slot| &index.rows[slot]);
     find(query).or_else(|| lemma.and_then(find))
 }
 
@@ -7193,8 +7291,8 @@ fn word_card_at(
             // aux fields stay separately labeled; a Wiktionary gloss
             // never sits in a pack field.
             let aux = aux_lang(data, pack_id, &version)
-                .map(|lang| aux_rows(data, &lang))
-                .and_then(|rows| aux_hit(&rows, &query, lemma.as_deref()).cloned());
+                .and_then(|lang| aux_index(data, &lang))
+                .and_then(|index| aux_hit(&index, &query, lemma.as_deref()).cloned());
             WordCardView {
                 query,
                 // The sidecar lemma is the pack's own lemmatizer truth
@@ -7619,7 +7717,7 @@ fn mine_add_at(
                 gloss: gloss.as_deref(),
                 source_citation: source_citation.trim(),
                 created_at: &created_at,
-            context_sentence_id: None,
+                context_sentence_id: None,
             },
         )
         .map_err(|e| e.to_string())?;
@@ -7647,6 +7745,8 @@ fn mine_add_at(
         .into_iter()
         .find(|m| m.id == outcome.id);
     let (reading, gloss, source_citation, row_created_at) = match stored {
+        // ROT FIX: the Some arm used to move fields out of `stored`, which
+        // is borrowed again below for context_sentence_id.
         Some(ref m) => (
             m.reading.clone(),
             m.gloss.clone(),
@@ -15266,7 +15366,14 @@ transfer_variants:
         );
         std::fs::write(&lex, text).unwrap();
 
-        let card = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "ru.story.fixture.market", "хле́ба").unwrap();
+        let card = word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "ru.story.fixture.market",
+            "хле́ба",
+        )
+        .unwrap();
         // `query` is the norm-token sent (stress gone), NOT the lemma —
         // the lemma travels in its own field.
         assert_eq!(card.query, "хлеба");
@@ -15303,7 +15410,14 @@ transfer_variants:
         // manifest deliberately carries no target_locale, so the aux
         // slice has no language to name — these assertions stay
         // hermetic regardless of the committed ru slice.)
-        let bare = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "ru.story.fixture.market", "квоцквц").unwrap();
+        let bare = word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "ru.story.fixture.market",
+            "квоцквц",
+        )
+        .unwrap();
         assert!(!bare.in_pack);
         assert_eq!(bare.query, "квоцквц");
         assert!(bare.lemma.is_none() && bare.gloss.is_none() && bare.surface.is_none());
@@ -15312,7 +15426,14 @@ transfer_variants:
         // Row resolves a lemma, but the pack has no entry for it: the
         // card stays honest about pack coverage while still naming the
         // dictionary form the pack's own sidecar resolved.
-        let lemma_only = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "ru.story.fixture.market", "молока").unwrap();
+        let lemma_only = word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "ru.story.fixture.market",
+            "молока",
+        )
+        .unwrap();
         assert!(!lemma_only.in_pack);
         assert_eq!(lemma_only.lemma.as_deref(), Some("молоко"));
         assert!(lemma_only.gloss.is_none() && lemma_only.surface.is_none());
@@ -15344,7 +15465,14 @@ transfer_variants:
         )
         .unwrap();
 
-        let card = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "ru.story.fixture.market", "подарка").unwrap();
+        let card = word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "ru.story.fixture.market",
+            "подарка",
+        )
+        .unwrap();
         assert!(!card.in_pack);
         assert_eq!(card.aux_word.as_deref(), Some("подарок"));
         assert_eq!(card.aux_gloss.as_deref(), Some("present, gift"));
@@ -15384,7 +15512,14 @@ transfer_variants:
 
         // The tapped form is not a slice surface; the pack sidecar
         // resolves the lemma, and the lemma finds the aux row.
-        let via_lemma = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "ru.story.fixture.market", "молока").unwrap();
+        let via_lemma = word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "ru.story.fixture.market",
+            "молока",
+        )
+        .unwrap();
         assert!(!via_lemma.in_pack);
         assert_eq!(via_lemma.lemma.as_deref(), Some("молоко"));
         assert_eq!(via_lemma.aux_gloss.as_deref(), Some("milk"));
@@ -15395,10 +15530,90 @@ transfer_variants:
         let mut manifest = std::fs::read_to_string(root.join("manifest.yaml")).unwrap();
         manifest = manifest.replace("target_locale: \"ru-RU\"", "target_locale: \"qq-QQ\"");
         std::fs::write(root.join("manifest.yaml"), manifest).unwrap();
-        let bare = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "ru.story.fixture.market", "молока").unwrap();
+        let bare = word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "ru.story.fixture.market",
+            "молока",
+        )
+        .unwrap();
         assert!(!bare.in_pack);
         assert!(bare.aux_gloss.is_none() && bare.aux_source.is_none());
         assert_eq!(bare.lemma.as_deref(), Some("молоко"));
+    }
+
+    /// FIX-READER-FLOW-001b-1: the slice is read+parsed at most ONCE,
+    /// not per tap. Two off-pack taps (different keys) against the same
+    /// slice must hit the cached index — the resolved path's build count
+    /// stays at 1. A slice replaced in place (different length) is
+    /// re-read by the next tap, so the cache never serves stale rows.
+    #[test]
+    fn word_card_parses_the_aux_slice_once_not_per_tap() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let root = data
+            .join("packs")
+            .join("org.openlanguage.ru-fixture")
+            .join("0.1.0");
+        let mut manifest = std::fs::read_to_string(root.join("manifest.yaml")).unwrap();
+        manifest.push_str("target_locale: \"ru-RU\"\n");
+        std::fs::write(root.join("manifest.yaml"), manifest).unwrap();
+        std::fs::create_dir_all(data.join("aux/lexicon")).unwrap();
+        let slice = data.join("aux/lexicon/ru.jsonl");
+        std::fs::write(
+            &slice,
+            "{\"word\":\"подарок\",\"pos\":[\"noun\"],\"glosses\":[\"present, gift\"],\"forms\":[\"подарка\",\"подарку\"]}\n",
+        )
+        .unwrap();
+
+        let first = word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "ru.story.fixture.market",
+            "подарка",
+        )
+        .unwrap();
+        assert_eq!(first.aux_gloss.as_deref(), Some("present, gift"));
+        let second = word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "ru.story.fixture.market",
+            "подарку",
+        )
+        .unwrap();
+        assert_eq!(second.aux_word.as_deref(), Some("подарок"));
+        assert_eq!(
+            aux_index_build_count(&slice),
+            1,
+            "the second tap must not re-read and re-parse the slice"
+        );
+
+        // An in-place replacement (installed copy swapped) is picked up:
+        // the new length invalidates the cached entry and the new row is
+        // the one served.
+        std::fs::write(
+            &slice,
+            "{\"word\":\"подарок\",\"pos\":[\"noun\"],\"glosses\":[\"present, gift\"],\"forms\":[\"подарка\",\"подарку\"]}\n{\"word\":\"кошка\",\"pos\":[\"noun\"],\"glosses\":[\"cat, feline animal\"],\"forms\":[\"кошки\"]}\n",
+        )
+        .unwrap();
+        let swapped = word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "ru.story.fixture.market",
+            "кошки",
+        )
+        .unwrap();
+        assert_eq!(swapped.aux_gloss.as_deref(), Some("cat, feline animal"));
+        assert_eq!(
+            aux_index_build_count(&slice),
+            2,
+            "a changed slice must be re-read exactly once"
+        );
     }
 
     /// READER-FLOW-001: the contract's lexicon match includes the direct
@@ -15410,7 +15625,14 @@ transfer_variants:
         let data = tmp.path();
         let (_pack, p) = install_ru_shaped_pack(data);
         // The RU-shaped fixture lexicon ships "хорошо" (approved, good).
-        let card = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "ru.story.fixture.market", "Хорошо.").unwrap();
+        let card = word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "ru.story.fixture.market",
+            "Хорошо.",
+        )
+        .unwrap();
         assert_eq!(card.query, "хорошо");
         assert!(card.in_pack);
         assert!(card.lemma.is_none(), "no sidecar row, no invented lemma");
@@ -15437,7 +15659,10 @@ transfer_variants:
             "Хорошо.",
         )
         .unwrap();
-        assert!(card.in_review, "the tap itself put the word in the pipeline");
+        assert!(
+            card.in_review,
+            "the tap itself put the word in the pipeline"
+        );
 
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
         let log = store.word_lookups(&p.id).unwrap();
@@ -15449,8 +15674,15 @@ transfer_variants:
 
         let items = store.mined_items(&p.id).unwrap();
         assert_eq!(items.len(), 1, "no manual Mine step was needed");
-        assert_eq!(items[0].surface, "хорошо", "pack surface, same rule as the Mine button");
-        assert_eq!(items[0].gloss.as_deref(), Some("good"), "pack gloss travels");
+        assert_eq!(
+            items[0].surface, "хорошо",
+            "pack surface, same rule as the Mine button"
+        );
+        assert_eq!(
+            items[0].gloss.as_deref(),
+            Some("good"),
+            "pack gloss travels"
+        );
         assert_eq!(items[0].source_citation, "ru.story.fixture.market");
         assert_eq!(
             items[0].context_sentence_id.as_deref(),
@@ -15473,7 +15705,10 @@ transfer_variants:
         assert_eq!(store.word_lookups(&p.id).unwrap().len(), 2);
         let items = store.mined_items(&p.id).unwrap();
         assert_eq!(items.len(), 1);
-        assert_eq!(items[0].id, anchor, "the original row (and its SRS anchor) survives");
+        assert_eq!(
+            items[0].id, anchor,
+            "the original row (and its SRS anchor) survives"
+        );
     }
 
     /// VOCAB-BUILDER-001: an off-pack tap logs and enters the pipeline
@@ -15500,7 +15735,10 @@ transfer_variants:
         assert_eq!(store.word_lookups(&p.id).unwrap().len(), 1);
         let items = store.mined_items(&p.id).unwrap();
         assert_eq!(items.len(), 1);
-        assert_eq!(items[0].surface, "квоцквц", "the tapped token is the surface off-pack");
+        assert_eq!(
+            items[0].surface, "квоцквц",
+            "the tapped token is the surface off-pack"
+        );
         assert!(items[0].reading.is_none() && items[0].gloss.is_none());
     }
 
@@ -15555,8 +15793,15 @@ transfer_variants:
 
         // Manual Mine still works (acceptance: untouched path) and stays
         // context-free.
-        mine_add_at(data, &p.id, "вручную".into(), None, Some("by hand".into()), "manual".into())
-            .unwrap();
+        mine_add_at(
+            data,
+            &p.id,
+            "вручную".into(),
+            None,
+            Some("by hand".into()),
+            "manual".into(),
+        )
+        .unwrap();
         let views = mine_list_at(data, &p.id).unwrap();
         let hand = views
             .iter()
