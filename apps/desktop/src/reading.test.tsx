@@ -181,13 +181,17 @@ describe("paragraph reader structure (READER-FLOW-001)", () => {
       aux_word: "подарок",
       aux_gloss: "present, gift",
       aux_pos: "noun",
-      aux_source: "Wiktionary via kaikki.org (CC BY-SA / GFDL)",
+      aux_source: "Definitions from Wiktionary via kaikki.org (CC BY-SA / GFDL)",
       in_review: false,
     });
-    // The aux answer is shown, labeled, and attributed (ShareAlike).
+    // The aux answer is shown, labeled, and carries the EXACT
+    // contract-pinned attribution string (ShareAlike; pinned in
+    // state/notes/READER-FLOW-001.md OFF-PACK SLICE addendum).
     expect(html).toContain("present, gift");
     expect(html).toContain("auxiliary dictionary");
-    expect(html).toContain("kaikki.org");
+    expect(html).toContain(
+      "Definitions from Wiktionary via kaikki.org (CC BY-SA / GFDL)",
+    );
     expect(html).toContain(">подарок<");
     // Mine stays offered; the card never claims pack membership.
     expect(html).toContain(">Mine</button>");

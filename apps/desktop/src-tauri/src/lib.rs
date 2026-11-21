@@ -7066,7 +7066,7 @@ struct AuxRow {
 
 /// The attribution every aux card carries (the same text the slice's
 /// provenance records; ShareAlike requires naming the source).
-const AUX_SOURCE: &str = "Wiktionary via kaikki.org (CC BY-SA / GFDL)";
+const AUX_SOURCE: &str = "Definitions from Wiktionary via kaikki.org (CC BY-SA / GFDL)";
 
 /// The language subtag the pack's manifest declares (`ja-JP` -> `ja`),
 /// reusing `pack_target_locale`'s manifest read. An unknown locale

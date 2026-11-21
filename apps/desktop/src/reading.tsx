@@ -385,8 +385,8 @@ export function ReadingPanel(p: ReadingPanelProps) {
             </p>
             <p className="meta">
               <LatinText locale="en">
-                not in your pack — offline auxiliary dictionary
-                {card.aux_source ? ` (${card.aux_source})` : ""}
+                not in your pack — offline auxiliary dictionary.
+                {card.aux_source ? card.aux_source : ""}
               </LatinText>
             </p>
             {card.aux_word && (
