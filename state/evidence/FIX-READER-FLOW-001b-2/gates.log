@@ -1,0 +1,23 @@
+== gate: unittest (lane suite) ==
+$ .venv/bin/python -m unittest discover -s scripts -p 'test_build_aux_lexicon.py'
+Ran 17 tests in 0.003s
+OK
+(negative-test stderr lines "FAIL: aux/lexicon/LICENSE-AUX missing" and
+"DRIFT: aux slice does not match provenance.slice_sha256" inside the run
+are the sandboxed do_check() negative assertions working as designed;
+ResourceWarnings are pre-existing open()-style noise in this suite.)
+unittest_exit=0
+
+== gate: --check on the committed slice (CI-wired, now license-aware) ==
+$ .venv/bin/python scripts/build-aux-lexicon.py --check
+check OK: /home/hunter/game-dev/LTS/aux/lexicon/ru.jsonl matches provenance (405825 rows)
+check_exit=0
+
+== gate: slice untouched (sha pin re-verified) ==
+$ sha256sum aux/lexicon/ru.jsonl
+44287c8ab7fa7e11e8ccf19af21bb0087fa6f94f2f1119e67c1361dd2cd6269a  (matches provenance.slice_sha256)
+
+== gate: validate_handoff ==
+$ python3 tools/validate_handoff.py --require-explicit-ledger-records
+HANDOFF VALIDATION PASSED (2160 data files checked)  (pre-existing optional WARNs only)
+validate_exit=0
