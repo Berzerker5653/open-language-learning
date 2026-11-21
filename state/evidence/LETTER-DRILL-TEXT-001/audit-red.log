@@ -1,0 +1,89 @@
+LEARNER COPY AUDIT v1.2.0: 33 source files scanned, 55 test files skipped, 1635 pack files scanned
+  apps/desktop/src/App.tsx:257  copy  runner  no-runner
+  apps/desktop/src/App.tsx:257  copy  runner  no low-stakes auto-runner exists for that skill yet
+  apps/desktop/src/App.tsx:259  copy  runner  no runner can ask about that construct yet
+  apps/desktop/src/home.tsx:533  copy  runner  — no practice runner for this yet
+  apps/desktop/src/lesson.tsx:154  copy  Served by  Served by the ${stage.runner} runner.
+  apps/desktop/src/lesson.tsx:155  copy  runner  Declared, but not runnable: no runner serves this stage yet.
+  apps/desktop/src/practice.tsx:309  copy  the answer is  Not quite — the answer is "${p.correctChoice}"
+  languages/ja-JP/orthography/hiragana.jsonl:46  pack-mnemonic  lowercase  ja.orth.hira.n: A lowercase n with a tail.
+  languages/ru-RU/orthography/cyrillic.jsonl:1  pack-reading  Letter name  ru.orth.cyrillic.a-upper: Letter name: а (a); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:2  pack-reading  Letter name  ru.orth.cyrillic.a-lower: Letter name: а (a); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:3  pack-reading  Letter name  ru.orth.cyrillic.o-upper: Letter name: о (o); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:4  pack-reading  Letter name  ru.orth.cyrillic.o-lower: Letter name: о (o); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:5  pack-reading  Letter name  ru.orth.cyrillic.m-upper: Letter name: эм (em); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:6  pack-reading  Letter name  ru.orth.cyrillic.m-lower: Letter name: эм (em); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:7  pack-reading  Letter name  ru.orth.cyrillic.t-upper: Letter name: тэ (te); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:8  pack-reading  Letter name  ru.orth.cyrillic.t-lower: Letter name: тэ (te); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:9  pack-reading  Letter name  ru.orth.cyrillic.k-upper: Letter name: ка (ka); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:10  pack-reading  Letter name  ru.orth.cyrillic.k-lower: Letter name: ка (ka); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:11  pack-reading  Letter name  ru.orth.cyrillic.e-upper: Letter name: е (ye); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:12  pack-reading  Letter name  ru.orth.cyrillic.e-lower: Letter name: е (ye); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:13  pack-reading  Letter name  ru.orth.cyrillic.n-upper: Letter name: эн (en); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:14  pack-reading  Letter name  ru.orth.cyrillic.n-lower: Letter name: эн (en); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:15  pack-reading  Letter name  ru.orth.cyrillic.s-upper: Letter name: эс (es); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:16  pack-reading  Letter name  ru.orth.cyrillic.s-lower: Letter name: эс (es); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:17  pack-reading  Letter name  ru.orth.cyrillic.r-upper: Letter name: эр (er); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:18  pack-reading  Letter name  ru.orth.cyrillic.r-lower: Letter name: эр (er); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:19  pack-reading  Letter name  ru.orth.cyrillic.v-upper: Letter name: вэ (ve); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:20  pack-reading  Letter name  ru.orth.cyrillic.v-lower: Letter name: вэ (ve); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:21  pack-reading  Letter name  ru.orth.cyrillic.u-upper: Letter name: у (u); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:22  pack-reading  Letter name  ru.orth.cyrillic.u-lower: Letter name: у (u); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:23  pack-reading  Letter name  ru.orth.cyrillic.kh-upper: Letter name: ха (kha); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:24  pack-reading  Letter name  ru.orth.cyrillic.kh-lower: Letter name: ха (kha); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:25  pack-reading  Letter name  ru.orth.cyrillic.b-upper: Letter name: бэ (be); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:26  pack-reading  Letter name  ru.orth.cyrillic.b-lower: Letter name: бэ (be); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:27  pack-reading  Letter name  ru.orth.cyrillic.p-upper: Letter name: пэ (pe); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:28  pack-reading  Letter name  ru.orth.cyrillic.p-lower: Letter name: пэ (pe); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:29  pack-reading  Letter name  ru.orth.cyrillic.d-upper: Letter name: дэ (de); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:30  pack-reading  Letter name  ru.orth.cyrillic.d-lower: Letter name: дэ (de); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:31  pack-reading  Letter name  ru.orth.cyrillic.g-upper: Letter name: гэ (ge); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:32  pack-reading  Letter name  ru.orth.cyrillic.g-lower: Letter name: гэ (ge); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:33  pack-reading  Letter name  ru.orth.cyrillic.l-upper: Letter name: эль (el); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:34  pack-reading  Letter name  ru.orth.cyrillic.l-lower: Letter name: эль (el); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:35  pack-reading  Letter name  ru.orth.cyrillic.z-upper: Letter name: зэ (ze); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:36  pack-reading  Letter name  ru.orth.cyrillic.z-lower: Letter name: зэ (ze); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:37  pack-reading  Letter name  ru.orth.cyrillic.zh-upper: Letter name: жэ (zhe); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:38  pack-reading  Letter name  ru.orth.cyrillic.zh-lower: Letter name: жэ (zhe); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:38  pack-mnemonic  lowercase  ru.orth.cyrillic.zh-lower: The same six-ended shape in lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:39  pack-reading  Letter name  ru.orth.cyrillic.i-upper: Letter name: и (i); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:40  pack-reading  Letter name  ru.orth.cyrillic.i-lower: Letter name: и (i); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:41  pack-reading  Letter name  ru.orth.cyrillic.y-upper: Letter name: ы (y); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:42  pack-reading  Letter name  ru.orth.cyrillic.y-lower: Letter name: ы (y); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:43  pack-reading  Letter name  ru.orth.cyrillic.short-i-upper: Letter name: и краткое (short i); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:44  pack-reading  Letter name  ru.orth.cyrillic.short-i-lower: Letter name: и краткое (short i); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:45  pack-reading  Letter name  ru.orth.cyrillic.yo-upper: Letter name: ё (yo); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:46  pack-reading  Letter name  ru.orth.cyrillic.yo-lower: Letter name: ё (yo); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:47  pack-reading  Letter name  ru.orth.cyrillic.yu-upper: Letter name: ю (yu); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:48  pack-reading  Letter name  ru.orth.cyrillic.yu-lower: Letter name: ю (yu); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:49  pack-reading  Letter name  ru.orth.cyrillic.ya-upper: Letter name: я (ya); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:50  pack-reading  Letter name  ru.orth.cyrillic.ya-lower: Letter name: я (ya); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:51  pack-reading  Letter name  ru.orth.cyrillic.eh-upper: Letter name: э (e); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:52  pack-reading  Letter name  ru.orth.cyrillic.eh-lower: Letter name: э (e); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:53  pack-reading  Letter name  ru.orth.cyrillic.f-upper: Letter name: эф (ef); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:54  pack-reading  Letter name  ru.orth.cyrillic.f-lower: Letter name: эф (ef); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:55  pack-reading  Letter name  ru.orth.cyrillic.ts-upper: Letter name: цэ (tse); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:56  pack-reading  Letter name  ru.orth.cyrillic.ts-lower: Letter name: цэ (tse); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:57  pack-reading  Letter name  ru.orth.cyrillic.ch-upper: Letter name: че (che); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:58  pack-reading  Letter name  ru.orth.cyrillic.ch-lower: Letter name: че (che); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:59  pack-reading  Letter name  ru.orth.cyrillic.sh-upper: Letter name: ша (sha); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:60  pack-reading  Letter name  ru.orth.cyrillic.sh-lower: Letter name: ша (sha); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:61  pack-reading  Letter name  ru.orth.cyrillic.shch-upper: Letter name: ща (shcha); uppercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:62  pack-reading  Letter name  ru.orth.cyrillic.shch-lower: Letter name: ща (shcha); lowercase.
+  languages/ru-RU/orthography/cyrillic.jsonl:63  pack-reading  Letter name  ru.orth.cyrillic.soft-sign-upper: Letter name: мягкий знак (soft sign); uppercase. No independent sound.
+  languages/ru-RU/orthography/cyrillic.jsonl:64  pack-reading  Letter name  ru.orth.cyrillic.soft-sign-lower: Letter name: мягкий знак (soft sign); lowercase. No independent sound.
+  languages/ru-RU/orthography/cyrillic.jsonl:65  pack-reading  Letter name  ru.orth.cyrillic.hard-sign-upper: Letter name: твёрдый знак (hard sign); uppercase. No independent sound.
+  languages/ru-RU/orthography/cyrillic.jsonl:66  pack-reading  Letter name  ru.orth.cyrillic.hard-sign-lower: Letter name: твёрдый знак (hard sign); lowercase. No independent sound.
+  languages/ru-RU/curriculum/units/002-self-introduction-01.yaml:4  pack-summary  unit 003  summary: "Read five subject pronouns as whole words. Learn the no-copula identity pattern;
+  languages/ru-RU/curriculum/units/006-everyday-01.yaml:4  pack-summary  unit 007  summary: "Read four familiar nouns and the identification word. Learn that это stays uncha
+  languages/ru-RU/curriculum/units/010-cyrillic-a-o-m-t.yaml:4  pack-summary  unit 000  summary: "Start here before unit 000. Recognize these printed case pairs, match each lette
+  languages/ru-RU/curriculum/units/011-cyrillic-k-e-n-s.yaml:4  pack-summary  case pair  summary: "Recognize these printed case pairs, match each letter to its partner and copy th
+  languages/ru-RU/curriculum/units/012-cyrillic-r-v-u-kh.yaml:4  pack-summary  case pair  summary: "Recognize these printed case pairs, match each letter to its partner and copy th
+  languages/ru-RU/curriculum/units/013-cyrillic-b-p-d-g.yaml:4  pack-summary  case pair  summary: "Recognize these printed case pairs, match each letter to its partner and copy th
+  languages/ru-RU/curriculum/units/014-cyrillic-l-z-zh-i.yaml:4  pack-summary  case pair  summary: "Recognize these printed case pairs, match each letter to its partner and copy th
+  languages/ru-RU/curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml:4  pack-summary  case pair  summary: "Recognize these printed case pairs, match each letter to its partner and copy th
+  languages/ru-RU/curriculum/units/016-cyrillic-ya-eh-f.yaml:4  pack-summary  case pair  summary: "Recognize these printed case pairs, match each letter to its partner and copy th
+  languages/ru-RU/curriculum/units/017-cyrillic-ts-ch-sh.yaml:4  pack-summary  case pair  summary: "Recognize these printed case pairs, match each letter to its partner and copy th
+  languages/ru-RU/curriculum/units/018-cyrillic-shch-soft-hard.yaml:4  pack-summary  case pair  summary: "Recognize these printed case pairs, match each letter to its partner and copy th
+  languages/ru-RU/curriculum/units/024-personal-details-05.yaml:5  pack-summary  unit 025  people; the number-year agreement practice follows in unit 025.
+findings: 87

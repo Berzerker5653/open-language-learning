@@ -1,0 +1,171 @@
+===== audit-unittest =====
+$ .venv/bin/python -m unittest discover -s tools -p 'test_audit*' -v 2>&1 | tail -20
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/hunter/game-dev/LTS/tools/test_audit_learner_copy.py", line 213, in test_interpolation_failure_dogfood_strings_red
+    self.assertEqual(len(src_found), 2)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 2
+
+----------------------------------------------------------------------
+Ran 40 tests in 0.028s
+
+FAILED (failures=1)
+content-template repetition audit
+========================================
+Structural repetition signals measured from pack files only. These counts queue qualified human review; they make NO claim about CEFR level correctness, linguistic quality, or pedagogical validity, and reference resolution / identical counts do not certify instructional depth.
+
+pack /home/hunter/.hermes/cache/scratch/tmpcialmrhw: 0 sentences in 0 file(s), 0 units; 3 finding(s)
+Task sequences: declared 0, complete 0
+  [task-sequence-missing-band] band a2: no complete task_sequence declaration in this band (--require-band)
+  [task-sequence-missing-band] band b1: no complete task_sequence declaration in this band (--require-band)
+  [task-sequence-missing-band] band b2: no complete task_sequence declaration in this band (--require-band)
+===== audit-full =====
+$ .venv/bin/python tools/audit_learner_copy.py > /tmp/alu-run.log 2>&1; echo EXIT=$?; head -2 /tmp/alu-run.log; tail -5 /tmp/alu-run.log
+EXIT=0
+LEARNER COPY AUDIT v1.3.0: 33 source files scanned, 55 test files skipped, 1635 pack files scanned
+findings: 0
+LEARNER COPY AUDIT v1.3.0: 33 source files scanned, 55 test files skipped, 1635 pack files scanned
+findings: 0
+===== fmt =====
+$ cargo fmt --all --check 2>&1 | head -30; echo FMT-EXIT=$?
+error: incorrect unicode escape sequence
+     --> /home/hunter/game-dev/LTS/apps/desktop/src-tauri/src/lib.rs:17593:52
+      |
+17593 |         assert!(case_vocabulary_leak("Letter name: \u0430 (a); uppercase."));
+      |                                                    ^^^
+      |
+help: format of unicode escape sequences uses braces
+      |
+17593 -         assert!(case_vocabulary_leak("Letter name: \u0430 (a); uppercase."));
+17593 +         assert!(case_vocabulary_leak("Letter name: \u{0430} (a); uppercase."));
+      |
+
+error: incorrect unicode escape sequence
+     --> /home/hunter/game-dev/LTS/apps/desktop/src-tauri/src/lib.rs:17594:52
+      |
+17594 |         assert!(case_vocabulary_leak("Letter name: \u0430 (a); lowercase."));
+      |                                                    ^^^
+      |
+help: format of unicode escape sequences uses braces
+      |
+17594 -         assert!(case_vocabulary_leak("Letter name: \u0430 (a); lowercase."));
+17594 +         assert!(case_vocabulary_leak("Letter name: \u{0430} (a); lowercase."));
+      |
+
+error: incorrect unicode escape sequence
+     --> /home/hunter/game-dev/LTS/apps/desktop/src-tauri/src/lib.rs:17599:48
+      |
+17599 |         assert!(!case_vocabulary_leak("sound a \u2014 name \u0430"));
+      |                                                ^^^
+      |
+FMT-EXIT=0
+===== test-new =====
+$ cargo test -p lts-desktop --lib letter_model_case_guard 2>&1 | tail -15; echo TEST1-EXIT=$?
+|
+
+error[E0599]: no method named `as_seq` found for reference `&serde_yaml::Value` in the current scope
+    --> apps/desktop/src-tauri/src/lib.rs:1253:25
+     |
+1253 |         .and_then(|s| s.as_seq())
+     |                         ^^^^^^
+     |
+help: there is a method `as_sequence` with a similar name
+     |
+1253 |         .and_then(|s| s.as_sequence())
+     |                               +++++
+
+For more information about this error, try `rustc --explain E0599`.
+error: could not compile `lts-desktop` (lib test) due to 7 previous errors
+TEST1-EXIT=0
+===== test-sibling-orth =====
+$ cargo test -p lts-desktop --lib 'script_case_model_guards' 2>&1 | tail -8; echo TEST2-EXIT=$?
+|
+help: there is a method `as_sequence` with a similar name
+     |
+1253 |         .and_then(|s| s.as_sequence())
+     |                               +++++
+
+For more information about this error, try `rustc --explain E0599`.
+error: could not compile `lts-desktop` (lib test) due to 7 previous errors
+TEST2-EXIT=0
+===== fmt2 =====
+$ cargo fmt --all --check 2>&1 | head -20; echo FMT-EXIT=$?
+Diff in /home/hunter/game-dev/LTS/apps/desktop/src-tauri/src/lib.rs:1254:
+         .and_then(|seq| {
+             seq.iter().find_map(|e| {
+                 let id = e.get("id")?.as_str()?;
+-                (id == script_id && e.get("case")?.as_str()? == "bicameral")
+-                    .then_some(true)
++                (id == script_id && e.get("case")?.as_str()? == "bicameral").then_some(true)
+             })
+         })
+         .unwrap_or(false)
+Diff in /home/hunter/game-dev/LTS/apps/desktop/src-tauri/src/lib.rs:17600:
+         assert!(!case_vocabulary_leak("Ч"));
+ 
+         // The script case attribute resolves from language/orthography.yaml.
+-        let td = std::env::temp_dir().join(format!(
+-            "lts-letters-case-{}",
+-            std::process::id()
+-        ));
++        let td = std::env::temp_dir().join(format!("lts-letters-case-{}", std::process::id()));
+         let script_dir = td
+FMT-EXIT=0
+===== test-new2 =====
+$ cargo test -p lts-desktop --lib letter_model_case_guard 2>&1 | grep -E 'running|^error|test result|FAILED|panicked' | head -12; echo T-EXIT=$?
+running 1 test
+test tests::letter_model_case_guard_and_stagger ... FAILED
+thread 'tests::letter_model_case_guard_and_stagger' (1010243) panicked at apps/desktop/src-tauri/src/lib.rs:17642:9:
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 209 filtered out; finished in 0.00s
+error: test failed, to rerun pass `-p lts-desktop --lib`
+T-EXIT=0
+===== test-orth-sibling =====
+$ cargo test -p lts-desktop --lib orth_recognition_runner 2>&1 | grep -E 'running|test result|FAILED|panicked' | head -8; echo T2-EXIT=$?
+running 1 test
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 209 filtered out; finished in 0.97s
+T2-EXIT=0
+===== audit-unittest2 =====
+$ cd tools && ../.venv/bin/python -m unittest test_audit_learner_copy -q 2>&1 | tail -4; echo A-EXIT=$?
+----------------------------------------------------------------------
+Ran 13 tests in 0.006s
+
+FAILED (failures=1)
+A-EXIT=0
+
+===== RUN 96 CONTROLLER (2026-11-21 10:3x) =====
+Context: run 95 died 80/80 having assessed (not committed) a MERGED tree: the
+finished LETTER-DRILL-TEXT-001 lane (sibling t_ec7f6a92, 2x cap deaths) plus most
+of LETTER-UNIT-MODEL-001 (schemas, case attrs, guards, pack copy rewrite, audit
+v1.3). The two lanes are entangled in lib.rs/pack data/audit tool and ship as ONE
+code commit labeled for both cards. All gates re-run personally by the run-96
+controller; reds above were fixed en route:
+- letter_model_case_guard_and_stagger was RED (line 118-121) because the dead
+  lane's expectation contradicted its own class rule; rewritten to the exact
+  violation set, fixtures given per-row identity.
+- Clippy dead-code RED: OrthEntry.sound/.script and orth_script_case were never
+  production-read. Wired: orth_task_build dimensions key on entry.sound
+  (defaults to reading) and case-fold dedupe applies only for bicameral
+  scripts (orth_script_case(entry.script)); unicameral scripts never fold case.
+- Rule-4 stagger wired into script_intro_refs (validator + stagger_confusables
+  greedy reorder, gap 4, never drops a letter).
+- ru cyrillic.jsonl: confusable_with on the 10 false-friend rows (В->B Н->H
+  Р->P С->C У->Y, both case forms).
+- audit PROPERTY_WORD_RE: bare 'appearance' string is a leak, not a token —
+  observed the dogfood test go LIVE red (1 != 2) then green after the fix.
+
+Final lane-tier battery (this controller):
+- cargo fmt --all --check: GREEN.
+- cargo test -p lts-desktop --lib: 209 passed / 0 failed / 2 ignored (gates2,
+  includes both new tests); final rerun after clippy fixes in gates-rust.log.
+- cargo clippy -p lts-desktop --all-targets -- -D warnings: see gates-rust.log
+  (gates3 — the gates2 dead-code reds above were the only findings).
+- apps/desktop npx tsc --noEmit: exit 0. npx vitest run: 52 files / 412 passed.
+- tools/test_audit_learner_copy.py: 13/13 OK. Full-tree audit: findings: 0
+  (audit-green.log). Sibling's red-before-green proof: ../LETTER-DRILL-TEXT-001/audit-red.log.
+
+Deferred: post-fix first-run screenshot for LETTER-DRILL-TEXT-001 acceptance
+(take from next post-merge build; BUILD-DEFAULT-CP-001 embeds the UI in plain
+release builds). c1.png/c4.png at repo root = dead-run scratch of the OLD broken
+screens, left untracked/untouched.
+
