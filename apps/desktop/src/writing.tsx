@@ -6,6 +6,8 @@
 import { usePackTextAttrs } from "@openlang/ui";
 import { StressText } from "./stress";
 import { useKanaIME } from "./kana-ime";
+import type { FormErrorOfferView } from "./error-review";
+import { ErrorOfferList } from "./error-review";
 
 export interface WritingTaskView {
   item_id: string;
@@ -37,6 +39,15 @@ export interface WritingPracticeProps {
   /// vocabulary; a Russian learner's romanized hint is a transliteration.
   /// The noun in the hint button label follows the pack's language.
   romanizationNoun?: string;
+  /// FIX-ERR-SRS-LOOP-001-2 (D3): the per-form review OFFER a graded miss
+  /// carries (WritingGrade.offer, additive wire field). Rendered only
+  /// with an accept handler — the App container owns the
+  /// `error_review_accept` call, and nothing schedules by itself.
+  offer?: FormErrorOfferView | null;
+  /// Ledger id of the offer the learner already accepted — the offer then
+  /// shows its confirmation, never a second button.
+  offerAccepted?: boolean;
+  onAcceptOffer?(offer: FormErrorOfferView): void;
 }
 
 export function WritingPractice(p: WritingPracticeProps) {
@@ -109,6 +120,13 @@ export function WritingPractice(p: WritingPracticeProps) {
         <p className="meta" data-testid="writing-expected" {...packAttrs}>
           The form this task asked for: <strong>{p.expected}</strong>
         </p>
+      ) : null}
+      {p.offer && p.onAcceptOffer ? (
+        <ErrorOfferList
+          offers={[p.offer]}
+          acceptedIds={p.offerAccepted ? [p.offer.ledger_id] : []}
+          onAccept={(o) => p.onAcceptOffer?.(o)}
+        />
       ) : null}
     </section>
   );

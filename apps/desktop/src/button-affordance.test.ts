@@ -65,6 +65,7 @@ describe("button affordance contract", () => {
     expect(files).toEqual(
       [
         "App.tsx",
+        "error-review.tsx", // FIX-ERR-SRS-LOOP-001-2: offer/grade buttons follow the reviewed idiom
         "hub.tsx",
         "lesson.tsx",
         "onboarding.tsx",

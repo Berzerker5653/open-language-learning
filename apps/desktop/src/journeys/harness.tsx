@@ -1023,6 +1023,18 @@ type Scenario = {
    * once after: for journeys that race a write against a language
    * switch to pin generation-guard behavior. */
   delayOnce?: string[];
+  /** FIX-ERR-SRS-LOOP-001-2: when set, the writing_submit fake attaches
+   * this per-form review OFFER to a graded miss (mirrors
+   * WritingGrade.offer). A review card then exists ONLY once the app
+   * calls `error_review_accept` with the offer's ledger id — the
+   * never-silent rule mirrored from lib.rs. */
+  errorOffer?: {
+    expected: string;
+    produced: string;
+    lemma: string;
+    error_class: string;
+    context_sentence_id: string;
+  };
 };
 
 export class LearnerEngine {
@@ -1067,6 +1079,34 @@ export class LearnerEngine {
   }[] = [];
   private nextCallback = 1;
   private nextListener = 1;
+  /** FIX-ERR-SRS-LOOP-001-2: the error review loop, mirroring lib.rs.
+   * Offers ride verdicts and schedule nothing; `error_review_accept` is
+   * the ONLY way a card row appears, the queue answers due cards, and
+   * grading advances the due stamp inside the journey's reach. */
+  private errorOffers = new Map<
+    string,
+    {
+      expected: string;
+      produced: string;
+      lemma: string;
+      error_class: string;
+      context_sentence_id: string;
+    }
+  >();
+  private errorCards = new Map<
+    string,
+    {
+      card_id: string;
+      ledger_id: string;
+      surface: string;
+      lemma: string;
+      error_class: string;
+      context_sentence_id: string;
+      context_text: string | null;
+      due_at: string;
+    }[]
+  >();
+  private scenarioErrorOffer: Scenario["errorOffer"];
   private readonly failOnceList: string[] = [];
   private readonly failedOnce = new Set<string>();
   private readonly delayOnceList: string[] = [];
@@ -1097,6 +1137,12 @@ export class LearnerEngine {
   constructor(scenario: Scenario = {}) {
     this.failOnceList = scenario.failOnce ?? [];
     this.delayOnceList = scenario.delayOnce ?? [];
+    this.scenarioErrorOffer = scenario.errorOffer;
+    if (scenario.errorOffer) {
+      // The ledger row the verdict's offer points at — the fake's own id,
+      // like the engine's per-record mint.
+      this.errorOffers.set("err-fake-1", { ...scenario.errorOffer });
+    }
     for (const c of scenario.confirmations ?? []) {
       this.confirmRows.push({
         profile_id: c.profileId,
@@ -1682,6 +1728,51 @@ export class LearnerEngine {
         );
         return true;
       }
+      case "error_review_accept": {
+        const p = this.profile(args.profileId);
+        const ledgerId = String(args.ledgerId);
+        const offer = this.errorOffers.get(ledgerId);
+        // lib.rs `error_review_accept_at`: an offer with no ledger row is
+        // refused, and this is the ONLY path that creates a card.
+        if (!offer) throw new Error("unknown error offer");
+        const cards = this.errorCards.get(p.id) ?? [];
+        const existing = cards.find((c) => c.ledger_id === ledgerId);
+        if (existing) return { ...existing }; // repeat accept keeps the original
+        const card = {
+          card_id: `errcard-${ledgerId}`,
+          ledger_id: ledgerId,
+          // lib.rs stores the expected form as the card's drilled surface.
+          surface: offer.expected,
+          lemma: offer.lemma,
+          error_class: offer.error_class,
+          context_sentence_id: offer.context_sentence_id,
+          // lib.rs resolves the context id through the pack, and a
+          // sentence-origin context contains the drilled form; the panel
+          // blanks it before reveal, so mirror that shape here.
+          context_text: `${offer.expected} — контекст ${offer.context_sentence_id}`,
+          // The accept's initial Good grade schedules ahead; inside the
+          // journey's reach the fake answers due in 150 ms, mirroring the
+          // mine fake's measured liberty.
+          due_at: new Date(Date.now() + 150).toISOString(),
+        };
+        this.errorCards.set(p.id, [...cards, card]);
+        return { ...card };
+      }
+      case "error_review_queue": {
+        const p = this.profile(args.profileId);
+        const now = new Date().toISOString();
+        return (this.errorCards.get(p.id) ?? [])
+          .filter((c) => c.due_at <= now)
+          .map((c) => ({ ...c }));
+      }
+      case "error_review_grade": {
+        const p = this.profile(args.profileId);
+        const cards = this.errorCards.get(p.id) ?? [];
+        const card = cards.find((c) => c.card_id === String(args.cardId));
+        if (!card) throw new Error("not an error review card");
+        card.due_at = new Date(Date.now() + (args.again ? 60 : 150)).toISOString();
+        return card.due_at;
+      }
       case "kanji_available":
         return this.activePack(this.profile(args.profileId)).kanji;
       case "kanji_list":
@@ -1961,6 +2052,17 @@ export class LearnerEngine {
         p.events += 1;
         // crates/activity/src/writing.rs WritingGrade: the expected form
         // travels with the verdict, never with the task.
+        // FIX-ERR-SRS-LOOP-001-2: a seeded offer rides a MISS only (the
+        // real engine offers on classified misses, never on correct
+        // answers), and riding costs nothing — scheduling needs accept.
+        if (!correct && this.scenarioErrorOffer) {
+          return {
+            correct,
+            matched_variant: false,
+            expected,
+            offer: { ledger_id: "err-fake-1", ...this.scenarioErrorOffer },
+          };
+        }
         return { correct, matched_variant: false, expected };
       }
       case "dictation_target": {

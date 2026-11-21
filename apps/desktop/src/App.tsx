@@ -45,6 +45,11 @@ import {
   type InstallReceipt,
 } from "./language";
 import { WritingPractice, type WritingTaskView } from "./writing";
+import {
+  ErrorReviewPanel,
+  type ErrorReviewCardView,
+  type FormErrorOfferView,
+} from "./error-review";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
 import { LessonEncounter, drillStageId, stagePositionLabel, type LessonPlan } from "./lesson";
 import { describeKanjiDecomposition } from "./kanji-decomposition";
@@ -420,6 +425,12 @@ export function App() {
   const [writingGraded, setWritingGraded] = useState(false);
   const [writingCorrect, setWritingCorrect] = useState(false);
   const [writingExpected, setWritingExpected] = useState("");
+  // FIX-ERR-SRS-LOOP-001-2 (D3): the per-form review OFFER the writing
+  // verdict carried, and the ledger ids the learner has accepted in this
+  // view. A card exists ONLY behind an explicit `error_review_accept`
+  // click — these states track that act, they never cause it.
+  const [writingOffer, setWritingOffer] = useState<FormErrorOfferView | null>(null);
+  const [acceptedOffers, setAcceptedOffers] = useState<string[]>([]);
   const [writingUsedHint, setWritingUsedHint] = useState(false);
   const [writingError, setWritingError] = useState<string | null>(null);
   const [practiceTarget, setPracticeTarget] = useState<{
@@ -607,6 +618,16 @@ export function App() {
   const [mineError, setMineError] = useState<string | null>(null);
   const [mineNotice, setMineNotice] = useState<string | null>(null);
   const [mineReview, setMineReview] = useState<{ item: MineItem; revealed: boolean } | null>(null);
+  // FIX-ERR-SRS-LOOP-001-2 (D3): the review-queue drill view over ACCEPTED
+  // error-review cards. Nothing lands here except through an explicit
+  // accept click on a dictation/writing offer (never silent).
+  const [errCards, setErrCards] = useState<ErrorReviewCardView[]>([]);
+  const [errReview, setErrReview] = useState<{
+    card: ErrorReviewCardView;
+    revealed: boolean;
+  } | null>(null);
+  const [errError, setErrError] = useState<string | null>(null);
+  const [errNotice, setErrNotice] = useState<string | null>(null);
   // SESSION-CHROME-001 (U6): the scheduler's predicted next interval for
   // the two grade buttons, read from the item's existing state. Null = no
   // preview fetched (or the fetch failed), and the buttons show no number.
@@ -2110,6 +2131,7 @@ export function App() {
     setWritingDraft("");
     setWritingGraded(false);
     setWritingExpected("");
+    setWritingOffer(null);
     setWritingScaffold({});
     setWritingUsedHint(false);
     setWritingHintKind(null);
@@ -2166,9 +2188,13 @@ export function App() {
           usedHint: writingUsedHint,
           hintKind: writingHintKind,
           sessionId: planSessionRef.current,
-        })) as { correct: boolean; expected?: string };
+        })) as { correct: boolean; expected?: string; offer?: FormErrorOfferView };
         setWritingCorrect(grade.correct);
         setWritingExpected(grade.correct ? "" : (grade.expected ?? ""));
+        // FIX-ERR-SRS-LOOP-001-2 (D3): the offer rides the verdict but
+        // schedules nothing — it renders as an explicit choice the learner
+        // can take or leave.
+        setWritingOffer(grade.correct ? null : (grade.offer ?? null));
         setWritingGraded(true);
       } catch (e) {
         setWritingError(String(e));
@@ -2909,7 +2935,11 @@ export function App() {
   async function openWords() {
     setRoute("words");
     setMineReview(null);
+    setErrReview(null);
+    setErrError(null);
+    setErrNotice(null);
     await refreshMine();
+    await refreshErrorReviews();
   }
 
   async function addMine(sourceCitation?: string) {
@@ -3028,6 +3058,56 @@ export function App() {
       await refreshMine();
     } catch (e) {
       setMineError(String(e));
+    }
+  }
+
+  // FIX-ERR-SRS-LOOP-001-2 (D3): the ONLY front-end call sites of the
+  // error-review commands. Accept is a deliberate click on an offer —
+  // rendering offers never triggers these; the engine creates the card
+  // inside `error_review_accept`, so an unaccepted offer schedules
+  // nothing (the never-silent invariant, pinned in error-review.test).
+  async function acceptErrorOffer(offer: FormErrorOfferView, fail: (msg: string) => void) {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      await inv("error_review_accept", { profileId, ledgerId: offer.ledger_id });
+      setAcceptedOffers((prev) =>
+        prev.includes(offer.ledger_id) ? prev : [...prev, offer.ledger_id],
+      );
+    } catch (e) {
+      fail(String(e));
+    }
+  }
+
+  async function refreshErrorReviews() {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      setErrCards((await inv("error_review_queue", { profileId })) as ErrorReviewCardView[]);
+    } catch (e) {
+      setErrError(String(e));
+    }
+  }
+
+  function startErrorReview() {
+    const [first] = errCards;
+    if (!first) {
+      setErrNotice("Nothing is due for review right now.");
+      return;
+    }
+    setErrNotice(null);
+    setErrReview({ card: first, revealed: false });
+  }
+
+  async function gradeErrorReview(again: boolean) {
+    const inv = detectInvoke();
+    if (!inv || !profileId || !errReview) return;
+    try {
+      await inv("error_review_grade", { profileId, cardId: errReview.card.card_id, again });
+      setErrReview(null);
+      await refreshErrorReviews();
+    } catch (e) {
+      setErrError(String(e));
     }
   }
 
@@ -3889,6 +3969,8 @@ export function App() {
             onStop={stopAndCheck}
             onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl, true)}
             kanaInput={inAppInputOn}
+            acceptedOffers={acceptedOffers}
+            onAcceptOffer={(o) => void acceptErrorOffer(o, setAudioMsg)}
           />
         </>
       ) : route === "shadowing" ? (
@@ -3936,37 +4018,48 @@ export function App() {
           onUnconfirm={(id) => void toggleContentConfirm(id)}
         />
       ) : route === "words" ? (
-        <MyWordsPanel
-          items={mineItems}
-          review={mineReview}
-          intervalPreview={minePreview}
-          error={mineError}
-          notice={mineNotice}
-          onPlayContext={(sentenceId) => void playMineContext(sentenceId)}
-          draft={{
-            surface: mineSurface,
-            reading: mineReading,
-            gloss: mineGloss,
-            source: mineSource,
-          }}
-          kanaInput={inAppInputOn}
-          onDraftChange={(field, value) =>
-            field === "surface"
-              ? setMineSurface(value)
-              : field === "reading"
-                ? setMineReading(value)
-                : field === "gloss"
-                  ? setMineGloss(value)
-                  : setMineSource(value)
-          }
-          onAdd={() => void addMine()}
-          onRemove={(id) => void removeMine(id)}
-          onGrade={(again) => void gradeMine(again)}
-          onStartReview={startMineReview}
-          onReviewNow={(id) => reviewMineNow(id)}
-          onStartNewReview={() => void startNewMineReview()}
-          onReveal={() => setMineReview((r) => (r ? { ...r, revealed: true } : r))}
-        />
+        <>
+          <MyWordsPanel
+            items={mineItems}
+            review={mineReview}
+            intervalPreview={minePreview}
+            error={mineError}
+            notice={mineNotice}
+            onPlayContext={(sentenceId) => void playMineContext(sentenceId)}
+            draft={{
+              surface: mineSurface,
+              reading: mineReading,
+              gloss: mineGloss,
+              source: mineSource,
+            }}
+            kanaInput={inAppInputOn}
+            onDraftChange={(field, value) =>
+              field === "surface"
+                ? setMineSurface(value)
+                : field === "reading"
+                  ? setMineReading(value)
+                  : field === "gloss"
+                    ? setMineGloss(value)
+                    : setMineSource(value)
+            }
+            onAdd={() => void addMine()}
+            onRemove={(id) => void removeMine(id)}
+            onGrade={(again) => void gradeMine(again)}
+            onStartReview={startMineReview}
+            onReviewNow={(id) => reviewMineNow(id)}
+            onStartNewReview={() => void startNewMineReview()}
+            onReveal={() => setMineReview((r) => (r ? { ...r, revealed: true } : r))}
+          />
+          <ErrorReviewPanel
+            cards={errCards}
+            review={errReview}
+            error={errError}
+            notice={errNotice}
+            onStartReview={startErrorReview}
+            onReveal={() => setErrReview((r) => (r ? { ...r, revealed: true } : r))}
+            onGrade={(again) => void gradeErrorReview(again)}
+          />
+        </>
       ) : route === "placement" ? (
         <section aria-label="Placement">
           <h1>Placement</h1>
@@ -4127,6 +4220,9 @@ export function App() {
               }
               onHint={showWritingHint}
               kanaInput={inAppInputOn}
+              offer={writingOffer}
+              offerAccepted={writingOffer ? acceptedOffers.includes(writingOffer.ledger_id) : false}
+              onAcceptOffer={(o) => void acceptErrorOffer(o, setWritingError)}
             />
           ) : writingError ? (
             // A failed read is an error, never the empty-state story: the

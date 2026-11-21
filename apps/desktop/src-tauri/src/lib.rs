@@ -8040,8 +8040,8 @@ fn mine_grade_at(
 /// ERR-SRS-LOOP-001: one accepted per-form review card as the drill
 /// needs it — the exact form plus the context sentence it was seen in,
 /// so the drill replays the form IN that sentence. `context_text` is
-/// `None` when no pack row matches (a lexicon-context card, or the pack
-/// changed under the card); the form itself is then still drilled.
+/// `None` when no pack row matches (the pack changed under the card);
+/// the form itself is then still drilled.
 #[derive(serde::Serialize)]
 struct ErrorReviewCardView {
     card_id: String,
@@ -8241,9 +8241,11 @@ fn error_review_grade_at(
 }
 
 /// The pack's sentence text for a content id, for the drill payload. A
-/// lexicon-context id (writing miss) resolves through the lexicon the
-/// same way the writing task was built; unknown ids give `None`, never
-/// a guess.
+/// lexicon-context id (writing miss) resolves through the pack's lexicon
+/// rows to that row's primary form text: a lexicon row carries no linked
+/// sentence, so for those ids the honest context is the word itself, and
+/// the drill replays the exact form next to it. Unknown ids give `None`,
+/// never a guess.
 fn pack_sentence_text(data: &Path, pack_id: &str, content_id: &str) -> Option<String> {
     if !packs::valid_pack_id(pack_id) {
         return None;
@@ -8256,6 +8258,31 @@ fn pack_sentence_text(data: &Path, pack_id: &str, content_id: &str) -> Option<St
             };
             if entry.get("id").and_then(|v| v.as_str()) == Some(content_id) {
                 return entry.get("text").and_then(|v| v.as_str()).map(String::from);
+            }
+        }
+    }
+    // FIX-ERR-SRS-LOOP-001-2 (D4): writing misses carry the writing item
+    // id (a lexicon id) as context; resolve it against the pack's own
+    // lexicon rows instead of leaving the drill payload bare.
+    if let Ok(texts) = jsonl_dir_texts(data, pack_id, &version, "lexicon") {
+        for line in texts.iter().flat_map(|t| t.lines()) {
+            let Ok(entry) = serde_json::from_str::<serde_json::Value>(line) else {
+                continue;
+            };
+            if entry.get("id").and_then(|v| v.as_str()) != Some(content_id) {
+                continue;
+            }
+            let Some(forms) = entry.get("forms").and_then(|v| v.as_array()) else {
+                continue;
+            };
+            let pick = forms
+                .iter()
+                .find(|f| f.get("is_primary").and_then(|v| v.as_bool()) == Some(true))
+                .or_else(|| forms.first())
+                .and_then(|f| f.get("text"))
+                .and_then(|v| v.as_str());
+            if let Some(text) = pick {
+                return Some(text.to_string());
             }
         }
     }
@@ -11694,6 +11721,50 @@ activities:
             cross_order,
             vec!["dY", "rX"],
             "recurrence never outvotes the confidence ordering"
+        );
+    }
+
+    /// FIX-ERR-SRS-LOOP-001-2 (D4): a writing miss's context id is a
+    /// lexicon row id; `pack_sentence_text` must resolve it against the
+    /// pack's lexicon rows (primary form text) instead of returning
+    /// `None`, and sentence ids keep resolving as before.
+    #[test]
+    fn pack_sentence_text_resolves_lexicon_context_ids() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let pack_dir = data.join("packs").join("org.openlanguage.ru-demo");
+        let root = pack_dir.join("0.1.0");
+        std::fs::create_dir_all(root.join("sentences")).unwrap();
+        std::fs::create_dir_all(root.join("lexicon")).unwrap();
+        std::fs::write(pack_dir.join("current"), "0.1.0\n").unwrap();
+        std::fs::write(
+            root.join("sentences/s.jsonl"),
+            "{\"id\":\"ru.sentence.p1\",\"text\":\"Я читаю книгу.\"}\n",
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("lexicon/l.jsonl"),
+            "{\"id\":\"ru.lex.other.dlya\",\"forms\":[{\"text\":\"для\",\"is_primary\":true}]}\n{\"id\":\"ru.lex.food.hleb\",\"forms\":[{\"text\":\"хлеба\"},{\"text\":\"хлеб\",\"is_primary\":true}]}\n",
+        )
+        .unwrap();
+        // Sentence ids resolve to the sentence text, unchanged behaviour.
+        assert_eq!(
+            pack_sentence_text(data, "org.openlanguage.ru-demo", "ru.sentence.p1").as_deref(),
+            Some("Я читаю книгу.")
+        );
+        // Lexicon ids resolve to the row's primary form, not the first form.
+        assert_eq!(
+            pack_sentence_text(data, "org.openlanguage.ru-demo", "ru.lex.food.hleb").as_deref(),
+            Some("хлеб")
+        );
+        assert_eq!(
+            pack_sentence_text(data, "org.openlanguage.ru-demo", "ru.lex.other.dlya").as_deref(),
+            Some("для")
+        );
+        // Unknown ids stay None — never a guess.
+        assert_eq!(
+            pack_sentence_text(data, "org.openlanguage.ru-demo", "ru.lex.nope.nada"),
+            None
         );
     }
 

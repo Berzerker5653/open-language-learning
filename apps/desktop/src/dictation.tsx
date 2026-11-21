@@ -8,12 +8,19 @@
 
 import { LatinText, usePackTextAttrs } from "@openlang/ui";
 import { useKanaIME } from "./kana-ime";
+import type { FormErrorOfferView } from "./error-review";
+import { ErrorOfferList } from "./error-review";
 export interface DictationResult {
   matched: boolean | null;
   heard: string;
   target: string;
   abstain_reason: string | null;
   mode: "guided" | "automatic";
+  /// ERR-SRS-LOOP-001 / FIX-ERR-SRS-LOOP-001-2 (D3): on a clear mismatch
+  /// the verdict carries explicit per-form review OFFERS (additive wire
+  /// field — older results simply have none). Nothing here is scheduled;
+  /// a review card exists only after the learner accepts an offer.
+  error_offers?: FormErrorOfferView[];
 }
 
 export interface DictationSentence {
@@ -40,6 +47,14 @@ export interface DictationProps {
   onPlayAttempt: () => void;
   /// Issue #2 phase 1: in-app kana keyboard for the typed override field.
   kanaInput?: boolean;
+  /// Ledger ids of offers already accepted in this view — the accept is a
+  /// one-way door per offer, so accepted ones show a confirmation instead
+  /// of a second button.
+  acceptedOffers?: string[];
+  /// FIX-ERR-SRS-LOOP-001-2 (D3): the App container owns the
+  /// `error_review_accept` call. A caller without this wiring renders no
+  /// offer cards at all, never dead buttons.
+  onAcceptOffer?(offer: FormErrorOfferView): void;
 }
 
 const REASON_TEXT: Record<string, string> = {
@@ -148,6 +163,13 @@ export function DictationPractice(props: DictationProps) {
               {reasonLabel(result.abstain_reason ?? "")}
             </p>
           )}
+          {result.matched === false && props.onAcceptOffer ? (
+            <ErrorOfferList
+              offers={result.error_offers ?? []}
+              acceptedIds={props.acceptedOffers}
+              onAccept={(o) => props.onAcceptOffer?.(o)}
+            />
+          ) : null}
           <p>
             <small data-testid="dict-mode">
               Guided feedback only: this is a recognition check, not a pronunciation grade. Your
