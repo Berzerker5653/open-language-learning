@@ -24,6 +24,11 @@ crate-type = ["staticlib", "cdylib", "rlib"]
 # preview/smoke fallbacks now do.
 default = ["custom-protocol"]
 custom-protocol = ["tauri/custom-protocol"]
+# WEB-SERVE-001: HTTP serve mode (the `lts-serve` binary). Opt-in so the
+# desktop shell build never carries the HTTP stack; the serve mode reuses
+# the SAME command wiring (wire_commands), driven through Tauri's own IPC
+# layer on a mock runtime — no command logic is duplicated.
+serve = ["dep:axum", "dep:tokio", "tauri/test"]
 
 [build-dependencies]
 tauri-build = { version = "2.7.1", features = [] }
@@ -49,6 +54,15 @@ ureq = "2.10"
 url = "2.5"
 zip.workspace = true
 tauri-plugin-single-instance = "2.4.5"
+# WEB-SERVE-001 (feature-gated `serve`): the HTTP bridge stack, never
+# compiled into the desktop shell.
+axum = { version = "0.8", optional = true }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net"], optional = true }
+
+[[bin]]
+name = "lts-serve"
+path = "src/bin/lts-serve.rs"
+required-features = ["serve"]
 
 [target.'cfg(unix)'.dependencies]
 # Free-space preflight for pack installs (statvfs). Windows keeps compiling
@@ -57,3 +71,5 @@ libc = "0.2"
 
 [dev-dependencies]
 tempfile.workspace = true
+# WEB-SERVE-001: drive the serve router in-process (oneshot) in tests.
+tower = { version = "0.5", features = ["util"] }

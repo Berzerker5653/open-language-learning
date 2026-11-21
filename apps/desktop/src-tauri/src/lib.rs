@@ -12,6 +12,12 @@ mod packcache;
 mod packs;
 mod progress;
 mod scenarios;
+
+/// WEB-SERVE-001: HTTP serve mode. Gated so the desktop shell never
+/// carries the HTTP stack; the serve entry point (`lts-serve`) reuses the
+/// SAME command wiring below — no command logic is duplicated.
+#[cfg(feature = "serve")]
+pub mod serve;
 use lts_speech_api::{
     AcousticFeatureProvider, AlignmentProvider, PronunciationInterpreter, ProsodyProvider,
 };
@@ -10242,67 +10248,21 @@ fn force_webkit_fallback_renderer() {
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
-pub fn run() {
-    force_webkit_fallback_renderer();
-    tauri::Builder::default()
+/// WEB-SERVE-001: the command wiring is runtime-agnostic — the desktop
+/// shell and the HTTP serve mode install the SAME handler list and the
+/// SAME session state through these two functions, so commands cannot
+/// drift between the two entry points except by an explicitly marked
+/// exclusion. The five commands the serve twin omits carry a concrete
+/// `tauri::AppHandle` (Wry-bound) in their signatures and cannot
+/// instantiate on Tauri's mock runtime; `serve.rs` routes those five to
+/// the SAME underlying core functions their wrappers call (no progress
+/// events — no browser listener would receive them anyway; the
+/// capabilities endpoint says so). When a new command is added to
+/// `wire_commands`, ask: does it take AppHandle? If not, add it to
+/// `wire_serve_commands` too (a serve-mode cargo test walks the table).
+fn wire_commands(builder: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
+    builder
         .manage(scenarios::SessionStore::default())
-        // PS-05b: a second launch must not open a second window over the same
-        // profile. Two windows mean two sessions and two writers on one
-        // SQLite file, and the learner would see one window silently
-        // competing with an invisible one. The plugin routes the second
-        // launch to the running instance, which surfaces its own window.
-        // Rust-side plugin only: no webview command, so no capability change.
-        .plugin(tauri_plugin_single_instance::init(|app, _argv, _cwd| {
-            use tauri::Manager;
-            if let Some(window) = app.get_webview_window("main") {
-                let _ = window.unminimize();
-                let _ = window.set_focus();
-            }
-        }))
-        // The window is built here (not via tauri.conf.json) so the
-        // webview permission handler can be attached: the pronunciation
-        // feature calls getUserMedia, and WebKitGTK denies permission
-        // requests unless the app answers them. Microphone is allowed
-        // (the UI gates it behind the explicit mic setting + privacy
-        // notice); everything else is denied.
-        .setup(|app| {
-            use tauri::webview::{PermissionKind, PermissionResponse};
-            let _win = tauri::WebviewWindowBuilder::new(app, "main", tauri::WebviewUrl::default())
-                .title("Open Language Learning Platform")
-                .inner_size(1100.0, 720.0)
-                .min_inner_size(800.0, 600.0)
-                .center()
-                .on_permission_request(|_webview, kind| match kind {
-                    PermissionKind::Microphone => PermissionResponse::Allow,
-                    _ => PermissionResponse::Deny,
-                })
-                .build()?;
-            use tauri::Manager;
-            if let Ok(rd) = app.path().resource_dir() {
-                // ADR-0019: the aligner-bundled variant stages its payload under
-                // `<resource_dir>/aligner`; a bare build has no such directory and
-                // abstains honestly rather than pretending an ASR exists.
-                let _ = BUNDLED_SIDECAR.set(rd.join("aligner"));
-                // K-59: the pack-bundled variant stages pack sources under
-                // `<resource_dir>/packs` beside the other payloads; a bare
-                // build has no such directory and resolves from the repo
-                // tree (dev) or abstains, honestly.
-                let _ = BUNDLED_PACKS.set(rd.join("packs"));
-            }
-            // K-63-follow: prime the content caches for already-installed packs
-            // so the first thing a learner does after opening the app is not the
-            // slowest thing they do.
-            let warm_dir = data_dir();
-            std::thread::spawn(move || warm_installed(&warm_dir));
-            // sweep-tmp-audio-privacy: plaintext sidecar WAVs stage in
-            // one private directory; a killed or crashed run can leave
-            // leftovers, so every start clears anything far too old to
-            // belong to a live call (sidecar calls take seconds).
-            lts_speech_runtime::sidecar::sweep_stale_audio_tmp(std::time::Duration::from_secs(
-                3600,
-            ));
-            Ok(())
-        })
         .invoke_handler(tauri::generate_handler![
             app_mode,
             build_identity,
@@ -10401,6 +10361,269 @@ pub fn run() {
             error_review_queue,
             error_review_grade,
         ])
+}
+
+#[cfg(feature = "serve")]
+fn wire_serve_commands(
+    builder: tauri::Builder<tauri::test::MockRuntime>,
+) -> tauri::Builder<tauri::test::MockRuntime> {
+    builder
+        .manage(scenarios::SessionStore::default())
+        .invoke_handler(tauri::generate_handler![
+            app_mode,
+            build_identity,
+            privacy_notice,
+            available_packs,
+            create_profile,
+            list_profiles,
+            resume_profile,
+            set_profile_hidden,
+            complete_onboarding,
+            home_state,
+            practice_plan,
+            first_run_steps,
+            progress_summary,
+            available_models,
+            aligner_status,
+            delete_model,
+            get_speech_model,
+            set_speech_model,
+            recommended_speech_model,
+            pronunciation_check,
+            pronunciation_demo,
+            perf_asr_setup,
+            perf_asr_attempt,
+            dictation_check,
+            dictation_target,
+            reference_audio,
+            speech_audio,
+            world_state,
+            goal_map,
+            memory_stats,
+            display_settings,
+            set_display_settings,
+            get_microphone_enabled,
+            set_microphone_enabled,
+            get_microphone_device,
+            set_microphone_device,
+            get_playback_device,
+            set_playback_device,
+            get_romaji_mode,
+            set_romaji_mode,
+            get_kana_keyboard,
+            set_kana_keyboard,
+            profile_export,
+            profile_import_preview,
+            profile_import,
+            profile_delete,
+            pack_claims,
+            catalog_packs,
+            cancel_pack_install,
+            installed_packs,
+            active_pack,
+            switch_pack,
+            writing_task,
+            writing_submit,
+            practice_task,
+            practice_submit,
+            lesson_plan,
+            placement_plan,
+            placement_coverage,
+            placement_submit,
+            kanji_list,
+            kanji_available,
+            scenario_list,
+            scenario_start,
+            scenario_attempt,
+            scenario_support,
+            scenario_recovery,
+            scenario_transfer,
+            scenario_transfer_answer,
+            scenario_finish,
+            contrast_audio,
+            shadowing_items,
+            dictation_audio,
+            story_list,
+            story_view,
+            story_audio,
+            word_card,
+            story_word_audio,
+            listening_audio,
+            mine_add,
+            content_confirm,
+            content_unconfirm,
+            mine_list,
+            mine_remove,
+            mine_due,
+            mine_new,
+            mine_grade,
+            srs_interval_preview,
+            error_review_accept,
+            error_review_queue,
+            error_review_grade,
+        ])
+}
+
+// Written next to the table it mirrors; consumed by the serve-mode test
+// that walks every name (serve::tests::every_serve_command_name_resolves_through_the_wiring).
+// The production bridge resolves names through the generated handler itself,
+// so outside tests this table is read by no runtime code.
+#[cfg(feature = "serve")]
+#[cfg_attr(not(test), allow(dead_code))]
+pub(crate) const SERVE_COMMAND_NAMES: &[&str] = &[
+    "app_mode",
+    "build_identity",
+    "privacy_notice",
+    "available_packs",
+    "create_profile",
+    "list_profiles",
+    "resume_profile",
+    "set_profile_hidden",
+    "complete_onboarding",
+    "home_state",
+    "practice_plan",
+    "first_run_steps",
+    "progress_summary",
+    "available_models",
+    "aligner_status",
+    "delete_model",
+    "get_speech_model",
+    "set_speech_model",
+    "recommended_speech_model",
+    "pronunciation_check",
+    "pronunciation_demo",
+    "perf_asr_setup",
+    "perf_asr_attempt",
+    "dictation_check",
+    "dictation_target",
+    "reference_audio",
+    "speech_audio",
+    "world_state",
+    "goal_map",
+    "memory_stats",
+    "display_settings",
+    "set_display_settings",
+    "get_microphone_enabled",
+    "set_microphone_enabled",
+    "get_microphone_device",
+    "set_microphone_device",
+    "get_playback_device",
+    "set_playback_device",
+    "get_romaji_mode",
+    "set_romaji_mode",
+    "get_kana_keyboard",
+    "set_kana_keyboard",
+    "profile_export",
+    "profile_import_preview",
+    "profile_import",
+    "profile_delete",
+    "pack_claims",
+    "catalog_packs",
+    "cancel_pack_install",
+    "installed_packs",
+    "active_pack",
+    "switch_pack",
+    "writing_task",
+    "writing_submit",
+    "practice_task",
+    "practice_submit",
+    "lesson_plan",
+    "placement_plan",
+    "placement_coverage",
+    "placement_submit",
+    "kanji_list",
+    "kanji_available",
+    "scenario_list",
+    "scenario_start",
+    "scenario_attempt",
+    "scenario_support",
+    "scenario_recovery",
+    "scenario_transfer",
+    "scenario_transfer_answer",
+    "scenario_finish",
+    "contrast_audio",
+    "shadowing_items",
+    "dictation_audio",
+    "story_list",
+    "story_view",
+    "story_audio",
+    "word_card",
+    "story_word_audio",
+    "listening_audio",
+    "mine_add",
+    "content_confirm",
+    "content_unconfirm",
+    "mine_list",
+    "mine_remove",
+    "mine_due",
+    "mine_new",
+    "mine_grade",
+    "srs_interval_preview",
+    "error_review_accept",
+    "error_review_queue",
+    "error_review_grade",
+];
+
+pub fn run() {
+    force_webkit_fallback_renderer();
+    wire_commands(tauri::Builder::default())
+        // PS-05b: a second launch must not open a second window over the same
+        // profile. Two windows mean two sessions and two writers on one
+        // SQLite file, and the learner would see one window silently
+        // competing with an invisible one. The plugin routes the second
+        // launch to the running instance, which surfaces its own window.
+        // Rust-side plugin only: no webview command, so no capability change.
+        .plugin(tauri_plugin_single_instance::init(|app, _argv, _cwd| {
+            use tauri::Manager;
+            if let Some(window) = app.get_webview_window("main") {
+                let _ = window.unminimize();
+                let _ = window.set_focus();
+            }
+        }))
+        // The window is built here (not via tauri.conf.json) so the
+        // webview permission handler can be attached: the pronunciation
+        // feature calls getUserMedia, and WebKitGTK denies permission
+        // requests unless the app answers them. Microphone is allowed
+        // (the UI gates it behind the explicit mic setting + privacy
+        // notice); everything else is denied.
+        .setup(|app| {
+            use tauri::webview::{PermissionKind, PermissionResponse};
+            let _win = tauri::WebviewWindowBuilder::new(app, "main", tauri::WebviewUrl::default())
+                .title("Open Language Learning Platform")
+                .inner_size(1100.0, 720.0)
+                .min_inner_size(800.0, 600.0)
+                .center()
+                .on_permission_request(|_webview, kind| match kind {
+                    PermissionKind::Microphone => PermissionResponse::Allow,
+                    _ => PermissionResponse::Deny,
+                })
+                .build()?;
+            use tauri::Manager;
+            if let Ok(rd) = app.path().resource_dir() {
+                // ADR-0019: the aligner-bundled variant stages its payload under
+                // `<resource_dir>/aligner`; a bare build has no such directory and
+                // abstains honestly rather than pretending an ASR exists.
+                let _ = BUNDLED_SIDECAR.set(rd.join("aligner"));
+                // K-59: the pack-bundled variant stages pack sources under
+                // `<resource_dir>/packs` beside the other payloads; a bare
+                // build has no such directory and resolves from the repo
+                // tree (dev) or abstains, honestly.
+                let _ = BUNDLED_PACKS.set(rd.join("packs"));
+            }
+            // K-63-follow: prime the content caches for already-installed packs
+            // so the first thing a learner does after opening the app is not the
+            // slowest thing they do.
+            let warm_dir = data_dir();
+            std::thread::spawn(move || warm_installed(&warm_dir));
+            // sweep-tmp-audio-privacy: plaintext sidecar WAVs stage in
+            // one private directory; a killed or crashed run can leave
+            // leftovers, so every start clears anything far too old to
+            // belong to a live call (sidecar calls take seconds).
+            lts_speech_runtime::sidecar::sweep_stale_audio_tmp(std::time::Duration::from_secs(
+                3600,
+            ));
+            Ok(())
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

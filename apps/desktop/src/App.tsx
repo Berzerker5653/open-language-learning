@@ -11,6 +11,7 @@ import {
 } from "./onboarding";
 import { PracticeHub, type HubMode } from "./hub";
 import { remainingPlanSeconds, SessionChrome } from "./session-chrome";
+import { fetchCapabilities, httpInvoke, inLtsServeMode } from "./ipc";
 import {
   Home,
   type PackUpdate,
@@ -119,12 +120,17 @@ function after<T>(ms: number, value: T): Promise<T> {
   return promise;
 }
 
-/** Tauri IPC when running inside the native shell; null in plain
- * browser/vitest runs, where the flow stays purely local. */
+/** Tauri IPC when running inside the native shell; the HTTP bridge when the
+ * page came from `lts-serve` (WEB-SERVE-001, single adapter in ./ipc); null
+ * in plain browser/vitest runs, where the flow stays purely local. */
 function detectInvoke(): Invoke | null {
   if (typeof window !== "undefined" && "__TAURI_INTERNALS__" in window) {
     return (cmd, args) =>
       invoke(cmd, args).catch((e: unknown) => Promise.reject(explainPackAbsence(e)));
+  }
+  if (inLtsServeMode()) {
+    return (cmd, args) =>
+      httpInvoke(cmd, args).catch((e: unknown) => Promise.reject(explainPackAbsence(e)));
   }
   return null;
 }
@@ -1146,6 +1152,28 @@ export function App() {
   // the UI invents. Stages are pushed to a module-level witness as well so the
   // headless walkthrough can prove the channel actually delivered them.
   const [engineProgress, setEngineProgress] = useState<EngineProgress | null>(null);
+
+  // WEB-SERVE-001 scope 4: in browser-serve mode the app states honestly
+  // what the serve bridge cannot do (install-progress events, and mic
+  // capture where the browser blocks it). The text comes from the server's
+  // capability report, never invented locally; nothing here changes a
+  // stored privacy mode.
+  const [serveNotice, setServeNotice] = useState<string | null>(null);
+  useEffect(() => {
+    if (!inLtsServeMode()) return;
+    void fetchCapabilities().then((caps) => {
+      if (!caps) {
+        setServeNotice("Browser mode: the serve bridge is unreachable right now.");
+        return;
+      }
+      const parts = [
+        "Browser mode: install progress is not streamed — results appear when the call lands.",
+        caps.microphone_capture ?? "",
+        caps.privacy_modes ?? "",
+      ].filter((s) => s.length > 0);
+      setServeNotice(parts.join(" "));
+    });
+  }, []);
 
   useEffect(() => {
     // No bridge (plain browser tab, test DOM) means no event source: importing
@@ -3935,6 +3963,14 @@ export function App() {
         </nav>
       }
     >
+      {/* WEB-SERVE-001 scope 4: browser-serve mode labels its limits
+          honestly (no progress streaming; mic capture depends on the
+          browser's secure-context rule) instead of failing silently. */}
+      {serveNotice ? (
+        <p role="status" className="notice" data-testid="serve-notice">
+          {serveNotice}
+        </p>
+      ) : null}
       {playbackError ? (
         <p role="alert" className="alert" data-testid="playback-error">
           {playbackError}
