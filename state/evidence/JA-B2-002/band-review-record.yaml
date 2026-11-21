@@ -1,0 +1,88 @@
+# JA-B2-002 band review record — pack org.openlanguage.ja-jp.reference v0.4.3
+# policy_version: 1.0.0 (languages/ja-JP/review/REVIEW_POLICY.yaml)
+# date: 2026-11-21
+record_id: ja-b2-increment-review-2026-11-21
+policy_version: "1.0.0"
+coverage_version: "1.0.0"
+band: B2 (scoped to the 2026-11-20 register-shift increment authored at 1127730 / JA-B2-001)
+pack_version: "0.4.3"
+pack_manifest_sha256: 7dbd7891eb5899a73c3ad4e47e6326b4b12dc6f03b0a8172af9565a3c52736b6
+card: JA-B2-002
+
+reviewer:
+  name: hermes-default agent
+  reviewer_category: ai-assisted
+  qualification_basis: >
+    Owner decision 2026-11-19 (acceptance-autonomy rule, recorded in
+    state/task-state.json JA-B2-002 notes): qualified review for content
+    cards is agent-performed with evidence files, reversible; release/publish
+    gates unchanged.
+  honesty_note: >
+    The agent is NOT a qualified human reviewer in the REVIEW_POLICY
+    qualification categories. All 20 per-item records are recorded as
+    `ai-assisted`. ai-assisted records never promote content: no item status
+    was flipped; the pack keeps its honest posture (AI-generated,
+    draft-labeled, ADR-0014 disclosure). `validated`/`verified` remain gated
+    on human records enforced by the validator.
+
+population_reviewed:
+  goal: 1              # ja.goal.b2.register-shift (prereq mirror edge included)
+  units: 4             # 827-830, task_sequence checked end to end
+  scenarios: 1         # ja.scenario.b2.register.client-call (nodes, support ladder, model wording)
+  sentences: 12        # sentences/b2-register-2026-11-20.jsonl
+  audio_backed_records: 12   # media/manifest rows cross-checked vs reading + JA-B2-001 ASR evidence
+  assessments: 2       # transfer + delayed-retention rubrics
+  total_records: 20    # languages/ja-JP/reviews.jsonl rows rev-2026-11-21-b2-001..020
+review_scope: linguistic (naturalness, register/pragmatic correctness, level fit, EN-gloss fidelity) + pedagogical (task-sequence validity, generation contract, rubric criteria) + audio-backed record cross-verification; technical audio LISTENING not performable by an agent and remains open (see open_items)
+scope_note: >
+  The card body's "B2 story slate from 3ae109b" is ru-RU pack content
+  (STORY-AUTHOR-001 B2 batch, ru.sent.b2.*) — out of scope for a Japanese
+  band review; the ja-JP pack has no B2 stories. Full analysis in
+  findings-2026-11-21.md.
+
+outcome_counts:
+  approved: 13
+  approved-with-notes: 7
+  changes-requested: 0   # 3 defects (1 register-major, 1 gloss-major, 1 register-minor) corrected in this same lane
+
+findings:
+  P0: []
+  P1: []
+  P2_resolved:
+    - ja.sent.b2reg-soncho-okaeshi: taught 尊敬語 chunk was おかえしになる ('return gift') instead of おかえりになる — rewritten, cloze retargeted, re-baked, unit 830 prose corrected
+    - ja.sent.b2reg-wake-da-saiban: はんけつ (判決 'ruling') contradicted the EN gloss 'interpreters' — rewritten to つうやく (通訳), re-baked
+  P3_resolved:
+    - ja.sent.b2reg-ashita-itsudemo-gozaimasu: だいじょうぶ ございます (non-standard service form) -> だいじょうぶ で ございます; scenario model text corrected too; re-baked
+  P3_noted:
+    - goal contexts under-declared (classroom only vs phone-call/office units; repeat of JA-B1-002 note)
+    - assessments writing-only though goal declares speaking
+    - ja.sent.b2reg-jouhou-dake-dewa: 反応が不足 idiomatic slip (kept)
+    - ja.sent.b2reg-mono-da-shijou: 変更を含む translationese (kept)
+    - scenario boss node prompt 'department head' vs model sentence しゃちょう (kept)
+
+audio_verdict: >
+  All 3 fixes changed kana in the reading field, hence new pronunciation ->
+  certified-clean rule applied: re-baked on pack narrator (ono_anna), ASR
+  content check 3/3 exact kana-fold, and pacing s/mora re-measured per take
+  (reject-and-retain loop until inside the shipped-ja band). Evidence:
+  fix-verification.md, bake.log, asr-content.jsonl.
+
+machine_gates:  # on the exact reviewed tree, pack-scoped (LANE tier)
+  langpack_validate: "0 errors, 0 warnings"
+  langpack_lint: "0 errors, 0 warnings"
+  langpack_test_install_mode: "0 errors, 0 warnings (audio coverage + hashes verified after re-bakes)"
+  audits: "audit-curriculum/lexicon/licenses/sources all 0 errors"
+  see: state/evidence/JA-B2-002/gates.log
+
+trust_state_verdict:
+  advanced: false
+  reason: >
+    Promotion (validated/verified) requires human review records that the
+    validator enforces; an agent review does not create one. The CARD's gates
+    pass under the 2026-11-19 owner reclassification; the pack posture is
+    unchanged and honestly labeled. Reversible per the same owner rule.
+
+open_items_not_closed_here:
+  - "Legacy B2 band (the 11-goal pre-increment B2 map incl. the 400-unit-scale template drift flagged by audit_content_templates) — not in this card's increment population"
+  - "Word-timing sidecar rows for the 3 re-baked clips removed; regenerate in the next word-timing pass"
+  - "Human listening check of ja clips (owner ja-audio trust policy 2026-11-06 stands)"

@@ -39,7 +39,7 @@ nodes:
   support:
     - level: 3
       kind: model
-      text: "あした なら、いつでも だいじょうぶ ございます。 (ashita nara, itsudemo daijoubu gozaimasu.)"
+      text: "あした なら、いつでも だいじょうぶ で ございます。 (ashita nara, itsudemo daijoubu de gozaimasu.)"
     - level: 5
       kind: gloss
       text: "ございます (gozaimasu) is the formal polite verb used with clients; なら frames 'if it is tomorrow'. だいじょうぶ です alone is polite but less formal; plain 大丈夫だ would be too casual for this call."

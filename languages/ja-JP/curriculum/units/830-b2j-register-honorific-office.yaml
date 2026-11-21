@@ -2,7 +2,7 @@
 id: ja.unit.b2-register-honorific-office
 goal_id: ja.goal.b2.register-shift
 title: "Honorific awareness: reporting about superiors"
-summary: "B2 pragmatics: 尊敬語 forms おかえしになる and いらっしゃる in office reporting, independent production, and the client-call scenario as changed-context transfer."
+summary: "B2 pragmatics: 尊敬語 forms おかえりになる and いらっしゃる in office reporting, independent production, and the client-call scenario as changed-context transfer."
 estimated_minutes: 9
 # ADR-0037: this unit claims the b2 register-shift task sequence end to end;
 # the client-call scenario (ja.scenario.b2.register.client-call) is this goal's
@@ -69,7 +69,7 @@ generation_contract:
   register:
   - ja.register.polite-neutral
   expected_interpretations:
-  - 'Honorific awareness: elevate the third party you report or ask about with いらっしゃる / おかえしになる, keep polite-neutral forms on client calls; taught chunks only.'
+  - 'Honorific awareness: elevate the third party you report or ask about with いらっしゃる / おかえりになる, keep polite-neutral forms on client calls; taught chunks only.'
   prohibited_ambiguity:
   - Honorifics elevate the OTHER party (superior, client); they are not used to elevate one's own actions.
   target_proficiency: B2
