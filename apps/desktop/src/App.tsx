@@ -10,7 +10,7 @@ import {
   type ProfileSummary,
 } from "./onboarding";
 import { PracticeHub, type HubMode } from "./hub";
-import { SessionChrome } from "./session-chrome";
+import { remainingPlanSeconds, SessionChrome } from "./session-chrome";
 import {
   Home,
   type PackUpdate,
@@ -2384,11 +2384,11 @@ export function App() {
             total: q.items.length,
             done: q.done,
             notRunnable: q.notRunnable,
-            // SESSION-CHROME-001 (U3): remaining time is the engine's own
-            // price for the items still to work, including the open one.
-            remainingSeconds: q.items
-              .slice(q.index)
-              .reduce((s, it) => s + it.est_seconds, 0),
+            // SESSION-CHROME-001 (U3) + SESSION-TIMER-001: remaining time
+            // is the engine's own price for the items still to work,
+            // including the open one — derived by the tested helper so the
+            // header always starts from the full queue's real estimate.
+            remainingSeconds: remainingPlanSeconds(q.items, q.index),
           }
         : null,
     );

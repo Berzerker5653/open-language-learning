@@ -92,6 +92,20 @@ export interface SessionOutcomeView {
 
 export const BUDGET_PRESETS = [5, 10, 20, 30];
 
+/**
+ * SESSION-TIMER-001 (owner dogfood 2026-11-21): a session's price must
+ * never read as "0 minutes" at the start — that reads as expired. An
+ * unpriceable plan (no seconds known) gets NO time figure rather than a
+ * fabricated one; a plan the engine prices under half a minute says
+ * "under a minute"; anything else rounds to whole minutes.
+ */
+export function planMinutesLabel(totalSeconds: number): string | null {
+  if (totalSeconds <= 0) return null;
+  if (totalSeconds < 30) return "under a minute";
+  const minutes = Math.round(totalSeconds / 60);
+  return minutes === 1 ? "about 1 minute" : `about ${minutes} minutes`;
+}
+
 const REASON_LABELS: Record<PlannedItem["reason"], string> = {
   "due-review": "Due for review",
   // R02: a card the learner saved from a text, scheduled by its own
@@ -380,7 +394,10 @@ export function Home(p: HomeProps) {
             ))}
           </div>
           <p className="plan-summary">
-            {p.plan.items.length} activities · about {Math.round(p.plan.total_seconds / 60)} minutes
+            {p.plan.items.length} activities
+            {planMinutesLabel(p.plan.total_seconds)
+              ? ` · ${planMinutesLabel(p.plan.total_seconds)}`
+              : ""}
           </p>
         </>
       )}
@@ -447,8 +464,10 @@ export function Home(p: HomeProps) {
             data-session-begin
             onClick={p.onStartSession}
           >
-            Start today's plan — {p.plan.items.length} activities, about{" "}
-            {Math.round(p.plan.total_seconds / 60)} minutes
+            Start today&apos;s plan — {p.plan.items.length} activities
+            {planMinutesLabel(p.plan.total_seconds)
+              ? `, ${planMinutesLabel(p.plan.total_seconds)}`
+              : ""}
           </button>
           <p className="meta">
             One activity at a time. You can stop at any point: what you finish is saved, and the

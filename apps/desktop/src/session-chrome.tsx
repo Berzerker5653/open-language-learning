@@ -27,6 +27,21 @@ export interface SessionChromeProps {
 }
 
 /**
+ * SESSION-TIMER-001: the seconds still to work in a session queue, from
+ * `index` (the open item included) to the end. The engine prices every
+ * planned item, so the header's estimate is that price summed — the whole
+ * queue at the first question, the rest as the session advances. An
+ * unpriced queue derives to 0, and `remainingTimeLabel` then hides the
+ * label rather than printing "0 min left".
+ */
+export function remainingPlanSeconds(
+  items: readonly { est_seconds: number }[],
+  index: number,
+): number {
+  return items.slice(Math.max(0, index)).reduce((s, it) => s + it.est_seconds, 0);
+}
+
+/**
  * "~X min left" from an engine estimate. A zero/unknown estimate renders
  * nothing rather than promising "0 minutes"; any positive estimate rounds
  * to whole minutes with a floor of 1, and is marked as an estimate.

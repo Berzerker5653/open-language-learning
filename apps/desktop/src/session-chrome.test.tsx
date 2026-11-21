@@ -3,7 +3,7 @@
 // and the FSRS next-interval preview on review grade buttons.
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
-import { remainingTimeLabel, SessionChrome } from "./session-chrome";
+import { remainingPlanSeconds, remainingTimeLabel, SessionChrome } from "./session-chrome";
 import { Home, summarizeForms, type PlannedItem, type SessionPlan } from "./home";
 import { PracticeHub } from "./hub";
 import { MyWordsPanel, previewIntervalLabel, type MineDraft, type MineItem } from "./words";
@@ -25,6 +25,59 @@ const plan: SessionPlan = {
   seed: 1,
   planner_version: "session-planner-0.1.0",
 };
+
+describe("remainingPlanSeconds (SESSION-TIMER-001 derivation)", () => {
+  const priced = (s: number) => ({ est_seconds: s });
+
+  it("prices the WHOLE queue at session start, so the header opens with a real estimate", () => {
+    const items = [priced(20), priced(20), priced(60)];
+    expect(remainingPlanSeconds(items, 0)).toBe(100);
+    const html = renderToStaticMarkup(
+      <SessionChrome
+        done={0}
+        total={items.length}
+        remainingSeconds={remainingPlanSeconds(items, 0)}
+        status="running"
+      />,
+    );
+    expect(html).toContain("~2 min left");
+    expect(html).not.toMatch(/(^|[^\d])0 min left/);
+  });
+
+  it("drops completed items as the session advances, keeping the open one priced", () => {
+    const items = [priced(20), priced(60), priced(40)];
+    expect(remainingPlanSeconds(items, 1)).toBe(100);
+    expect(remainingPlanSeconds(items, items.length)).toBe(0);
+  });
+
+  it("derives to zero for an unpriced queue and the chrome then prints no time, never '0 min left'", () => {
+    const items = [{ est_seconds: 0 }];
+    expect(remainingPlanSeconds(items, 0)).toBe(0);
+    const html = renderToStaticMarkup(
+      <SessionChrome
+        done={0}
+        total={1}
+        remainingSeconds={remainingPlanSeconds(items, 0)}
+        status="running"
+      />,
+    );
+    expect(html).toContain("1 of 1");
+    expect(html).not.toMatch(/min left/);
+  });
+
+  it("floors a short positive remainder at ~1 minute rather than 0", () => {
+    const html = renderToStaticMarkup(
+      <SessionChrome
+        done={3}
+        total={4}
+        remainingSeconds={remainingPlanSeconds([priced(20)], 0)}
+        status="running"
+      />,
+    );
+    expect(html).toContain("~1 min left");
+    expect(html).not.toMatch(/(^|[^\d])0 min left/);
+  });
+});
 
 describe("SessionChrome (U3 in-session progress bar)", () => {
   it("shows a progressbar with the true done/total and the n-of-N step", () => {

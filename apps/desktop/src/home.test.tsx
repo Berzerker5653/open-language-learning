@@ -5,6 +5,7 @@ import {
   CanDoSummary,
   GoalMap,
   Home,
+  planMinutesLabel,
   ProgressView,
   type PlannedItem,
   type SessionPlan,
@@ -42,6 +43,45 @@ const plan: SessionPlan = {
   seed: 0,
   planner_version: "session-planner-0.1.0",
 };
+
+describe("planMinutesLabel (SESSION-TIMER-001)", () => {
+  it("never reads a positively priced plan as 0 minutes", () => {
+    expect(planMinutesLabel(20)).toBe("under a minute");
+    expect(planMinutesLabel(29)).toBe("under a minute");
+    expect(planMinutesLabel(80)).toBe("about 1 minute");
+    expect(planMinutesLabel(120)).toBe("about 2 minutes");
+  });
+
+  it("hides the figure when the plan carries no price at all", () => {
+    expect(planMinutesLabel(0)).toBeNull();
+  });
+
+  it("a one-review plan offers 'under a minute', never 0 minutes", () => {
+    const first: PlannedItem = plan.items[0] as PlannedItem;
+    const tiny: SessionPlan = { ...plan, items: [first], total_seconds: first.est_seconds };
+    const html = renderToStaticMarkup(
+      <Home
+        displayName="H"
+        plan={tiny}
+        activeBudget={5}
+        onBudget={() => {}}
+        onStartSession={() => {}}
+      />,
+    );
+    expect(html).toContain("data-session-begin");
+    expect(html).toContain("under a minute");
+    expect(html).not.toMatch(/0 minutes/);
+  });
+
+  it("an unpriced empty plan prints no time figure rather than 'about 0 minutes'", () => {
+    const empty: SessionPlan = { ...plan, items: [], total_seconds: 0 };
+    const html = renderToStaticMarkup(
+      <Home displayName="H" plan={empty} activeBudget={5} onBudget={() => {}} />,
+    );
+    expect(html).not.toMatch(/0 minutes/);
+    expect(html).not.toContain("activities · about");
+  });
+});
 
 describe("home", () => {
   it("shows next actions with learning reasons and budget presets", () => {
