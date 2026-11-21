@@ -290,7 +290,11 @@ export function PracticeRunner(p: PracticeRunnerProps) {
             <button
               key={choice}
               type="button"
-              className="btn btn--quiet"
+              className={
+                p.graded && !p.correct && choice === p.correctChoice
+                  ? "btn btn--quiet choice--correct"
+                  : "btn btn--quiet"
+              }
               disabled={p.graded}
               onClick={() => p.onChoose(i)}
             >
@@ -306,7 +310,14 @@ export function PracticeRunner(p: PracticeRunnerProps) {
           p.graded ? (p.correct ? "verdict verdict--correct" : "verdict verdict--retry") : undefined
         }
       >
-        {p.graded ? (p.correct ? "Correct" : `Not quite — the answer is "${p.correctChoice}"`) : ""}
+        {p.graded
+          ? p.correct
+            ? "Correct"
+            : // LETTER-DRILL-TEXT-001: the verdict points at the right
+              // choice, it never states it — a hint that spells the
+              // answer trains nothing.
+              "Not quite — the highlighted choice is the right one."
+          : ""}
       </p>
       {p.graded && (
         <div className="btn-row">

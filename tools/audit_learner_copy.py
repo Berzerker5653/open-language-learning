@@ -40,7 +40,7 @@ import re
 import sys
 from pathlib import Path
 
-VERSION = "1.1.0"
+VERSION = "1.3.0"
 
 DEFAULT_ROOTS = ["apps/desktop/src", "packages/ui/src"]
 
@@ -66,6 +66,34 @@ ID_RE = re.compile(
     # two or more dotted/colon-joined segments, e.g. ja.lex.demo.obaasan.
     r"|[a-z]{2}(?:[.:][a-z0-9_-]+){2,}"
     r")\b"
+)
+
+# LETTER-DRILL-TEXT-001 (owner dogfood 2026-11-21): generated learner copy
+# that leaks letter-property metadata, engine jargon ("runner", "cursor"),
+# internal unit numbers, or an answer-revealing hint fails here — the
+# ratchet, not a screenshot review.
+APP_COPY_RE = re.compile(
+    r"(?:\bthe answer is\b|\bserved by\b|\bsorted by\b|\brunner\b"
+    r"\b|\bcursor\b|\bfind guide\b|\bappearance\b|\bh: \b)",
+    re.IGNORECASE,
+)
+PACK_ORTH_RE = re.compile(
+    r"(?:uppercase|lowercase|letter name|case pair|requested case|appearance"
+    r"|\bh: |:$)",
+    re.IGNORECASE,
+)
+PACK_SUMMARY_RE = re.compile(
+    r"(?:letter name|case pair|requested case|\bunit 0\d+\b|\bsorted by\b"
+    r"|\bencounter order\b|most-recently|spaced-review)",
+    re.IGNORECASE,
+)
+
+# A no-space string is normally a wiring token, not sentence copy — but a
+# string that IS exactly a letter-property word ('appearance', 'uppercase')
+# is a metadata leak, not a token (LETTER-UNIT-MODEL-001 rule 6).
+PROPERTY_WORD_RE = re.compile(
+    r"^(?:uppercase|lowercase|appearance|letter name|case pair)$",
+    re.IGNORECASE,
 )
 
 # Attribute names whose value is a wiring token rather than learner copy.
@@ -114,8 +142,19 @@ def scan_source(text):
                 j += 1
             body = "".join(body)
             match = ID_RE.search(body)
-            if match and not _is_wiring(text, i):
-                findings.append((line, "string", body.strip()[:90], match.group(0)))
+            copy = APP_COPY_RE.search(body)
+            # Wiring codes and mapping keys (no spaces) are tokens, not
+            # sentence copy; ID_RE still catches them as ids when they are
+            # internal identifiers.
+            if copy and not re.search(r"\s", body) and not PROPERTY_WORD_RE.match(
+                body.strip()
+            ):
+                copy = None
+            if not _is_wiring(text, i):
+                if match:
+                    findings.append((line, "string", body.strip()[:90], match.group(0)))
+                elif copy:
+                    findings.append((line, "copy", body.strip()[:90], copy.group(0)))
             line += text.count("\n", i, j + 1)
             i = j + 1
             continue
@@ -168,6 +207,7 @@ def audit_file(path):
         stripped = strip_comments(text)
         for line, node in _jsx_text_nodes(stripped):
             match = ID_RE.search(node)
+            copy = APP_COPY_RE.search(node)
             if match:
                 findings.append(
                     {
@@ -175,6 +215,16 @@ def audit_file(path):
                         "line": line,
                         "kind": "jsx-text",
                         "id": match.group(0),
+                        "text": node.strip()[:90],
+                    }
+                )
+            elif copy:
+                findings.append(
+                    {
+                        "file": str(path),
+                        "line": line,
+                        "kind": "copy",
+                        "id": copy.group(0),
                         "text": node.strip()[:90],
                     }
                 )
@@ -212,10 +262,79 @@ def audit_roots(roots):
     return scanned, skipped, findings
 
 
-def render(scanned, skipped, findings):
+def audit_packs(packs_root):
+    """Scan learner-visible pack fields (orthography copy, unit summaries).
+
+    v1.2.0: generated letter drills rendered pack `reading` metadata
+    ('…; uppercase.') as sentence copy; this scan keeps property words
+    out of the fields the session screen prints.
+    """
+    root = Path(packs_root)
+    if not root.is_dir():
+        return 0, []
+    scanned = 0
+    findings = []
+    for path in sorted(root.rglob("*.jsonl")):
+        if path.parent.name != "orthography":
+            continue
+        scanned += 1
+        for line_no, raw in enumerate(
+            path.read_text(encoding="utf-8").splitlines(), start=1
+        ):
+            raw = raw.strip()
+            if not raw:
+                continue
+            try:
+                row = json.loads(raw)
+            except json.JSONDecodeError:
+                continue
+            for field in ("reading", "mnemonic"):
+                value = row.get(field)
+                if isinstance(value, str):
+                    m = PACK_ORTH_RE.search(value)
+                    if m:
+                        findings.append(
+                            {
+                                "file": str(path),
+                                "line": line_no,
+                                "kind": f"pack-{field}",
+                                "id": m.group(0),
+                                "text": f"{row.get('id', '?')}: {value[:80]}",
+                            }
+                        )
+    for path in sorted(root.rglob("curriculum/units/*.yaml")):
+        scanned += 1
+        inside = False
+        for line_no, raw in enumerate(
+            path.read_text(encoding="utf-8").splitlines(), start=1
+        ):
+            stripped = raw.strip()
+            if stripped.startswith("summary:"):
+                inside = True
+            elif not stripped or raw.startswith(("  ", "\t")):
+                if not inside:
+                    continue
+            else:
+                inside = False
+            if inside:
+                m = PACK_SUMMARY_RE.search(stripped)
+                if m:
+                    findings.append(
+                        {
+                            "file": str(path),
+                            "line": line_no,
+                            "kind": "pack-summary",
+                            "id": m.group(0),
+                            "text": stripped[:90],
+                        }
+                    )
+    return scanned, findings
+
+
+def render(scanned, skipped, findings, packs_scanned=0):
     lines = [
         f"LEARNER COPY AUDIT v{VERSION}: {scanned} source files scanned, "
-        f"{skipped} test files skipped"
+        f"{skipped} test files skipped, {packs_scanned} pack files scanned"
     ]
     for f in findings:
         lines.append(f"  {f['file']}:{f['line']}  {f['kind']}  {f['id']}  {f['text']}")
@@ -224,7 +343,7 @@ def render(scanned, skipped, findings):
 
 
 def add_arguments(parser):
-    parser.add_argument("roots", nargs="*", default=DEFAULT_ROOTS, help="source directories")
+    parser.add_argument("roots", nargs="*", default=None, help="source directories")
     parser.add_argument("--json", action="store_true", help="emit JSON instead of text")
     return parser
 
@@ -235,6 +354,11 @@ def main(argv=None):
     ).parse_args(argv)
     roots = opts.roots or DEFAULT_ROOTS
     scanned, skipped, findings = audit_roots(roots)
+    packs_scanned = 0
+    if not opts.roots:
+        # Repo default: the shipped packs' learner-visible fields too.
+        packs_scanned, pack_findings = audit_packs("languages")
+        findings.extend(pack_findings)
     if opts.json:
         print(
             json.dumps(
@@ -242,6 +366,7 @@ def main(argv=None):
                     "tool": "audit_learner_copy",
                     "version": VERSION,
                     "scanned": scanned,
+                    "packs_scanned": packs_scanned,
                     "skipped_tests": skipped,
                     "findings": findings,
                 },
@@ -249,7 +374,7 @@ def main(argv=None):
             )
         )
     else:
-        print(render(scanned, skipped, findings), end="")
+        print(render(scanned, skipped, findings, packs_scanned), end="")
     return 1 if findings else 0
 
 

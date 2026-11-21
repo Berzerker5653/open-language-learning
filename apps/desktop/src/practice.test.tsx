@@ -30,9 +30,13 @@ describe("practice runner", () => {
     expect(html).not.toContain("verdict");
   });
 
-  it("reveals the correct answer and an advance action after a miss", () => {
+  it("highlights the right choice after a miss without stating it", () => {
     const html = render({ graded: true, correct: false, correctChoice: "hello" });
-    expect(html).toContain("Not quite — the answer is &quot;hello&quot;");
+    expect(html).toContain("Not quite — the highlighted choice is the right one.");
+    expect(html).toContain("choice--correct");
+    // LETTER-DRILL-TEXT-001: a verdict that prints the answer is a hint
+    // that trains nothing — the answer may only be pointed at.
+    expect(html).not.toContain("the answer is");
     expect(html).toContain("Back to plan");
     expect(html).toContain("disabled");
   });

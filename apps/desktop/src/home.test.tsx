@@ -198,12 +198,13 @@ describe("home", () => {
     ]) {
       const html = render(modality);
       expect(html).toContain('class="plan-item"');
-      expect(html).not.toContain("no practice runner");
+      expect(html).not.toContain("nothing to practise here yet");
     }
     // A modality with no runner says so instead of offering a dead button.
+    // (LETTER-DRILL-TEXT-001: the label is learner language now.)
     const inert = render("comprehension-reading");
     expect(inert).not.toContain('class="plan-item"');
-    expect(inert).toContain("no practice runner");
+    expect(inert).toContain("nothing to practise here yet");
     // And no handler means no button at all.
     expect(render("recall-meaning", false)).not.toContain('class="plan-item"');
   });

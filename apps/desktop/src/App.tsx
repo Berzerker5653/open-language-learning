@@ -254,9 +254,9 @@ function PlacementCoverageNote({
   const planned = rows.filter((r) => r.status === "planned").length;
   const declined = rows.filter((r) => r.status !== "planned");
   const COPY: Record<string, string> = {
-    "no-runner": "no low-stakes auto-runner exists for that skill yet",
+    "no-runner": "that skill cannot be practised in the app yet",
     "no-content": "no content at the right level can serve that rubric",
-    "modality-unsupported": "no runner can ask about that construct yet",
+    "modality-unsupported": "that kind of question is not available yet",
   };
   const byStatus = new Map<string, { n: number; sample?: string }>();
   for (const r of declined) {
@@ -4457,7 +4457,7 @@ export function App() {
       ) : practiceTarget ? (
         <section aria-label="Practice">
           <p className="empty">
-            This activity has no practice runner yet.
+            This activity is not ready to practise yet.
             {practiceError ? ` ${practiceError}` : ""}
           </p>
           <div className="btn-row">

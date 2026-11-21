@@ -130,5 +130,88 @@ export function PlanRow() {
             self.assertEqual(clean_code, 0)
 
 
+class CopyRuleTests(unittest.TestCase):
+    """LETTER-DRILL-TEXT-001 ratchet: un-interpolated drill copy, answer
+    hints and engine jargon in learner-visible strings fail the gate."""
+
+    def test_pack_reading_metadata_and_summary_leaks_fail(self):
+        with tempfile.TemporaryDirectory() as td:
+            write_tree(
+                td,
+                {
+                    "pack/orthography/cyr.jsonl": '{"id":"x.orth.cyr.a","reading":"Letter name: а (a); uppercase.","mnemonic":"fine"}\n',
+                    "pack/curriculum/units/010.yaml": 'id: u1\nsummary: "Start here before unit 000. Recognize these printed case pairs, copy the requested case."\n',
+                },
+            )
+            scanned, found = alc.audit_packs(td)
+            self.assertGreaterEqual(scanned, 2)
+            self.assertEqual(
+                {f["kind"] for f in found}, {"pack-reading", "pack-summary"}
+            )
+
+    def test_clean_pack_copy_passes(self):
+        with tempfile.TemporaryDirectory() as td:
+            write_tree(
+                td,
+                {
+                    "pack/orthography/cyr.jsonl": '{"id":"x.orth.cyr.a","reading":"sound a — name а","mnemonic":"Recognize the A-shaped form."}\n',
+                    "pack/curriculum/units/010.yaml": 'id: u1\nsummary: "Start here: your first letters. Each letter is one sound."\n',
+                },
+            )
+            _, found = alc.audit_packs(td)
+            self.assertEqual(found, [])
+
+    def test_answer_hint_and_jargon_copy_fail(self):
+        src = (
+            "export function P({ x }: { x: string }) {\n"
+            "  const v = `Not quite — the answer is \"${x}\"`;\n"
+            "  const s = \"Served by the typed runner.\";\n"
+            "  return <p>{v}{s}</p>;\n"
+            "}\n"
+        )
+        with tempfile.TemporaryDirectory() as td:
+            write_tree(td, {"panel.tsx": src})
+            _, _, found = alc.audit_roots([td])
+            self.assertEqual(len(found), 2)
+            self.assertEqual({f["kind"] for f in found}, {"copy"})
+
+    def test_wiring_tokens_are_not_copy_findings(self):
+        src = 'const COPY = {"no-runner": "that skill is not available yet"};\nexport const C = COPY;\n'
+        with tempfile.TemporaryDirectory() as td:
+            write_tree(td, {"panel.tsx": src})
+            _, _, found = alc.audit_roots([td])
+            self.assertEqual(found, [])
+
+
+    def test_interpolation_failure_dogfood_strings_red(self):
+        """LETTER-UNIT-MODEL-001: the exact copy from
+        state/evidence/DOGFOOD-2026-11-21/ (complaint-01 drill rows,
+        complaint-04 case-quiz options/hint) fails the audit."""
+        with tempfile.TemporaryDirectory() as td:
+            write_tree(
+                td,
+                {
+                    "pack/orthography/cyr.jsonl": (
+                        '{"id":"x.orth.cyr.a-upper","reading":"Letter name: \u0430 (a); uppercase.","mnemonic":"ok"}\n'
+                        '{"id":"x.orth.cyr.a-lower","reading":"Letter name: \u0430 (a); lowercase.","mnemonic":"ok"}\n'
+                        '{"id":"x.orth.cyr.b-lower","reading":"Lowercase:","mnemonic":"ok"}\n'
+                        '{"id":"x.orth.cyr.c","reading":"fine","mnemonic":"h: find guide"}\n'
+                    ),
+                    "panel.tsx": (
+                        "export const HINT = 'Not quite \u2014 the answer is \"Letter name: \u0430 (a); uppercase.\"';\n"
+                        "export const C = 'appearance';\n"
+                    ),
+                },
+            )
+            scanned, found = alc.audit_packs(td)
+            kinds = [f["kind"] for f in found]
+            # three bad readings (two property rows, one stray-colon
+            # interpolation) plus the debug mnemonic all land.
+            self.assertEqual(kinds.count("pack-reading"), 3)
+            self.assertEqual(kinds.count("pack-mnemonic"), 1)
+            _, _, src_found = alc.audit_roots([td])
+            self.assertEqual(len(src_found), 2)
+
+
 if __name__ == "__main__":
     unittest.main()

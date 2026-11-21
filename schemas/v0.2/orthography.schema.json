@@ -20,6 +20,11 @@
           "name": { "type": "string", "minLength": 1 },
           "direction": { "enum": ["ltr", "rtl", "vertical"] },
           "unicode_blocks": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+          "case": {
+            "enum": ["bicameral", "unicameral"],
+            "default": "unicameral",
+            "description": "LETTER-UNIT-MODEL-001 (state/notes/LETTER-TEACHING-DESIGN-001.md): whether this script HAS an uppercase/lowercase dimension at all. Case drills and case vocabulary are structurally impossible for unicameral scripts; an undeclared script is treated as unicameral (the safe default — most scripts have no case)."
+          },
           "teaching_order": { "type": "integer", "minimum": 0 }
         }
       }

@@ -16,6 +16,7 @@
  * the harness answers mirror lib.rs.
  */
 import { afterEach, describe, expect, it } from "vitest";
+import { RUNNER_LABEL } from "../lesson";
 import {
   RU,
   LearnerEngine,
@@ -94,11 +95,11 @@ describe("RU modalities are served by their named runners (RU-MODALITY-PRACTICE-
       ["ru.activity.b2.u818-write", "typed"],
       ["ru.activity.b2.u818-listen", "comprehension-listening"],
       ["ru.activity.b2.u818-speak", "guided-speaking"],
-    ]) {
+    ] as [string, string][]) {
       const el = lesson.querySelector(`[data-stage="${stage}"]`);
       if (!el) throw new Error(`the lesson rendered no stage "${stage}"`);
       expect(el.getAttribute("data-runner")).toBe(runner);
-      expect(el.textContent).toContain(`Served by the ${runner} runner.`);
+      expect(el.textContent).toContain(RUNNER_LABEL[runner] ?? "More practice follows.");
     }
     // The grammar encounter teaches with the pack's own concept rows, not
     // an explanation the app invents.

@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.cyrillic-k-e-n-s"
 goal_id: "ru.goal.on-ramp.cyrillic"
 title: "Printed Cyrillic: К к, Е е, Н н, С с"
-summary: "Recognize these printed case pairs, match each letter to its partner and copy the requested case. Letter-name labels are not audio tasks."
+summary: "Meet these printed letters. Each letter is one sound — see its printed forms, learn its name and sound, then recognise it and write it."
 estimated_minutes: 5
 activities:
   - id: "ru.activity.on-ramp.cyrillic-k-e-n-s-read"

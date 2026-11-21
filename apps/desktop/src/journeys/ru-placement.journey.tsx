@@ -43,8 +43,10 @@ describe("placement asks only runnable questions and reports the rest (U05)", ()
     if (!coverage) throw new Error("coverage note missing");
     expect(coverage.textContent).toContain("1 question ready");
     expect(coverage.textContent).toContain("2 rubrics the engine will not fake");
-    expect(coverage.textContent).toContain("no runner can ask about that construct yet");
-    expect(coverage.textContent).toContain("no low-stakes auto-runner exists");
+    // LETTER-DRILL-TEXT-001: abstention copy is learner language now; the
+    // statuses and engine reasons stay asserted exactly as before.
+    expect(coverage.textContent).toContain("that kind of question is not available yet");
+    expect(coverage.textContent).toContain("that skill cannot be practised in the app yet");
     const reason = coverage.querySelector("code");
     expect(reason?.textContent).toContain("builder-refused:recall-meaning:ru.orth.cyrillic.");
     expect(reason?.textContent).toContain("unknown practice target");

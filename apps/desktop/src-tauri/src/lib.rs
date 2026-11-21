@@ -1137,6 +1137,17 @@ struct OrthEntry {
     /// (`orthography/*.jsonl` `teaching_order`). None when the pack
     /// does not sequence it; the pack's order, never an app-side one.
     teaching_order: Option<i64>,
+    /// LETTER-UNIT-MODEL-001: a letter entity is { form, name, sound } —
+    /// one grapheme, one sound, with a spoken name. `sound` defaults to
+    /// the reading when the pack does not separate the two; the drill
+    /// dimensions key on sound↔symbol, never on letter-property metadata.
+    sound: String,
+    /// The pack's script id for this row (`script`), used to resolve the
+    /// script's `case` declaration (bicameral | unicameral).
+    script: String,
+    /// Rule 4: glyphs (typically Latin lookalikes) this letter will be
+    /// confused with; drives confusable-pair drills and sequencing.
+    confusable_with: Vec<String>,
 }
 
 /// Parse an installed pack's `orthography/*.jsonl` units. A pack
@@ -1190,10 +1201,114 @@ fn orth_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<OrthEnt
                     .unwrap_or("draft")
                     .to_string(),
                 teaching_order: entry.get("teaching_order").and_then(|v| v.as_i64()),
+                sound: entry
+                    .get("sound")
+                    .and_then(|v| v.as_str())
+                    .filter(|s| !s.is_empty())
+                    .unwrap_or(reading)
+                    .to_string(),
+                script: entry
+                    .get("script")
+                    .and_then(|v| v.as_str())
+                    .unwrap_or("")
+                    .to_string(),
+                confusable_with: entry
+                    .get("confusable_with")
+                    .and_then(|v| v.as_array())
+                    .map(|a| {
+                        a.iter()
+                            .filter_map(|x| x.as_str())
+                            .filter(|s| !s.is_empty())
+                            .map(str::to_string)
+                            .collect()
+                    })
+                    .unwrap_or_default(),
             });
         }
     }
     Ok(out)
+}
+
+/// LETTER-UNIT-MODEL-001 (design authority
+/// state/notes/LETTER-TEACHING-DESIGN-001.md rule 1/5): does this pack's
+/// script HAVE an uppercase/lowercase dimension at all? Declared in
+/// `language/orthography.yaml` per script; an undeclared or unmatched
+/// script is `unicameral` — the safe default, because most of the
+/// world's scripts have no case, and a wrong guess in that direction
+/// can only ever REMOVE a drill dimension, never invent one.
+fn orth_script_case(data: &Path, pack_id: &str, version: &str, script_id: &str) -> bool {
+    let path = data
+        .join("packs")
+        .join(pack_id)
+        .join(version)
+        .join("language")
+        .join("orthography.yaml");
+    let Ok(text) = std::fs::read_to_string(&path) else {
+        return false;
+    };
+    let Ok(doc) = serde_yaml::from_str::<serde_yaml::Value>(&text) else {
+        return false;
+    };
+    doc.get("scripts")
+        .and_then(|s| s.as_sequence())
+        .and_then(|seq| {
+            seq.iter().find_map(|e| {
+                let id = e.get("id")?.as_str()?;
+                (id == script_id && e.get("case")?.as_str()? == "bicameral").then_some(true)
+            })
+        })
+        .unwrap_or(false)
+}
+
+/// LETTER-UNIT-MODEL-001 rule 2/6: the case/property vocabulary that may
+/// NEVER appear in generated drill copy or scheduler state — for ANY
+/// script, bicameral included (case is a form attribute shown jointly,
+/// never a discrimination dimension). The pack audit
+/// (tools/audit_learner_copy.py) stops this at pack validation; this
+/// guard makes it structurally impossible for a task to be built even
+/// from a pack that slipped through.
+fn case_vocabulary_leak(s: &str) -> bool {
+    let lowered = s.to_lowercase();
+    [
+        "uppercase",
+        "lowercase",
+        "letter name",
+        "case pair",
+        "requested case",
+        "appearance",
+    ]
+    .iter()
+    .any(|w| lowered.contains(w))
+        || s.contains("h: ")
+        || s.chars().last().is_some_and(|c| c == ':')
+}
+
+/// LETTER-UNIT-MODEL-001 rule 4: letters the learner will confuse with
+/// Latin looks (В/Н/Р/С/У…) must never be introduced back-to-back.
+/// Given the pack's teaching sequence, returns the ids of letters that
+/// violate the stagger: any confusable letter closer than `min_gap`
+/// teaching positions to another confusable letter. A pack with no
+/// declared confusables passes vacuously.
+fn orth_confusable_stagger_violations(
+    entries: &[&OrthEntry],
+    min_gap: i64,
+) -> Vec<(String, String)> {
+    let mut confusables: Vec<(i64, &OrthEntry)> = entries
+        .iter()
+        .copied()
+        .filter(|e| !e.confusable_with.is_empty())
+        .filter_map(|e| e.teaching_order.map(|o| (o, e)))
+        .collect();
+    confusables.sort_by_key(|(o, _)| *o);
+    let mut violations = Vec::new();
+    for (i, (order, a)) in confusables.iter().enumerate() {
+        for (other_order, b) in confusables.iter().skip(i + 1) {
+            if other_order - order < min_gap && orth_confusable_pair(a, b) {
+                violations.push((a.id.clone(), b.id.clone()));
+            }
+        }
+    }
+    violations
 }
 
 /// K-16: a character-instruction item reduced to what the kanji drill
@@ -3220,10 +3335,68 @@ fn script_intro_refs(
     // The pack's teaching_order decides; unit/declared order breaks ties
     // (stable sort over the deduped declared sequence).
     refs.sort_by_key(|e| e.teaching_order.unwrap_or(i64::MAX));
+    // LETTER-UNIT-MODEL-001 rule 4 (state/notes/LETTER-TEACHING-DESIGN-001.md):
+    // confusable/false-friend letters (В/Н/Р/С/У and friends) must never be
+    // introduced back-to-back. If the pack's declared order stacks them,
+    // the engine staggers the presentation sequence; nothing is ever
+    // dropped — an unsatisfiable window falls back to the pack's order.
+    if !orth_confusable_stagger_violations(&refs, ORTH_STAGGER_GAP).is_empty() {
+        refs = stagger_confusables(refs, ORTH_STAGGER_GAP as usize);
+    }
     Ok(refs
         .into_iter()
         .map(|e| (e.clone(), unit.goal_id.clone()))
         .collect())
+}
+
+/// Minimum teaching positions two confusable letters must stay apart
+/// (LETTER-UNIT-MODEL-001 rule 4).
+const ORTH_STAGGER_GAP: i64 = 4;
+
+/// True when either letter names the other's form as a confusable
+/// look-alike (LETTER-UNIT-MODEL-001 rule 4): any two DISTINCT letters
+/// that both declare confusables form a stagger class — a learner who
+/// just mapped В→v is exactly the learner who will mis-map Н→n next.
+/// Case forms of ONE letter are never a pair: rule 3 teaches "А а"
+/// jointly, so they must stay adjacent.
+fn orth_confusable_pair(a: &OrthEntry, b: &OrthEntry) -> bool {
+    if a.confusable_with.is_empty() || b.confusable_with.is_empty() {
+        return false;
+    }
+    let forms = |e: &OrthEntry| {
+        let mut f = e
+            .confusable_with
+            .iter()
+            .map(|s| s.to_lowercase())
+            .collect::<Vec<_>>();
+        f.sort();
+        (e.symbol.to_lowercase(), f)
+    };
+    forms(a) != forms(b)
+}
+
+/// Reorder the pack's letter sequence so confusable letters keep
+/// `gap` positions between them where the sequence allows it. Greedy
+/// stable pick: take the earliest remaining letter that does not
+/// confusable-clash with the last `gap - 1` placed letters; when every
+/// candidate clashes, take the earliest anyway (pack order wins over
+/// silence — never drop a letter, and a dense pack can still be taught).
+fn stagger_confusables(mut refs: Vec<&OrthEntry>, gap: usize) -> Vec<&OrthEntry> {
+    let gap = gap.max(2);
+    let mut out: Vec<&OrthEntry> = Vec::with_capacity(refs.len());
+    while !refs.is_empty() {
+        let pick = refs
+            .iter()
+            .position(|e| {
+                out.iter()
+                    .rev()
+                    .take(gap - 1)
+                    .all(|r| !orth_confusable_pair(e, r))
+            })
+            .unwrap_or(0);
+        out.push(refs.remove(pick));
+    }
+    out
 }
 
 #[derive(Serialize)]
@@ -5781,7 +5954,7 @@ fn practice_build(
                 | lts_domain::ActivityModality::OrthographicEncoding
         )
     {
-        return Err("no practice runner for this activity yet".to_string());
+        return Err("This activity is not ready to practise yet".to_string());
     }
     let active = packs::active_pack(data, profile_id)?;
     let pack_id = active.first().ok_or("no active language pack")?;
@@ -5967,7 +6140,7 @@ fn speaking_sentence_task_build(
     let entry = sentence_entries(data, pack_id, version)?
         .into_iter()
         .find(|e| e.id == content_id)
-        .ok_or("no practice runner for this activity yet")?;
+        .ok_or("This activity is not ready to practise yet")?;
     let item_id = format!(
         "{content_id}#{}",
         dimension_kebab(lts_domain::ActivityModality::ProductionSpeaking)
@@ -6008,23 +6181,58 @@ fn orth_task_build(
         .find(|e| e.id == content_id)
         .ok_or("unknown practice target")?;
     let recognize = fnv1a(content_id) % 2 == 0;
+    // LETTER-UNIT-MODEL-001 rule 1: the drill dimensions key on
+    // sound↔symbol — `sound` is the pack-declared sound, falling back to
+    // the reading when the pack does not separate name from sound.
+    let bicameral = orth_script_case(data, pack_id, version, &entry.script);
     let (prompt, answer) = if recognize {
-        (&entry.symbol, &entry.reading)
+        (&entry.symbol, &entry.sound)
     } else {
-        (&entry.reading, &entry.symbol)
+        (&entry.sound, &entry.symbol)
     };
-    let mut seen = std::collections::HashSet::from([answer.clone()]);
+    // LETTER-UNIT-MODEL-001 (rules 2/4/5): the only dimensions this
+    // runner can express are form→sound (recognize) and sound→form
+    // (produce) over the pack's own letter entities. There is no
+    // case-matching or letter-property code path to delete because case
+    // never existed as a dimension — but a pack whose `reading` copy
+    // carries case/property vocabulary (the dogfood 'Letter name: …;
+    // uppercase.' rows) would smuggle a case drill in through data, so
+    // the generated surfaces are guarded here: any case word, stray
+    // ':' ending or debug fragment refuses the task outright. For a
+    // unicameral script this is doubly enforced: an upper/lower form
+    // cannot even be looked up, because nothing reads case at all.
+    if case_vocabulary_leak(prompt) || case_vocabulary_leak(answer) {
+        return Err(
+            "generated drill copy names a letter property; the letter model teaches one sound per letter"
+                .to_string(),
+        );
+    }
+    // LETTER-DRILL-TEXT-001 (design authority
+    // state/notes/LETTER-TEACHING-DESIGN-001.md): a drill is a letter↔sound
+    // check, never a case discrimination. Two options that differ only by
+    // case are the SAME visible option — so dedupe choices and the answer
+    // case-insensitively, which also makes a unicameral script (kana)
+    // structurally incapable of a case pair.
+    let key = |s: &str| {
+        if bicameral {
+            s.to_lowercase()
+        } else {
+            s.to_string()
+        }
+    };
+    let mut seen = std::collections::HashSet::from([key(answer)]);
     let mut choices: Vec<String> = entries
         .iter()
         .filter(|e| e.id != content_id)
         .map(|e| {
             if recognize {
-                e.reading.clone()
+                e.sound.clone()
             } else {
                 e.symbol.clone()
             }
         })
-        .filter(|c| seen.insert(c.clone()))
+        .filter(|c| seen.insert(key(c)))
+        .filter(|c| !case_vocabulary_leak(c))
         .take(3)
         .collect();
     if choices.is_empty() {
@@ -17446,6 +17654,161 @@ transfer_variants:
     }
 
     #[test]
+    fn letter_model_case_guard_and_stagger() {
+        // LETTER-UNIT-MODEL-001 (state/notes/LETTER-TEACHING-DESIGN-001.md):
+        // the exact dogfood copy from state/evidence/DOGFOOD-2026-11-21/ is
+        // case/property vocabulary and can never reach a generated drill.
+        assert!(case_vocabulary_leak("Letter name: а (a); uppercase."));
+        assert!(case_vocabulary_leak("Letter name: а (a); lowercase."));
+        assert!(case_vocabulary_leak("Lowercase:"));
+        assert!(case_vocabulary_leak("h: find guide"));
+        assert!(case_vocabulary_leak("A:"));
+        assert!(case_vocabulary_leak("appearance"));
+        assert!(!case_vocabulary_leak("sound a — name а"));
+        assert!(!case_vocabulary_leak("Ч"));
+
+        // The script case attribute resolves from language/orthography.yaml.
+        let td = std::env::temp_dir().join(format!("lts-letters-case-{}", std::process::id()));
+        let script_dir = td
+            .join("packs")
+            .join("org.openlanguage.test.kana")
+            .join("0.0.1")
+            .join("language");
+        std::fs::create_dir_all(&script_dir).unwrap();
+        std::fs::write(
+            script_dir.join("orthography.yaml"),
+            "schema_version: \"0.2\"\nscripts:\n  - id: test.orth.kana\n    name: Kana\n    direction: ltr\n    case: unicameral\n  - id: test.orth.cyr\n    name: Cyrillic\n    direction: ltr\n    case: bicameral\n",
+        )
+        .unwrap();
+        assert!(!orth_script_case(
+            &td,
+            "org.openlanguage.test.kana",
+            "0.0.1",
+            "test.orth.kana"
+        ));
+        assert!(orth_script_case(
+            &td,
+            "org.openlanguage.test.kana",
+            "0.0.1",
+            "test.orth.cyr"
+        ));
+        // A script with no declaration is unicameral (safe default).
+        assert!(!orth_script_case(
+            &td,
+            "org.openlanguage.test.kana",
+            "0.0.1",
+            "test.orth.missing"
+        ));
+
+        // Rule 4: confusable/false-friend letters never introduced
+        // back-to-back (the RU false friends В/Н/Р/С/У pattern).
+        let mk = |id: &str, order: i64, conf: &str| OrthEntry {
+            id: id.into(),
+            symbol: "В".into(),
+            reading: "sound v".into(),
+            status: "draft".into(),
+            teaching_order: Some(order),
+            sound: "v".into(),
+            script: "test.orth.cyr".into(),
+            confusable_with: vec![conf.into()],
+        };
+        let near = [
+            mk("test.orth.cyr.n", 1, "H"),
+            mk("test.orth.cyr.s", 2, "C"),
+            mk("test.orth.cyr.a", 3, "A"),
+            mk("test.orth.cyr.r", 9, "P"),
+        ];
+        let v = orth_confusable_stagger_violations(&near.iter().collect::<Vec<_>>(), 4);
+        // Class rule (rule 4): every declared false friend must stay
+        // min_gap apart from every other — Н/С/А stack, Р at order 9 is far.
+        let pairs: std::collections::HashSet<(String, String)> = v.into_iter().collect();
+        assert_eq!(
+            pairs,
+            [
+                ("test.orth.cyr.n".to_string(), "test.orth.cyr.s".to_string()),
+                ("test.orth.cyr.n".to_string(), "test.orth.cyr.a".to_string()),
+                ("test.orth.cyr.s".to_string(), "test.orth.cyr.a".to_string()),
+            ]
+            .into_iter()
+            .collect()
+        );
+        // A pack that declares no confusables passes vacuously.
+        let bare = [OrthEntry {
+            id: "test.orth.cyr.x".into(),
+            symbol: "ъ".into(),
+            reading: "no sound".into(),
+            status: "draft".into(),
+            teaching_order: Some(0),
+            sound: "".into(),
+            script: "test.orth.cyr".into(),
+            confusable_with: Vec::new(),
+        }];
+        assert!(orth_confusable_stagger_violations(&bare.iter().collect::<Vec<_>>(), 4).is_empty());
+        let _ = std::fs::remove_dir_all(&td);
+    }
+
+    #[test]
+    fn stagger_confusables_spaces_false_friends_but_never_splits_case_forms() {
+        // LETTER-UNIT-MODEL-001 rule 4: the RU unit pattern К Е Н С, where
+        // Н and С are both Latin false friends, must not introduce them
+        // within ORTH_STAGGER_GAP positions of each other.
+        let mk = |id: &str, symbol: &str, conf: Option<&str>, order: i64| OrthEntry {
+            id: id.into(),
+            symbol: symbol.into(),
+            reading: format!("sound {id}"),
+            status: "draft".into(),
+            teaching_order: Some(order),
+            sound: "x".into(),
+            script: "ru.orth.cyrillic".into(),
+            confusable_with: conf.into_iter().map(str::to_string).collect(),
+        };
+        let entries = [
+            mk("k", "К", None, 0),
+            mk("e", "Е", None, 1),
+            mk("n", "Н", Some("H"), 2),
+            mk("t", "Т", None, 3),
+            mk("s", "С", Some("C"), 4),
+            mk("i", "И", None, 5),
+        ];
+        let out = stagger_confusables(entries.iter().collect(), 4);
+        let pos = |id: &str| out.iter().position(|e| e.id == id).unwrap();
+        assert!(
+            (pos("n") as i64 - pos("s") as i64).abs() >= 4 - 1,
+            "false friends must not stack: {:?}",
+            out.iter().map(|e| e.id.as_str()).collect::<Vec<_>>()
+        );
+        // Rule 3: case forms of ONE letter are a pair-free unit — the
+        // reorder must never tear "В в" apart.
+        let pair = [
+            mk("v-u", "В", Some("B"), 0),
+            mk("v-l", "в", Some("B"), 1),
+            mk("a-u", "А", None, 2),
+            mk("a-l", "а", None, 3),
+        ];
+        let out = stagger_confusables(pair.iter().collect(), 4);
+        assert_eq!(
+            vec!["v-u", "v-l", "a-u", "a-l"],
+            out.iter().map(|e| e.id.as_str()).collect::<Vec<_>>()
+        );
+        // The validator agrees: declared false-friend case rows adjacent
+        // in the pack (В в at orders 18/19) are NOT stagger violations.
+        let ruish = [
+            mk("v-u", "В", Some("B"), 18),
+            mk("v-l", "в", Some("B"), 19),
+            mk("u-u", "У", Some("Y"), 20),
+        ];
+        let v = orth_confusable_stagger_violations(&ruish.iter().collect::<Vec<_>>(), 4);
+        // В forms vs У: one violation per form pair; the В/в pair itself
+        // is never flagged.
+        assert!(
+            v.iter().all(|(a, b)| a != b
+                && !(a.starts_with("v-") && b.starts_with("v-"))
+                && !(b.starts_with("v-") && a.starts_with("v-"))),
+            "case forms of one letter are never a violation pair: {v:?}"
+        );
+    }
+
+    #[test]
     fn orth_recognition_runner_records_evidence_and_establishes_kana_literacy() {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
@@ -18283,7 +18646,7 @@ activities:
                 false
             )
             .err(),
-            Some("no practice runner for this activity yet".to_string())
+            Some("This activity is not ready to practise yet".to_string())
         );
     }
 

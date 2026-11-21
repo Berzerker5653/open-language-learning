@@ -10,12 +10,14 @@ scripts:
     direction: ltr
     unicode_blocks:
       - Hiragana
+    case: unicameral
     teaching_order: 0
   - id: ja.orth.katakana
     name: Katakana
     direction: ltr
     unicode_blocks:
       - Katakana
+    case: unicameral
     teaching_order: 1
   - id: ja.orth.kanji
     name: Kanji
@@ -23,6 +25,7 @@ scripts:
     unicode_blocks:
       - CJK Unified Ideographs
       - CJK Unified Ideographs Extension A
+    case: unicameral
     teaching_order: 2
   - id: ja.orth.latin
     name: "Latin / romaji (temporary scaffold and native mixed-script use)"
@@ -30,4 +33,5 @@ scripts:
     unicode_blocks:
       - Basic Latin
       - Latin-1 Supplement
+    case: bicameral
     teaching_order: 3

@@ -226,16 +226,20 @@ describe("LessonEncounter", () => {
     expect(html).toContain("は marks the topic of the sentence.");
   });
 
-  it("names the runner that serves each stage and says plainly when none does", () => {
-    expect(html).toContain("Served by the encounter runner.");
-    expect(html).toContain("Served by the recall-meaning runner.");
-    expect(html).toContain("Served by the cloze runner.");
+  it("names what each step asks in learner language and says plainly when none does", () => {
+    expect(html).toContain("You meet these first.");
+    expect(html).toContain("You recall these from memory.");
+    expect(html).toContain("You fill in the missing words.");
     // `grammar-study` is a pair the pack declares that nothing executes —
     // lib.rs `activity_runner` answers it `None` — and the screen says so
     // rather than presenting it as practice. (`encounter-read` is NOT such
     // a stage: the engine names the encounter runner for it, and the
     // fixture above carries that runner.)
-    expect(html).toContain("Declared, but not runnable: no runner serves this stage yet.");
+    expect(html).toContain("Not ready to practise yet — there is nothing to do in this step.");
+    // LETTER-DRILL-TEXT-001: engine runner names stay on data-runner, out
+    // of the copy.
+    expect(html).toContain('data-runner="cloze"');
+    expect(html).not.toContain("runner.");
   });
 
   it("offers the conversation stage only when the pack declares one", () => {

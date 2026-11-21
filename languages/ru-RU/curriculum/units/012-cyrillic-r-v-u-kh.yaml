@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.cyrillic-r-v-u-kh"
 goal_id: "ru.goal.on-ramp.cyrillic"
 title: "Printed Cyrillic: Р р, В в, У у, Х х"
-summary: "Recognize these printed case pairs, match each letter to its partner and copy the requested case. Letter-name labels are not audio tasks."
+summary: "Meet these printed letters. Each letter is one sound — see its printed forms, learn its name and sound, then recognise it and write it."
 estimated_minutes: 5
 activities:
   - id: "ru.activity.on-ramp.cyrillic-r-v-u-kh-read"

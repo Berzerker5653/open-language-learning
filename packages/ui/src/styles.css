@@ -61,6 +61,18 @@
   --content-max: 46rem;
 }
 
+/* LETTER-DRILL-TEXT-001 (d): on wide panels — the owner's 4K desktop and
+   the dogfood VM at 1920 — the 46rem measure is a narrow sliver with a
+   huge dead gutter beside it, which read as the column "hanging right".
+   One token bump at wide viewports widens the measure and keeps the
+   header/column/card left edges aligned; margin-inline: auto keeps the
+   column centered at every width. */
+@media (min-width: 100rem) {
+  :root {
+    --content-max: 64rem;
+  }
+}
+
 /* ------------------------------------------------------------------ base */
 *,
 *::before,
@@ -811,6 +823,14 @@ th:last-child {
 
 .verdict--correct {
   color: var(--ok);
+}
+
+/* LETTER-DRILL-TEXT-001: after a miss the runner POINTS at the right
+   choice (complaint 4g: a hint that states the answer trains nothing);
+   the correct button carries this marker. */
+.choice--correct {
+  border-color: var(--ok);
+  box-shadow: 0 0 0 2px var(--ok);
 }
 
 .verdict--correct::before {

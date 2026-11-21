@@ -24,6 +24,7 @@
  * harness answers mirror lib.rs.
  */
 import { afterEach, describe, expect, it } from "vitest";
+import { RUNNER_LABEL } from "../lesson";
 import {
   RU,
   LearnerEngine,
@@ -78,7 +79,7 @@ function expectRunners(lesson: HTMLElement, runners: [string, string][]): void {
     const el = lesson.querySelector(`[data-stage="${stage}"]`);
     if (!el) throw new Error(`the lesson rendered no stage "${stage}"`);
     expect(el.getAttribute("data-runner")).toBe(runner);
-    expect(el.textContent).toContain(`Served by the ${runner} runner.`);
+    expect(el.textContent).toContain(RUNNER_LABEL[runner] ?? "More practice follows.");
   }
 }
 

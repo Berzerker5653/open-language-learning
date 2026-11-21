@@ -20,6 +20,23 @@
       "minLength": 1,
       "description": "The canonical reading the learner maps the symbol to (romanization, roman letter name, ...)."
     },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "LETTER-UNIT-MODEL-001: the letter's spoken name (бэ, ка, گ). Optional; a letter entity is {form, name, sound}, and where a script has no per-letter name the reading doubles as it."
+    },
+    "sound": {
+      "type": "string",
+      "minLength": 1,
+      "description": "LETTER-UNIT-MODEL-001: the sound this letter maps to, separated from the name. The letter→sound / sound→letter drill dimensions key on this; default derived from `reading` when absent."
+    },
+    "confusable_with": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 },
+      "description": "LETTER-UNIT-MODEL-001 rule 4: single glyphs (typically Latin lookalikes: В→B, Н→H, Р→P, С→C, У→Y) that a learner of THIS script will confuse with this letter. Drives confusable-pair discrimination and the sequencing stagger: confusable letters must never be introduced back-to-back."
+    },
     "mnemonic": { "type": "string", "description": "Optional memory story shown on introduction." },
     "teaching_order": { "type": "integer", "minimum": 0 },
     "similar_to": {

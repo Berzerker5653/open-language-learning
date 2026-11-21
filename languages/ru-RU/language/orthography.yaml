@@ -4,4 +4,5 @@ scripts:
     name: "Russian Cyrillic — printed forms and teaching stress mark"
     direction: "ltr"
     unicode_blocks: ["Cyrillic", "Combining Diacritical Marks"]
+    case: "bicameral"
     teaching_order: 0

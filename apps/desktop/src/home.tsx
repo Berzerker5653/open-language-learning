@@ -529,8 +529,8 @@ export function Home(p: HomeProps) {
                           <>
                             {label}
                             <span className="meta">
-                              {item.modality}, ~{item.est_seconds}s
-                              {p.onStart ? " — no practice runner for this yet" : ""}
+                              {modalityLabel(item.modality)} · ~{item.est_seconds}s
+                              {p.onStart ? " — nothing to practise here yet" : ""}
                             </span>
                           </>
                         )}

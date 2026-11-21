@@ -77,6 +77,20 @@ export const STAGE_LABEL: Record<string, string> = {
 };
 
 /**
+ * LETTER-DRILL-TEXT-001: what each step asks of the learner, in plain
+ * learner language. The internal runner name stays on the element as
+ * `data-runner` for tests and a11y hooks — it is never copy.
+ */
+export const RUNNER_LABEL: Record<string, string> = {
+  encounter: "You meet these first.",
+  "recall-meaning": "You recall these from memory.",
+  typed: "You write these yourself.",
+  cloze: "You fill in the missing words.",
+  "comprehension-listening": "You listen and choose.",
+  "guided-speaking": "You say these out loud; no score.",
+};
+
+/**
  * Which authored stage the drill on screen is actually answering (U06).
  *
  * The engine's cursor decides it: `lesson_plan` names the next stage in
@@ -100,18 +114,29 @@ export function stagePositionLabel(lesson: LessonPlan): string | null {
   return `Stage ${lesson.stage_position} of ${lesson.stage_total}`;
 }
 
-function LessonContentItem({ item }: { item: LessonContent }) {
+/**
+ * LETTER-DRILL-TEXT-001: each step shows its OWN item set, not the unit's
+ * whole content list three times. The encounter step teaches the printed
+ * form with its sound and meaning; a recall step shows what the learner
+ * will be shown and must answer from memory; a typed step shows the
+ * prompt they will write against. The stage's step decides which slice
+ * is on the row — the engine's `done` still decides which stages appear.
+ */
+function LessonContentItem({ item, stage }: { item: LessonContent; stage: LessonStage }) {
+  const typed = stage.runner === "typed";
+  const encounter = !stage.runner || stage.runner === "encounter";
+  const surface = typed ? (item.reading ?? item.display) : item.display;
   return (
     <li className="lesson__item" data-content={item.content_id} data-kind={item.kind}>
       <PackText tag="span" className="lesson__surface">
-        {item.display}
+        {surface}
       </PackText>
-      {item.reading ? (
+      {!typed && encounter && item.reading ? (
         <span className="lesson__reading" dir="ltr">
           {item.reading}
         </span>
       ) : null}
-      {item.gloss ? <span className="lesson__gloss">{item.gloss}</span> : null}
+      {!typed && item.gloss ? <span className="lesson__gloss">{item.gloss}</span> : null}
       {item.explanation ? <p className="lesson__explanation">{item.explanation}</p> : null}
     </li>
   );
@@ -151,12 +176,12 @@ export function LessonEncounter({
           <h2>{STAGE_LABEL[stage.stage_kind] ?? "Meet something new"}</h2>
           <p className="meta lesson__runner">
             {stage.runner
-              ? `Served by the ${stage.runner} runner.`
-              : "Declared, but not runnable: no runner serves this stage yet."}
+              ? (RUNNER_LABEL[stage.runner] ?? "More practice follows.")
+              : "Not ready to practise yet — there is nothing to do in this step."}
           </p>
           <ul className="lesson__items">
             {stage.content.map((item) => (
-              <LessonContentItem item={item} key={item.content_id} />
+              <LessonContentItem item={item} stage={stage} key={item.content_id} />
             ))}
           </ul>
         </section>

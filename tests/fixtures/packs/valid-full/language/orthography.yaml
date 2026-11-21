@@ -3,4 +3,5 @@ scripts:
   - id: "es.orth.latin"
     name: "Latin"
     direction: "ltr"
+    case: "bicameral"
     teaching_order: 0
