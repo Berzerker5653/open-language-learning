@@ -7160,7 +7160,7 @@ async fn story_audio(profile_id: String, sentence_id: String) -> Result<SpeechAu
 /// dictionary form, built by scripts/build-morphology-table.py) plus
 /// the pack lexicon. An off-pack word gets the honest `in_pack: false`
 /// card, optionally extended by the OFFLINE auxiliary lexicon slice
-/// (`aux/lexicon/<lang>.jsonl`, kaikki.org/Wiktionary, license-checked)
+/// (`auxdata/lexicon/<lang>.jsonl`, kaikki.org/Wiktionary, license-checked)
 /// whose fields travel separately and are labeled by `aux_source` — the
 /// pack lexicon stays primary and trusted. No external dictionary is
 /// ever called (offline-first).
@@ -7359,7 +7359,7 @@ fn dictation_form_offers(
 /// READER-FLOW-001 off-pack slice: one row of the offline auxiliary
 /// lexicon. Built by `scripts/build-aux-lexicon.py` from kaikki.org's
 /// machine-readable Wiktionary extraction (CC BY-SA / GFDL — license
-/// checked and pinned in `aux/lexicon/ru.provenance.json`). The slice
+/// checked and pinned in `auxdata/lexicon/ru.provenance.json`). The slice
 /// is consulted ONLY after the pack lexicon misses, never merges into
 /// pack lexicon or scheduling paths, and its rows are always rendered
 /// under their own `AUX_SOURCE` label.
@@ -7433,21 +7433,27 @@ fn aux_cache() -> &'static std::sync::Mutex<std::collections::HashMap<PathBuf, A
     AUX_INDEX_CACHE.get_or_init(|| std::sync::Mutex::new(std::collections::HashMap::new()))
 }
 
-/// Locate the aux slice for one language. Candidate order is unchanged:
-/// the learner data dir (a replaceable installed copy), then the repo
-/// tree (dev builds, same CARGO_MANIFEST_DIR resolution as the dev pack
-/// candidates), then the staged resources beside a pack-bundled build's
-/// `packs/` root.
+/// Locate the aux slice for one language. Candidate order: the learner
+/// data dir under `auxdata/lexicon` (a replaceable installed copy), the
+/// same dir in the repo tree (dev builds, same CARGO_MANIFEST_DIR
+/// resolution as the dev pack candidates), the staged resources beside a
+/// pack-bundled build's `packs/` root, and finally the legacy `aux/`
+/// data-dir spelling. `aux` is a Windows reserved device name, so no
+/// checkoutable tree may use it (FIX-WIN-RESERVED-NAME-001); the legacy
+/// candidate only saves existing non-Windows installs from re-staging.
 fn aux_slice_path(data: &Path, lang: &str) -> Option<(PathBuf, std::fs::Metadata)> {
     let name = format!("{lang}.jsonl");
-    let mut candidates = vec![data.join("aux").join("lexicon").join(&name)];
+    let mut candidates = vec![
+        data.join("auxdata").join("lexicon").join(&name),
+        data.join("aux").join("lexicon").join(&name),
+    ];
     candidates.push(
         PathBuf::from(env!("CARGO_MANIFEST_DIR"))
-            .join("../../../aux/lexicon")
+            .join("../../../auxdata/lexicon")
             .join(&name),
     );
     if let Some(packs_root) = BUNDLED_PACKS.get().and_then(|p| p.parent()) {
-        candidates.push(packs_root.join("aux/lexicon").join(&name));
+        candidates.push(packs_root.join("auxdata/lexicon").join(&name));
     }
     candidates
         .iter()
@@ -15934,13 +15940,14 @@ transfer_variants:
             .join("0.1.0");
         // This test gives the fixture a target_locale so the aux lookup
         // has a language to name, and installs an aux slice into the
-        // learner data dir (the first read candidate) to stay hermetic.
+        // learner data dir under the current (Windows-safe) `auxdata/`
+        // spelling to stay hermetic.
         let mut manifest = std::fs::read_to_string(root.join("manifest.yaml")).unwrap();
         manifest.push_str("target_locale: \"ru-RU\"\n");
         std::fs::write(root.join("manifest.yaml"), manifest).unwrap();
-        std::fs::create_dir_all(data.join("aux/lexicon")).unwrap();
+        std::fs::create_dir_all(data.join("auxdata/lexicon")).unwrap();
         std::fs::write(
-            data.join("aux/lexicon/ru.jsonl"),
+            data.join("auxdata/lexicon/ru.jsonl"),
             "{\"word\":\"подарок\",\"pos\":[\"noun\"],\"glosses\":[\"present, gift\"],\"forms\":[\"подарка\",\"подарку\"]}\n",
         )
         .unwrap();

@@ -130,7 +130,7 @@ class LicenseShips(unittest.TestCase):
     def test_committed_repo_ships_license_aux(self):
         self.assertTrue(
             os.path.exists(B.LICENSE_AUX),
-            "aux/lexicon/LICENSE-kaikki.txt missing — the kaikki slice is a "
+            "auxdata/lexicon/LICENSE-kaikki.txt missing — the kaikki slice is a "
             "CC-BY-SA/GFDL derivative, not the repo's Apache-2.0",
         )
 
@@ -146,7 +146,7 @@ class LicenseShips(unittest.TestCase):
 
     def test_provenance_points_at_the_license_file(self):
         prov = json.load(open(B.PROVENANCE, encoding="utf-8"))
-        self.assertEqual(prov.get("license_file"), "aux/lexicon/LICENSE-kaikki.txt")
+        self.assertEqual(prov.get("license_file"), "auxdata/lexicon/LICENSE-kaikki.txt")
 
 
 if __name__ == "__main__":

@@ -155,3 +155,10 @@ displayed on every aux card, recorded in the slice provenance +
 - Tests: 14 python (synthetic entries + write/check roundtrip), 3 rust
   (labeled aux card, lemma-routed hit, no-slice degradation), 1 vitest
   (labeled render + attribution + Mine).
+
+AMENDMENT (FIX-WIN-RESERVED-NAME-001, 2026-11-21): the slice dir is now
+`auxdata/lexicon/` (repo tree, data-dir and bundle candidates) — `aux`
+is a Windows reserved device name and broke actions/checkout on every
+windows-latest runner. The old `<data>/aux/lexicon/` data-dir spelling
+remains as a final legacy candidate; everything else in this contract is
+unchanged.

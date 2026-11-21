@@ -22,3 +22,17 @@ Lane gates for FIX-WIN-RESERVED-NAME-001 (run 2026-11-21, main @ e538307 + this 
 
 5) Windows checkout leg: verified post-push against fresh CI run (see
    card summary for run id).
+
+--- PHASE 2 (directory rename aux -> auxdata) ---
+6) cargo fmt --all --check -> FMT_OK
+7) cargo clippy -p lts-desktop --all-targets -- -D warnings -> exit 0
+   (note: bare `-D warnings` before `--` is rejected by this cargo
+   wrapper; use the `-- -D warnings` form)
+8) cargo test -p lts-desktop --lib aux -> 3 passed (one new-spelling
+   test + two legacy data/aux candidate fallback tests)
+9) reserved-name rescan of git ls-files (all components, reserved stems
+   + trailing dot/space): clean after auxdata rename.
+10) python battery re-run after dir move: 17 unittests OK,
+    build-aux-lexicon.py --check OK from auxdata/lexicon,
+    validate_handoff --require-explicit-ledger-records PASSED,
+    bash -n stage-pack-bundle.sh OK.

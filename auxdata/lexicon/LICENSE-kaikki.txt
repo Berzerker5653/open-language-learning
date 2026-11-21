@@ -1,4 +1,4 @@
-License for the aux/lexicon data slices (NOT the repository's Apache-2.0)
+License for the auxdata/lexicon data slices (NOT the repository's Apache-2.0)
 =========================================================================
 
 The JSONL lexicon slices in this directory (ru.jsonl and any future

@@ -5,10 +5,30 @@ CI run 44924654098 (and every run since f816f5c): platform-compile
 `error: invalid path 'aux/lexicon/LICENSE-AUX'` — AUX is a Windows
 reserved device name, so no Windows runner could check the repo out.
 
-Rename: `aux/lexicon/LICENSE-AUX` -> `aux/lexicon/LICENSE-kaikki.txt`
-(via `git mv`; no prior naming convention existed in aux/lexicon —
-kaikki names the data source). License text bytes unchanged (it never
-contained its own filename).
+PHASE 1 (commit 74001ed): renamed the FILE
+`aux/lexicon/LICENSE-AUX` -> `aux/lexicon/LICENSE-kaikki.txt`
+(via `git mv`; license bytes unchanged). CI run 44932615472 windows job
+still failed checkout: `invalid path 'aux/lexicon/LICENSE-kaikki.txt'` —
+because the DIRECTORY component `aux` is itself a Windows reserved
+device name (reserved names apply to directories too).
+
+PHASE 2 (this commit): renamed the DIRECTORY `aux/` -> `auxdata/` and
+updated every live consumer:
+- lib.rs aux_slice_path(): candidates now data/auxdata/lexicon (new
+  primary), legacy data/aux/lexicon kept as final fallback for existing
+  non-Windows installs, repo-tree dev candidate + bundle resource
+  candidate moved to auxdata; 1 of 3 aux tests switched to the new
+  spelling, 2 kept on legacy to cover the fallback.
+- scripts/stage-pack-bundle.sh: bundle overlay maps auxdata/lexicon.
+- scripts/build-aux-lexicon.py: AUX_DIR, docstring, provenance
+  license_file, FAIL messages.
+- auxdata/lexicon/ru.provenance.json + README + LICENSE-kaikki.txt
+  header.
+- state/notes/READER-FLOW-001.md: AMENDMENT block recording the dir
+  move (old contract prose left intact as the record it is).
+
+Tree-wide reserved-name scan (all path components, incl. trailing
+dot/space rules): `aux` was the ONLY reserved component in git ls-files.
 
 Card premise "nothing parses the filename programmatically" was WRONG —
 updated live references:
