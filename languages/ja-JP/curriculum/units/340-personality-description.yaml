@@ -4,6 +4,16 @@ goal_id: ja.goal.b1.emotions-personality
 title: personality description
 summary: B1 language for personality description.
 estimated_minutes: 6
+# ADR-0037 task journey (JA-B1-003-JOURNEYS-001): input/scaffolded/independent
+# are this unit's stages; transfer is the next unit's listening check (context
+# change proven by the sentences this goal's units share); reuse is the goal's
+# phase-gated revision unit 839.
+task_sequence:
+  input: ja.activity.personality-description-enc
+  scaffolded: ja.activity.personality-description-cloze0
+  independent: ja.activity.personality-description-enc-write
+  transfer: ja.activity.emotion-vocabulary-listen
+  reuse: ja.activity.personality-rev-write
 generation_contract:
   allowed_vocab:
   - ja.lex.emotion.seikaku
@@ -15,6 +25,12 @@ generation_contract:
   - ja.sent.meeting-starts
   - ja.sent.reply-email
   allowed_grammar:
+  - ja.grammar.particle.topic-wa
+  - ja.grammar.particle.possessive-no
+  - ja.grammar.particle.de-means
+  - ja.grammar.copula.polite-desu
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.verb.polite-masu
   - ja.grammar.particle.object-wo
   new_item_budget: 6
   validation_method: choice
@@ -22,7 +38,7 @@ activities:
 - id: ja.activity.personality-description-enc
   type: encounter-read
   modality: reading
-  support_level: 5
+  support_level: 2
   content_refs:
   - ja.lex.emotion.seikaku
   - ja.lex.emotion.majime
@@ -83,3 +99,11 @@ activities:
   support_level: 2
   content_refs:
   - ja.sent.meeting-starts
+- id: ja.activity.personality-description-enc-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.personality-desc
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email

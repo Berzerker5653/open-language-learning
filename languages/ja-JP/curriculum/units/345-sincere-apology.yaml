@@ -4,6 +4,21 @@ goal_id: ja.goal.b1.emotions-personality
 title: sincere apology
 summary: B1 language for sincere apology.
 estimated_minutes: 6
+# ADR-0037 task journey (JA-B1-003-JOURNEYS-001): input/scaffolded/independent
+# are this unit's stages; transfer is the next unit's listening check (context
+# change proven by the sentences this goal's units share); reuse is the goal's
+# phase-gated revision unit 839.
+task_sequence:
+  input: ja.activity.sincere-apology-enc
+  scaffolded: ja.activity.sincere-apology-cloze0
+  independent: ja.activity.sincere-apology-enc-write
+  transfer: ja.activity.deepened-gratitude-listen
+  reuse: ja.activity.personality-rev-write
+# ADR-0022 phase gate: this unit's lesson surfaces after the previous
+# journey unit's content reached `supported`.
+requires_unit:
+- unit: ja.unit.conflict-feelings
+  state: supported
 generation_contract:
   allowed_vocab:
   - ja.lex.emotion.shougi
@@ -16,13 +31,17 @@ generation_contract:
   - ja.sent.reply-email
   allowed_grammar:
   - ja.grammar.particle.object-wo
+  - ja.grammar.particle.possessive-no
+  - ja.grammar.particle.ni-destination
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.particle.subject-ga
   new_item_budget: 6
   validation_method: choice
 activities:
 - id: ja.activity.sincere-apology-enc
   type: encounter-read
   modality: reading
-  support_level: 5
+  support_level: 2
   content_refs:
   - ja.lex.emotion.shougi
   - ja.lex.emotion.houbi
@@ -83,3 +102,11 @@ activities:
   support_level: 2
   content_refs:
   - ja.sent.meeting-starts
+- id: ja.activity.sincere-apology-enc-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.apology
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
