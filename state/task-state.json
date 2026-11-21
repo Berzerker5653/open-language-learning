@@ -2253,8 +2253,7 @@
       "attempts": 1,
       "evidence": [
         "state/notes/CODING-STANDARDS-001.md",
-        "state/evidence/CODING-STANDARDS-001/gates.log",
-        "state/evidence/CODING-STANDARDS-001/gates.txt"
+        "state/evidence/CODING-STANDARDS-001/gates.log"
       ],
       "summary": "CODING_STANDARDS.md shipped at main (722b7bc): 62-line reviewer checklist, machine gates named only (26 items grounded in ci.yml/ci.sh/ids.rs), judgement-call list consolidated from AGENTS.md/docs/09/CONTRIBUTING.md. Remaining: protected AGENTS.md Coding-standard link — worker edit hard-blocked, hunk+resume recipe preserved in notes.",
       "notes": "Blocked on the protected-file step only (same shape as GLOSSARY-001). Owner-present session applies the notes hunk, runs validate_handoff, flips done per resume recipe.",
