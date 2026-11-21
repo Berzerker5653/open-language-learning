@@ -2795,6 +2795,22 @@ tasks:
   - "D5 — an empty composition submission records no ledger row and yields no offer (non-attempts are not wrong-word errors)."
   - "LANE gates green: fmt; cargo test -p lts-activity --lib form_errors; cargo test -p lts-storage --test error_ledger; scoped desktop lib tests; clippy -p lts-activity -p lts-desktop --all-targets -- -D warnings."
   required_for_desktop_1_0: false
+- id: FIX-ERR-SRS-LOOP-001-2
+  milestone: M8
+  priority: P1
+  title: Learner-facing error-offer surface — dictation/writing review offers, review-queue drill view, and the honest lexicon-context comment (review defects D3/D4)
+  dependencies:
+  - ERR-SRS-LOOP-001
+  - FIX-ERR-SRS-LOOP-001-1
+  read_first:
+  - state/evidence/REVIEW-ERR-SRS-LOOP-001/review.md
+  acceptance:
+  - "D3 — the dictation result view renders DictationResult.error_offers with an explicit accept affordance and the writing result view renders WritingGrade.offer with the same; wire changes are additive only, no existing DictationResult/WritingGrade field changes."
+  - "D3 — accepting an offer calls error_review_accept, and a review-queue drill view over the error_review_queue payload grades via error_review_grade (Again/Good, the same self-grade idiom the my-words drill uses)."
+  - "D3 — never silent: tests pin that rendering offers never calls error_review_accept; a review card exists only after an explicit accept."
+  - "D4 — the pack_sentence_text lexicon-context promise is made honest: a lexicon id (ru.lex.*) either resolves to its lexicon row's form text or the comment states the deferral; comment and behaviour must match."
+  - "LANE gates green: npx tsc --noEmit; npx vitest run; cargo fmt --all --check; cargo clippy -p lts-desktop --all-targets -- -D warnings; scoped cargo test where lib.rs is touched."
+  required_for_desktop_1_0: false
 - id: READABILITY-GATE-001
   milestone: M8
   priority: P1
@@ -2999,6 +3015,7 @@ execution_scope:
   - STORY-LISTEN-001
   - ERR-SRS-LOOP-001
   - FIX-ERR-SRS-LOOP-001-1
+  - FIX-ERR-SRS-LOOP-001-2
   - READABILITY-GATE-001
   - GRAMMAR-LABELS-001
   - UI-HYGIENE-001
