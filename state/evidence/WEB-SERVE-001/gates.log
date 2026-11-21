@@ -1,0 +1,53 @@
+WEB-SERVE-001 controller gate battery (takeover run, board card t_77fe5ea3, 2026-11-21)
+
+Context: takeover of t_59e5fefd (runs 105/106 both died at 80/80 with the lane
+~95% done). Lane lived in graft worktree /home/hunter/.hermes/cache/scratch/
+lts-serve-work (base b7586e6; lib.rs/Cargo.toml/Cargo.lock/App.tsx unchanged
+b7586e6..HEAD 3444c2a, graft valid). Main-tree serve.rs/bin/Cargo.toml/
+Cargo.lock verified byte-identical to the worktree copies before commit.
+
+== FINAL BATTERY (run personally in the worktree, CARGO_TARGET_DIR=<repo>/target) ==
+fmt            cargo fmt --all --check                      exit 0
+clippy         cargo clippy -p lts-desktop --all-targets -- -D warnings        exit 0
+clippy-serve   cargo clippy -p lts-desktop --all-targets --features serve -- -D warnings  exit 0
+tests no-serve cargo test -p lts-desktop --lib              173 passed; 38 failed (final-test-baseline.log)
+tests serve    cargo test -p lts-desktop --lib --features serve  183 passed; 38 failed (final-test-serve.log)
+
+Failure-set rule: serve-run FAILED set is EXACTLY equal to the no-serve
+baseline set (diff vs run-106's failed-baseline.txt: identical;
+final-failed-baseline.txt / final-failed-serve.txt). The 38 are the known
+worktree artifacts — gitignored reference-pack media (baked audio) exists
+only in the main tree; CI restores it from the catalog archives. Lane
+failures: 0. The 10 new serve::tests all pass (183 = 173 + 10).
+
+== FRONTEND (main tree; dirty frontend == lane files only) ==
+npx tsc --noEmit    exit 0
+npx vitest run      56 files / 456 tests passed (incl. new src/ipc.test.ts)
+
+== SMOKE (request-level, fresh LTS_DATA_DIR) ==
+smoke.log: capabilities (mode browser-serve, honest labels) / index marker
+injected (1) / create_profile(displayName) 200 / complete_onboarding 200 /
+available_packs 200 (3 packs) / home_state 200 / list_profiles 200;
+traversal /media/../etc/passwd (--path-as-is) AND percent-encoded form both
+404 (the run-106 probe read 200 only because curl collapsed `..` client-side
+into an SPA-fallback route — re-probed with --path-as-is here);
+public bind 141.101.1.1 refused; unknown command -> 422 "Command ... not found".
+Binary built from the exact lane tree (worktree), dist rebuilt from the lane
+frontend. Script: ~/.hermes/cache/scratch/serve-gates/smoke-final.sh.
+
+== COMMIT MECHANICS (shared tree with live IME WIP) ==
+Code commit 4ba842c: lib.rs staged via
+  sha=git hash-object -w <worktree lib.rs> (1002c8b0...) then
+  git update-index --cacheinfo 100644,$sha,... (HEAD+serve ONLY; the
+  IN-APP-IME-001 Rust-half WIP in lib.rs/packs.rs stayed unstaged, never
+  touched). Added: Cargo.toml, Cargo.lock, src/serve.rs, src/bin/lts-serve.rs,
+  src/ipc.ts, src/ipc.test.ts, App.tsx. Never git add lib.rs, never -A.
+Post-commit: git merge-file grafted the serve hunks into the dirty main-tree
+lib.rs (exit 0, zero conflicts; file keeps both IME (20 markers) and serve
+(wire_commands + SERVE_COMMAND_NAMES) hunks) so the IME lane's future commit
+carries this wiring. Hotspot stands (RUN 106 comment): 257ab85 shipped IME
+frontend; its Rust half is still the uncommitted WIP now rebased onto
+wire_commands — ime_candidates belongs to wire_commands only, NOT the
+SERVE_COMMAND_NAMES table.
+Run-105/106 raw gate logs preserved at ~/.hermes/cache/scratch/serve-gates/
+(gates1-5, baseline1, failed-*).

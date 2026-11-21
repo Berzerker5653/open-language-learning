@@ -2453,9 +2453,24 @@
       ],
       "summary": "docs/22_REMOTE_ACCESS.md ships the user guide per the 2026-11-21 survey decision: 5-step Tailscale desktop+phone walkthrough with QR sign-in and the https ts.net serve URL, LAN toggle + pairing PIN fallback with honest plain-HTTP mic limitation and a firewall step proven by probe (LAN fetch went blocked->200->blocked as a UFW rule came and went), one-page self-maintained Headscale appendix, and a prominent DO-NOT box (Cloudflare Tunnel = vendor sees plaintext + public probeable hostname; Funnel = public, no identity). Linked from the README docs table and the docs/13 Mobile section. Card said docs/19: verified taken (19/20/21), shipped as docs/22.",
       "notes": "Acceptance dry run on the live tailnet: second device fetched the served page over ts.net HTTPS, tailnet IP, and MagicDNS (all 200); phone device is enrolled but was offline, so the fetch leg ran from a second computer — stated honestly in the guide and dry-run.md. WEB-SERVE-001's uncommitted sibling lane untouched; docs/JSON/YAML-only diff, no cargo/tsc surface."
+    },
+    "WEB-SERVE-001": {
+      "task_id": "WEB-SERVE-001",
+      "title": "Serve-mode slice of WEB-001 — HTTP server plus single IPC adapter so a browser on a trusted network runs the app (pull-forward, tailnet-only)",
+      "status": "done",
+      "attempts": 3,
+      "updated": "2026-11-21",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/WEB-SERVE-001/gates.log",
+        "state/evidence/WEB-SERVE-001/smoke.log",
+        "state/notes/WEB-SERVE-001.md"
+      ],
+      "summary": "Serve mode shipped as code commit 4ba842c: opt-in `serve` feature + lts-serve binary bridging fetch('/api/<command>') to the SAME command wiring the desktop installs (run()/serve share wire_commands; the five AppHandle-coupled commands route to the same *_report/*_at cores, smoke_ack refused); single frontend IPC adapter (src/ipc.ts + detectInvoke) activated only by the server-injected __LTS_SERVE marker; capabilities endpoint + rendered notice label browser limits honestly (mic needs secure context, no install progress), stored mic/privacy settings never rewritten; binds restricted to loopback/RFC1918/tailnet with public binds refused and media traversal blocked. Request-level smoke from a fresh LTS_DATA_DIR green end-to-end. Board runs 105/106 of the parent died 80/80 with the lane ~95% done; takeover card re-ran the full LANE battery in the graft worktree (fmt 0, clippy default+serve 0, lib test failure set exactly == no-serve baseline, 10 new serve tests pass; tsc 0, vitest 456/456) and committed via cacheinfo graft so the IN-APP-IME-001 Rust-half WIP stayed unstaged; serve hunks then merge-file-grafted into the dirty main-tree lib.rs for the IME lane.",
+      "notes": "Lanes: apps/desktop/src-tauri (Cargo.toml feature+bin, src/serve.rs, src/bin/lts-serve.rs, lib.rs wire_commands/wire_serve_commands+SERVE_COMMAND_NAMES), apps/desktop/src (ipc.ts, ipc.test.ts, App.tsx). WEB-001 stays open (SEC sign-off, full WEB acceptance) — this card is the pull-forward slice; runbook + SEC-sign-off posture in state/notes/WEB-SERVE-001.md. Hotspot: lib.rs shared with the uncommitted IN-APP-IME-001 Rust half, now rebased onto wire_commands (ime_candidates belongs to wire_commands, NOT the serve table)."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
   "current_release_candidate": "Packs: ja-JP 0.4.3 (published 2026-11-09) and ru-RU 0.4.5 (published 2026-11-20) — manifests and catalog/packs.json pins agree (re-measured 2026-11-20, state/evidence/DOC-CONTRACT-RECONCILE-001/audit-2026-11-20.md); the 0.4.4/0.4.2/0.4.1/0.4.0 releases stay live as immutable rollback targets. App: newest published artifact is still open-language-learning-platform-0.4.0-alpha.1 (2026-10-13, Linux pre-release); code identity is 0.4.3-alpha.1 and unpublished — next-artifact decision is owner action O-06. Nothing in the build consumes this field; it is documentation.",
-  "updated_at": "2026-11-21T08:41:46-07:00"
+  "updated_at": "2026-11-21T16:06:25-07:00"
 }

@@ -2936,6 +2936,21 @@ tasks:
   - one-page Headscale appendix labeled self-maintained, plus a prominent DO-NOT box stating Cloudflare Tunnel and Tailscale Funnel are public publishing, with the survey one-line why
   - guide linked from the README docs table and docs/13, and its mechanics verified by an on-tailnet dry run recorded under state/evidence/REMOTE-ACCESS-DOCS-001/
   required_for_desktop_1_0: false
+- id: WEB-SERVE-001
+  milestone: M11
+  priority: P1
+  title: Serve-mode slice of WEB-001 — HTTP server plus single IPC adapter so a browser on a trusted network runs the app (pull-forward, tailnet-only)
+  dependencies: []
+  read_first:
+  - docs/07_TECHNICAL_ARCHITECTURE.md
+  - state/notes/WEB-SERVE-001.md
+  acceptance:
+  - an opt-in serve feature and lts-serve binary reuse the exact desktop command wiring through shared wire_commands (the five AppHandle-coupled commands route to the same core functions), so no command logic is duplicated
+  - one frontend IPC adapter module routes invokes to fetch on /api/<command> only when the server-injected serve marker is present, keeping the Tauri and vitest paths unchanged
+  - a capabilities endpoint plus a rendered notice label browser-unavailable features honestly (mic needs a secure context, no install-progress streaming), and serve mode never rewrites stored mic or privacy settings
+  - the server binds only loopback, RFC1918 or tailnet addresses, refuses public binds, and blocks media path traversal
+  - a request-level playtest from a fresh data dir completes capabilities, profile create, onboarding, pack list and home state in state/evidence/WEB-SERVE-001/smoke.log
+  required_for_desktop_1_0: false
 - id: GLOSSARY-001
   milestone: M8
   priority: P2
@@ -3079,6 +3094,7 @@ execution_scope:
   - SESSION-CHROME-001
   - SESSION-TIMER-001
   - PROGRESS-STATS-001
+  - WEB-SERVE-001
   - GLOSSARY-001
   - CODING-STANDARDS-001
   public_publication_authorized: false

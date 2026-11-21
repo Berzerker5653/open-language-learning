@@ -1,0 +1,6 @@
+=== fmt ===
+fmt exit 0
+=== clippy default ===
+clippy-default exit 0
+=== clippy serve ===
+clippy-serve exit 0

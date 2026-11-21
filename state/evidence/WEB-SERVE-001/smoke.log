@@ -1,0 +1,39 @@
+
+$ GET /api/capabilities
+{"commands":"all desktop commands share one wiring (wire_commands); installs run identically without progress events","install_progress_events":false,"install_progress_note":"the desktop streams install stages; in browser mode the result appears when the call lands","microphone_capture":"needs a secure context (https or localhost); over a plain tailnet http URL the browser blocks mic capture, so scoring features are labeled unavailable","mode":"browser-serve","network":"trusted-network assumption; SEC sign-off is a later WEB-001 concern (state/notes/WEB-SERVE-001.md)","privacy_modes":"unchanged — serve mode never rewrites stored mic/privacy settings, it only labels what the browser can do"}
+
+$ GET / (served index must carry the serve marker; count of marker occurrences)
+1
+
+$ POST /api/create_profile
+{"id":"prof-c40f50fd-86f5-41b6-9a06-e9e7857c4224","display_name":"Smoke Learner","pack":null,"band":null,"due_count":null,"last_studied":null,"hidden":false}
+
+
+$ POST /api/complete_onboarding (profile prof-c40f50fd-86f5-41b6-9a06-e9e7857c4224, packId null, mic off)
+null [200]
+
+$ POST /api/available_packs (pack list)
+[{"pack_id":"org.openlanguage.ja-jp.reference","display_name":"Japanese Reference Pack","locale":"ja-JP","maturity":"experimental","rtl":false},{"pack_id":"org.openlanguage.ru-ru.reference","display_name":"Russian Reference Pack","locale":"ru-RU","maturity":"experimental","rtl":false},{"pack_id":"org.openlanguage.eo-demo","display_name":"Esperanto — original demo (unreviewed)","locale":"eo","maturity":"community","rtl":false}] [200]
+
+
+$ POST /api/home_state (fresh profile home)
+{"display_name":"Smoke Learner","plan":{"items":[],"total_seconds":0,"budget_minutes":5,"seed":0,"planner_version":"session-planner-0.1.0"},"next_goal":null} [200]
+
+
+$ POST /api/list_profiles (resume-at-launch state)
+[{"id":"prof-c40f50fd-86f5-41b6-9a06-e9e7857c4224","display_name":"Smoke Learner","pack":null,"band":null,"due_count":0,"last_studied":null,"hidden":false}]
+
+$ GET /media/../etc/passwd with --path-as-is (server must reject traversal: expect 404)
+status 404
+
+$ GET /media/%2e%2e%2f%2e%2e%2fetc%2fpasswd percent-encoded traversal (expect 404)
+status 404
+
+$ public-bind refusal proof
+lts-serve: refusing to bind 141.101.1.1:17999: lts-serve only binds loopback, RFC1918, or tailnet (100.64.0.0/10) addresses — no public exposure (WEB-SERVE-001 scope 5)
+
+SERVER LOG (first 2 lines):
+lts-serve listening on http://127.0.0.1:17631 (trusted network only)
+
+$ unknown command rejection (POST /api/not_a_command)
+{"error":"Command not_a_command not found"} [422]
