@@ -90,6 +90,9 @@ describe("content confirmation on the paragraph reader (CONTENT-CONFIRM-001, REA
     expect(app.engine.lastArgsFor("word_card")).toEqual({
       profileId: "dana",
       sentenceId: "ja.sent.journeys.confirm.1",
+      // VOCAB-BUILDER-001 (merged): the reader carries the story it is
+      // reading so the tap can log its encounter context.
+      storyId: "ja.story.journeys.confirmation",
       token: "きょうしつ",
     });
     expect(app.engine.lastArgsFor("story_word_audio")).toEqual({
