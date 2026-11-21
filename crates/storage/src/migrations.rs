@@ -22,6 +22,8 @@
 //!    (CONTENT-CONFIRM-001, ADR-0040).
 //! 7. `error_ledger` + `error_review_cards` — the error memory loop
 //!    (ERR-SRS-LOOP-001).
+//! 8. `word_lookups` — automatic vocabulary builder ledger
+//!    (VOCAB-BUILDER-001).
 //! 9. `profiles.hidden` — archived profiles stay on disk but leave the
 //!    chooser (UI-HYGIENE-001, visual-ui-audit U13).
 
