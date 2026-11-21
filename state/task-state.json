@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-20",
-  "active_task": "CODING-STANDARDS-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2249,14 +2249,37 @@
       "notes": "Authoring card per ADR-0037 + R12 lineage (UPPERBAND-TASK-JOURNEYS-001). Files: curriculum/units/*.yaml."
     },
     "CODING-STANDARDS-001": {
-      "status": "in_progress",
+      "status": "blocked",
       "attempts": 1,
       "evidence": [
         "state/notes/CODING-STANDARDS-001.md",
         "state/evidence/CODING-STANDARDS-001/gates.log"
       ],
       "summary": "CODING_STANDARDS.md shipped at main (722b7bc): 62-line reviewer checklist, machine gates named only (26 items grounded in ci.yml/ci.sh/ids.rs), judgement-call list consolidated from AGENTS.md/docs/09/CONTRIBUTING.md. Remaining: protected AGENTS.md Coding-standard link — worker edit hard-blocked, hunk+resume recipe preserved in notes.",
-      "notes": "Blocked on the protected-file step only (same shape as GLOSSARY-001). Owner-present session applies the notes hunk, runs validate_handoff, flips done per resume recipe."
+      "notes": "Blocked on the protected-file step only (same shape as GLOSSARY-001). Owner-present session applies the notes hunk, runs validate_handoff, flips done per resume recipe.",
+      "blocker": "Shipped through 722b7bc; remaining step is the protected AGENTS.md Coding-standard link — headless workers hard-block on agent-instruction edits (same shape as GLOSSARY-001). Exact hunk + numbered resume recipe in state/notes/CODING-STANDARDS-001.md; an owner-present session applies it and flips done.",
+      "updated": "2026-11-20"
+    },
+    "ERR-SRS-LOOP-001": {
+      "status": "done",
+      "attempts": 2,
+      "evidence": [
+        "state/notes/ERR-SRS-LOOP-001.md",
+        "state/evidence/ERR-SRS-LOOP-001/gates.log",
+        "state/evidence/ERR-SRS-LOOP-001/clippy-lts-activity.log",
+        "state/evidence/ERR-SRS-LOOP-001/clippy-lts-scheduler.log",
+        "state/evidence/ERR-SRS-LOOP-001/clippy-lts-storage.log",
+        "state/evidence/ERR-SRS-LOOP-001/clippy-lts-desktop.log",
+        "state/evidence/ERR-SRS-LOOP-001/test-lts-activity.log",
+        "state/evidence/ERR-SRS-LOOP-001/test-lts-scheduler.log",
+        "state/evidence/ERR-SRS-LOOP-001/test-lts-storage.log",
+        "state/evidence/VOCAB-BUILDER-001/takeover-test-lts-desktop-maintree.log",
+        "state/evidence/VOCAB-BUILDER-001/takeover-baseline-head-desktop.log",
+        "state/evidence/VOCAB-BUILDER-001/takeover-clippy-2.log"
+      ],
+      "summary": "ERR-SRS-LOOP-001: error memory loop shipped — pymorphy-sidecar form-error classifier (case/aspect/stress/agreement/wrong-word + honest other/no-claim) in lts-activity; per-profile error_ledger + accepted-only error_review_cards in storage (migration v7, export bundle v4 round-trip, pre-v4 import compat); explicit per-form review OFFERS on dictation/speaking-check misses and composition grading (never silent), accepted cards scheduled via the existing FSRS path under the fsrs-spike-0.1.0+error partition and drilled with their exact context sentence; recurrence feeds personalize_progression INPUT ONLY, capped at 3 and tie-break-only (no-calibration-claims preserved). Local-only, no new network calls.",
+      "notes": "Attempt 1 (board timeout) left the lane uncommitted; attempt 2 verified it, fixed 4 real gate defects (record_error arity, 6 stale DictationAttempt fixtures, move-after-move, ErrorSink refactor for too_many_arguments x2) and 2 card-mandated assertion updates (export v4, migration history v7). Desktop suite green in HEAD worktree + lane files (main tree red only from a sibling lane's uncommitted ja-JP pack WIP: 154 audio-addressable items with manifest rows removed — errors name ja.lex.* content, zero lane files involved).",
+      "updated": "2026-11-20"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

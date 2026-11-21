@@ -1,0 +1,12 @@
+    Checking lts-domain v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-vocab-work/crates/domain)
+    Checking lts-security v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-vocab-work/crates/security)
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/.hermes/cache/scratch/lts-vocab-work/apps/desktop/src-tauri)
+    Checking lts-speech-api v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-vocab-work/crates/speech-api)
+    Checking lts-speech-runtime v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-vocab-work/crates/speech-runtime)
+    Checking lts-learner-model v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-vocab-work/crates/learner-model)
+    Checking lts-storage v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-vocab-work/crates/storage)
+    Checking lts-langpack v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-vocab-work/crates/langpack)
+    Checking lts-scheduler v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-vocab-work/crates/scheduler)
+    Checking lts-world v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-vocab-work/crates/world)
+    Checking lts-activity v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-vocab-work/crates/activity)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 7.64s
