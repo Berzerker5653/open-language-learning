@@ -1397,7 +1397,7 @@
     },
     "JA-B2-002": {
       "task_id": "JA-B2-002",
-      "status": "blocked",
+      "status": "pending",
       "attempts": 1,
       "title": "Qualified Japanese content review — B2",
       "activity": "idle",
@@ -1412,7 +1412,8 @@
         "languages/ja-JP/review/WORKLIST-2026-10-14.md"
       ],
       "updated": "2026-10-20",
-      "blocker": "Blocked by the owner's permanent posture (ADR-0040, 2026-10-20): the project seeks no external qualified review. This card stays blocked as the honest record that expert review has not happened and will not; content is AI-authored with machine gates, and only in-app attributed community confirmation (CONTENT-CONFIRM-001) can ever mark content confirmed."
+      "blocker": "Blocked by the owner's permanent posture (ADR-0040, 2026-10-20): the project seeks no external qualified review. This card stays blocked as the honest record that expert review has not happened and will not; content is AI-authored with machine gates, and only in-app attributed community confirmation (CONTENT-CONFIRM-001) can ever mark content confirmed.",
+      "note": "Unblocked 2026-11-21: JA-B2-001 authoring shipped (1127730 + B2 story slate); band review proceeding agent-performed."
     },
     "ACC-001": {
       "task_id": "ACC-001",
@@ -2370,5 +2371,5 @@
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
   "current_release_candidate": "Packs: ja-JP 0.4.3 (published 2026-11-09) and ru-RU 0.4.5 (published 2026-11-20) — manifests and catalog/packs.json pins agree (re-measured 2026-11-20, state/evidence/DOC-CONTRACT-RECONCILE-001/audit-2026-11-20.md); the 0.4.4/0.4.2/0.4.1/0.4.0 releases stay live as immutable rollback targets. App: newest published artifact is still open-language-learning-platform-0.4.0-alpha.1 (2026-10-13, Linux pre-release); code identity is 0.4.3-alpha.1 and unpublished — next-artifact decision is owner action O-06. Nothing in the build consumes this field; it is documentation.",
-  "updated_at": "2026-11-21T07:35:00-07:00"
+  "updated_at": "2026-11-21T08:41:46-07:00"
 }
