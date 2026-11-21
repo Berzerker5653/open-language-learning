@@ -63,3 +63,48 @@ test: 0 error(s), 0 warning(s)
 exit: 0
 ----- task-sequence findings on goal 2-3 units (expect none) -----
 findings-grep exit: 1 (1 = none)
+== lane-gate battery (worktree at 0b81570 + this run's 64 unit files: goals education-academic, technology, culture-tradition, society-rules; media restored in worktree; main tree excluded - sibling lts-b1fix-bake live media writer) ==
+2026-11-20T17:15:18-07:00
+===== langpack validate =====
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 0 warning(s)
+exit: 0
+===== langpack lint =====
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+lint: 0 error(s), 0 warning(s)
+exit: 0
+===== langpack audit-curriculum =====
+audit-curriculum: 0 error(s), 0 warning(s)
+exit: 0
+===== langpack test =====
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+test: 0 error(s), 0 warning(s)
+exit: 0
+===== content-template task-sequence audit (my units) =====
+  [task-sequence-unrunnable] unit ja.unit.b1-repair-clarify (band b1): role transfer activity ja.activity.b1-repair-paraphrase-check (recall-choice/reading) has no engine runner in activity_runner
+  [task-sequence-no-context-change] unit ja.unit.b1-repair-clarify (band b1): transfer activity ja.activity.b1-repair-paraphrase-check names no scenario_id and lives in this unit
+  [task-sequence-no-reuse] unit ja.unit.b1-repair-clarify (band b1): delayed reuse unproven: reuse activity ja.activity.b1-repair-recall-later names an activity of this unit
+  [task-sequence-no-context-change] unit ja.unit.b1-repair-workplace (band b1): transfer activity ja.activity.b1-repair-work-confirm names no scenario_id and lives in this unit
+  [task-sequence-no-reuse] unit ja.unit.b1-repair-workplace (band b1): delayed reuse unproven: reuse activity ja.activity.b1-repair-work-recall-later names an activity of this unit
+  [task-sequence-unrunnable] unit ja.unit.b1-discourse-connect (band b1): role transfer activity ja.activity.b1-disc-choice (recall-choice/reading) has no engine runner in activity_runner
+  [task-sequence-no-context-change] unit ja.unit.b1-discourse-connect (band b1): transfer activity ja.activity.b1-disc-choice names no scenario_id and lives in this unit
+  [task-sequence-no-reuse] unit ja.unit.b1-discourse-connect (band b1): delayed reuse unproven: reuse activity ja.activity.b1-disc-recall-later names an activity of this unit
+  [task-sequence-unrunnable] unit ja.unit.b1-news-reading (band b1): role transfer activity ja.activity.b1-news-choice (recall-choice/reading) has no engine runner in activity_runner
+  [task-sequence-no-context-change] unit ja.unit.b1-news-reading (band b1): transfer activity ja.activity.b1-news-choice names no scenario_id and lives in this unit
+  [task-sequence-no-reuse] unit ja.unit.b1-news-reading (band b1): delayed reuse unproven: reuse activity ja.activity.b1-news-recall-later names an activity of this unit
+  [task-sequence-no-reuse] unit ja.unit.b2-register-polite-phone (band b2): delayed reuse unproven: reuse activity ja.activity.b2reg-phone-recall-later names an activity of this unit
+  [task-sequence-unrunnable] unit ja.unit.b2-register-formal-writing (band b2): role transfer activity ja.activity.b2reg-formal-choice (recall-choice/reading) has no engine runner in activity_runner
+  [task-sequence-no-context-change] unit ja.unit.b2-register-formal-writing (band b2): transfer activity ja.activity.b2reg-formal-choice names no scenario_id and lives in this unit
+  [task-sequence-no-reuse] unit ja.unit.b2-register-formal-writing (band b2): delayed reuse unproven: reuse activity ja.activity.b2reg-formal-recall-later names an activity of this unit
+  [task-sequence-unrunnable] unit ja.unit.b2-register-casual-opinions (band b2): role transfer activity ja.activity.b2reg-casual-choice (recall-choice/reading) has no engine runner in activity_runner
+  [task-sequence-no-context-change] unit ja.unit.b2-register-casual-opinions (band b2): transfer activity ja.activity.b2reg-casual-choice names no scenario_id and lives in this unit
+  [task-sequence-no-reuse] unit ja.unit.b2-register-casual-opinions (band b2): delayed reuse unproven: reuse activity ja.activity.b2reg-casual-recall-later names an activity of this unit
+  [task-sequence-no-reuse] unit ja.unit.b2-register-honorific-office (band b2): delayed reuse unproven: reuse activity ja.activity.b2reg-hon-recall-later names an activity of this unit

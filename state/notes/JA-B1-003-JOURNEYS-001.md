@@ -82,13 +82,29 @@ health-wellness — 15 legacy units each):
 - [x] work-professional (220-234 + 235 revision) — lane commit: see git log pack(ja) JA-B1-003-JOURNEYS-001
 - [x] media-news (250-264 + 831 revision)
 - [x] storytelling (385-399 + 832 revision)
-- [ ] education-academic (units 235-249 — NOTE: 235 collides with the new work-professional revision file number; the education units keep their existing names, new revision files live at 833+)
-- [ ] technology
-- [ ] culture-tradition
-- [ ] society-rules
+- [x] education-academic (235-249 + 833 revision) — run 2
+- [x] technology (265-279 + 834 revision) — run 2
+- [x] culture-tradition (280-294 + 835 revision) — run 2
+- [x] society-rules (295-309 + 836 revision) — run 2
 - [ ] environment
 - [ ] travel-extended
 - [ ] emotions-personality
 - [ ] advice-opinion
 - [ ] comparison-debate
 - [ ] health-wellness
+
+## Run 2 addendum (2026-11-20): the transform is scripted
+
+Run 2 replaced the manual per-unit recipe with a script:
+`state/evidence/JA-B1-003-JOURNEYS-001/j001_transform.py` (committed copy;
+the diff-shape it emits is byte-consistent with run 1's commits). Per goal it
+asserts the shared-pair transfer proof, picks a collision-free revision number
+(833+) and rev prefix, detects allowed_grammar from sentence romaji, replaces
+bogus activity grammar refs with subject-ga, and writes the revision unit.
+Run `python3 j001_transform.py <goal-short>` (dry run) then `--apply`.
+One battery run covers the whole goal-set (64-file copy into the lts-j001-wt
+worktree detached at current main — `git checkout -f --detach` first, the
+worktree stays dirty from the previous set; media survives, it is gitignored).
+Grammar-detector honesty: conservative romaji-token patterns, ai-assisted
+grading; bogus b1.* concepts were never in the units' sentences (all 12 run-2
+replacements verified sentence-by-sentence by the script's assertion).

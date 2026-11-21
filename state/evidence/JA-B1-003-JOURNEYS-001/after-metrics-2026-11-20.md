@@ -45,3 +45,28 @@ Remaining legacy goals: media-news, storytelling,
 education-academic, technology, culture-tradition, society-rules, environment,
 travel-extended, emotions-personality, advice-opinion, comparison-debate, health-wellness
 (12 × 15 units). Resume recipe: `state/notes/JA-B1-003-JOURNEYS-001.md`.
+
+## Run 2 (2026-11-20, goal-set A) — scripted transform, four goals
+Goals education-academic (235-249 + 833 revision), technology (265-279 + 834),
+culture-tradition (280-294 + 835), society-rules (295-309 + 836):
+60 units re-shaped + 4 revision units created. Per goal: 15 task_sequences
+(all five roles engine-runnable), 15 requires_unit linear gates (units 2-15),
+15 lv5->2 encounter demotions, 15 new lv0 recall/writing stages; listen-and-choose
+audio pairs untouched at 3; allowed_grammar re-set per sentence-detected concepts
+(romaji-token detector over the units' contract sentences, goal-1 precedent).
+False grammar activity refs replaced with subject-ga on: 237/238/245/248
+(to-iu-toka, you-form-volitional, kedo-keredo, rashii-sou-youda); 273/278
+(onaji-chigai, te-iku-te-kuru); 285/288 (maeni-ato-de, ba-formal);
+296/298/307/308 (ukemi-indirect, dake-bakari-shika, azu-ni, toba-conditional).
+wo-only contracts in these goals: 48 -> 0. Shared-pair proof (meeting-starts +
+reply-email in every unit) asserted per unit by the transform script.
+4/4 gates 0 errors 0 warnings + zero task-sequence audit findings on lane units
+(one battery run covering all four goals; see gates.log run-2 block).
+
+Band-wide counters after run 2 (measured over all units whose goal_id is one of
+the 13 legacy B1 goals, including work-notice + revision units): units 207,
+task_seq 108, support_level-5 92 (of which 2 sit in the 821/822 work-notice
+units, outside the legacy 15-unit families), wo-only contracts 72,
+support_level-0 activities 119.
+Remaining legacy goals: environment, travel-extended, emotions-personality,
+advice-opinion, comparison-debate, health-wellness (6 x 15 units).
