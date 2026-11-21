@@ -2370,6 +2370,22 @@
       ],
       "summary": "Zero real rot. The flagged 37 failures are environment noise: measured in a scratch worktree where the 4,935 gitignored ja-JP wavs are absent, and pack-archive bakes refuse missing declared media by design (ADR-0016/ADR-0024). Main-tree full lib suite green at 56ee3e8 (207 passed / 0 failed / 2 ignored, exit 0, unpiped); same HEAD in a clean worktree reds exactly that family (38 = 37 + 1 suite-growth), all panics trace to the media-absence guards. No engine/validator/test change needed or made.",
       "notes": "Board card t_765fb6ab. Upstream evidence never recorded the 37 NAMES (process gap) - reconstructed by worktree-vs-main failure-set diff. Honest expectation: cargo test -p lts-desktop --lib is green only where bundle media is on disk (main tree or CI after the media-restore step)."
+    },
+    "SESSION-TIMER-001": {
+      "task_id": "SESSION-TIMER-001",
+      "title": "Session timer honesty — tested start-of-session estimate, no \"0 minutes\" readings (owner dogfood 2026-11-21)",
+      "status": "done",
+      "attempts": 0,
+      "updated": "2026-11-21",
+      "dependencies": [
+        "SESSION-CHROME-001"
+      ],
+      "evidence": [
+        "state/evidence/SESSION-TIMER-001/close-note.md",
+        "state/evidence/SESSION-TIMER-001/gates.log"
+      ],
+      "summary": "Card premise (\"0 min left\" at session start) re-verified against the two dogfood screenshots and does not reproduce — both read \"1 of 9 · ~9 min left\" under tesseract psm7/8/13 + digit whitelist + 8x glyph vision. Fixed the real gaps the card named: remaining-time derivation extracted from App publishSession into tested remainingPlanSeconds (full queue at start, drops completed, unpriced→hidden, ~1 floor), and new planMinutesLabel kills the producible \"about 0 minutes\" in the plan summary and begin CTA (unpriced→no figure, <30s→\"under a minute\", singular \"about 1 minute\"). 8 new vitest tests; tsc 0; full frontend suite 52 files / 420 tests green; 0 new prettier deltas.",
+      "notes": "Frontend-only lane: session-chrome.tsx, home.tsx, App.tsx + their tests. No crates touched, no cargo gates. home.tsx and session-chrome.test.tsx are pre-existing prettier-dirty at HEAD; lane hunks prettier-clean, rest left alone. \"1 activities\" plural grammar left out of scope deliberately."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

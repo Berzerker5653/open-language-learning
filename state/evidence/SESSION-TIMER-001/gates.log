@@ -1,0 +1,26 @@
+SESSION-TIMER-001 lane gate battery — controller-run at commit time, 2026-11-21 (worker t_949aca0f)
+
+Frontend-only lane (apps/desktop/src: session-chrome.tsx, session-chrome.test.tsx, home.tsx, home.test.tsx, App.tsx). No crate or src-tauri file touched — no cargo gates apply.
+
+== npx tsc --noEmit
+exit=0
+
+== npx vitest run (full frontend suite)
+Test Files  52 passed (52)
+Tests  420 passed (420)
+(includes the 8 new SESSION-TIMER-001 tests)
+
+== npx vitest run src/session-chrome.test.tsx src/home.test.tsx src/a11y.test.tsx (mid-lane check)
+Test Files  3 passed (3)
+Tests  108 passed (108)
+
+== prettier (repo has pre-existing dirty files; gate = zero NEW deltas from this lane)
+for each touched file: diff(unified(prettier(tree), tree), unified(prettier(HEAD), HEAD)) = 0 new lines
+touched: home.tsx, session-chrome.test.tsx, home.test.tsx, session-chrome.tsx, App.tsx — all 0 new deltas.
+(home.tsx and session-chrome.test.tsx were already prettier-dirty at HEAD; left untouched outside lane hunks.)
+
+== screenshot re-verification (card premise)
+python3 + PIL crop of the chrome row (y190-245) from both DOGFOOD-2026-11-21 screenshots; tesseract psm 7/13/8 and digit whitelist; 8x LANCZOS upscale vision glyph check.
+complaint-01-session-screen.png: "1 of 9 · ~9 min left"
+complaint-04-case-quiz.png:     "1 of 9 · ~9 min left"
+digit whitelist pass: "109~9" — no 0 digit in the row.

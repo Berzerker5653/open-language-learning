@@ -2880,6 +2880,20 @@ tasks:
   - no scoring language appears on guided/formative activities; the graded/formative distinction is encoded as a badge on mode cards, not prose only
   - desktop vitest + cargo lib tests cover the new chrome components
   required_for_desktop_1_0: false
+- id: SESSION-TIMER-001
+  milestone: M8
+  priority: P2
+  title: Session timer honesty — tested start-of-session estimate and no "0 minutes" readings (owner dogfood 2026-11-21)
+  dependencies:
+  - SESSION-CHROME-001
+  read_first:
+  - docs/visual-ui-audit-2026-11.md
+  - state/evidence/SESSION-TIMER-001/close-note.md
+  acceptance:
+  - the header's remaining-time estimate derives from the engine's per-item prices for the queue still to work and is unit-tested at session start and mid-session, so the first question shows a real estimate
+  - no learner-facing session string reads 0 minutes at start — an unpriced plan shows no time figure, a sub-half-minute plan says under a minute, and a positive remainder never drops below ~1 min left
+  - frontend lane gates green (tsc, full desktop vitest, no new prettier deltas)
+  required_for_desktop_1_0: false
 - id: PROGRESS-STATS-001
   milestone: M8
   priority: P2
@@ -3034,6 +3048,7 @@ execution_scope:
   - GRAMMAR-LABELS-001
   - UI-HYGIENE-001
   - SESSION-CHROME-001
+  - SESSION-TIMER-001
   - PROGRESS-STATS-001
   - GLOSSARY-001
   - CODING-STANDARDS-001
