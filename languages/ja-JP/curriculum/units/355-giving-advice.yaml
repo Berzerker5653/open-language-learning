@@ -4,6 +4,16 @@ goal_id: ja.goal.b1.advice-opinion
 title: giving advice
 summary: B1 language for giving advice.
 estimated_minutes: 6
+# ADR-0037 task journey (JA-B1-003-JOURNEYS-001): input/scaffolded/independent
+# are this unit's stages; transfer is the next unit's listening check (context
+# change proven by the sentences this goal's units share); reuse is the goal's
+# phase-gated revision unit 840.
+task_sequence:
+  input: ja.activity.giving-advice-enc
+  scaffolded: ja.activity.giving-advice-cloze0
+  independent: ja.activity.giving-advice-enc-write
+  transfer: ja.activity.soft-advice-listen
+  reuse: ja.activity.opinion-rev-write
 generation_contract:
   allowed_vocab:
   - ja.lex.advice.sagen
@@ -16,13 +26,17 @@ generation_contract:
   - ja.sent.reply-email
   allowed_grammar:
   - ja.grammar.particle.object-wo
+  - ja.grammar.particle.ni-destination
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.particle.possessive-no
   new_item_budget: 6
   validation_method: choice
 activities:
 - id: ja.activity.giving-advice-enc
   type: encounter-read
   modality: reading
-  support_level: 5
+  support_level: 2
   content_refs:
   - ja.lex.advice.sagen
   - ja.lex.advice.sansei
@@ -83,3 +97,11 @@ activities:
   support_level: 2
   content_refs:
   - ja.sent.meeting-starts
+- id: ja.activity.giving-advice-enc-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.give-advice
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email

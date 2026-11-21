@@ -1,0 +1,77 @@
+# ai-assisted draft unit (JA-B1-003-JOURNEYS-001: delayed-reuse stage closing the legacy B1
+# advice-opinion journey family 355-369); content refs are existing pack data; qualified
+# review pending.
+id: ja.unit.advice-opinion-revision
+goal_id: ja.goal.b1.advice-opinion
+title: "Review: advice opinion language"
+summary: Delayed reuse of the sentences shared across the advice opinion journey units, plus unit sentences.
+estimated_minutes: 7
+# K-70/ADR-0022 phase gate: the revision surfaces only after the journey units' content
+# reached `supported`; this is the reuse stage named by every unit's task_sequence, and the
+# transfer target for the last unit.
+requires_unit:
+- unit: ja.unit.giving-advice
+  state: supported
+- unit: ja.unit.soft-advice
+  state: supported
+- unit: ja.unit.opinion-structure
+  state: supported
+- unit: ja.unit.partial-agreement
+  state: supported
+- unit: ja.unit.polite-disagreement
+  state: supported
+- unit: ja.unit.gentle-persuasion
+  state: supported
+- unit: ja.unit.suggestion-forms
+  state: supported
+- unit: ja.unit.polite-warnings
+  state: supported
+- unit: ja.unit.expressing-regret
+  state: supported
+- unit: ja.unit.expressing-hope
+  state: supported
+- unit: ja.unit.explaining-preference
+  state: supported
+- unit: ja.unit.stating-priorities
+  state: supported
+- unit: ja.unit.compromise-writing
+  state: supported
+- unit: ja.unit.decision-talk
+  state: supported
+- unit: ja.unit.reflection-essay
+  state: supported
+activities:
+- id: ja.activity.opinion-rev-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.opinion-rev-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.opinion-rev-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+generation_contract:
+  allowed_vocab:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  - ja.lex.advice.sagen
+  - ja.lex.advice.sansei
+  allowed_grammar:
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.particle.object-wo
+  - ja.grammar.particle.possessive-no
+  new_item_budget: 2
+  validation_method: choice
