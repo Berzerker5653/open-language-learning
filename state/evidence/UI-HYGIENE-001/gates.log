@@ -1,0 +1,37 @@
+== cargo fmt --all --check ==
+2026-11-21T07:00:05-07:00
+exit: 0
+===== START fmt 2026-11-21T07:10:07-07:00
+----- fmt exit=0 2026-11-21T07:10:08-07:00
+===== START clippy-desktop 2026-11-21T07:10:08-07:00
+----- clippy-desktop exit=0 2026-11-21T07:10:12-07:00
+===== START clippy-storage 2026-11-21T07:10:12-07:00
+----- clippy-storage exit=0 2026-11-21T07:10:13-07:00
+===== START test-storage 2026-11-21T07:10:13-07:00
+----- test-storage exit=101 2026-11-21T07:10:16-07:00
+===== START test-desktop-lib 2026-11-21T07:10:16-07:00
+----- test-desktop-lib exit=0 2026-11-21T07:14:02-07:00
+===== START py-audit 2026-11-21T07:14:02-07:00
+----- py-audit exit=0 2026-11-21T07:14:02-07:00
+===== START tsc 2026-11-21T07:14:02-07:00
+----- tsc exit=1 2026-11-21T07:14:03-07:00
+===== START vitest 2026-11-21T07:14:03-07:00
+----- vitest exit=127 2026-11-21T07:14:03-07:00
+===== START test-storage-fixed 2026-11-21T07:14:14-07:00
+----- test-storage-fixed exit=101 2026-11-21T07:14:17-07:00
+===== START tsc 2026-11-21T07:14:17-07:00
+----- tsc exit=0 2026-11-21T07:14:17-07:00
+===== START vitest 2026-11-21T07:14:17-07:00
+----- vitest exit=0 2026-11-21T07:14:19-07:00
+===== START test-storage-final 2026-11-21T07:14:56-07:00
+----- test-storage-final exit=0 2026-11-21T07:15:00-07:00
+===== START fmt-final 2026-11-21T07:15:15-07:00
+----- fmt-final exit=1 2026-11-21T07:15:15-07:00
+===== START clippy-storage-final 2026-11-21T07:15:15-07:00
+----- clippy-storage-final exit=0 2026-11-21T07:15:16-07:00
+===== START fmt-v2 2026-11-21T07:15:27-07:00
+----- fmt-v2 exit=0 2026-11-21T07:15:28-07:00
+===== START test-storage-v2 2026-11-21T07:15:28-07:00
+----- test-storage-v2 exit=0 2026-11-21T07:15:31-07:00
+===== START clippy-storage-v2 2026-11-21T07:15:31-07:00
+----- clippy-storage-v2 exit=0 2026-11-21T07:15:31-07:00

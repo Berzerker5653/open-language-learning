@@ -2298,6 +2298,20 @@
       "evidence": [
         "state/notes/VOCAB-BUILDER-001.md"
       ]
+    },
+    "UI-HYGIENE-001": {
+      "task_id": "UI-HYGIENE-001",
+      "title": "Learner-facing hygiene pass — container alignment, copy/token leaks, profile chooser cleanup (visual-ui-audit U1/U2/U13)",
+      "status": "done",
+      "attempts": 0,
+      "updated": "2026-11-21",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/UI-HYGIENE-001/takeover-note.md",
+        "state/evidence/UI-HYGIENE-001/gates.log"
+      ],
+      "summary": "Takeover-commit of the lane left uncommitted by circuit-broken card t_822930b7 (board t_7984526c). Shipped: one shared --content-max container token aligning header/cards/lists; audit_learner_copy v1.1.0 raw-content-token leak check + tests (journeys skipped as developer drivers); storage migration v9 profiles.hidden + set_profile_hidden + last_evidence_at; chooser lists only real unhidden profiles as aligned cards with pack, last-studied and due/band, dedupe collapsing only contentless fixture twins so restored same-name profiles stay resumable; honesty line as designed badge. All LANE gates green at commit.",
+      "notes": "Code commit 115f1bc; mainline-rot fixes in separate chore commits ec1fe5a (content-confirm fixture) and 3cb7645 (store.rs version pin, reproduced red at pure HEAD from the merged VOCAB v8). Takeover restored the c9e332e word_card test a stale lib.rs base would have reverted and deleted a stale lib.rs.rej. Two v9-bump test fixtures completed (migrations upgrade-path rewind gains the v9 marker delete; lookups.rs pins SCHEMA_VERSION instead of literal 8). Sibling VOCAB-BUILDER-001 doc-comment hunk in migrations.rs deliberately left unstaged for takeover t_cd2a7687. No packs touched, nothing published."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
