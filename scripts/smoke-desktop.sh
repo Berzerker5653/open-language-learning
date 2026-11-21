@@ -45,7 +45,11 @@ else
   # `Process completed with exit code 143`, twice, on two separate attempts.
   trap 'if [ -n "${VITE_PID:-}" ]; then kill "${VITE_PID}" 2>/dev/null || true; fi; [ -n "${MARKER:-}" ] && rm -f "$MARKER"; [ -n "${DATA:-}" ] && rm -rf "$DATA"; true' EXIT
   sleep 2
-  cargo build -p lts-desktop
+  # --no-default-features opts out of the embedded-UI default
+  # (BUILD-DEFAULT-CP-001) so this branch keeps walking the vite dev server it
+  # just started, exactly as before the flip. The pnpm branch above already
+  # embedded (the tauri CLI adds custom-protocol to every build).
+  cargo build -p lts-desktop --no-default-features
 fi
 
 BIN="target/debug/lts-desktop"

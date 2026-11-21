@@ -46,11 +46,19 @@ jobs:
       - name: Pack bundle staging script regression test
         run: ./scripts/test-stage-pack-bundle.sh
       - run: cargo fmt --all --check
-      - run: cargo clippy --workspace --all-targets -- -D warnings
+      # BUILD-DEFAULT-CP-001: lts-desktop now DEFAULTS custom-protocol, which
+      # embeds the gitignored `apps/desktop/dist` and panics tauri-build codegen
+      # on a fresh checkout. These Rust jobs compile the workspace in dev-mode
+      # features — byte-identical to the pre-flip graph (lts-desktop is the only
+      # workspace crate with [features], so --no-default-features is a no-op for
+      # every other crate). The DEFAULT-ON build is genuinely gated by
+      # platform-compile (cargo check --all-targets after pnpm build) and
+      # desktop-smoke (embedded tauri build + walkthrough).
+      - run: cargo clippy --workspace --all-targets --no-default-features -- -D warnings
       # The 12 Doc-tests targets (all currently example-free but compiled and
       # asserted to exist) — nextest does not run doc tests, so this step
       # preserves the exact former `cargo test --workspace` contract.
-      - run: cargo test --workspace --doc
+      - run: cargo test --workspace --doc --no-default-features
 
   # The heavy Rust tests, split into four parallel partitions. Partitioning
   # (not nextest-specific) is what kills the tail: 33 heavyweight
@@ -123,7 +131,10 @@ jobs:
         # the matrix - hash:4/3 is refused). hash: is a deterministic
         # test-name hash: the same quarter runs every time, and the 33
         # heavy reference-pack tests scatter across partitions.
-        run: cargo nextest run --workspace --partition hash:${{ matrix.partition }}/4
+        run: cargo nextest run --workspace --no-default-features --partition hash:${{ matrix.partition }}/4
+        # (--no-default-features: see the rust-static note — fresh checkouts have
+        # no built frontendDist; the embedded default-on build is gated by
+        # platform-compile and desktop-smoke.)
 
   # Content gates on the pack trees. Its own job so a content regression is
   # visible at ~5 min instead of behind the test tail; the langpack CLI build

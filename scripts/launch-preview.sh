@@ -17,8 +17,10 @@ if [ ! -x "$BIN" ]; then
     # pnpm missing (a bare Node install — Node 26 no longer ships corepack).
     # The native binary is enough here: this script serves the frontend on
     # build.devUrl itself, which is what the debug build loads. Same fallback
-    # scripts/smoke-desktop.sh uses.
-    cargo build -p lts-desktop
+    # scripts/smoke-desktop.sh uses. --no-default-features opts out of the
+    # embedded-UI default (BUILD-DEFAULT-CP-001) to keep that devUrl behavior —
+    # and because this branch never builds apps/desktop/dist.
+    cargo build -p lts-desktop --no-default-features
   fi
 fi
 

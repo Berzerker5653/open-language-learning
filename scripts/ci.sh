@@ -8,7 +8,11 @@ echo "== rust: format =="
 cargo fmt --all --check
 
 echo "== rust: clippy =="
-cargo clippy --workspace --all-targets -- -D warnings
+# --no-default-features: lts-desktop defaults custom-protocol (BUILD-DEFAULT-CP-001),
+# which embeds the gitignored frontendDist; same reasoning as the CI rust-static
+# note in .github/workflows/ci.yml. The default-on build is covered by
+# `cargo check -p lts-desktop` after `pnpm build` (platform-compile parity).
+cargo clippy --workspace --all-targets --no-default-features -- -D warnings
 
 
 echo "== packs: media (gitignored bulk audio; parity with the CI restore step) =="
@@ -34,7 +38,9 @@ for pack_dir in languages/ja-JP languages/ru-RU; do
 done
 
 echo "== rust: test =="
-cargo test --workspace
+# --no-default-features: CI runs nextest the same way (see BUILD-DEFAULT-CP-001
+# note in .github/workflows/ci.yml); fresh trees have no built frontendDist.
+cargo test --workspace --no-default-features
 
 echo "== packs: conformance (ja-JP + ru-RU + example template) =="
 cargo run -q -p lts-langpack-cli -- validate languages/ja-JP
