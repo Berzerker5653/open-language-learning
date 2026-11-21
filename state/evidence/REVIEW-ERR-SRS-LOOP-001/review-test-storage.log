@@ -1,0 +1,15 @@
+   Compiling lts-domain v0.1.0 (/home/hunter/.hermes/cache/scratch/review-errsrs/wt/crates/domain)
+   Compiling lts-storage v0.1.0 (/home/hunter/.hermes/cache/scratch/review-errsrs/wt/crates/storage)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.73s
+     Running tests/error_ledger.rs (/home/hunter/game-dev/LTS/target/debug/deps/error_ledger-97fba219baa9fa7b)
+
+running 6 tests
+test ledger_appends_repeats_and_counts_recurrence_by_context ... ok
+test accept_is_idempotent_and_the_card_anchors_to_the_original ... ok
+test ledger_and_cards_delete_with_the_person ... ok
+test same_store_restore_reissues_ids_and_keeps_card_linkage ... ok
+test a_pre_v4_bundle_still_imports_and_carries_no_error_rows ... ok
+test export_v4_round_trips_the_ledger_and_cards ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+

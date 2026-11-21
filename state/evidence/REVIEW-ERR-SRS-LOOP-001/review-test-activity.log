@@ -1,0 +1,20 @@
+   Compiling lts-domain v0.1.0 (/home/hunter/.hermes/cache/scratch/review-errsrs/wt/crates/domain)
+   Compiling lts-security v0.1.0 (/home/hunter/.hermes/cache/scratch/review-errsrs/wt/crates/security)
+   Compiling lts-learner-model v0.1.0 (/home/hunter/.hermes/cache/scratch/review-errsrs/wt/crates/learner-model)
+   Compiling lts-langpack v0.1.0 (/home/hunter/.hermes/cache/scratch/review-errsrs/wt/crates/langpack)
+   Compiling lts-activity v0.1.0 (/home/hunter/.hermes/cache/scratch/review-errsrs/wt/crates/activity)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.20s
+     Running unittests src/lib.rs (/home/hunter/game-dev/LTS/target/debug/deps/lts_activity-ca39897db3711f2e)
+
+running 8 tests
+test form_errors::tests::a_different_known_lemma_is_a_wrong_word ... ok
+test form_errors::tests::a_different_case_ending_is_classified_as_case ... ok
+test form_errors::tests::a_perfective_substitution_is_classified_as_aspect ... ok
+test form_errors::tests::a_stress_only_difference_is_classified_as_stress ... ok
+test form_errors::tests::an_unknown_produced_form_is_a_wrong_word_not_a_guess ... ok
+test form_errors::tests::a_number_or_gender_slip_is_classified_as_agreement ... ok
+test form_errors::tests::no_sidecar_row_for_the_expected_form_means_no_claim ... ok
+test form_errors::tests::same_lemma_same_slots_falls_back_to_other_not_a_named_class ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 16 filtered out; finished in 0.00s
+
