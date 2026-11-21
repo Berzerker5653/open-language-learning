@@ -1,0 +1,74 @@
+{
+ "screen": "drill",
+ "overflow": {
+  "scrollWidth": 412,
+  "clientWidth": 412
+ },
+ "boxes": [
+  {
+   "tag": "a",
+   "label": "Skip to main content",
+   "w": 189,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Today",
+   "w": 68,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Practice",
+   "w": 84,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "My Words",
+   "w": 98,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Progress",
+   "w": 89,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Settings",
+   "w": 86,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.btn",
+   "label": "Show the lesson again",
+   "w": 380,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "input",
+   "label": "",
+   "w": 380,
+   "h": 44,
+   "inline": true
+  },
+  {
+   "tag": "button.btn",
+   "label": "Check",
+   "w": 380,
+   "h": 44,
+   "inline": false
+  }
+ ],
+ "fails": 0,
+ "error": null
+}

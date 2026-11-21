@@ -1,0 +1,137 @@
+{
+ "screen": "reader",
+ "overflow": {
+  "scrollWidth": 390,
+  "clientWidth": 390
+ },
+ "boxes": [
+  {
+   "tag": "a",
+   "label": "Skip to main content",
+   "w": 189,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Today",
+   "w": 68,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Practice",
+   "w": 84,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "My Words",
+   "w": 98,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Progress",
+   "w": 89,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Settings",
+   "w": 86,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.btn",
+   "label": "All stories",
+   "w": 358,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.word",
+   "label": "きょうしつ",
+   "w": 79,
+   "h": 27,
+   "inline": true
+  },
+  {
+   "tag": "button.word",
+   "label": "に",
+   "w": 16,
+   "h": 27,
+   "inline": true
+  },
+  {
+   "tag": "button.word",
+   "label": "ほん",
+   "w": 32,
+   "h": 27,
+   "inline": true
+  },
+  {
+   "tag": "button.word",
+   "label": "が",
+   "w": 16,
+   "h": 27,
+   "inline": true
+  },
+  {
+   "tag": "button.word",
+   "label": "おいてある",
+   "w": 79,
+   "h": 27,
+   "inline": true
+  },
+  {
+   "tag": "button.btn",
+   "label": "This looks right",
+   "w": 153,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.word",
+   "label": "あした",
+   "w": 48,
+   "h": 27,
+   "inline": true
+  },
+  {
+   "tag": "button.word",
+   "label": "また",
+   "w": 32,
+   "h": 27,
+   "inline": true
+  },
+  {
+   "tag": "button.word",
+   "label": "きます",
+   "w": 48,
+   "h": 27,
+   "inline": true
+  },
+  {
+   "tag": "button.btn",
+   "label": "This looks right",
+   "w": 153,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.input-mode-bubble__button",
+   "label": "System keyboard; in-app romaji → hiragan",
+   "w": 374,
+   "h": 63,
+   "inline": false
+  }
+ ],
+ "fails": 0,
+ "error": null
+}

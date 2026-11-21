@@ -40,6 +40,7 @@ repair-r*.log
 node_modules/
 target/
 dist/
+dist-mobile/
 build/
 .venv/
 __pycache__/

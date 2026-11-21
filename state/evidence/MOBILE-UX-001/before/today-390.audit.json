@@ -1,0 +1,123 @@
+{
+ "screen": "today",
+ "overflow": {
+  "scrollWidth": 390,
+  "clientWidth": 390
+ },
+ "boxes": [
+  {
+   "tag": "a",
+   "label": "Skip to main content",
+   "w": 189,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Today",
+   "w": 68,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Practice",
+   "w": 84,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "My Words",
+   "w": 98,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Progress",
+   "w": 89,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Settings",
+   "w": 86,
+   "h": 46,
+   "inline": false
+  },
+  {
+   "tag": "button.seg-btn",
+   "label": "5 min",
+   "w": 73,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.seg-btn",
+   "label": "10 min",
+   "w": 83,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.seg-btn",
+   "label": "20 min",
+   "w": 83,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.seg-btn",
+   "label": "30 min",
+   "w": 83,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.btn",
+   "label": "Start today's plan — 5 activities, about",
+   "w": 358,
+   "h": 66,
+   "inline": false
+  },
+  {
+   "tag": "button.plan-item",
+   "label": "New materialПодпишите, пожалуйста, после",
+   "w": 324,
+   "h": 198,
+   "inline": false
+  },
+  {
+   "tag": "button.plan-item",
+   "label": "New materialПодпишите, пожалуйста, после",
+   "w": 324,
+   "h": 198,
+   "inline": false
+  },
+  {
+   "tag": "button.plan-item",
+   "label": "New materialПеред отправкой письма сверь",
+   "w": 324,
+   "h": 169,
+   "inline": false
+  },
+  {
+   "tag": "button.plan-item",
+   "label": "Due for reviewнадпискаinscription, overw",
+   "w": 324,
+   "h": 58,
+   "inline": false
+  },
+  {
+   "tag": "button.plan-item",
+   "label": "Due for reviewсверятьto check against, c",
+   "w": 324,
+   "h": 58,
+   "inline": false
+  }
+ ],
+ "fails": 0,
+ "error": null
+}

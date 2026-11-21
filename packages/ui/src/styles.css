@@ -903,18 +903,60 @@ th:last-child {
 }
 
 /* --------------------------------------------------------- responsive */
-@media (max-width: 40rem) {
+/* MOBILE-UX-001 (owner standard 2026-11-21: "look and run good on phones"):
+   a real phone layout tier at 44rem — comfortable type, a compact one-row
+   route bar, generous touch targets, and lists that stack. The wide-screen
+   measure token above (LETTER-DRILL-TEXT-001) is reused, not duplicated:
+   every rule here works off --content-max and the existing tokens.
+   44rem = 704px covers the 390/412px card viewports and the landscape
+   gap; the 24rem (384px) tier catches the small end of the phone range. */
+@media (max-width: 44rem) {
+  /* Typography at phone distance: body keeps the 1rem base (comfortable
+     at 30cm), headings scale down so they stop eating the narrow column. */
   h1 {
     font-size: 1.5rem;
   }
 
+  h2 {
+    font-size: 1.1875rem;
+    margin-top: 1.5rem;
+  }
+
+  /* Shell collapses to a compact bar: brand line, then the route tabs as
+     a full-width strip. Five tabs at this padding measure ~350px, so the
+     strip stays one row at 390/412px instead of scrolling or stacking
+     twice. */
   .shell-bar {
-    padding-inline: 1rem;
+    padding: 0.5rem 1rem 0;
+    min-height: 0;
+    row-gap: 0;
   }
 
   .brand {
     margin-right: 0;
     width: 100%;
+    font-size: 1rem;
+  }
+
+  .routes {
+    width: 100%;
+    /* Measured at 390px: five tabs' intrinsic text (with "Progress") is
+       ~360px and overflowed a nowrap row into a clipped, internally
+       scrolling strip. Wrapping keeps every route visible with zero
+       sideways movement; at 412px the row stays single-line. */
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+    padding-bottom: 0.25rem;
+  }
+
+  .tab {
+    flex: 1 1 auto;
+    justify-content: center;
+    /* 2.75rem = 44px exactly: the WCAG 2.2 AA target size, kept at the
+       narrow padding, not dropped with it */
+    min-height: 2.75rem;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.875rem;
   }
 
   .page {
@@ -931,6 +973,86 @@ th:last-child {
 
   .btn-row .btn {
     min-width: 9rem;
+  }
+
+  /* Touch targets (card §2): drill options and reader controls ride .btn
+     (min-height 2.75rem — verified by the tap-target audit in
+     state/evidence/MOBILE-UX-001/). The small controls that are NOT .btn
+     join the 44px floor here. */
+  .seg-btn {
+    min-height: 2.75rem;
+    padding-inline: 0.875rem;
+  }
+
+  details.prose-note > summary {
+    min-height: 2.75rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .input-mode-bubble__button {
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+  }
+
+  /* Session chrome stacks: progress bar above the meta line so the
+     nowrap estimate never squeezes against the bar edge. */
+  .session-chrome {
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+  }
+
+  /* Reader at phone distance: the story text is the point of the screen,
+     so it gets a comfortable display size and looser leading. Word taps
+     ride inline buttons — the leading makes each tap row ~40px tall; the
+     audit records inline text as the one honest exception to the 44px
+     floor (word-level accuracy needs it, and the word card is the
+     fallback surface). */
+  .reader-paragraph {
+    font-size: 1.1875rem;
+    line-height: 2.1;
+    margin-bottom: 1rem;
+  }
+
+  .word-card .word-headword {
+    font-size: 1.5rem;
+  }
+
+  /* Interlinear labels are micro-text already; at phone width the full
+     forms would collide, keep the compact rail. */
+  .il-label {
+    font-size: 0.625rem;
+  }
+
+  /* Fixed-width instruments (activity calendar SVG, contours) live in
+     their own scroll container instead of widening the document. */
+  .memory-calendar {
+    overflow-x: auto;
+  }
+
+  /* Settings at phone width (measured by the harness audit, 390px):
+     a long speech-model <select> was 479px intrinsic and pushed the
+     DOCUMENT to 512px horizontal scroll — selects ride the column. */
+  select {
+    width: 100%;
+    max-width: 100%;
+    min-height: 2.75rem;
+    font-size: 1rem;
+  }
+
+  /* The destructive-delete confirmation checkbox (settings.tsx) renders at
+     the UA default 13x13 — unusable with a thumb; the row carries the
+     label, the box itself joins the 44px floor. */
+  input[type="checkbox"] {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+}
+
+@media (max-width: 24rem) {
+  .tab {
+    font-size: 0.8125rem;
+    padding-inline: 0.375rem;
   }
 }
 

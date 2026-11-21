@@ -1,0 +1,32 @@
+{
+ "screen": "onboarding",
+ "overflow": {
+  "scrollWidth": 412,
+  "clientWidth": 412
+ },
+ "boxes": [
+  {
+   "tag": "a",
+   "label": "Skip to main content",
+   "w": 189,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "input",
+   "label": "",
+   "w": 346,
+   "h": 44,
+   "inline": true
+  },
+  {
+   "tag": "button.btn",
+   "label": "Create local profile",
+   "w": 179,
+   "h": 44,
+   "inline": false
+  }
+ ],
+ "fails": 0,
+ "error": null
+}

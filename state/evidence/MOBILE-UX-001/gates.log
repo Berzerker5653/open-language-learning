@@ -1,0 +1,63 @@
+MOBILE-UX-001 — controller gate battery (board run 108, 2026-11-21)
+====================================================================
+
+Lane: CSS/layout tier + dev-only evidence harness. No Rust files touched;
+no cargo gates apply. The working tree also carries WEB-SERVE-001's
+complete-but-uncommitted lane (Cargo.toml, lib.rs, packs.rs, App.tsx,
+serve.rs, ipc.ts, src/bin/) — OFF-LIMITS, not staged, not reverted.
+Gates below ran with that WIP present in the tree; the lane commit
+contains none of it.
+
+Harness truth fix (run-107 lesson):
+- Run 107's captures were fake-passes: RU onboarding stalls at the mic
+  step in the fake engine, so today/drill/settings screenshots showed the
+  mic step, and a missing-button error never reached the audit JSON.
+- Run 108 fixed mobile-screens.tsx: today/drill/settings run on the
+  seeded RU profile (profiles:[Katya], installed:[RU] — the
+  ru-modality.journey.tsx scenario shape), button matching counts
+  aria-label ("Continue Katya"), and the navigation error now rides in
+  the audit JSON (error field) + the on-screen banner.
+
+Captures (scripts/mobile-capture.mjs, headless Chrome via raw CDP):
+- before/: packages/ui/src/styles.css at HEAD (b7586e6), same harness.
+  settings-390/412 FAIL the audit: document scrollWidth 512 > clientWidth
+  390 (long speech-model <select> intrinsic 479px) and one 13x13
+  checkbox; at 390px the five-tab nav strip overflowed its nowrap row
+  into an internally scrolling, clipped strip ("Settin") — visible in the
+  before screenshots (nav-internal scroll does not move the document, so
+  the document-level audit alone cannot see it).
+- after/: final lane. 10/10 audits clean: 0 errors, scrollWidth ==
+  clientWidth at 390 and 412, 0 non-inline tap targets < 44px.
+  Reader word buttons (32px inline) remain the one documented exception:
+  word-level tap accuracy needs inline size; the audit flags inline
+  separately and the word card is the fallback surface.
+
+Gates (all run by this worker, full output captured):
+- npx vitest run (apps/desktop): 56 files / 456 tests passed, incl. new
+  src/mobile-audit.test.ts (11 tests: audit coverage + per-audit
+  no-h-scroll and no-sub-44px assertions = the "asserted layout test"
+  acceptance bullet).
+- npx tsc --noEmit (apps/desktop): exit 0.
+- npx eslint mobile-screens.tsx mobile-audit.test.ts mobile-capture.mjs
+  vite.mobile-harness.config.ts: 0 problems (root eslint.config.js
+  gained a scripts/**/*.mjs Node-globals block — repo has no stylelint;
+  its card mention is aspirational, prettier covers CSS formatting).
+- npx prettier --check on every touched file: clean.
+- vision pass (after-fix): today-390 and settings-390 judged clean —
+  all five tabs visible (wrap, not clip), selects ride the column,
+  comfortable type; before screenshots carry the HEAD defects.
+
+Race notes:
+- c1.png / c4.png (repo root, 10:14 today) are another session's
+  untracked scratch screenshots — left untouched, flagged on the board.
+- apps/desktop/dist-mobile/ is a build artifact — gitignored, not
+  committed.
+
+Deferred / follow-up candidates (not blockers):
+- "Meet something newru.sent.b2.j2" — plan-row label and monospace id
+  concatenate with no space (pre-existing content-rendering nit visible
+  in today-390.png; not a viewport defect, out of this card's CSS scope).
+- Onboarding mic-step heading renders as a teal-bordered box that reads
+  like a text input (cosmetic; owner dogfood call).
+- Owner phone dogfooding over lts-serve lives on WEB-SERVE-001's
+  follow-up, per that card's notes.

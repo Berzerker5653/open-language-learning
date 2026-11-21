@@ -1,0 +1,284 @@
+{
+ "screen": "settings",
+ "overflow": {
+  "scrollWidth": 390,
+  "clientWidth": 390
+ },
+ "boxes": [
+  {
+   "tag": "a",
+   "label": "Skip to main content",
+   "w": 189,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Today",
+   "w": 71,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Practice",
+   "w": 86,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "My Words",
+   "w": 99,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Progress",
+   "w": 91,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.tab",
+   "label": "Settings",
+   "w": 358,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "a",
+   "label": "source",
+   "w": 41,
+   "h": 18,
+   "inline": true
+  },
+  {
+   "tag": "button.btn",
+   "label": "Automatic",
+   "w": 116,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.btn",
+   "label": "Always highlight",
+   "w": 163,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.btn",
+   "label": "Off",
+   "w": 61,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.btn",
+   "label": "Shown",
+   "w": 88,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.btn",
+   "label": "Install v0.4.0",
+   "w": 324,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.btn",
+   "label": "Install v0.3.0",
+   "w": 324,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "input",
+   "label": "",
+   "w": 312,
+   "h": 26,
+   "inline": true
+  },
+  {
+   "tag": "input",
+   "label": "",
+   "w": 44,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "summary",
+   "label": "The setting is enforced: while it is off",
+   "w": 324,
+   "h": 45,
+   "inline": false
+  },
+  {
+   "tag": "select",
+   "label": "System default",
+   "w": 324,
+   "h": 44,
+   "inline": true
+  },
+  {
+   "tag": "summary",
+   "label": "Microphone names appear once you allow a",
+   "w": 324,
+   "h": 67,
+   "inline": false
+  },
+  {
+   "tag": "button",
+   "label": "Detect microphones",
+   "w": 135,
+   "h": 21,
+   "inline": true
+  },
+  {
+   "tag": "label>input[radio]",
+   "label": "Auto — fade as my reading grows",
+   "w": 290,
+   "h": 77,
+   "inline": false
+  },
+  {
+   "tag": "label>input[radio]",
+   "label": "Always show romaji",
+   "w": 290,
+   "h": 51,
+   "inline": false
+  },
+  {
+   "tag": "label>input[radio]",
+   "label": "Off — Japanese script only",
+   "w": 290,
+   "h": 50,
+   "inline": false
+  },
+  {
+   "tag": "summary",
+   "label": "Romaji is a temporary scaffold: Auto fad",
+   "w": 324,
+   "h": 67,
+   "inline": false
+  },
+  {
+   "tag": "summary",
+   "label": "Export, restore, and switching all live ",
+   "w": 324,
+   "h": 67,
+   "inline": false
+  },
+  {
+   "tag": "button.btn",
+   "label": "Export profile data",
+   "w": 324,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "input",
+   "label": "",
+   "w": 324,
+   "h": 44,
+   "inline": true
+  },
+  {
+   "tag": "button.btn",
+   "label": "Check a backup…",
+   "w": 324,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "button.btn",
+   "label": "Switch profile…",
+   "w": 324,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "summary",
+   "label": "Switching deletes nothing: each profile ",
+   "w": 324,
+   "h": 45,
+   "inline": false
+  },
+  {
+   "tag": "button.btn",
+   "label": "Delete profile data…",
+   "w": 324,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "summary",
+   "label": "Deleting is final: one explicit confirma",
+   "w": 324,
+   "h": 67,
+   "inline": false
+  },
+  {
+   "tag": "select",
+   "label": "Off — speaking activities abstainorg.ope",
+   "w": 324,
+   "h": 44,
+   "inline": true
+  },
+  {
+   "tag": "summary",
+   "label": "This is the app's one speech-model prefe",
+   "w": 324,
+   "h": 67,
+   "inline": false
+  },
+  {
+   "tag": "summary",
+   "label": "Optional, fully on-device models: nothin",
+   "w": 324,
+   "h": 67,
+   "inline": false
+  },
+  {
+   "tag": "button.btn",
+   "label": "Download ~72.2 MB",
+   "w": 290,
+   "h": 44,
+   "inline": false
+  },
+  {
+   "tag": "select",
+   "label": "System default",
+   "w": 324,
+   "h": 44,
+   "inline": true
+  },
+  {
+   "tag": "summary",
+   "label": "No output names revealed yet: playback f",
+   "w": 324,
+   "h": 45,
+   "inline": false
+  },
+  {
+   "tag": "summary",
+   "label": "The engines this build ships and can loa",
+   "w": 324,
+   "h": 45,
+   "inline": false
+  },
+  {
+   "tag": "summary",
+   "label": "When you report a platform problem, quot",
+   "w": 324,
+   "h": 45,
+   "inline": false
+  }
+ ],
+ "fails": 0,
+ "error": null
+}
