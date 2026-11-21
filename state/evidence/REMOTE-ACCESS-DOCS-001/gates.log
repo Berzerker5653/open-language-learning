@@ -1,0 +1,41 @@
+# REMOTE-ACCESS-DOCS-001 — controller gate log (2026-11-21)
+
+Lane surface: markdown + task-state.json + ROADMAP.yaml + KANBAN.md only.
+No Rust/TS files touched, so cargo/tsc/vitest surfaces are not in scope
+(`git diff --stat` at commit time confirms). Docs-only LANE gate battery:
+
+## 1. python3 tools/validate_handoff.py --require-explicit-ledger-records
+
+- Pass 1 (before this file existed): single FAIL —
+  `REMOTE-ACCESS-DOCS-001/evidence: missing/unsafe file 'state/evidence/REMOTE-ACCESS-DOCS-001/gates.log'`.
+  WARNs (pre-existing): manifest-only example fixture; five optional tasks
+  without explicit ledger records (AI-001, PLAT-002, ADV-001, WEB-001,
+  STORY-LISTEN-001 — pre-existing, not introduced here).
+- Pass 2 (after this file + ROADMAP card + optional_tasks entry + task-state
+  record): see bottom of file — expected `HANDOFF VALIDATION PASSED`.
+
+## 2. ROADMAP.yaml YAML integrity
+
+- The `patch` tool's YAML lint reported `status: ok` on both inserts
+  (surgical text patches, no yaml round-trip). A local editor LSP
+  "Ansible Tasks Schema" diagnostic on line 1 is the YAML extension guessing
+  the wrong schema for the root mapping — not a repo issue; validate_handoff
+  parses the file as the authority.
+- New card has no duplicate keys and acceptance bullets are plain scalars.
+
+## 3. Secrets scan
+
+- Guide + evidence contain no real tailnet hostname beyond a redacted
+  `gamingpc.taila…d.ts.net`, no IPs other than the RFC1918 lab ranges already
+  named in repo evidence, no credentials. `tailscale` serve config and UFW
+  rules were reverted on the machine (dry-run.md records the restore check).
+
+## Race note
+
+WEB-SERVE-001's complete-but-uncommitted lane (Cargo.lock/Cargo.toml/lib.rs/
+packs.rs/App.tsx + untracked serve.rs/ipc.ts/bin/) stayed untouched and
+unstaged; staging was per-file, never `git add -A`.
+
+## Pass 2 result
+
+HANDOFF VALIDATION PASSED (2186 data files checked) — same pre-existing WARN set only. Dry-run http.server access log corroborates probes: 100.111.14.104 (omarchy tailnet IP) x2 over ts.net proxy, 192.168.4.60 (omarchy LAN) x1 after the temporary firewall rule.

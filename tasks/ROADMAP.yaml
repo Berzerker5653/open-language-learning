@@ -2922,6 +2922,20 @@ tasks:
   - every non-inline interactive element measures at least 44x44 at phone widths, with inline reader word taps documented as the one honest exception
   - typography and lists stay comfortable at phone distance using the existing measure token, and before/after screenshots plus the tap-target checklist sit in state/evidence/MOBILE-UX-001/
   required_for_desktop_1_0: false
+- id: REMOTE-ACCESS-DOCS-001
+  milestone: M11
+  priority: P1
+  title: User-facing remote-access guide — Tailscale path, LAN+PIN fallback, Headscale appendix, public-publishing DO-NOT (owner decision 2026-11-21)
+  dependencies: []
+  read_first:
+  - state/notes/REMOTE-ACCESS-SURVEY-2026-11.md
+  - docs/08_DATA_AND_PRIVACY.md
+  acceptance:
+  - docs/22_REMOTE_ACCESS.md walks a non-technical user through the Tailscale desktop+phone pair in about five steps, including QR sign-in and the https ts.net serve URL
+  - LAN toggle plus pairing PIN fallback section, honest about the plain-HTTP microphone limitation and the firewall-rule step
+  - one-page Headscale appendix labeled self-maintained, plus a prominent DO-NOT box stating Cloudflare Tunnel and Tailscale Funnel are public publishing, with the survey one-line why
+  - guide linked from the README docs table and docs/13, and its mechanics verified by an on-tailnet dry run recorded under state/evidence/REMOTE-ACCESS-DOCS-001/
+  required_for_desktop_1_0: false
 - id: GLOSSARY-001
   milestone: M8
   priority: P2
@@ -2998,6 +3012,7 @@ execution_scope:
   - K-24
   - K-30
   - MOBILE-UX-001
+  - REMOTE-ACCESS-DOCS-001
   - K-31
   - K-32
   - K-33

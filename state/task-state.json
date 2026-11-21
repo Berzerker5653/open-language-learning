@@ -2439,6 +2439,20 @@
       ],
       "summary": "Phase 2 shipped (code 257ab85): manifest capabilities.input_methods (0.2 schema, bool-safe absent=unchanged / present=allowlist) honored by the langpack reader, the installed-pack wire, and the renderer gate; conversion candidates come ONLY from the active pack's lexicon (plus separately-labeled aux slice) via the new ime_candidates command, every candidate carrying entry-id provenance; useKanaIME arms conversion on Enter and SPACE cycles pack candidates. Tests pin gating tri-state, provenance, and no CJK ideograph in any engine source. Phase 3 (WebKitInputMethodContext + Orca session) deliberately NOT attempted - real-AT dependency, stays open honestly.",
       "notes": "Takeover close: run 103 died 80/80 with the Rust half uncommitted; controller fixed a fixture-helper YAML mangling + missing std::io::Write import, wrote the TS half, re-ran the full lane battery (all green, logs in evidence dir). conversionLabel UI surfacing left as a follow-up (API tested, not in card's named scope)."
+    },
+    "REMOTE-ACCESS-DOCS-001": {
+      "task_id": "REMOTE-ACCESS-DOCS-001",
+      "title": "User-facing remote-access guide — Tailscale path, LAN+PIN fallback, Headscale appendix, public-publishing DO-NOT (owner decision 2026-11-21)",
+      "status": "done",
+      "attempts": 1,
+      "updated": "2026-11-21",
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/REMOTE-ACCESS-DOCS-001/dry-run.md",
+        "state/evidence/REMOTE-ACCESS-DOCS-001/gates.log"
+      ],
+      "summary": "docs/22_REMOTE_ACCESS.md ships the user guide per the 2026-11-21 survey decision: 5-step Tailscale desktop+phone walkthrough with QR sign-in and the https ts.net serve URL, LAN toggle + pairing PIN fallback with honest plain-HTTP mic limitation and a firewall step proven by probe (LAN fetch went blocked->200->blocked as a UFW rule came and went), one-page self-maintained Headscale appendix, and a prominent DO-NOT box (Cloudflare Tunnel = vendor sees plaintext + public probeable hostname; Funnel = public, no identity). Linked from the README docs table and the docs/13 Mobile section. Card said docs/19: verified taken (19/20/21), shipped as docs/22.",
+      "notes": "Acceptance dry run on the live tailnet: second device fetched the served page over ts.net HTTPS, tailnet IP, and MagicDNS (all 200); phone device is enrolled but was offline, so the fetch leg ran from a second computer — stated honestly in the guide and dry-run.md. WEB-SERVE-001's uncommitted sibling lane untouched; docs/JSON/YAML-only diff, no cargo/tsc surface."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
