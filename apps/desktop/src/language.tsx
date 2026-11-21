@@ -25,6 +25,15 @@ export interface InstalledPack {
    * keyboard setting exists (SETTINGS-PACK-CAPABILITY-001) — read these,
    * never `locale`. An absent manifest yields the empty list. */
   scripts: string[];
+  /** IN-APP-IME-001 phase 2: the input-method ids the pack's manifest
+   * declares TRUE under `capabilities.input_methods` (sorted). The
+   * tri-state contract mirrors the Rust reader: `input_methods_declared`
+   * false means the manifest carried no map — the pack declared nothing
+   * and current behavior stands; true means the map is the explicit
+   * allowlist and only the named ids are on. Interpretation of ids stays
+   * in the renderer. */
+  input_methods: string[];
+  input_methods_declared: boolean;
 }
 
 export interface CatalogEntry {

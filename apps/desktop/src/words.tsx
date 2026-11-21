@@ -11,6 +11,7 @@
  */
 import { PackText, usePackTextAttrs } from "@openlang/ui";
 import { useKanaIME } from "./kana-ime";
+import type { ImeCandidate } from "./ime-candidates";
 
 /**
  * SESSION-CHROME-001 (U6, Quizlet/Anki idiom): a grade button states the
@@ -75,6 +76,10 @@ export interface MyWordsPanelProps {
   intervalPreview?: { again_seconds: number; good_seconds: number } | null;
   /// Issue #2 phase 1: in-app kana keyboard for the surface/reading fields.
   kanaInput?: boolean;
+  /// IN-APP-IME-001 phase 2: pack-lexicon candidate lookup for the kana
+  /// fields (undefined when the active pack's declared input methods rule
+  /// the method out). Enter arms conversion, Space cycles candidates.
+  imeCandidates?: (kana: string) => Promise<ImeCandidate[]>;
 }
 
 export function MyWordsPanel(p: MyWordsPanelProps) {
@@ -83,11 +88,13 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
     enabled: p.kanaInput === true,
     value: p.draft.surface,
     onDraft: (v) => p.onDraftChange("surface", v),
+    candidates: p.imeCandidates,
   });
   const kanaReading = useKanaIME({
     enabled: p.kanaInput === true,
     value: p.draft.reading,
     onDraft: (v) => p.onDraftChange("reading", v),
+    candidates: p.imeCandidates,
   });
   return (
     <section aria-label="My words">
@@ -123,8 +130,7 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
               <p className="notice">Met in: {p.review.item.source_citation}</p>
               {p.review.item.context_sentence && (
                 <p className="notice">
-                  In this sentence:{" "}
-                  <PackText tag="span">{p.review.item.context_sentence}</PackText>
+                  In this sentence: <PackText tag="span">{p.review.item.context_sentence}</PackText>
                   {p.onPlayContext && p.review.item.context_sentence_id && (
                     <button
                       type="button"

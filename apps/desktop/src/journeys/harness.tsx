@@ -1236,6 +1236,11 @@ export class LearnerEngine {
       trust_state: pack.trust_state,
       rtl: pack.rtl,
       scripts: pack.scripts,
+      // IN-APP-IME-001 phase 2: journey packs declare no input-method map —
+      // absent means current behavior, exactly like a pack published
+      // before the field existed.
+      input_methods: [],
+      input_methods_declared: false,
     });
   }
 

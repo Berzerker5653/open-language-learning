@@ -6,6 +6,7 @@
 import { usePackTextAttrs } from "@openlang/ui";
 import { StressText } from "./stress";
 import { useKanaIME } from "./kana-ime";
+import type { ImeCandidate } from "./ime-candidates";
 import type { FormErrorOfferView } from "./error-review";
 import { ErrorOfferList } from "./error-review";
 
@@ -35,6 +36,9 @@ export interface WritingPracticeProps {
   /// Issue #2 phase 1: in-app kana keyboard (see practice.tsx); the label
   /// stays honest — a platform IME remains supported either way.
   kanaInput?: boolean;
+  /// IN-APP-IME-001 phase 2: pack-lexicon candidate lookup (undefined when
+  /// the active pack's declared input methods rule the method out).
+  imeCandidates?: (kana: string) => Promise<ImeCandidate[]>;
   /// UX audit (fake-home persona run): "romaji" is Japanese-specific
   /// vocabulary; a Russian learner's romanized hint is a transliteration.
   /// The noun in the hint button label follows the pack's language.
@@ -56,6 +60,7 @@ export function WritingPractice(p: WritingPracticeProps) {
     enabled: p.kanaInput === true,
     value: p.draft,
     onDraft: (v) => p.onDraft(v),
+    candidates: p.imeCandidates,
   });
   return (
     <section aria-label="Writing practice">

@@ -25,6 +25,13 @@ capabilities:
   handwriting: false
   rtl: false
   scenario_help: true
+  # IN-APP-IME-001 phase 2: this pack's in-app input methods. Declarative
+  # only — the ids name what the engine may offer for this pack; packs
+  # never execute code. Absent on a pack means the engine keeps the
+  # pack's current behavior; this map is the explicit allowlist.
+  input_methods:
+    romaji-kana: true
+    lexicon-candidates: true
 requested_model_capabilities:
   - "asr.ja"
   - "vad"

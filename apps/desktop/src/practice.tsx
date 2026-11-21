@@ -10,6 +10,7 @@
 import { StressText } from "./stress";
 import { Ruby } from "./ruby";
 import { useKanaIME } from "./kana-ime";
+import type { ImeCandidate } from "./ime-candidates";
 import { LatinText, PackText, usePackTextAttrs } from "@openlang/ui";
 import type { DictationResult } from "./dictation";
 
@@ -76,6 +77,9 @@ export interface PracticeRunnerProps {
   /// Issue #2 phase 1: the learner's in-app kana keyboard choice; when on,
   /// the answer field converts romaji to kana without any system IME.
   kanaInput?: boolean;
+  /// IN-APP-IME-001 phase 2: pack-lexicon candidate lookup (undefined when
+  /// the active pack's declared input methods rule the method out).
+  imeCandidates?: (kana: string) => Promise<ImeCandidate[]>;
   onReveal?(): void;
   /// K-41: highlight U+0301-stressed vowels in readings (display-only).
   stress?: boolean;
@@ -120,6 +124,7 @@ export function PracticeRunner(p: PracticeRunnerProps) {
     enabled: p.kanaInput === true,
     value: p.draft ?? "",
     onDraft: (v) => p.onDraft?.(v),
+    candidates: p.imeCandidates,
   });
   if (p.task.mode === "guided") {
     return (

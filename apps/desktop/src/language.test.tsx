@@ -11,6 +11,8 @@ const installed: InstalledPack[] = [
     trust_state: "community",
     rtl: false,
     scripts: ["ja.orth.hiragana", "ja.orth.katakana", "ja.orth.kanji", "ja.orth.latin"],
+    input_methods: [],
+    input_methods_declared: false,
   },
   {
     pack_id: "community.example.esperanto",
@@ -20,6 +22,8 @@ const installed: InstalledPack[] = [
     trust_state: "community",
     rtl: false,
     scripts: ["eo.orth.latin"],
+    input_methods: [],
+    input_methods_declared: false,
   },
 ];
 
@@ -417,6 +421,8 @@ describe("language panel", () => {
           trust_state: "experimental",
           rtl: true,
           scripts: ["ar.orth.arabic", "ar.orth.latin"],
+          input_methods: [],
+          input_methods_declared: false,
         },
       ],
     });

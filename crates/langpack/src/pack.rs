@@ -211,6 +211,29 @@ impl Pack {
             .unwrap_or(false)
     }
 
+    /// IN-APP-IME-001 phase 2: the pack's declared in-app input methods
+    /// (`capabilities.input_methods`, ADR-0038 pattern) read from this
+    /// pack's parsed manifest. Declarative only: the map says which input
+    /// methods the pack offers; the engine interprets ids and packs never
+    /// execute code. An absent key means `None` — the pack declares
+    /// nothing and current behavior stands. A present map is returned as
+    /// id → bool with non-bool entries skipped: a bool-safe read that a
+    /// malformed value can never panic (same posture as
+    /// `help_guarantee_declared`).
+    pub fn declared_input_methods(&self) -> Option<BTreeMap<String, bool>> {
+        let m = self
+            .manifest
+            .as_ref()?
+            .get("capabilities")?
+            .get("input_methods")?
+            .as_object()?;
+        Some(
+            m.iter()
+                .filter_map(|(k, v)| Some((k.clone(), v.as_bool()?)))
+                .collect(),
+        )
+    }
+
     /// Load every classified document under `root`. Parse failures are
     /// collected, not fatal, so one bad file does not hide the rest.
     pub fn load_dir(root: &Path) -> Result<Pack, io::Error> {

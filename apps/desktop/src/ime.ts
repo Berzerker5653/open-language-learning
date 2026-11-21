@@ -298,14 +298,45 @@ export interface InAppKeyboard {
 }
 
 /**
+ * IN-APP-IME-001 phase 2: the pack's declared input-method map, read off
+ * the installed manifest (mirror of `InstalledPack.input_methods*` on the
+ * wire). Tri-state on purpose: `declared: false` means the manifest
+ * carried NO map — the pack declared nothing and current behavior stands;
+ * `declared: true` means the map exists and `methods` (the ids declared
+ * TRUE) is the explicit allowlist. Declarative only — packs declare
+ * availability, the engine interprets ids, packs never execute code.
+ */
+export interface InputMethodGate {
+  declared: boolean;
+  methods: string[];
+}
+
+/** Whether a named feature id passes the pack's declared gate: absent map
+ * grants (current behavior stands); a present map is the allowlist, so an
+ * explicit false — or a missing key — refuses. */
+export function inputMethodAllowed(gate: InputMethodGate | undefined, id: string): boolean {
+  if (!gate || !gate.declared) return true;
+  return gate.methods.includes(id);
+}
+
+/**
  * IME-TOGGLE-UX-001 / SETTINGS-PACK-CAPABILITY-001: resolve the in-app
  * keyboard from the pack's own manifest `scripts:` plus the converter
  * registry — never from the pack's locale or a language code. A pack that
  * declares no script any converter serves (or declares nothing) resolves
  * to null: no keyboard, no bubble, no shortcut effect.
+ *
+ * IN-APP-IME-001 phase 2: `gate` layers the pack-declared input-method
+ * allowlist on top of the script grant — a converter serves only when its
+ * id also passes the gate. No gate (or an absent map) is today's script
+ * resolution exactly.
  */
-export function inAppKeyboardForScripts(scripts: string[]): InAppKeyboard | null {
+export function inAppKeyboardForScripts(
+  scripts: string[],
+  gate?: InputMethodGate,
+): InAppKeyboard | null {
   for (const converter of IN_APP_KEYBOARD_CONVERTERS) {
+    if (!inputMethodAllowed(gate, converter.id)) continue;
     const declared = scripts.filter((id) =>
       converter.scriptNames.includes(id.split(".").pop()?.toLowerCase() ?? ""),
     );
@@ -337,7 +368,7 @@ export function inputModeLabel(kb: InAppKeyboard): string {
  * converter from the pack's declared scripts. Now a thin view over the
  * same resolution every other surface uses.
  */
-export function packDeclaresInAppKanaKeyboard(scripts: string[]): boolean {
-  const kb = inAppKeyboardForScripts(scripts);
+export function packDeclaresInAppKanaKeyboard(scripts: string[], gate?: InputMethodGate): boolean {
+  const kb = inAppKeyboardForScripts(scripts, gate);
   return kb !== null && kb.converter.id === ROMAJI_KANA_CONVERTER.id;
 }

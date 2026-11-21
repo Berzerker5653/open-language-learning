@@ -25,6 +25,8 @@
  */
 import { useRef } from "react";
 import { ROMAJI_KANA_CONVERTER, type ScriptKeyboardConverter } from "./ime";
+import type { ImeCandidate } from "./ime-candidates";
+import { candidateProvenanceLabel } from "./ime-candidates";
 
 export interface KanaIME {
   onKeyDown(e: React.KeyboardEvent<HTMLInputElement>): void;
@@ -32,7 +34,17 @@ export interface KanaIME {
    * did not come through the layer, so the layer realigns to the new text
    * on the next key rather than trusting a stale buffer. */
   noteExternalEdit(): void;
+  /** IN-APP-IME-001 phase 2: a human-readable provenance line for the
+   * currently selected conversion candidate (`null` while no conversion is
+   * armed or the buffer kana is showing) — what the UI renders so the
+   * learner can see WHICH source and entry produced the word. */
+  conversionLabel(): string | null;
 }
+
+/** A run of kana at the end of the text — the span a conversion replaces.
+ * Written with code-point escapes: the engine sources stay free of CJK
+ * literals (pinned structurally by ime.test.ts). */
+const TRAILING_KANA_RUN = /[\u3041-\u30ff\u31f0-\u31ff\u3005/]+$/;
 
 export function useKanaIME(opts: {
   /** The learner's in-app keyboard preference, resolved by the caller:
@@ -46,11 +58,24 @@ export function useKanaIME(opts: {
    * the pack-declared capability. Phase 1 registers only romaji→kana, so
    * callers pass nothing; a future script's keyboard passes its own. */
   converter?: ScriptKeyboardConverter;
+  /** IN-APP-IME-001 phase 2: pack-lexicon-backed conversion candidates for
+   * a committed kana run, resolved by the caller through the engine's
+   * `ime_candidates` command — the caller applies the pack's declared
+   * input-method gate and passes undefined when the pack rules the method
+   * out. The engine reads the ACTIVE PACK'S OWN LEXICON (with provenance):
+   * there is no baked-in word list anywhere in the input path. */
+  candidates?: (kana: string) => Promise<ImeCandidate[]>;
 }): KanaIME {
   const buffer = useRef("");
   const base = useRef("");
   const lastWritten = useRef("");
   const composing = useRef(false);
+  // Conversion state (phase 2): the kana run under conversion, its
+  // candidates, and which one (if any) currently stands in the field.
+  const convRun = useRef("");
+  const convList = useRef<ImeCandidate[]>([]);
+  const convIndex = useRef(-1);
+  const convSeq = useRef(0);
   const { enabled, value } = opts;
   const onDraft = opts.onDraft;
   const converter = opts.converter ?? ROMAJI_KANA_CONVERTER;
@@ -59,6 +84,13 @@ export function useKanaIME(opts: {
     const next = base.current + converter.display(buffer.current);
     lastWritten.current = next;
     onDraft(next);
+  };
+
+  const disarmConversion = () => {
+    convSeq.current += 1;
+    convRun.current = "";
+    convList.current = [];
+    convIndex.current = -1;
   };
 
   return {
@@ -70,10 +102,12 @@ export function useKanaIME(opts: {
       if (e.ctrlKey || e.metaKey || e.altKey) return;
       if (value !== lastWritten.current) {
         // Externally edited (OS IME kana, paste, a form clear): adopt the
-        // text as the base and start the buffer fresh.
+        // text as the base and start the buffer fresh. A conversion the
+        // layer was holding dies with the edit it no longer describes.
         base.current = value;
         buffer.current = "";
         lastWritten.current = value;
+        disarmConversion();
       }
       const k = e.key;
       if (k === "Backspace") {
@@ -93,15 +127,84 @@ export function useKanaIME(opts: {
         buffer.current = "";
         lastWritten.current = base.current;
         onDraft(base.current);
+        // IN-APP-IME-001 phase 2: arm conversion for the kana run just
+        // written. Candidates come from the engine's lexicon lookup —
+        // async by design (pack data on disk), so a slow or failing
+        // lookup simply never arms: the field keeps its kana.
+        if (opts.candidates) {
+          const run = TRAILING_KANA_RUN.exec(base.current)?.[0] ?? "";
+          if (run !== "") {
+            const seq = ++convSeq.current;
+            convRun.current = run;
+            void opts
+              .candidates(run)
+              .then((list) => {
+                if (seq !== convSeq.current) return; // stale answer
+                if (list.length === 0) {
+                  disarmConversion();
+                  return;
+                }
+                convList.current = list;
+                convIndex.current = -1;
+              })
+              .catch(() => {
+                if (seq === convSeq.current) disarmConversion();
+              });
+          }
+        }
+        return;
+      }
+      if (k === " ") {
+        // IN-APP-IME-001 phase 2: SPACE cycles the committed kana run
+        // through its pack-lexicon candidates and back. Only while
+        // conversion is armed AND the field still ends with that run
+        // (typing anything else or an external edit disarms first).
+        if (
+          convList.current.length === 0 ||
+          convRun.current === "" ||
+          !base.current.endsWith(
+            convIndex.current >= 0 ? convList.current[convIndex.current]!.text : convRun.current,
+          )
+        ) {
+          return;
+        }
+        e.preventDefault();
+        const run = convRun.current;
+        const list = convList.current;
+        const next = (convIndex.current + 1) % (list.length + 1);
+        convIndex.current = next;
+        const shown = next === list.length ? run : list[next]!.text;
+        base.current = base.current.slice(0, base.current.length - run.length) + shown;
+        lastWritten.current = base.current;
+        onDraft(base.current);
         return;
       }
       if (k === "Escape") {
+        // Escape first retracts an armed conversion back to the plain kana
+        // run (a candidate is a proposal, not a commitment), then clears
+        // the romaji preedit as before.
+        if (convList.current.length > 0 && convIndex.current >= 0) {
+          e.preventDefault();
+          const run = convRun.current;
+          const at = base.current.lastIndexOf(run);
+          if (at !== -1) {
+            base.current = base.current.slice(0, at) + run + base.current.slice(at + run.length);
+            lastWritten.current = base.current;
+            onDraft(base.current);
+          }
+          convIndex.current = -1;
+          return;
+        }
+        if (convList.current.length > 0) disarmConversion();
         if (buffer.current === "") return;
         e.preventDefault();
         buffer.current = "";
         write();
         return;
       }
+      // Any other key belongs to ordinary typing: an armed conversion is
+      // over, the learner has moved past the word they were converting.
+      disarmConversion();
       if (/^[a-zA-Z']$/.test(k)) {
         e.preventDefault();
         buffer.current += k;
@@ -111,6 +214,11 @@ export function useKanaIME(opts: {
     noteExternalEdit() {
       buffer.current = "";
       lastWritten.current = "";
+      disarmConversion();
+    },
+    conversionLabel() {
+      if (convIndex.current < 0 || convIndex.current >= convList.current.length) return null;
+      return candidateProvenanceLabel(convList.current[convIndex.current]!);
     },
   };
 }

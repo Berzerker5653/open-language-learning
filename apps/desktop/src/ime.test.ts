@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import {
   inAppKeyboardForScripts,
+  inputMethodAllowed,
   inputModeLabel,
   kanaCommit,
   kanaDisplay,
@@ -9,6 +10,11 @@ import {
   ROMAJI_KANA_CONVERTER,
   toKana,
 } from "./ime";
+import {
+  candidateProvenanceLabel,
+  LEXICON_CANDIDATES_METHOD_ID,
+  type ImeCandidate,
+} from "./ime-candidates";
 
 describe("romaji→kana converter (issue #2 phase 1)", () => {
   it("converts the words the practice runners actually ask for", () => {
@@ -166,4 +172,100 @@ describe("no language-literal branches in the input UI (IME-TOGGLE-UX-001)", () 
       expect(match, `found language literal ${match?.[0]} in ${file}`).toBeNull();
     });
   }
+});
+
+// IN-APP-IME-001 phase 2: packs may declare their input methods via
+// manifest capabilities.input_methods (mirrored onto the installed-pack
+// record). Absent map = current behavior stands; a present map is the
+// explicit allowlist — an explicit false or a missing key refuses, even
+// when the pack's scripts would otherwise grant the converter.
+describe("pack-declared input methods gate (IN-APP-IME-001 phase 2)", () => {
+  const JA_SCRIPTS = ["ja.orth.hiragana", "ja.orth.katakana"];
+
+  it("an absent map changes nothing (tri-state, not an empty refusal)", () => {
+    expect(inputMethodAllowed(undefined, "romaji-kana")).toBe(true);
+    expect(inputMethodAllowed({ declared: false, methods: [] }, "romaji-kana")).toBe(true);
+    expect(inAppKeyboardForScripts(JA_SCRIPTS)?.converter.id).toBe("romaji-kana");
+    expect(
+      inAppKeyboardForScripts(JA_SCRIPTS, { declared: false, methods: [] })?.converter.id,
+    ).toBe("romaji-kana");
+  });
+
+  it("a declared map is the allowlist: an explicit false turns the converter off", () => {
+    const off = { declared: true, methods: ["lexicon-candidates"] };
+    expect(inputMethodAllowed(off, "romaji-kana")).toBe(false);
+    expect(inAppKeyboardForScripts(JA_SCRIPTS, off)).toBeNull();
+    expect(packDeclaresInAppKanaKeyboard(JA_SCRIPTS, off)).toBe(false);
+  });
+
+  it("a declared map naming the converter keeps the grant", () => {
+    const on = { declared: true, methods: ["lexicon-candidates", "romaji-kana"] };
+    expect(inAppKeyboardForScripts(JA_SCRIPTS, on)?.converter.id).toBe("romaji-kana");
+    expect(packDeclaresInAppKanaKeyboard(JA_SCRIPTS, on)).toBe(true);
+  });
+
+  it("the lexicon-candidates id is the gate the candidate lookup honors", () => {
+    // The App builds the gate from the installed record and rules the
+    // engine lookup out BEFORE calling it when the pack refuses.
+    expect(
+      inputMethodAllowed(
+        { declared: true, methods: ["romaji-kana"] },
+        LEXICON_CANDIDATES_METHOD_ID,
+      ),
+    ).toBe(false);
+    expect(inputMethodAllowed({ declared: false, methods: [] }, LEXICON_CANDIDATES_METHOD_ID)).toBe(
+      true,
+    );
+  });
+});
+
+// IN-APP-IME-001 phase 2 acceptance 3 (structural): the engine contains no
+// hard-coded word list. The romaji→kana table is universal transliteration
+// data (kana only); any Japanese WORD list would carry kanji. So NO engine
+// source may contain a single CJK Unified Ideograph — a baked-in word list
+// cannot be added without tripping this test.
+describe("no baked-in word list in the input engine (IN-APP-IME-001)", () => {
+  const CJK_UNIFIED = /[\u4e00-\u9fff\u3400-\u4dbf]/;
+  for (const file of ["ime.ts", "kana-ime.tsx", "ime-candidates.ts"]) {
+    it(`${file} contains no CJK ideograph (no word list can hide there)`, () => {
+      const src = readFileSync(new URL(`./${file}`, import.meta.url), "utf8");
+      const match = src.match(CJK_UNIFIED);
+      expect(match, `found CJK ideograph ${match?.[0]} in ${file}`).toBeNull();
+    });
+  }
+});
+
+// IN-APP-IME-001 phase 2 acceptance 2 (renderer half): every candidate
+// carries the provenance of the entry that produced it, and the aux slice
+// never claims a pack content id.
+describe("candidate provenance formatting (IN-APP-IME-001)", () => {
+  it("a pack candidate names its source AND its entry id", () => {
+    const c: ImeCandidate = {
+      text: "\u6982\u5ff5",
+      reading: "\u304c\u3044\u306d\u3093",
+      gloss: "concept",
+      source: "pack",
+      entry_id: "ja.lex.fixture.gainen",
+      attribution: null,
+    };
+    const label = candidateProvenanceLabel(c);
+    expect(label).toContain("pack lexicon");
+    expect(label).toContain("ja.lex.fixture.gainen");
+    expect(label).toContain("concept");
+  });
+
+  it("an aux candidate is labeled auxiliary and never shows an entry id", () => {
+    const c: ImeCandidate = {
+      text: "\u732b",
+      reading: null,
+      gloss: "cat",
+      source: "aux",
+      entry_id: null,
+      attribution: "Definitions from Wiktionary via kaikki.org (CC BY-SA / GFDL)",
+    };
+    const label = candidateProvenanceLabel(c);
+    expect(label).toContain("auxiliary lexicon");
+    expect(label).toContain("kaikki.org");
+    expect(label).not.toContain("pack");
+  });
 });

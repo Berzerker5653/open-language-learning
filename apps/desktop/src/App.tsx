@@ -75,7 +75,14 @@ import {
   type RomajiMode,
   type KanaKeyboardMode,
 } from "./settings";
-import { inAppKeyboardForScripts, inputModeLabel, packDeclaresInAppKanaKeyboard } from "./ime";
+import {
+  inAppKeyboardForScripts,
+  inputMethodAllowed,
+  inputModeLabel,
+  packDeclaresInAppKanaKeyboard,
+} from "./ime";
+import type { ImeCandidate } from "./ime-candidates";
+import { LEXICON_CANDIDATES_METHOD_ID } from "./ime-candidates";
 import { InputModeBubble } from "./kana-ime";
 import {
   CaptureOwner,
@@ -1956,8 +1963,35 @@ export function App() {
   // live only when the setting and the pack's declaration agree.
   const activeKeyboard = useMemo(() => {
     const record = installed.find((i) => i.pack_id === activeIds[0]);
-    return record ? inAppKeyboardForScripts(record.scripts) : null;
+    if (!record) return null;
+    // IN-APP-IME-001 phase 2: the pack's declared input-method map gates
+    // converters on top of the script grant (absent map = unchanged).
+    return inAppKeyboardForScripts(record.scripts, {
+      declared: record.input_methods_declared,
+      methods: record.input_methods,
+    });
   }, [installed, activeIds]);
+  // IN-APP-IME-001 phase 2: pack-lexicon conversion candidates for the
+  // kana fields. The engine's `ime_candidates` command answers ONLY from
+  // the active pack's lexicon (plus the separately-labeled aux slice) —
+  // never a baked-in word list — and the pack's declared input-method
+  // allowlist rules the lookup out before it is ever called (absent map =
+  // current behavior). The gate's feature id mirrors the manifest id, so
+  // packs can switch conversion off without an engine change.
+  const imeCandidates = useMemo(() => {
+    if (!inv || profileId === null) return undefined;
+    const record = installed.find((i) => i.pack_id === activeIds[0]);
+    if (!record) return undefined;
+    if (
+      !inputMethodAllowed(
+        { declared: record.input_methods_declared, methods: record.input_methods },
+        LEXICON_CANDIDATES_METHOD_ID,
+      )
+    ) {
+      return undefined;
+    }
+    return (kana: string) => inv("ime_candidates", { kana, profileId }) as Promise<ImeCandidate[]>;
+  }, [installed, activeIds, profileId]);
   const inAppInputOn =
     activeKeyboard !== null &&
     kanaKeyboard !== "off" &&
@@ -3820,7 +3854,10 @@ export function App() {
   // that declares no such script — or no pack is active — grants no toggle;
   // this is the pack's declaration read back, never a language-code check.
   const packDeclaresKanaKeyboard = activeRecord
-    ? packDeclaresInAppKanaKeyboard(activeRecord.scripts)
+    ? packDeclaresInAppKanaKeyboard(activeRecord.scripts, {
+        declared: activeRecord.input_methods_declared,
+        methods: activeRecord.input_methods,
+      })
     : false;
   const activePack =
     activeIds[0] && activeClaims
@@ -3979,6 +4016,7 @@ export function App() {
             onStop={stopAndCheck}
             onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl, true)}
             kanaInput={inAppInputOn}
+            imeCandidates={imeCandidates}
             acceptedOffers={acceptedOffers}
             onAcceptOffer={(o) => void acceptErrorOffer(o, setAudioMsg)}
           />
@@ -4043,6 +4081,7 @@ export function App() {
               source: mineSource,
             }}
             kanaInput={inAppInputOn}
+            imeCandidates={imeCandidates}
             onDraftChange={(field, value) =>
               field === "surface"
                 ? setMineSurface(value)
@@ -4232,6 +4271,7 @@ export function App() {
               }
               onHint={showWritingHint}
               kanaInput={inAppInputOn}
+              imeCandidates={imeCandidates}
               offer={writingOffer}
               offerAccepted={writingOffer ? acceptedOffers.includes(writingOffer.ledger_id) : false}
               onAcceptOffer={(o) => void acceptErrorOffer(o, setWritingError)}
@@ -4411,6 +4451,7 @@ export function App() {
                 onPlayAudio={playPracticeAudio}
                 playing={clipPlaying}
                 kanaInput={inAppInputOn}
+                imeCandidates={imeCandidates}
                 heading={
                   practiceTarget.modality === "orthography-recognition"
                     ? "Which one matches?"

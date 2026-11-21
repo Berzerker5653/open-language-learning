@@ -69,7 +69,13 @@
         "prosody_assessment": { "type": "boolean", "default": false },
         "handwriting": { "type": "boolean", "default": false },
         "rtl": { "type": "boolean", "default": false },
-        "scenario_help": { "type": "boolean", "default": false, "description": "U07 promise: every support-ladder rung above 0 delivers a payload on every scenario node and every expected_actions token (incl. recovery branches) carries a learner-facing label. Absent means the pack never made the promise, so packs published before 2026-10-19 stay installable." }
+        "scenario_help": { "type": "boolean", "default": false, "description": "U07 promise: every support-ladder rung above 0 delivers a payload on every scenario node and every expected_actions token (incl. recovery branches) carries a learner-facing label. Absent means the pack never made the promise, so packs published before 2026-10-19 stay installable." },
+        "input_methods": {
+          "type": "object",
+          "propertyNames": { "pattern": "^[a-z0-9][a-z0-9._-]*$" },
+          "additionalProperties": { "type": "boolean" },
+          "description": "IN-APP-IME-001 phase 2: the pack's declared in-app input methods, method id to bool. Declarative only — packs declare availability, the engine interprets, packs never execute code. Absent means the pack declares nothing and current behavior stands; present means the map is the explicit allowlist for that pack."
+        }
       }
     },
     "requested_model_capabilities": {

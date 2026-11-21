@@ -8,6 +8,7 @@
 
 import { LatinText, usePackTextAttrs } from "@openlang/ui";
 import { useKanaIME } from "./kana-ime";
+import type { ImeCandidate } from "./ime-candidates";
 import type { FormErrorOfferView } from "./error-review";
 import { ErrorOfferList } from "./error-review";
 export interface DictationResult {
@@ -47,6 +48,9 @@ export interface DictationProps {
   onPlayAttempt: () => void;
   /// Issue #2 phase 1: in-app kana keyboard for the typed override field.
   kanaInput?: boolean;
+  /// IN-APP-IME-001 phase 2: pack-lexicon candidate lookup (undefined when
+  /// the active pack's declared input methods rule the method out).
+  imeCandidates?: (kana: string) => Promise<ImeCandidate[]>;
   /// Ledger ids of offers already accepted in this view — the accept is a
   /// one-way door per offer, so accepted ones show a confirmation instead
   /// of a second button.
@@ -88,6 +92,7 @@ export function DictationPractice(props: DictationProps) {
     enabled: props.kanaInput === true,
     value: target,
     onDraft: (v) => props.onTargetChange(v),
+    candidates: props.imeCandidates,
   });
   return (
     <section aria-label="Dictation practice">
