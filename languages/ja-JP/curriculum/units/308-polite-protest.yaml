@@ -4,6 +4,21 @@ goal_id: ja.goal.b1.society-rules
 title: polite protest
 summary: B1 language for polite protest.
 estimated_minutes: 6
+# ADR-0037 task journey (JA-B1-003-JOURNEYS-001): input/scaffolded/independent
+# are this unit's stages; transfer is the next unit's listening check (context
+# change proven by the sentences this goal's units share); reuse is the goal's
+# phase-gated revision unit 836.
+task_sequence:
+  input: ja.activity.polite-protest-enc
+  scaffolded: ja.activity.polite-protest-cloze0
+  independent: ja.activity.polite-protest-enc-write
+  transfer: ja.activity.civic-participation-listen
+  reuse: ja.activity.rules-rev-write
+# ADR-0022 phase gate: this unit's lesson surfaces after the previous
+# journey unit's content reached `supported`.
+requires_unit:
+- unit: ja.unit.generational-difference
+  state: supported
 generation_contract:
   allowed_vocab:
   - ja.lex.society2.seimei
@@ -14,22 +29,24 @@ generation_contract:
   - ja.sent.meeting-starts
   - ja.sent.reply-email
   allowed_grammar:
-  - ja.grammar.b1.toba-conditional
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.verb.polite-masu
   - ja.grammar.particle.object-wo
+  - ja.grammar.particle.possessive-no
   new_item_budget: 6
   validation_method: choice
 activities:
 - id: ja.activity.polite-protest-enc
   type: encounter-read
   modality: reading
-  support_level: 5
+  support_level: 2
   content_refs:
   - ja.lex.society2.seimei
   - ja.lex.society2.akusei
   - ja.lex.society2.teigen
   - ja.lex.society2.houfuku
   - ja.lex.society2.koufuku
-  - ja.grammar.b1.toba-conditional
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.polite-protest-listen
@@ -42,7 +59,7 @@ activities:
   - ja.lex.society2.teigen
   - ja.lex.society2.houfuku
   - ja.lex.society2.koufuku
-  - ja.grammar.b1.toba-conditional
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.polite-protest-match
@@ -55,7 +72,7 @@ activities:
   - ja.lex.society2.teigen
   - ja.lex.society2.houfuku
   - ja.lex.society2.koufuku
-  - ja.grammar.b1.toba-conditional
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.polite-protest-speak
@@ -68,7 +85,7 @@ activities:
   - ja.lex.society2.teigen
   - ja.lex.society2.houfuku
   - ja.lex.society2.koufuku
-  - ja.grammar.b1.toba-conditional
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.polite-protest-cloze0
@@ -82,4 +99,11 @@ activities:
   modality: writing
   support_level: 2
   content_refs:
+  - ja.sent.reply-email
+- id: ja.activity.polite-protest-enc-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.meeting-starts
   - ja.sent.reply-email
