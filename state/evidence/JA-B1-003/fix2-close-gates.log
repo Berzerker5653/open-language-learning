@@ -1,0 +1,34 @@
+# JA-B1-003-FIX-002 — ledger-close takeover verification (2026-11-21, board worker t_dac65d20 attempt 2)
+# Attempt 1 exhausted its 60-iteration budget; the lane content had landed at ced4da4
+# (full record: fix2-verification.md). This run did NOT re-bake or re-whisper anything.
+# It independently re-verified the commit's claims and re-ran the LANE gate battery at HEAD.
+
+## Independent re-verification of ced4da4 (scripts, not prose)
+- Defective set: 51 ja.sent target ids carry rev-2026-11-20-b1leg-* outcome changes-requested.
+  changed-row set in sentences/entries.jsonl at ced4da4 == that 51-id set exactly (0 extra, 0 missing).
+- Invariants on all 51 new rows: 0 violations (cloze targets contained contiguously in reading;
+  text/reading/romaji/gloss present; status/id/sources unchanged from pre-fix rows).
+  50 rows reading-changed; ja.sent.guest-host gloss-only (reading and audio unchanged by design).
+- media/manifest.jsonl: 51/51 target rows sha256==disk wav, bytes==len(disk), text==declared reading.
+- media/words.jsonl: 4,575 rows total; timing rows for all 51 ids present, spans 0<=s<e,
+  monotonic, last end within clip duration + 0.3 s; report min align score 0.4057 >= 0.35 floor.
+- ASR: production scripts/qa-asr.py verdict(text, heard, 'ja') re-scored offline on the 50 stored
+  fix2-asr.jsonl rows: 50/50 ok (lowest ratio 0.780 @ ja.sent.itinerary-plan); mora-aware
+  duration cap (1.3 + 0.45*mora) violations: 0.
+
+## LANE gate battery re-run at close (cargo run -q -p lts-langpack-cli -- <cmd> languages/ja-JP)
+validate            exit=0  0 error(s), 0 warning(s)
+lint                exit=0  0 error(s), 0 warning(s)
+audit-curriculum    exit=0  0 error(s), 0 warning(s)
+audit-lexicon       exit=0  0 error(s), 0 warning(s)
+audit-licenses      exit=0  0 error(s), 0 warning(s)
+audit-sources       exit=0  0 error(s), 0 warning(s)
+test                exit=0  0 error(s), 0 warning(s)
+(info-level media_item_without_reading / unused_source lines match the pre-existing K-65 and
+source-hygiene infos logged in fix2-gates.log; they are info, not warnings.)
+
+## Ledger mechanics
+- state/task-state.json on disk is shared dirty WIP (other lanes); the FIX-002 done flip was
+  committed from HEAD + this card's semantic edit only, via git hash-object/update-index
+  (working copy untouched). validate_handoff --require-explicit-ledger-records PASS run against
+  a HEAD worktree carrying exactly that file.

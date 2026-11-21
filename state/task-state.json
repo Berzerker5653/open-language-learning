@@ -2220,17 +2220,22 @@
     "JA-B1-003-FIX-002": {
       "task_id": "JA-B1-003-FIX-002",
       "title": "Rewrite the 51 defective legacy B1 sentences and re-bake their audio",
-      "status": "blocked",
+      "status": "done",
       "attempts": 0,
-      "updated": "2026-11-20",
+      "updated": "2026-11-21",
       "dependencies": [
         "JA-B1-003-FIX-001"
       ],
       "evidence": [
-        "state/evidence/JA-B1-003/findings-2026-11-20.md"
+        "state/evidence/JA-B1-003/findings-2026-11-20.md",
+        "state/evidence/JA-B1-003/fix2-verification.md",
+        "state/evidence/JA-B1-003/fix2-gates.log",
+        "state/evidence/JA-B1-003/fix2-asr.jsonl",
+        "state/evidence/JA-B1-003/fix2-word-timings-report.jsonl",
+        "state/evidence/JA-B1-003/fix2-close-gates.log"
       ],
       "summary": "Created by JA-B1-003: rewrite 32 P1 + 19 P2 legacy B1 sentences around corrected vocabulary (ids preserved), re-bake reading-paired clips via scripts/generate-pack-audio.py, ASR content-check, re-align word-timing rows (WORD-TIMING-003 contract).",
-      "notes": "Held pending prerequisite JA-B1-003-FIX-001 (lexicon corrections must land before sentence rewrites reuse corrected words). Board parent edge enforces ordering and auto-resumes; no human action needed. Files: languages/ja-JP/sentences/*.jsonl + media/manifest.jsonl + media/words.jsonl + wavs."
+      "notes": "LANDED 2026-11-21: content commit ced4da4 (51 rewrites, 50 re-bakes 50/50 ASR ok, 50 CTC word-timings re-aligned, 51 fix-verification records rev-2026-11-21-b1legfix2-001..051). ja.sent.guest-host gloss-only by design (audio unchanged). No status flips; nothing published. | Ledger-close takeover (board t_dac65d20 attempt 2): ced4da4 claims independently re-verified row-by-row (51/51 id-set exact vs rev-2026-11-20-b1leg changes-requested, manifest sha256==disk 51/51, production verdict() re-score 50/50 ASR ok, timings monotonic min score 0.4057>=0.35) and 7/7 LANE gates re-run green at close (fix2-close-gates.log)."
     },
     "JA-B1-003-JOURNEYS-001": {
       "task_id": "JA-B1-003-JOURNEYS-001",
