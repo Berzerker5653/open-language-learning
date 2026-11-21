@@ -73,6 +73,12 @@ pub fn norm_form(raw: &str) -> String {
         .collect()
 }
 
+/// Same mark rule as `norm_form` but case-SENSITIVE: used to prove a
+/// difference is only in stress marks, never to paper over case.
+fn strip_stress(raw: &str) -> String {
+    raw.chars().filter(|c| *c != '\u{301}').collect()
+}
+
 /// Grammemes of a sidecar tag string: ``,` and whitespace separate
 /// grammemes ("NOUN,inan,masc sing,accs" -> 5 grammemes).
 fn grammemes(tag: &str) -> Vec<&str> {
@@ -115,8 +121,14 @@ pub fn classify_form_mismatch<'a>(
     let find = |key: &str| index.iter().find(|row| norm_form(row.surface) == key);
     let expected_row = find(&en)?;
     let lemma = expected_row.lemma;
-    if en == pn && expected != produced {
-        // Identical modulo stress marks: a stress (or ё) mistake.
+    if expected != produced && strip_stress(expected) == strip_stress(produced) {
+        // Identical modulo stress marks (case-SENSITIVE compare): a
+        // stress mistake. Case-only differences do NOT take this branch
+        // — a case gap between the pack surface and an ASR/typed form is
+        // an artifact the data cannot name, so it falls through to the
+        // sidecar diff and lands in the honest `other` bucket. (Ё→Е is
+        // not a stress mark either: norm_form does not fold it, so that
+        // pair also falls through to the sidecar diff.)
         return Some((lemma, FormErrorClass::Stress));
     }
     let Some(produced_row) = find(&pn) else {
@@ -198,6 +210,19 @@ mod tests {
         let (lemma, class) = classify_form_mismatch("мука\u{301}", "мука", &i).unwrap();
         assert_eq!(lemma, "мука");
         assert_eq!(class, FormErrorClass::Stress);
+    }
+
+    #[test]
+    fn a_case_only_difference_never_claims_stress() {
+        // Review defect D2 (honesty rule): norm_form lowercases, but the
+        // dictation/writing producers do not case-fold. "Spasibo"-style
+        // case gaps (pack surface vs ASR-heard or typed form) are an
+        // artifact, not a named linguistic class — no stress claim.
+        let i = idx(TABLE);
+        let (lemma, class) = classify_form_mismatch("Книга", "книга", &i).unwrap();
+        assert_eq!(lemma, "книга");
+        assert_ne!(class, FormErrorClass::Stress);
+        assert_eq!(class, FormErrorClass::Other);
     }
 
     #[test]

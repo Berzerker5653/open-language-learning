@@ -5244,6 +5244,7 @@ fn dictation_check_at(data: &Path, attempt: DictationAttempt) -> Result<Dictatio
                     pack_id: &attempt.pack_id,
                     context_sentence_id: sid,
                     now,
+                    seq: std::cell::Cell::new(0),
                 };
                 error_offers = dictation_form_offers(&sink, &attempt.target_text, &heard);
             }
@@ -5556,6 +5557,7 @@ fn writing_submit(
             pack_id,
             context_sentence_id: &item_id,
             now,
+            seq: std::cell::Cell::new(0),
         };
         grade.offer = record_form_error(
             &sink,
@@ -7052,6 +7054,10 @@ struct ErrorSink<'a> {
     pack_id: &'a str,
     context_sentence_id: &'a str,
     now: std::time::Duration,
+    /// FIX-ERR-SRS-LOOP-001-1 (D1): `now` is captured ONCE per check, so
+    /// the ledger id also carries a per-sink sequence — every recorded
+    /// pair gets its own row instead of colliding on the PRIMARY KEY.
+    seq: std::cell::Cell<u32>,
 }
 
 fn record_form_error(
@@ -7059,6 +7065,12 @@ fn record_form_error(
     expected: &str,
     produced: &str,
 ) -> Option<lts_activity::form_errors::FormErrorOffer> {
+    // FIX-ERR-SRS-LOOP-001-1 (D5): a non-attempt (empty typed answer,
+    // punctuation-only heard token) is not a wrong word — the ledger
+    // records attempts, not skips.
+    if produced.trim().is_empty() {
+        return None;
+    }
     let index: Vec<lts_activity::form_errors::LemmaForm<'_>> = sink
         .rows
         .iter()
@@ -7070,7 +7082,9 @@ fn record_form_error(
         .collect();
     let (lemma, class) =
         lts_activity::form_errors::classify_form_mismatch(expected, produced, &index)?;
-    let ledger_id = format!("err-{}-{}", sink.now.as_secs(), sink.now.subsec_nanos());
+    let n = sink.seq.get();
+    sink.seq.set(n + 1);
+    let ledger_id = format!("err-{}-{}-{n}", sink.now.as_secs(), sink.now.subsec_nanos());
     let created_at = rfc3339_utc(sink.now.as_secs());
     sink.store
         .record_error(
@@ -11717,6 +11731,7 @@ activities:
             pack_id: "ru.demo",
             context_sentence_id: "ru.sentence.p1",
             now,
+            seq: std::cell::Cell::new(0),
         };
         let offer = record_form_error(&sink, "книги", "книгу").unwrap();
         assert_eq!(offer.error_class, lts_activity::FormErrorClass::Case);
@@ -11757,6 +11772,103 @@ activities:
         assert_eq!(
             tags,
             vec![lts_scheduler::ERROR_REVIEW_SCHEDULER.to_string()]
+        );
+    }
+
+    /// FIX-ERR-SRS-LOOP-001-1 (D1): one dictation sentence with several
+    /// mismatched pairs must append one ledger row per pair. The ids
+    /// used to share the once-captured `now`, collide on the PRIMARY
+    /// KEY, and silently drop every mismatch after the first.
+    #[test]
+    fn one_sentence_with_two_mismatches_records_two_rows_and_two_offers() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let profile = store
+            .create_profile("Ana", "2026-11-01T00:00:00Z")
+            .unwrap()
+            .id;
+        let rows = vec![
+            LemmaRow {
+                surface: "книги".into(),
+                lemma: "книга".into(),
+                tag: "NOUN,inan,fem sing,gent".into(),
+            },
+            LemmaRow {
+                surface: "книгу".into(),
+                lemma: "книга".into(),
+                tag: "NOUN,inan,fem sing,accs".into(),
+            },
+            LemmaRow {
+                surface: "стол".into(),
+                lemma: "стол".into(),
+                tag: "NOUN,anim,masc sing,nomn".into(),
+            },
+            LemmaRow {
+                surface: "столы".into(),
+                lemma: "стол".into(),
+                tag: "NOUN,anim,masc plur,nomn".into(),
+            },
+        ];
+        let sink = ErrorSink {
+            rows: &rows,
+            store: &store,
+            profile_id: &profile,
+            pack_id: "ru.demo",
+            context_sentence_id: "ru.sentence.p9",
+            now: std::time::Duration::from_secs(1_764_000_000),
+            seq: std::cell::Cell::new(0),
+        };
+        let offers = dictation_form_offers(&sink, "книги стол", "книгу столы");
+        assert_eq!(offers.len(), 2, "both mismatched pairs are offered");
+        assert_ne!(offers[0].ledger_id, offers[1].ledger_id);
+        let ledger = store.error_ledger(&profile).unwrap();
+        assert_eq!(ledger.len(), 2, "every pair gets its own ledger row");
+        let rec = store.error_recurrence_by_context(&profile).unwrap();
+        assert_eq!(rec, vec![("ru.sentence.p9".to_string(), 2)]);
+    }
+
+    /// FIX-ERR-SRS-LOOP-001-1 (D5): a non-attempt (empty typed answer,
+    /// as `grade_writing` returns for a skipped composition item) must
+    /// not append a wrong-word row or produce an offer.
+    #[test]
+    fn an_empty_submission_records_no_ledger_row_and_no_offer() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let profile = store
+            .create_profile("Ana", "2026-11-01T00:00:00Z")
+            .unwrap()
+            .id;
+        let rows = vec![
+            LemmaRow {
+                surface: "книги".into(),
+                lemma: "книга".into(),
+                tag: "NOUN,inan,fem sing,gent".into(),
+            },
+            LemmaRow {
+                surface: "книгу".into(),
+                lemma: "книга".into(),
+                tag: "NOUN,inan,fem sing,accs".into(),
+            },
+        ];
+        let sink = ErrorSink {
+            rows: &rows,
+            store: &store,
+            profile_id: &profile,
+            pack_id: "ru.demo",
+            context_sentence_id: "ru.lex.test",
+            now: std::time::Duration::from_secs(1_764_000_000),
+            seq: std::cell::Cell::new(0),
+        };
+        assert!(record_form_error(&sink, "книги", "").is_none());
+        assert!(record_form_error(&sink, "книги", "   ").is_none());
+        assert!(store.error_ledger(&profile).unwrap().is_empty());
+        assert!(
+            store
+                .error_recurrence_by_context(&profile)
+                .unwrap()
+                .is_empty()
         );
     }
 
