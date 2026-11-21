@@ -1397,7 +1397,7 @@
     },
     "JA-B2-002": {
       "task_id": "JA-B2-002",
-      "status": "pending",
+      "status": "ready",
       "attempts": 1,
       "title": "Qualified Japanese content review — B2",
       "activity": "idle",
