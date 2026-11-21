@@ -2249,11 +2249,12 @@
       "notes": "Authoring card per ADR-0037 + R12 lineage (UPPERBAND-TASK-JOURNEYS-001). Files: curriculum/units/*.yaml."
     },
     "CODING-STANDARDS-001": {
-      "status": "blocked",
+      "status": "done",
       "attempts": 1,
       "evidence": [
         "state/notes/CODING-STANDARDS-001.md",
-        "state/evidence/CODING-STANDARDS-001/gates.log"
+        "state/evidence/CODING-STANDARDS-001/gates.log",
+        "state/evidence/CODING-STANDARDS-001/gates.txt"
       ],
       "summary": "CODING_STANDARDS.md shipped at main (722b7bc): 62-line reviewer checklist, machine gates named only (26 items grounded in ci.yml/ci.sh/ids.rs), judgement-call list consolidated from AGENTS.md/docs/09/CONTRIBUTING.md. Remaining: protected AGENTS.md Coding-standard link — worker edit hard-blocked, hunk+resume recipe preserved in notes.",
       "notes": "Blocked on the protected-file step only (same shape as GLOSSARY-001). Owner-present session applies the notes hunk, runs validate_handoff, flips done per resume recipe.",
@@ -2294,5 +2295,6 @@
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
-  "current_release_candidate": "Packs: ja-JP 0.4.3 (published 2026-11-09) and ru-RU 0.4.5 (published 2026-11-20) — manifests and catalog/packs.json pins agree (re-measured 2026-11-20, state/evidence/DOC-CONTRACT-RECONCILE-001/audit-2026-11-20.md); the 0.4.4/0.4.2/0.4.1/0.4.0 releases stay live as immutable rollback targets. App: newest published artifact is still open-language-learning-platform-0.4.0-alpha.1 (2026-10-13, Linux pre-release); code identity is 0.4.3-alpha.1 and unpublished — next-artifact decision is owner action O-06. Nothing in the build consumes this field; it is documentation."
+  "current_release_candidate": "Packs: ja-JP 0.4.3 (published 2026-11-09) and ru-RU 0.4.5 (published 2026-11-20) — manifests and catalog/packs.json pins agree (re-measured 2026-11-20, state/evidence/DOC-CONTRACT-RECONCILE-001/audit-2026-11-20.md); the 0.4.4/0.4.2/0.4.1/0.4.0 releases stay live as immutable rollback targets. App: newest published artifact is still open-language-learning-platform-0.4.0-alpha.1 (2026-10-13, Linux pre-release); code identity is 0.4.3-alpha.1 and unpublished — next-artifact decision is owner action O-06. Nothing in the build consumes this field; it is documentation.",
+  "updated_at": "2026-11-21T00:30:12-07:00"
 }
