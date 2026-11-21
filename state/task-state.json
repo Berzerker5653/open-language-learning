@@ -2403,6 +2403,24 @@
       "summary": "Shipped all four acceptance bullets: engine-derived progress_pct per goal dimension (mean concept ladder weight, unseen=0) drawn as dependency-free SVG role=progressbar bars in GoalMap; world_state 'missing' references upgraded to WorldMissing{target,modality,label} with labels resolved from the active pack's lexicon (raw id never rendered inline); new memory_stats command (due today, engine-priced minutes, per-band mean FSRS retrievability with honest abstention, 12-week evidence-event calendar via new Store::evidence_event_days) rendered as MemoryStatsStrip above the GoalMap, framed as n=1 instruments not grades; zero new runtime deps, a11y semantics test-asserted. Board run 100 died at 80/80 with the lane complete but uncommitted; run 101 re-ran the whole LANE battery personally and fixed two clippy nits (useless_conversion, unnecessary_sort_by) before commit.",
       "notes": "Lanes: apps/desktop/src-tauri/src/lib.rs (goal_map/memory_stats/world_state + 3 targeted tests), crates/storage (evidence_event_days), apps/desktop/src frontend (home, memory-stats, App) + tests, packages/ui/src/styles.css. Battery: fmt 0; clippy+test green for lts-storage and lts-desktop (211 passed incl. targeted tests); tsc 0; vitest 53 files / 426 tests."
     },
+    "MOBILE-UX-001": {
+      "task_id": "MOBILE-UX-001",
+      "title": "Phone look and feel — viewport-aware layout, 44px touch targets, phone typography at 390/412px (owner standard 2026-11-21)",
+      "status": "done",
+      "attempts": 1,
+      "updated": "2026-11-21",
+      "dependencies": [
+        "SESSION-CHROME-001"
+      ],
+      "evidence": [
+        "state/evidence/MOBILE-UX-001/gates.log",
+        "state/evidence/MOBILE-UX-001/tap-target-audit.md",
+        "state/evidence/MOBILE-UX-001/after/settings-390.png",
+        "state/evidence/MOBILE-UX-001/before/settings-390.png"
+      ],
+      "summary": "Shipped the phone tier in packages/ui/src/styles.css (one 44rem media tier + 24rem tail): compact wrapping nav bar with 44px tabs, 44px floor for seg-btns/notes summaries/IME bubble/selects/delete-confirm checkbox, selects width:100% (HEAD's 479px speech-model select pushed the document to 512px h-scroll on settings), phone typography (h1 1.5rem, reader 1.1875rem/2.1), stacked session chrome, all riding LETTER-DRILL-TEXT-001's --content-max token. Dev-only evidence harness (mobile-harness.html, src/mobile-screens.tsx, vite.mobile-harness.config.ts, scripts/mobile-capture.mjs) captured before/after screenshots + tap/overflow audits at 390x844 and 412x915; vitest gate src/mobile-audit.test.ts (11 tests) asserts no-h-scroll and no sub-44px targets per audit. 10/10 after-audits clean; before-audits flag HEAD's settings h-scroll + 13x13 checkbox.",
+      "notes": "Board run 107 died 80/80 with fake-pass captures (RU onboarding stalls at the mic step in the fake engine; nav errors never reached the audit JSON). Run 108 re-harnessed: seeded RU profile for today/drill/settings, aria-label-aware button matching, error field in the audit. Lane is CSS+harness+tests only, no crates; WEB-SERVE-001's complete-but-uncommitted lane (lib.rs/packs.rs/App.tsx/serve.rs/ipc.ts) stayed unstaged — gates ran with it in the tree. Repo has no stylelint (card mention aspirational)."
+    },
     "IN-APP-IME-001": {
       "task_id": "IN-APP-IME-001",
       "title": "In-app IME phase 2: pack-declared input methods + lexicon-backed kana candidates",

@@ -2909,6 +2909,19 @@ tasks:
   - a stats strip (due today, ~minutes, per-band retention, 12-week activity calendar) sits above the capability tree; all data is local n=1 and labeled as an instrument, not a grade or certificate
   - charts are dependency-free SVG (no new runtime deps) and pass the a11y contrast audit
   required_for_desktop_1_0: false
+- id: MOBILE-UX-001
+  milestone: M8
+  priority: P1
+  title: Phone look and feel — viewport-aware layout, 44px touch targets, and phone typography at 390/412px (owner standard 2026-11-21)
+  dependencies:
+  - SESSION-CHROME-001
+  read_first:
+  - docs/visual-ui-audit-2026-11.md
+  acceptance:
+  - no horizontal document scroll at 390x844 or 412x915 on onboarding, today, drill, reader, and settings, asserted by the audit gate in apps/desktop/src/mobile-audit.test.ts
+  - every non-inline interactive element measures at least 44x44 at phone widths, with inline reader word taps documented as the one honest exception
+  - typography and lists stay comfortable at phone distance using the existing measure token, and before/after screenshots plus the tap-target checklist sit in state/evidence/MOBILE-UX-001/
+  required_for_desktop_1_0: false
 - id: GLOSSARY-001
   milestone: M8
   priority: P2
@@ -2984,6 +2997,7 @@ execution_scope:
   - K-23
   - K-24
   - K-30
+  - MOBILE-UX-001
   - K-31
   - K-32
   - K-33
