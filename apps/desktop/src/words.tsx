@@ -33,6 +33,14 @@ export interface MineItem {
   source_citation: string;
   created_at: string;
   due_at: string | null;
+  /// VOCAB-BUILDER-001: the sentence this word was met in, when the word
+  /// entered through a reader tap (null for manual mines). Mirrors the
+  /// wire shape: the engine always answers both fields.
+  context_sentence_id: string | null;
+  /// The context sentence's text, resolved by the engine against the
+  /// active pack. Null when there is no context or the sentence is no
+  /// longer in the pack — the drill then shows no context line.
+  context_sentence: string | null;
 }
 
 export interface MineDraft {
@@ -56,6 +64,10 @@ export interface MyWordsPanelProps {
   onStartNewReview(): void;
   onStartReview(): void;
   onReveal(): void;
+  /// VOCAB-BUILDER-001: replay the sentence the word was met in (the
+  /// existing `story_audio` sentence path). Optional: a caller with no
+  /// audio wiring renders no Play button, never a broken one.
+  onPlayContext?(sentenceId: string): void;
   /// SESSION-CHROME-001 (U6): the FSRS scheduler's predicted next interval
   /// (seconds) for each grade button, read from the item's existing state
   /// via `srs_interval_preview`. Null/undefined means the scheduler has no
@@ -109,6 +121,24 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
                 <p>(no gloss)</p>
               )}
               <p className="notice">Met in: {p.review.item.source_citation}</p>
+              {p.review.item.context_sentence && (
+                <p className="notice">
+                  In this sentence:{" "}
+                  <PackText tag="span">{p.review.item.context_sentence}</PackText>
+                  {p.onPlayContext && p.review.item.context_sentence_id && (
+                    <button
+                      type="button"
+                      className="btn btn--quiet"
+                      onClick={() => {
+                        const sid = p.review?.item.context_sentence_id;
+                        if (sid) p.onPlayContext?.(sid);
+                      }}
+                    >
+                      Play
+                    </button>
+                  )}
+                </p>
+              )}
               <div className="btn-row">
                 <button type="button" className="btn" onClick={() => p.onGrade(false)}>
                   I knew it

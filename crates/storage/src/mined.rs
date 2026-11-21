@@ -17,6 +17,12 @@ pub struct MinedItem {
     pub gloss: Option<String>,
     pub source_citation: String,
     pub created_at: String,
+    /// VOCAB-BUILDER-001: the context sentence the word was encountered in
+    /// (drill replay). NULL for manually mined rows — manual Mine is
+    /// untouched semantics. `serde(default)` keeps v1-4 bundles (which have
+    /// no such field) importable.
+    #[serde(default)]
+    pub context_sentence_id: Option<String>,
 }
 
 /// Input for `add_mined`; keeps the API under the argument-count lint.
@@ -28,6 +34,7 @@ pub struct NewMinedItem<'a> {
     pub gloss: Option<&'a str>,
     pub source_citation: &'a str,
     pub created_at: &'a str,
+    pub context_sentence_id: Option<&'a str>,
 }
 
 /// Result of `add_mined`: the id of the row that survived, and whether
@@ -59,10 +66,10 @@ impl Store {
         // simultaneous Mine clicks both try to insert, and the loser would
         // surface exactly the raw UNIQUE error this change removes.
         let inserted = self.conn.execute(
-            "INSERT INTO mined_items(id, profile_id, surface, reading, gloss, source_citation, created_at)
-             VALUES (?1,?2,?3,?4,?5,?6,?7)
+            "INSERT INTO mined_items(id, profile_id, surface, reading, gloss, source_citation, created_at, context_sentence_id)
+             VALUES (?1,?2,?3,?4,?5,?6,?7,?8)
              ON CONFLICT(profile_id, surface) DO NOTHING",
-            params![item.id, profile_id, item.surface, item.reading, item.gloss, item.source_citation, item.created_at],
+            params![item.id, profile_id, item.surface, item.reading, item.gloss, item.source_citation, item.created_at, item.context_sentence_id],
         )?;
         if inserted > 0 {
             return Ok(AddMinedOutcome {
@@ -72,9 +79,10 @@ impl Store {
         }
         self.conn.execute(
             "UPDATE mined_items
-             SET reading = COALESCE(?3, reading), gloss = COALESCE(?4, gloss)
+             SET reading = COALESCE(?3, reading), gloss = COALESCE(?4, gloss),
+                 context_sentence_id = COALESCE(?5, context_sentence_id)
              WHERE profile_id = ?1 AND surface = ?2",
-            params![profile_id, item.surface, item.reading, item.gloss],
+            params![profile_id, item.surface, item.reading, item.gloss, item.context_sentence_id],
         )?;
         let id = self
             .conn
@@ -90,7 +98,7 @@ impl Store {
 
     pub fn mined_items(&self, profile_id: &str) -> Result<Vec<MinedItem>, Error> {
         let mut stmt = self.conn.prepare(
-            "SELECT id, surface, reading, gloss, source_citation, created_at
+            "SELECT id, surface, reading, gloss, source_citation, created_at, context_sentence_id
              FROM mined_items WHERE profile_id = ?1 ORDER BY created_at, id",
         )?;
         let rows = stmt.query_map(params![profile_id], |r| {
@@ -101,6 +109,7 @@ impl Store {
                 gloss: r.get(3)?,
                 source_citation: r.get(4)?,
                 created_at: r.get(5)?,
+                context_sentence_id: r.get(6)?,
             })
         })?;
         rows.collect::<Result<_, _>>().map_err(Error::from)

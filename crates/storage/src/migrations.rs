@@ -26,7 +26,7 @@
 use crate::error::Error;
 use rusqlite::{Connection, Transaction, TransactionBehavior};
 
-pub const SCHEMA_VERSION: i64 = 7;
+pub const SCHEMA_VERSION: i64 = 8;
 
 struct Migration {
     version: i64,
@@ -251,6 +251,33 @@ CREATE TABLE error_review_cards (
 );
 ",
     },
+    Migration {
+        version: 8,
+        sql: "
+-- VOCAB-BUILDER-001: the automatic vocabulary builder. The lookup log is
+-- an observation ledger in the CONTENT-CONFIRM-001 / ERR-SRS-LOOP-001
+-- pattern: one row per reader word-tap (printed surface, sidecar lemma
+-- when one resolved, the story being read, the context sentence, the
+-- time). Taps never dedupe — Kindle vocab.db LOOKUPS semantics: the
+-- sentence each word sat in is the durable artifact. The review card
+-- behind a looked-up word is an ordinary mined item (existing '+mined'
+-- partition, no new scheduler tag); mined_items gains the context
+-- sentence id so a drill can replay the original sentence. NULL for
+-- rows mined manually, so manual Mine keeps working untouched.
+CREATE TABLE word_lookups (
+  id TEXT PRIMARY KEY,
+  profile_id TEXT NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+  surface TEXT NOT NULL,
+  lemma TEXT,
+  story_id TEXT NOT NULL,
+  sentence_id TEXT NOT NULL,
+  created_at TEXT NOT NULL
+);
+CREATE INDEX idx_word_lookups_profile_surface
+  ON word_lookups(profile_id, surface);
+ALTER TABLE mined_items ADD COLUMN context_sentence_id TEXT;
+",
+    },
 ];
 
 pub(crate) fn migrate(conn: &Connection) -> Result<(), Error> {
@@ -373,9 +400,12 @@ mod tests {
              DELETE FROM schema_migrations WHERE version = 5;
              DELETE FROM schema_migrations WHERE version = 6;
              DELETE FROM schema_migrations WHERE version = 7;
+             DELETE FROM schema_migrations WHERE version = 8;
              DROP TABLE IF EXISTS error_review_cards;
              DROP TABLE IF EXISTS error_ledger;
-             DROP TABLE IF EXISTS content_confirmations;",
+             DROP TABLE IF EXISTS content_confirmations;
+             DROP TABLE IF EXISTS word_lookups;
+             ALTER TABLE mined_items DROP COLUMN context_sentence_id;",
         )
         .unwrap();
         conn.execute(
@@ -464,6 +494,24 @@ mod tests {
                         .unwrap()
                             == 1
                     })
+            }
+            8 => {
+                // VOCAB-BUILDER-001: the lookup table plus the mined
+                // annotation — both artifacts of v8.
+                conn.query_row(
+                    "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = 'word_lookups'",
+                    [],
+                    |r| r.get::<_, i64>(0),
+                )
+                .unwrap()
+                    == 1
+                    && conn.query_row(
+                        "SELECT COUNT(*) FROM pragma_table_info('mined_items') WHERE name = 'context_sentence_id'",
+                        [],
+                        |r| r.get::<_, i64>(0),
+                    )
+                    .unwrap()
+                        == 1
             }
             _ => panic!("v{version} has no schema artifact"),
         }

@@ -125,6 +125,10 @@ export interface WordCardView {
   aux_gloss: string | null;
   aux_pos: string | null;
   aux_source: string | null;
+  /// VOCAB-BUILDER-001: true once the word lives in the review pipeline
+  /// (the tap itself puts it there — the lookup IS the learning signal).
+  /// Rendered as "In My words", never as a mastery claim.
+  in_review: boolean;
 }
 
 /** The open word card: which sentence's which raw token, plus the engine's
@@ -422,6 +426,14 @@ export function ReadingPanel(p: ReadingPanelProps) {
           >
             Mine
           </button>
+          {/* VOCAB-BUILDER-001: the tap already recorded this word into
+              My words — the state rides beside the still-working Mine
+              button, and the copy makes no mastery claim. */}
+          {card?.in_review && (
+            <span role="status" className="meta word-in-review">
+              <LatinText locale="en">In My words</LatinText>
+            </span>
+          )}
           {knownId && confirmControl(knownId)}
           <button type="button" className="btn btn--quiet" onClick={p.onWordClose}>
             Close

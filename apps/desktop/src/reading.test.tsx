@@ -74,6 +74,7 @@ const CLASSROOM_CARD: WordCardView = {
   aux_gloss: null,
   aux_pos: null,
   aux_source: null,
+  in_review: false,
 };
 
 function base(over: Partial<ReadingPanelProps>): ReadingPanelProps {
@@ -157,6 +158,7 @@ describe("paragraph reader structure (READER-FLOW-001)", () => {
       aux_gloss: null,
       aux_pos: null,
       aux_source: null,
+      in_review: false,
     });
     expect(html).toContain("not in your pack yet");
     expect(html).toContain(">Mine</button>");
@@ -180,6 +182,7 @@ describe("paragraph reader structure (READER-FLOW-001)", () => {
       aux_gloss: "present, gift",
       aux_pos: "noun",
       aux_source: "Wiktionary via kaikki.org (CC BY-SA / GFDL)",
+      in_review: false,
     });
     // The aux answer is shown, labeled, and attributed (ShareAlike).
     expect(html).toContain("present, gift");
@@ -204,6 +207,7 @@ describe("paragraph reader structure (READER-FLOW-001)", () => {
       aux_gloss: null,
       aux_pos: null,
       aux_source: null,
+      in_review: false,
     });
     expect(withLemma).toContain("dictionary form:");
     expect(withLemma).toContain(">хлеб<");
@@ -363,5 +367,17 @@ describe("interlinear grammar labels (GRAMMAR-LABELS-001)", () => {
   it("unknown label atoms render verbatim rather than vanishing", () => {
     expect(expandGrammarLabel("nom.pl")).toBe("nominative plural");
     expect(expandGrammarLabel("dub.dat")).toBe("dub dative");
+  });
+});
+
+describe("lookup state on the word card (VOCAB-BUILDER-001)", () => {
+  it("an in_review card shows the In-My-words state beside the still-working Mine button", () => {
+    const html = withCard("きょうしつ", { ...CLASSROOM_CARD, in_review: true });
+    expect(html).toContain("In My words");
+    expect(html).toContain(">Mine</button>");
+  });
+  it("a card whose word is not in the pipeline yet shows no In-My-words state", () => {
+    const html = withCard("きょうしつ", { ...CLASSROOM_CARD, in_review: false });
+    expect(html).not.toContain("In My words");
   });
 });

@@ -127,6 +127,7 @@ fn seed(store: &Store) -> String {
                 gloss: Some("cat"),
                 source_citation: "es.story.demo.cat",
                 created_at: "2026-10-02T00:00:00Z",
+            context_sentence_id: None,
             },
         )
         .unwrap();
@@ -140,6 +141,7 @@ fn seed(store: &Store) -> String {
                 gloss: Some("dog"),
                 source_citation: "",
                 created_at: "2026-10-02T00:00:00Z",
+            context_sentence_id: None,
             },
         )
         .unwrap();
@@ -349,7 +351,7 @@ fn version_1_bundles_remain_importable_without_saved_words() {
     let bundle = src
         .export_profile(&pid, "2026-10-04T00:00:00Z", &ExportOptions::default())
         .unwrap();
-    assert_eq!(bundle.format_version, 4, "exports write the current format");
+    assert_eq!(bundle.format_version, 5, "exports write the current format");
     let mut doc = serde_json::to_value(&bundle).unwrap();
     doc["format_version"] = json!(1);
     doc.as_object_mut().unwrap().remove("mined_items");
@@ -619,5 +621,133 @@ fn confirmations_travel_with_their_learner() {
             .len(),
         2,
         "both the original learner and the copy hold a mark"
+    );
+}
+
+/// VOCAB-BUILDER-001: a version 4 bundle (no `word_lookups` field, mined
+/// items without `context_sentence_id`) stays importable — the compat
+/// rule, not a schema rewrite.
+#[test]
+fn version_4_bundles_remain_importable_without_lookups() {
+    let src = Store::in_memory().unwrap();
+    let pid = seed(&src);
+    src.record_word_lookup(
+        &pid,
+        lts_storage::NewWordLookup {
+            id: "lk-1",
+            surface: "犬",
+            lemma: None,
+            story_id: "es.story.demo",
+            sentence_id: "es.sent.greet.hola",
+            created_at: "2026-10-03T00:00:00Z",
+        },
+    )
+    .unwrap();
+    let bundle = src
+        .export_profile(&pid, "2026-10-04T00:00:00Z", &ExportOptions::default())
+        .unwrap();
+    assert_eq!(bundle.word_lookups.len(), 1, "the v5 export carries the log");
+    assert_eq!(bundle.format_version, 5, "exports write the current format");
+    let mut doc = serde_json::to_value(&bundle).unwrap();
+    doc["format_version"] = json!(4);
+    doc.as_object_mut().unwrap().remove("word_lookups");
+    for m in doc["mined_items"].as_array_mut().unwrap() {
+        m.as_object_mut().unwrap().remove("context_sentence_id");
+    }
+
+    let dst = Store::in_memory().unwrap();
+    let legacy: lts_storage::ExportBundle = serde_json::from_str(&doc.to_string()).unwrap();
+    assert!(legacy.word_lookups.is_empty());
+    assert!(legacy.mined_items.iter().all(|m| m.context_sentence_id.is_none()));
+    let new_id = dst
+        .import_profile(&legacy, &ImportMode::NewProfile)
+        .expect("a version 4 bundle stays importable");
+    assert_eq!(
+        dst.mined_items(&new_id).unwrap().len(),
+        2,
+        "the rest of the record still restores"
+    );
+    assert!(
+        dst.word_lookups(&new_id).unwrap().is_empty(),
+        "a version 4 bundle carries no lookups to restore"
+    );
+}
+
+/// VOCAB-BUILDER-001: the lookup log travels with the learner, and a
+/// mined item's context sentence survives the round trip.
+#[test]
+fn lookups_and_mined_context_travel_with_their_learner() {
+    let src = Store::in_memory().unwrap();
+    let pid = seed(&src);
+    src.record_word_lookup(
+        &pid,
+        lts_storage::NewWordLookup {
+            id: "lk-1",
+            surface: "猫",
+            lemma: Some("猫"),
+            story_id: "es.story.demo.cat",
+            sentence_id: "es.sent.greet.hola",
+            created_at: "2026-10-03T00:00:00Z",
+        },
+    )
+    .unwrap();
+    src.record_word_lookup(
+        &pid,
+        lts_storage::NewWordLookup {
+            id: "lk-2",
+            surface: "犬",
+            lemma: None,
+            story_id: "es.story.demo",
+            sentence_id: "es.sent.other",
+            created_at: "2026-10-03T00:01:00Z",
+        },
+    )
+    .unwrap();
+    // A word kept from a reader tap carries its context sentence. The
+    // seed already kept 猫 manually (mine-cat), so this folds onto that
+    // original anchor row (one live row per surface, K-14 rule) and adds
+    // only the context annotation.
+    let kept = src
+        .add_mined(
+            &pid,
+            NewMinedItem {
+                id: "mine-via-lookup",
+                surface: "猫",
+                reading: Some("ねこ"),
+                gloss: Some("cat"),
+                source_citation: "es.story.demo.cat",
+                created_at: "2026-10-03T00:00:00Z",
+                context_sentence_id: Some("es.sent.greet.hola"),
+            },
+        )
+        .unwrap();
+    assert!(!kept.was_new, "folds onto the manual-mine anchor");
+    assert_eq!(kept.id, "mine-cat");
+
+    let bundle = src
+        .export_profile(&pid, "2026-10-04T00:00:00Z", &ExportOptions::default())
+        .unwrap();
+    assert_eq!(bundle.word_lookups.len(), 2);
+
+    let dst = Store::in_memory().unwrap();
+    let copy = dst
+        .import_profile(&bundle, &ImportMode::NewProfile)
+        .unwrap();
+    let restored = dst.word_lookups(&copy).unwrap();
+    assert_eq!(restored.len(), 2);
+    assert_eq!(restored[0].surface, "猫");
+    assert_eq!(restored[0].lemma.as_deref(), Some("猫"));
+    assert_eq!(restored[0].story_id, "es.story.demo.cat");
+    assert_eq!(restored[1].lemma, None, "no sidecar row, no lemma claim");
+    assert_eq!(
+        dst.mined_items(&copy)
+            .unwrap()
+            .iter()
+            .find(|m| m.id == "mine-cat")
+            .expect("the folded lookup-mined word survives")
+            .context_sentence_id
+            .as_deref(),
+        Some("es.sent.greet.hola"),
+        "the drill context rides the round trip"
     );
 }

@@ -1,0 +1,17 @@
+90b152b
+languages/ja-JP/curriculum/units/400-wellness-routines.yaml
+languages/ja-JP/curriculum/units/401-sleep-habits.yaml
+languages/ja-JP/curriculum/units/402-balanced-nutrition.yaml
+languages/ja-JP/curriculum/units/403-exercise-planning.yaml
+languages/ja-JP/curriculum/units/404-stress-management.yaml
+languages/ja-JP/curriculum/units/405-mental-health-talk.yaml
+languages/ja-JP/curriculum/units/406-habit-change.yaml
+languages/ja-JP/curriculum/units/407-quitting-habits.yaml
+languages/ja-JP/curriculum/units/408-medical-information.yaml
+languages/ja-JP/curriculum/units/409-vaccination-discussion.yaml
+languages/ja-JP/curriculum/units/410-care-and-aging.yaml
+languages/ja-JP/curriculum/units/411-fitness-club-life.yaml
+languages/ja-JP/curriculum/units/412-diet-culture.yaml
+languages/ja-JP/curriculum/units/413-wellbeing-apps.yaml
+languages/ja-JP/curriculum/units/414-health-debate.yaml
+languages/ja-JP/curriculum/units/842-health-wellness-revision.yaml

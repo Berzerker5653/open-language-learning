@@ -184,6 +184,8 @@ describe("review grade buttons with FSRS interval preview (U6)", () => {
     source_citation: "ja.story.demo.first-meeting",
     created_at: "2026-11-20T00:00:00Z",
     due_at: "2026-11-20T12:00:00Z",
+    context_sentence_id: null,
+    context_sentence: null,
   };
   const draft: MineDraft = { surface: "", reading: "", gloss: "", source: "" };
 
@@ -228,5 +230,52 @@ describe("review grade buttons with FSRS interval preview (U6)", () => {
     expect(previewIntervalLabel(7200)).toBe("back in ~2 h");
     expect(previewIntervalLabel(86_400 * 10)).toBe("back in ~10 days");
     expect(previewIntervalLabel(0)).toBe("soon");
+  });
+});
+
+describe("drill context replay (VOCAB-BUILDER-001)", () => {
+  const bare: MineItem = {
+    id: "mine-ctx",
+    surface: "猫",
+    reading: null,
+    gloss: "cat",
+    source_citation: "ja.story.demo.first-meeting",
+    created_at: "2026-11-20T00:00:00Z",
+    due_at: "2026-11-20T12:00:00Z",
+    context_sentence_id: "ja.sent.demo.first-meeting.1",
+    context_sentence: "猫です。",
+  };
+  const noCtx: MineItem = { ...bare, context_sentence_id: null, context_sentence: null };
+  const draft: MineDraft = { surface: "", reading: "", gloss: "", source: "" };
+
+  const render = (item: MineItem) =>
+    renderToStaticMarkup(
+      <MyWordsPanel
+        items={[item]}
+        review={{ item, revealed: true }}
+        error={null}
+        notice={null}
+        draft={draft}
+        onDraftChange={() => undefined}
+        onAdd={() => undefined}
+        onRemove={() => undefined}
+        onGrade={() => undefined}
+        onReviewNow={() => undefined}
+        onStartNewReview={() => undefined}
+        onStartReview={() => undefined}
+        onReveal={() => undefined}
+        onPlayContext={() => undefined}
+      />,
+    );
+
+  it("a lookup-mined word replays its context sentence after reveal", () => {
+    const html = render(bare);
+    expect(html).toContain("In this sentence:");
+    expect(html).toContain("猫です。");
+    expect(html).toContain(">Play</button>");
+  });
+  it("a manually mined word states no context it does not have", () => {
+    const html = render(noCtx);
+    expect(html).not.toContain("In this sentence:");
   });
 });

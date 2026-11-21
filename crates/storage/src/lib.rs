@@ -13,6 +13,7 @@ mod error;
 mod error_ledger;
 mod evidence;
 mod export;
+mod lookups;
 mod mastery;
 mod migrations;
 mod mined;
@@ -32,6 +33,7 @@ pub use export::{
 };
 pub use mastery::MasterySnapshot;
 pub use migrations::SCHEMA_VERSION;
+pub use lookups::{NewWordLookup, WordLookup};
 pub use mined::{AddMinedOutcome, MinedItem, NewMinedItem};
 pub use packs::{ContentVersion, PackInstallation};
 pub use profile::{GoalStatus, LearnerGoal, Profile, Setting};

@@ -1,0 +1,17 @@
+229c8d3
+languages/ja-JP/curriculum/units/370-product-reviews.yaml
+languages/ja-JP/curriculum/units/371-service-comparison.yaml
+languages/ja-JP/curriculum/units/372-pros-and-cons.yaml
+languages/ja-JP/curriculum/units/373-explaining-choices.yaml
+languages/ja-JP/curriculum/units/374-ranking-with-reasons.yaml
+languages/ja-JP/curriculum/units/375-debate-basics.yaml
+languages/ja-JP/curriculum/units/376-using-evidence.yaml
+languages/ja-JP/curriculum/units/377-counter-arguments.yaml
+languages/ja-JP/curriculum/units/378-conceding-points.yaml
+languages/ja-JP/curriculum/units/379-writing-conclusions.yaml
+languages/ja-JP/curriculum/units/380-review-posts.yaml
+languages/ja-JP/curriculum/units/381-rating-systems.yaml
+languages/ja-JP/curriculum/units/382-budget-comparison.yaml
+languages/ja-JP/curriculum/units/383-travel-comparison.yaml
+languages/ja-JP/curriculum/units/384-decision-essay.yaml
+languages/ja-JP/curriculum/units/841-comparison-debate-revision.yaml

@@ -13,7 +13,7 @@ use crate::error::Error;
 use crate::{
     ContentConfirmation, ContentVersion, ErrorLedgerEntry, ErrorReviewCard, LearnerGoal,
     MasterySnapshot, MinedItem, PackInstallation, Profile, Recording, SchedulerRecord, Setting,
-    Store,
+    Store, WordLookup,
 };
 use lts_domain::{EvidenceCorrection, EvidenceEvent};
 use rusqlite::params;
@@ -26,10 +26,12 @@ use std::collections::HashMap;
 /// (`content_confirmations`, CONTENT-CONFIRM-001). Version 4 added the
 /// error memory loop (`error_ledger` + `error_review_cards`,
 /// ERR-SRS-LOOP-001): the ledger is local-only learner data, so the
-/// export bundle is its only portability path. Version 1-3 bundles stay
-/// importable under the explicit compatibility rule in `import_profile`:
-/// they simply carry no such rows.
-pub const EXPORT_FORMAT_VERSION: u32 = 4;
+/// export bundle is its only portability path. Version 5 added the
+/// vocabulary-lookup log (`word_lookups`, VOCAB-BUILDER-001) and the
+/// `context_sentence_id` annotation on mined items (drill replay).
+/// Version 1-4 bundles stay importable under the explicit compatibility
+/// rule in `import_profile`: they simply carry no such rows.
+pub const EXPORT_FORMAT_VERSION: u32 = 5;
 
 /// Oldest bundle version this build understands.
 pub const MIN_SUPPORTED_FORMAT_VERSION: u32 = 1;
@@ -68,6 +70,12 @@ pub struct ExportBundle {
     /// rows and those scheduler rows move together (R05 discipline).
     #[serde(default)]
     pub error_review_cards: Vec<ErrorReviewCard>,
+    /// The reader's lookup log (VOCAB-BUILDER-001). Version 1-4 bundles
+    /// have no such field; they import as an empty list. Like every row
+    /// here it never leaves the device except via this explicit learner
+    /// action (docs/08).
+    #[serde(default)]
+    pub word_lookups: Vec<WordLookup>,
     /// Opt-in: `None` unless explicitly requested at export time.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recordings: Option<Vec<Recording>>,
@@ -149,6 +157,7 @@ impl Store {
             content_confirmations: self.profile_content_confirmations(profile_id)?,
             error_ledger: self.error_ledger(profile_id)?,
             error_review_cards: self.error_review_cards(profile_id)?,
+            word_lookups: self.word_lookups(profile_id)?,
             recordings,
         })
     }
@@ -311,8 +320,8 @@ impl Store {
             let fresh = self.fresh_id(&m.id, target_id, "mined_items", "id")?;
             mined_ids.insert(m.id.clone(), fresh.clone());
             self.conn.execute(
-                "INSERT INTO mined_items(id, profile_id, surface, reading, gloss, source_citation, created_at)
-                 VALUES (?1,?2,?3,?4,?5,?6,?7)",
+                "INSERT INTO mined_items(id, profile_id, surface, reading, gloss, source_citation, created_at, context_sentence_id)
+                 VALUES (?1,?2,?3,?4,?5,?6,?7,?8)",
                 params![
                     fresh,
                     target_id,
@@ -320,7 +329,8 @@ impl Store {
                     m.reading,
                     m.gloss,
                     m.source_citation,
-                    m.created_at
+                    m.created_at,
+                    m.context_sentence_id
                 ],
             )?;
         }
@@ -370,6 +380,25 @@ impl Store {
                     c.error_class,
                     c.context_sentence_id,
                     c.created_at
+                ],
+            )?;
+        }
+        // Lookup log (VOCAB-BUILDER-001): same fresh-id discipline as
+        // every other global id here; the profile reference is remapped
+        // to the importing profile.
+        for l in &bundle.word_lookups {
+            let fresh = self.fresh_id(&l.id, target_id, "word_lookups", "id")?;
+            self.conn.execute(
+                "INSERT INTO word_lookups(id, profile_id, surface, lemma, story_id, sentence_id, created_at)
+                 VALUES (?1,?2,?3,?4,?5,?6,?7)",
+                params![
+                    fresh,
+                    target_id,
+                    l.surface,
+                    l.lemma,
+                    l.story_id,
+                    l.sentence_id,
+                    l.created_at
                 ],
             )?;
         }

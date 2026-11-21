@@ -247,6 +247,7 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
             aux_gloss: null,
             aux_pos: null,
             aux_source: null,
+            in_review: false,
           },
         }}
         wordAudioAvailable={false}
@@ -365,6 +366,8 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
       source_citation: "ar.story.salam#1",
       created_at: "2026-10-14T00:00:00Z",
       due_at: null,
+      context_sentence_id: null,
+      context_sentence: null,
     };
     const html = shell(
       "rtl",

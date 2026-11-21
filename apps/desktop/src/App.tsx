@@ -2816,7 +2816,11 @@ export function App() {
   // Play button, the app never guesses word audio.
   async function openStoryWordCard(sentenceId: string, token: string) {
     const inv = detectInvoke();
-    if (!inv || !profileId) return;
+    // VOCAB-BUILDER-001: the tap records WHICH STORY it happened in —
+    // no active story, no lookup call (the reader is the truth of the
+    // story; the engine only shape-checks the id).
+    const storyId = storyActive?.id;
+    if (!inv || !profileId || !storyId) return;
     closeStoryWordCard();
     storyWordGenRef.current = { sentenceId, token };
     setStoryWord({ sentenceId, token, card: null, audioUrl: null });
@@ -2825,7 +2829,12 @@ export function App() {
       return gen !== null && gen.sentenceId === sentenceId && gen.token === token;
     };
     try {
-      const card = (await inv("word_card", { profileId, sentenceId, token })) as WordCardView;
+      const card = (await inv("word_card", {
+        profileId,
+        sentenceId,
+        storyId,
+        token,
+      })) as WordCardView;
       if (current()) {
         setStoryWord((prev) => (prev ? { ...prev, card } : prev));
       }
@@ -2935,6 +2944,24 @@ export function App() {
       await refreshMine();
     } catch (e) {
       setStoryError(String(e));
+    }
+  }
+
+  // VOCAB-BUILDER-001: the My-words drill replays the sentence the word
+  // was met in, through the SAME `story_audio` sentence path the reader
+  // uses — one audio truth, no second clip mechanism.
+  async function playMineContext(sentenceId: string) {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      const a = (await inv("story_audio", { profileId, sentenceId })) as {
+        wav_b64: string;
+        source: string;
+      };
+      const bytes = Uint8Array.from(atob(a.wav_b64), (c) => c.charCodeAt(0));
+      playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
+    } catch (e) {
+      setMineError(audioFailureMessage(String(e)));
     }
   }
 
@@ -3897,6 +3924,7 @@ export function App() {
           intervalPreview={minePreview}
           error={mineError}
           notice={mineNotice}
+          onPlayContext={(sentenceId) => void playMineContext(sentenceId)}
           draft={{
             surface: mineSurface,
             reading: mineReading,

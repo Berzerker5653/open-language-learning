@@ -1,0 +1,12 @@
+7054c37
+languages/ja-JP/curriculum/units/330-travel-safety.yaml
+languages/ja-JP/curriculum/units/331-border-documentation.yaml
+languages/ja-JP/curriculum/units/332-homestay-letters.yaml
+languages/ja-JP/curriculum/units/333-guided-tours.yaml
+languages/ja-JP/curriculum/units/334-travel-companions.yaml
+languages/ja-JP/curriculum/units/335-lost-belongings.yaml
+languages/ja-JP/curriculum/units/336-travel-budgeting.yaml
+languages/ja-JP/curriculum/units/337-route-changes.yaml
+languages/ja-JP/curriculum/units/338-travel-reflection.yaml
+languages/ja-JP/curriculum/units/339-postcard-writing.yaml
+languages/ja-JP/curriculum/units/838-travel-extended-revision.yaml

@@ -1,0 +1,12 @@
+c544e51
+languages/ja-JP/curriculum/units/360-gentle-persuasion.yaml
+languages/ja-JP/curriculum/units/361-suggestion-forms.yaml
+languages/ja-JP/curriculum/units/362-polite-warnings.yaml
+languages/ja-JP/curriculum/units/363-expressing-regret.yaml
+languages/ja-JP/curriculum/units/364-expressing-hope.yaml
+languages/ja-JP/curriculum/units/365-explaining-preference.yaml
+languages/ja-JP/curriculum/units/366-stating-priorities.yaml
+languages/ja-JP/curriculum/units/367-compromise-writing.yaml
+languages/ja-JP/curriculum/units/368-decision-talk.yaml
+languages/ja-JP/curriculum/units/369-reflection-essay.yaml
+languages/ja-JP/curriculum/units/840-advice-opinion-revision.yaml

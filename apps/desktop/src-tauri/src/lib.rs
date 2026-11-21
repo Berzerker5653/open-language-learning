@@ -6882,6 +6882,12 @@ struct WordCardView {
     aux_gloss: Option<String>,
     aux_pos: Option<String>,
     aux_source: Option<String>,
+    /// VOCAB-BUILDER-001: the lookup itself is the learning signal — the
+    /// tap auto-records the lookup and auto-enters the review pipeline
+    /// (an ordinary mined item). True once the word lives in My words,
+    /// which after a logged tap it always does; the frontend shows
+    /// "In My words" without any mastery claim.
+    in_review: bool,
 }
 
 /// norm-token (READER-FLOW-001 wire contract): remove every U+0301
@@ -7114,27 +7120,35 @@ fn aux_hit<'a>(rows: &'a [AuxRow], query: &str, lemma: Option<&str>) -> Option<&
 async fn word_card(
     profile_id: String,
     sentence_id: String,
+    story_id: String,
     token: String,
 ) -> Result<WordCardView, String> {
     // Lexicon parsing is the ~250 ms path (K-63-follow); keep it off the
     // main thread like every other pack-reading command.
     tauri::async_runtime::spawn_blocking(move || {
-        word_card_at(&data_dir(), &profile_id, &sentence_id, &token)
+        word_card_at(&data_dir(), &profile_id, &sentence_id, &story_id, &token)
     })
     .await
     .map_err(|e| format!("word-card failed: {e}"))?
 }
 
+#[allow(clippy::too_many_arguments)]
 fn word_card_at(
     data: &Path,
     profile_id: &str,
     sentence_id: &str,
+    story_id: &str,
     token: &str,
 ) -> Result<WordCardView, String> {
     // The sentence id is the card's context (and the Mine citation it
     // will carry); it must still be a well-formed content id before any
     // pack read happens.
     checked_unit(sentence_id)?;
+    // VOCAB-BUILDER-001: the story the learner is reading travels the
+    // same shape check. NOT membership-checked — sentences are reused
+    // across stories, so the reading screen is the truth of which story
+    // this lookup happened in.
+    checked_unit(story_id)?;
     let query = norm_token(token);
     if query.is_empty() {
         return Err("empty word query".into());
@@ -7157,7 +7171,7 @@ fn word_card_at(
             let surface = norm_token(&e.surface);
             surface == query || lemma.as_deref().is_some_and(|l| surface == norm_token(l))
         });
-    match entry {
+    let mut view = match entry {
         Some(e) => Ok(WordCardView {
             query,
             lemma,
@@ -7171,6 +7185,7 @@ fn word_card_at(
             aux_gloss: None,
             aux_pos: None,
             aux_source: None,
+            in_review: false,
         }),
         None => {
             // READER-FLOW-001 off-pack slice: before falling back to the
@@ -7197,9 +7212,80 @@ fn word_card_at(
                 aux_gloss: aux.as_ref().and_then(|r| r.glosses.first().cloned()),
                 aux_pos: aux.as_ref().and_then(|r| r.pos.first().cloned()),
                 aux_source: aux.as_ref().map(|_| AUX_SOURCE.to_string()),
+                in_review: false,
             })
         }
+    };
+    // VOCAB-BUILDER-001: the lookup IS the learning signal (the Kindle
+    // Vocabulary Builder analogue, docs/READING-STORY-UX-001 Phase C).
+    // Before the card is shown, the tap appends its observation row and
+    // the word enters the existing review/mine pipeline — no manual Mine
+    // step. A storage failure here is an honest error, not a silently
+    // dropped learning signal.
+    record_reader_lookup(data, profile_id, story_id, sentence_id, token, &view)?;
+    view.in_review = true;
+    Ok(view)
+}
+
+/// Append the lookup row and auto-mine the tapped word (VOCAB-BUILDER-001).
+/// The mined surface follows the manual Mine button exactly (reading.tsx:
+/// pack entry surface when the card is in-pack, else the tapped token),
+/// and reading/gloss come only from the PACK card fields — an aux
+/// (Wiktionary) gloss never masquerades as pack data. Repeat taps fold
+/// into the original mined row (K-61/K-14 anchor rule), so the tap is
+/// idempotent for the pipeline and the lookup log stays append-only.
+fn record_reader_lookup(
+    data: &Path,
+    profile_id: &str,
+    story_id: &str,
+    sentence_id: &str,
+    token: &str,
+    view: &WordCardView,
+) -> Result<(), String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map_err(|e| e.to_string())?;
+    let created_at = rfc3339_utc(now.as_secs());
+    store
+        .record_word_lookup(
+            profile_id,
+            lts_storage::NewWordLookup {
+                id: &format!("lk-{}-{}", now.as_secs(), now.subsec_nanos()),
+                surface: token.trim(),
+                lemma: view.lemma.as_deref(),
+                story_id,
+                sentence_id,
+                created_at: &created_at,
+            },
+        )
+        .map_err(|e| e.to_string())?;
+    let surface = view
+        .surface
+        .clone()
+        .unwrap_or_else(|| token.to_string())
+        .trim()
+        .to_string();
+    if surface.is_empty() || surface.chars().count() > 100 {
+        // Same guard as the manual Mine path: nothing sensible to keep.
+        // The observation row above still stands — the tap happened.
+        return Ok(());
     }
+    store
+        .add_mined(
+            profile_id,
+            lts_storage::NewMinedItem {
+                id: &format!("mine-{}-{}", now.as_secs(), now.subsec_nanos()),
+                surface: &surface,
+                reading: view.reading.as_deref(),
+                gloss: view.gloss.as_deref(),
+                source_citation: story_id,
+                created_at: &created_at,
+                context_sentence_id: Some(sentence_id),
+            },
+        )
+        .map_err(|e| e.to_string())?;
+    Ok(())
 }
 
 /// Minimal reader for the pack's baked clips: sliceable audio must be
@@ -7359,6 +7445,14 @@ struct MinedItemView {
     /// then describes the ORIGINAL stored row, and App.tsx tells the
     /// learner instead of failing on the UNIQUE constraint (K-61).
     was_new: bool,
+    /// VOCAB-BUILDER-001: the context sentence the word was encountered
+    /// in (None for manually mined rows).
+    context_sentence_id: Option<String>,
+    /// The context sentence's text, resolved against the ACTIVE pack —
+    /// the drill replays it (Kindle flashcard behavior). `None` when the
+    /// row has no context or the sentence is no longer in the pack: the
+    /// drill falls back to bare display, honest.
+    context_sentence: Option<String>,
 }
 
 fn is_mined_item(item_id: &str) -> bool {
@@ -7525,6 +7619,7 @@ fn mine_add_at(
                 gloss: gloss.as_deref(),
                 source_citation: source_citation.trim(),
                 created_at: &created_at,
+            context_sentence_id: None,
             },
         )
         .map_err(|e| e.to_string())?;
@@ -7538,6 +7633,9 @@ fn mine_add_at(
             created_at,
             due_at: None,
             was_new: true,
+            // Manual Mine asserts no context — the learner typed it by hand.
+            context_sentence_id: None,
+            context_sentence: None,
         });
     }
     // Repeat mine: report what is actually stored (the add folded the
@@ -7572,6 +7670,19 @@ fn mine_add_at(
         created_at: row_created_at,
         due_at,
         was_new: false,
+        // The repeat manual Mine keeps the stored row's context (if a
+        // reader tap gave it one earlier); resolved against the active
+        // pack the same way `mine_list_at` renders it.
+        context_sentence_id: stored.as_ref().and_then(|m| m.context_sentence_id.clone()),
+        context_sentence: stored
+            .as_ref()
+            .and_then(|m| m.context_sentence_id.as_ref())
+            .and_then(|sid| {
+                packs::active_pack(data, profile_id)
+                    .ok()
+                    .and_then(|a| a.first().cloned())
+                    .and_then(|pack| pack_sentence_text(data, &pack, sid))
+            }),
     })
 }
 
@@ -7589,19 +7700,33 @@ fn mine_list_at(data: &Path, profile_id: &str) -> Result<Vec<MinedItemView>, Str
         .filter(|r| is_mined_item(&r.item_id) && r.scheduler == lts_scheduler::MINED_SCHEDULER)
         .map(|r| (r.item_id, r.due_at))
         .collect();
+    // VOCAB-BUILDER-001: drill replay resolves each row's context
+    // sentence against the ACTIVE pack (same truth the reader uses).
+    // No active pack or a stale id renders as no context — never a guess.
+    let pack = packs::active_pack(data, profile_id)
+        .ok()
+        .and_then(|a| a.first().cloned());
     Ok(store
         .mined_items(profile_id)
         .map_err(|e| e.to_string())?
         .into_iter()
-        .map(|m| MinedItemView {
-            due_at: due.get(&m.id).cloned(),
-            id: m.id,
-            surface: m.surface,
-            reading: m.reading,
-            gloss: m.gloss,
-            source_citation: m.source_citation,
-            created_at: m.created_at,
-            was_new: true,
+        .map(|m| {
+            let context_sentence = m
+                .context_sentence_id
+                .as_ref()
+                .and_then(|sid| pack.as_ref().and_then(|p| pack_sentence_text(data, p, sid)));
+            MinedItemView {
+                due_at: due.get(&m.id).cloned(),
+                id: m.id,
+                surface: m.surface,
+                reading: m.reading,
+                gloss: m.gloss,
+                source_citation: m.source_citation,
+                created_at: m.created_at,
+                was_new: true,
+                context_sentence_id: m.context_sentence_id,
+                context_sentence,
+            }
         })
         .collect())
 }
@@ -15136,7 +15261,7 @@ transfer_variants:
         );
         std::fs::write(&lex, text).unwrap();
 
-        let card = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "хле́ба").unwrap();
+        let card = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "ru.story.fixture.market", "хле́ба").unwrap();
         // `query` is the norm-token sent (stress gone), NOT the lemma —
         // the lemma travels in its own field.
         assert_eq!(card.query, "хлеба");
@@ -15173,7 +15298,7 @@ transfer_variants:
         // manifest deliberately carries no target_locale, so the aux
         // slice has no language to name — these assertions stay
         // hermetic regardless of the committed ru slice.)
-        let bare = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "квоцквц").unwrap();
+        let bare = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "ru.story.fixture.market", "квоцквц").unwrap();
         assert!(!bare.in_pack);
         assert_eq!(bare.query, "квоцквц");
         assert!(bare.lemma.is_none() && bare.gloss.is_none() && bare.surface.is_none());
@@ -15182,7 +15307,7 @@ transfer_variants:
         // Row resolves a lemma, but the pack has no entry for it: the
         // card stays honest about pack coverage while still naming the
         // dictionary form the pack's own sidecar resolved.
-        let lemma_only = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "молока").unwrap();
+        let lemma_only = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "ru.story.fixture.market", "молока").unwrap();
         assert!(!lemma_only.in_pack);
         assert_eq!(lemma_only.lemma.as_deref(), Some("молоко"));
         assert!(lemma_only.gloss.is_none() && lemma_only.surface.is_none());
@@ -15214,7 +15339,7 @@ transfer_variants:
         )
         .unwrap();
 
-        let card = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "подарка").unwrap();
+        let card = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "ru.story.fixture.market", "подарка").unwrap();
         assert!(!card.in_pack);
         assert_eq!(card.aux_word.as_deref(), Some("подарок"));
         assert_eq!(card.aux_gloss.as_deref(), Some("present, gift"));
@@ -15254,7 +15379,7 @@ transfer_variants:
 
         // The tapped form is not a slice surface; the pack sidecar
         // resolves the lemma, and the lemma finds the aux row.
-        let via_lemma = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "молока").unwrap();
+        let via_lemma = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "ru.story.fixture.market", "молока").unwrap();
         assert!(!via_lemma.in_pack);
         assert_eq!(via_lemma.lemma.as_deref(), Some("молоко"));
         assert_eq!(via_lemma.aux_gloss.as_deref(), Some("milk"));
@@ -15265,7 +15390,7 @@ transfer_variants:
         let mut manifest = std::fs::read_to_string(root.join("manifest.yaml")).unwrap();
         manifest = manifest.replace("target_locale: \"ru-RU\"", "target_locale: \"qq-QQ\"");
         std::fs::write(root.join("manifest.yaml"), manifest).unwrap();
-        let bare = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "молока").unwrap();
+        let bare = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "ru.story.fixture.market", "молока").unwrap();
         assert!(!bare.in_pack);
         assert!(bare.aux_gloss.is_none() && bare.aux_source.is_none());
         assert_eq!(bare.lemma.as_deref(), Some("молоко"));
@@ -15280,11 +15405,159 @@ transfer_variants:
         let data = tmp.path();
         let (_pack, p) = install_ru_shaped_pack(data);
         // The RU-shaped fixture lexicon ships "хорошо" (approved, good).
-        let card = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "Хорошо.").unwrap();
+        let card = word_card_at(data, &p.id, "ru.sent.fixture.privet-mir", "ru.story.fixture.market", "Хорошо.").unwrap();
         assert_eq!(card.query, "хорошо");
         assert!(card.in_pack);
         assert!(card.lemma.is_none(), "no sidecar row, no invented lemma");
         assert_eq!(card.gloss.as_deref(), Some("good"));
+    }
+
+    /// VOCAB-BUILDER-001: the lookup IS the learning signal. Every reader
+    /// tap appends its lookup row (printed surface, sidecar lemma when
+    /// one resolved, story, sentence, time) and the word enters the
+    /// EXISTING review/mine pipeline — no manual Mine step. A repeat tap
+    /// is a second observation in the log but never a second card: it
+    /// folds into the original mined row (the K-14 anchor rule keeps the
+    /// row id, so the word's review history survives).
+    #[test]
+    fn word_tap_auto_logs_the_lookup_and_enters_the_review_pipeline() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let card = word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "ru.story.fixture.market",
+            "Хорошо.",
+        )
+        .unwrap();
+        assert!(card.in_review, "the tap itself put the word in the pipeline");
+
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let log = store.word_lookups(&p.id).unwrap();
+        assert_eq!(log.len(), 1);
+        assert_eq!(log[0].surface, "Хорошо.", "the printed token as tapped");
+        assert_eq!(log[0].lemma, None, "no sidecar row, no lemma claim");
+        assert_eq!(log[0].story_id, "ru.story.fixture.market");
+        assert_eq!(log[0].sentence_id, "ru.sent.fixture.privet-mir");
+
+        let items = store.mined_items(&p.id).unwrap();
+        assert_eq!(items.len(), 1, "no manual Mine step was needed");
+        assert_eq!(items[0].surface, "хорошо", "pack surface, same rule as the Mine button");
+        assert_eq!(items[0].gloss.as_deref(), Some("good"), "pack gloss travels");
+        assert_eq!(items[0].source_citation, "ru.story.fixture.market");
+        assert_eq!(
+            items[0].context_sentence_id.as_deref(),
+            Some("ru.sent.fixture.privet-mir"),
+            "the drill can replay the sentence it came from"
+        );
+        let anchor = items[0].id.clone();
+
+        // Repeat tap, this time in another sentence: the log is
+        // append-only (Kindle LOOKUPS semantics — each tap keeps its own
+        // row), and the pipeline stays anchored to the original row.
+        word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.kak-dela",
+            "ru.story.fixture.market",
+            "Хорошо.",
+        )
+        .unwrap();
+        assert_eq!(store.word_lookups(&p.id).unwrap().len(), 2);
+        let items = store.mined_items(&p.id).unwrap();
+        assert_eq!(items.len(), 1);
+        assert_eq!(items[0].id, anchor, "the original row (and its SRS anchor) survives");
+    }
+
+    /// VOCAB-BUILDER-001: an off-pack tap logs and enters the pipeline
+    /// too — the mined surface is then the tapped token (exactly the
+    /// manual Mine button's rule) and reading/gloss stay None: an aux
+    /// (Wiktionary) gloss never masquerades as data the learner mined.
+    #[test]
+    fn off_pack_word_tap_also_logs_and_mines_the_token() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let card = word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "ru.story.fixture.market",
+            "квоцквц",
+        )
+        .unwrap();
+        assert!(!card.in_pack);
+        assert!(card.in_review);
+
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        assert_eq!(store.word_lookups(&p.id).unwrap().len(), 1);
+        let items = store.mined_items(&p.id).unwrap();
+        assert_eq!(items.len(), 1);
+        assert_eq!(items[0].surface, "квоцквц", "the tapped token is the surface off-pack");
+        assert!(items[0].reading.is_none() && items[0].gloss.is_none());
+    }
+
+    /// VOCAB-BUILDER-001: the story id is validated before anything is
+    /// written — a malformed id is refused and no partial observation
+    /// lands.
+    #[test]
+    fn word_card_refuses_a_malformed_story_id_before_logging() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let err = word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "not a story id",
+            "Хорошо.",
+        )
+        .unwrap_err();
+        assert!(err.contains("invalid unit id"), "got: {err}");
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        assert!(store.word_lookups(&p.id).unwrap().is_empty());
+        assert!(store.mined_items(&p.id).unwrap().is_empty());
+    }
+
+    /// VOCAB-BUILDER-001: the My-words drill receives the ORIGINAL
+    /// context sentence resolved live against the active pack; a manual
+    /// Mine still works and honestly carries no context claim.
+    #[test]
+    fn mine_list_renders_the_drill_context_for_lookup_mined_words() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        word_card_at(
+            data,
+            &p.id,
+            "ru.sent.fixture.privet-mir",
+            "ru.story.fixture.market",
+            "Хорошо.",
+        )
+        .unwrap();
+        let views = mine_list_at(data, &p.id).unwrap();
+        let tapped = views
+            .iter()
+            .find(|m| m.surface == "хорошо")
+            .expect("the tap mined the word");
+        assert_eq!(
+            tapped.context_sentence_id.as_deref(),
+            Some("ru.sent.fixture.privet-mir")
+        );
+        assert_eq!(tapped.context_sentence.as_deref(), Some("Привет, мир!"));
+
+        // Manual Mine still works (acceptance: untouched path) and stays
+        // context-free.
+        mine_add_at(data, &p.id, "вручную".into(), None, Some("by hand".into()), "manual".into())
+            .unwrap();
+        let views = mine_list_at(data, &p.id).unwrap();
+        let hand = views
+            .iter()
+            .find(|m| m.surface == "вручную")
+            .expect("the manual mine still lands");
+        assert!(hand.context_sentence_id.is_none() && hand.context_sentence.is_none());
     }
 
     /// READER-FLOW-001 / WORD-CARD-AUDIO-001: the exact printed form is
