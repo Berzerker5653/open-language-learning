@@ -86,6 +86,29 @@ impl Store {
             .map_err(Error::from)
     }
 
+    /// PROGRESS-STATS-001 (visual-ui-audit U7): evidence events per UTC
+    /// calendar day since `since_rfc` (canonical RFC 3339 UTC), oldest
+    /// first, for the 12-week activity calendar. Day keys are the leading
+    /// `YYYY-MM-DD` of the canonical `occurred_at` the write path stores;
+    /// days with no events are absent, not zero rows.
+    pub fn evidence_event_days(
+        &self,
+        profile_id: &str,
+        since_rfc: &str,
+    ) -> Result<Vec<(String, usize)>, Error> {
+        let mut stmt = self.conn.prepare(
+            "SELECT substr(occurred_at, 1, 10) AS day, COUNT(*)
+             FROM evidence_events
+             WHERE profile_id = ?1 AND occurred_at >= ?2
+             GROUP BY day
+             ORDER BY day",
+        )?;
+        let rows = stmt.query_map(params![profile_id, since_rfc], |r| {
+            Ok((r.get::<_, String>(0)?, r.get::<_, i64>(1)? as usize))
+        })?;
+        rows.collect::<Result<_, _>>().map_err(Error::from)
+    }
+
     /// Append a correction referencing prior events; originals are never
     /// deleted (tombstone semantics, docs/08).
     pub fn append_correction(&self, c: &EvidenceCorrection) -> Result<bool, Error> {

@@ -27,6 +27,7 @@ import type {
   WorldEnvironment,
   FirstRunStep,
 } from "../home";
+import type { MemoryStats } from "../memory-stats";
 import type {
   AlignerStatus,
   CatalogEntry,
@@ -1494,8 +1495,30 @@ export class LearnerEngine {
       }
       case "world_state":
         return [
-          { id: "cafe", display_name: "Café", unlocked: false, missing: ["speaking"] },
+          {
+            id: "cafe",
+            display_name: "Café",
+            unlocked: false,
+            missing: [
+              {
+                target: "ja.lex.demo.konnichiwa",
+                modality: "production-speaking",
+                label: "こんにちは",
+              },
+            ],
+          },
         ] satisfies WorldEnvironment[];
+      case "memory_stats":
+        // PROGRESS-STATS-001: the fake's own scheduler/evidence answer.
+        return {
+          due_today: 2,
+          est_minutes: 1,
+          band_retention: [
+            { band: "on-ramp", retention_pct: 62, scheduled_items: 4 },
+            { band: "a1", retention_pct: null, scheduled_items: 0 },
+          ],
+          activity_days: [{ date: "2026-11-20", events: 3 }],
+        } satisfies MemoryStats;
       case "display_settings": {
         this.profile(args.profileId); // unknown profile fails loudly
         // No fixture reading carries U+0301, so the answer is honest for the
@@ -2036,6 +2059,7 @@ export class LearnerEngine {
               concepts_seen: reached ? dims.length : 0,
               exemplar: reached ? (s.content_id ?? null) : null,
               best_state: reached ? "independent" : "unseen",
+              progress_pct: reached ? 60 : 0,
             })),
           };
         });

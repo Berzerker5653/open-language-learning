@@ -29,6 +29,7 @@ import {
   type SessionStatus,
   type SessionView,
 } from "./home";
+import { MemoryStatsStrip, type MemoryStats } from "./memory-stats";
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
 import { DictationPractice, type DictationResult, type DictationSentence } from "./dictation";
 import {
@@ -397,6 +398,10 @@ export function App() {
     };
   }, [attemptUrl]);
   const [goals, setGoals] = useState<GoalCard[]>([]);
+  // PROGRESS-STATS-001: memory instruments for the progress route; null
+  // until read, and a failed read stays silent (the strip is an extra,
+  // never a reason to withhold the progress page itself).
+  const [memoryStats, setMemoryStats] = useState<MemoryStats | null>(null);
   const [installed, setInstalled] = useState<InstalledPack[]>([]);
   const [claims, setClaims] = useState<PackClaims[] | null>(null);
   const [activeIds, setActiveIds] = useState<string[]>([]);
@@ -2112,6 +2117,11 @@ export function App() {
       try {
         setProgress((await inv("progress_summary", { profileId })) as ProgressRow[]);
         setGoals((await inv("goal_map", { profileId })) as GoalCard[]);
+        try {
+          setMemoryStats((await inv("memory_stats", { profileId })) as MemoryStats);
+        } catch {
+          setMemoryStats(null);
+        }
       } catch (e) {
         // An honest alert, never an empty "no progress yet" claim: the data
         // may exist; the read is what failed.
@@ -4191,6 +4201,8 @@ export function App() {
           {!progressError && (
             <>
               <CanDoSummary goals={goals} rows={progress} nextGoal={nextGoal} />
+              {/* PROGRESS-STATS-001 (U14): instruments above the tree. */}
+              {memoryStats ? <MemoryStatsStrip stats={memoryStats} /> : null}
               <GoalMap goals={goals} />
               <ProgressView rows={progress} />
             </>

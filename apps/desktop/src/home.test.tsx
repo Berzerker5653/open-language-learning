@@ -262,7 +262,14 @@ describe("home", () => {
             id: "cafe",
             display_name: "Quiet cafe",
             unlocked: false,
-            missing: ["comprehension-reading of ja.lex.demo.konnichiwa"],
+            missing: [
+              {
+                target: "ja.lex.demo.konnichiwa",
+                modality: "comprehension-reading",
+                label: "konnichiwa greeting",
+              },
+              { target: "ja.grammar.demo.te-form", modality: "production-speaking", label: null },
+            ],
           },
         ]}
       />,
@@ -272,6 +279,14 @@ describe("home", () => {
     expect(html).toContain('data-unlocked="yes"');
     expect(html).toContain('data-unlocked="no"');
     expect(html).toContain("not from activity counts");
+    // PROGRESS-STATS-001 (U14 acceptance 2): the locked place names what
+    // it grows with in human words — the pack's own label, and the
+    // readable token segment only when the engine could not resolve one.
+    // The raw id never reaches the learner (it stays on the word card).
+    expect(html).toContain("Reading in “konnichiwa greeting”");
+    expect(html).toContain("Say it aloud in “Te form”");
+    expect(html).not.toContain("ja.lex.demo.konnichiwa");
+    expect(html).not.toContain("ja.grammar.demo.te-form");
   });
 
   it("groups the plan by the engine's kind regardless of item order", () => {
@@ -492,6 +507,7 @@ describe("goal map", () => {
                 concepts_seen: 1,
                 exemplar: "ja.orth.hira.a",
                 best_state: "supported",
+                progress_pct: 40,
               },
             ],
           },
@@ -521,6 +537,7 @@ describe("goal map", () => {
                 concepts_seen: 0,
                 exemplar: null,
                 best_state: "unseen",
+                progress_pct: 0,
               },
               {
                 modality: "interaction",
@@ -529,6 +546,7 @@ describe("goal map", () => {
                 concepts_seen: 0,
                 exemplar: null,
                 best_state: "unseen",
+                progress_pct: 0,
               },
             ],
           },
@@ -546,6 +564,14 @@ describe("goal map", () => {
     expect(html).toContain("supported");
     expect(html).toContain("not started");
     expect(html).toContain("locked");
+    // PROGRESS-STATS-001 (U14 acceptance 1+4): every dimension carries a
+    // dependency-free SVG bar toward its gate, with the same a11y
+    // semantics SessionChrome's progress row is tested for.
+    expect(html).toContain('role="progressbar"');
+    expect(html).toContain('aria-valuenow="40"');
+    expect(html).toContain('data-progress-pct="40"');
+    expect(html).toContain('data-progress-pct="0"');
+    expect(html).toContain("toward “Recognize hiragana chart symbols on sight.”");
     // UI-HYGIENE-001: a prerequisite is spoken in human words; the raw
     // content id never reaches the learner.
     expect(html).toContain("independent in Reading");
@@ -574,6 +600,7 @@ describe("goal map", () => {
           concepts_seen: 0,
           exemplar: null,
           best_state: "unseen",
+          progress_pct: 0,
         },
       ],
     });
@@ -613,6 +640,7 @@ describe("goal map", () => {
                 concepts_seen: 1,
                 exemplar: "ja.grammar.demo.adjectives",
                 best_state: "independent",
+                progress_pct: 15,
               },
             ],
           },
@@ -621,6 +649,9 @@ describe("goal map", () => {
     );
     expect(html).toContain('data-state="unseen"');
     expect(html).toContain('data-coverage="1/4"');
+    // PROGRESS-STATS-001: the bar agrees with R09 — one strong concept out
+    // of four reads visibly partial, never near-complete.
+    expect(html).toContain('data-progress-pct="15"');
     // UI-HYGIENE-001: R09 stays honest — coverage and the weakest
     // aggregate headline the learner sees; the exemplar's raw pack id
     // is gone.
@@ -738,6 +769,7 @@ describe("what you can do now", () => {
         concepts_seen: 1,
         exemplar: "ja.lex.demo.obaasan",
         best_state: "independent",
+        progress_pct: 60,
       },
     ],
   };

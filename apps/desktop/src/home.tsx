@@ -222,11 +222,21 @@ function humanizeToken(id: string): string {
   return word.replace(/[-_]/g, " ").replace(/^./, (c) => c.toUpperCase());
 }
 
+export interface WorldMissing {
+  /// Raw content id of the driving item. It stays a lookup target for the
+  /// word/goal card; it is never rendered inline (U14 acceptance 2).
+  target: string;
+  modality: string;
+  /// The pack's human label when the engine resolved one; null falls back
+  /// to the readable token segment — never the raw id.
+  label: string | null;
+}
+
 export interface WorldEnvironment {
   id: string;
   display_name: string;
   unlocked: boolean;
-  missing: string[];
+  missing: WorldMissing[];
 }
 
 /// PACK-UPDATE-UX-001: an installed pack the pack catalogue lists at a different
@@ -594,12 +604,13 @@ export function Home(p: HomeProps) {
                     <span className="meta">
                       grows with:{" "}
                       {e.missing
-                        .map((note) => {
-                          const parts = note.match(/^([a-z][a-z-]*) of (.+)$/);
-                          return parts?.[1] && parts[2]
-                            ? `${modalityLabel(parts[1])} in “${humanizeToken(parts[2])}”`
-                            : humanizeToken(note);
-                        })
+                        .map(
+                          (m) =>
+                            // U14 acceptance 2: the note names the driving
+                            // item by its human label; the raw id lives on
+                            // the word/goal card lookup, never inline.
+                            `${modalityLabel(m.modality)} in “${m.label ?? humanizeToken(m.target)}”`,
+                        )
                         .join(", ")}
                     </span>
                   </>
@@ -761,6 +772,10 @@ export interface GoalDimension {
   concepts_seen: number;
   exemplar: string | null;
   best_state: string;
+  /// PROGRESS-STATS-001 (U14): 0-100 of the modality gate, derived by the
+  /// engine from the per-concept mastery ladder (mean of ladder weights,
+  /// unseen concepts counting 0). An instrument, never a grade.
+  progress_pct: number;
 }
 
 export interface GoalPrereq {
@@ -818,7 +833,7 @@ const BAND_HEADERS: Record<string, { label: string; gloss: string }> = {
   other: { label: "Unlabelled", gloss: "this pack does not band these goals" },
 };
 
-function bandHeader(band: string): { label: string; gloss: string } {
+export function bandHeader(band: string): { label: string; gloss: string } {
   return (
     BAND_HEADERS[band.trim().toLowerCase()] ?? { label: band, gloss: `banded ${band} by the pack` }
   );
@@ -880,6 +895,30 @@ export function GoalMap({ goals }: { goals: GoalCard[] }) {
                           >
                             <span className="meta">{modalityLabel(d.modality)}</span>{" "}
                             <span data-state={d.state}>{STATE_LABELS[d.state] ?? d.state}</span>
+                            {/* PROGRESS-STATS-001 (U14): the same derived
+                                state ladder, drawn as a bar toward the
+                                modality gate. Dependency-free SVG; the
+                                a11y contract matches SessionChrome's
+                                progressbar semantics. */}
+                            <svg
+                              className="dim-progress"
+                              width="120"
+                              height="8"
+                              role="progressbar"
+                              aria-valuenow={d.progress_pct}
+                              aria-valuemin={0}
+                              aria-valuemax={100}
+                              aria-label={`${modalityLabel(d.modality)} toward “${g.description}”: ${d.progress_pct}% of the gate`}
+                              data-progress-pct={d.progress_pct}
+                            >
+                              <rect className="dim-progress-track" width="120" height="8" rx="4" />
+                              <rect
+                                className="dim-progress-fill"
+                                width={(120 * Math.min(100, Math.max(0, d.progress_pct))) / 100}
+                                height="8"
+                                rx="2"
+                              />
+                            </svg>
                             {/* R09: the headline state is the weakest declared
                                 concept, so a goal with one strong concept and
                                 several untouched ones cannot read as achieved.

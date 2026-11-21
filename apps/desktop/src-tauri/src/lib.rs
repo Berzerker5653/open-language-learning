@@ -3510,6 +3510,36 @@ fn state_kebab(s: lts_domain::MasteryState) -> &'static str {
     }
 }
 
+/// PROGRESS-STATS-001: the ladder position of a mastery state on 0..=100,
+/// used ONLY to draw a progress bar. This renders the existing state ladder
+/// (docs/03 §2); it is not a new score — the engine still gates on states,
+/// and the UI must present the bar as an instrument, never a grade.
+fn state_progress_weight(s: lts_domain::MasteryState) -> u32 {
+    match s {
+        lts_domain::MasteryState::Unseen => 0,
+        lts_domain::MasteryState::Introduced => 20,
+        lts_domain::MasteryState::Supported => 40,
+        lts_domain::MasteryState::Independent => 60,
+        lts_domain::MasteryState::Flexible => 80,
+        lts_domain::MasteryState::Retained => 100,
+    }
+}
+
+/// PROGRESS-STATS-001: a goal dimension's gate progress — the mean ladder
+/// weight of its declared concepts (unseen concepts count as 0, so partial
+/// coverage reads as partial, never as achieved). Rounded to whole percent.
+fn concepts_progress_pct(states: &[lts_domain::MasteryState]) -> u32 {
+    if states.is_empty() {
+        return 0;
+    }
+    let sum: u64 = states
+        .iter()
+        .map(|s| u64::from(state_progress_weight(*s)))
+        .sum();
+    let n = states.len() as u64;
+    ((sum + n / 2) / n) as u32
+}
+
 /// Per (content, dimension) capability rows: modality differences are
 /// first-class, never collapsed into one score (docs/03 §2).
 #[tauri::command]
@@ -3557,6 +3587,12 @@ struct GoalDimensionView {
     /// own status.
     exemplar: Option<String>,
     best_state: &'static str,
+    /// PROGRESS-STATS-001 (visual-ui-audit U14): how far this modality has
+    /// walked toward the goal's gate, 0-100. The gate holds only when EVERY
+    /// declared concept reaches the goal's required state, so the bar is the
+    /// mean of per-concept ladder weights — one untouched concept always
+    /// holds the bar down, mirroring R09's honesty rule in visual form.
+    progress_pct: u32,
 }
 
 #[derive(Serialize, PartialEq, Debug)]
@@ -4166,6 +4202,10 @@ fn goal_map_at(data: &Path, profile_id: &str) -> Result<Vec<GoalMapView>, String
                             .iter()
                             .filter_map(|(c, s)| s.map(|s| (*c, s)))
                             .max_by_key(|(_, s)| *s);
+                        let dim_states: Vec<lts_domain::MasteryState> = pairs
+                            .iter()
+                            .map(|(_, s)| s.unwrap_or(lts_domain::MasteryState::Unseen))
+                            .collect();
                         Some(GoalDimensionView {
                             modality: m.clone(),
                             state: state_kebab(goal_derived_state(goal, dim, &derived)),
@@ -4176,6 +4216,7 @@ fn goal_map_at(data: &Path, profile_id: &str) -> Result<Vec<GoalMapView>, String
                                 best.map(|(_, s)| s)
                                     .unwrap_or(lts_domain::MasteryState::Unseen),
                             ),
+                            progress_pct: concepts_progress_pct(&dim_states),
                         })
                     })
                     .collect();
@@ -4207,6 +4248,150 @@ async fn goal_map(profile_id: String) -> Result<Vec<GoalMapView>, String> {
     tauri::async_runtime::spawn_blocking(move || goal_map_at(&data_dir(), &profile_id))
         .await
         .map_err(|e| format!("goal-map failed: {e}"))?
+}
+
+// ---------------------------------------------------------------------------
+// PROGRESS-STATS-001 (visual-ui-audit U7/U14): the memory stats strip.
+// Everything below is this profile's OWN local scheduler and evidence data
+// (n=1): an instrument the learner reads about their own memory, never a
+// grade, certificate, or comparison to anyone else.
+// ---------------------------------------------------------------------------
+
+#[derive(Serialize, Debug)]
+struct BandRetention {
+    /// CEFR-style band label from the pack's own goal files.
+    band: String,
+    /// Mean current retrievability (FSRS formula) of the scheduled items in
+    /// this band, 0-100. None when nothing in the band is scheduled yet —
+    /// the strip then says there is no memory data, rather than 0%.
+    retention_pct: Option<u32>,
+    scheduled_items: usize,
+}
+
+#[derive(Serialize, Debug)]
+struct ActivityDay {
+    /// UTC calendar day, `YYYY-MM-DD`.
+    date: String,
+    events: usize,
+}
+
+#[derive(Serialize, Debug)]
+struct MemoryStats {
+    due_today: usize,
+    /// Engine's own per-review price (PlannerConfig::review_seconds),
+    /// rounded up to whole minutes. 0 when nothing is due — the UI then
+    /// shows no time figure at all.
+    est_minutes: u32,
+    band_retention: Vec<BandRetention>,
+    /// Evidence events per UTC day over the last 12 weeks; days with no
+    /// events are simply absent (the calendar renders them empty).
+    activity_days: Vec<ActivityDay>,
+}
+
+fn memory_stats_at(data: &Path, profile_id: &str) -> Result<MemoryStats, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let now = now_secs();
+    let now_rfc = rfc3339_utc(now);
+    // "Due today" is everything scheduled up to the end of today (UTC) —
+    // the scheduler's own due_at values, in the canonical shape its write
+    // boundary enforces, so the text comparison is a true time comparison.
+    let end_of_today = format!("{}T23:59:59Z", &now_rfc[..10]);
+    let mut due_today = 0usize;
+    for scheduler in [lts_scheduler::SPIKE_VERSION, lts_scheduler::MINED_SCHEDULER] {
+        due_today += store
+            .due_items(profile_id, scheduler, &end_of_today)
+            .map_err(|e| e.to_string())?
+            .len();
+    }
+    let review_seconds = lts_scheduler::planner::PlannerConfig::default().review_seconds;
+    let est_minutes = ((due_today as u64) * u64::from(review_seconds)).div_ceil(60) as u32;
+
+    // Retention per band: the scheduler's per-item FSRS state, averaged
+    // over the concepts each band's goals declare. Only rows whose params
+    // parse as the spike scheduler's item state count; anything else stays
+    // out rather than being guessed at.
+    let spike_states: Vec<(String, lts_scheduler::fsrs::ItemState)> = store
+        .scheduler_state(profile_id)
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .filter(|r| r.scheduler == lts_scheduler::SPIKE_VERSION)
+        .filter_map(|r| {
+            serde_json::from_str::<lts_scheduler::fsrs::ItemState>(&r.params_json)
+                .ok()
+                .map(|s| (r.item_id, s))
+        })
+        .collect();
+    let packs_root = data.join("packs");
+    let mut bands: Vec<(String, std::collections::HashSet<String>)> = Vec::new();
+    for (pack_id, _) in store
+        .selected_packs(profile_id)
+        .map_err(|e| e.to_string())?
+    {
+        let Some(version) = lts_langpack::archive::current_version(&pack_id, &packs_root) else {
+            continue;
+        };
+        let root = packs_root.join(&pack_id).join(&version);
+        for path in pack_goal_files(&root) {
+            let Ok(text) = std::fs::read_to_string(&path) else {
+                continue;
+            };
+            let Ok(goals) = serde_yaml::from_str::<PackGoals>(&text) else {
+                continue;
+            };
+            for goal in goals.goals {
+                let band = goal.band.clone().unwrap_or_else(|| "other".into());
+                if !bands.iter().any(|(b, _)| *b == band) {
+                    bands.push((band.clone(), std::collections::HashSet::new()));
+                }
+                let set = &mut bands.iter_mut().find(|(b, _)| *b == band).unwrap().1;
+                set.extend(goal.required_concepts.iter().cloned());
+            }
+        }
+    }
+    bands.sort_by_key(|a| band_sort_key(Some(&a.0)));
+    let spike = lts_scheduler::FsrsSpike {
+        w: lts_scheduler::fsrs::DEFAULT_W,
+        request_ret: lts_scheduler::fsrs::DEFAULT_REQUEST_RET,
+    };
+    let band_retention = bands
+        .into_iter()
+        .map(|(band, concepts)| {
+            let hits: Vec<f64> = spike_states
+                .iter()
+                .filter(|(id, _)| concepts.contains(id))
+                .map(|(_, st)| lts_scheduler::Scheduler::retrievability(&spike, st, now as i64))
+                .collect();
+            BandRetention {
+                band,
+                scheduled_items: hits.len(),
+                retention_pct: (!hits.is_empty()).then(|| {
+                    ((hits.iter().sum::<f64>() / hits.len() as f64) * 100.0).round() as u32
+                }),
+            }
+        })
+        .collect();
+
+    let since = rfc3339_utc(now - 83 * 86_400);
+    let activity_days = store
+        .evidence_event_days(profile_id, &since)
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .map(|(date, events)| ActivityDay { date, events })
+        .collect();
+
+    Ok(MemoryStats {
+        due_today,
+        est_minutes,
+        band_retention,
+        activity_days,
+    })
+}
+
+#[tauri::command]
+async fn memory_stats(profile_id: String) -> Result<MemoryStats, String> {
+    tauri::async_runtime::spawn_blocking(move || memory_stats_at(&data_dir(), &profile_id))
+        .await
+        .map_err(|e| format!("memory-stats failed: {e}"))?
 }
 
 // ---------------------------------------------------------------------------
@@ -4263,16 +4448,59 @@ fn world_config_at(data: &Path, profile_id: &str) -> lts_world::WorldConfig {
 }
 
 #[derive(Serialize, PartialEq, Debug)]
+struct WorldMissing {
+    /// Raw content id of the driving item — carried on the wire for the
+    /// word/goal card lookup, never rendered inline (U14 acceptance 2).
+    target: String,
+    modality: &'static str,
+    /// The pack's own human label when the driving item lives in the active
+    /// pack's lexicon; None means the engine could not resolve one and the
+    /// UI falls back to the readable token segment.
+    label: Option<String>,
+}
+
+#[derive(Serialize, PartialEq, Debug)]
 struct WorldEnvironment {
     id: String,
     display_name: String,
     unlocked: bool,
-    missing: Vec<String>,
+    missing: Vec<WorldMissing>,
 }
 
 #[tauri::command]
 fn world_state(profile_id: String) -> Result<Vec<WorldEnvironment>, String> {
     world_state_at(&data_dir(), &profile_id)
+}
+
+/// Human labels for the active pack's content, from its own lexicon
+/// (PROGRESS-STATS-001 / U14): grows-with notes name the thing the learner
+/// has to be able to do, not a raw id. An unreadable lexicon resolves to an
+/// empty index — the UI then falls back to the token segment, never a
+/// fabricated label.
+fn pack_label_index(data: &Path, profile_id: &str) -> std::collections::HashMap<String, String> {
+    let store = match lts_storage::Store::open(data.join("profiles.db")) {
+        Ok(s) => s,
+        Err(_) => return std::collections::HashMap::new(),
+    };
+    let packs_root = data.join("packs");
+    let Some((pack_id, _)) = store
+        .selected_packs(profile_id)
+        .ok()
+        .and_then(|v| v.first().cloned())
+    else {
+        return std::collections::HashMap::new();
+    };
+    let Some(version) = lts_langpack::archive::current_version(&pack_id, &packs_root) else {
+        return std::collections::HashMap::new();
+    };
+    let entries = match lexicon_entries(data, &pack_id, &version) {
+        Ok(e) => e,
+        Err(_) => return std::collections::HashMap::new(),
+    };
+    entries
+        .into_iter()
+        .map(|e| (e.id.clone(), e.surface.clone()))
+        .collect()
 }
 
 fn world_state_at(data: &Path, profile_id: &str) -> Result<Vec<WorldEnvironment>, String> {
@@ -4284,6 +4512,7 @@ fn world_state_at(data: &Path, profile_id: &str) -> Result<Vec<WorldEnvironment>
             .map(|d| ((d.content_id.clone(), d.dimension), d.state))
             .collect(),
     };
+    let labels = pack_label_index(data, profile_id);
     Ok(
         lts_world::evaluate(&world_config_at(data, profile_id), &snapshot)
             .into_iter()
@@ -4294,7 +4523,11 @@ fn world_state_at(data: &Path, profile_id: &str) -> Result<Vec<WorldEnvironment>
                 missing: e
                     .missing
                     .iter()
-                    .map(|r| format!("{} ({:?})", r.content_id, r.modality))
+                    .map(|r| WorldMissing {
+                        target: r.content_id.clone(),
+                        modality: dimension_kebab(r.modality),
+                        label: labels.get(&r.content_id).cloned(),
+                    })
                     .collect(),
             })
             .collect(),
@@ -10103,6 +10336,7 @@ pub fn run() {
             speech_audio,
             world_state,
             goal_map,
+            memory_stats,
             display_settings,
             set_display_settings,
             get_microphone_enabled,
@@ -13167,9 +13401,29 @@ activities:
             half.missing
         );
         assert!(
-            half.missing[0].starts_with("ja.sent.check-price"),
+            half.missing[0].target.starts_with("ja.sent.check-price"),
             "the hint must name the missing content: {:?}",
             half.missing
+        );
+        // PROGRESS-STATS-001 (U14): the wire carries the pack's own human
+        // label for lexicon items so the UI never shows a raw id inline,
+        // and keeps the raw id only as the lookup target.
+        assert_eq!(half.missing[0].modality, "comprehension-listening");
+        assert_eq!(
+            fresh
+                .missing
+                .iter()
+                .find(|m| m.target == "ja.lex.food-drink.kohi")
+                .and_then(|m| m.label.as_deref()),
+            Some("コーヒー"),
+            "a lexicon requirement carries the pack's own surface form"
+        );
+        assert!(
+            fresh
+                .missing
+                .iter()
+                .all(|m| m.target.starts_with("ja.") || m.label.is_some()),
+            "every requirement resolves or keeps the id as lookup target only"
         );
 
         let ev = attempt(
@@ -13215,6 +13469,82 @@ activities:
             store.append_evidence(&ev).unwrap();
         }
         assert_eq!(world_state_at(data, &p.id).unwrap(), unlocked);
+    }
+
+    /// PROGRESS-STATS-001 (U14): gate progress is the mean ladder weight of
+    /// the goal's declared concepts — an untouched concept always holds the
+    /// bar down, so partial coverage can never read as achieved.
+    #[test]
+    fn gate_progress_averages_concept_ladder_weights() {
+        use lts_domain::MasteryState::*;
+        assert_eq!(concepts_progress_pct(&[]), 0);
+        assert_eq!(concepts_progress_pct(&[Unseen, Unseen]), 0);
+        assert_eq!(concepts_progress_pct(&[Retained, Unseen]), 50);
+        assert_eq!(concepts_progress_pct(&[Supported, Supported]), 40);
+        assert_eq!(concepts_progress_pct(&[Retained, Retained, Retained]), 100);
+        // One strong concept out of several stays visibly partial (R09).
+        assert_eq!(concepts_progress_pct(&[Retained, Unseen, Unseen]), 33);
+    }
+
+    /// PROGRESS-STATS-001 (U7): the stats strip is derived only from this
+    /// profile's own scheduler and evidence rows. A fresh profile says so
+    /// with zeros and abstentions; stamped evidence shows up as calendar
+    /// days; nothing is invented.
+    #[test]
+    fn memory_stats_reports_only_this_profiles_local_data() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+        store
+            .set_active_pack(&p.id, "org.openlanguage.ja-jp.reference", &version)
+            .unwrap();
+
+        let fresh = memory_stats_at(data, &p.id).unwrap();
+        assert_eq!(fresh.due_today, 0, "a new profile has nothing scheduled");
+        assert_eq!(fresh.est_minutes, 0, "no due work means no time figure");
+        assert!(
+            !fresh.band_retention.is_empty(),
+            "the reference pack's own bands appear as abstentions"
+        );
+        assert!(
+            fresh
+                .band_retention
+                .iter()
+                .all(|b| b.retention_pct.is_none()),
+            "no scheduled items means no retention invented: {:?}",
+            fresh.band_retention
+        );
+        assert!(
+            fresh.activity_days.is_empty(),
+            "nothing practised, no calendar"
+        );
+
+        let ev = attempt(
+            "ja.lex.food-drink.kohi",
+            lts_domain::ActivityModality::RecallMeaning,
+            "ja.expr.demo.food-a",
+            0,
+            "2026-11-20T09:00:00Z",
+            "m1",
+            &p.id,
+        );
+        store.append_evidence(&ev).unwrap();
+        let stats = memory_stats_at(data, &p.id).unwrap();
+        assert!(
+            stats
+                .activity_days
+                .iter()
+                .any(|d| d.date == "2026-11-20" && d.events == 1),
+            "one stamped day of practice shows in the calendar: {:?}",
+            stats.activity_days
+        );
     }
 
     /// ADR-0018: a pack that declares no world collection gives the learner
