@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-20",
-  "active_task": null,
+  "active_task": "JA-B1-003-JOURNEYS-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2233,14 +2233,17 @@
     "JA-B1-003-JOURNEYS-001": {
       "task_id": "JA-B1-003-JOURNEYS-001",
       "title": "De-scaffold and re-journey the legacy B1 activity band",
-      "status": "ready",
+      "status": "in_progress",
       "attempts": 0,
       "updated": "2026-11-20",
       "dependencies": [
         "JA-B1-003"
       ],
       "evidence": [
-        "state/evidence/JA-B1-003/findings-2026-11-20.md"
+        "state/evidence/JA-B1-003-JOURNEYS-001/before-metrics-2026-11-20.md",
+        "state/evidence/JA-B1-003-JOURNEYS-001/after-metrics-2026-11-20.md",
+        "state/evidence/JA-B1-003-JOURNEYS-001/gates.log",
+        "state/notes/JA-B1-003-JOURNEYS-001.md"
       ],
       "summary": "Created by JA-B1-003: reduce the 197 support_level-5 legacy activities toward B1 independence, add task journeys per legacy goal, move 155 object-wo-only generation grammar contracts to real concept sets; measure band distribution before/after.",
       "notes": "Authoring card per ADR-0037 + R12 lineage (UPPERBAND-TASK-JOURNEYS-001). Files: curriculum/units/*.yaml."
