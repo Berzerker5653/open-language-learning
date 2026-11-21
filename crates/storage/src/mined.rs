@@ -82,7 +82,13 @@ impl Store {
              SET reading = COALESCE(?3, reading), gloss = COALESCE(?4, gloss),
                  context_sentence_id = COALESCE(?5, context_sentence_id)
              WHERE profile_id = ?1 AND surface = ?2",
-            params![profile_id, item.surface, item.reading, item.gloss, item.context_sentence_id],
+            params![
+                profile_id,
+                item.surface,
+                item.reading,
+                item.gloss,
+                item.context_sentence_id
+            ],
         )?;
         let id = self
             .conn

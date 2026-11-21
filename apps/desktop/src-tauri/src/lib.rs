@@ -6866,7 +6866,7 @@ async fn story_audio(profile_id: String, sentence_id: String) -> Result<SpeechAu
 /// whose fields travel separately and are labeled by `aux_source` — the
 /// pack lexicon stays primary and trusted. No external dictionary is
 /// ever called (offline-first).
-#[derive(Serialize)]
+#[derive(Debug, Serialize)]
 struct WordCardView {
     query: String,
     lemma: Option<String>,
@@ -7172,7 +7172,7 @@ fn word_card_at(
             surface == query || lemma.as_deref().is_some_and(|l| surface == norm_token(l))
         });
     let mut view = match entry {
-        Some(e) => Ok(WordCardView {
+        Some(e) => WordCardView {
             query,
             lemma,
             surface: Some(e.surface),
@@ -7186,7 +7186,7 @@ fn word_card_at(
             aux_pos: None,
             aux_source: None,
             in_review: false,
-        }),
+        },
         None => {
             // READER-FLOW-001 off-pack slice: before falling back to the
             // bare honest card, try the offline auxiliary lexicon. The
@@ -7195,7 +7195,7 @@ fn word_card_at(
             let aux = aux_lang(data, pack_id, &version)
                 .map(|lang| aux_rows(data, &lang))
                 .and_then(|rows| aux_hit(&rows, &query, lemma.as_deref()).cloned());
-            Ok(WordCardView {
+            WordCardView {
                 query,
                 // The sidecar lemma is the pack's own lemmatizer truth
                 // (pymorphy3 table built at pack build time), so it
@@ -7213,7 +7213,7 @@ fn word_card_at(
                 aux_pos: aux.as_ref().and_then(|r| r.pos.first().cloned()),
                 aux_source: aux.as_ref().map(|_| AUX_SOURCE.to_string()),
                 in_review: false,
-            })
+            }
         }
     };
     // VOCAB-BUILDER-001: the lookup IS the learning signal (the Kindle
@@ -7647,7 +7647,12 @@ fn mine_add_at(
         .into_iter()
         .find(|m| m.id == outcome.id);
     let (reading, gloss, source_citation, row_created_at) = match stored {
-        Some(m) => (m.reading, m.gloss, m.source_citation, m.created_at),
+        Some(ref m) => (
+            m.reading.clone(),
+            m.gloss.clone(),
+            m.source_citation.clone(),
+            m.created_at.clone(),
+        ),
         None => (
             reading,
             gloss,

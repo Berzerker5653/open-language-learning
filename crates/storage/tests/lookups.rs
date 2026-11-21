@@ -34,8 +34,22 @@ fn lookup(store: &Store, p: &str, id: &str, surface: &str, lemma: Option<&str>, 
 fn lookup_log_appends_every_tap_oldest_first() {
     let store = Store::in_memory().unwrap();
     let p = profile(&store);
-    lookup(&store, &p, "lk-2", "хлеба", Some("хлеб"), "2026-11-20T10:05:00Z");
-    lookup(&store, &p, "lk-1", "хлеба", Some("хлеб"), "2026-11-20T10:00:00Z");
+    lookup(
+        &store,
+        &p,
+        "lk-2",
+        "хлеба",
+        Some("хлеб"),
+        "2026-11-20T10:05:00Z",
+    );
+    lookup(
+        &store,
+        &p,
+        "lk-1",
+        "хлеба",
+        Some("хлеб"),
+        "2026-11-20T10:00:00Z",
+    );
     // Same word, second tap: the log never dedupes — the sentence and the
     // time per tap are the durable artifact (Kindle LOOKUPS semantics).
     let rows = store.word_lookups(&p).unwrap();
@@ -51,7 +65,14 @@ fn lookup_log_appends_every_tap_oldest_first() {
 fn lemma_is_optional_and_stays_honest_without_sidecar_data() {
     let store = Store::in_memory().unwrap();
     let p = profile(&store);
-    lookup(&store, &p, "lk-1", "сложноСлово", None, "2026-11-20T10:00:00Z");
+    lookup(
+        &store,
+        &p,
+        "lk-1",
+        "сложноСлово",
+        None,
+        "2026-11-20T10:00:00Z",
+    );
     let rows = store.word_lookups(&p).unwrap();
     assert_eq!(rows.len(), 1);
     assert_eq!(rows[0].lemma, None, "no sidecar row, no lemma claim");
@@ -62,7 +83,14 @@ fn lookups_belong_to_the_person_and_cascade_on_profile_delete() {
     let store = Store::in_memory().unwrap();
     let a = profile(&store);
     let b = profile(&store);
-    lookup(&store, &a, "lk-1", "кошка", Some("кошка"), "2026-11-20T10:00:00Z");
+    lookup(
+        &store,
+        &a,
+        "lk-1",
+        "кошка",
+        Some("кошка"),
+        "2026-11-20T10:00:00Z",
+    );
     assert!(store.word_lookups(&b).unwrap().is_empty(), "per-profile");
     store.delete_profile(&a).unwrap();
     assert!(

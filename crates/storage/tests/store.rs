@@ -302,7 +302,7 @@ fn mined_items_crud_and_cascade() {
                 gloss: Some("cat"),
                 source_citation: "ja.story.demo.first-meeting",
                 created_at: "2026-10-03T09:00:00Z",
-            context_sentence_id: None,
+                context_sentence_id: None,
             },
         )
         .unwrap();
@@ -323,7 +323,7 @@ fn mined_items_crud_and_cascade() {
                 gloss: Some("dog"),
                 source_citation: "manual",
                 created_at: "2026-10-03T09:01:00Z",
-            context_sentence_id: None,
+                context_sentence_id: None,
             },
         )
         .unwrap();
@@ -384,7 +384,7 @@ fn duplicate_mined_surface_keeps_the_original_row_and_srs_history() {
                 gloss: Some("cat"),
                 source_citation: "ja.story.demo.first-meeting",
                 created_at: "2026-10-03T09:00:00Z",
-            context_sentence_id: None,
+                context_sentence_id: None,
             },
         )
         .unwrap();
@@ -410,7 +410,7 @@ fn duplicate_mined_surface_keeps_the_original_row_and_srs_history() {
                 gloss: Some("CAT"),
                 source_citation: "manual",
                 created_at: "2026-10-05T09:00:00Z",
-            context_sentence_id: None,
+                context_sentence_id: None,
             },
         )
         .unwrap();
@@ -441,7 +441,7 @@ fn duplicate_mined_surface_keeps_the_original_row_and_srs_history() {
                 gloss: None,
                 source_citation: "manual",
                 created_at: "2026-10-05T09:30:00Z",
-            context_sentence_id: None,
+                context_sentence_id: None,
             },
         )
         .unwrap();
@@ -473,7 +473,7 @@ fn duplicate_mined_surface_keeps_the_original_row_and_srs_history() {
                 gloss: Some("cat"),
                 source_citation: "manual",
                 created_at: "2026-10-03T10:00:00Z",
-            context_sentence_id: None,
+                context_sentence_id: None,
             },
         )
         .unwrap();
@@ -530,7 +530,7 @@ fn remove_mined_rolls_back_when_the_srs_delete_fails() {
                 gloss: Some("cat"),
                 source_citation: "manual",
                 created_at: "2026-10-02T09:00:00Z",
-            context_sentence_id: None,
+                context_sentence_id: None,
             },
         )
         .unwrap();

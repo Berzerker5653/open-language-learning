@@ -127,7 +127,7 @@ fn seed(store: &Store) -> String {
                 gloss: Some("cat"),
                 source_citation: "es.story.demo.cat",
                 created_at: "2026-10-02T00:00:00Z",
-            context_sentence_id: None,
+                context_sentence_id: None,
             },
         )
         .unwrap();
@@ -141,7 +141,7 @@ fn seed(store: &Store) -> String {
                 gloss: Some("dog"),
                 source_citation: "",
                 created_at: "2026-10-02T00:00:00Z",
-            context_sentence_id: None,
+                context_sentence_id: None,
             },
         )
         .unwrap();
@@ -646,7 +646,11 @@ fn version_4_bundles_remain_importable_without_lookups() {
     let bundle = src
         .export_profile(&pid, "2026-10-04T00:00:00Z", &ExportOptions::default())
         .unwrap();
-    assert_eq!(bundle.word_lookups.len(), 1, "the v5 export carries the log");
+    assert_eq!(
+        bundle.word_lookups.len(),
+        1,
+        "the v5 export carries the log"
+    );
     assert_eq!(bundle.format_version, 5, "exports write the current format");
     let mut doc = serde_json::to_value(&bundle).unwrap();
     doc["format_version"] = json!(4);
@@ -658,7 +662,12 @@ fn version_4_bundles_remain_importable_without_lookups() {
     let dst = Store::in_memory().unwrap();
     let legacy: lts_storage::ExportBundle = serde_json::from_str(&doc.to_string()).unwrap();
     assert!(legacy.word_lookups.is_empty());
-    assert!(legacy.mined_items.iter().all(|m| m.context_sentence_id.is_none()));
+    assert!(
+        legacy
+            .mined_items
+            .iter()
+            .all(|m| m.context_sentence_id.is_none())
+    );
     let new_id = dst
         .import_profile(&legacy, &ImportMode::NewProfile)
         .expect("a version 4 bundle stays importable");

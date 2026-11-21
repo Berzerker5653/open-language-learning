@@ -31,9 +31,9 @@ pub use export::{
     EXPORT_FORMAT_VERSION, ExportBundle, ExportOptions, ImportError, ImportMode,
     MIN_SUPPORTED_FORMAT_VERSION,
 };
+pub use lookups::{NewWordLookup, WordLookup};
 pub use mastery::MasterySnapshot;
 pub use migrations::SCHEMA_VERSION;
-pub use lookups::{NewWordLookup, WordLookup};
 pub use mined::{AddMinedOutcome, MinedItem, NewMinedItem};
 pub use packs::{ContentVersion, PackInstallation};
 pub use profile::{GoalStatus, LearnerGoal, Profile, Setting};
