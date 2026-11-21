@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-21",
-  "active_task": null,
+  "active_task": "VOCAB-BUILDER-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2289,11 +2289,11 @@
       "updated": "2026-11-20"
     },
     "VOCAB-BUILDER-001": {
-      "status": "blocked",
+      "status": "in_progress",
       "attempts": 2,
       "title": "Automatic vocabulary builder - every word lookup logged with its context sentence, feeding review",
       "summary": "",
-      "notes": "Board card t_771af11d circuit-broke (2x iteration budget 60/60) with NO commits; planner marked blocked 2026-11-21 and cleared active_task. Frozen contract + resume recipe: state/notes/VOCAB-BUILDER-001.md. Fresh-budget takeover card t_cd2a7687 depends on UI-HYGIENE-001 takeover t_7984526c (shared dirty files incl. apps/desktop/src-tauri/src/lib.rs). Possible lane WIP may still sit uncommitted in the tree - takeover worker triages it, never reverts.",
+      "notes": "Takeover card t_cd2a7687 (fresh budget after t_771af11d circuit-break). Audit: the full frozen contract (migration v8 word_lookups + mined context column, lookups.rs, export v5, desktop word_card story_id + auto-log/auto-mine + in_review, frontend reading.tsx/App.tsx/words.tsx drill context + play) is already merged on main via the 28e9e30 sweep; takeover commits the residual migrations.rs doc-comment hunk and re-runs the LANE gates as close evidence. Merged lane not re-implemented, only gated.",
       "updated": "2026-11-21",
       "evidence": [
         "state/notes/VOCAB-BUILDER-001.md"
@@ -2301,7 +2301,7 @@
     },
     "UI-HYGIENE-001": {
       "task_id": "UI-HYGIENE-001",
-      "title": "Learner-facing hygiene pass — container alignment, copy/token leaks, profile chooser cleanup (visual-ui-audit U1/U2/U13)",
+      "title": "Learner-facing hygiene pass \u2014 container alignment, copy/token leaks, profile chooser cleanup (visual-ui-audit U1/U2/U13)",
       "status": "done",
       "attempts": 0,
       "updated": "2026-11-21",
