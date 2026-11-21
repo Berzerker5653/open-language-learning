@@ -1,0 +1,38 @@
+ERR-SRS-LOOP-001 — controller takeover gates (VOCAB-BUILDER-001 worker, 2026-11-20)
+
+The lane finished but never landed (board card t_469da709 blocked on iteration
+budget with the whole lane unstaged). The next worker (VOCAB-BUILDER-001,
+overlapping files) takeover-commits it per lts-concurrent-lane-commits, after
+personally re-running the LANE-tier battery. Logs live under
+state/evidence/VOCAB-BUILDER-001/ (named takeover-*):
+
+- takeover-fmt.log: cargo fmt --all --check — exit 0 (lane tree).
+- takeover-test-storage-activity-scheduler.log: cargo test -p lts-storage
+  -p lts-activity -p lts-scheduler — exit 0 (HEAD worktree + lane files only).
+- takeover-clippy-2.log: cargo clippy -p lts-storage -p lts-activity
+  -p lts-scheduler -p lts-desktop --all-targets -- -D warnings — exit 0.
+- takeover-test-lts-desktop-maintree.log: cargo test -p lts-desktop in the
+  main tree (lane code): 165 passed, 34 failed, 2 ignored. All 34 failures
+  name ja-JP pack fixtures ("154 audio-addressable items have no media
+  manifest row") — the sibling pack lane's UNCOMMITTED manifest WIP, zero
+  lane files involved (matches the ERR-SRS attempt-2 notes verbatim).
+- takeover-baseline-head-desktop.log: pure-HEAD baseline, same worktree
+  style: 37 failures. The lane-run failure set (no-audio env,
+  takeover-test-lts-desktop.log, 37) is BYTE-IDENTICAL to the pure-HEAD
+  baseline set, and the main-tree 34-failure set is a subset: the lane
+  introduces zero regressions. All ERR-SRS lane tests pass in the main-tree
+  run (error_review_offer_accept_schedule_and_grade_round_trip, word_card_*
+  family, export round-trips — see the ok lines in the main-tree log).
+
+Honesty notes (recorded, not hidden):
+- The attempt-2 record referenced `test-lts-desktop-worktree.log` and this
+  `gates.log`, which did not exist on disk, and its
+  test-lts-desktop.log captured the ja-pack-env failures above. The
+  task-state evidence list was corrected to point at files that exist and
+  carry the load; this file and the takeover logs are the proof.
+- Fresh git worktrees lack the gitignored pack wavs (9,885 in the main
+  tree); a worktree desktop run without them fails exactly the 37-set.
+  Restoring main-tree wav bytes against a HEAD manifest fails the other
+  direction (216 byte-size errors) because the sibling lane repaired audio
+  mid-campaign. Desktop evidence for this lane is therefore the main-tree
+  run + the byte-identical baseline set diff.

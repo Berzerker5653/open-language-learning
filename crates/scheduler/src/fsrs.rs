@@ -12,6 +12,14 @@ pub const SPIKE_VERSION: &str = "fsrs-spike-0.1.0";
 /// practice can never reach pack-content mastery (review finding R02).
 pub const MINED_SCHEDULER: &str = "fsrs-spike-0.1.0+mined";
 
+/// Scheduler tag for accepted per-form error review cards
+/// (ERR-SRS-LOOP-001). Same algorithm, own partition (the +mined rule
+/// from review finding R02): an error drill can never be mistaken for
+/// pack content, and a pack plan never picks up an error row. Error
+/// cards are drilled through their own due-queue path, not the
+/// session plan.
+pub const ERROR_REVIEW_SCHEDULER: &str = "fsrs-spike-0.1.0+error";
+
 /// Retrieval rating for a scheduled review (FSRS grading scale 1..=4).
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum Rating {

@@ -12,6 +12,7 @@
 //! translation is not equal to independent comprehension").
 
 pub mod attempt;
+pub mod form_errors;
 pub mod reading;
 pub mod scenario;
 pub mod spec;
@@ -19,6 +20,9 @@ pub mod support;
 pub mod writing;
 
 pub use attempt::{Attempt, AttemptOutcome};
+pub use form_errors::{
+    FormErrorClass, FormErrorOffer, LemmaForm, classify_form_mismatch, norm_form,
+};
 pub use reading::{
     HIDE_AT_STATE, ReaderSettings, ReadingDisplay, ReadingItem, RomajiUserMode, ScriptKind,
     is_kana_only, render_reading_display, script_of,

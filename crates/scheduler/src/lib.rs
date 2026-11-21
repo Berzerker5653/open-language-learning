@@ -17,7 +17,8 @@ pub mod fsrs;
 pub mod planner;
 
 pub use fsrs::{
-    FsrsSpike, ItemState, MINED_SCHEDULER, Rating, SPIKE_VERSION, ScheduleDecision, Scheduler,
+    ERROR_REVIEW_SCHEDULER, FsrsSpike, ItemState, MINED_SCHEDULER, Rating, SPIKE_VERSION,
+    ScheduleDecision, Scheduler,
 };
 pub use planner::{
     BUDGET_PRESETS, DueReviewItem, PLANNER_VERSION, PlanReason, PlannedItem, PlannerConfig,

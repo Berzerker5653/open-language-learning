@@ -11,8 +11,9 @@
 
 use crate::error::Error;
 use crate::{
-    ContentConfirmation, ContentVersion, LearnerGoal, MasterySnapshot, MinedItem, PackInstallation,
-    Profile, Recording, SchedulerRecord, Setting, Store,
+    ContentConfirmation, ContentVersion, ErrorLedgerEntry, ErrorReviewCard, LearnerGoal,
+    MasterySnapshot, MinedItem, PackInstallation, Profile, Recording, SchedulerRecord, Setting,
+    Store,
 };
 use lts_domain::{EvidenceCorrection, EvidenceEvent};
 use rusqlite::params;
@@ -22,10 +23,13 @@ use std::collections::HashMap;
 /// Bump when the bundle shape changes; import rejects unknown versions.
 /// Version 2 added the learner's saved words (`mined_items`, review
 /// finding R05). Version 3 added the learner's content confirmations
-/// (`content_confirmations`, CONTENT-CONFIRM-001). Version 1 and 2
-/// bundles stay importable under the explicit compatibility rule in
-/// `import_profile`: they simply carry no such rows.
-pub const EXPORT_FORMAT_VERSION: u32 = 3;
+/// (`content_confirmations`, CONTENT-CONFIRM-001). Version 4 added the
+/// error memory loop (`error_ledger` + `error_review_cards`,
+/// ERR-SRS-LOOP-001): the ledger is local-only learner data, so the
+/// export bundle is its only portability path. Version 1-3 bundles stay
+/// importable under the explicit compatibility rule in `import_profile`:
+/// they simply carry no such rows.
+pub const EXPORT_FORMAT_VERSION: u32 = 4;
 
 /// Oldest bundle version this build understands.
 pub const MIN_SUPPORTED_FORMAT_VERSION: u32 = 1;
@@ -55,6 +59,15 @@ pub struct ExportBundle {
     /// list. Attribution travels: the row names the importing profile.
     #[serde(default)]
     pub content_confirmations: Vec<ContentConfirmation>,
+    /// The learner's error observations (ERR-SRS-LOOP-001). Version 1-3
+    /// bundles have no such field; they import as an empty list.
+    #[serde(default)]
+    pub error_ledger: Vec<ErrorLedgerEntry>,
+    /// Review cards the learner explicitly accepted. Their schedules
+    /// ride in `scheduler_state` under the '+error' tag, so the card
+    /// rows and those scheduler rows move together (R05 discipline).
+    #[serde(default)]
+    pub error_review_cards: Vec<ErrorReviewCard>,
     /// Opt-in: `None` unless explicitly requested at export time.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub recordings: Option<Vec<Recording>>,
@@ -134,6 +147,8 @@ impl Store {
             scheduler_state: self.scheduler_state(profile_id)?,
             mined_items: self.mined_items(profile_id)?,
             content_confirmations: self.profile_content_confirmations(profile_id)?,
+            error_ledger: self.error_ledger(profile_id)?,
+            error_review_cards: self.error_review_cards(profile_id)?,
             recordings,
         })
     }
@@ -309,9 +324,63 @@ impl Store {
                 ],
             )?;
         }
+        // Error memory loop (ERR-SRS-LOOP-001): ledger ids are global
+        // like every other row here, so a same-store restore re-issues
+        // them; a card re-issues too and points at the ledger id it
+        // actually got, and its '+error' scheduler row is rewritten
+        // below the same way a mined word's row is (R05).
+        let mut ledger_ids: HashMap<String, String> = HashMap::new();
+        for e in &bundle.error_ledger {
+            let fresh = self.fresh_id(&e.id, target_id, "error_ledger", "id")?;
+            ledger_ids.insert(e.id.clone(), fresh.clone());
+            self.conn.execute(
+                "INSERT INTO error_ledger(id, profile_id, pack_id, surface, produced, lemma, error_class, context_sentence_id, created_at)
+                 VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9)",
+                params![
+                    fresh,
+                    target_id,
+                    e.pack_id,
+                    e.surface,
+                    e.produced,
+                    e.lemma,
+                    e.error_class,
+                    e.context_sentence_id,
+                    e.created_at
+                ],
+            )?;
+        }
+        let mut error_card_ids: HashMap<String, String> = HashMap::new();
+        for c in &bundle.error_review_cards {
+            let fresh = self.fresh_id(&c.id, target_id, "error_review_cards", "id")?;
+            let ledger = ledger_ids
+                .get(&c.ledger_id)
+                .cloned()
+                .unwrap_or_else(|| c.ledger_id.clone());
+            error_card_ids.insert(c.id.clone(), fresh.clone());
+            self.conn.execute(
+                "INSERT INTO error_review_cards(id, profile_id, ledger_id, pack_id, surface, lemma, error_class, context_sentence_id, created_at)
+                 VALUES (?1,?2,?3,?4,?5,?6,?7,?8,?9)",
+                params![
+                    fresh,
+                    target_id,
+                    ledger,
+                    c.pack_id,
+                    c.surface,
+                    c.lemma,
+                    c.error_class,
+                    c.context_sentence_id,
+                    c.created_at
+                ],
+            )?;
+        }
         for sc in &bundle.scheduler_state {
             let mut sc = sc.clone();
             if let Some(fresh) = mined_ids.get(&sc.item_id) {
+                sc.item_id = fresh.clone();
+            } else if let Some(fresh) = error_card_ids.get(&sc.item_id) {
+                // The same R05 discipline as mined words: a re-issued
+                // review-card id is rewritten in the scheduler row too,
+                // so a restored card keeps its own due state.
                 sc.item_id = fresh.clone();
             }
             self.save_scheduler_state(target_id, &sc)?;

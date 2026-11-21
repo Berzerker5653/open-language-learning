@@ -20,10 +20,13 @@
 //! 5. `+mined` scheduler tag partition (review finding R02).
 //! 6. `content_confirmations` — attributed per-profile content marks
 //!    (CONTENT-CONFIRM-001, ADR-0040).
+//! 7. `error_ledger` + `error_review_cards` — the error memory loop
+//!    (ERR-SRS-LOOP-001).
+
 use crate::error::Error;
 use rusqlite::{Connection, Transaction, TransactionBehavior};
 
-pub const SCHEMA_VERSION: i64 = 6;
+pub const SCHEMA_VERSION: i64 = 7;
 
 struct Migration {
     version: i64,
@@ -208,6 +211,46 @@ CREATE TABLE content_confirmations (
 );
 ",
     },
+    Migration {
+        version: 7,
+        sql: "
+-- ERR-SRS-LOOP-001: the error memory loop. The ledger is an observation
+-- log of detected production errors (dictation / speaking / composition
+-- mismatches vs the pymorphy-expected form) — never evidence, never a
+-- mastery claim (docs/18). Repeat errors append repeat rows on purpose:
+-- recurrence across sessions is the signal. A review card exists only
+-- after the learner ACCEPTED an offer (never silent); one live card per
+-- (profile, form, context) keeps repeat accepts from fabricating
+-- parallel drills, and its schedule reuses the ordinary scheduler_state
+-- table under its own '+error' scheduler tag (same partition discipline
+-- as +mined, review finding R02).
+CREATE TABLE error_ledger (
+  id TEXT PRIMARY KEY,
+  profile_id TEXT NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+  pack_id TEXT NOT NULL,
+  surface TEXT NOT NULL,
+  produced TEXT NOT NULL,
+  lemma TEXT NOT NULL,
+  error_class TEXT NOT NULL,
+  context_sentence_id TEXT NOT NULL,
+  created_at TEXT NOT NULL
+);
+CREATE INDEX idx_error_ledger_profile_context
+  ON error_ledger(profile_id, context_sentence_id);
+CREATE TABLE error_review_cards (
+  id TEXT PRIMARY KEY,
+  profile_id TEXT NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+  ledger_id TEXT NOT NULL REFERENCES error_ledger(id) ON DELETE CASCADE,
+  pack_id TEXT NOT NULL,
+  surface TEXT NOT NULL,
+  lemma TEXT NOT NULL,
+  error_class TEXT NOT NULL,
+  context_sentence_id TEXT NOT NULL,
+  created_at TEXT NOT NULL,
+  UNIQUE(profile_id, surface, context_sentence_id)
+);
+",
+    },
 ];
 
 pub(crate) fn migrate(conn: &Connection) -> Result<(), Error> {
@@ -329,6 +372,9 @@ mod tests {
             "PRAGMA user_version = 4;
              DELETE FROM schema_migrations WHERE version = 5;
              DELETE FROM schema_migrations WHERE version = 6;
+             DELETE FROM schema_migrations WHERE version = 7;
+             DROP TABLE IF EXISTS error_review_cards;
+             DROP TABLE IF EXISTS error_ledger;
              DROP TABLE IF EXISTS content_confirmations;",
         )
         .unwrap();
@@ -406,6 +452,19 @@ mod tests {
                 )
                 .unwrap()
                     == 1,
+            7 => {
+                ["error_ledger", "error_review_cards"]
+                    .iter()
+                    .all(|name| {
+                        conn.query_row(
+                            "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = ?1",
+                            [name],
+                            |r| r.get::<_, i64>(0),
+                        )
+                        .unwrap()
+                            == 1
+                    })
+            }
             _ => panic!("v{version} has no schema artifact"),
         }
     }

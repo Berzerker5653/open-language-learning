@@ -10,6 +10,7 @@
 
 mod confirm;
 mod error;
+mod error_ledger;
 mod evidence;
 mod export;
 mod mastery;
@@ -21,6 +22,9 @@ mod scheduler;
 
 pub use confirm::{ConfirmedBy, ContentConfirmation};
 pub use error::Error;
+pub use error_ledger::{
+    AddErrorCardOutcome, ErrorLedgerEntry, ErrorReviewCard, NewErrorLedger, NewErrorReviewCard,
+};
 pub use evidence::{NewRecording, Recording};
 pub use export::{
     EXPORT_FORMAT_VERSION, ExportBundle, ExportOptions, ImportError, ImportMode,

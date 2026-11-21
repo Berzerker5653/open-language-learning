@@ -122,6 +122,13 @@ pub struct WritingGrade {
     /// string (K-12), while the practice hub promises that a miss shows the
     /// form it expected.
     pub expected: String,
+    /// ERR-SRS-LOOP-001: on a graded miss whose mismatch the pack's
+    /// pymorphy table can classify, the verdict carries an explicit
+    /// per-form review OFFER (acceptance is a separate learner act —
+    /// the card is never created silently). `None` when the answer was
+    /// correct, or when no sidecar data supports a claim.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub offer: Option<crate::form_errors::FormErrorOffer>,
 }
 
 pub fn grade_writing(input: &str, task: &WritingTask) -> WritingGrade {
@@ -131,6 +138,7 @@ pub fn grade_writing(input: &str, task: &WritingTask) -> WritingGrade {
             correct: false,
             matched_variant: false,
             expected: task.answer.clone(),
+            offer: None,
         };
     }
     if typed == normalize_typed(&task.answer) {
@@ -138,6 +146,7 @@ pub fn grade_writing(input: &str, task: &WritingTask) -> WritingGrade {
             correct: true,
             matched_variant: false,
             expected: task.answer.clone(),
+            offer: None,
         };
     }
     let matched = task.accepted.iter().any(|a| typed == normalize_typed(a));
@@ -145,5 +154,6 @@ pub fn grade_writing(input: &str, task: &WritingTask) -> WritingGrade {
         correct: matched,
         matched_variant: matched,
         expected: task.answer.clone(),
+        offer: None,
     }
 }

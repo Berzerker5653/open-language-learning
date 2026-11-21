@@ -2737,8 +2737,15 @@ fn build_plan(
     // n=1 personalization: bias the fixed new-item budget toward dimensions
     // the learner is still developing and away from ones they have mastered,
     // using their OWN recorded attempts. Personal tuning, never a mastery or
-    // population claim (docs/18).
-    personalize_progression(&mut progression, &derived);
+    // population claim (docs/18). ERR-SRS-LOOP-001 adds the error ledger's
+    // cross-session recurrence as an INPUT ONLY (capped, tie-break within a
+    // dimension; the confidence ordering stays authoritative).
+    let recurrence: std::collections::HashMap<String, u32> = store
+        .error_recurrence_by_context(profile_id)
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .collect();
+    personalize_progression(&mut progression, &derived, &recurrence);
     // K-66 (ADR-0020 §1): the pack's own goal map orders the introduction
     // half of the plan — band ladder, then unit order, then content
     // order. Personalization stays authoritative for the tail the pack
@@ -2778,9 +2785,19 @@ fn build_plan(
 /// hold roughly their curriculum position. The sort is stable, so within a
 /// dimension curriculum order is preserved. This is personal tuning only — it
 /// records nothing and makes no mastery/population claim (docs/18).
+///
+/// ERR-SRS-LOOP-001: cross-session error recurrence (from the local error
+/// ledger) enters as an INPUT ONLY: within one dimension group, forms the
+/// learner keeps getting wrong are introduced sooner, capped at
+/// `RECURRENCE_CAP` so no error count — however large — can outvote the
+/// confidence ordering or claim anything about the learner. The caps and the
+/// no-calibration-claims rule above stay exactly as they were.
+const RECURRENCE_CAP: u32 = 3;
+
 fn personalize_progression(
     progression: &mut [lts_scheduler::ProgressionItem],
     derived: &[lts_learner_model::DerivedMastery],
+    recurrence: &std::collections::HashMap<String, u32>,
 ) {
     use std::collections::HashMap;
     let mut agg: HashMap<lts_domain::ActivityModality, (f32, usize)> = HashMap::new();
@@ -2797,11 +2814,15 @@ fn personalize_progression(
             _ => WEAK_CONFIDENCE,
         }
     };
-    // Lower mean confidence (more developing) -> introduced sooner.
+    let capped_recurrence = |c: &str| recurrence.get(c).copied().unwrap_or(0).min(RECURRENCE_CAP);
+    // Lower mean confidence (more developing) -> introduced sooner; a
+    // capped recurrence count only breaks ties INSIDE an equal
+    // dimension-key group, never across it.
     progression.sort_by(|a, b| {
         key(a.modality)
             .partial_cmp(&key(b.modality))
             .unwrap_or(std::cmp::Ordering::Equal)
+            .then_with(|| capped_recurrence(&b.content_id).cmp(&capped_recurrence(&a.content_id)))
     });
 }
 
@@ -4074,6 +4095,14 @@ struct DictationAttempt {
     /// The sentence the learner reads aloud; checked against the transcript.
     target_text: String,
     wav_b64: String,
+    /// ERR-SRS-LOOP-001: id of the pack sentence being dictated when the
+    /// app picked it (a learner-typed target has none). Error-ledger rows
+    /// need the context id; without it, form errors are not recorded.
+    #[serde(default)]
+    content_id: Option<String>,
+    /// The profile the attempt belongs to — the ledger is per-profile.
+    #[serde(default)]
+    profile_id: Option<String>,
 }
 
 #[derive(Serialize)]
@@ -4087,6 +4116,11 @@ struct DictationResult {
     /// Dictation is a production/recognition check, never a pronunciation
     /// grade or mastery; always guided.
     mode: &'static str,
+    /// ERR-SRS-LOOP-001: on a clear mismatch, classified per-form review
+    /// OFFERS (case/aspect/stress/agreement/wrong-word vs the
+    /// pymorphy-expected form). Explicit offers only — no card is created
+    /// until the learner accepts one.
+    error_offers: Vec<lts_activity::form_errors::FormErrorOffer>,
 }
 
 #[derive(Serialize, Clone)]
@@ -5020,6 +5054,7 @@ fn dictation_check_at(data: &Path, attempt: DictationAttempt) -> Result<Dictatio
         target: attempt.target_text.clone(),
         abstain_reason: Some(reason),
         mode: "guided",
+        error_offers: Vec::new(),
     };
     // RU-MODALITY-PRACTICE-001: the recognizer language comes from the
     // installed pack, never a hardcoded locale. Comparing a Russian
@@ -5096,12 +5131,43 @@ fn dictation_check_at(data: &Path, attempt: DictationAttempt) -> Result<Dictatio
     } else {
         return Ok(abstain("uncertain".into(), heard));
     };
+    // ERR-SRS-LOOP-001: a clear mismatch gets token-level pairing and
+    // classification against the pack's lemmatizer sidecar. Classified
+    // pairs land in the per-profile error ledger and come back as
+    // explicit per-form review offers — never auto-created cards. An
+    // app-picked sentence is required for a context id; a learner-typed
+    // target or a sidecar-less pack records nothing (no claim).
+    let mut error_offers = Vec::new();
+    if matched == Some(false) {
+        if let (Some(sid), Some(pid)) =
+            (attempt.content_id.as_deref(), attempt.profile_id.as_deref())
+        {
+            let rows = lemma_rows(data, &attempt.pack_id, &version);
+            if !rows.is_empty() {
+                let store = lts_storage::Store::open(data.join("profiles.db"))
+                    .map_err(|e| e.to_string())?;
+                let now = std::time::SystemTime::now()
+                    .duration_since(std::time::UNIX_EPOCH)
+                    .map_err(|e| e.to_string())?;
+                let sink = ErrorSink {
+                    rows: &rows,
+                    store: &store,
+                    profile_id: pid,
+                    pack_id: &attempt.pack_id,
+                    context_sentence_id: sid,
+                    now,
+                };
+                error_offers = dictation_form_offers(&sink, &attempt.target_text, &heard);
+            }
+        }
+    }
     Ok(DictationResult {
         matched,
         heard,
         target: attempt.target_text,
         abstain_reason: None,
         mode: "guided",
+        error_offers,
     })
 }
 
@@ -5378,7 +5444,7 @@ fn writing_submit(
         .find(|t| t.item_id == item_id)
         .ok_or("unknown writing target")?
         .clone();
-    let grade = lts_activity::writing::grade_writing(&answer, &task);
+    let mut grade = lts_activity::writing::grade_writing(&answer, &task);
     let active = packs::active_pack(&data, &profile_id)?;
     let pack_id = active.first().ok_or("no active language pack")?;
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
@@ -5387,6 +5453,28 @@ fn writing_submit(
     let now = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .map_err(|e| e.to_string())?;
+    // ERR-SRS-LOOP-001: a graded miss whose mismatch the pack's
+    // lemmatizer sidecar can classify lands in the per-profile error
+    // ledger and rides back to the learner as an explicit per-form
+    // review OFFER. The card itself exists only if the learner accepts
+    // (never silent). A sidecar-less pack classifies nothing and offers
+    // nothing — the verdict is unchanged.
+    if !grade.correct {
+        let rows = lemma_rows(&data, pack_id, &version);
+        let sink = ErrorSink {
+            rows: &rows,
+            store: &store,
+            profile_id: &profile_id,
+            pack_id,
+            context_sentence_id: &item_id,
+            now,
+        };
+        grade.offer = record_form_error(
+            &sink,
+            &grade.expected,
+            &lts_activity::writing::normalize_typed(&answer),
+        );
+    }
     use lts_domain::support_actions as sa;
     // Support is recorded as the concrete scaffold, at the docs/03 §5 level
     // for a text/reading cue (3). Level 1 used to be recorded here, which
@@ -6853,6 +6941,105 @@ fn lemma_rows(data: &Path, pack_id: &str, version: &str) -> Vec<LemmaRow> {
         .unwrap_or_default()
 }
 
+/// ERR-SRS-LOOP-001: classify one production mismatch (expected form vs
+/// produced form) against the pack's lemmatizer sidecar; when the
+/// classification holds, append the per-profile error-ledger row and
+/// return the explicit per-form review OFFER. Accepting the offer is a
+/// separate learner act — this never creates a card. No sidecar rows
+/// for the expected form means no claim and no offer.
+/// ERR-SRS-LOOP-001: shared context for recording one form error — the
+/// pack's sidecar rows, the store, the profile, the pack, the context
+/// sentence and the clock. Bundled so the two entry points stay within
+/// the argument-count lint instead of growing an allow.
+struct ErrorSink<'a> {
+    rows: &'a [LemmaRow],
+    store: &'a lts_storage::Store,
+    profile_id: &'a str,
+    pack_id: &'a str,
+    context_sentence_id: &'a str,
+    now: std::time::Duration,
+}
+
+fn record_form_error(
+    sink: &ErrorSink<'_>,
+    expected: &str,
+    produced: &str,
+) -> Option<lts_activity::form_errors::FormErrorOffer> {
+    let index: Vec<lts_activity::form_errors::LemmaForm<'_>> = sink
+        .rows
+        .iter()
+        .map(|r| lts_activity::form_errors::LemmaForm {
+            surface: r.surface.as_str(),
+            lemma: r.lemma.as_str(),
+            tag: r.tag.as_str(),
+        })
+        .collect();
+    let (lemma, class) =
+        lts_activity::form_errors::classify_form_mismatch(expected, produced, &index)?;
+    let ledger_id = format!("err-{}-{}", sink.now.as_secs(), sink.now.subsec_nanos());
+    let created_at = rfc3339_utc(sink.now.as_secs());
+    sink.store
+        .record_error(
+            sink.profile_id,
+            lts_storage::NewErrorLedger {
+                id: &ledger_id,
+                pack_id: sink.pack_id,
+                surface: expected,
+                produced,
+                lemma,
+                error_class: class.kebab(),
+                context_sentence_id: sink.context_sentence_id,
+                created_at: &created_at,
+            },
+        )
+        .ok()?;
+    Some(lts_activity::form_errors::FormErrorOffer {
+        ledger_id,
+        expected: expected.to_string(),
+        produced: produced.to_string(),
+        lemma: lemma.to_string(),
+        error_class: class,
+        context_sentence_id: sink.context_sentence_id.to_string(),
+    })
+}
+
+/// ERR-SRS-LOOP-001: token-level pairing of the dictated target and the
+/// heard transcript, then classification of each mismatched pair. Exact
+/// (normalized) matches are consumed first; remaining target and heard
+/// tokens pair in order, and only real seen-vs-expected PAIRS are
+/// named — unmatched insertions/deletions in a noisy transcript are
+/// skipped rather than guessed at. Surfaces are compared and stored in
+/// the same normalized shape the sidecar keys use, so ASR casing or
+/// punctuation artifacts never become a wrong-word claim.
+fn dictation_form_offers(
+    sink: &ErrorSink<'_>,
+    target_text: &str,
+    heard: &str,
+) -> Vec<lts_activity::form_errors::FormErrorOffer> {
+    let clean = |t: &str| -> String { normalize_for_match(t).into_iter().collect() };
+    let target_tokens: Vec<String> = target_text
+        .split_whitespace()
+        .map(clean)
+        .filter(|c| !c.is_empty())
+        .collect();
+    let mut heard_tokens: Vec<String> = heard.split_whitespace().map(clean).collect();
+    let mut unmatched_t: Vec<String> = Vec::new();
+    for tk in &target_tokens {
+        match heard_tokens.iter().position(|hk| hk == tk) {
+            Some(pos) => {
+                heard_tokens.remove(pos);
+            }
+            None => unmatched_t.push(tk.clone()),
+        }
+    }
+    unmatched_t
+        .iter()
+        .zip(heard_tokens.iter())
+        .filter(|(tk, hk)| tk != hk)
+        .filter_map(|(tk, hk)| record_form_error(sink, tk, hk))
+        .collect()
+}
+
 /// READER-FLOW-001 off-pack slice: one row of the offline auxiliary
 /// lexicon. Built by `scripts/build-aux-lexicon.py` from kaikki.org's
 /// machine-readable Wiktionary extraction (CC BY-SA / GFDL — license
@@ -7516,6 +7703,231 @@ fn mine_grade_at(
         )
         .map_err(|e| e.to_string())?;
     Ok(due_at)
+}
+
+/// ERR-SRS-LOOP-001: one accepted per-form review card as the drill
+/// needs it — the exact form plus the context sentence it was seen in,
+/// so the drill replays the form IN that sentence. `context_text` is
+/// `None` when no pack row matches (a lexicon-context card, or the pack
+/// changed under the card); the form itself is then still drilled.
+#[derive(serde::Serialize)]
+struct ErrorReviewCardView {
+    card_id: String,
+    ledger_id: String,
+    surface: String,
+    lemma: String,
+    error_class: String,
+    context_sentence_id: String,
+    context_text: Option<String>,
+    due_at: String,
+}
+
+/// Accept a per-form review offer: create the review card and schedule
+/// it through the EXISTING SRS (the same FsrsSpike that grades mined
+/// reviews) under its own `+error` tag partition. Idempotent: accepting
+/// twice keeps the original card and its SRS history (repeat-mine rule).
+#[tauri::command]
+fn error_review_accept(
+    profile_id: String,
+    ledger_id: String,
+) -> Result<ErrorReviewCardView, String> {
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map_err(|e| e.to_string())?;
+    error_review_accept_at(&data_dir(), &profile_id, &ledger_id, now.as_secs())
+}
+
+fn error_review_accept_at(
+    data: &Path,
+    profile_id: &str,
+    ledger_id: &str,
+    now_secs: u64,
+) -> Result<ErrorReviewCardView, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let entry = store
+        .error_ledger_entry(profile_id, ledger_id)
+        .map_err(|e| e.to_string())?
+        .ok_or("unknown error offer")?;
+    let created_at = rfc3339_utc(now_secs);
+    let proposed_id = format!("errcard-{ledger_id}");
+    let outcome = store
+        .add_error_review_card(
+            profile_id,
+            lts_storage::NewErrorReviewCard {
+                id: &proposed_id,
+                ledger_id: &entry.id,
+                pack_id: &entry.pack_id,
+                surface: &entry.surface,
+                lemma: &entry.lemma,
+                error_class: &entry.error_class,
+                context_sentence_id: &entry.context_sentence_id,
+                created_at: &created_at,
+            },
+        )
+        .map_err(|e| e.to_string())?;
+    if outcome.was_new {
+        let spike = lts_scheduler::FsrsSpike::default();
+        let decision = lts_scheduler::Scheduler::review(
+            &spike,
+            None,
+            lts_scheduler::Rating::Good,
+            now_secs as i64,
+        );
+        store
+            .save_scheduler_state(
+                profile_id,
+                &lts_storage::SchedulerRecord {
+                    item_id: outcome.id.clone(),
+                    scheduler: lts_scheduler::ERROR_REVIEW_SCHEDULER.to_string(),
+                    params_json: serde_json::to_string(&decision.state)
+                        .map_err(|e| e.to_string())?,
+                    due_at: rfc3339_utc(decision.due_at.max(0) as u64),
+                },
+            )
+            .map_err(|e| e.to_string())?;
+    }
+    let due_at = store
+        .scheduler_state(profile_id)
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .find(|r| r.item_id == outcome.id)
+        .map(|r| r.due_at)
+        .unwrap_or(created_at);
+    let context_text = pack_sentence_text(data, &entry.pack_id, &entry.context_sentence_id);
+    Ok(ErrorReviewCardView {
+        card_id: outcome.id,
+        ledger_id: entry.id,
+        surface: entry.surface,
+        lemma: entry.lemma,
+        error_class: entry.error_class,
+        context_sentence_id: entry.context_sentence_id,
+        context_text,
+        due_at,
+    })
+}
+
+/// Cards due at or before now — the drill queue. Payloads carry the
+/// exact form and its context sentence (context audio reuses the
+/// existing media-first `dictation_audio` path).
+#[tauri::command]
+fn error_review_queue(profile_id: String) -> Result<Vec<ErrorReviewCardView>, String> {
+    let now_rfc = rfc3339_utc(
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map_err(|e| e.to_string())?
+            .as_secs(),
+    );
+    error_review_queue_at(&data_dir(), &profile_id, &now_rfc)
+}
+
+fn error_review_queue_at(
+    data: &Path,
+    profile_id: &str,
+    now_rfc: &str,
+) -> Result<Vec<ErrorReviewCardView>, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let mut out = Vec::new();
+    for rec in store
+        .due_items(profile_id, lts_scheduler::ERROR_REVIEW_SCHEDULER, now_rfc)
+        .map_err(|e| e.to_string())?
+    {
+        if let Some(card) = store
+            .error_review_card(profile_id, &rec.item_id)
+            .map_err(|e| e.to_string())?
+        {
+            out.push(ErrorReviewCardView {
+                card_id: card.id,
+                ledger_id: card.ledger_id,
+                surface: card.surface,
+                lemma: card.lemma,
+                error_class: card.error_class,
+                context_sentence_id: card.context_sentence_id.clone(),
+                context_text: pack_sentence_text(data, &card.pack_id, &card.context_sentence_id),
+                due_at: rec.due_at,
+            });
+        }
+    }
+    Ok(out)
+}
+
+/// Grade one due review card (Again/Good), advancing its schedule
+/// through the same FsrsSpike path as `mine_grade`. Returns the new due
+/// time. Error drills never write mastery evidence — they live in their
+/// own scheduler partition (docs/18: no calibration claim).
+#[tauri::command]
+fn error_review_grade(profile_id: String, card_id: String, again: bool) -> Result<String, String> {
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map_err(|e| e.to_string())?;
+    error_review_grade_at(&data_dir(), &profile_id, &card_id, again, now.as_secs())
+}
+
+fn error_review_grade_at(
+    data: &Path,
+    profile_id: &str,
+    card_id: &str,
+    again: bool,
+    now_secs: u64,
+) -> Result<String, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    if store
+        .error_review_card(profile_id, card_id)
+        .map_err(|e| e.to_string())?
+        .is_none()
+    {
+        return Err("not an error review card".into());
+    }
+    let spike = lts_scheduler::FsrsSpike::default();
+    let prior = store
+        .scheduler_state(profile_id)
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .find(|r| r.item_id == card_id && r.scheduler == lts_scheduler::ERROR_REVIEW_SCHEDULER)
+        .map(|r| serde_json::from_str::<lts_scheduler::ItemState>(&r.params_json))
+        .transpose()
+        .map_err(|e| e.to_string())?;
+    let rating = if again {
+        lts_scheduler::Rating::Again
+    } else {
+        lts_scheduler::Rating::Good
+    };
+    let decision =
+        lts_scheduler::Scheduler::review(&spike, prior.as_ref(), rating, now_secs as i64);
+    let due_at = rfc3339_utc(decision.due_at.max(0) as u64);
+    store
+        .save_scheduler_state(
+            profile_id,
+            &lts_storage::SchedulerRecord {
+                item_id: card_id.to_string(),
+                scheduler: lts_scheduler::ERROR_REVIEW_SCHEDULER.to_string(),
+                params_json: serde_json::to_string(&decision.state).map_err(|e| e.to_string())?,
+                due_at: due_at.clone(),
+            },
+        )
+        .map_err(|e| e.to_string())?;
+    Ok(due_at)
+}
+
+/// The pack's sentence text for a content id, for the drill payload. A
+/// lexicon-context id (writing miss) resolves through the lexicon the
+/// same way the writing task was built; unknown ids give `None`, never
+/// a guess.
+fn pack_sentence_text(data: &Path, pack_id: &str, content_id: &str) -> Option<String> {
+    if !packs::valid_pack_id(pack_id) {
+        return None;
+    }
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))?;
+    if let Ok(texts) = jsonl_dir_texts(data, pack_id, &version, "sentences") {
+        for line in texts.iter().flat_map(|t| t.lines()) {
+            let Ok(entry) = serde_json::from_str::<serde_json::Value>(line) else {
+                continue;
+            };
+            if entry.get("id").and_then(|v| v.as_str()) == Some(content_id) {
+                return entry.get("text").and_then(|v| v.as_str()).map(String::from);
+            }
+        }
+    }
+    None
 }
 
 /// SESSION-CHROME-001 (visual-ui-audit U6): the interval the scheduler
@@ -9177,6 +9589,9 @@ pub fn run() {
             mine_new,
             mine_grade,
             srs_interval_preview,
+            error_review_accept,
+            error_review_queue,
+            error_review_grade,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
@@ -10876,7 +11291,7 @@ activities:
             pi("rB", M::RecallMeaning),
             pi("dB", M::PhonologicalDiscrimination),
         ];
-        personalize_progression(&mut prog, &derived);
+        personalize_progression(&mut prog, &derived, &std::collections::HashMap::new());
         // Developing dimension first, within-dimension curriculum order kept.
         let order: Vec<&str> = prog.iter().map(|p| p.content_id.as_str()).collect();
         assert_eq!(order, vec!["dA", "dB", "rA", "rB"]);
@@ -10886,9 +11301,148 @@ activities:
             pi("rA", M::RecallMeaning),
             pi("dA", M::PhonologicalDiscrimination),
         ];
-        personalize_progression(&mut fresh, &[]);
+        personalize_progression(&mut fresh, &[], &std::collections::HashMap::new());
         let fresh_order: Vec<&str> = fresh.iter().map(|p| p.content_id.as_str()).collect();
         assert_eq!(fresh_order, vec!["rA", "dA"]);
+    }
+
+    /// ERR-SRS-LOOP-001: recurrence feeds the ordering as an input only —
+    /// a tie-break inside an equal dimension group, capped so counts past
+    /// the cap cannot outvote anything.
+    #[test]
+    fn error_recurrence_breaks_dimension_ties_capped() {
+        use lts_domain::ActivityModality as M;
+        let pi = |c: &str, m: M| lts_scheduler::ProgressionItem {
+            content_id: c.into(),
+            modality: m,
+        };
+        let rec = |pairs: &[(&str, u32)]| -> std::collections::HashMap<String, u32> {
+            pairs.iter().map(|(c, n)| (c.to_string(), *n)).collect()
+        };
+        // Same (neutral) dimension key for all: recurrence orders within it.
+        let mut prog = vec![pi("a", M::RecallMeaning), pi("b", M::RecallMeaning)];
+        personalize_progression(&mut prog, &[], &rec(&[("b", 2)]));
+        let order: Vec<&str> = prog.iter().map(|p| p.content_id.as_str()).collect();
+        assert_eq!(
+            order,
+            vec!["b", "a"],
+            "the form with recorded errors comes first"
+        );
+
+        // Counts past the cap are indistinguishable: 7 and 3 tie, and the
+        // stable sort keeps curriculum order — no count outvotes another.
+        let mut capped = vec![pi("a", M::RecallMeaning), pi("b", M::RecallMeaning)];
+        personalize_progression(&mut capped, &[], &rec(&[("a", 7), ("b", 3)]));
+        let capped_order: Vec<&str> = capped.iter().map(|p| p.content_id.as_str()).collect();
+        assert_eq!(capped_order, vec!["a", "b"], "cap flattens 7 vs 3 to a tie");
+
+        // And it never crosses a real dimension-key gap: the mastered
+        // dimension still trails the developing one regardless of counts.
+        let dm = |c: &str, m: M, conf: f32| lts_learner_model::DerivedMastery {
+            content_id: c.into(),
+            dimension: m,
+            state: lts_domain::MasteryState::Introduced,
+            confidence: conf,
+            needs_refresh: false,
+            policy_version: "p".into(),
+            algorithm_version: "a".into(),
+        };
+        let derived = vec![
+            dm("r1", M::RecallMeaning, 0.8),
+            dm("d1", M::PhonologicalDiscrimination, 0.2),
+        ];
+        let mut cross = vec![
+            pi("rX", M::RecallMeaning),
+            pi("dY", M::PhonologicalDiscrimination),
+        ];
+        personalize_progression(&mut cross, &derived, &rec(&[("rX", 99)]));
+        let cross_order: Vec<&str> = cross.iter().map(|p| p.content_id.as_str()).collect();
+        assert_eq!(
+            cross_order,
+            vec!["dY", "rX"],
+            "recurrence never outvotes the confidence ordering"
+        );
+    }
+
+    /// ERR-SRS-LOOP-001: the whole loop on a local store — a classified
+    /// miss produces an offer and a ledger row, the card exists ONLY
+    /// after accept, the accepted card schedules through the existing
+    /// SRS under its own partition, grading advances it, and a repeat
+    /// accept never resets it.
+    #[test]
+    fn error_review_offer_accept_schedule_and_grade_round_trip() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let profile = store
+            .create_profile("Ana", "2026-11-01T00:00:00Z")
+            .unwrap()
+            .id;
+        let rows = vec![
+            LemmaRow {
+                surface: "книги".into(),
+                lemma: "книга".into(),
+                tag: "NOUN,inan,fem sing,gent".into(),
+            },
+            LemmaRow {
+                surface: "книгу".into(),
+                lemma: "книга".into(),
+                tag: "NOUN,inan,fem sing,accs".into(),
+            },
+        ];
+        let now = std::time::Duration::from_secs(1_764_000_000);
+        let sink = ErrorSink {
+            rows: &rows,
+            store: &store,
+            profile_id: &profile,
+            pack_id: "ru.demo",
+            context_sentence_id: "ru.sentence.p1",
+            now,
+        };
+        let offer = record_form_error(&sink, "книги", "книгу").unwrap();
+        assert_eq!(offer.error_class, lts_activity::FormErrorClass::Case);
+        assert_eq!(offer.lemma, "книга");
+        // Never silent: nothing is scheduled until the learner accepts.
+        let future = rfc3339_utc(now.as_secs() + 400 * 86400);
+        let q = error_review_queue_at(data, &profile, &future).unwrap();
+        assert!(q.is_empty(), "no accepted card yet");
+        let view = error_review_accept_at(data, &profile, &offer.ledger_id, now.as_secs()).unwrap();
+        assert_eq!(view.surface, "книги");
+        assert_eq!(view.ledger_id, offer.ledger_id);
+        let q = error_review_queue_at(data, &profile, &future).unwrap();
+        assert_eq!(q.len(), 1, "the accepted card reaches the drill queue");
+        // A repeat accept keeps the original card and its schedule.
+        let again =
+            error_review_accept_at(data, &profile, &offer.ledger_id, now.as_secs() + 5).unwrap();
+        assert_eq!(again.card_id, view.card_id);
+        let due =
+            error_review_grade_at(data, &profile, &view.card_id, true, now.as_secs() + 60).unwrap();
+        assert!(
+            is_canonical_shape(&due),
+            "grade returns a canonical due: {due}"
+        );
+        let err =
+            error_review_grade_at(data, &profile, "nope", false, now.as_secs() + 60).unwrap_err();
+        assert_eq!(err, "not an error review card");
+        // Recurrence for personalization input, keyed by context id.
+        let rec = store.error_recurrence_by_context(&profile).unwrap();
+        assert_eq!(rec, vec![("ru.sentence.p1".to_string(), 1)]);
+        // Partition discipline: the card lives under its own scheduler
+        // tag, never a pack-content tag (docs/18, review finding R02).
+        let tags: Vec<String> = store
+            .scheduler_state(&profile)
+            .unwrap()
+            .into_iter()
+            .map(|r| r.scheduler)
+            .collect();
+        assert_eq!(
+            tags,
+            vec![lts_scheduler::ERROR_REVIEW_SCHEDULER.to_string()]
+        );
+    }
+
+    fn is_canonical_shape(s: &str) -> bool {
+        s.len() == 20 && s.ends_with('Z') && s.contains('T')
     }
 
     #[test]
@@ -11490,6 +12044,8 @@ activities:
             pack_id: "org.openlanguage.ja-demo".into(),
             target_text: "おばあさん".into(),
             wav_b64: base64::engine::general_purpose::STANDARD.encode(b"not-a-wav"),
+            content_id: None,
+            profile_id: None,
         };
         let res = dictation_check_at(data, attempt).unwrap();
         assert_eq!(res.abstain_reason.as_deref(), Some("speech-model-off"));
@@ -11521,6 +12077,8 @@ activities:
                 pack_id: "org.openlanguage.ja-demo".into(),
                 target_text: "おばあさん".into(),
                 wav_b64: base64::engine::general_purpose::STANDARD.encode(&wav),
+                content_id: None,
+                profile_id: None,
             },
         )
         .unwrap();
@@ -11553,6 +12111,8 @@ activities:
                 pack_id: "org.openlanguage.ja-demo".into(),
                 target_text: "これは何ですか".into(),
                 wav_b64: base64::engine::general_purpose::STANDARD.encode(&wav),
+                content_id: None,
+                profile_id: None,
             },
         )
         .unwrap();
@@ -11580,6 +12140,8 @@ activities:
                 pack_id: "org.openlanguage.ja-demo".into(),
                 target_text: "おばあさん".into(),
                 wav_b64: base64::engine::general_purpose::STANDARD.encode(&silence),
+                content_id: None,
+                profile_id: None,
             },
         )
         .unwrap();
@@ -11622,6 +12184,8 @@ activities:
             pack_id: "org.openlanguage.ja-demo".into(),
             target_text: "おばあさん".into(),
             wav_b64: base64::engine::general_purpose::STANDARD.encode(&audio),
+            content_id: None,
+            profile_id: None,
         };
         let script = bin.join("whisper-cli");
         std::fs::write(&script, "#!/bin/sh\nexit 3\n").unwrap();
@@ -17499,6 +18063,8 @@ activities:
                 pack_id: pack,
                 target_text: "Спасибо.".into(),
                 wav_b64: base64::engine::general_purpose::STANDARD.encode(b"not-a-wav"),
+                content_id: None,
+                profile_id: None,
             },
         )
         .unwrap();

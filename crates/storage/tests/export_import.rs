@@ -349,11 +349,13 @@ fn version_1_bundles_remain_importable_without_saved_words() {
     let bundle = src
         .export_profile(&pid, "2026-10-04T00:00:00Z", &ExportOptions::default())
         .unwrap();
-    assert_eq!(bundle.format_version, 3, "exports write the current format");
+    assert_eq!(bundle.format_version, 4, "exports write the current format");
     let mut doc = serde_json::to_value(&bundle).unwrap();
     doc["format_version"] = json!(1);
     doc.as_object_mut().unwrap().remove("mined_items");
     doc.as_object_mut().unwrap().remove("content_confirmations");
+    doc.as_object_mut().unwrap().remove("error_ledger");
+    doc.as_object_mut().unwrap().remove("error_review_cards");
 
     let dst = Store::in_memory().unwrap();
     let legacy: lts_storage::ExportBundle = serde_json::from_str(&doc.to_string()).unwrap();

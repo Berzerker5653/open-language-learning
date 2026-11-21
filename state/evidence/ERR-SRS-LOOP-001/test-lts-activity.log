@@ -1,0 +1,82 @@
+   Compiling lts-activity v0.1.0 (/home/hunter/game-dev/LTS/crates/activity)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.44s
+     Running unittests src/lib.rs (target/debug/deps/lts_activity-ca39897db3711f2e)
+
+running 24 tests
+test form_errors::tests::a_different_known_lemma_is_a_wrong_word ... ok
+test form_errors::tests::a_different_case_ending_is_classified_as_case ... ok
+test form_errors::tests::a_number_or_gender_slip_is_classified_as_agreement ... ok
+test form_errors::tests::a_perfective_substitution_is_classified_as_aspect ... ok
+test form_errors::tests::an_unknown_produced_form_is_a_wrong_word_not_a_guess ... ok
+test form_errors::tests::a_stress_only_difference_is_classified_as_stress ... ok
+test form_errors::tests::no_sidecar_row_for_the_expected_form_means_no_claim ... ok
+test form_errors::tests::same_lemma_same_slots_falls_back_to_other_not_a_named_class ... ok
+test scenario::tests::a_declared_variant_without_payload_can_never_be_completed ... ok
+test scenario::tests::a_guided_click_through_never_stamps_independent_evidence ... ok
+test scenario::tests::a_pack_without_extra_intents_renders_no_invented_distractors ... ok
+test scenario::tests::a_node_is_satisfied_only_by_its_full_declared_action_set ... ok
+test scenario::tests::a_walk_payload_runs_with_full_set_semantics_and_earns_the_transfer ... ok
+test scenario::tests::a_wrong_click_on_a_rendered_distractor_yields_recovery_that_renders ... ok
+test scenario::tests::an_unknown_variant_and_an_empty_payload_open_nothing ... ok
+test scenario::tests::chain_reached_but_transfer_unmet_is_not_complete ... ok
+test scenario::tests::declared_support_above_the_floor_is_preserved ... ok
+test scenario::tests::early_finish_is_partial_not_complete ... ok
+test scenario::tests::full_set_completion_advances_and_terminal_completes ... ok
+test scenario::tests::full_walk_with_transfer_requirement_is_complete ... ok
+test scenario::tests::recall_practice_counts_only_the_accepted_answer ... ok
+test scenario::tests::single_exchange_scenario_completes_exactly ... ok
+test scenario::tests::the_rendered_set_is_a_strict_superset_of_the_answer_at_every_node ... ok
+test scenario::tests::there_is_no_mark_done_channel_at_all ... ok
+
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/reading.rs (target/debug/deps/reading-2f75be765e9d1528)
+
+running 5 tests
+test canonical_text_remains_japanese_script ... ok
+test on_demand_reveal_is_always_available_and_counts_as_support ... ok
+test visibility_responds_to_mastery ... ok
+test visibility_responds_to_settings_and_kana_literacy ... ok
+test reading_evidence_is_independent_from_listening_and_speaking ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/runtime.rs (target/debug/deps/runtime-c20407fb0dfad1ea)
+
+running 5 tests
+test modality_dimension_mapping_is_conservative ... ok
+test unknown_activity_types_are_rejected ... ok
+test hints_replays_translations_emit_support_evidence ... ok
+test all_four_activity_kinds_render_from_pack_data ... ok
+test correct_with_strong_help_is_not_independent_success ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/scenario.rs (target/debug/deps/scenario-7ded4bbae9078a0f)
+
+running 5 tests
+test graph_supports_intents_ladder_recovery_and_transfers ... ok
+test evidence_events_record_support_per_node ... ok
+test replaying_a_scenario_is_a_separate_sitting ... ok
+test runtime_is_language_agnostic ... ok
+test ja_seed_first_meeting_graph_runs_end_to_end ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.52s
+
+     Running tests/writing.rs (target/debug/deps/writing-93f7be6dc29eaf03)
+
+running 5 tests
+test grading_accepts_canonical_and_declared_variants ... ok
+test hints_are_support_not_answers ... ok
+test a_miss_carries_the_form_the_task_asked_for ... ok
+test keyboard_is_the_only_input_surface_no_handwriting_required ... ok
+test writing_evidence_is_distinct_from_recognition ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_activity
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
