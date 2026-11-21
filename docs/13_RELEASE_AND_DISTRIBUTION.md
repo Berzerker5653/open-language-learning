@@ -313,6 +313,11 @@ behavior. Until the owner rules, nothing may be built toward a bundle format.
 
 Tauri 2 supports Android/iOS targets, but mobile is a separate milestone because microphone permissions, app-store packaging, model memory/storage, background behavior, and native dependencies need validation.
 
+Meanwhile a phone reaches the desktop instance through a private path, never a
+public URL: the Tailscale walkthrough, home-Wi-Fi fallback, and the
+public-publishing prohibitions are the user guide in `docs/22_REMOTE_ACCESS.md`
+(survey decision record: `state/notes/REMOTE-ACCESS-SURVEY-2026-11.md`).
+
 ## Web/PWA
 
 A web build may offer reduced-capability learning. Do not weaken privacy promises or force cloud speech solely to claim browser parity.
