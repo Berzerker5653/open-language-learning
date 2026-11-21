@@ -1,0 +1,77 @@
+# ai-assisted draft unit (JA-B1-003-JOURNEYS-001: delayed-reuse stage closing the legacy B1
+# environment journey family 310-324); content refs are existing pack data; qualified
+# review pending.
+id: ja.unit.environment-revision
+goal_id: ja.goal.b1.environment
+title: "Review: environment language"
+summary: Delayed reuse of the sentences shared across the environment journey units, plus unit sentences.
+estimated_minutes: 7
+# K-70/ADR-0022 phase gate: the revision surfaces only after the journey units' content
+# reached `supported`; this is the reuse stage named by every unit's task_sequence, and the
+# transfer target for the last unit.
+requires_unit:
+- unit: ja.unit.weather-climate
+  state: supported
+- unit: ja.unit.recycling-systems
+  state: supported
+- unit: ja.unit.energy-choices
+  state: supported
+- unit: ja.unit.reducing-waste
+  state: supported
+- unit: ja.unit.eco-transport
+  state: supported
+- unit: ja.unit.nature-protection
+  state: supported
+- unit: ja.unit.wildlife-discussion
+  state: supported
+- unit: ja.unit.pollution-problems
+  state: supported
+- unit: ja.unit.sustainable-shopping
+  state: supported
+- unit: ja.unit.environmental-policy
+  state: supported
+- unit: ja.unit.disaster-preparation
+  state: supported
+- unit: ja.unit.water-issues
+  state: supported
+- unit: ja.unit.food-waste
+  state: supported
+- unit: ja.unit.green-cities
+  state: supported
+- unit: ja.unit.personal-footprint
+  state: supported
+activities:
+- id: ja.activity.environment-rev-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.environment-rev-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.environment-rev-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+generation_contract:
+  allowed_vocab:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  - ja.lex.env.kikou
+  - ja.lex.env.saitei
+  allowed_grammar:
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.verb.polite-masu
+  - ja.grammar.particle.object-wo
+  - ja.grammar.particle.possessive-no
+  new_item_budget: 2
+  validation_method: choice
