@@ -1,0 +1,31 @@
+FIX-ERR-SRS-LOOP-001-2 — LANE gate battery (close run, takeover of iteration-budget attempt 1)
+
+Frontend (apps/desktop):
+- npx tsc --noEmit                      exit 0
+- npx vitest run                        exit 0 — 52 files / 412 tests passed
+  (baseline at UI-HYGIENE close: 50 files / 401 tests; +error-review.test.tsx
+   and +journeys/error-offer-review.journey.tsx, plus pre-existing suites all green)
+
+Rust (lib.rs touched — D4):
+- cargo fmt --all --check               exit 0                      (fmt.log)
+- cargo clippy -p lts-desktop --all-targets -- -D warnings   exit 0 (clippy-final.log;
+   attempt 1's clippy-lts-desktop.log was green on the same tree content)
+- cargo test -p lts-desktop --lib       exit 0 — 207 passed, 0 failed, 2 ignored
+  (test-desktop-lib.log; includes new tests::pack_sentence_text_resolves_lexicon_context_ids,
+   attempt 1's targeted run: test-pack-sentence-text.log)
+
+Takeover fixes made in this close run (attempt 1's in-progress tests caught real bugs):
+1. error-review.tsx: the drill panel showed the context sentence VERBATIM before
+   reveal, spoiling the drilled form when the sentence contains it. Fix:
+   blankedContext() blanks the surface out of the sentence pre-reveal; when the
+   context IS the form itself (lexicon-origin card, D4) or blanking is impossible,
+   the prompt honestly names just the lemma. Tests rewritten to pin this
+   ("Я читаю ____" pre-reveal, never "книги"), plus a new lexicon-origin case.
+2. journeys/harness.tsx: the error_review_accept fake's context_text now contains
+   the drilled form (mirrors lib.rs, where the context resolves to the sentence
+   the form appeared in), so the journey exercises the blanking path.
+3. button-affordance.test.ts: error-review.tsx added to the pinned bare-btn
+   inventory (its offer/grade buttons use the reviewed btn/btn--quiet/btn--primary
+   idiom verbatim; the inventory is the review, and this card reviewed the site).
+
+validate_handoff --require-explicit-ledger-records: see ledger commit message.

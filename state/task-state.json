@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-21",
-  "active_task": "FIX-ERR-SRS-LOOP-001-2",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2334,7 +2334,7 @@
     "FIX-ERR-SRS-LOOP-001-2": {
       "task_id": "FIX-ERR-SRS-LOOP-001-2",
       "title": "Learner-facing error-offer surface — dictation/writing review offers, review-queue drill view, and the honest lexicon-context comment (review defects D3/D4)",
-      "status": "in_progress",
+      "status": "done",
       "attempts": 0,
       "updated": "2026-11-21",
       "dependencies": [
@@ -2342,9 +2342,13 @@
         "FIX-ERR-SRS-LOOP-001-1"
       ],
       "evidence": [
-        "state/evidence/REVIEW-ERR-SRS-LOOP-001/review.md"
+        "state/evidence/REVIEW-ERR-SRS-LOOP-001/review.md",
+        "state/evidence/FIX-ERR-SRS-LOOP-001-2/gates.log",
+        "state/evidence/FIX-ERR-SRS-LOOP-001-2/test-desktop-lib.log",
+        "state/evidence/FIX-ERR-SRS-LOOP-001-2/clippy-final.log",
+        "state/evidence/FIX-ERR-SRS-LOOP-001-2/fmt.log"
       ],
-      "summary": "Follow-up to REVIEW-ERR-SRS-LOOP-001 defects D3 (SUBSTANTIVE: frontend has zero references to the error-offer commands; the accept->queue->grade loop is unreachable by a learner) and D4 (MINOR: pack_sentence_text doc promises lexicon-context resolution it does not implement). UI lane: render offers on dictation/writing results with explicit accept, review-queue drill view, never-silent invariant pinned by tests.",
+      "summary": "D3 shipped: offers render on dictation/writing verdicts with an explicit accept button (error_review_accept); the Form reviews drill queue over error_review_queue grades via error_review_grade; never-silent pinned by component + journey tests (zero accept calls until the click). D4 shipped: pack_sentence_text resolves lexicon ids to the row primary form, comment honest. Pre-reveal drill blanks the drilled form out of the context sentence (spoiler bug caught by this card tests).",
       "notes": "Board card t_53cd64f8. Builds on merged UI-HYGIENE-001 (115f1bc) and FIX-ERR-SRS-LOOP-001-1 (05a8384). Wire shapes additive only — DictationResult/WritingGrade Rust fields already exist; TS interfaces gain optional fields."
     }
   },

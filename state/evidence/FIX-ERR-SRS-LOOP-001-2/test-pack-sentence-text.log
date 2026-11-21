@@ -1,0 +1,57 @@
+   Compiling aws-lc-sys v0.45.0
+   Compiling glib-sys v0.18.1
+   Compiling gobject-sys v0.18.0
+   Compiling gio-sys v0.18.1
+   Compiling gdk-sys v0.18.2
+   Compiling cairo-sys-rs v0.18.2
+   Compiling pango-sys v0.18.0
+   Compiling gdk-pixbuf-sys v0.18.0
+   Compiling atk-sys v0.18.2
+   Compiling soup3-sys v0.5.0
+   Compiling javascriptcore-rs-sys v1.1.1
+   Compiling gdkx11-sys v0.18.2
+   Compiling x11-dl v2.21.0
+   Compiling libdbus-sys v0.2.7
+   Compiling gtk-sys v0.18.2
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+   Compiling gtk v0.18.2
+   Compiling webkit2gtk-sys v2.0.2
+   Compiling wry v0.57.0
+   Compiling dbus v0.9.12
+   Compiling glib v0.18.5
+   Compiling gdkwayland-sys v0.18.2
+   Compiling aws-lc-rs v1.18.1
+   Compiling rustls v0.23.46
+   Compiling gio v0.18.4
+   Compiling cairo-rs v0.18.5
+   Compiling atk v0.18.2
+   Compiling javascriptcore-rs v1.1.2
+   Compiling rustls-webpki v0.103.16
+   Compiling tokio-rustls v0.26.6
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling ureq v2.12.1
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.13.5
+   Compiling jsonschema v0.58.5
+   Compiling pango v0.18.3
+   Compiling gdk-pixbuf v0.18.5
+   Compiling soup3 v0.5.0
+   Compiling gdk v0.18.2
+   Compiling lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack)
+   Compiling lts-activity v0.1.0 (/home/hunter/game-dev/LTS/crates/activity)
+   Compiling gdkx11 v0.18.2
+   Compiling webkit2gtk v2.0.2
+   Compiling tao v0.37.1
+   Compiling muda v0.20.0
+   Compiling tauri-runtime v2.12.1
+   Compiling tauri-runtime-wry v2.12.1
+   Compiling tauri v2.12.1
+   Compiling tauri-plugin-single-instance v2.5.2
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 50.81s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-d61b0657df16a667)
+
+running 1 test
+test tests::pack_sentence_text_resolves_lexicon_context_ids ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 208 filtered out; finished in 0.00s
+
