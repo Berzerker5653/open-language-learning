@@ -1,0 +1,80 @@
+# ai-assisted draft unit (JA-B1-003-JOURNEYS-001: delayed-reuse stage closing the legacy B1
+# work-professional journey family 220-234); content refs are existing pack data; qualified
+# review pending.
+id: ja.unit.work-professional-revision
+goal_id: ja.goal.b1.work-professional
+title: "Review: workplace language"
+summary: Delayed reuse of the meeting/email sentences and the core work words shared across the job-interview, resume, meeting, report, feedback, email, conflict, and promotion units.
+estimated_minutes: 7
+# K-70/ADR-0022 phase gate: the revision surfaces only after the journey units' content
+# reached `supported`; this is the reuse stage named by every 220-234 task_sequence, and
+# the transfer target for unit 234.
+requires_unit:
+- unit: ja.unit.interview-prep
+  state: supported
+- unit: ja.unit.writing-resume
+  state: supported
+- unit: ja.unit.workplace-comm
+  state: supported
+- unit: ja.unit.meeting-opinions
+  state: supported
+- unit: ja.unit.project-reports
+  state: supported
+- unit: ja.unit.deadline-negotiation
+  state: supported
+- unit: ja.unit.giving-feedback
+  state: supported
+- unit: ja.unit.accepting-feedback
+  state: supported
+- unit: ja.unit.career-change-plans
+  state: supported
+- unit: ja.unit.professional-email
+  state: supported
+- unit: ja.unit.team-conflict
+  state: supported
+- unit: ja.unit.customer-escalation
+  state: supported
+- unit: ja.unit.presentation-structure
+  state: supported
+- unit: ja.unit.networking-messages
+  state: supported
+- unit: ja.unit.promotion-conversations
+  state: supported
+activities:
+- id: ja.activity.work-rev-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.work-rev-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.work-rev-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  - ja.sent.interview-qualification
+  - ja.lex.work2.shikaku
+generation_contract:
+  allowed_vocab:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  - ja.sent.interview-qualification
+  - ja.lex.work2.shikaku
+  - ja.lex.work2.tantou
+  allowed_grammar:
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.particle.object-wo
+  - ja.grammar.particle.possessive-no
+  - ja.grammar.verb.polite-masu
+  new_item_budget: 2
+  validation_method: choice

@@ -1,0 +1,48 @@
+== lane-gate battery (worktree at HEAD 4f0e728 + this lane's 16 unit files, media restored from pinned 0.4.3 archive via scripts/fetch-pack-audio.sh; main tree excluded because sibling lane lts-b1fix-bake is a live media/manifest writer) ==
+date: 2026-11-20T17:06:55-07:00
+
+===== langpack validate =====
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 0 warning(s)
+exit: 0
+
+===== langpack lint =====
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+lint: 0 error(s), 0 warning(s)
+exit: 0
+
+===== langpack audit-curriculum =====
+audit-curriculum: 0 error(s), 0 warning(s)
+exit: 0
+
+===== langpack test =====
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+test: 0 error(s), 0 warning(s)
+exit: 0
+
+===== content-template task-sequence audit (my units) =====
+  [identical-grammar-sets] band b1: 4 units share the same 4-element grammar-concept set: ja.unit.career-change-plans, ja.unit.deadline-negotiation, ja.unit.presentation-structure, ja.unit.work-professional-revision
+  band b1: unit ja.unit.accepting-feedback (goal ja.goal.b1.work-professional): input=ja.activity.accepting-feedback-enc scaffolded=ja.activity.accepting-feedback-cloze0 independent=ja.activity.accepting-feedback-enc-write transfer=ja.activity.career-change-plans-listen reuse=ja.activity.work-rev-write
+  band b1: unit ja.unit.career-change-plans (goal ja.goal.b1.work-professional): input=ja.activity.career-change-plans-enc scaffolded=ja.activity.career-change-plans-cloze0 independent=ja.activity.career-change-plans-enc-write transfer=ja.activity.professional-email-listen reuse=ja.activity.work-rev-write
+  band b1: unit ja.unit.customer-escalation (goal ja.goal.b1.work-professional): input=ja.activity.customer-escalation-enc scaffolded=ja.activity.customer-escalation-cloze0 independent=ja.activity.customer-escalation-enc-write transfer=ja.activity.presentation-structure-listen reuse=ja.activity.work-rev-write
+  band b1: unit ja.unit.deadline-negotiation (goal ja.goal.b1.work-professional): input=ja.activity.deadline-negotiation-enc scaffolded=ja.activity.deadline-negotiation-cloze0 independent=ja.activity.deadline-negotiation-enc-write transfer=ja.activity.giving-feedback-listen reuse=ja.activity.work-rev-write
+  band b1: unit ja.unit.giving-feedback (goal ja.goal.b1.work-professional): input=ja.activity.giving-feedback-enc scaffolded=ja.activity.giving-feedback-cloze0 independent=ja.activity.giving-feedback-enc-write transfer=ja.activity.accepting-feedback-listen reuse=ja.activity.work-rev-write
+  band b1: unit ja.unit.interview-prep (goal ja.goal.b1.work-professional): input=ja.activity.interview-prep-enc scaffolded=ja.activity.interview-prep-cloze0 independent=ja.activity.interview-prep-enc-write transfer=ja.activity.writing-resume-listen reuse=ja.activity.work-rev-write
+  band b1: unit ja.unit.meeting-opinions (goal ja.goal.b1.work-professional): input=ja.activity.meeting-opinions-enc scaffolded=ja.activity.meeting-opinions-cloze0 independent=ja.activity.meeting-opinions-enc-write transfer=ja.activity.project-reports-listen reuse=ja.activity.work-rev-write
+  band b1: unit ja.unit.networking-messages (goal ja.goal.b1.work-professional): input=ja.activity.networking-messages-enc scaffolded=ja.activity.networking-messages-cloze0 independent=ja.activity.networking-messages-enc-write transfer=ja.activity.promotion-conversations-listen reuse=ja.activity.work-rev-write
+  band b1: unit ja.unit.presentation-structure (goal ja.goal.b1.work-professional): input=ja.activity.presentation-structure-enc scaffolded=ja.activity.presentation-structure-cloze0 independent=ja.activity.presentation-structure-enc-write transfer=ja.activity.networking-messages-listen reuse=ja.activity.work-rev-write
+  band b1: unit ja.unit.professional-email (goal ja.goal.b1.work-professional): input=ja.activity.professional-email-enc scaffolded=ja.activity.professional-email-cloze0 independent=ja.activity.professional-email-enc-write transfer=ja.activity.team-conflict-listen reuse=ja.activity.work-rev-write
+  band b1: unit ja.unit.project-reports (goal ja.goal.b1.work-professional): input=ja.activity.project-reports-enc scaffolded=ja.activity.project-reports-cloze0 independent=ja.activity.project-reports-enc-write transfer=ja.activity.deadline-negotiation-listen reuse=ja.activity.work-rev-write
+  band b1: unit ja.unit.promotion-conversations (goal ja.goal.b1.work-professional): input=ja.activity.promotion-conversations-enc scaffolded=ja.activity.promotion-conversations-cloze0 independent=ja.activity.promotion-conversations-enc-write transfer=ja.activity.work-rev-listen reuse=ja.activity.work-rev-write
+  band b1: unit ja.unit.team-conflict (goal ja.goal.b1.work-professional): input=ja.activity.team-conflict-enc scaffolded=ja.activity.team-conflict-cloze0 independent=ja.activity.team-conflict-enc-write transfer=ja.activity.customer-escalation-listen reuse=ja.activity.work-rev-write
+  band b1: unit ja.unit.workplace-comm (goal ja.goal.b1.work-professional): input=ja.activity.workplace-comm-enc scaffolded=ja.activity.workplace-comm-cloze0 independent=ja.activity.workplace-comm-enc-write transfer=ja.activity.meeting-opinions-listen reuse=ja.activity.work-rev-write
+  band b1: unit ja.unit.writing-resume (goal ja.goal.b1.work-professional): input=ja.activity.writing-resume-enc scaffolded=ja.activity.writing-resume-cloze0 independent=ja.activity.writing-resume-enc-write transfer=ja.activity.workplace-comm-listen reuse=ja.activity.work-rev-write
+grep exit: 0 (1 = zero findings on this lane's units)
