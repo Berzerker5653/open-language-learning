@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-21",
-  "active_task": "FIX-ERR-SRS-LOOP-001-1",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2317,7 +2317,7 @@
     "FIX-ERR-SRS-LOOP-001-1": {
       "task_id": "FIX-ERR-SRS-LOOP-001-1",
       "title": "Fix review defects D1/D2/D5 of the error memory loop (unique ledger ids, honest case-only classification, no empty-submission rows)",
-      "status": "in_progress",
+      "status": "done",
       "attempts": 0,
       "updated": "2026-11-21",
       "dependencies": [
@@ -2325,13 +2325,14 @@
       ],
       "evidence": [
         "state/evidence/REVIEW-ERR-SRS-LOOP-001/review.md",
+        "state/evidence/FIX-ERR-SRS-LOOP-001-1/gates.log",
         "state/evidence/FIX-ERR-SRS-LOOP-001-1/gates.log"
       ],
       "summary": "Follow-up to REVIEW-ERR-SRS-LOOP-001 (changes-requested): D1 duplicate ledger_id drops every dictation mismatch after the first; D2 case-only diffs fabricate a stress claim; D5 empty composition submissions append a wrong-word row. Engine/desktop RECORD path only.",
-      "notes": "Board card t_e265093f. Scope = record path only (D3 UI offers + D4 lexicon-context resolution are separate cards)."
+      "notes": "Board card t_e265093f. Scope = record path only (D3 UI offers + D4 lexicon-context resolution are separate cards). SHIPPED 2026-11-21: code 05a8384 — D1 per-sink seq in ledger id (err-<secs>-<nanos>-<n>); D2 stress branch case-sensitive modulo-U+0301 compare, case-only falls through to honest other; D5 record_form_error skips empty produced (both dictation and writing paths). New tests: desktop lib one_sentence_with_two_mismatches (2 rows+2 offers+recurrence 2) and an_empty_submission (no row/offer); activity a_case_only_difference_never_claims_stress (Other). LANE gates all exit 0 (gates.log); validate_handoff --require-explicit-ledger-records PASSED. No status flips beyond this card; nothing published."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
   "current_release_candidate": "Packs: ja-JP 0.4.3 (published 2026-11-09) and ru-RU 0.4.5 (published 2026-11-20) — manifests and catalog/packs.json pins agree (re-measured 2026-11-20, state/evidence/DOC-CONTRACT-RECONCILE-001/audit-2026-11-20.md); the 0.4.4/0.4.2/0.4.1/0.4.0 releases stay live as immutable rollback targets. App: newest published artifact is still open-language-learning-platform-0.4.0-alpha.1 (2026-10-13, Linux pre-release); code identity is 0.4.3-alpha.1 and unpublished — next-artifact decision is owner action O-06. Nothing in the build consumes this field; it is documentation.",
-  "updated_at": "2026-11-21T07:30:00-07:00"
+  "updated_at": "2026-11-21T07:35:00-07:00"
 }

@@ -1,0 +1,27 @@
+2026-11-21T07:29:59-07:00
+== cargo fmt --all --check ==
+exit=0
+== cargo test -p lts-activity --lib form_errors ==
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 16 filtered out; finished in 0.00s
+
+exit=0
+== cargo test -p lts-storage --test error_ledger ==
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+exit=0
+== cargo test -p lts-desktop --lib (full; incl 2 new FIX-ERR-SRS-LOOP-001-1 tests) ==
+test result: ok. 206 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 198.31s
+
+exit=0
+== cargo clippy -p lts-activity -p lts-desktop --all-targets -- -D warnings ==
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.33s
+exit=0
+== validate_handoff --require-explicit-ledger-records ==
+HANDOFF VALIDATION PASSED (2162 data files checked)
+== new FIX tests by name (cached rerun) ==
+test tests::one_sentence_with_two_mismatches_records_two_rows_and_two_offers ... ok
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 207 filtered out; finished in 0.14s
+test tests::an_empty_submission_records_no_ledger_row_and_no_offer ... ok
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 207 filtered out; finished in 0.12s
+test form_errors::tests::a_case_only_difference_never_claims_stress ... ok
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 24 filtered out; finished in 0.00s
