@@ -1,0 +1,79 @@
+# ai-assisted draft unit (JA-B1-003-JOURNEYS-001: delayed-reuse stage closing the legacy B1
+# story journey family 385-399); content refs are existing pack data; qualified
+# review pending.
+id: ja.unit.storytelling-revision
+goal_id: ja.goal.b1.storytelling
+title: "Review: story language"
+summary: Delayed reuse of the sentences shared across the story journey units, plus two unit sentences.
+estimated_minutes: 7
+# K-70/ADR-0022 phase gate: the revision surfaces only after the journey units' content
+# reached `supported`; this is the reuse stage named by every unit's task_sequence, and the
+# transfer target for the last unit.
+requires_unit:
+- unit: ja.unit.narrative-structure
+  state: supported
+- unit: ja.unit.background-setting
+  state: supported
+- unit: ja.unit.plot-sequencing
+  state: supported
+- unit: ja.unit.character-description
+  state: supported
+- unit: ja.unit.setting-description
+  state: supported
+- unit: ja.unit.building-suspense
+  state: supported
+- unit: ja.unit.writing-dialogue
+  state: supported
+- unit: ja.unit.perspective-shifts
+  state: supported
+- unit: ja.unit.writing-endings
+  state: supported
+- unit: ja.unit.story-revision
+  state: supported
+- unit: ja.unit.anecdote-telling
+  state: supported
+- unit: ja.unit.polite-humor
+  state: supported
+- unit: ja.unit.folktale-reading
+  state: supported
+- unit: ja.unit.story-retelling
+  state: supported
+- unit: ja.unit.personal-essay
+  state: supported
+activities:
+- id: ja.activity.story-rev-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.story-rev-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.story-rev-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  - ja.sent.narrative-structure
+  - ja.sent.background-setting
+generation_contract:
+  allowed_vocab:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  - ja.sent.narrative-structure
+  - ja.sent.background-setting
+  allowed_grammar:
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.particle.possessive-no
+  - ja.grammar.particle.object-wo
+  - ja.grammar.verb.polite-masu
+  new_item_budget: 2
+  validation_method: choice

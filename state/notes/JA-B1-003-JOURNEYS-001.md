@@ -80,9 +80,9 @@ health-wellness — 15 legacy units each):
 ## Progress ledger
 
 - [x] work-professional (220-234 + 235 revision) — lane commit: see git log pack(ja) JA-B1-003-JOURNEYS-001
-- [ ] media-news
-- [ ] storytelling
-- [ ] education-academic
+- [x] media-news (250-264 + 831 revision)
+- [x] storytelling (385-399 + 832 revision)
+- [ ] education-academic (units 235-249 — NOTE: 235 collides with the new work-professional revision file number; the education units keep their existing names, new revision files live at 833+)
 - [ ] technology
 - [ ] culture-tradition
 - [ ] society-rules

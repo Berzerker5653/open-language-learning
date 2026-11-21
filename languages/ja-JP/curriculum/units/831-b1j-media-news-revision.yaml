@@ -1,0 +1,79 @@
+# ai-assisted draft unit (JA-B1-003-JOURNEYS-001: delayed-reuse stage closing the legacy B1
+# media journey family 250-264); content refs are existing pack data; qualified
+# review pending.
+id: ja.unit.media-news-revision
+goal_id: ja.goal.b1.media-news
+title: "Review: media language"
+summary: Delayed reuse of the sentences shared across the media journey units, plus two unit sentences.
+estimated_minutes: 7
+# K-70/ADR-0022 phase gate: the revision surfaces only after the journey units' content
+# reached `supported`; this is the reuse stage named by every unit's task_sequence, and the
+# transfer target for the last unit.
+requires_unit:
+- unit: ja.unit.reading-news
+  state: supported
+- unit: ja.unit.headline-style
+  state: supported
+- unit: ja.unit.opinion-vs-fact
+  state: supported
+- unit: ja.unit.article-summary
+  state: supported
+- unit: ja.unit.discussing-news
+  state: supported
+- unit: ja.unit.social-media-use
+  state: supported
+- unit: ja.unit.check-misinfo
+  state: supported
+- unit: ja.unit.media-habits
+  state: supported
+- unit: ja.unit.photo-captions
+  state: supported
+- unit: ja.unit.broadcast-style
+  state: supported
+- unit: ja.unit.reading-editorials
+  state: supported
+- unit: ja.unit.responding-news
+  state: supported
+- unit: ja.unit.current-events
+  state: supported
+- unit: ja.unit.class-debate
+  state: supported
+- unit: ja.unit.media-ethics
+  state: supported
+activities:
+- id: ja.activity.media-rev-listen
+  type: listen-and-choose
+  modality: listening
+  support_level: 2
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.media-rev-cloze
+  type: cloze
+  modality: writing
+  support_level: 1
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+- id: ja.activity.media-rev-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  - ja.sent.news-morning
+  - ja.sent.fact-speculation
+generation_contract:
+  allowed_vocab:
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email
+  - ja.sent.news-morning
+  - ja.sent.fact-speculation
+  allowed_grammar:
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.particle.possessive-no
+  - ja.grammar.particle.object-wo
+  - ja.grammar.verb.polite-masu
+  new_item_budget: 2
+  validation_method: choice

@@ -4,6 +4,21 @@ goal_id: ja.goal.b1.media-news
 title: headline style
 summary: B1 language for headline style.
 estimated_minutes: 6
+# ADR-0037 task journey (JA-B1-003-JOURNEYS-001): input/scaffolded/independent
+# are this unit's stages; transfer is the next unit's listening check (context
+# change proven by the sentences this goal's units share); reuse is the goal's
+# phase-gated revision unit 831.
+task_sequence:
+  input: ja.activity.headline-style-enc
+  scaffolded: ja.activity.headline-style-cloze0
+  independent: ja.activity.headline-style-enc-write
+  transfer: ja.activity.opinion-vs-fact-listen
+  reuse: ja.activity.media-rev-write
+# ADR-0022 phase gate: this unit's lesson surfaces after the previous
+# journey unit's content reached `supported`.
+requires_unit:
+- unit: ja.unit.reading-news
+  state: supported
 generation_contract:
   allowed_vocab:
   - ja.lex.media.kisha
@@ -14,22 +29,24 @@ generation_contract:
   - ja.sent.meeting-starts
   - ja.sent.reply-email
   allowed_grammar:
-  - ja.grammar.b1.node-versus-kara
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.particle.possessive-no
   - ja.grammar.particle.object-wo
+  - ja.grammar.verb.polite-masu
   new_item_budget: 6
   validation_method: choice
 activities:
 - id: ja.activity.headline-style-enc
   type: encounter-read
   modality: reading
-  support_level: 5
+  support_level: 2
   content_refs:
   - ja.lex.media.kisha
   - ja.lex.media.housou
   - ja.lex.media.hassha
   - ja.lex.media.housou-kyoku
   - ja.lex.media.rajio
-  - ja.grammar.b1.node-versus-kara
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.headline-style-listen
@@ -42,7 +59,7 @@ activities:
   - ja.lex.media.hassha
   - ja.lex.media.housou-kyoku
   - ja.lex.media.rajio
-  - ja.grammar.b1.node-versus-kara
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.headline-style-match
@@ -55,7 +72,7 @@ activities:
   - ja.lex.media.hassha
   - ja.lex.media.housou-kyoku
   - ja.lex.media.rajio
-  - ja.grammar.b1.node-versus-kara
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.headline-style-speak
@@ -68,7 +85,7 @@ activities:
   - ja.lex.media.hassha
   - ja.lex.media.housou-kyoku
   - ja.lex.media.rajio
-  - ja.grammar.b1.node-versus-kara
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.headline-style-cloze0
@@ -82,4 +99,11 @@ activities:
   modality: writing
   support_level: 2
   content_refs:
+  - ja.sent.reply-email
+- id: ja.activity.headline-style-enc-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.meeting-starts
   - ja.sent.reply-email

@@ -46,3 +46,20 @@ exit: 0
   band b1: unit ja.unit.workplace-comm (goal ja.goal.b1.work-professional): input=ja.activity.workplace-comm-enc scaffolded=ja.activity.workplace-comm-cloze0 independent=ja.activity.workplace-comm-enc-write transfer=ja.activity.meeting-opinions-listen reuse=ja.activity.work-rev-write
   band b1: unit ja.unit.writing-resume (goal ja.goal.b1.work-professional): input=ja.activity.writing-resume-enc scaffolded=ja.activity.writing-resume-cloze0 independent=ja.activity.writing-resume-enc-write transfer=ja.activity.workplace-comm-listen reuse=ja.activity.work-rev-write
 grep exit: 0 (1 = zero findings on this lane's units)
+
+===== lane battery goals 2-3 (media-news 250-264 + 831; storytelling 385-399 + 832) 2026-11-20T17:09:50-07:00 =====
+worktree HEAD 123b304 + goals 2-3 files, restored media
+----- langpack validate -----
+validate(scaffold): 0 error(s), 0 warning(s)
+exit: 0
+----- langpack lint -----
+lint: 0 error(s), 0 warning(s)
+exit: 0
+----- langpack audit-curriculum -----
+audit-curriculum: 0 error(s), 0 warning(s)
+exit: 0
+----- langpack test -----
+test: 0 error(s), 0 warning(s)
+exit: 0
+----- task-sequence findings on goal 2-3 units (expect none) -----
+findings-grep exit: 1 (1 = none)

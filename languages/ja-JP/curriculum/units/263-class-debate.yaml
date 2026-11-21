@@ -4,6 +4,21 @@ goal_id: ja.goal.b1.media-news
 title: class debate
 summary: B1 language for class debate.
 estimated_minutes: 6
+# ADR-0037 task journey (JA-B1-003-JOURNEYS-001): input/scaffolded/independent
+# are this unit's stages; transfer is the next unit's listening check (context
+# change proven by the sentences this goal's units share); reuse is the goal's
+# phase-gated revision unit 831.
+task_sequence:
+  input: ja.activity.class-debate-enc
+  scaffolded: ja.activity.class-debate-cloze0
+  independent: ja.activity.class-debate-enc-write
+  transfer: ja.activity.media-ethics-listen
+  reuse: ja.activity.media-rev-write
+# ADR-0022 phase gate: this unit's lesson surfaces after the previous
+# journey unit's content reached `supported`.
+requires_unit:
+- unit: ja.unit.current-events
+  state: supported
 generation_contract:
   allowed_vocab:
   - ja.lex.media2.ronsuu
@@ -15,14 +30,20 @@ generation_contract:
   - ja.sent.meeting-starts
   - ja.sent.reply-email
   allowed_grammar:
+  - ja.grammar.adjectives.suki-na
+  - ja.grammar.verb.koto-no-noun
+  - ja.grammar.particle.de-means
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.particle.possessive-no
   - ja.grammar.particle.object-wo
+  - ja.grammar.verb.polite-masu
   new_item_budget: 6
   validation_method: choice
 activities:
 - id: ja.activity.class-debate-enc
   type: encounter-read
   modality: reading
-  support_level: 5
+  support_level: 2
   content_refs:
   - ja.lex.media2.ronsuu
   - ja.lex.media2.taaron
@@ -83,3 +104,11 @@ activities:
   support_level: 2
   content_refs:
   - ja.sent.meeting-starts
+- id: ja.activity.class-debate-enc-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.debate-point
+  - ja.sent.meeting-starts
+  - ja.sent.reply-email

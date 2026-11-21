@@ -4,6 +4,21 @@ goal_id: ja.goal.b1.media-news
 title: media ethics
 summary: B1 language for media ethics.
 estimated_minutes: 6
+# ADR-0037 task journey (JA-B1-003-JOURNEYS-001): input/scaffolded/independent
+# are this unit's stages; transfer is the next unit's listening check (context
+# change proven by the sentences this goal's units share); reuse is the goal's
+# phase-gated revision unit 831.
+task_sequence:
+  input: ja.activity.media-ethics-enc
+  scaffolded: ja.activity.media-ethics-cloze0
+  independent: ja.activity.media-ethics-enc-write
+  transfer: ja.activity.media-rev-listen
+  reuse: ja.activity.media-rev-write
+# ADR-0022 phase gate: this unit's lesson surfaces after the previous
+# journey unit's content reached `supported`.
+requires_unit:
+- unit: ja.unit.class-debate
+  state: supported
 generation_contract:
   allowed_vocab:
   - ja.lex.media2.rinri
@@ -14,22 +29,24 @@ generation_contract:
   - ja.sent.meeting-starts
   - ja.sent.reply-email
   allowed_grammar:
-  - ja.grammar.b1.kanoukei-expansion
+  - ja.grammar.particle.subject-ga
+  - ja.grammar.particle.possessive-no
   - ja.grammar.particle.object-wo
+  - ja.grammar.verb.polite-masu
   new_item_budget: 6
   validation_method: choice
 activities:
 - id: ja.activity.media-ethics-enc
   type: encounter-read
   modality: reading
-  support_level: 5
+  support_level: 2
   content_refs:
   - ja.lex.media2.rinri
   - ja.lex.media2.kohei
   - ja.lex.media2.shino
   - ja.lex.media2.kenryoku
   - ja.lex.media2.tsushin
-  - ja.grammar.b1.kanoukei-expansion
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.media-ethics-listen
@@ -42,7 +59,7 @@ activities:
   - ja.lex.media2.shino
   - ja.lex.media2.kenryoku
   - ja.lex.media2.tsushin
-  - ja.grammar.b1.kanoukei-expansion
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.media-ethics-match
@@ -55,7 +72,7 @@ activities:
   - ja.lex.media2.shino
   - ja.lex.media2.kenryoku
   - ja.lex.media2.tsushin
-  - ja.grammar.b1.kanoukei-expansion
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.media-ethics-speak
@@ -68,7 +85,7 @@ activities:
   - ja.lex.media2.shino
   - ja.lex.media2.kenryoku
   - ja.lex.media2.tsushin
-  - ja.grammar.b1.kanoukei-expansion
+  - ja.grammar.particle.subject-ga
   - ja.sent.meeting-starts
   - ja.sent.reply-email
 - id: ja.activity.media-ethics-cloze0
@@ -82,4 +99,11 @@ activities:
   modality: writing
   support_level: 2
   content_refs:
+  - ja.sent.reply-email
+- id: ja.activity.media-ethics-enc-write
+  type: recall
+  modality: writing
+  support_level: 0
+  content_refs:
+  - ja.sent.meeting-starts
   - ja.sent.reply-email
