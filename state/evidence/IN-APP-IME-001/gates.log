@@ -1,0 +1,92 @@
+# IN-APP-IME-001 phase 2 — controller gate battery (run 104, 2026-11-21)
+
+Run 103 died at 80/80 with the Rust half written but uncommitted. Run 104
+(controller takeover) reviewed that tree, fixed two real defects in it,
+wrote the full TS half, and ran the lane battery below. No gate output is
+quoted from run 103 — everything here was re-run by the controller.
+
+## Controller fixes on top of run 103's tree
+
+1. `crates/langpack/tests/input_methods.rs` — the `set_capabilities`
+   helper's `trim_start()` on the `license:` tail deleted the block's
+   indentation, producing invalid YAML; 2 of 3 tests failed with
+   `parse_error / manifest_missing`. Fixed by preserving the tail verbatim
+   (`{head}capabilities:\n{caps}license:{tail}`). Gate-integrity note:
+   this fixes a broken FIXTURE HELPER, not an assertion — the three
+   assertions (absent→None, present→id:bool, malformed→schema error) are
+   exactly as run 103 wrote them.
+2. `apps/desktop/src-tauri/src/lib.rs` — new candidate tests use
+   `OpenOptions … .write_all(..)` without `use std::io::Write` in the
+   tests module: E0599, the whole lib-test target failed to compile.
+   Import added.
+3. `cargo fmt` re-run over the touched Rust files (run 103's tree was
+   fmt-dirty: the fixed helper collapses).
+
+## Gate results (controller-run, CARGO_TARGET_DIR=repo target)
+
+- `cargo fmt --all --check` — unit lts-ime-gates3: FMT-OK.
+- `cargo test -p lts-langpack` — all suites ok incl. new
+  `tests/input_methods.rs` 3/3 (controller foreground run, 13:56).
+- `cargo test -p lts-desktop --lib` — log:
+  ~/.hermes/cache/scratch/lts-ime-desk-test.log (unit lts-ime-gates3;
+  includes the 2 new candidate tests).
+- `cargo clippy -p lts-desktop --all-targets -- -D warnings` — log:
+  ~/.hermes/cache/scratch/lts-ime-desk-clippy.log.
+- `cargo clippy -p lts-langpack --all-targets -- -D warnings` — log:
+  ~/.hermes/cache/scratch/lts-ime-lp-clippy.log.
+- Pack conformance on the schema-touched packs (ja-JP manifest now
+  declares input_methods; ru-RU unchanged control):
+  ~/.hermes/cache/scratch/lts-ime-validate.log
+  (validate ja-JP + ru-RU, lint ja-JP + ru-RU; install-mode `test` is the
+  CI audio-restore gate, not run locally — media .wav are gitignored).
+- `npx tsc --noEmit` — clean (controller, 13:01).
+- `npx vitest run` — 440/440 (controller, 13:01), incl. new
+  `src/kana-ime.test.tsx` (conversion cycle: Enter arms lookup on exactly
+  the committed kana run, Space cycles kana→candidate→kana with provenance
+  readable, unarmed/failing/disarmed Space stays ordinary typing) and new
+  ime.test.ts suites (declared-method gating tri-state, structural
+  no-CJK-ideograph pin over ime.ts/kana-ime.tsx/ime-candidates.ts,
+  candidate provenance labels).
+
+## TS half added by run 104 (contract in state/notes/IN-APP-IME-001.md)
+
+- `ime.ts`: `InputMethodGate` + `inputMethodAllowed` (absent map = current
+  behavior; present map = allowlist); `inAppKeyboardForScripts` and
+  `packDeclaresInAppKanaKeyboard` honor the gate.
+- `ime-candidates.ts` (new): `ImeCandidate` wire mirror +
+  `LEXICON_CANDIDATES_METHOD_ID` + provenance label.
+- `kana-ime.tsx`: `useKanaIME({candidates})` — Enter arms conversion for
+  the trailing kana run (async lookup, stale/failed lookups never arm),
+  SPACE cycles candidates and back, any other key / external edit /
+  Escape disarms; `conversionLabel()` exposes provenance.
+- `language.tsx`: InstalledPack gains `input_methods` +
+  `input_methods_declared` (mirror of the Rust wire fields).
+- `App.tsx`: gate threaded into keyboard resolution and the settings
+  grant; `imeCandidates` callback gated on `lexicon-candidates` before
+  the engine command is ever called; passed to the kana-input fields
+  (writing, dictation target, my-words surface/reading, practice runner).
+- `writing.tsx` / `practice.tsx` / `dictation.tsx` / `words.tsx`: optional
+  `imeCandidates` prop forwarded to `useKanaIME`.
+- Fixture hygiene: journeys harness + language/onboarding InstalledPack
+  literals carry the tri-state fields (absent = current behavior).
+
+## Deferred / open
+
+- Phase 3 (WebKitInputMethodContext native path + Orca verification):
+  NOT attempted, honest open acceptance item — needs a real AT session.
+- The UI does not yet render `conversionLabel()` visibly next to the
+  field (the label API exists and is tested; surfacing it in the chrome
+  is a follow-up UI card, not in this card's named scope).
+- Root-level stray screenshots `c1.png`/`c4.png` (owner dogfood 10:14,
+  NOT this lane) remain untracked and untouched — hotspot flag on the
+  board so a sibling's `git add -A` cannot sweep them into a labeled
+  commit.
+
+## Unit lts-ime-gates3 journal summary
+cargo test -p lts-desktop --lib exit: 0
+cargo clippy -p lts-desktop --all-targets -- -D warnings exit: 0
+cargo clippy -p lts-langpack --all-targets -- -D warnings exit: 0
+Copied gate logs (controller-run): desk-test.log, desk-clippy.log, lp-clippy.log, pack-validate.log in this directory.
+
+## Pack conformance (schema touched -> both reference packs)
+validate ja-JP: 0 errors / lint ja-JP: 0 errors; validate ru-RU: 0 errors / lint ru-RU: 0 errors (full output: pack-validate.log).

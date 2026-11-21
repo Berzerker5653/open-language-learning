@@ -2402,6 +2402,25 @@
       ],
       "summary": "Shipped all four acceptance bullets: engine-derived progress_pct per goal dimension (mean concept ladder weight, unseen=0) drawn as dependency-free SVG role=progressbar bars in GoalMap; world_state 'missing' references upgraded to WorldMissing{target,modality,label} with labels resolved from the active pack's lexicon (raw id never rendered inline); new memory_stats command (due today, engine-priced minutes, per-band mean FSRS retrievability with honest abstention, 12-week evidence-event calendar via new Store::evidence_event_days) rendered as MemoryStatsStrip above the GoalMap, framed as n=1 instruments not grades; zero new runtime deps, a11y semantics test-asserted. Board run 100 died at 80/80 with the lane complete but uncommitted; run 101 re-ran the whole LANE battery personally and fixed two clippy nits (useless_conversion, unnecessary_sort_by) before commit.",
       "notes": "Lanes: apps/desktop/src-tauri/src/lib.rs (goal_map/memory_stats/world_state + 3 targeted tests), crates/storage (evidence_event_days), apps/desktop/src frontend (home, memory-stats, App) + tests, packages/ui/src/styles.css. Battery: fmt 0; clippy+test green for lts-storage and lts-desktop (211 passed incl. targeted tests); tsc 0; vitest 53 files / 426 tests."
+    },
+    "IN-APP-IME-001": {
+      "task_id": "IN-APP-IME-001",
+      "title": "In-app IME phase 2: pack-declared input methods + lexicon-backed kana candidates",
+      "status": "done",
+      "attempts": 0,
+      "updated": "2026-11-21",
+      "dependencies": [
+        "ACC-001"
+      ],
+      "evidence": [
+        "state/evidence/IN-APP-IME-001/gates.log",
+        "state/evidence/IN-APP-IME-001/desk-test.log",
+        "state/evidence/IN-APP-IME-001/desk-clippy.log",
+        "state/evidence/IN-APP-IME-001/lp-clippy.log",
+        "state/evidence/IN-APP-IME-001/pack-validate.log"
+      ],
+      "summary": "Phase 2 shipped (code 257ab85): manifest capabilities.input_methods (0.2 schema, bool-safe absent=unchanged / present=allowlist) honored by the langpack reader, the installed-pack wire, and the renderer gate; conversion candidates come ONLY from the active pack's lexicon (plus separately-labeled aux slice) via the new ime_candidates command, every candidate carrying entry-id provenance; useKanaIME arms conversion on Enter and SPACE cycles pack candidates. Tests pin gating tri-state, provenance, and no CJK ideograph in any engine source. Phase 3 (WebKitInputMethodContext + Orca session) deliberately NOT attempted - real-AT dependency, stays open honestly.",
+      "notes": "Takeover close: run 103 died 80/80 with the Rust half uncommitted; controller fixed a fixture-helper YAML mangling + missing std::io::Write import, wrote the TS half, re-ran the full lane battery (all green, logs in evidence dir). conversionLabel UI surfacing left as a follow-up (API tested, not in card's named scope)."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

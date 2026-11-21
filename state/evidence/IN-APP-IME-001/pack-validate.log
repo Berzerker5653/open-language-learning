@@ -1,0 +1,21 @@
+== validate ja-JP ==
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 0 warning(s)
+V1=0
+== lint ja-JP ==
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+lint: 0 error(s), 0 warning(s)
+L1=0
+== validate ru-RU ==
+info[media_item_without_reading] media/manifest.jsonl: 3757 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ru.contrast.palatalization.brat-0, ru.contrast.palatalization.brat-1, ru.contrast.palatalization.luk-0, ru.contrast.palatalization.luk-1, ru.contrast.voicing.bp-0, ru.contrast.voicing.bp-1, ru.contrast.voicing.dt-0, ru.contrast.voicing.dt-1 (first 8 shown); authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 0 warning(s)
+V2=0
+== lint ru-RU ==
+info[media_item_without_reading] media/manifest.jsonl: 3757 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ru.contrast.palatalization.brat-0, ru.contrast.palatalization.brat-1, ru.contrast.palatalization.luk-0, ru.contrast.palatalization.luk-1, ru.contrast.voicing.bp-0, ru.contrast.voicing.bp-1, ru.contrast.voicing.dt-0, ru.contrast.voicing.dt-1 (first 8 shown); authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "ru-batch-70ec683-20f994d" is not referenced by any content record
+lint: 0 error(s), 0 warning(s)
+L2=0
