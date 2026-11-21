@@ -1397,22 +1397,25 @@
     },
     "JA-B2-002": {
       "task_id": "JA-B2-002",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "title": "Qualified Japanese content review — B2",
-      "activity": "idle",
-      "summary": "B2 band coverage and correctness judged by a qualified human reviewer under the REVIEW-001 gate; gates every public framework-alignment claim and blocks stable 1.0 if evidence is insufficient.",
-      "notes": "Recorded 2026-10-15 (REL-001 recheck). This is the dependency that four required release cards share (ACC-001, SEC-001, PLAT-001, PERF-002): while it had no ledger entry, all four derived as ready, which no release gate should silently permit. The B2 journey work (R12, `ja.goal.b2.film-analysis`) is drafted and gated at `draft`; the review verdict is the missing part. [owner decision 2026-11-19: content-review cards reclassified per 2026-11-19 acceptance-autonomy rule: qualified review is agent-performed with evidence files, reversible; release/publish gates unchanged.] [owner decision 2026-11-19: content-review owner gate LIFTED (agent-performed review per acceptance-autonomy rule); remains blocked only on prerequisite authoring card JA-B2-001 — set ready when that closes.] [2026-11-20: prerequisite authoring card JA-B2-001 closed (1127730) — B2 increment evidence in state/evidence/JA-B2-001/. Card remains blocked per ADR-0040 posture: this project seeks no external qualified review; AI-authored content carries machine gates only.]",
+      "activity": "closed",
+      "summary": "B2 increment band review executed 2026-11-21 (agent review seat per owner decision 2026-11-19): 20 ai-assisted per-item records over the 1127730 increment (goal, units 827-830, client-call scenario, 12 audio-backed sentences, 2 assessments) — 13 approved, 7 approved-with-notes, 0 open changes-requested. 2 P2 register/gloss defects + 1 P3 teinei-go form defect corrected in-lane; reading changed so audio re-baked on pack narrator, certified by ASR content check 3/3 exact kana-fold + pacing band (take-1 rejects re-taken). Card body's 'B2 story slate' half resolved as ru-RU pack content — out of scope for ja review. No status flipped; posture unchanged.",
+      "notes": "Recorded 2026-10-15 (REL-001 recheck). This is the dependency that four required release cards share (ACC-001, SEC-001, PLAT-001, PERF-002): while it had no ledger entry, all four derived as ready, which no release gate should silently permit. The B2 journey work (R12, `ja.goal.b2.film-analysis`) is drafted and gated at `draft`; the review verdict is the missing part. [owner decision 2026-11-19: content-review cards reclassified per 2026-11-19 acceptance-autonomy rule: qualified review is agent-performed with evidence files, reversible; release/publish gates unchanged.] [owner decision 2026-11-19: content-review owner gate LIFTED (agent-performed review per acceptance-autonomy rule); remains blocked only on prerequisite authoring card JA-B2-001 — set ready when that closes.] [2026-11-20: prerequisite authoring card JA-B2-001 closed (1127730) — B2 increment evidence in state/evidence/JA-B2-001/. Card remains blocked per ADR-0040 posture: this project seeks no external qualified review; AI-authored content carries machine gates only.] [2026-11-21: review shipped at 50ea8e7 — verdicts in reviews.jsonl rev-2026-11-21-b2-001..020, evidence state/evidence/JA-B2-002/ (findings + band-review-record + fix-verification + gates.log, pack battery 0/0 x7 on the final tree incl. install-mode hash check after re-bakes). Scope = the 20-item 1127730 population; the legacy 11-goal B2 map band is not in this card's population. Defects: おかえし/おかえり honorific (P2), はんけつ/gloss mismatch (P2), 大丈夫ございます form (P3); all fixed in-lane with re-bakes.]",
       "dependencies": [
         "JA-B2-001",
         "REVIEW-001"
       ],
       "evidence": [
         "languages/ja-JP/review/REVIEWER_KIT.md",
-        "languages/ja-JP/review/WORKLIST-2026-10-14.md"
+        "languages/ja-JP/review/WORKLIST-2026-10-14.md",
+        "state/evidence/JA-B2-002/findings-2026-11-21.md",
+        "state/evidence/JA-B2-002/band-review-record.yaml",
+        "state/evidence/JA-B2-002/fix-verification.md",
+        "state/evidence/JA-B2-002/gates.log"
       ],
-      "updated": "2026-10-20",
-      "blocker": "Blocked by the owner's permanent posture (ADR-0040, 2026-10-20): the project seeks no external qualified review. This card stays blocked as the honest record that expert review has not happened and will not; content is AI-authored with machine gates, and only in-app attributed community confirmation (CONTENT-CONFIRM-001) can ever mark content confirmed.",
+      "updated": "2026-11-21",
       "note": "Unblocked 2026-11-21: JA-B2-001 authoring shipped (1127730 + B2 story slate); band review proceeding agent-performed."
     },
     "ACC-001": {
