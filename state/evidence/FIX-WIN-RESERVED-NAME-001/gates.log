@@ -1,0 +1,24 @@
+Lane gates for FIX-WIN-RESERVED-NAME-001 (run 2026-11-21, main @ e538307 + this lane's edits)
+
+1) grep-clean for stale references:
+   grep -rn "LICENSE-AUX" . (excluding .git/.venv) -> only remaining
+   hits: intentional anti-regression comment at
+   scripts/build-aux-lexicon.py:72 and historical
+   state/evidence/{REVIEW-READER-FLOW-001b,FIX-READER-FLOW-001b-2}/
+   records. No live references remain. PASS
+
+2) .venv/bin/python -m unittest discover -s scripts -p 'test_build_aux_lexicon.py'
+   -> Ran 17 tests in 0.004s / OK  (exit 0)
+
+3) .venv/bin/python scripts/build-aux-lexicon.py --check
+   -> check OK: aux/lexicon/ru.jsonl matches provenance (405825 rows)
+   (this is the narrowest license audit gate covering aux/lexicon;
+   `audit-licenses` audits languages/ pack manifests only and does NOT
+   cover aux/ — card's if-clause not met, not run)
+
+4) .venv/bin/python tools/validate_handoff.py --require-explicit-ledger-records
+   -> HANDOFF VALIDATION PASSED (2165 data files checked); warnings all
+   pre-existing (optional-task records + fixture note)
+
+5) Windows checkout leg: verified post-push against fresh CI run (see
+   card summary for run id).

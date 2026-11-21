@@ -15,7 +15,7 @@ License posture (checked at build time, recorded in provenance):
     GFDL" (https://kaikki.org/dictionary/, section "Copyright and
     license", accessed 2026-11-20).
     Consequence: the derived slice is re-hosted under CC-BY-SA/GFDL
-    with attribution (aux/lexicon/LICENSE-AUX), and ShareAlike is the
+    with attribution (aux/lexicon/LICENSE-kaikki.txt), and ShareAlike is the
     reason it stays a separate file — it must never be folded into the
     MIT-licensed pack lexicon, matching the card's "separate and
     trusted" contract. The app displays the attribution on every aux
@@ -27,7 +27,7 @@ committed (948 MB); `--write` records its sha256/size/URL in
 `aux/lexicon/ru.provenance.json` together with the slice sha256, so
 `--check` (no input needed, CI-safe) proves the committed slice is the
 tool's output for the pinned input, is internally valid, and ships the
-CC-BY-SA/GFDL license text (aux/lexicon/LICENSE-AUX) that the Apache-2.0
+CC-BY-SA/GFDL license text (aux/lexicon/LICENSE-kaikki.txt) that the Apache-2.0
 repo root does not cover it with.
 
 Slice rules (all recorded verbatim in provenance.slicer):
@@ -69,7 +69,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 AUX_DIR = os.path.join(ROOT, "aux", "lexicon")
 OUT = os.path.join(AUX_DIR, "ru.jsonl")
 PROVENANCE = os.path.join(AUX_DIR, "ru.provenance.json")
-LICENSE_AUX = os.path.join(AUX_DIR, "LICENSE-AUX")
+# NOT "LICENSE-AUX": AUX is a Windows reserved device name and made
+# actions/checkout fail on every windows-latest runner (FIX-WIN-RESERVED-NAME-001).
+LICENSE_AUX = os.path.join(AUX_DIR, "LICENSE-kaikki.txt")
 
 SOURCE_URL = "https://kaikki.org/dictionary/Russian/kaikki.org-dictionary-Russian.jsonl"
 SOURCE_LICENSE = "CC-BY-SA + GFDL (Wiktionary terms; kaikki.org redistribution)"
@@ -248,7 +250,7 @@ def do_write(input_path: str) -> int:
         "format_version": 1,
         "attribution": ATTRIBUTION,
         "license": SOURCE_LICENSE,
-        "license_file": "aux/lexicon/LICENSE-AUX",
+        "license_file": "aux/lexicon/LICENSE-kaikki.txt",
         "source_url": SOURCE_URL,
         "source_license_page": SOURCE_PAGE,
         "source_size_bytes": os.path.getsize(input_path),
@@ -301,7 +303,7 @@ def do_check() -> int:
     # on-disk signal it is not Apache.
     if not os.path.exists(LICENSE_AUX):
         print(
-            "FAIL: aux/lexicon/LICENSE-AUX missing — the slice is a "
+            "FAIL: aux/lexicon/LICENSE-kaikki.txt missing — the slice is a "
             "CC-BY-SA/GFDL derivative, not the repo's Apache-2.0",
             file=sys.stderr,
         )
@@ -312,7 +314,7 @@ def do_check() -> int:
         "GNU Free Documentation License",
     ):
         if needle not in lic:
-            print(f"FAIL: LICENSE-AUX never names '{needle}'", file=sys.stderr)
+            print(f"FAIL: LICENSE-kaikki.txt never names '{needle}'", file=sys.stderr)
             return 1
     prov = json.load(open(PROVENANCE, encoding="utf-8"))
     content = open(OUT, encoding="utf-8").read()

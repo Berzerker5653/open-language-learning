@@ -101,11 +101,11 @@ class Check(unittest.TestCase):
             with open(inp, "w", encoding="utf-8") as f:
                 for e in [entry("собака", forms=["соба́ки"]), entry("кот")]:
                     f.write(json.dumps(e, ensure_ascii=False) + "\n")
-            shutil.copy(B.LICENSE_AUX, os.path.join(tmp, "LICENSE-AUX"))
+            shutil.copy(B.LICENSE_AUX, os.path.join(tmp, "LICENSE-kaikki.txt"))
             old_out, old_prov, old_lic = B.OUT, B.PROVENANCE, B.LICENSE_AUX
             B.OUT = os.path.join(tmp, "ru.jsonl")
             B.PROVENANCE = os.path.join(tmp, "ru.provenance.json")
-            B.LICENSE_AUX = os.path.join(tmp, "LICENSE-AUX")
+            B.LICENSE_AUX = os.path.join(tmp, "LICENSE-kaikki.txt")
             try:
                 self.assertEqual(B.do_write(inp), 0)
                 self.assertEqual(B.do_check(), 0)
@@ -130,7 +130,7 @@ class LicenseShips(unittest.TestCase):
     def test_committed_repo_ships_license_aux(self):
         self.assertTrue(
             os.path.exists(B.LICENSE_AUX),
-            "aux/lexicon/LICENSE-AUX missing — the kaikki slice is a "
+            "aux/lexicon/LICENSE-kaikki.txt missing — the kaikki slice is a "
             "CC-BY-SA/GFDL derivative, not the repo's Apache-2.0",
         )
 
@@ -146,7 +146,7 @@ class LicenseShips(unittest.TestCase):
 
     def test_provenance_points_at_the_license_file(self):
         prov = json.load(open(B.PROVENANCE, encoding="utf-8"))
-        self.assertEqual(prov.get("license_file"), "aux/lexicon/LICENSE-AUX")
+        self.assertEqual(prov.get("license_file"), "aux/lexicon/LICENSE-kaikki.txt")
 
 
 if __name__ == "__main__":
