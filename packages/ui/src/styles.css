@@ -106,6 +106,20 @@ h1 {
   font-weight: 600;
 }
 
+/* LESSON-TITLE-FIT-001: the lesson encounter title ("Printed Cyrillic: А а,
+   О о, М м, Т т") must always FIT the narrow card column — never a glyph
+   hanging past its edge. Wrapping is already the default (no nowrap rides
+   this heading), so this rule fixes the FIT of the wrap: balance keeps the
+   lines even instead of orphaning one glyph on its own line, and
+   break-word is the safety net for any long unbreakable token at the small
+   end of the phone range. The harness gate in scripts/encounter-capture.mjs
+   measures the h1's own line rects, so a regression to clipping fails
+   machine-checked, not just on vision. */
+.lesson h1 {
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+
 h2 {
   font-size: 1.3rem;
   font-weight: 600;

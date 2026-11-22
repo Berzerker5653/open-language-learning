@@ -37,6 +37,19 @@
       }
     },
     {
+      "name": "the lesson title wraps inside its column with no overflow at 390px (LESSON-TITLE-FIT-001)",
+      "pass": true,
+      "measured": {
+        "text": "Printed Cyrillic: А а, О о, М м, Т т",
+        "clientW": 358,
+        "scrollW": 358,
+        "lineCount": 2,
+        "widestLineW": 186.796875,
+        "docScrollW": 390,
+        "viewportW": 390
+      }
+    },
+    {
       "name": "the lesson encounter panel renders with the new copy on-screen",
       "pass": true,
       "measured": {
@@ -64,6 +77,6 @@
   ],
   "failures": 0,
   "error": null,
-  "profileId": "prof-ae857b30-1056-4bbd-8269-bd1b4fa90e8b",
-  "serveLogTail": "lts-serve listening on http://127.0.0.1:17877 (trusted network only)\n"
+  "profileId": "prof-00141d6d-a260-41a7-8152-ec7bf5d8b103",
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17812 (trusted network only)\n"
 }

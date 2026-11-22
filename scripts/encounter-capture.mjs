@@ -287,6 +287,34 @@ try {
       sample: expl[0] ?? null,
     };
   })()`);
+  // LESSON-TITLE-FIT-001: the title must FIT the column — measured from the
+  // h1's own line rects (viewport screenshots can crop, so ink-in-a-png can
+  // never prove this), never from body text (WEB-HISTORY-001 rule).
+  const titleFit = await evaluate(`(() => {
+    const sec = document.querySelector('[data-testid="lesson-encounter"]');
+    const h1 = sec && sec.querySelector('h1');
+    if (!h1) return { error: 'no lesson title h1' };
+    const rg = document.createRange();
+    rg.selectNodeContents(h1);
+    const lines = [...rg.getClientRects()];
+    return {
+      text: h1.textContent,
+      clientW: h1.clientWidth,
+      scrollW: h1.scrollWidth,
+      lineCount: lines.length,
+      widestLineW: lines.length ? Math.max(...lines.map((r) => r.width)) : 0,
+      docScrollW: document.documentElement.scrollWidth,
+      viewportW: window.innerWidth,
+    };
+  })()`);
+  check(
+    "the lesson title wraps inside its column with no overflow at 390px (LESSON-TITLE-FIT-001)",
+    !titleFit.error &&
+      titleFit.scrollW <= titleFit.clientW &&
+      titleFit.widestLineW <= titleFit.clientW + 1 &&
+      titleFit.docScrollW <= titleFit.viewportW,
+    titleFit,
+  );
   await send(
     "Page.captureScreenshot",
     { format: "png", captureBeyondViewport: true },
