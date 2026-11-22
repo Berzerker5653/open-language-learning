@@ -3242,6 +3242,20 @@ tasks:
   - the wrap reads as balanced lines rather than an orphaned single glyph at mobile width
   - after-capture evidence lands under state/evidence/LESSON-TITLE-FIT-001 with the lane harness re-run green
   required_for_desktop_1_0: false
+- id: PATH-VISUAL-001
+  milestone: M11
+  priority: P1
+  title: The Path had honest data but a flat-list look, so it renders as a winding node track with state rings, section banners, and an in-progress state that makes proven-done counts honest
+  dependencies: [PATH-VIEW-001]
+  read_first:
+  - state/notes/PATH-VISUAL-001.md
+  - state/evidence/PATH-VISUAL-001/gates.log
+  acceptance:
+  - mobile 390px before/after screenshots land under state/evidence/PATH-VISUAL-001
+  - a profile with one fully-completed letter session shows that unit DONE and never 0-done alongside a pin beyond it
+  - started-but-unproven units render a partially-filled ring with the honest proven-ref fraction, and the section counter counts proven-done only
+  - LANE-tier gates over the touched packages
+  required_for_desktop_1_0: false
 - id: ORTHO-LETTER-UNITS-001
   milestone: M8
   priority: P1
@@ -3438,4 +3452,5 @@ execution_scope:
   - ENCOUNTER-BEFORE-TEST-001
   - PATH-WHATSNEXT-001
   - LESSON-TITLE-FIT-001
+  - PATH-VISUAL-001
   public_publication_authorized: false

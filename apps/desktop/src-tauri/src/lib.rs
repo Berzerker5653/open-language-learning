@@ -3874,6 +3874,20 @@ struct UnitPathNodeView {
     /// its due items already ride the plan.
     review_due: bool,
     due_count: usize,
+    /// PATH-VISUAL-001: the unit is STARTED but UNPROVEN — unlocked, not
+    /// done, and the learner has met at least one of its refs (an evidence
+    /// pair at any state, or a completed encounter row). The path renders
+    /// this as a partially-filled ring so a pinned unit past a unit with
+    /// real progress never reads as "0 done alongside a pin beyond it"
+    /// (owner dogfood 2026-11-22 complaint 09b contradiction). Exposure
+    /// opens this state; it NEVER closes the `done` gate — evidence still
+    /// owns done (the PATH-VIEW-001 attendance red test stays true).
+    in_progress: bool,
+    /// PATH-VISUAL-001: EVIDENCE-BACKED proven refs (state >= introduced)
+    /// over scheduled refs. The ring fill fraction rides these numbers;
+    /// the section done-counter counts `done` only, never `refs_done`.
+    refs_done: usize,
+    refs_total: usize,
     /// "What unlocks this" in the pack's own words (goal descriptions,
     /// gating unit titles); never invented prose. None when unlocked.
     unlock_hint: Option<String>,
@@ -3902,6 +3916,15 @@ fn unit_path_at(data: &Path, profile_id: &str) -> Result<Vec<UnitPathNodeView>, 
     } else {
         &intro_refs
     };
+    // PATH-VISUAL-001: units whose authored encounter the learner has
+    // COMPLETED (`encounter_complete` rows — exposure, never mastery).
+    // Meeting the material starts a unit on the path; it can never finish
+    // one. The done gate below stays evidence-only.
+    let encountered: std::collections::HashSet<String> = store
+        .encountered_unit_ids(profile_id)
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .collect();
     // Due items across every scheduler this profile has rows in; the
     // canonical whole-second RFC 3339 shape (enforced by the storage write
     // boundary) makes the string compare the right due test. Rows are keyed
@@ -3951,11 +3974,36 @@ fn unit_path_at(data: &Path, profile_id: &str) -> Result<Vec<UnitPathNodeView>, 
                 .iter()
                 .all(|g| unit_gate_holds(g, &units, &derived));
             let locked = goal_locked || gate_locked;
-            let done = refs.iter().all(|c| {
+            // PATH-VISUAL-001 audit (owner screenshot: pin on unit 2 while
+            // the section says 0/20 done): `done` keeps the EVIDENCE floor
+            // exactly as PATH-VIEW-001 pinned it — every scheduled ref at
+            // `introduced` mastery or better, never attendance, never an
+            // encounter row. What the audit ADDS is visibility of honest
+            // partial progress: refs proven EVIDENCE-BACKED count into
+            // `refs_done` (the ring's fill fraction), and a unit the
+            // learner has MET (a completed authored encounter) or already
+            // holds evidence on is `in_progress` — started but unproven.
+            // Chosen threshold, documented in state/notes/PATH-VISUAL-001.md:
+            // a fully-drilled letter session lands evidence on every ref,
+            // so it flips DONE; a learner who only MET the letters (the
+            // dogfood case — drills starved one ref) sees the unit
+            // IN PROGRESS with the honest filled count, never "0/20 done
+            // with a pin beyond it".
+            let refs_done = refs
+                .iter()
+                .filter(|c| {
+                    derived.iter().any(|d| {
+                        d.content_id == **c && d.state >= lts_domain::MasteryState::Introduced
+                    })
+                })
+                .count();
+            let refs_started = refs.iter().any(|c| {
                 derived
                     .iter()
-                    .any(|d| d.content_id == *c && d.state >= lts_domain::MasteryState::Introduced)
+                    .any(|d| d.content_id == *c && d.state != lts_domain::MasteryState::Unseen)
             });
+            let done = refs_done == refs.len();
+            let in_progress = !locked && !done && (refs_started || encountered.contains(&unit.id));
             let due_here: usize = refs.iter().filter_map(|c| due.get(*c)).sum();
             let current = refs.iter().any(|c| current_pool.contains(c));
             let unlock_hint = if locked {
@@ -4006,6 +4054,9 @@ fn unit_path_at(data: &Path, profile_id: &str) -> Result<Vec<UnitPathNodeView>, 
                 current,
                 review_due: done && due_here > 0,
                 due_count: due_here,
+                in_progress,
+                refs_done,
+                refs_total: refs.len(),
                 unlock_hint,
             });
         }
@@ -15743,6 +15794,115 @@ activities:
             first.review_due && first.due_count >= 1,
             "a done unit with due items re-lights as review-due"
         );
+    }
+
+    /// PATH-VISUAL-001 done-threshold audit + IN-PROGRESS state (owner
+    /// dogfood 2026-11-22: a pin sat past units the learner had genuinely
+    /// worked, yet every section said "0/20 units done"). The audit's
+    /// answer, documented in state/notes/PATH-VISUAL-001.md:
+    /// - `done` stays the evidence floor: EVERY scheduled ref at
+    ///   `introduced` mastery. A fully-drilled letter session flips it.
+    /// - partial work or a completed encounter opens `in_progress`
+    ///   (half-filled ring), so started-but-unproven units are VISIBLE.
+    /// - the encounter row alone NEVER closes the done gate.
+    #[test]
+    fn letter_unit_goes_in_progress_then_done_as_its_refs_are_proven() {
+        let ru = "org.openlanguage.ru-ru.reference";
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_reference_pack_fast(data, ru).unwrap();
+        let p = create_local_profile(data, "Rampart").unwrap();
+        finish_onboarding(data, &p.id, Some(ru), false).unwrap();
+        let unit = "ru.unit.on-ramp.cyrillic-a-o-m-t";
+        let letters = [
+            "ru.orth.cyrillic.a",
+            "ru.orth.cyrillic.o",
+            "ru.orth.cyrillic.m",
+            "ru.orth.cyrillic.t",
+        ];
+        fn find<'a>(nodes: &'a [UnitPathNodeView], unit: &str) -> &'a UnitPathNodeView {
+            nodes
+                .iter()
+                .find(|n| n.unit_id == unit)
+                .expect("the first letter unit is on the path")
+        }
+
+        // Untouched: not done, NOT in progress — the path shows it ready.
+        let nodes = unit_path_at(data, &p.id).unwrap();
+        let n = find(&nodes, unit);
+        assert!(!n.done && !n.in_progress, "a unit nobody visited is ready");
+        assert_eq!(
+            n.refs_total,
+            letters.len(),
+            "the ring's denominator is the unit's own refs"
+        );
+        assert_eq!(n.refs_done, 0);
+
+        // The learner MEETS the letters (completes the authored encounter).
+        // Exposure starts the unit; it must not fake a finish.
+        let recorded = encounter_complete_at(data, &p.id, unit).unwrap();
+        assert_eq!(recorded as usize, letters.len(), "one row per letter");
+        let nodes = unit_path_at(data, &p.id).unwrap();
+        let n = find(&nodes, unit);
+        assert!(
+            n.in_progress,
+            "a met-but-untested unit is in progress, never invisible"
+        );
+        assert!(!n.done, "encounter rows are exposure, never mastery");
+        assert_eq!(n.refs_done, 0, "exposure proves no ref");
+
+        // The owner's exact contradiction: three of four letters drilled
+        // correct (the drill rotation starved `t`). Honest reading: three
+        // of four refs proven — in progress with an HONEST fill fraction,
+        // not done, and never rendered as if nothing happened.
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        for (i, c) in letters[..3].iter().enumerate() {
+            let mut ev = attempt(
+                c,
+                lts_domain::ActivityModality::OrthographyRecognition,
+                &format!("ru.expr.ramp-{i}"),
+                0,
+                &format!("2026-11-22T10:0{}:00Z", i),
+                &format!("ramp-ev-{i}"),
+                &p.id,
+            );
+            ev.pack_id = ru.into();
+            store.append_evidence(&ev).unwrap();
+        }
+        let nodes = unit_path_at(data, &p.id).unwrap();
+        let n = find(&nodes, unit);
+        assert_eq!(
+            n.refs_done, 3,
+            "three drilled letters are three proven refs"
+        );
+        assert!(
+            n.in_progress && !n.done,
+            "3/4 proven reads as in progress, not 0/20 done"
+        );
+
+        // The red test the card names: ONE fully-completed letter session —
+        // every ref drilled correct once — flips the unit DONE (the
+        // policy's introduced floor is one valid observation, and one
+        // honest session supplies exactly that for every ref).
+        let mut ev = attempt(
+            letters[3],
+            lts_domain::ActivityModality::OrthographyRecognition,
+            "ru.expr.ramp-3",
+            0,
+            "2026-11-22T10:03:00Z",
+            "ramp-ev-3",
+            &p.id,
+        );
+        ev.pack_id = ru.into();
+        store.append_evidence(&ev).unwrap();
+        let nodes = unit_path_at(data, &p.id).unwrap();
+        let n = find(&nodes, unit);
+        assert!(
+            n.done,
+            "a fully-drilled letter session flips the letter unit DONE"
+        );
+        assert!(!n.in_progress, "done subsumes in-progress");
+        assert_eq!(n.refs_done, n.refs_total);
     }
 
     /// PATH-WHATSNEXT-001 (the Codemm rule): exactly ONE offer — a due

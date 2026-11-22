@@ -1545,6 +1545,12 @@ export class LearnerEngine {
           current: [...u.refs].some((r) => currentPool.has(r)),
           review_due: false,
           due_count: 0,
+          // PATH-VISUAL-001: the fixture world carries no mastery ledger
+          // and no encounter rows, so no unit is started — the mirror
+          // answers these fields honestly, not by invention.
+          in_progress: false,
+          refs_done: 0,
+          refs_total: u.refs.size,
           unlock_hint: null as string | null,
         }));
       }

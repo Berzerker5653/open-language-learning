@@ -18,6 +18,9 @@ const node = (over: Partial<UnitPathNode>): UnitPathNode => ({
   current: false,
   review_due: false,
   due_count: 0,
+  in_progress: false,
+  refs_done: 0,
+  refs_total: 4,
   unlock_hint: null,
   ...over,
 });
@@ -90,5 +93,50 @@ describe("unit path (PATH-VIEW-001)", () => {
     expect(pathNodeState(node({ current: true, done: true, review_due: true }))).toBe("current");
     expect(pathNodeState(node({ done: true, review_due: true }))).toBe("review-due");
     expect(pathNodeState(node({}))).toBe("ready");
+  });
+
+  it("renders a started-but-unproven unit as an in-progress ring filled to the honest fraction", () => {
+    // PATH-VISUAL-001: the dogfood contradiction — the learner drilled 3
+    // of this unit's 4 refs (one ref starved by the rotation), so the
+    // engine says NOT done but STARTED. The path must SHOW that, not a
+    // flat open circle beside a pin that sits past it.
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({
+            unit_id: "ru.unit.on-ramp.cyrillic-a-o-m-t",
+            in_progress: true,
+            refs_done: 3,
+            refs_total: 4,
+          }),
+          node({ unit_id: "ru.unit.on-ramp.cyrillic-k-e-n-s", current: true }),
+        ]}
+      />,
+    );
+    expect(html).toContain('data-state="in-progress"');
+    // The ring arc is drawn at the engine's honest fraction, not a fake
+    // "half" — 3/4 proven renders as a 75% arc.
+    expect(html).toContain('data-fill="0.75"');
+    expect(html).toContain('stroke-dasharray="75 25"');
+    expect(html).toContain("In progress (3/4 learned)");
+    // And the section counter still counts PROVEN-DONE only.
+    expect(html).toContain("0/2 units done");
+  });
+
+  it("winds: node rings sway along a deterministic wave with connector stubs", () => {
+    // PATH-VISUAL-001: the flat list is what the owner rejected. The
+    // markup must carry the winding geometry — a sway that is a pure
+    // function of position, and connectors hanging off each ring.
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={Array.from({ length: 4 }, (_, i) =>
+          node({ unit_id: `ru.unit.w.${i}`, in_progress: i === 0, refs_done: 1 }),
+        )}
+      />,
+    );
+    expect(html).toContain("--path-sway:0px");
+    expect(html).toContain("--path-sway:29px");
+    expect(html).toContain("path-conn--down");
+    expect(html).toContain("path-conn--up");
   });
 });

@@ -1,0 +1,164 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "a fully-drilled letter unit is DONE on the API",
+      "pass": true,
+      "measured": {
+        "done": [
+          "ru.unit.on-ramp.cyrillic-a-o-m-t",
+          "ru.unit.on-ramp.cyrillic-k-e-n-s"
+        ]
+      }
+    },
+    {
+      "name": "a three-of-four unit is IN PROGRESS with an honest partial fill",
+      "pass": true,
+      "measured": [
+        {
+          "unit": "ru.unit.on-ramp.cyrillic-stress-review",
+          "refs_done": 8,
+          "refs_total": 36
+        }
+      ]
+    },
+    {
+      "name": "the pin sits on a unit the learner started (never past real progress)",
+      "pass": true,
+      "measured": [
+        {
+          "unit": "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+          "in_progress": false,
+          "refs_done": 0,
+          "refs_total": 4
+        },
+        {
+          "unit": "ru.unit.on-ramp.cyrillic-b-p-d-g",
+          "in_progress": false,
+          "refs_done": 0,
+          "refs_total": 7
+        },
+        {
+          "unit": "ru.unit.on-ramp.cyrillic-stress-review",
+          "in_progress": true,
+          "refs_done": 8,
+          "refs_total": 36
+        }
+      ]
+    },
+    {
+      "name": "units ahead of the visited pair stay locked",
+      "pass": true,
+      "measured": {
+        "lockedSample": [
+          "ru.unit.on-ramp.greetings-01",
+          "ru.unit.on-ramp.greetings-02"
+        ]
+      }
+    },
+    {
+      "name": "the pinned section counts at least one proven-done unit (no 0-done-past-a-pin)",
+      "pass": true,
+      "measured": {
+        "pinBand": "on-ramp",
+        "bandDone": 2
+      }
+    },
+    {
+      "name": "home reached a stable pack-loaded state before measurement (no load flicker)",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    },
+    {
+      "name": "every open-section node renders a ring",
+      "pass": true,
+      "measured": {
+        "ringCount": 20
+      }
+    },
+    {
+      "name": "the track WINDS: ring centers sway across the column (flat list would be 0)",
+      "pass": true,
+      "measured": {
+        "xSpreadPx": 58
+      }
+    },
+    {
+      "name": "some current node's ring is FILLED to an honest fraction (never empty past real work)",
+      "pass": true,
+      "measured": {
+        "currentFills": [
+          "0.00",
+          "0.00",
+          "0.22"
+        ]
+      }
+    },
+    {
+      "name": "started-but-unproven work is visible (in-progress node or a filled pin ring)",
+      "pass": true,
+      "measured": {
+        "inProgressCount": 0,
+        "inProgressLabel": null
+      }
+    },
+    {
+      "name": "locked nodes carry a drawn lock glyph",
+      "pass": true,
+      "measured": {
+        "lockedWithGlyph": 10
+      }
+    },
+    {
+      "name": "the open section is a banner with a friendly name and CEFR subtitle",
+      "pass": true,
+      "measured": "Getting started / Pre-A1"
+    },
+    {
+      "name": "the section counter counts PROVEN-DONE only (matches the API's done nodes)",
+      "pass": true,
+      "measured": {
+        "domCounter": "2/20 units done",
+        "apiBandDone": 2
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-1752f27c-f1e2-40f4-bc5b-a769d0b161a9",
+  "seed": {
+    "unitFully": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    "drilledFully": [
+      "ru.orth.cyrillic.a",
+      "ru.orth.cyrillic.o",
+      "ru.orth.cyrillic.m",
+      "ru.orth.cyrillic.t",
+      "ru.orth.cyrillic.a",
+      "ru.orth.cyrillic.o",
+      "ru.orth.cyrillic.m",
+      "ru.orth.cyrillic.t",
+      "ru.orth.cyrillic.a",
+      "ru.orth.cyrillic.o",
+      "ru.orth.cyrillic.m",
+      "ru.orth.cyrillic.t"
+    ],
+    "unitPartial": "ru.unit.on-ramp.cyrillic-k-e-n-s",
+    "drilledPartial": [
+      "ru.orth.cyrillic.k",
+      "ru.orth.cyrillic.e",
+      "ru.orth.cyrillic.n",
+      "ru.orth.cyrillic.s",
+      "ru.orth.cyrillic.k",
+      "ru.orth.cyrillic.e",
+      "ru.orth.cyrillic.n",
+      "ru.orth.cyrillic.s",
+      "ru.orth.cyrillic.k",
+      "ru.orth.cyrillic.e",
+      "ru.orth.cyrillic.n"
+    ],
+    "partialTotal": 12
+  },
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17915 (trusted network only)\n"
+}

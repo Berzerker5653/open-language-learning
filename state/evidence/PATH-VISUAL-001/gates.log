@@ -1,0 +1,27 @@
+== PATH-VISUAL-001 LANE gates (run 2026-11-22T15:14:36-07:00, unit lts-pv1g4) ==
+--- cargo fmt --all --check
+FMT-OK
+--- cargo clippy -p lts-desktop --all-targets -- -D warnings
+clippy exit: 0
+--- cargo test -p lts-desktop --lib (full lib suite)
+rusttest exit: 101
+test tests::placement_coverage_names_why_a_rubric_has_no_question ... FAILED
+test result: FAILED. 227 passed; 1 failed; 2 ignored; 0 measured; 0 filtered out; finished in 260.72s
+test tests::letter_unit_goes_in_progress_then_done_as_its_refs_are_proven has been running for over 60 seconds
+test tests::letter_unit_goes_in_progress_then_done_as_its_refs_are_proven ... ok
+test tests::unit_path_done_never_reads_attendance_only ... ok
+--- npx tsc --noEmit (apps/desktop)
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'tsc' --noEmit
+TSC-OK
+--- npx vitest run (apps/desktop)
+vitest exit: 0
+[2m Test Files [22m [1m[32m61 passed[39m[22m[90m (61)[39m
+[2m      Tests [22m [1m[32m485 passed[39m[22m[90m (485)[39m
+--- serve binary build (--features serve)
+servebuild exit: 0
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 6.33s
+DONE-PV1-GATES
+== CONTROLLER RUN 177 addendum ==
+placement_coverage_names_why_a_rubric_has_no_question is HEAD-RED at c1ca2fe AND at 1451aef (worktree runs, shared target): pre-existing mainline rot, NOT this lane; suite otherwise 227/228 green incl. letter_unit_goes_in_progress + unit_path_done_never_reads_attendance_only. Fix card should be opened by the planner.

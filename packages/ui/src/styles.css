@@ -1313,33 +1313,43 @@ th:last-child {
   fill-opacity: 1;
 }
 
-/* PATH-VIEW-001: the Today tab's unit path (PROGRESS-PATH-DESIGN-001
-   phase 1). Mobile-first: every section control and node row meets the
-   same 44px touch floor the mobile audit measures (2.75rem). Locked
-   nodes stay visible and dim (owner decision 2026-11-22), the pinned
-   node stands out, and a done unit re-lights when reviews are due. */
+/* PATH-VIEW-001 + PATH-VISUAL-001: the Today tab's unit path rendered as
+   a JOURNEY, not a list (owner dogfood 2026-11-22: "I wanted it to look
+   and feel like the other apps"). A winding vertical track: circular
+   node rings that sway along a wave, dashed connectors between them,
+   section banners between node groups. States: locked = dim ring + lock,
+   ready = open ring, in-progress = the ring arc FILLED to the honest
+   proven-ref fraction, done = filled + check, review-due = a re-lit
+   ring. Mobile-first: every control and node meets the 44px touch floor
+   (the ring is 3rem = 48px). */
 .unit-path {
   display: grid;
-  gap: 0.5rem;
+  gap: 0.75rem;
   margin-top: 1.25rem;
 }
 
 .path-section {
-  border: 1px solid var(--line);
-  border-radius: 0.75rem;
-  background: var(--surface);
+  border: none;
+  border-radius: 0;
+  background: none;
 }
 
+/* Section breaks ride wide banners: friendly name big, CEFR subtitle
+   small, the proven-done count honest (never visits or encounters). */
 .path-section-toggle {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0.2rem 0.6rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "name count"
+    "cefr count";
+  align-items: center;
+  gap: 0.1rem 0.75rem;
   width: 100%;
-  min-height: 2.75rem;
-  padding: 0.6rem 0.75rem;
-  background: none;
-  border: none;
+  min-height: 3.25rem;
+  padding: 0.65rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
   color: inherit;
   font: inherit;
   text-align: left;
@@ -1347,78 +1357,198 @@ th:last-child {
 }
 
 .path-section-name {
-  font-weight: 600;
-  font-size: 1.05rem;
+  grid-area: name;
+  font-weight: 700;
+  font-size: 1.15rem;
 }
 
 .path-section-cefr {
+  grid-area: cefr;
   color: var(--ink-faint);
+  font-size: 0.85rem;
 }
 
 .path-section-count {
-  margin-left: auto;
+  grid-area: count;
   color: var(--ink-faint);
   font-size: 0.875rem;
+  white-space: nowrap;
 }
 
+/* The winding column: nodes sway along `--path-sway` (computed in the
+   component), and each ring carries dashed connector stubs angled to its
+   neighbours. No border rail — the connectors ARE the road. */
 .path-nodes {
   list-style: none;
   display: grid;
-  gap: 0.25rem;
-  margin: 0;
-  padding: 0.25rem 0.75rem 0.75rem 1rem;
-  border-left: 2px solid var(--line-strong);
-  margin-left: 1.4rem;
+  gap: 0.75rem;
+  margin: 0.5rem 0 0;
+  padding: 0.25rem 0.5rem 0.5rem;
 }
 
 .path-node {
-  display: flex;
-  gap: 0.6rem;
-  align-items: flex-start;
-  min-height: 2.75rem;
-  padding: 0.5rem 0.5rem;
-  border-radius: 0.5rem;
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 4.75rem;
+  padding: 0.1rem 0.25rem;
+  border-radius: 0.75rem;
+}
+
+.path-node-ring {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  /* the wave: the ring sways along the deterministic path */
+  transform: translateX(var(--path-sway, 0px));
+}
+
+.path-node-dial {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.path-node-track {
+  fill: var(--surface-raised, var(--surface));
+  stroke: var(--line-strong);
+  stroke-width: 2.5;
+}
+
+.path-node-arc {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3.5;
+  stroke-linecap: round;
 }
 
 .path-node-marker {
-  width: 1.4rem;
-  text-align: center;
-  font-size: 1.1rem;
-  line-height: 1.4;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.path-node-lock {
+  width: 1rem;
+  height: 1rem;
+  color: var(--ink-faint);
+}
+
+/* The road: dashed stubs angled from this ring toward the next one. */
+.path-conn {
+  position: absolute;
+  left: 50%;
+  width: 0;
+  height: 2.9rem;
+  border-left: 3px dashed var(--line-strong);
+  opacity: 0.7;
+}
+
+.path-conn--down {
+  top: calc(100% - 0.3rem);
+  transform: translateX(-50%) rotate(var(--path-conn-down, 0deg));
+  transform-origin: top center;
+}
+
+.path-conn--up {
+  bottom: calc(100% - 0.3rem);
+  transform: translateX(-50%) rotate(var(--path-conn-up, 0deg));
+  transform-origin: bottom center;
+}
+
+.path-node-body {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
 }
 
 .path-node-title {
   font-size: 1rem;
+  line-height: 1.3;
 }
 
+/* States — engine-derived, never invented here. */
 .path-node--locked {
   opacity: 0.55;
 }
 
-.path-node--done .path-node-marker {
-  color: var(--ok);
+.path-node--locked .path-node-arc {
+  stroke: transparent;
 }
 
-.path-node--review-due {
-  background: var(--warn-soft);
+.path-node--done .path-node-track {
+  fill: var(--ok);
+  stroke: var(--ok);
+}
+
+.path-node--done .path-node-arc {
+  stroke: var(--ok);
+}
+
+.path-node--done .path-node-marker {
+  color: var(--surface, #fff);
+}
+
+.path-node--review-due .path-node-track {
+  stroke: var(--warn);
+}
+
+.path-node--review-due .path-node-arc {
+  stroke: var(--warn);
+}
+
+.path-node--review-due .path-node-ring {
+  box-shadow: 0 0 0 4px var(--warn-soft);
+  border-radius: 50%;
 }
 
 .path-node--review-due .path-node-marker {
   color: var(--warn);
 }
 
-.path-node--current {
-  background: var(--accent-soft);
-  outline: 1px solid var(--accent);
+.path-node--current .path-node-track {
+  fill: var(--accent-soft);
+  stroke: var(--accent);
+  stroke-width: 3.5;
+}
+
+.path-node--current .path-node-ring {
+  width: 3.5rem;
+  height: 3.5rem;
+  box-shadow: 0 0 0 5px var(--accent-soft);
+  border-radius: 50%;
 }
 
 .path-node--current .path-node-marker {
   color: var(--accent);
 }
 
+/* PATH-VISUAL-001: started-but-unproven. The arc fills to the honest
+   proven-ref fraction (0 when the learner only MET the material), and
+   the row names the fraction — the honest answer to the dogfood
+   contradiction "pinned past a unit, yet 0/20 done". */
+.path-node--in-progress .path-node-track {
+  stroke: var(--accent);
+}
+
 .path-node-pin {
-  display: block;
-  color: var(--accent-ink);
+  display: inline-block;
+  color: var(--accent-ink, var(--accent));
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.path-node-progress {
+  color: var(--ink-faint);
   font-size: 0.85rem;
 }
 

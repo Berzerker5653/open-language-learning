@@ -7,7 +7,7 @@
  * streak/attendance surface anywhere (ADR-0002).
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { LatinText, PackText } from "@openlang/ui";
 export interface PlannedItem {
   item_id: string;
@@ -917,6 +917,15 @@ export interface UnitPathNode {
   current: boolean;
   review_due: boolean;
   due_count: number;
+  /** PATH-VISUAL-001: started but unproven — the learner has MET at
+   * least one ref (completed encounter) or already holds evidence on one.
+   * The ring renders partially filled; `done` stays evidence-only. */
+  in_progress: boolean;
+  /** PATH-VISUAL-001: evidence-backed proven refs over scheduled refs —
+   * the ring's fill fraction, and the reason the section counter can say
+   * "0 done" honestly while a visited unit still LOOKS visited. */
+  refs_done: number;
+  refs_total: number;
   unlock_hint: string | null;
 }
 
@@ -958,11 +967,16 @@ export function pathSections(nodes: UnitPathNode[]): { band: string; nodes: Unit
 }
 
 /** One honest state per node for styling and the mobile audit. Locked wins
- * over everything (a locked node is never clickable), the pin over done. */
+ * over everything (a locked node is never clickable), the pin over done.
+ * PATH-VISUAL-001: `in-progress` (started but unproven) ranks below the
+ * pin — a pinned unit that was also visited still shows its fill ring,
+ * because the ring fraction rides refs_done/refs_total in the markup,
+ * not this label. */
 export function pathNodeState(n: UnitPathNode): string {
   if (n.locked) return "locked";
   if (n.current) return "current";
   if (n.done) return n.review_due ? "review-due" : "done";
+  if (n.in_progress) return "in-progress";
   return "ready";
 }
 
@@ -972,7 +986,34 @@ const PATH_MARKERS: Record<string, string> = {
   current: "◉",
   done: "✓",
   "review-due": "⟳",
+  // PATH-VISUAL-001: the half-filled ring is drawn, not glyphed — the
+  // ring arc itself is the state marker.
+  "in-progress": "",
 };
+
+/** PATH-VISUAL-001 winding track: node sway follows a smooth wave down
+ * the column (Duolingo's grammar), never random jitter — deterministic
+ * from the node index so the mobile audit and the vitest contract see
+ * the same geometry every run. */
+export const PATH_SWAY_AMP_PX = 34;
+/** Nominal row pitch the connector stub angles are computed against.
+ * The stubs hang off the ring itself, so when a row grows (a long title
+ * or an unlock hint) the wave still reads continuous. */
+export const PATH_ROW_PITCH_PX = 76;
+export function pathSway(index: number): number {
+  return Math.round(PATH_SWAY_AMP_PX * Math.sin((index * 2 * Math.PI) / 6));
+}
+
+/** The lock on a locked node — drawn, never an emoji (the ring itself
+ * is the state; this just names WHY the node is inert). */
+function PathLockGlyph() {
+  return (
+    <svg viewBox="0 0 16 16" className="path-node-lock" aria-hidden="true">
+      <path d="M5 7V5a3 3 0 0 1 6 0v2" fill="none" strokeWidth="1.6" stroke="currentColor" />
+      <rect x="3.5" y="7" width="9" height="6.5" rx="1.4" fill="currentColor" />
+    </svg>
+  );
+}
 
 /**
  * The path itself: a scrolling journey of unit nodes. Only the section that
@@ -1025,6 +1066,8 @@ export function PathView({
       {sections.map((s) => {
         const header = bandHeader(s.band);
         const isOpen = openBand === s.band;
+        // PATH-VISUAL-001: the counter counts PROVEN-DONE only — refs the
+        // learner actually proved — never visits or encounters.
         const doneCount = s.nodes.filter((n) => n.done).length;
         return (
           <div key={s.band} className="path-section" data-band={s.band}>
@@ -1042,8 +1085,28 @@ export function PathView({
             </button>
             {isOpen ? (
               <ol className="path-nodes">
-                {s.nodes.map((n) => {
+                {s.nodes.map((n, i) => {
                   const state = pathNodeState(n);
+                  const fill =
+                    n.refs_total > 0 ? Math.min(1, n.refs_done / n.refs_total) : 0;
+                  // The winding geometry: a deterministic sway wave, and
+                  // dashed connector stubs whose angle rides the sway
+                  // delta to the neighbours — stubs are attached to the
+                  // ring, so variable row heights never break the track.
+                  const sway = pathSway(i);
+                  const dy = PATH_ROW_PITCH_PX;
+                  const downDeg =
+                    i + 1 < s.nodes.length
+                      ? (Math.atan2(pathSway(i + 1) - sway, dy) * 180) / Math.PI
+                      : 0;
+                  const upDeg =
+                    i > 0 ? (Math.atan2(sway - pathSway(i - 1), dy) * 180) / Math.PI : 0;
+                  const style = {
+                    "--path-fill": String(fill),
+                    "--path-sway": `${sway}px`,
+                    "--path-conn-down": `${downDeg}deg`,
+                    "--path-conn-up": `${upDeg}deg`,
+                  } as CSSProperties;
                   return (
                     <li
                       key={n.unit_id}
@@ -1051,14 +1114,42 @@ export function PathView({
                       className={`path-node path-node--${state}`}
                       data-testid={`path-node-${n.unit_id}`}
                       data-state={state}
+                      style={style}
                     >
-                      <span className="path-node-marker" aria-hidden="true">
-                        {PATH_MARKERS[state]}
+                      <span
+                        className={`path-node-ring path-node-ring--${state}`}
+                        data-testid={`path-ring-${n.unit_id}`}
+                        data-fill={fill.toFixed(2)}
+                        aria-hidden="true"
+                      >
+                        {i > 0 ? <span className="path-conn path-conn--up" /> : null}
+                        {i + 1 < s.nodes.length ? (
+                          <span className="path-conn path-conn--down" />
+                        ) : null}
+                        <svg viewBox="0 0 44 44" className="path-node-dial">
+                          <circle className="path-node-track" cx="22" cy="22" r="18" />
+                          <circle
+                            className="path-node-arc"
+                            cx="22"
+                            cy="22"
+                            r="18"
+                            pathLength={100}
+                            strokeDasharray={`${Math.round(fill * 100)} ${100 - Math.round(fill * 100)}`}
+                          />
+                        </svg>
+                        <span className="path-node-marker">
+                          {state === "locked" ? <PathLockGlyph /> : PATH_MARKERS[state]}
+                        </span>
                       </span>
                       <span className="path-node-body">
                         <span className="path-node-title">{n.title}</span>
                         {state === "current" ? (
                           <span className="path-node-pin">You are here</span>
+                        ) : null}
+                        {state === "in-progress" ? (
+                          <span className="path-node-progress">
+                            In progress ({n.refs_done}/{n.refs_total} learned)
+                          </span>
                         ) : null}
                         {state === "review-due" ? (
                           <span
