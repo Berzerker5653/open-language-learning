@@ -1184,10 +1184,11 @@ export function App() {
     // WEB-PROGRESS-001: in serve mode the stages arrive over the bridge
     // (`GET /api/progress/events`) and feed the SAME state the desktop
     // listener feeds — one progress UI, whichever transport carried the stage.
-    if (inLtsServeMode()) return subscribeServeProgress((p) => {
-      progressStages.push(p);
-      setEngineProgress(p);
-    });
+    if (inLtsServeMode())
+      return subscribeServeProgress((p) => {
+        progressStages.push(p);
+        setEngineProgress(p);
+      });
     // No bridge (plain browser tab, test DOM) means no event source: importing
     // the Tauri event API there would fail, so the listener is not registered.
     if (!("__TAURI_INTERNALS__" in window)) return;

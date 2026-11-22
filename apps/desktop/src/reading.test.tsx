@@ -189,9 +189,7 @@ describe("paragraph reader structure (READER-FLOW-001)", () => {
     // state/notes/READER-FLOW-001.md OFF-PACK SLICE addendum).
     expect(html).toContain("present, gift");
     expect(html).toContain("auxiliary dictionary");
-    expect(html).toContain(
-      "Definitions from Wiktionary via kaikki.org (CC BY-SA / GFDL)",
-    );
+    expect(html).toContain("Definitions from Wiktionary via kaikki.org (CC BY-SA / GFDL)");
     expect(html).toContain(">подарок<");
     // Mine stays offered; the card never claims pack membership.
     expect(html).toContain(">Mine</button>");

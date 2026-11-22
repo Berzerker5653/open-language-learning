@@ -1412,7 +1412,7 @@ export class LearnerEngine {
           return {
             id: p.id,
             display_name: p.display_name,
-            pack: firstPack ? this.installed.get(firstPack)?.display_name ?? null : null,
+            pack: firstPack ? (this.installed.get(firstPack)?.display_name ?? null) : null,
             band: null,
             due_count: p.installs.length ? p.schedule.length : null,
             last_studied: p.events ? new Date(Date.now() - 2 * 86_400_000).toISOString() : null,

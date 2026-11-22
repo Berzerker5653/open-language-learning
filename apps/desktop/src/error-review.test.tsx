@@ -170,9 +170,7 @@ describe("error-review drill queue (D3 drill view)", () => {
   });
 
   it("the due list names cards by lemma, never spoiling the drilled form", () => {
-    const html = renderToStaticMarkup(
-      <ErrorReviewPanel {...PANEL} cards={[CARD]} review={null} />,
-    );
+    const html = renderToStaticMarkup(<ErrorReviewPanel {...PANEL} cards={[CARD]} review={null} />);
     expect(html).toContain("книга");
     expect(html).not.toContain("книги");
   });

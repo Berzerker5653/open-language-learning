@@ -67,8 +67,7 @@ describe("keyboard-only route walk", () => {
     const stops = tabStops();
     const lee = stops.find(
       (el) =>
-        el.textContent?.trim() === "Lee" ||
-        (el.getAttribute("aria-label") ?? "").includes("Lee"),
+        el.textContent?.trim() === "Lee" || (el.getAttribute("aria-label") ?? "").includes("Lee"),
     );
     if (!lee) throw new Error("the resume picker offered no tab-reachable profile");
     await press(lee);

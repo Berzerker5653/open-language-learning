@@ -14,7 +14,7 @@ only (owner directive 2026-11-19).
 - [ ] Web: `pnpm fmt:check`, `pnpm lint`, `pnpm typecheck` (tsc strict),
       `pnpm test` (vitest), `pnpm build` — web job
 - [ ] Pack conformance: `langpack validate|lint|test` (plus `audit-curriculum
-      |audit-lexicon|audit-licenses|audit-sources` for pack changes) —
+    |audit-lexicon|audit-licenses|audit-sources` for pack changes) —
       rust-conformance job, `scripts/ci.sh`
 - [ ] Id charsets `^[a-z0-9]+(?:[._-][a-z0-9]+)*$`, pack ids
       `^[a-z][a-z0-9.-]+$` — `crates/domain/src/ids.rs` via the langpack CLI

@@ -22,13 +22,7 @@ import { PackText, usePackTextAttrs } from "@openlang/ui";
 /** Wire mirror of `FormErrorClass` (crates/activity/src/form_errors.rs,
  * kebab-case serde). `other` is the engine's honest fallback and is
  * labeled as one, never dressed up as a named grammar term. */
-export type FormErrorClass =
-  | "case"
-  | "aspect"
-  | "stress"
-  | "agreement"
-  | "wrong-word"
-  | "other";
+export type FormErrorClass = "case" | "aspect" | "stress" | "agreement" | "wrong-word" | "other";
 
 /** Wire mirror of `FormErrorOffer` — an explicit per-form review offer
  * riding on a dictation or writing verdict. Nothing is scheduled by it. */
@@ -171,8 +165,8 @@ export function ErrorReviewPanel(p: ErrorReviewPanelProps) {
     <section aria-label="Form reviews">
       <h1>Form reviews</h1>
       <p className="empty">
-        Forms you asked to work on after a mistake. Reviews are self-graded and stay on this
-        device; they never count as mastery evidence.
+        Forms you asked to work on after a mistake. Reviews are self-graded and stay on this device;
+        they never count as mastery evidence.
       </p>
       {p.error && (
         <p role="alert" className="alert">

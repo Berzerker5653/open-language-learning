@@ -22,9 +22,7 @@ const stats = (over: Partial<MemoryStats> = {}): MemoryStats => ({
 
 describe("MemoryStatsStrip", () => {
   it("names due work with the engine's own minute price, marked as an estimate", () => {
-    const html = renderToStaticMarkup(
-      <MemoryStatsStrip stats={stats()} today="2026-11-21" />,
-    );
+    const html = renderToStaticMarkup(<MemoryStatsStrip stats={stats()} today="2026-11-21" />);
     expect(html).toContain("3 cards are due today");
     expect(html).toContain("about 2 minutes of review");
     expect(html).toContain('data-due-today="3"');
@@ -32,10 +30,7 @@ describe("MemoryStatsStrip", () => {
 
   it("says nothing is due without inventing a time figure", () => {
     const html = renderToStaticMarkup(
-      <MemoryStatsStrip
-        stats={stats({ due_today: 0, est_minutes: 0 })}
-        today="2026-11-21"
-      />,
+      <MemoryStatsStrip stats={stats({ due_today: 0, est_minutes: 0 })} today="2026-11-21" />,
     );
     expect(html).toContain("Nothing is due today");
     expect(html).not.toContain("about 0");
@@ -54,7 +49,9 @@ describe("MemoryStatsStrip", () => {
 
   it("renders the 12-week calendar as local counts only, with a summary label", () => {
     const html = renderToStaticMarkup(<MemoryStatsStrip stats={stats()} today="2026-11-21" />);
-    expect(html).toContain("Activity calendar, last 12 weeks: 2 active days, busiest day 3 exercises");
+    expect(html).toContain(
+      "Activity calendar, last 12 weeks: 2 active days, busiest day 3 exercises",
+    );
     expect(html).toContain('data-date="2026-11-20"');
     expect(html).toContain('data-events="3"');
     expect(html).toContain("2 of the last 84 days had practice");

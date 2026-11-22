@@ -508,10 +508,7 @@ export function Home(p: HomeProps) {
                   // session plan prices, not a new guess.
                   <p className="meta plan-due-budget">
                     {items.length} due · about{" "}
-                    {Math.max(
-                      1,
-                      Math.round(items.reduce((s, it) => s + it.est_seconds, 0) / 60),
-                    )}{" "}
+                    {Math.max(1, Math.round(items.reduce((s, it) => s + it.est_seconds, 0) / 60))}{" "}
                     min
                   </p>
                 ) : null}
@@ -534,9 +531,7 @@ export function Home(p: HomeProps) {
                           // UI-HYGIENE-001: a plan row with no surface word
                           // still never shows the raw content id — the id's
                           // readable name segment stands in.
-                          <span className="plan-surface">
-                            {humanizeToken(item.content_id)}
-                          </span>
+                          <span className="plan-surface">{humanizeToken(item.content_id)}</span>
                         )}
                         {item.gloss && <LatinText>{item.gloss}</LatinText>}
                       </>

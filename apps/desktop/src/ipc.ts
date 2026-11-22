@@ -82,9 +82,7 @@ export async function fetchCapabilities(): Promise<ServeCapabilities | null> {
  * loses a stage, never an install — progress stays a nicety.
  * Returns the close function.
  */
-export function subscribeServeProgress(
-  onStage: (p: EngineProgress) => void,
-): () => void {
+export function subscribeServeProgress(onStage: (p: EngineProgress) => void): () => void {
   if (typeof EventSource === "undefined") return () => {};
   const es = new EventSource("/api/progress/events");
   es.onmessage = (e: MessageEvent<string>) => {

@@ -83,7 +83,8 @@ export function ActivityCalendar({ days, today }: { days: ActivityDay[]; today?:
             // Lightness speaks volume, not color: events 1..n map to a
             // bounded set of fill levels so contrast never depends on a
             // hue pair.
-            const level = cell.events === 0 ? 0 : Math.min(4, 1 + Math.ceil(Math.log2(cell.events)));
+            const level =
+              cell.events === 0 ? 0 : Math.min(4, 1 + Math.ceil(Math.log2(cell.events)));
             return (
               <rect
                 key={`${cell.date}`}
@@ -101,7 +102,9 @@ export function ActivityCalendar({ days, today }: { days: ActivityDay[]; today?:
         )}
       </svg>
       <p className="meta">
-        <small>{activeDays} of the last {WEEKS * 7} days had practice.</small>
+        <small>
+          {activeDays} of the last {WEEKS * 7} days had practice.
+        </small>
       </p>
     </div>
   );
@@ -113,8 +116,8 @@ export function MemoryStatsStrip({ stats, today }: { stats: MemoryStats; today?:
       <h2>Your memory, by the numbers</h2>
       <p className="meta">
         <small>
-          All of it is local data from your own practice — one learner&apos;s worth (n=1). These
-          are instruments for reading your memory, not a grade or a certificate.
+          All of it is local data from your own practice — one learner&apos;s worth (n=1). These are
+          instruments for reading your memory, not a grade or a certificate.
         </small>
       </p>
       <ul className="memory-stats-facts">

@@ -159,7 +159,14 @@ describe("Home session summary card and dues budget (U3/U6)", () => {
         plan={plan}
         activeBudget={10}
         onBudget={() => undefined}
-        sessionOutcome={{ done: 1, total: 1, reason: "finished", notRunnable: 0, minutes: 0, forms: [] }}
+        sessionOutcome={{
+          done: 1,
+          total: 1,
+          reason: "finished",
+          notRunnable: 0,
+          minutes: 0,
+          forms: [],
+        }}
       />,
     );
     expect(short).toContain("Under a minute on the activities.");
@@ -204,13 +211,19 @@ describe("PracticeHub graded/formative badges (U3)", () => {
   it("formative modes are badged formative", () => {
     const html = renderToStaticMarkup(<PracticeHub onOpen={() => undefined} />);
     // Each formative blurb sits right after its formative badge.
-    expect(html).toMatch(/data-grade-kind="formative"[^>]*>Formative<\/span><span class="meta"> — Read a sentence aloud/);
-    expect(html).toMatch(/data-grade-kind="formative"[^>]*>Formative<\/span><span class="meta"> — Speak along/);
+    expect(html).toMatch(
+      /data-grade-kind="formative"[^>]*>Formative<\/span><span class="meta"> — Read a sentence aloud/,
+    );
+    expect(html).toMatch(
+      /data-grade-kind="formative"[^>]*>Formative<\/span><span class="meta"> — Speak along/,
+    );
   });
 
   it("no formative card promises a score or grade in its own copy", () => {
     const html = renderToStaticMarkup(<PracticeHub onOpen={() => undefined} />);
-    const formativeCards = html.split("data-grade-kind=").filter((c) => c.startsWith('"formative"'));
+    const formativeCards = html
+      .split("data-grade-kind=")
+      .filter((c) => c.startsWith('"formative"'));
     for (const card of formativeCards) {
       // Scope the slice to THIS card's blurb: without the </li> bound the
       // text runs into the next card, whose badge class name contains
