@@ -2591,6 +2591,23 @@
       ],
       "summary": "All 20 RU stories reviewed: mechanical gate tools/qa_stories.py (structure, vocab budget, lexicon coverage, dictionary stress) green 20/20; sentence-level agent review fixed 6 naturalness/government/gloss defects, 4 wrong stress marks in shared cp sentences (стои́т горя́чий молоко́ уро́к) with cloze re-alignment, and added 14 missing lexicon glosses (incl. пахнуть whose B2 provenance claimed it). 8 changed-sentence ids queued for re-bake at next RU publish. Accepted for dogfood 2026-11-21, reversible, stories stay draft.",
       "updated": "2026-11-21"
+    },
+    "SESSION-FLOW-COPY-001": {
+      "task_id": "SESSION-FLOW-COPY-001",
+      "title": "One-click session flow with visible Next-bridge and en-US copy standard with ratchets",
+      "status": "done",
+      "attempts": 1,
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/SESSION-FLOW-COPY-001/gates.log",
+        "state/evidence/SESSION-FLOW-COPY-001/result.json",
+        "state/evidence/SESSION-FLOW-COPY-001/session-bridge.png",
+        "state/evidence/SESSION-FLOW-COPY-001/session-after-bridge.png",
+        "state/notes/SESSION-FLOW-COPY-001.md"
+      ],
+      "summary": "Sessions start once and flow: the first activity's lesson encounter is the single start, then advanceSession shows an announced 'Next: <verb>' bridge (role=status, own pause control, reduced-motion skips it, pause/stop/history cancel it) and opens the next runner with no lesson-card re-gate. Serve banner renders line-per-capability (word-salad repro fixed). en-US copy standard documented (GLOSSARY + CODING_STANDARDS) with a scripted sweep of UI strings, en-US glosses and RU curriculum summaries; audit_learner_copy v1.5.0 ratchets locale (kind locale-uk) and 'unit 000' id leaks over strings, jsx text, unit summaries/titles and glosses - repo audit findings: 0.",
+      "activity": "idle",
+      "updated": "2026-11-21"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

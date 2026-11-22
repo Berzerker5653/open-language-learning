@@ -3088,6 +3088,21 @@ tasks:
   - source fixes for flagged sentences ride the next RU publish with the re-bake id list recorded in the notes
   required_for_desktop_1_0: false
 
+- id: SESSION-FLOW-COPY-001
+  milestone: M8
+  priority: P1
+  title: One-click session flow with visible Next-bridge and en-US copy standard with ratchets
+  dependencies: []
+  read_first:
+  - state/notes/SESSION-FLOW-COPY-001.md
+  - apps/desktop/src/App.tsx
+  acceptance:
+  - a bounded session starts ONCE and flows between activities through an announced Next-what bridge that names the next activity and carries its own pause control, with the lesson card never re-gating mid-session
+  - the browser-mode serve banner renders one clean line per capability instead of joined word-salad
+  - en-US is the documented copy standard in GLOSSARY.md and CODING_STANDARDS.md and all learner-visible copy and UI strings carry US spellings
+  - audit_learner_copy enforces a locale rule and a unit-id-leak rule over source copy, unit summaries and titles, and en-US glosses, and the full repo audit run is green
+  - after-screenshots of the bridge plus the measured capture audit and lane gate logs land in state/evidence/SESSION-FLOW-COPY-001
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3211,4 +3226,5 @@ execution_scope:
   - SETTINGS-SCOPE-001
   - READING-CLUTTER-001
   - CONTENT-QA-STORIES-001
+  - SESSION-FLOW-COPY-001
   public_publication_authorized: false

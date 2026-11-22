@@ -1,0 +1,44 @@
+LANE gates for SESSION-FLOW-COPY-001 — run in an isolated worktree at HEAD
+(b65401b + lane changes; ~22:20-22:28 MST 2026-11-21). No Rust touched, so
+the lane tier is web + python only.
+
+- prettier --write over every lane-touched web file: applied (CI fmt:check
+  stays honest).
+- apps/desktop: npx tsc --noEmit -> exit 0.
+- apps/desktop: npx vitest run -> Test Files 59 passed (59),
+  Tests 474 passed (474). Includes the session journey's NEW bridge
+  assertions (bridge appears, names the next activity, runner then opens
+  with no Start control).
+- packages/ui: npx vitest run -> 2 files / 10 tests passed.
+- tools/test_audit_learner_copy.py (repo venv): Ran 17 tests OK
+  (incl. 4 new LocaleRulesTests for the locale + unit-id-leak rules).
+- python3 tools/audit_learner_copy.py (repo venv):
+  LEARNER COPY AUDIT v1.5.0: 39 source files scanned, 62 test files
+  skipped, 1848 pack files scanned - findings: 0.
+- python3 tools/qa_stories.py (repo venv): 20 stories, 0 FAIL
+  (pack-content sanity after the two en-US gloss edits).
+- node scripts/session-flow-capture.mjs -> SESSION FLOW GATE: PASS.
+  Measured: bridge label "Next: Recall" (role=status, its own pause
+  control), runner auto-opened afterwards with lessonCard=false and
+  ZERO "Start practicing" buttons in the DOM, harness navigation error
+  null. Screenshots: session-bridge.png (bridge + session chrome
+  "2 of 2 - ~1 min left"), session-after-bridge.png (next runner live).
+  result.json in this directory.
+
+Controller/coordination notes:
+- Sibling PRACTICE-GATE-001 and ORTHO-LETTER-UNITS-001 WIP sat in the shared
+  tree the whole run and was NEVER staged. The shared dirty files
+  (App.tsx, lesson.tsx, lesson.test.tsx, tools/audit_learner_copy.py,
+  tools/test_audit_learner_copy.py, curriculum units 010-018) were committed
+  as HEAD+lane-hunks via index graft; the lane hunks were ALSO applied to
+  the siblings' dirty working copies (word-level copy sed + patch) so their
+  later takeover commits carry them instead of clobbering them.
+- The audit tool's -upper/-lower rule from the ORTHO lane stays uncommitted
+  in THEIR lane (as they specified in their note); their takeover rebases it
+  onto v1.5.0 (VERSION line: their copy moved 1.3.0->1.4.0, main is now
+  1.5.0 - keep 1.5.0).
+- The unit-id-leak rule requested on the RU-REPUBLISH-046-001 card
+  (controller comment 2026-11-21, "unit 000 style bare ids in any learner
+  copy") is IMPLEMENTED here (rule shared per this card's coordination
+  clause); their 471-unit refs are content ids in wiring lists, not copy,
+  so they are not findings.

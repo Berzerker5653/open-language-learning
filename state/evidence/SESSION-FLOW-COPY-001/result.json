@@ -1,0 +1,72 @@
+{
+  "viewport": "390x844",
+  "mode": "phone",
+  "bridge": {
+    "label": "Next: Recall",
+    "announced": true,
+    "pauseControl": true
+  },
+  "afterBridge": {
+    "practiceOpen": true,
+    "lessonCard": false,
+    "startButtons": [],
+    "bridgeGone": true
+  },
+  "harness_audit": {
+    "screen": "session",
+    "error": null,
+    "fails": 1
+  },
+  "checks": [
+    {
+      "name": "bridge appears",
+      "pass": true,
+      "measured": {
+        "label": "Next: Recall",
+        "announced": true,
+        "pauseControl": true
+      }
+    },
+    {
+      "name": "bridge names the next activity (en-US 'Next: <what>')",
+      "pass": true,
+      "measured": "Next: Recall"
+    },
+    {
+      "name": "bridge is announced (role=status)",
+      "pass": true,
+      "measured": true
+    },
+    {
+      "name": "bridge carries its own pause control",
+      "pass": true,
+      "measured": true
+    },
+    {
+      "name": "runner auto-opened after the bridge",
+      "pass": true,
+      "measured": {
+        "practiceOpen": true,
+        "lessonCard": false,
+        "startButtons": [],
+        "bridgeGone": true
+      }
+    },
+    {
+      "name": "no lesson card re-gate, no Start control",
+      "pass": true,
+      "measured": {
+        "practiceOpen": true,
+        "lessonCard": false,
+        "startButtons": [],
+        "bridgeGone": true
+      }
+    },
+    {
+      "name": "harness navigation clean",
+      "pass": true,
+      "measured": null
+    }
+  ],
+  "pass": true
+}
