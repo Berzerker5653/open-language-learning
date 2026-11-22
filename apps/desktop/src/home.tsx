@@ -952,18 +952,41 @@ export function offerLabel(o: NextOffer): string {
     : `Next: ${o.title} — new material · about ${o.minutes} minutes`;
 }
 
-/** Engine order is curriculum order; consecutive nodes of one band form one
- * section (On-ramp / Beginner / Elementary …, CEFR as the small subtitle —
- * owner decision 2026-11-22). */
+/** PATH-SECTIONS-DEDUP-001 (owner dogfood 2026-11-22 complaint 09a): path
+ * sections are the CANONICAL band ladder — every band appears exactly once
+ * and every unit maps INTO its band, never beside it. The old rule grouped
+ * CONSECUTIVE nodes of one band, so the nine late-appended journey units
+ * (pack files 810–818: A2 past-events, B1 practical-problems, B2
+ * style-register — all honestly banded, all at the tail of file order)
+ * spawned a second A2/B1/B2 row under the main ladder. Grouping is now by
+ * band with a fixed section order: the BAND_HEADERS ladder (on-ramp → C2 →
+ * unlabeled), then any custom pack band in first-occurrence order.
+ * Nodes inside a section keep engine/curriculum order. The section `band`
+ * stays the pack's own raw string (first occurrence) so data-band selectors
+ * and the pinned-section logic are unchanged. */
 export function pathSections(nodes: UnitPathNode[]): { band: string; nodes: UnitPathNode[] }[] {
-  const sections: { band: string; nodes: UnitPathNode[] }[] = [];
+  const ladder = Object.keys(BAND_HEADERS);
+  const byKey = new Map<string, { band: string; nodes: UnitPathNode[]; rank: number }>();
   for (const n of nodes) {
-    const band = n.band ?? "other";
-    const last = sections[sections.length - 1];
-    if (last && last.band === band) last.nodes.push(n);
-    else sections.push({ band, nodes: [n] });
+    const raw = n.band && n.band.trim() ? n.band : "other";
+    const key = raw.trim().toLowerCase();
+    let section = byKey.get(key);
+    if (!section) {
+      const rung = ladder.indexOf(key);
+      section = {
+        band: raw,
+        nodes: [],
+        // Canonical ladder first; unknown pack bands follow it in
+        // first-occurrence order ("other", a known rung, still sorts last).
+        rank: rung >= 0 ? rung : ladder.length + byKey.size,
+      };
+      byKey.set(key, section);
+    }
+    section.nodes.push(n);
   }
-  return sections;
+  return [...byKey.values()]
+    .sort((a, b) => a.rank - b.rank)
+    .map((s) => ({ band: s.band, nodes: s.nodes }));
 }
 
 /** One honest state per node for styling and the mobile audit. Locked wins

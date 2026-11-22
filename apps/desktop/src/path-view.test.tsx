@@ -5,7 +5,7 @@
 // due, and sections carry friendly names with CEFR as the small subtitle.
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
-import { PathView, pathNodeState, type UnitPathNode } from "./home";
+import { PathView, pathNodeState, pathSections, type UnitPathNode } from "./home";
 
 const node = (over: Partial<UnitPathNode>): UnitPathNode => ({
   pack_id: "org.openlanguage.ru-ru.reference",
@@ -138,5 +138,78 @@ describe("unit path (PATH-VIEW-001)", () => {
     expect(html).toContain("--path-sway:29px");
     expect(html).toContain("path-conn--down");
     expect(html).toContain("path-conn--up");
+  });
+});
+
+// PATH-SECTIONS-DEDUP-001 (owner dogfood 2026-11-22 complaint 09a): the
+// path shows ONE section row per band. The pack's late-appended journey
+// groups (files 810–818: A2 past-events, B1 practical-problems, B2
+// style-register) sit at the tail of curriculum file order, honestly
+// banded — the old consecutive-run grouping rendered them as a SECOND
+// A2/B1/B2 ladder at 0/3 each. The rule under test: sections are the
+// canonical band list; every unit maps INTO its band, never beside it.
+describe("path sections are the canonical band ladder (PATH-SECTIONS-DEDUP-001)", () => {
+  // Exactly the shape the pack produces: the five main bands, then the
+  // three stray journey groups at the tail of engine order.
+  const packShapedNodes = (): UnitPathNode[] => [
+    node({ unit_id: "ru.unit.ramp.1", band: "on-ramp" }),
+    node({ unit_id: "ru.unit.a1.1", band: "A1" }),
+    node({ unit_id: "ru.unit.a2.1", band: "A2" }),
+    node({ unit_id: "ru.unit.a2.2", band: "A2" }),
+    node({ unit_id: "ru.unit.b1.1", band: "B1" }),
+    node({ unit_id: "ru.unit.b2.1", band: "B2" }),
+    node({ unit_id: "ru.unit.a2.jpast-01", band: "A2" }),
+    node({ unit_id: "ru.unit.a2.jpast-02", band: "A2" }),
+    node({ unit_id: "ru.unit.a2.jpast-03", band: "A2" }),
+    node({ unit_id: "ru.unit.b1.jprob-01", band: "B1" }),
+    node({ unit_id: "ru.unit.b1.jprob-02", band: "B1" }),
+    node({ unit_id: "ru.unit.b1.jprob-03", band: "B1" }),
+    node({ unit_id: "ru.unit.b2.jstyle-01", band: "B2" }),
+    node({ unit_id: "ru.unit.b2.jstyle-02", band: "B2" }),
+    node({ unit_id: "ru.unit.b2.jstyle-03", band: "B2" }),
+  ];
+
+  it("never spawns a duplicate band label — the tail groups merge into their band", () => {
+    const sections = pathSections(packShapedNodes());
+    const bands = sections.map((s) => s.band.trim().toLowerCase());
+    expect(new Set(bands).size).toBe(bands.length);
+    // Canonical ladder order regardless of where the nodes rode in engine order.
+    expect(bands).toEqual(["on-ramp", "a1", "a2", "b1", "b2"]);
+    // The stray groups merged INTO their band, counts included.
+    expect(sections.find((s) => s.band === "A2")!.nodes.map((n) => n.unit_id)).toEqual([
+      "ru.unit.a2.1",
+      "ru.unit.a2.2",
+      "ru.unit.a2.jpast-01",
+      "ru.unit.a2.jpast-02",
+      "ru.unit.a2.jpast-03",
+    ]);
+    expect(sections.find((s) => s.band === "B1")!.nodes).toHaveLength(4);
+    expect(sections.find((s) => s.band === "B2")!.nodes).toHaveLength(4);
+  });
+
+  it("orders sections by the canonical ladder, not by first-occurrence in engine order", () => {
+    const sections = pathSections([
+      node({ unit_id: "ru.unit.b2.late", band: "B2" }),
+      node({ unit_id: "ru.unit.a1.early", band: "A1" }),
+      node({ unit_id: "ru.unit.nope", band: null }),
+    ]);
+    expect(sections.map((s) => s.band)).toEqual(["A1", "B2", "other"]);
+  });
+
+  it("custom pack bands ride after the CEFR ladder in first-occurrence order", () => {
+    const sections = pathSections([
+      node({ unit_id: "ru.unit.novice.1", band: "novice" }),
+      node({ unit_id: "ru.unit.a1.1", band: "A1" }),
+      node({ unit_id: "ru.unit.expert.1", band: "expert" }),
+    ]);
+    expect(sections.map((s) => s.band)).toEqual(["A1", "novice", "expert"]);
+  });
+
+  it("renders exactly one section header per band at the real pack's shape", () => {
+    const html = renderToStaticMarkup(<PathView nodes={packShapedNodes()} />);
+    for (const band of ["on-ramp", "A1", "A2", "B1", "B2"]) {
+      const rows = html.split(`data-band="${band}"`).length - 1;
+      expect(rows, `section header rows for band ${band}`).toBe(1);
+    }
   });
 });
