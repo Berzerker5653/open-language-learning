@@ -709,23 +709,24 @@ mod tests {
         // SETTINGS-SCOPE-001: the same report that feeds the browser-mode
         // banner also decides whether the Settings "Detect microphones"
         // button can do anything — the truth is computed once, here.
-        let ask = |origin: Option<&str>| {
+        // An async fn, not a closure returning `async move`: a closure
+        // whose future borrows the argument fails lifetime inference on
+        // the pinned toolchain (mainline rot caught by the LAN lane).
+        async fn ask(origin: Option<&str>) -> serde_json::Value {
             let app = test_router();
-            async move {
-                let mut builder = Request::builder().uri("/api/capabilities");
-                if let Some(o) = origin {
-                    builder = builder.header("origin", o);
-                }
-                let resp = app
-                    .oneshot(builder.body(Body::empty()).unwrap())
-                    .await
-                    .unwrap();
-                let bytes = axum::body::to_bytes(resp.into_body(), usize::MAX)
-                    .await
-                    .unwrap();
-                serde_json::from_slice::<serde_json::Value>(&bytes).unwrap()
+            let mut builder = Request::builder().uri("/api/capabilities");
+            if let Some(o) = origin {
+                builder = builder.header("origin", o);
             }
-        };
+            let resp = app
+                .oneshot(builder.body(Body::empty()).unwrap())
+                .await
+                .unwrap();
+            let bytes = axum::body::to_bytes(resp.into_body(), usize::MAX)
+                .await
+                .unwrap();
+            serde_json::from_slice::<serde_json::Value>(&bytes).unwrap()
+        }
         // Plain tailnet-style http origin: names cannot be revealed.
         let v = ask(Some("http://100.101.179.46:8000")).await;
         assert_eq!(
