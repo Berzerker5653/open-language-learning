@@ -2502,6 +2502,26 @@
       ],
       "summary": "Browser Back now walks INSIDE the app. A query-encoded history shim (src/history-nav.ts, ?d=destination - serve has no SPA fallback so only / is reload-safe) mirrors the app's DERIVED location (tab/session/stage; the root tab encodes without a segment) and routes every popstate back through App's own navigation functions (setRoute, pauseSession, resumeSession, closeSession) - no router library, no second source of truth. A compound action (starting the plan opens the first activity in one commit) still gets one entry PER LEVEL, so Back walks stage -> session (the app's own pause, Resume owns re-entry) -> the guardrail: leaving an ACTIVE session restores the history position BEFORE asking (Keep working strands nothing); confirming runs the app's own Stop-session exit (summary identical to Stop session) and walks the pointer back to the arrival entry; Back from the root tab is a real exit, no loops. Forward/deep entries are never reconstructed by inventing state - the same activity re-opens or the current location re-lands, so nothing double-advances. Desktop is byte-identical: the shim installs only under window.__LTS_SERVE (the existing ipc.ts serve marker) or the acceptance flag, proven by the flag-off journey. Run 121 died at the 80-cap with one bug left (pushPath read the root-tab ladder's first segment as a tab, so starting a plan pushed a single entry and Back skipped the session level); run 122 added tabOf(), built the real-browser acceptance (state/evidence/WEB-HISTORY-001/history-walk.mjs, headless Chromium over CDP at 390x844 mobile) and passed 18/18 checks with six screenshots, then ran the LANE battery in an isolated HEAD+lane worktree: tsc 0, vitest 58 files/469 tests (10 new), walk PASS.",
       "notes": "Lanes: apps/desktop/src (history-nav.ts + test, journeys/history-nav.journey.tsx, App.tsx seam, history-screens.tsx evidence entry), apps/desktop (history-harness.html, vite.history-harness.config.ts), state/evidence/WEB-HISTORY-001. Pitfalls for the next web-nav card in state/notes/WEB-HISTORY-001.md (the root tab encodes as the empty string - level words are never tabs; screenshot-harness banners echo click labels into body.innerText - acceptance assertions must query BUTTON elements, not body text)."
+    },
+    "WORDCARD-OFFSCREEN-001": {
+      "task_id": "WORDCARD-OFFSCREEN-001",
+      "title": "Phone word-cards open in-viewport as a bottom sheet - tap during reading never renders the card below the fold",
+      "status": "done",
+      "attempts": 2,
+      "dependencies": [
+        "READER-FLOW-001",
+        "MOBILE-UX-001"
+      ],
+      "evidence": [
+        "state/evidence/WORDCARD-OFFSCREEN-001/gates.log",
+        "state/evidence/WORDCARD-OFFSCREEN-001/result-phone-HEAD-red.json",
+        "state/evidence/WORDCARD-OFFSCREEN-001/result-phone.json",
+        "state/evidence/WORDCARD-OFFSCREEN-001/result-desktop.json",
+        "state/notes/WORDCARD-OFFSCREEN-001.md"
+      ],
+      "summary": "The .word-card is inline flow appended after the whole reading paragraph, so on phone viewports a word tap populated the card ~640px below the fold (owner complaint 08: 'nothing pops up'). At phone width the card is now a fixed bottom sheet (z-index 45, max-height 70svh, inner scroll, Close row sticky); wide viewports keep the inline card untouched. Focus management rides the APPLIED stylesheet: the App effect focuses the card on open only when its computed position is fixed, and Close/Escape return focus to the tapped word; navigation supersedes never arm return-focus. scripts/wordcard-capture.mjs is the RED-FIRST machine gate (headless Chrome over CDP, 390x844, journeys #reader screen): RED at HEAD 321f242 4/6 checks FAIL (card 629..904, static, focus on h1, Close clipped; owner's real story y=1486), GREEN after fix 6/6 with full containment + focus-in + focus-return, desktop run asserts position stays static. Board run 123 died at the 80-iteration cap with the finished lane uncommitted; run 124 re-ran the LANE battery (tsc 0, vitest 470 pass) and committed. Sibling-offender audit: no other inline tap-opened popover in reading/session flows (kanji drill is a route).",
+      "notes": "Harness lesson: assert FULL containment, not intersection — the fixture's short story put the inline card at 629..904 on an 844 viewport ('intersecting' but Close clipped). Contract + seams in state/notes/WORDCARD-OFFSCREEN-001.md.",
+      "updated": "2026-11-21"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

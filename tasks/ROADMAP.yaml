@@ -2981,6 +2981,22 @@ tasks:
   - desktop behavior stays unchanged because the shim installs only under the serve or acceptance marker
   - a real-browser mobile acceptance walk lands stage to session to plan with screenshots and Back from the root tab leaves the site
   required_for_desktop_1_0: false
+- id: WORDCARD-OFFSCREEN-001
+  milestone: M8
+  priority: P1
+  title: Phone word-cards open in-viewport as a bottom sheet - tap during reading never renders the card below the fold
+  dependencies:
+  - READER-FLOW-001
+  - MOBILE-UX-001
+  read_first:
+  - state/notes/WORDCARD-OFFSCREEN-001.md
+  - apps/desktop/src/reading.tsx
+  acceptance:
+  - a real-browser phone walk at 390x844 taps the first button.word and the card sits fully inside the viewport with focus in it and the Close row on-screen
+  - clicking Close removes the card and returns focus to the tapped word and Escape does the same
+  - at wide viewports the card keeps its inline in-flow rendering unchanged with a screenshot proving it
+  - before and after screenshots plus the measured audit JSONs land in state/evidence/WORDCARD-OFFSCREEN-001
+  required_for_desktop_1_0: false
 - id: GLOSSARY-001
   milestone: M8
   priority: P2
@@ -3010,7 +3026,6 @@ tasks:
   - every named gate corresponds to a real job or command in ci.yml, scripts/ci.sh or the langpack CLI
   - CODING_STANDARDS.md is linked from AGENTS.md under a Coding standard heading
   required_for_desktop_1_0: false
-
 - id: SESSION-SEQUENCE-001
   milestone: M11
   priority: P1
@@ -3030,7 +3045,6 @@ execution_scope:
   completion_task: REL-001
   required_flag: required_for_desktop_1_0
   optional_tasks:
-  - SESSION-SEQUENCE-001
   - ADV-001
   - AI-001
   - PLAT-002
@@ -3143,5 +3157,7 @@ execution_scope:
   - WEB-PROGRESS-001
   - GLOSSARY-001
   - CODING-STANDARDS-001
+  - SESSION-SEQUENCE-001
   - WEB-HISTORY-001
+  - WORDCARD-OFFSCREEN-001
   public_publication_authorized: false
