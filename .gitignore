@@ -74,3 +74,4 @@ tmp/
 *.tsbuildinfo
 qs-r*.jsonl
 tmp/jmdict
+dist-history/

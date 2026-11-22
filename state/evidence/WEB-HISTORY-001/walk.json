@@ -1,0 +1,77 @@
+{
+ "viewport": "390x844 mobile",
+ "checks": [
+  {
+   "name": "page booted on Today without navigation error",
+   "ok": true
+  },
+  {
+   "name": "arrival entry labeled with the root location",
+   "ok": true,
+   "detail": "\"\""
+  },
+  {
+   "name": "Today shows the plan",
+   "ok": true
+  },
+  {
+   "name": "starting the plan pushed the session level",
+   "ok": true,
+   "detail": "\"session/stage\""
+  },
+  {
+   "name": "URL carries the stage destination",
+   "ok": true,
+   "detail": "/?d=session%2Fstage"
+  },
+  {
+   "name": "back #1 landed on the session level",
+   "ok": true,
+   "detail": "/?d=session"
+  },
+  {
+   "name": "session survives as paused (app's own pause path)",
+   "ok": true
+  },
+  {
+   "name": "back #2 asked to confirm leaving the active session",
+   "ok": true
+  },
+  {
+   "name": "history position restored before the question",
+   "ok": true
+  },
+  {
+   "name": "session NOT destroyed by the intercepted back",
+   "ok": true
+  },
+  {
+   "name": "confirm walked back to the root entry",
+   "ok": true
+  },
+  {
+   "name": "session ended: the app's own summary offers Back to the plan",
+   "ok": true
+  },
+  {
+   "name": "no live session controls survive the exit",
+   "ok": true
+  },
+  {
+   "name": "root plan visible again",
+   "ok": true
+  },
+  {
+   "name": "back from the root tab left the site",
+   "ok": true,
+   "detail": "about:blank"
+  },
+  {
+   "name": "in-page walk never recorded a navigation error",
+   "ok": true,
+   "detail": "in-page walk state"
+  }
+ ],
+ "failed": false,
+ "historySeed": "about:blank prior document"
+}

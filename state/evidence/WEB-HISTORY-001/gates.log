@@ -1,0 +1,53 @@
+WEB-HISTORY-001 LANE gates — controller run 122, taken over after run 121 died at the 80/80 iteration cap with the lane complete but uncommitted and ONE bug from green.
+
+Gate isolation: git worktree at HEAD 6bba940 + ONLY this lane's files
+(~/.hermes/cache/scratch/lts-history-work, removed after; node_modules
+symlinked). The main tree carries ORTHO-LETTER-UNITS-001 WIP (lesson.tsx,
+lib.rs, pack data) that would pollute any gate run there — nothing of it
+is in this lane or this commit.
+
+Results (full logs captured):
+$ npx tsc --noEmit                     exit 0
+$ npx vitest run                       exit 0 — Test Files 58 passed (58), Tests 469 passed (469)
+$ npx vitest run src/history-nav.test.ts src/journeys/history-nav.journey.tsx
+                                       exit 0 — 2 files / 10 tests (6 location-mapping + 4 browser-walk journey)
+$ npx vite build --config vite.history-harness.config.ts
+                                       exit 0 — evidence harness bundle (dist-history, built IN the isolated worktree, so the acceptance ran on exactly HEAD+lane bytes; dist-history itself is untracked build output, rebuild before rerunning the walk)
+$ node state/evidence/WEB-HISTORY-001/history-walk.mjs
+                                       exit 0 — real headless Chromium over CDP, mobile 390x844: 18/18 checks PASS (walk-run.log, walk.json, screenshots 01-06)
+
+Card acceptance mapping: the app has no unit-detail screen; Today shows the
+plan and "Start today's plan" opens the session whose first activity
+starts in the same commit — the shim gives that one action TWO history
+levels, so Back walks stage -> session (app's own pause path) -> the
+guardrail confirm (the card's own active-session rule) -> the app's own
+session summary -> plan. Back from the root tab leaves the site (seeded
+about:blank prior document observed as the landing page). Desktop
+unchanged: shim installs only under window.__LTS_SERVE / __LTS_HISTORY;
+flag-off journey test proves nothing touches history.
+
+No Rust touched (the src-tauri WIP in the main tree belongs to
+ORTHO-LETTER-UNITS-001) — cargo gates N/A for this lane.
+
+RUN 122 CONTROLLER — fixes on top of the dead run 121, all pre-commit:
+1. apps/desktop/src/history-nav.ts pushPath: sameTab compared
+   toSegs[0] to fromSegs[0], but the ROOT tab encodes WITHOUT a segment —
+   "session/stage"'s first segment is the level word, so the per-level
+   ladder never fired and starting the plan pushed ONE entry; Back skipped
+   the session level straight to the guardrail. Added tabOf() (session/
+   stage are level words, never tabs). Caught BY the real-browser walk —
+   the fake-history journey had not yet been run when run 121 died.
+2. New evidence entry apps/desktop/src/history-screens.tsx +
+   history-harness.html + vite.history-harness.config.ts (dev-only,
+   mirrors the MOBILE-UX-001 pattern). First live run exposed the harness
+   banner echoing click labels into body.innerText, which faked a passing
+   "root plan visible" innerText check — assertions now query BUTTON
+   elements, never body text.
+3. history-walk.mjs: tolerate the CDP context swap when the exit-
+   traversal evaluate dies in the document switch (that rejection is the
+   measured behavior; the location poll decides the assertion).
+4. Stale /tmp chrome profile + leaked headless chrome from the crashed
+   first walk run cleared before the clean run (sibling lane's
+   lts-ortho-capture chrome left running was NOT touched).
+
+Deferred: none. Acceptance complete.

@@ -54,6 +54,11 @@ import {
 } from "./error-review";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
 import { LessonEncounter, drillStageId, stagePositionLabel, type LessonPlan } from "./lesson";
+import {
+  installHistoryNav,
+  type AppLocation,
+  type HistoryNav,
+} from "./history-nav";
 import { describeKanjiDecomposition } from "./kanji-decomposition";
 import { playClip } from "./playback";
 import { grammarLabelsEnabled, stressEnabled, type DisplaySettingsView } from "./stress";
@@ -3839,6 +3844,103 @@ export function App() {
   // unexplained; kanji-decomposition.ts states the rule.
   const kanjiDecomposition = kanjiActive ? describeKanjiDecomposition(kanjiActive) : null;
 
+  // WEB-HISTORY-001: browser back/forward integration for web (serve)
+  // mode. The destination below is DERIVED from the same state that
+  // renders the screens — the state machine stays the single source of
+  // truth and history traversals are routed back through the app's own
+  // navigation functions (src/history-nav.ts owns the mechanics). The
+  // shim installs only under the serve marker or the acceptance-harness
+  // flag, so desktop behavior is unchanged at the install seam.
+  const appLocation: AppLocation = {
+    tab: route === "practice" ? "" : route,
+    session: session !== null,
+    stage: practiceTarget !== null,
+  };
+  const historyNavRef = useRef<HistoryNav | null>(null);
+  const currentLocationRef = useRef<AppLocation>(appLocation);
+  currentLocationRef.current = appLocation;
+  const [historyExitAsk, setHistoryExitAsk] = useState<AppLocation | null>(null);
+  const historyPopRef = useRef<(target: AppLocation | null, guarded: boolean) => void>(
+    () => {},
+  );
+  historyPopRef.current = (target, guarded) => {
+    const nav = historyNavRef.current;
+    if (!nav || step !== "done") return;
+    if (target === null) {
+      nav.sync(appLocation);
+      return;
+    }
+    if (guarded) {
+      // The shim already restored the learner's history position; ask
+      // before leaving a live session.
+      setHistoryExitAsk(target);
+      return;
+    }
+    // A destination the app can no longer re-enter (its session closed,
+    // or a solo activity that was not a session activity) is never
+    // faked: re-land the current location on top of it instead, which
+    // also blocks forward-jumps from double-advancing anything.
+    if (
+      (target.session || target.stage) &&
+      !sessionQueueRef.current &&
+      !practiceTarget
+    ) {
+      nav.sync(appLocation);
+      return;
+    }
+    // A token this app never authored may name a tab that does not
+    // exist; that is not a destination — the root tab answers it.
+    const knownTabs = ["practice", "words", "progress", "settings"];
+    const wantRoute =
+      target.tab === "" || !knownTabs.includes(target.tab) ? "practice" : target.tab;
+    if (wantRoute !== route) {
+      setRoute(wantRoute as typeof route);
+    }
+    if (!target.stage && practiceTarget) {
+      // Leaving the runner by history: inside a session this pauses it
+      // (the Resume control then owns re-entry); solo it just closes the
+      // activity, mirroring the runner's own "Back to plan" action.
+      if (sessionQueueRef.current) pauseSession();
+      else {
+        setPracticeTarget(null);
+        setPracticeTask(null);
+        setLesson(null);
+        setLessonSeen(false);
+      }
+    }
+    if (target.stage && sessionQueueRef.current && !practiceTarget) {
+      // Re-entering the stage destination of a live session returns to
+      // the activity the session queue is on — never the next one, and
+      // the session-level destination never auto-starts one.
+      void resumeSession();
+    }
+  };
+  useEffect(() => {
+    const nav = installHistoryNav({
+      current: () => currentLocationRef.current,
+      onPop: (target, guarded) => historyPopRef.current(target, guarded),
+    });
+    historyNavRef.current = nav;
+    return () => nav?.teardown();
+  }, []);
+  useEffect(() => {
+    const nav = historyNavRef.current;
+    if (!nav || step !== "done" || profileId === null) return;
+    nav.sync(appLocation);
+    // The location strings are the only values that matter: pushing an
+    // entry whose destination the history already names is a no-op,
+    // which is what keeps the walk loop-free.
+  }, [appLocation.tab, appLocation.session, appLocation.stage, step, profileId]);
+  function confirmHistoryExit() {
+    setHistoryExitAsk(null);
+    const nav = historyNavRef.current;
+    if (!nav) return;
+    // Stopping is the app's own session exit — the summary and the
+    // engine's saved progress are identical to pressing Stop session.
+    closeSession("stopped");
+    nav.backToRoot();
+  }
+
   if (step !== "done") {
     return (
       <AppShell productName="Open Language Learning Platform" nav={[]}>
@@ -4596,6 +4698,41 @@ export function App() {
           onDismissSessionSummary={() => setSessionOutcome(null)}
         />
       )}
+      {/* WEB-HISTORY-001: leaving an ACTIVE session by browser Back asks
+          first — the shim already restored the history position, so
+          declining keeps the learner exactly where they were. Stopping
+          here is the same exit the runner's own Stop control performs. */}
+      {historyExitAsk ? (
+        <div
+          role="alertdialog"
+          aria-label="Leave this session?"
+          data-testid="history-exit-ask"
+          className="notice"
+        >
+          <p>
+            You are in the middle of a session. Finished activities are already
+            saved; this one is not.
+          </p>
+          <div className="btn-row">
+            <button
+              type="button"
+              className="btn"
+              data-testid="history-exit-confirm"
+              onClick={confirmHistoryExit}
+            >
+              Stop the session and go back
+            </button>
+            <button
+              type="button"
+              className="btn btn--quiet"
+              data-testid="history-exit-keep"
+              onClick={() => setHistoryExitAsk(null)}
+            >
+              Keep working
+            </button>
+          </div>
+        </div>
+      ) : null}
       {/* IME-TOGGLE-UX-001: the input-mode bubble is pinned to the app
           chrome (fixed position), so it rides every in-app route. It
           exists only while the active pack's declared scripts grant an

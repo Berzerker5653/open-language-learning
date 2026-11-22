@@ -1,0 +1,23 @@
+PASS page booted on Today without navigation error
+PASS arrival entry labeled with the root location — ""
+PASS Today shows the plan
+  screenshot 01-root-today.png
+PASS starting the plan pushed the session level — "session/stage"
+PASS URL carries the stage destination — /?d=session%2Fstage
+  screenshot 02-stage-open.png
+PASS back #1 landed on the session level — /?d=session
+PASS session survives as paused (app's own pause path)
+  screenshot 03-back1-session.png
+PASS back #2 asked to confirm leaving the active session
+PASS history position restored before the question
+PASS session NOT destroyed by the intercepted back
+  screenshot 04-back2-guardrail-confirm.png
+PASS confirm walked back to the root entry
+PASS session ended: the app's own summary offers Back to the plan
+PASS no live session controls survive the exit
+  screenshot 05-after-confirm-session-summary.png
+PASS root plan visible again
+  screenshot 06-root-plan-clean.png
+PASS back from the root tab left the site — about:blank
+PASS in-page walk never recorded a navigation error — in-page walk state
+WEB-HISTORY-001 walk: PASS
