@@ -37,7 +37,8 @@ function installFakeHistory(): FakeHistory {
     pos: 0,
     top: () => fake.stack[fake.pos] ?? null,
     fakeBack: async () => {
-      if (fake.pos <= 0) throw new Error("fakeBack past the arrival entry — the app must exit here");
+      if (fake.pos <= 0)
+        throw new Error("fakeBack past the arrival entry — the app must exit here");
       fake.pos -= 1;
       realReplace(fake.top() === null ? null : { lts: fake.top() }, "");
       window.dispatchEvent(new Event("popstate"));

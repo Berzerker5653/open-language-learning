@@ -100,8 +100,7 @@ async function seed() {
   const imp = await api("install_pack", { packId: PACK_ID });
   if (imp.status !== 200) throw new Error(`install_pack failed: ${JSON.stringify(imp)}`);
   const prof = await api("create_profile", { displayName: "Gate Tester" });
-  if (prof.status !== 200)
-    throw new Error(`create_profile failed: ${JSON.stringify(prof)}`);
+  if (prof.status !== 200) throw new Error(`create_profile failed: ${JSON.stringify(prof)}`);
   const profileId = prof.value?.id;
   if (!profileId) throw new Error(`create_profile returned no id: ${JSON.stringify(prof)}`);
   const sw = await api("switch_pack", { profileId, packId: PACK_ID });
@@ -217,7 +216,8 @@ try {
       el.click();
       return true;
     })()`);
-    if (!clicked) throw new Error(`navigation error: no ${scope} containing ${JSON.stringify(label)}`);
+    if (!clicked)
+      throw new Error(`navigation error: no ${scope} containing ${JSON.stringify(label)}`);
     await sleep(500);
   }
 
@@ -262,8 +262,12 @@ try {
     );
     return { speakingButtons: modes.length };
   })()`);
-  await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: true }, sessionId).then(
-    (shot) => writeFileSync(join(OUT, `practice-hub-${TAG}.png`), Buffer.from(shot.data, "base64")),
+  await send(
+    "Page.captureScreenshot",
+    { format: "png", captureBeyondViewport: true },
+    sessionId,
+  ).then((shot) =>
+    writeFileSync(join(OUT, `practice-hub-${TAG}.png`), Buffer.from(shot.data, "base64")),
   );
   if (TAG === "before") check("practice hub offers Speaking", hub.speakingButtons > 0, hub);
 
@@ -273,8 +277,12 @@ try {
     const s = document.querySelector('[data-testid="dict-sentence"]');
     return { sentence: s ? (s.textContent ?? '').trim() : null };
   })()`);
-  await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: true }, sessionId).then(
-    (shot) => writeFileSync(join(OUT, `speaking-${TAG}.png`), Buffer.from(shot.data, "base64")),
+  await send(
+    "Page.captureScreenshot",
+    { format: "png", captureBeyondViewport: true },
+    sessionId,
+  ).then((shot) =>
+    writeFileSync(join(OUT, `speaking-${TAG}.png`), Buffer.from(shot.data, "base64")),
   );
   if (TAG === "before")
     check(

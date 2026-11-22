@@ -136,11 +136,7 @@ export function installHistoryNav(opts: {
     const fromSegs = from === "" ? [] : from.split("/");
     const toSegs = to === "" ? [] : to.split("/");
     const sameTab = tabOf(from) === tabOf(to);
-    if (
-      sameTab &&
-      toSegs.length > fromSegs.length + 1 &&
-      toSegs[toSegs.length - 1] === "stage"
-    ) {
+    if (sameTab && toSegs.length > fromSegs.length + 1 && toSegs[toSegs.length - 1] === "stage") {
       for (let n = fromSegs.length + 1; n <= toSegs.length; n++) {
         push(toSegs.slice(0, n).join("/"));
       }
@@ -183,13 +179,7 @@ export function installHistoryNav(opts: {
     // asks to confirm first. The learner's position is restored before
     // the question is asked, so refusing to answer can never strand the
     // session or leak the exit.
-    if (
-      !passGuardOnce &&
-      cur.session &&
-      !target.session &&
-      !target.stage &&
-      target.tab === ""
-    ) {
+    if (!passGuardOnce && cur.session && !target.session && !target.stage && target.tab === "") {
       push(encodeLocation(cur));
       push(encodeLocation(cur));
       opts.onPop(target, true);

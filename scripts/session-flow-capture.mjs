@@ -191,7 +191,11 @@ try {
   if (!runner) throw new Error("the next activity never opened on its own after the bridge");
   result.afterBridge = runner;
   check("runner auto-opened after the bridge", runner.practiceOpen && runner.bridgeGone, runner);
-  check("no lesson card re-gate, no Start control", !runner.lessonCard && !runner.startButtons.length, runner);
+  check(
+    "no lesson card re-gate, no Start control",
+    !runner.lessonCard && !runner.startButtons.length,
+    runner,
+  );
   await screenshot("session-after-bridge.png");
 
   // 3. The walk's own audit/banner (navigation error rides in — MOBILE-UX-001).

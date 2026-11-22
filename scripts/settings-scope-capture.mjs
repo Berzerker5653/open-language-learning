@@ -182,7 +182,9 @@ try {
       // caught this). The tall PNG proves the claim to a human reader.
       { format: "png", captureBeyondViewport: true },
       sessionId,
-    ).then((shot) => writeFileSync(join(OUT, `settings-${TAG}-${screen}.png`), Buffer.from(shot.data, "base64")));
+    ).then((shot) =>
+      writeFileSync(join(OUT, `settings-${TAG}-${screen}.png`), Buffer.from(shot.data, "base64")),
+    );
     check(`${screen}: Settings renders`, m.settingsAlive && m.profileDataAlive, {
       settingsAlive: m.settingsAlive,
       profileDataAlive: m.profileDataAlive,
@@ -199,5 +201,7 @@ try {
   server.close();
   chrome.kill();
 }
-console.log(`wrote ${OUT}/result.json (${checks.filter((c) => c.pass).length}/${checks.length} pass)`);
+console.log(
+  `wrote ${OUT}/result.json (${checks.filter((c) => c.pass).length}/${checks.length} pass)`,
+);
 process.exit(result.failures === 0 ? 0 : 1);

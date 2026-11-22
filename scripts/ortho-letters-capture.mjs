@@ -108,7 +108,9 @@ try {
   const allContent = stages.flatMap((s) => s.content ?? []);
   const orthRows = allContent.filter((c) => c.kind === "orthography");
   const encounterStages = stages.filter((s) => s.stage_kind === "encounter");
-  const encIds = [...new Set(encounterStages.flatMap((s) => (s.content ?? []).map((c) => c.content_id)))];
+  const encIds = [
+    ...new Set(encounterStages.flatMap((s) => (s.content ?? []).map((c) => c.content_id))),
+  ];
   check(
     "lesson_plan resolves one orthography entity set {a,o,m,t} for the letter unit",
     lp.status === 200 &&
@@ -193,7 +195,8 @@ try {
       el.click();
       return true;
     })()`);
-    if (!clicked) throw new Error(`navigation error: no ${scope} containing ${JSON.stringify(label)}`);
+    if (!clicked)
+      throw new Error(`navigation error: no ${scope} containing ${JSON.stringify(label)}`);
     await sleep(500);
   }
 
@@ -261,10 +264,16 @@ try {
       };
     })()`);
   }
-  if (!card) throw new Error('navigation error: no [data-testid="lesson-encounter"] card after starting the plan');
+  if (!card)
+    throw new Error(
+      'navigation error: no [data-testid="lesson-encounter"] card after starting the plan',
+    );
 
   const orthRowsDom = card.rows.filter((r) => r.kind === "orthography");
-  check("lesson card is the merged letter unit", card.title.includes("Printed Cyrillic"), { title: card.title, stageLabel: card.stageLabel });
+  check("lesson card is the merged letter unit", card.title.includes("Printed Cyrillic"), {
+    title: card.title,
+    stageLabel: card.stageLabel,
+  });
   check(
     "letter lesson section shows FOUR rows (not eight per-case rows)",
     orthRowsDom.length === 4,
@@ -272,11 +281,9 @@ try {
   );
   const pairs = ["А а", "О о", "М м", "Т т"];
   check(
-    "each row leads with BOTH printed forms (\"А а\")",
+    'each row leads with BOTH printed forms ("А а")',
     orthRowsDom.length === 4 &&
-      orthRowsDom.every((r) =>
-        pairs.some((p) => r.surface.replace(/\s+/g, " ").startsWith(p)),
-      ),
+      orthRowsDom.every((r) => pairs.some((p) => r.surface.replace(/\s+/g, " ").startsWith(p))),
     { surfaces: orthRowsDom.map((r) => r.surface) },
   );
   const uniqueIds = [...new Set(card.allRows.map((r) => r.content_id))];
@@ -287,8 +294,12 @@ try {
       !uniqueIds.some((id) => /-(upper|lower)$/.test(id)),
     { uniqueIds, rowCount: card.allRows.length },
   );
-  await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: true }, sessionId).then(
-    (shot) => writeFileSync(join(OUT, "letter-rows-after.png"), Buffer.from(shot.data, "base64")),
+  await send(
+    "Page.captureScreenshot",
+    { format: "png", captureBeyondViewport: true },
+    sessionId,
+  ).then((shot) =>
+    writeFileSync(join(OUT, "letter-rows-after.png"), Buffer.from(shot.data, "base64")),
   );
 
   // ---- the complaint-04 screen itself (best-effort drill capture) ----
@@ -312,11 +323,16 @@ try {
         uniq.size === drill.length,
         { labels: drill },
       );
-      await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: true }, sessionId).then(
-        (shot) => writeFileSync(join(OUT, "letter-drill-after.png"), Buffer.from(shot.data, "base64")),
+      await send(
+        "Page.captureScreenshot",
+        { format: "png", captureBeyondViewport: true },
+        sessionId,
+      ).then((shot) =>
+        writeFileSync(join(OUT, "letter-drill-after.png"), Buffer.from(shot.data, "base64")),
       );
     } else {
-      result.drillNote = "drill screen ('Which one matches?') did not appear within 9s of Start practicing — skipped, primary gates stand";
+      result.drillNote =
+        "drill screen ('Which one matches?') did not appear within 9s of Start practicing — skipped, primary gates stand";
     }
   } catch (err) {
     result.drillNote = `drill capture skipped: ${String(err?.message ?? err)}`;

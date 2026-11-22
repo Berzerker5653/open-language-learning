@@ -84,8 +84,13 @@ await call("Emulation.setDeviceMetricsOverride", {
 });
 
 const js = async (expr) => {
-  const r = await call("Runtime.evaluate", { expression: expr, returnByValue: true, awaitPromise: true });
-  if (r.exceptionDetails) throw new Error(r.exceptionDetails.exception?.description ?? "page eval error");
+  const r = await call("Runtime.evaluate", {
+    expression: expr,
+    returnByValue: true,
+    awaitPromise: true,
+  });
+  if (r.exceptionDetails)
+    throw new Error(r.exceptionDetails.exception?.description ?? "page eval error");
   return r.result.value;
 };
 const has = (sel) => js(`!!document.querySelector(${JSON.stringify(sel)})`);
@@ -105,7 +110,9 @@ async function clickText(label, { timeoutMs = 30000 } = {}) {
       return;
     }
     if (Date.now() - t0 > timeoutMs) {
-      const seen = await js('(() => [...document.querySelectorAll("button, a")].map((e)=>(e.textContent??"").trim()).filter(Boolean).join(" | "))');
+      const seen = await js(
+        '(() => [...document.querySelectorAll("button, a")].map((e)=>(e.textContent??"").trim()).filter(Boolean).join(" | "))',
+      );
       throw new Error(`no control carrying "${label}" (saw: ${seen})`);
     }
     await sleep(300);
@@ -121,38 +128,41 @@ const already = await js(`(() => {
   return true;
 })()`);
 if (!already) {
-for (let i = 0; ! (await has("#profile-name")) && i < 20; i++) await sleep(500);
-await js(`(() => {
+  for (let i = 0; !(await has("#profile-name")) && i < 20; i++) await sleep(500);
+  await js(`(() => {
   const el = document.querySelector("#profile-name");
   const set = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
   set.call(el, "Katya");
   el.dispatchEvent(new Event("input", { bubbles: true }));
 })()`);
-await clickText("Create local profile");
-await js(`(() => {
+  await clickText("Create local profile");
+  await js(`(() => {
   const radios = [...document.querySelectorAll("input[name=pack], input[type=radio]")];
   const hit = radios.find((r) => ((r.closest("label")?.textContent) ?? "").match(/Russian|русск/i));
   if (!hit) throw new Error("RU pack not offered in onboarding");
   hit.click();
   if (!hit.checked) throw new Error("RU radio did not take the click");
 })()`);
-await clickText("Install");
-// Wait for the install to actually land before continuing (the archive is
-// built from the repo tree; the button only settles once it has).
-{
-  const t0 = Date.now();
-  for (;;) {
-    const stillInstall = await js(`(() => [...document.querySelectorAll("button")].some((e) => (e.textContent ?? "").trim() === "Install"))()`);
-    if (!stillInstall) break;
-    if (Date.now() - t0 > 120000) throw new Error("install never finished: " + (await text()).slice(0, 400));
-    await sleep(1000);
+  await clickText("Install");
+  // Wait for the install to actually land before continuing (the archive is
+  // built from the repo tree; the button only settles once it has).
+  {
+    const t0 = Date.now();
+    for (;;) {
+      const stillInstall = await js(
+        `(() => [...document.querySelectorAll("button")].some((e) => (e.textContent ?? "").trim() === "Install"))()`,
+      );
+      if (!stillInstall) break;
+      if (Date.now() - t0 > 120000)
+        throw new Error("install never finished: " + (await text()).slice(0, 400));
+      await sleep(1000);
+    }
   }
-}
-await clickText("Continue", { timeoutMs: 30000 });
-if (await has("button")) {
-  const t = await text();
-  if (t.includes("Skip for now")) await clickText("Skip for now");
-}
+  await clickText("Continue", { timeoutMs: 30000 });
+  if (await has("button")) {
+    const t = await text();
+    if (t.includes("Skip for now")) await clickText("Skip for now");
+  }
 }
 
 // 2. Today: open the printed-Cyrillic on-ramp lesson (resume chip first if shown).
@@ -177,7 +187,9 @@ if (!opened) {
   }
 }
 if (!opened) {
-  const seen = await js('JSON.stringify([...document.querySelectorAll("button, a")].map((e)=>(e.textContent??"").trim()).filter(Boolean))');
+  const seen = await js(
+    'JSON.stringify([...document.querySelectorAll("button, a")].map((e)=>(e.textContent??"").trim()).filter(Boolean))',
+  );
   const body = await js("document.body.innerText.slice(0, 3000)");
   throw new Error(`no lesson entry found on Today (buttons: ${seen}) (body: ${body})`);
 }
@@ -199,15 +211,28 @@ const encounter = audit.rowTexts.find((s) => s.label === "Meet something new");
 const problems = [];
 if (!encounter) problems.push("no encounter section rows measured");
 else {
-  if (encounter.rows.length !== 4) problems.push(`encounter shows ${encounter.rows.length} rows, expected 4`);
-  if (!encounter.rows.some((r) => r.includes("А а"))) problems.push(`no row shows both forms "А а": ${JSON.stringify(encounter.rows)}`);
+  if (encounter.rows.length !== 4)
+    problems.push(`encounter shows ${encounter.rows.length} rows, expected 4`);
+  if (!encounter.rows.some((r) => r.includes("А а")))
+    problems.push(`no row shows both forms "А а": ${JSON.stringify(encounter.rows)}`);
 }
-if (audit.caseWords) problems.push("the words uppercase/lowercase still appear on screen (per-case rows)");
+if (audit.caseWords)
+  problems.push("the words uppercase/lowercase still appear on screen (per-case rows)");
 
 const shot = await call("Page.captureScreenshot", { format: "png" });
 writeFileSync(`${OUT}/after-encounter-four-rows.png`, Buffer.from(shot.data, "base64"));
 writeFileSync(`${OUT}/capture-audit.json`, JSON.stringify({ url: URL0, audit, problems }, null, 2));
-console.log(JSON.stringify({ sections: audit.rowTexts.map((s) => ({ label: s.label, n: s.rows.length })), firstRows: encounter?.rows?.slice(0, 2), problems }, null, 2));
+console.log(
+  JSON.stringify(
+    {
+      sections: audit.rowTexts.map((s) => ({ label: s.label, n: s.rows.length })),
+      firstRows: encounter?.rows?.slice(0, 2),
+      problems,
+    },
+    null,
+    2,
+  ),
+);
 chrome.kill();
 ws.close();
 if (problems.length) {

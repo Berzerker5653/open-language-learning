@@ -769,7 +769,9 @@ export function LanAccessCard() {
     setPairMessage(null);
     try {
       const result = (await postJson("/pair", { pin: pairPin })) as { paired: boolean };
-      setPairMessage(result.paired ? "Paired — this device reconnects without a PIN." : "Pairing failed.");
+      setPairMessage(
+        result.paired ? "Paired — this device reconnects without a PIN." : "Pairing failed.",
+      );
       setPairPin("");
     } catch (e) {
       setPairMessage(e instanceof Error ? e.message : "That PIN did not work.");
@@ -801,9 +803,7 @@ export function LanAccessCard() {
           <p>
             Open one of these addresses from a device on the same network:{" "}
             {status.addresses.length > 0 ? (
-              status.addresses.map((a) => (
-                <code key={a}>{a}</code>
-              ))
+              status.addresses.map((a) => <code key={a}>{a}</code>)
             ) : (
               <em>no local address was found on this computer</em>
             )}
@@ -841,9 +841,7 @@ export function LanAccessCard() {
             Pair
           </button>
         </p>
-        {pairMessage && (
-          <p data-testid="lan-pair-message">{pairMessage}</p>
-        )}
+        {pairMessage && <p data-testid="lan-pair-message">{pairMessage}</p>}
       </fieldset>
     </div>
   );
