@@ -1,0 +1,19 @@
+== RU-CONTENT-FREEZE-047-001 lane gates (run 1, 2026-11-21) ==
+-- stage 1: 8 sentence re-bakes (pack narrator qwen3/ono_anna) --
+generate-pack-audio --force --only <8 ids>: generated=8 ok, refused=0
+qa-asr first pass: checked=8 passed=7 (p37 mismatch) -> bake-bestof K=8: 1/1 solved (take order in bestof-p37.jsonl)
+qa-asr re-audit (asr-rebake2.jsonl):
+  qa-asr re-audit: 8/8 status=ok
+-- stage 2: 20 drift drill clips --
+  piper ladder pass@: 18
+  piper exhausted: 2
+  bake-bestof residuals: manifest rows updated: 2; summary -> state/evidence/RU-CONTENT-FREEZE-047-001/bestof-drift.jsonl
+  qa-asr re-audit: 20/20 status=ok
+-- pack gates on the repaired tree --
+cargo run -p lts-langpack-cli -- validate languages/ru-RU: 0 errors (scaffold)
+cargo run -p lts-langpack-cli -- lint languages/ru-RU: 0 errors
+cargo run -p lts-langpack-cli -- test languages/ru-RU: 0 errors
+cargo test -p lts-langpack --lib (detached HEAD worktree + lane manifest + hardlinked wavs): 5 passed 0 failed
+scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU --verify-only: rows checked=5032 files valid=5032 rows failing=0
+main-tree cargo test -p lts-langpack skipped: sibling lane WIP in crates/langpack (RC build at HEAD covers the test gate)
+Original-take backups (evidence backup/ backup-drift/, ~4MB superseded wavs) are NOT committed: every pre-repair clip is byte-recoverable from the catalog-pinned 0.4.6 archive via scripts/fetch-pack-audio.sh.

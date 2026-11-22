@@ -3147,6 +3147,21 @@ tasks:
   - validate, lint and install-mode test of languages/ru-RU pass with zero errors on a HEAD worktree with the built media tree
   - every new clip survives the production ASR round-trip gate including the duration cap, with soft-sign homophone takes flagged for native audition
   required_for_desktop_1_0: false
+- id: RU-CONTENT-FREEZE-047-001
+  milestone: M8
+  priority: P0
+  title: Re-bake changed ru sentences, repair 20 drift drill clips, freeze ru content, publish 0.4.7
+  dependencies: [RU-STORIES-MEDIA-001]
+  read_first:
+  - state/notes/RU-CONTENT-FREEZE-047-001.md
+  - state/notes/CONTENT-QA-STORIES-001.md
+  - state/evidence/RU-STORIES-MEDIA-001/asr-verify.jsonl
+  - docs/PACK_AUTHORING_CONTRACT.md
+  acceptance:
+  - the 8 sentence ids changed by the content QA pass speak their new text with gate-passing ASR round-trip takes on the declared pack narrator
+  - all 20 gate-v5 drift drill clips are repaired via the Piper ladder or best-of fallback and re-audited green by the production gate
+  - a ru content freeze note records the publish window and the reviewer queue for soft-sign homophone spot-audition
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3274,4 +3289,5 @@ execution_scope:
   - SESSION-FLOW-COPY-001
   - LAN-TOGGLE-PIN-001
   - RU-STORIES-MEDIA-001
+  - RU-CONTENT-FREEZE-047-001
   public_publication_authorized: false
