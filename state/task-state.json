@@ -2554,6 +2554,27 @@
       "summary": "Settings sections are now declared by installed packs: manifest key settings_capabilities (schemas/v0.2), the romaji card renders only when some installed pack grants romanization-display (union across installed packs, never a locale/constant), and the Detect-microphones button grays with the serve bridge's own secure-context reason from /api/capabilities. Phone-viewport full-page captures prove RU-only hides the card while the ja-demo pack makes it appear; red-first settings tests fail at HEAD and pass at the lane.",
       "notes": "Contract + takeover history in state/notes/SETTINGS-SCOPE-001.md. Published ja archives predate the manifest field: store-installed ja-JP shows the card only at next republish.",
       "updated": "2026-11-21"
+    },
+    "READING-CLUTTER-001": {
+      "task_id": "READING-CLUTTER-001",
+      "title": "Story flow shows no raw grammar-tag chips and no per-sentence confirm buttons - clean learner reading view",
+      "status": "done",
+      "attempts": 1,
+      "dependencies": [
+        "READER-FLOW-001",
+        "CONTENT-CONFIRM-001"
+      ],
+      "evidence": [
+        "state/evidence/READING-CLUTTER-001/gates.log",
+        "state/evidence/READING-CLUTTER-001/result-phone-HEAD-red.json",
+        "state/evidence/READING-CLUTTER-001/result-phone.json",
+        "state/evidence/READING-CLUTTER-001/before-HEAD-story-flow.png",
+        "state/evidence/READING-CLUTTER-001/phone-1-story-confirm.png",
+        "state/notes/READING-CLUTTER-001.md"
+      ],
+      "summary": "Story flow is clean learner prose: the paragraph never renders raw morphology chips (labels sidecar + wire data unchanged; the word card keeps the human-form grammar line and now honors the grammar_labels display toggle), and the confirm mechanic exited the prose per owner ruling 2026-11-21 - one quiet control under the story ('Did this story sound right?' / thumbs-up, with Undo) that invokes the SAME content_confirm/content_unconfirm commands once per sentence, union 'Confirmed by' line, and the word card keeps its per-word toggle. scripts/reading-clutter-capture.mjs is the RED-FIRST gate: RED at HEAD 4f12237 (2 inline confirm buttons, 0 story controls), GREEN 5/5 after (0 in prose, control 44px tall fully in viewport); before/after phone screenshots committed. Full apps/desktop suite 59 files/475 tests green.",
+      "notes": "Harness runs the JA fixture story (no labels sidecar), so chip removal is pinned by reading.test.tsx RU-label fixtures; capture keeps a raw-tag prose tripwire. Contract + owner ruling verbatim in state/notes/READING-CLUTTER-001.md.",
+      "updated": "2026-11-21"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
