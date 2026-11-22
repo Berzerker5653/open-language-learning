@@ -1,0 +1,19 @@
+LAN-TOGGLE-PIN-001 — controller gate log (attempt 3, 2026-11-21 ~23:25 MST)
+
+Gate battery (unit lts-lan-gates1, attempt 2; logs in this dir, all EXIT lines verified):
+- fmt.log        cargo fmt --all --check ........................ FMT-EXIT:0
+- test-serve.log cargo test -q -p lts-desktop --features serve serve:: ... 18 passed; TEST-EXIT:0
+- clippy.log     cargo clippy -q -p lts-desktop --features serve --all-targets ... CLIPPY-EXIT:0
+- tsc.log        npx tsc --noEmit ................................ TSC-EXIT:0
+- vitest-settings.log npx vitest run src/settings.test.tsx ...... 24 passed; VITEST-EXIT:0
+
+Attempt-3 controller actions:
+- Re-verified the battery logs are fresh and green (unit inactive, all *-EXIT:0).
+- HEAD carries 354497a (lib-test lifetime rot fix found by this lane); the stale
+  staged copy of serve.rs (pre-fix closure form) was healed by staging the working
+  tree copy, which contains the async-fn fix.
+- Removed leftover lib.rs.orig junk (attempt-1 patch residue) from the tree.
+- Smoke: SMOKE-EXIT:0 PASS (scripts/smoke-lan-pair.sh, isolated LTS_DATA_DIR, real
+  LAN socket 192.168.4.69 + tailnet, unpaired 401 'pairing required', pair -> cookie
+  200, single-use PIN 403, restart persistence, toggle-off closes all 4 listeners).
+  Full transcript in smoke.log.

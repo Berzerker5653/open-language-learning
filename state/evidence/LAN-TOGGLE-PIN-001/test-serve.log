@@ -1,0 +1,42 @@
+warning: type `SessionRecord` is more private than the item `validate_pin`
+   --> apps/desktop/src-tauri/src/serve.rs:617:1
+    |
+617 | pub fn validate_pin(state: &mut LanState, code: &str, now_epoch: u64) -> Option<SessionRecord> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ function `validate_pin` is reachable at visibility `pub`
+    |
+note: but type `SessionRecord` is only usable at visibility `pub(self)`
+   --> apps/desktop/src-tauri/src/serve.rs:568:1
+    |
+568 | struct SessionRecord {
+    | ^^^^^^^^^^^^^^^^^^^^
+    = note: `#[warn(private_interfaces)]` on by default
+
+warning: type `serve::SessionRecord` is more private than the item `serve::validate_pin`
+   --> apps/desktop/src-tauri/src/serve.rs:617:1
+    |
+617 | pub fn validate_pin(state: &mut LanState, code: &str, now_epoch: u64) -> Option<SessionRecord> {
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ function `serve::validate_pin` is reachable at visibility `pub`
+    |
+note: but type `serve::SessionRecord` is only usable at visibility `pub(self)`
+   --> apps/desktop/src-tauri/src/serve.rs:568:1
+    |
+568 | struct SessionRecord {
+    | ^^^^^^^^^^^^^^^^^^^^
+    = note: `#[warn(private_interfaces)]` on by default
+
+
+running 18 tests
+..................
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 218 filtered out; finished in 0.46s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+TEST-EXIT:0

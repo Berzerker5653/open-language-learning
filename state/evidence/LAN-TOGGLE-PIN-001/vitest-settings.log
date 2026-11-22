@@ -1,0 +1,13 @@
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'vitest' run src/settings.test.tsx
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/hunter/.hermes/cache/scratch/lts-lan-work/apps/desktop[39m
+
+ [32m✓[39m [30m[43m node [49m[39m src/settings.test.tsx [2m([22m[2m24 tests[22m[2m)[22m[32m 68[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m24 passed[39m[22m[90m (24)[39m
+[2m   Start at [22m 23:16:36
+[2m   Duration [22m 299ms[2m (transform 48%, tests 33%, import 17%, worker 1%)[22m
+
+VITEST-EXIT:0

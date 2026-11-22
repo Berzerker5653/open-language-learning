@@ -3103,6 +3103,20 @@ tasks:
   - audit_learner_copy enforces a locale rule and a unit-id-leak rule over source copy, unit summaries and titles, and en-US glosses, and the full repo audit run is green
   - after-screenshots of the bridge plus the measured capture audit and lane gate logs land in state/evidence/SESSION-FLOW-COPY-001
   required_for_desktop_1_0: false
+- id: LAN-TOGGLE-PIN-001
+  milestone: M8
+  priority: P1
+  title: One-click LAN access with pairing PIN in Settings as the zero-install remote fallback
+  dependencies: []
+  read_first:
+  - state/notes/LAN-TOGGLE-PIN-001.md
+  - apps/desktop/src-tauri/src/serve.rs
+  - docs/22_REMOTE_ACCESS.md
+  acceptance:
+  - a Settings toggle in serve mode binds the running server to home-network interfaces behind a 6-digit pairing PIN that expires and is single-use, with the bind staying localhost while the toggle is off
+  - paired devices get a long-lived session cookie and pairing survives a process restart, with unit tests over PIN issue/validate/expiry and bind policy
+  - the card labels the traffic honestly as unencrypted http with the browser mic blocked, and a second-LTS_DATA_DIR smoke proves the full client flow over a real LAN socket
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3227,4 +3241,5 @@ execution_scope:
   - READING-CLUTTER-001
   - CONTENT-QA-STORIES-001
   - SESSION-FLOW-COPY-001
+  - LAN-TOGGLE-PIN-001
   public_publication_authorized: false

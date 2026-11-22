@@ -1,0 +1,25 @@
+== start lts-serve on an isolated data dir (loopback bind) ==
+== operator: switch on local-network access (loopback only) ==
+{"addresses":["http://192.168.4.69:17642/","http://100.77.9.119:17642/","http://[fda9:b459:69:1:1857:fcf1:19dd:734e]:17642/","http://[fd7a:115c:a1e0::503a:978]:17642/"],"enabled":true,"paired_devices":0,"pin":"226923","pin_expires_in_secs":299,"traffic_note":"plain http on the local network is unencrypted: anyone on this Wi-Fi can read what paired devices send, and the browser blocks the microphone here. The Tailscale path (https) is the private one (docs/22)."}operator sees PIN 226923; LAN address: http://192.168.4.69:17642
+== second device: unpaired data reads are refused ==
+unpaired POST /api/app_mode -> 401 as expected: {"error":"pairing required — on the computer running LTS, open Settings → 'Local network access' to show the current 6-digit pairing PIN, then enter it here
+== second device: pair with the PIN (cookie jar = the phone's cookie) ==
+== second device: data reads now work with the cookie ==
+paired POST /api/app_mode -> 200: {"smoke":false,"smoke_perf":false}
+== the PIN was single-use: re-pairing with it fails ==
+== restart the process: toggle + session persist from the data dir ==
+after restart, paired device reads again -> 200 (no re-pairing)
+== operator: toggle off closes the LAN listener ==
+LAN address refuses connections after the toggle went off
+PASS: LAN toggle + pairing PIN smoke (isolated LTS_DATA_DIR, real LAN socket, restart persistence)
+== server log ==
+lts-serve listening on http://127.0.0.1:17642 (trusted network only)
+lts-serve: LAN access open on 192.168.4.69:17642 — unencrypted http, pairing PIN required
+lts-serve: LAN access open on 100.77.9.119:17642 — unencrypted http, pairing PIN required
+lts-serve: LAN access open on [fda9:b459:69:1:1857:fcf1:19dd:734e]:17642 — unencrypted http, pairing PIN required
+lts-serve: LAN access open on [fd7a:115c:a1e0::503a:978]:17642 — unencrypted http, pairing PIN required
+lts-serve: LAN access closed on 192.168.4.69:17642
+lts-serve: LAN access closed on 100.77.9.119:17642
+lts-serve: LAN access closed on [fda9:b459:69:1:1857:fcf1:19dd:734e]:17642
+lts-serve: LAN access closed on [fd7a:115c:a1e0::503a:978]:17642
+SMOKE-EXIT:0

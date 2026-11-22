@@ -2608,6 +2608,26 @@
       "summary": "Sessions start once and flow: the first activity's lesson encounter is the single start, then advanceSession shows an announced 'Next: <verb>' bridge (role=status, own pause control, reduced-motion skips it, pause/stop/history cancel it) and opens the next runner with no lesson-card re-gate. Serve banner renders line-per-capability (word-salad repro fixed). en-US copy standard documented (GLOSSARY + CODING_STANDARDS) with a scripted sweep of UI strings, en-US glosses and RU curriculum summaries; audit_learner_copy v1.5.0 ratchets locale (kind locale-uk) and 'unit 000' id leaks over strings, jsx text, unit summaries/titles and glosses - repo audit findings: 0.",
       "activity": "idle",
       "updated": "2026-11-21"
+    },
+    "LAN-TOGGLE-PIN-001": {
+      "task_id": "LAN-TOGGLE-PIN-001",
+      "title": "One-click LAN access with pairing PIN in Settings as the zero-install remote fallback",
+      "status": "done",
+      "attempts": 3,
+      "dependencies": [],
+      "evidence": [
+        "state/evidence/LAN-TOGGLE-PIN-001/gates.log",
+        "state/evidence/LAN-TOGGLE-PIN-001/fmt.log",
+        "state/evidence/LAN-TOGGLE-PIN-001/test-serve.log",
+        "state/evidence/LAN-TOGGLE-PIN-001/clippy.log",
+        "state/evidence/LAN-TOGGLE-PIN-001/tsc.log",
+        "state/evidence/LAN-TOGGLE-PIN-001/vitest-settings.log",
+        "state/evidence/LAN-TOGGLE-PIN-001/smoke.log",
+        "state/notes/LAN-TOGGLE-PIN-001.md"
+      ],
+      "summary": "Settings gains a serve-mode-only 'Allow devices on my home network' card: enabling it binds the running lts-serve to home-network interfaces (non-loopback private + 100.64/10 tailnet via if-addrs; bind stays localhost while off) behind a 6-digit pairing PIN - PIN_TTL 300 s, single-use, 10 attempts/peer, then a 30-day lts_session cookie. Toggle + issued sessions persist to <data>/serve-access.json across restarts; LAN peers without a cookie get 401 'pairing required' on data routes, loopback is always allowed. Card labels the traffic honestly as unencrypted http with the browser mic blocked. 18 serve:: unit tests (bind policy, PIN issue/validate/expiry/limit, restart persistence, router-level unpaired-401/paired-200) + 24 vitest settings tests + second-LTS_DATA_DIR smoke over a real LAN socket.",
+      "activity": "idle",
+      "updated": "2026-11-21"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
