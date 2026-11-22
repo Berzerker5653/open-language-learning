@@ -14,10 +14,16 @@
 //!
 //! Network posture (scope 5): the bind address must be an explicit
 //! loopback, RFC1918, or Tailscale CGNAT (100.64.0.0/10) address —
-//! `0.0.0.0` and public interfaces are refused at startup. There is no
-//! auth: the trusted-LAN assumption is documented in
-//! `state/notes/WEB-SERVE-001.md`, and the SEC sign-off stays an explicit
-//! later WEB-001 concern.
+//! `0.0.0.0` and public interfaces are refused at startup, and public
+//! addresses stay refused in every mode. LAN-TOGGLE-PIN-001 adds the
+//! owner-approved zero-install fallback: while the persisted Settings
+//! toggle 'Allow devices on my home network' is ON, an explicit LAN bind
+//! or `0.0.0.0` is allowed, and every non-loopback peer must pair with
+//! the expiring 6-digit PIN before any `/api`/`/media` data flows
+//! (loopback stays the operator path and always sees the PIN). The
+//! trusted-LAN assumption for the tailnet path is documented in
+//! `state/notes/WEB-SERVE-001.md`; tailscale-serve forwards land on
+//! loopback, so the recommended HTTPS path needs no pairing.
 //!
 //! Browser-mode honesty (scope 4): `/api/capabilities` reports what the
 //! serve mode can and cannot do; the frontend labels unavailable
@@ -27,10 +33,10 @@
 
 use axum::body::Bytes;
 use axum::extract::Path as AxPath;
-use axum::http::HeaderMap;
-use axum::http::StatusCode;
 use axum::http::header::CONTENT_TYPE;
 use axum::http::header::ORIGIN;
+use axum::http::HeaderMap;
+use axum::http::StatusCode;
 use axum::response::sse::{Event, KeepAlive, Sse};
 use axum::response::{IntoResponse, Response};
 use axum::routing::{get, post};
@@ -39,8 +45,8 @@ use futures_core::stream::Stream;
 use std::convert::Infallible;
 use std::path::{Component, Path, PathBuf};
 use std::pin::Pin;
-use std::sync::OnceLock;
 use std::sync::mpsc::SyncSender;
+use std::sync::OnceLock;
 use std::task::{Context, Poll};
 use tokio::sync::broadcast;
 
@@ -59,6 +65,14 @@ pub const SERVE_MARKER: &str = "<script>window.__LTS_SERVE=true;</script>";
 /// CGNAT bind. `0.0.0.0` (unspecified) and public addresses fail here, so
 /// the server can never be started in a publicly exposed posture by accident.
 pub fn parse_bind(bind: &str) -> Result<std::net::SocketAddr, String> {
+    parse_bind_with_lan(bind, false)
+}
+
+/// LAN-TOGGLE-PIN-001 bind policy: the scope-5 trusted set, plus — ONLY
+/// while the persisted LAN-access toggle is on — the unspecified address
+/// (`0.0.0.0`) and IPv6 unique-local ranges. Public addresses are refused
+/// in every mode: the toggle widens the LAN posture, never the public one.
+pub fn parse_bind_with_lan(bind: &str, lan_enabled: bool) -> Result<std::net::SocketAddr, String> {
     let addr: std::net::SocketAddr = bind
         .parse()
         .map_err(|_| format!("bind must be an explicit host:port (got {bind:?})"))?;
@@ -69,8 +83,13 @@ pub fn parse_bind(bind: &str) -> Result<std::net::SocketAddr, String> {
                 || v4.is_private()
                 // Tailscale tailnet CGNAT range 100.64.0.0/10.
                 || (v4.octets()[0] == 100 && (v4.octets()[1] & 0b1100_0000) == 0b0100_0000)
+                || (lan_enabled && v4.is_unspecified())
         }
-        std::net::IpAddr::V6(v6) => v6.is_loopback(),
+        std::net::IpAddr::V6(v6) => {
+            v6.is_loopback()
+                || v6.is_unspecified() && lan_enabled
+                || v6.is_unique_local() && lan_enabled
+        }
     };
     if !trusted {
         return Err(format!(
@@ -79,6 +98,28 @@ pub fn parse_bind(bind: &str) -> Result<std::net::SocketAddr, String> {
         ));
     }
     Ok(addr)
+}
+
+/// LAN-TOGGLE-PIN-001: the LAN addresses a running serve process can open
+/// for the toggle — every non-loopback interface address in the trusted
+/// private/tailnet ranges, stamped with the serve port. Explicit-interface
+/// binds (not `0.0.0.0`) let the LAN listener coexist with the loopback
+/// listener already holding the same port.
+pub fn lan_iface_addrs(port: u16) -> Vec<std::net::SocketAddr> {
+    let addrs = if_addrs::get_if_addrs().unwrap_or_default();
+    addrs
+        .iter()
+        .filter(|iface| !iface.is_loopback())
+        .map(|iface| iface.ip())
+        .filter(|ip| match ip {
+            std::net::IpAddr::V4(v4) => {
+                v4.is_private()
+                    || (v4.octets()[0] == 100 && (v4.octets()[1] & 0b1100_0000) == 0b0100_0000)
+            }
+            std::net::IpAddr::V6(v6) => v6.is_unique_local(),
+        })
+        .map(|ip| std::net::SocketAddr::new(ip, port))
+        .collect()
 }
 
 // -- IPC bridge ------------------------------------------------------------
@@ -217,7 +258,10 @@ impl Stream for ProgressStream {
 /// GET /api/progress/events: the browser twin of the desktop event stream.
 /// Frames are SSE `data:` frames carrying the same JSON the webview receives;
 /// the frontend adapter feeds both into the same progress UI.
-async fn progress_events() -> Response {
+async fn progress_events(peer: Peer, headers: HeaderMap) -> Response {
+    if let Some(reject) = require_paired_or_local(peer, &headers).await {
+        return reject;
+    }
     let mut stages = progress_tx().subscribe();
     let (tx, rx) = tokio::sync::mpsc::channel::<crate::progress::Progress>(64);
     tokio::spawn(async move {
@@ -319,8 +363,8 @@ fn app_handle_command(cmd: &str, payload: &serde_json::Value) -> Option<IpcReply
 /// install is cancellable through the ordinary `cancel_pack_install`
 /// command exactly like a desktop one).
 fn install_catalog_pack_served(pack_id: &str) -> Result<crate::packs::InstallResult, String> {
-    use std::sync::Arc;
     use std::sync::atomic::AtomicBool;
+    use std::sync::Arc;
     let flag = Arc::new(AtomicBool::new(false));
     let registered = pack_id.to_string();
     if let Ok(mut m) = crate::install_cancel_registry().lock() {
@@ -343,7 +387,17 @@ fn install_catalog_pack_served(pack_id: &str) -> Result<crate::packs::InstallRes
 /// POST /api/<command>: body is the same JSON args object a webview
 /// `invoke(cmd, args)` would carry (camelCase keys — the exact conversion
 /// Tauri's IPC layer performs is reused here, not reimplemented).
-async fn api_dispatch(AxPath(cmd): AxPath<String>, body: Bytes) -> Response {
+async fn api_dispatch(
+    peer: Peer,
+    headers: HeaderMap,
+    AxPath(cmd): AxPath<String>,
+    body: Bytes,
+) -> Response {
+    // LAN-TOGGLE-PIN-001: no learner data crosses the LAN boundary
+    // before pairing.
+    if let Some(reject) = require_paired_or_local(peer, &headers).await {
+        return reject;
+    }
     let payload: serde_json::Value = if body.is_empty() {
         serde_json::Value::Object(serde_json::Map::new())
     } else if let Ok(v) = serde_json::from_slice(&body) {
@@ -442,7 +496,11 @@ async fn capabilities(headers: HeaderMap) -> Json<serde_json::Value> {
             let host = host.split('/').next().unwrap_or("");
             let local =
                 host == "localhost" || host == "127.0.0.1" || host == "[::1]" || host == "::1";
-            if local { Some(true) } else { Some(false) }
+            if local {
+                Some(true)
+            } else {
+                Some(false)
+            }
         }
         None => None,
     };
@@ -457,6 +515,484 @@ async fn capabilities(headers: HeaderMap) -> Json<serde_json::Value> {
         "privacy_modes": "unchanged — serve mode never rewrites stored mic/privacy settings, it only labels what the browser can do",
         "network": "trusted-network assumption; SEC sign-off is a later WEB-001 concern (state/notes/WEB-SERVE-001.md)",
     }))
+}
+
+// -- LAN access + pairing PIN (LAN-TOGGLE-PIN-001) -------------------------
+//
+// The zero-install fallback from the owner remote-access decision
+// (state/notes/REMOTE-ACCESS-SURVEY-2026-11.md): the Settings toggle
+// 'Allow devices on my home network' opens the running serve process to
+// the local network, but no LAN peer reads learner data until it pairs.
+// Posture, stated exactly:
+// * A loopback peer IS the operator: always allowed, always sees the PIN,
+//   and is the only peer that can change LAN settings. Tailscale-serve
+//   forwards arrive on loopback, so the recommended HTTPS path is
+//   unaffected by pairing.
+// * A non-loopback peer needs a valid `lts_session` cookie for every
+//   data route (/api/<cmd>, /api/progress/events, /media/*). It may only
+//   reach /pair (rate-limited) and the static app shell.
+// * The PIN is 6 digits — only 10^6 — so the per-peer attempt limit is
+//   load-bearing, not decoration. It is single-use and expires in
+//   minutes; a pairing cookie lasts SESSION_TTL and persists across
+//   restarts (`<data>/serve-access.json`) so a paired phone reconnects
+//   without re-entering anything.
+// * Honest label: plain http on the LAN is unencrypted; the UI says so.
+
+/// How long an issued PIN stays valid (the card's 'a few minutes').
+pub const PIN_TTL: std::time::Duration = std::time::Duration::from_secs(300);
+/// How long a paired device's session cookie lasts (docs/22 promises
+/// reconnect-without-re-entering; 30 days, re-pair after that).
+pub const SESSION_TTL: std::time::Duration = std::time::Duration::from_secs(30 * 24 * 3600);
+/// Wrong-PIN guesses accepted per peer IP before the peer is locked out
+/// for the process lifetime (a restart clears it; 10^6 space / 10 tries).
+const PAIR_ATTEMPT_LIMIT: u32 = 10;
+const SESSION_COOKIE: &str = "lts_session";
+
+#[derive(Debug, Default, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+pub struct PersistedAccess {
+    #[serde(default)]
+    pub lan_enabled: bool,
+    #[serde(default)]
+    pub sessions: Vec<PersistedSession>,
+}
+
+#[derive(Debug, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+pub struct PersistedSession {
+    pub token: String,
+    pub expires_epoch: u64,
+}
+
+#[derive(Debug)]
+struct PinRecord {
+    code: String,
+    expires: std::time::Instant,
+}
+
+#[derive(Debug, Clone)]
+pub struct SessionRecord {
+    token: String,
+    expires_epoch: u64,
+}
+
+#[derive(Debug, Default)]
+pub struct LanState {
+    enabled: bool,
+    pin: Option<PinRecord>,
+    sessions: Vec<SessionRecord>,
+    attempts: std::collections::HashMap<String, u32>,
+    listeners: Vec<(String, tokio::task::AbortHandle)>,
+}
+
+/// One non-deterministic 64-hex digest (uuid v4 + clock + pid, hashed).
+/// No `rand` dependency is pulled into the desktop tree for this; the
+/// PIN and tokens only need unpredictability, and sha2 is already a dep.
+fn random_hex() -> String {
+    use sha2::Digest as _;
+    let seed = format!(
+        "{}|{}|{}",
+        uuid::Uuid::new_v4(),
+        std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_nanos())
+            .unwrap_or(0),
+        std::process::id()
+    );
+    let mut h = sha2::Sha256::new();
+    h.update(seed.as_bytes());
+    h.finalize().iter().map(|b| format!("{b:02x}")).collect()
+}
+
+/// Issue (replacing any live PIN) and return the 6-digit code. `ttl` is
+/// a parameter so expiry is testable without sleeping.
+pub fn issue_pin(state: &mut LanState, ttl: std::time::Duration) -> String {
+    let hex = random_hex();
+    let n: u32 = u32::from_str_radix(&hex[..6], 16).unwrap_or(0) % 1_000_000;
+    let code = format!("{n:06}");
+    state.pin = Some(PinRecord {
+        code: code.clone(),
+        expires: std::time::Instant::now() + ttl,
+    });
+    code
+}
+
+/// On a match: consume the PIN, mint a session, prune expired sessions,
+/// and return the record (whose token goes into the cookie). A wrong or
+/// expired code changes nothing — a typo must not burn the visible PIN.
+pub fn validate_pin(state: &mut LanState, code: &str, now_epoch: u64) -> Option<SessionRecord> {
+    let matches = state
+        .pin
+        .as_ref()
+        .is_some_and(|p| p.expires > std::time::Instant::now() && p.code == code);
+    if !matches {
+        return None;
+    }
+    state.pin = None;
+    let rec = SessionRecord {
+        token: random_hex(),
+        expires_epoch: now_epoch + SESSION_TTL.as_secs(),
+    };
+    state.sessions.retain(|s| s.expires_epoch > now_epoch);
+    state.sessions.push(rec.clone());
+    Some(rec)
+}
+
+pub fn session_valid(state: &LanState, token: &str, now_epoch: u64) -> bool {
+    state
+        .sessions
+        .iter()
+        .any(|s| s.token == token && s.expires_epoch > now_epoch)
+}
+
+/// Count a pairing attempt for `peer`; false once the limit is crossed.
+pub fn note_attempt(state: &mut LanState, peer: &str) -> bool {
+    let c = state.attempts.entry(peer.to_string()).or_insert(0);
+    *c += 1;
+    *c <= PAIR_ATTEMPT_LIMIT
+}
+
+/// The toggle state rides one JSON file in the data dir, so a LAN
+/// pairing survives serve restarts (the phone reconnects by cookie) and
+/// the bind posture is known BEFORE startup binds the socket.
+fn persist_access_to(path: &Path, state: &LanState) {
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map(|d| d.as_secs())
+        .unwrap_or(0);
+    let doc = PersistedAccess {
+        lan_enabled: state.enabled,
+        sessions: state
+            .sessions
+            .iter()
+            .filter(|s| s.expires_epoch > now)
+            .map(|s| PersistedSession {
+                token: s.token.clone(),
+                expires_epoch: s.expires_epoch,
+            })
+            .collect(),
+    };
+    if let Ok(text) = serde_json::to_string_pretty(&doc) {
+        if let Some(parent) = path.parent() {
+            let _ = std::fs::create_dir_all(parent);
+        }
+        let _ = std::fs::write(path, text);
+    }
+}
+
+fn load_access_from(path: &Path, state: &mut LanState) {
+    let Ok(text) = std::fs::read_to_string(path) else {
+        return;
+    };
+    let Ok(doc) = serde_json::from_str::<PersistedAccess>(&text) else {
+        return;
+    };
+    state.enabled = doc.lan_enabled;
+    let now = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map(|d| d.as_secs())
+        .unwrap_or(0);
+    state.sessions = doc
+        .sessions
+        .into_iter()
+        .filter(|s| s.expires_epoch > now && !s.token.is_empty())
+        .map(|s| SessionRecord {
+            token: s.token,
+            expires_epoch: s.expires_epoch,
+        })
+        .collect();
+}
+
+fn access_file() -> PathBuf {
+    crate::data_dir().join("serve-access.json")
+}
+
+/// Process-wide LAN state (the serve process has exactly one), plus the
+/// router/port a runtime toggle needs to open extra interface listeners.
+static LAN: OnceLock<std::sync::Mutex<LanState>> = OnceLock::new();
+static LAN_ROUTER: OnceLock<Router> = OnceLock::new();
+static LAN_PORT: OnceLock<u16> = OnceLock::new();
+
+fn lan() -> &'static std::sync::Mutex<LanState> {
+    LAN.get_or_init(|| std::sync::Mutex::new(LanState::default()))
+}
+
+fn lan_lock() -> std::sync::MutexGuard<'static, LanState> {
+    lan().lock().unwrap_or_else(|p| p.into_inner())
+}
+
+/// Open (or close) the explicit-interface LAN listeners to match
+/// `enabled`. Loopback never needs its own entry — the primary listener
+/// already answers it. Binding per-interface (instead of `0.0.0.0`) is
+/// what lets the LAN listener appear on the SAME port while the loopback
+/// listener already holds it. Lock discipline: the state mutex is taken
+/// and released in phases — no guard is held across an await (the axum
+/// handlers that call this must stay Send).
+async fn sync_lan_listeners() {
+    let (wanted, router) = {
+        let mut state = lan_lock();
+        let wanted_all: Vec<String> = match (state.enabled, LAN_PORT.get()) {
+            (true, Some(port)) => lan_iface_addrs(*port)
+                .iter()
+                .map(|a| a.to_string())
+                .collect(),
+            _ => Vec::new(),
+        };
+        state.listeners.retain(|(addr, handle)| {
+            if wanted_all.contains(addr) {
+                return true;
+            }
+            handle.abort();
+            eprintln!("lts-serve: LAN access closed on {addr}");
+            false
+        });
+        let wanted: Vec<String> = wanted_all
+            .into_iter()
+            .filter(|a| !state.listeners.iter().any(|(x, _)| x == a))
+            .collect();
+        (wanted, LAN_ROUTER.get().cloned())
+    };
+    let Some(router) = router else {
+        return;
+    };
+    for addr in wanted {
+        match tokio::net::TcpListener::bind(&addr).await {
+            Ok(listener) => {
+                let shown = addr.clone();
+                // axum 0.8 injects ConnectInfo (the peer address the gate
+                // needs) only through into_make_service_with_connect_info.
+                let make = router
+                    .clone()
+                    .into_make_service_with_connect_info::<std::net::SocketAddr>();
+                let ended = shown.clone();
+                let task = tokio::spawn(async move {
+                    if let Err(e) = axum::serve(listener, make).await {
+                        eprintln!("lts-serve: LAN listener {ended} ended: {e}");
+                    }
+                });
+                lan_lock().listeners.push((addr, task.abort_handle()));
+                eprintln!(
+                    "lts-serve: LAN access open on {shown} — unencrypted http, pairing PIN required"
+                );
+            }
+            Err(e) => eprintln!("lts-serve: could not open LAN address {addr}: {e}"),
+        }
+    }
+}
+
+// -- pairing endpoints ------------------------------------------------------
+
+/// The connecting peer's socket address when the listener provides one.
+/// A hand-rolled extractor: axum 0.8 injects `ConnectInfo` only through
+/// `into_make_service_with_connect_info`, and `Option<ConnectInfo<..>>`
+/// as a handler arg needs an `OptionalFromRequestParts` that
+/// `ConnectInfo` does not implement. Missing address means an
+/// in-process caller (the router tests): the honest local default.
+#[derive(Debug, Clone, Copy)]
+struct Peer(Option<std::net::SocketAddr>);
+
+impl<S: Send + Sync> axum::extract::FromRequestParts<S> for Peer {
+    type Rejection = std::convert::Infallible;
+    async fn from_request_parts(
+        parts: &mut axum::http::request::Parts,
+        _state: &S,
+    ) -> Result<Self, Self::Rejection> {
+        Ok(Peer(
+            parts
+                .extensions
+                .get::<axum::extract::ConnectInfo<std::net::SocketAddr>>()
+                .map(|c| c.0),
+        ))
+    }
+}
+
+fn peer_is_loopback(peer: &Peer) -> bool {
+    peer.0.is_none_or(|a| a.ip().is_loopback())
+}
+
+fn peer_ip(peer: &Peer) -> String {
+    peer.0
+        .map(|a| a.ip().to_string())
+        .unwrap_or_else(|| "local".into())
+}
+
+fn now_epoch() -> u64 {
+    std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .map(|d| d.as_secs())
+        .unwrap_or(0)
+}
+
+fn cookie_value(headers: &HeaderMap, name: &str) -> Option<String> {
+    let raw = headers.get(axum::http::header::COOKIE)?.to_str().ok()?;
+    raw.split(';').find_map(|kv| {
+        let kv = kv.trim();
+        kv.strip_prefix(&format!("{name}="))
+            .map(|v| v.trim().to_string())
+            .filter(|v| !v.is_empty())
+    })
+}
+
+fn pairing_required() -> Response {
+    (
+        StatusCode::UNAUTHORIZED,
+        Json(serde_json::json!({
+            "error": "pairing required — on the computer running LTS, open Settings \u{2192} \
+                      'Local network access' to show the current 6-digit pairing PIN, then \
+                      enter it here once; this device reconnects without a PIN afterwards"
+        })),
+    )
+        .into_response()
+}
+
+fn forbidden(message: &str) -> Response {
+    (
+        StatusCode::FORBIDDEN,
+        Json(serde_json::json!({"error": message})),
+    )
+        .into_response()
+}
+
+/// The data-route gate: loopback passes; everyone else needs a live
+/// session cookie. Checked inside each data handler (not as router
+/// middleware) so the static app shell and /pair stay reachable —
+/// an unpaired phone must be able to load the page to enter the PIN.
+async fn data_route_allowed(peer: &Peer, headers: &HeaderMap) -> bool {
+    if peer_is_loopback(peer) {
+        return true;
+    }
+    let Some(token) = cookie_value(headers, SESSION_COOKIE) else {
+        return false;
+    };
+    session_valid(&lan_lock(), &token, now_epoch())
+}
+
+fn lan_status_json(state: &LanState) -> serde_json::Value {
+    let port = LAN_PORT.get().copied().unwrap_or(0);
+    let pin = state
+        .pin
+        .as_ref()
+        .filter(|p| p.expires > std::time::Instant::now());
+    serde_json::json!({
+        "enabled": state.enabled,
+        "pin": pin.map(|p| p.code.clone()),
+        "pin_expires_in_secs": pin.map(|p| p.expires.saturating_duration_since(std::time::Instant::now()).as_secs()),
+        "addresses": if state.enabled { lan_iface_addrs(port).iter().map(|a| format!("http://{a}/")).collect::<Vec<_>>() } else { Vec::<String>::new() },
+        "paired_devices": state.sessions.iter().filter(|s| s.expires_epoch > now_epoch()).count(),
+        "traffic_note": "plain http on the local network is unencrypted: anyone on this Wi-Fi can read what paired devices send, and the browser blocks the microphone here. The Tailscale path (https) is the private one (docs/22).",
+    })
+}
+
+/// GET /lan/status — loopback only (it shows the PIN). While enabled, a
+/// dead/expired PIN is rotated automatically so the panel always shows
+/// one that works.
+async fn lan_status(peer: Peer) -> Response {
+    if !peer_is_loopback(&peer) {
+        return forbidden("the pairing PIN is only shown to the computer running LTS");
+    }
+    let (json, enabled) = {
+        let mut state = lan_lock();
+        if state.enabled
+            && state
+                .pin
+                .as_ref()
+                .is_none_or(|p| p.expires <= std::time::Instant::now())
+        {
+            issue_pin(&mut state, PIN_TTL);
+        }
+        (lan_status_json(&state), state.enabled)
+    };
+    if enabled {
+        sync_lan_listeners().await;
+    }
+    Json(json).into_response()
+}
+
+/// POST /lan/enable {"enabled": bool} — loopback only (changing the
+/// network posture from the network would defeat the gate).
+async fn lan_enable(peer: Peer, body: Bytes) -> Response {
+    if !peer_is_loopback(&peer) {
+        return forbidden("local-network access is only switched from the computer running LTS");
+    }
+    let wanted: bool = match serde_json::from_slice::<serde_json::Value>(&body) {
+        Ok(v) => v.get("enabled").and_then(|b| b.as_bool()).unwrap_or(false),
+        Err(_) => false,
+    };
+    let json = {
+        let mut state = lan_lock();
+        state.enabled = wanted;
+        if wanted
+            && state
+                .pin
+                .as_ref()
+                .is_none_or(|p| p.expires <= std::time::Instant::now())
+        {
+            issue_pin(&mut state, PIN_TTL);
+        }
+        persist_access_to(&access_file(), &state);
+        lan_status_json(&state)
+    };
+    sync_lan_listeners().await;
+    Json(json).into_response()
+}
+
+/// POST /lan/rotate — loopback only; immediately replaces the shown PIN
+/// (e.g. after a shoulder-surfacing worry).
+async fn lan_rotate(peer: Peer) -> Response {
+    if !peer_is_loopback(&peer) {
+        return forbidden("the pairing PIN is only rotated from the computer running LTS");
+    }
+    let mut state = lan_lock();
+    let code = issue_pin(&mut state, PIN_TTL);
+    Json(serde_json::json!({"pin": code, "expires_in_secs": PIN_TTL.as_secs()})).into_response()
+}
+
+/// POST /pair {"pin": "123456"} — the LAN device's one pairing call.
+/// Success sets the HttpOnly session cookie and persists the session.
+async fn pair(peer: Peer, body: Bytes) -> Response {
+    let peer_addr = peer_ip(&peer);
+    let code = serde_json::from_slice::<serde_json::Value>(&body)
+        .ok()
+        .and_then(|v| v.get("pin").and_then(|p| p.as_str()).map(str::to_string))
+        .unwrap_or_default();
+    let mut state = lan_lock();
+    if !note_attempt(&mut state, &peer_addr) {
+        return (
+            StatusCode::TOO_MANY_REQUESTS,
+            Json(serde_json::json!({
+                "error": "too many pairing attempts from this device — restart lts-serve or pair from the main computer"
+            })),
+        )
+            .into_response();
+    }
+    let Some(session) = validate_pin(&mut state, code.trim(), now_epoch()) else {
+        return forbidden(
+            "that pairing PIN did not work — a PIN is only valid for a few minutes; check \
+             Settings \u{2192} 'Local network access' on the main computer for the current one",
+        );
+    };
+    persist_access_to(&access_file(), &state);
+    let cookie = format!(
+        "{SESSION_COOKIE}={}; HttpOnly; SameSite=Lax; Max-Age={}; Path=/",
+        session.token,
+        SESSION_TTL.as_secs()
+    );
+    (
+        StatusCode::OK,
+        [(axum::http::header::SET_COOKIE, cookie)],
+        Json(serde_json::json!({
+            "paired": true,
+            "expires_in_secs": session.expires_epoch.saturating_sub(now_epoch()),
+        })),
+    )
+        .into_response()
+}
+
+/// The gate wrapper for the data routes (see `data_route_allowed`).
+async fn require_paired_or_local(peer: Peer, headers: &HeaderMap) -> Option<Response> {
+    if data_route_allowed(&peer, headers).await {
+        None
+    } else {
+        Some(pairing_required())
+    }
 }
 
 // -- static files ----------------------------------------------------------
@@ -500,7 +1036,10 @@ fn content_type(path: &Path) -> &'static str {
 /// via `story_audio` base64 through the IPC bridge; this route exists so
 /// clip URLs are available to plain <audio src> uses too). Only paths under
 /// the installed-packs store, only audio/image extensions.
-async fn media_handler(AxPath(rel): AxPath<String>) -> Response {
+async fn media_handler(peer: Peer, headers: HeaderMap, AxPath(rel): AxPath<String>) -> Response {
+    if let Some(reject) = require_paired_or_local(peer, &headers).await {
+        return reject;
+    }
     let Some(inner) = safe_relpath(&rel) else {
         return (StatusCode::NOT_FOUND, "not found").into_response();
     };
@@ -582,6 +1121,10 @@ pub fn router(cfg: ServeConfig) -> Router {
         .route("/api/progress/events", get(progress_events))
         .route("/api/{cmd}", post(api_dispatch))
         .route("/media/{*rest}", get(media_handler))
+        .route("/lan/status", get(lan_status))
+        .route("/lan/enable", post(lan_enable))
+        .route("/lan/rotate", post(lan_rotate))
+        .route("/pair", post(pair))
         .fallback(move |req: axum::extract::Request| {
             let dist = dist_for_fallback.clone();
             async move { static_handler(&dist, req.uri().path()) }
@@ -591,7 +1134,15 @@ pub fn router(cfg: ServeConfig) -> Router {
 /// Entry point for the `lts-serve` binary: bind (validated), warm the
 /// command app, serve until the process is stopped.
 pub async fn serve(bind: &str, dist: PathBuf) -> Result<(), String> {
-    let addr = parse_bind(bind)?;
+    // LAN-TOGGLE-PIN-001: the persisted toggle is read BEFORE binding,
+    // so a restart keeps both the widened bind posture and the paired
+    // devices' sessions without any learner-side re-pairing.
+    {
+        let mut state = lan_lock();
+        load_access_from(&access_file(), &mut state);
+    }
+    let enabled = lan_lock().enabled;
+    let addr = parse_bind_with_lan(bind, enabled)?;
     if !dist.join("index.html").is_file() {
         return Err(format!(
             "no built frontend at {} — run `pnpm build` in apps/desktop first",
@@ -604,9 +1155,25 @@ pub async fn serve(bind: &str, dist: PathBuf) -> Result<(), String> {
         .await
         .map_err(|e| format!("bind {addr} failed: {e}"))?;
     eprintln!("lts-serve listening on http://{addr} (trusted network only)");
-    axum::serve(listener, router(ServeConfig { dist }))
-        .await
-        .map_err(|e| format!("serve loop ended: {e}"))
+    let app = router(ServeConfig { dist });
+    // The runtime toggle needs the router and port to open extra LAN
+    // interface listeners on the same port (LAN-TOGGLE-PIN-001).
+    let _ = LAN_ROUTER.set(app.clone());
+    let _ = LAN_PORT.set(
+        listener
+            .local_addr()
+            .map(|a| a.port())
+            .unwrap_or(addr.port()),
+    );
+    if enabled {
+        sync_lan_listeners().await;
+    }
+    axum::serve(
+        listener,
+        app.into_make_service_with_connect_info::<std::net::SocketAddr>(),
+    )
+    .await
+    .map_err(|e| format!("serve loop ended: {e}"))
 }
 
 #[cfg(test)]
@@ -733,12 +1300,10 @@ mod tests {
             v["microphone_names_available"], false,
             "insecure origin must say so: {v}"
         );
-        assert!(
-            v["microphone_names_note"]
-                .as_str()
-                .unwrap()
-                .contains("secure context")
-        );
+        assert!(v["microphone_names_note"]
+            .as_str()
+            .unwrap()
+            .contains("secure context"));
         // Loopback http and any https are secure contexts.
         for origin in [
             "http://localhost:8000",
@@ -950,5 +1515,277 @@ mod tests {
             .await
             .unwrap();
         assert_eq!(resp.status(), StatusCode::NOT_FOUND);
+    }
+
+    // -- LAN-TOGGLE-PIN-001: bind policy, PIN lifecycle, pairing gate ------
+
+    #[test]
+    fn bind_policy_opens_the_wildcard_only_while_lan_access_is_on() {
+        // The toggle widens the LAN posture, never the public one.
+        assert!(parse_bind_with_lan("0.0.0.0:17625", false).is_err());
+        assert!(parse_bind_with_lan("0.0.0.0:17625", true).is_ok());
+        assert!(parse_bind_with_lan("141.101.1.1:17625", true).is_err());
+        assert!(parse_bind_with_lan("192.168.1.10:17625", true).is_ok());
+        assert!(parse_bind_with_lan("127.0.0.1:17625", false).is_ok());
+        assert!(parse_bind_with_lan("[::]:17625", true).is_ok());
+        assert!(parse_bind_with_lan("[fd00::1]:17625", true).is_ok());
+        assert!(parse_bind_with_lan("[2001:db8::1]:17625", true).is_err());
+    }
+
+    #[test]
+    fn pin_is_issued_six_digit_single_use_and_expiring() {
+        let mut st = LanState::default();
+        let code = issue_pin(&mut st, std::time::Duration::from_secs(300));
+        assert_eq!(code.len(), 6, "PIN must be exactly 6 digits: {code}");
+        assert!(code.bytes().all(|b| b.is_ascii_digit()));
+
+        // A wrong guess must not burn the visible PIN.
+        let wrong = if code == "000000" { "000001" } else { "000000" };
+        assert!(validate_pin(&mut st, wrong, now_epoch()).is_none());
+        assert!(st.pin.is_some(), "a typo must not consume the live PIN");
+
+        // The right code pairs exactly once (single use).
+        let s1 = validate_pin(&mut st, &code, now_epoch()).expect("correct PIN pairs");
+        assert!(session_valid(&st, &s1.token, now_epoch()));
+        assert!(
+            validate_pin(&mut st, &code, now_epoch()).is_none(),
+            "PIN must be single-use"
+        );
+
+        // An expired PIN is refused, and an expired session stops working.
+        let stale = issue_pin(&mut st, std::time::Duration::ZERO);
+        assert!(validate_pin(&mut st, &stale, now_epoch()).is_none());
+        let expired_now = s1.expires_epoch + 1;
+        assert!(!session_valid(&st, &s1.token, expired_now));
+    }
+
+    #[test]
+    fn pairing_attempts_are_limited_per_peer() {
+        let mut st = LanState::default();
+        for _ in 0..PAIR_ATTEMPT_LIMIT {
+            assert!(note_attempt(&mut st, "192.168.5.5"));
+        }
+        assert!(
+            !note_attempt(&mut st, "192.168.5.5"),
+            "11th guess must be locked out"
+        );
+        // A different peer keeps its own budget.
+        assert!(note_attempt(&mut st, "192.168.5.6"));
+    }
+
+    #[test]
+    fn access_and_sessions_survive_a_restart() {
+        let dir = tempfile::tempdir().unwrap();
+        let path = dir.path().join("serve-access.json");
+        let mut st = LanState {
+            enabled: true,
+            ..Default::default()
+        };
+        st.sessions.push(SessionRecord {
+            token: "live-token".into(),
+            expires_epoch: now_epoch() + 3600,
+        });
+        st.sessions.push(SessionRecord {
+            token: "dead-token".into(),
+            expires_epoch: now_epoch() - 1,
+        });
+        persist_access_to(&path, &st);
+
+        let mut reloaded = LanState::default();
+        load_access_from(&path, &mut reloaded);
+        assert!(reloaded.enabled, "the toggle survives a restart");
+        assert!(session_valid(&reloaded, "live-token", now_epoch()));
+        assert!(
+            !session_valid(&reloaded, "dead-token", now_epoch()),
+            "expired sessions drop out"
+        );
+    }
+
+    /// Request-shape helper: same as `post_json` but lets a test present
+    /// as a specific peer (ConnectInfo) and carry a cookie.
+    async fn request_as(
+        app: &Router,
+        method: &str,
+        path: &str,
+        body: &str,
+        peer: std::net::SocketAddr,
+        cookie: Option<&str>,
+    ) -> (StatusCode, serde_json::Value, Option<String>) {
+        let mut builder = Request::builder().method(method).uri(path);
+        if !body.is_empty() {
+            builder = builder.header(CONTENT_TYPE, "application/json");
+        }
+        if let Some(c) = cookie {
+            builder = builder.header(axum::http::header::COOKIE, c);
+        }
+        let mut req = builder.body(Body::from(body.to_string())).unwrap();
+        req.extensions_mut()
+            .insert(axum::extract::ConnectInfo(peer));
+        let resp = app.clone().oneshot(req).await.unwrap();
+        let status = resp.status();
+        let set_cookie = resp
+            .headers()
+            .get(axum::http::header::SET_COOKIE)
+            .and_then(|v| v.to_str().ok())
+            .map(str::to_string);
+        let bytes = axum::body::to_bytes(resp.into_body(), usize::MAX)
+            .await
+            .unwrap();
+        let json = serde_json::from_slice(&bytes).unwrap_or(serde_json::Value::Null);
+        (status, json, set_cookie)
+    }
+
+    const LOOPBACK: &str = "127.0.0.1:51234";
+    const LAN_PEER: &str = "192.168.5.5:55555";
+
+    #[tokio::test]
+    async fn lan_peer_must_pair_before_any_data_route() {
+        // The flow test drives the process-global LAN state and pairing
+        // writes the access file, so point the data dir at a tempdir.
+        let dir = tempfile::tempdir().unwrap();
+        unsafe { std::env::set_var("LTS_DATA_DIR", dir.path()) };
+        *lan_lock() = LanState::default();
+        let app = test_router();
+        let local: std::net::SocketAddr = LOOPBACK.parse().unwrap();
+        let peer: std::net::SocketAddr = LAN_PEER.parse().unwrap();
+
+        // LAN access is switched from the operator (loopback) only.
+        let (status, json, _) = request_as(
+            &app,
+            "POST",
+            "/lan/enable",
+            r#"{"enabled":true}"#,
+            peer,
+            None,
+        )
+        .await;
+        assert_eq!(
+            status,
+            StatusCode::FORBIDDEN,
+            "LAN peer must not toggle: {json}"
+        );
+
+        let (status, json, _) = request_as(
+            &app,
+            "POST",
+            "/lan/enable",
+            r#"{"enabled":true}"#,
+            local,
+            None,
+        )
+        .await;
+        assert_eq!(status, StatusCode::OK, "loopback toggles: {json}");
+        let pin = json["pin"].as_str().unwrap_or_default().to_string();
+        assert_eq!(
+            pin.len(),
+            6,
+            "the toggle hands the operator a 6-digit PIN: {json}"
+        );
+        assert!(json["traffic_note"]
+            .as_str()
+            .unwrap()
+            .contains("unencrypted"));
+
+        // The unpaired LAN peer is refused on every data route...
+        let (status, json, _) = request_as(&app, "POST", "/api/app_mode", "{}", peer, None).await;
+        assert_eq!(
+            status,
+            StatusCode::UNAUTHORIZED,
+            "unpaired peer must get 401: {json}"
+        );
+        assert!(json["error"].as_str().unwrap().contains("pairing required"));
+        let (status, _, _) = request_as(&app, "GET", "/api/progress/events", "", peer, None).await;
+        assert_eq!(status, StatusCode::UNAUTHORIZED);
+        let (status, _, _) =
+            request_as(&app, "GET", "/media/packs/a/b/c.wav", "", peer, None).await;
+        assert_eq!(status, StatusCode::UNAUTHORIZED);
+        // ...but loopback keeps working untouched.
+        let (status, _, _) = request_as(&app, "POST", "/api/app_mode", "{}", local, None).await;
+        assert_eq!(status, StatusCode::OK);
+
+        // A wrong PIN is refused (and counted); the right one sets a
+        // session cookie.
+        let (status, _, _) =
+            request_as(&app, "POST", "/pair", r#"{"pin":"000000"}"#, peer, None).await;
+        if pin != "000000" {
+            assert_eq!(status, StatusCode::FORBIDDEN);
+        }
+        let (status, json, set_cookie) = request_as(
+            &app,
+            "POST",
+            "/pair",
+            &format!(r#"{{"pin":"{pin}"}}"#),
+            peer,
+            None,
+        )
+        .await;
+        assert_eq!(status, StatusCode::OK, "correct PIN pairs: {json}");
+        assert_eq!(json["paired"], true);
+        let cookie = set_cookie.expect("pairing sets a session cookie");
+        assert!(cookie.contains(SESSION_COOKIE) && cookie.contains("HttpOnly"));
+        let cookie = cookie.split(';').next().unwrap().to_string();
+
+        // The paired peer now reaches data routes; the PIN is spent and
+        // a re-pair without a fresh PIN fails.
+        let (status, json, _) =
+            request_as(&app, "POST", "/api/app_mode", "{}", peer, Some(&cookie)).await;
+        assert_eq!(status, StatusCode::OK, "paired peer reads: {json}");
+        let (status, _, _) =
+            request_as(&app, "POST", "/pair", r#"{"pin":"000000"}"#, peer, None).await;
+        assert_eq!(status, StatusCode::FORBIDDEN, "the PIN was single-use");
+
+        // A paired peer still cannot read or change LAN settings.
+        let (status, _, _) = request_as(&app, "GET", "/lan/status", "", peer, Some(&cookie)).await;
+        assert_eq!(status, StatusCode::FORBIDDEN);
+        let (status, _, _) = request_as(
+            &app,
+            "POST",
+            "/lan/enable",
+            r#"{"enabled":false}"#,
+            peer,
+            Some(&cookie),
+        )
+        .await;
+        assert_eq!(status, StatusCode::FORBIDDEN);
+        // The operator sees the PIN on loopback.
+        let (status, json, _) = request_as(&app, "GET", "/lan/status", "", local, None).await;
+        assert_eq!(status, StatusCode::OK);
+        assert_eq!(json["enabled"], true);
+        assert!(json["pin"].is_string(), "loopback sees a live PIN: {json}");
+        // And the pairing persisted to the access file for a restart.
+        let text = std::fs::read_to_string(dir.path().join("serve-access.json")).unwrap();
+        let doc: PersistedAccess = serde_json::from_str(&text).unwrap();
+        assert!(doc.lan_enabled);
+        assert_eq!(doc.sessions.len(), 1);
+
+        // A rotate replaces the shown PIN for the operator (and no peer
+        // may rotate it).
+        let (status, json, _) = request_as(&app, "POST", "/lan/rotate", "{}", local, None).await;
+        assert_eq!(status, StatusCode::OK, "operator rotates: {json}");
+        let fresh = json["pin"].as_str().unwrap_or_default().to_string();
+        assert_eq!(fresh.len(), 6, "rotated PIN is 6 digits: {json}");
+        let (status, _, _) =
+            request_as(&app, "POST", "/lan/rotate", "{}", peer, Some(&cookie)).await;
+        assert_eq!(
+            status,
+            StatusCode::FORBIDDEN,
+            "a paired peer cannot rotate the PIN"
+        );
+        // The fresh PIN pairs again (a second device).
+        let (status, _, set_cookie2) = request_as(
+            &app,
+            "POST",
+            "/pair",
+            &format!(r#"{{"pin":"{fresh}"}}"#),
+            peer,
+            None,
+        )
+        .await;
+        assert_eq!(status, StatusCode::OK, "the rotated PIN pairs");
+        assert!(set_cookie2.is_some());
+
+        // Leave global state clean for other tests.
+        *lan_lock() = LanState::default();
+        unsafe { std::env::remove_var("LTS_DATA_DIR") };
     }
 }

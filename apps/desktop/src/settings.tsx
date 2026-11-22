@@ -15,8 +15,9 @@
  * renderable in tests.
  */
 
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import type { Microphone, SpeakerOutput } from "./capture";
+import { inLtsServeMode } from "./ipc";
 import { megabytes, type AlignerStatus, type DeviceTier } from "./language";
 export type RomajiMode = "auto" | "always" | "off";
 
@@ -657,6 +658,12 @@ export function Settings(p: SettingsProps) {
         </ProseNote>
       </div>
 
+      {/* LAN-TOGGLE-PIN-001: the zero-install remote-access fallback
+          (docs/22): bind the running serve process to the home network
+          behind an expiring pairing PIN. Serve mode only — the desktop
+          shell runs no HTTP server to configure. */}
+      {inLtsServeMode() && <LanAccessCard />}
+
       <div className="card">
         <h3>About this build</h3>
         {p.buildIdentity ? (
@@ -678,5 +685,166 @@ export function Settings(p: SettingsProps) {
         )}
       </div>
     </section>
+  );
+}
+
+/**
+ * LAN-TOGGLE-PIN-001: the 'Allow devices on my home network' card, shown
+ * only in serve mode (`window.__LTS_SERVE`). Unlike every other card
+ * here, its state lives on the serve process, not in the App container:
+ * the card talks to the bridge's own `/lan/*` and `/pair` endpoints
+ * (serve.rs), never through an engine command — there is no HTTP server
+ * in the desktop shell to configure. The honest label is part of the
+ * contract: plain http on the LAN is unencrypted, and the browser blocks
+ * the microphone there; Tailscale (docs/22) stays the private path.
+ */
+interface LanStatusPayload {
+  enabled: boolean;
+  pin: string | null;
+  pin_expires_in_secs: number | null;
+  addresses: string[];
+  paired_devices: number;
+  traffic_note: string;
+}
+
+export function LanAccessCard() {
+  const [status, setStatus] = useState<LanStatusPayload | null>(null);
+  const [lanError, setLanError] = useState<string | null>(null);
+  const [pairPin, setPairPin] = useState("");
+  const [pairMessage, setPairMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    let alive = true;
+    fetch("/lan/status", { credentials: "same-origin" })
+      .then((res) => (res.ok ? (res.json() as Promise<LanStatusPayload>) : null))
+      .then((payload) => {
+        if (!alive) return;
+        if (payload) setStatus(payload);
+        else setLanError("The local-network access endpoint did not answer.");
+      })
+      .catch(() => alive && setLanError("Could not reach the local-network access endpoint."));
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  async function postJson(path: string, body: Record<string, unknown>): Promise<unknown | null> {
+    const res = await fetch(path, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+      credentials: "same-origin",
+    });
+    const payload = await res.json().catch(() => null);
+    if (!res.ok) {
+      const message =
+        payload && typeof payload === "object" && "error" in payload
+          ? String((payload as { error: unknown }).error)
+          : `HTTP ${res.status}`;
+      throw new Error(message);
+    }
+    return payload;
+  }
+
+  async function onToggle(enabled: boolean) {
+    setLanError(null);
+    try {
+      setStatus((await postJson("/lan/enable", { enabled })) as LanStatusPayload);
+    } catch (e) {
+      setLanError(e instanceof Error ? e.message : "Could not change local-network access.");
+    }
+  }
+
+  async function onRotate() {
+    setLanError(null);
+    try {
+      const rotated = (await postJson("/lan/rotate", {})) as { pin: string };
+      setStatus((s) => (s ? { ...s, pin: rotated.pin } : s));
+    } catch (e) {
+      setLanError(e instanceof Error ? e.message : "Could not refresh the PIN.");
+    }
+  }
+
+  async function onPair() {
+    setPairMessage(null);
+    try {
+      const result = (await postJson("/pair", { pin: pairPin })) as { paired: boolean };
+      setPairMessage(result.paired ? "Paired — this device reconnects without a PIN." : "Pairing failed.");
+      setPairPin("");
+    } catch (e) {
+      setPairMessage(e instanceof Error ? e.message : "That PIN did not work.");
+    }
+  }
+
+  return (
+    <div className="card" data-testid="lan-access-card">
+      <h3>Local network access</h3>
+      <p>
+        <label htmlFor="lan-enabled">
+          <input
+            id="lan-enabled"
+            type="checkbox"
+            checked={status?.enabled === true}
+            onChange={(e) => onToggle(e.target.checked)}
+          />{" "}
+          Allow devices on my home network
+        </label>
+      </p>
+      {status && (
+        <p className="notice" data-testid="lan-traffic-note">
+          {status.traffic_note}
+        </p>
+      )}
+      {lanError && <p className="error">{lanError}</p>}
+      {status?.enabled && (
+        <>
+          <p>
+            Open one of these addresses from a device on the same network:{" "}
+            {status.addresses.length > 0 ? (
+              status.addresses.map((a) => (
+                <code key={a}>{a}</code>
+              ))
+            ) : (
+              <em>no local address was found on this computer</em>
+            )}
+          </p>
+          <p>
+            Pairing PIN: <code data-testid="lan-pin">{status.pin ?? "(request a new PIN)"}</code>
+            {status.pin_expires_in_secs != null && (
+              <span> — valid for {status.pin_expires_in_secs} more seconds</span>
+            )}{" "}
+            <button type="button" id="lan-rotate" onClick={onRotate}>
+              New PIN
+            </button>
+          </p>
+          <p className="meta">
+            Paired devices: {status.paired_devices}. A PIN is tried once by one device, then it is
+            spent; guessing is rate-limited (docs/22).
+          </p>
+        </>
+      )}
+      <fieldset>
+        <legend>Pair this device with a PIN</legend>
+        <p>
+          <label htmlFor="lan-pair-pin">
+            PIN from the main computer:{" "}
+            <input
+              id="lan-pair-pin"
+              inputMode="numeric"
+              pattern="[0-9]*"
+              maxLength={6}
+              value={pairPin}
+              onChange={(e) => setPairPin(e.target.value)}
+            />
+          </label>{" "}
+          <button type="button" id="lan-pair" onClick={onPair}>
+            Pair
+          </button>
+        </p>
+        {pairMessage && (
+          <p data-testid="lan-pair-message">{pairMessage}</p>
+        )}
+      </fieldset>
+    </div>
   );
 }

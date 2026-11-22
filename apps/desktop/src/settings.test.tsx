@@ -642,3 +642,46 @@ describe("settings", () => {
     );
   });
 });
+
+// LAN-TOGGLE-PIN-001: the local-network access card exists only in serve
+// mode, carries the honest unencrypted-LAN label, and offers both the
+// operator toggle and the device-side PIN entry.
+describe("local network access card (LAN-TOGGLE-PIN-001)", () => {
+  function withServeMode<T>(on: boolean, body: () => T): T {
+    // The settings tests run in the node environment: install the minimal
+    // window surface `inLtsServeMode` reads (same shape as ipc.test.ts).
+    const g = globalThis as unknown as {
+      window?: (Window & { __LTS_SERVE?: boolean }) | undefined;
+    };
+    const original = g.window;
+    if (original === undefined) g.window = {} as Window & { __LTS_SERVE?: boolean };
+    const w = g.window as Window & { __LTS_SERVE?: boolean };
+    const had = w.__LTS_SERVE;
+    w.__LTS_SERVE = on ? true : had;
+    try {
+      return body();
+    } finally {
+      w.__LTS_SERVE = had;
+      if (original === undefined) delete g.window;
+    }
+  }
+
+  it("is absent outside serve mode — the desktop shell runs no HTTP server", () => {
+    const html = withServeMode(false, () => render());
+    expect(html).not.toContain("Allow devices on my home network");
+    expect(html).not.toContain("Local network access");
+  });
+
+  it("appears in serve mode with the honest label and a pairing entry", () => {
+    const html = withServeMode(true, () => render());
+    expect(html).toContain("Local network access");
+    expect(html).toContain("Allow devices on my home network");
+    expect(html).toContain('id="lan-enabled"');
+    expect(html).toContain('id="lan-pair"');
+    expect(html).toContain('id="lan-pair-pin"');
+    expect(html).toContain("Pair this device with a PIN");
+    // The card's status read is async; the static render shows the
+    // skeleton plus a real error path, never an invented "off" state.
+    expect(html).toContain("lan-access-card");
+  });
+});
