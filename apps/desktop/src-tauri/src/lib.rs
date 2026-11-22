@@ -877,6 +877,12 @@ struct LexEntry {
     /// topic particle in its orthographic form (は for the word read
     /// わ) still resolves to the particle entry.
     readings: Vec<String>,
+    /// IN-APP-IME-001 phase 2: every declared form of the entry that is
+    /// NOT the primary surface and differs from it (a kanji form beside
+    /// a kana surface, a variant spelling). Pure pack data — the IME
+    /// candidate list is assembled from these, never from a baked-in
+    /// word table in the engine.
+    alt_forms: Vec<String>,
 }
 
 /// K-44: one variable part of a phrase, as declared by the pack.
@@ -1106,6 +1112,18 @@ fn parse_lexicon_entries(
                     .collect()
             })
             .unwrap_or_default();
+        // IN-APP-IME-001 phase 2: the entry's other declared forms (kanji
+        // forms beside a kana surface, variants) in declaration order,
+        // duplicates and the surface itself excluded. The IME candidate
+        // lookup reads exactly these — a candidate always traces back to
+        // the entry id that carries it.
+        let mut alt_forms: Vec<String> = forms
+            .iter()
+            .filter_map(|f| f.get("text").and_then(|t| t.as_str()))
+            .filter(|t| !t.is_empty() && *t != surface)
+            .map(String::from)
+            .collect();
+        alt_forms.dedup();
         out.push(LexEntry {
             id: id.to_string(),
             surface: surface.to_string(),
@@ -1124,6 +1142,7 @@ fn parse_lexicon_entries(
                 .and_then(|v| v.as_str())
                 .map(String::from),
             readings,
+            alt_forms,
         });
     }
     Ok(out)
@@ -7320,6 +7339,7 @@ fn story_view_at(data: &Path, profile_id: &str, story_id: &str) -> Result<StoryV
             slots: Vec::new(),
             pos: None,
             readings: Vec::new(),
+            alt_forms: Vec::new(),
         };
         let display = reader_display(data, profile_id, &proxy, false);
         // Tap-to-lookup: one entry per covered token span, in sentence
@@ -7878,6 +7898,99 @@ fn word_card_at(
     record_reader_lookup(data, profile_id, story_id, sentence_id, token, &view)?;
     view.in_review = true;
     Ok(view)
+}
+
+/// IN-APP-IME-001 phase 2: lexicon-backed IME conversion candidates.
+/// A committed kana run is matched against the ACTIVE pack's own lexicon
+/// (declared readings or surface), and the candidates are the OTHER
+/// forms the matching entries declare — a kanji form beside a kana
+/// surface, a variant spelling. Every candidate carries its provenance:
+/// `source: "pack"` plus the content id of the entry that produced it
+/// (`entry_id`), or the separately-labeled offline aux slice (entry_id
+/// stays None, the attribution rides along — same never-masquerading
+/// posture as `WordCardView`). There is no baked-in word list anywhere
+/// in the engine: no pack lexicon, no pack candidates. Results cap at
+/// `IME_CANDIDATE_CAP` in lexicon read order (deterministic).
+#[derive(Debug, Serialize)]
+struct ImeCandidateView {
+    text: String,
+    reading: Option<String>,
+    gloss: String,
+    source: String,
+    entry_id: Option<String>,
+    attribution: Option<String>,
+}
+
+const IME_CANDIDATE_CAP: usize = 8;
+
+fn ime_candidates_at(
+    data: &Path,
+    profile_id: &str,
+    kana: &str,
+) -> Result<Vec<ImeCandidateView>, String> {
+    let kana = kana.trim();
+    if kana.is_empty() {
+        return Err("empty candidate query".into());
+    }
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let mut out: Vec<ImeCandidateView> = Vec::new();
+    for e in lexicon_entries(data, pack_id, &version)? {
+        if out.len() >= IME_CANDIDATE_CAP {
+            break;
+        }
+        if e.surface != kana && !e.readings.iter().any(|r| r == kana) {
+            continue;
+        }
+        // The typed kana is never echoed back as its own candidate.
+        let mut texts = e.alt_forms.clone();
+        if e.surface != kana {
+            texts.insert(0, e.surface.clone());
+        }
+        for text in texts {
+            if out.len() >= IME_CANDIDATE_CAP {
+                break;
+            }
+            out.push(ImeCandidateView {
+                text,
+                reading: e.reading.clone(),
+                gloss: e.gloss.clone(),
+                source: "pack".into(),
+                entry_id: Some(e.id.clone()),
+                attribution: None,
+            });
+        }
+    }
+    if out.is_empty() {
+        // Off-pack: the offline auxiliary slice, exact key hit only,
+        // labeled under its own attribution and NEVER claiming a pack
+        // content id. Absent slice simply means no candidates.
+        let aux = aux_lang(data, pack_id, &version)
+            .and_then(|lang| aux_index(data, &lang))
+            .and_then(|index| index.by_key.get(kana).map(|&slot| index.rows[slot].clone()));
+        if let Some(row) = aux {
+            if row.word != kana {
+                out.push(ImeCandidateView {
+                    text: row.word,
+                    reading: None,
+                    gloss: row.glosses.into_iter().next().unwrap_or_default(),
+                    source: "aux".into(),
+                    entry_id: None,
+                    attribution: Some(AUX_SOURCE.to_string()),
+                });
+            }
+        }
+    }
+    Ok(out)
+}
+
+#[tauri::command]
+async fn ime_candidates(kana: String, profile_id: String) -> Result<Vec<ImeCandidateView>, String> {
+    tauri::async_runtime::spawn_blocking(move || ime_candidates_at(&data_dir(), &profile_id, &kana))
+        .await
+        .map_err(|e| format!("ime-candidates failed: {e}"))?
 }
 
 /// Append the lookup row and auto-mine the tapped word (VOCAB-BUILDER-001).
@@ -10346,6 +10459,7 @@ fn wire_commands(builder: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::W
             story_view,
             story_audio,
             word_card,
+            ime_candidates,
             story_word_audio,
             listening_audio,
             mine_add,
@@ -10631,6 +10745,9 @@ pub fn run() {
 #[cfg(test)]
 mod tests {
     use super::*;
+    // IN-APP-IME-001 phase 2 candidate fixtures append lexicon rows
+    // through `OpenOptions` + `write_all` — Write must be in scope.
+    use std::io::Write;
 
     /// UX-PERSONA-001: the welcome-step privacy bullets must name concrete
     /// learner things, not this repo's ledger terms. The claims stay: local
@@ -16478,6 +16595,117 @@ transfer_variants:
         assert!(lemma_only.gloss.is_none() && lemma_only.surface.is_none());
     }
 
+    /// IN-APP-IME-001 phase 2: conversion candidates come from the ACTIVE
+    /// pack's own lexicon with provenance. A kana run matching an entry's
+    /// declared reading yields that entry's other declared forms, each
+    /// carrying the entry id that produced it — never a baked-in word
+    /// list, and the typed kana is never echoed back.
+    #[test]
+    fn ime_candidates_come_from_the_pack_lexicon_with_provenance() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let root = data
+            .join("packs")
+            .join("org.openlanguage.ru-fixture")
+            .join("0.1.0");
+        std::fs::OpenOptions::new()
+            .append(true)
+            .open(root.join("lexicon/entries.jsonl"))
+            .unwrap()
+            .write_all(
+                concat!(
+                    "{\"id\":\"ja.lex.fixture.gainen\",\"forms\":[{\"text\":\"がいねん\",\"script\":\"hiragana\",\"is_primary\":true},{\"text\":\"概念\",\"script\":\"kanji\"}],\"readings\":[{\"text\":\"がいねん\",\"script\":\"hiragana\"}],\"glosses\":{\"en-US\":[\"concept\"]}}\n",
+                    "{\"id\":\"ja.lex.fixture.koka-a\",\"forms\":[{\"text\":\"こうか\",\"script\":\"hiragana\",\"is_primary\":true},{\"text\":\"効果\",\"script\":\"kanji\"}],\"readings\":[{\"text\":\"こうか\",\"script\":\"hiragana\"}],\"glosses\":{\"en-US\":[\"effect\"]}}\n",
+                    "{\"id\":\"ja.lex.fixture.koka-b\",\"forms\":[{\"text\":\"校歌\",\"script\":\"kanji\",\"is_primary\":true}],\"readings\":[{\"text\":\"こうか\",\"script\":\"hiragana\"}],\"glosses\":{\"en-US\":[\"school song\"]}}\n",
+                )
+                .as_bytes(),
+            )
+            .unwrap();
+
+        let one = ime_candidates_at(data, &p.id, "がいねん").unwrap();
+        assert_eq!(one.len(), 1);
+        assert_eq!(one[0].text, "概念");
+        assert_eq!(one[0].source, "pack");
+        assert_eq!(one[0].entry_id.as_deref(), Some("ja.lex.fixture.gainen"));
+        assert_eq!(one[0].gloss, "concept");
+
+        // Homophone readings: BOTH entries answer, each candidate naming
+        // the entry that produced it. File order is deterministic; the
+        // kanji-surface entry offers its surface, the kana-surface entry
+        // offers its alt form — the typed kana itself never appears.
+        let many = ime_candidates_at(data, &p.id, "こうか").unwrap();
+        assert_eq!(many.len(), 2);
+        assert_eq!(many[0].text, "効果");
+        assert_eq!(many[0].entry_id.as_deref(), Some("ja.lex.fixture.koka-a"));
+        assert_eq!(many[1].text, "校歌");
+        assert_eq!(many[1].entry_id.as_deref(), Some("ja.lex.fixture.koka-b"));
+        assert!(many.iter().all(|c| c.text != "こうか"));
+
+        // Nothing in the lexicon answers: honest empty, no fallback list.
+        assert!(
+            ime_candidates_at(data, &p.id, "ねこにゃん")
+                .unwrap()
+                .is_empty()
+        );
+    }
+
+    /// IN-APP-IME-001 phase 2 off-pack posture: the offline aux slice is
+    /// consulted only when the pack lexicon missed, its candidate is
+    /// labeled under its own attribution, and it NEVER claims a pack
+    /// content id. A pack-lexicon hit keeps the aux slice unconsulted.
+    #[test]
+    fn ime_candidates_aux_fallback_stays_labeled_and_secondary() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (_pack, p) = install_ru_shaped_pack(data);
+        let root = data
+            .join("packs")
+            .join("org.openlanguage.ru-fixture")
+            .join("0.1.0");
+        let mut manifest = std::fs::read_to_string(root.join("manifest.yaml")).unwrap();
+        manifest.push_str("target_locale: \"ja-JP\"\n");
+        std::fs::write(root.join("manifest.yaml"), manifest).unwrap();
+        std::fs::create_dir_all(data.join("auxdata/lexicon")).unwrap();
+        std::fs::write(
+            data.join("auxdata/lexicon/ja.jsonl"),
+            "{\"word\":\"論争\",\"pos\":[\"noun\"],\"glosses\":[\"debate\"],\"forms\":[\"ろんそう\"]}\n{\"word\":\"猫\",\"pos\":[\"noun\"],\"glosses\":[\"cat\"],\"forms\":[\"ねこ\"]}\n",
+        )
+        .unwrap();
+        std::fs::OpenOptions::new()
+            .append(true)
+            .open(root.join("lexicon/entries.jsonl"))
+            .unwrap()
+            .write_all(
+                "{\"id\":\"ja.lex.fixture.ronso\",\"forms\":[{\"text\":\"ろんそう\",\"script\":\"hiragana\",\"is_primary\":true},{\"text\":\"論争\",\"script\":\"kanji\"}],\"readings\":[{\"text\":\"ろんそう\",\"script\":\"hiragana\"}],\"glosses\":{\"en-US\":[\"debate (pack)\"]}}\n".as_bytes(),
+            )
+            .unwrap();
+
+        // Pack lexicon answers: the aux slice never rides along.
+        let pack_hit = ime_candidates_at(data, &p.id, "ろんそう").unwrap();
+        assert!(pack_hit.iter().all(|c| c.source == "pack"));
+        assert!(pack_hit.iter().all(|c| c.attribution.is_none()));
+
+        // Pack miss, aux hit (slice form key ねこ → headword 猫): labeled
+        // source and attribution, and it NEVER claims a pack content id.
+        let aux = ime_candidates_at(data, &p.id, "ねこ").unwrap();
+        assert_eq!(aux.len(), 1);
+        assert_eq!(aux[0].text, "猫");
+        assert_eq!(aux[0].source, "aux");
+        assert_eq!(aux[0].entry_id, None);
+        assert_eq!(
+            aux[0].attribution.as_deref(),
+            Some("Definitions from Wiktionary via kaikki.org (CC BY-SA / GFDL)")
+        );
+
+        // A miss everywhere stays honestly empty.
+        assert!(
+            ime_candidates_at(data, &p.id, "ねこのか")
+                .unwrap()
+                .is_empty()
+        );
+    }
+
     /// READER-FLOW-001 off-pack slice: an off-pack token the offline aux
     /// lexicon covers (here via an inflected form) gets a clearly
     /// labeled aux card — gloss + headword + source attribution — while
@@ -17049,6 +17277,7 @@ transfer_variants:
                 slots: Vec::new(),
                 pos: None,
                 readings: Vec::new(),
+                alt_forms: Vec::new(),
             }
         }
         let lex = vec![
@@ -17113,6 +17342,7 @@ transfer_variants:
                 slots: Vec::new(),
                 pos: pos.map(String::from),
                 readings: readings.iter().map(|s| s.to_string()).collect(),
+                alt_forms: Vec::new(),
             }
         }
         let lex = vec![

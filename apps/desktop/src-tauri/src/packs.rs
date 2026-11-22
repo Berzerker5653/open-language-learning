@@ -103,6 +103,15 @@ pub struct InstalledPack {
     /// at all — on these, never on `locale`. An absent or unparseable
     /// manifest yields an empty list: no declared capability, no feature.
     pub scripts: Vec<String>,
+    /// IN-APP-IME-001 phase 2: the method ids the manifest declares TRUE
+    /// under `capabilities.input_methods` (sorted). Interpretation — which
+    /// ids an in-app feature recognizes — stays in the renderer; this is
+    /// the declaration read back verbatim, bool-safe (non-bool entries
+    /// skipped). `input_methods_declared` says whether the manifest carried
+    /// the map at all: absent means the pack declared nothing and current
+    /// behavior stands; present means the true-ids are the allowlist.
+    pub input_methods: Vec<String>,
+    pub input_methods_declared: bool,
 }
 
 fn is_hex64(s: &str) -> bool {
@@ -1065,37 +1074,78 @@ fn display_for(data: &Path, pack_id: &str, version: &str, trust: &str) -> Instal
         .join(pack_id)
         .join(version)
         .join("manifest.yaml");
-    let (display_name, locale, rtl, scripts) = fs::read_to_string(&manifest)
-        .ok()
-        .and_then(|s| serde_yaml::from_str::<serde_yaml::Value>(&s).ok())
-        .map(|v| {
-            let g = |k: &str| {
-                v.get(k)
-                    .and_then(|x| x.as_str())
-                    .unwrap_or_default()
-                    .to_string()
-            };
-            let rtl = v
-                .get("capabilities")
-                .and_then(|c| c.get("rtl"))
-                .and_then(|x| x.as_bool())
-                .unwrap_or(false);
-            // SETTINGS-PACK-CAPABILITY-001: the manifest's declared script ids
-            // ride to the renderer verbatim; interpreting them (which scripts
-            // an in-app feature can serve) is the renderer's job, keyed on
-            // script metadata, never on the pack's locale.
-            let scripts = v
-                .get("scripts")
-                .and_then(|x| x.as_sequence())
-                .map(|seq| {
-                    seq.iter()
-                        .filter_map(|s| s.as_str().map(str::to_string))
-                        .collect()
-                })
-                .unwrap_or_default();
-            (g("display_name"), g("target_locale"), rtl, scripts)
-        })
-        .unwrap_or_else(|| (pack_id.to_string(), String::new(), false, Vec::new()));
+    let (display_name, locale, rtl, scripts, input_methods, input_methods_declared) =
+        fs::read_to_string(&manifest)
+            .ok()
+            .and_then(|s| serde_yaml::from_str::<serde_yaml::Value>(&s).ok())
+            .map(|v| {
+                let g = |k: &str| {
+                    v.get(k)
+                        .and_then(|x| x.as_str())
+                        .unwrap_or_default()
+                        .to_string()
+                };
+                let rtl = v
+                    .get("capabilities")
+                    .and_then(|c| c.get("rtl"))
+                    .and_then(|x| x.as_bool())
+                    .unwrap_or(false);
+                // SETTINGS-PACK-CAPABILITY-001: the manifest's declared script ids
+                // ride to the renderer verbatim; interpreting them (which scripts
+                // an in-app feature can serve) is the renderer's job, keyed on
+                // script metadata, never on the pack's locale.
+                let scripts = v
+                    .get("scripts")
+                    .and_then(|x| x.as_sequence())
+                    .map(|seq| {
+                        seq.iter()
+                            .filter_map(|s| s.as_str().map(str::to_string))
+                            .collect()
+                    })
+                    .unwrap_or_default();
+                // IN-APP-IME-001 phase 2: the declared input-method map, read
+                // bool-safe (only TRUE entries are named; a non-bool value is
+                // skipped, never guessed at). The declared/present distinction
+                // crosses as its own flag so the renderer can tell "absent =
+                // current behavior" from "present = explicit allowlist".
+                let caps = v.get("capabilities").and_then(|c| c.as_mapping());
+                let im = caps
+                    .and_then(|c| c.get("input_methods"))
+                    .and_then(|m| m.as_mapping());
+                let input_methods_declared = im.is_some();
+                let mut input_methods: Vec<String> = im
+                    .map(|m| {
+                        m.iter()
+                            .filter_map(|(k, val)| {
+                                if val.as_bool() == Some(true) {
+                                    k.as_str().map(str::to_string)
+                                } else {
+                                    None
+                                }
+                            })
+                            .collect()
+                    })
+                    .unwrap_or_default();
+                input_methods.sort();
+                (
+                    g("display_name"),
+                    g("target_locale"),
+                    rtl,
+                    scripts,
+                    input_methods,
+                    input_methods_declared,
+                )
+            })
+            .unwrap_or_else(|| {
+                (
+                    pack_id.to_string(),
+                    String::new(),
+                    false,
+                    Vec::new(),
+                    Vec::new(),
+                    false,
+                )
+            });
     InstalledPack {
         pack_id: pack_id.into(),
         version: version.into(),
@@ -1104,6 +1154,8 @@ fn display_for(data: &Path, pack_id: &str, version: &str, trust: &str) -> Instal
         trust_state: trust.into(),
         rtl,
         scripts,
+        input_methods,
+        input_methods_declared,
     }
 }
 
@@ -1279,6 +1331,14 @@ mod tests {
             "org.example.cyrillic",
             "schema_version: \"0.2\"\ntarget_locale: \"ru-RU\"\nscripts:\n  - \"ru.orth.cyrillic\"\n",
         );
+        // IN-APP-IME-001 phase 2: a pack that declares its input methods.
+        // Only TRUE entries ride as named ids; a non-bool value is skipped
+        // (bool-safe read), and the declared/present flag distinguishes the
+        // explicit-allowlist mode from "absent = current behavior".
+        write_manifest(
+            "org.example.declared",
+            "schema_version: \"0.2\"\ntarget_locale: \"ja-JP\"\ncapabilities:\n  rtl: false\n  input_methods:\n    lexicon-candidates: true\n    romaji-kana: true\n    future-method: \"yes\"\n    refused-method: false\n",
+        );
 
         let kana = display_for(dir.path(), "org.example.kana", "0.1.0", "community");
         assert_eq!(
@@ -1295,6 +1355,21 @@ mod tests {
         // answer, and the renderer's gate turns the feature off for it.
         let uninstalled = display_for(dir.path(), "org.example.absent", "0.1.0", "community");
         assert!(uninstalled.scripts.is_empty());
+        assert!(!uninstalled.input_methods_declared);
+        assert!(uninstalled.input_methods.is_empty());
+
+        // A manifest WITHOUT the map: absent means current behavior, and
+        // the flag says so (the renderer must not read an empty list as a
+        // refusal — that is the whole tri-state contract).
+        assert!(!kana.input_methods_declared);
+        assert!(kana.input_methods.is_empty());
+
+        let declared = display_for(dir.path(), "org.example.declared", "0.1.0", "community");
+        assert!(declared.input_methods_declared);
+        assert_eq!(
+            declared.input_methods,
+            vec!["lexicon-candidates".to_string(), "romaji-kana".to_string()]
+        );
     }
 
     fn entry(url: &str) -> PackEntry {
