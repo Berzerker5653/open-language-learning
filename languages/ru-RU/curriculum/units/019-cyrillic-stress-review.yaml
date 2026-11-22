@@ -66,6 +66,11 @@ activities:
         "ru.orth.cyrillic.hard-sign",
         "ru.orth.cyrillic.stress-mark",
       ]
+  - id: "ru.activity.on-ramp.cyrillic-stress-review-discriminate"
+    type: "listen-and-choose"
+    modality: "listening"
+    support_level: 1
+    content_refs: [ "ru.contrast.stress.zamok", "ru.contrast.stress.muka" ]
 generation_contract:
   allowed_vocab:
     [
@@ -103,6 +108,8 @@ generation_contract:
       "ru.orth.cyrillic.soft-sign",
       "ru.orth.cyrillic.hard-sign",
       "ru.orth.cyrillic.stress-mark",
+      "ru.contrast.stress.zamok",
+      "ru.contrast.stress.muka",
     ]
   allowed_grammar: []
   new_item_budget: 0

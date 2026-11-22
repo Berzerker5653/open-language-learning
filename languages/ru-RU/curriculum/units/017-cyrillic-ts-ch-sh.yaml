@@ -34,12 +34,18 @@ activities:
         "ru.orth.cyrillic.ch",
         "ru.orth.cyrillic.sh",
       ]
+  - id: "ru.activity.on-ramp.cyrillic-ts-ch-sh-discriminate"
+    type: "listen-and-choose"
+    modality: "listening"
+    support_level: 1
+    content_refs: [ "ru.contrast.voicing.zhsh" ]
 generation_contract:
   allowed_vocab:
     [
       "ru.orth.cyrillic.ts",
       "ru.orth.cyrillic.ch",
       "ru.orth.cyrillic.sh",
+      "ru.contrast.voicing.zhsh",
     ]
   allowed_grammar: []
   new_item_budget: 0

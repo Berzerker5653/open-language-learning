@@ -34,12 +34,18 @@ activities:
         "ru.orth.cyrillic.soft-sign",
         "ru.orth.cyrillic.hard-sign",
       ]
+  - id: "ru.activity.on-ramp.cyrillic-shch-soft-hard-discriminate"
+    type: "listen-and-choose"
+    modality: "listening"
+    support_level: 1
+    content_refs: [ "ru.contrast.palatalization.brat" ]
 generation_contract:
   allowed_vocab:
     [
       "ru.orth.cyrillic.shch",
       "ru.orth.cyrillic.soft-sign",
       "ru.orth.cyrillic.hard-sign",
+      "ru.contrast.palatalization.brat",
     ]
   allowed_grammar: []
   new_item_budget: 0

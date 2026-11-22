@@ -37,6 +37,11 @@ activities:
         "ru.orth.cyrillic.yo",
         "ru.orth.cyrillic.yu",
       ]
+  - id: "ru.activity.on-ramp.cyrillic-y-short-i-yo-yu-discriminate"
+    type: "listen-and-choose"
+    modality: "listening"
+    support_level: 1
+    content_refs: [ "ru.contrast.palatalization.luk" ]
 generation_contract:
   allowed_vocab:
     [
@@ -44,6 +49,7 @@ generation_contract:
       "ru.orth.cyrillic.short-i",
       "ru.orth.cyrillic.yo",
       "ru.orth.cyrillic.yu",
+      "ru.contrast.palatalization.luk",
     ]
   allowed_grammar: []
   new_item_budget: 0

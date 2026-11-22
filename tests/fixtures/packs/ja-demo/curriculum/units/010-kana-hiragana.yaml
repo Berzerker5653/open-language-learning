@@ -39,3 +39,12 @@ activities:
         "ja.orth.hira.ma",
         "ja.orth.hira.ha",
       ]
+  # ORPHAN-CONTENT-001: the NEW-stream ladder rule fails any contrast no
+  # unit references CLOSED, so the scaffold claims its demo contrast on
+  # the kana unit that teaches the syllables it drills — the contract the
+  # scaffold must teach.
+  - id: "ja.activity.demo.discriminate-vowel-length"
+    type: "listen-and-choose"
+    modality: "listening"
+    support_level: 0
+    content_refs: ["ja.contrast.demo.vowel-length"]

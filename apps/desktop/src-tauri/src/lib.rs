@@ -2245,13 +2245,13 @@ fn unit_goal_locked(
 /// references have no ladder position at all — `ru.lex.argue.kontrargument`
 /// is a B2 word the pack ships in the lexicon that zero units claim, and it
 /// seeded into day-one plans through precisely this blind spot. In a pack
-/// that declares a goal ladder the LEXICON seeding stream therefore fails
-/// such entries CLOSED (applied where the stream runs). The goal-path
-/// stream needs no such rule — its items come
-/// from the ladder itself — and the sentence stream is deliberately left
-/// alone for now: unclaimed sentences in the reference packs are dominated
-/// by beginner `ru.sent.a1.*` material, and banding them is pack-authoring
-/// work tracked separately, not a beginner-safety gate.
+/// that declares a goal ladder the RAW seeding streams therefore fail such
+/// entries CLOSED (applied where the streams run): ORPHAN-CONTENT-001
+/// extended the takeover's lexicon-only rule to the CONTRAST and SENTENCE
+/// streams too, after measurement showed all 8 RU phonology contrasts and
+/// 161/945 RU sentences sat in exactly the same blind spot (a1:24, a2:27,
+/// b1:30, b2:40, cp:40). The goal-path stream needs no such rule — its
+/// items come from the ladder itself.
 fn goal_locked_new_content(
     units: &[PackUnit],
     goals: &[PackGoal],
@@ -2972,28 +2972,29 @@ fn add_new_item_candidates(
             let goals = pack_goals(&pack_root);
             let mut locked = locked_new_content(&units, derived);
             locked.extend(goal_locked_new_content(&units, &goals, derived));
-            // SESSION-SEQUENCE-001 takeover: the lexicon stream iterates
-            // the RAW pack lexicon, so entries no unit's activities
-            // reference have no goal-graph view and evade the exclusive
-            // rule above. When the pack declares a goal ladder, a lexicon
-            // word outside that ladder fails CLOSED for NEW seeding — the
-            // pack has to attach it to a unit to surface it. Packs without
-            // a goal map keep seeding their whole lexicon (fixture escape
-            // hatch, same shape as goal_locked_new_content's guard).
+            // SESSION-SEQUENCE-001 takeover + ORPHAN-CONTENT-001: the raw
+            // seeding streams iterate PACK CONTENT DIRECTLY, so entries no
+            // unit's activities reference have no goal-graph view and evade
+            // the exclusive rule above. When the pack declares a goal
+            // ladder, lexicon words, phonology contrasts, and sentences
+            // outside that ladder fail CLOSED for NEW seeding — the pack
+            // has to attach them to a unit to surface them. Packs without
+            // a goal map keep seeding raw (fixture escape hatch, same shape
+            // as goal_locked_new_content's guard).
             let claimed_by_units: std::collections::HashSet<&str> = units
                 .iter()
                 .flat_map(|u| u.activities.iter())
                 .flat_map(|a| a.content_refs.iter())
                 .map(|c| c.as_str())
                 .collect();
-            let ladder_locked_lexicon = !goals.is_empty();
+            let ladder_locked_streams = !goals.is_empty();
             let orth = orth_entries(data, &pack_id, &version)?;
             let learned_kana = learned_kana_set(&units, &orth, derived);
             for entry in lexicon_entries(data, &pack_id, &version)? {
                 if locked.contains(&entry.id) {
                     continue;
                 }
-                if ladder_locked_lexicon && !claimed_by_units.contains(entry.id.as_str()) {
+                if ladder_locked_streams && !claimed_by_units.contains(entry.id.as_str()) {
                     continue;
                 }
                 // K-70: a word joins the NEW pool only when every kana of
@@ -3055,8 +3056,16 @@ fn add_new_item_candidates(
             // K-10: perceptual contrasts join the new-item stream so
             // pronunciation-adjacent listening practice is available
             // from day one wherever a pack declares contrasts.
+            // ORPHAN-CONTENT-001: same fail-CLOSED claim rule as the
+            // lexicon stream — a contrast no unit references has no
+            // ladder position. (The RU content lane now claims all eight
+            // shipped contrasts into the on-ramp cyrillic units, so the
+            // beginner minimal pairs keep seeding.)
             for entry in contrast_entries(data, &pack_id, &version)? {
                 if locked.contains(&entry.id) {
+                    continue;
+                }
+                if ladder_locked_streams && !claimed_by_units.contains(entry.id.as_str()) {
                     continue;
                 }
                 let m = lts_domain::ActivityModality::PhonologicalDiscrimination;
@@ -3085,6 +3094,13 @@ fn add_new_item_candidates(
             let audio_ids = media_ids(&data.join("packs").join(&pack_id).join(&version));
             for entry in sentence_entries(data, &pack_id, &version)? {
                 if locked.contains(&entry.id) {
+                    continue;
+                }
+                // ORPHAN-CONTENT-001: same fail-CLOSED claim rule as the
+                // lexicon and contrast streams — an orphan sentence has no
+                // ladder position. (Measured RU census: 161/945 orphans,
+                // band decision in state/notes/ORPHAN-CONTENT-001.md.)
+                if ladder_locked_streams && !claimed_by_units.contains(entry.id.as_str()) {
                     continue;
                 }
                 let modes = [
@@ -20308,6 +20324,78 @@ transfer_variants:
             !ids.contains("ru.lex.everyday.eto"),
             "eto is taught only by units behind the cyrillic->independent hard goal edge; the exclusive rule must lock it at zero evidence"
         );
+    }
+
+    /// ORPHAN-CONTENT-001: the fail-CLOSED ladder rule rides the CONTRAST
+    /// and SENTENCE NEW-seeding streams exactly like the lexicon stream it
+    /// covers since the SESSION-SEQUENCE-001 takeover. Synthetic UNCLAIMED
+    /// rows appended to the installed pack must never seed for a
+    /// zero-evidence profile. And the content-claim guard: this card's
+    /// content lane attaches all eight shipped RU contrasts to on-ramp
+    /// cyrillic units, so the beginner minimal pairs (дом/том, год/кот,
+    /// бить/пить, …) stay day-0-eligible — a claim regression fails here
+    /// instead of silently depopulating the beginner plan.
+    #[test]
+    fn unclaimed_contrast_and_sentence_rows_are_not_seeded() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let pack = "org.openlanguage.ru-ru.reference";
+        install_reference_pack_fast(data, pack).unwrap();
+        let p = create_local_profile(data, "Orphan").unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let version = lts_langpack::archive::current_version(pack, &data.join("packs")).unwrap();
+        store.set_active_pack(&p.id, pack, &version).unwrap();
+        let root = data.join("packs").join(pack).join(&version);
+        use std::io::Write;
+        std::fs::OpenOptions::new()
+            .append(true)
+            .open(root.join("phonology/contrasts.jsonl"))
+            .unwrap()
+            .write_all(
+                r#"{"id":"ru.contrast.test.orphan-row","feature_id":"ru.phon.obstruent-voicing","description":"synthetic orphan contrast for the fail-CLOSED gate test","items":[{"text":"дом","gloss":"house"},{"text":"том","gloss":"volume"}]}
+"#.as_bytes(),
+            )
+            .unwrap();
+        std::fs::OpenOptions::new()
+            .append(true)
+            .open(root.join("sentences/entries.jsonl"))
+            .unwrap()
+            .write_all(
+                r#"{"id":"ru.sent.test.orphan-row","text":"Синтетическое сиротское предложение.","gloss":"synthetic orphan sentence for the fail-CLOSED gate test","cloze_targets":["предложение"]}
+"#.as_bytes(),
+            )
+            .unwrap();
+        let mut candidates = Vec::new();
+        add_new_item_candidates(data, &store, &p.id, &[], &mut candidates, &[]).unwrap();
+        let ids: std::collections::HashSet<String> =
+            candidates.iter().map(|c| c.content_id.clone()).collect();
+        assert!(
+            !ids.contains("ru.contrast.test.orphan-row"),
+            "unclaimed contrast row seeded as NEW material in a ladder pack"
+        );
+        assert!(
+            !ids.contains("ru.sent.test.orphan-row"),
+            "unclaimed sentence row seeded as NEW material in a ladder pack"
+        );
+        assert!(
+            !ids.contains("ru.sent.a1.kot-doma.u001"),
+            "a real orphan RU sentence (referenced by zero units) seeded into a zero-evidence plan"
+        );
+        for claimed in [
+            "ru.contrast.voicing.dt",
+            "ru.contrast.voicing.gk",
+            "ru.contrast.voicing.bp",
+            "ru.contrast.voicing.zhsh",
+            "ru.contrast.palatalization.luk",
+            "ru.contrast.palatalization.brat",
+            "ru.contrast.stress.zamok",
+            "ru.contrast.stress.muka",
+        ] {
+            assert!(
+                ids.contains(claimed),
+                "the on-ramp claim for {claimed} regressed — it no longer seeds a zero-evidence plan"
+            );
+        }
     }
 
     /// The reference pack's source tree, for reading base counts out of.
