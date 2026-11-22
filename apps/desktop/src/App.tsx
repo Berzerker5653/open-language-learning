@@ -28,6 +28,7 @@ import {
   type GoalCard,
   GoalMap,
   CanDoSummary,
+  type UnitPathNode,
   type WorldEnvironment,
   type NextGoalView,
   type FirstRunStep,
@@ -395,6 +396,8 @@ export function App() {
   // composes these strings itself (ADR-0020).
   const [nextGoal, setNextGoal] = useState<NextGoalView | null | undefined>(undefined);
   const [firstRunSteps, setFirstRunSteps] = useState<FirstRunStep[]>([]);
+  // PATH-VIEW-001: the Today tab's unit path, straight from `unit_path`.
+  const [pathNodes, setPathNodes] = useState<UnitPathNode[]>([]);
   const [progress, setProgress] = useState<ProgressRow[]>([]);
   const [progressError, setProgressError] = useState<string | null>(null);
   const [progressLoading, setProgressLoading] = useState(false);
@@ -868,6 +871,7 @@ export function App() {
           // the ja-JP pack. The script asserts both markers.
           const freshSteps = (await inv("first_run_steps", { profileId: p.id })) as FirstRunStep[];
           setFirstRunSteps(freshSteps);
+          setPathNodes((await inv("unit_path", { profileId: p.id })) as UnitPathNode[]);
           await inv("smoke_ack", { note: `fresh-plan:${home.plan.items.length}` });
           await inv("smoke_ack", { note: `first-run:${freshSteps.length}` });
           setEnvironments((await inv("world_state", { profileId: p.id })) as WorldEnvironment[]);
@@ -986,6 +990,7 @@ export function App() {
             ["placement_plan", { profileId: p.id }],
             ["kanji_list", { profileId: p.id }],
             ["goal_map", { profileId: p.id }],
+            ["unit_path", { profileId: p.id }],
             ["practice_plan", { profileId: p.id, minutes: 10 }],
             ["writing_task", { profileId: p.id }],
             // Not content: this proves the command is actually registered in the
@@ -1422,6 +1427,7 @@ export function App() {
     applyPlan(EMPTY_PLAN);
     setNextGoal(undefined);
     setFirstRunSteps([]);
+    setPathNodes([]);
     setEnvironments([]);
     setPracticeTarget(null);
     setPracticeTask(null);
@@ -1472,6 +1478,7 @@ export function App() {
       applyPlan(home.plan);
       setNextGoal(home.next_goal);
       setFirstRunSteps((await inv("first_run_steps", { profileId })) as FirstRunStep[]);
+      setPathNodes((await inv("unit_path", { profileId })) as UnitPathNode[]);
       if (gen !== packSwitchGen.current) return;
       setEnvironments((await inv("world_state", { profileId })) as WorldEnvironment[]);
       setDisplay((await inv("display_settings", { profileId })) as DisplaySettingsView);
@@ -1825,6 +1832,7 @@ export function App() {
         applyPlan(home.plan);
         setNextGoal(home.next_goal);
         setFirstRunSteps((await inv("first_run_steps", { profileId })) as FirstRunStep[]);
+        setPathNodes((await inv("unit_path", { profileId })) as UnitPathNode[]);
         const envs = (await inv("world_state", { profileId })) as WorldEnvironment[];
         setEnvironments(envs);
         setDisplay((await inv("display_settings", { profileId })) as DisplaySettingsView);
@@ -1879,6 +1887,7 @@ export function App() {
       applyPlan(home.plan);
       setNextGoal(home.next_goal);
       setFirstRunSteps((await inv("first_run_steps", { profileId: p.id })) as FirstRunStep[]);
+      setPathNodes((await inv("unit_path", { profileId: p.id })) as UnitPathNode[]);
       const envs = (await inv("world_state", { profileId: p.id })) as WorldEnvironment[];
       setEnvironments(envs);
       setDisplay((await inv("display_settings", { profileId: p.id })) as DisplaySettingsView);
@@ -4872,6 +4881,7 @@ export function App() {
           onBudget={(m) => void changeBudget(m)}
           environments={environments}
           nextGoal={nextGoal}
+          pathNodes={pathNodes}
           firstRunSteps={firstRunSteps}
           onStart={(item) => void openPractice(item)}
           onStartSession={() => void startSession()}

@@ -3724,6 +3724,184 @@ fn home_state(profile_id: String) -> Result<HomeState, String> {
     })
 }
 
+// ---------------------------------------------------------------------------
+// PATH-VIEW-001 (state/notes/PROGRESS-PATH-DESIGN-001.md phase 1): the unit
+// path the Today tab renders. VIEW ONLY — every node state is derived from
+// machinery that already exists and no new engine: the SESSION-SEQUENCE-001
+// gating predicates decide locked, evidence-derived mastery decides done,
+// the plan decides current, and scheduler_state due rows decide review-due.
+// `done` NEVER reads attendance, plan rows or confirmation marks: a unit is
+// done only when EVERY content ref its activities schedule holds
+// evidence-backed mastery at the `introduced` floor — the same state floor
+// the pack's own phase gates speak (the Busuu distrust trap the design doc
+// names).
+
+#[derive(Serialize)]
+struct UnitPathNodeView {
+    pack_id: String,
+    unit_id: String,
+    title: String,
+    summary: String,
+    /// The band of the unit's own goal (the pack's ladder authority);
+    /// None for a unit the goal map does not place (such a unit renders
+    /// locked — see `unit_goal_locked` fail-closed).
+    band: Option<String>,
+    locked: bool,
+    done: bool,
+    /// Today's plan lives in this unit — the "you are here" pin.
+    current: bool,
+    /// PATH-VIEW-001: a DONE node whose unit holds due scheduler items —
+    /// the "the path lights up again" signal the market research names as
+    /// Duolingo's missing piece. Not raised while the unit is not done:
+    /// its due items already ride the plan.
+    review_due: bool,
+    due_count: usize,
+    /// "What unlocks this" in the pack's own words (goal descriptions,
+    /// gating unit titles); never invented prose. None when unlocked.
+    unlock_hint: Option<String>,
+}
+
+fn unit_path_at(data: &Path, profile_id: &str) -> Result<Vec<UnitPathNodeView>, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let now_secs = now_secs();
+    let now_rfc = rfc3339_utc(now_secs);
+    let derived = derive_pairs(&store, profile_id, &now_rfc)?;
+    // The plan is the "you are here" authority — same 5-minute default the
+    // Today card shows, so the pin marks exactly what "Start today's plan"
+    // would run. Introduction items claim the pin first; a review-only
+    // plan pins the units being reviewed instead of showing no pin at all.
+    let plan = build_plan_view(data, profile_id, 5, now_secs)?;
+    let mut intro_refs: std::collections::HashSet<&str> = Default::default();
+    let mut plan_refs: std::collections::HashSet<&str> = Default::default();
+    for item in &plan.items {
+        plan_refs.insert(item.content_id.as_str());
+        if item.kind == "introduction" {
+            intro_refs.insert(item.content_id.as_str());
+        }
+    }
+    let current_pool = if intro_refs.is_empty() {
+        &plan_refs
+    } else {
+        &intro_refs
+    };
+    // Due items across every scheduler this profile has rows in; the
+    // canonical whole-second RFC 3339 shape (enforced by the storage write
+    // boundary) makes the string compare the right due test. Rows are keyed
+    // `content#modality` (split_item_id) — the map is keyed by the CONTENT
+    // id so a unit's refs see their reviews; malformed rows contribute
+    // nothing here (the plan path already surfaces them loudly elsewhere).
+    let mut due: std::collections::HashMap<String, usize> = Default::default();
+    for row in store
+        .scheduler_state(profile_id)
+        .map_err(|e| e.to_string())?
+    {
+        if row.due_at.as_str() <= now_rfc.as_str() {
+            if let Some((content, _)) = split_item_id(&row.item_id) {
+                *due.entry(content).or_insert(0) += 1;
+            }
+        }
+    }
+    let mut out = Vec::new();
+    for (pack_id, _) in store
+        .selected_packs(profile_id)
+        .map_err(|e| e.to_string())?
+    {
+        let version = match lts_langpack::archive::current_version(&pack_id, &data.join("packs")) {
+            Some(v) => v,
+            None => continue,
+        };
+        let root = data.join("packs").join(&pack_id).join(&version);
+        let units = pack_units(&root);
+        let goals = pack_goals(&root);
+        // pack_units sorted the file paths — the pack's own numbered
+        // curriculum order, which IS the path order.
+        for unit in units.iter() {
+            let refs: std::collections::HashSet<&str> = unit
+                .activities
+                .iter()
+                .flat_map(|a| a.content_refs.iter().map(|c| c.as_str()))
+                .collect();
+            if refs.is_empty() {
+                // A unit that schedules no content has nothing to master
+                // and nothing to visit on the path; skip rather than show
+                // an instant-done dot.
+                continue;
+            }
+            let goal_locked = unit_goal_locked(unit, &goals, &derived);
+            let gate_locked = !unit
+                .requires_unit
+                .iter()
+                .all(|g| unit_gate_holds(g, &units, &derived));
+            let locked = goal_locked || gate_locked;
+            let done = refs.iter().all(|c| {
+                derived
+                    .iter()
+                    .any(|d| d.content_id == *c && d.state >= lts_domain::MasteryState::Introduced)
+            });
+            let due_here: usize = refs.iter().filter_map(|c| due.get(*c)).sum();
+            let current = refs.iter().any(|c| current_pool.contains(c));
+            let unlock_hint = if locked {
+                let mut hints: Vec<String> = Vec::new();
+                if goal_locked {
+                    if let Some(goal) = goals.iter().find(|g| g.id == unit.goal_id) {
+                        for p in &goal.prerequisites {
+                            if p.strength == "hard"
+                                && goals.iter().any(|g| g.id == p.target)
+                                && !prereq_satisfied(p, &goals, &derived)
+                            {
+                                if let Some(target) = goals.iter().find(|g| g.id == p.target) {
+                                    hints.push(format!("finish \"{}\"", target.description));
+                                }
+                            }
+                        }
+                    }
+                }
+                for g in &unit.requires_unit {
+                    if !unit_gate_holds(g, &units, &derived) {
+                        let name = units
+                            .iter()
+                            .find(|u| u.id == g.unit)
+                            .map(|u| u.title.clone())
+                            .unwrap_or_else(|| g.unit.clone());
+                        hints.push(format!("finish \"{name}\" first"));
+                    }
+                }
+                match hints.len() {
+                    0 => Some("unlocks as you complete the units before it".into()),
+                    n if n <= 2 => Some(hints.join(" · ")),
+                    n => Some(format!("{} · +{} more", hints[..2].join(" · "), n - 2)),
+                }
+            } else {
+                None
+            };
+            out.push(UnitPathNodeView {
+                pack_id: pack_id.clone(),
+                unit_id: unit.id.clone(),
+                title: unit.title.clone(),
+                summary: unit.summary.clone(),
+                band: goals
+                    .iter()
+                    .find(|g| g.id == unit.goal_id)
+                    .and_then(|g| g.band.clone()),
+                locked,
+                done,
+                current,
+                review_due: done && due_here > 0,
+                due_count: due_here,
+                unlock_hint,
+            });
+        }
+    }
+    Ok(out)
+}
+
+#[tauri::command]
+async fn unit_path(profile_id: String) -> Result<Vec<UnitPathNodeView>, String> {
+    tauri::async_runtime::spawn_blocking(move || unit_path_at(&data_dir(), &profile_id))
+        .await
+        .map_err(|e| format!("unit-path failed: {e}"))?
+}
+
 /// The content refs of the pack's `script-introduction` unit, in the
 /// pack's own `teaching_order` (unsequenced ones last, refs in declared
 /// order before that). The declaration is the ONLY cue (ADR-0021 rule
@@ -10862,6 +11040,7 @@ macro_rules! lts_command_table {
             set_profile_hidden,
             complete_onboarding,
             home_state,
+            unit_path,
             practice_plan,
             practice_queue,
             first_run_steps,
@@ -14950,6 +15129,133 @@ activities:
             "the furthest concept's own state stays visible, qualified"
         );
         assert_eq!(reading.exemplar.as_deref(), Some("ja.orth.hira.a"));
+    }
+
+    /// PATH-VIEW-001: the unit path derives every node state from the
+    /// existing engines, and `done` rests on evidence-backed mastery —
+    /// never on attendance (the Busuu trap the design doc names).
+    #[test]
+    fn unit_path_done_never_reads_attendance_only() {
+        let ru = "org.openlanguage.ru-ru.reference";
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_reference_pack_fast(data, ru).unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, Some(ru), false).unwrap();
+        let attempt_ru = |target: &str, id: &str| {
+            let mut ev = attempt(
+                target,
+                lts_domain::ActivityModality::ComprehensionReading,
+                "ru.expr.path.a-1",
+                0,
+                "2026-11-22T10:00:00Z",
+                id,
+                &p.id,
+            );
+            // R07: derive scopes credit to the profile's packs — the
+            // shared helper stamps the ja-demo pack, restamp for ru.
+            ev.pack_id = ru.into();
+            ev
+        };
+        fn find(nodes: &[UnitPathNodeView]) -> &UnitPathNodeView {
+            nodes
+                .iter()
+                .find(|n| n.unit_id == "ru.unit.on-ramp.greetings-01")
+                .expect("on-ramp greetings-01 is on the path")
+        }
+
+        let nodes = unit_path_at(data, &p.id).unwrap();
+        assert!(
+            !nodes.is_empty(),
+            "the installed reference pack surfaces unit nodes"
+        );
+        assert!(
+            nodes.iter().any(|n| n.current),
+            "today's plan puts a 'you are here' pin on some unit"
+        );
+        let first = find(&nodes);
+        // (greetings-01 is itself goal-locked for a RU newcomer — the pack
+        // teaches it AFTER the Cyrillic ramp — so nothing is asserted here
+        // about ITS unlocked state; the unlocked shape is proven by the
+        // pinned node, and this unit's job in the test is the done rule.)
+        assert_eq!(first.band.as_deref(), Some("on-ramp"), "band from the goal");
+        // THE red test: the fresh learner has attendance-shaped state —
+        // today's plan schedules this unit's items — but zero evidence.
+        // The node must NOT render done.
+        assert!(
+            !first.done,
+            "attendance/plan rows alone never mark a unit done"
+        );
+        // Locked-ahead units stay VISIBLE (owner decision: visible-dim)
+        // and each names what unlocks it in the pack's own words.
+        let deep = nodes
+            .iter()
+            .find(|n| n.locked)
+            .expect("higher-band units are locked for a fresh learner");
+        assert!(!deep.done, "a locked unit is never done");
+        assert!(
+            deep.unlock_hint.is_some(),
+            "a locked node shows why it is locked"
+        );
+
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        // Partial mastery is still below the threshold: one ref covered,
+        // the unit's other refs untouched.
+        store
+            .append_evidence(&attempt_ru("ru.lex.greetings.spasibo", "path-partial"))
+            .unwrap();
+        let nodes = unit_path_at(data, &p.id).unwrap();
+        assert!(!find(&nodes).done, "partial mastery is not mastery");
+
+        // Every ref the unit schedules now holds evidence >= introduced.
+        for (i, c) in [
+            "ru.lex.greetings.zdravstvuyte",
+            "ru.lex.greetings.dobroe-utro",
+            "ru.lex.greetings.dobryy-den",
+            "ru.lex.greetings.dobryy-vecher",
+            "ru.grammar.on-ramp.formulaic-politeness",
+        ]
+        .iter()
+        .enumerate()
+        {
+            store
+                .append_evidence(&attempt_ru(c, &format!("path-{i}")))
+                .unwrap();
+        }
+        let nodes = unit_path_at(data, &p.id).unwrap();
+        let first = find(&nodes);
+        assert!(first.done, "evidence on EVERY ref marks the unit done");
+        assert!(
+            !first.review_due,
+            "no scheduler rows yet: nothing to review"
+        );
+
+        // Review-due: the DONE node re-glows when a scheduler item in it
+        // is due (the market research's fix for 'how do I continue').
+        store
+            .save_scheduler_state(
+                &p.id,
+                &lts_storage::SchedulerRecord {
+                    item_id: "ru.lex.greetings.spasibo#comprehension-reading".into(),
+                    scheduler: lts_scheduler::SPIKE_VERSION.into(),
+                    params_json: serde_json::to_string(&lts_scheduler::ItemState {
+                        stability_days: 1.0,
+                        difficulty: 5.0,
+                        reps: 1,
+                        lapses: 0,
+                        last_review: now_secs() as i64 - 3_600,
+                    })
+                    .unwrap(),
+                    due_at: rfc3339_utc(now_secs() - 60),
+                },
+            )
+            .unwrap();
+        let nodes = unit_path_at(data, &p.id).unwrap();
+        let first = find(&nodes);
+        assert!(
+            first.review_due && first.due_count >= 1,
+            "a done unit with due items re-lights as review-due"
+        );
     }
 
     /// K-47: goal-map bands follow the proficiency ladder, not ASCII order.

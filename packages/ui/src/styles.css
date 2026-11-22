@@ -1298,3 +1298,124 @@ th:last-child {
   fill: var(--accent);
   fill-opacity: 1;
 }
+
+/* PATH-VIEW-001: the Today tab's unit path (PROGRESS-PATH-DESIGN-001
+   phase 1). Mobile-first: every section control and node row meets the
+   same 44px touch floor the mobile audit measures (2.75rem). Locked
+   nodes stay visible and dim (owner decision 2026-11-22), the pinned
+   node stands out, and a done unit re-lights when reviews are due. */
+.unit-path {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.path-section {
+  border: 1px solid var(--line);
+  border-radius: 0.75rem;
+  background: var(--surface);
+}
+
+.path-section-toggle {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.2rem 0.6rem;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.6rem 0.75rem;
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.path-section-name {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.path-section-cefr {
+  color: var(--ink-faint);
+}
+
+.path-section-count {
+  margin-left: auto;
+  color: var(--ink-faint);
+  font-size: 0.875rem;
+}
+
+.path-nodes {
+  list-style: none;
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0.25rem 0.75rem 0.75rem 1rem;
+  border-left: 2px solid var(--line-strong);
+  margin-left: 1.4rem;
+}
+
+.path-node {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.path-node-marker {
+  width: 1.4rem;
+  text-align: center;
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.path-node-title {
+  font-size: 1rem;
+}
+
+.path-node--locked {
+  opacity: 0.55;
+}
+
+.path-node--done .path-node-marker {
+  color: var(--ok);
+}
+
+.path-node--review-due {
+  background: var(--warn-soft);
+}
+
+.path-node--review-due .path-node-marker {
+  color: var(--warn);
+}
+
+.path-node--current {
+  background: var(--accent-soft);
+  outline: 1px solid var(--accent);
+}
+
+.path-node--current .path-node-marker {
+  color: var(--accent);
+}
+
+.path-node-pin {
+  display: block;
+  color: var(--accent-ink);
+  font-size: 0.85rem;
+}
+
+.path-node-review {
+  display: block;
+  color: var(--warn);
+  font-size: 0.85rem;
+}
+
+.path-node-hint {
+  display: block;
+  color: var(--ink-faint);
+  font-size: 0.85rem;
+}

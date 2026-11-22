@@ -1512,6 +1512,42 @@ export class LearnerEngine {
           goal_id: `${pack.id}.goal.${s.goal}`,
         }));
       }
+      case "unit_path": {
+        // PATH-VIEW-001: mirror of `unit_path_at` for the fake world — one
+        // node per goal the pack's schedule sequences (curriculum order),
+        // `current` from the same plan rows the Today card shows. The
+        // fixture profiles carry no per-content mastery ledger, so nothing
+        // is `done`: exactly the attendance-vs-done honesty the red test
+        // pins on the Rust side.
+        const p = this.profile(args.profileId);
+        const pack = p.active ? PACKS[p.active] : undefined;
+        if (!pack) return [];
+        const plan = this.plan(p);
+        const introRefs = new Set(
+          plan.items.filter((i) => i.kind === "introduction").map((i) => i.content_id),
+        );
+        const planRefs = new Set(plan.items.map((i) => i.content_id));
+        const currentPool = introRefs.size > 0 ? introRefs : planRefs;
+        const units: { goal: string; refs: Set<string> }[] = [];
+        for (const s of p.schedule) {
+          const last = units[units.length - 1];
+          if (last && last.goal === s.goal) last.refs.add(s.content_id);
+          else units.push({ goal: s.goal, refs: new Set([s.content_id]) });
+        }
+        return units.map((u) => ({
+          pack_id: pack.id,
+          unit_id: `${pack.id}.unit.${u.goal}`,
+          title: `${u.goal.replace(/-/g, " ")} unit`,
+          summary: "",
+          band: "on-ramp" as string | null,
+          locked: false,
+          done: false,
+          current: [...u.refs].some((r) => currentPool.has(r)),
+          review_due: false,
+          due_count: 0,
+          unlock_hint: null as string | null,
+        }));
+      }
       case "world_state":
         return [
           {

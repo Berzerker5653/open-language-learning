@@ -7,6 +7,7 @@
  * streak/attendance surface anywhere (ADR-0002).
  */
 
+import { useState } from "react";
 import { LatinText, PackText } from "@openlang/ui";
 export interface PlannedItem {
   item_id: string;
@@ -298,6 +299,9 @@ export interface HomeProps {
   /// pack re-answers; Home says so while that settles instead of showing a
   /// plan that belongs to the language being left.
   packSwitching?: boolean;
+  /// PATH-VIEW-001: the unit path from the `unit_path` command — engine
+  /// state only. Empty while loading; Home then renders no path section.
+  pathNodes?: UnitPathNode[];
 }
 
 export function Home(p: HomeProps) {
@@ -567,6 +571,7 @@ export function Home(p: HomeProps) {
           })}
         </>
       )}
+      {p.pathNodes && p.pathNodes.length > 0 ? <PathView nodes={p.pathNodes} /> : null}
       {p.nextGoal === undefined ? null : p.nextGoal === null ? (
         <p className="empty next-goal-none">
           This pack declares no learning path yet. Choose one under Settings → Language packs.
@@ -817,20 +822,196 @@ const STATE_LABELS: Record<string, string> = {
  * pass N4 -> A2) for linguistic/reception skills only; that crosswalk and its
  * source live in docs/assessment/RELEASE_COVERAGE.yaml.
  */
-const BAND_HEADERS: Record<string, { label: string; gloss: string }> = {
-  "on-ramp": { label: "Getting started", gloss: "first words and routines, with support" },
-  a1: { label: "A1", gloss: "familiar everyday expressions, very simple exchanges" },
-  a2: { label: "A2", gloss: "familiar routines, everyday exchanges, simple past" },
-  b1: { label: "B1", gloss: "most everyday situations, opinions, plans, experiences" },
-  b2: { label: "B2", gloss: "complex text, argument, fluent interaction" },
-  c1: { label: "C1", gloss: "flexible, well-structured use of the language" },
-  c2: { label: "C2", gloss: "precise, nuanced, near-native use" },
+const BAND_HEADERS: Record<
+  string,
+  { label: string; gloss: string; friendly?: string; cefr?: string }
+> = {
+  "on-ramp": {
+    label: "Getting started",
+    gloss: "first words and routines, with support",
+    cefr: "Pre-A1",
+  },
+  a1: {
+    label: "A1",
+    gloss: "familiar everyday expressions, very simple exchanges",
+    friendly: "Beginner",
+    cefr: "A1",
+  },
+  a2: {
+    label: "A2",
+    gloss: "familiar routines, everyday exchanges, simple past",
+    friendly: "Elementary",
+    cefr: "A2",
+  },
+  b1: {
+    label: "B1",
+    gloss: "most everyday situations, opinions, plans, experiences",
+    friendly: "Intermediate",
+    cefr: "B1",
+  },
+  b2: {
+    label: "B2",
+    gloss: "complex text, argument, fluent interaction",
+    friendly: "Upper-intermediate",
+    cefr: "B2",
+  },
+  c1: {
+    label: "C1",
+    gloss: "flexible, well-structured use of the language",
+    friendly: "Advanced",
+    cefr: "C1",
+  },
+  c2: { label: "C2", gloss: "precise, nuanced, near-native use", friendly: "Mastery", cefr: "C2" },
   other: { label: "Unlabeled", gloss: "this pack does not band these goals" },
 };
 
-export function bandHeader(band: string): { label: string; gloss: string } {
+export function bandHeader(band: string): {
+  label: string;
+  gloss: string;
+  friendly?: string;
+  cefr?: string;
+} {
   return (
     BAND_HEADERS[band.trim().toLowerCase()] ?? { label: band, gloss: `banded ${band} by the pack` }
+  );
+}
+
+/**
+ * PATH-VIEW-001 (PROGRESS-PATH-DESIGN-001.md phase 1): one unit node on the
+ * Today tab's path, exactly as the `unit_path` command reports it. The view
+ * derives NOTHING: locked/done/current/review-due all come from the engine's
+ * existing gating, mastery, plan and scheduler state (no new engine, and
+ * `done` is evidence-backed by construction — the red test for attendance-
+ * only lives on the Rust side where the flag is computed).
+ */
+export interface UnitPathNode {
+  pack_id: string;
+  unit_id: string;
+  title: string;
+  summary: string;
+  band: string | null;
+  locked: boolean;
+  done: boolean;
+  current: boolean;
+  review_due: boolean;
+  due_count: number;
+  unlock_hint: string | null;
+}
+
+/** Engine order is curriculum order; consecutive nodes of one band form one
+ * section (On-ramp / Beginner / Elementary …, CEFR as the small subtitle —
+ * owner decision 2026-11-22). */
+export function pathSections(nodes: UnitPathNode[]): { band: string; nodes: UnitPathNode[] }[] {
+  const sections: { band: string; nodes: UnitPathNode[] }[] = [];
+  for (const n of nodes) {
+    const band = n.band ?? "other";
+    const last = sections[sections.length - 1];
+    if (last && last.band === band) last.nodes.push(n);
+    else sections.push({ band, nodes: [n] });
+  }
+  return sections;
+}
+
+/** One honest state per node for styling and the mobile audit. Locked wins
+ * over everything (a locked node is never clickable), the pin over done. */
+export function pathNodeState(n: UnitPathNode): string {
+  if (n.locked) return "locked";
+  if (n.current) return "current";
+  if (n.done) return n.review_due ? "review-due" : "done";
+  return "ready";
+}
+
+const PATH_MARKERS: Record<string, string> = {
+  locked: "•",
+  ready: "○",
+  current: "◉",
+  done: "✓",
+  "review-due": "⟳",
+};
+
+/**
+ * The path itself: a scrolling journey of unit nodes. Only the section that
+ * holds the pin is open by default — the pack carries 818 units and the
+ * design's rule is "the screen never shows 818 dots" — every other section
+ * collapses to its header with a done-count and opens on tap (a real
+ * control, 44px+ tall). Locked-ahead units stay VISIBLE and dim, each naming
+ * what unlocks it in the pack's own words; done units re-light with a
+ * review-due count; scrolling up is the visible history of what was learned.
+ */
+export function PathView({ nodes }: { nodes: UnitPathNode[] }) {
+  const sections = pathSections(nodes);
+  const pinnedBand = sections.find((s) => s.nodes.some((n) => n.current))?.band;
+  // undefined = nobody has tapped yet, so the pinned section opens by
+  // default; an explicit null collapses everything, an override re-opens
+  // the tapped band even after the pack data refreshes underneath.
+  const [bandOverride, setBandOverride] = useState<string | null | undefined>(undefined);
+  if (sections.length === 0) return null;
+  const openBand =
+    bandOverride === undefined ? (pinnedBand ?? sections[0]?.band ?? "") : bandOverride;
+  return (
+    <section aria-label="Your path" className="unit-path" data-testid="unit-path">
+      <h2>Your path</h2>
+      <p className="meta">
+        <small>What you have completed, where you are now, and where this leads.</small>
+      </p>
+      {sections.map((s) => {
+        const header = bandHeader(s.band);
+        const isOpen = openBand === s.band;
+        const doneCount = s.nodes.filter((n) => n.done).length;
+        return (
+          <div key={s.band} className="path-section" data-band={s.band}>
+            <button
+              type="button"
+              className="path-section-toggle"
+              aria-expanded={isOpen}
+              onClick={() => setBandOverride(isOpen ? null : s.band)}
+            >
+              <span className="path-section-name">{header.friendly ?? header.label}</span>
+              <small className="path-section-cefr">{header.cefr ?? header.gloss}</small>
+              <span className="path-section-count">
+                {doneCount}/{s.nodes.length} units done
+              </span>
+            </button>
+            {isOpen ? (
+              <ol className="path-nodes">
+                {s.nodes.map((n) => {
+                  const state = pathNodeState(n);
+                  return (
+                    <li
+                      key={n.unit_id}
+                      className={`path-node path-node--${state}`}
+                      data-testid={`path-node-${n.unit_id}`}
+                      data-state={state}
+                    >
+                      <span className="path-node-marker" aria-hidden="true">
+                        {PATH_MARKERS[state]}
+                      </span>
+                      <span className="path-node-body">
+                        <span className="path-node-title">{n.title}</span>
+                        {state === "current" ? (
+                          <span className="path-node-pin">You are here</span>
+                        ) : null}
+                        {state === "review-due" ? (
+                          <span
+                            className="path-node-review"
+                            data-testid={`path-review-${n.unit_id}`}
+                          >
+                            Review due ({n.due_count})
+                          </span>
+                        ) : null}
+                        {state === "locked" && n.unlock_hint ? (
+                          <small className="path-node-hint">{n.unlock_hint}</small>
+                        ) : null}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ol>
+            ) : null}
+          </div>
+        );
+      })}
+    </section>
   );
 }
 
