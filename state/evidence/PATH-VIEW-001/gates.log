@@ -1,0 +1,32 @@
+PATH-VIEW-001 — CONTROLLER takeover gate log (2026-11-22, run t_8ec1ddb8 / PATH-WHATSNEXT-001 worker acting as controller)
+
+Context: PATH-VIEW-001 board card (t_c6917020) died twice at the 80-iteration cap and is
+blocked. Its finished lane was left UNCOMMITTED in the shared working tree, entangled in
+lib.rs/home.tsx only with PATH-VIEW files (the ENCOUNTER lane's storage/content files are a
+separate disjoint set, committed under its own label). Per the takeover rule the controller
+re-ran the whole battery personally before committing; nothing was trusted from the dead runs'
+heartbeats. The dead runs' own gate unit (lts-pathview-rust-gates.service) never executed
+(systemd 203/EXEC: scratch script not executable) — zero prior gate evidence existed.
+
+Battery (main tree, lane tier, after controller fixes):
+  cargo fmt --all --check                     exit 0  (controller ran `cargo fmt --all` first:
+                                                  drift only in crates/storage/src/encounter.rs)
+  cargo test -p lts-storage --lib             7 passed 0 failed
+      — controller FIX: the new v10 migration clashed with the v8 upgrade fixture in
+        migrations.rs::mined_scheduler_rows_are_partitioned_on_upgrade (UNIQUE constraint on
+        schema_migrations.version); fixture now also DELETEs version 10. Fixture-only, not lane code.
+  cargo test -p lts-desktop --lib unit_path   1 passed (unit_path_done_never_reads_attendance_only —
+        the card's red test, green; 225 filtered)
+  cargo clippy -p lts-storage --all-targets -- -D warnings   exit 0
+  cargo clippy -p lts-desktop --all-targets -- -D warnings   exit 0
+  npx tsc --noEmit (apps/desktop)             exit 0
+  npx vitest run (apps/desktop)               60 files, 482 tests passed (incl. path-view.test.tsx x5)
+  npx prettier --check on all touched TS/CSS  all pass
+  cargo test -p lts-langpack --lib            5 passed
+  .venv/bin/python tools/qa_stories.py        20 stories, 0 FAIL
+
+Deferred (card acceptance still open — capture half):
+  - playwright mobile screenshots into state/evidence/PATH-VIEW-001/ via
+    scripts/path-view-capture.mjs (harness shipped, green vitest bridge in journeys/harness.tsx);
+    the attempt-2 serve binary PREDATES the due-map product-bug fix — rebuild before capture.
+  - resume recipe: state/notes/PATH-VIEW-001.md.

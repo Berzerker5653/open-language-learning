@@ -3188,6 +3188,32 @@ tasks:
   - gated dictation shadowing and writing refuse honestly with no fallback to unfiltered pack content and learner free-typed sentences stay ungated
   - mobile-viewport before/after screenshots with machine-gated result.json land under state/evidence/PRACTICE-GATE-001
   required_for_desktop_1_0: false
+- id: PATH-VIEW-001
+  milestone: M11
+  priority: P1
+  title: Today tab becomes the unit-node path so learners always see where they are and where this leads
+  dependencies: [SESSION-SEQUENCE-001, PRACTICE-GATE-001]
+  read_first:
+  - state/notes/PATH-VIEW-001.md
+  - state/evidence/PATH-VIEW-001/gates.log
+  acceptance:
+  - mobile screenshots for a fresh profile show on-ramp units done or current, the next unit ready, higher bands visible-dim with unlock hints, and scroll-up history, under state/evidence/PATH-VIEW-001
+  - a red test shows a unit with attendance but below the mastery floor renders not done
+  - LANE-tier gates over the touched packages
+  required_for_desktop_1_0: false
+- id: ENCOUNTER-BEFORE-TEST-001
+  milestone: M11
+  priority: P1
+  title: A drill tested a letter the learner had not finished meeting, so tests gate on completed encounters and confusables get false-friend copy
+  dependencies: [SESSION-SEQUENCE-001, PRACTICE-GATE-001]
+  read_first:
+  - state/notes/ENCOUNTER-BEFORE-TEST-001.md
+  - state/evidence/ENCOUNTER-BEFORE-TEST-001/gates.log
+  acceptance:
+  - a red-first plan test shows an un-encountered letter is withheld from due-review and weak-skill routes while its encounter rides the plan first, and the withheld row returns after the encounter completes
+  - an owner-profile plan audit via API read shows zero un-encountered tested letters
+  - an after-screenshot of one confusable encounter line lands under state/evidence/ENCOUNTER-BEFORE-TEST-001
+  required_for_desktop_1_0: false
 - id: ORTHO-LETTER-UNITS-001
   milestone: M8
   priority: P1
@@ -3380,4 +3406,6 @@ execution_scope:
   - ORPHAN-CONTENT-001
   - RU-SENTENCE-CLAIM-001
   - RU-LEXICON-CLAIM-001
+  - PATH-VIEW-001
+  - ENCOUNTER-BEFORE-TEST-001
   public_publication_authorized: false

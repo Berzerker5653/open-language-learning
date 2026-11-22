@@ -1,0 +1,31 @@
+ENCOUNTER-BEFORE-TEST-001 — CONTROLLER takeover gate log (2026-11-22, run t_8ec1ddb8)
+
+The card died twice at the 80-iteration cap (board t_233fafab, blocked). Its WIP was on the
+dirty main tree; the controller re-verified and committed the STORAGE + CONTENT part of the
+lane under this card's label. IMPORTANT correction for the next worker — the notes file's
+"Contract (shipped engine part)" overstates what is on disk:
+
+MEASURED on-disk state:
+- SHIPPED: storage v10 `encounter_events` table (migrations.rs), crates/storage/src/encounter.rs
+  (record_encounter idempotent + encountered_content_ids; module test pins the
+  exposure-never-evidence property), cyrillic.jsonl false-friend / friendly-letter copy
+  (11 mnemonics, text-only, rides the NEXT pack publish).
+- NOT shipped (attempt-2 claimed it in flight; grep proves absence): the
+  `encounter_test_allowance()` gate in build_plan's eligibility layer, the
+  `encounter_complete` IPC, the plan-level red test
+  `a_letter_is_never_tested_before_its_encounter_completes`, and the frontend wiring.
+  The v10 table is currently written by NOTHING outside its own module test.
+
+Gate battery (main tree, after controller fixes; full text of runs on request):
+  cargo fmt --all --check                     exit 0 (controller fmt'd drift in encounter.rs first)
+  cargo test -p lts-storage --lib             7 passed 0 failed
+      — controller FIX: v10 clashed with the v8 upgrade fixture
+        (mined_scheduler_rows_are_partitioned_on_upgrade); fixture DELETEs version 10 now.
+  cargo clippy -p lts-storage --all-targets -- -D warnings   exit 0
+  cargo test -p lts-langpack --lib            5 passed
+  .venv/bin/python tools/qa_stories.py        20 stories, 0 FAIL (mnemonic copy clean)
+
+Deferred (card stays open): engine gate + IPC + plan-level red test, frontend wiring of
+encounter_complete at lesson "Start practicing", confusable-line screenshot, owner-profile
+plan audit. Resume recipe: state/notes/ENCOUNTER-BEFORE-TEST-001.md (see its CONTROLLER
+section for the correction above).

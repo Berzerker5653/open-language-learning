@@ -2822,6 +2822,40 @@
         "state/evidence/RC-0.4.8-2026-11-22/diff-047-to-048-ru-RU.txt",
         "state/evidence/RC-0.4.8-2026-11-22/publish-proof.txt"
       ]
+    },
+    "PATH-VIEW-001": {
+      "task_id": "PATH-VIEW-001",
+      "title": "Today tab becomes the unit-node path (locked/ready/current/done/review-due) — approved design phase 1",
+      "status": "retryable",
+      "attempts": 2,
+      "dependencies": [
+        "SESSION-SEQUENCE-001",
+        "PRACTICE-GATE-001"
+      ],
+      "evidence": [
+        "state/notes/PATH-VIEW-001.md",
+        "state/evidence/PATH-VIEW-001/gates.log"
+      ],
+      "summary": "Engine + UI shipped via controller takeover (iteration-cap deaths on board t_c6917020): unit_path IPC derives node state ONLY from existing gating/mastery/plan/scheduler machinery (done is evidence-backed; red test unit_path_done_never_reads_attendance_only green), PathView sections with friendly names + CEFR subtitle, locked-ahead visible-dim with pack-worded unlock hints, review-due re-glow with counts; harness mirror + 5 vitest contract tests + capture harness scripted. Controller battery: fmt/storage 7/desktop unit_path/clippy x2/tsc/vitest 482/prettier/langpack/qa_stories all green (gates.log). OPEN: mobile acceptance screenshots via scripts/path-view-capture.mjs from a serve binary built at current main — recipe items 1-3 in the notes file.",
+      "notes": "Frozen contract + REMAINING RECIPE in state/notes/PATH-VIEW-001.md; controller gate battery in state/evidence/PATH-VIEW-001/gates.log. lib.rs/home.tsx are collision hotspots (ENCOUNTER + PATH-WHATSNEXT lanes).",
+      "updated": "2026-11-22"
+    },
+    "ENCOUNTER-BEFORE-TEST-001": {
+      "task_id": "ENCOUNTER-BEFORE-TEST-001",
+      "title": "Drills tested a letter the learner had not finished meeting — tests gate on completed encounters; confusables get false-friend copy",
+      "status": "retryable",
+      "attempts": 2,
+      "dependencies": [
+        "SESSION-SEQUENCE-001",
+        "PRACTICE-GATE-001"
+      ],
+      "evidence": [
+        "state/notes/ENCOUNTER-BEFORE-TEST-001.md",
+        "state/evidence/ENCOUNTER-BEFORE-TEST-001/gates.log"
+      ],
+      "summary": "Storage + content half shipped via controller takeover: schema v10 encounter_events (append-only, exposure-never-evidence pinned by module test), record_encounter/encountered_content_ids, and cyrillic.jsonl false-friend/friendly-letter copy (11 mnemonics, text-only, rides next RU publish; langpack + qa_stories green). CORRECTION measured at takeover: the encounter_test_allowance gate, encounter_complete IPC and the plan-level red test were NOT on disk despite the dead run's claims — the v10 table has no production writer yet. OPEN: engine gate + IPC + red test, frontend wiring at lesson Start-practicing, confusable screenshot, owner-profile plan audit.",
+      "notes": "Resume recipe + CONTROLLER correction in state/notes/ENCOUNTER-BEFORE-TEST-001.md; controller battery in state/evidence/ENCOUNTER-BEFORE-TEST-001/gates.log.",
+      "updated": "2026-11-22"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
