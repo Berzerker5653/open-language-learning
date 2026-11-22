@@ -3256,6 +3256,21 @@ tasks:
   - started-but-unproven units render a partially-filled ring with the honest proven-ref fraction, and the section counter counts proven-done only
   - LANE-tier gates over the touched packages
   required_for_desktop_1_0: false
+- id: PATH-SECTIONS-DEDUP-001
+  milestone: M11
+  priority: P2
+  title: The path rendered extra second A2/B1/B2 section rows at 0/3 units each, so sections are now one canonical band ladder every unit maps into
+  dependencies: [PATH-VISUAL-001]
+  read_first:
+  - state/evidence/PATH-SECTIONS-DEDUP-001/gates.log
+  - state/evidence/PATH-SECTIONS-DEDUP-001/unit-band-audit.json
+  - scripts/path-sections-capture.mjs
+  acceptance:
+  - a scripted audit lists every unit mapped into exactly one band with zero unmapped and names the stray adjacency runs
+  - the pack sections list carries no duplicate band labels, covered by red-first vitest cases
+  - after-screenshots of the band headers at 390px show exactly one row per band with merged counts
+  - LANE-tier gates over the touched packages
+  required_for_desktop_1_0: false
 - id: ORTHO-LETTER-UNITS-001
   milestone: M8
   priority: P1
@@ -3453,4 +3468,5 @@ execution_scope:
   - PATH-WHATSNEXT-001
   - LESSON-TITLE-FIT-001
   - PATH-VISUAL-001
+  - PATH-SECTIONS-DEDUP-001
   public_publication_authorized: false

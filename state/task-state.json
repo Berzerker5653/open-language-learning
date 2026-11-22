@@ -2912,6 +2912,29 @@
       "summary": "Engine + UI shipped (attempt-1 WIP finished by run 177): unit_path_at adds in_progress + refs_done/refs_total (done stays the evidence floor: every scheduled ref at Introduced; encounter rows are exposure, never mastery); PathView renders winding ring nodes (deterministic sine sway, dashed connectors angled per edge), state rings (locked+drawn lock glyph, ready, in-progress arc at honest fraction, done check, review-due glow), section banners name+CEFR, counter counts proven-done only. Capture scripts/path-visual-capture.mjs 13/13 green at 390px: fully-drilled letter unit DONE, partial unit IN PROGRESS 8/36, section 2/20 proven, winding x-spread 58px; before=complaint-09b. Red test letter_unit_goes_in_progress_then_done_as_its_refs_are_proven green. placement_coverage_names_why_a_rubric_has_no_question was ALREADY RED at HEAD and 1451aef (mainline rot, not this lane).",
       "notes": "Vision check of after-shots found cosmetic defects to fix in a follow-up: PATH_SWAY_AMP_PX=34 pulls rings over the start of the label text at 390px, and three units share the current pool so multiple 'You are here' captions render and collide. Not path-state correctness. Gate log has the HEAD-red note. lib.rs/styles.css/home.tsx remain collision hotspots.",
       "updated": "2026-11-22"
+    },
+    "PATH-SECTIONS-DEDUP-001": {
+      "task_id": "PATH-SECTIONS-DEDUP-001",
+      "title": "Path sections deduped to one canonical band ladder (journey tail units merged into A2/B1/B2, no 0/3 strays)",
+      "status": "done",
+      "attempts": 2,
+      "dependencies": [
+        "PATH-VISUAL-001"
+      ],
+      "evidence": [
+        "state/evidence/PATH-SECTIONS-DEDUP-001/gates.log",
+        "state/evidence/PATH-SECTIONS-DEDUP-001/unit-band-audit.json",
+        "state/evidence/PATH-SECTIONS-DEDUP-001/result.json",
+        "state/evidence/PATH-SECTIONS-DEDUP-001/path-section-on-ramp-390.png",
+        "state/evidence/PATH-SECTIONS-DEDUP-001/path-section-a1-390.png",
+        "state/evidence/PATH-SECTIONS-DEDUP-001/path-section-a2-390.png",
+        "state/evidence/PATH-SECTIONS-DEDUP-001/path-section-b1-390.png",
+        "state/evidence/PATH-SECTIONS-DEDUP-001/path-section-b2-390.png",
+        "state/evidence/PATH-SECTIONS-DEDUP-001/path-sections-full.png"
+      ],
+      "summary": "Root cause: pathSections() grouped consecutive same-band nodes, so the nine late-appended journey units (curriculum files 810-818, honestly banded A2/B1/B2) spawned a second A2/B1/B2 ladder at 0/3 each (owner complaint 09a). Fix: group by band key on the canonical BAND_HEADERS ladder (custom bands follow in first-occurrence order); section band stays the pack raw string so PATH-VISUAL-001 banners are untouched. tools/path_sections_audit.py: 818 units, zero unmapped, strays named. 4 red-first vitest cases; apps/desktop suite 489/489; tsc green. scripts/path-sections-capture.mjs on the real engine at 390px: 11/11 green - duplicate-free canonical API ladder, exactly one DOM header per band, totals 0/20 0/90 0/102 0/203 0/403 == audit, per-band after-shots gated by in-viewport rect; vision-checked on-ramp and A2 shots.",
+      "notes": "Attempt 1 (board run 178) died with the whole lane uncommitted; run 179 took over, re-ran every gate, and fixed an evidence gap - attempt 1's single headers png showed no band header (open sections are hundreds of nodes tall, container-centered scroll missed them). Harness now shoots each band header (toggle button centered) with a machine gate that the row was in-viewport at capture time. Collision note: home.tsx remains a hotspot.",
+      "updated": "2026-11-22"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

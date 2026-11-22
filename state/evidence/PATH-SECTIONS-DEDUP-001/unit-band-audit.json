@@ -1,0 +1,4919 @@
+{
+ "units": [
+  {
+   "unit": "ru.unit.on-ramp.greetings-01",
+   "goal": "ru.goal.on-ramp.greetings",
+   "band": "on-ramp",
+   "file": "000-greetings-01.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.greetings-02",
+   "goal": "ru.goal.on-ramp.greetings",
+   "band": "on-ramp",
+   "file": "001-greetings-02.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.self-introduction-01",
+   "goal": "ru.goal.on-ramp.self-introduction",
+   "band": "on-ramp",
+   "file": "002-self-introduction-01.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.self-introduction-02",
+   "goal": "ru.goal.on-ramp.self-introduction",
+   "band": "on-ramp",
+   "file": "003-self-introduction-02.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.classroom-01",
+   "goal": "ru.goal.on-ramp.classroom",
+   "band": "on-ramp",
+   "file": "004-classroom-01.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.classroom-02",
+   "goal": "ru.goal.on-ramp.classroom",
+   "band": "on-ramp",
+   "file": "005-classroom-02.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.everyday-01",
+   "goal": "ru.goal.on-ramp.everyday",
+   "band": "on-ramp",
+   "file": "006-everyday-01.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.everyday-02",
+   "goal": "ru.goal.on-ramp.everyday",
+   "band": "on-ramp",
+   "file": "007-everyday-02.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.numbers-01",
+   "goal": "ru.goal.on-ramp.numbers",
+   "band": "on-ramp",
+   "file": "008-numbers-01.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.numbers-02",
+   "goal": "ru.goal.on-ramp.numbers",
+   "band": "on-ramp",
+   "file": "009-numbers-02.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+   "goal": "ru.goal.on-ramp.cyrillic",
+   "band": "on-ramp",
+   "file": "010-cyrillic-a-o-m-t.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.cyrillic-k-e-n-s",
+   "goal": "ru.goal.on-ramp.cyrillic",
+   "band": "on-ramp",
+   "file": "011-cyrillic-k-e-n-s.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+   "goal": "ru.goal.on-ramp.cyrillic",
+   "band": "on-ramp",
+   "file": "012-cyrillic-r-v-u-kh.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.cyrillic-b-p-d-g",
+   "goal": "ru.goal.on-ramp.cyrillic",
+   "band": "on-ramp",
+   "file": "013-cyrillic-b-p-d-g.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.cyrillic-l-z-zh-i",
+   "goal": "ru.goal.on-ramp.cyrillic",
+   "band": "on-ramp",
+   "file": "014-cyrillic-l-z-zh-i.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.cyrillic-y-short-i-yo-yu",
+   "goal": "ru.goal.on-ramp.cyrillic",
+   "band": "on-ramp",
+   "file": "015-cyrillic-y-short-i-yo-yu.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.cyrillic-ya-eh-f",
+   "goal": "ru.goal.on-ramp.cyrillic",
+   "band": "on-ramp",
+   "file": "016-cyrillic-ya-eh-f.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.cyrillic-ts-ch-sh",
+   "goal": "ru.goal.on-ramp.cyrillic",
+   "band": "on-ramp",
+   "file": "017-cyrillic-ts-ch-sh.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.cyrillic-shch-soft-hard",
+   "goal": "ru.goal.on-ramp.cyrillic",
+   "band": "on-ramp",
+   "file": "018-cyrillic-shch-soft-hard.yaml"
+  },
+  {
+   "unit": "ru.unit.on-ramp.cyrillic-stress-review",
+   "goal": "ru.goal.on-ramp.cyrillic",
+   "band": "on-ramp",
+   "file": "019-cyrillic-stress-review.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.personal-details-01",
+   "goal": "ru.goal.a1.personal-details",
+   "band": "A1",
+   "file": "020-personal-details-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.personal-details-02",
+   "goal": "ru.goal.a1.personal-details",
+   "band": "A1",
+   "file": "021-personal-details-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.personal-details-03",
+   "goal": "ru.goal.a1.personal-details",
+   "band": "A1",
+   "file": "022-personal-details-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.personal-details-04",
+   "goal": "ru.goal.a1.personal-details",
+   "band": "A1",
+   "file": "023-personal-details-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.personal-details-05",
+   "goal": "ru.goal.a1.personal-details",
+   "band": "A1",
+   "file": "024-personal-details-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.personal-details-06",
+   "goal": "ru.goal.a1.personal-details",
+   "band": "A1",
+   "file": "025-personal-details-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.personal-details-07",
+   "goal": "ru.goal.a1.personal-details",
+   "band": "A1",
+   "file": "026-personal-details-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.personal-details-08",
+   "goal": "ru.goal.a1.personal-details",
+   "band": "A1",
+   "file": "027-personal-details-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.personal-details-09",
+   "goal": "ru.goal.a1.personal-details",
+   "band": "A1",
+   "file": "028-personal-details-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.personal-details-10",
+   "goal": "ru.goal.a1.personal-details",
+   "band": "A1",
+   "file": "029-personal-details-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.people-family-01",
+   "goal": "ru.goal.a1.people-family",
+   "band": "A1",
+   "file": "030-people-family-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.people-family-02",
+   "goal": "ru.goal.a1.people-family",
+   "band": "A1",
+   "file": "031-people-family-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.people-family-03",
+   "goal": "ru.goal.a1.people-family",
+   "band": "A1",
+   "file": "032-people-family-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.people-family-04",
+   "goal": "ru.goal.a1.people-family",
+   "band": "A1",
+   "file": "033-people-family-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.people-family-05",
+   "goal": "ru.goal.a1.people-family",
+   "band": "A1",
+   "file": "034-people-family-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.people-family-06",
+   "goal": "ru.goal.a1.people-family",
+   "band": "A1",
+   "file": "035-people-family-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.people-family-07",
+   "goal": "ru.goal.a1.people-family",
+   "band": "A1",
+   "file": "036-people-family-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.people-family-08",
+   "goal": "ru.goal.a1.people-family",
+   "band": "A1",
+   "file": "037-people-family-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.people-family-09",
+   "goal": "ru.goal.a1.people-family",
+   "band": "A1",
+   "file": "038-people-family-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.people-family-10",
+   "goal": "ru.goal.a1.people-family",
+   "band": "A1",
+   "file": "039-people-family-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.home-01",
+   "goal": "ru.goal.a1.home",
+   "band": "A1",
+   "file": "040-home-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.home-02",
+   "goal": "ru.goal.a1.home",
+   "band": "A1",
+   "file": "041-home-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.home-03",
+   "goal": "ru.goal.a1.home",
+   "band": "A1",
+   "file": "042-home-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.home-04",
+   "goal": "ru.goal.a1.home",
+   "band": "A1",
+   "file": "043-home-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.home-05",
+   "goal": "ru.goal.a1.home",
+   "band": "A1",
+   "file": "044-home-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.home-06",
+   "goal": "ru.goal.a1.home",
+   "band": "A1",
+   "file": "045-home-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.home-07",
+   "goal": "ru.goal.a1.home",
+   "band": "A1",
+   "file": "046-home-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.home-08",
+   "goal": "ru.goal.a1.home",
+   "band": "A1",
+   "file": "047-home-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.home-09",
+   "goal": "ru.goal.a1.home",
+   "band": "A1",
+   "file": "048-home-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.home-10",
+   "goal": "ru.goal.a1.home",
+   "band": "A1",
+   "file": "049-home-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.routines-01",
+   "goal": "ru.goal.a1.routines",
+   "band": "A1",
+   "file": "050-routines-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.routines-02",
+   "goal": "ru.goal.a1.routines",
+   "band": "A1",
+   "file": "051-routines-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.routines-03",
+   "goal": "ru.goal.a1.routines",
+   "band": "A1",
+   "file": "052-routines-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.routines-04",
+   "goal": "ru.goal.a1.routines",
+   "band": "A1",
+   "file": "053-routines-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.routines-05",
+   "goal": "ru.goal.a1.routines",
+   "band": "A1",
+   "file": "054-routines-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.routines-06",
+   "goal": "ru.goal.a1.routines",
+   "band": "A1",
+   "file": "055-routines-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.routines-07",
+   "goal": "ru.goal.a1.routines",
+   "band": "A1",
+   "file": "056-routines-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.routines-08",
+   "goal": "ru.goal.a1.routines",
+   "band": "A1",
+   "file": "057-routines-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.routines-09",
+   "goal": "ru.goal.a1.routines",
+   "band": "A1",
+   "file": "058-routines-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.routines-10",
+   "goal": "ru.goal.a1.routines",
+   "band": "A1",
+   "file": "059-routines-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.food-01",
+   "goal": "ru.goal.a1.food",
+   "band": "A1",
+   "file": "060-food-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.food-02",
+   "goal": "ru.goal.a1.food",
+   "band": "A1",
+   "file": "061-food-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.food-03",
+   "goal": "ru.goal.a1.food",
+   "band": "A1",
+   "file": "062-food-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.food-04",
+   "goal": "ru.goal.a1.food",
+   "band": "A1",
+   "file": "063-food-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.food-05",
+   "goal": "ru.goal.a1.food",
+   "band": "A1",
+   "file": "064-food-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.food-06",
+   "goal": "ru.goal.a1.food",
+   "band": "A1",
+   "file": "065-food-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.food-07",
+   "goal": "ru.goal.a1.food",
+   "band": "A1",
+   "file": "066-food-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.food-08",
+   "goal": "ru.goal.a1.food",
+   "band": "A1",
+   "file": "067-food-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.food-09",
+   "goal": "ru.goal.a1.food",
+   "band": "A1",
+   "file": "068-food-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.food-10",
+   "goal": "ru.goal.a1.food",
+   "band": "A1",
+   "file": "069-food-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.shopping-01",
+   "goal": "ru.goal.a1.shopping",
+   "band": "A1",
+   "file": "070-shopping-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.shopping-02",
+   "goal": "ru.goal.a1.shopping",
+   "band": "A1",
+   "file": "071-shopping-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.shopping-03",
+   "goal": "ru.goal.a1.shopping",
+   "band": "A1",
+   "file": "072-shopping-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.shopping-04",
+   "goal": "ru.goal.a1.shopping",
+   "band": "A1",
+   "file": "073-shopping-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.shopping-05",
+   "goal": "ru.goal.a1.shopping",
+   "band": "A1",
+   "file": "074-shopping-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.shopping-06",
+   "goal": "ru.goal.a1.shopping",
+   "band": "A1",
+   "file": "075-shopping-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.shopping-07",
+   "goal": "ru.goal.a1.shopping",
+   "band": "A1",
+   "file": "076-shopping-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.shopping-08",
+   "goal": "ru.goal.a1.shopping",
+   "band": "A1",
+   "file": "077-shopping-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.shopping-09",
+   "goal": "ru.goal.a1.shopping",
+   "band": "A1",
+   "file": "078-shopping-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.shopping-10",
+   "goal": "ru.goal.a1.shopping",
+   "band": "A1",
+   "file": "079-shopping-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.city-01",
+   "goal": "ru.goal.a1.city",
+   "band": "A1",
+   "file": "080-city-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.city-02",
+   "goal": "ru.goal.a1.city",
+   "band": "A1",
+   "file": "081-city-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.city-03",
+   "goal": "ru.goal.a1.city",
+   "band": "A1",
+   "file": "082-city-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.city-04",
+   "goal": "ru.goal.a1.city",
+   "band": "A1",
+   "file": "083-city-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.city-05",
+   "goal": "ru.goal.a1.city",
+   "band": "A1",
+   "file": "084-city-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.city-06",
+   "goal": "ru.goal.a1.city",
+   "band": "A1",
+   "file": "085-city-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.city-07",
+   "goal": "ru.goal.a1.city",
+   "band": "A1",
+   "file": "086-city-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.city-08",
+   "goal": "ru.goal.a1.city",
+   "band": "A1",
+   "file": "087-city-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.city-09",
+   "goal": "ru.goal.a1.city",
+   "band": "A1",
+   "file": "088-city-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.city-10",
+   "goal": "ru.goal.a1.city",
+   "band": "A1",
+   "file": "089-city-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.time-plans-01",
+   "goal": "ru.goal.a1.time-plans",
+   "band": "A1",
+   "file": "090-time-plans-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.time-plans-02",
+   "goal": "ru.goal.a1.time-plans",
+   "band": "A1",
+   "file": "091-time-plans-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.time-plans-03",
+   "goal": "ru.goal.a1.time-plans",
+   "band": "A1",
+   "file": "092-time-plans-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.time-plans-04",
+   "goal": "ru.goal.a1.time-plans",
+   "band": "A1",
+   "file": "093-time-plans-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.time-plans-05",
+   "goal": "ru.goal.a1.time-plans",
+   "band": "A1",
+   "file": "094-time-plans-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.time-plans-06",
+   "goal": "ru.goal.a1.time-plans",
+   "band": "A1",
+   "file": "095-time-plans-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.time-plans-07",
+   "goal": "ru.goal.a1.time-plans",
+   "band": "A1",
+   "file": "096-time-plans-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.time-plans-08",
+   "goal": "ru.goal.a1.time-plans",
+   "band": "A1",
+   "file": "097-time-plans-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.time-plans-09",
+   "goal": "ru.goal.a1.time-plans",
+   "band": "A1",
+   "file": "098-time-plans-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.time-plans-10",
+   "goal": "ru.goal.a1.time-plans",
+   "band": "A1",
+   "file": "099-time-plans-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.basic-messages-01",
+   "goal": "ru.goal.a1.basic-messages",
+   "band": "A1",
+   "file": "100-basic-messages-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.basic-messages-02",
+   "goal": "ru.goal.a1.basic-messages",
+   "band": "A1",
+   "file": "101-basic-messages-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.basic-messages-03",
+   "goal": "ru.goal.a1.basic-messages",
+   "band": "A1",
+   "file": "102-basic-messages-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.basic-messages-04",
+   "goal": "ru.goal.a1.basic-messages",
+   "band": "A1",
+   "file": "103-basic-messages-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.basic-messages-05",
+   "goal": "ru.goal.a1.basic-messages",
+   "band": "A1",
+   "file": "104-basic-messages-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.basic-messages-06",
+   "goal": "ru.goal.a1.basic-messages",
+   "band": "A1",
+   "file": "105-basic-messages-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.basic-messages-07",
+   "goal": "ru.goal.a1.basic-messages",
+   "band": "A1",
+   "file": "106-basic-messages-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.basic-messages-08",
+   "goal": "ru.goal.a1.basic-messages",
+   "band": "A1",
+   "file": "107-basic-messages-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.basic-messages-09",
+   "goal": "ru.goal.a1.basic-messages",
+   "band": "A1",
+   "file": "108-basic-messages-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a1.basic-messages-10",
+   "goal": "ru.goal.a1.basic-messages",
+   "band": "A1",
+   "file": "109-basic-messages-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.past-events-01",
+   "goal": "ru.goal.a2.past-events",
+   "band": "A2",
+   "file": "110-past-events-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.past-events-02",
+   "goal": "ru.goal.a2.past-events",
+   "band": "A2",
+   "file": "111-past-events-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.past-events-03",
+   "goal": "ru.goal.a2.past-events",
+   "band": "A2",
+   "file": "112-past-events-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.past-events-04",
+   "goal": "ru.goal.a2.past-events",
+   "band": "A2",
+   "file": "113-past-events-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.past-events-05",
+   "goal": "ru.goal.a2.past-events",
+   "band": "A2",
+   "file": "114-past-events-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.past-events-06",
+   "goal": "ru.goal.a2.past-events",
+   "band": "A2",
+   "file": "115-past-events-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.past-events-08",
+   "goal": "ru.goal.a2.past-events",
+   "band": "A2",
+   "file": "117-past-events-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.past-events-09",
+   "goal": "ru.goal.a2.past-events",
+   "band": "A2",
+   "file": "118-past-events-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.past-events-10",
+   "goal": "ru.goal.a2.past-events",
+   "band": "A2",
+   "file": "119-past-events-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.travel-01",
+   "goal": "ru.goal.a2.travel",
+   "band": "A2",
+   "file": "120-travel-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.travel-02",
+   "goal": "ru.goal.a2.travel",
+   "band": "A2",
+   "file": "121-travel-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.travel-03",
+   "goal": "ru.goal.a2.travel",
+   "band": "A2",
+   "file": "122-travel-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.travel-04",
+   "goal": "ru.goal.a2.travel",
+   "band": "A2",
+   "file": "123-travel-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.travel-05",
+   "goal": "ru.goal.a2.travel",
+   "band": "A2",
+   "file": "124-travel-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.travel-06",
+   "goal": "ru.goal.a2.travel",
+   "band": "A2",
+   "file": "125-travel-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.travel-07",
+   "goal": "ru.goal.a2.travel",
+   "band": "A2",
+   "file": "126-travel-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.travel-08",
+   "goal": "ru.goal.a2.travel",
+   "band": "A2",
+   "file": "127-travel-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.travel-09",
+   "goal": "ru.goal.a2.travel",
+   "band": "A2",
+   "file": "128-travel-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.travel-10",
+   "goal": "ru.goal.a2.travel",
+   "band": "A2",
+   "file": "129-travel-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.services-01",
+   "goal": "ru.goal.a2.services",
+   "band": "A2",
+   "file": "130-services-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.services-02",
+   "goal": "ru.goal.a2.services",
+   "band": "A2",
+   "file": "131-services-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.services-03",
+   "goal": "ru.goal.a2.services",
+   "band": "A2",
+   "file": "132-services-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.services-04",
+   "goal": "ru.goal.a2.services",
+   "band": "A2",
+   "file": "133-services-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.services-05",
+   "goal": "ru.goal.a2.services",
+   "band": "A2",
+   "file": "134-services-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.services-06",
+   "goal": "ru.goal.a2.services",
+   "band": "A2",
+   "file": "135-services-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.services-07",
+   "goal": "ru.goal.a2.services",
+   "band": "A2",
+   "file": "136-services-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.services-08",
+   "goal": "ru.goal.a2.services",
+   "band": "A2",
+   "file": "137-services-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.services-09",
+   "goal": "ru.goal.a2.services",
+   "band": "A2",
+   "file": "138-services-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.services-10",
+   "goal": "ru.goal.a2.services",
+   "band": "A2",
+   "file": "139-services-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.wellbeing-01",
+   "goal": "ru.goal.a2.wellbeing",
+   "band": "A2",
+   "file": "140-wellbeing-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.wellbeing-02",
+   "goal": "ru.goal.a2.wellbeing",
+   "band": "A2",
+   "file": "141-wellbeing-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.wellbeing-03",
+   "goal": "ru.goal.a2.wellbeing",
+   "band": "A2",
+   "file": "142-wellbeing-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.wellbeing-04",
+   "goal": "ru.goal.a2.wellbeing",
+   "band": "A2",
+   "file": "143-wellbeing-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.wellbeing-05",
+   "goal": "ru.goal.a2.wellbeing",
+   "band": "A2",
+   "file": "144-wellbeing-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.wellbeing-06",
+   "goal": "ru.goal.a2.wellbeing",
+   "band": "A2",
+   "file": "145-wellbeing-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.wellbeing-07",
+   "goal": "ru.goal.a2.wellbeing",
+   "band": "A2",
+   "file": "146-wellbeing-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.wellbeing-08",
+   "goal": "ru.goal.a2.wellbeing",
+   "band": "A2",
+   "file": "147-wellbeing-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.wellbeing-09",
+   "goal": "ru.goal.a2.wellbeing",
+   "band": "A2",
+   "file": "148-wellbeing-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.wellbeing-10",
+   "goal": "ru.goal.a2.wellbeing",
+   "band": "A2",
+   "file": "149-wellbeing-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.work-study-01",
+   "goal": "ru.goal.a2.work-study",
+   "band": "A2",
+   "file": "150-work-study-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.work-study-02",
+   "goal": "ru.goal.a2.work-study",
+   "band": "A2",
+   "file": "151-work-study-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.work-study-03",
+   "goal": "ru.goal.a2.work-study",
+   "band": "A2",
+   "file": "152-work-study-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.work-study-04",
+   "goal": "ru.goal.a2.work-study",
+   "band": "A2",
+   "file": "153-work-study-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.work-study-05",
+   "goal": "ru.goal.a2.work-study",
+   "band": "A2",
+   "file": "154-work-study-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.work-study-06",
+   "goal": "ru.goal.a2.work-study",
+   "band": "A2",
+   "file": "155-work-study-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.work-study-07",
+   "goal": "ru.goal.a2.work-study",
+   "band": "A2",
+   "file": "156-work-study-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.work-study-08",
+   "goal": "ru.goal.a2.work-study",
+   "band": "A2",
+   "file": "157-work-study-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.work-study-09",
+   "goal": "ru.goal.a2.work-study",
+   "band": "A2",
+   "file": "158-work-study-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.work-study-10",
+   "goal": "ru.goal.a2.work-study",
+   "band": "A2",
+   "file": "159-work-study-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.social-plans-01",
+   "goal": "ru.goal.a2.social-plans",
+   "band": "A2",
+   "file": "160-social-plans-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.social-plans-02",
+   "goal": "ru.goal.a2.social-plans",
+   "band": "A2",
+   "file": "161-social-plans-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.social-plans-03",
+   "goal": "ru.goal.a2.social-plans",
+   "band": "A2",
+   "file": "162-social-plans-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.social-plans-04",
+   "goal": "ru.goal.a2.social-plans",
+   "band": "A2",
+   "file": "163-social-plans-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.social-plans-05",
+   "goal": "ru.goal.a2.social-plans",
+   "band": "A2",
+   "file": "164-social-plans-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.social-plans-06",
+   "goal": "ru.goal.a2.social-plans",
+   "band": "A2",
+   "file": "165-social-plans-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.social-plans-07",
+   "goal": "ru.goal.a2.social-plans",
+   "band": "A2",
+   "file": "166-social-plans-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.social-plans-08",
+   "goal": "ru.goal.a2.social-plans",
+   "band": "A2",
+   "file": "167-social-plans-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.social-plans-09",
+   "goal": "ru.goal.a2.social-plans",
+   "band": "A2",
+   "file": "168-social-plans-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.social-plans-10",
+   "goal": "ru.goal.a2.social-plans",
+   "band": "A2",
+   "file": "169-social-plans-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.comparisons-01",
+   "goal": "ru.goal.a2.comparisons",
+   "band": "A2",
+   "file": "170-comparisons-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.comparisons-02",
+   "goal": "ru.goal.a2.comparisons",
+   "band": "A2",
+   "file": "171-comparisons-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.comparisons-03",
+   "goal": "ru.goal.a2.comparisons",
+   "band": "A2",
+   "file": "172-comparisons-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.comparisons-04",
+   "goal": "ru.goal.a2.comparisons",
+   "band": "A2",
+   "file": "173-comparisons-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.comparisons-05",
+   "goal": "ru.goal.a2.comparisons",
+   "band": "A2",
+   "file": "174-comparisons-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.comparisons-06",
+   "goal": "ru.goal.a2.comparisons",
+   "band": "A2",
+   "file": "175-comparisons-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.comparisons-07",
+   "goal": "ru.goal.a2.comparisons",
+   "band": "A2",
+   "file": "176-comparisons-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.comparisons-08",
+   "goal": "ru.goal.a2.comparisons",
+   "band": "A2",
+   "file": "177-comparisons-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.comparisons-09",
+   "goal": "ru.goal.a2.comparisons",
+   "band": "A2",
+   "file": "178-comparisons-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.comparisons-10",
+   "goal": "ru.goal.a2.comparisons",
+   "band": "A2",
+   "file": "179-comparisons-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.instructions-01",
+   "goal": "ru.goal.a2.instructions",
+   "band": "A2",
+   "file": "180-instructions-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.instructions-02",
+   "goal": "ru.goal.a2.instructions",
+   "band": "A2",
+   "file": "181-instructions-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.instructions-03",
+   "goal": "ru.goal.a2.instructions",
+   "band": "A2",
+   "file": "182-instructions-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.instructions-04",
+   "goal": "ru.goal.a2.instructions",
+   "band": "A2",
+   "file": "183-instructions-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.instructions-05",
+   "goal": "ru.goal.a2.instructions",
+   "band": "A2",
+   "file": "184-instructions-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.instructions-06",
+   "goal": "ru.goal.a2.instructions",
+   "band": "A2",
+   "file": "185-instructions-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.instructions-07",
+   "goal": "ru.goal.a2.instructions",
+   "band": "A2",
+   "file": "186-instructions-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.instructions-08",
+   "goal": "ru.goal.a2.instructions",
+   "band": "A2",
+   "file": "187-instructions-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.instructions-09",
+   "goal": "ru.goal.a2.instructions",
+   "band": "A2",
+   "file": "188-instructions-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.instructions-10",
+   "goal": "ru.goal.a2.instructions",
+   "band": "A2",
+   "file": "189-instructions-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.problems-solutions-01",
+   "goal": "ru.goal.a2.problems-solutions",
+   "band": "A2",
+   "file": "190-problems-solutions-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.problems-solutions-02",
+   "goal": "ru.goal.a2.problems-solutions",
+   "band": "A2",
+   "file": "191-problems-solutions-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.problems-solutions-03",
+   "goal": "ru.goal.a2.problems-solutions",
+   "band": "A2",
+   "file": "192-problems-solutions-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.problems-solutions-04",
+   "goal": "ru.goal.a2.problems-solutions",
+   "band": "A2",
+   "file": "193-problems-solutions-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.problems-solutions-05",
+   "goal": "ru.goal.a2.problems-solutions",
+   "band": "A2",
+   "file": "194-problems-solutions-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.problems-solutions-06",
+   "goal": "ru.goal.a2.problems-solutions",
+   "band": "A2",
+   "file": "195-problems-solutions-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.problems-solutions-07",
+   "goal": "ru.goal.a2.problems-solutions",
+   "band": "A2",
+   "file": "196-problems-solutions-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.problems-solutions-08",
+   "goal": "ru.goal.a2.problems-solutions",
+   "band": "A2",
+   "file": "197-problems-solutions-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.problems-solutions-09",
+   "goal": "ru.goal.a2.problems-solutions",
+   "band": "A2",
+   "file": "198-problems-solutions-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.problems-solutions-10",
+   "goal": "ru.goal.a2.problems-solutions",
+   "band": "A2",
+   "file": "199-problems-solutions-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.connected-messages-01",
+   "goal": "ru.goal.a2.connected-messages",
+   "band": "A2",
+   "file": "200-connected-messages-01.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.connected-messages-02",
+   "goal": "ru.goal.a2.connected-messages",
+   "band": "A2",
+   "file": "201-connected-messages-02.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.connected-messages-03",
+   "goal": "ru.goal.a2.connected-messages",
+   "band": "A2",
+   "file": "202-connected-messages-03.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.connected-messages-04",
+   "goal": "ru.goal.a2.connected-messages",
+   "band": "A2",
+   "file": "203-connected-messages-04.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.connected-messages-05",
+   "goal": "ru.goal.a2.connected-messages",
+   "band": "A2",
+   "file": "204-connected-messages-05.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.connected-messages-06",
+   "goal": "ru.goal.a2.connected-messages",
+   "band": "A2",
+   "file": "205-connected-messages-06.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.connected-messages-07",
+   "goal": "ru.goal.a2.connected-messages",
+   "band": "A2",
+   "file": "206-connected-messages-07.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.connected-messages-08",
+   "goal": "ru.goal.a2.connected-messages",
+   "band": "A2",
+   "file": "207-connected-messages-08.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.connected-messages-09",
+   "goal": "ru.goal.a2.connected-messages",
+   "band": "A2",
+   "file": "208-connected-messages-09.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.connected-messages-10",
+   "goal": "ru.goal.a2.connected-messages",
+   "band": "A2",
+   "file": "209-connected-messages-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-sequence-01",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "210-narration-sequence-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-sequence-02",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "211-narration-sequence-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-sequence-03",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "212-narration-sequence-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-sequence-04",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "213-narration-sequence-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-sequence-05",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "214-narration-sequence-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-sequence-06",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "215-narration-sequence-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-sequence-07",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "216-narration-sequence-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-sequence-08",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "217-narration-sequence-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-sequence-09",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "218-narration-sequence-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-sequence-10",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "219-narration-sequence-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-background-01",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "220-narration-background-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-background-02",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "221-narration-background-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-background-03",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "222-narration-background-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-background-04",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "223-narration-background-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-background-05",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "224-narration-background-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-background-06",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "225-narration-background-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-background-07",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "226-narration-background-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-background-08",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "227-narration-background-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-background-09",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "228-narration-background-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.narration-background-10",
+   "goal": "ru.goal.b1.narration",
+   "band": "B1",
+   "file": "229-narration-background-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.life-experiences-01",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "230-life-experiences-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.life-experiences-02",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "231-life-experiences-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.life-experiences-03",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "232-life-experiences-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.life-experiences-04",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "233-life-experiences-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.life-experiences-05",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "234-life-experiences-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.life-experiences-06",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "235-life-experiences-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.life-experiences-07",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "236-life-experiences-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.life-experiences-08",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "237-life-experiences-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.life-experiences-09",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "238-life-experiences-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.life-experiences-10",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "239-life-experiences-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.travel-experiences-01",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "240-travel-experiences-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.travel-experiences-02",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "241-travel-experiences-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.travel-experiences-03",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "242-travel-experiences-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.travel-experiences-04",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "243-travel-experiences-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.travel-experiences-05",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "244-travel-experiences-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.travel-experiences-06",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "245-travel-experiences-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.travel-experiences-07",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "246-travel-experiences-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.travel-experiences-08",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "247-travel-experiences-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.travel-experiences-09",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "248-travel-experiences-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.travel-experiences-10",
+   "goal": "ru.goal.b1.experiences",
+   "band": "B1",
+   "file": "249-travel-experiences-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.service-problems-01",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "250-service-problems-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.service-problems-02",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "251-service-problems-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.service-problems-03",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "252-service-problems-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.service-problems-04",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "253-service-problems-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.service-problems-05",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "254-service-problems-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.service-problems-06",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "255-service-problems-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.service-problems-07",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "256-service-problems-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.service-problems-08",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "257-service-problems-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.service-problems-09",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "258-service-problems-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.service-problems-10",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "259-service-problems-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.housing-problems-01",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "260-housing-problems-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.housing-problems-02",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "261-housing-problems-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.housing-problems-03",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "262-housing-problems-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.housing-problems-04",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "263-housing-problems-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.housing-problems-05",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "264-housing-problems-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.housing-problems-06",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "265-housing-problems-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.housing-problems-07",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "266-housing-problems-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.housing-problems-08",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "267-housing-problems-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.housing-problems-09",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "268-housing-problems-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.housing-problems-10",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "269-housing-problems-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.learning-work-01",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "270-learning-work-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.learning-work-02",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "271-learning-work-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.learning-work-03",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "272-learning-work-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.learning-work-04",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "273-learning-work-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.learning-work-05",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "274-learning-work-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.learning-work-06",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "275-learning-work-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.learning-work-07",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "276-learning-work-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.learning-work-08",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "277-learning-work-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.learning-work-09",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "278-learning-work-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.learning-work-10",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "279-learning-work-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.work-processes-01",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "280-work-processes-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.work-processes-02",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "281-work-processes-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.work-processes-03",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "282-work-processes-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.work-processes-04",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "283-work-processes-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.work-processes-05",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "284-work-processes-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.work-processes-06",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "285-work-processes-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.work-processes-07",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "286-work-processes-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.work-processes-08",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "287-work-processes-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.work-processes-09",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "288-work-processes-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.work-processes-10",
+   "goal": "ru.goal.b1.learning-work",
+   "band": "B1",
+   "file": "289-work-processes-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.relationships-01",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "290-relationships-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.relationships-02",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "291-relationships-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.relationships-03",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "292-relationships-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.relationships-04",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "293-relationships-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.relationships-05",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "294-relationships-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.relationships-06",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "295-relationships-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.relationships-07",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "296-relationships-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.relationships-08",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "297-relationships-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.relationships-09",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "298-relationships-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.relationships-10",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "299-relationships-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.feelings-01",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "300-feelings-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.feelings-02",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "301-feelings-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.feelings-03",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "302-feelings-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.feelings-04",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "303-feelings-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.feelings-05",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "304-feelings-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.feelings-06",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "305-feelings-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.feelings-07",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "306-feelings-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.feelings-08",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "307-feelings-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.feelings-09",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "308-feelings-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.feelings-10",
+   "goal": "ru.goal.b1.relationships",
+   "band": "B1",
+   "file": "309-feelings-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.culture-media-01",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "310-culture-media-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.culture-media-02",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "311-culture-media-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.culture-media-03",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "312-culture-media-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.culture-media-04",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "313-culture-media-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.culture-media-05",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "314-culture-media-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.culture-media-06",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "315-culture-media-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.culture-media-07",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "316-culture-media-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.culture-media-08",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "317-culture-media-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.culture-media-09",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "318-culture-media-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.culture-media-10",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "319-culture-media-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.media-01",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "320-media-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.media-02",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "321-media-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.media-03",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "322-media-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.media-04",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "323-media-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.media-05",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "324-media-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.media-06",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "325-media-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.media-07",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "326-media-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.media-08",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "327-media-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.media-09",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "328-media-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.media-10",
+   "goal": "ru.goal.b1.culture-media",
+   "band": "B1",
+   "file": "329-media-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.opinions-01",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "330-opinions-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.opinions-02",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "331-opinions-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.opinions-03",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "332-opinions-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.opinions-04",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "333-opinions-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.opinions-05",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "334-opinions-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.opinions-06",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "335-opinions-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.opinions-07",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "336-opinions-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.opinions-08",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "337-opinions-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.opinions-09",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "338-opinions-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.opinions-10",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "339-opinions-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.respect-01",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "340-respect-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.respect-02",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "341-respect-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.respect-03",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "342-respect-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.respect-04",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "343-respect-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.respect-05",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "344-respect-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.respect-06",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "345-respect-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.respect-07",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "346-respect-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.respect-08",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "347-respect-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.respect-09",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "348-respect-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.respect-10",
+   "goal": "ru.goal.b1.opinions",
+   "band": "B1",
+   "file": "349-respect-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary-01",
+   "goal": "ru.goal.b1.information-summary",
+   "band": "B1",
+   "file": "350-summary-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary-02",
+   "goal": "ru.goal.b1.information-summary",
+   "band": "B1",
+   "file": "351-summary-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary-03",
+   "goal": "ru.goal.b1.information-summary",
+   "band": "B1",
+   "file": "352-summary-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary-04",
+   "goal": "ru.goal.b1.information-summary",
+   "band": "B1",
+   "file": "353-summary-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary-05",
+   "goal": "ru.goal.b1.information-summary",
+   "band": "B1",
+   "file": "354-summary-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary-06",
+   "goal": "ru.goal.b1.information-summary",
+   "band": "B1",
+   "file": "355-summary-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary-07",
+   "goal": "ru.goal.b1.information-summary",
+   "band": "B1",
+   "file": "356-summary-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary-08",
+   "goal": "ru.goal.b1.information-summary",
+   "band": "B1",
+   "file": "357-summary-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary-09",
+   "goal": "ru.goal.b1.information-summary",
+   "band": "B1",
+   "file": "358-summary-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary-10",
+   "goal": "ru.goal.b1.information-summary",
+   "band": "B1",
+   "file": "359-summary-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary2-01",
+   "goal": "ru.goal.b1.information-summary2",
+   "band": "B1",
+   "file": "360-summary2-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary2-02",
+   "goal": "ru.goal.b1.information-summary2",
+   "band": "B1",
+   "file": "361-summary2-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary2-03",
+   "goal": "ru.goal.b1.information-summary2",
+   "band": "B1",
+   "file": "362-summary2-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary2-04",
+   "goal": "ru.goal.b1.information-summary2",
+   "band": "B1",
+   "file": "363-summary2-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary2-05",
+   "goal": "ru.goal.b1.information-summary2",
+   "band": "B1",
+   "file": "364-summary2-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary2-06",
+   "goal": "ru.goal.b1.information-summary2",
+   "band": "B1",
+   "file": "365-summary2-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary2-07",
+   "goal": "ru.goal.b1.information-summary2",
+   "band": "B1",
+   "file": "366-summary2-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary2-08",
+   "goal": "ru.goal.b1.information-summary2",
+   "band": "B1",
+   "file": "367-summary2-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary2-09",
+   "goal": "ru.goal.b1.information-summary2",
+   "band": "B1",
+   "file": "368-summary2-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.summary2-10",
+   "goal": "ru.goal.b1.information-summary2",
+   "band": "B1",
+   "file": "369-summary2-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future-01",
+   "goal": "ru.goal.b1.future-conditions",
+   "band": "B1",
+   "file": "370-future-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future-02",
+   "goal": "ru.goal.b1.future-conditions",
+   "band": "B1",
+   "file": "371-future-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future-03",
+   "goal": "ru.goal.b1.future-conditions",
+   "band": "B1",
+   "file": "372-future-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future-04",
+   "goal": "ru.goal.b1.future-conditions",
+   "band": "B1",
+   "file": "373-future-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future-05",
+   "goal": "ru.goal.b1.future-conditions",
+   "band": "B1",
+   "file": "374-future-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future-06",
+   "goal": "ru.goal.b1.future-conditions",
+   "band": "B1",
+   "file": "375-future-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future-07",
+   "goal": "ru.goal.b1.future-conditions",
+   "band": "B1",
+   "file": "376-future-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future-08",
+   "goal": "ru.goal.b1.future-conditions",
+   "band": "B1",
+   "file": "377-future-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future-09",
+   "goal": "ru.goal.b1.future-conditions",
+   "band": "B1",
+   "file": "378-future-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future-10",
+   "goal": "ru.goal.b1.future-conditions",
+   "band": "B1",
+   "file": "379-future-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future2-01",
+   "goal": "ru.goal.b1.future-conditions2",
+   "band": "B1",
+   "file": "380-future2-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future2-02",
+   "goal": "ru.goal.b1.future-conditions2",
+   "band": "B1",
+   "file": "381-future2-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future2-03",
+   "goal": "ru.goal.b1.future-conditions2",
+   "band": "B1",
+   "file": "382-future2-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future2-04",
+   "goal": "ru.goal.b1.future-conditions2",
+   "band": "B1",
+   "file": "383-future2-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future2-05",
+   "goal": "ru.goal.b1.future-conditions2",
+   "band": "B1",
+   "file": "384-future2-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future2-06",
+   "goal": "ru.goal.b1.future-conditions2",
+   "band": "B1",
+   "file": "385-future2-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future2-07",
+   "goal": "ru.goal.b1.future-conditions2",
+   "band": "B1",
+   "file": "386-future2-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future2-08",
+   "goal": "ru.goal.b1.future-conditions2",
+   "band": "B1",
+   "file": "387-future2-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future2-09",
+   "goal": "ru.goal.b1.future-conditions2",
+   "band": "B1",
+   "file": "388-future2-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.future2-10",
+   "goal": "ru.goal.b1.future-conditions2",
+   "band": "B1",
+   "file": "389-future2-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing-01",
+   "goal": "ru.goal.b1.extended-writing",
+   "band": "B1",
+   "file": "390-writing-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing-02",
+   "goal": "ru.goal.b1.extended-writing",
+   "band": "B1",
+   "file": "391-writing-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing-03",
+   "goal": "ru.goal.b1.extended-writing",
+   "band": "B1",
+   "file": "392-writing-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing-04",
+   "goal": "ru.goal.b1.extended-writing",
+   "band": "B1",
+   "file": "393-writing-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing-05",
+   "goal": "ru.goal.b1.extended-writing",
+   "band": "B1",
+   "file": "394-writing-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing-06",
+   "goal": "ru.goal.b1.extended-writing",
+   "band": "B1",
+   "file": "395-writing-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing-07",
+   "goal": "ru.goal.b1.extended-writing",
+   "band": "B1",
+   "file": "396-writing-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing-08",
+   "goal": "ru.goal.b1.extended-writing",
+   "band": "B1",
+   "file": "397-writing-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing-09",
+   "goal": "ru.goal.b1.extended-writing",
+   "band": "B1",
+   "file": "398-writing-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing-10",
+   "goal": "ru.goal.b1.extended-writing",
+   "band": "B1",
+   "file": "399-writing-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing2-01",
+   "goal": "ru.goal.b1.extended-writing2",
+   "band": "B1",
+   "file": "400-writing2-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing2-02",
+   "goal": "ru.goal.b1.extended-writing2",
+   "band": "B1",
+   "file": "401-writing2-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing2-03",
+   "goal": "ru.goal.b1.extended-writing2",
+   "band": "B1",
+   "file": "402-writing2-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing2-04",
+   "goal": "ru.goal.b1.extended-writing2",
+   "band": "B1",
+   "file": "403-writing2-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing2-05",
+   "goal": "ru.goal.b1.extended-writing2",
+   "band": "B1",
+   "file": "404-writing2-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing2-06",
+   "goal": "ru.goal.b1.extended-writing2",
+   "band": "B1",
+   "file": "405-writing2-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing2-07",
+   "goal": "ru.goal.b1.extended-writing2",
+   "band": "B1",
+   "file": "406-writing2-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing2-08",
+   "goal": "ru.goal.b1.extended-writing2",
+   "band": "B1",
+   "file": "407-writing2-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing2-09",
+   "goal": "ru.goal.b1.extended-writing2",
+   "band": "B1",
+   "file": "408-writing2-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.writing2-10",
+   "goal": "ru.goal.b1.extended-writing2",
+   "band": "B1",
+   "file": "409-writing2-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue-01",
+   "goal": "ru.goal.b2.argumentation",
+   "band": "B2",
+   "file": "410-argue-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue-02",
+   "goal": "ru.goal.b2.argumentation",
+   "band": "B2",
+   "file": "411-argue-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue-03",
+   "goal": "ru.goal.b2.argumentation",
+   "band": "B2",
+   "file": "412-argue-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue-04",
+   "goal": "ru.goal.b2.argumentation",
+   "band": "B2",
+   "file": "413-argue-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue-05",
+   "goal": "ru.goal.b2.argumentation",
+   "band": "B2",
+   "file": "414-argue-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue-05b",
+   "goal": "ru.goal.b2.argumentation",
+   "band": "B2",
+   "file": "415-argue-05b.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue-06",
+   "goal": "ru.goal.b2.argumentation",
+   "band": "B2",
+   "file": "416-argue-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue-07",
+   "goal": "ru.goal.b2.argumentation",
+   "band": "B2",
+   "file": "417-argue-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue-08",
+   "goal": "ru.goal.b2.argumentation",
+   "band": "B2",
+   "file": "418-argue-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue-09",
+   "goal": "ru.goal.b2.argumentation",
+   "band": "B2",
+   "file": "419-argue-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue2-01",
+   "goal": "ru.goal.b2.argumentation2",
+   "band": "B2",
+   "file": "420-argue2-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue2-02",
+   "goal": "ru.goal.b2.argumentation2",
+   "band": "B2",
+   "file": "421-argue2-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue2-03",
+   "goal": "ru.goal.b2.argumentation2",
+   "band": "B2",
+   "file": "422-argue2-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue2-04",
+   "goal": "ru.goal.b2.argumentation2",
+   "band": "B2",
+   "file": "423-argue2-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue2-05",
+   "goal": "ru.goal.b2.argumentation2",
+   "band": "B2",
+   "file": "424-argue2-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue2-06",
+   "goal": "ru.goal.b2.argumentation2",
+   "band": "B2",
+   "file": "425-argue2-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue2-07",
+   "goal": "ru.goal.b2.argumentation2",
+   "band": "B2",
+   "file": "426-argue2-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue2-08",
+   "goal": "ru.goal.b2.argumentation2",
+   "band": "B2",
+   "file": "427-argue2-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue2-09",
+   "goal": "ru.goal.b2.argumentation2",
+   "band": "B2",
+   "file": "428-argue2-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue2-10",
+   "goal": "ru.goal.b2.argumentation2",
+   "band": "B2",
+   "file": "429-argue2-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue3-01",
+   "goal": "ru.goal.b2.argumentation3",
+   "band": "B2",
+   "file": "430-argue3-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue3-02",
+   "goal": "ru.goal.b2.argumentation3",
+   "band": "B2",
+   "file": "431-argue3-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue3-03",
+   "goal": "ru.goal.b2.argumentation3",
+   "band": "B2",
+   "file": "432-argue3-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue3-04",
+   "goal": "ru.goal.b2.argumentation3",
+   "band": "B2",
+   "file": "433-argue3-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue3-05",
+   "goal": "ru.goal.b2.argumentation3",
+   "band": "B2",
+   "file": "434-argue3-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue3-06",
+   "goal": "ru.goal.b2.argumentation3",
+   "band": "B2",
+   "file": "435-argue3-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue3-07",
+   "goal": "ru.goal.b2.argumentation3",
+   "band": "B2",
+   "file": "436-argue3-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue3-08",
+   "goal": "ru.goal.b2.argumentation3",
+   "band": "B2",
+   "file": "437-argue3-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue3-09",
+   "goal": "ru.goal.b2.argumentation3",
+   "band": "B2",
+   "file": "438-argue3-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue3-10",
+   "goal": "ru.goal.b2.argumentation3",
+   "band": "B2",
+   "file": "439-argue3-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue4-01",
+   "goal": "ru.goal.b2.argumentation4",
+   "band": "B2",
+   "file": "440-argue4-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue4-02",
+   "goal": "ru.goal.b2.argumentation4",
+   "band": "B2",
+   "file": "441-argue4-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue4-03",
+   "goal": "ru.goal.b2.argumentation4",
+   "band": "B2",
+   "file": "442-argue4-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue4-04",
+   "goal": "ru.goal.b2.argumentation4",
+   "band": "B2",
+   "file": "443-argue4-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue4-05",
+   "goal": "ru.goal.b2.argumentation4",
+   "band": "B2",
+   "file": "444-argue4-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue4-06",
+   "goal": "ru.goal.b2.argumentation4",
+   "band": "B2",
+   "file": "445-argue4-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue4-07",
+   "goal": "ru.goal.b2.argumentation4",
+   "band": "B2",
+   "file": "446-argue4-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue4-08",
+   "goal": "ru.goal.b2.argumentation4",
+   "band": "B2",
+   "file": "447-argue4-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue4-09",
+   "goal": "ru.goal.b2.argumentation4",
+   "band": "B2",
+   "file": "448-argue4-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.argue4-10",
+   "goal": "ru.goal.b2.argumentation4",
+   "band": "B2",
+   "file": "449-argue4-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical-01",
+   "goal": "ru.goal.b2.critical-reading",
+   "band": "B2",
+   "file": "450-critical-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical-02",
+   "goal": "ru.goal.b2.critical-reading",
+   "band": "B2",
+   "file": "451-critical-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical-03",
+   "goal": "ru.goal.b2.critical-reading",
+   "band": "B2",
+   "file": "452-critical-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical-04",
+   "goal": "ru.goal.b2.critical-reading",
+   "band": "B2",
+   "file": "453-critical-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical-05",
+   "goal": "ru.goal.b2.critical-reading",
+   "band": "B2",
+   "file": "454-critical-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical-06",
+   "goal": "ru.goal.b2.critical-reading",
+   "band": "B2",
+   "file": "455-critical-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical-07",
+   "goal": "ru.goal.b2.critical-reading",
+   "band": "B2",
+   "file": "456-critical-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical-08",
+   "goal": "ru.goal.b2.critical-reading",
+   "band": "B2",
+   "file": "457-critical-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical-09",
+   "goal": "ru.goal.b2.critical-reading",
+   "band": "B2",
+   "file": "458-critical-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical-10",
+   "goal": "ru.goal.b2.critical-reading",
+   "band": "B2",
+   "file": "459-critical-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical2-01",
+   "goal": "ru.goal.b2.critical-reading2",
+   "band": "B2",
+   "file": "460-critical2-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical2-02",
+   "goal": "ru.goal.b2.critical-reading2",
+   "band": "B2",
+   "file": "461-critical2-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical2-03",
+   "goal": "ru.goal.b2.critical-reading2",
+   "band": "B2",
+   "file": "462-critical2-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical2-04",
+   "goal": "ru.goal.b2.critical-reading2",
+   "band": "B2",
+   "file": "463-critical2-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical2-05",
+   "goal": "ru.goal.b2.critical-reading2",
+   "band": "B2",
+   "file": "464-critical2-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical2-06",
+   "goal": "ru.goal.b2.critical-reading2",
+   "band": "B2",
+   "file": "465-critical2-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical2-07",
+   "goal": "ru.goal.b2.critical-reading2",
+   "band": "B2",
+   "file": "466-critical2-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical2-08",
+   "goal": "ru.goal.b2.critical-reading2",
+   "band": "B2",
+   "file": "467-critical2-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical2-09",
+   "goal": "ru.goal.b2.critical-reading2",
+   "band": "B2",
+   "file": "468-critical2-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical2-10",
+   "goal": "ru.goal.b2.critical-reading2",
+   "band": "B2",
+   "file": "469-critical2-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical3-01",
+   "goal": "ru.goal.b2.critical-reading3",
+   "band": "B2",
+   "file": "470-critical3-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical3-02",
+   "goal": "ru.goal.b2.critical-reading3",
+   "band": "B2",
+   "file": "471-critical3-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical3-03",
+   "goal": "ru.goal.b2.critical-reading3",
+   "band": "B2",
+   "file": "472-critical3-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical3-04",
+   "goal": "ru.goal.b2.critical-reading3",
+   "band": "B2",
+   "file": "473-critical3-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical3-05",
+   "goal": "ru.goal.b2.critical-reading3",
+   "band": "B2",
+   "file": "474-critical3-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical3-06",
+   "goal": "ru.goal.b2.critical-reading3",
+   "band": "B2",
+   "file": "475-critical3-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical3-07",
+   "goal": "ru.goal.b2.critical-reading3",
+   "band": "B2",
+   "file": "476-critical3-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical3-08",
+   "goal": "ru.goal.b2.critical-reading3",
+   "band": "B2",
+   "file": "477-critical3-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical3-09",
+   "goal": "ru.goal.b2.critical-reading3",
+   "band": "B2",
+   "file": "478-critical3-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical3-10",
+   "goal": "ru.goal.b2.critical-reading3",
+   "band": "B2",
+   "file": "479-critical3-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical4-01",
+   "goal": "ru.goal.b2.critical-reading4",
+   "band": "B2",
+   "file": "480-critical4-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical4-02",
+   "goal": "ru.goal.b2.critical-reading4",
+   "band": "B2",
+   "file": "481-critical4-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical4-03",
+   "goal": "ru.goal.b2.critical-reading4",
+   "band": "B2",
+   "file": "482-critical4-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical4-04",
+   "goal": "ru.goal.b2.critical-reading4",
+   "band": "B2",
+   "file": "483-critical4-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical4-05",
+   "goal": "ru.goal.b2.critical-reading4",
+   "band": "B2",
+   "file": "484-critical4-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical4-06",
+   "goal": "ru.goal.b2.critical-reading4",
+   "band": "B2",
+   "file": "485-critical4-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical4-07",
+   "goal": "ru.goal.b2.critical-reading4",
+   "band": "B2",
+   "file": "486-critical4-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical4-08",
+   "goal": "ru.goal.b2.critical-reading4",
+   "band": "B2",
+   "file": "487-critical4-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical4-09",
+   "goal": "ru.goal.b2.critical-reading4",
+   "band": "B2",
+   "file": "488-critical4-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.critical4-10",
+   "goal": "ru.goal.b2.critical-reading4",
+   "band": "B2",
+   "file": "489-critical4-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis-01",
+   "goal": "ru.goal.b2.synthesis",
+   "band": "B2",
+   "file": "490-synthesis-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis-02",
+   "goal": "ru.goal.b2.synthesis",
+   "band": "B2",
+   "file": "491-synthesis-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis-03",
+   "goal": "ru.goal.b2.synthesis",
+   "band": "B2",
+   "file": "492-synthesis-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis-04",
+   "goal": "ru.goal.b2.synthesis",
+   "band": "B2",
+   "file": "493-synthesis-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis-05",
+   "goal": "ru.goal.b2.synthesis",
+   "band": "B2",
+   "file": "494-synthesis-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis-06",
+   "goal": "ru.goal.b2.synthesis",
+   "band": "B2",
+   "file": "495-synthesis-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis-07",
+   "goal": "ru.goal.b2.synthesis",
+   "band": "B2",
+   "file": "496-synthesis-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis-08",
+   "goal": "ru.goal.b2.synthesis",
+   "band": "B2",
+   "file": "497-synthesis-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis-09",
+   "goal": "ru.goal.b2.synthesis",
+   "band": "B2",
+   "file": "498-synthesis-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis-10",
+   "goal": "ru.goal.b2.synthesis",
+   "band": "B2",
+   "file": "499-synthesis-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis2-01",
+   "goal": "ru.goal.b2.synthesis2",
+   "band": "B2",
+   "file": "500-synthesis2-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis2-02",
+   "goal": "ru.goal.b2.synthesis2",
+   "band": "B2",
+   "file": "501-synthesis2-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis2-03",
+   "goal": "ru.goal.b2.synthesis2",
+   "band": "B2",
+   "file": "502-synthesis2-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis2-04",
+   "goal": "ru.goal.b2.synthesis2",
+   "band": "B2",
+   "file": "503-synthesis2-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis2-05",
+   "goal": "ru.goal.b2.synthesis2",
+   "band": "B2",
+   "file": "504-synthesis2-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis2-06",
+   "goal": "ru.goal.b2.synthesis2",
+   "band": "B2",
+   "file": "505-synthesis2-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis2-07",
+   "goal": "ru.goal.b2.synthesis2",
+   "band": "B2",
+   "file": "506-synthesis2-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis2-08",
+   "goal": "ru.goal.b2.synthesis2",
+   "band": "B2",
+   "file": "507-synthesis2-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis2-09",
+   "goal": "ru.goal.b2.synthesis2",
+   "band": "B2",
+   "file": "508-synthesis2-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis2-10",
+   "goal": "ru.goal.b2.synthesis2",
+   "band": "B2",
+   "file": "509-synthesis2-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis3-01",
+   "goal": "ru.goal.b2.synthesis3",
+   "band": "B2",
+   "file": "510-synthesis3-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis3-02",
+   "goal": "ru.goal.b2.synthesis3",
+   "band": "B2",
+   "file": "511-synthesis3-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis3-03",
+   "goal": "ru.goal.b2.synthesis3",
+   "band": "B2",
+   "file": "512-synthesis3-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis3-04",
+   "goal": "ru.goal.b2.synthesis3",
+   "band": "B2",
+   "file": "513-synthesis3-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis3-05",
+   "goal": "ru.goal.b2.synthesis3",
+   "band": "B2",
+   "file": "514-synthesis3-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis3-06",
+   "goal": "ru.goal.b2.synthesis3",
+   "band": "B2",
+   "file": "515-synthesis3-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis3-07",
+   "goal": "ru.goal.b2.synthesis3",
+   "band": "B2",
+   "file": "516-synthesis3-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis3-08",
+   "goal": "ru.goal.b2.synthesis3",
+   "band": "B2",
+   "file": "517-synthesis3-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis3-09",
+   "goal": "ru.goal.b2.synthesis3",
+   "band": "B2",
+   "file": "518-synthesis3-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis3-10",
+   "goal": "ru.goal.b2.synthesis3",
+   "band": "B2",
+   "file": "519-synthesis3-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis4-01",
+   "goal": "ru.goal.b2.synthesis4",
+   "band": "B2",
+   "file": "520-synthesis4-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis4-02",
+   "goal": "ru.goal.b2.synthesis4",
+   "band": "B2",
+   "file": "521-synthesis4-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis4-03",
+   "goal": "ru.goal.b2.synthesis4",
+   "band": "B2",
+   "file": "522-synthesis4-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis4-04",
+   "goal": "ru.goal.b2.synthesis4",
+   "band": "B2",
+   "file": "523-synthesis4-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis4-05",
+   "goal": "ru.goal.b2.synthesis4",
+   "band": "B2",
+   "file": "524-synthesis4-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis4-06",
+   "goal": "ru.goal.b2.synthesis4",
+   "band": "B2",
+   "file": "525-synthesis4-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis4-07",
+   "goal": "ru.goal.b2.synthesis4",
+   "band": "B2",
+   "file": "526-synthesis4-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis4-08",
+   "goal": "ru.goal.b2.synthesis4",
+   "band": "B2",
+   "file": "527-synthesis4-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis4-09",
+   "goal": "ru.goal.b2.synthesis4",
+   "band": "B2",
+   "file": "528-synthesis4-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.synthesis4-10",
+   "goal": "ru.goal.b2.synthesis4",
+   "band": "B2",
+   "file": "529-synthesis4-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study-01",
+   "goal": "ru.goal.b2.academic-study",
+   "band": "B2",
+   "file": "530-study-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study-02",
+   "goal": "ru.goal.b2.academic-study",
+   "band": "B2",
+   "file": "531-study-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study-03",
+   "goal": "ru.goal.b2.academic-study",
+   "band": "B2",
+   "file": "532-study-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study-04",
+   "goal": "ru.goal.b2.academic-study",
+   "band": "B2",
+   "file": "533-study-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study-05",
+   "goal": "ru.goal.b2.academic-study",
+   "band": "B2",
+   "file": "534-study-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study-06",
+   "goal": "ru.goal.b2.academic-study",
+   "band": "B2",
+   "file": "535-study-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study-07",
+   "goal": "ru.goal.b2.academic-study",
+   "band": "B2",
+   "file": "536-study-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study-08",
+   "goal": "ru.goal.b2.academic-study",
+   "band": "B2",
+   "file": "537-study-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study-09",
+   "goal": "ru.goal.b2.academic-study",
+   "band": "B2",
+   "file": "538-study-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study-10",
+   "goal": "ru.goal.b2.academic-study",
+   "band": "B2",
+   "file": "539-study-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study2-01",
+   "goal": "ru.goal.b2.academic-study2",
+   "band": "B2",
+   "file": "540-study2-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study2-02",
+   "goal": "ru.goal.b2.academic-study2",
+   "band": "B2",
+   "file": "541-study2-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study2-03",
+   "goal": "ru.goal.b2.academic-study2",
+   "band": "B2",
+   "file": "542-study2-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study2-04",
+   "goal": "ru.goal.b2.academic-study2",
+   "band": "B2",
+   "file": "543-study2-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study2-05",
+   "goal": "ru.goal.b2.academic-study2",
+   "band": "B2",
+   "file": "544-study2-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study2-06",
+   "goal": "ru.goal.b2.academic-study2",
+   "band": "B2",
+   "file": "545-study2-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study2-07",
+   "goal": "ru.goal.b2.academic-study2",
+   "band": "B2",
+   "file": "546-study2-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study2-08",
+   "goal": "ru.goal.b2.academic-study2",
+   "band": "B2",
+   "file": "547-study2-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study2-09",
+   "goal": "ru.goal.b2.academic-study2",
+   "band": "B2",
+   "file": "548-study2-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study2-10",
+   "goal": "ru.goal.b2.academic-study2",
+   "band": "B2",
+   "file": "549-study2-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study3-01",
+   "goal": "ru.goal.b2.academic-study3",
+   "band": "B2",
+   "file": "550-study3-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study3-02",
+   "goal": "ru.goal.b2.academic-study3",
+   "band": "B2",
+   "file": "551-study3-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study3-03",
+   "goal": "ru.goal.b2.academic-study3",
+   "band": "B2",
+   "file": "552-study3-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study3-04",
+   "goal": "ru.goal.b2.academic-study3",
+   "band": "B2",
+   "file": "553-study3-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study3-05",
+   "goal": "ru.goal.b2.academic-study3",
+   "band": "B2",
+   "file": "554-study3-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study3-06",
+   "goal": "ru.goal.b2.academic-study3",
+   "band": "B2",
+   "file": "555-study3-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study3-07",
+   "goal": "ru.goal.b2.academic-study3",
+   "band": "B2",
+   "file": "556-study3-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study3-08",
+   "goal": "ru.goal.b2.academic-study3",
+   "band": "B2",
+   "file": "557-study3-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study3-09",
+   "goal": "ru.goal.b2.academic-study3",
+   "band": "B2",
+   "file": "558-study3-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study3-10",
+   "goal": "ru.goal.b2.academic-study3",
+   "band": "B2",
+   "file": "559-study3-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study4-01",
+   "goal": "ru.goal.b2.academic-study4",
+   "band": "B2",
+   "file": "560-study4-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study4-02",
+   "goal": "ru.goal.b2.academic-study4",
+   "band": "B2",
+   "file": "561-study4-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study4-03",
+   "goal": "ru.goal.b2.academic-study4",
+   "band": "B2",
+   "file": "562-study4-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study4-04",
+   "goal": "ru.goal.b2.academic-study4",
+   "band": "B2",
+   "file": "563-study4-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study4-05",
+   "goal": "ru.goal.b2.academic-study4",
+   "band": "B2",
+   "file": "564-study4-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study4-06",
+   "goal": "ru.goal.b2.academic-study4",
+   "band": "B2",
+   "file": "565-study4-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study4-07",
+   "goal": "ru.goal.b2.academic-study4",
+   "band": "B2",
+   "file": "566-study4-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study4-08",
+   "goal": "ru.goal.b2.academic-study4",
+   "band": "B2",
+   "file": "567-study4-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study4-09",
+   "goal": "ru.goal.b2.academic-study4",
+   "band": "B2",
+   "file": "568-study4-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.study4-10",
+   "goal": "ru.goal.b2.academic-study4",
+   "band": "B2",
+   "file": "569-study4-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prof-01",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "570-prof-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prof-02",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "571-prof-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prof-03",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "572-prof-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prof-04",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "573-prof-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prof-05",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "574-prof-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prof-06",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "575-prof-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prof-07",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "576-prof-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prof-08",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "577-prof-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prof-09",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "578-prof-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prof-10",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "579-prof-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prop-01",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "580-prop-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prop-02",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "581-prop-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prop-03",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "582-prop-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prop-04",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "583-prop-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prop-05",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "584-prop-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prop-06",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "585-prop-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prop-07",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "586-prop-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prop-08",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "587-prop-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prop-09",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "588-prop-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.prop-10",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "589-prop-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.proc-01",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "590-proc-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.proc-02",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "591-proc-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.proc-03",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "592-proc-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.proc-04",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "593-proc-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.proc-05",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "594-proc-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.proc-06",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "595-proc-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.proc-07",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "596-proc-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.proc-08",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "597-proc-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.proc-09",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "598-proc-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.proc-10",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "599-proc-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.app-01",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "600-app-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.app-02",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "601-app-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.app-03",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "602-app-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.app-04",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "603-app-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.app-05",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "604-app-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.app-06",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "605-app-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.app-07",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "606-app-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.app-08",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "607-app-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.app-09",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "608-app-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.app-10",
+   "goal": "ru.goal.b2.professional-writing",
+   "band": "B2",
+   "file": "609-app-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.neg-01",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "610-neg-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.neg-02",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "611-neg-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.neg-03",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "612-neg-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.neg-04",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "613-neg-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.neg-05",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "614-neg-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.neg-06",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "615-neg-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.neg-07",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "616-neg-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.neg-08",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "617-neg-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.neg-09",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "618-neg-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.neg-10",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "619-neg-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.comp-01",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "620-comp-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.comp-02",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "621-comp-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.comp-03",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "622-comp-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.comp-04",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "623-comp-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.comp-05",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "624-comp-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.comp-06",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "625-comp-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.comp-07",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "626-comp-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.comp-08",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "627-comp-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.comp-09",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "628-comp-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.comp-10",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "629-comp-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.con-01",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "630-con-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.con-02",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "631-con-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.con-03",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "632-con-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.con-04",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "633-con-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.con-05",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "634-con-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.con-06",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "635-con-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.con-07",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "636-con-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.con-08",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "637-con-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.con-09",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "638-con-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.con-10",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "639-con-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.clar-01",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "640-clar-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.clar-02",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "641-clar-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.clar-03",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "642-clar-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.clar-04",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "643-clar-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.clar-05",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "644-clar-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.clar-06",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "645-clar-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.clar-07",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "646-clar-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.clar-08",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "647-clar-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.clar-09",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "648-clar-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.clar-10",
+   "goal": "ru.goal.b2.negotiation",
+   "band": "B2",
+   "file": "649-clar-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.soc-01",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "650-soc-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.soc-02",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "651-soc-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.soc-03",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "652-soc-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.soc-04",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "653-soc-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.soc-05",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "654-soc-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.soc-06",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "655-soc-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.soc-07",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "656-soc-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.soc-08",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "657-soc-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.soc-09",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "658-soc-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.soc-10",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "659-soc-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.pol-01",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "660-pol-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.pol-02",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "661-pol-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.pol-03",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "662-pol-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.pol-04",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "663-pol-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.pol-05",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "664-pol-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.pol-06",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "665-pol-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.pol-07",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "666-pol-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.pol-08",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "667-pol-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.pol-09",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "668-pol-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.pol-10",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "669-pol-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.inst-01",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "670-inst-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.inst-02",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "671-inst-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.inst-03",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "672-inst-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.inst-04",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "673-inst-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.inst-05",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "674-inst-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.inst-06",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "675-inst-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.inst-07",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "676-inst-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.inst-08",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "677-inst-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.inst-09",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "678-inst-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.inst-10",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "679-inst-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.bal-01",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "680-bal-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.bal-02",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "681-bal-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.bal-03",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "682-bal-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.bal-04",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "683-bal-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.bal-05",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "684-bal-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.bal-06",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "685-bal-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.bal-07",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "686-bal-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.bal-08",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "687-bal-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.bal-09",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "688-bal-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.bal-10",
+   "goal": "ru.goal.b2.society-policy",
+   "band": "B2",
+   "file": "689-bal-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.sci-01",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "690-sci-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.sci-02",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "691-sci-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.sci-03",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "692-sci-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.sci-04",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "693-sci-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.sci-05",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "694-sci-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.sci-06",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "695-sci-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.sci-07",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "696-sci-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.sci-08",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "697-sci-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.sci-09",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "698-sci-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.sci-10",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "699-sci-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.tec-01",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "700-tec-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.tec-02",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "701-tec-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.tec-03",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "702-tec-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.tec-04",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "703-tec-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.tec-05",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "704-tec-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.tec-06",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "705-tec-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.tec-07",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "706-tec-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.tec-08",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "707-tec-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.tec-09",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "708-tec-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.tec-10",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "709-tec-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.env-01",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "710-env-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.env-02",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "711-env-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.env-03",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "712-env-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.env-04",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "713-env-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.env-05",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "714-env-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.env-06",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "715-env-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.env-07",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "716-env-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.env-08",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "717-env-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.env-09",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "718-env-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.env-10",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "719-env-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.risk-01",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "720-risk-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.risk-02",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "721-risk-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.risk-03",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "722-risk-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.risk-04",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "723-risk-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.risk-05",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "724-risk-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.risk-06",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "725-risk-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.risk-07",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "726-risk-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.risk-08",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "727-risk-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.risk-09",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "728-risk-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.risk-10",
+   "goal": "ru.goal.b2.science-environment",
+   "band": "B2",
+   "file": "729-risk-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lit-01",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "730-lit-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lit-02",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "731-lit-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lit-03",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "732-lit-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lit-04",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "733-lit-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lit-05",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "734-lit-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lit-06",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "735-lit-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lit-07",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "736-lit-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lit-08",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "737-lit-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lit-09",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "738-lit-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lit-10",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "739-lit-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.his-01",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "740-his-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.his-02",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "741-his-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.his-03",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "742-his-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.his-04",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "743-his-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.his-05",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "744-his-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.his-06",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "745-his-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.his-07",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "746-his-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.his-08",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "747-his-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.his-09",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "748-his-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.his-10",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "749-his-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.iden-01",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "750-iden-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.iden-02",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "751-iden-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.iden-03",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "752-iden-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.iden-04",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "753-iden-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.iden-05",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "754-iden-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.iden-06",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "755-iden-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.iden-07",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "756-iden-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.iden-08",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "757-iden-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.iden-09",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "758-iden-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.iden-10",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "759-iden-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.int-01",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "760-int-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.int-02",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "761-int-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.int-03",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "762-int-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.int-04",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "763-int-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.int-05",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "764-int-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.int-06",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "765-int-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.int-07",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "766-int-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.int-08",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "767-int-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.int-09",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "768-int-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.int-10",
+   "goal": "ru.goal.b2.culture-perspectives",
+   "band": "B2",
+   "file": "769-int-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lex-01",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "770-lex-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lex-02",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "771-lex-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lex-03",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "772-lex-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lex-04",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "773-lex-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lex-05",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "774-lex-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lex-06",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "775-lex-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lex-07",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "776-lex-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lex-08",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "777-lex-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lex-09",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "778-lex-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.lex-10",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "779-lex-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.form-01",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "780-form-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.form-02",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "781-form-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.form-03",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "782-form-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.form-04",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "783-form-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.form-05",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "784-form-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.form-06",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "785-form-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.form-07",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "786-form-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.form-08",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "787-form-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.form-09",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "788-form-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.form-10",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "789-form-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.coh-01",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "790-coh-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.coh-02",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "791-coh-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.coh-03",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "792-coh-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.coh-04",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "793-coh-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.coh-05",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "794-coh-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.coh-06",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "795-coh-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.coh-07",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "796-coh-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.coh-08",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "797-coh-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.coh-09",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "798-coh-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.coh-10",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "799-coh-10.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.rev-01",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "800-rev-01.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.rev-02",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "801-rev-02.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.rev-03",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "802-rev-03.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.rev-04",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "803-rev-04.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.rev-05",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "804-rev-05.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.rev-06",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "805-rev-06.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.rev-07",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "806-rev-07.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.rev-08",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "807-rev-08.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.rev-09",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "808-rev-09.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.rev-10",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "809-rev-10.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.jpast-01",
+   "goal": "ru.goal.a2.past-events",
+   "band": "A2",
+   "file": "810-a2j-past-day.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.jpast-02",
+   "goal": "ru.goal.a2.past-events",
+   "band": "A2",
+   "file": "811-a2j-past-workday.yaml"
+  },
+  {
+   "unit": "ru.unit.a2.jpast-03",
+   "goal": "ru.goal.a2.past-events",
+   "band": "A2",
+   "file": "812-a2j-past-revision.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.jprob-01",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "813-b1j-problem-letter.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.jprob-02",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "814-b1j-problem-reply.yaml"
+  },
+  {
+   "unit": "ru.unit.b1.jprob-03",
+   "goal": "ru.goal.b1.practical-problems",
+   "band": "B1",
+   "file": "815-b1j-problem-revision.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.jstyle-01",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "816-b2j-style-editing.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.jstyle-02",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "817-b2j-style-presend.yaml"
+  },
+  {
+   "unit": "ru.unit.b2.jstyle-03",
+   "goal": "ru.goal.b2.style-register",
+   "band": "B2",
+   "file": "818-b2j-style-revision.yaml"
+  }
+ ],
+ "sections": {
+  "on-ramp": 20,
+  "a1": 90,
+  "a2": 102,
+  "b1": 203,
+  "b2": 403
+ }
+}

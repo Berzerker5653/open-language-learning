@@ -1,0 +1,164 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "unit_path reports the full pack path",
+      "pass": true,
+      "measured": {
+        "nodes": 818
+      }
+    },
+    {
+      "name": "API sections carry NO duplicate band label",
+      "pass": true,
+      "measured": {
+        "bands": [
+          "on-ramp",
+          "a1",
+          "a2",
+          "b1",
+          "b2"
+        ]
+      }
+    },
+    {
+      "name": "API section order is the canonical ladder",
+      "pass": true,
+      "measured": {
+        "order": [
+          "on-ramp",
+          "a1",
+          "a2",
+          "b1",
+          "b2"
+        ]
+      }
+    },
+    {
+      "name": "API per-band counts match the pack audit exactly",
+      "pass": true,
+      "measured": {
+        "audit": {
+          "on-ramp": 20,
+          "a1": 90,
+          "a2": 102,
+          "b1": 203,
+          "b2": 403
+        },
+        "api": {
+          "on-ramp": 20,
+          "a1": 90,
+          "a2": 102,
+          "b1": 203,
+          "b2": 403
+        }
+      }
+    },
+    {
+      "name": "home reached a stable pack-loaded state before measurement (no load flicker)",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    },
+    {
+      "name": "exactly ONE section header row per band in the DOM",
+      "pass": true,
+      "measured": {
+        "rows": 5,
+        "bands": [
+          "on-ramp",
+          "a1",
+          "a2",
+          "b1",
+          "b2"
+        ]
+      }
+    },
+    {
+      "name": "DOM section order is the canonical ladder",
+      "pass": true,
+      "measured": {
+        "order": [
+          "on-ramp",
+          "a1",
+          "a2",
+          "b1",
+          "b2"
+        ]
+      }
+    },
+    {
+      "name": "DOM per-band TOTALS match the pack audit (merged counts, no 0/3 strays)",
+      "pass": true,
+      "measured": {
+        "audit": {
+          "on-ramp": 20,
+          "a1": 90,
+          "a2": 102,
+          "b1": 203,
+          "b2": 403
+        },
+        "domTotals": {
+          "on-ramp": 20,
+          "a1": 90,
+          "a2": 102,
+          "b1": 203,
+          "b2": 403
+        }
+      }
+    },
+    {
+      "name": "no stray 0/3-style section exists (every total >= 20)",
+      "pass": true,
+      "measured": [
+        "0/20 units done",
+        "0/90 units done",
+        "0/102 units done",
+        "0/203 units done",
+        "0/403 units done"
+      ]
+    },
+    {
+      "name": "section banners carry friendly name + CEFR subtitle",
+      "pass": true,
+      "measured": [
+        "Getting started/Pre-A1",
+        "Beginner/A1",
+        "Elementary/A2",
+        "Intermediate/B1",
+        "Upper-intermediate/B2"
+      ]
+    },
+    {
+      "name": "every band header row was provably in-viewport for its own after-shot",
+      "pass": true,
+      "measured": [
+        {
+          "band": "on-ramp",
+          "inView": true
+        },
+        {
+          "band": "a1",
+          "inView": true
+        },
+        {
+          "band": "a2",
+          "inView": true
+        },
+        {
+          "band": "b1",
+          "inView": true
+        },
+        {
+          "band": "b2",
+          "inView": true
+        }
+      ]
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-05aac5eb-0d51-43c1-871a-8b44047f6a45",
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17934 (trusted network only)\n"
+}

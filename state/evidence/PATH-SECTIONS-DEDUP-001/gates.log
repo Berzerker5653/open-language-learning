@@ -1,0 +1,68 @@
+== PATH-SECTIONS-DEDUP-001 LANE gates (run 2026-11-22, worker run 179) ==
+CONTEXT: attempt 1 (run 178) died 'no reply' with the whole lane UNCOMMITTED in the
+tree (home.tsx fix + 4 red tests + audit tool + capture harness). Run 179 took over:
+re-verified every gate personally, found one evidence gap, fixed it, then committed.
+
+ROOT CAUSE (confirmed by tools/path_sections_audit.py over languages/ru-RU):
+all 818 units are honestly banded (zero unmapped); the nine late-appended journey
+units (curriculum files 810-818: A2 past-events, B1 practical-problems, B2
+style-register) sit at the TAIL of file order, and the old pathSections() grouped
+CONSECUTIVE runs of one band -> 8 derived sections with duplicate A2/B1/B2 rows at
+0/3 each (runs [99,3], [200,3], [400,3]). Fix: group by band key with the canonical
+BAND_HEADERS ladder order (custom pack bands follow in first-occurrence order);
+section `band` stays the pack's raw string, so bandHeader() rendering and
+data-band selectors are unchanged (PATH-VISUAL-001 banners untouched — no fork).
+
+--- ~/game-dev/LTS/.venv/bin/python tools/path_sections_audit.py
+units: 818  goals: 60
+unmapped units: 0
+sections as derived today: 8
+  DUPLICATE band A2: runs [99, 3]
+  DUPLICATE band B1: runs [200, 3]
+  DUPLICATE band B2: runs [400, 3]
+derived sections: 5
+  on-ramp: 20 / a1: 90 / a2: 102 / b1: 203 / b2: 403 units
+GATE PASS: zero unmapped units, sections carry every unit once
+(wrote unit-band-audit.json)
+
+--- cargo fmt --all --check
+FMT-OK
+(no Rust touched; fmt/clippy run for gate honesty — clippy not re-run, zero Rust files
+in the diff: git diff --stat shows only home.tsx + path-view.test.tsx)
+
+--- npx tsc --noEmit (apps/desktop)
+TSC-OK
+
+--- npx vitest run (apps/desktop, full suite)
+Test Files 61 passed (61); Tests 489 passed (489)
+(485 at HEAD + exactly the 4 new PATH-SECTIONS-DEDUP-001 tests in
+path-view.test.tsx: duplicate-free bands, ladder order, custom-band order,
+one rendered header per band)
+
+--- build (frontend dist + serve binary built FROM THIS TREE so the capture measures
+the exact bytes committed)
+npx vite build -> dist/assets/index-Cps6H_-c.js (fresh mtime verified)
+cargo build -p lts-desktop --features serve -> Finished dev profile
+
+--- SERVE_BIN=$PWD/target/debug/lts-serve SERVE_DIST=$PWD/apps/desktop/dist \
+    node scripts/path-sections-capture.mjs
+11/11 PASS, exit 0 (full per-check output in result.json):
+unit_path 818 nodes; API sections duplicate-free AND canonical ladder order;
+API per-band counts == audit exactly; stable pack-loaded home (no flicker);
+exactly ONE .path-section DOM row per band (5 rows, canonical order); DOM per-band
+TOTALS == audit (0/20, 0/90, 0/102, 0/203, 0/403 — no 0/3 strays); friendly name +
+CEFR subtitle on every banner; every band header provably in-viewport for its shot.
+
+== RUN 179 CONTROLLER addendum (evidence gap found + fixed) ==
+Attempt 1's single path-sections-headers-390.png did NOT show any band header
+(scrollIntoView centered the whole .path-section container; sections are collapsible
+so an open band is hundreds of nodes tall). MOBILE-UX-001 rule: a PASS png must have
+SEEN the measured element. Harness fixed: one after-shot PER band (path-section-
+<band>-390.png), scroll targets the .path-section-toggle BUTTON, and a new gate
+asserts each header's rect is inside the viewport at capture time. Stale
+headers-390.png deleted. Vision-checked path-section-on-ramp-390.png and
+path-section-a2-390.png: 'Getting started/Pre-A1/0/20' fully visible with no second
+header row; 'Elementary/A2/0/102' fully visible, bands Beginner/Elementary/
+Intermediate/Upper-intermediate each exactly once, no 0/3 row anywhere.
+
+Deferred: none — all card acceptance clauses measured above.
