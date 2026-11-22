@@ -2951,6 +2951,21 @@ tasks:
   - the server binds only loopback, RFC1918 or tailnet addresses, refuses public binds, and blocks media path traversal
   - a request-level playtest from a fresh data dir completes capabilities, profile create, onboarding, pack list and home state in state/evidence/WEB-SERVE-001/smoke.log
   required_for_desktop_1_0: false
+- id: WEB-PROGRESS-001
+  milestone: M11
+  priority: P2
+  title: Browser install progress — pack install stages stream over SSE in serve mode and the existing progress UI renders in browser mode
+  dependencies:
+  - WEB-SERVE-001
+  read_first:
+  - state/notes/WEB-PROGRESS-001.md
+  - apps/desktop/src-tauri/src/serve.rs
+  acceptance:
+  - serve-mode install commands report the SAME stage events the desktop streams (one progress vocabulary, no second protocol)
+  - an SSE endpoint on the serve router relays those stages to the browser and capabilities reports the stream honestly
+  - the frontend adapter feeds browser-mode stages into the existing install-progress UI
+  - a unit test covers the event bridge and a request-level smoke installs a small fixture pack with stage events observed over HTTP
+  required_for_desktop_1_0: false
 - id: GLOSSARY-001
   milestone: M8
   priority: P2
@@ -3095,6 +3110,7 @@ execution_scope:
   - SESSION-TIMER-001
   - PROGRESS-STATS-001
   - WEB-SERVE-001
+  - WEB-PROGRESS-001
   - GLOSSARY-001
   - CODING-STANDARDS-001
   public_publication_authorized: false

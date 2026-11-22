@@ -2468,6 +2468,23 @@
       ],
       "summary": "Serve mode shipped as code commit 4ba842c: opt-in `serve` feature + lts-serve binary bridging fetch('/api/<command>') to the SAME command wiring the desktop installs (run()/serve share wire_commands; the five AppHandle-coupled commands route to the same *_report/*_at cores, smoke_ack refused); single frontend IPC adapter (src/ipc.ts + detectInvoke) activated only by the server-injected __LTS_SERVE marker; capabilities endpoint + rendered notice label browser limits honestly (mic needs secure context, no install progress), stored mic/privacy settings never rewritten; binds restricted to loopback/RFC1918/tailnet with public binds refused and media traversal blocked. Request-level smoke from a fresh LTS_DATA_DIR green end-to-end. Board runs 105/106 of the parent died 80/80 with the lane ~95% done; takeover card re-ran the full LANE battery in the graft worktree (fmt 0, clippy default+serve 0, lib test failure set exactly == no-serve baseline, 10 new serve tests pass; tsc 0, vitest 456/456) and committed via cacheinfo graft so the IN-APP-IME-001 Rust-half WIP stayed unstaged; serve hunks then merge-file-grafted into the dirty main-tree lib.rs for the IME lane.",
       "notes": "Lanes: apps/desktop/src-tauri (Cargo.toml feature+bin, src/serve.rs, src/bin/lts-serve.rs, lib.rs wire_commands/wire_serve_commands+SERVE_COMMAND_NAMES), apps/desktop/src (ipc.ts, ipc.test.ts, App.tsx). WEB-001 stays open (SEC sign-off, full WEB acceptance) — this card is the pull-forward slice; runbook + SEC-sign-off posture in state/notes/WEB-SERVE-001.md. Hotspot: lib.rs shared with the uncommitted IN-APP-IME-001 Rust half, now rebased onto wire_commands (ime_candidates belongs to wire_commands, NOT the serve table)."
+    },
+    "WEB-PROGRESS-001": {
+      "task_id": "WEB-PROGRESS-001",
+      "title": "Browser install progress — pack install stages stream over SSE in serve mode; existing progress UI renders in browser mode",
+      "status": "done",
+      "attempts": 2,
+      "updated": "2026-11-21",
+      "dependencies": [
+        "WEB-SERVE-001"
+      ],
+      "evidence": [
+        "state/evidence/WEB-PROGRESS-001/gates.log",
+        "state/evidence/WEB-PROGRESS-001/smoke.log",
+        "state/notes/WEB-PROGRESS-001.md"
+      ],
+      "summary": "Browser-mode installs now stream the SAME stages the desktop shows. serve.rs: noop reporter replaced by serve_progress_reporter at all four AppHandle-coupled install routes + the served catalog install's closure — a process-wide tokio broadcast of the identical progress::Progress values; GET /api/progress/events (SSE) forwards each as a json_data frame (per-connection broadcast→mpsc(64) pump, Lagged skips stages, hung-up tab ends the pump, keep-alive comments). capabilities() reports install_progress_events:true and names the endpoint. Frontend: src/ipc.ts subscribeServeProgress (EventSource twin of listen('engine-progress'), malformed frames ignored) + App.tsx serve branch feeding the same engineProgress/progressStages state, notice copy driven by the capability report. Unit test the_bridge_delivers_desktop_stage_values_to_subscribers + in-process SSE test a_reported_stage_reaches_an_sse_subscriber_as_a_data_frame; scripts/smoke-serve-progress.sh opens the SSE sub BEFORE POST /api/import_pack of the ja-demo fixture on an isolated LTS_DATA_DIR and asserts install/record stages attributed to org.openlanguage.ja-demo arrived while the call was in flight (PASS). Board run 114 died 80/80 with the lane complete but one compile error; run 115 controller fixed poll_next(mut self), smoke script missing 'sys' import, re-ran the LANE battery (fmt 0; clippy serve --all-targets -D warnings 0; serve-scoped lib tests 12/12; tsc 0; vitest 56 files/459) and committed.",
+      "notes": "Lanes: apps/desktop/src-tauri (serve.rs bridge+SSE route+capability flip, Cargo.toml futures-core/tokio sync+time/http-body-util dev-dep), apps/desktop/src (ipc.ts, ipc.test.ts, App.tsx), scripts/smoke-serve-progress.sh. Pitfalls for the next serve card in state/notes/WEB-PROGRESS-001.md (broadcast Receiver has no poll_recv — pump pattern; BodyExt::frame Output is Option<Result<..>>; capabilities assertions in serve.rs/ipc.test.ts/App.tsx are load-bearing — flip together)."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
