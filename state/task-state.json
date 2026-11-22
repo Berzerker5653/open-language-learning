@@ -2724,6 +2724,9 @@
       "evidence": [
         "state/notes/LETTER-TEACHING-DESIGN-001.md",
         "state/evidence/ORTHO-LETTER-UNITS-001/desktop-lib-tests.log",
+        "state/evidence/ORTHO-LETTER-UNITS-001/after/letter-rows-after.png",
+        "state/evidence/ORTHO-LETTER-UNITS-001/after/letter-drill-after.png",
+        "state/evidence/ORTHO-LETTER-UNITS-001/after/result.json",
         "state/evidence/ORTHO-LETTER-UNITS-001/langpack-tests.log",
         "state/evidence/ORTHO-LETTER-UNITS-001/ru-bake.log",
         "state/evidence/ORTHO-LETTER-UNITS-001/py-newpack.log",

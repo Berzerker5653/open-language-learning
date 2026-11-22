@@ -1,0 +1,213 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "lesson_plan resolves one orthography entity set {a,o,m,t} for the letter unit",
+      "pass": true,
+      "measured": {
+        "status": 200,
+        "encIds": [
+          "ru.orth.cyrillic.a",
+          "ru.orth.cyrillic.o",
+          "ru.orth.cyrillic.m",
+          "ru.orth.cyrillic.t"
+        ]
+      }
+    },
+    {
+      "name": "every orthography wire row carries BOTH case forms",
+      "pass": true,
+      "measured": [
+        {
+          "id": "ru.orth.cyrillic.a",
+          "forms": [
+            "А",
+            "а"
+          ]
+        },
+        {
+          "id": "ru.orth.cyrillic.o",
+          "forms": [
+            "О",
+            "о"
+          ]
+        },
+        {
+          "id": "ru.orth.cyrillic.m",
+          "forms": [
+            "М",
+            "м"
+          ]
+        },
+        {
+          "id": "ru.orth.cyrillic.t",
+          "forms": [
+            "Т",
+            "т"
+          ]
+        },
+        {
+          "id": "ru.orth.cyrillic.a",
+          "forms": [
+            "А",
+            "а"
+          ]
+        },
+        {
+          "id": "ru.orth.cyrillic.o",
+          "forms": [
+            "О",
+            "о"
+          ]
+        },
+        {
+          "id": "ru.orth.cyrillic.m",
+          "forms": [
+            "М",
+            "м"
+          ]
+        },
+        {
+          "id": "ru.orth.cyrillic.t",
+          "forms": [
+            "Т",
+            "т"
+          ]
+        },
+        {
+          "id": "ru.orth.cyrillic.a",
+          "forms": [
+            "А",
+            "а"
+          ]
+        },
+        {
+          "id": "ru.orth.cyrillic.o",
+          "forms": [
+            "О",
+            "о"
+          ]
+        },
+        {
+          "id": "ru.orth.cyrillic.m",
+          "forms": [
+            "М",
+            "м"
+          ]
+        },
+        {
+          "id": "ru.orth.cyrillic.t",
+          "forms": [
+            "Т",
+            "т"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "zero per-case -upper/-lower ids anywhere on the lesson wire",
+      "pass": true,
+      "measured": {
+        "contentIds": [
+          "ru.orth.cyrillic.a",
+          "ru.orth.cyrillic.o",
+          "ru.orth.cyrillic.m",
+          "ru.orth.cyrillic.t",
+          "ru.orth.cyrillic.a",
+          "ru.orth.cyrillic.o",
+          "ru.orth.cyrillic.m",
+          "ru.orth.cyrillic.t",
+          "ru.orth.cyrillic.a",
+          "ru.orth.cyrillic.o",
+          "ru.orth.cyrillic.m",
+          "ru.orth.cyrillic.t"
+        ]
+      }
+    },
+    {
+      "name": "lesson card is the merged letter unit",
+      "pass": true,
+      "measured": {
+        "title": "Printed Cyrillic: А а, О о, М м, Т т",
+        "stageLabel": "Meet something new"
+      }
+    },
+    {
+      "name": "letter lesson section shows FOUR rows (not eight per-case rows)",
+      "pass": true,
+      "measured": {
+        "rows": [
+          {
+            "content_id": "ru.orth.cyrillic.a",
+            "kind": "orthography",
+            "surface": "А а"
+          },
+          {
+            "content_id": "ru.orth.cyrillic.o",
+            "kind": "orthography",
+            "surface": "О о"
+          },
+          {
+            "content_id": "ru.orth.cyrillic.m",
+            "kind": "orthography",
+            "surface": "М м"
+          },
+          {
+            "content_id": "ru.orth.cyrillic.t",
+            "kind": "orthography",
+            "surface": "Т т"
+          }
+        ]
+      }
+    },
+    {
+      "name": "each row leads with BOTH printed forms (\"А а\")",
+      "pass": true,
+      "measured": {
+        "surfaces": [
+          "А а",
+          "О о",
+          "М м",
+          "Т т"
+        ]
+      }
+    },
+    {
+      "name": "card-wide entity set is the FOUR merged letters — none per-case",
+      "pass": true,
+      "measured": {
+        "uniqueIds": [
+          "ru.orth.cyrillic.a",
+          "ru.orth.cyrillic.o",
+          "ru.orth.cyrillic.m",
+          "ru.orth.cyrillic.t"
+        ],
+        "rowCount": 12
+      }
+    },
+    {
+      "name": "complaint-04 drill screen offers NO duplicate option labels (ghost rows gone)",
+      "pass": true,
+      "measured": {
+        "labels": [
+          "Today",
+          "Practice",
+          "My Words",
+          "Progress",
+          "Settings",
+          "Show the lesson again",
+          "о",
+          "м",
+          "т",
+          "а",
+          "Pause session",
+          "Stop session"
+        ]
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-97620dc8-59c1-45d2-b987-f3a2397790a0",
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17919 (trusted network only)\n"
+}

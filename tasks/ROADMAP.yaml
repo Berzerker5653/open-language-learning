@@ -3183,6 +3183,7 @@ tasks:
   read_first:
   - state/notes/LETTER-TEACHING-DESIGN-001.md
   - state/evidence/ORTHO-LETTER-UNITS-001/desktop-lib-tests.log
+  - state/evidence/ORTHO-LETTER-UNITS-001/after/letter-rows-after.png
   acceptance:
   - the RU pack carries one entity per letter (34 rows including the stress mark) with a forms array and zero per-case -upper/-lower ids in any pack source
   - the bake validator the scaffold generator and audit_learner_copy v1.5.0 refuse per-case row splits with red-first tests
