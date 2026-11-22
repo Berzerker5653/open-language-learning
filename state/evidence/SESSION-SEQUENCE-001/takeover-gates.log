@@ -1,0 +1,38 @@
+SESSION-SEQUENCE-001 takeover — controller gate battery, run 122 (2026-11-22 01:24–01:36 MST)
+Worktree: ~/.hermes/cache/scratch/lts-ss1-to-work (HEAD+lane diff, media wav symlinks,
+apps/desktop/dist symlink for the tauri build). CARGO_TARGET_DIR=/home/hunter/game-dev/LTS/target.
+Battery unit: lts-ss1to-gates3; logs: ~/.hermes/cache/scratch/ss1to-logs3/.
+
+fmt: cargo fmt --all --check — exit 0 (fmt.log empty).
+Targeted tests: cargo test -p lts-desktop --lib -- beginner_plan_never_serves_a_locked_units_content
+  lexicon_words_outside_the_goal_ladder_are_not_seeded day_one_never_seeds_katakana_or_words_with_unlearned_kana
+  katakana_and_kana_words_unlock_with_the_letters_they_need proposed_listening_items_point_at_audio_the_pack_declares
+  kanji_drill_uses_existing_dimensions_and_srs_gates_resurfacing
+  — exit 0; test result: ok. 6 passed; 0 failed (test NAMES verified: both lane tests ran and passed).
+Full desktop lib suite: cargo test -p lts-desktop --lib — 218 passed; 1 failed:
+  tests::dictation_check_matches_spoken_target ("got Some(\"engine-error\")").
+  Flake triage per lane skill: same test with neighbours filtered (cargo test -p lts-desktop --lib --
+  dictation_check_matches_spoken_target the_aligner_language_comes_from_the_pack_manifest speech) —
+  7 passed; 0 failed. Vendor-gated dictation ASR test, known full-suite load flake, SKIPs in CI;
+  the lane diff touches only plan routes (build_plan/unit_goal_locked/lexicon seeding), no speech path.
+clippy: cargo clippy -p lts-desktop --all-targets -- -D warnings — exit 0.
+clippy -p lts-engine: NOT RUN — no `lts-engine` crate exists in this workspace
+  (members: lts-activity, lts-domain, lts-langpack, lts-security, lts-learner-model, lts-storage,
+  lts-audio, lts-langpack-cli, lts-scheduler, lts-speech-api, lts-speech-runtime, lts-world,
+  lts-desktop — measured via cargo metadata). The lane diff touches only apps/desktop/src-tauri/src/lib.rs;
+  no other crate is affected.
+tsc/vitest: not run — frontend untouched (lane diff is Rust-only).
+
+CONTROLLER FIX on top of run 143's diff (run 122): the new test
+lexicon_words_outside_the_goal_ladder_are_not_seeded asserted ru.lex.everyday.eto seeds day-one —
+FALSE PREMISE, measured: eto is referenced by ~300 units but every one of them sits behind a hard
+goal edge (006-everyday-01's goal ru.goal.on-ramp.everyday requires ru.goal.on-ramp.cyrillic at
+independent), so the run-120 EXCLUSIVE rule correctly locks eto at zero evidence (it returns when
+everyday-01 unlocks). Assertion corrected to the honest day-one measurement (!ids.contains(eto));
+the claimed-word positive path (unlocked unit's lexicon word seeds in a ladder pack) is covered by
+the K-70 test's ja.lex.greeting.konnichiwa line. No gate or engine was weakened — the expectation
+was wrong about pack reality.
+
+RED evidence: the run-143 battery (ss1to-logs/) is the measured RED of the tests against
+run 143's own expectation, and run 120's state/evidence/SESSION-SEQUENCE-001/acceptance-home_state.json
+is the measured RED on the live owner profile (2 weak-skill argue rows + kontrargument progression row).

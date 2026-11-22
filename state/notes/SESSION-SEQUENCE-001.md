@@ -211,3 +211,27 @@ REMAINING RECIPE if this run dies mid-way:
    takeover-*.
 6. Close parent t_fb35220d: unblock then complete --result with shas.
    Follow-up card: claim orphan lexicon entries into RU/JA units.
+
+
+## RUN 122 controller record (2026-11-22, takeover t_426b4251 — LANDED)
+
+Gates (unit lts-ss1to-gates3, logs ~/.hermes/cache/scratch/ss1to-logs3/, distilled into
+state/evidence/SESSION-SEQUENCE-001/takeover-gates.log): fmt exit 0; targeted 6/6 green
+(both lane tests by NAME); full desktop lib 218/1 where the single red is the vendor-gated
+dictation ASR load-flake (passes filtered with neighbours; untouched by this lane); clippy
+-p lts-desktop --all-targets -D warnings exit 0. NOTE: `-p lts-engine` (card gate line) is a
+nonexistent crate — workspace has no lts-engine; the lane diff is lts-desktop-only.
+
+Controller fix over run 143's diff: the new lexicon test's eto assertion was a FALSE PREMISE
+(measured: every unit referencing ru.lex.everyday.eto sits behind a hard goal edge — 006's goal
+requires on-ramp.cyrillic@independent — so the run-120 exclusive rule correctly locks it at zero
+evidence). Assertion corrected to the honest day-one lock; claimed-word positive path stays
+covered by the K-70 konnichiwa line. No gate/engine weakened.
+
+Acceptance (:17641, built from this lane's worktree, owner profile prof-e1799551…): plan has
+ZERO argue/kontrargument rows (run-120 RED had 3); zero above-on-ramp UNIT-BANDED activities;
+poisoned scheduler rows intact (5 scheduler_state / 6 evidence_events before == after).
+NEW measured limitation (same class as unclaimed sentences): the 3 ru.contrast.voicing.* plan
+rows are UNCLAIMED phonology content — zero units reference any contrast id. Frozen contract
+scoped the orphan gate to the lexicon stream; phonology/sentence orphan gating goes on the
+orphan-content follow-up card (also: claim the 178 orphan RU lexicon entries there).

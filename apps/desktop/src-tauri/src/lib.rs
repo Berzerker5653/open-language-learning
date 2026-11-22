@@ -2191,9 +2191,12 @@ fn goal_is_locked(
 /// the pack against itself. Only goal→goal edges can order the ladder
 /// without circularity (the pack validator refuses prerequisite cycles),
 /// because an upstream goal's evidence arrives through its own units'
-/// content, which the same rule unlocks rung by rung. A unit with no goal,
-/// or whose goal is not declared in the map, is not locked by this rule —
-/// exactly today's behavior for such units.
+/// content, which the same rule unlocks rung by rung. A unit with an EMPTY
+/// goal (fixture packs without a ladder) is not locked by this rule — that
+/// is the escape hatch K-70's fixtures rest on. A unit whose goal_id is
+/// NON-empty but absent from a non-empty goal map fails CLOSED (takeover
+/// run 2026-11-22): the ladder is the band authority, so a unit the ladder
+/// does not declare has no proven band position and must not seed.
 fn unit_goal_locked(
     unit: &PackUnit,
     goals: &[PackGoal],
@@ -2203,7 +2206,8 @@ fn unit_goal_locked(
         return false;
     }
     let Some(goal) = goals.iter().find(|g| g.id == unit.goal_id) else {
-        return false;
+        // SESSION-SEQUENCE-001 takeover: fail-CLOSED (see doc above).
+        return true;
     };
     goal.prerequisites.iter().any(|p| {
         p.strength == "hard"
@@ -2217,9 +2221,18 @@ fn unit_goal_locked(
 /// the `requires_unit` phase gate: a content id is locked only when at
 /// least one unit references it AND every unit that references it is
 /// goal-locked. A word taught by any unlocked unit stays eligible (shared
-/// words like `ru.lex.everyday.eto` never disappear), and words no unit
-/// references keep their existing eligibility — this rule cannot hide
-/// content the goal graph has no view on.
+/// words like `ru.lex.everyday.eto` never disappear). Takeover addendum
+/// (2026-11-22, measured on installed ru 0.4.6): lexicon entries NO unit
+/// references have no ladder position at all — `ru.lex.argue.kontrargument`
+/// is a B2 word the pack ships in the lexicon that zero units claim, and it
+/// seeded into day-one plans through precisely this blind spot. In a pack
+/// that declares a goal ladder the LEXICON seeding stream therefore fails
+/// such entries CLOSED (applied where the stream runs). The goal-path
+/// stream needs no such rule — its items come
+/// from the ladder itself — and the sentence stream is deliberately left
+/// alone for now: unclaimed sentences in the reference packs are dominated
+/// by beginner `ru.sent.a1.*` material, and banding them is pack-authoring
+/// work tracked separately, not a beginner-safety gate.
 fn goal_locked_new_content(
     units: &[PackUnit],
     goals: &[PackGoal],
@@ -2750,10 +2763,28 @@ fn add_new_item_candidates(
             let goals = pack_goals(&pack_root);
             let mut locked = locked_new_content(&units, derived);
             locked.extend(goal_locked_new_content(&units, &goals, derived));
+            // SESSION-SEQUENCE-001 takeover: the lexicon stream iterates
+            // the RAW pack lexicon, so entries no unit's activities
+            // reference have no goal-graph view and evade the exclusive
+            // rule above. When the pack declares a goal ladder, a lexicon
+            // word outside that ladder fails CLOSED for NEW seeding — the
+            // pack has to attach it to a unit to surface it. Packs without
+            // a goal map keep seeding their whole lexicon (fixture escape
+            // hatch, same shape as goal_locked_new_content's guard).
+            let claimed_by_units: std::collections::HashSet<&str> = units
+                .iter()
+                .flat_map(|u| u.activities.iter())
+                .flat_map(|a| a.content_refs.iter())
+                .map(|c| c.as_str())
+                .collect();
+            let ladder_locked_lexicon = !goals.is_empty();
             let orth = orth_entries(data, &pack_id, &version)?;
             let learned_kana = learned_kana_set(&units, &orth, derived);
             for entry in lexicon_entries(data, &pack_id, &version)? {
                 if locked.contains(&entry.id) {
+                    continue;
+                }
+                if ladder_locked_lexicon && !claimed_by_units.contains(entry.id.as_str()) {
                     continue;
                 }
                 // K-70: a word joins the NEW pool only when every kana of
@@ -3057,7 +3088,7 @@ fn build_plan(
         });
     }
     let derived = derive_pairs(&store, profile_id, &now_rfc)?;
-    let weak_skills: Vec<lts_scheduler::WeakSkillItem> = derived
+    let mut weak_skills: Vec<lts_scheduler::WeakSkillItem> = derived
         .iter()
         .filter(|d| d.state != lts_domain::MasteryState::Unseen && d.confidence < WEAK_CONFIDENCE)
         .map(|d| lts_scheduler::WeakSkillItem {
@@ -3127,6 +3158,14 @@ fn build_plan(
         })
         .collect();
     due_reviews.retain(|r| r.saved || !band_locked.contains(&r.content_id));
+    // SESSION-SEQUENCE-001 takeover: the SAME lock set gates the plan's
+    // THIRD content route. The owner-profile acceptance read exposed the
+    // poisoned Claim words arriving as WEAK SKILLS too (answering them left
+    // derived rows with confidence < WEAK_CONFIDENCE). Weak-skill rows for
+    // goal-locked content are withheld from the plan; the derived evidence
+    // stays on disk and returns when the learner unlocks the unit — no
+    // deletion, same scoping shape as due reviews and R07.
+    weak_skills.retain(|w| !band_locked.contains(&w.content_id));
 
     let config = lts_scheduler::PlannerConfig {
         budget_minutes: minutes,
@@ -15814,10 +15853,16 @@ activities:
                 && i.modality == lts_domain::ActivityModality::OrthographyRecognition),
             "katakana unlocks once the hiragana chart is introduced"
         );
-        // さかな is pure hiragana — every kana learned — eligible now.
+        // こんにちは is pure hiragana — every kana learned — eligible now.
+        // (Swap from the old fixture word さかな, which the takeover's
+        // fail-CLOSED lexicon rule correctly withholds: NO unit in the ja
+        // pack references ja.lex.food-drink.sakana — it is orphan content,
+        // see state/evidence/SESSION-SEQUENCE-001/takeover-findings.md.
+        // こんにちは is claimed by the unlocked greeting units, so the
+        // K-70 kana contract stays under test.)
         assert!(
             prog.iter()
-                .any(|i| i.content_id == "ja.lex.food-drink.sakana"),
+                .any(|i| i.content_id == "ja.lex.greeting.konnichiwa"),
             "a word of learned kana becomes NEW material"
         );
         // パン is still excluded: パ folds to a learned は, but the katakana
@@ -19512,6 +19557,34 @@ transfer_variants:
                 }
             };
 
+        // The takeover extension (run 120 acceptance): the learner had
+        // ANSWERED the Claim words, so beyond the scheduler rows there are
+        // derived mastery rows, and the plan's THIRD route — weak skills —
+        // resurfaces them too. Two low-support attempts each: the exact
+        // incident shape (confidence below WEAK_CONFIDENCE, never deleted).
+        for id in poison {
+            for (i, family) in ["a", "b"].iter().enumerate() {
+                let mut ev = attempt(
+                    id,
+                    lts_domain::ActivityModality::RecallMeaning,
+                    &format!("ru.lex.argue.poison-{family}"),
+                    1,
+                    &rfc3339_utc(1_795_290_000 + (i as u64) * 10),
+                    &format!("ev-poison-{id}-{i}"),
+                    &p.id,
+                );
+                ev.pack_id = pack.into();
+                store.append_evidence(&ev).unwrap();
+            }
+        }
+
+        // Measured on the installed ru 0.4.6 pack (takeover run): NO unit
+        // in the pack references this lexicon entry, so the goal graph has
+        // no view on it and the exclusive rule cannot lock it. The takeover
+        // decision fails ladder-external lexicon content CLOSED (see the
+        // decision record in state/notes/SESSION-SEQUENCE-001.md).
+        const UNCLAIMED_B2_WORD: &str = "ru.lex.argue.kontrargument";
+
         // Content ids of units whose goal sits in the B2 band — the exact
         // class the beginner was served.
         let goal_band = |goal_id: &str| -> Option<String> {
@@ -19551,6 +19624,23 @@ transfer_variants:
                 "session {}: the poisoned scheduler rows served Claim vocabulary to a beginner",
                 session
             );
+            // The weak-skill route specifically: no plan item may arrive
+            // with reason `weak-skill` for B2-band content (the takeover's
+            // weak_skills gate is what makes this hold).
+            assert!(
+                !plan.items.iter().any(|i| matches!(
+                    i.reason,
+                    lts_scheduler::PlanReason::WeakSkill
+                ) && (b2_content.contains(&i.content_id)
+                    || poison.contains(&i.content_id.as_str()))),
+                "session {}: a weak-skill plan item carried locked-band content",
+                session
+            );
+            assert!(
+                !plan.items.iter().any(|i| i.content_id == UNCLAIMED_B2_WORD),
+                "session {}: lexicon content outside the goal ladder seeded into a beginner plan",
+                session
+            );
             assert!(
                 !plan.items.is_empty(),
                 "session {session}: a fresh profile must still get a plan"
@@ -19559,6 +19649,45 @@ transfer_variants:
                 teach(&item.content_id, item.modality, &session.to_string(), seq);
             }
         }
+    }
+
+    /// Takeover decision (SESSION-SEQUENCE-001, 2026-11-22): in a pack
+    /// that declares a goal ladder, a lexicon word NO unit references has
+    /// no ladder position — the NEW pool fails it closed. A word an
+    /// unlocked unit references stays NEW-eligible (the exclusive rule is
+    /// untouched), and packs with NO goal map keep seeding their whole
+    /// lexicon (the fixture escape hatch).
+    #[test]
+    fn lexicon_words_outside_the_goal_ladder_are_not_seeded() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let pack = "org.openlanguage.ru-ru.reference";
+        install_reference_pack_fast(data, pack).unwrap();
+        let p = create_local_profile(data, "Ladder").unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let version = lts_langpack::archive::current_version(pack, &data.join("packs")).unwrap();
+        store.set_active_pack(&p.id, pack, &version).unwrap();
+        let mut candidates = Vec::new();
+        add_new_item_candidates(data, &store, &p.id, &[], &mut candidates, &[]).unwrap();
+        let ids: std::collections::HashSet<String> =
+            candidates.iter().map(|c| c.content_id.clone()).collect();
+        assert!(
+            !ids.contains("ru.lex.argue.kontrargument"),
+            "unclaimed B2 lexicon word seeded as NEW material with zero evidence"
+        );
+        // Honest measurement (controller, takeover run 122): `eto` is
+        // claimed by units — but EVERY unit that references it sits behind
+        // a hard goal edge (006-everyday-01's goal requires
+        // ru.goal.on-ramp.cyrillic at independent), so the EXCLUSIVE rule
+        // from run 120 legitimately locks it at zero evidence and it
+        // returns when everyday-01 unlocks. The claimed-word positive path
+        // — an unlocked unit's lexicon word stays NEW-eligible in a ladder
+        // pack — is asserted by the K-70 test above
+        // (ja.lex.greeting.konnichiwa seeds despite the ladder).
+        assert!(
+            !ids.contains("ru.lex.everyday.eto"),
+            "eto is taught only by units behind the cyrillic->independent hard goal edge; the exclusive rule must lock it at zero evidence"
+        );
     }
 
     /// The reference pack's source tree, for reading base counts out of.
