@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-22",
-  "active_task": "ORPHAN-CONTENT-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2741,16 +2741,21 @@
     "ORPHAN-CONTENT-001": {
       "task_id": "ORPHAN-CONTENT-001",
       "title": "Band/claim orphan pack content — unclaimed phonology contrasts and sentences seeded into beginner plans; 192 RU lexicon rows dead pack weight",
-      "status": "in_progress",
-      "attempts": 1,
+      "status": "done",
+      "attempts": 2,
       "dependencies": [
         "SESSION-SEQUENCE-001"
       ],
       "evidence": [
         "state/notes/ORPHAN-CONTENT-001.md",
-        "state/evidence/ORPHAN-CONTENT-001/orphan-ids.json"
+        "state/evidence/ORPHAN-CONTENT-001/orphan-ids.json",
+        "state/evidence/ORPHAN-CONTENT-001/gates.log",
+        "state/evidence/ORPHAN-CONTENT-001/red-test.log",
+        "state/evidence/ORPHAN-CONTENT-001/targeted-test.log",
+        "state/evidence/ORPHAN-CONTENT-001/acceptance-result.json",
+        "state/evidence/ORPHAN-CONTENT-001/acceptance-run.log"
       ],
-      "summary": "",
+      "summary": "Ladder rule extended fail-CLOSED to the CONTRAST and SENTENCE NEW-seeding streams (packs with a goal map only seed unit-claimed rows) at 2b13a7b, and all 8 RU phonology contrasts CLAIMED into on-ramp cyrillic units 013/015/017/018/019 via listen-and-choose activities (beginner minimal pairs stay day-0-eligible). Red-first test unclaimed_contrast_and_sentence_rows_are_not_seeded proves synthetic and real orphan rows never seed while the eight claims still do. :17641-style live read on a fresh level-0 profile: 4/4 PASS - 5-item plan, every item unit-attached, zero orphan ids, claimed contrasts seeding. Claim decisions for the 161 orphan sentences and 192 orphan lexicon rows filed (deferred with rationale); banding makes the omission safe. Follow-up cards RU-SENTENCE-CLAIM-001 / RU-LEXICON-CLAIM-001 proposed in the notes.",
       "updated": "2026-11-22",
       "notes": "board t_e34dadda; opened from SESSION-SEQUENCE-001-TAKEOVER measured limitation"
     }
