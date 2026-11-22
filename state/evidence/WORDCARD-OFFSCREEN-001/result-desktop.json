@@ -1,0 +1,30 @@
+{
+ "viewport": "1280x900",
+ "mode": "desktop",
+ "harness_audit": {
+  "screen": "reader",
+  "error": null,
+  "fails": 1
+ },
+ "measured": {
+  "cardTop": 482,
+  "cardBottom": 699,
+  "position": "static",
+  "focusInside": false,
+  "focusedTag": "h1",
+  "closeTop": 618,
+  "closeBottom": 662,
+  "docScrollW": 1280,
+  "docClientW": 1280
+ },
+ "checks": [
+  {
+   "name": "wide card keeps inline (static) position",
+   "pass": true,
+   "measured": {
+    "position": "static"
+   }
+  }
+ ],
+ "ok": true
+}

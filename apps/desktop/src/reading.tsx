@@ -14,6 +14,7 @@
  * block; the explanatory prose (card labels, controls) is app chrome and is
  * never flipped.
  */
+import { useRef } from "react";
 import { LatinText, PackText } from "@openlang/ui";
 import { Ruby } from "./ruby";
 
@@ -175,6 +176,11 @@ export interface ReadingPanelProps {
   onPlaySentence(contentId: string): void;
   /** Word tap: opens the card at that raw token of that sentence. */
   onWordTap(contentId: string, token: string): void;
+  /** WORDCARD-OFFSCREEN-001: hands the tapped word's button element to the
+   * caller before the tap fires, so opening a phone bottom-sheet card can
+   * focus it when the card closes (focus returns to the word). Optional:
+   * desktop/inline behavior ignores it. */
+  onWordAnchor?(el: HTMLElement): void;
   /** The card's Play button: just that word's audio. */
   onWordPlay(contentId: string, token: string): void;
   onWordClose(): void;
@@ -184,6 +190,11 @@ export interface ReadingPanelProps {
 }
 
 export function ReadingPanel(p: ReadingPanelProps) {
+  // WORDCARD-OFFSCREEN-001: the card region takes focus when the card
+  // opens (a phone bottom-sheet covering the page is useless to keyboard
+  // and screen-reader users if focus stays behind it), and Escape closes
+  // it through the same handler as the Close button.
+  const cardRef = useRef<HTMLDivElement>(null);
   // CONTENT-CONFIRM-001: the only "checked by" surface in the app. The
   // mark is created ONLY by this explicit button click (acceptance 2),
   // and the copy says "confirmed by <names>" — never verified, expert,
@@ -250,6 +261,9 @@ export function ReadingPanel(p: ReadingPanelProps) {
         // The tap belongs to the word; the surrounding sentence span must
         // not also hear it (that would fire sentence audio too).
         e.stopPropagation();
+        // WORDCARD-OFFSCREEN-001: hand the tapped button to the caller so
+        // closing the card can return focus to this exact word.
+        p.onWordAnchor?.(e.currentTarget);
         p.onWordTap(s.content_id, tok);
       }}
     >
@@ -341,7 +355,18 @@ export function ReadingPanel(p: ReadingPanelProps) {
     // confirmation mark — the same ids `story_view` attributes marks to.
     const knownId = sentence?.known.find((w) => normToken(w.surface) === normToken(wc.token))?.id;
     return (
-      <div role="group" aria-label="Word card" className="card word-card">
+      <div
+        ref={cardRef}
+        role="group"
+        aria-label="Word card"
+        className="card word-card"
+        tabIndex={-1}
+        onKeyDown={(e) => {
+          // The card is a transient surface: Escape closes it exactly like
+          // the Close button (which returns focus to the tapped word).
+          if (e.key === "Escape") p.onWordClose();
+        }}
+      >
         <p>
           <strong className="word-headword">
             <PackText tag="span">{card?.surface ?? wc.token}</PackText>

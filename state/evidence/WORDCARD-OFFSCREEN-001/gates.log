@@ -1,0 +1,51 @@
+WORDCARD-OFFSCREEN-001 — LANE gate log (controller run 124, 2026-11-21)
+
+Lane WIP was left UNCOMMITTED by board run 123 (died at the 80/80 iteration
+cap with the whole lane finished: reading.tsx + App.tsx + styles.css + the
+capture harness). Run 124 verified and committed it; no card work was redone.
+The RED run at HEAD 321f242 already existed in scratch worktree
+lts-wordcard-red (built from clean HEAD); its outputs are preserved here as
+result-phone-HEAD-red.json + the phone-*-before screenshots copied before the
+fix bundle was rebuilt.
+
+RED-FIRST (pre-fix, worktree at HEAD 321f242, dist built there):
+  node scripts/wordcard-capture.mjs evidence-red   -> WORDCARD GATE FAIL (exit 1)
+  measured: cardTop 629 cardBottom 904 (viewport 844), position static,
+  focus stayed on h1, closeBottom 869 > 844; 4/6 checks FAIL.
+  (Owner's real story put the card at y=1486; the fixture's short story is
+  the milder 629..904 shape — full containment is asserted, not intersection.)
+
+AFTER FIX (this tree, rebuilt via `npx vite build --config
+vite.mobile-harness.config.ts` from the exact working-tree bytes, dist-mobile):
+  node scripts/wordcard-capture.mjs state/evidence/WORDCARD-OFFSCREEN-001
+  PASS card fully inside the viewport      {cardTop 570, cardBottom 844}
+  PASS focus moved into the card on open   {focusedTag div.card}
+  PASS Close button is inside the viewport {closeTop 774, closeBottom 818}
+  PASS no horizontal overflow              {scrollW 390 = clientW 390}
+  PASS Close removes the card              {cardGone true}
+  PASS Close returns focus to the tapped word {focusedTag button.word}
+  -> WORDCARD GATE PASS, exit 0
+
+DESKTOP (wide viewport 1280x900, same harness --desktop):
+  node scripts/wordcard-capture.mjs state/evidence/WORDCARD-OFFSCREEN-001 --desktop
+  PASS wide card keeps inline (static) position {position static}
+  -> WORDCARD GATE PASS, exit 0  (wide-0-before-tap.png, wide-1-card-open.png)
+
+LANE gates (apps/desktop):
+  npx tsc --noEmit                                  exit 0
+  npx vitest run                                    470 tests passed (tree
+      includes sibling ORTHO-LETTER-UNITS-001 WIP lesson.test.tsx additions;
+      no failures)
+  npx prettier --check .                            my lane files clean; the
+      4 remaining [warn]s are PRE-EXISTING/sibling: history-nav.ts and
+      journeys/history-nav.journey.tsx (WEB-HISTORY-001 lane left them
+      prettier-dirty at HEAD — CI fmt:check red at 321f242 predates this
+      card), CODING_STANDARDS.md, and untracked sibling scripts/ortho-capture.mjs.
+  NOTE: apps/desktop/src/App.tsx was prettier-dirty at HEAD; prettier was
+      applied to the whole file in this lane's WIP, so the App.tsx diff also
+      carries a few pre-existing import-line wraps from the WEB-HISTORY /
+      WEB-PROGRESS lanes. No semantic change outside the WORDCARD hunks (tsc
+      and vitest green over the result).
+
+No Rust/Cargo files in this lane — cargo gates not applicable.
+Sibling-offender audit result in state/notes/WORDCARD-OFFSCREEN-001.md.

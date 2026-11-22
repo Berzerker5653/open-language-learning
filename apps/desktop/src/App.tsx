@@ -54,11 +54,7 @@ import {
 } from "./error-review";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
 import { LessonEncounter, drillStageId, stagePositionLabel, type LessonPlan } from "./lesson";
-import {
-  installHistoryNav,
-  type AppLocation,
-  type HistoryNav,
-} from "./history-nav";
+import { installHistoryNav, type AppLocation, type HistoryNav } from "./history-nav";
 import { describeKanjiDecomposition } from "./kanji-decomposition";
 import { playClip } from "./playback";
 import { grammarLabelsEnabled, stressEnabled, type DisplaySettingsView } from "./stress";
@@ -632,6 +628,13 @@ export function App() {
   } | null>(null);
   const storyWordGenRef = useRef<{ sentenceId: string; token: string } | null>(null);
   const storyWordAudioRef = useRef<string | null>(null);
+  // WORDCARD-OFFSCREEN-001: the tapped word's button, remembered so the
+  // phone bottom-sheet card can return focus to it when it closes.
+  // Mutable (not state): a DOM element, and focus moves in an effect.
+  const storyWordAnchorRef = useRef<{
+    el: HTMLElement | null;
+    closing: boolean;
+  }>({ el: null, closing: false });
   const [storyError, setStoryError] = useState<string | null>(null);
   const [mineItems, setMineItems] = useState<MineItem[]>([]);
   const [mineSurface, setMineSurface] = useState("");
@@ -1359,7 +1362,7 @@ export function App() {
     setShadowIdx(0);
     setStoryList([]);
     setStoryActive(null);
-    closeStoryWordCard();
+    closeStoryWordCard(false);
     setPronDemo(null);
     setPronResult(null);
     setDictSentence(null);
@@ -2902,7 +2905,8 @@ export function App() {
   async function openReading() {
     setRoute("reading");
     setStoryActive(null);
-    closeStoryWordCard();
+    // Navigation drop, not a learner Close: never arms return-focus.
+    closeStoryWordCard(false);
     const inv = detectInvoke();
     if (!inv || !profileId) return;
     try {
@@ -2918,7 +2922,7 @@ export function App() {
     if (!inv || !profileId) return;
     try {
       setStoryActive((await inv("story_view", { profileId, storyId: id })) as typeof storyActive);
-      closeStoryWordCard();
+      closeStoryWordCard(false);
       setStoryError(null);
     } catch (e) {
       setStoryError(String(e));
@@ -2952,7 +2956,10 @@ export function App() {
     // story; the engine only shape-checks the id).
     const storyId = storyActive?.id;
     if (!inv || !profileId || !storyId) return;
-    closeStoryWordCard();
+    // The internal close supersedes an old card — deliberately NOT an
+    // explicit close, so it never arms the return-focus (the anchor the
+    // tap just captured belongs to the NEW card).
+    closeStoryWordCard(false);
     storyWordGenRef.current = { sentenceId, token };
     setStoryWord({ sentenceId, token, card: null, audioUrl: null });
     const current = () => {
@@ -3000,14 +3007,41 @@ export function App() {
     }
   }
 
-  function closeStoryWordCard() {
+  function closeStoryWordCard(explicit = true) {
     if (storyWordAudioRef.current) {
       URL.revokeObjectURL(storyWordAudioRef.current);
       storyWordAudioRef.current = null;
     }
+    // WORDCARD-OFFSCREEN-001: only an EXPLICIT close (the Close button or
+    // Escape) arms return-focus; navigation supersedes (tab switch, story
+    // change) drop the card without stealing focus.
+    if (explicit && storyWordAnchorRef.current.el) {
+      storyWordAnchorRef.current.closing = true;
+    }
     storyWordGenRef.current = null;
     setStoryWord(null);
   }
+
+  // WORDCARD-OFFSCREEN-001: focus management for the phone bottom-sheet
+  // card. On open, focus rides the card itself (measuring the applied
+  // stylesheet, not the viewport width, so a mid-visit rotation can never
+  // yank the page on a desktop-width inline card). On close, focus returns
+  // to the tapped word button, keyboard position intact.
+  useEffect(() => {
+    const anchor = storyWordAnchorRef.current;
+    if (storyWord === null) {
+      if (anchor.closing && anchor.el && anchor.el.isConnected) {
+        anchor.el.focus();
+      }
+      anchor.el = null;
+      anchor.closing = false;
+      return;
+    }
+    const card = document.querySelector<HTMLElement>(".word-card");
+    if (card && getComputedStyle(card).position === "fixed") {
+      card.focus();
+    }
+  }, [storyWord]);
 
   // K-14: learner-owned lexicon. Mined words are device-local, cited,
   // and scheduled by their own SRS rows — never mastery evidence.
@@ -3860,9 +3894,7 @@ export function App() {
   const currentLocationRef = useRef<AppLocation>(appLocation);
   currentLocationRef.current = appLocation;
   const [historyExitAsk, setHistoryExitAsk] = useState<AppLocation | null>(null);
-  const historyPopRef = useRef<(target: AppLocation | null, guarded: boolean) => void>(
-    () => {},
-  );
+  const historyPopRef = useRef<(target: AppLocation | null, guarded: boolean) => void>(() => {});
   historyPopRef.current = (target, guarded) => {
     const nav = historyNavRef.current;
     if (!nav || step !== "done") return;
@@ -3880,11 +3912,7 @@ export function App() {
     // or a solo activity that was not a session activity) is never
     // faked: re-land the current location on top of it instead, which
     // also blocks forward-jumps from double-advancing anything.
-    if (
-      (target.session || target.stage) &&
-      !sessionQueueRef.current &&
-      !practiceTarget
-    ) {
+    if ((target.session || target.stage) && !sessionQueueRef.current && !practiceTarget) {
       nav.sync(appLocation);
       return;
     }
@@ -4208,6 +4236,10 @@ export function App() {
           wordCard={storyWord}
           wordAudioAvailable={storyWord !== null && storyWord.audioUrl !== null}
           onWordTap={(id, token) => void openStoryWordCard(id, token)}
+          onWordAnchor={(el) => {
+            storyWordAnchorRef.current.el = el;
+            storyWordAnchorRef.current.closing = false;
+          }}
           onWordPlay={(id, token) => playStoryWordAudio(id, token)}
           onWordClose={closeStoryWordCard}
           onMine={(surface, reading, gloss) => void mineFromStory(surface, reading, gloss)}
@@ -4710,8 +4742,8 @@ export function App() {
           className="notice"
         >
           <p>
-            You are in the middle of a session. Finished activities are already
-            saved; this one is not.
+            You are in the middle of a session. Finished activities are already saved; this one is
+            not.
           </p>
           <div className="btn-row">
             <button

@@ -1,0 +1,78 @@
+{
+ "viewport": "390x844",
+ "mode": "phone",
+ "harness_audit": {
+  "screen": "reader",
+  "error": null,
+  "fails": 0
+ },
+ "measured": {
+  "cardTop": 570,
+  "cardBottom": 844,
+  "position": "fixed",
+  "focusInside": true,
+  "focusedTag": "div.card",
+  "closeTop": 774,
+  "closeBottom": 818,
+  "docScrollW": 390,
+  "docClientW": 390
+ },
+ "afterClose": {
+  "cardGone": true,
+  "focusedIsWord": true,
+  "focusedTag": "button.word"
+ },
+ "checks": [
+  {
+   "name": "card fully inside the viewport",
+   "pass": true,
+   "measured": {
+    "cardTop": 570,
+    "cardBottom": 844,
+    "viewportH": 844
+   }
+  },
+  {
+   "name": "focus moved into the card on open",
+   "pass": true,
+   "measured": {
+    "focusedTag": "div.card"
+   }
+  },
+  {
+   "name": "Close button is inside the viewport",
+   "pass": true,
+   "measured": {
+    "closeTop": 774,
+    "closeBottom": 818
+   }
+  },
+  {
+   "name": "no horizontal overflow",
+   "pass": true,
+   "measured": {
+    "scrollW": 390,
+    "clientW": 390
+   }
+  },
+  {
+   "name": "Close removes the card",
+   "pass": true,
+   "measured": {
+    "cardGone": true,
+    "focusedIsWord": true,
+    "focusedTag": "button.word"
+   }
+  },
+  {
+   "name": "Close returns focus to the tapped word",
+   "pass": true,
+   "measured": {
+    "cardGone": true,
+    "focusedIsWord": true,
+    "focusedTag": "button.word"
+   }
+  }
+ ],
+ "ok": true
+}
