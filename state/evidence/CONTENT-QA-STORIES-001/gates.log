@@ -1,0 +1,93 @@
+# CONTENT-QA-STORIES-001 lane gates (2026-11-21, worker t_19978531)
+
+## tools/qa_stories.py (final, after source fixes)
+PASS at-the-market (cp)
+       WARN  stress_unverified: ['холодное']
+PASS aukcion-odnoy-kartiny (b2)
+       WARN  no_stress_marks: 50 multi-syllable content words carry no stress mark
+PASS avtobus-ne-prishol (a2)
+       WARN  no_stress_marks: 34 multi-syllable content words carry no stress mark
+PASS dva-bileta-v-odin-teatr (b2)
+       WARN  no_stress_marks: 77 multi-syllable content words carry no stress mark
+PASS gorod-bez-karty (b2)
+       WARN  no_stress_marks: 71 multi-syllable content words carry no stress mark
+PASS internet-v-derevne (b1)
+       WARN  no_stress_marks: 45 multi-syllable content words carry no stress mark
+PASS kluch-ot-dachi (b1)
+       WARN  no_stress_marks: 49 multi-syllable content words carry no stress mark
+PASS kot-doma (a1)
+       WARN  no_stress_marks: 16 multi-syllable content words carry no stress mark
+PASS morning-of-anna (cp)
+PASS moy-den (a1)
+       WARN  no_stress_marks: 15 multi-syllable content words carry no stress mark
+PASS noch-v-poezde (b1)
+       WARN  no_stress_marks: 65 multi-syllable content words carry no stress mark
+PASS perevodchik-vse-pereputal (b2)
+       WARN  no_stress_marks: 57 multi-syllable content words carry no stress mark
+PASS pismo-ne-temu (b1)
+       WARN  no_stress_marks: 55 multi-syllable content words carry no stress mark
+PASS podarok-dlya-mamy (a1)
+       WARN  no_stress_marks: 14 multi-syllable content words carry no stress mark
+PASS rybalka-zimoy (a2)
+       WARN  no_stress_marks: 30 multi-syllable content words carry no stress mark
+PASS shapka-v-parke (a1)
+       WARN  no_stress_marks: 13 multi-syllable content words carry no stress mark
+PASS sosed-s-gitarioy (a2)
+       WARN  no_stress_marks: 29 multi-syllable content words carry no stress mark
+PASS spor-o-budushchem (b2)
+       WARN  no_stress_marks: 58 multi-syllable content words carry no stress mark
+PASS telefon-v-taksi (a2)
+       WARN  no_stress_marks: 33 multi-syllable content words carry no stress mark
+PASS walk-in-the-forest (cp)
+       WARN  stress_unverified: ['сидит']
+
+20 stories, 0 FAIL: []
+exit=0
+
+## tools/test_qa_stories.py
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.582s
+
+OK
+exit=0
+
+## cargo test -p lts-langpack (git worktree at HEAD 181853e + lane content files copied; CARGO_TARGET_DIR=repo target; sibling WIP in crates/langpack excluded)
+(run output captured next)
+### cargo test -p lts-langpack
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.86s
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.47s
+test malformed_sidecar_line_surfaces_a_clear_error ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+test malformed_map_is_a_schema_error_and_the_reader_stays_bool_safe ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.47s
+test scenario_choices_help_below_two_options_is_error ... ok
+test undeclared_reference_warns_in_scaffold_and_errors_in_install ... ok
+test capability_without_items_is_exactly_one_error ... ok
+test result: ok. 51 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.85s
+test malformed_sidecar_line_surfaces_a_clear_error ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+exit=0
+
+### langpack CLI validate
+info[media_unbuilt] media/manifest.jsonl: the media manifest declares 5018 asset(s) and none of them are present; expected in a source checkout: the .wav bytes are gitignored and regenerated before install-mode gates and build (ADR-0016)
+warning[media_unlisted] media/manifest.jsonl: media/media exists in the pack but no manifest row declares it, so its provenance would have to be inferred from file presence (ADR-0016)
+validate(scaffold): 0 error(s), 1 warning(s)
+exit=0
+
+note: the 'media_unlisted media/media' warning above is an artifact of the scratch worktree (media dir was symlinked in); the real pack tree has no media/media. No media manifest rows were changed by this lane.
