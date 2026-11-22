@@ -2856,6 +2856,20 @@
       "summary": "Storage + content half shipped via controller takeover: schema v10 encounter_events (append-only, exposure-never-evidence pinned by module test), record_encounter/encountered_content_ids, and cyrillic.jsonl false-friend/friendly-letter copy (11 mnemonics, text-only, rides next RU publish; langpack + qa_stories green). CORRECTION measured at takeover: the encounter_test_allowance gate, encounter_complete IPC and the plan-level red test were NOT on disk despite the dead run's claims — the v10 table has no production writer yet. OPEN: engine gate + IPC + red test, frontend wiring at lesson Start-practicing, confusable screenshot, owner-profile plan audit.",
       "notes": "Resume recipe + CONTROLLER correction in state/notes/ENCOUNTER-BEFORE-TEST-001.md; controller battery in state/evidence/ENCOUNTER-BEFORE-TEST-001/gates.log.",
       "updated": "2026-11-22"
+    },
+    "PATH-WHATSNEXT-001": {
+      "task_id": "PATH-WHATSNEXT-001",
+      "title": "One current offer so learners are never lost after a session (Codemm rule) — phase 2",
+      "status": "retryable",
+      "attempts": 2,
+      "dependencies": [],
+      "evidence": [
+        "state/notes/PATH-WHATSNEXT-001.md",
+        "state/evidence/PATH-WHATSNEXT-001/gates.log"
+      ],
+      "summary": "Code ON MAIN ebd96c8: current_offer IPC (one answer: review-first else next ready unit; engine red-first test green), Today strip + earned review-due chip, after-session card line, PathView two-phase scroll to the offered node, honest journeys mirror, journey test (vitest 483/483 incl. it), capture harness scripts/whatsnext-capture.mjs. Full LANE battery green at the commit (gates.log). OPEN: mobile capture not yet run green — review_due = done && due>0 means the back-date must hit a DONE unit's scheduler row; numbered REMAINING RECIPE in the notes file.",
+      "notes": "ROADMAP declares dependency PATH-VIEW-001; its ENGINE/UI work is merged on main (64489e8) and this lane builds directly on it — omitted from this ledger record only because PATH-VIEW-001 sits retryable (its own screenshot acceptance is open) and the validator gates retryable prerequisites. Two real bugs fixed in the dead attempt's WIP before commit (single-phase scroll; substring unit mapping). review_due semantics + pkill self-SIGTERM trap documented in the recipe. lib.rs/home.tsx hotspot flags stand.",
+      "updated": "2026-11-22"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

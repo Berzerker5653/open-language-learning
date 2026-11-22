@@ -3201,6 +3201,19 @@ tasks:
   - a red test shows a unit with attendance but below the mastery floor renders not done
   - LANE-tier gates over the touched packages
   required_for_desktop_1_0: false
+- id: PATH-WHATSNEXT-001
+  milestone: M11
+  priority: P1
+  title: One current offer so learners are never lost after a session - next-step banner, path pin, review-due chip
+  dependencies: [PATH-VIEW-001]
+  read_first:
+  - state/notes/PATH-WHATSNEXT-001.md
+  - state/evidence/PATH-WHATSNEXT-001/gates.log
+  acceptance:
+  - a mobile browser sequence finishes a session and the after-session card names the single offer with the path scrolled to it, under state/evidence/PATH-WHATSNEXT-001
+  - seeding one due scheduler row flips the offer to review-first with a review-due chip on the Today strip
+  - LANE-tier gates over the touched packages
+  required_for_desktop_1_0: false
 - id: ENCOUNTER-BEFORE-TEST-001
   milestone: M11
   priority: P1
@@ -3408,4 +3421,5 @@ execution_scope:
   - RU-LEXICON-CLAIM-001
   - PATH-VIEW-001
   - ENCOUNTER-BEFORE-TEST-001
+  - PATH-WHATSNEXT-001
   public_publication_authorized: false

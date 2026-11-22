@@ -1,0 +1,38 @@
+PATH-WHATSNEXT-001 — controller gate log (run 2026-11-22, takeover of dead attempt 1, 80/80)
+
+Base: 7c69cdf (PATH-VIEW-001 64489e8 + ENCOUNTER storage half e8b8cf8).
+Lane WIP from attempt 1 found dirty in the tree and finished, not rerun:
+- FIXED two real bugs in the dead WIP before any gate:
+  1. home.tsx PathView scroll was single-phase — scrolled a node that was
+     not in the DOM yet when its section was collapsed. Now two-phase
+     (open section, then scroll on re-render) + scrollIntoView guarded.
+  2. journeys/harness.tsx current_offer mirror used a substring guess for
+     content->unit and a bogus `.unit.unknown` fallback; now derives the
+     owner from the SAME schedule-row mapping unit_path renders, abstains
+     (null) instead of inventing.
+- FIXED Rust compile error E0277 in current_offer_at (pack_units returns
+  Arc<Vec<PackUnit>>; bind then .iter()).
+- FIXED capture harness for today's pack: practice_plan now returns
+  {items:[...]} (PRACTICE-GATE-001 shape) — accepts both shapes.
+
+Gates (all run fresh at this commit, full logs ~/.hermes/cache/scratch/wsn/):
+- cargo fmt --all            applied (dead WIP not rustfmt-clean), then
+                             cargo fmt --all --check -> FMT-OK
+- cargo clippy -p lts-desktop --all-targets -- -D warnings -> Finished (clippy2.log)
+- cargo test -p lts-desktop --lib current_offer ->
+  tests::current_offer_flips_to_review_first_when_a_review_is_due ... ok
+  1 passed; 226 filtered out (test-offer2.log)
+- npx tsc --noEmit -> clean
+- npx vitest run (apps/desktop) -> 61 files, 483 tests, ALL green
+  (482 shipped by PATH-VIEW + 1 new whatsnext journey) (vitest-full.log)
+- npx vite build -> OK; cargo build -p lts-desktop --bin lts-serve
+  --features serve -> target/debug/lts-serve OK (serve-build3.log)
+
+DEFERRED (honest): mobile acceptance capture NOT yet executed green.
+First run failed on the practice_plan shape (fixed above); the deeper
+issue is that review_due = done && due>0 (unit_path_at), so the capture's
+back-date must pick a scheduler row of a DONE unit, and API-only seeding
+against today's letter-first pack was still being probed when the budget
+died (probe2 interrupted by a self-inflicted pkill SIGTERM — run pkill
+ALONE, never in a command whose args contain the pattern).
+Resume recipe: state/notes/PATH-WHATSNEXT-001.md.
