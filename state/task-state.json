@@ -2673,7 +2673,7 @@
     "RU-CONTENT-FREEZE-047-001": {
       "task_id": "RU-CONTENT-FREEZE-047-001",
       "title": "Re-bake changed ru sentences, repair 20 drift drill clips, freeze ru content, publish 0.4.7",
-      "status": "ready",
+      "status": "done",
       "attempts": 1,
       "dependencies": [
         "RU-STORIES-MEDIA-001"
@@ -2682,9 +2682,13 @@
         "state/evidence/RU-CONTENT-FREEZE-047-001/gates.log",
         "state/evidence/RU-CONTENT-FREEZE-047-001/asr-rebake2.jsonl",
         "state/evidence/RU-CONTENT-FREEZE-047-001/asr-drift2.jsonl",
-        "state/notes/RU-CONTENT-FREEZE-047-001.md"
+        "state/notes/RU-CONTENT-FREEZE-047-001.md",
+        "state/evidence/RC-0.4.7-2026-11-21/SUMMARY.txt",
+        "state/evidence/RC-0.4.7-2026-11-21/archive-ru-RU.txt",
+        "state/evidence/RC-0.4.7-2026-11-21/install-ru-RU.txt",
+        "state/evidence/RC-0.4.7-2026-11-21/diff-046-to-047-ru-RU.txt"
       ],
-      "updated": "2026-11-21"
+      "updated": "2026-11-22"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

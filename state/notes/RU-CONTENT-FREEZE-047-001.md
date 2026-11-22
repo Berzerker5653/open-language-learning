@@ -38,6 +38,15 @@ content work desired inside the window goes to a follow-up card targeting 0.4.8.
    lts-pack-audio-qa references/pack-release-publication.md (RC built in an
    isolated detached worktree — sibling lanes hold WIP).
 
+## Publish status
+
+2026-11-22: ru 0.4.7 published (immutable release
+`org.openlanguage.ru-ru.reference-0.4.7`, asset sha256
+`b2f564a8eb3b88f0632c4a3909468e12a8a539b31ddd9afe47bf1a883f6050f2` equals the
+catalog pin; RC evidence in `state/evidence/RC-0.4.7-2026-11-21/`). The freeze
+lifts when the CI 'Restore reference-pack audio' legs go green on the run after
+the catalog re-pin commit lands.
+
 ## Native spot-audition flags queued for the reviewer (do NOT block publish)
 
 From RU-STORIES-MEDIA-001 (gate passed, soft-sign homophone risk):

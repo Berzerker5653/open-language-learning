@@ -1,0 +1,241 @@
+--- ru-RU: PUBLISHED 0.4.6 (PUBLISHED/CATALOG-PINNED) -> CANDIDATE 0.4.7 (bytes + 12-hex hash + path) ---
+published 0.4.6 members = 5973   candidate 0.4.7 members = 5987
+identical (size+hash)   = 5929
+added in 0.4.7:
+1105964 60a08db0c07f media/ru.sent.b2.dva-bileta-v-odin-teatr.u002.wav
+119084 084bc284ce0c media/ru.sent.cp.p11.wav
+138284 49e73593e517 media/ru.sent.cp.p37.wav
+14892 b57156283214 media/ru.lex.stories202611.pet.wav
+153644 8e42191a3528 media/ru.sent.a2.telefon-v-taksi.u005.wav
+17211 c21e08e574b7 sentences/content-parity-2026-10-12.jsonl
+17452 9fb8564f74ea media/ru.lex.stories202611.zarya.wav
+17964 4c86b2fedb23 media/ru.lex.stories202611.ogon.wav
+17964 8c17637790d1 media/ru.lex.stories202611.tsvet.wav
+1802 1f4ebc352e8b curriculum/units/496-synthesis-07.yaml
+180524 9cea8a8c2713 media/ru.sent.cp.p34.wav
+184364 43446bfb07e9 media/ru.sent.b1.pismo-ne-temu.u001.wav
+18988 8a237e46e939 media/ru.lex.stories202611.karman.wav
+195884 e8d0e0bb7a0b media/ru.sent.b2.spor-o-budushchem.u001.wav
+1978 04ac75e8c7f2 curriculum/units/016-cyrillic-ya-eh-f.yaml
+1990 9650d834321a curriculum/units/017-cyrillic-ts-ch-sh.yaml
+199724 f0539d410861 media/ru.sent.a2.avtobus-ne-prishol.u005.wav
+20012 e8d2e6bc000a media/ru.lex.stories202611.yarko.wav
+20012 e9c022b73433 media/ru.lex.stories202611.vetka.wav
+20524 8a65df372521 media/ru.lex.stories202611.varit.wav
+20524 dbaf2153d0fe media/ru.lex.stories202611.kupe.wav
+21036 8fd190641fd7 media/ru.lex.stories202611.goryachiy.wav
+21036 fe072ed538e4 media/ru.lex.stories202611.yagoda.wav
+2142 16ad8112bc15 curriculum/units/018-cyrillic-shch-soft-hard.yaml
+22060 3e351a5a1b39 media/ru.lex.stories202611.doska.wav
+22060 bc1060762136 media/ru.lex.stories202611.ptichka.wav
+2253 0eec90883aa5 curriculum/units/013-cyrillic-b-p-d-g.yaml
+2253 e188fb4a10f9 curriculum/units/011-cyrillic-k-e-n-s.yaml
+2265 9713b45d40ae curriculum/units/014-cyrillic-l-z-zh-i.yaml
+2265 af126b4467c4 curriculum/units/012-cyrillic-r-v-u-kh.yaml
+2306 6e40f9d820af curriculum/units/010-cyrillic-a-o-m-t.yaml
+2349 ad6486e241f1 curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+24108 c96da0f6c7b9 media/ru.lex.stories202611.lot.wav
+25132 586019fe1366 media/ru.lex.stories202611.nakupit.wav
+25132 a3e9bf884d68 media/ru.lex.stories202611.vyhodit.wav
+26156 7126b502fc8f media/ru.lex.stories202611.ustoyat.wav
+27180 f1caa248a854 media/ru.lex.stories202611.svetit.wav
+28204 177d9ddf2058 media/ru.lex.stories202611.vozrazit.wav
+28204 2dff9868757e media/ru.lex.stories202611.baton.wav
+28204 8d000f5079e6 media/ru.lex.stories202611.internet.wav
+28716 0ec4945097de media/ru.lex.stories202611.odevatsya.wav
+28716 2c4838aab98d media/ru.lex.stories202611.lunka.wav
+28716 5aaf808b3837 media/ru.lex.stories202611.muzykant.wav
+29228 c459439380f8 media/ru.lex.stories202611.pahnut.wav
+31276 6c4200a0cf7d media/ru.lex.stories202611.poetessa.wav
+33324 06a9591bdb21 media/ru.lex.stories202611.perevodchik.wav
+33324 0d965e6a9e53 media/ru.lex.stories202611.kollektsioner.wav
+33836 c34d1cb5e1be media/ru.lex.stories202611.nachinatsya.wav
+34348 f7f1a28d0618 media/ru.lex.stories202611.fizik.wav
+357942 9a4f572248fb sentences/entries.jsonl
+38800 b248bbc930c3 lexicon/synthesis.jsonl
+38956 dabf65c57015 media/ru.lex.stories202611.improvizirovat.wav
+4072387 df9f6c854566 media/manifest.jsonl
+41004 e977189d122b media/ru.lex.stories202611.zanaves.wav
+44612 b0e29b2f6fa5 lexicon/stories202611.jsonl
+46124 4d38d7e7d1c3 media/ru.lex.stories202611.fonar.wav
+49964 6f071d70a981 media/ru.lex.stories202611.foye.wav
+946 1103ea454945 manifest.yaml
+removed in 0.4.7:
+103724 7be451f65dc8 media/ru.sent.cp.p34.wav
+107564 e32a3b4acc11 media/ru.lex.stories202611.fonar.wav
+130604 a2e08d737bcb media/ru.lex.stories202611.kupe.wav
+145964 610d9017587d media/ru.lex.stories202611.vozrazit.wav
+145964 755da9b786ae media/ru.lex.stories202611.zanaves.wav
+145964 d59c4eaab9ab media/ru.lex.stories202611.perevodchik.wav
+153644 3e3f7ca0d895 media/ru.sent.a2.telefon-v-taksi.u005.wav
+16791 336674de31bc sentences/content-parity-2026-10-12.jsonl
+1802 0757b068beeb curriculum/units/496-synthesis-07.yaml
+192044 7be578619b63 media/ru.lex.stories202611.poetessa.wav
+195884 a80331c3038c media/ru.sent.b1.pismo-ne-temu.u001.wav
+1978 535d85a04453 curriculum/units/016-cyrillic-ya-eh-f.yaml
+1990 c55947bf8bdb curriculum/units/017-cyrillic-ts-ch-sh.yaml
+2142 fb25a7f1b7ed curriculum/units/018-cyrillic-shch-soft-hard.yaml
+222764 1eec8d70f58f media/ru.sent.a2.avtobus-ne-prishol.u005.wav
+2253 084cebccd40e curriculum/units/013-cyrillic-b-p-d-g.yaml
+2253 4e92adaf564a curriculum/units/011-cyrillic-k-e-n-s.yaml
+2265 19a7f374cf9e curriculum/units/014-cyrillic-l-z-zh-i.yaml
+2265 2fa1889b1fdd curriculum/units/012-cyrillic-r-v-u-kh.yaml
+2306 cac9f6fd6cae curriculum/units/010-cyrillic-a-o-m-t.yaml
+2349 06d414a0bc7a curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+241964 3aed60e944c1 media/ru.sent.cp.p11.wav
+284204 1d5643438c2d media/ru.lex.stories202611.improvizirovat.wav
+288044 e504b37db858 media/ru.sent.b2.spor-o-budushchem.u001.wav
+34604 1e48af1525b7 media/ru.lex.stories202611.lot.wav
+357422 60b400d954de sentences/entries.jsonl
+36328 1ae8db60e573 lexicon/stories202611.jsonl
+38800 9757e4f34bac lexicon/synthesis.jsonl
+4060682 6cebc87d9879 media/manifest.jsonl
+42284 4a2f8d5a8278 media/ru.lex.stories202611.foye.wav
+464684 e7ccf503316b media/ru.sent.b2.dva-bileta-v-odin-teatr.u002.wav
+49964 8ad0389979e2 media/ru.lex.stories202611.muzykant.wav
+49964 cf620360b054 media/ru.lex.stories202611.lunka.wav
+61484 34dbbdd71559 media/ru.lex.stories202611.yagoda.wav
+61484 593f317fafd8 media/ru.lex.stories202611.internet.wav
+65324 d04de09b7b3b media/ru.lex.stories202611.kollektsioner.wav
+69164 318ac5c049b9 media/ru.lex.stories202611.karman.wav
+727 cd40716cbbd9 manifest.yaml
+73004 3a484f654fd0 media/ru.lex.stories202611.ustoyat.wav
+80684 5f438a20f91e media/ru.lex.stories202611.fizik.wav
+84524 51de75339834 media/ru.lex.stories202611.ogon.wav
+85036 1e346e842929 media/ru.sent.cp.p37.wav
+88364 b72c7b3f28ca media/ru.lex.stories202611.doska.wav
+99884 c5e9e56472be media/ru.lex.stories202611.tsvet.wav
+present on both sides with different bytes:
+  curriculum/units/010-cyrillic-a-o-m-t.yaml
+    0.4.7: 2306 cac9f6fd6cae curriculum/units/010-cyrillic-a-o-m-t.yaml
+    0.4.6: 2306 6e40f9d820af curriculum/units/010-cyrillic-a-o-m-t.yaml
+  curriculum/units/011-cyrillic-k-e-n-s.yaml
+    0.4.7: 2253 4e92adaf564a curriculum/units/011-cyrillic-k-e-n-s.yaml
+    0.4.6: 2253 e188fb4a10f9 curriculum/units/011-cyrillic-k-e-n-s.yaml
+  curriculum/units/012-cyrillic-r-v-u-kh.yaml
+    0.4.7: 2265 2fa1889b1fdd curriculum/units/012-cyrillic-r-v-u-kh.yaml
+    0.4.6: 2265 af126b4467c4 curriculum/units/012-cyrillic-r-v-u-kh.yaml
+  curriculum/units/013-cyrillic-b-p-d-g.yaml
+    0.4.7: 2253 084cebccd40e curriculum/units/013-cyrillic-b-p-d-g.yaml
+    0.4.6: 2253 0eec90883aa5 curriculum/units/013-cyrillic-b-p-d-g.yaml
+  curriculum/units/014-cyrillic-l-z-zh-i.yaml
+    0.4.7: 2265 19a7f374cf9e curriculum/units/014-cyrillic-l-z-zh-i.yaml
+    0.4.6: 2265 9713b45d40ae curriculum/units/014-cyrillic-l-z-zh-i.yaml
+  curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+    0.4.7: 2349 06d414a0bc7a curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+    0.4.6: 2349 ad6486e241f1 curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+  curriculum/units/016-cyrillic-ya-eh-f.yaml
+    0.4.7: 1978 535d85a04453 curriculum/units/016-cyrillic-ya-eh-f.yaml
+    0.4.6: 1978 04ac75e8c7f2 curriculum/units/016-cyrillic-ya-eh-f.yaml
+  curriculum/units/017-cyrillic-ts-ch-sh.yaml
+    0.4.7: 1990 c55947bf8bdb curriculum/units/017-cyrillic-ts-ch-sh.yaml
+    0.4.6: 1990 9650d834321a curriculum/units/017-cyrillic-ts-ch-sh.yaml
+  curriculum/units/018-cyrillic-shch-soft-hard.yaml
+    0.4.7: 2142 fb25a7f1b7ed curriculum/units/018-cyrillic-shch-soft-hard.yaml
+    0.4.6: 2142 16ad8112bc15 curriculum/units/018-cyrillic-shch-soft-hard.yaml
+  curriculum/units/496-synthesis-07.yaml
+    0.4.7: 1802 0757b068beeb curriculum/units/496-synthesis-07.yaml
+    0.4.6: 1802 1f4ebc352e8b curriculum/units/496-synthesis-07.yaml
+  lexicon/stories202611.jsonl
+    0.4.7: 36328 1ae8db60e573 lexicon/stories202611.jsonl
+    0.4.6: 44612 b0e29b2f6fa5 lexicon/stories202611.jsonl
+  lexicon/synthesis.jsonl
+    0.4.7: 38800 9757e4f34bac lexicon/synthesis.jsonl
+    0.4.6: 38800 b248bbc930c3 lexicon/synthesis.jsonl
+  manifest.yaml
+    0.4.7: 727 cd40716cbbd9 manifest.yaml
+    0.4.6: 946 1103ea454945 manifest.yaml
+  media/manifest.jsonl
+    0.4.7: 4060682 6cebc87d9879 media/manifest.jsonl
+    0.4.6: 4072387 df9f6c854566 media/manifest.jsonl
+  media/ru.lex.stories202611.doska.wav
+    0.4.7: 88364 b72c7b3f28ca media/ru.lex.stories202611.doska.wav
+    0.4.6: 22060 3e351a5a1b39 media/ru.lex.stories202611.doska.wav
+  media/ru.lex.stories202611.fizik.wav
+    0.4.7: 80684 5f438a20f91e media/ru.lex.stories202611.fizik.wav
+    0.4.6: 34348 f7f1a28d0618 media/ru.lex.stories202611.fizik.wav
+  media/ru.lex.stories202611.fonar.wav
+    0.4.7: 107564 e32a3b4acc11 media/ru.lex.stories202611.fonar.wav
+    0.4.6: 46124 4d38d7e7d1c3 media/ru.lex.stories202611.fonar.wav
+  media/ru.lex.stories202611.foye.wav
+    0.4.7: 42284 4a2f8d5a8278 media/ru.lex.stories202611.foye.wav
+    0.4.6: 49964 6f071d70a981 media/ru.lex.stories202611.foye.wav
+  media/ru.lex.stories202611.improvizirovat.wav
+    0.4.7: 284204 1d5643438c2d media/ru.lex.stories202611.improvizirovat.wav
+    0.4.6: 38956 dabf65c57015 media/ru.lex.stories202611.improvizirovat.wav
+  media/ru.lex.stories202611.internet.wav
+    0.4.7: 61484 593f317fafd8 media/ru.lex.stories202611.internet.wav
+    0.4.6: 28204 8d000f5079e6 media/ru.lex.stories202611.internet.wav
+  media/ru.lex.stories202611.karman.wav
+    0.4.7: 69164 318ac5c049b9 media/ru.lex.stories202611.karman.wav
+    0.4.6: 18988 8a237e46e939 media/ru.lex.stories202611.karman.wav
+  media/ru.lex.stories202611.kollektsioner.wav
+    0.4.7: 65324 d04de09b7b3b media/ru.lex.stories202611.kollektsioner.wav
+    0.4.6: 33324 0d965e6a9e53 media/ru.lex.stories202611.kollektsioner.wav
+  media/ru.lex.stories202611.kupe.wav
+    0.4.7: 130604 a2e08d737bcb media/ru.lex.stories202611.kupe.wav
+    0.4.6: 20524 dbaf2153d0fe media/ru.lex.stories202611.kupe.wav
+  media/ru.lex.stories202611.lot.wav
+    0.4.7: 34604 1e48af1525b7 media/ru.lex.stories202611.lot.wav
+    0.4.6: 24108 c96da0f6c7b9 media/ru.lex.stories202611.lot.wav
+  media/ru.lex.stories202611.lunka.wav
+    0.4.7: 49964 cf620360b054 media/ru.lex.stories202611.lunka.wav
+    0.4.6: 28716 2c4838aab98d media/ru.lex.stories202611.lunka.wav
+  media/ru.lex.stories202611.muzykant.wav
+    0.4.7: 49964 8ad0389979e2 media/ru.lex.stories202611.muzykant.wav
+    0.4.6: 28716 5aaf808b3837 media/ru.lex.stories202611.muzykant.wav
+  media/ru.lex.stories202611.ogon.wav
+    0.4.7: 84524 51de75339834 media/ru.lex.stories202611.ogon.wav
+    0.4.6: 17964 4c86b2fedb23 media/ru.lex.stories202611.ogon.wav
+  media/ru.lex.stories202611.perevodchik.wav
+    0.4.7: 145964 d59c4eaab9ab media/ru.lex.stories202611.perevodchik.wav
+    0.4.6: 33324 06a9591bdb21 media/ru.lex.stories202611.perevodchik.wav
+  media/ru.lex.stories202611.poetessa.wav
+    0.4.7: 192044 7be578619b63 media/ru.lex.stories202611.poetessa.wav
+    0.4.6: 31276 6c4200a0cf7d media/ru.lex.stories202611.poetessa.wav
+  media/ru.lex.stories202611.tsvet.wav
+    0.4.7: 99884 c5e9e56472be media/ru.lex.stories202611.tsvet.wav
+    0.4.6: 17964 8c17637790d1 media/ru.lex.stories202611.tsvet.wav
+  media/ru.lex.stories202611.ustoyat.wav
+    0.4.7: 73004 3a484f654fd0 media/ru.lex.stories202611.ustoyat.wav
+    0.4.6: 26156 7126b502fc8f media/ru.lex.stories202611.ustoyat.wav
+  media/ru.lex.stories202611.vozrazit.wav
+    0.4.7: 145964 610d9017587d media/ru.lex.stories202611.vozrazit.wav
+    0.4.6: 28204 177d9ddf2058 media/ru.lex.stories202611.vozrazit.wav
+  media/ru.lex.stories202611.yagoda.wav
+    0.4.7: 61484 34dbbdd71559 media/ru.lex.stories202611.yagoda.wav
+    0.4.6: 21036 fe072ed538e4 media/ru.lex.stories202611.yagoda.wav
+  media/ru.lex.stories202611.zanaves.wav
+    0.4.7: 145964 755da9b786ae media/ru.lex.stories202611.zanaves.wav
+    0.4.6: 41004 e977189d122b media/ru.lex.stories202611.zanaves.wav
+  media/ru.sent.a2.avtobus-ne-prishol.u005.wav
+    0.4.7: 222764 1eec8d70f58f media/ru.sent.a2.avtobus-ne-prishol.u005.wav
+    0.4.6: 199724 f0539d410861 media/ru.sent.a2.avtobus-ne-prishol.u005.wav
+  media/ru.sent.a2.telefon-v-taksi.u005.wav
+    0.4.7: 153644 3e3f7ca0d895 media/ru.sent.a2.telefon-v-taksi.u005.wav
+    0.4.6: 153644 8e42191a3528 media/ru.sent.a2.telefon-v-taksi.u005.wav
+  media/ru.sent.b1.pismo-ne-temu.u001.wav
+    0.4.7: 195884 a80331c3038c media/ru.sent.b1.pismo-ne-temu.u001.wav
+    0.4.6: 184364 43446bfb07e9 media/ru.sent.b1.pismo-ne-temu.u001.wav
+  media/ru.sent.b2.dva-bileta-v-odin-teatr.u002.wav
+    0.4.7: 464684 e7ccf503316b media/ru.sent.b2.dva-bileta-v-odin-teatr.u002.wav
+    0.4.6: 1105964 60a08db0c07f media/ru.sent.b2.dva-bileta-v-odin-teatr.u002.wav
+  media/ru.sent.b2.spor-o-budushchem.u001.wav
+    0.4.7: 288044 e504b37db858 media/ru.sent.b2.spor-o-budushchem.u001.wav
+    0.4.6: 195884 e8d0e0bb7a0b media/ru.sent.b2.spor-o-budushchem.u001.wav
+  media/ru.sent.cp.p11.wav
+    0.4.7: 241964 3aed60e944c1 media/ru.sent.cp.p11.wav
+    0.4.6: 119084 084bc284ce0c media/ru.sent.cp.p11.wav
+  media/ru.sent.cp.p34.wav
+    0.4.7: 103724 7be451f65dc8 media/ru.sent.cp.p34.wav
+    0.4.6: 180524 9cea8a8c2713 media/ru.sent.cp.p34.wav
+  media/ru.sent.cp.p37.wav
+    0.4.7: 85036 1e346e842929 media/ru.sent.cp.p37.wav
+    0.4.6: 138284 49e73593e517 media/ru.sent.cp.p37.wav
+  sentences/content-parity-2026-10-12.jsonl
+    0.4.7: 16791 336674de31bc sentences/content-parity-2026-10-12.jsonl
+    0.4.6: 17211 c21e08e574b7 sentences/content-parity-2026-10-12.jsonl
+  sentences/entries.jsonl
+    0.4.7: 357422 60b400d954de sentences/entries.jsonl
+    0.4.6: 357942 9a4f572248fb sentences/entries.jsonl
+

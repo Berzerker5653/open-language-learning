@@ -1,0 +1,46 @@
+worktree=/home/hunter/.hermes/cache/scratch/lts-ru047/work (detached at HEAD=6f489d4a2ea2ece4f3452608c4b9f24d853d58d2; built from main HEAD)
+HEAD=6f489d4a2ea2ece4f3452608c4b9f24d853d58d2
+media hardlinked from /home/hunter/game-dev/LTS (gitignored bytes; manifest tracked at HEAD)
+--- manifests as shipped ---
+1103ea4549454d85886feb9124f09ce7140532c689aa4bca206310bbed2a1a24  languages/ru-RU/manifest.yaml
+version: "0.4.7"
+  content_license: "CC0-1.0"
+rc-ru-RU-validate                            exit=0
+rc-ru-RU-lint                                exit=0
+rc-ru-RU-test                                exit=0
+rc-ru-RU-audit-curriculum                    exit=0
+rc-ru-RU-audit-lexicon                       exit=0
+rc-ru-RU-audit-licenses                      exit=0
+rc-ru-RU-audit-sources                       exit=0
+rc-build-ru-RU                               exit=0
+archive: /home/hunter/.hermes/cache/scratch/lts-ru047/work/dist/rc-0.4.7/ru-ru-reference-0.4.7.lpk
+bytes=293645025
+b2f564a8eb3b88f0632c4a3909468e12a8a539b31ddd9afe47bf1a883f6050f2  /home/hunter/.hermes/cache/scratch/lts-ru047/work/dist/rc-0.4.7/ru-ru-reference-0.4.7.lpk
+rc-inspect-ru-RU                             exit=0
+archive members=5987 media_members=5032
+manifest_rows=5032 media_members=5032 delta=0
+words_sidecar_member=1
+--- ru-RU: PUBLISHED 0.4.6 (PUBLISHED/CATALOG-PINNED) -> CANDIDATE 0.4.7 (bytes + 12-hex hash + path) ---
+published 0.4.6 members = 5973   candidate 0.4.7 members = 5987
+identical (size+hash)   = 5929
+added in 0.4.7:
+1105964 60a08db0c07f media/ru.sent.b2.dva-bileta-v-odin-teatr.u002.wav
+119084 084bc284ce0c media/ru.sent.cp.p11.wav
+138284 49e73593e517 media/ru.sent.cp.p37.wav
+14892 b57156283214 media/ru.lex.stories202611.pet.wav
+rc-install-ru-RU                             exit=0
+find: ‘/home/hunter/.hermes/cache/scratch/lts-ru047/work/dist/rc-0.4.7/store-ru-RU’: No such file or directory
+store layout: 
+current pointer: 
+find: ‘/home/hunter/.hermes/cache/scratch/lts-ru047/work/dist/rc-0.4.7/store-ru-RU’: No such file or directory
+media files in installed tree: 0
+find: ‘/home/hunter/.hermes/cache/scratch/lts-ru047/work/dist/rc-0.4.7/store-ru-RU’: No such file or directory
+rows_checked=5032 installed_mismatches=0
+rc-draft-catalog                             exit=0
+      "license": "CC0-1.0",
+      "pack_id": "org.openlanguage.ru-ru.reference",
+      "sha256": "b2f564a8eb3b88f0632c4a3909468e12a8a539b31ddd9afe47bf1a883f6050f2",
+      "size_bytes": 293645025,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.7/ru-ru-reference-0.4.7.lpk",
+      "version": "0.4.7"
+RC_047_DONE

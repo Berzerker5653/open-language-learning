@@ -641,6 +641,31 @@ changed + 24 added manifest rows. GitHub asset digest equals the catalog pin; re
 non-prerelease, immutable. The ja-JP 0.4.3/0.4.2/0.4.1/0.4.0 archives stay published as rollback
 targets; the ru-RU 0.4.6 pin is unchanged.
 
+**ru-RU 0.4.7 published 2026-11-22** (RU-CONTENT-FREEZE-047-001; the pinned
+0.4.6 archive predates the 14 `ru.lex.stories202611` drill audio rows landed by
+RU-STORIES-MEDIA-001, which turned every CI `Restore reference-pack audio` leg
+red — `fetch-pack-audio.sh` reports manifest rows the archive does not carry).
+Built by `state/evidence/RC-0.4.7-2026-11-21/build-rc-0.4.7.sh` from HEAD
+6f489d4 in an isolated detached worktree (sibling lanes held WIP; gitignored
+`.wav` bytes hardlinked from the main tree). Seven gates exit 0; archive
+293,645,025 bytes, sha256 `b2f564a8eb3b88f0632c4a3909468e12a8a539b31ddd9afe47bf1a883f6050f2`;
+manifest rows 5,032 == media members 5,032 delta 0; `words.jsonl` sidecar
+present; install round-trip verified — an independent re-check of the installed
+store against the manifest: 5,032/5,032 rows sha-match, 0 mismatches (the first
+block of `install-ru-RU.txt` is a stale append from an aborted first launch and
+is superseded by the verified second block). Accounting vs published 0.4.6
+(`diff-046-to-047-ru-RU.txt`): 5,973 -> 5,987 members, +14 added — exactly the
+14 stories202611 drill wavs — 0 removed, 28 changed wavs: the 8 sentence
+re-bakes for text/stress changed in c347aa2 (pack narrator qwen3/ono_anna;
+cp.p37 returned from an off-voice piper row to the narrator) and the 20
+pre-existing stories202611 drill clips failing gate v5 (Piper ladder first per
+owner policy; fonar+foye via bake-bestof K=8), plus `media/manifest.jsonl` and
+the post-0.4.6 tracked content files. Content freeze for this release recorded
+in `state/notes/RU-CONTENT-FREEZE-047-001.md`. GitHub asset digest equals the
+catalog pin; release non-draft, non-prerelease, immutable. The
+0.4.6/0.4.5/0.4.4/0.4.3 ru archives stay published as rollback targets; the
+ja-JP 0.4.4 pin is unchanged.
+
 **Licensing paper corrected after publication.** The published ja-JP 0.4.0
 archive carries three `licenses.jsonl` records. The tree now carries five: the
 baked-audio record was corrected to name the Qwen3-TTS bake engine (ADR-0023; the

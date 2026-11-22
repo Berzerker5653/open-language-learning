@@ -1,0 +1,17 @@
+find: ‘/home/hunter/.hermes/cache/scratch/lts-ru047/work/dist/rc-0.4.7/store-ru-RU’: No such file or directory
+store layout: 
+current pointer: 
+find: ‘/home/hunter/.hermes/cache/scratch/lts-ru047/work/dist/rc-0.4.7/store-ru-RU’: No such file or directory
+media files in installed tree: 0
+find: ‘/home/hunter/.hermes/cache/scratch/lts-ru047/work/dist/rc-0.4.7/store-ru-RU’: No such file or directory
+sidecar in installed tree: 0
+-- installed wav sha256 vs manifest rows --
+Traceback (most recent call last):
+  File "<stdin>", line 5, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: 'languages/ru-RU/media/manifest.jsonl'
+store layout: /home/hunter/.hermes/cache/scratch/lts-ru047/work/dist/rc-0.4.7/store-ru-RU/org.openlanguage.ru-ru.reference /home/hunter/.hermes/cache/scratch/lts-ru047/work/dist/rc-0.4.7/store-ru-RU/org.openlanguage.ru-ru.reference/0.4.7 /home/hunter/.hermes/cache/scratch/lts-ru047/work/dist/rc-0.4.7/store-ru-RU/org.openlanguage.ru-ru.reference/current 
+current pointer: 0.4.7
+media files in installed tree: 5032
+sidecar in installed tree: 1
+-- installed wav sha256 vs manifest rows --
+rows_checked=5032 installed_mismatches=0
