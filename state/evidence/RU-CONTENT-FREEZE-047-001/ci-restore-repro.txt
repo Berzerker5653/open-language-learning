@@ -1,0 +1,3 @@
+# LOCAL CI-RESTORE REPRO against published 0.4.7 (run in RC worktree at HEAD 6f489d4 with the re-pinned catalog from 61c3ee1, 2026-11-22T00:42:05-07:00)
+fetch-pack-audio: summary languages/ru-RU: catalog stamp 15877955fc50 matches a fully verified restored tree: rows checked=5032 files valid=5032 files restored=0 files already valid=5032 rows failing=0
+EXIT=0

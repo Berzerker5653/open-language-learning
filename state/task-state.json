@@ -2686,7 +2686,8 @@
         "state/evidence/RC-0.4.7-2026-11-21/SUMMARY.txt",
         "state/evidence/RC-0.4.7-2026-11-21/archive-ru-RU.txt",
         "state/evidence/RC-0.4.7-2026-11-21/install-ru-RU.txt",
-        "state/evidence/RC-0.4.7-2026-11-21/diff-046-to-047-ru-RU.txt"
+        "state/evidence/RC-0.4.7-2026-11-21/diff-046-to-047-ru-RU.txt",
+        "state/evidence/RU-CONTENT-FREEZE-047-001/ci-restore-repro.txt"
       ],
       "updated": "2026-11-22"
     }
