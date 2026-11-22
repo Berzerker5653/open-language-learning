@@ -292,3 +292,74 @@ describe("LessonEncounter with the engine's cursor", () => {
     expect(html).not.toContain("lesson-position");
   });
 });
+
+// ORTHO-LETTER-UNITS-001 (owner phone dogfood 2026-11-21, complaint 4):
+// the on-ramp met eight rows for four letters because the pack carried
+// one entity per case form. The letter is the entity; both printed forms
+// ride on ONE row, form glyph first.
+describe("orthography rows carry one letter with both forms", () => {
+  const cyrillicFour: LessonPlan = {
+    unit_id: "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    goal_id: "ru.goal.on-ramp.cyrillic",
+    title: "Printed Cyrillic: А а, О о, М м, Т т",
+    summary: "Start here: your first four printed letters.",
+    stages: [
+      {
+        activity_id: "ru.activity.on-ramp.cyrillic-a-o-m-t-read",
+        activity_type: "encounter-read",
+        stage_kind: "encounter",
+        runner: "encounter",
+        modality: "reading",
+        support_level: 1,
+        content: [
+          {
+            content_id: "ru.orth.cyrillic.a",
+            kind: "orthography",
+            display: "а",
+            forms: ["А", "а"],
+            reading: "sound a — name а",
+          },
+          {
+            content_id: "ru.orth.cyrillic.o",
+            kind: "orthography",
+            display: "о",
+            forms: ["О", "о"],
+            reading: "sound o — name о",
+          },
+          {
+            content_id: "ru.orth.cyrillic.m",
+            kind: "orthography",
+            display: "м",
+            forms: ["М", "м"],
+            reading: "sound m — name эм",
+          },
+          {
+            content_id: "ru.orth.cyrillic.t",
+            kind: "orthography",
+            display: "т",
+            forms: ["Т", "т"],
+            reading: "sound t — name тэ",
+          },
+        ],
+      },
+    ],
+  };
+
+  it("renders four letter rows, each leading with its form glyphs", () => {
+    const html = renderToStaticMarkup(
+      <LessonEncounter
+        lesson={cyrillicFour}
+        onStart={() => undefined}
+        onScenario={() => undefined}
+      />,
+    );
+    expect((html.match(/class="lesson__item"/g) ?? []).length).toBe(4);
+    expect(html).toContain("А а");
+    expect(html).toContain("О о");
+    expect(html).toContain("М м");
+    expect(html).toContain("Т т");
+    // No ghost rows for the invisible other case.
+    expect(html).not.toContain("cyrillic.a-upper");
+    expect(html).not.toContain("cyrillic.a-lower");
+  });
+});

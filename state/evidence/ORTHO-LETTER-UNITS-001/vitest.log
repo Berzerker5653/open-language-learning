@@ -1,0 +1,15 @@
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'vitest' run
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/apps/desktop
+
+
+ Test Files  56 passed (56)
+      Tests  460 passed (460)
+   Start at  19:35:09
+   Duration  2.10s (transform 39%, tests 25%, environment 22%, import 14%, worker 1%)
+
+  Transform  |node| transforming modules took 4.53s · 59% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

@@ -38,7 +38,13 @@ describe("no speech model (journey c)", () => {
     expect(speaking.querySelector('[data-testid="dict-sentence"]')?.textContent).toContain(
       "おばあさん",
     );
-    expect(app.engine.argsFor("dictation_target")).toEqual({ packId: JA, offset: 0 });
+    // PRACTICE-GATE-001: the sentence pool is encounter-gated engine-side,
+    // so the request names the profile it is generated for.
+    expect(app.engine.argsFor("dictation_target")).toEqual({
+      profileId: "lee",
+      packId: JA,
+      offset: 0,
+    });
 
     // A real recording: the shipped capture path opens the device and frames
     // reach the buffer, so the attempt below is audio, not a fixture string.

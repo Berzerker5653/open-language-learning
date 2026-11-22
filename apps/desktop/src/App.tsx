@@ -3766,8 +3766,12 @@ export function App() {
   async function fetchDictation(offset: number) {
     const inv = detectInvoke();
     if (!inv) return;
+    // PRACTICE-GATE-001: the sentence pool is encounter-gated engine-side,
+    // so the request names the profile it is generated for.
+    if (!profileId) return;
     try {
       const req = await packRequest<DictationSentence>(inv, selectedPack, "dictation_target", {
+        profileId,
         offset,
       });
       if (!req.ok) {

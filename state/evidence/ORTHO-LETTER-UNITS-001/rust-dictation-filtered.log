@@ -1,0 +1,11 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.26s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-7647ca427c780ccc)
+
+running 4 tests
+test tests::dictation_check_abstains_when_model_off ... ok
+test tests::dictation_check_abstains_on_silence ... ok
+test tests::dictation_check_flags_clear_mismatch ... ok
+test tests::dictation_check_matches_spoken_target ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 212 filtered out; finished in 0.52s
+

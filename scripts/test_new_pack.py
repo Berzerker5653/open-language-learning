@@ -255,6 +255,23 @@ class NewPackTest(unittest.TestCase):
                 self.assertEqual(set(node["tokens"]), node["labels"],
                                  "every expected_actions token needs an action_labels entry")
 
+    def test_per_case_orthography_ids_are_refused(self):
+        """ORTHO-LETTER-UNITS-001: one orthography entity per letter; case
+        forms are a forms attribute, never -upper/-lower rows."""
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("new_pack", GENERATOR)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        with self.assertRaises(SystemExit):
+            mod.reject_per_case_orthography([{"id": "ru.orth.cyrillic.a-upper"}])
+        with self.assertRaises(SystemExit):
+            mod.reject_per_case_orthography([{"id": "ru.orth.cyrillic.a-lower"}])
+        # The merged shape passes: one row per letter.
+        mod.reject_per_case_orthography([
+            {"id": "ru.orth.cyrillic.a"},
+            {"id": "ru.orth.cyrillic.stress-mark"},
+        ])
+
     def test_unknown_script_and_dirty_output_are_refused(self):
         out = self.root / "bad"
         proc = generate(out, "--scripts", " Klingonian ")

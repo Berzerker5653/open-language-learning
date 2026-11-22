@@ -1173,6 +1173,11 @@ struct OrthEntry {
     /// Rule 4: glyphs (typically Latin lookalikes) this letter will be
     /// confused with; drives confusable-pair drills and sequencing.
     confusable_with: Vec<String>,
+    /// ORTHO-LETTER-UNITS-001: the letter's written forms (e.g. ["А", "а"])
+    /// in the pack's display order. One entity per letter, forms as
+    /// attributes — a per-case row (-upper/-lower) is a schema-level
+    /// authoring bug, not a letter. Empty = single-form letter.
+    forms: Vec<String>,
 }
 
 /// Parse an installed pack's `orthography/*.jsonl` units. A pack
@@ -1245,6 +1250,20 @@ fn orth_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<OrthEnt
                             .filter_map(|x| x.as_str())
                             .filter(|s| !s.is_empty())
                             .map(str::to_string)
+                            .collect()
+                    })
+                    .unwrap_or_default(),
+                forms: entry
+                    .get("forms")
+                    .and_then(|v| v.as_array())
+                    .map(|a| {
+                        a.iter()
+                            .filter_map(|f| {
+                                f.get("symbol")
+                                    .and_then(|s| s.as_str())
+                                    .filter(|s| !s.is_empty())
+                                    .map(str::to_string)
+                            })
                             .collect()
                     })
                     .unwrap_or_default(),
@@ -2292,6 +2311,196 @@ fn pack_goals(root: &Path) -> std::sync::Arc<Vec<PackGoal>> {
     let goals = std::sync::Arc::new(goals);
     cache.insert(root.to_path_buf(), std::sync::Arc::clone(&goals));
     goals
+}
+
+// ---------------------------------------------------------------------------
+// PRACTICE-GATE-001: the practice queue is GENERATED from encounter state.
+// Self-directed practice modes must pull from the same eligibility source
+// the plan's NEW pool uses (the SESSION-SEQUENCE-001 gate interface:
+// `locked_new_content` + `goal_locked_new_content`) — one gating engine,
+// never a fork. A content id is practice-eligible only when it is MET
+// (an UNLOCKED unit references it) AND not locked: content above the
+// learner's band never reaches a drill, and content no unit references has
+// no encounter path at all, so it is not "met" either. The MET half is
+// load-bearing: the goal-graph lock set is exclusive (it only covers ids
+// SOME unit references), so unclaimed lexicon rows and orphan sentences
+// sit in neither lock set — a lock-only filter still served «Я учу русский
+// язык.» (ru.sent.cp.p01, referenced by no unit) and B2 vocabulary to a
+// day-0 learner.
+// ---------------------------------------------------------------------------
+
+/// The content ids the learner has MET: referenced by at least one unit
+/// whose OWN gates currently hold — the goal graph's band edges
+/// (`unit_goal_locked`) and the `requires_unit` phase gates
+/// (`unit_gate_holds`), the same predicates the plan's NEW pool uses.
+fn practice_met_content(
+    units: &[PackUnit],
+    goals: &[PackGoal],
+    derived: &[lts_learner_model::DerivedMastery],
+) -> std::collections::HashSet<String> {
+    let mut met = std::collections::HashSet::new();
+    for unit in units {
+        if unit_goal_locked(unit, goals, derived)
+            || !unit
+                .requires_unit
+                .iter()
+                .all(|g| unit_gate_holds(g, units, derived))
+        {
+            continue;
+        }
+        for act in &unit.activities {
+            for c in &act.content_refs {
+                met.insert(c.clone());
+            }
+        }
+    }
+    met
+}
+
+/// PRACTICE-GATE-001: the ONE eligibility spelling every practiced stream
+/// uses: met AND not locked. Plan/flow routes (practice_build, goal-path
+/// progression, reviews of already-introduced items) are untouched.
+fn practice_eligible(
+    id: &str,
+    met: &std::collections::HashSet<String>,
+    locked: &std::collections::HashSet<String>,
+) -> bool {
+    met.contains(id) && !locked.contains(id)
+}
+
+/// The met/locked pools for ONE installed pack version and one profile —
+/// the pack-scoped shape (dictation names its pack; shadowing and the
+/// queue serve the profile's active pack).
+fn practice_pools_at(
+    data: &Path,
+    pack_id: &str,
+    profile_id: &str,
+) -> Result<
+    (
+        std::collections::HashSet<String>,
+        std::collections::HashSet<String>,
+    ),
+    String,
+> {
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let derived = derive_pairs(&store, profile_id, &rfc3339_utc(now_secs()))?;
+    let root = data.join("packs").join(pack_id).join(&version);
+    let units = pack_units(&root);
+    let goals = pack_goals(&root);
+    let met = practice_met_content(&units, &goals, &derived);
+    let mut locked = locked_new_content(&units, &derived);
+    locked.extend(goal_locked_new_content(&units, &goals, &derived));
+    Ok((met, locked))
+}
+
+/// The met/locked pools across every pack the profile has selected or set
+/// active (the writing stream serves tasks built from profile packs).
+fn practice_pools_for_profile(
+    data: &Path,
+    profile_id: &str,
+) -> Result<
+    (
+        std::collections::HashSet<String>,
+        std::collections::HashSet<String>,
+    ),
+    String,
+> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let derived = derive_pairs(&store, profile_id, &rfc3339_utc(now_secs()))?;
+    let mut met = std::collections::HashSet::new();
+    let mut locked = std::collections::HashSet::new();
+    let mut packs: Vec<String> = store
+        .selected_packs(profile_id)
+        .map_err(|e| e.to_string())?
+        .into_iter()
+        .map(|(pack_id, _v)| pack_id)
+        .collect();
+    if let Ok(active) = packs::active_pack(data, profile_id) {
+        packs.extend(active);
+    }
+    packs.sort();
+    packs.dedup();
+    for pack_id in packs {
+        let Some(version) = lts_langpack::archive::current_version(&pack_id, &data.join("packs"))
+        else {
+            continue;
+        };
+        let root = data.join("packs").join(&pack_id).join(&version);
+        let units = pack_units(&root);
+        let goals = pack_goals(&root);
+        met.extend(practice_met_content(&units, &goals, &derived));
+        locked.extend(locked_new_content(&units, &derived));
+        locked.extend(goal_locked_new_content(&units, &goals, &derived));
+    }
+    Ok((met, locked))
+}
+
+/// PRACTICE-GATE-001: the practice queue itself — what the Practice tab
+/// offers is generated from this list, never browsed from the pack. One
+/// row per practice-eligible content id, kind resolved from the pack's own
+/// tables (never from id prefixes or script literals).
+#[derive(Serialize, Clone, Debug)]
+struct PracticeQueueEntry {
+    content_id: String,
+    kind: &'static str,
+}
+
+#[tauri::command]
+fn practice_queue(profile_id: String) -> Result<Vec<PracticeQueueEntry>, String> {
+    practice_queue_at(&data_dir(), &profile_id)
+}
+
+fn practice_queue_at(data: &Path, profile_id: &str) -> Result<Vec<PracticeQueueEntry>, String> {
+    let active = packs::active_pack(data, profile_id)?;
+    let pack_id = active.first().ok_or("no active language pack")?;
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let derived = derive_pairs(&store, profile_id, &rfc3339_utc(now_secs()))?;
+    let units = pack_units(&data.join("packs").join(pack_id).join(&version));
+    let goals = pack_goals(&data.join("packs").join(pack_id).join(&version));
+    let met = practice_met_content(&units, &goals, &derived);
+    let mut locked = locked_new_content(&units, &derived);
+    locked.extend(goal_locked_new_content(&units, &goals, &derived));
+    let lex_entries = lexicon_entries(data, pack_id, &version)?;
+    // The K-70 learned-kana gate rides the lexicon streams exactly as it
+    // rides the plan's NEW pool.
+    let learned_kana = learned_kana_set(&units, &orth_entries(data, pack_id, &version)?, &derived);
+    let mut entries: Vec<PracticeQueueEntry> = Vec::new();
+    for e in sentence_entries(data, pack_id, &version)?
+        .iter()
+        .filter(|e| practice_eligible(&e.id, &met, &locked))
+    {
+        entries.push(PracticeQueueEntry {
+            content_id: e.id.clone(),
+            kind: "sentence",
+        });
+    }
+    for e in lex_entries
+        .iter()
+        .filter(|e| practice_eligible(&e.id, &met, &locked))
+    {
+        if !word_kana_eligible(&e.surface, e.reading.as_deref(), &learned_kana) {
+            continue;
+        }
+        entries.push(PracticeQueueEntry {
+            content_id: e.id.clone(),
+            kind: "lexicon",
+        });
+    }
+    for e in orth_entries(data, pack_id, &version)?
+        .iter()
+        .filter(|e| practice_eligible(&e.id, &met, &locked))
+    {
+        entries.push(PracticeQueueEntry {
+            content_id: e.id.clone(),
+            kind: "orthography",
+        });
+    }
+    entries.sort_by(|a, b| a.content_id.cmp(&b.content_id));
+    Ok(entries)
 }
 
 /// Re-derive mastery for every (content, dimension) pair the evidence
@@ -4819,7 +5028,7 @@ struct DictationResult {
     error_offers: Vec<lts_activity::form_errors::FormErrorOffer>,
 }
 
-#[derive(Serialize, Clone)]
+#[derive(Serialize, Clone, Debug)]
 struct DictationTarget {
     id: String,
     /// Surface form shown to the learner (may contain kanji).
@@ -5887,7 +6096,17 @@ fn normalize_for_match(s: &str) -> Vec<char> {
 /// surface and reading normalize equal, so the free-ASR transcript compares
 /// cleanly to the cue; a pack whose script has no reading field (Russian)
 /// dictates its surface text (U04). `offset` cycles the candidates.
-fn dictation_target_at(data: &Path, pack_id: &str, offset: u32) -> Result<DictationTarget, String> {
+/// PRACTICE-GATE-001: the pool is the learner's practice-eligible set —
+/// sentences from units the goal graph has unlocked — never the whole
+/// pack. A day-one profile's pool is empty and the call refuses honestly
+/// instead of serving a full-sentence reading drill to a learner who has
+/// not met the alphabet.
+fn dictation_target_at(
+    data: &Path,
+    pack_id: &str,
+    profile_id: &str,
+    offset: u32,
+) -> Result<DictationTarget, String> {
     if !packs::valid_pack_id(pack_id) {
         return Err("pack not allowlisted".into());
     }
@@ -5898,14 +6117,21 @@ fn dictation_target_at(data: &Path, pack_id: &str, offset: u32) -> Result<Dictat
         Ok(texts) => texts.join("\n"),
         Err(_) => return Err("pack declares no sentences".to_string()),
     };
+    let (met, locked) = practice_pools_at(data, pack_id, profile_id)?;
     let mut clean_match: Vec<DictationTarget> = Vec::new();
     let mut all: Vec<DictationTarget> = Vec::new();
     for line in text.lines().filter(|l| !l.trim().is_empty()) {
         let v: serde_json::Value =
             serde_json::from_str(line).map_err(|_| "bad sentences entries".to_string())?;
+        let id = v["id"].as_str().unwrap_or("").to_string();
+        // PRACTICE-GATE-001: only met content dictates; the pack's whole
+        // sentence file is not a menu.
+        if !practice_eligible(&id, &met, &locked) {
+            continue;
+        }
         let reading = v["reading"].as_str().unwrap_or("").to_string();
         let t = DictationTarget {
-            id: v["id"].as_str().unwrap_or("").to_string(),
+            id: id.to_string(),
             text: v["text"].as_str().unwrap_or("").to_string(),
             // Russian rows carry no reading field at all: the surface IS the
             // comparison target (U04). Absent reading travels as null so the
@@ -5934,7 +6160,9 @@ fn dictation_target_at(data: &Path, pack_id: &str, offset: u32) -> Result<Dictat
         &clean_match
     };
     if pool.is_empty() {
-        return Err("pack declares no usable sentences".into());
+        return Err(
+            "no sentence practice is unlocked yet — finish more lessons to unlock it".to_string(),
+        );
     }
     Ok(pool[(offset as usize) % pool.len()].clone())
 }
@@ -6092,11 +6320,15 @@ fn build_writing_tasks(
 }
 
 /// Next unattempted writing target for the profile (deterministic order;
-/// attempted items rotate out so practice advances).
+/// attempted items rotate out so practice advances). PRACTICE-GATE-001:
+/// the pool is restricted to the learner's practice-eligible set — a
+/// level-0 learner never sees a writing drill over words they have not
+/// met; letter drills come through the plan/orthography path.
 #[tauri::command]
 fn writing_task(profile_id: String) -> Result<Option<lts_activity::writing::WritingTask>, String> {
     let data = data_dir();
     let tasks = writing_tasks_for_profile(&data, &profile_id)?;
+    let (met, locked) = practice_pools_for_profile(&data, &profile_id)?;
     let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
     let attempted: std::collections::HashSet<String> = store
         .evidence_for_profile(&profile_id)
@@ -6107,6 +6339,7 @@ fn writing_task(profile_id: String) -> Result<Option<lts_activity::writing::Writ
         .collect();
     Ok(tasks
         .iter()
+        .filter(|t| practice_eligible(&t.item_id, &met, &locked))
         .find(|t| !attempted.contains(&t.item_id))
         .cloned())
 }
@@ -6896,7 +7129,7 @@ fn contrast_audio_at(
 /// feedback is self-comparison (play model audio, speak, play your
 /// recording back). Exposing the pack lexicon keeps the activity
 /// pack-data-driven for any language.
-#[derive(Serialize)]
+#[derive(Serialize, Debug)]
 struct ShadowItem {
     content_id: String,
     surface: String,
@@ -6918,8 +7151,29 @@ async fn shadowing_items(profile_id: String) -> Result<Vec<ShadowItem>, String> 
 fn shadowing_items_at(data: &Path, profile_id: &str) -> Result<Vec<ShadowItem>, String> {
     let active = packs::active_pack(data, profile_id)?;
     let pack_id = active.first().ok_or("no active language pack")?;
+    // PRACTICE-GATE-001: shadow material is the learner's met vocabulary,
+    // not the pack's whole lexicon. The K-70 learned-kana gate rides this
+    // stream exactly as it rides the plan's NEW pool.
     let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
         .ok_or("pack not installed")?;
+    let kana_units = pack_units(&data.join("packs").join(pack_id).join(&version));
+    let kana_goals = pack_goals(&data.join("packs").join(pack_id).join(&version));
+    let kana_derived_rfc = rfc3339_utc(now_secs());
+    let kana_store =
+        lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let kana_derived = derive_pairs(&kana_store, profile_id, &kana_derived_rfc)?;
+    let met = practice_met_content(&kana_units, &kana_goals, &kana_derived);
+    let mut locked = locked_new_content(&kana_units, &kana_derived);
+    locked.extend(goal_locked_new_content(
+        &kana_units,
+        &kana_goals,
+        &kana_derived,
+    ));
+    let learned_kana = learned_kana_set(
+        &kana_units,
+        &orth_entries(data, pack_id, &version)?,
+        &kana_derived,
+    );
     // WORD-TIMING-001: read the same langpack sidecar loader the validator
     // uses; an absent or corrupt overlay simply means "no timings", which is
     // the pre-feature render path (install-time validation already flagged
@@ -6935,6 +7189,10 @@ fn shadowing_items_at(data: &Path, profile_id: &str) -> Result<Vec<ShadowItem>, 
         .unwrap_or_default();
     Ok(lexicon_entries(data, pack_id, &version)?
         .into_iter()
+        .filter(|e| {
+            practice_eligible(&e.id, &met, &locked)
+                && word_kana_eligible(&e.surface, e.reading.as_deref(), &learned_kana)
+        })
         .map(|e| ShadowItem {
             words: timings.get(&e.id).cloned().unwrap_or_default(),
             content_id: e.id,
@@ -9516,6 +9774,12 @@ struct LessonContent {
     content_id: String,
     kind: &'static str,
     display: String,
+    /// ORTHO-LETTER-UNITS-001: an orthography row's written forms in the
+    /// pack's display order ("А а"). One row per letter, both forms
+    /// visible — never one row per case form. Absent for every other
+    /// content kind and for single-form letters.
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    forms: Vec<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
     reading: Option<String>,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -9690,6 +9954,7 @@ fn lesson_plan_at(
                     content_id: id.to_string(),
                     kind: "lexicon",
                     display: e.surface.clone(),
+                    forms: Vec::new(),
                     reading: e.reading.clone(),
                     gloss: Some(e.gloss.clone()),
                     explanation: None,
@@ -9700,6 +9965,7 @@ fn lesson_plan_at(
                     content_id: id.to_string(),
                     kind: "sentence",
                     display: e.text.clone(),
+                    forms: Vec::new(),
                     reading: e.reading.clone(),
                     gloss: e.gloss.clone(),
                     explanation: None,
@@ -9710,6 +9976,7 @@ fn lesson_plan_at(
                     content_id: id.to_string(),
                     kind: "orthography",
                     display: e.symbol.clone(),
+                    forms: e.forms.clone(),
                     reading: Some(e.reading.clone()),
                     gloss: None,
                     explanation: None,
@@ -9720,6 +9987,7 @@ fn lesson_plan_at(
                     content_id: id.to_string(),
                     kind: "grammar",
                     display: g.name.clone(),
+                    forms: Vec::new(),
                     reading: None,
                     gloss: None,
                     explanation: (!g.definition.is_empty()).then(|| g.definition.clone()),
@@ -10478,8 +10746,12 @@ async fn dictation_check(attempt: DictationAttempt) -> Result<DictationResult, S
 
 /// Pick a pack sentence to dictate (ties dictation to curriculum).
 #[tauri::command]
-fn dictation_target(pack_id: String, offset: u32) -> Result<DictationTarget, String> {
-    dictation_target_at(&data_dir(), &pack_id, offset)
+fn dictation_target(
+    profile_id: String,
+    pack_id: String,
+    offset: u32,
+) -> Result<DictationTarget, String> {
+    dictation_target_at(&data_dir(), &pack_id, &profile_id, offset)
 }
 
 fn now_secs() -> u64 {
@@ -10567,6 +10839,7 @@ fn wire_commands(builder: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::W
             complete_onboarding,
             home_state,
             practice_plan,
+            practice_queue,
             first_run_steps,
             progress_summary,
             available_models,
@@ -10672,6 +10945,7 @@ fn wire_serve_commands(
             complete_onboarding,
             home_state,
             practice_plan,
+            practice_queue,
             first_run_steps,
             progress_summary,
             available_models,
@@ -10773,6 +11047,7 @@ pub(crate) const SERVE_COMMAND_NAMES: &[&str] = &[
     "complete_onboarding",
     "home_state",
     "practice_plan",
+    "practice_queue",
     "first_run_steps",
     "progress_summary",
     "available_models",
@@ -13825,7 +14100,17 @@ activities:
         let tmp = tempfile::TempDir::new().unwrap();
         let data = tmp.path();
         install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
-        let t = dictation_target_at(data, "org.openlanguage.ja-jp.reference", 0).unwrap();
+        let p = create_local_profile(data, "Rotator").unwrap();
+        let version = lts_langpack::archive::current_version(
+            "org.openlanguage.ja-jp.reference",
+            &data.join("packs"),
+        )
+        .unwrap();
+        lts_storage::Store::open(data.join("profiles.db"))
+            .unwrap()
+            .set_active_pack(&p.id, "org.openlanguage.ja-jp.reference", &version)
+            .unwrap();
+        let t = dictation_target_at(data, "org.openlanguage.ja-jp.reference", &p.id, 0).unwrap();
         assert!(!t.text.is_empty() && t.reading.is_some());
         // Preferred candidates are kana-only: text and reading normalize equal.
         assert_eq!(
@@ -13833,11 +14118,12 @@ activities:
             normalize_for_match(&t.reading.unwrap())
         );
         // Rotation is deterministic and wraps without panic.
-        let a0 = dictation_target_at(data, "org.openlanguage.ja-jp.reference", 0).unwrap();
-        let a0b = dictation_target_at(data, "org.openlanguage.ja-jp.reference", 0).unwrap();
+        let a0 = dictation_target_at(data, "org.openlanguage.ja-jp.reference", &p.id, 0).unwrap();
+        let a0b = dictation_target_at(data, "org.openlanguage.ja-jp.reference", &p.id, 0).unwrap();
         assert_eq!(a0.id, a0b.id, "same offset is deterministic");
-        let b = dictation_target_at(data, "org.openlanguage.ja-jp.reference", 1).unwrap();
-        let big = dictation_target_at(data, "org.openlanguage.ja-jp.reference", 9999).unwrap();
+        let b = dictation_target_at(data, "org.openlanguage.ja-jp.reference", &p.id, 1).unwrap();
+        let big =
+            dictation_target_at(data, "org.openlanguage.ja-jp.reference", &p.id, 9999).unwrap();
         assert!(
             !b.id.is_empty() && !big.id.is_empty(),
             "large offset wraps to a valid target"
@@ -13848,8 +14134,11 @@ activities:
     fn dictation_target_uses_the_surface_when_a_pack_has_no_readings() {
         // U04: Russian rows carry no reading fields at all. Dictation in a
         // Cyrillic pack must still have targets — the surface IS the
-        // comparison string, and the absent cue travels as null rather than
-        // an empty box or a "no usable sentences" refusal.
+        // comparison string, and the absent cue travels as null rather
+        // than an empty box or a "no usable sentences" refusal.
+        // PRACTICE-GATE-001 reshaped this test: the pool is encounter-
+        // gated, so the targets only exist once the learner's evidence
+        // unlocks the sentence-bearing units.
         let tmp = tempfile::TempDir::new().unwrap();
         let data = tmp.path();
         // Staged as an installed tree, like the placement test: `archive::build`
@@ -13870,14 +14159,170 @@ activities:
             version.as_bytes(),
         )
         .unwrap();
-        let t = dictation_target_at(data, pack, 0).unwrap();
+        let p = create_local_profile(data, "Cycler").unwrap();
+        lts_storage::Store::open(data.join("profiles.db"))
+            .unwrap()
+            .set_active_pack(&p.id, pack, &version)
+            .unwrap();
+        // PRACTICE-GATE-001: day one, the sentence pool is locked — the
+        // honest refusal, never a full-sentence drill over unseen letters.
+        let err = dictation_target_at(data, pack, &p.id, 0).unwrap_err();
+        assert!(
+            err.contains("no sentence practice is unlocked yet"),
+            "day-one RU dictation must refuse: {err}"
+        );
+        // Once the letter on-ramp is Independent the ladder opens, and a
+        // Cyrillic target arrives with reading = null (surface compares).
+        let cyrillic: Vec<String> = serde_yaml::from_str::<PackGoals>(
+            &std::fs::read_to_string(
+                data.join("packs")
+                    .join(pack)
+                    .join(&version)
+                    .join("curriculum/goals.yaml"),
+            )
+            .unwrap(),
+        )
+        .unwrap()
+        .goals
+        .iter()
+        .find(|g| g.id == "ru.goal.on-ramp.cyrillic")
+        .unwrap()
+        .required_concepts
+        .clone();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        for (i, concept) in cyrillic.iter().enumerate() {
+            for family in ["a", "b"] {
+                let mut ev = attempt(
+                    concept,
+                    lts_domain::ActivityModality::OrthographyRecognition,
+                    &format!("ru.expr.gate-{i}-{family}"),
+                    0,
+                    &rfc3339_utc(1_795_300_000 + (i as u64) * 10 + u64::from(family == "b")),
+                    &format!("ev-gate-{i}-{family}"),
+                    &p.id,
+                );
+                ev.pack_id = pack.into();
+                store.append_evidence(&ev).unwrap();
+            }
+        }
+        let t = dictation_target_at(data, pack, &p.id, 0).unwrap();
         assert!(!t.text.is_empty());
         assert!(t.reading.is_none());
-        let b = dictation_target_at(data, "org.openlanguage.ru-ru.reference", 1).unwrap();
-        let wrap = dictation_target_at(data, "org.openlanguage.ru-ru.reference", 9999).unwrap();
+        let b = dictation_target_at(data, pack, &p.id, 1).unwrap();
+        let wrap = dictation_target_at(data, pack, &p.id, 9999).unwrap();
         assert!(
             !b.text.is_empty() && !wrap.text.is_empty(),
             "rotation wraps"
+        );
+    }
+
+    #[test]
+    fn practice_queue_is_generated_from_encounter_state_never_a_pack_buffet() {
+        // PRACTICE-GATE-001 (owner phone dogfood 2026-11-21 complaint 07):
+        // a level-0 RU profile was served the full-sentence speaking drill
+        // "Я учу русский язык" before knowing the Cyrillic alphabet. The
+        // practice queue is generated from the learner's encounter state —
+        // the SESSION-SEQUENCE-001 gate interface — never browsed from the
+        // pack's whole content files.
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let pack = "org.openlanguage.ru-ru.reference";
+        install_reference_pack_fast(data, pack).unwrap();
+        let p = create_local_profile(data, "LevelZero").unwrap();
+        let version = lts_langpack::archive::current_version(pack, &data.join("packs")).unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        store.set_active_pack(&p.id, pack, &version).unwrap();
+
+        // Day one, zero encounters: the queue exists (never an empty tab)
+        // and contains ONLY letter-level on-ramp content.
+        let root = data.join("packs").join(pack).join(&version);
+        let units = pack_units(&root);
+        let letter_refs: std::collections::HashSet<String> = units
+            .iter()
+            .filter(|u| u.goal_id == "ru.goal.on-ramp.cyrillic")
+            .flat_map(|u| u.activities.iter())
+            .flat_map(|a| a.content_refs.clone())
+            .collect();
+        assert!(
+            letter_refs.contains("ru.orth.cyrillic.a"),
+            "the letter on-ramp is the day-one content base"
+        );
+
+        let queue = || practice_queue_at(data, &p.id).unwrap();
+
+        let day_one = queue();
+        assert!(
+            !day_one.is_empty(),
+            "a day-one learner still gets practice — the letter drills"
+        );
+        assert!(
+            day_one.iter().all(|e| e.kind == "orthography"),
+            "day one is letters only: {day_one:?}"
+        );
+        assert!(
+            day_one.iter().all(|e| letter_refs.contains(&e.content_id)),
+            "the day-one queue is on-ramp letter content: {day_one:?}"
+        );
+        // The complaint's class of bug: the pack DOES ship sentence
+        // content (the buffet existed); the queue must show none of it.
+        assert!(
+            !sentence_entries(data, pack, &version)
+                .unwrap()
+                .iter()
+                .all(|e| day_one.iter().any(|q| q.content_id == e.id)),
+            "the pack ships sentences, yet none are day-one practice"
+        );
+
+        // Dictation (the Speaking mode pool) refuses rather than serving
+        // the owner's screenshot sentence.
+        let err = dictation_target_at(data, pack, &p.id, 0).unwrap_err();
+        assert!(
+            err.contains("no sentence practice is unlocked yet"),
+            "level-0 speaking pool must be empty: {err}"
+        );
+        // Shadowing pulls nothing above the learner's state.
+        let shadow = shadowing_items_at(data, &p.id).unwrap();
+        assert!(
+            shadow.is_empty(),
+            "a level-0 RU profile gets no word shadowing: {shadow:?}"
+        );
+
+        // Completing letter encounters keeps sentence practice at zero
+        // (the greetings goal gates on INDEPENDENT cyrillic, not a single
+        // encounter) and the queue stays exactly letter-level.
+        let store2 = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        for (i, concept) in letter_refs.iter().enumerate() {
+            let mut ev = attempt(
+                concept,
+                lts_domain::ActivityModality::OrthographyRecognition,
+                &format!("ru.expr.letter-{i}"),
+                0,
+                &rfc3339_utc(1_795_300_100 + (i as u64) * 10),
+                &format!("ev-letter-{i}"),
+                &p.id,
+            );
+            ev.pack_id = pack.into();
+            store2.append_evidence(&ev).unwrap();
+        }
+        let after_letters = queue();
+        assert!(
+            after_letters
+                .iter()
+                .all(|e| e.kind == "orthography" && letter_refs.contains(&e.content_id)),
+            "after letter encounters practice is still letters only: {after_letters:?}"
+        );
+        let err = dictation_target_at(data, pack, &p.id, 0).unwrap_err();
+        assert!(
+            err.contains("no sentence practice is unlocked yet"),
+            "one letter encounter must not open the sentence buffet: {err}"
+        );
+        // B2 content (the SESSION-SEQUENCE leak class) never enters the
+        // practice streams either.
+        assert!(
+            after_letters
+                .iter()
+                .all(|e| e.content_id != "ru.lex.argue.utverzhdenie"),
+            "B2 vocabulary never reaches practice"
         );
     }
 
@@ -14232,6 +14677,80 @@ activities:
         let other = create_local_profile(data, "Nobody").unwrap();
         assert_eq!(world_state_at(data, &other.id).unwrap(), vec![]);
     }
+    /// ORTHO-LETTER-UNITS-001: the LETTER is the entity, the case forms
+    /// are attributes. The shipped packs must carry exactly one
+    /// orthography row per letter — a row id with an -upper/-lower
+    /// suffix, or two rows whose glyphs differ only by case, is the
+    /// authoring bug that rendered the on-ramp as ghost duplicate rows
+    /// (owner phone dogfood 2026-11-21, complaint 4).
+    #[test]
+    fn shipped_packs_carry_one_orthography_entity_per_letter() {
+        let langs = PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../languages");
+        for pack in ["ru-RU", "ja-JP"] {
+            let dir = langs.join(pack).join("orthography");
+            let mut seen: Vec<String> = Vec::new();
+            for entry in std::fs::read_dir(&dir).unwrap() {
+                let path = entry.unwrap().path();
+                if path.extension().and_then(|x| x.to_str()) != Some("jsonl") {
+                    continue;
+                }
+                for line in std::fs::read_to_string(&path).unwrap().lines() {
+                    let Ok(row) = serde_json::from_str::<serde_json::Value>(line) else {
+                        continue;
+                    };
+                    let id = row["id"].as_str().unwrap();
+                    assert!(
+                        !id.ends_with("-upper") && !id.ends_with("-lower"),
+                        "{pack}: per-case entity id {id} — case forms are attributes, not entities"
+                    );
+                    let symbol = row["symbol"].as_str().unwrap();
+                    let folded = symbol.to_lowercase();
+                    assert!(
+                        !seen.contains(&folded),
+                        "{pack}: the letter {symbol:?} is split across more than one entity"
+                    );
+                    seen.push(folded);
+                }
+            }
+        }
+        // RU: 33 letters (one entity each) plus the pedagogical stress
+        // mark, and bicameral letters carry both forms, uppercase first.
+        let ru_src =
+            std::fs::read_to_string(langs.join("ru-RU/orthography/cyrillic.jsonl")).unwrap();
+        let rows: Vec<serde_json::Value> = ru_src
+            .lines()
+            .filter_map(|l| serde_json::from_str(l).ok())
+            .collect();
+        assert_eq!(rows.len(), 34, "one entity per letter plus the stress mark");
+        let a = rows
+            .iter()
+            .find(|r| r["id"] == "ru.orth.cyrillic.a")
+            .unwrap();
+        let forms: Vec<&str> = a["forms"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|f| f["symbol"].as_str().unwrap())
+            .collect();
+        assert_eq!(forms, ["А", "а"], "forms ride on the letter, shown jointly");
+        // ja: kana are unicameral — no forms anywhere. Hiragana and
+        // katakana are parallel sets with their own entities, never
+        // case-split (LETTER-TEACHING-DESIGN-001 rule 5).
+        for file in ["hiragana.jsonl", "katakana.jsonl"] {
+            let src = std::fs::read_to_string(langs.join("ja-JP/orthography").join(file)).unwrap();
+            for row in src
+                .lines()
+                .filter_map(|l| serde_json::from_str::<serde_json::Value>(l).ok())
+            {
+                assert!(
+                    row.get("forms").is_none(),
+                    "kana carry no case dimension: {}",
+                    row["id"].as_str().unwrap()
+                );
+            }
+        }
+    }
+
     /// R08: the Russian on-ramp has to be walkable, not decorative. A fresh
     /// profile is pointed at the pack's declared first Cyrillic instruction;
     /// the greetings gate opens on genuine recognition evidence across the
@@ -14269,10 +14788,18 @@ activities:
             .filter_map(|line| serde_json::from_str::<serde_json::Value>(line).ok())
             .filter_map(|row| row.get("id").and_then(|id| id.as_str().map(String::from)))
             .collect();
-        assert_eq!(letters.len(), 67, "33 letter pairs plus the stress mark");
+        assert_eq!(
+            letters.len(),
+            34,
+            "33 letters (one entity each) plus the stress mark"
+        );
 
         // Two clean successes for one letter, from two different prompts:
         // the policy's own bar for Independent, at the requested dimension.
+        // ORTHO-LETTER-UNITS-001: the attempt total is COUNTED here, not a
+        // literal — the old 268 was the pre-merge 67-entity alphabet, and
+        // data-shape drift must not silently break this intent assertion.
+        let appended = std::cell::Cell::new(0u64);
         let practise = |target: &str, dim: lts_domain::ActivityModality, tag: &str| {
             for (i, family) in ["first", "second"].iter().enumerate() {
                 let mut ev = attempt(
@@ -14289,6 +14816,7 @@ activities:
                 );
                 ev.pack_id = pack.into();
                 store.append_evidence(&ev).unwrap();
+                appended.set(appended.get() + 1);
             }
         };
         let goal = |id: &str| {
@@ -14346,13 +14874,36 @@ activities:
         let steps = first_run_steps_at(data, &p.id).unwrap();
         assert_eq!(
             steps.first().and_then(|s| s.content_id.as_deref()),
-            Some("ru.orth.cyrillic.a-upper"),
+            Some("ru.orth.cyrillic.a"),
             "first run must lead with the pack's declared script introduction"
         );
         assert_eq!(
             steps.first().and_then(|s| s.goal_id.as_deref()),
             Some("ru.goal.on-ramp.cyrillic")
         );
+        // ORTHO-LETTER-UNITS-001: the meet screen shows FOUR letters with
+        // both printed forms on the row — never eight rows where half the
+        // "letters" are the invisible other case of the same letter.
+        let plan = lesson_plan_at(data, &p.id, "ru.orth.cyrillic.a")
+            .unwrap()
+            .expect("the on-ramp unit declares this letter");
+        let meet = plan
+            .stages
+            .iter()
+            .find(|s| s.stage_kind == "encounter")
+            .expect("the unit opens with an encounter stage");
+        let orth: Vec<_> = meet
+            .content
+            .iter()
+            .filter(|c| c.kind == "orthography")
+            .collect();
+        assert_eq!(
+            orth.len(),
+            4,
+            "the first Cyrillic unit meets four letters, not eight case forms: {:?}",
+            orth.iter().map(|c| &c.content_id).collect::<Vec<_>>()
+        );
+        assert_eq!(orth[0].forms, ["А", "а"], "the row carries both forms");
         let plan_ids = || -> Vec<String> {
             build_plan_view(data, &p.id, 60, 1_762_128_000)
                 .unwrap()
@@ -14427,7 +14978,7 @@ activities:
             .collect();
         assert_eq!(
             store.evidence_count(&p.id).unwrap(),
-            268,
+            appended.get(),
             "every appended attempt is stored — a dropped append would make the gate look \
              unearned rather than report the gap"
         );
@@ -16744,6 +17295,43 @@ transfer_variants:
         );
     }
 
+    /// PRACTICE-GATE-001: shadow material is the learner's MET vocabulary,
+    /// and the K-70 learned-kana gate rides it — a zero-encounter profile's
+    /// pool is empty. Seed every pack kana with two clean recognition
+    /// attempts so the demo words' kana are all learned, which is the
+    /// honest precondition for these pre-gating fixtures.
+    fn seed_all_pack_kana_learned(data: &Path, pack_id: &str, profile_id: &str) {
+        let version = lts_langpack::archive::current_version(pack_id, &data.join("packs")).unwrap();
+        let orth = data
+            .join("packs")
+            .join(pack_id)
+            .join(&version)
+            .join("orthography/units.jsonl");
+        let ids: Vec<String> = std::fs::read_to_string(orth)
+            .unwrap()
+            .lines()
+            .filter_map(|l| serde_json::from_str::<serde_json::Value>(l).ok())
+            .filter_map(|r| r["id"].as_str().map(str::to_string))
+            .collect();
+        assert!(!ids.is_empty(), "the pack declares orthography rows");
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        for (i, id) in ids.iter().enumerate() {
+            for (j, _family) in ["first", "second"].iter().enumerate() {
+                let mut ev = attempt(
+                    id,
+                    lts_domain::ActivityModality::OrthographyRecognition,
+                    &format!("test.expr.seed-kana-{i}-{j}"),
+                    0,
+                    &rfc3339_utc(1_795_200_000 + (i as u64) * 4 + j as u64),
+                    &format!("test-ev-seed-kana-{i}-{j}"),
+                    profile_id,
+                );
+                ev.pack_id = pack_id.into();
+                store.append_evidence(&ev).unwrap();
+            }
+        }
+    }
+
     #[test]
     fn shadowing_targets_come_from_pack_and_record_no_evidence() {
         let tmp = tempfile::tempdir().unwrap();
@@ -16752,8 +17340,18 @@ transfer_variants:
         let p = create_local_profile(data, "Hunter").unwrap();
         finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
 
-        // Shadowing targets are the pack lexicon — pack-data-driven,
-        // no language literals in the engine.
+        // PRACTICE-GATE-001: day one, no word shadowing — the learner has
+        // met nothing. (The engine refuses by serving an empty pool; the
+        // tab renders the letter-level drills the plan already gates.)
+        let fresh = shadowing_items_at(data, &p.id).unwrap();
+        assert!(
+            fresh.is_empty(),
+            "a zero-encounter profile gets no word shadowing: {fresh:?}"
+        );
+
+        // Shadowing targets are the pack lexicon ONCE MET — pack-data-
+        // driven, no language literals in the engine.
+        seed_all_pack_kana_learned(data, "org.openlanguage.ja-demo", &p.id);
         let items = shadowing_items_at(data, &p.id).unwrap();
         assert!(
             items
@@ -16764,7 +17362,18 @@ transfer_variants:
         // FORMATIVE ONLY: the shadowing path never writes evidence or
         // scheduler state (docs/05 — no calibrated scorer exists).
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
-        assert!(store.evidence_for_profile(&p.id).unwrap().is_empty());
+        let seeded = store.evidence_for_profile(&p.id).unwrap().len();
+        assert!(seeded > 0, "the kana seeding rode through");
+        assert_eq!(
+            shadowing_items_at(data, &p.id).map(|i| i.len()).unwrap(),
+            items.len(),
+            "the second read records nothing new"
+        );
+        assert_eq!(
+            store.evidence_for_profile(&p.id).unwrap().len(),
+            seeded,
+            "shadowing records no evidence"
+        );
         assert!(store.scheduler_state(&p.id).unwrap().is_empty());
     }
 
@@ -16789,6 +17398,9 @@ transfer_variants:
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         let p = create_local_profile(data, "Hunter").unwrap();
         finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
+        // PRACTICE-GATE-001: the timing overlay measures shadow POOL
+        // items, so the pool must be met — seed the kana first.
+        seed_all_pack_kana_learned(data, "org.openlanguage.ja-demo", &p.id);
 
         // Without the sidecar every item carries no spans: the panel renders
         // exactly as before WORD-TIMING-001.
@@ -16816,10 +17428,15 @@ transfer_variants:
         assert_eq!(with.words.len(), 1);
         assert_eq!(with.words[0].w, "こんにちは");
         assert!(with.words[0].s < with.words[0].e);
-        assert!(
-            items
-                .iter()
-                .any(|i| i.content_id != "ja.lex.demo.konnichiwa" && i.words.is_empty())
+        // PRACTICE-GATE-001: lexicon rows NO unlocked unit references are
+        // never met, so the shadow pool holds only met vocabulary — the
+        // sidecar covering an unclaimed row changes nothing. (Before the
+        // gate this fixture's pool carried every demo word unspanned.)
+        let pool: Vec<String> = items.iter().map(|i| i.content_id.clone()).collect();
+        assert_eq!(
+            pool,
+            ["ja.lex.demo.konnichiwa".to_string()],
+            "only met vocabulary shadows"
         );
     }
 
@@ -18831,6 +19448,7 @@ transfer_variants:
             sound: "v".into(),
             script: "test.orth.cyr".into(),
             confusable_with: vec![conf.into()],
+            forms: vec!["В".into(), "в".into()],
         };
         let near = [
             mk("test.orth.cyr.n", 1, "H"),
@@ -18862,6 +19480,7 @@ transfer_variants:
             sound: "".into(),
             script: "test.orth.cyr".into(),
             confusable_with: Vec::new(),
+            forms: Vec::new(),
         }];
         assert!(orth_confusable_stagger_violations(&bare.iter().collect::<Vec<_>>(), 4).is_empty());
         let _ = std::fs::remove_dir_all(&td);
@@ -18881,6 +19500,7 @@ transfer_variants:
             sound: "x".into(),
             script: "ru.orth.cyrillic".into(),
             confusable_with: conf.into_iter().map(str::to_string).collect(),
+            forms: Vec::new(),
         };
         let entries = [
             mk("k", "К", None, 0),

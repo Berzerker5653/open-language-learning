@@ -516,6 +516,21 @@ impl Pack {
                 if content {
                     register(&mut checked, id, &inst.file, &inst.pointer, &mut diags);
                 }
+                // ORTHO-LETTER-UNITS-001 (docs/04 Orthography): the letter
+                // is the orthography entity; its printed case forms are a
+                // `forms` attribute. A per-case row id (-upper/-lower) is
+                // the ghost-duplicate-row bug, refused at bake time.
+                if inst.schema == "orthography-unit"
+                    && (id.ends_with("-upper") || id.ends_with("-lower"))
+                {
+                    diags.push(Diagnostic::new(
+                        &inst.file,
+                        inst.pointer.clone(),
+                        "per_case_orthography_entity",
+                        "orthography ids name ONE letter with its case forms as `forms`; a -upper/-lower row splits a letter into per-case entities (state/notes/LETTER-TEACHING-DESIGN-001.md rules 1-3)",
+                        Severity::Error,
+                    ));
+                }
             }
             match inst.schema {
                 "unit" => {

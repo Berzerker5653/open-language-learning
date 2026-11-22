@@ -161,6 +161,26 @@ class CopyRuleTests(unittest.TestCase):
             _, found = alc.audit_packs(td)
             self.assertEqual(found, [])
 
+    def test_per_case_orthography_entity_ids_fail(self):
+        """ORTHO-LETTER-UNITS-001: one entity per letter. A -upper/-lower
+        row id is the ghost-duplicate-row bug the owner dogfooded; case
+        forms ride on the letter as a forms array, never as entities."""
+        with tempfile.TemporaryDirectory() as td:
+            write_tree(
+                td,
+                {
+                    "pack/orthography/cyr.jsonl": (
+                        '{"id":"x.orth.cyr.a-upper","reading":"sound a","mnemonic":"cap"}\n'
+                        '{"id":"x.orth.cyr.a-lower","reading":"sound a","mnemonic":"bowl"}\n'
+                        '{"id":"x.orth.cyr.b","reading":"sound b","mnemonic":"stick",'
+                        '"forms":[{"symbol":"\u0411","case":"upper"},{"symbol":"\u0431","case":"lower"}]}\n'
+                    ),
+                },
+            )
+            _, found = alc.audit_packs(td)
+            split = [f for f in found if f["kind"] == "pack-case-split"]
+            self.assertEqual(len(split), 2, found)
+
     def test_answer_hint_and_jargon_copy_fail(self):
         src = (
             "export function P({ x }: { x: string }) {\n"

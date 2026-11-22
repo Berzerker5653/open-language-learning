@@ -1,0 +1,57 @@
+test_fail_on_findings_only_with_flag (test_audit_content_templates.CliAndRobustness.test_fail_on_findings_only_with_flag) ... ok
+test_json_shape (test_audit_content_templates.CliAndRobustness.test_json_shape) ... ok
+test_missing_optional_dirs_no_crash (test_audit_content_templates.CliAndRobustness.test_missing_optional_dirs_no_crash) ... ok
+test_write_review_appends_section (test_audit_content_templates.CliAndRobustness.test_write_review_appends_section) ... ok
+test_empty_sets_are_not_findings (test_audit_content_templates.GrammarSetRule.test_empty_sets_are_not_findings) ... ok
+test_reports_largest_identical_set_and_band (test_audit_content_templates.GrammarSetRule.test_reports_largest_identical_set_and_band) ... ok
+test_does_not_fire_below_threshold (test_audit_content_templates.LeadingTokenRule.test_does_not_fire_below_threshold) ... ok
+test_fires_at_and_above_threshold (test_audit_content_templates.LeadingTokenRule.test_fires_at_and_above_threshold) ... ok
+test_repeated_skeleton_grouped_by_band (test_audit_content_templates.SkeletonRule.test_repeated_skeleton_grouped_by_band) ... ok
+test_romaji_fallback_for_unspaced_text (test_audit_content_templates.SkeletonRule.test_romaji_fallback_for_unspaced_text) ... ok
+test_single_kind_fires_staged_does_not (test_audit_content_templates.StageKindRule.test_single_kind_fires_staged_does_not) ... ok
+test_block_style_claim_complete_representative_zero_findings (test_audit_content_templates.TaskSequenceRule.test_block_style_claim_complete_representative_zero_findings) ... ok
+test_cli_text_report_prints_task_sequences_section (test_audit_content_templates.TaskSequenceRule.test_cli_text_report_prints_task_sequences_section) ... ok
+test_duplicate_activity_id_across_units (test_audit_content_templates.TaskSequenceRule.test_duplicate_activity_id_across_units) ... ok
+test_incomplete_role_names_unknown_activity (test_audit_content_templates.TaskSequenceRule.test_incomplete_role_names_unknown_activity) ... ok
+test_missing_band_reported_once_per_band_case_insensitive (test_audit_content_templates.TaskSequenceRule.test_missing_band_reported_once_per_band_case_insensitive) ... ok
+test_no_context_change_for_same_unit_transfer_without_scenario (test_audit_content_templates.TaskSequenceRule.test_no_context_change_for_same_unit_transfer_without_scenario) ... ok
+test_no_reuse_when_prereq_edge_missing (test_audit_content_templates.TaskSequenceRule.test_no_reuse_when_prereq_edge_missing) ... ok
+test_no_scaffold_when_independent_carries_support (test_audit_content_templates.TaskSequenceRule.test_no_scaffold_when_independent_carries_support) ... ok
+test_review_section_gets_task_sequence_groups (test_audit_content_templates.TaskSequenceRule.test_review_section_gets_task_sequence_groups) ... ok
+test_runner_table_is_the_shared_parser_not_a_literal (test_audit_content_templates.TaskSequenceRule.test_runner_table_is_the_shared_parser_not_a_literal) ... ok
+test_sequence_crossing_goals_is_incomplete (test_audit_content_templates.TaskSequenceRule.test_sequence_crossing_goals_is_incomplete) ... ok
+test_string_valued_sequence_is_block_mapping_error (test_audit_content_templates.TaskSequenceRule.test_string_valued_sequence_is_block_mapping_error) ... ok
+test_transfer_by_scenario_id_in_own_unit_passes (test_audit_content_templates.TaskSequenceRule.test_transfer_by_scenario_id_in_own_unit_passes) ... ok
+test_two_roles_may_not_name_the_same_activity (test_audit_content_templates.TaskSequenceRule.test_two_roles_may_not_name_the_same_activity) ... ok
+test_unrunnable_stage_match_reading (test_audit_content_templates.TaskSequenceRule.test_unrunnable_stage_match_reading) ... ok
+test_unverifiable_table_skips_runnability_keeps_the_rest (test_audit_content_templates.TaskSequenceRule.test_unverifiable_table_skips_runnability_keeps_the_rest) ... ok
+test_a_raw_content_token_in_learner_copy_is_a_finding (test_audit_learner_copy.AuditTests.test_a_raw_content_token_in_learner_copy_is_a_finding) ... ok
+test_a_test_file_is_outside_the_learner_surface (test_audit_learner_copy.AuditTests.test_a_test_file_is_outside_the_learner_surface) ... ok
+test_a_token_in_wiring_not_copy_is_not_a_finding (test_audit_learner_copy.AuditTests.test_a_token_in_wiring_not_copy_is_not_a_finding) ... ok
+test_clean_copy_scans_clean (test_audit_learner_copy.AuditTests.test_clean_copy_scans_clean) ... ok
+test_journey_harnesses_are_outside_the_learner_surface (test_audit_learner_copy.AuditTests.test_journey_harnesses_are_outside_the_learner_surface) ... ok
+test_jsx_text_naming_an_adr_is_a_finding (test_audit_learner_copy.AuditTests.test_jsx_text_naming_an_adr_is_a_finding) ... ok
+test_rendered_string_literal_with_a_ticket_id_is_a_finding (test_audit_learner_copy.AuditTests.test_rendered_string_literal_with_a_ticket_id_is_a_finding) ... ok
+test_the_gate_exit_code_follows_the_findings (test_audit_learner_copy.AuditTests.test_the_gate_exit_code_follows_the_findings) ... ok
+test_answer_hint_and_jargon_copy_fail (test_audit_learner_copy.CopyRuleTests.test_answer_hint_and_jargon_copy_fail) ... ok
+test_clean_pack_copy_passes (test_audit_learner_copy.CopyRuleTests.test_clean_pack_copy_passes) ... ok
+test_interpolation_failure_dogfood_strings_red (test_audit_learner_copy.CopyRuleTests.test_interpolation_failure_dogfood_strings_red)
+LETTER-UNIT-MODEL-001: the exact copy from ... ok
+test_pack_reading_metadata_and_summary_leaks_fail (test_audit_learner_copy.CopyRuleTests.test_pack_reading_metadata_and_summary_leaks_fail) ... ok
+test_per_case_orthography_entity_ids_fail (test_audit_learner_copy.CopyRuleTests.test_per_case_orthography_entity_ids_fail)
+ORTHO-LETTER-UNITS-001: one entity per letter. A -upper/-lower ... ok
+test_wiring_tokens_are_not_copy_findings (test_audit_learner_copy.CopyRuleTests.test_wiring_tokens_are_not_copy_findings) ... ok
+
+----------------------------------------------------------------------
+Ran 41 tests in 0.025s
+
+OK
+content-template repetition audit
+========================================
+Structural repetition signals measured from pack files only. These counts queue qualified human review; they make NO claim about CEFR level correctness, linguistic quality, or pedagogical validity, and reference resolution / identical counts do not certify instructional depth.
+
+pack /tmp/tmpuw5617lv: 0 sentences in 0 file(s), 0 units; 3 finding(s)
+Task sequences: declared 0, complete 0
+  [task-sequence-missing-band] band a2: no complete task_sequence declaration in this band (--require-band)
+  [task-sequence-missing-band] band b1: no complete task_sequence declaration in this band (--require-band)
+  [task-sequence-missing-band] band b2: no complete task_sequence declaration in this band (--require-band)

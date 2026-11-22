@@ -135,6 +135,16 @@ Declare one or more writing systems and how they are introduced. Data may includ
 
 Transliteration is a scaffold, not the canonical representation unless the language itself uses that script.
 
+**Orthography units (`orthography/*.jsonl`) — the letter is the entity**
+(LETTER-TEACHING-DESIGN-001, ORTHO-LETTER-UNITS-001): one row per teachable
+letter/kana, never one row per case form. A bicameral script's printed forms
+ride on the letter as `forms: [{symbol, case}]` and render jointly ("А а");
+`symbol` stays the canonical drill glyph. A row id ending in `-upper`/`-lower`
+is refused by the scaffold generator and by `tools/audit_learner_copy.py`
+(`pack-case-split`), and the langpack validator rejects it at bake time.
+Unicameral scripts (kana included) carry no `forms` and no case dimension at
+all — hiragana and katakana are parallel sets of entities, not cases.
+
 ## Phonology/prosody
 
 Declare features the teaching system may care about:

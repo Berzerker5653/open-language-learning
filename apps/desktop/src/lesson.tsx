@@ -26,6 +26,11 @@ export interface LessonContent {
   content_id: string;
   kind: string;
   display: string;
+  /// ORTHO-LETTER-UNITS-001: an orthography row's written forms in the
+  /// pack's display order ("А а"). One row per letter with both forms
+  /// visible — the letter is the entity, case forms are attributes
+  /// (state/notes/LETTER-TEACHING-DESIGN-001.md rules 1/3).
+  forms?: string[];
   reading?: string | null;
   gloss?: string | null;
   explanation?: string | null;
@@ -125,7 +130,15 @@ export function stagePositionLabel(lesson: LessonPlan): string | null {
 function LessonContentItem({ item, stage }: { item: LessonContent; stage: LessonStage }) {
   const typed = stage.runner === "typed";
   const encounter = !stage.runner || stage.runner === "encounter";
-  const surface = typed ? (item.reading ?? item.display) : item.display;
+  // ORTHO-LETTER-UNITS-001: an orthography row leads with the FORM glyphs
+  // ("А а") so the letter reads as one unit with both printed forms; a
+  // bare display would show a single case and the owner's dogfood saw
+  // ghost rows whose "different letter" was the invisible other case.
+  const surface = typed
+    ? (item.reading ?? item.display)
+    : item.forms && item.forms.length
+      ? item.forms.join(" ")
+      : item.display;
   return (
     <li className="lesson__item" data-content={item.content_id} data-kind={item.kind}>
       <PackText tag="span" className="lesson__surface">

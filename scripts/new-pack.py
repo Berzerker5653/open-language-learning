@@ -109,6 +109,28 @@ def yq(value: str) -> str:
     return json.dumps(value, ensure_ascii=False)
 
 
+def reject_per_case_orthography(rows: list[dict]) -> None:
+    """Per-case split guard (ORTHO-LETTER-UNITS-001): the LETTER is the
+    orthography entity. A row id ending in -upper/-lower splits one letter
+    into per-case entities — the bug that rendered the Russian on-ramp as
+    eight ghost rows for four letters (state/notes/LETTER-TEACHING-
+    DESIGN-001.md rules 1-3). Case forms ride on the letter as a `forms`
+    array, never as separate rows. The scaffold generator refuses to emit
+    one rather than teaching the bug to whoever runs it."""
+    offenders = [
+        r["id"]
+        for r in rows
+        if str(r.get("id", "")).endswith("-upper")
+        or str(r.get("id", "")).endswith("-lower")
+    ]
+    if offenders:
+        raise SystemExit(
+            "per-case orthography ids refused: "
+            + ", ".join(sorted(offenders))
+            + " — one entity per letter; write its case forms in the forms array"
+        )
+
+
 class Pack:
     def __init__(self, out: Path, language: str, locale: str, title: str,
                  scripts: list[str], band: str, rtl: bool,
@@ -257,6 +279,7 @@ class Pack:
                         "generation": self.generation("scaffold placeholder symbol; needs human review"),
                     }
                 )
+            reject_per_case_orthography(rows)
             self.sub(
                 f"orthography/{script}.jsonl",
                 "".join(self.jline(r) + "\n" for r in rows if r["script"] == script),

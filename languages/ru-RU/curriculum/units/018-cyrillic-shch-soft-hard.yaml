@@ -10,12 +10,9 @@ activities:
     support_level: 1
     content_refs:
       [
-        "ru.orth.cyrillic.shch-upper",
-        "ru.orth.cyrillic.shch-lower",
-        "ru.orth.cyrillic.soft-sign-upper",
-        "ru.orth.cyrillic.soft-sign-lower",
-        "ru.orth.cyrillic.hard-sign-upper",
-        "ru.orth.cyrillic.hard-sign-lower",
+        "ru.orth.cyrillic.shch",
+        "ru.orth.cyrillic.soft-sign",
+        "ru.orth.cyrillic.hard-sign",
       ]
   - id: "ru.activity.on-ramp.cyrillic-shch-soft-hard-recognize"
     type: "recall"
@@ -23,12 +20,9 @@ activities:
     support_level: 0
     content_refs:
       [
-        "ru.orth.cyrillic.shch-upper",
-        "ru.orth.cyrillic.shch-lower",
-        "ru.orth.cyrillic.soft-sign-upper",
-        "ru.orth.cyrillic.soft-sign-lower",
-        "ru.orth.cyrillic.hard-sign-upper",
-        "ru.orth.cyrillic.hard-sign-lower",
+        "ru.orth.cyrillic.shch",
+        "ru.orth.cyrillic.soft-sign",
+        "ru.orth.cyrillic.hard-sign",
       ]
   - id: "ru.activity.on-ramp.cyrillic-shch-soft-hard-copy"
     type: "recall"
@@ -36,22 +30,16 @@ activities:
     support_level: 1
     content_refs:
       [
-        "ru.orth.cyrillic.shch-upper",
-        "ru.orth.cyrillic.shch-lower",
-        "ru.orth.cyrillic.soft-sign-upper",
-        "ru.orth.cyrillic.soft-sign-lower",
-        "ru.orth.cyrillic.hard-sign-upper",
-        "ru.orth.cyrillic.hard-sign-lower",
+        "ru.orth.cyrillic.shch",
+        "ru.orth.cyrillic.soft-sign",
+        "ru.orth.cyrillic.hard-sign",
       ]
 generation_contract:
   allowed_vocab:
     [
-      "ru.orth.cyrillic.shch-upper",
-      "ru.orth.cyrillic.shch-lower",
-      "ru.orth.cyrillic.soft-sign-upper",
-      "ru.orth.cyrillic.soft-sign-lower",
-      "ru.orth.cyrillic.hard-sign-upper",
-      "ru.orth.cyrillic.hard-sign-lower",
+      "ru.orth.cyrillic.shch",
+      "ru.orth.cyrillic.soft-sign",
+      "ru.orth.cyrillic.hard-sign",
     ]
   allowed_grammar: []
   new_item_budget: 0

@@ -332,6 +332,23 @@ def audit_packs(packs_root):
                 row = json.loads(raw)
             except json.JSONDecodeError:
                 continue
+            # ORTHO-LETTER-UNITS-001: the letter is the entity; a row id
+            # with an -upper/-lower suffix is a per-case split — the bug
+            # that rendered the RU on-ramp as eight ghost rows for four
+            # letters (state/notes/LETTER-TEACHING-DESIGN-001.md rules 1-3).
+            row_id = row.get("id")
+            if isinstance(row_id, str) and (
+                row_id.endswith("-upper") or row_id.endswith("-lower")
+            ):
+                findings.append(
+                    {
+                        "file": str(path),
+                        "line": line_no,
+                        "kind": "pack-case-split",
+                        "id": row_id.rsplit("-", 1)[1],
+                        "text": f"{row_id}: per-case entity — one entity per letter, forms are attributes",
+                    }
+                )
             for field in ("reading", "mnemonic"):
                 value = row.get(field)
                 if isinstance(value, str):

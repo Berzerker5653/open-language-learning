@@ -1119,3 +1119,45 @@ fn deep_yaml_flow_nesting_is_a_diagnostic_not_a_stack_overflow() {
         "nesting under the cap must reach the parser: {diags:?}"
     );
 }
+
+fn copy_tree(from: &std::path::Path, to: &std::path::Path) {
+    fs::create_dir_all(to).unwrap();
+    for entry in fs::read_dir(from).unwrap() {
+        let entry = entry.unwrap();
+        let dst = to.join(entry.file_name());
+        if entry.file_type().unwrap().is_dir() {
+            copy_tree(&entry.path(), &dst);
+        } else {
+            fs::copy(entry.path(), &dst).unwrap();
+        }
+    }
+}
+
+#[test]
+fn per_case_orthography_entity_is_refused_at_bake() {
+    // ORTHO-LETTER-UNITS-001 (docs/04 Orthography): a letter carries its
+    // printed case forms as `forms`; an -upper/-lower row id splits ONE
+    // letter into per-case entities and fails the bake.
+    let tmp = tempfile::tempdir().unwrap();
+    copy_tree(&fixture("ja-demo"), tmp.path());
+    let units = tmp.path().join("orthography/units.jsonl");
+    let mut text = fs::read_to_string(&units).unwrap();
+    if !text.ends_with('\n') {
+        text.push('\n');
+    }
+    text.push_str("{\"id\":\"ja.orth.hira.a-upper\",\"status\":\"review-needed\",\"script\":\"hiragana\",\"symbol\":\"\\u3042\",\"reading\":\"a\",\"sources\":[\"ai-drafted-kana\"]}\n");
+    fs::write(&units, &text).unwrap();
+    let pack = Pack::load_dir(tmp.path()).unwrap();
+    let diags = pack.validate(Mode::Scaffold, None);
+    assert!(
+        codes(&diags).contains(&"per_case_orthography_entity"),
+        "per-case row id must be refused: {:?}",
+        codes(&diags)
+    );
+    // And the merged shape (the letter with forms) stays clean of that code.
+    let clean = Pack::load_dir(&fixture("ja-demo")).unwrap();
+    assert!(
+        !codes(&clean.validate(Mode::Scaffold, None)).contains(&"per_case_orthography_entity"),
+        "the unsplit fixture must not carry the code"
+    );
+}

@@ -10,12 +10,9 @@ activities:
     support_level: 1
     content_refs:
       [
-        "ru.orth.cyrillic.ya-upper",
-        "ru.orth.cyrillic.ya-lower",
-        "ru.orth.cyrillic.eh-upper",
-        "ru.orth.cyrillic.eh-lower",
-        "ru.orth.cyrillic.f-upper",
-        "ru.orth.cyrillic.f-lower",
+        "ru.orth.cyrillic.ya",
+        "ru.orth.cyrillic.eh",
+        "ru.orth.cyrillic.f",
       ]
   - id: "ru.activity.on-ramp.cyrillic-ya-eh-f-recognize"
     type: "recall"
@@ -23,12 +20,9 @@ activities:
     support_level: 0
     content_refs:
       [
-        "ru.orth.cyrillic.ya-upper",
-        "ru.orth.cyrillic.ya-lower",
-        "ru.orth.cyrillic.eh-upper",
-        "ru.orth.cyrillic.eh-lower",
-        "ru.orth.cyrillic.f-upper",
-        "ru.orth.cyrillic.f-lower",
+        "ru.orth.cyrillic.ya",
+        "ru.orth.cyrillic.eh",
+        "ru.orth.cyrillic.f",
       ]
   - id: "ru.activity.on-ramp.cyrillic-ya-eh-f-copy"
     type: "recall"
@@ -36,22 +30,16 @@ activities:
     support_level: 1
     content_refs:
       [
-        "ru.orth.cyrillic.ya-upper",
-        "ru.orth.cyrillic.ya-lower",
-        "ru.orth.cyrillic.eh-upper",
-        "ru.orth.cyrillic.eh-lower",
-        "ru.orth.cyrillic.f-upper",
-        "ru.orth.cyrillic.f-lower",
+        "ru.orth.cyrillic.ya",
+        "ru.orth.cyrillic.eh",
+        "ru.orth.cyrillic.f",
       ]
 generation_contract:
   allowed_vocab:
     [
-      "ru.orth.cyrillic.ya-upper",
-      "ru.orth.cyrillic.ya-lower",
-      "ru.orth.cyrillic.eh-upper",
-      "ru.orth.cyrillic.eh-lower",
-      "ru.orth.cyrillic.f-upper",
-      "ru.orth.cyrillic.f-lower",
+      "ru.orth.cyrillic.ya",
+      "ru.orth.cyrillic.eh",
+      "ru.orth.cyrillic.f",
     ]
   allowed_grammar: []
   new_item_budget: 0

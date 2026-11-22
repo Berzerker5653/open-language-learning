@@ -1,0 +1,19 @@
+test_band_lands_on_every_goal (test_new_pack.NewPackTest.test_band_lands_on_every_goal) ... ok
+test_install_prerequisites_are_present (test_new_pack.NewPackTest.test_install_prerequisites_are_present) ... ok
+test_manifest_scripts_are_all_declared_in_orthography (test_new_pack.NewPackTest.test_manifest_scripts_are_all_declared_in_orthography) ... ok
+test_media_rows_cover_every_addressable_item (test_new_pack.NewPackTest.test_media_rows_cover_every_addressable_item) ... ok
+test_media_rows_match_the_bytes_on_disk (test_new_pack.NewPackTest.test_media_rows_match_the_bytes_on_disk) ... ok
+test_per_case_orthography_ids_are_refused (test_new_pack.NewPackTest.test_per_case_orthography_ids_are_refused)
+ORTHO-LETTER-UNITS-001: one orthography entity per letter; case ... ok
+test_placeholder_audio_is_labelled_placeholder (test_new_pack.NewPackTest.test_placeholder_audio_is_labelled_placeholder) ... ok
+test_real_audio_flag_writes_no_media_rather_than_fake_media (test_new_pack.NewPackTest.test_real_audio_flag_writes_no_media_rather_than_fake_media) ... ok
+test_rtl_is_declared_only_when_asked_and_records_the_gap (test_new_pack.NewPackTest.test_rtl_is_declared_only_when_asked_and_records_the_gap) ... ok
+test_scenario_delivers_every_declared_rung_and_label (test_new_pack.NewPackTest.test_scenario_delivers_every_declared_rung_and_label) ... ok
+test_shards_only_carry_their_own_script (test_new_pack.NewPackTest.test_shards_only_carry_their_own_script) ... ok
+test_ungrounded_language_gets_labelled_placeholders (test_new_pack.NewPackTest.test_ungrounded_language_gets_labelled_placeholders) ... ok
+test_unknown_script_and_dirty_output_are_refused (test_new_pack.NewPackTest.test_unknown_script_and_dirty_output_are_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.744s
+
+OK

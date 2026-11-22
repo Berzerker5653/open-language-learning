@@ -10,14 +10,10 @@ activities:
     support_level: 1
     content_refs:
       [
-        "ru.orth.cyrillic.l-upper",
-        "ru.orth.cyrillic.l-lower",
-        "ru.orth.cyrillic.z-upper",
-        "ru.orth.cyrillic.z-lower",
-        "ru.orth.cyrillic.zh-upper",
-        "ru.orth.cyrillic.zh-lower",
-        "ru.orth.cyrillic.i-upper",
-        "ru.orth.cyrillic.i-lower",
+        "ru.orth.cyrillic.l",
+        "ru.orth.cyrillic.z",
+        "ru.orth.cyrillic.zh",
+        "ru.orth.cyrillic.i",
       ]
   - id: "ru.activity.on-ramp.cyrillic-l-z-zh-i-recognize"
     type: "recall"
@@ -25,14 +21,10 @@ activities:
     support_level: 0
     content_refs:
       [
-        "ru.orth.cyrillic.l-upper",
-        "ru.orth.cyrillic.l-lower",
-        "ru.orth.cyrillic.z-upper",
-        "ru.orth.cyrillic.z-lower",
-        "ru.orth.cyrillic.zh-upper",
-        "ru.orth.cyrillic.zh-lower",
-        "ru.orth.cyrillic.i-upper",
-        "ru.orth.cyrillic.i-lower",
+        "ru.orth.cyrillic.l",
+        "ru.orth.cyrillic.z",
+        "ru.orth.cyrillic.zh",
+        "ru.orth.cyrillic.i",
       ]
   - id: "ru.activity.on-ramp.cyrillic-l-z-zh-i-copy"
     type: "recall"
@@ -40,26 +32,18 @@ activities:
     support_level: 1
     content_refs:
       [
-        "ru.orth.cyrillic.l-upper",
-        "ru.orth.cyrillic.l-lower",
-        "ru.orth.cyrillic.z-upper",
-        "ru.orth.cyrillic.z-lower",
-        "ru.orth.cyrillic.zh-upper",
-        "ru.orth.cyrillic.zh-lower",
-        "ru.orth.cyrillic.i-upper",
-        "ru.orth.cyrillic.i-lower",
+        "ru.orth.cyrillic.l",
+        "ru.orth.cyrillic.z",
+        "ru.orth.cyrillic.zh",
+        "ru.orth.cyrillic.i",
       ]
 generation_contract:
   allowed_vocab:
     [
-      "ru.orth.cyrillic.l-upper",
-      "ru.orth.cyrillic.l-lower",
-      "ru.orth.cyrillic.z-upper",
-      "ru.orth.cyrillic.z-lower",
-      "ru.orth.cyrillic.zh-upper",
-      "ru.orth.cyrillic.zh-lower",
-      "ru.orth.cyrillic.i-upper",
-      "ru.orth.cyrillic.i-lower",
+      "ru.orth.cyrillic.l",
+      "ru.orth.cyrillic.z",
+      "ru.orth.cyrillic.zh",
+      "ru.orth.cyrillic.i",
     ]
   allowed_grammar: []
   new_item_budget: 0

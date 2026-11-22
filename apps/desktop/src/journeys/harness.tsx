@@ -239,7 +239,7 @@ const RU_PLACEMENT_COVERAGE = [
     assessment_id: "ru.assess.on-ramp.cyrillic-recognition",
     goal_id: "ru.goal.on-ramp.cyrillic",
     status: "modality-unsupported",
-    reason: "builder-refused:recall-meaning:ru.orth.cyrillic.a-upper:unknown practice target",
+    reason: "builder-refused:recall-meaning:ru.orth.cyrillic.a:unknown practice target",
   },
   {
     assessment_id: "ru.assess.on-ramp.greetings-writing",
