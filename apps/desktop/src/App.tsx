@@ -4728,7 +4728,21 @@ export function App() {
           {lesson && !lessonSeen ? (
             <LessonEncounter
               lesson={lesson}
-              onStart={() => setLessonSeen(true)}
+              onStart={() => {
+                // ENCOUNTER-BEFORE-TEST-001: finishing the encounter view
+                // IS the completed encounter — the engine's test routes
+                // (due-review, weak-skill) gate on this record. Once per
+                // encounter view; the engine dedupes per
+                // (profile, content, activity), and a failed write never
+                // traps the learner — the next view re-records.
+                if (inv && profileId) {
+                  void inv("encounter_complete", {
+                    profileId,
+                    unitId: lesson.unit_id,
+                  }).catch(() => {});
+                }
+                setLessonSeen(true);
+              }}
               onScenario={(scenarioId) => {
                 void startScenario(scenarioId);
                 setRoute("scenarios");

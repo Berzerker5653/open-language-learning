@@ -125,6 +125,19 @@ impl Store {
         let rows = stmt.query_map(params![profile_id], |r| r.get::<_, String>(0))?;
         rows.collect::<Result<Vec<_>, _>>().map_err(Into::into)
     }
+
+    /// The unit ids this learner has a recorded encounter with — the
+    /// unit-level half of the `encountered` predicate: the authored
+    /// encounter stage is ONE teaching unit, so a recorded encounter event
+    /// for a unit allows testing that unit's content (ENCOUNTER-BEFORE-TEST-001).
+    /// Same exposure-only boundary as `encountered_content_ids`.
+    pub fn encountered_unit_ids(&self, profile_id: &str) -> Result<Vec<String>, Error> {
+        let mut stmt = self
+            .conn
+            .prepare("SELECT DISTINCT unit_id FROM encounter_events WHERE profile_id = ?1")?;
+        let rows = stmt.query_map(params![profile_id], |r| r.get::<_, String>(0))?;
+        rows.collect::<Result<Vec<_>, _>>().map_err(Into::into)
+    }
 }
 
 #[cfg(test)]
@@ -171,6 +184,14 @@ mod tests {
         assert_eq!(
             db.encountered_content_ids(&profile.id).unwrap(),
             vec!["ru.orth.cyrillic.t".to_string()]
+        );
+        assert_eq!(
+            db.encountered_unit_ids(&profile.id).unwrap(),
+            vec!["u1".to_string()]
+        );
+        assert_eq!(
+            db.encountered_unit_ids("other").unwrap(),
+            Vec::<String>::new()
         );
         assert!(db.encountered_content_ids("other").unwrap().is_empty());
         // Exposure, never observation: the evidence stream stays empty.

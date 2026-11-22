@@ -1178,6 +1178,10 @@ struct OrthEntry {
     /// attributes — a per-case row (-upper/-lower) is a schema-level
     /// authoring bug, not a letter. Empty = single-form letter.
     forms: Vec<String>,
+    /// ENCOUNTER-BEFORE-TEST-001: the pack's own teaching copy for this
+    /// symbol ("False friend: looks like your В…" / "Friendly letter:…").
+    /// Text-only: shown in the lesson encounter panel, never audio-consumed.
+    mnemonic: Option<String>,
 }
 
 /// Parse an installed pack's `orthography/*.jsonl` units. A pack
@@ -1267,6 +1271,11 @@ fn orth_entries(data: &Path, pack_id: &str, version: &str) -> Result<Vec<OrthEnt
                             .collect()
                     })
                     .unwrap_or_default(),
+                mnemonic: entry
+                    .get("mnemonic")
+                    .and_then(|v| v.as_str())
+                    .filter(|s| !s.is_empty())
+                    .map(str::to_string),
             });
         }
     }
@@ -3232,6 +3241,103 @@ fn collect_content_ids(dir: &Path, ids: &mut std::collections::HashSet<String>) 
     }
 }
 
+/// U06's scored-stage test at the activity level (mirrors
+/// `has_scored_runner` over a built `LessonStage`): a presentation is
+/// seen, never answered, and the guided-speaking card mints no evidence
+/// (ADR-0017 decision 1), so neither counts as "the learner acted".
+fn activity_has_scored_runner(a: &PackUnitActivity) -> bool {
+    matches!(
+        activity_runner(&a.activity_type, &a.modality),
+        Some(r) if r != "encounter" && r != "guided-speaking"
+    )
+}
+
+/// ENCOUNTER-BEFORE-TEST-001: the `encountered` predicate — the ONE
+/// eligibility layer's encounter half, living with SESSION-SEQUENCE-001's
+/// lock sets and PRACTICE-GATE-001's `practice_eligible` (no fork, no
+/// second bookkeeping). The decision per content id is
+/// `(test_allowed, unit_declared)`; content no unit declares is never in
+/// the returned set — ungated here, because the band ladder's fail-closed
+/// rule and the `saved` mining path already govern those rows. For content
+/// a unit declares:
+/// - a unit with NO encounter stage tests fine (nothing to meet);
+/// - a unit whose authored scored stage the learner already acted on is
+///   grandfathered via the U06 cursor inference — the same evidence
+///   attribution `lesson_plan_at` reads (R11), so a legacy learner keeps
+///   every review earned before this card existed;
+/// - content with a recorded encounter event (`encounter_events`, written
+///   by `encounter_complete`) is allowed;
+/// - a content id declared by several units is allowed if ANY declaring
+///   unit allows it (a completed encounter or an earned review anywhere
+///   is a completed encounter with the content).
+///   Otherwise the content is WITHHELD — from the due-review and weak-skill
+///   routes ONLY. Progression (the encounter route) stays untouched, so an
+///   interrupted unit resumes at the missing encounter in the pack's own
+///   order, and withheld scheduler rows are never deleted — they return the
+///   moment the encounter lands.
+///
+/// Returns the withheld content ids.
+fn encounter_test_allowance(
+    data: &Path,
+    store: &lts_storage::Store,
+    profile_id: &str,
+) -> Result<std::collections::HashSet<String>, String> {
+    let mut declared: std::collections::HashSet<String> = Default::default();
+    let mut allowed: std::collections::HashSet<String> = Default::default();
+    for (pack_id, _v) in store
+        .selected_packs(profile_id)
+        .map_err(|e| e.to_string())?
+    {
+        let Some(version) = lts_langpack::archive::current_version(&pack_id, &data.join("packs"))
+        else {
+            continue;
+        };
+        let root = data.join("packs").join(&pack_id).join(&version);
+        let units = pack_units(&root);
+        if units.is_empty() {
+            continue;
+        }
+        let practiced: std::collections::HashSet<String> = store
+            .evidence_for_profile(profile_id)
+            .map_err(|e| e.to_string())?
+            .into_iter()
+            .map(|e| e.activity_id.as_str().to_string())
+            .collect();
+        // Unit-level: the authored encounter stage is ONE teaching unit,
+        // so a recorded event for the unit allows its whole content — the
+        // contract's 'unit with a recorded encounter event is allowed'.
+        let encountered_units: std::collections::HashSet<String> = store
+            .encountered_unit_ids(profile_id)
+            .map_err(|e| e.to_string())?
+            .into_iter()
+            .collect();
+        for unit in units.iter() {
+            let refs: Vec<&String> = unit
+                .activities
+                .iter()
+                .flat_map(|a| a.content_refs.iter())
+                .collect();
+            declared.extend(refs.iter().map(|c| (*c).clone()));
+            let has_encounter_stage = unit
+                .activities
+                .iter()
+                .any(|a| activity_runner(&a.activity_type, &a.modality) == Some("encounter"));
+            if !has_encounter_stage {
+                // Nothing to meet — this unit's content tests fine.
+                allowed.extend(refs.iter().map(|c| (*c).clone()));
+                continue;
+            }
+            let grandfathered = unit.activities.iter().any(|a| {
+                !a.id.is_empty() && activity_has_scored_runner(a) && practiced.contains(&a.id)
+            });
+            if grandfathered || encountered_units.contains(&unit.id) {
+                allowed.extend(refs.iter().map(|c| (*c).clone()));
+            }
+        }
+    }
+    Ok(&declared - &allowed)
+}
+
 /// Compose a time-budgeted session from scheduler values: due reviews
 /// (retrievability), weak skills (derived confidence), curriculum
 /// progression, and the learner's own mined words. Never a trivial "next
@@ -3391,6 +3497,18 @@ fn build_plan(
     // stays on disk and returns when the learner unlocks the unit — no
     // deletion, same scoping shape as due reviews and R07.
     weak_skills.retain(|w| !band_locked.contains(&w.content_id));
+
+    // ENCOUNTER-BEFORE-TEST-001: a drill may not outrun an encounter. The
+    // SAME layer, the SAME shape as the lock-set retains above — no fork:
+    // due-review and weak-skill rows for content with no completed
+    // encounter stay out of the plan; the rows are NOT deleted and return
+    // the moment `encounter_complete` records the encounter. The
+    // progression half above is deliberately untouched (it IS the
+    // encounter route), and learner-mined `saved` rows are learner-owned,
+    // ungated here, exactly as above.
+    let unencountered = encounter_test_allowance(data, &store, profile_id)?;
+    due_reviews.retain(|r| r.saved || !unencountered.contains(&r.content_id));
+    weak_skills.retain(|w| !unencountered.contains(&w.content_id));
 
     let config = lts_scheduler::PlannerConfig {
         budget_minutes: minutes,
@@ -10258,7 +10376,11 @@ fn lesson_plan_at(
                     forms: e.forms.clone(),
                     reading: Some(e.reading.clone()),
                     gloss: None,
-                    explanation: None,
+                    // ENCOUNTER-BEFORE-TEST-001: the encounter is where the
+                    // pack's teaching copy lands — the false-friend /
+                    // friendly-letter line is exactly what the learner must
+                    // MEET before any drill may test the letter.
+                    explanation: e.mnemonic.clone(),
                 });
             }
             if let Some(g) = grammar.iter().find(|g| g.id == id) {
@@ -10345,6 +10467,77 @@ fn lesson_plan_at(
 #[tauri::command]
 fn lesson_plan(profile_id: String, content_id: String) -> Result<Option<LessonPlan>, String> {
     lesson_plan_at(&data_dir(), &profile_id, &content_id)
+}
+
+/// ENCOUNTER-BEFORE-TEST-001: record that the learner COMPLETED the
+/// encounter of unit `unit_id` — every content ref of the unit's
+/// PRESENTATION stages becomes an `encounter_events` row. The authored
+/// encounter stage is one teaching unit: the record is written when the
+/// learner finishes the encounter view (a partially-seen list is not
+/// completed). Idempotent per (profile, content, activity), so a repeated
+/// encounter view never fabricates a second row. Exposure, never
+/// observation: this never writes evidence, mastery, or scheduler ratings
+/// (the storage module test pins that boundary).
+#[tauri::command]
+fn encounter_complete(profile_id: String, unit_id: String) -> Result<usize, String> {
+    encounter_complete_at(&data_dir(), &profile_id, &unit_id)
+}
+
+fn encounter_complete_at(data: &Path, profile_id: &str, unit_id: &str) -> Result<usize, String> {
+    if unit_id.is_empty() {
+        return Err("unit_id is empty".to_string());
+    }
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let occurred_at = rfc3339_utc(now_secs());
+    for (pack_id, _v) in store
+        .selected_packs(profile_id)
+        .map_err(|e| e.to_string())?
+    {
+        let Some(version) = lts_langpack::archive::current_version(&pack_id, &data.join("packs"))
+        else {
+            continue;
+        };
+        let root = data.join("packs").join(&pack_id).join(&version);
+        let units = pack_units(&root);
+        let Some(unit) = units.iter().find(|u| !u.id.is_empty() && u.id == unit_id) else {
+            continue;
+        };
+        // A unit with no presentation stage needs no record — its content
+        // is testable by definition (nothing to meet), and the allowance
+        // predicate already answers it so.
+        let mut recorded = 0usize;
+        for act in &unit.activities {
+            if activity_runner(&act.activity_type, &act.modality) != Some("encounter") {
+                continue;
+            }
+            let activity_id = if act.id.is_empty() {
+                format!("{unit_id}#encounter")
+            } else {
+                act.id.clone()
+            };
+            for content in &act.content_refs {
+                if lts_domain::ContentId::parse(content).is_err() {
+                    continue;
+                }
+                store
+                    .record_encounter(
+                        profile_id,
+                        &lts_storage::NewEncounter {
+                            pack_id: &pack_id,
+                            unit_id: &unit.id,
+                            activity_id: &activity_id,
+                            content_id: content,
+                            id: &format!("enc-{}", uuid::Uuid::new_v4()),
+                            occurred_at: &occurred_at,
+                        },
+                    )
+                    .map_err(|e| e.to_string())?;
+                recorded += 1;
+            }
+        }
+        return Ok(recorded);
+    }
+    Err(format!("no unit {unit_id} in the profile's packs"))
 }
 
 #[derive(Serialize)]
@@ -11175,6 +11368,7 @@ macro_rules! lts_command_table {
             practice_task,
             practice_submit,
             lesson_plan,
+            encounter_complete,
             placement_plan,
             placement_coverage,
             placement_submit,
@@ -12922,6 +13116,12 @@ activities:
         finish_onboarding(data, &p.id, Some("org.openlanguage.ja-demo"), false).unwrap();
         let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
 
+        // ENCOUNTER-BEFORE-TEST-001: the greetings unit's encounter is
+        // completed before its earned reviews are seeded — the plan's
+        // review routes now gate on a completed encounter, and this
+        // learner met the content the honest way first.
+        encounter_complete_at(data, &p.id, "ja.unit.demo.greetings").unwrap();
+
         // 2025-11-03T00:00:00Z; one overdue FSRS item.
         let now_secs: u64 = 1_762_128_000;
         let state = lts_scheduler::ItemState {
@@ -12995,6 +13195,207 @@ activities:
         assert!(plan.total_seconds <= 300);
         // Deterministic: identical inputs produce identical plans.
         assert_eq!(plan, build_plan(data, &p.id, 5, now_secs).unwrap());
+    }
+
+    /// ENCOUNTER-BEFORE-TEST-001: hand-built mini pack — one letter unit
+    /// with an authored encounter stage and an authored recognition stage
+    /// over four printed letters. Staged as an installed tree (the shape
+    /// the app actually reads), exactly like `install_ru_shaped_pack`:
+    /// `archive::build` refuses packs without the gitignored media bytes,
+    /// and the plan path reads the installed version root, never an
+    /// archive.
+    fn install_letter_encounter_pack(data: &Path) -> (lts_storage::Store, String) {
+        let pack = "org.openlanguage.enc-fixture";
+        let version = "0.1.0";
+        let root = data.join("packs").join(pack).join(version);
+        std::fs::create_dir_all(root.join("curriculum/units")).unwrap();
+        std::fs::create_dir_all(root.join("orthography")).unwrap();
+        std::fs::create_dir_all(root.join("lexicon")).unwrap();
+        std::fs::create_dir_all(root.join("sentences")).unwrap();
+        std::fs::create_dir_all(root.join("grammar")).unwrap();
+        // The new-item candidates read these streams. The jsonl-dir reader
+        // requires at least one `*.jsonl` file per directory (an empty dir
+        // reads as "pack not found"), so an EMPTY file is the pack's
+        // honest "I declare none".
+        std::fs::write(root.join("lexicon/entries.jsonl"), "").unwrap();
+        std::fs::write(root.join("sentences/entries.jsonl"), "").unwrap();
+        std::fs::write(root.join("grammar/concepts.jsonl"), "").unwrap();
+        std::fs::write(data.join("packs").join(pack).join("current"), version).unwrap();
+        std::fs::write(
+            root.join("curriculum/goals.yaml"),
+            "goals:\n- id: ru.goal.enc.cyr\n  band: on-ramp\n  description: Read the first printed letters.\n  modalities: [reading]\n",
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("curriculum/units/001-aomt.yaml"),
+            r#"id: "ru.unit.enc.aomt"
+goal_id: "ru.goal.enc.cyr"
+title: "Printed Cyrillic: А а, О о, М м, Т т"
+activities:
+  - id: "ru.activity.enc.aomt-read"
+    type: "encounter-read"
+    modality: "reading"
+    support_level: 1
+    content_refs: ["ru.orth.enc.a", "ru.orth.enc.o", "ru.orth.enc.m", "ru.orth.enc.t"]
+  - id: "ru.activity.enc.aomt-recognize"
+    type: "recall"
+    modality: "reading"
+    support_level: 0
+    content_refs: ["ru.orth.enc.a", "ru.orth.enc.o", "ru.orth.enc.m", "ru.orth.enc.t"]
+"#,
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("orthography/cyrillic.jsonl"),
+            [
+                "{\"id\":\"ru.orth.enc.a\",\"symbol\":\"а\",\"reading\":\"sound a\",\"mnemonic\":\"Friendly letter: А looks like your A.\"}",
+                "{\"id\":\"ru.orth.enc.o\",\"symbol\":\"о\",\"reading\":\"sound o\"}",
+                "{\"id\":\"ru.orth.enc.m\",\"symbol\":\"м\",\"reading\":\"sound m\"}",
+                "{\"id\":\"ru.orth.enc.t\",\"symbol\":\"т\",\"reading\":\"sound t\",\"mnemonic\":\"False friend: looks like your T, sounds like the t in cat.\"}",
+            ]
+            .join("\n")
+            + "\n",
+        )
+        .unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        store
+            .record_installation(&lts_storage::PackInstallation {
+                pack_id: pack.into(),
+                version: version.into(),
+                installed_at: rfc3339_utc(now_secs()),
+                trust_state: "community".into(),
+            })
+            .unwrap();
+        let p = create_local_profile(data, "Owner").unwrap();
+        store.set_active_pack(&p.id, pack, version).unwrap();
+        (store, p.id)
+    }
+
+    /// Seed one real, due FSRS scheduler row — the exact poisoned shape the
+    /// owner's phone dogfood left behind (the learner's scheduler carries
+    /// rows the plan must then route honestly).
+    fn seed_due_letter_row(store: &lts_storage::Store, profile_id: &str, now_secs: u64) {
+        let state = lts_scheduler::ItemState {
+            stability_days: 1.0,
+            difficulty: 5.0,
+            reps: 2,
+            lapses: 0,
+            last_review: (now_secs - 3 * 86_400) as i64,
+        };
+        store
+            .save_scheduler_state(
+                profile_id,
+                &lts_storage::SchedulerRecord {
+                    item_id: "ru.orth.enc.t#orthography-recognition".into(),
+                    scheduler: lts_scheduler::SPIKE_VERSION.into(),
+                    params_json: serde_json::to_string(&state).unwrap(),
+                    due_at: rfc3339_utc(now_secs - 3_600),
+                },
+            )
+            .unwrap();
+    }
+
+    /// ENCOUNTER-BEFORE-TEST-001 (red-first): a scheduler row for a
+    /// never-met letter must NOT surface as a quiz. This is the owner's
+    /// phone dogfood shape («А/О/М just learned, next question was Том's
+    /// Т»): a real, due scheduler row for a letter whose unit has no
+    /// completed encounter. With the gate disabled this test is red (the
+    /// GATE-OFF run is logged in state/evidence/ENCOUNTER-BEFORE-TEST-001/gates.log).
+    /// Recording the encounter brings the row straight back — withheld,
+    /// never deleted.
+    #[test]
+    fn a_letter_is_never_tested_before_its_encounter_completes() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (store, pid) = install_letter_encounter_pack(data);
+        let now_secs: u64 = 1_762_128_000;
+        seed_due_letter_row(&store, &pid, now_secs);
+
+        let tests_the_letter = |i: &lts_scheduler::PlannedItem| {
+            i.content_id == "ru.orth.enc.t"
+                && matches!(
+                    i.reason,
+                    lts_scheduler::PlanReason::DueReview | lts_scheduler::PlanReason::WeakSkill
+                )
+        };
+        let plan = build_plan(data, &pid, 5, now_secs).unwrap();
+        assert!(
+            !plan.items.iter().any(tests_the_letter),
+            "a never-met letter surfaced as a quiz: {:?}",
+            plan.items
+                .iter()
+                .map(|i| (&i.content_id, i.reason))
+                .collect::<Vec<_>>()
+        );
+
+        // The learner completes the letter unit's encounter — the exact
+        // call the lesson's "Start practicing" control makes, and the
+        // whole authored presentation stage is one teaching unit: all
+        // four letters land in one call. A replay is idempotent.
+        let recorded = encounter_complete_at(data, &pid, "ru.unit.enc.aomt").unwrap();
+        assert_eq!(recorded, 4);
+        let again = encounter_complete_at(data, &pid, "ru.unit.enc.aomt").unwrap();
+        assert_eq!(again, 4, "a replayed encounter reports the same stage");
+        assert_eq!(store.encountered_content_ids(&pid).unwrap().len(), 4);
+        assert_eq!(
+            store.encountered_unit_ids(&pid).unwrap(),
+            vec!["ru.unit.enc.aomt".to_string()]
+        );
+
+        // Withheld, never deleted: the same due row returns the moment
+        // the encounter lands.
+        let plan = build_plan(data, &pid, 5, now_secs).unwrap();
+        assert!(
+            plan.items.iter().any(tests_the_letter),
+            "the due row must resurface the moment the encounter lands"
+        );
+    }
+
+    /// ENCOUNTER-BEFORE-TEST-001: the U06 inference grandfathers legacy
+    /// learners — a learner who already ACTED on a unit's authored scored
+    /// stage (R11 evidence attribution) keeps every earned review even
+    /// with no `encounter_events` row on disk.
+    #[test]
+    fn a_legacy_earned_review_survives_without_an_encounter_event() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let (store, pid) = install_letter_encounter_pack(data);
+        let now_secs: u64 = 1_762_128_000;
+        seed_due_letter_row(&store, &pid, now_secs);
+
+        // The learner already answered the unit's authored recognition
+        // stage — evidence attributed to the authored activity id (R11).
+        let ev = lts_learner_model::AttemptDraft::new(
+            vec![cid("ru.orth.enc.t")],
+            lts_domain::ActivityModality::OrthographyRecognition,
+            cid("ru.activity.enc.aomt-recognize"),
+            "org.openlanguage.enc-fixture",
+            "0.1.0",
+        )
+        .prompt_family(cid("ru.activity.enc.aomt-recognize"))
+        .support(lts_domain::SupportLevel::new(0).unwrap(), vec![])
+        .scored(lts_domain::Score::Correct)
+        .finish(
+            lts_domain::EventId::new("enc-gf-1"),
+            "2025-11-02T00:00:00Z",
+            lts_domain::ProfileId::new(&pid),
+        );
+        store.append_evidence(&ev).unwrap();
+
+        let plan = build_plan(data, &pid, 5, now_secs).unwrap();
+        assert!(
+            plan.items.iter().any(|i| {
+                i.content_id == "ru.orth.enc.t" && i.reason == lts_scheduler::PlanReason::DueReview
+            }),
+            "the earned review must survive for a grandfathered learner: {:?}",
+            plan.items
+                .iter()
+                .map(|i| (&i.content_id, i.reason))
+                .collect::<Vec<_>>()
+        );
+        // Exposure stayed exposure: no encounter event was fabricated, and
+        // the earned review rides the U06 inference alone.
+        assert!(store.encountered_unit_ids(&pid).unwrap().is_empty());
     }
 
     #[test]
@@ -19438,6 +19839,12 @@ transfer_variants:
                 &reference_version,
             )
             .unwrap();
+        // ENCOUNTER-BEFORE-TEST-001: this fixture's kohi review is earned
+        // under a fabricated activity id, so the new test-gate withholds it
+        // (the engine cannot attribute it to an authored scored stage).
+        // Record the hosting unit's encounter exactly the way the app does
+        // — the test keeps measuring pack ISOLATION, not the gate.
+        encounter_complete_at(data, &p.id, "ja.unit.eat-and-drink").unwrap();
         let plan_alt = build_plan(data, &p.id, 5, now_secs).unwrap();
         assert!(
             content_ids(&plan_alt)
@@ -19797,6 +20204,7 @@ transfer_variants:
             script: "test.orth.cyr".into(),
             confusable_with: vec![conf.into()],
             forms: vec!["В".into(), "в".into()],
+            mnemonic: None,
         };
         let near = [
             mk("test.orth.cyr.n", 1, "H"),
@@ -19829,6 +20237,7 @@ transfer_variants:
             script: "test.orth.cyr".into(),
             confusable_with: Vec::new(),
             forms: Vec::new(),
+            mnemonic: None,
         }];
         assert!(orth_confusable_stagger_violations(&bare.iter().collect::<Vec<_>>(), 4).is_empty());
         let _ = std::fs::remove_dir_all(&td);
@@ -19849,6 +20258,7 @@ transfer_variants:
             script: "ru.orth.cyrillic".into(),
             confusable_with: conf.into_iter().map(str::to_string).collect(),
             forms: Vec::new(),
+            mnemonic: None,
         };
         let entries = [
             mk("k", "К", None, 0),
