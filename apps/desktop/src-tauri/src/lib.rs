@@ -10825,29 +10825,37 @@ fn force_webkit_fallback_renderer() {
     }
 }
 
-#[cfg_attr(mobile, tauri::mobile_entry_point)]
-/// WEB-SERVE-001: the command wiring is runtime-agnostic — the desktop
-/// shell and the HTTP serve mode install the SAME handler list and the
-/// SAME session state through these two functions, so commands cannot
-/// drift between the two entry points except by an explicitly marked
-/// exclusion. The five commands the serve twin omits carry a concrete
-/// `tauri::AppHandle` (Wry-bound) in their signatures and cannot
-/// instantiate on Tauri's mock runtime; `serve.rs` routes those five to
-/// the SAME underlying core functions their wrappers call (no progress
-/// events — no browser listener would receive them anyway; the
-/// capabilities endpoint says so). When a new command is added to
-/// `wire_commands`, ask: does it take AppHandle? If not, add it to
-/// `wire_serve_commands` too (a serve-mode cargo test walks the table).
-fn wire_commands(builder: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
-    builder
-        .manage(scenarios::SessionStore::default())
-        .invoke_handler(tauri::generate_handler![
+/// Emits the command list as a `tauri::generate_handler!` call.
+macro_rules! emit_generate_handler {
+    ($($cmd:ident),* $(,)?) => {
+        tauri::generate_handler![$($cmd),*]
+    };
+}
+
+/// Emits the command list as the serve-mode command-name table. Only the
+/// serve build consumes it; gating it keeps the plain desktop clippy gate
+/// clean.
+#[cfg(feature = "serve")]
+macro_rules! emit_serve_command_names {
+    ($($cmd:ident),* $(,)?) => {
+        &[$(stringify!($cmd)),*]
+    };
+}
+
+/// Single source of truth for the desktop/serve command wiring
+/// (ARCH-HOTSPOT-2026-11-22). `$emit` receives the full command list
+/// (desktop-only commands first, then the shared list); the shared list
+/// lives exactly once, here. `ime_candidates` joins the serve wiring with
+/// this change — IN-APP-IME-001 shipped it desktop-only, the drift this
+/// single-source removes by construction.
+macro_rules! lts_command_table {
+    ($emit:ident; $($desktop_only:ident),* $(,)?) => {
+        $emit!(
+            $($desktop_only,)*
             app_mode,
             build_identity,
-            smoke_ack,
             privacy_notice,
             available_packs,
-            install_pack,
             create_profile,
             list_profiles,
             resume_profile,
@@ -10859,7 +10867,6 @@ fn wire_commands(builder: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::W
             first_run_steps,
             progress_summary,
             available_models,
-            install_model,
             aligner_status,
             delete_model,
             get_speech_model,
@@ -10894,9 +10901,7 @@ fn wire_commands(builder: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::W
             profile_delete,
             pack_claims,
             catalog_packs,
-            install_catalog_pack,
             cancel_pack_install,
-            import_pack,
             installed_packs,
             active_pack,
             switch_pack,
@@ -10940,7 +10945,41 @@ fn wire_commands(builder: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::W
             error_review_accept,
             error_review_queue,
             error_review_grade,
-        ])
+        )
+    };
+}
+
+#[cfg_attr(mobile, tauri::mobile_entry_point)]
+/// ARCH-HOTSPOT-2026-11-22: the command table is SINGLE-SOURCED. The desktop
+/// shell and the HTTP serve mode install the SAME shared command list through
+/// `lts_command_table!` (defined below), so commands cannot drift between the
+/// two entry points — the list is written once. The only divergence is the
+/// explicitly-listed desktop-only commands that take a concrete
+/// `tauri::AppHandle` (Wry-bound) in their signatures and cannot instantiate
+/// on Tauri’s mock runtime (currently: `smoke_ack`, `install_pack`,
+/// `install_model`, `install_catalog_pack`, `import_pack`); `serve.rs` routes
+/// those to the SAME underlying core functions their wrappers call (no
+/// progress events — no browser listener would receive them anyway; the
+/// capabilities endpoint says so).
+///
+/// To add a command: define it, then add its name to the single list inside
+/// `lts_command_table!` below. If it takes `tauri::AppHandle`, do NOT put it
+/// in that list — pass it as a desktop-only argument to the
+/// `lts_command_table!` call in `wire_commands` instead. The serve-mode name
+/// table is generated from the same list, and
+/// `serve::tests::every_serve_command_name_resolves_through_the_wiring`
+/// walks every generated name through the serve wiring.
+fn wire_commands(builder: tauri::Builder<tauri::Wry>) -> tauri::Builder<tauri::Wry> {
+    builder
+        .manage(scenarios::SessionStore::default())
+        .invoke_handler(lts_command_table!(
+            emit_generate_handler;
+            smoke_ack,
+            install_pack,
+            install_model,
+            install_catalog_pack,
+            import_pack
+        ))
 }
 
 #[cfg(feature = "serve")]
@@ -10949,202 +10988,17 @@ fn wire_serve_commands(
 ) -> tauri::Builder<tauri::test::MockRuntime> {
     builder
         .manage(scenarios::SessionStore::default())
-        .invoke_handler(tauri::generate_handler![
-            app_mode,
-            build_identity,
-            privacy_notice,
-            available_packs,
-            create_profile,
-            list_profiles,
-            resume_profile,
-            set_profile_hidden,
-            complete_onboarding,
-            home_state,
-            practice_plan,
-            practice_queue,
-            first_run_steps,
-            progress_summary,
-            available_models,
-            aligner_status,
-            delete_model,
-            get_speech_model,
-            set_speech_model,
-            recommended_speech_model,
-            pronunciation_check,
-            pronunciation_demo,
-            perf_asr_setup,
-            perf_asr_attempt,
-            dictation_check,
-            dictation_target,
-            reference_audio,
-            speech_audio,
-            world_state,
-            goal_map,
-            memory_stats,
-            display_settings,
-            set_display_settings,
-            get_microphone_enabled,
-            set_microphone_enabled,
-            get_microphone_device,
-            set_microphone_device,
-            get_playback_device,
-            set_playback_device,
-            get_romaji_mode,
-            set_romaji_mode,
-            get_kana_keyboard,
-            set_kana_keyboard,
-            profile_export,
-            profile_import_preview,
-            profile_import,
-            profile_delete,
-            pack_claims,
-            catalog_packs,
-            cancel_pack_install,
-            installed_packs,
-            active_pack,
-            switch_pack,
-            writing_task,
-            writing_submit,
-            practice_task,
-            practice_submit,
-            lesson_plan,
-            placement_plan,
-            placement_coverage,
-            placement_submit,
-            kanji_list,
-            kanji_available,
-            scenario_list,
-            scenario_start,
-            scenario_attempt,
-            scenario_support,
-            scenario_recovery,
-            scenario_transfer,
-            scenario_transfer_answer,
-            scenario_finish,
-            contrast_audio,
-            shadowing_items,
-            dictation_audio,
-            story_list,
-            story_view,
-            story_audio,
-            word_card,
-            story_word_audio,
-            listening_audio,
-            mine_add,
-            content_confirm,
-            content_unconfirm,
-            mine_list,
-            mine_remove,
-            mine_due,
-            mine_new,
-            mine_grade,
-            srs_interval_preview,
-            error_review_accept,
-            error_review_queue,
-            error_review_grade,
-        ])
+        .invoke_handler(lts_command_table!(emit_generate_handler;))
 }
 
-// Written next to the table it mirrors; consumed by the serve-mode test
-// that walks every name (serve::tests::every_serve_command_name_resolves_through_the_wiring).
+// Generated from the single `lts_command_table!` list; consumed by the
+// serve-mode test that walks every name
+// (serve::tests::every_serve_command_name_resolves_through_the_wiring).
 // The production bridge resolves names through the generated handler itself,
 // so outside tests this table is read by no runtime code.
 #[cfg(feature = "serve")]
 #[cfg_attr(not(test), allow(dead_code))]
-pub(crate) const SERVE_COMMAND_NAMES: &[&str] = &[
-    "app_mode",
-    "build_identity",
-    "privacy_notice",
-    "available_packs",
-    "create_profile",
-    "list_profiles",
-    "resume_profile",
-    "set_profile_hidden",
-    "complete_onboarding",
-    "home_state",
-    "practice_plan",
-    "practice_queue",
-    "first_run_steps",
-    "progress_summary",
-    "available_models",
-    "aligner_status",
-    "delete_model",
-    "get_speech_model",
-    "set_speech_model",
-    "recommended_speech_model",
-    "pronunciation_check",
-    "pronunciation_demo",
-    "perf_asr_setup",
-    "perf_asr_attempt",
-    "dictation_check",
-    "dictation_target",
-    "reference_audio",
-    "speech_audio",
-    "world_state",
-    "goal_map",
-    "memory_stats",
-    "display_settings",
-    "set_display_settings",
-    "get_microphone_enabled",
-    "set_microphone_enabled",
-    "get_microphone_device",
-    "set_microphone_device",
-    "get_playback_device",
-    "set_playback_device",
-    "get_romaji_mode",
-    "set_romaji_mode",
-    "get_kana_keyboard",
-    "set_kana_keyboard",
-    "profile_export",
-    "profile_import_preview",
-    "profile_import",
-    "profile_delete",
-    "pack_claims",
-    "catalog_packs",
-    "cancel_pack_install",
-    "installed_packs",
-    "active_pack",
-    "switch_pack",
-    "writing_task",
-    "writing_submit",
-    "practice_task",
-    "practice_submit",
-    "lesson_plan",
-    "placement_plan",
-    "placement_coverage",
-    "placement_submit",
-    "kanji_list",
-    "kanji_available",
-    "scenario_list",
-    "scenario_start",
-    "scenario_attempt",
-    "scenario_support",
-    "scenario_recovery",
-    "scenario_transfer",
-    "scenario_transfer_answer",
-    "scenario_finish",
-    "contrast_audio",
-    "shadowing_items",
-    "dictation_audio",
-    "story_list",
-    "story_view",
-    "story_audio",
-    "word_card",
-    "story_word_audio",
-    "listening_audio",
-    "mine_add",
-    "content_confirm",
-    "content_unconfirm",
-    "mine_list",
-    "mine_remove",
-    "mine_due",
-    "mine_new",
-    "mine_grade",
-    "srs_interval_preview",
-    "error_review_accept",
-    "error_review_queue",
-    "error_review_grade",
-];
+pub(crate) const SERVE_COMMAND_NAMES: &[&str] = lts_command_table!(emit_serve_command_names;);
 
 pub fn run() {
     force_webkit_fallback_renderer();
