@@ -1,0 +1,25 @@
+ARCH-HOTSPOT-2026-11-22 lane gate battery (main tree, base f03e33b + lane diff)
+Battery script + full logs in this directory. Run 2026-11-22 ~07:10 MST.
+
+cargo fmt --all --check                       rc=0   (FMT_OK, zero diff)
+cargo clippy -p lts-desktop --all-targets -- -D warnings                 rc=0  (clippy-default.log)
+cargo clippy -p lts-desktop --all-targets --features serve -- -D warnings rc=0  (clippy-serve.log)
+cargo test -p lts-desktop --lib --features serve   rc=101 (test-serve.log)
+  test result: FAILED. 240 passed; 1 failed; 2 ignored
+  serve::tests::every_serve_command_name_resolves_through_the_wiring ... ok
+  sole failure: tests::placement_coverage_names_why_a_rubric_has_no_question
+
+== Baseline isolation (skill: blame to HEAD before blaming the lane) ==
+git worktree add <scratch> HEAD (pure f03e33b, hardlinked media, shared
+CARGO_TARGET_DIR):
+  cargo test -p lts-desktop --lib --features serve placement_coverage_names_why_a_rubric_has_no_question
+  -> FAILED with the IDENTICAL panic (lib.rs:11738):
+     left:  ("modality-unsupported", Some("builder-refused:comprehension-listening:ja.contrast.demo.vowel-length:unknown practice target"))
+     right: ("no-content", Some("no-activity-at-modality:listening:ja.goal.demo.kana-hiragana"))
+  Failure set at HEAD == failure set with lane diff (exactly {placement_coverage_names_why_a_rubric_has_no_question}).
+PRE-EXISTING main rot at base, NOT introduced by this lane. Likely born in
+today's content campaigns (RU sentence/lexicon claims changed builder
+refusals; the test asserts the old abstention reason). CI run 45029777800
+at f03e33b in progress at gate time; run at 60f260f concluded failure.
+Flagged to the planner for a FIX card; ARCH lane does not fix placement
+semantics.
