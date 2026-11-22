@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-22",
-  "active_task": null,
+  "active_task": "RU-SENTENCE-CLAIM-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2758,6 +2758,23 @@
       "summary": "Ladder rule extended fail-CLOSED to the CONTRAST and SENTENCE NEW-seeding streams (packs with a goal map only seed unit-claimed rows) at 2b13a7b, and all 8 RU phonology contrasts CLAIMED into on-ramp cyrillic units 013/015/017/018/019 via listen-and-choose activities (beginner minimal pairs stay day-0-eligible). Red-first test unclaimed_contrast_and_sentence_rows_are_not_seeded proves synthetic and real orphan rows never seed while the eight claims still do. :17641-style live read on a fresh level-0 profile: 4/4 PASS - 5-item plan, every item unit-attached, zero orphan ids, claimed contrasts seeding. Claim decisions for the 161 orphan sentences and 192 orphan lexicon rows filed (deferred with rationale); banding makes the omission safe. Follow-up cards RU-SENTENCE-CLAIM-001 / RU-LEXICON-CLAIM-001 proposed in the notes.",
       "updated": "2026-11-22",
       "notes": "board t_e34dadda; opened from SESSION-SEQUENCE-001-TAKEOVER measured limitation"
+    },
+    "RU-SENTENCE-CLAIM-001": {
+      "task_id": "RU-SENTENCE-CLAIM-001",
+      "title": "Claim the 161 orphan RU sentences into band-appropriate units (content campaign follow-up of ORPHAN-CONTENT-001)",
+      "status": "in_progress",
+      "attempts": 1,
+      "dependencies": [
+        "ORPHAN-CONTENT-001"
+      ],
+      "evidence": [
+        "state/notes/RU-SENTENCE-CLAIM-001.md",
+        "state/evidence/RU-SENTENCE-CLAIM-001/claim-map.json",
+        "state/evidence/RU-SENTENCE-CLAIM-001/apply_claims.py"
+      ],
+      "summary": "Opened: band rule fixed (sentence band tag == hosting unit goal band, cp -> a1) and the full 161-id claim map validated (37 groups, exact coverage, no non-orphan refs).",
+      "updated": "2026-11-22",
+      "notes": "board t_34ae2f4b; follow-up of ORPHAN-CONTENT-001 deferred claim decision"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

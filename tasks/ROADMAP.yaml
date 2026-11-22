@@ -3203,6 +3203,21 @@ tasks:
   - all eight RU phonology contrasts are claimed by on-ramp cyrillic unit activities and the beginner minimal pairs still seed a zero-evidence plan
   - the claim decisions for the 161 orphan sentences and 192 orphan lexicon ids are filed in state/notes/ORPHAN-CONTENT-001.md with id lists in state/evidence/ORPHAN-CONTENT-001
   required_for_desktop_1_0: false
+- id: RU-SENTENCE-CLAIM-001
+  milestone: M11
+  priority: P2
+  title: Claim the 161 orphan RU sentences into band-appropriate units — banding made them safe but no unit references them, so they never seed any plan
+  dependencies: [ORPHAN-CONTENT-001]
+  read_first:
+  - state/notes/RU-SENTENCE-CLAIM-001.md
+  - state/notes/ORPHAN-CONTENT-001.md
+  - state/evidence/ORPHAN-CONTENT-001/orphan-ids.json
+  acceptance:
+  - every one of the 161 orphan sentence ids appears in at least one unit activity content_refs and the re-measured sentence orphan census reports zero
+  - all claims are pure content_ref additions with no sentence text, gloss or audio change, so no shard sweep and no re-bake ride this card
+  - the langpack validation suite and the story-accuracy gate stay green over the rewritten units
+  - a band-matched live plan read shows the claimed sentences seeding for a learner at that band, and the orphan-gating test stays green
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3334,4 +3349,5 @@ execution_scope:
   - PRACTICE-GATE-001
   - ORTHO-LETTER-UNITS-001
   - ORPHAN-CONTENT-001
+  - RU-SENTENCE-CLAIM-001
   public_publication_authorized: false
