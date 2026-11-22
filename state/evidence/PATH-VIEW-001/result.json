@@ -1,0 +1,366 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "unit_path returns nodes",
+      "pass": true,
+      "measured": {
+        "nodes": 818
+      }
+    },
+    {
+      "name": "at least one unit earned evidence-backed done",
+      "pass": true,
+      "measured": {
+        "done": [
+          "ru.unit.on-ramp.cyrillic-a-o-m-t",
+          "ru.unit.on-ramp.cyrillic-k-e-n-s"
+        ]
+      }
+    },
+    {
+      "name": "today's plan pins exactly one current unit",
+      "pass": true,
+      "measured": {
+        "current": [
+          "ru.unit.on-ramp.cyrillic-b-p-d-g"
+        ]
+      }
+    },
+    {
+      "name": "locked-ahead units exist WITH unlock hints (visible-dim, never a mystery)",
+      "pass": true,
+      "measured": {
+        "locked": 808,
+        "sampleHint": "finish \"Recognize and copy all printed Cyrillic letter case forms and interpret the teaching stress mark.\""
+      }
+    },
+    {
+      "name": "no done node is locked; no attendance-only unit slipped through",
+      "pass": true,
+      "measured": {
+        "lockedDone": 0
+      }
+    },
+    {
+      "name": "a done unit re-lights review-due once its scheduler item is past due",
+      "pass": true,
+      "measured": {
+        "before": 0,
+        "after": [
+          "ru.unit.on-ramp.cyrillic-a-o-m-t(1)"
+        ]
+      }
+    },
+    {
+      "name": "path renders on the Today route with all five node states visible",
+      "pass": true,
+      "measured": {
+        "nodeCount": 20,
+        "states": [
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "review-due",
+          "done",
+          "ready",
+          "current",
+          "ready",
+          "ready",
+          "ready",
+          "ready",
+          "ready",
+          "ready"
+        ]
+      }
+    },
+    {
+      "name": "pinned unit shows the 'you are here' marker",
+      "pass": true,
+      "measured": {
+        "found": true,
+        "nodeCount": 20,
+        "states": [
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "review-due",
+          "done",
+          "ready",
+          "current",
+          "ready",
+          "ready",
+          "ready",
+          "ready",
+          "ready",
+          "ready"
+        ],
+        "minHeight": 44,
+        "toggleHeights": [
+          46,
+          46,
+          46,
+          46,
+          46,
+          46,
+          46,
+          46
+        ],
+        "pin": true,
+        "review": true,
+        "hint": true,
+        "doneGlyph": true,
+        "docOverflow": false
+      }
+    },
+    {
+      "name": "done unit shows the done glyph",
+      "pass": true,
+      "measured": {
+        "found": true,
+        "nodeCount": 20,
+        "states": [
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "review-due",
+          "done",
+          "ready",
+          "current",
+          "ready",
+          "ready",
+          "ready",
+          "ready",
+          "ready",
+          "ready"
+        ],
+        "minHeight": 44,
+        "toggleHeights": [
+          46,
+          46,
+          46,
+          46,
+          46,
+          46,
+          46,
+          46
+        ],
+        "pin": true,
+        "review": true,
+        "hint": true,
+        "doneGlyph": true,
+        "docOverflow": false
+      }
+    },
+    {
+      "name": "review-due badge renders on the back-dated unit",
+      "pass": true,
+      "measured": {
+        "found": true,
+        "nodeCount": 20,
+        "states": [
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "review-due",
+          "done",
+          "ready",
+          "current",
+          "ready",
+          "ready",
+          "ready",
+          "ready",
+          "ready",
+          "ready"
+        ],
+        "minHeight": 44,
+        "toggleHeights": [
+          46,
+          46,
+          46,
+          46,
+          46,
+          46,
+          46,
+          46
+        ],
+        "pin": true,
+        "review": true,
+        "hint": true,
+        "doneGlyph": true,
+        "docOverflow": false
+      }
+    },
+    {
+      "name": "locked nodes render their unlock hint",
+      "pass": true,
+      "measured": {
+        "found": true,
+        "nodeCount": 20,
+        "states": [
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "locked",
+          "review-due",
+          "done",
+          "ready",
+          "current",
+          "ready",
+          "ready",
+          "ready",
+          "ready",
+          "ready",
+          "ready"
+        ],
+        "minHeight": 44,
+        "toggleHeights": [
+          46,
+          46,
+          46,
+          46,
+          46,
+          46,
+          46,
+          46
+        ],
+        "pin": true,
+        "review": true,
+        "hint": true,
+        "doneGlyph": true,
+        "docOverflow": false
+      }
+    },
+    {
+      "name": "no document-level horizontal overflow at 390px",
+      "pass": true,
+      "measured": {
+        "docOverflow": false
+      }
+    },
+    {
+      "name": "every path row meets the 44px touch floor",
+      "pass": true,
+      "measured": {
+        "minHeight": 44,
+        "toggleHeights": [
+          46,
+          46,
+          46,
+          46,
+          46,
+          46,
+          46,
+          46
+        ]
+      }
+    },
+    {
+      "name": "scroll-up history: done units render ABOVE the pin and the pin sits in the viewport",
+      "pass": true,
+      "measured": {
+        "found": true,
+        "doneAbove": 2,
+        "pinVisible": true,
+        "overflow": false
+      }
+    },
+    {
+      "name": "locked-ahead units stay VISIBLE dim with named unlock reasons",
+      "pass": true,
+      "measured": {
+        "lockedVisible": 90,
+        "withHint": 90,
+        "overflow": false
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-8a325ee2-6eec-4f67-af95-a43e9d95fefd",
+  "backdatedItem": "ru.orth.cyrillic.a#orthography-recognition",
+  "audit": {
+    "pathAudit": {
+      "found": true,
+      "nodeCount": 20,
+      "states": [
+        "locked",
+        "locked",
+        "locked",
+        "locked",
+        "locked",
+        "locked",
+        "locked",
+        "locked",
+        "locked",
+        "locked",
+        "review-due",
+        "done",
+        "ready",
+        "current",
+        "ready",
+        "ready",
+        "ready",
+        "ready",
+        "ready",
+        "ready"
+      ],
+      "minHeight": 44,
+      "toggleHeights": [
+        46,
+        46,
+        46,
+        46,
+        46,
+        46,
+        46,
+        46
+      ],
+      "pin": true,
+      "review": true,
+      "hint": true,
+      "doneGlyph": true,
+      "docOverflow": false
+    },
+    "ahead": {
+      "lockedVisible": 90,
+      "withHint": 90,
+      "overflow": false
+    }
+  },
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17797 (trusted network only)\n"
+}

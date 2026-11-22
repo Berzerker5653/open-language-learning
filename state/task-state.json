@@ -2826,7 +2826,7 @@
     "PATH-VIEW-001": {
       "task_id": "PATH-VIEW-001",
       "title": "Today tab becomes the unit-node path (locked/ready/current/done/review-due) — approved design phase 1",
-      "status": "retryable",
+      "status": "done",
       "attempts": 2,
       "dependencies": [
         "SESSION-SEQUENCE-001",
@@ -2834,10 +2834,11 @@
       ],
       "evidence": [
         "state/notes/PATH-VIEW-001.md",
-        "state/evidence/PATH-VIEW-001/gates.log"
+        "state/evidence/PATH-VIEW-001/gates.log",
+        "state/evidence/PATH-VIEW-001/result.json"
       ],
-      "summary": "Engine + UI shipped via controller takeover (iteration-cap deaths on board t_c6917020): unit_path IPC derives node state ONLY from existing gating/mastery/plan/scheduler machinery (done is evidence-backed; red test unit_path_done_never_reads_attendance_only green), PathView sections with friendly names + CEFR subtitle, locked-ahead visible-dim with pack-worded unlock hints, review-due re-glow with counts; harness mirror + 5 vitest contract tests + capture harness scripted. Controller battery: fmt/storage 7/desktop unit_path/clippy x2/tsc/vitest 482/prettier/langpack/qa_stories all green (gates.log). OPEN: mobile acceptance screenshots via scripts/path-view-capture.mjs from a serve binary built at current main — recipe items 1-3 in the notes file.",
-      "notes": "Frozen contract + REMAINING RECIPE in state/notes/PATH-VIEW-001.md; controller gate battery in state/evidence/PATH-VIEW-001/gates.log. lib.rs/home.tsx are collision hotspots (ENCOUNTER + PATH-WHATSNEXT lanes).",
+      "summary": "Engine + UI shipped via controller takeover (code 64489e8, ledger 7c69cdf): unit_path IPC derives node state ONLY from existing gating/mastery/plan/scheduler machinery; PathView sections with friendly names + CEFR subtitle, locked-ahead visible-dim with pack-worded unlock hints, review-due re-glow with counts. Acceptance capture CLOSED at takeover t_02a3e491: serve binary built clean from HEAD 06ab973, scripts/path-view-capture.mjs seeding fixed (plan-round phase replaced by targeted per-ref practice traffic with the pack's own strings; assertions untouched), 15/15 checks green reproduced twice, mobile 390px screenshots (path-today-top / path-history-above-pin / path-locked-ahead) + result.json in state/evidence/PATH-VIEW-001/, vision-checked: done=green check above pin, teal You-are-here pin, orange Review due (1), hollow circles ahead, locked rows with finish-... hints.",
+      "notes": "Frozen contract + recipe in state/notes/PATH-VIEW-001.md; controller gate battery in state/evidence/PATH-VIEW-001/gates.log; acceptance capture result.json + 3 screenshots committed with this ledger. Observations for follow-up (PATH-WHATSNEXT-001/home area, NOT path-view defects): stale 'No language is set for this profile' empty-state banner still renders while switch_pack'd plan+path render; plan label concatenation missing spaces ('Meet something newДОМ', 'minutesReview due (2)'). Same Array.isArray(plan.value) harness bug exists in scripts/whatsnext-capture.mjs (PATH-WHATSNEXT-001 lane owns the fix). lib.rs/home.tsx remain collision hotspots (ENCOUNTER + PATH-WHATSNEXT lanes).",
       "updated": "2026-11-22"
     },
     "ENCOUNTER-BEFORE-TEST-001": {
