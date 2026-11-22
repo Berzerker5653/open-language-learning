@@ -1,0 +1,866 @@
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'vitest' run
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/hunter/.hermes/cache/scratch/lts-settings-scope-lane/apps/desktop[39m
+
+ [32m✓[39m [30m[43m node [49m[39m src/ipc.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 63[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/home.test.tsx [2m([22m[2m30 tests[22m[2m)[22m[32m 63[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/reading.test.tsx [2m([22m[2m21 tests[22m[2m)[22m[32m 51[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/memory-stats.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 123[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/language.test.tsx [2m([22m[2m18 tests[22m[2m)[22m[32m 48[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/settings.test.tsx [2m([22m[2m22 tests[22m[2m)[22m[32m 125[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/onboarding.test.tsx [2m([22m[2m24 tests[22m[2m)[22m[32m 40[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/practice.test.tsx [2m([22m[2m17 tests[22m[2m)[22m[32m 37[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/scenario.test.tsx [2m([22m[2m23 tests[22m[2m)[22m[32m 36[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/session-chrome.test.tsx [2m([22m[2m21 tests[22m[2m)[22m[32m 39[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/rtl-direction.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[32m 35[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/stress.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/kanji-decomposition.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 30[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/dictation.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/error-review.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[32m 28[2mms[22m[39m
+[90mstderr[2m | src/journeys/ru-modality.journey.tsx[2m > [22m[2mRU modalities are served by their named runners (RU-MODALITY-PRACTICE-001)[2m > [22m[2mruns encounter, listening, writing, and guided-speaking honestly
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+ [32m✓[39m [30m[43m node [49m[39m src/pronunciation.test.tsx [2m([22m[2m12 tests[22m[2m)[22m[32m 70[2mms[22m[39m
+[90mstderr[2m | src/journeys/ru-modality.journey.tsx[2m > [22m[2mRU modalities are served by their named runners (RU-MODALITY-PRACTICE-001)[2m > [22m[2mruns encounter, listening, writing, and guided-speaking honestly
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/keyboard.journey.tsx[2m > [22m[2mkeyboard-only route walk[2m > [22m[2mwalks from the resume picker through a no-pack Today into Settings, focus in hand
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/settings-scope-gating.journey.tsx[2m > [22m[2msettings sections follow installed packs' declared capabilities[2m > [22m[2ma Russian-only learner never sees the Japanese-only romaji control
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/settings-scope-gating.journey.tsx[2m > [22m[2msettings sections follow installed packs' declared capabilities[2m > [22m[2ma Russian-only learner never sees the Japanese-only romaji control
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+ [32m✓[39m [30m[43m node [49m[39m src/a11y.test.tsx [2m([22m[2m57 tests[22m[2m)[22m[32m 39[2mms[22m[39m
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/dup-install.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 153[2mms[22m[39m
+[90mstderr[2m | src/journeys/ru-placement.journey.tsx[2m > [22m[2mplacement asks only runnable questions and reports the rest (U05)[2m > [22m[2mruns the first Russian question and names every abstention
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/ru-placement.journey.tsx[2m > [22m[2mplacement asks only runnable questions and reports the rest (U05)[2m > [22m[2mruns the first Russian question and names every abstention
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/upperband-sequence.journey.tsx[2m > [22m[2mone RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001)[2m > [22m[2mruns the a2 past-events sequence with the speaking stage guided-only
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/a11y-focus.journey.tsx[2m > [22m[2mfocus lands on the heading of every new screen (F-01)[2m > [22m[2mannounces lesson arrival and activity cards with focus on their heading
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2mopens a Russian task, switches to Japanese mid-task, switches back
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m [30m[43m node [49m[39m src/word-timing.test.tsx [2m([22m[2m11 tests[22m[2m)[22m[32m 50[2mms[22m[39m
+[90mstderr[2m | src/journeys/a11y-focus.journey.tsx[2m > [22m[2mfocus lands on the heading of every new screen (F-01)[2m > [22m[2mannounces lesson arrival and activity cards with focus on their heading
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2mopens a Russian task, switches to Japanese mid-task, switches back
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/upperband-sequence.journey.tsx[2m > [22m[2mone RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001)[2m > [22m[2mruns the a2 past-events sequence with the speaking stage guided-only
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/ru-modality.journey.tsx[2m > [22m[2mRU modalities are served by their named runners (RU-MODALITY-PRACTICE-001)[2m > [22m[2mruns encounter, listening, writing, and guided-speaking honestly
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/keyboard.journey.tsx[2m > [22m[2mkeyboard-only route walk[2m > [22m[2mwalks from the resume picker through a no-pack Today into Settings, focus in hand
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/ru-modality.journey.tsx[2m > [22m[2mRU modalities are served by their named runners (RU-MODALITY-PRACTICE-001)[2m > [22m[2mruns encounter, listening, writing, and guided-speaking honestly
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/history-nav.journey.tsx[2m > [22m[2mbrowser history walk (WEB-HISTORY-001)[2m > [22m[2mone entry per level, Back walks stage->session, guardrail asks before leaving the session
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/progress.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 261[2mms[22m[39m
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/settings-prime.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 263[2mms[22m[39m
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/keyboard.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 274[2mms[22m[39m
+[90mstderr[2m | src/journeys/history-nav.journey.tsx[2m > [22m[2mbrowser history walk (WEB-HISTORY-001)[2m > [22m[2mone entry per level, Back walks stage->session, guardrail asks before leaving the session
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/kana-card-gating.journey.tsx[2m > [22m[2mthe in-app keyboard card follows the active pack's declared scripts[2m > [22m[2ma profile learning the Cyrillic pack never sees the control
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+ [32m✓[39m [30m[43m node [49m[39m src/ime.test.ts [2m([22m[2m27 tests[22m[2m)[22m[32m 20[2mms[22m[39m
+[90mstderr[2m | src/journeys/kana-card-gating.journey.tsx[2m > [22m[2mthe in-app keyboard card follows the active pack's declared scripts[2m > [22m[2ma profile learning the Cyrillic pack never sees the control
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/ru-modality.journey.tsx[2m > [22m[2mRU modalities are served by their named runners (RU-MODALITY-PRACTICE-001)[2m > [22m[2mruns encounter, listening, writing, and guided-speaking honestly
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m [30m[43m node [49m[39m src/ruby.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 30[2mms[22m[39m
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/ru-modality.journey.tsx[2m > [22m[2mRU modalities are served by their named runners (RU-MODALITY-PRACTICE-001)[2m > [22m[2mruns encounter, listening, writing, and guided-speaking honestly
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/ru-placement.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 385[2mms[22m[39m
+   [32m✓[39m placement asks only runnable questions and reports the rest (U05) [2m(1)[22m
+     [33m[2m✓[22m[39m runs the first Russian question and names every abstention[33m 382[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/kana-ime.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 135[2mms[22m[39m
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/no-speech-model.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 389[2mms[22m[39m
+   [32m✓[39m no speech model (journey c) [2m(1)[22m
+     [33m[2m✓[22m[39m reports what is missing instead of inventing a speaking verdict[33m 387[2mms[22m[39m
+[90mstderr[2m | src/journeys/upperband-sequence.journey.tsx[2m > [22m[2mone RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001)[2m > [22m[2mruns the a2 past-events sequence with the speaking stage guided-only
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/upperband-sequence.journey.tsx[2m > [22m[2mone RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001)[2m > [22m[2mruns the a2 past-events sequence with the speaking stage guided-only
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/a11y-focus.journey.tsx[2m > [22m[2mfocus lands on the heading of every new screen (F-01)[2m > [22m[2mannounces lesson arrival and activity cards with focus on their heading
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/a11y-focus.journey.tsx[2m > [22m[2mfocus lands on the heading of every new screen (F-01)[2m > [22m[2mannounces lesson arrival and activity cards with focus on their heading
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/kana-card-gating.journey.tsx [2m([22m[2m2 tests[22m[2m)[22m[33m 410[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/hub.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 31[2mms[22m[39m
+[90mstderr[2m | src/journeys/settings-scope-gating.journey.tsx[2m > [22m[2msettings sections follow installed packs' declared capabilities[2m > [22m[2mthe grant is the union across installed packs, not the active pack's language
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/settings-scope-gating.journey.tsx[2m > [22m[2msettings sections follow installed packs' declared capabilities[2m > [22m[2mthe grant is the union across installed packs, not the active pack's language
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/ru-modality.journey.tsx[2m > [22m[2mRU modalities are served by their named runners (RU-MODALITY-PRACTICE-001)[2m > [22m[2mruns encounter, listening, writing, and guided-speaking honestly
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/kanji-decomp.journey.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 458[2mms[22m[39m
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/first-run.journey.tsx [2m([22m[2m2 tests[22m[2m)[22m[33m 467[2mms[22m[39m
+   [32m✓[39m first run (journey a) [2m(2)[22m
+     [33m[2m✓[22m[39m walks a new device from the privacy notice to a graded first drill[33m 336[2mms[22m[39m
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/ru-modality.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 464[2mms[22m[39m
+   [32m✓[39m RU modalities are served by their named runners (RU-MODALITY-PRACTICE-001) [2m(1)[22m
+     [33m[2m✓[22m[39m runs encounter, listening, writing, and guided-speaking honestly[33m 461[2mms[22m[39m
+[90mstderr[2m | src/journeys/ime-mode-bubble.journey.tsx[2m > [22m[2minput-mode bubble and shortcut follow the active pack's declared scripts[2m > [22m[2mthe documented shortcut flips the keyboard from a non-Settings route, and typing follows
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/ime-mode-bubble.journey.tsx[2m > [22m[2minput-mode bubble and shortcut follow the active pack's declared scripts[2m > [22m[2mthe documented shortcut flips the keyboard from a non-Settings route, and typing follows
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m [30m[43m node [49m[39m src/mobile-audit.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 19[2mms[22m[39m
+[90mstderr[2m | src/journeys/ime-mode-bubble.journey.tsx[2m > [22m[2minput-mode bubble and shortcut follow the active pack's declared scripts[2m > [22m[2mthe documented shortcut flips the keyboard from a non-Settings route, and typing follows
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/ime-mode-bubble.journey.tsx[2m > [22m[2minput-mode bubble and shortcut follow the active pack's declared scripts[2m > [22m[2mthe documented shortcut flips the keyboard from a non-Settings route, and typing follows
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/history-nav.journey.tsx[2m > [22m[2mbrowser history walk (WEB-HISTORY-001)[2m > [22m[2mforward re-enters the SAME activity the session is on — never the next one
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/settings-scope-gating.journey.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 507[2mms[22m[39m
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/upperband-sequence.journey.tsx[2m > [22m[2mone RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001)[2m > [22m[2mruns the a2 past-events sequence with the speaking stage guided-only
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/pack-install.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 523[2mms[22m[39m
+   [32m✓[39m pack install (journey b) [2m(1)[22m
+     [33m[2m✓[22m[39m turns an honest refusal into a graded writing target and character cards[33m 518[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/button-affordance.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/content-confirm.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 516[2mms[22m[39m
+   [32m✓[39m content confirmation on the paragraph reader (CONTENT-CONFIRM-001, READER-FLOW-001) [2m(1)[22m
+     [33m[2m✓[22m[39m shows another learner's mark, confirms once, and retracts only its own[33m 510[2mms[22m[39m
+[90mstderr[2m | src/journeys/upperband-sequence.journey.tsx[2m > [22m[2mone RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001)[2m > [22m[2mruns the a2 past-events sequence with the speaking stage guided-only
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/history-nav.journey.tsx[2m > [22m[2mbrowser history walk (WEB-HISTORY-001)[2m > [22m[2mforward re-enters the SAME activity the session is on — never the next one
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/history-nav.journey.tsx[2m > [22m[2mbrowser history walk (WEB-HISTORY-001)[2m > [22m[2mforward re-enters the SAME activity the session is on — never the next one
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+[90mstderr[2m | src/journeys/history-nav.journey.tsx[2m > [22m[2mbrowser history walk (WEB-HISTORY-001)[2m > [22m[2mforward re-enters the SAME activity the session is on — never the next one
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/a11y-focus.journey.tsx [2m([22m[2m2 tests[22m[2m)[22m[33m 545[2mms[22m[39m
+   [32m✓[39m focus lands on the heading of every new screen (F-01) [2m(2)[22m
+     [33m[2m✓[22m[39m announces lesson arrival and activity cards with focus on their heading[33m 456[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/writing.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/export-restore.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 554[2mms[22m[39m
+   [32m✓[39m export then restore (journey d) [2m(1)[22m
+     [33m[2m✓[22m[39m restores a backup as a new profile whose plan says the same thing[33m 552[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/capture.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/progress.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/idle-stability.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 576[2mms[22m[39m
+   [32m✓[39m idle time and interaction issue no repeated native reads (U01) [2m(1)[22m
+     [33m[2m✓[22m[39m settles after bootstrap instead of looping the bridge[33m 569[2mms[22m[39m
+[90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2mopens a Russian task, switches to Japanese mid-task, switches back
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2mopens a Russian task, switches to Japanese mid-task, switches back
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/upperband-sequence.journey.tsx[2m > [22m[2mone RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001)[2m > [22m[2mruns the a2 past-events sequence with the speaking stage guided-only
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/ime-mode-bubble.journey.tsx[2m > [22m[2minput-mode bubble and shortcut follow the active pack's declared scripts[2m > [22m[2ma pack declaring no in-app keyboard has no bubble, and the shortcut no-ops
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/ime-mode-bubble.journey.tsx[2m > [22m[2minput-mode bubble and shortcut follow the active pack's declared scripts[2m > [22m[2ma pack declaring no in-app keyboard has no bubble, and the shortcut no-ops
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+ [32m✓[39m [30m[43m node [49m[39m src/lesson.test.tsx [2m([22m[2m12 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/upperband-sequence.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 628[2mms[22m[39m
+   [32m✓[39m one RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001) [2m(1)[22m
+     [33m[2m✓[22m[39m runs the a2 past-events sequence with the speaking stage guided-only[33m 623[2mms[22m[39m
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/session.journey.tsx [2m([22m[2m2 tests[22m[2m)[22m[33m 617[2mms[22m[39m
+   [32m✓[39m one bounded session (journey e) [2m(2)[22m
+     [33m[2m✓[22m[39m begins, walks the plan, pauses, resumes, and finishes honestly[33m 516[2mms[22m[39m
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/error-offer-review.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 625[2mms[22m[39m
+   [32m✓[39m an error offer becomes a review card only on accept (D3) [2m(1)[22m
+     [33m[2m✓[22m[39m miss → offer → accept → queue drill → self-grade, with no silent accept[33m 624[2mms[22m[39m
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/kana-kbd.journey.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 631[2mms[22m[39m
+   [32m✓[39m in-app kana keyboard on the My Words form [2m(3)[22m
+     [33m[2m✓[22m[39m romaji typed on the surface field lands as kana[33m 392[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/kanji-mnemonic-elements.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/playback.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/ime-mode-bubble.journey.tsx [2m([22m[2m4 tests[22m[2m)[22m[33m 644[2mms[22m[39m
+   [32m✓[39m input-mode bubble and shortcut follow the active pack's declared scripts [2m(4)[22m
+     [33m[2m✓[22m[39m the bubble rides every in-app route and names the pack's declared scripts[33m 329[2mms[22m[39m
+[90mstderr[2m | src/journeys/history-nav.journey.tsx[2m > [22m[2mbrowser history walk (WEB-HISTORY-001)[2m > [22m[2mtab changes get one entry each and Back re-lands the previous tab
+[22m[39mAn update to App inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ [32m✓[39m [30m[43m node [49m[39m src/history-nav.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+[90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2ma running session does not survive the language switch (sweep finding 15)
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2ma running session does not survive the language switch (sweep finding 15)
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/history-nav.journey.tsx [2m([22m[2m4 tests[22m[2m)[22m[33m 710[2mms[22m[39m
+   [32m✓[39m browser history walk (WEB-HISTORY-001) [2m(4)[22m
+     [33m[2m✓[22m[39m one entry per level, Back walks stage->session, guardrail asks before leaving the session[33m 379[2mms[22m[39m
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/new-word-review.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 685[2mms[22m[39m
+   [32m✓[39m a saved word reaches its first review (U03) [2m(1)[22m
+     [33m[2m✓[22m[39m save → Review now → reveal → self-grade → later due → due review[33m 684[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/speech-readiness.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/perf-probe.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[43m node [49m[39m src/App.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/restart-resume.journey.tsx [2m([22m[2m5 tests[22m[2m)[22m[33m 770[2mms[22m[39m
+[90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2man in-flight budget change cannot strand the new pack on the old plan (sweep finding 22)
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+[90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2man in-flight budget change cannot strand the new pack on the old plan (sweep finding 22)
+[22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+ [32m✓[39m [30m[45m dom [49m[39m src/journeys/language-switch.journey.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 955[2mms[22m[39m
+   [32m✓[39m a language change refreshes the learner context (U02) [2m(3)[22m
+     [33m[2m✓[22m[39m opens a Russian task, switches to Japanese mid-task, switches back[33m 604[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m59 passed[39m[22m[90m (59)[39m
+[2m      Tests [22m [1m[32m474 passed[39m[22m[90m (474)[39m
+[2m   Start at [22m 21:14:37
+[2m   Duration [22m 2.79s[2m (transform 43%, tests 24%, environment 20%, import 13%, worker 1%)[22m
+
+[2m  Transform [22m [30m[43m node [49m[39m [33mtransforming modules took 5.27s[39m[2m · 57% of tracked time, re-done on every run[22m
+[2m            [22m [2mpersist transforms across runs with [22m[33mfsModuleCache: true[39m
+[2m            [22m [2mlearn more: https://vitest.dev/guide/improving-performance#caching-between-reruns[22m
+
+EXIT=0
+STAGE-B-DONE

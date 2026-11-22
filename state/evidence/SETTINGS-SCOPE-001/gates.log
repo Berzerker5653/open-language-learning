@@ -1,0 +1,69 @@
+SETTINGS-SCOPE-001 — controller gate battery (RUN 125 units + RUN 126 takeover)
+================================================================
+
+RUN 125 gate units (lts-settings-scope-rust2, lts-settings-scope-ev), results
+in this dir. RUN 126 (controller takeover after the 80/80 iteration cap):
+read those logs per NO-REVERIFY, fixed what was red, rebuilt the evidence
+chain three times for tooling bugs, and verified the acceptance.
+
+RUST (lane tier, unit logs kept beside this file):
+- fmt-check.log            EXIT=1 at 21:13 (serve.rs import order + wraps)
+- fmt-check2.log           EXIT=0 after `cargo fmt` (only serve.rs hunks
+                           changed; sibling lib.rs diff untouched — verified
+                           by before/after `git diff --stat` on *.rs)
+- rust-packs.log           EXIT=0  packs::tests::manifest_settings_capabilities_travel_to_the_renderer ok
+- rust-serve-caps.log      EXIT=0  + tests::world_unlocks_follow_pack_declared_capabilities ok
+- rust-clippy.log          EXIT=0  (cargo clippy -p lts-desktop --all-targets -- -D warnings)
+
+TS (lane tier, isolated worktree HEAD+lane-diff to dodge sibling ORTHO WIP;
+stage-B of the evidence chain — logs tsc.log / vitest.log):
+- tsc.log      EXIT=0
+- vitest.log   EXIT=0  59 files, 474 tests incl. src/settings.test.tsx (22)
+             and src/journeys/settings-scope-gating.journey.tsx (3)
+
+RED-FIRST (machine proof the section is declaration-derived, not constant):
+- test-red-at-head.log  RED-EXIT=1 — the lane's settings.test.tsx run against
+  pure HEAD + only the nav plumbing: the two new tests fail at HEAD
+  (2 failed | 20 passed). At the lane tree the same file passes (22/22).
+
+ACCEPTANCE CAPTURES (phone 390x844, full-page, seeded Settings scenarios):
+- before/result.json  6/6 pass, CAPTURE-BEFORE-EXIT=0: romaji radios+heading
+  PRESENT in all three install shapes at pure HEAD (the shipped bug).
+  Screenshots before/settings-before-*.png; before-ru visibly contains the
+  Romaji (romanisation) display card with Auto/Always/Off (vision-checked).
+- after/result.json   6/6 pass, CAPTURE-AFTER-EXIT=0: romaji ABSENT for
+  RU-only (0 radios, no heading), PRESENT for ja-demo-installed and for the
+  both-packs union. after-ja visibly contains the card (vision-checked);
+  after-ru page is 891px shorter (card gone).
+- Capture tooling bugs found + fixed during takeover (script now carries
+  the lessons inline): (1) npx vite must run from apps/desktop, not the
+  worktree root — run 125's chain built nothing ("vite: command not
+  found"); (2) Page.navigate with only a hash change does NOT reload the
+  document — screens 2 and 3 measured the first screen's stale engine
+  (controller CDP probe proved the lane tree renders the JA card fine);
+  (3) viewport-only screenshots left the romaji card below the Settings
+  fold — captureBeyondViewport: true now ships full-page proof shots.
+- Chain bookkeeping: worktree re-registration after `rm -rf` silently
+  failed stage A once (fixed: worktree remove --force + prune before add).
+
+GRAFT HYGIENE (sibling ORTHO-LETTER-UNITS/SESSION-SEQUENCE WIP present):
+- journeys/harness.tsx staged blob = HEAD + lane hunks only (the sibling's
+  ru.orth.cyrillic placement one-liner stays unstaged for their commit).
+- docs/04_LANGUAGE_PACK_SPEC.md staged blob = HEAD + the lane hunk only
+  (the sibling's "Orthography units" paragraph stays unstaged).
+- state/task-state.json ledger edit round-trips onto the sibling's dirty
+  file, keeping their SESSION-SEQUENCE-001 record + active_task.
+- Never staged: lib.rs, lesson.*, curriculum/*, orthography.*, ortho
+  schemas, audit tools, lib.rs.orig, root c*.png, scripts/ortho-capture.mjs.
+
+DEFERRED: published archives (ru 0.4.6, ja 0.4.3) predate the manifest
+field — a store-installed ja-JP pack shows no romaji card until its next
+republish carries `settings_capabilities` (same pattern as scenario_help;
+ja-demo fixture declares it and drives the acceptance).
+
+COMMIT-TREE ISOLATION (controller, post-commit): the unit logs above ran in
+the main tree which also carried sibling lib.rs WIP. To prove THIS commit
+blameless alone: `git worktree add` at 94aeffea + symlinked the gitignored
+frontendDist (the scratch-tree 'proc macro panicked' is exactly that missing
+dir, not lane rot) -> cargo clippy -p lts-desktop --all-targets -- -D
+warnings  EXIT=0, logged in clippy-commit-isolated.log.

@@ -1,0 +1,72 @@
+Diff in /home/hunter/game-dev/LTS/apps/desktop/src-tauri/src/serve.rs:27:
+ 
+ use axum::body::Bytes;
+ use axum::extract::Path as AxPath;
++use axum::http::HeaderMap;
+ use axum::http::StatusCode;
+-use axum::http::header::ORIGIN;
+ use axum::http::header::CONTENT_TYPE;
+-use axum::http::HeaderMap;
++use axum::http::header::ORIGIN;
+ use axum::response::sse::{Event, KeepAlive, Sse};
+ use axum::response::{IntoResponse, Response};
+ use axum::routing::{get, post};
+Diff in /home/hunter/game-dev/LTS/apps/desktop/src-tauri/src/serve.rs:440:
+                 .and_then(|h| h.split(']').next())
+                 .unwrap_or(host);
+             let host = host.split('/').next().unwrap_or("");
+-            let local = host == "localhost" || host == "127.0.0.1" || host == "[::1]" || host == "::1";
+-            if local {
+-                Some(true)
+-            } else {
+-                Some(false)
+-            }
++            let local =
++                host == "localhost" || host == "127.0.0.1" || host == "[::1]" || host == "::1";
++            if local { Some(true) } else { Some(false) }
+         }
+         None => None,
+     };
+Diff in /home/hunter/game-dev/LTS/apps/desktop/src-tauri/src/serve.rs:719:
+                 if let Some(o) = origin {
+                     builder = builder.header("origin", o);
+                 }
+-                let resp = app.oneshot(builder.body(Body::empty()).unwrap()).await.unwrap();
++                let resp = app
++                    .oneshot(builder.body(Body::empty()).unwrap())
++                    .await
++                    .unwrap();
+                 let bytes = axum::body::to_bytes(resp.into_body(), usize::MAX)
+                     .await
+                     .unwrap();
+Diff in /home/hunter/game-dev/LTS/apps/desktop/src-tauri/src/serve.rs:732:
+             v["microphone_names_available"], false,
+             "insecure origin must say so: {v}"
+         );
+-        assert!(v["microphone_names_note"]
+-            .as_str()
+-            .unwrap()
+-            .contains("secure context"));
++        assert!(
++            v["microphone_names_note"]
++                .as_str()
++                .unwrap()
++                .contains("secure context")
++        );
+         // Loopback http and any https are secure contexts.
+-        for origin in ["http://localhost:8000", "http://127.0.0.1:8000", "https://example.invalid"] {
++        for origin in [
++            "http://localhost:8000",
++            "http://127.0.0.1:8000",
++            "https://example.invalid",
++        ] {
+             let v = ask(Some(origin)).await;
+-            assert_eq!(v["microphone_names_available"], true, "{origin} is secure: {v}");
++            assert_eq!(
++                v["microphone_names_available"], true,
++                "{origin} is secure: {v}"
++            );
+         }
+         // No Origin header at all (typed-in top-level navigation): the
+         // honest answer is "cannot say", never a silent false.
+EXIT=1

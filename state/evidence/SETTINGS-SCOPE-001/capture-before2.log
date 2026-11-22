@@ -1,0 +1,9 @@
+PASS settings-ru: Settings renders — {"settingsAlive":true,"profileDataAlive":true}
+PASS settings-ru: romaji card present as declared — {"romajiRadios":3,"romajiHeading":true,"expected":true}
+PASS settings-ja: Settings renders — {"settingsAlive":true,"profileDataAlive":true}
+PASS settings-ja: romaji card present as declared — {"romajiRadios":3,"romajiHeading":true,"expected":true}
+PASS settings-both: Settings renders — {"settingsAlive":true,"profileDataAlive":true}
+PASS settings-both: romaji card present as declared — {"romajiRadios":3,"romajiHeading":true,"expected":true}
+wrote /home/hunter/.hermes/cache/scratch/lts-settings-scope-head2/state/evidence/SETTINGS-SCOPE-001/before/result.json (6/6 pass)
+CAPTURE-BEFORE-EXIT=0
+STAGE-A2-DONE

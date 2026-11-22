@@ -1,0 +1,14 @@
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'vite' build --config vite.mobile-harness.config.ts
+vite v8.3.3 building client environment for production...
+transforming...
+✓ 55 modules transformed.
+rendering chunks...
+computing gzip size...
+dist-mobile/mobile-harness.html                   0.59 kB │ gzip:   0.39 kB
+dist-mobile/assets/mobile-harness-CR9qzsTe.css   15.21 kB │ gzip:   3.79 kB
+dist-mobile/assets/event-BdM1dtSY.js              1.04 kB │ gzip:   0.54 kB
+dist-mobile/assets/mobile-harness-loSlWQMB.js   447.39 kB │ gzip: 132.47 kB
+
+✓ built in 179ms
+BUILD-DONE

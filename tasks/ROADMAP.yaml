@@ -2997,6 +2997,22 @@ tasks:
   - at wide viewports the card keeps its inline in-flow rendering unchanged with a screenshot proving it
   - before and after screenshots plus the measured audit JSONs land in state/evidence/WORDCARD-OFFSCREEN-001
   required_for_desktop_1_0: false
+- id: SETTINGS-SCOPE-001
+  milestone: M8
+  priority: P1
+  title: Settings sections exist only because installed packs declare the capability - no romaji card on Russian-only devices
+  dependencies:
+  - MOBILE-UX-001
+  read_first:
+  - state/notes/SETTINGS-SCOPE-001.md
+  - schemas/v0.2/language-pack-manifest.schema.json
+  - apps/desktop/src/settings.tsx
+  acceptance:
+  - the romaji display card renders only while some installed pack's manifest declares the romanization-display settings capability - derived from the declarations, never a language constant, with red-first tests failing at HEAD
+  - phone-viewport screenshots prove an RU-only install shows no romaji card while the ja-demo reference pack makes it appear, with measured audits committed under state/evidence/SETTINGS-SCOPE-001
+  - the detect-microphones control grays out with the serve bridge's own reason when microphone names are unavailable, sourced from /api/capabilities
+  - lane gates green - fmt, targeted cargo tests and clippy, tsc, vitest - logged in state/evidence/SETTINGS-SCOPE-001/gates.log
+  required_for_desktop_1_0: false
 - id: GLOSSARY-001
   milestone: M8
   priority: P2
@@ -3160,4 +3176,5 @@ execution_scope:
   - SESSION-SEQUENCE-001
   - WEB-HISTORY-001
   - WORDCARD-OFFSCREEN-001
+  - SETTINGS-SCOPE-001
   public_publication_authorized: false

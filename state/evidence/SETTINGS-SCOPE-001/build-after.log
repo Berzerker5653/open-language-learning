@@ -1,0 +1,3 @@
+npm notice run open-language-learning-platform@0.1.0 npx
+npm notice run 'vite' build --config vite.mobile-harness.config.ts
+sh: line 1: vite: command not found

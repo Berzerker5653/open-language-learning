@@ -1,0 +1,70 @@
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'vitest' run src/settings.test.tsx
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/hunter/.hermes/cache/scratch/lts-settings-scope-head2/apps/desktop[39m
+
+ [31m❯[39m [30m[43m node [49m[39m src/settings.test.tsx [2m([22m[2m22 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[32m 58[2mms[22m[39m
+   [31m❯[39m settings [2m(22)[22m
+     [32m✓[39m the microphone control reflects the stored value[32m 12[2mms[22m[39m
+     [32m✓[39m states the exact build identity a runtime report has to quote[32m 4[2mms[22m[39m
+     [32m✓[39m the microphone picker reflects the stored device and admits when names are unavailable[32m 4[2mms[22m[39m
+     [32m✓[39m the romaji control reflects the stored mode[32m 5[2mms[22m[39m
+     [32m✓[39m shows the kana keyboard card iff the active pack declares a script the keyboard can type[32m 2[2mms[22m[39m
+[31m     [31m×[31m the romaji card exists only while an installed pack grants romanization-display[39m[32m 3[2mms[22m[39m
+[31m     [31m×[31m detect-microphones is gray with the bridge's reason when names are unavailable[39m[32m 3[2mms[22m[39m
+     [32m✓[39m delete requires a second explicit confirmation before it can fire[32m 2[2mms[22m[39m
+     [32m✓[39m offers leaving the profile without deleting anything, with a confirmation step[32m 2[2mms[22m[39m
+     [32m✓[39m export reports where the file went[32m 2[2mms[22m[39m
+     [32m✓[39m makes no capability claim this build lacks[32m 1[2mms[22m[39m
+     [32m✓[39m K-77: exactly one speech-model picker — the duplicate is gone[32m 1[2mms[22m[39m
+     [32m✓[39m labels an unpublished model honestly instead of offering a button (D5)[32m 1[2mms[22m[39m
+     [32m✓[39m the single Speech card states runtime availability honestly (D4/ADR-0019)[32m 2[2mms[22m[39m
+     [32m✓[39m I03: readiness is stated before the controls, with the alternative named[32m 1[2mms[22m[39m
+     [32m✓[39m I03: a ready device is reported as ready[32m 1[2mms[22m[39m
+     [32m✓[39m the model list carries sizes, licenses, and the detected recommendation[32m 1[2mms[22m[39m
+     [32m✓[39m describes the speech models honestly: runtime-gated, never a false capability claim[32m 1[2mms[22m[39m
+     [32m✓[39m offers an output picker only when the runtime can actually route, and never an empty one[32m 2[2mms[22m[39m
+     [32m✓[39m names saved words in the export and shows a backup before restoring it[32m 4[2mms[22m[39m
+     [32m✓[39m keeps count grammar honest at exactly one item[32m 2[2mms[22m[39m
+     [32m✓[39m collapses each prose block into a native details/summary expander with the full text inside[32m 2[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m [30m[43m node [49m[39m src/settings.test.tsx[2m > [22msettings[2m > [22mthe romaji card exists only while an installed pack grants romanization-display
+[31m[1mTypeError[22m: installedPacksDeclareSetting is not a function[39m
+[36m [2m❯[22m src/settings.test.tsx:[2m180:40[22m[39m
+    [90m178|[39m     // not a disabled or hidden one.
+    [90m179|[39m     const ruOnly = render({
+    [90m180|[39m       packDeclaresRomanizationDisplay: installedPacksDeclareSetting(
+    [90m   |[39m                                        [31m^[39m
+    [90m181|[39m         [{ settings_capabilities: [] }],
+    [90m182|[39m         "romanization-display",
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m [30m[43m node [49m[39m src/settings.test.tsx[2m > [22msettings[2m > [22mdetect-microphones is gray with the bridge's reason when names are unavailable
+[31m[1mAssertionError[22m: expected '<section aria-label="Settings"><h2>Se…' to match /id="mic-detect"[^>]*disabled=""/[39m
+
+[32m- Expected:[39m
+/id="mic-detect"[^>]*disabled=""/
+
+[31m+ Received:[39m
+"<section aria-label=\"Settings\"><h2>Settings</h2><div class=\"card\"><h3>Microphone</h3><label for=\"mic-enabled\" class=\"radio-row\"><input id=\"mic-enabled\" type=\"checkbox\"/> Allow microphone access for speaking activities</label><details class=\"prose-note\"><summary>The setting is enforced: while it is off, the app never asks the system for microphone access.</summary><p><small>The setting is enforced: while it is off, the app never asks the system for microphone access — pressing Record shows a note pointing here instead. Speaking activities abstain; reading, writing, listening, and every other activity work without a microphone, and turning this off never blocks progress.</small></p></details><label for=\"mic-device\">Microphone to record from<select id=\"mic-device\"><option value=\"\" selected=\"\">System default</option></select></label><details class=\"prose-note\"><summary>Microphone names appear once you allow access; recording from the system default works until then.</summary><p><small>There is nothing to list yet: the browser only reveals microphone names after you allow microphone access once. Recording from the system default works until then.</small></p></details><p><button id=\"mic-detect\" type=\"button\">Detect microphones</button></p></div><div class=\"card\"><h3>Romaji (romanisation) display</h3><fieldset><legend>Show romaji alongside Japanese text</legend><label class=\"radio-row\"><input type=\"radio\" name=\"romaji-mode\" checked=\"\" value=\"auto\"/> Auto — fade as my reading grows</label><label class=\"radio-row\"><input type=\"radio\" name=\"romaji-mode\" value=\"always\"/> Always show romaji</label><label class=\"radio-row\"><input type=\"radio\" name=\"romaji-mode\" value=\"off\"/> Off — Japanese script only</label></fieldset><details class=\"prose-note\"><summary>Romaji is a temporary scaffold: Auto fades it as reading grows, and the choice never blocks progression.</summary><p><small>Romaji is a temporary scaffold: content is stored in Japanese script, and Auto fades romanisation as reading grows. Your choice is honored everywhere and never blocks progression.</small></p></details></div><div class=\"card\"><h3>Kana keyboard (in-app)</h3><fieldset><legend>Type Japanese in the app without changing the system keyboard</legend><label class=\"radio-row\"><input type=\"radio\" name=\"kana-keyboard\" checked=\"\" value=\"off\"/> Off — I use the system keyboard or IME</label><label class=\"radio-row\"><input type=\"radio\" name=\"kana-keyboard\" value=\"romaji-kana\"/> On — type romaji, get kana, inside the app</label></fieldset><details class=\"prose-note\"><summary>Romaji is converted to kana inside the app&#x27;s own answer fields — nothing is installed and your system layout stays exactly as it is.</summary><p><small>Romaji is converted to kana inside the app&#x27;s own answer fields — nothing is installed and your system layout stays exactly as it is. A platform IME still works when you prefer it: the app steps back while an IME is composing, and turns no key when this is off. Kanji candidates follow the pack&#x27;s own vocabulary in a later pass; free text outside it stays kana.</small></p></details></div><div class=\"card\"><h3>Profile data</h3><details class=\"prose-note\"><summary>Export, restore, and switching all live here; an export is a readable JSON file, and no audio is ever part of one.</summary><p><small>The privacy notice promises you can export or delete your local profile data at any time — both are here, and switching profiles starts here too. Switching only leaves the current profile; it deletes nothing. An export is a readable JSON file holding your profile, settings, your answers and the help you asked for, saved words, and review schedule. Recording metadata is not included, and no audio is ever part of an export.</small></p></details><div class=\"btn-row\"><button type=\"button\" class=\"btn\">Export profile data</button></div><div class=\"field\"><label for=\"restore-path\">Restore from a backup file</label><input id=\"restore-path\" type=\"text\" data-testid=\"settings-restore-path\" placeholder=\"path shown by Export profile data\" value=\"\"/></div><div class=\"btn-row\"><button type=\"button\" class=\"btn btn--quiet\" data-testid=\"settings-restore-check\" disabled=\"\">Check a backup…</button></div><div class=\"btn-row\"><button type=\"button\" class=\"btn btn--quiet\">Switch profile…</button></div><details class=\"prose-note\"><summary>Switching deletes nothing: each profile keeps its own data and waits for you in the picker.</summary><p><small data-testid=\"settings-switch-note\">Switching deletes nothing: each profile keeps its own progress, saved words, and settings, and waits for you in the picker.</small></p></details><div class=\"btn-row\"><button type=\"button\" class=\"btn btn--quiet\">Delete profile data…</button></div><details class=\"prose-note\"><summary>Deleting is final: one explicit confirmation, then all of the profile&#x27;s local data on this device is gone.</summary><p><small data-testid=\"settings-delete-note\">Deleting removes this profile and all of its learning data on this device, and cannot be undone. The app asks for one explicit confirmation before anything is deleted.</small></p></details></div><div class=\"card\"><h3>Speech</h3><p class=\"meta pack-posture\" data-aligner=\"no\" data-testid=\"settings-speech-readiness\">Microphone: off — speaking activities abstain and nothing is recorded. Speech model: off — speaking checks say so instead of guessing. Speech runtime: status could not be read.</p><label for=\"speech-model\">Active speech model<select id=\"speech-model\"><option value=\"off\" selected=\"\">Off — speaking activities abstain</option><option value=\"org.openlanguage.speech.whisper-ggml-tiny\">org.openlanguage.speech.whisper-ggml-tiny — v1.0.0, MIT (not downloaded)</option></select></label><details class=\"prose-note\"><summary>This is the app&#x27;s one speech-model preference; the models themselves are listed below with sizes, licenses, and downloads.</summary><p><small>This is the app&#x27;s one speech-model preference; the models themselves are listed below with their sizes, licenses, and downloads.</small></p></details><h4>Speech recognition &amp; pronunciation</h4><details class=\"prose-note\"><summary>Optional, fully on-device models: nothing is uploaded, feedback is guided only, and model size never changes pronunciation accuracy.</summary><p><small>Optional. These local models feed the speech-based checks — pronunciation alignment and dictation recognition — or you can turn them off above. They run entirely on this device; nothing is uploaded. Pronunciation feedback is <em>guided only</em> (no automatic scoring or mastery) until it has been calibrated. For pronunciation feedback the model sizes give the same result — pick one your device can comfortably run. Larger models mainly help future listening/recognition features, not pronunciation accuracy. This device&#x27;s tier could not be detected, so no model is recommended — pick one your device can comfortably run.</small></p></details><ul class=\"pack-list\"><li>Whisper Tiny — smallest, lightest — 74.1 MB, MIT<button type=\"button\" class=\"btn btn--primary\" aria-label=\"Download Whisper Tiny — smallest, lightest, about 74.1 megabytes\">Download ~74.1 MB</button></li></ul><h4>Playback output</h4><details class=\"prose-note\"><summary>This runtime follows the system sound settings for playback.</summary><p data-playback-route=\"system\"><small>This runtime cannot direct playback to a chosen device, so there is no picker here — the system sound settings decide where audio plays.</small></p></details></div><div class=\"card\"><h3>Speech runtimes</h3><details class=\"prose-note\"><summary>The engines this build ships and can load — honest status, not a choice.</summary><p><small>The engines this build ships and can load — honest status, not a choice. Pronunciation feedback and dictation recognition also need a recognition runtime: where it is absent, those checks abstain, and choosing or downloading a model does not change that.</small></p></details></div><div class=\"card\"><h3>About this build</h3><p class=\"meta\" data-build-commit=\"172d2a2\">Version <strong>0.4.0-alpha.1</strong>, commit <strong>172d2a2</strong>.</p><details class=\"prose-note\"><summary>When you report a platform problem, quote both lines above.</summary><p><small>Please quote both lines when you report a platform problem — a report that names only &quot;the latest version&quot; cannot be matched to a build.</small></p></details></div></section>"
+
+[36m [2m❯[22m src/settings.test.tsx:[2m207:20[22m[39m
+    [90m205|[39m         "Detect microphones is unavailable here: this context is not a…
+    [90m206|[39m     });
+    [90m207|[39m     expect(grayed).toMatch(/id="mic-detect"[^>]*disabled=""/);
+    [90m   |[39m                    [31m^[39m
+    [90m208|[39m     expect(grayed).toContain("not a secure context");
+    [90m209|[39m     // No reason (desktop, or a secure context): the live button as be…
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m20 passed[39m[22m[90m (22)[39m
+[2m   Start at [22m 21:23:11
+[2m   Duration [22m 248ms[2m (transform 43%, tests 36%, import 19%, worker 2%)[22m
+
+RED-EXIT=1

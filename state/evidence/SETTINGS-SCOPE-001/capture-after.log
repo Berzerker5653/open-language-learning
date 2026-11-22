@@ -1,0 +1,11 @@
+file:///home/hunter/.hermes/cache/scratch/lts-settings-scope-lane/scripts/settings-scope-capture.mjs:154
+    if (!audit) throw new Error(`mobile harness never published its audit for #${screen}`);
+                      ^
+
+Error: mobile harness never published its audit for #settings-ru
+    at file:///home/hunter/.hermes/cache/scratch/lts-settings-scope-lane/scripts/settings-scope-capture.mjs:154:23
+
+Node.js v26.13.1
+CAPTURE-AFTER-EXIT=1
+STAGE-C-DONE
+CHAIN-ALL-DONE

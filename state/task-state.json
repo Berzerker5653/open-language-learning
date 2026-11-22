@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-21",
-  "active_task": null,
+  "active_task": "SESSION-SEQUENCE-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2521,6 +2521,38 @@
       ],
       "summary": "The .word-card is inline flow appended after the whole reading paragraph, so on phone viewports a word tap populated the card ~640px below the fold (owner complaint 08: 'nothing pops up'). At phone width the card is now a fixed bottom sheet (z-index 45, max-height 70svh, inner scroll, Close row sticky); wide viewports keep the inline card untouched. Focus management rides the APPLIED stylesheet: the App effect focuses the card on open only when its computed position is fixed, and Close/Escape return focus to the tapped word; navigation supersedes never arm return-focus. scripts/wordcard-capture.mjs is the RED-FIRST machine gate (headless Chrome over CDP, 390x844, journeys #reader screen): RED at HEAD 321f242 4/6 checks FAIL (card 629..904, static, focus on h1, Close clipped; owner's real story y=1486), GREEN after fix 6/6 with full containment + focus-in + focus-return, desktop run asserts position stays static. Board run 123 died at the 80-iteration cap with the finished lane uncommitted; run 124 re-ran the LANE battery (tsc 0, vitest 470 pass) and committed. Sibling-offender audit: no other inline tap-opened popover in reading/session flows (kanji drill is a route).",
       "notes": "Harness lesson: assert FULL containment, not intersection — the fixture's short story put the inline card at 629..904 on an 844 viewport ('intersecting' but Close clipped). Contract + seams in state/notes/WORDCARD-OFFSCREEN-001.md.",
+      "updated": "2026-11-21"
+    },
+    "SESSION-SEQUENCE-001": {
+      "task_id": "SESSION-SEQUENCE-001",
+      "title": "Beginner plan gating — level-0 profile served the B2 Claim lesson in its first session",
+      "status": "in_progress",
+      "attempts": 1,
+      "dependencies": [],
+      "evidence": [
+        "state/notes/SESSION-SEQUENCE-001.md"
+      ],
+      "summary": "",
+      "notes": "Root cause and gate contract in state/notes/SESSION-SEQUENCE-001.md.",
+      "updated": "2026-11-21"
+    },
+    "SETTINGS-SCOPE-001": {
+      "task_id": "SETTINGS-SCOPE-001",
+      "title": "Settings sections exist only because installed packs declare the capability - no romaji card on Russian-only devices",
+      "status": "done",
+      "attempts": 2,
+      "dependencies": [
+        "MOBILE-UX-001"
+      ],
+      "evidence": [
+        "state/evidence/SETTINGS-SCOPE-001/gates.log",
+        "state/evidence/SETTINGS-SCOPE-001/clippy-commit-isolated.log",
+        "state/evidence/SETTINGS-SCOPE-001/before/result.json",
+        "state/evidence/SETTINGS-SCOPE-001/after/result.json",
+        "state/notes/SETTINGS-SCOPE-001.md"
+      ],
+      "summary": "Settings sections are now declared by installed packs: manifest key settings_capabilities (schemas/v0.2), the romaji card renders only when some installed pack grants romanization-display (union across installed packs, never a locale/constant), and the Detect-microphones button grays with the serve bridge's own secure-context reason from /api/capabilities. Phone-viewport full-page captures prove RU-only hides the card while the ja-demo pack makes it appear; red-first settings tests fail at HEAD and pass at the lane.",
+      "notes": "Contract + takeover history in state/notes/SETTINGS-SCOPE-001.md. Published ja archives predate the manifest field: store-installed ja-JP shows the card only at next republish.",
       "updated": "2026-11-21"
     }
   },

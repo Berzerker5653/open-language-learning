@@ -1,0 +1,90 @@
+{
+  "tag": "after",
+  "viewport": "390x844",
+  "scenarios": [
+    {
+      "screen": "settings-ru",
+      "measured": {
+        "romajiRadios": 0,
+        "romajiHeading": false,
+        "settingsAlive": true,
+        "profileDataAlive": true
+      },
+      "expectRomaji": false
+    },
+    {
+      "screen": "settings-ja",
+      "measured": {
+        "romajiRadios": 3,
+        "romajiHeading": true,
+        "settingsAlive": true,
+        "profileDataAlive": true
+      },
+      "expectRomaji": true
+    },
+    {
+      "screen": "settings-both",
+      "measured": {
+        "romajiRadios": 3,
+        "romajiHeading": true,
+        "settingsAlive": true,
+        "profileDataAlive": true
+      },
+      "expectRomaji": true
+    }
+  ],
+  "failures": 0,
+  "checks": [
+    {
+      "name": "settings-ru: Settings renders",
+      "pass": true,
+      "measured": {
+        "settingsAlive": true,
+        "profileDataAlive": true
+      }
+    },
+    {
+      "name": "settings-ru: romaji card absent as declared",
+      "pass": true,
+      "measured": {
+        "romajiRadios": 0,
+        "romajiHeading": false,
+        "expected": false
+      }
+    },
+    {
+      "name": "settings-ja: Settings renders",
+      "pass": true,
+      "measured": {
+        "settingsAlive": true,
+        "profileDataAlive": true
+      }
+    },
+    {
+      "name": "settings-ja: romaji card present as declared",
+      "pass": true,
+      "measured": {
+        "romajiRadios": 3,
+        "romajiHeading": true,
+        "expected": true
+      }
+    },
+    {
+      "name": "settings-both: Settings renders",
+      "pass": true,
+      "measured": {
+        "settingsAlive": true,
+        "profileDataAlive": true
+      }
+    },
+    {
+      "name": "settings-both: romaji card present as declared",
+      "pass": true,
+      "measured": {
+        "romajiRadios": 3,
+        "romajiHeading": true,
+        "expected": true
+      }
+    }
+  ]
+}
