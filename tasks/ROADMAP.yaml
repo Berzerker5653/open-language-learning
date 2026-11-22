@@ -2966,6 +2966,21 @@ tasks:
   - the frontend adapter feeds browser-mode stages into the existing install-progress UI
   - a unit test covers the event bridge and a request-level smoke installs a small fixture pack with stage events observed over HTTP
   required_for_desktop_1_0: false
+- id: WEB-HISTORY-001
+  milestone: M11
+  priority: P2
+  title: Browser back and forward wired into in-app navigation - Back walks stage, session and plan instead of leaving the site
+  dependencies:
+  - WEB-SERVE-001
+  read_first:
+  - state/notes/WEB-HISTORY-001.md
+  - apps/desktop/src/history-nav.ts
+  acceptance:
+  - every in-app destination (tab, session, activity stage) pushes one history entry per level and popstate navigates back through the existing state machine
+  - leaving an active session asks to confirm, back from a root tab exits with no loops and forward jumps never double-advance
+  - desktop behavior stays unchanged because the shim installs only under the serve or acceptance marker
+  - a real-browser mobile acceptance walk lands stage to session to plan with screenshots and Back from the root tab leaves the site
+  required_for_desktop_1_0: false
 - id: GLOSSARY-001
   milestone: M8
   priority: P2
@@ -3128,4 +3143,5 @@ execution_scope:
   - WEB-PROGRESS-001
   - GLOSSARY-001
   - CODING-STANDARDS-001
+  - WEB-HISTORY-001
   public_publication_authorized: false
