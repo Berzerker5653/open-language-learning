@@ -47,6 +47,13 @@ catalog pin; RC evidence in `state/evidence/RC-0.4.7-2026-11-21/`). The freeze
 lifts when the CI 'Restore reference-pack audio' legs go green on the run after
 the catalog re-pin commit lands.
 
+2026-11-22 FREEZE LIFTED: CI run 44999277611 (head 61c3ee1) shows every
+'Restore reference-pack audio' leg green (ru 0.4.7: rows checked=5032, valid
+5032, failing 0) and rust-conformance fully green; the only run-red is the
+pre-existing web `pnpm fmt:check` drift owned by the desktop/web lanes
+(`state/evidence/RU-CONTENT-FREEZE-047-001/ci-watch.txt`). ru content edits
+are allowed again.
+
 ## Native spot-audition flags queued for the reviewer (do NOT block publish)
 
 From RU-STORIES-MEDIA-001 (gate passed, soft-sign homophone risk):
