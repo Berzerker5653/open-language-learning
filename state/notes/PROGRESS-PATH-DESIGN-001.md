@@ -1,7 +1,7 @@
 # PROGRESS-PATH-DESIGN-001 — how progress is presented, research + proposal
 
 Date: 2026-11-22. Trigger: owner dogfood, verbatim: "I just did the 5-minute session. And now I'm confused as to how to continue proceeding forward... I know a lot of them use some sort of linear bubble tree... this would also make it easier for our Learners to go back to information that they have studied before... gives them a better physical representation of where they are. Research this and come back to me, we can bounce ideas off each other."
-Status: RESEARCH + PROPOSAL. No implementation cards until owner signs off on shape.
+Status: APPROVED by owner 2026-11-22 (Today becomes the Path; locked-ahead visible-dim; friendly section names). Cards: PATH-VIEW-001, PATH-WHATSNEXT-001, PATH-REOPEN follow-up. Encounter-before-test rule below.
 
 ## What the market does (evidence)
 
@@ -43,3 +43,10 @@ Tapping any node you've started = its unit detail (activities, stories, "strengt
 1. Path as the Today tab itself, or a 6th nav item ("Path")? (Recommend: Today becomes the path top — fewer tabs, one source of truth.)
 2. Section naming: keep CEFR-ish (On-ramp, A1, A2) or friendly unit titles only? (Recommend: friendly titles, CEFR as small subtitle.)
 3. Locked units visible ahead (Spark Chamber: see where it leads) or hidden until unlocked? (Recommend: visible, dim, with prerequisites named — matches "preview what's ahead" already on the board.)
+
+
+## Owner addendum (2026-11-22): teach the correct basics before overloading
+
+Owner verbatim: "I had just learned a o and m and the next question was Tom. So yes we learned two of the three letters but our users would have to guess that the t does not change in Russian."
+
+Rule adopted: **ENCOUNTER-BEFORE-TEST** — a drill may only test a letter/word the learner has a COMPLETED encounter with (evidence of a finished encounter item, not same-unit attendance). Interrupted units resume at missing encounters before any test touching unseen items. Latin-script learners also get explicit contrast teaching: friendly-friend letters (Т О А М К Е — look Latin, similar sound) acknowledged with a one-liner on introduction; confusables (В Н Р С У per LETTER-TEACHING-DESIGN-001.md) taught as explicit false-friends BEFORE testing.
