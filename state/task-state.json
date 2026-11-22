@@ -2649,6 +2649,26 @@
       "summary": "Data-independent half of SPEECH-007 landed so calibration flips data files, not architecture. Registry (CalibrationRecord binding feature/provider/model version+hash/interpreter/pack version/thresholds/metrics/envelope, fail-closed), the per-feature pronunciation guided/automatic gate (mode+mode_reason) and honest UI labels shipped 2026-10-04 in 2c722a5; this card closed the measured gap: end-to-end contract tests through the real pipeline. Two vendor-gated tests in apps/desktop/src-tauri/src/lib.rs (real whisper.cpp+ggml-tiny run locally; skip in place without vendor): a Qualified record bound to the exact installed combination flips pronunciation_check_at to mode=automatic with the scored audio outcome unchanged, and a record bound to a decoy model version fails closed (guided, mode_reason=model-version-drift, docs/17 sec 97). Also fixed run-1's E0308 helper compile bug and shipped the serve.rs rustfmt rot from a12f2d2 as chore 39a3990. Code b06f18a. Gates at HEAD+lane in worktree (shared target): fmt 0, speech-api 9/9, contract 2/2, pronunciation regression 4/4, clippy -D warnings 0, audit_learner_copy 0 findings. No behavior change: automatic stays off by default until a qualified record exists; SPEECH-007 itself stays blocked on owner calibration data, unchanged.",
       "activity": "idle",
       "updated": "2026-11-21"
+    },
+    "RU-STORIES-MEDIA-001": {
+      "task_id": "RU-STORIES-MEDIA-001",
+      "title": "Bake drill audio for the 14 stories202611 lexicon entries so ru conformance goes green",
+      "status": "done",
+      "attempts": 1,
+      "dependencies": [
+        "CONTENT-QA-STORIES-001"
+      ],
+      "evidence": [
+        "state/evidence/RU-STORIES-MEDIA-001/gates.log",
+        "state/evidence/RU-STORIES-MEDIA-001/piper-bestof.jsonl",
+        "state/evidence/RU-STORIES-MEDIA-001/asr-verify.jsonl",
+        "state/notes/RU-STORIES-MEDIA-001.md"
+      ],
+      "summary": "14 ru.lex.stories202611 drill entries from c347aa2 got baked audio per the engine contract (script-tagged lexicon entries are audio-addressable; weakening the enumeration was off-limits). Piper multi-voice ladder fed marked readings (baton fed unmarked - espeak broke on U+0301, single attested stress), all 14 rows re-gated with the production ASR gate + duration cap (ratios 0.80-1.00, pet/vyhodit/goryachiy flagged for native audition), synthesizer {runtime,model,voice} law. validate/lint/test languages/ru-RU 0 errors in a HEAD worktree with the built media tree; the same run on the HEAD manifest reproduces the CI media_asset_missing x14 exactly. CI ru leg stays red until an 0.4.7 publish (archive pin predates the rows) - follow-up card carries the 8 re-bake ids, 20 pre-existing drift clips, and the RC/publish.",
+      "activity": [
+        "run 1: bake + record + local red/green proof, closed same run"
+      ],
+      "updated": "2026-11-21"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

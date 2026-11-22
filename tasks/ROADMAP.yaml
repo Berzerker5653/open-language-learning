@@ -3133,6 +3133,20 @@ tasks:
   - paired devices get a long-lived session cookie and pairing survives a process restart, with unit tests over PIN issue/validate/expiry and bind policy
   - the card labels the traffic honestly as unencrypted http with the browser mic blocked, and a second-LTS_DATA_DIR smoke proves the full client flow over a real LAN socket
   required_for_desktop_1_0: false
+- id: RU-STORIES-MEDIA-001
+  milestone: M8
+  priority: P1
+  title: Bake drill audio for the 14 stories202611 lexicon entries so ru conformance goes green
+  dependencies: [CONTENT-QA-STORIES-001]
+  read_first:
+  - state/notes/RU-STORIES-MEDIA-001.md
+  - state/evidence/RU-STORIES-MEDIA-001/gates.log
+  - docs/PACK_AUTHORING_CONTRACT.md
+  acceptance:
+  - every ru.lex.stories202611 entry added by the content QA pass has a gate-passing media manifest row with synthesizer runtime/model/voice provenance
+  - validate, lint and install-mode test of languages/ru-RU pass with zero errors on a HEAD worktree with the built media tree
+  - every new clip survives the production ASR round-trip gate including the duration cap, with soft-sign homophone takes flagged for native audition
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3259,4 +3273,5 @@ execution_scope:
   - CONTENT-QA-STORIES-001
   - SESSION-FLOW-COPY-001
   - LAN-TOGGLE-PIN-001
+  - RU-STORIES-MEDIA-001
   public_publication_authorized: false

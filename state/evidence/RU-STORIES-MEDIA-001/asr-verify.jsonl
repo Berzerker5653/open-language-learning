@@ -1,0 +1,56 @@
+{"id": "ru.lex.stories202611.fonar", "status": "MISMATCH", "text": "фона́рь", "reasons": ["duration-suspect (2.24s > 2.20s cap)"]}
+{"id": "ru.lex.stories202611.lunka", "status": "MISMATCH", "ratio": 0.55, "text": "лу́нка", "heard": "Коинка."}
+{"id": "ru.lex.stories202611.sidene", "status": "ok", "ratio": 1.0, "text": "сиде́нье", "heard": "Сиденье."}
+{"id": "ru.lex.stories202611.ded", "status": "ok", "ratio": 1.0, "text": "дед", "heard": "Дед."}
+{"id": "ru.lex.stories202611.gitara", "status": "ok", "ratio": 0.88, "text": "гита́ра", "heard": "ГИТАЕРА"}
+{"id": "ru.lex.stories202611.znayushchiy", "status": "ok", "ratio": 1.0, "text": "зна́ющий", "heard": "Знающий!"}
+{"id": "ru.lex.stories202611.zontik", "status": "ok", "ratio": 0.75, "text": "зо́нтик", "heard": "Зойонтик..."}
+{"id": "ru.lex.stories202611.derevnya", "status": "ok", "ratio": 1.0, "text": "дере́вня", "heard": "Деревня."}
+{"id": "ru.lex.stories202611.muzykant", "status": "MISMATCH", "ratio": 0.71, "text": "музыка́нт", "heard": "Музыка."}
+{"id": "ru.lex.stories202611.antrakt", "status": "ok", "ratio": 0.75, "text": "антра́кт", "heard": "Антроюкт."}
+{"id": "ru.lex.stories202611.dokladchik", "status": "ok", "ratio": 1.0, "text": "докла́дчик", "heard": "Докладчик."}
+{"id": "ru.lex.stories202611.doska", "status": "MISMATCH", "ratio": 0.31, "text": "доска́", "heard": "Тескою."}
+{"id": "ru.lex.stories202611.improvizirovat", "status": "MISMATCH", "text": "импровизи́ровать", "reasons": ["duration-suspect (5.92s > 4.00s cap)"]}
+{"id": "ru.lex.stories202611.aukcion", "status": "ok", "ratio": 0.94, "text": "аукцио́н", "heard": "Аукции ОН"}
+{"id": "ru.lex.stories202611.fizik", "status": "MISMATCH", "ratio": 0.67, "text": "фи́зик", "heard": "ФИОЗИ"}
+{"id": "ru.lex.stories202611.foye", "status": "MISMATCH", "ratio": 0.5, "text": "фойе́", "heard": "Фуя!"}
+{"id": "ru.lex.stories202611.internet", "status": "MISMATCH", "ratio": 0.7, "text": "интерне́т", "heard": "Интернейоту!"}
+{"id": "ru.lex.stories202611.karman", "status": "MISMATCH", "ratio": 0.5, "text": "карма́н", "heard": "Кармал!"}
+{"id": "ru.lex.stories202611.khozyayka", "status": "ok", "ratio": 0.88, "text": "хозя́йка", "heard": "Хозяйойка!"}
+{"id": "ru.lex.stories202611.kupe", "status": "MISMATCH", "text": "купе́", "reasons": ["duration-suspect (2.72s > 2.20s cap)"]}
+{"id": "ru.lex.stories202611.konferentsiya", "status": "ok", "ratio": 0.9, "text": "конфере́нция", "heard": "Конференции!"}
+{"id": "ru.lex.stories202611.kollektsioner", "status": "MISMATCH", "ratio": 0.6, "text": "коллекционе́р", "heard": "Каякцева не ур!"}
+{"id": "ru.lex.stories202611.koreshok", "status": "ok", "ratio": 0.78, "text": "корешо́к", "heard": "Корешаяк!"}
+{"id": "ru.lex.stories202611.lavka", "status": "ok", "ratio": 1.0, "text": "ла́вка", "heard": "Лавка."}
+{"id": "ru.lex.stories202611.lot", "status": "MISMATCH", "ratio": 0.67, "text": "лот", "heard": "Вот!"}
+{"id": "ru.lex.stories202611.poetessa", "status": "MISMATCH", "text": "поэте́сса", "reasons": ["duration-suspect (4.00s > 3.10s cap)"]}
+{"id": "ru.lex.stories202611.pensioner", "status": "ok", "ratio": 1.0, "text": "пенсионе́р", "heard": "Пенсионер."}
+{"id": "ru.lex.stories202611.ogon", "status": "MISMATCH", "ratio": 0.4, "text": "ого́нь", "heard": "О, Ва, Ён!"}
+{"id": "ru.lex.stories202611.perevodchik", "status": "MISMATCH", "ratio": 0.74, "text": "перево́дчик", "heard": "Кирилл Чик!"}
+{"id": "ru.lex.stories202611.poimat", "status": "ok", "ratio": 0.77, "text": "пойма́ть", "heard": "Ой, мать!"}
+{"id": "ru.lex.stories202611.tsvet", "status": "MISMATCH", "text": "цвет", "reasons": ["duration-suspect (2.08s > 1.75s cap)"]}
+{"id": "ru.lex.stories202611.prilavok", "status": "ok", "ratio": 0.8, "text": "прила́вок", "heard": "Прилаёвок!"}
+{"id": "ru.lex.stories202611.rasti", "status": "ok", "ratio": 1.0, "text": "расти́", "heard": "Расти!"}
+{"id": "ru.lex.stories202611.torgovka", "status": "ok", "ratio": 0.89, "text": "торго́вка", "heard": "ТОРГОЕВКА"}
+{"id": "ru.lex.stories202611.vozrazit", "status": "MISMATCH", "text": "возрази́ть", "reasons": ["duration-suspect (3.04s > 2.65s cap)"]}
+{"id": "ru.lex.stories202611.ulybatsya", "status": "ok", "ratio": 0.89, "text": "улыба́ться", "heard": "Улыбается."}
+{"id": "ru.lex.stories202611.ustoyat", "status": "MISMATCH", "ratio": 0.63, "text": "устоя́ть", "heard": "Устой, ай-ёть!"}
+{"id": "ru.lex.stories202611.utverzhdat", "status": "ok", "ratio": 0.87, "text": "утвержда́ть", "heard": "Утверждаться..."}
+{"id": "ru.lex.stories202611.zanaves", "status": "MISMATCH", "text": "за́навес", "reasons": ["duration-suspect (3.04s > 2.65s cap)"]}
+{"id": "ru.lex.stories202611.vyklyuchitsya", "status": "ok", "ratio": 1.0, "text": "вы́ключиться", "heard": "Выключиться!"}
+{"id": "ru.lex.stories202611.vstretitsya", "status": "ok", "ratio": 1.0, "text": "встре́титься", "heard": "Встретиться!"}
+{"id": "ru.lex.stories202611.yagoda", "status": "MISMATCH", "ratio": 0.71, "text": "я́года", "heard": "Я и угода."}
+{"id": "ru.lex.stories202611.baton", "status": "ok", "ratio": 1.0, "text": "ба́тон", "heard": "Батон."}
+{"id": "ru.lex.stories202611.nakupit", "status": "ok", "ratio": 1.0, "text": "накупи́ть", "heard": "накупить."}
+{"id": "ru.lex.stories202611.goryachiy", "status": "ok", "ratio": 0.95, "text": "горя́чий", "heard": "горячие."}
+{"id": "ru.lex.stories202611.nachinatsya", "status": "ok", "ratio": 1.0, "text": "начина́ться", "heard": "Начинаться."}
+{"id": "ru.lex.stories202611.odevatsya", "status": "ok", "ratio": 1.0, "text": "одева́ться", "heard": "одеваться."}
+{"id": "ru.lex.stories202611.pahnut", "status": "ok", "ratio": 1.0, "text": "па́хнуть", "heard": "Пахнуть."}
+{"id": "ru.lex.stories202611.ptichka", "status": "ok", "ratio": 1.0, "text": "пти́чка", "heard": "Птичка."}
+{"id": "ru.lex.stories202611.pet", "status": "ok", "ratio": 0.8, "text": "петь", "heard": "Пять."}
+{"id": "ru.lex.stories202611.svetit", "status": "ok", "ratio": 1.0, "text": "свети́ть", "heard": "Светить."}
+{"id": "ru.lex.stories202611.vetka", "status": "ok", "ratio": 1.0, "text": "ве́тка", "heard": "Ветка."}
+{"id": "ru.lex.stories202611.varit", "status": "ok", "ratio": 0.93, "text": "вари́ть", "heard": "Варите."}
+{"id": "ru.lex.stories202611.vyhodit", "status": "ok", "ratio": 0.89, "text": "вы́ходить", "heard": "Высадить."}
+{"id": "ru.lex.stories202611.yarko", "status": "ok", "ratio": 1.0, "text": "я́рко", "heard": "Ярко."}
+{"id": "ru.lex.stories202611.zarya", "status": "ok", "ratio": 1.0, "text": "заря́", "heard": "Заря."}

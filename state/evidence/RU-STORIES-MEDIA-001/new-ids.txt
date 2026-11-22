@@ -1,0 +1,14 @@
+ru.lex.stories202611.baton
+ru.lex.stories202611.goryachiy
+ru.lex.stories202611.nachinatsya
+ru.lex.stories202611.nakupit
+ru.lex.stories202611.odevatsya
+ru.lex.stories202611.pahnut
+ru.lex.stories202611.pet
+ru.lex.stories202611.ptichka
+ru.lex.stories202611.svetit
+ru.lex.stories202611.varit
+ru.lex.stories202611.vetka
+ru.lex.stories202611.vyhodit
+ru.lex.stories202611.yarko
+ru.lex.stories202611.zarya

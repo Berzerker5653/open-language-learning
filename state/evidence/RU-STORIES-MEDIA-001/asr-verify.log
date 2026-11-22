@@ -1,0 +1,14 @@
+carrying 42 settled rows from state/evidence/RU-STORIES-MEDIA-001/asr-verify.jsonl; 14 left to check
+audit start: 14 rows x 4 workers -> state/evidence/RU-STORIES-MEDIA-001/asr-verify.jsonl
+checked=56 passed=36 MISMATCH=20 TIMEOUT=0 WAV-MISSING=0 CHECK-ERROR=0
+Traceback (most recent call last):
+  File "/home/hunter/game-dev/LTS/scripts/qa-asr.py", line 324, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/hunter/game-dev/LTS/scripts/qa-asr.py", line 312, in main
+    for r in sorted(mismatches, key=lambda r: r["ratio"]):
+             ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hunter/game-dev/LTS/scripts/qa-asr.py", line 312, in <lambda>
+    for r in sorted(mismatches, key=lambda r: r["ratio"]):
+                                              ~^^^^^^^^^
+KeyError: 'ratio'

@@ -1,0 +1,69 @@
+RU-STORIES-MEDIA-001 — gate log (2026-11-21, run 1, closed)
+
+== Lane ==
+14 ru.lex.stories202611 drill entries added by c347aa2 (CONTENT-QA-STORIES-001)
+carried no media manifest rows; rust-conformance red with
+error[media_asset_missing] on every job restoring pack audio.
+
+Resolution per engine contract (docs/PACK_AUTHORING_CONTRACT.md, ADR-0024):
+script-tagged lexicon entries ARE audio-addressable; option 2 ("mark
+non-audio-addressable") would mean weakening the engine enumeration — taken
+option 1: baked drill audio + manifest rows.
+
+== Bake ==
+Ladder: scripts/piper-bestof.py logic (multi-voice Piper, production gate +
+duration cap 1.3+0.45*syllables), fed stress-marked readings from
+lexicon/stories202611.jsonl. Report: piper-bestof.jsonl (13/14 first-pass).
+baton: all marked-text piper takes garbled (espeak G2P broke on U+0301:
+heard Баттен/Байкен); probe with unmarked батон passed ruslan/denis ratio
+1.00 — ба́тон has exactly one attested stress so unmarked feeding is safe;
+take kept (ru_RU-denis-medium, 0.64s). Feeding note recorded in manifest row.
+Candidates: piper-candidates/ ; applied wavs -> languages/ru-RU/media/,
+manifest rows appended with synthesizer {runtime,model,voice} only (law).
+Voice mixing: owner-approved for drill snippets (word-lookup audio may be any
+voice; narrator consistency applies to continuous narration only).
+
+== ASR verification (production gate) ==
+qa-asr.py --pack languages/ru-RU --ids new-ids.txt (rows re-gated FROM the
+recorded manifest rows): all 14 targets status=ok (asr-verify.jsonl; ratios
+0.80-1.00). Native spot-audition candidates flagged (soft-sign class, gate
+passed): ru.lex.stories202611.pet (heard "Пять" — петь/пять homophones),
+ru.lex.stories202611.vyhodit (heard "Высадить", ratio 0.89),
+ru.lex.stories202611.goryachiy (heard "горячие", ratio 0.95).
+
+== Gates ==
+All pack gates run in a clean HEAD worktree (~/.hermes/cache/scratch/lts-rumed-gate,
+HEAD cddc944) because the main tree carries a sibling lane's uncommitted
+crates/langpack WIP; media dir symlinked to the main tree's fully built media
+(5032 wavs) to exercise install-mode coverage exactly as CI does.
+- validate languages/ru-RU  -> 0 errors (exit 0)
+- lint languages/ru-RU      -> 0 errors (exit 0)
+- test   languages/ru-RU    -> 0 errors (exit 0)   [install-mode coverage, built]
+RED baseline proof (same wav bytes, HEAD manifest via git archive + hard links):
+- test (HEAD manifest)      -> exactly 1 error = media_asset_missing x14
+  (reproduces the CI red byte-for-byte; green with this lane's manifest).
+No code touched -> no fmt/clippy needed; cargo gates untouched.
+RACE NOTE (honest): the first baseline attempt used `cp -al` and then
+`git show HEAD:...manifest.jsonl > scratch/.../manifest.jsonl` — the
+redirect through the hard link truncated the MAIN TREE manifest back to
+HEAD's 5018 rows. Re-applied the 14 rows (same candidate wavs, identical
+bytes) and re-ran the three CLI gates (all 0 errors, manifest sha now
+e6f1db9ceedb...). Lesson: `>` through a hard link writes the original.
+
+== PRE-EXISTING finding (NOT introduced by this lane; surfaced by the audit) ==
+Re-gating all 56 ru.lex.stories202611 clips (the first pass ran the full
+shard) shows 20 pre-existing clips from the 2026-11-18 story batch failing
+the current gate v5: 8 duration-suspect (fonar 2.24s, improvizirovat 5.92s,
+kupe, poetessa, tsvet, vozrazit, zaves, ...) + 12 ratio-mismatch (lunka 0.55,
+doska 0.31, ogon 0.40, perevodchik 0.74, kollektsioner 0.60, ...).
+Full rows in asr-verify.jsonl. These sit inside the published 0.4.6 archive
+and are repair candidates for the 0.4.7 cycle alongside the 8 re-bake ids
+listed in state/notes/CONTENT-QA-STORIES-001.md.
+
+== CI posture after this commit ==
+rust-conformance's media_asset_missing is gone locally, but the CI restore
+leg fetches wavs from the pinned ru archive (0.4.6, predates these rows);
+fetch-pack-audio.sh will report the 14 new rows unrestorable until an ru
+republish (0.4.7) lands. Per card + docs/13 lesson: do NOT cut 0.4.7 until
+content is frozen (8 re-bake ids first). Follow-up card carries: 8 sentence
+re-bakes, the 20 drift clips, 0.4.7 RC + publish + catalog re-pin.
