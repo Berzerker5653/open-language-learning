@@ -7,6 +7,7 @@
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { Settings, type SettingsProps } from "./settings";
+import { installedPacksDeclareSetting } from "./language";
 import { packDeclaresInAppKanaKeyboard } from "./ime";
 
 const base: SettingsProps = {
@@ -25,6 +26,8 @@ const base: SettingsProps = {
   kanaKeyboard: "off",
   onSetKanaKeyboard: () => {},
   packDeclaresKanaKeyboard: true,
+  packDeclaresRomanizationDisplay: true,
+  micDetectUnavailableReason: null,
   speechModel: "off",
   speechModels: [
     {
@@ -162,8 +165,50 @@ describe("settings", () => {
     );
 
     // Gating one card removes only that card; the rest of Settings is intact.
-    expect(cyrillic).toContain("Romaji (romanisation) display");
     expect(cyrillic).toContain("Profile data");
+  });
+
+  // SETTINGS-SCOPE-001 (red-first, owner phone dogfood complaint 06): the
+  // romaji card rendered for a learner with zero Japanese packs. Section
+  // visibility must be derived from installed-pack declarations — the two
+  // props below arrive from `installedPacksDeclareSetting(installed, ...)`
+  // and the serve capability report, never from a constant in this page.
+  it("the romaji card exists only while an installed pack grants romanization-display", () => {
+    // RU-only shape: the ru manifest grants nothing -> no card at all,
+    // not a disabled or hidden one.
+    const ruOnly = render({
+      packDeclaresRomanizationDisplay: installedPacksDeclareSetting(
+        [{ settings_capabilities: [] }],
+        "romanization-display",
+      ),
+    });
+    expect(ruOnly).not.toContain("Romaji (romanisation) display");
+    expect(ruOnly).not.toMatch(/name="romaji-mode"/);
+    // Settings stays alive: only the ungranted card is gone.
+    expect(ruOnly).toContain("Microphone");
+    expect(ruOnly).toContain("Profile data");
+
+    // The ja-demo fixture's own declaration grants it -> the card appears.
+    const jaInstalled = render({
+      packDeclaresRomanizationDisplay: installedPacksDeclareSetting(
+        [{ settings_capabilities: ["romanization-display"] }],
+        "romanization-display",
+      ),
+    });
+    expect(jaInstalled).toContain("Romaji (romanisation) display");
+    expect(jaInstalled).toMatch(/name="romaji-mode"/);
+  });
+
+  it("detect-microphones is gray with the bridge's reason when names are unavailable", () => {
+    const grayed = render({
+      micDetectUnavailableReason:
+        "Detect microphones is unavailable here: this context is not a secure context, so the browser reveals no microphone names. Recording from the system default still works.",
+    });
+    expect(grayed).toMatch(/id="mic-detect"[^>]*disabled=""/);
+    expect(grayed).toContain("not a secure context");
+    // No reason (desktop, or a secure context): the live button as before.
+    expect(render()).toMatch(/id="mic-detect"/);
+    expect(render()).not.toMatch(/id="mic-detect"[^>]*disabled=""/);
   });
 
   it("delete requires a second explicit confirmation before it can fire", () => {

@@ -14,6 +14,12 @@ scripts:
   - "ja.orth.katakana"
   - "ja.orth.kanji"
   - "ja.orth.latin"
+# SETTINGS-SCOPE-001: this pack grants the romanization-display settings
+# section. A pack published BEFORE this field existed declares nothing and
+# therefore shows no such section — the 0.4.3 archive predates the rule;
+# the next republish carries the declaration.
+settings_capabilities:
+  - "romanization-display"
 world: environments.jsonl
 capabilities:
   listening: true

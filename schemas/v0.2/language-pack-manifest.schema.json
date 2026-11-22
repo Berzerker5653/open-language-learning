@@ -51,6 +51,12 @@
       "uniqueItems": true,
       "description": "Script IDs declared in orthography/scripts.yaml; checked semantically against the orthography file."
     },
+    "settings_capabilities": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$" },
+      "uniqueItems": true,
+      "description": "SETTINGS-SCOPE-001: settings sections this pack grants (e.g. 'romanization-display'). The settings UI renders such a section only when at least one installed pack declares the capability — an uninstalled language contributes no controls. Absent means the pack grants no extra settings sections, so packs published before 2026-11-21 stay installable. The host ships these ids verbatim; interpreting them (which section an id names) is the renderer's job, never a locale check."
+    },
     "world": {
       "type": "string",
       "enum": ["environments.jsonl"],

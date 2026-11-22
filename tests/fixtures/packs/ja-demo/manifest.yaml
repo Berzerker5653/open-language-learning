@@ -5,6 +5,9 @@ version: "0.1.0"
 target_locale: "ja-JP"
 source_locales: ["en-US"]
 scripts: ["ja.orth.hiragana"]
+# SETTINGS-SCOPE-001: this pack grants the romanization-display settings
+# section — a learner with no such pack installed never sees the control.
+settings_capabilities: ["romanization-display"]
 engine:
   min_version: "0.1.0"
   max_version_exclusive: null

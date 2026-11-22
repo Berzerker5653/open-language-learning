@@ -112,6 +112,13 @@ pub struct InstalledPack {
     /// behavior stands; present means the true-ids are the allowlist.
     pub input_methods: Vec<String>,
     pub input_methods_declared: bool,
+    /// SETTINGS-SCOPE-001: the settings-capability ids the manifest declares
+    /// under `settings_capabilities:` (e.g. `romanization-display`), read
+    /// verbatim. The settings UI renders a gated section only while some
+    /// installed pack names it — an uninstalled language contributes no
+    /// controls, and no per-language check exists on this path. An absent
+    /// or unparseable manifest yields an empty list: no grant, no section.
+    pub settings_capabilities: Vec<String>,
 }
 
 fn is_hex64(s: &str) -> bool {
@@ -1074,78 +1081,99 @@ fn display_for(data: &Path, pack_id: &str, version: &str, trust: &str) -> Instal
         .join(pack_id)
         .join(version)
         .join("manifest.yaml");
-    let (display_name, locale, rtl, scripts, input_methods, input_methods_declared) =
-        fs::read_to_string(&manifest)
-            .ok()
-            .and_then(|s| serde_yaml::from_str::<serde_yaml::Value>(&s).ok())
-            .map(|v| {
-                let g = |k: &str| {
-                    v.get(k)
-                        .and_then(|x| x.as_str())
-                        .unwrap_or_default()
-                        .to_string()
-                };
-                let rtl = v
-                    .get("capabilities")
-                    .and_then(|c| c.get("rtl"))
-                    .and_then(|x| x.as_bool())
-                    .unwrap_or(false);
-                // SETTINGS-PACK-CAPABILITY-001: the manifest's declared script ids
-                // ride to the renderer verbatim; interpreting them (which scripts
-                // an in-app feature can serve) is the renderer's job, keyed on
-                // script metadata, never on the pack's locale.
-                let scripts = v
-                    .get("scripts")
-                    .and_then(|x| x.as_sequence())
-                    .map(|seq| {
-                        seq.iter()
-                            .filter_map(|s| s.as_str().map(str::to_string))
-                            .collect()
-                    })
-                    .unwrap_or_default();
-                // IN-APP-IME-001 phase 2: the declared input-method map, read
-                // bool-safe (only TRUE entries are named; a non-bool value is
-                // skipped, never guessed at). The declared/present distinction
-                // crosses as its own flag so the renderer can tell "absent =
-                // current behavior" from "present = explicit allowlist".
-                let caps = v.get("capabilities").and_then(|c| c.as_mapping());
-                let im = caps
-                    .and_then(|c| c.get("input_methods"))
-                    .and_then(|m| m.as_mapping());
-                let input_methods_declared = im.is_some();
-                let mut input_methods: Vec<String> = im
-                    .map(|m| {
-                        m.iter()
-                            .filter_map(|(k, val)| {
-                                if val.as_bool() == Some(true) {
-                                    k.as_str().map(str::to_string)
-                                } else {
-                                    None
-                                }
-                            })
-                            .collect()
-                    })
-                    .unwrap_or_default();
-                input_methods.sort();
-                (
-                    g("display_name"),
-                    g("target_locale"),
-                    rtl,
-                    scripts,
-                    input_methods,
-                    input_methods_declared,
-                )
-            })
-            .unwrap_or_else(|| {
-                (
-                    pack_id.to_string(),
-                    String::new(),
-                    false,
-                    Vec::new(),
-                    Vec::new(),
-                    false,
-                )
-            });
+    let (
+        display_name,
+        locale,
+        rtl,
+        scripts,
+        input_methods,
+        input_methods_declared,
+        settings_capabilities,
+    ) = fs::read_to_string(&manifest)
+        .ok()
+        .and_then(|s| serde_yaml::from_str::<serde_yaml::Value>(&s).ok())
+        .map(|v| {
+            let g = |k: &str| {
+                v.get(k)
+                    .and_then(|x| x.as_str())
+                    .unwrap_or_default()
+                    .to_string()
+            };
+            let rtl = v
+                .get("capabilities")
+                .and_then(|c| c.get("rtl"))
+                .and_then(|x| x.as_bool())
+                .unwrap_or(false);
+            // SETTINGS-PACK-CAPABILITY-001: the manifest's declared script ids
+            // ride to the renderer verbatim; interpreting them (which scripts
+            // an in-app feature can serve) is the renderer's job, keyed on
+            // script metadata, never on the pack's locale.
+            let scripts = v
+                .get("scripts")
+                .and_then(|x| x.as_sequence())
+                .map(|seq| {
+                    seq.iter()
+                        .filter_map(|s| s.as_str().map(str::to_string))
+                        .collect()
+                })
+                .unwrap_or_default();
+            // IN-APP-IME-001 phase 2: the declared input-method map, read
+            // bool-safe (only TRUE entries are named; a non-bool value is
+            // skipped, never guessed at). The declared/present distinction
+            // crosses as its own flag so the renderer can tell "absent =
+            // current behavior" from "present = explicit allowlist".
+            let caps = v.get("capabilities").and_then(|c| c.as_mapping());
+            let im = caps
+                .and_then(|c| c.get("input_methods"))
+                .and_then(|m| m.as_mapping());
+            let input_methods_declared = im.is_some();
+            let mut input_methods: Vec<String> = im
+                .map(|m| {
+                    m.iter()
+                        .filter_map(|(k, val)| {
+                            if val.as_bool() == Some(true) {
+                                k.as_str().map(str::to_string)
+                            } else {
+                                None
+                            }
+                        })
+                        .collect()
+                })
+                .unwrap_or_default();
+            input_methods.sort();
+            // SETTINGS-SCOPE-001: the declared settings-capability ids
+            // ride verbatim (string-safe read); interpretation is the
+            // renderer's job.
+            let settings_capabilities = v
+                .get("settings_capabilities")
+                .and_then(|x| x.as_sequence())
+                .map(|seq| {
+                    seq.iter()
+                        .filter_map(|s| s.as_str().map(str::to_string))
+                        .collect()
+                })
+                .unwrap_or_default();
+            (
+                g("display_name"),
+                g("target_locale"),
+                rtl,
+                scripts,
+                input_methods,
+                input_methods_declared,
+                settings_capabilities,
+            )
+        })
+        .unwrap_or_else(|| {
+            (
+                pack_id.to_string(),
+                String::new(),
+                false,
+                Vec::new(),
+                Vec::new(),
+                false,
+                Vec::new(),
+            )
+        });
     InstalledPack {
         pack_id: pack_id.into(),
         version: version.into(),
@@ -1156,6 +1184,7 @@ fn display_for(data: &Path, pack_id: &str, version: &str, trust: &str) -> Instal
         scripts,
         input_methods,
         input_methods_declared,
+        settings_capabilities,
     }
 }
 
@@ -1369,6 +1398,61 @@ mod tests {
         assert_eq!(
             declared.input_methods,
             vec!["lexicon-candidates".to_string(), "romaji-kana".to_string()]
+        );
+    }
+
+    // SETTINGS-SCOPE-001: a manifest's `settings_capabilities:` ids ride to
+    // the renderer verbatim on the installed-pack view, so a settings
+    // section exists only because an installed pack granted it — never
+    // because the app knows a language.
+    #[test]
+    fn manifest_settings_capabilities_travel_to_the_renderer() {
+        let dir = tempfile::tempdir().unwrap();
+        let write_manifest = |pack_id: &str, yaml: &str| {
+            let p = dir.path().join("packs").join(pack_id).join("0.1.0");
+            fs::create_dir_all(&p).unwrap();
+            fs::write(p.join("manifest.yaml"), yaml).unwrap();
+        };
+        // The ja-demo fixture's own shape (tests/fixtures/packs/ja-demo).
+        write_manifest(
+            "org.example.ja",
+            "schema_version: \"0.2\"\ntarget_locale: \"ja-JP\"\nscripts:\n  - \"ja.orth.hiragana\"\nsettings_capabilities:\n  - \"romanization-display\"\n",
+        );
+        // The ru-RU reference shape: Cyrillic, and NO settings grant.
+        write_manifest(
+            "org.example.cyrillic",
+            "schema_version: \"0.2\"\ntarget_locale: \"ru-RU\"\nscripts:\n  - \"ru.orth.cyrillic\"\n",
+        );
+
+        let ja = display_for(dir.path(), "org.example.ja", "0.1.0", "community");
+        assert_eq!(
+            ja.settings_capabilities,
+            vec!["romanization-display".to_string()]
+        );
+        // Absent key = the honest zero: packs published before the field
+        // existed stay installable and grant no settings section.
+        let cyrillic = display_for(dir.path(), "org.example.cyrillic", "0.1.0", "community");
+        assert!(cyrillic.settings_capabilities.is_empty());
+        let uninstalled = display_for(dir.path(), "org.example.absent", "0.1.0", "community");
+        assert!(uninstalled.settings_capabilities.is_empty());
+    }
+
+    // SETTINGS-SCOPE-001: the shipped ja-demo fixture actually makes the
+    // grant, so the store-install acceptance path (install ja-demo from the
+    // fixture-backed store, watch the romaji section appear) exercises the
+    // real declaration, not a test-only manifest.
+    #[test]
+    fn ja_demo_fixture_declares_the_romanization_setting() {
+        let dir = tempfile::tempdir().unwrap();
+        let src =
+            PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../tests/fixtures/packs/ja-demo");
+        let dst = dir.path().join("packs/org.openlanguage.ja-demo/0.1.0");
+        fs::create_dir_all(&dst).unwrap();
+        fs::copy(src.join("manifest.yaml"), dst.join("manifest.yaml")).unwrap();
+        let view = display_for(dir.path(), "org.openlanguage.ja-demo", "0.1.0", "community");
+        assert_eq!(
+            view.settings_capabilities,
+            vec!["romanization-display".to_string()]
         );
     }
 

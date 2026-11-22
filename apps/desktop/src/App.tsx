@@ -11,7 +11,13 @@ import {
 } from "./onboarding";
 import { PracticeHub, type HubMode } from "./hub";
 import { remainingPlanSeconds, SessionChrome } from "./session-chrome";
-import { fetchCapabilities, httpInvoke, inLtsServeMode, subscribeServeProgress } from "./ipc";
+import {
+  fetchCapabilities,
+  httpInvoke,
+  inLtsServeMode,
+  subscribeServeProgress,
+  type ServeCapabilities,
+} from "./ipc";
 import {
   Home,
   type PackUpdate,
@@ -35,8 +41,10 @@ import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./
 import { DictationPractice, type DictationResult, type DictationSentence } from "./dictation";
 import {
   LanguagePanel,
+  installedPacksDeclareSetting,
   packPosture,
   readFileB64,
+  ROMANIZATION_DISPLAY_SETTING,
   type CatalogEntry,
   type InstalledPack,
   type PackClaims,
@@ -1167,12 +1175,21 @@ export function App() {
   // capability report, never invented locally; nothing here changes a
   // stored privacy mode.
   const [serveNotice, setServeNotice] = useState<string | null>(null);
+  // SETTINGS-SCOPE-001: the same capability report also decides whether the
+  // Settings "Detect microphones" button can do anything: in an insecure
+  // context the browser reveals no input names, so the button renders gray
+  // with the server's own reason — the availability truth lives at exactly
+  // one source (/api/capabilities), never in a local guess.
+  const [serveMicNamesAvailable, setServeMicNamesAvailable] = useState<boolean | null>(null);
   useEffect(() => {
     if (!inLtsServeMode()) return;
     void fetchCapabilities().then((caps) => {
       if (!caps) {
         setServeNotice("Browser mode: the serve bridge is unreachable right now.");
         return;
+      }
+      if (typeof caps.microphone_names_available === "boolean") {
+        setServeMicNamesAvailable(caps.microphone_names_available);
       }
       const parts = [
         // WEB-PROGRESS-001: whether progress streams is the server's report,
@@ -4030,6 +4047,26 @@ export function App() {
         methods: activeRecord.input_methods,
       })
     : false;
+  // SETTINGS-SCOPE-001: the romaji card exists only while some INSTALLED
+  // pack's manifest declares the `romanization-display` settings capability
+  // — the union across installed packs, read back verbatim from each pack's
+  // own manifest. A Russian-only learner sees no Japanese-only control;
+  // installing a pack that grants it makes the card appear. Nothing here
+  // reads a locale or a pack id.
+  const packDeclaresRomanizationDisplay = installedPacksDeclareSetting(
+    installed,
+    ROMANIZATION_DISPLAY_SETTING,
+  );
+  // SETTINGS-SCOPE-001: the detect-microphones button honors the serve
+  // bridge's own availability report instead of offering a click that the
+  // browser will refuse (insecure context). Desktop mode never consults
+  // this — the webview reveals inputs; only a serve report that names the
+  // truth (or an unreachable bridge in serve mode, where the banner already
+  // says so) changes the button.
+  const micDetectUnavailableReason =
+    inLtsServeMode() && serveMicNamesAvailable === false
+      ? "Detect microphones is unavailable here: this context is not a secure context, so the browser reveals no microphone names. Recording from the system default still works."
+      : null;
   const activePack =
     activeIds[0] && activeClaims
       ? {
@@ -4535,6 +4572,8 @@ export function App() {
             kanaKeyboard={kanaKeyboard}
             onSetKanaKeyboard={(m) => void setKanaKeyboardSetting(m)}
             packDeclaresKanaKeyboard={packDeclaresKanaKeyboard}
+            packDeclaresRomanizationDisplay={packDeclaresRomanizationDisplay}
+            micDetectUnavailableReason={micDetectUnavailableReason}
             speechModel={speechModel}
             speechModels={speechModels}
             onSelectSpeechModel={(id) => void selectSpeechModel(id)}

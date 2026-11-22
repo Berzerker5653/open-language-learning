@@ -16,7 +16,7 @@
 import { createRoot } from "react-dom/client";
 import "@openlang/ui/styles.css";
 import { App } from "./App";
-import { LearnerEngine, RU } from "./journeys/harness";
+import { JA, LearnerEngine, RU } from "./journeys/harness";
 
 const WAIT = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
@@ -89,14 +89,18 @@ async function onboard(packName: string): Promise<void> {
 async function goto(hash: string): Promise<void> {
   if (hash === "onboarding") return;
   const reader = hash === "reader";
-  if (hash === "today" || hash === "drill" || hash === "settings") {
+  // SETTINGS-SCOPE-001 evidence: the Settings screen under three install
+  // shapes (RU-only, JA-only, both) — the seeded scenario is chosen per
+  // screen, never by clicking an install through onboarding.
+  const settingsScreen = hash === "settings" || hash.startsWith("settings-");
+  if (hash === "today" || hash === "drill" || settingsScreen) {
     // These screens run on the seeded RU profile (the same scenario shape
     // ru-modality.journey.tsx uses). The pack picker does not complete the
     // RU install through the onboarding UI in this fake engine (run 107's
     // captures stalled at the mic step), so seeding is the honest path.
     await clickWith("Continue Katya"); // profile chooser -> active profile
     if (hash === "today") return;
-    if (hash === "settings") {
+    if (settingsScreen) {
       await clickWith("Settings");
       return;
     }
@@ -198,11 +202,22 @@ async function main(): Promise<void> {
   host.id = "root";
   document.body.append(host);
   // RU screens run on the seeded profile (see goto()); the rest boot to a
-  // fresh first-run, like first-run.journey.tsx.
-  const seeded = hash === "today" || hash === "drill" || hash === "settings";
+  // fresh first-run, like first-run.journey.tsx. The settings-* screens run
+  // three install shapes (SETTINGS-SCOPE-001): RU-only, JA-only, and both
+  // with RU active — the union case for declared settings capabilities.
+  const shape: Record<string, string> = {
+    "settings-ja": JA,
+    "settings-both": JA,
+  };
+  const seeded = hash === "today" || hash === "drill" || hash.startsWith("settings");
   const engine = new LearnerEngine(
     seeded
-      ? { profiles: [{ id: "katya", display_name: "Katya", active: RU }], installed: [RU] }
+      ? {
+          profiles: [
+            { id: "katya", display_name: "Katya", active: shape[hash] ?? RU },
+          ],
+          installed: hash === "settings-ja" ? [JA] : hash === "settings-both" ? [RU, JA] : [RU],
+        }
       : {},
   );
   (window as unknown as Record<string, unknown>).__TAURI_INTERNALS__ = {

@@ -27,8 +27,10 @@
 
 use axum::body::Bytes;
 use axum::extract::Path as AxPath;
+use axum::http::HeaderMap;
 use axum::http::StatusCode;
 use axum::http::header::CONTENT_TYPE;
+use axum::http::header::ORIGIN;
 use axum::response::sse::{Event, KeepAlive, Sse};
 use axum::response::{IntoResponse, Response};
 use axum::routing::{get, post};
@@ -412,13 +414,46 @@ fn error_response(error_value: serde_json::Value) -> Response {
 
 /// Scope 4: what this serve mode can and cannot do, reported honestly.
 /// Nothing here changes stored settings — the UI only labels consequences.
-async fn capabilities() -> Json<serde_json::Value> {
+async fn capabilities(headers: HeaderMap) -> Json<serde_json::Value> {
+    // SETTINGS-SCOPE-001: microphone-name enumeration follows the browser's
+    // secure-context rule (https, or localhost/127.0.0.1/IPv6 loopback).
+    // The bridge states the rule's outcome for the origin it is answering
+    // — the Settings mic control grays from this report, never from a local
+    // guess in the page. An origin that is not even local cannot have been
+    // served by this bridge at all (the scope-5 guard says so first); the
+    // honest report for that shape is "cannot say", not a silent false.
+    let origin = headers.get(ORIGIN).and_then(|v| v.to_str().ok());
+    let named = match origin {
+        Some(o) if o.starts_with("https://") => Some(true),
+        Some(o) => {
+            let rest = o
+                .strip_prefix("http://")
+                .or_else(|| o.strip_prefix("ws://"))
+                .unwrap_or(o);
+            let host = match rest.find("://") {
+                Some(i) => &rest[i + 3..],
+                None => rest,
+            };
+            let host = host.split([':', '/']).next().unwrap_or("");
+            let host = host
+                .strip_prefix('[')
+                .and_then(|h| h.split(']').next())
+                .unwrap_or(host);
+            let host = host.split('/').next().unwrap_or("");
+            let local =
+                host == "localhost" || host == "127.0.0.1" || host == "[::1]" || host == "::1";
+            if local { Some(true) } else { Some(false) }
+        }
+        None => None,
+    };
     Json(serde_json::json!({
         "mode": "browser-serve",
         "commands": "all desktop commands share one wiring (wire_commands); installs run identically and stream their stages over /api/progress/events",
         "install_progress_events": true,
         "install_progress_note": "install stages stream over GET /api/progress/events (SSE) — the same stages the desktop shell receives",
         "microphone_capture": "needs a secure context (https or localhost); over a plain tailnet http URL the browser blocks mic capture, so scoring features are labeled unavailable",
+        "microphone_names_available": named,
+        "microphone_names_note": "named inputs (EnumerateDevices) exist only in a secure context: https, or localhost/127.0.0.1; over a plain tailnet http URL the Settings 'Detect microphones' control is unavailable, and recording from the system default still works",
         "privacy_modes": "unchanged — serve mode never rewrites stored mic/privacy settings, it only labels what the browser can do",
         "network": "trusted-network assumption; SEC sign-off is a later WEB-001 concern (state/notes/WEB-SERVE-001.md)",
     }))
@@ -667,6 +702,58 @@ mod tests {
             "capabilities must name the stream it now offers: {v}"
         );
         assert!(v["privacy_modes"].as_str().unwrap().contains("unchanged"));
+    }
+
+    #[tokio::test]
+    async fn capabilities_report_names_mic_availability_per_origin() {
+        // SETTINGS-SCOPE-001: the same report that feeds the browser-mode
+        // banner also decides whether the Settings "Detect microphones"
+        // button can do anything — the truth is computed once, here.
+        let ask = |origin: Option<&str>| {
+            let app = test_router();
+            async move {
+                let mut builder = Request::builder().uri("/api/capabilities");
+                if let Some(o) = origin {
+                    builder = builder.header("origin", o);
+                }
+                let resp = app
+                    .oneshot(builder.body(Body::empty()).unwrap())
+                    .await
+                    .unwrap();
+                let bytes = axum::body::to_bytes(resp.into_body(), usize::MAX)
+                    .await
+                    .unwrap();
+                serde_json::from_slice::<serde_json::Value>(&bytes).unwrap()
+            }
+        };
+        // Plain tailnet-style http origin: names cannot be revealed.
+        let v = ask(Some("http://100.101.179.46:8000")).await;
+        assert_eq!(
+            v["microphone_names_available"], false,
+            "insecure origin must say so: {v}"
+        );
+        assert!(
+            v["microphone_names_note"]
+                .as_str()
+                .unwrap()
+                .contains("secure context")
+        );
+        // Loopback http and any https are secure contexts.
+        for origin in [
+            "http://localhost:8000",
+            "http://127.0.0.1:8000",
+            "https://example.invalid",
+        ] {
+            let v = ask(Some(origin)).await;
+            assert_eq!(
+                v["microphone_names_available"], true,
+                "{origin} is secure: {v}"
+            );
+        }
+        // No Origin header at all (typed-in top-level navigation): the
+        // honest answer is "cannot say", never a silent false.
+        let v = ask(None).await;
+        assert!(v["microphone_names_available"].is_null());
     }
 
     #[tokio::test]

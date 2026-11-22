@@ -16,6 +16,7 @@ const jaOnDevice: InstalledPack = {
   rtl: false,
   input_methods: [],
   input_methods_declared: false,
+  settings_capabilities: [],
   scripts: ["ja.orth.hiragana", "ja.orth.katakana", "ja.orth.kanji", "ja.orth.latin"],
 };
 

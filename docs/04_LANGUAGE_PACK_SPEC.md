@@ -94,6 +94,11 @@ The manifest declares:
 - trust/maturity state;
 - declared scripts;
 - declared capabilities;
+- declared settings capabilities (`settings_capabilities:` ids, e.g.
+  `romanization-display`): a settings section renders only when an installed
+  pack declares the capability — a language that is not installed contributes
+  no settings UI, and the app never hardcodes per-language checks
+  (SETTINGS-SCOPE-001);
 - optional model bundles;
 - license summary;
 - content hashes in built form.

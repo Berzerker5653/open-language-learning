@@ -11,6 +11,9 @@ maturity: "experimental"
 authors: ["Open Language Learning Platform contributors"]
 scripts:
   - "ru.orth.cyrillic"
+# SETTINGS-SCOPE-001: this pack grants NO extra settings sections (the card's
+# ru-side case): with only this pack installed, Settings shows no
+# romanization control. Absent `settings_capabilities` is the honest zero.
 world: "environments.jsonl"
 capabilities:
   listening: true

@@ -99,6 +99,17 @@ export interface SettingsProps {
    * a script the in-app keyboard can type. False hides the whole card — the
    * pack's declared metadata decides, never a language-code check. */
   packDeclaresKanaKeyboard: boolean;
+  /** SETTINGS-SCOPE-001: whether ANY installed pack declares the
+   * `romanization-display` settings capability on its own manifest. False
+   * renders no romaji card at all — a learner with only packs that never
+   * granted the control (e.g. Russian-only) never sees a Japanese-only
+   * setting. The declaration, not a language constant, is the source. */
+  packDeclaresRomanizationDisplay: boolean;
+  /** SETTINGS-SCOPE-001: when non-null, "Detect microphones" is disabled and
+   * this sentence names why. The reason comes from the serve bridge's
+   * capability report (`/api/capabilities`) — the same source as the
+   * browser-mode banner — never a local guess. */
+  micDetectUnavailableReason: string | null;
   /** The one speech-model preference app-wide (get/set_speech_model). */
   speechModel: string;
   speechModels: SpeechModelPref[];
@@ -288,35 +299,57 @@ export function Settings(p: SettingsProps) {
             : "The choice is stored for this profile. If the chosen microphone is unplugged, the app says so and records from the system default for that one recording instead of switching silently."}
         </ProseNote>
         <p>
-          <button id="mic-detect" type="button" onClick={p.onDetectMicrophones}>
+          <button
+            id="mic-detect"
+            type="button"
+            onClick={p.onDetectMicrophones}
+            disabled={p.micDetectUnavailableReason !== null}
+            title={p.micDetectUnavailableReason ?? undefined}
+          >
             Detect microphones
           </button>
         </p>
+        {/* SETTINGS-SCOPE-001: in a context where the browser cannot reveal
+            inputs (e.g. serve mode over an insecure origin), the control is
+            gray with the server's own reason — same capability source as the
+            browser-mode banner — instead of a live button to a dead promise. */}
+        {p.micDetectUnavailableReason && (
+          <p className="notice" data-testid="mic-detect-unavailable">
+            {p.micDetectUnavailableReason}
+          </p>
+        )}
       </div>
 
-      <div className="card">
-        <h3>Romaji (romanisation) display</h3>
-        <fieldset>
-          <legend>Show romaji alongside Japanese text</legend>
-          {ROMAJI_MODES.map((m) => (
-            <label key={m.value} className="radio-row">
-              <input
-                type="radio"
-                name="romaji-mode"
-                value={m.value}
-                checked={p.romajiMode === m.value}
-                onChange={() => p.onSetRomajiMode(m.value)}
-              />{" "}
-              {m.label}
-            </label>
-          ))}
-        </fieldset>
-        <ProseNote summary="Romaji is a temporary scaffold: Auto fades it as reading grows, and the choice never blocks progression.">
-          Romaji is a temporary scaffold: content is stored in Japanese script, and Auto fades
-          romanisation as reading grows. Your choice is honored everywhere and never blocks
-          progression.
-        </ProseNote>
-      </div>
+      {/* SETTINGS-SCOPE-001 (owner phone dogfood): the romanization card
+          exists only while an INSTALLED pack's manifest grants it via
+          `settings_capabilities: [romanization-display]`. A Russian-only
+          learner never sees a Japanese-only control — the packs'
+          declarations decide, never a language constant in this page. */}
+      {p.packDeclaresRomanizationDisplay && (
+        <div className="card">
+          <h3>Romaji (romanisation) display</h3>
+          <fieldset>
+            <legend>Show romaji alongside Japanese text</legend>
+            {ROMAJI_MODES.map((m) => (
+              <label key={m.value} className="radio-row">
+                <input
+                  type="radio"
+                  name="romaji-mode"
+                  value={m.value}
+                  checked={p.romajiMode === m.value}
+                  onChange={() => p.onSetRomajiMode(m.value)}
+                />{" "}
+                {m.label}
+              </label>
+            ))}
+          </fieldset>
+          <ProseNote summary="Romaji is a temporary scaffold: Auto fades it as reading grows, and the choice never blocks progression.">
+            Romaji is a temporary scaffold: content is stored in Japanese script, and Auto fades
+            romanisation as reading grows. Your choice is honored everywhere and never blocks
+            progression.
+          </ProseNote>
+        </div>
+      )}
       {/* SETTINGS-PACK-CAPABILITY-001: the card exists only while the active
           pack's own manifest declares a script this keyboard can type. A
           Cyrillic-only pack never sees the control, because the pack never

@@ -373,6 +373,11 @@ interface Pack {
    * manifests carry, and what the in-app keyboard card gates on
    * (SETTINGS-PACK-CAPABILITY-001). */
   scripts: string[];
+  /** The manifest `settings_capabilities:` ids this pack grants (e.g.
+   * `romanization-display`) — SETTINGS-SCOPE-001. Mirrors the shipped
+   * manifests: the JA fixtures grant the romanization settings section, the
+   * RU/EO fixtures declare none. */
+  settings_capabilities: string[];
   /** Whether the pack carries character data — the engine's `kanji_available`
    * answer, and the only thing that decides if the hub shows the Kanji card. */
   kanji: boolean;
@@ -425,6 +430,7 @@ const PACKS: Record<string, Pack> = {
     trust_state: "community",
     rtl: false,
     scripts: ["ja.orth.hiragana", "ja.orth.katakana", "ja.orth.kanji", "ja.orth.latin"],
+    settings_capabilities: ["romanization-display"],
     kanji: true,
     drills: [
       // The three shapes the shipped ja-JP pack actually contains: a list of
@@ -536,6 +542,7 @@ const PACKS: Record<string, Pack> = {
     trust_state: "community",
     rtl: false,
     scripts: ["eo.orth.latin"],
+    settings_capabilities: [],
     kanji: false,
     drills: [],
     words: [
@@ -581,6 +588,9 @@ const PACKS: Record<string, Pack> = {
     trust_state: "community",
     rtl: false,
     scripts: ["ru.orth.cyrillic"],
+    // SETTINGS-SCOPE-001: the ru-RU reference manifest declares no settings
+    // grant — with only this pack on device, Settings shows no romaji card.
+    settings_capabilities: [],
     kanji: false,
     drills: [],
     words: [
@@ -1236,6 +1246,10 @@ export class LearnerEngine {
       trust_state: pack.trust_state,
       rtl: pack.rtl,
       scripts: pack.scripts,
+      // SETTINGS-SCOPE-001: the pack's declared settings grants ride the
+      // installed-pack view verbatim, exactly like the real host reads them
+      // off the manifest.
+      settings_capabilities: pack.settings_capabilities,
       // IN-APP-IME-001 phase 2: journey packs declare no input-method map —
       // absent means current behavior, exactly like a pack published
       // before the field existed.

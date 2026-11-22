@@ -56,6 +56,12 @@ export type ServeCapabilities = {
   install_progress_events: boolean;
   install_progress_note?: string;
   microphone_capture?: string;
+  /** SETTINGS-SCOPE-001: whether THIS context can reveal microphone names at
+   * all (secure-context rule). The serve bridge computes it from the page
+   * origin it served; the Settings mic button grays with this truth instead
+   * of offering a dead click. Absent (older bridge) = unknown, not false. */
+  microphone_names_available?: boolean;
+  microphone_names_note?: string;
   privacy_modes?: string;
   network?: string;
 };

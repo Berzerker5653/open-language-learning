@@ -13,6 +13,7 @@ const installed: InstalledPack[] = [
     scripts: ["ja.orth.hiragana", "ja.orth.katakana", "ja.orth.kanji", "ja.orth.latin"],
     input_methods: [],
     input_methods_declared: false,
+    settings_capabilities: [],
   },
   {
     pack_id: "community.example.esperanto",
@@ -24,6 +25,7 @@ const installed: InstalledPack[] = [
     scripts: ["eo.orth.latin"],
     input_methods: [],
     input_methods_declared: false,
+    settings_capabilities: [],
   },
 ];
 
@@ -423,6 +425,7 @@ describe("language panel", () => {
           scripts: ["ar.orth.arabic", "ar.orth.latin"],
           input_methods: [],
           input_methods_declared: false,
+          settings_capabilities: [],
         },
       ],
     });

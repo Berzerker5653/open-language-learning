@@ -34,6 +34,12 @@ export interface InstalledPack {
    * in the renderer. */
   input_methods: string[];
   input_methods_declared: boolean;
+  /** SETTINGS-SCOPE-001: the settings-capability ids the pack's own manifest
+   * declares under `settings_capabilities:` (e.g. `romanization-display`).
+   * Settings sections gate on the union across INSTALLED packs — a language
+   * that is not installed contributes no controls, and no gate on this path
+   * ever reads `locale`. An absent manifest yields the empty list. */
+  settings_capabilities: string[];
 }
 
 export interface CatalogEntry {
@@ -190,6 +196,24 @@ const STATUS_LABELS: Record<string, string> = {
     "Community packs are coming soon — this build has no catalog configured yet. Meanwhile you can import a pack file you received from someone below.",
   "offline-no-cache": "Offline, and no catalog has been fetched on this device yet.",
 };
+
+export const ROMANIZATION_DISPLAY_SETTING = "romanization-display";
+
+/**
+ * SETTINGS-SCOPE-001 (owner design call, general): a gated Settings section
+ * renders iff at least one INSTALLED pack declares the capability id on its
+ * own manifest (`settings_capabilities:`). This is the whole rule — the union
+ * across installed packs, never a per-language constant, never `locale`.
+ * A learner with only packs that declare nothing sees no such section;
+ * installing a pack that names the capability makes the section appear
+ * without any app change.
+ */
+export function installedPacksDeclareSetting(
+  installed: { settings_capabilities: string[] }[],
+  capabilityId: string,
+): boolean {
+  return installed.some((pack) => pack.settings_capabilities.includes(capabilityId));
+}
 
 /// Owner 2026-10-07: per-item draft badges are retired; every pack is
 /// stated AI-generated, once, at pack level. Derived from the pack's
