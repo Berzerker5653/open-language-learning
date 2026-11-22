@@ -40,7 +40,7 @@ import re
 import sys
 from pathlib import Path
 
-VERSION = "1.5.0"
+VERSION = "1.6.0"
 
 DEFAULT_ROOTS = ["apps/desktop/src", "packages/ui/src"]
 
@@ -85,6 +85,19 @@ PACK_ORTH_RE = re.compile(
 PACK_SUMMARY_RE = re.compile(
     r"(?:letter name|case pair|requested case|\bunit 0\d+\b|\bsorted by\b"
     r"|\bencounter order\b|most-recently|spaced-review)",
+    re.IGNORECASE,
+)
+
+# RU-GOALS-SCRUB-001 (LETTER-TEACHING-DESIGN-001 rule 2): the goals layer and
+# assessment rubrics still carried pre-letter-model wording ("all printed
+# Cyrillic letter case forms", "the 66 printed letter forms with the requested
+# case") that rendered live in the Next-up panel. Case is a form attribute,
+# never a teaching dimension, so a goal description, unit summary or rubric
+# criterion that frames letters by CASE is a finding. Deliberately NOT bare
+# "case": legitimate copy says e.g. "Weigh the case aloud" (argumentation).
+CASE_FRAMING_RE = re.compile(
+    r"(?:case forms?|letter case|letter forms?|\bupper\s?case\b"
+    r"|\blower\s?case\b|requested case|upper[/-]lower)",
     re.IGNORECASE,
 )
 
@@ -372,7 +385,11 @@ def audit_packs(packs_root):
             stripped = raw.strip()
             if stripped.startswith("title:"):
                 t = stripped.split(":", 1)[1]
-                ht = LOCALE_UK_RE.search(t) or UNIT_ID_LEAK_RE.search(t)
+                ht = (
+                    LOCALE_UK_RE.search(t)
+                    or UNIT_ID_LEAK_RE.search(t)
+                    or CASE_FRAMING_RE.search(t)
+                )
                 if ht:
                     findings.append(
                         {
@@ -395,6 +412,7 @@ def audit_packs(packs_root):
                     PACK_SUMMARY_RE.search(stripped)
                     or UNIT_ID_LEAK_RE.search(stripped)
                     or LOCALE_UK_RE.search(stripped)
+                    or CASE_FRAMING_RE.search(stripped)
                 )
                 if m:
                     findings.append(
@@ -439,6 +457,61 @@ def audit_packs(packs_root):
                             "kind": "pack-gloss",
                             "id": hg.group(0),
                             "text": f"{row.get('id', '?')}: {gloss[:80]}",
+                        }
+                    )
+    # RU-GOALS-SCRUB-001: the GOALS layer renders into the Next-up panel
+    # (home.tsx `Next up: {nextGoal.description}`) and assessment rubrics
+    # carry the mastery criteria the learner is held to — the same
+    # case-framing and id-leak rules ride these fields.
+    for path in sorted(root.rglob("curriculum/goals.yaml")):
+        scanned += 1
+        for line_no, raw in enumerate(
+            path.read_text(encoding="utf-8").splitlines(), start=1
+        ):
+            stripped = raw.strip()
+            if not stripped.startswith("description:"):
+                continue
+            body = stripped.split(":", 1)[1]
+            m = CASE_FRAMING_RE.search(body) or UNIT_ID_LEAK_RE.search(body)
+            if m:
+                findings.append(
+                    {
+                        "file": str(path),
+                        "line": line_no,
+                        "kind": "pack-goal",
+                        "id": m.group(0),
+                        "text": stripped[:90],
+                    }
+                )
+    for path in sorted(root.rglob("*.jsonl")):
+        if path.parent.name != "assessments":
+            continue
+        scanned += 1
+        for line_no, raw in enumerate(
+            path.read_text(encoding="utf-8").splitlines(), start=1
+        ):
+            raw = raw.strip()
+            if not raw:
+                continue
+            try:
+                row = json.loads(raw)
+            except json.JSONDecodeError:
+                continue
+            crits = row.get("rubric", {}).get("criteria") if isinstance(row.get("rubric"), dict) else None
+            if not isinstance(crits, list):
+                continue
+            for crit in crits:
+                if not isinstance(crit, str):
+                    continue
+                m = CASE_FRAMING_RE.search(crit) or UNIT_ID_LEAK_RE.search(crit)
+                if m:
+                    findings.append(
+                        {
+                            "file": str(path),
+                            "line": line_no,
+                            "kind": "pack-rubric",
+                            "id": m.group(0),
+                            "text": f"{row.get('id', '?')}: {crit[:80]}",
                         }
                     )
     return scanned, findings

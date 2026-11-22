@@ -1,0 +1,3 @@
+== grep sweep (v1 CASE_FRAMING patterns, curriculum+assessments, both packs) ==
+2026-11-22T15:57:52-07:00
+grep exit=1 (1 = zero matches)

@@ -1,6 +1,6 @@
 goals:
 - id: ru.goal.on-ramp.cyrillic
-  description: Recognize and copy all printed Cyrillic letter case forms and interpret the teaching stress mark.
+  description: Recognize and copy every printed Cyrillic letter, one sound per letter, and interpret the teaching stress mark.
   band: on-ramp
   modalities:
   - reading

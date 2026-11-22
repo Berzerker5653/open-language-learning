@@ -61,6 +61,6 @@ generation_contract:
   expected_interpretations:
   - 'Weekdays: dates and plans with taught forms only.'
   prohibited_ambiguity:
-  - Do not capitalize weekday names; Russian weekdays are written in lowercase.
+  - Do not capitalize weekday names; Russian weekdays take no capital initial letter.
   target_proficiency: A1
   validation_method: choice

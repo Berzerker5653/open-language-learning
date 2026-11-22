@@ -1,0 +1,19 @@
+RU-GOALS-SCRUB-001 — controller gate battery (2026-11-22, at the committed tree)
+
+python3 tools/audit_learner_copy.py            -> exit 0 (v1.6.0, 1852 pack files, findings 0)  [audit-learner-copy.log]
+python3 -m unittest discover -s tools -p test_audit_learner_copy.py -> exit 0, Ran 20 tests OK   [py-unittest.log]
+cargo fmt --all --check                        -> exit 0
+cargo run -q -p lts-langpack-cli -- validate languages/ru-RU          -> exit 0  [pack-validate.log]
+cargo run -q -p lts-langpack-cli -- lint languages/ru-RU              -> exit 0  [pack-lint.log]
+cargo run -q -p lts-langpack-cli -- audit-curriculum languages/ru-RU  -> exit 0  [pack-audit-curriculum.log]
+cargo run -q -p lts-langpack-cli -- audit-lexicon languages/ru-RU     -> exit 0  [pack-audit-lexicon.log]
+cargo run -q -p lts-langpack-cli -- audit-licenses languages/ru-RU    -> exit 0  [pack-audit-licenses.log]
+cargo run -q -p lts-langpack-cli -- audit-sources languages/ru-RU     -> exit 0  [pack-audit-sources.log]
+grep sweep CASE_FRAMING over languages/{ru-RU,ja-JP}/{curriculum,assessments} -> exit 1 = zero matches [grep-proof.txt]
+
+Scope notes:
+- No Rust/TS frontend changed; greps confirmed no code or test asserts the old
+  goal/assessment strings, so desktop tsc/vitest and the full cargo matrix are
+  out of LANE scope for this card.
+- ja pack data untouched (zero matches before and after).
+- validate/lint/audit-curriculum re-run after the final unit-090 reword.

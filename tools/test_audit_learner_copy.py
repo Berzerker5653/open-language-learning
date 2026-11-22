@@ -302,5 +302,69 @@ class LocaleRulesTests(unittest.TestCase):
             self.assertEqual(kinds.get("pack-gloss"), "colour")
 
 
+class GoalsScrubTests(unittest.TestCase):
+    """RU-GOALS-SCRUB-001 ratchet: the goals layer and assessment rubrics
+    render live (Next-up panel, mastery criteria); case-framed letter copy
+    fails the gate. Bare 'case' is NOT banned — 'Weigh the case aloud' is
+    legitimate argumentation copy."""
+
+    def test_case_framed_goal_description_and_rubric_fail(self):
+        with tempfile.TemporaryDirectory() as td:
+            write_tree(
+                td,
+                {
+                    "pack/curriculum/goals.yaml": (
+                        "goals:\n"
+                        "- id: x.goal.cyr\n"
+                        "  description: Recognize and copy all printed Cyrillic"
+                        " letter case forms and interpret the teaching stress mark.\n"
+                        "- id: x.goal.greet\n"
+                        "  description: Read and write taught greetings.\n"
+                    ),
+                    "pack/assessments/definitions.jsonl": (
+                        '{"id":"x.assess.rec","rubric":{"criteria":['
+                        '"Recognize all 33 printed uppercase/lowercase pairs '
+                        'from letter-name prompts.",'
+                        '"Weigh the case aloud with a taught chunk.",'
+                        '"Copy each of the 66 printed letter forms with the '
+                        'requested case."]}}\n'
+                    ),
+                },
+            )
+            _, found = alc.audit_packs(str(Path(td) / "pack"))
+            goals = [f for f in found if f["kind"] == "pack-goal"]
+            rubrics = [f for f in found if f["kind"] == "pack-rubric"]
+            self.assertEqual([f["id"].lower() for f in goals], ["letter case"])
+            self.assertEqual(
+                sorted(f["id"].lower() for f in rubrics),
+                ["letter forms", "uppercase"],
+            )
+
+    def test_scrubbed_goal_copy_and_bare_case_pass(self):
+        with tempfile.TemporaryDirectory() as td:
+            write_tree(
+                td,
+                {
+                    "pack/curriculum/goals.yaml": (
+                        "goals:\n"
+                        "- id: x.goal.cyr\n"
+                        "  description: Recognize and copy every printed Cyrillic"
+                        " letter, one sound per letter, and interpret the teaching"
+                        " stress mark.\n"
+                    ),
+                    "pack/assessments/definitions.jsonl": (
+                        '{"id":"x.assess.spk","rubric":{"criteria":['
+                        '"Weigh the case aloud with a taught chunk."]}}\n'
+                    ),
+                    "pack/curriculum/units/019.yaml": (
+                        "id: u19\n"
+                        "summary: Review every taught letter with its sound.\n"
+                    ),
+                },
+            )
+            _, found = alc.audit_packs(str(Path(td) / "pack"))
+            self.assertEqual(found, [])
+
+
 if __name__ == "__main__":
     unittest.main()
