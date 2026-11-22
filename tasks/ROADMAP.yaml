@@ -3175,6 +3175,21 @@ tasks:
   - fetch-pack-audio.sh against the published 0.4.8 archive exits green with zero failing rows
   - the 0.4.7 release body carries a SUPERSEDED notice and its assets stay downloadable for auditability
   required_for_desktop_1_0: false
+- id: RU-GOALS-SCRUB-001
+  milestone: M8
+  priority: P1
+  title: Scrub pre-letter-model case wording from the goals layer so the Next-up panel stops teaching letter case
+  dependencies: [ORTHO-LETTER-UNITS-001]
+  read_first:
+  - state/notes/RU-GOALS-SCRUB-001.md
+  - state/notes/LETTER-TEACHING-DESIGN-001.md
+  - state/evidence/RU-GOALS-SCRUB-001/gates.log
+  acceptance:
+  - a scripted sweep of every curriculum/goals.yaml plus unit titles, summaries and assessment rubrics in both packs finds no case-framing vocabulary
+  - the Next-up goal string is quoted verbatim before and after in the card notes
+  - the learner-copy audit carries a hermetic red test over the exact pre-scrub wording and stays green on the scrubbed copy
+  - the repair rides the next RU publish without publishing in this card
+  required_for_desktop_1_0: false
 - id: PRACTICE-GATE-001
   milestone: M11
   priority: P1
@@ -3469,4 +3484,5 @@ execution_scope:
   - LESSON-TITLE-FIT-001
   - PATH-VISUAL-001
   - PATH-SECTIONS-DEDUP-001
+  - RU-GOALS-SCRUB-001
   public_publication_authorized: false

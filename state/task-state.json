@@ -2935,6 +2935,23 @@
       "summary": "Root cause: pathSections() grouped consecutive same-band nodes, so the nine late-appended journey units (curriculum files 810-818, honestly banded A2/B1/B2) spawned a second A2/B1/B2 ladder at 0/3 each (owner complaint 09a). Fix: group by band key on the canonical BAND_HEADERS ladder (custom bands follow in first-occurrence order); section band stays the pack raw string so PATH-VISUAL-001 banners are untouched. tools/path_sections_audit.py: 818 units, zero unmapped, strays named. 4 red-first vitest cases; apps/desktop suite 489/489; tsc green. scripts/path-sections-capture.mjs on the real engine at 390px: 11/11 green - duplicate-free canonical API ladder, exactly one DOM header per band, totals 0/20 0/90 0/102 0/203 0/403 == audit, per-band after-shots gated by in-viewport rect; vision-checked on-ramp and A2 shots.",
       "notes": "Attempt 1 (board run 178) died with the whole lane uncommitted; run 179 took over, re-ran every gate, and fixed an evidence gap - attempt 1's single headers png showed no band header (open sections are hundreds of nodes tall, container-centered scroll missed them). Harness now shoots each band header (toggle button centered) with a machine gate that the row was in-viewport at capture time. Collision note: home.tsx remains a hotspot.",
       "updated": "2026-11-22"
+    },
+    "RU-GOALS-SCRUB-001": {
+      "task_id": "RU-GOALS-SCRUB-001",
+      "title": "Scrub pre-letter-model case wording from the goals layer so the Next-up panel stops teaching letter case",
+      "status": "done",
+      "attempts": 1,
+      "dependencies": [
+        "ORTHO-LETTER-UNITS-001"
+      ],
+      "evidence": [
+        "state/notes/RU-GOALS-SCRUB-001.md",
+        "state/evidence/RU-GOALS-SCRUB-001/gates.log",
+        "state/evidence/RU-GOALS-SCRUB-001/grep-proof.txt"
+      ],
+      "summary": "The Next-up panel still rendered the pre-letter-model goal string 'Recognize and copy all printed Cyrillic letter case forms and interpret the teaching stress mark' (complaint-09a bottom). Swept both packs' goals/unit/assessment copy: goal description now 'every printed Cyrillic letter, one sound per letter' (stress mark kept as legitimate), unit 019 summary 'every taught letter with its sound', the two on-ramp cyrillic rubrics now name 33 letters not case pairs / 66 letter forms, and unit 090's weekday note reworded to 'no capital initial letter'. Ratchet: tools/audit_learner_copy v1.6.0 gains CASE_FRAMING_RE over unit titles/summaries plus NEW pack-goal and pack-rubric scans, with GoalsScrubTests red-first over the exact old strings. Grep sweep over both packs' curriculum+assessments exits zero-match. Ready for the 0.4.9 publish train; nothing published and manifest stays 0.4.8.",
+      "notes": "ADR-0031's quote of the old string is an immutable decision record and stays. ja-JP copy was already clean. Publish follow-up named in state/notes/RU-GOALS-SCRUB-001.md.",
+      "updated": "2026-11-22"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
