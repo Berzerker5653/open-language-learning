@@ -22,11 +22,13 @@
  * result and fail the run loudly. Mobile viewport 390x844 like the owner's
  * phone. Screenshots land in state/evidence/PRACTICE-GATE-001/<tag>/.
  *
- *   usage: SERVE_BIN=<path> SERVE_DIST=<path> PACK_LPK=<path> \
+ *   usage: SERVE_BIN=<path> SERVE_DIST=<path> \
+ *          (the pack itself is installed engine-side by serve's own
+ *           install_pack command from the tree that binary was built in)
  *          node scripts/practice-gate-capture.mjs <before|after>
  */
 import { spawn } from "node:child_process";
-import { mkdirSync, writeFileSync, readFileSync, mkdtempSync } from "node:fs";
+import { mkdirSync, writeFileSync, mkdtempSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 
@@ -37,17 +39,21 @@ if (!["before", "after"].includes(TAG ?? "")) {
 }
 const SERVE_BIN = resolve(process.env.SERVE_BIN ?? "");
 const SERVE_DIST = resolve(process.env.SERVE_DIST ?? "");
-const PACK_LPK = resolve(process.env.PACK_LPK ?? "");
 for (const [name, p] of [
   ["SERVE_BIN", SERVE_BIN],
   ["SERVE_DIST", SERVE_DIST],
-  ["PACK_LPK", PACK_LPK],
 ]) {
   if (!p) {
     console.error(`${name} is required`);
     process.exit(2);
   }
-  readFileSync(p); // fails loudly if missing
+  // existsSync, not readFileSync: SERVE_DIST is a DIRECTORY (serve joins
+  // dist/index.html itself); readFileSync would EISDIR and bait you into
+  // passing the file path, which then fails serve's own join.
+  if (!existsSync(p)) {
+    console.error(`${name} not found: ${p}`);
+    process.exit(2);
+  }
 }
 const REPO = resolve(import.meta.dirname, "..");
 const OUT = join(REPO, "state/evidence/PRACTICE-GATE-001", TAG);
@@ -85,9 +91,14 @@ async function api(command, body) {
 }
 
 async function seed() {
-  const lpk = readFileSync(PACK_LPK).toString("base64");
-  const imp = await api("import_pack", { dataB64: lpk });
-  if (imp.status !== 200) throw new Error(`import_pack failed: ${JSON.stringify(imp)}`);
+  // Pack bytes ride NO HTTP path: serve's install_pack command builds the
+  // archive in-process from its OWN compiled dev tree (CARGO_MANIFEST_DIR
+  // is baked at build time), so the before binary installs the pre-lane
+  // pack and the after binary installs the post-lane pack — exact tree
+  // bytes, and axum's 2MB default body limit (which kills any 300MB
+  // base64 import_pack) never enters the picture.
+  const imp = await api("install_pack", { packId: PACK_ID });
+  if (imp.status !== 200) throw new Error(`install_pack failed: ${JSON.stringify(imp)}`);
   const prof = await api("create_profile", { displayName: "Gate Tester" });
   if (prof.status !== 200)
     throw new Error(`create_profile failed: ${JSON.stringify(prof)}`);
@@ -186,6 +197,7 @@ try {
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const { targetId } = await send("Target.createTarget", { url: "about:blank" });
   const { sessionId } = await send("Target.attachToTarget", { targetId, flatten: true });
+  await send("Page.enable", {}, sessionId); // Page.* fails 'wasn't found' without this
   async function evaluate(expression) {
     const r = await send(
       "Runtime.evaluate",
@@ -220,9 +232,19 @@ try {
   for (let i = 0; i < 60 && !resumed; i++) {
     await sleep(250);
     resumed = await evaluate(`(() => {
-      const el = [...document.querySelectorAll('button')].find(
-        (e) => (e.textContent ?? '').includes('Gate Tester'),
-      );
+      // The chooser card's button reads 'Continue'; the profile NAME lives
+      // in the card wrapper, not the button text (MOBILE-UX-001 lesson:
+      // match interactive elements by their accessible container).
+      const el = [...document.querySelectorAll('button')]
+        .filter((b) => (b.textContent ?? '').includes('Continue'))
+        .find((b) => {
+          let n = b;
+          for (let i = 0; i < 6 && n; i++) {
+            n = n.parentElement;
+            if (n && (n.textContent ?? '').includes('Gate Tester')) return true;
+          }
+          return false;
+        });
       if (!el) return false;
       el.click();
       return true;
@@ -240,7 +262,7 @@ try {
     );
     return { speakingButtons: modes.length };
   })()`);
-  await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: true }).then(
+  await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: true }, sessionId).then(
     (shot) => writeFileSync(join(OUT, `practice-hub-${TAG}.png`), Buffer.from(shot.data, "base64")),
   );
   if (TAG === "before") check("practice hub offers Speaking", hub.speakingButtons > 0, hub);
@@ -251,7 +273,7 @@ try {
     const s = document.querySelector('[data-testid="dict-sentence"]');
     return { sentence: s ? (s.textContent ?? '').trim() : null };
   })()`);
-  await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: true }).then(
+  await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: true }, sessionId).then(
     (shot) => writeFileSync(join(OUT, `speaking-${TAG}.png`), Buffer.from(shot.data, "base64")),
   );
   if (TAG === "before")
