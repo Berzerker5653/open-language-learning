@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-22",
-  "active_task": null,
+  "active_task": "ORPHAN-CONTENT-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2737,6 +2737,22 @@
       "summary": "Ghost duplicate letter rows (complaint 04) fixed at 867654e (entangled with PRACTICE-GATE-001 — the practice acceptance test asserts the merged ru.orth.cyrillic.a id): RU pack 67 per-case rows -> 34 entities (33 letters + stress mark) with a forms attribute; units 010-019 and goals.yaml refs swept to merged ids; schema gains forms; the bake validator refuses per-case -upper/-lower orthography ids (per_case_orthography_entity, red-first test in lts-langpack); scripts/new-pack.py and tools/audit_learner_copy v1.5.0 enforce the same rule at authoring time; docs/04 records the contract; OrthEntry.forms/LessonContent.forms ride the lesson wire and the encounter row leads with the form glyphs. Lane gate logs predate the commit; the PRACTICE-GATE-001 controller battery re-ran the full lts-desktop lib suite, langpack tests incl. the per-case red-first test, tsc and vitest green at exactly the committed tree (state/evidence/PRACTICE-GATE-001/gates.log).",
       "notes": "Design rationale in state/notes/LETTER-TEACHING-DESIGN-001.md; controller verification battery in state/evidence/PRACTICE-GATE-001/gates.log.",
       "updated": "2026-11-22"
+    },
+    "ORPHAN-CONTENT-001": {
+      "task_id": "ORPHAN-CONTENT-001",
+      "title": "Band/claim orphan pack content — unclaimed phonology contrasts and sentences seeded into beginner plans; 192 RU lexicon rows dead pack weight",
+      "status": "in_progress",
+      "attempts": 1,
+      "dependencies": [
+        "SESSION-SEQUENCE-001"
+      ],
+      "evidence": [
+        "state/notes/ORPHAN-CONTENT-001.md",
+        "state/evidence/ORPHAN-CONTENT-001/orphan-ids.json"
+      ],
+      "summary": "",
+      "updated": "2026-11-22",
+      "notes": "board t_e34dadda; opened from SESSION-SEQUENCE-001-TAKEOVER measured limitation"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

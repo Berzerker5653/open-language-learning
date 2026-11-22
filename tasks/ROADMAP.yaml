@@ -3189,6 +3189,20 @@ tasks:
   - the bake validator the scaffold generator and audit_learner_copy v1.5.0 refuse per-case row splits with red-first tests
   - learner rows render one row per letter with both printed forms visible
   required_for_desktop_1_0: false
+- id: ORPHAN-CONTENT-001
+  milestone: M11
+  priority: P1
+  title: Band and claim orphan pack content — unclaimed phonology contrasts and sentences seeded into beginner plans, and 192 RU lexicon rows are dead pack weight
+  dependencies: [SESSION-SEQUENCE-001]
+  read_first:
+  - state/notes/ORPHAN-CONTENT-001.md
+  - state/evidence/ORPHAN-CONTENT-001/orphan-ids.json
+  acceptance:
+  - every plan item measured live on a fresh level-0 profile derives from content referenced by some unit activity content_refs
+  - a red-first test proves the contrast and sentence NEW-seeding streams fail CLOSED for rows no unit references in packs that declare a goal ladder
+  - all eight RU phonology contrasts are claimed by on-ramp cyrillic unit activities and the beginner minimal pairs still seed a zero-evidence plan
+  - the claim decisions for the 161 orphan sentences and 192 orphan lexicon ids are filed in state/notes/ORPHAN-CONTENT-001.md with id lists in state/evidence/ORPHAN-CONTENT-001
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3319,4 +3333,5 @@ execution_scope:
   - RU-CONTENT-FREEZE-047-001
   - PRACTICE-GATE-001
   - ORTHO-LETTER-UNITS-001
+  - ORPHAN-CONTENT-001
   public_publication_authorized: false
