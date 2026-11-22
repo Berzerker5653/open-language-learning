@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-21",
-  "active_task": "SESSION-SEQUENCE-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2526,15 +2526,21 @@
     "SESSION-SEQUENCE-001": {
       "task_id": "SESSION-SEQUENCE-001",
       "title": "Beginner plan gating — level-0 profile served the B2 Claim lesson in its first session",
-      "status": "in_progress",
-      "attempts": 1,
+      "status": "done",
+      "attempts": 2,
       "dependencies": [],
       "evidence": [
-        "state/notes/SESSION-SEQUENCE-001.md"
+        "state/notes/SESSION-SEQUENCE-001.md",
+        "state/evidence/SESSION-SEQUENCE-001/acceptance-home_state.json",
+        "state/evidence/SESSION-SEQUENCE-001/red-test.log",
+        "state/evidence/SESSION-SEQUENCE-001/green-test.log",
+        "state/evidence/SESSION-SEQUENCE-001/takeover-findings.md",
+        "state/evidence/SESSION-SEQUENCE-001/takeover-gates.log",
+        "state/evidence/SESSION-SEQUENCE-001/takeover-acceptance-home_state.json"
       ],
-      "summary": "",
+      "summary": "Level-0 RU profile served the B2 Claim lesson on day one. Root fix shipped at 2c6f328 (goal-graph band locks on NEW seeding + due reviews, red-then-green test). Takeover closed the two remaining plan routes measured on the owner profile: weak_skills now withheld when band-locked, and lexicon entries no unit references fail CLOSED in packs with a goal ladder (the kontrargument leak: zero units claim it; premise of a undeclared goal_id refuted by measurement on installed 0.4.6). Acceptance re-run on :17641 shows zero above-on-ramp unit-banded activities (no argue/kontrargument ids) with poisoned rows intact on disk; unclaimed phonology/sentence orphans recorded as the known-limitation follow-up.",
       "notes": "Root cause and gate contract in state/notes/SESSION-SEQUENCE-001.md.",
-      "updated": "2026-11-21"
+      "updated": "2026-11-22"
     },
     "SETTINGS-SCOPE-001": {
       "task_id": "SETTINGS-SCOPE-001",
