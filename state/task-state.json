@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-21",
+  "updated": "2026-11-22",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -2696,9 +2696,45 @@
         "state/evidence/RU-CONTENT-FREEZE-047-001/ci-restore-repro.txt"
       ],
       "updated": "2026-11-22"
+    },
+    "PRACTICE-GATE-001": {
+      "task_id": "PRACTICE-GATE-001",
+      "title": "Practice queue generated from learner encounter state — a new user was served full-sentence speaking drills before knowing Cyrillic",
+      "status": "done",
+      "attempts": 3,
+      "dependencies": [
+        "SESSION-SEQUENCE-001"
+      ],
+      "evidence": [
+        "state/notes/PRACTICE-GATE-001.md",
+        "state/evidence/PRACTICE-GATE-001/gates.log"
+      ],
+      "summary": "Level-0 profiles were served full-sentence speaking drills (owner phone dogfood complaint 07). Shipped at 867654e (entangled single commit with ORTHO-LETTER-UNITS-001, sanctioned rule): practice-eligible = met (referenced by an unlocked unit) AND not locked; dictation_target_at profiles its pool, shadowing_items_at/writing_task gate the same way, an empty pool refuses honestly, practice_queue IPC served via SERVE_COMMAND_NAMES from encounter state. Takeover run 145 found run 128's MET allow-list was NOTES-ONLY (day-0 queue leaked unclaimed B2 lexicon + ru.sent.cp.* — unclaimed ids sit in neither lock set), implemented practice_met_content/practice_eligible wired into all four streams, rewrote two pre-gating JA shadowing fixtures to the new contract. Gates: fmt 0; lts-desktop full lib 223 tests 0 failed; clippy desktop+langpack --all-targets -D warnings 0; tsc 0; vitest 477 green; py authoring gates 31 OK (full battery state/evidence/PRACTICE-GATE-001/gates.log). Deferred (named in gates.log): optional 'Preview what ahead' affordance, practice_queue frontend rendering, mobile before/after screenshots (harness recipe committed).",
+      "notes": "Contract + takeover history in state/notes/PRACTICE-GATE-001.md; gate battery and deferred list in state/evidence/PRACTICE-GATE-001/gates.log.",
+      "updated": "2026-11-22"
+    },
+    "ORTHO-LETTER-UNITS-001": {
+      "task_id": "ORTHO-LETTER-UNITS-001",
+      "title": "One orthography entity per letter (merge -upper/-lower rows) with form glyphs rendered in learner rows",
+      "status": "done",
+      "attempts": 2,
+      "dependencies": [],
+      "evidence": [
+        "state/notes/LETTER-TEACHING-DESIGN-001.md",
+        "state/evidence/ORTHO-LETTER-UNITS-001/desktop-lib-tests.log",
+        "state/evidence/ORTHO-LETTER-UNITS-001/langpack-tests.log",
+        "state/evidence/ORTHO-LETTER-UNITS-001/ru-bake.log",
+        "state/evidence/ORTHO-LETTER-UNITS-001/py-newpack.log",
+        "state/evidence/ORTHO-LETTER-UNITS-001/py-audit.log",
+        "state/evidence/ORTHO-LETTER-UNITS-001/tsc.log",
+        "state/evidence/ORTHO-LETTER-UNITS-001/vitest.log"
+      ],
+      "summary": "Ghost duplicate letter rows (complaint 04) fixed at 867654e (entangled with PRACTICE-GATE-001 — the practice acceptance test asserts the merged ru.orth.cyrillic.a id): RU pack 67 per-case rows -> 34 entities (33 letters + stress mark) with a forms attribute; units 010-019 and goals.yaml refs swept to merged ids; schema gains forms; the bake validator refuses per-case -upper/-lower orthography ids (per_case_orthography_entity, red-first test in lts-langpack); scripts/new-pack.py and tools/audit_learner_copy v1.5.0 enforce the same rule at authoring time; docs/04 records the contract; OrthEntry.forms/LessonContent.forms ride the lesson wire and the encounter row leads with the form glyphs. Lane gate logs predate the commit; the PRACTICE-GATE-001 controller battery re-ran the full lts-desktop lib suite, langpack tests incl. the per-case red-first test, tsc and vitest green at exactly the committed tree (state/evidence/PRACTICE-GATE-001/gates.log).",
+      "notes": "Design rationale in state/notes/LETTER-TEACHING-DESIGN-001.md; controller verification battery in state/evidence/PRACTICE-GATE-001/gates.log.",
+      "updated": "2026-11-22"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
   "current_release_candidate": "Packs: ja-JP 0.4.3 (published 2026-11-09) and ru-RU 0.4.5 (published 2026-11-20) — manifests and catalog/packs.json pins agree (re-measured 2026-11-20, state/evidence/DOC-CONTRACT-RECONCILE-001/audit-2026-11-20.md); the 0.4.4/0.4.2/0.4.1/0.4.0 releases stay live as immutable rollback targets. App: newest published artifact is still open-language-learning-platform-0.4.0-alpha.1 (2026-10-13, Linux pre-release); code identity is 0.4.3-alpha.1 and unpublished — next-artifact decision is owner action O-06. Nothing in the build consumes this field; it is documentation.",
-  "updated_at": "2026-11-21T16:06:25-07:00"
+  "updated_at": "2026-11-22T02:20:00-07:00"
 }

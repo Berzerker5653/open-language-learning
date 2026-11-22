@@ -3162,6 +3162,32 @@ tasks:
   - all 20 gate-v5 drift drill clips are repaired via the Piper ladder or best-of fallback and re-audited green by the production gate
   - a ru content freeze note records the publish window and the reviewer queue for soft-sign homophone spot-audition
   required_for_desktop_1_0: false
+- id: PRACTICE-GATE-001
+  milestone: M11
+  priority: P1
+  title: Practice queue generated from learner encounter state — a new user was served full-sentence speaking drills before knowing Cyrillic
+  dependencies: [SESSION-SEQUENCE-001]
+  read_first:
+  - state/notes/PRACTICE-GATE-001.md
+  - state/evidence/PRACTICE-GATE-001/gates.log
+  acceptance:
+  - a level-0 profile with zero encounters gets zero sentence-level practice items while the letter-level drills that ARE eligible remain
+  - gated dictation shadowing and writing refuse honestly with no fallback to unfiltered pack content and learner free-typed sentences stay ungated
+  - mobile-viewport before/after screenshots with machine-gated result.json land under state/evidence/PRACTICE-GATE-001
+  required_for_desktop_1_0: false
+- id: ORTHO-LETTER-UNITS-001
+  milestone: M8
+  priority: P1
+  title: One orthography entity per letter (merge -upper/-lower rows) with form glyphs rendered in learner rows
+  dependencies: []
+  read_first:
+  - state/notes/LETTER-TEACHING-DESIGN-001.md
+  - state/evidence/ORTHO-LETTER-UNITS-001/desktop-lib-tests.log
+  acceptance:
+  - the RU pack carries one entity per letter (34 rows including the stress mark) with a forms array and zero per-case -upper/-lower ids in any pack source
+  - the bake validator the scaffold generator and audit_learner_copy v1.5.0 refuse per-case row splits with red-first tests
+  - learner rows render one row per letter with both printed forms visible
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3290,4 +3316,6 @@ execution_scope:
   - LAN-TOGGLE-PIN-001
   - RU-STORIES-MEDIA-001
   - RU-CONTENT-FREEZE-047-001
+  - PRACTICE-GATE-001
+  - ORTHO-LETTER-UNITS-001
   public_publication_authorized: false
