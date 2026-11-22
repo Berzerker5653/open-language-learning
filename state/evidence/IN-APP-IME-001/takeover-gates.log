@@ -1,0 +1,1267 @@
+== IN-APP-IME-001 takeover gate battery 2026-11-21T18:04:52-07:00 HEAD=c7a1ee2 ==
+### cargo fmt --all --check
+FMT_EXIT=0
+### cargo test -p lts-desktop --lib
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 8.66s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-ab99dae54466fc36)
+
+running 215 tests
+test models::tests::a_placeholder_url_is_refused_whatever_the_marker_says ... ok
+test models::tests::catalog_entries_are_pinned_and_licensed ... ok
+test models::tests::fetch_failure_leaves_no_partial_install ... ok
+test packs::tests::a_full_disk_is_named_rather_than_reported_as_a_generic_failure ... ok
+test models::tests::unpublished_payloads_are_never_offered_or_fetched ... ok
+test packs::tests::a_retry_asks_for_the_missing_bytes_and_only_trusts_a_partial_answer ... ok
+test packcache::tests::warming_a_pack_that_cannot_load_caches_nothing ... ok
+test packs::tests::both_pinned_catalog_entries_install_through_the_native_transport ... ignored, downloads both pinned reference packs (~634 MB)
+test models::tests::a_model_install_reports_received_bytes_and_nothing_invented ... ok
+test models::tests::speech_pref_defaults_off_and_validates_selection ... ok
+test models::tests::install_is_checksummed_atomic_and_removable ... ok
+test models::tests::model_status_stops_rehashing_until_files_actually_change ... ok
+test packs::tests::entries_are_hardened ... ok
+test packs::tests::a_cancelled_transfer_stops_at_the_next_byte_boundary ... ok
+test packs::tests::an_unidentifiable_partial_is_refused_and_cleared ... ok
+test packs::tests::every_pinned_catalog_entry_passes_the_download_policy ... ok
+test packs::tests::redirect_hops_stay_on_allowlisted_hosts_for_downloads ... ok
+test packs::tests::fetch_progress_counts_the_bytes_actually_read ... ok
+test packs::tests::the_published_catalog_is_the_default_and_explicit_config_overrides_it ... ok
+test packs::tests::scripted_redirect_chains_are_accepted_or_refused_hop_by_hop ... ok
+test progress::tests::a_stage_crosses_the_boundary_with_the_field_names_the_renderer_reads ... ok
+test progress::tests::an_unknown_fraction_stays_absent_instead_of_becoming_zero ... ok
+test scenarios::tests::a_content_gate_names_the_capability_and_where_it_is_practiced ... ok
+test packs::tests::manifest_scripts_travel_with_the_installed_pack_view ... ok
+test scenarios::tests::a_goal_gate_is_labelled_a_later_curriculum_stage_by_its_own_words ... ok
+test scenarios::tests::a_mixed_gate_stays_the_actionable_one_and_lists_every_rung ... ok
+test scenarios::tests::a_completed_transfer_survives_every_view_return ... ok
+test scenarios::tests::an_unnamed_prerequisite_falls_back_to_an_honest_phrase_not_the_id ... ok
+test scenarios::tests::near_rows_sit_between_playable_and_later_rows ... ok
+test scenarios::tests::nothing_is_recommended_while_every_scenario_is_locked ... ok
+test scenarios::tests::playable_rows_lead_later_stage_rows_in_either_input_order ... ok
+test scenarios::tests::readiness_and_lock_kinds_serialize_as_the_ts_union_strings ... ok
+test scenarios::tests::readiness_is_later_for_an_untouched_later_stage_or_an_undefined_goal ... ok
+test scenarios::tests::readiness_is_near_when_the_gate_is_part_open_or_the_same_stage ... ok
+test scenarios::tests::readiness_is_playable_only_when_the_hard_gate_is_met ... ok
+test scenarios::tests::the_copy_scanner_finds_pack_ids_and_ignores_ordinary_copy ... ok
+test scenarios::tests::scenario_views_serialize_snake_case_keys ... ok
+test scenarios::tests::the_recommendation_is_the_first_playable_row_and_there_is_one ... ok
+test scenarios::tests::the_step_result_serde_tags_include_partial_accepted ... ok
+test scenarios::tests::within_a_tier_the_band_ladder_then_the_smallest_gate_wins ... ok
+test scenarios::tests::transfer_views_show_payload_availability_and_only_payloads_stamp_done ... ok
+test tests::a_disabled_speech_model_is_reported_as_opted_out ... ok
+test scenarios::tests::renaming_pack_display_data_renames_the_lock_copy ... ok
+test tests::a_pack_without_declared_sources_gets_an_empty_provenance_payload ... ok
+test models::tests::directory_entry_installs_verifies_and_rejects_unsafe_archives ... ok
+test tests::a_bundled_payload_whose_bytes_disagree_with_the_manifest_is_refused ... ok
+test tests::a_payload_the_cpu_cannot_run_says_so_instead_of_claiming_absence ... ok
+test tests::a_bundled_packs_sidecar_that_fails_closed_yields_no_candidates ... ok
+test tests::a_new_lexicon_version_is_never_answered_with_the_old_versions_rows ... ok
+test tests::an_incomplete_payload_never_runs_and_does_not_shadow_the_dev_path ... ok
+test tests::a_unit_parse_is_shared_per_version_root_and_never_across_roots ... ok
+test tests::band_sort_key_places_unknown_and_missing_bands_after_the_ladder ... ok
+test tests::build_identity_reports_a_version_and_a_quotable_commit ... ok
+test packs::tests::import_rejects_garbage_honestly ... ok
+test packs::tests::catalog_cache_roundtrip_and_view ... ok
+test tests::an_empty_submission_records_no_ledger_row_and_no_offer ... ok
+test packs::tests::catalog_status_is_honest_when_unset_offline_or_cached ... ok
+test tests::a_speaking_attempt_is_refused_before_any_mastery_write ... ok
+test tests::a_profile_with_no_language_can_still_be_entered ... ok
+test packs::tests::an_interrupted_download_resumes_from_the_bytes_on_disk ... ok
+test tests::comprehension_listening_runs_over_a_russian_pack_sentence ... ok
+test tests::device_tier_detection_recommends_by_measured_capacity ... ok
+test tests::a_declared_task_sequence_loads_and_names_a_runner_for_every_stage ... ok
+test tests::dictation_abstains_rather_than_comparing_in_an_undeclared_language ... ok
+test packs::tests::a_rejected_checksum_stops_after_the_stage_that_failed ... ok
+test packs::tests::cancelling_during_unpacking_leaves_no_pack_installed ... ok
+test packs::tests::tampered_archive_is_rejected ... ok
+test packs::tests::cancelling_after_verify_leaves_no_pack_installed ... ok
+test tests::a_due_mined_word_reaches_todays_plan_without_touching_mastery ... ok
+test tests::dictation_check_abstains_on_silence ... ok
+test tests::an_installed_pack_that_is_not_bundled_appears_in_the_wizard_list ... ok
+test tests::dictation_check_abstains_when_model_off ... ok
+test tests::error_recurrence_breaks_dimension_ties_capped ... ok
+test tests::error_review_offer_accept_schedule_and_grade_round_trip ... ok
+test tests::cloze_and_dictation_grade_typed_answers_on_correct_dimensions ... ok
+test tests::finishing_onboarding_rejects_a_pack_that_is_not_installed ... ok
+test tests::content_confirmations_are_attributed_and_rendered_in_the_story_view ... ok
+test tests::dictation_abstains_fault_honestly_when_the_recognizer_breaks ... ok
+test tests::dictation_check_flags_clear_mismatch ... ok
+test tests::gate_progress_averages_concept_ladder_weights ... ok
+test tests::discrimination_runner_records_phonological_dimension_evidence ... ok
+test tests::duplicate_mine_returns_the_original_id_instead_of_an_error ... ok
+test tests::every_planned_placement_question_survives_the_submit_task_builder ... ok
+test tests::goal_rank_map_follows_the_band_ladder_and_asks_nothing_of_locked_or_unrunnable_content ... ok
+test tests::ime_candidates_aux_fallback_stays_labeled_and_secondary ... ok
+test tests::first_run_steps_make_no_script_claim_for_a_pack_without_the_declaration ... ok
+test tests::ime_candidates_come_from_the_pack_lexicon_with_provenance ... ok
+test tests::fresh_user_onramp_flow_persists_and_resumes ... ok
+test tests::dictation_target_uses_the_surface_when_a_pack_has_no_readings ... ok
+test tests::learned_kana_folding_folds_marks_and_size_but_not_the_moraic_nasal ... ok
+test tests::letter_model_case_guard_and_stagger ... ok
+test tests::kanji_drill_uses_existing_dimensions_and_srs_gates_resurfacing ... ok
+test tests::list_and_resume_profiles_round_trip ... ok
+test tests::listening_runner_hides_transcript_and_schedules_listening_row ... ok
+test packcache::tests::a_new_version_is_never_served_from_the_old_versions_entry ... ok
+test tests::dictation_check_matches_spoken_target ... ok
+test tests::a_pack_bundled_build_resolves_candidates_from_staged_resources ... ok
+test packs::tests::import_validates_then_installs_as_community ... ok
+test packs::tests::a_partial_on_disk_is_verified_before_anything_is_installed ... ok
+test tests::mine_list_renders_the_drill_context_for_lookup_mined_words ... ok
+test tests::a_pack_without_environments_gives_an_empty_world ... ok
+test tests::off_pack_word_tap_also_logs_and_mines_the_token ... ok
+test packs::tests::the_receipt_names_the_version_source_and_verified_sha ... ok
+test tests::onboarding_can_finish_with_no_pack_and_still_saves_the_mic_choice ... ok
+test tests::pack_sentence_text_resolves_lexicon_context_ids ... ok
+test tests::perf_commands_refuse_without_harness_env ... ok
+test tests::personalize_progression_favors_developing_dimensions ... ok
+test tests::one_sentence_with_two_mismatches_records_two_rows_and_two_offers ... ok
+test tests::pick_reading_ranks_by_structure_and_never_returns_a_transliteration ... ok
+test packs::tests::a_catalog_install_reports_each_stage_before_doing_it ... ok
+test tests::community_import_installs_and_switches_learning_language ... ok
+test tests::placement_coverage_reports_a_modality_with_no_auto_runner ... ok
+test tests::media_provenance_comes_from_the_pack_manifest_not_file_presence ... ok
+test tests::mined_words_schedule_without_touching_mastery_evidence ... ok
+test tests::new_profile_gets_first_lessons_and_runner_records_evidence ... ok
+test tests::orth_recognition_runner_records_evidence_and_establishes_kana_literacy ... ok
+test tests::privacy_notice_names_concrete_things_not_ledger_terms ... ok
+test tests::probe_real_store_word_attachment ... ignored, controller probe: set LTS_PROBE_DATA_DIR + LTS_PROBE_PROFILE_ID
+test tests::placement_never_substitutes_or_repeats_a_diagnostic_item ... ok
+test tests::profile_import_path_must_live_inside_the_data_dir ... ok
+test tests::placement_coverage_names_why_a_rubric_has_no_question ... ok
+test tests::placement_records_diagnostic_evidence_within_one_prompt ... ok
+test tests::plan_uses_scheduler_values_under_budget ... ok
+test tests::progress_shows_modality_differences ... ok
+test tests::pronunciation_check_abstains_when_speech_model_is_off ... ok
+test tests::proposed_listening_items_point_at_audio_the_pack_declares ... ok
+test scenarios::tests::every_shipped_scenario_offers_wrong_moves_and_records_honest_evidence ... ok
+test packs::tests::an_import_reports_only_the_stages_it_can_perform ... ok
+test scenarios::tests::the_shipped_pack_leads_with_an_openable_scenario_for_a_fresh_profile ... ok
+test packs::tests::the_installed_fact_is_the_profile_selection_then_the_current_pointer ... ok
+test tests::reading_aware_span_lookup_prefers_closed_class_homophones ... ok
+test tests::reader_fades_scaffolds_and_reveals_record_support ... ok
+test packs::tests::installing_an_older_version_does_not_downgrade_the_current_pointer ... ok
+test tests::reference_audio_follows_the_manifest_and_refuses_traversal ... ok
+test tests::rfc3339_conversion_is_correct ... ok
+test tests::recorded_attempts_keep_retry_practice_and_genuine_variation_apart ... ok
+test scenarios::tests::a_fresh_profiles_lock_copy_carries_no_raw_ids_in_either_shipped_pack ... ok
+test tests::running_the_authored_stages_makes_independent_reachable ... ok
+test tests::rtl_capability_reaches_the_renderer_through_pack_listing ... ok
+test tests::pronunciation_check_abstains_on_weak_reference_and_mismatch ... ok
+test tests::scenario_locks_until_prereqs_then_records_interaction_evidence ... ok
+test tests::scenario_rungs_without_payloads_are_refused_without_voiding_the_node ... ok
+test tests::settings_microphone_and_romaji_round_trip ... ok
+test tests::sentence_listening_practises_declared_audio_without_the_transcript ... ok
+test tests::shadowing_items_attach_word_timings_only_when_the_sidecar_ships ... ok
+test tests::shadowing_targets_come_from_pack_and_record_no_evidence ... ok
+test tests::a_contrast_the_app_cannot_measure_stays_listening_practice has been running for over 60 seconds
+test tests::a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order has been running for over 60 seconds
+test tests::a_supported_backup_restores_saved_words_and_history has been running for over 60 seconds
+test tests::an_installed_pack_that_is_also_bundled_is_listed_exactly_once has been running for over 60 seconds
+test tests::bundled_japanese_pack_installs_and_records has been running for over 60 seconds
+test tests::bundled_pack_phrase_entries_carry_valid_slots has been running for over 60 seconds
+test tests::claims_are_one_entry_per_pack_even_with_two_installed_versions has been running for over 60 seconds
+test tests::day_one_never_seeds_katakana_or_words_with_unlearned_kana has been running for over 60 seconds
+test tests::dictation_target_prefers_kana_only_and_rotates has been running for over 60 seconds
+test tests::first_run_steps_lead_with_the_declared_script_in_its_teaching_order has been running for over 60 seconds
+test tests::goal_map_ignores_activity_volume has been running for over 60 seconds
+test tests::goal_map_orders_bands_by_ladder_not_ascii has been running for over 60 seconds
+test tests::goal_map_surfaces_pack_goals_with_prereqs_and_mastery has been running for over 60 seconds
+test tests::installing_a_pack_warms_its_content_for_the_first_visit has been running for over 60 seconds
+test tests::katakana_and_kana_words_unlock_with_the_letters_they_need has been running for over 60 seconds
+test tests::lexicon_entries_covers_all_pack_lexicon_files has been running for over 60 seconds
+test tests::memory_stats_reports_only_this_profiles_local_data has been running for over 60 seconds
+test tests::pack_claims_report_installed_pack_data_without_upgrading_trust has been running for over 60 seconds
+test tests::phrase_entries_carry_slots_and_target_the_right_slot has been running for over 60 seconds
+test tests::plan_generation_stays_fast_on_the_reference_pack has been running for over 60 seconds
+test tests::preview_journey_select_activity_restart_switch_retain has been running for over 60 seconds
+test tests::profile_export_writes_bundle_and_delete_is_one_shot has been running for over 60 seconds
+test tests::pronunciation_check_uses_pack_declared_target_without_media has been running for over 60 seconds
+test tests::pronunciation_demo_comes_from_pack_contrasts has been running for over 60 seconds
+test tests::provenance_payload_covers_every_installed_pack_verbatim has been running for over 60 seconds
+test tests::reading_aware_lookup_of_a_ni_particle_span_never_answers_two has been running for over 60 seconds
+test tests::reading_aware_lookup_of_the_self_intro_shows_the_topic_particle_not_the_tooth has been running for over 60 seconds
+test tests::reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior has been running for over 60 seconds
+test tests::russian_contrast_arrives_as_the_packs_own_pair has been running for over 60 seconds
+test tests::russian_cyrillic_practice_unlocks_the_greetings_gate has been running for over 60 seconds
+test tests::sharded_pack_directories_reach_every_reader has been running for over 60 seconds
+test tests::shipped_story_function_word_lookup_report_is_empty has been running for over 60 seconds
+test tests::preview_journey_select_activity_restart_switch_retain ... ok
+test tests::a_contrast_the_app_cannot_measure_stays_listening_practice ... ok
+test tests::speech_audio_reports_an_honest_media_miss_when_the_pack_ships_no_recording ... ok
+test tests::speech_audio_serves_pack_media_and_rejects_bad_ids ... ok
+test tests::srs_interval_preview_matches_the_grade_it_prices ... ok
+test tests::stagger_confusables_spaces_false_friends_but_never_splits_case_forms ... ok
+test tests::story_lookup_returns_spans_not_substrings ... ok
+test tests::story_reader_shows_scaffolds_and_lookup_without_evidence ... ok
+test tests::story_view_carries_grammar_labels_only_when_the_sidecar_ships ... ok
+test tests::story_word_audio_slices_the_word_span_from_the_sentence_clip ... ok
+test tests::russian_contrast_arrives_as_the_packs_own_pair ... ok
+test tests::russian_cyrillic_practice_unlocks_the_greetings_gate ... ok
+test tests::bundled_japanese_pack_installs_and_records ... ok
+test tests::the_authored_order_changes_what_the_app_runs ... ok
+test tests::the_authored_unit_journey_reaches_the_desktop ... ok
+test tests::the_blank_window_workaround_forces_the_fallback_renderer_only_when_unset ... ok
+test tests::the_bundled_sidecar_outranks_the_dev_vendor_tree ... ok
+test tests::claims_are_one_entry_per_pack_even_with_two_installed_versions ... ok
+test tests::the_dev_repo_tree_beats_staged_resources_when_both_exist ... ok
+test tests::the_hub_gate_for_the_kanji_drill_comes_from_the_pack_not_from_the_card_list ... ok
+test tests::the_lesson_plan_names_the_runner_for_every_declared_stage ... ok
+test tests::the_practice_cursor_skips_stages_no_runner_can_answer ... ok
+test tests::the_practice_cursor_walks_the_authored_stages_in_order ... ok
+test tests::an_installed_pack_that_is_also_bundled_is_listed_exactly_once ... ok
+test tests::the_speaking_pair_builds_a_guided_unscored_task ... ok
+test tests::the_word_filter_checks_only_declared_kana_forms ... ok
+test tests::the_writing_pair_builds_a_typed_cloze_task ... ok
+test tests::unknown_model_id_is_rejected_before_any_download ... ok
+test tests::word_card_aux_lookup_goes_through_the_lemma_and_degrades_without_a_slice ... ok
+test tests::word_card_matches_the_lexicon_surface_directly_without_a_lemma_row ... ok
+test tests::word_card_off_pack_token_gets_the_labeled_aux_card ... ok
+test tests::word_card_parses_the_aux_slice_once_not_per_tap ... ok
+test tests::word_card_refuses_a_malformed_story_id_before_logging ... ok
+test tests::word_card_reports_off_pack_words_as_not_in_pack ... ok
+test tests::word_card_resolves_an_inflected_ru_form_to_its_lemma ... ok
+test tests::word_tap_auto_logs_the_lookup_and_enters_the_review_pipeline ... ok
+test tests::installing_a_pack_warms_its_content_for_the_first_visit ... ok
+test tests::a_supported_backup_restores_saved_words_and_history ... ok
+test tests::bundled_pack_phrase_entries_carry_valid_slots ... ok
+test tests::the_russian_reference_packs_first_placement_question_builds ... ok
+test tests::day_one_never_seeds_katakana_or_words_with_unlearned_kana ... ok
+test tests::goal_map_ignores_activity_volume ... ok
+test tests::a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order ... ok
+test tests::goal_map_surfaces_pack_goals_with_prereqs_and_mastery ... ok
+test tests::dictation_target_prefers_kana_only_and_rotates ... ok
+test tests::goal_map_orders_bands_by_ladder_not_ascii ... ok
+test tests::first_run_steps_lead_with_the_declared_script_in_its_teaching_order ... ok
+test tests::katakana_and_kana_words_unlock_with_the_letters_they_need ... ok
+test tests::lexicon_entries_covers_all_pack_lexicon_files ... ok
+test tests::memory_stats_reports_only_this_profiles_local_data ... ok
+test tests::pack_claims_report_installed_pack_data_without_upgrading_trust ... ok
+test tests::profile_export_writes_bundle_and_delete_is_one_shot ... ok
+test tests::sharded_pack_directories_reach_every_reader ... ok
+test tests::reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior ... ok
+test tests::pronunciation_check_uses_pack_declared_target_without_media ... ok
+test tests::reading_aware_lookup_of_the_self_intro_shows_the_topic_particle_not_the_tooth ... ok
+test tests::reading_aware_lookup_of_a_ni_particle_span_never_answers_two ... ok
+test tests::shipped_story_function_word_lookup_report_is_empty ... ok
+test tests::situation_ids_resolve_to_human_labels ... ok
+test tests::phrase_entries_carry_slots_and_target_the_right_slot ... ok
+test tests::plan_generation_stays_fast_on_the_reference_pack ... ok
+test tests::pronunciation_demo_comes_from_pack_contrasts ... ok
+test tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see ... ok
+test tests::the_claim_report_survives_a_trust_change_without_lying_about_it ... ok
+test tests::world_unlocks_follow_pack_declared_capabilities ... ok
+test tests::stress_display_settings_are_data_driven_and_persisted has been running for over 60 seconds
+test tests::the_aligner_language_comes_from_the_pack_manifest has been running for over 60 seconds
+test tests::writing_targets_are_parsed_once_per_version_root has been running for over 60 seconds
+test tests::provenance_payload_covers_every_installed_pack_verbatim ... ok
+test tests::writing_targets_are_parsed_once_per_version_root ... ok
+test tests::stress_display_settings_are_data_driven_and_persisted ... ok
+test tests::the_aligner_language_comes_from_the_pack_manifest ... ok
+
+test result: ok. 213 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 194.38s
+
+DESK_TEST_EXIT=0
+### cargo clippy -p lts-desktop --all-targets -- -D warnings
+   Compiling aws-lc-sys v0.45.0
+   Compiling glib-sys v0.18.1
+   Compiling gobject-sys v0.18.0
+   Compiling gio-sys v0.18.1
+   Compiling gdk-sys v0.18.2
+   Compiling gdk-pixbuf-sys v0.18.0
+   Compiling pango-sys v0.18.0
+   Compiling cairo-sys-rs v0.18.2
+   Compiling atk-sys v0.18.2
+   Compiling javascriptcore-rs-sys v1.1.1
+   Compiling soup3-sys v0.5.0
+   Compiling gdkx11-sys v0.18.2
+   Compiling gtk-sys v0.18.2
+    Checking lts-domain v0.1.0 (/home/hunter/game-dev/LTS/crates/domain)
+    Checking x11-dl v2.21.0
+    Checking libdbus-sys v0.2.7
+   Compiling gtk v0.18.2
+   Compiling webkit2gtk-sys v2.0.2
+    Checking lts-security v0.1.0 (/home/hunter/game-dev/LTS/crates/security)
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Checking lts-speech-api v0.1.0 (/home/hunter/game-dev/LTS/crates/speech-api)
+   Compiling wry v0.57.0
+    Checking dbus v0.9.12
+    Checking lts-speech-runtime v0.1.0 (/home/hunter/game-dev/LTS/crates/speech-runtime)
+    Checking lts-learner-model v0.1.0 (/home/hunter/game-dev/LTS/crates/learner-model)
+    Checking lts-world v0.1.0 (/home/hunter/game-dev/LTS/crates/world)
+    Checking lts-scheduler v0.1.0 (/home/hunter/game-dev/LTS/crates/scheduler)
+    Checking lts-storage v0.1.0 (/home/hunter/game-dev/LTS/crates/storage)
+    Checking glib v0.18.5
+    Checking gdkwayland-sys v0.18.2
+    Checking gio v0.18.4
+    Checking cairo-rs v0.18.5
+    Checking atk v0.18.2
+    Checking javascriptcore-rs v1.1.2
+   Compiling aws-lc-rs v1.18.1
+   Compiling rustls v0.23.46
+    Checking rustls-webpki v0.103.16
+    Checking tokio-rustls v0.26.6
+    Checking rustls-platform-verifier v0.7.1
+    Checking ureq v2.12.1
+    Checking hyper-rustls v0.27.10
+    Checking reqwest v0.13.5
+    Checking jsonschema v0.58.5
+    Checking gdk-pixbuf v0.18.5
+    Checking pango v0.18.3
+    Checking soup3 v0.5.0
+    Checking lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack)
+    Checking gdk v0.18.2
+    Checking lts-activity v0.1.0 (/home/hunter/game-dev/LTS/crates/activity)
+    Checking gdkx11 v0.18.2
+    Checking webkit2gtk v2.0.2
+    Checking tao v0.37.1
+    Checking muda v0.20.0
+    Checking tauri-runtime v2.12.1
+    Checking tauri-runtime-wry v2.12.1
+    Checking tauri v2.12.1
+    Checking tauri-plugin-single-instance v2.5.2
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 30.45s
+DESK_CLIPPY_EXIT=0
+### cargo test -p lts-langpack
+   Compiling aws-lc-sys v0.45.0
+   Compiling aws-lc-rs v1.18.1
+   Compiling rustls v0.23.46
+   Compiling rustls-webpki v0.103.16
+   Compiling tokio-rustls v0.26.6
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.13.5
+   Compiling jsonschema v0.58.5
+   Compiling lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 17.26s
+     Running unittests src/lib.rs (target/debug/deps/lts_langpack-2b5d560d20d73713)
+
+running 5 tests
+test migrate::tests::bare_prerequisites_become_reviewable_records ... ok
+test migrate::tests::bare_prerequisites_are_rejected_by_0_2_schema ... ok
+test migrate::tests::migrated_goal_validates_against_0_2_schema ... ok
+test migrate::tests::migrated_records_trigger_review_warning ... ok
+test audit::tests::lemmas_sidecar_needs_no_manifest_row ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/archive.rs (target/debug/deps/archive-704398598fd4140c)
+
+running 17 tests
+test install_rejects_path_traversal ... ok
+test build_rejects_invalid_pack ... ok
+test install_rejects_hash_mismatch ... ok
+test install_rejects_unlisted_and_symlink_entries ... ok
+test a_cancelled_unpack_leaves_the_store_untouched ... ok
+test install_enforces_install_mode_gates ... ok
+test build_is_deterministic ... ok
+test undeclared_help_promise_installs_payload_less_scenario ... ok
+test install_is_install_with_cancel_that_never_fires ... ok
+test declared_help_promise_blocks_payload_less_scenario_at_build_and_install ... ok
+test same_version_reinstall_swaps_without_ever_gapping_current ... ok
+test install_upgrade_rollback_cycle ... ok
+test failed_reinstall_restores_the_previous_version ... ok
+test install_rejects_manifest_over_the_entry_cap ... ok
+test install_rejects_decompression_bomb ... ok
+test inspect_and_read_entry_reject_decompressed_bombs ... ok
+test install_rejects_zip_with_more_entries_than_the_cap ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.88s
+
+     Running tests/audit.rs (target/debug/deps/audit-1d0ea46ee37a2b76)
+
+running 9 tests
+test attribution_requirement_without_entry_fails ... ok
+test by_over_a_by_sa_source_names_the_dropped_obligation ... ok
+test clean_chain_audits_and_reports_attribution ... ok
+test reference_only_source_cannot_be_bundled ... ok
+test matching_and_unjudgeable_licences_produce_no_finding ... ok
+test unknown_license_blocks_reference_build ... ok
+test source_provenance_flags_gaps_and_term_conflicts ... ok
+test clean_source_chain_has_no_provenance_warnings ... ok
+test seed_pack_licensed_and_reports_sources ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.49s
+
+     Running tests/grammar_labels.rs (target/debug/deps/grammar_labels-bf5aeefdba42d97c)
+
+running 3 tests
+test malformed_sidecar_line_surfaces_a_clear_error ... ok
+test sidecar_labels_are_exposed_keyed_by_sentence_id ... ok
+test pack_without_the_sidecar_loads_unchanged ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/input_methods.rs (target/debug/deps/input_methods-e36d0420690b064f)
+
+running 3 tests
+test declared_map_is_exposed_id_to_bool_and_validates ... ok
+test malformed_map_is_a_schema_error_and_the_reader_stays_bool_safe ... ok
+test absent_input_methods_reads_none_and_changes_nothing ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/ja_contrasts.rs (target/debug/deps/ja_contrasts-851a305fe77a13be)
+
+running 2 tests
+test vowel_length_pairs_declare_mora_derived_targets ... ok
+test contrasts_validate_against_v02_schema ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/ja_dependency_map.rs (target/debug/deps/ja_dependency_map-2b141b23d92bacf2)
+
+running 3 tests
+test politeness_is_contextual_not_binary ... ok
+test concepts_cover_every_goal_required_concept ... ok
+test validator_reports_no_cycles_or_missing_dependencies ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/ja_goal_graph.rs (target/debug/deps/ja_goal_graph-071e85048c6d65d3)
+
+running 4 tests
+test prerequisites_resolve_and_are_acyclic ... ok
+test bands_cover_onramp_through_release_band ... ok
+test goals_have_modalities_assessments_and_framework_refs ... ok
+test every_goal_validates_against_v02_goal_schema ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/ja_orthography.rs (target/debug/deps/ja_orthography-77117f41abc747fa)
+
+running 4 tests
+test reading_and_writing_competencies_are_separate ... ok
+test romaji_fade_is_specified_and_never_gates ... ok
+test scaffold_policy_covers_all_five_scaffolds ... ok
+test scripts_document_validates_against_v02_schema ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/ja_phonology.rs (target/debug/deps/ja_phonology-72d009b864596423)
+
+running 3 tests
+test no_automatic_scoring_without_calibration ... ok
+test required_feature_areas_are_encoded ... ok
+test inventory_validates_against_v02_phonology_schema ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/leximport.rs (target/debug/deps/leximport-18781bf04ff4130d)
+
+running 6 tests
+test non_redistributable_source_is_rejected ... ok
+test deterministic_ids_and_collision_handling ... ok
+test imported_data_never_becomes_teaching_order ... ok
+test attribution_and_license_requirements_are_generated ... ok
+test import_is_reproducible_and_separated_from_curriculum ... ok
+test pack_still_validates_after_import ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/media.rs (target/debug/deps/media-b31937301714df79)
+
+running 17 tests
+test a_pack_with_audio_addressable_items_and_no_media_manifest_fails_install ... ok
+test unbuilt_media_blocks_install_and_speaks_once_in_a_checkout ... ok
+test undeclared_media_file_is_caught ... ok
+test partially_built_media_is_refused_in_every_mode ... ok
+test contrast_item_audio_ties_to_the_item_reading_and_counts_reading_gaps ... ok
+test a_built_manifest_that_misses_an_addressable_item_fails_the_install_gate ... ok
+test lexicon_audio_must_speak_a_scripted_reading_never_a_transliteration ... ok
+test narrator_sidecar_is_declared_data_not_an_unlisted_asset ... ok
+test lexicon_row_fed_the_kanji_surface_fails_tie_and_names_the_reading ... ok
+test tampered_audio_fails_whatever_the_mode ... ok
+test drifting_media_is_refused_by_build ... ok
+test an_unbuilt_pack_never_builds_since_nothing_falls_back_anymore ... ok
+test dot_segment_media_row_is_refused_before_any_read ... ok
+test a_partially_built_pack_never_builds ... ok
+test declared_asset_matching_its_bytes_is_clean ... ok
+test non_synthesized_audio_is_never_judged_against_declared_readings ... ok
+test synthesized_audio_must_record_the_declared_reading_not_the_surface_or_romaji ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/media_upgrade.rs (target/debug/deps/media_upgrade-116869765a74e92a)
+
+running 3 tests
+test an_upgrade_swaps_the_media_in_force_and_keeps_the_old_bytes_for_rollback ... ok
+test a_tampered_installed_asset_fails_install_validation ... ok
+test reinstalling_the_same_version_replaces_the_media_instead_of_merging_it ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests/perf_install.rs (target/debug/deps/perf_install-c1a37d5ddbdd352b)
+
+running 1 test
+test pack_update_timing ... ignored, requires a ~318 MB network-fetched pack archive via LTS_PERF_PACK_ARCHIVE; measurement evidence, not a CI gate
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/source_matrix.rs (target/debug/deps/source_matrix-576d2fa424703700)
+
+running 3 tests
+test nonshippable_entries_have_alternative_or_blocker ... ok
+test matrix_covers_required_categories ... ok
+test every_entry_is_classified_with_registry_fields ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/transliteration.rs (target/debug/deps/transliteration-4fd444dd63d264c3)
+
+running 8 tests
+test sentence_romaji_may_contain_digits ... ok
+test sentence_romaji_with_kana_is_flagged ... ok
+test script_label_disagreeing_with_its_own_text_is_flagged ... ok
+test script_neutral_marks_keep_kana_labels_clean ... ok
+test mixed_script_text_keeps_whichever_kana_label_it_carries ... ok
+test transliteration_reading_with_kana_or_digit_is_flagged_and_names_the_kana ... ok
+test well_formed_transliteration_is_left_alone ... ok
+test the_validator_adopts_the_romaji_rules_and_nothing_else_from_the_audit ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/unit_gates.rs (target/debug/deps/unit_gates-d23a8c3de9b4f2ad)
+
+running 7 tests
+test a_gate_state_outside_the_mastery_vocabulary_fails_the_schema ... ok
+test a_gate_target_that_is_not_a_unit_is_rejected ... ok
+test a_gate_cycle_locks_every_unit_on_it_and_is_rejected ... ok
+test a_unit_gated_on_itself_can_never_be_introduced ... ok
+test a_gate_on_an_undeclared_id_travels_the_unresolved_reference_path ... ok
+test a_declared_gate_on_a_real_unit_validates_clean ... ok
+test the_japanese_pack_gates_katakana_on_every_hiragana_chart_unit ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.48s
+
+     Running tests/validate.rs (target/debug/deps/validate-13a12f7369d852ef)
+
+running 51 tests
+test lexicon_script_contamination_and_stress_defects_are_caught ... ok
+test manifest_scripts_must_match_orthography_ids ... ok
+test dependency_mirror_must_agree_with_content_prerequisites ... ok
+test inverted_engine_range_fails ... ok
+test bare_prerequisite_ids_fail_in_0_2 ... ok
+test locale_mismatch_fails ... ok
+test bad_id_grammar_fails ... ok
+test cloze_target_not_in_text_fails ... ok
+test dead_goal_audit_reports_unreachable_goals ... ok
+test out_of_range_support_level_fails ... ok
+test diagnostics_carry_actionable_locations ... ok
+test duplicate_ids_fail ... ok
+test draft_unresolved_reference_and_license_gates_block_install ... ok
+test migrated_prerequisites_warn_for_human_review ... ok
+test shipped_packs_keep_the_declared_help_promise ... ok
+test goals_sharding_accepted ... ok
+test deferred_modality_prerequisites_are_representable ... ok
+test generation_contract_envelopes_unit_content ... ok
+test manifest_rejects_non_boolean_scenario_help ... ok
+test scaffold_draft_is_accepted_as_scaffold_only ... ok
+test ai_only_approval_cannot_promote_to_verified ... ok
+test status_flip_with_review_record_is_clean ... ok
+test review_governance_paths_accepted ... ok
+test stray_file_under_review_dir_flagged ... ok
+test scenario_choices_help_below_two_options_is_error ... ok
+test prerequisite_cycles_fail_with_cycle_path ... ok
+test matching_dependency_mirror_is_clean ... ok
+test media_assets_load_as_binary_and_pack_stays_clean ... ok
+test capability_without_items_is_exactly_one_error ... ok
+test undeclared_reference_warns_in_scaffold_and_errors_in_install ... ok
+test capability_declaration_with_items_validates_clean ... ok
+test deep_yaml_flow_nesting_is_a_diagnostic_not_a_stack_overflow ... ok
+test payloads_behind_every_required_transfer_validate_clean ... ok
+test a_removed_requirement_validates_clean ... ok
+test a_partially_payloaded_requirement_is_still_a_gap ... ok
+test unknown_capability_string_fails_validation ... ok
+test pack_without_declared_help_promise_is_exempt_from_u07 ... ok
+test a_transfer_requirement_without_payloads_is_rejected ... ok
+test sentence_content_validates_in_0_2 ... ok
+test scenario_rung_without_payload_is_undelivered_help ... ok
+test scenario_intent_token_without_label_is_unlabelled_action ... ok
+test scenario_with_labels_and_delivered_help_validates_clean ... ok
+test valid_minimal_is_clean_in_both_modes ... ok
+test scenario_without_rungs_or_labels_stays_valid_as_before ... ok
+test unit_without_capabilities_key_validates_as_before ... ok
+test engine_version_compatibility_is_checked ... ok
+test valid_full_covers_every_content_type ... ok
+test russian_declares_exactly_one_script_introduction_unit ... ok
+test japanese_declares_exactly_one_script_introduction_unit ... ok
+test japanese_draft_seed_validates_as_scaffold ... ok
+test japanese_seed_is_install_eligible ... ok
+
+test result: ok. 51 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.14s
+
+     Running tests/word_timings.rs (target/debug/deps/word_timings-bf7ad7b036918de3)
+
+running 3 tests
+test malformed_sidecar_line_surfaces_a_clear_error ... ok
+test pack_without_the_sidecar_loads_unchanged ... ok
+test sidecar_timings_are_exposed_keyed_by_clip_id ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/world.rs (target/debug/deps/world-87fbf44213daceb9)
+
+running 8 tests
+test an_unlock_on_an_unrecordable_dimension_is_rejected ... ok
+test declaring_a_collection_without_rows_is_a_pack_bug ... ok
+test a_pack_without_the_collection_stays_clean_and_yields_nothing ... ok
+test declared_environments_validate_and_are_returned_typed ... ok
+test environment_ids_are_pack_unique ... ok
+test a_row_is_rejected_when_it_names_a_state_the_engine_does_not_have ... ok
+test an_unlock_rule_must_point_at_content_the_pack_declares ... ok
+test a_listening_unlock_needs_audio_the_pack_declares ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+   Doc-tests lts_langpack
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+LP_TEST_EXIT=0
+### langpack validate/lint ja-JP
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 0 warning(s)
+VAL_JA_EXIT=0
+info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ja.contrast.gemination.kite-0, ja.contrast.gemination.kite-1, ja.contrast.gemination.matta-0, ja.contrast.gemination.matta-1, ja.contrast.vowel-length.obasan-0, ja.contrast.vowel-length.obasan-1, ja.contrast.vowel-length.tooi-0, ja.contrast.vowel-length.tooi-1; authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "pyopenjtalk" is not referenced by any content record
+info[unused_source] sources.jsonl/3: source "commonvoice-ja-27" is not referenced by any content record
+info[unused_source] sources.jsonl/4: source "ai-drafted-kana" is not referenced by any content record
+info[unused_source] sources.jsonl/7: source "kokoro-sherpa-tts" is not referenced by any content record
+lint: 0 error(s), 0 warning(s)
+LINT_JA_EXIT=0
+### langpack validate/lint ru-RU
+info[media_item_without_reading] media/manifest.jsonl: 3757 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ru.contrast.palatalization.brat-0, ru.contrast.palatalization.brat-1, ru.contrast.palatalization.luk-0, ru.contrast.palatalization.luk-1, ru.contrast.voicing.bp-0, ru.contrast.voicing.bp-1, ru.contrast.voicing.dt-0, ru.contrast.voicing.dt-1 (first 8 shown); authoring readings is human linguistic work and stays a review-pending record (K-65)
+validate(scaffold): 0 error(s), 0 warning(s)
+VAL_RU_EXIT=0
+info[media_item_without_reading] media/manifest.jsonl: 3757 model-output asset(s) belong to items that declare no reading, so their audio can only be the written form and cannot be checked against a declared reading: ru.contrast.palatalization.brat-0, ru.contrast.palatalization.brat-1, ru.contrast.palatalization.luk-0, ru.contrast.palatalization.luk-1, ru.contrast.voicing.bp-0, ru.contrast.voicing.bp-1, ru.contrast.voicing.dt-0, ru.contrast.voicing.dt-1 (first 8 shown); authoring readings is human linguistic work and stays a review-pending record (K-65)
+info[unused_source] sources.jsonl/2: source "ru-batch-70ec683-20f994d" is not referenced by any content record
+lint: 0 error(s), 0 warning(s)
+LINT_RU_EXIT=0
+### pnpm -r typecheck (tsc --noEmit per package)
+packages/learner-ui typecheck$ tsc --noEmit
+packages/schemas typecheck$ tsc --noEmit
+packages/shared typecheck$ tsc --noEmit
+packages/scenario-ui typecheck$ tsc --noEmit
+packages/schemas typecheck: Done
+packages/scenario-ui typecheck: Done
+packages/learner-ui typecheck: Done
+packages/ui typecheck$ tsc --noEmit
+packages/shared typecheck: Done
+packages/ui typecheck: Done
+apps/desktop typecheck$ tsc --noEmit
+apps/desktop typecheck: Done
+TSC_EXIT=0
+### pnpm -r test (vitest run per package)
+Scope: 6 of 7 workspace projects
+packages/schemas test$ vitest run --passWithNoTests
+packages/scenario-ui test$ vitest run --passWithNoTests
+packages/learner-ui test$ vitest run --passWithNoTests
+packages/shared test$ vitest run --passWithNoTests
+packages/learner-ui test: 
+packages/learner-ui test: [1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/hunter/game-dev/LTS/packages/learner-ui[39m
+packages/learner-ui test: 
+packages/scenario-ui test: 
+packages/schemas test: 
+packages/schemas test: [1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/hunter/game-dev/LTS/packages/schemas[39m
+packages/schemas test: 
+packages/shared test: 
+packages/shared test: [1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/hunter/game-dev/LTS/packages/shared[39m
+packages/shared test: 
+packages/scenario-ui test: [1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/hunter/game-dev/LTS/packages/scenario-ui[39m
+packages/scenario-ui test: 
+packages/learner-ui test: No test files found, exiting with code 0
+packages/learner-ui test: 
+packages/schemas test: No test files found, exiting with code 0
+packages/schemas test: 
+packages/learner-ui test: [2minclude: [22m[33m**/*.{test,spec}.?(c|m)[jt]s?(x)[39m
+packages/learner-ui test: [2mexclude:  [22m[33m**/node_modules/**[2m, [22m**/.git/**[39m
+packages/learner-ui test: 
+packages/schemas test: [2minclude: [22m[33m**/*.{test,spec}.?(c|m)[jt]s?(x)[39m
+packages/schemas test: [2mexclude:  [22m[33m**/node_modules/**[2m, [22m**/.git/**[39m
+packages/schemas test: 
+packages/scenario-ui test: No test files found, exiting with code 0
+packages/scenario-ui test: 
+packages/scenario-ui test: [2minclude: [22m[33m**/*.{test,spec}.?(c|m)[jt]s?(x)[39m
+packages/scenario-ui test: [2mexclude:  [22m[33m**/node_modules/**[2m, [22m**/.git/**[39m
+packages/scenario-ui test: 
+packages/learner-ui test: Done
+packages/schemas test: Done
+packages/ui test$ vitest run --passWithNoTests
+packages/scenario-ui test: Done
+packages/shared test:  [32m✓[39m src/index.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+packages/shared test: 
+packages/shared test: [2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+packages/shared test: [2m      Tests [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+packages/shared test: [2m   Start at [22m 18:09:21
+packages/shared test: [2m   Duration [22m 106ms[2m (transform 53%, import 27%, tests 10%, worker 10%)[22m
+packages/shared test: 
+packages/shared test: Done
+packages/ui test: 
+packages/ui test: [1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/hunter/game-dev/LTS/packages/ui[39m
+packages/ui test: 
+packages/ui test:  [32m✓[39m src/pack-direction.test.tsx [2m([22m[2m7 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+packages/ui test:  [32m✓[39m src/AppShell.test.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 2[2mms[22m[39m
+packages/ui test: 
+packages/ui test: [2m Test Files [22m [1m[32m2 passed[39m[22m[90m (2)[39m
+packages/ui test: [2m      Tests [22m [1m[32m10 passed[39m[22m[90m (10)[39m
+packages/ui test: [2m   Start at [22m 18:09:22
+packages/ui test: [2m   Duration [22m 131ms[2m (import 53%, transform 35%, tests 8%, worker 4%)[22m
+packages/ui test: 
+packages/ui test: Done
+apps/desktop test$ vitest run --passWithNoTests
+apps/desktop test: 
+apps/desktop test: [1m[30m[46m RUN [49m[39m[22m [36mv5.0.3 [39m[90m/home/hunter/game-dev/LTS/apps/desktop[39m
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/ipc.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 56[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/reading.test.tsx [2m([22m[2m21 tests[22m[2m)[22m[32m 77[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/onboarding.test.tsx [2m([22m[2m24 tests[22m[2m)[22m[32m 104[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/home.test.tsx [2m([22m[2m30 tests[22m[2m)[22m[32m 84[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/practice.test.tsx [2m([22m[2m17 tests[22m[2m)[22m[32m 35[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/language.test.tsx [2m([22m[2m18 tests[22m[2m)[22m[32m 71[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/settings.test.tsx [2m([22m[2m20 tests[22m[2m)[22m[32m 118[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/memory-stats.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 148[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/kanji-decomposition.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/scenario.test.tsx [2m([22m[2m23 tests[22m[2m)[22m[32m 28[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/session-chrome.test.tsx [2m([22m[2m21 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/error-review.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/dictation.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/rtl-direction.test.tsx [2m([22m[2m10 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/pronunciation.test.tsx [2m([22m[2m12 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/word-timing.test.tsx [2m([22m[2m11 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/hub.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/kana-ime.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 23[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/mobile-audit.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/ime.test.ts [2m([22m[2m27 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/writing.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/ruby.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 12[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/a11y.test.tsx [2m([22m[2m57 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/button-affordance.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/progress.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/stress.test.tsx [2m([22m[2m4 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/capture.test.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/ru-placement.journey.tsx[2m > [22m[2mplacement asks only runnable questions and reports the rest (U05)[2m > [22m[2mruns the first Russian question and names every abstention
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/ru-modality.journey.tsx[2m > [22m[2mRU modalities are served by their named runners (RU-MODALITY-PRACTICE-001)[2m > [22m[2mruns encounter, listening, writing, and guided-speaking honestly
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/kanji-mnemonic-elements.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2mopens a Russian task, switches to Japanese mid-task, switches back
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2mopens a Russian task, switches to Japanese mid-task, switches back
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/upperband-sequence.journey.tsx[2m > [22m[2mone RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001)[2m > [22m[2mruns the a2 past-events sequence with the speaking stage guided-only
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/upperband-sequence.journey.tsx[2m > [22m[2mone RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001)[2m > [22m[2mruns the a2 past-events sequence with the speaking stage guided-only
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/ru-modality.journey.tsx[2m > [22m[2mRU modalities are served by their named runners (RU-MODALITY-PRACTICE-001)[2m > [22m[2mruns encounter, listening, writing, and guided-speaking honestly
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/ru-placement.journey.tsx[2m > [22m[2mplacement asks only runnable questions and reports the rest (U05)[2m > [22m[2mruns the first Russian question and names every abstention
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/a11y-focus.journey.tsx[2m > [22m[2mfocus lands on the heading of every new screen (F-01)[2m > [22m[2mannounces lesson arrival and activity cards with focus on their heading
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/lesson.test.tsx [2m([22m[2m12 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/keyboard.journey.tsx[2m > [22m[2mkeyboard-only route walk[2m > [22m[2mwalks from the resume picker through a no-pack Today into Settings, focus in hand
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/dup-install.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 109[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/a11y-focus.journey.tsx[2m > [22m[2mfocus lands on the heading of every new screen (F-01)[2m > [22m[2mannounces lesson arrival and activity cards with focus on their heading
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mromaji typed on the surface field lands as kana
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/keyboard.journey.tsx[2m > [22m[2mkeyboard-only route walk[2m > [22m[2mwalks from the resume picker through a no-pack Today into Settings, focus in hand
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/upperband-sequence.journey.tsx[2m > [22m[2mone RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001)[2m > [22m[2mruns the a2 past-events sequence with the speaking stage guided-only
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/upperband-sequence.journey.tsx[2m > [22m[2mone RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001)[2m > [22m[2mruns the a2 past-events sequence with the speaking stage guided-only
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/ru-modality.journey.tsx[2m > [22m[2mRU modalities are served by their named runners (RU-MODALITY-PRACTICE-001)[2m > [22m[2mruns encounter, listening, writing, and guided-speaking honestly
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/ru-modality.journey.tsx[2m > [22m[2mRU modalities are served by their named runners (RU-MODALITY-PRACTICE-001)[2m > [22m[2mruns encounter, listening, writing, and guided-speaking honestly
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/settings-prime.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 174[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/progress.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 156[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/keyboard.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 171[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/ru-placement.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 176[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/kana-card-gating.journey.tsx[2m > [22m[2mthe in-app keyboard card follows the active pack's declared scripts[2m > [22m[2ma profile learning the Cyrillic pack never sees the control
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/perf-probe.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/kana-card-gating.journey.tsx[2m > [22m[2mthe in-app keyboard card follows the active pack's declared scripts[2m > [22m[2ma profile learning the Cyrillic pack never sees the control
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/a11y-focus.journey.tsx[2m > [22m[2mfocus lands on the heading of every new screen (F-01)[2m > [22m[2mannounces lesson arrival and activity cards with focus on their heading
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/a11y-focus.journey.tsx[2m > [22m[2mfocus lands on the heading of every new screen (F-01)[2m > [22m[2mannounces lesson arrival and activity cards with focus on their heading
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/ru-modality.journey.tsx[2m > [22m[2mRU modalities are served by their named runners (RU-MODALITY-PRACTICE-001)[2m > [22m[2mruns encounter, listening, writing, and guided-speaking honestly
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/ru-modality.journey.tsx[2m > [22m[2mRU modalities are served by their named runners (RU-MODALITY-PRACTICE-001)[2m > [22m[2mruns encounter, listening, writing, and guided-speaking honestly
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/upperband-sequence.journey.tsx[2m > [22m[2mone RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001)[2m > [22m[2mruns the a2 past-events sequence with the speaking stage guided-only
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/speech-readiness.test.tsx [2m([22m[2m5 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/playback.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 6[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/upperband-sequence.journey.tsx[2m > [22m[2mone RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001)[2m > [22m[2mruns the a2 past-events sequence with the speaking stage guided-only
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/content-confirm.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 242[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/no-speech-model.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 242[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/pack-install.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 249[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/first-run.journey.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 250[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/kana-card-gating.journey.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 259[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/kanji-decomp.journey.tsx [2m([22m[2m3 tests[22m[2m)[22m[32m 260[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/export-restore.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 261[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[43m node [49m[39m src/App.test.tsx [2m([22m[2m6 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2mopens a Russian task, switches to Japanese mid-task, switches back
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2mopens a Russian task, switches to Japanese mid-task, switches back
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/kana-kbd.journey.tsx[2m > [22m[2min-app kana keyboard on the My Words form[2m > [22m[2mEscape cancels the half-typed syllable; Enter completes the word, grading untouched
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/ime-mode-bubble.journey.tsx[2m > [22m[2minput-mode bubble and shortcut follow the active pack's declared scripts[2m > [22m[2mthe documented shortcut flips the keyboard from a non-Settings route, and typing follows
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/ime-mode-bubble.journey.tsx[2m > [22m[2minput-mode bubble and shortcut follow the active pack's declared scripts[2m > [22m[2mthe documented shortcut flips the keyboard from a non-Settings route, and typing follows
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/ime-mode-bubble.journey.tsx[2m > [22m[2minput-mode bubble and shortcut follow the active pack's declared scripts[2m > [22m[2mthe documented shortcut flips the keyboard from a non-Settings route, and typing follows
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/ime-mode-bubble.journey.tsx[2m > [22m[2minput-mode bubble and shortcut follow the active pack's declared scripts[2m > [22m[2mthe documented shortcut flips the keyboard from a non-Settings route, and typing follows
+apps/desktop test: [22m[39mAn update to App inside a test was not wrapped in act(...).
+apps/desktop test: 
+apps/desktop test: When testing, code that causes React state updates should be wrapped into act(...):
+apps/desktop test: 
+apps/desktop test: act(() => {
+apps/desktop test:   /* fire events that update state */
+apps/desktop test: });
+apps/desktop test: /* assert on the output */
+apps/desktop test: 
+apps/desktop test: This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/ru-modality.journey.tsx[2m > [22m[2mRU modalities are served by their named runners (RU-MODALITY-PRACTICE-001)[2m > [22m[2mruns encounter, listening, writing, and guided-speaking honestly
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/a11y-focus.journey.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 280[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/upperband-sequence.journey.tsx[2m > [22m[2mone RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNEYS-001)[2m > [22m[2mruns the a2 past-events sequence with the speaking stage guided-only
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/ru-modality.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 280[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/upperband-sequence.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[32m 293[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/kana-kbd.journey.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 328[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2ma running session does not survive the language switch (sweep finding 15)
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2ma running session does not survive the language switch (sweep finding 15)
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/session.journey.tsx [2m([22m[2m2 tests[22m[2m)[22m[33m 329[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/ime-mode-bubble.journey.tsx[2m > [22m[2minput-mode bubble and shortcut follow the active pack's declared scripts[2m > [22m[2ma pack declaring no in-app keyboard has no bubble, and the shortcut no-ops
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/ime-mode-bubble.journey.tsx[2m > [22m[2minput-mode bubble and shortcut follow the active pack's declared scripts[2m > [22m[2ma pack declaring no in-app keyboard has no bubble, and the shortcut no-ops
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/ime-mode-bubble.journey.tsx [2m([22m[2m4 tests[22m[2m)[22m[33m 354[2mms[22m[39m
+apps/desktop test: [90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2man in-flight budget change cannot strand the new pack on the old plan (sweep finding 22)
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test: [90mstderr[2m | src/journeys/language-switch.journey.tsx[2m > [22m[2ma language change refreshes the learner context (U02)[2m > [22m[2man in-flight budget change cannot strand the new pack on the old plan (sweep finding 22)
+apps/desktop test: [22m[39mEncountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+apps/desktop test: 
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/error-offer-review.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 431[2mms[22m[39m
+apps/desktop test:    [32m✓[39m an error offer becomes a review card only on accept (D3) [2m(1)[22m
+apps/desktop test:      [33m[2m✓[22m[39m miss → offer → accept → queue drill → self-grade, with no silent accept[33m 430[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/restart-resume.journey.tsx [2m([22m[2m5 tests[22m[2m)[22m[33m 431[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/idle-stability.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 442[2mms[22m[39m
+apps/desktop test:    [32m✓[39m idle time and interaction issue no repeated native reads (U01) [2m(1)[22m
+apps/desktop test:      [33m[2m✓[22m[39m settles after bootstrap instead of looping the bridge[33m 440[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/new-word-review.journey.tsx [2m([22m[2m1 test[22m[2m)[22m[33m 458[2mms[22m[39m
+apps/desktop test:    [32m✓[39m a saved word reaches its first review (U03) [2m(1)[22m
+apps/desktop test:      [33m[2m✓[22m[39m save → Review now → reveal → self-grade → later due → due review[33m 457[2mms[22m[39m
+apps/desktop test:  [32m✓[39m [30m[45m dom [49m[39m src/journeys/language-switch.journey.tsx [2m([22m[2m3 tests[22m[2m)[22m[33m 558[2mms[22m[39m
+apps/desktop test: 
+apps/desktop test: [2m Test Files [22m [1m[32m56 passed[39m[22m[90m (56)[39m
+apps/desktop test: [2m      Tests [22m [1m[32m456 passed[39m[22m[90m (456)[39m
+apps/desktop test: [2m   Start at [22m 18:09:22
+apps/desktop test: [2m   Duration [22m 1.73s[2m (transform 37%, environment 27%, tests 22%, import 13%, worker 2%)[22m
+apps/desktop test: 
+apps/desktop test: [2m  Transform [22m [30m[43m node [49m[39m [33mtransforming modules took 3.41s[39m[2m · 56% of tracked time, re-done on every run[22m
+apps/desktop test: [2m            [22m [2mpersist transforms across runs with [22m[33mfsModuleCache: true[39m
+apps/desktop test: [2m            [22m [2mlearn more: https://vitest.dev/guide/improving-performance#caching-between-reruns[22m
+apps/desktop test: 
+apps/desktop test: Done
+VITEST_EXIT=0
+== battery done 2026-11-21T18:09:24-07:00 ==
