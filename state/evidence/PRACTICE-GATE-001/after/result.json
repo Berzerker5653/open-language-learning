@@ -1,0 +1,69 @@
+{
+  "tag": "after",
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "dictation_target REFUSES a zero-encounter profile",
+      "pass": true,
+      "measured": {
+        "status": 422,
+        "error": "no sentence practice is unlocked yet — finish more lessons to unlock it"
+      }
+    },
+    {
+      "name": "practice_queue is non-empty and letter-level ONLY",
+      "pass": true,
+      "measured": {
+        "count": 34,
+        "kinds": [
+          "orthography"
+        ]
+      }
+    },
+    {
+      "name": "speaking screen shows NO pack sentence for a zero-encounter profile",
+      "pass": true,
+      "measured": {
+        "sentence": null
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-8aca4d3e-2c89-476a-8eab-8d21c4448c7c",
+  "queueSample": [
+    {
+      "content_id": "ru.orth.cyrillic.a",
+      "kind": "orthography"
+    },
+    {
+      "content_id": "ru.orth.cyrillic.b",
+      "kind": "orthography"
+    },
+    {
+      "content_id": "ru.orth.cyrillic.ch",
+      "kind": "orthography"
+    },
+    {
+      "content_id": "ru.orth.cyrillic.d",
+      "kind": "orthography"
+    },
+    {
+      "content_id": "ru.orth.cyrillic.e",
+      "kind": "orthography"
+    },
+    {
+      "content_id": "ru.orth.cyrillic.eh",
+      "kind": "orthography"
+    },
+    {
+      "content_id": "ru.orth.cyrillic.f",
+      "kind": "orthography"
+    },
+    {
+      "content_id": "ru.orth.cyrillic.g",
+      "kind": "orthography"
+    }
+  ],
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17777 (trusted network only)\n"
+}

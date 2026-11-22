@@ -1,0 +1,31 @@
+{
+  "tag": "before",
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "dictation_target serves a sentence to a zero-encounter profile (the complaint)",
+      "pass": true,
+      "measured": {
+        "served": "Я учу́ ру́сский язы́к."
+      }
+    },
+    {
+      "name": "practice hub offers Speaking",
+      "pass": true,
+      "measured": {
+        "speakingButtons": 1
+      }
+    },
+    {
+      "name": "speaking screen shows a full sentence (the complaint, reproduced)",
+      "pass": true,
+      "measured": {
+        "sentence": "Я учу́ ру́сский язы́к.I am learning Russian.New sentence"
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-f4c25f51-5ebe-446e-86bf-a6e862a3b4d7",
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17752 (trusted network only)\n"
+}

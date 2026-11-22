@@ -45,17 +45,38 @@ DEFERRED (named, non-blocking):
 - 'Preview what's ahead' name-only affordance — optional per card.
 - Frontend rendering of the practice_queue IPC itself (IPC live via
   SERVE_COMMAND_NAMES; tab's visible change comes from the gated streams).
-- Mobile before/after screenshots (scripts/practice-gate-capture.mjs): the
-  harness aborts in this headless session (node core-dump 134, no result.
-  json; SERVE_DIST must be dist/index.html, NOT the dist dir — EISDIR).
-  RESUME RECIPE:
-    1) cargo build -q -p lts-desktop --features serve --bin lts-serve   # after
-       cp target/debug/lts-serve <scratch>/lts-serve-after
-    2) git worktree add --detach <wt> 867654e^ ; in <wt>: ln -s <repo>/apps/desktop/dist
-       apps/desktop/dist, CARGO_TARGET_DIR=<scratch>/target cargo build the same way  # before
-    3) cargo run -q -p lts-langpack-cli -- build languages/ru-RU --out <scratch>/ru.lpk
-    4) SERVE_BIN=<bin> SERVE_DIST=<repo>/apps/desktop/dist/index.html PACK_LPK=<ru.lpk> \
-       node scripts/practice-gate-capture.mjs <before|after>
-       (runs fine where headless chrome works, e.g. with WAYLAND_DISPLAY set —
-       MOBILE-UX-001/SETTINGS-SCOPE harnesses ran before; the engine-level
-       machine gates in result.json are the load-bearing part)
+
+MOBILE BEFORE/AFTER CAPTURES — SHIPPED (controller run 146, 2026-11-22,
+same board card, after run 145 died at the cap):
+- before/: 3/3 PASS — dictation_target serves «Я учу́ ру́сский язы́к.» to a
+  zero-encounter profile (complaint reproduced), hub offers Speaking, the
+  sentence is visibly rendered (speaking-before.png).
+- after/: 3/3 PASS — dictation_target REFUSES (422, "no sentence practice
+  is unlocked yet — finish more lessons to unlock it"), practice_queue is
+  34 entries ALL kind=orthography (the 34 merged letter entities), the
+  speaking screen shows no sentence (speaking-after.png).
+- practice-hub-before/after.png are byte-identical by design: the hub is
+  unchanged by this lane; the visual delta is entirely on the speaking
+  screen. Vision-checked both speaking shots.
+- Harness fixes that made it work (scripts/practice-gate-capture.mjs):
+  1) node V8 OOM: readFileSync(300MB lpk).toString('base64') +
+     JSON.stringify ~ 1.5GB of V8 strings (run 145's core-dump 134).
+  2) base64-over-HTTP import is a dead end ANYWAY: axum's DefaultBodyLimit
+     (2MB) 413s any real pack — production never imports via HTTP
+     (catalog installs download server-side). Fix: seed via serve's OWN
+     install_pack command, which builds+installs the archive in-process
+     from the dev tree baked into that binary at compile time — so
+     lts-serve-before installs the pre-lane tree (c431333 worktree with
+     hardlinked gitignored media) and lts-serve-after the committed tree.
+  3) SERVE_DIST is the dist DIRECTORY (serve joins index.html itself);
+     run 145's 'pass index.html' note was the script's own readFileSync
+     EISDIR trap.
+  4) chooser card buttons read 'Continue' — profile name lives in the card
+     wrapper (MOBILE-UX-001 lesson), match the container.
+  5) CDP: Page.enable after attach, and Page.captureScreenshot must carry
+     the sessionId (browser session has no Page domain).
+- NEW follow-up surfaced by the after shot (NOT fixed here): the frontend
+  Speaking screen shows a silently-empty input when the engine refuses;
+  the honest refusal TEXT exists engine-side but no empty-state copy
+  renders in the UI. Frontend UX follow-up, same family as the deferred
+  practice_queue rendering.
