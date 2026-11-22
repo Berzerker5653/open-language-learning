@@ -2893,6 +2893,25 @@
       "summary": "Repro at HEAD showed the title already wrapping but orphaning a lone glyph on line 2 (no clipping reproduced; the teal 'card' in the png is the heading's :focus-visible outline). Shipped .lesson h1 { text-wrap: balance; overflow-wrap: break-word } plus a new LESSON-TITLE-FIT-001 fit gate inside scripts/encounter-capture.mjs measuring the h1's own line rects (scrollW<=clientW, widestLineW<=clientW+1, docScrollW<=viewportW). Harness 8/8 PASS at 390px: title wraps 'Printed Cyrillic:' / 'А а, О о, М м, Т т', widest line 186.8px in a 358px column; vision verdict clean, no glyph touches any edge.",
       "notes": "Balanced wrap fix + regression-proof machine gate; the original filed clipping did not reproduce at HEAD — recorded honestly in gates.log.",
       "updated": "2026-11-22"
+    },
+    "PATH-VISUAL-001": {
+      "task_id": "PATH-VISUAL-001",
+      "title": "Path renders as a winding node journey (rings, banners, locks) with an in-progress state and proven-done-only counters",
+      "status": "done",
+      "attempts": 1,
+      "dependencies": [
+        "PATH-VIEW-001"
+      ],
+      "evidence": [
+        "state/notes/PATH-VISUAL-001.md",
+        "state/evidence/PATH-VISUAL-001/gates.log",
+        "state/evidence/PATH-VISUAL-001/result.json",
+        "state/evidence/PATH-VISUAL-001/path-journey-pin-region.png",
+        "state/evidence/PATH-VISUAL-001/path-journey-full.png"
+      ],
+      "summary": "Engine + UI shipped (attempt-1 WIP finished by run 177): unit_path_at adds in_progress + refs_done/refs_total (done stays the evidence floor: every scheduled ref at Introduced; encounter rows are exposure, never mastery); PathView renders winding ring nodes (deterministic sine sway, dashed connectors angled per edge), state rings (locked+drawn lock glyph, ready, in-progress arc at honest fraction, done check, review-due glow), section banners name+CEFR, counter counts proven-done only. Capture scripts/path-visual-capture.mjs 13/13 green at 390px: fully-drilled letter unit DONE, partial unit IN PROGRESS 8/36, section 2/20 proven, winding x-spread 58px; before=complaint-09b. Red test letter_unit_goes_in_progress_then_done_as_its_refs_are_proven green. placement_coverage_names_why_a_rubric_has_no_question was ALREADY RED at HEAD and 1451aef (mainline rot, not this lane).",
+      "notes": "Vision check of after-shots found cosmetic defects to fix in a follow-up: PATH_SWAY_AMP_PX=34 pulls rings over the start of the label text at 390px, and three units share the current pool so multiple 'You are here' captions render and collide. Not path-state correctness. Gate log has the HEAD-red note. lib.rs/styles.css/home.tsx remain collision hotspots.",
+      "updated": "2026-11-22"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
