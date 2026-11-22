@@ -1,0 +1,20 @@
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/.hermes/cache/scratch/lts-ss1-red/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.81s
+     Running unittests src/lib.rs (/home/hunter/game-dev/LTS/target/debug/deps/lts_desktop-7647ca427c780ccc)
+
+running 1 test
+test tests::beginner_plan_never_serves_a_locked_units_content has been running for over 60 seconds
+
+thread 'tests::beginner_plan_never_serves_a_locked_units_content' (1569923) panicked at apps/desktop/src-tauri/src/lib.rs:19255:17:
+session 0: plan served B2-banded content ru.lex.argue.otricanie (DueReview)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test tests::beginner_plan_never_serves_a_locked_units_content ... FAILED
+
+failures:
+
+failures:
+    tests::beginner_plan_never_serves_a_locked_units_content
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 215 filtered out; finished in 77.67s
+
+error: test failed, to rerun pass `-p lts-desktop --lib`

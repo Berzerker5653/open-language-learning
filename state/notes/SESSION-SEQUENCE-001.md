@@ -113,3 +113,48 @@ activities from above-on-ramp units; the two poisoned
 deleted (verify rows still on disk after the read). Clear this block
 when the lane lands.
 
+
+## RUN 120 outcome + RUN 121 RESUME RECIPE (2026-11-21 20:25)
+
+SHIPPED (commit 2c6f328, gates in state/evidence/SESSION-SEQUENCE-001/):
+goal-graph band locks on NEW seeding + due reviews; RED-then-green test
+passes; full lts-desktop lib suite 214/0 (HEAD baseline 213+1 red);
+fmt/clippy green. Dirty main copy also carries the hunks (ORTHO lane
+keeps them; duplicate test removed).
+
+NOT SHIPPED — acceptance FAILED for a newly-traced reason: the live
+owner read (fixed lts-serve on :17641, profileId arg, pack 0.4.6) still
+served 3 argue rows:
+- ru.lex.argue.otricanie / utverzhdenie: reason `weak-skill` — the plan
+  has a THIRD content route, `weak_skills` in build_plan (derived rows
+  with confidence < WEAK_CONFIDENCE become WeakSkillItems). My fix gated
+  `progression` (NEW seeding) and `due_reviews`, never weak_skills.
+- ru.lex.argue.kontrargument: reason `progression` — check which units
+  reference it in the INSTALLED 0.4.6 pack; if any referencing unit has
+  an undeclared goal_id (unit_goal_locked returns false for undeclared
+  goals) it survives the exclusive rule. See grep output in the board
+  comment; likely 0.4.6 (published from 96367af, pre-ORTHO) has a unit
+  whose goal is not in goals.yaml, OR a shared ref in an unlocked unit.
+
+NEXT (TAKEOVER card):
+1. Gate weak_skills in build_plan exactly like due_reviews:
+   `weak_skills.retain(|w| !band_locked.contains(&w.content_id));`
+   (same band_locked set; evidence rows on disk untouched — the rows
+   return when the unit unlocks).
+2. Investigate kontrargument: for the 0.4.6 installed pack list every
+   unit that references it and its goal_id; if the goal is undeclared,
+   decide: fail-CLOSED (a unit whose goal is declared-missing and whose
+   goal_id is non-empty is locked when goals map is non-empty) — that
+   matches "the goal graph alone gates bands"; keep the empty-goal_id
+   fixture escape hatch. Rewrite the test to assert weak-skill rows
+   withheld too (extend the poison assertions: reason must never be
+   weak-skill for locked-band content).
+3. Re-run lane gates (worktrees + media symlink recipe above), then the
+   :17641-style acceptance (POST /api/home_state body uses `profileId`
+   camelCase!), require zero above-on-ramp activities.
+4. Ledger graft (HEAD task-state has NO entry; my entry text is in the
+   dirty task-state.json, flip to done) + evidence dir + notes; run
+   tools/validate_handoff.py --require-explicit-ledger-records in the
+   fix worktree (main tree carries ORTHO WIP that pollutes validation).
+5. Close: unblock+complete t_fb35220d (it is still `running`-claimed by
+   the cap-death; takeover closes the parent per the standard recipe).
