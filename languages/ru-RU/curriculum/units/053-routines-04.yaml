@@ -43,6 +43,12 @@ activities:
   - ru.sent.a1.u051
   - ru.lex.everyday.eto
   - ru.lex.everyday.mama
+- id: ru.activity.a1.parity-routines-04
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.cp.p05
 generation_contract:
   allowed_vocab:
   - ru.lex.routines.utro
@@ -53,6 +59,7 @@ generation_contract:
   - ru.sent.a1.u051
   - ru.lex.everyday.eto
   - ru.lex.everyday.mama
+  - ru.sent.cp.p05
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

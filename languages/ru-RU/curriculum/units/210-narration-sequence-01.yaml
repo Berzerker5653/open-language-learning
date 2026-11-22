@@ -43,6 +43,19 @@ activities:
   - ru.sent.b1.u210
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.b1.story-kluch-ot-dachi
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.kluch-ot-dachi.u001
+  - ru.sent.b1.kluch-ot-dachi.u002
+  - ru.sent.b1.kluch-ot-dachi.u003
+  - ru.sent.b1.kluch-ot-dachi.u004
+  - ru.sent.b1.kluch-ot-dachi.u005
+  - ru.sent.b1.kluch-ot-dachi.u006
+  - ru.sent.b1.kluch-ot-dachi.u007
+  - ru.sent.b1.kluch-ot-dachi.u008
 generation_contract:
   allowed_vocab:
   - ru.lex.narration.sperva
@@ -53,6 +66,14 @@ generation_contract:
   - ru.sent.b1.u210
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.sent.b1.kluch-ot-dachi.u001
+  - ru.sent.b1.kluch-ot-dachi.u002
+  - ru.sent.b1.kluch-ot-dachi.u003
+  - ru.sent.b1.kluch-ot-dachi.u004
+  - ru.sent.b1.kluch-ot-dachi.u005
+  - ru.sent.b1.kluch-ot-dachi.u006
+  - ru.sent.b1.kluch-ot-dachi.u007
+  - ru.sent.b1.kluch-ot-dachi.u008
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

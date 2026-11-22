@@ -43,6 +43,19 @@ activities:
   - ru.sent.b1.u217
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.b1.story-noch-v-poezde
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.b1.noch-v-poezde.u001
+  - ru.sent.b1.noch-v-poezde.u002
+  - ru.sent.b1.noch-v-poezde.u003
+  - ru.sent.b1.noch-v-poezde.u004
+  - ru.sent.b1.noch-v-poezde.u005
+  - ru.sent.b1.noch-v-poezde.u006
+  - ru.sent.b1.noch-v-poezde.u007
+  - ru.sent.b1.noch-v-poezde.u008
 generation_contract:
   allowed_vocab:
   - ru.lex.narration.rasskazal
@@ -53,6 +66,14 @@ generation_contract:
   - ru.sent.b1.u217
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.sent.b1.noch-v-poezde.u001
+  - ru.sent.b1.noch-v-poezde.u002
+  - ru.sent.b1.noch-v-poezde.u003
+  - ru.sent.b1.noch-v-poezde.u004
+  - ru.sent.b1.noch-v-poezde.u005
+  - ru.sent.b1.noch-v-poezde.u006
+  - ru.sent.b1.noch-v-poezde.u007
+  - ru.sent.b1.noch-v-poezde.u008
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

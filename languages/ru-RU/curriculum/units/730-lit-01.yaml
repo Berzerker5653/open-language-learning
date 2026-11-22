@@ -43,6 +43,19 @@ activities:
   - ru.sent.b2.u730
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.b2.story-aukcion-odnoy-kartiny
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.aukcion-odnoy-kartiny.u001
+  - ru.sent.b2.aukcion-odnoy-kartiny.u002
+  - ru.sent.b2.aukcion-odnoy-kartiny.u003
+  - ru.sent.b2.aukcion-odnoy-kartiny.u004
+  - ru.sent.b2.aukcion-odnoy-kartiny.u005
+  - ru.sent.b2.aukcion-odnoy-kartiny.u006
+  - ru.sent.b2.aukcion-odnoy-kartiny.u007
+  - ru.sent.b2.aukcion-odnoy-kartiny.u008
 generation_contract:
   allowed_vocab:
   - ru.lex.cult.siuzhetnyy
@@ -53,6 +66,14 @@ generation_contract:
   - ru.sent.b2.u730
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.sent.b2.aukcion-odnoy-kartiny.u001
+  - ru.sent.b2.aukcion-odnoy-kartiny.u002
+  - ru.sent.b2.aukcion-odnoy-kartiny.u003
+  - ru.sent.b2.aukcion-odnoy-kartiny.u004
+  - ru.sent.b2.aukcion-odnoy-kartiny.u005
+  - ru.sent.b2.aukcion-odnoy-kartiny.u006
+  - ru.sent.b2.aukcion-odnoy-kartiny.u007
+  - ru.sent.b2.aukcion-odnoy-kartiny.u008
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

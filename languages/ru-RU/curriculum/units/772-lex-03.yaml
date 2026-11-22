@@ -43,6 +43,19 @@ activities:
   - ru.sent.b2.u772
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.b2.story-perevodchik-vse-pereputal
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.b2.perevodchik-vse-pereputal.u001
+  - ru.sent.b2.perevodchik-vse-pereputal.u002
+  - ru.sent.b2.perevodchik-vse-pereputal.u003
+  - ru.sent.b2.perevodchik-vse-pereputal.u004
+  - ru.sent.b2.perevodchik-vse-pereputal.u005
+  - ru.sent.b2.perevodchik-vse-pereputal.u006
+  - ru.sent.b2.perevodchik-vse-pereputal.u007
+  - ru.sent.b2.perevodchik-vse-pereputal.u008
 generation_contract:
   allowed_vocab:
   - ru.lex.style.omonimiya
@@ -53,6 +66,14 @@ generation_contract:
   - ru.sent.b2.u772
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.sent.b2.perevodchik-vse-pereputal.u001
+  - ru.sent.b2.perevodchik-vse-pereputal.u002
+  - ru.sent.b2.perevodchik-vse-pereputal.u003
+  - ru.sent.b2.perevodchik-vse-pereputal.u004
+  - ru.sent.b2.perevodchik-vse-pereputal.u005
+  - ru.sent.b2.perevodchik-vse-pereputal.u006
+  - ru.sent.b2.perevodchik-vse-pereputal.u007
+  - ru.sent.b2.perevodchik-vse-pereputal.u008
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

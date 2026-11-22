@@ -43,6 +43,18 @@ activities:
   - ru.sent.a2.u114
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.a2.story-telefon-v-taksi
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.telefon-v-taksi.u001
+  - ru.sent.a2.telefon-v-taksi.u002
+  - ru.sent.a2.telefon-v-taksi.u003
+  - ru.sent.a2.telefon-v-taksi.u004
+  - ru.sent.a2.telefon-v-taksi.u005
+  - ru.sent.a2.telefon-v-taksi.u006
+  - ru.sent.a2.telefon-v-taksi.u007
 generation_contract:
   allowed_vocab:
   - ru.lex.pastevents.kogda
@@ -53,6 +65,13 @@ generation_contract:
   - ru.sent.a2.u114
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.sent.a2.telefon-v-taksi.u001
+  - ru.sent.a2.telefon-v-taksi.u002
+  - ru.sent.a2.telefon-v-taksi.u003
+  - ru.sent.a2.telefon-v-taksi.u004
+  - ru.sent.a2.telefon-v-taksi.u005
+  - ru.sent.a2.telefon-v-taksi.u006
+  - ru.sent.a2.telefon-v-taksi.u007
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

@@ -43,6 +43,17 @@ activities:
   - ru.sent.a2.u119
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.a2.story-rybalka-zimoy
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.rybalka-zimoy.u001
+  - ru.sent.a2.rybalka-zimoy.u002
+  - ru.sent.a2.rybalka-zimoy.u003
+  - ru.sent.a2.rybalka-zimoy.u004
+  - ru.sent.a2.rybalka-zimoy.u005
+  - ru.sent.a2.rybalka-zimoy.u006
 generation_contract:
   allowed_vocab:
   - ru.lex.pastevents.poezdka
@@ -53,6 +64,12 @@ generation_contract:
   - ru.sent.a2.u119
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.sent.a2.rybalka-zimoy.u001
+  - ru.sent.a2.rybalka-zimoy.u002
+  - ru.sent.a2.rybalka-zimoy.u003
+  - ru.sent.a2.rybalka-zimoy.u004
+  - ru.sent.a2.rybalka-zimoy.u005
+  - ru.sent.a2.rybalka-zimoy.u006
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

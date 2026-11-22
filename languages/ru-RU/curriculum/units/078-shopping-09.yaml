@@ -43,6 +43,17 @@ activities:
   - ru.sent.a1.u078
   - ru.lex.everyday.eto
   - ru.lex.everyday.mama
+- id: ru.activity.a1.story-podarok-dlya-mamy
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.a1.podarok-dlya-mamy.u001
+  - ru.sent.a1.podarok-dlya-mamy.u002
+  - ru.sent.a1.podarok-dlya-mamy.u003
+  - ru.sent.a1.podarok-dlya-mamy.u004
+  - ru.sent.a1.podarok-dlya-mamy.u005
+  - ru.sent.a1.podarok-dlya-mamy.u006
 generation_contract:
   allowed_vocab:
   - ru.lex.shopping.staryy
@@ -53,6 +64,12 @@ generation_contract:
   - ru.sent.a1.u078
   - ru.lex.everyday.eto
   - ru.lex.everyday.mama
+  - ru.sent.a1.podarok-dlya-mamy.u001
+  - ru.sent.a1.podarok-dlya-mamy.u002
+  - ru.sent.a1.podarok-dlya-mamy.u003
+  - ru.sent.a1.podarok-dlya-mamy.u004
+  - ru.sent.a1.podarok-dlya-mamy.u005
+  - ru.sent.a1.podarok-dlya-mamy.u006
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

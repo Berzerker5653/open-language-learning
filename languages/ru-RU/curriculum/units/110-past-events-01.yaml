@@ -43,6 +43,18 @@ activities:
   - ru.sent.a2.u110
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.a2.story-avtobus-ne-prishol
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.a2.avtobus-ne-prishol.u001
+  - ru.sent.a2.avtobus-ne-prishol.u002
+  - ru.sent.a2.avtobus-ne-prishol.u003
+  - ru.sent.a2.avtobus-ne-prishol.u004
+  - ru.sent.a2.avtobus-ne-prishol.u005
+  - ru.sent.a2.avtobus-ne-prishol.u006
+  - ru.sent.a2.avtobus-ne-prishol.u007
 generation_contract:
   allowed_vocab:
   - ru.lex.pastevents.vchera
@@ -53,6 +65,13 @@ generation_contract:
   - ru.sent.a2.u110
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.sent.a2.avtobus-ne-prishol.u001
+  - ru.sent.a2.avtobus-ne-prishol.u002
+  - ru.sent.a2.avtobus-ne-prishol.u003
+  - ru.sent.a2.avtobus-ne-prishol.u004
+  - ru.sent.a2.avtobus-ne-prishol.u005
+  - ru.sent.a2.avtobus-ne-prishol.u006
+  - ru.sent.a2.avtobus-ne-prishol.u007
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula
