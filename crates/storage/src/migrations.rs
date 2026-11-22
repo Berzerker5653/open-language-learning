@@ -30,7 +30,7 @@
 use crate::error::Error;
 use rusqlite::{Connection, Transaction, TransactionBehavior};
 
-pub const SCHEMA_VERSION: i64 = 9;
+pub const SCHEMA_VERSION: i64 = 10;
 
 struct Migration {
     version: i64,
@@ -293,6 +293,32 @@ ALTER TABLE mined_items ADD COLUMN context_sentence_id TEXT;
 ALTER TABLE profiles ADD COLUMN hidden INTEGER NOT NULL DEFAULT 0;
 ",
     },
+    Migration {
+        version: 10,
+        sql: "
+-- ENCOUNTER-BEFORE-TEST-001 (owner phone dogfood 2026-11-22: a Т drill
+-- surfaced before the learner finished meeting Т). The engine has never
+-- recorded a COMPLETED encounter: the lesson cursor only infers a passed
+-- presentation from a later scored stage, so a test could outrun the
+-- encounter it was supposed to follow. This table is the missing record:
+-- append-only, idempotent per (profile, content, encounter activity), and
+-- deliberately NOT evidence_events — an encounter is exposure, never a
+-- scored observation, and it must never touch mastery or scheduler ratings
+-- (docs/03 §3 privacy and docs/18 honesty rules).
+CREATE TABLE IF NOT EXISTS encounter_events (
+  id TEXT PRIMARY KEY,
+  profile_id TEXT NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+  pack_id TEXT NOT NULL,
+  unit_id TEXT NOT NULL,
+  activity_id TEXT NOT NULL,
+  content_id TEXT NOT NULL,
+  occurred_at TEXT NOT NULL,
+  UNIQUE(profile_id, content_id, activity_id)
+);
+CREATE INDEX IF NOT EXISTS idx_encounter_events_profile
+  ON encounter_events(profile_id);
+",
+    },
 ];
 
 pub(crate) fn migrate(conn: &Connection) -> Result<(), Error> {
@@ -417,6 +443,7 @@ mod tests {
              DELETE FROM schema_migrations WHERE version = 7;
              DELETE FROM schema_migrations WHERE version = 8;
              DELETE FROM schema_migrations WHERE version = 9;
+             DELETE FROM schema_migrations WHERE version = 10;
              DROP TABLE IF EXISTS error_review_cards;
              DROP TABLE IF EXISTS error_ledger;
              DROP TABLE IF EXISTS content_confirmations;
@@ -535,6 +562,17 @@ mod tests {
                 // itself is the artifact of v9.
                 conn.query_row(
                     "SELECT COUNT(*) FROM pragma_table_info('profiles') WHERE name = 'hidden'",
+                    [],
+                    |r| r.get::<_, i64>(0),
+                )
+                .unwrap()
+                    == 1
+            }
+            10 => {
+                // ENCOUNTER-BEFORE-TEST-001: the encounter record table is
+                // the artifact of v10.
+                conn.query_row(
+                    "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = 'encounter_events'",
                     [],
                     |r| r.get::<_, i64>(0),
                 )

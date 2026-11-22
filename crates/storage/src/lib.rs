@@ -9,6 +9,7 @@
 //!   duplicate event ids are rejected, so retries cannot double-count.
 
 mod confirm;
+mod encounter;
 mod error;
 mod error_ledger;
 mod evidence;
@@ -22,6 +23,7 @@ mod profile;
 mod scheduler;
 
 pub use confirm::{ConfirmedBy, ContentConfirmation};
+pub use encounter::{EncounterEvent, NewEncounter};
 pub use error::Error;
 pub use error_ledger::{
     AddErrorCardOutcome, ErrorLedgerEntry, ErrorReviewCard, NewErrorLedger, NewErrorReviewCard,
