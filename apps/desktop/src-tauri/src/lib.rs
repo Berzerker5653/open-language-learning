@@ -2179,6 +2179,108 @@ fn goal_is_locked(
         .any(|p| p.strength == "hard" && !prereq_satisfied(p, goals, derived))
 }
 
+/// SESSION-SEQUENCE-001 (owner phone dogfood 2026-11-21): true when the
+/// unit's own goal still has an unsatisfied HARD prerequisite that names
+/// another goal in the map — the shape the reference packs use for their
+/// band ladders (B2 goals gated at `independent` on B1 goals, …).
+///
+/// Prerequisite edges that target CONTENT deliberately do not lock NEW
+/// seeding: those edges already gate the goal-path progression stream via
+/// `goal_is_locked`/`prereq_satisfied`, and NEW seeding is precisely the
+/// route that introduces that content — locking it out here would deadlock
+/// the pack against itself. Only goal→goal edges can order the ladder
+/// without circularity (the pack validator refuses prerequisite cycles),
+/// because an upstream goal's evidence arrives through its own units'
+/// content, which the same rule unlocks rung by rung. A unit with no goal,
+/// or whose goal is not declared in the map, is not locked by this rule —
+/// exactly today's behavior for such units.
+fn unit_goal_locked(
+    unit: &PackUnit,
+    goals: &[PackGoal],
+    derived: &[lts_learner_model::DerivedMastery],
+) -> bool {
+    if goals.is_empty() || unit.goal_id.is_empty() {
+        return false;
+    }
+    let Some(goal) = goals.iter().find(|g| g.id == unit.goal_id) else {
+        return false;
+    };
+    goal.prerequisites.iter().any(|p| {
+        p.strength == "hard"
+            && goals.iter().any(|g| g.id == p.target)
+            && !prereq_satisfied(p, goals, derived)
+    })
+}
+
+/// SESSION-SEQUENCE-001: the content ids the pack's goal graph locks out
+/// of the NEW-material pool. The exclusion is EXCLUSIVE, not union like
+/// the `requires_unit` phase gate: a content id is locked only when at
+/// least one unit references it AND every unit that references it is
+/// goal-locked. A word taught by any unlocked unit stays eligible (shared
+/// words like `ru.lex.everyday.eto` never disappear), and words no unit
+/// references keep their existing eligibility — this rule cannot hide
+/// content the goal graph has no view on.
+fn goal_locked_new_content(
+    units: &[PackUnit],
+    goals: &[PackGoal],
+    derived: &[lts_learner_model::DerivedMastery],
+) -> std::collections::HashSet<String> {
+    if goals.is_empty() {
+        return Default::default();
+    }
+    let mut unlocked_refs: std::collections::HashSet<&str> = std::collections::HashSet::new();
+    let mut locked_units: Vec<&PackUnit> = Vec::new();
+    for unit in units {
+        if unit_goal_locked(unit, goals, derived) {
+            locked_units.push(unit);
+        } else {
+            for act in &unit.activities {
+                for c in &act.content_refs {
+                    unlocked_refs.insert(c.as_str());
+                }
+            }
+        }
+    }
+    let mut locked = std::collections::HashSet::new();
+    for unit in locked_units {
+        for act in &unit.activities {
+            for c in &act.content_refs {
+                if !unlocked_refs.contains(c.as_str()) {
+                    locked.insert(c.clone());
+                }
+            }
+        }
+    }
+    locked
+}
+
+/// SESSION-SEQUENCE-001: the pack's goal map, cached per immutable version
+/// root exactly like `pack_units`/`LEXICON_CACHE` (a version directory
+/// never changes under a running app). Shard-safe: reads go through
+/// `pack_goal_files`, so a pack split across goal files is fully loaded.
+static PACK_GOALS_CACHE: std::sync::LazyLock<
+    std::sync::Mutex<std::collections::HashMap<PathBuf, std::sync::Arc<Vec<PackGoal>>>>,
+> = std::sync::LazyLock::new(|| std::sync::Mutex::new(Default::default()));
+
+fn pack_goals(root: &Path) -> std::sync::Arc<Vec<PackGoal>> {
+    let mut cache = PACK_GOALS_CACHE.lock().unwrap_or_else(|e| e.into_inner());
+    if let Some(hit) = cache.get(root) {
+        return std::sync::Arc::clone(hit);
+    }
+    let mut goals: Vec<PackGoal> = Vec::new();
+    for path in pack_goal_files(root) {
+        let Ok(text) = std::fs::read_to_string(&path) else {
+            continue;
+        };
+        if let Ok(doc) = serde_yaml::from_str::<PackGoals>(&text) {
+            goals.extend(doc.goals);
+        }
+    }
+    let goals = std::sync::Arc::new(goals);
+    cache.insert(root.to_path_buf(), std::sync::Arc::clone(&goals));
+    goals
+}
+
 /// Re-derive mastery for every (content, dimension) pair the evidence
 /// log mentions. Derivation is from the append-only log, so progress
 /// is reproducible and never trusts a stale snapshot (docs/03).
@@ -2595,7 +2697,12 @@ fn add_new_item_candidates(
             };
             let pack_root = data.join("packs").join(&pack_id).join(&version);
             let units = pack_units(&pack_root);
-            let locked = locked_new_content(&units, derived);
+            // SESSION-SEQUENCE-001: the goal graph's hard band edges gate
+            // every route into the NEW pool, not just `requires_unit`
+            // phase gates.
+            let goals = pack_goals(&pack_root);
+            let mut locked = locked_new_content(&units, derived);
+            locked.extend(goal_locked_new_content(&units, &goals, derived));
             // K-70 (ADR-0022): goal-path words face the learned-kana
             // filter exactly like lexicon-seeded ones.
             let learned_kana =
@@ -2635,8 +2742,14 @@ fn add_new_item_candidates(
             // K-70 (ADR-0022): this pack's phase gate and learned-kana set,
             // evaluated once per pack (`pack_units`/`lexicon_entries` are
             // cached per immutable version root).
-            let units = pack_units(&data.join("packs").join(&pack_id).join(&version));
-            let locked = locked_new_content(&units, derived);
+            let pack_root = data.join("packs").join(&pack_id).join(&version);
+            let units = pack_units(&pack_root);
+            // SESSION-SEQUENCE-001: goal-graph band locks ride every
+            // seeding stream below (lexicon, orthography, contrast,
+            // sentence, kanji), exclusive-style: shared words stay.
+            let goals = pack_goals(&pack_root);
+            let mut locked = locked_new_content(&units, derived);
+            locked.extend(goal_locked_new_content(&units, &goals, derived));
             let orth = orth_entries(data, &pack_id, &version)?;
             let learned_kana = learned_kana_set(&units, &orth, derived);
             for entry in lexicon_entries(data, &pack_id, &version)? {
@@ -2989,6 +3102,31 @@ fn build_plan(
             order_progression_by_goal_map(&mut progression, &ranks);
         }
     }
+
+    // SESSION-SEQUENCE-001: a plan built before the fix poisoned the
+    // learner's own scheduler — they ANSWERED the Claim words, so the rows
+    // are real due reviews and the scheduler faithfully resurfaces them to
+    // a learner three letter drills deep. Due pack-content rows whose
+    // content sits only in goal-locked units stay out of the plan; the
+    // rows are NOT deleted (same shape as the R07 language-switch
+    // scoping: they return when the learner's evidence unlocks the unit).
+    // Learner-mined (`saved`) rows are learner-owned, not pack content,
+    // and ADR-0022 phase gates still never hide already-introduced items.
+    let band_locked: std::collections::HashSet<String> = store
+        .selected_packs(profile_id)
+        .map_err(|e| e.to_string())?
+        .iter()
+        .flat_map(|(pack_id, _v)| {
+            lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+                .map(|version| {
+                    let root = data.join("packs").join(pack_id).join(&version);
+                    goal_locked_new_content(&pack_units(&root), &pack_goals(&root), &derived)
+                })
+                .into_iter()
+                .flatten()
+        })
+        .collect();
+    due_reviews.retain(|r| r.saved || !band_locked.contains(&r.content_id));
 
     let config = lts_scheduler::PlannerConfig {
         budget_minutes: minutes,
@@ -19151,6 +19289,129 @@ transfer_variants:
             &data.join("packs"),
         )
         .expect("the install records a current version")
+    }
+
+    /// SESSION-SEQUENCE-001 (owner phone dogfood 2026-11-21): a level-0
+    /// profile's fourth activity was the B2 unit `410-argue-01` ("Claim" —
+    /// утверждение/отрицание/критика/обоснование/рассуждение). Root cause:
+    /// the goal graph's hard prerequisite edges gate the goal-path
+    /// progression stream (`progression_items`) and unit phase gates cover
+    /// only the units that declare `requires_unit`, but the reference packs
+    /// gate their bands through the GOAL graph, and the lexicon/sentence/
+    /// contrast seeding streams consulted neither. A unit whose own goal is
+    /// locked by unsatisfied hard goal-prerequisites must never contribute
+    /// NEW material; and the scheduler rows that poisoning already created
+    /// must not keep serving that content to a learner whose evidence says
+    /// they are still on the on-ramp.
+    #[test]
+    fn beginner_plan_never_serves_a_locked_units_content() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let pack = "org.openlanguage.ru-ru.reference";
+        install_reference_pack_fast(data, pack).unwrap();
+        let p = create_local_profile(data, "Dogfood").unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let version = lts_langpack::archive::current_version(pack, &data.join("packs")).unwrap();
+        store.set_active_pack(&p.id, pack, &version).unwrap();
+        let root = data.join("packs").join(pack).join(&version);
+        let units = pack_units(&root);
+        let goals: Vec<PackGoal> = serde_yaml::from_str::<PackGoals>(
+            &std::fs::read_to_string(root.join("curriculum/goals.yaml")).unwrap(),
+        )
+        .unwrap()
+        .goals;
+
+        // The bug's residue: the Claim words were already introduced, so
+        // their FSRS rows sit in the scheduler and resurface as due reviews
+        // for a learner whose evidence is three letter drills deep.
+        let poison = ["ru.lex.argue.utverzhdenie", "ru.lex.argue.otricanie"];
+        for id in poison {
+            store
+                .save_scheduler_state(
+                    &p.id,
+                    &lts_storage::SchedulerRecord {
+                        item_id: format!("{id}#recall-meaning"),
+                        scheduler: lts_scheduler::SPIKE_VERSION.into(),
+                        due_at: rfc3339_utc(1_795_300_000 - 3_600),
+                        params_json: serde_json::to_string(&lts_scheduler::ItemState {
+                            stability_days: 3.0,
+                            difficulty: 6.0,
+                            reps: 1,
+                            lapses: 0,
+                            last_review: 1_795_300_000 - 86_400,
+                        })
+                        .unwrap(),
+                    },
+                )
+                .unwrap();
+        }
+
+        // Independent: two clean successes from two different prompt
+        // families — the policy's own bar (see the cyrillic-greetings test).
+        let teach =
+            |target: &str, modality: lts_domain::ActivityModality, stamp: &str, seq: usize| {
+                for (i, family) in ["a", "b"].iter().enumerate() {
+                    let mut ev = attempt(
+                        target,
+                        modality,
+                        &format!("ru.expr.sequence-{stamp}-{seq}-{family}"),
+                        0,
+                        &rfc3339_utc(1_795_300_000 + (seq as u64 + i as u64) * 10),
+                        &format!("ev-seq-{stamp}-{seq}-{i}"),
+                        &p.id,
+                    );
+                    ev.pack_id = pack.into();
+                    store.append_evidence(&ev).unwrap();
+                }
+            };
+
+        // Content ids of units whose goal sits in the B2 band — the exact
+        // class the beginner was served.
+        let goal_band = |goal_id: &str| -> Option<String> {
+            goals
+                .iter()
+                .find(|g| g.id == goal_id)
+                .and_then(|g| g.band.clone())
+        };
+        let b2_content: std::collections::HashSet<String> = units
+            .iter()
+            .filter(|u| goal_band(&u.goal_id).as_deref() == Some("B2"))
+            .flat_map(|u| u.activities.iter())
+            .flat_map(|a| a.content_refs.clone())
+            .collect();
+        assert!(
+            b2_content.contains("ru.lex.argue.utverzhdenie"),
+            "the Claim lesson's vocabulary is B2-banded pack content"
+        );
+
+        // Six sessions of the real planner path, each executed and graded.
+        for session in 0..6usize {
+            let plan = build_plan(data, &p.id, 5, 1_795_300_000 + (session as u64) * 60).unwrap();
+            for item in &plan.items {
+                assert!(
+                    !b2_content.contains(&item.content_id),
+                    "session {}: plan served B2-banded content {} ({:?})",
+                    session,
+                    item.content_id,
+                    item.reason
+                );
+            }
+            assert!(
+                !plan
+                    .items
+                    .iter()
+                    .any(|i| poison.contains(&i.content_id.as_str())),
+                "session {}: the poisoned scheduler rows served Claim vocabulary to a beginner",
+                session
+            );
+            assert!(
+                !plan.items.is_empty(),
+                "session {session}: a fresh profile must still get a plan"
+            );
+            for (seq, item) in plan.items.iter().enumerate() {
+                teach(&item.content_id, item.modality, &session.to_string(), seq);
+            }
+        }
     }
 
     /// The reference pack's source tree, for reading base counts out of.

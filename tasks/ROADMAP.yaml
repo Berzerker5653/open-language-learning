@@ -2996,11 +2996,26 @@ tasks:
   - CODING_STANDARDS.md is linked from AGENTS.md under a Coding standard heading
   required_for_desktop_1_0: false
 
+- id: SESSION-SEQUENCE-001
+  milestone: M11
+  priority: P1
+  title: Beginner plan gating — a level-0 profile was served the B2 Claim lesson in its first session, so NEW-material seeding and due reviews must honor the pack's goal-graph locks
+  dependencies: []
+  read_first:
+  - state/notes/SESSION-SEQUENCE-001.md
+  acceptance:
+  - on a fresh level-0 profile every plan candidate on every seeding route belongs to a unit whose own goal has no unsatisfied hard goal-prerequisite
+  - a red-then-green test walks six sessions of a fresh RU reference-pack profile and never sees B2-banded content, including rows poisoned into the scheduler by the pre-fix plan
+  - due pack-content reviews whose content sits only in learner-locked units stay out of the plan while their scheduler rows remain on disk
+  - the owner live profile plan is re-read after deploy and contains zero activities from units above the on-ramp band
+  required_for_desktop_1_0: false
+
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
   required_flag: required_for_desktop_1_0
   optional_tasks:
+  - SESSION-SEQUENCE-001
   - ADV-001
   - AI-001
   - PLAT-002
