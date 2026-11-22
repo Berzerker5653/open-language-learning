@@ -1,0 +1,51 @@
+run_id=44999277611
+2026-11-22T00:42:46-07:00 in_progress 
+2026-11-22T00:43:16-07:00 in_progress 
+2026-11-22T00:43:47-07:00 in_progress 
+2026-11-22T00:44:17-07:00 in_progress 
+2026-11-22T00:44:48-07:00 in_progress 
+2026-11-22T00:45:19-07:00 in_progress 
+2026-11-22T00:45:49-07:00 in_progress 
+2026-11-22T00:46:20-07:00 in_progress 
+2026-11-22T00:46:51-07:00 in_progress 
+2026-11-22T00:47:22-07:00 in_progress 
+2026-11-22T00:47:52-07:00 in_progress 
+2026-11-22T00:48:23-07:00 in_progress 
+2026-11-22T00:48:54-07:00 in_progress 
+2026-11-22T00:49:24-07:00 in_progress 
+2026-11-22T00:49:55-07:00 in_progress 
+2026-11-22T00:50:25-07:00 in_progress 
+2026-11-22T00:50:56-07:00 in_progress 
+2026-11-22T00:51:27-07:00 in_progress 
+2026-11-22T00:51:57-07:00 in_progress 
+2026-11-22T00:52:28-07:00 in_progress 
+2026-11-22T00:52:58-07:00 in_progress 
+2026-11-22T00:53:29-07:00 in_progress 
+2026-11-22T00:54:00-07:00 in_progress 
+2026-11-22T00:54:30-07:00 in_progress 
+2026-11-22T00:55:01-07:00 in_progress 
+2026-11-22T00:55:32-07:00 in_progress 
+2026-11-22T00:56:02-07:00 in_progress 
+2026-11-22T00:56:33-07:00 completed failure
+{"conclusion":"failure","jobs":[{"conclusion":"success","name":"rust-conformance"},{"conclusion":"success","name":"security"},{"conclusion":"failure","name":"web"},{"conclusion":"success","name":"desktop-smoke"},{"conclusion":"success","name":"platform-compile (windows-latest)"},{"conclusion":"success","name":"platform-compile (macos-latest)"},{"conclusion":"success","name":"rust-static"},{"conclusion":"success","name":"rust-test (1)"},{"conclusion":"success","name":"schemas"},{"conclusion":"success","name":"rust-test (4)"},{"conclusion":"success","name":"rust-test (2)"},{"conclusion":"success","name":"rust-test (3)"},{"conclusion":"skipped","name":"platform-bundles"}],"status":"completed"}
+desktop-smoke	Restore reference-pack audio (published archives)	﻿2026-11-22T07:42:06.3219317Z ##[group]Run ./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP --work-dir tmp/pack-audio
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:42:06.3220100Z ^[[36;1m./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP --work-dir tmp/pack-audio^[[0m
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:42:06.3220739Z ^[[36;1m./scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU --work-dir tmp/pack-audio^[[0m
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:42:06.3249563Z shell: /usr/bin/bash -e {0}
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:42:06.3249808Z env:
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:42:06.3250018Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:42:06.3250269Z   CARGO_HOME: /home/runner/.cargo
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:42:06.3250469Z   CARGO_INCREMENTAL: 0
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:42:06.3250640Z   CARGO_TERM_COLOR: always
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:42:06.3250816Z   CACHE_ON_FAILURE: false
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:42:06.3250990Z ##[endgroup]
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:42:06.3525054Z fetch-pack-audio: restoring org.openlanguage.ja-jp.reference 0.4.4 audio into languages/ja-JP (archive ja-jp-reference-0.4.4.lpk)
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:42:07.6939298Z fetch-pack-audio: unpacking through: cargo run -q -p lts-langpack-cli -- install
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:42:35.1477426Z installed org.openlanguage.ja-jp.reference v0.4.4 at tmp/pack-audio/store/org.openlanguage.ja-jp.reference/0.4.4
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:43:10.9447324Z fetch-pack-audio: summary languages/ja-JP: rows checked=4935 files valid=4935 files restored=4935 files already valid=0 rows failing=0
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:43:11.0480262Z fetch-pack-audio: restoring org.openlanguage.ru-ru.reference 0.4.7 audio into languages/ru-RU (archive ru-ru-reference-0.4.7.lpk)
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:43:12.3892387Z fetch-pack-audio: unpacking through: cargo run -q -p lts-langpack-cli -- install
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:43:22.3862974Z installed org.openlanguage.ru-ru.reference v0.4.7 at tmp/pack-audio/store/org.openlanguage.ru-ru.reference/0.4.7
+desktop-smoke	Restore reference-pack audio (published archives)	2026-11-22T07:43:58.3315103Z fetch-pack-audio: summary languages/ru-RU: rows checked=5032 files valid=5032 files restored=5032 files already valid=0 rows failing=0
+rust-conformance	Restore reference-pack audio (published archives)	﻿2026-11-22T07:40:44.4540399Z ##[group]Run ./scripts/fetch-pack-audio.sh --pack-dir languages/ja-JP --work-dir tmp/pack-audio
+CI_WATCH_DONE run=44999277611

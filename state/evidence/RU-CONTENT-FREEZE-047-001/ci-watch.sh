@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Poll the CI run for 61c3ee1 until completed; record restore-leg + conformance posture.
 set -uo pipefail
+cd /home/hunter/game-dev/LTS
 export PATH="$HOME/.cargo/bin:$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin"
 E=/home/hunter/game-dev/LTS/state/evidence/RU-CONTENT-FREEZE-047-001
 SHA=61c3ee1b301ddddbec57cc7d1fd3efe55d9769a2
