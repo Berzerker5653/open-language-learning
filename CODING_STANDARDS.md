@@ -27,7 +27,8 @@ only (owner directive 2026-11-19).
 - [ ] Secrets/advisories: gitleaks, `pnpm audit --audit-level=high`,
       `cargo audit` — security job
 - [ ] Built app launches headless — desktop-smoke (`scripts/smoke-desktop.sh`)
-- [ ] Ticket/ADR ids stay out of learner-facing copy —
+- [ ] Ticket/ADR ids, bare unit ids, and non-US spellings stay out of
+      learner-facing copy — copy standard is en-US —
       `tools/audit_learner_copy.py` — schemas job
 
 ## B. Judgement calls — flag on the diff if violated

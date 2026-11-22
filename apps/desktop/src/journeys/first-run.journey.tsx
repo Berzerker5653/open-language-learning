@@ -89,7 +89,7 @@ describe("first run (journey a)", () => {
     expect(lesson.querySelector("h1")?.textContent).toBe("First meeting");
     expect(lesson.textContent).toContain("はじめまして");
     expect(lesson.textContent).toContain("how do you do (first meeting)");
-    await app.click(app.button(lesson, "Start practising"));
+    await app.click(app.button(lesson, "Start practicing"));
 
     // …then the drill itself, graded by the engine and answered in words the
     // learner can act on.

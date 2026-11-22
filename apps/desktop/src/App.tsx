@@ -224,6 +224,11 @@ export async function packAttemptRequest<T>(
   return { ok: true, packId, value: (await inv(cmd, payload)) as T };
 }
 
+// SESSION-FLOW-COPY-001: how long the "Next: <what>" inter-activity bridge
+// stays up before the session opens the next runner. Short enough that it
+// reads as a transition, long enough to be a calm, announced one.
+const SESSION_BRIDGE_MS = 1200;
+
 const EMPTY_PLAN: SessionPlan = {
   items: [],
   total_seconds: 0,
@@ -277,7 +282,7 @@ function PlacementCoverageNote({
   const planned = rows.filter((r) => r.status === "planned").length;
   const declined = rows.filter((r) => r.status !== "planned");
   const COPY: Record<string, string> = {
-    "no-runner": "that skill cannot be practised in the app yet",
+    "no-runner": "that skill cannot be practiced in the app yet",
     "no-content": "no content at the right level can serve that rubric",
     "modality-unsupported": "that kind of question is not available yet",
   };
@@ -492,6 +497,62 @@ export function App() {
   // measured time the end-of-session summary reports. Not persisted — a
   // session is for this sitting, and its clock is too.
   const sessionStartedAtRef = useRef<number | null>(null);
+  // SESSION-FLOW-COPY-001 (owner phone dogfood): one start per session.
+  // Between activities the session shows a short "Next: <what>" bridge and
+  // opens the next runner itself — no second "Start practicing" wall. The
+  // bridge is a transition, not a gate: it is cancelable by the same pause
+  // control that owns the session, and reduced-motion users skip it.
+  const [sessionBridge, setSessionBridge] = useState<string | null>(null);
+  const bridgeRef = useRef<{
+    timer: ReturnType<typeof setTimeout>;
+    finish: (proceeded: boolean) => void;
+  } | null>(null);
+
+  /// Cancel an in-flight bridge (pause/stop/pack-switch). Resolves the
+  /// pending advance as "did not proceed" so the session never opens an
+  /// activity behind the learner's back.
+  function cancelSessionBridge() {
+    const b = bridgeRef.current;
+    if (!b) return;
+    clearTimeout(b.timer);
+    bridgeRef.current = null;
+    setSessionBridge(null);
+    b.finish(false);
+  }
+
+  function sessionBridgeLabel(item: PlannedItem): string {
+    const verb = RUNNABLE_MODALITIES[item.modality] ?? "more practice";
+    return `Next: ${verb}`;
+  }
+
+  function prefersReducedMotion(): boolean {
+    return (
+      typeof window !== "undefined" &&
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    );
+  }
+
+  /// Show the bridge for SESSION_BRIDGE_MS, then report whether the session
+  /// may proceed. False means the learner (or a navigation) took over.
+  function showSessionBridge(item: PlannedItem): Promise<boolean> {
+    if (prefersReducedMotion()) return Promise.resolve(true);
+    setSessionBridge(sessionBridgeLabel(item));
+    return new Promise<boolean>((resolve) => {
+      const timer = setTimeout(() => {
+        bridgeRef.current = null;
+        setSessionBridge(null);
+        resolve(true);
+      }, SESSION_BRIDGE_MS);
+      bridgeRef.current = {
+        timer,
+        finish: (proceeded) => {
+          setSessionBridge(null);
+          resolve(proceeded);
+        },
+      };
+    });
+  }
   const [scenarioList, setScenarioList] = useState<ScenarioSummaryView[]>([]);
   const [scenarioActive, setScenarioActive] = useState<ScenarioView | null>(null);
   const [scenarioStep, setScenarioStep] = useState<ScenarioStepResult | null>(null);
@@ -1174,7 +1235,7 @@ export function App() {
   // capture where the browser blocks it). The text comes from the server's
   // capability report, never invented locally; nothing here changes a
   // stored privacy mode.
-  const [serveNotice, setServeNotice] = useState<string | null>(null);
+  const [serveNotice, setServeNotice] = useState<string[] | null>(null);
   // SETTINGS-SCOPE-001: the same capability report also decides whether the
   // Settings "Detect microphones" button can do anything: in an insecure
   // context the browser reveals no input names, so the button renders gray
@@ -1185,12 +1246,17 @@ export function App() {
     if (!inLtsServeMode()) return;
     void fetchCapabilities().then((caps) => {
       if (!caps) {
-        setServeNotice("Browser mode: the serve bridge is unreachable right now.");
+        setServeNotice(["Browser mode: the serve bridge is unreachable right now."]);
         return;
       }
       if (typeof caps.microphone_names_available === "boolean") {
         setServeMicNamesAvailable(caps.microphone_names_available);
       }
+      // SESSION-FLOW-COPY-001 (third dogfood repro): the capability lines
+      // were JOINED into one sentence — "...labeled unavailable unchanged —
+      // serve mode never rewrites..." read as word-salad. Each line rides as
+      // its own notice row; the one line that floats without context
+      // (privacy_modes starts "unchanged —") gets a plain-language lead-in.
       const parts = [
         // WEB-PROGRESS-001: whether progress streams is the server's report,
         // not a local assumption — an older serve build still says the truth.
@@ -1198,9 +1264,9 @@ export function App() {
           ? "Browser mode: install progress streams live, the same stages the desktop shows."
           : "Browser mode: install progress is not streamed — results appear when the call lands.",
         caps.microphone_capture ?? "",
-        caps.privacy_modes ?? "",
+        caps.privacy_modes ? `Privacy settings: ${caps.privacy_modes}` : "",
       ].filter((s) => s.length > 0);
-      setServeNotice(parts.join(" "));
+      setServeNotice(parts);
     });
   }, []);
 
@@ -2314,7 +2380,7 @@ export function App() {
 
   // UX-003: first lessons. Plan items are runnable; grading, evidence,
   // and scheduling happen natively.
-  async function openPractice(item: PlannedItem) {
+  async function openPractice(item: PlannedItem, opts: { showLessonCard?: boolean } = {}) {
     // Review finding R02: a saved (mined) word is scheduled by its own
     // scheduler and has no pack content behind it, so it opens the saved
     // word's review card — a pack practice task on a `mine-…` id could only
@@ -2346,7 +2412,12 @@ export function App() {
     setPracticeSpeakCheck(null);
     setPracticeTarget({ contentId: item.content_id, modality: item.modality });
     setLesson(null);
-    setLessonSeen(false);
+    // SESSION-FLOW-COPY-001: inside a running session only the FIRST
+    // activity shows the lesson encounter card and its Start control —
+    // that click is the session's one start. Later activities arrive
+    // through the bridge and open the runner directly; the card stays one
+    // tap away on the "Show the lesson again" control.
+    setLessonSeen(opts.showLessonCard === false);
     if (inv && profileId) {
       try {
         setLesson(
@@ -2540,8 +2611,14 @@ export function App() {
     q.index += 1;
     const next = q.items[q.index];
     if (next) {
+      // SESSION-FLOW-COPY-001: the session advances itself. A short bridge
+      // names what comes next, then the runner opens — no second Start
+      // click. If the learner paused or stopped during the bridge, the
+      // advance resolves as "did not proceed" and nothing opens.
       publishSession("running");
-      await openPractice(next);
+      const proceeded = await showSessionBridge(next);
+      if (!proceeded || !sessionQueueRef.current) return;
+      await openPractice(next, { showLessonCard: false });
       return;
     }
     const outcome = sessionOutcomeFrom(q, "finished");
@@ -2582,6 +2659,7 @@ export function App() {
   function closeSession(reason: "stopped") {
     const q = sessionQueueRef.current;
     if (!q) return;
+    cancelSessionBridge();
     const outcome = sessionOutcomeFrom(q, reason);
     sessionQueueRef.current = null;
     sessionStartedAtRef.current = null;
@@ -2595,6 +2673,9 @@ export function App() {
 
   function pauseSession() {
     if (!sessionQueueRef.current) return;
+    // The bridge is part of the running session: pausing cancels it, and
+    // nothing opens behind the learner.
+    cancelSessionBridge();
     setPracticeTarget(null);
     setPracticeTask(null);
     setLesson(null);
@@ -4148,7 +4229,11 @@ export function App() {
           browser's secure-context rule) instead of failing silently. */}
       {serveNotice ? (
         <p role="status" className="notice" data-testid="serve-notice">
-          {serveNotice}
+          {serveNotice.map((line) => (
+            <span key={line} className="notice-line">
+              {line}
+            </span>
+          ))}
         </p>
       ) : null}
       {playbackError ? (
@@ -4729,10 +4814,34 @@ export function App() {
             </div>
           ) : null}
         </>
+      ) : sessionBridge ? (
+        // SESSION-FLOW-COPY-001: the inter-activity bridge. Announced
+        // (role=status), visible, and cancellable — the pause control rides
+        // here too, so the auto-advance is never something the learner has
+        // to outrun.
+        <section
+          aria-label="Session bridge"
+          data-testid="session-bridge"
+          className="session-bridge"
+        >
+          <p role="status" aria-live="polite" className="session-bridge-label">
+            {sessionBridge}
+          </p>
+          <div className="btn-row">
+            <button
+              type="button"
+              className="btn btn--quiet"
+              data-session-pause
+              onClick={pauseSession}
+            >
+              Pause session
+            </button>
+          </div>
+        </section>
       ) : practiceTarget ? (
         <section aria-label="Practice">
           <p className="empty">
-            This activity is not ready to practise yet.
+            This activity is not ready to practice yet.
             {practiceError ? ` ${practiceError}` : ""}
           </p>
           <div className="btn-row">

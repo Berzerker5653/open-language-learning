@@ -55,10 +55,10 @@ describe("focus lands on the heading of every new screen (F-01)", () => {
     expect(lessonHeading, "no heading in #main had focus on lesson arrival").toBeTruthy();
     expect(lessonHeading?.tagName).toBe("H1");
 
-    // Start practising: the activity card's question heading is now the
+    // Start practicing: the activity card's question heading is now the
     // focused landmark — either the content h1 or the runner h2, and not
     // the Start button that was clicked.
-    await app.click(app.button(app.section("Lesson"), "Start practising"));
+    await app.click(app.button(app.section("Lesson"), "Start practicing"));
     await app.settle();
     const cardHeading = focusedHeading();
     expect(cardHeading, "no heading in #main had focus on card arrival").toBeTruthy();

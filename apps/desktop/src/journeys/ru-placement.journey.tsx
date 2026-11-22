@@ -46,7 +46,7 @@ describe("placement asks only runnable questions and reports the rest (U05)", ()
     // LETTER-DRILL-TEXT-001: abstention copy is learner language now; the
     // statuses and engine reasons stay asserted exactly as before.
     expect(coverage.textContent).toContain("that kind of question is not available yet");
-    expect(coverage.textContent).toContain("that skill cannot be practised in the app yet");
+    expect(coverage.textContent).toContain("that skill cannot be practiced in the app yet");
     const reason = coverage.querySelector("code");
     expect(reason?.textContent).toContain("builder-refused:recall-meaning:ru.orth.cyrillic.");
     expect(reason?.textContent).toContain("unknown practice target");

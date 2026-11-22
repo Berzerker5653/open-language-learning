@@ -67,7 +67,7 @@ function planRowFor(app: Mounted, text: string, group = "Meet something new"): H
 async function startActivity(app: Mounted, row: HTMLButtonElement): Promise<HTMLElement> {
   await app.click(row);
   const lesson = app.section("Lesson");
-  await app.click(app.button(lesson, "Start practising"));
+  await app.click(app.button(lesson, "Start practicing"));
   return app.section("Practice");
 }
 
@@ -187,7 +187,7 @@ describe("one RU upper-band task_sequence runs end to end (UPPERBAND-TASK-JOURNE
     // row (`были`), and the independent writing stage is a typed card the
     // app scores: choices absent, answer typed, verdict graded — the
     // contrast with the speaking stage below is this `Check` control.
-    await app.click(app.button(lesson, "Start practising"));
+    await app.click(app.button(lesson, "Start practicing"));
     const writing = app.section("Practice");
     expect(writing.querySelector("h2")?.textContent).toBe("Fill in the blank");
     expect(writing.textContent).toContain(

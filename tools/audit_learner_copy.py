@@ -40,7 +40,7 @@ import re
 import sys
 from pathlib import Path
 
-VERSION = "1.3.0"
+VERSION = "1.5.0"
 
 DEFAULT_ROOTS = ["apps/desktop/src", "packages/ui/src"]
 
@@ -87,6 +87,26 @@ PACK_SUMMARY_RE = re.compile(
     r"|\bencounter order\b|most-recently|spaced-review)",
     re.IGNORECASE,
 )
+
+# SESSION-FLOW-COPY-001: en-US is the documented copy standard (GLOSSARY.md,
+# CODING_STANDARDS.md). Learner copy carries US spellings; a British form in
+# a learner-visible string or pack field is a finding, not a style note.
+# The list is the irregular, high-signal set — not every -ise verb.
+LOCALE_UK_RE = re.compile(
+    r"\b(?:practise[sd]?|practising"
+    r"|recognise[sd]?|recognising"
+    r"|organise[sd]?|organising"
+    r"|labell(?:ed|ing)"
+    r"|colour(?:s|ed)?|licence[sd]?"
+    r"|behaviours?|centres?|programmes?"
+    r"|whilst|learnt|travel(?:l)?ed|travel(?:l)?ing"
+    r"|apologise[sd]?|apologising)\b",
+    re.IGNORECASE,
+)
+
+# RU-REPUBLISH-046-001 (controller note): internal unit numbers ("unit 000"
+# style bare ids) must never surface as learner copy, in any scanned field.
+UNIT_ID_LEAK_RE = re.compile(r"\bunit\s+\d{3}(?:-[a-z0-9_-]+)?\b", re.IGNORECASE)
 
 # A no-space string is normally a wiring token, not sentence copy — but a
 # string that IS exactly a letter-property word ('appearance', 'uppercase')
@@ -155,6 +175,10 @@ def scan_source(text):
                     findings.append((line, "string", body.strip()[:90], match.group(0)))
                 elif copy:
                     findings.append((line, "copy", body.strip()[:90], copy.group(0)))
+                elif (leak := UNIT_ID_LEAK_RE.search(body)):
+                    findings.append((line, "unit-id-leak", body.strip()[:90], leak.group(0)))
+                elif (uk := LOCALE_UK_RE.search(body)):
+                    findings.append((line, "locale-uk", body.strip()[:90], uk.group(0)))
             line += text.count("\n", i, j + 1)
             i = j + 1
             continue
@@ -225,6 +249,26 @@ def audit_file(path):
                         "line": line,
                         "kind": "copy",
                         "id": copy.group(0),
+                        "text": node.strip()[:90],
+                    }
+                )
+            elif (leak := UNIT_ID_LEAK_RE.search(node)):
+                findings.append(
+                    {
+                        "file": str(path),
+                        "line": line,
+                        "kind": "unit-id-leak",
+                        "id": leak.group(0),
+                        "text": node.strip()[:90],
+                    }
+                )
+            elif (uk := LOCALE_UK_RE.search(node)):
+                findings.append(
+                    {
+                        "file": str(path),
+                        "line": line,
+                        "kind": "locale-uk",
+                        "id": uk.group(0),
                         "text": node.strip()[:90],
                     }
                 )
@@ -309,6 +353,19 @@ def audit_packs(packs_root):
             path.read_text(encoding="utf-8").splitlines(), start=1
         ):
             stripped = raw.strip()
+            if stripped.startswith("title:"):
+                t = stripped.split(":", 1)[1]
+                ht = LOCALE_UK_RE.search(t) or UNIT_ID_LEAK_RE.search(t)
+                if ht:
+                    findings.append(
+                        {
+                            "file": str(path),
+                            "line": line_no,
+                            "kind": "pack-title",
+                            "id": ht.group(0),
+                            "text": stripped[:90],
+                        }
+                    )
             if stripped.startswith("summary:"):
                 inside = True
             elif not stripped or raw.startswith(("  ", "\t")):
@@ -317,7 +374,11 @@ def audit_packs(packs_root):
             else:
                 inside = False
             if inside:
-                m = PACK_SUMMARY_RE.search(stripped)
+                m = (
+                    PACK_SUMMARY_RE.search(stripped)
+                    or UNIT_ID_LEAK_RE.search(stripped)
+                    or LOCALE_UK_RE.search(stripped)
+                )
                 if m:
                     findings.append(
                         {
@@ -326,6 +387,41 @@ def audit_packs(packs_root):
                             "kind": "pack-summary",
                             "id": m.group(0),
                             "text": stripped[:90],
+                        }
+                    )
+    # SESSION-FLOW-COPY-001 + RU-REPUBLISH-046-001: en-US glosses are shown
+    # verbatim on word cards and sentence helpers — the same locale and
+    # unit-id rules ride every lexicon/sentence gloss row.
+    for path in sorted(root.rglob("*.jsonl")):
+        if path.parent.name not in ("lexicon", "sentences"):
+            continue
+        scanned += 1
+        for line_no, raw in enumerate(
+            path.read_text(encoding="utf-8").splitlines(), start=1
+        ):
+            raw = raw.strip()
+            if not raw:
+                continue
+            try:
+                row = json.loads(raw)
+            except json.JSONDecodeError:
+                continue
+            glosses = row.get("glosses")
+            values = glosses.get("en-US", []) if isinstance(glosses, dict) else []
+            if not isinstance(values, list):
+                continue
+            for gloss in values:
+                if not isinstance(gloss, str):
+                    continue
+                hg = LOCALE_UK_RE.search(gloss) or UNIT_ID_LEAK_RE.search(gloss)
+                if hg:
+                    findings.append(
+                        {
+                            "file": str(path),
+                            "line": line_no,
+                            "kind": "pack-gloss",
+                            "id": hg.group(0),
+                            "text": f"{row.get('id', '?')}: {gloss[:80]}",
                         }
                     )
     return scanned, findings

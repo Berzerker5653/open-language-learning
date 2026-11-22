@@ -16,7 +16,7 @@ import { JA, LearnerEngine, mountApp, type Mounted } from "./harness";
 /** Answer the activity currently on screen, lesson encounter included. */
 async function doActivity(app: Mounted, gloss: string): Promise<void> {
   const lesson = document.querySelector('[aria-label="Lesson"]');
-  if (lesson) await app.click(app.button(lesson as HTMLElement, "Start practising"));
+  if (lesson) await app.click(app.button(lesson as HTMLElement, "Start practicing"));
   await app.click(app.button(app.section("Choices"), gloss));
   expect(app.text('[aria-label="Practice"] [aria-live="polite"]')).toBe("Correct");
 }
@@ -74,6 +74,19 @@ describe("one bounded session (journey e)", () => {
     expect(app.button(app.section("Practice"), "Continue to next activity")).toBeTruthy();
     await app.click(app.button(app.section("Practice"), "Continue to next activity"));
     await app.settle();
+
+    // SESSION-FLOW-COPY-001: the session advances itself. A bridge names
+    // what comes next — no second "Start practicing" card in between.
+    const bridge = document.querySelector('[data-testid="session-bridge"]');
+    if (!bridge) throw new Error("the session advanced without showing a bridge");
+    expect(bridge.textContent).toContain("Next:");
+    // ...and after the bridge the runner opens on its own, Start click or
+    // not: the lesson card was never re-rendered.
+    await new Promise((r) => setTimeout(r, 1500));
+    await app.settle();
+    expect(document.querySelector('[data-testid="session-bridge"]')).toBeNull();
+    expect(document.querySelector('[aria-label="Lesson"]')).toBeNull();
+    expect(app.section("Practice")).toBeTruthy();
 
     // Pausing mid-session leaves the runner and says what is left.
     await app.click(sessionExit().pause);

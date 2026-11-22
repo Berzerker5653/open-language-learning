@@ -213,5 +213,74 @@ class CopyRuleTests(unittest.TestCase):
             self.assertEqual(len(src_found), 2)
 
 
+class LocaleRulesTests(unittest.TestCase):
+    """SESSION-FLOW-COPY-001 + RU-REPUBLISH-046-001 ratchets: en-US is the
+    documented copy standard, and internal unit ids never reach learners."""
+
+    def test_british_spelling_in_source_string_fails(self):
+        src = (
+            "export function P() {\n"
+            '  return <button>{"Start practising"}</button>;\n'
+            "}\n"
+        )
+        with tempfile.TemporaryDirectory() as td:
+            write_tree(td, {"app/src/x.tsx": src})
+            _, _, found = alc.audit_roots([td])
+            self.assertEqual([f["kind"] for f in found], ["locale-uk"])
+            self.assertEqual(found[0]["id"], "practising")
+
+    def test_british_spelling_in_jsx_text_fails(self):
+        src = (
+            "export function P() {\n"
+            "  return <h2>Recognise the script</h2>;\n"
+            "}\n"
+        )
+        with tempfile.TemporaryDirectory() as td:
+            write_tree(td, {"app/src/x.tsx": src})
+            _, _, found = alc.audit_roots([td])
+            self.assertEqual([f["kind"] for f in found], ["locale-uk"])
+
+    def test_us_spelling_is_clean(self):
+        src = (
+            "export function P() {\n"
+            '  const a = "Start practicing";\n'
+            "  return <h2>Recognize the script · Unlabeled · The color</h2>;\n"
+            "}\n"
+        )
+        with tempfile.TemporaryDirectory() as td:
+            write_tree(td, {"app/src/x.tsx": src})
+            _, _, found = alc.audit_roots([td])
+            self.assertEqual(found, [])
+
+    def test_unit_id_leak_in_source_and_pack_copy_fails(self):
+        src = (
+            "export function P() {\n"
+            '  const a = "Start with unit 010-cyrillic-a-o-m-t";\n'
+            "  return null;\n"
+            "}\n"
+        )
+        with tempfile.TemporaryDirectory() as td:
+            write_tree(
+                td,
+                {
+                    "app/src/x.tsx": src,
+                    "pack/curriculum/units/010-a.yaml": (
+                        "id: u-010\ntitle: Unit 000 basics\n"
+                        "summary: Meet letters, then recognise them.\n"
+                    ),
+                    "pack/lexicon/w.jsonl": (
+                        '{"id":"x.lex.w.a","glosses":{"en-US":["colour; flower"]}}\n'
+                    ),
+                },
+            )
+            _, _, src_found = alc.audit_roots([td])
+            self.assertEqual([f["kind"] for f in src_found], ["unit-id-leak"])
+            scanned, found = alc.audit_packs(str(Path(td) / "pack"))
+            kinds = {f["kind"]: f["id"] for f in found}
+            self.assertEqual(kinds.get("pack-title"), "Unit 000")
+            self.assertEqual(kinds.get("pack-summary"), "recognise")
+            self.assertEqual(kinds.get("pack-gloss"), "colour")
+
+
 if __name__ == "__main__":
     unittest.main()

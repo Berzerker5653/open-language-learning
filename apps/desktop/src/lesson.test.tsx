@@ -235,7 +235,7 @@ describe("LessonEncounter", () => {
     // rather than presenting it as practice. (`encounter-read` is NOT such
     // a stage: the engine names the encounter runner for it, and the
     // fixture above carries that runner.)
-    expect(html).toContain("Not ready to practise yet — there is nothing to do in this step.");
+    expect(html).toContain("Not ready to practice yet — there is nothing to do in this step.");
     // LETTER-DRILL-TEXT-001: engine runner names stay on data-runner, out
     // of the copy.
     expect(html).toContain('data-runner="cloze"');
@@ -256,7 +256,7 @@ describe("LessonEncounter", () => {
 
   it("gives the learner a way into the drill without hiding it", () => {
     expect(html).toContain("lesson-start");
-    expect(html).toContain("Start practising");
+    expect(html).toContain("Start practicing");
   });
 });
 

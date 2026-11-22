@@ -623,7 +623,7 @@ export function Onboarding(p: OnboardingProps) {
           <p>
             {p.selectedPack
               ? "Profile created locally, with the language pack installed. Microphone and speech can be enabled anytime."
-              : "Profile created locally with no language chosen yet, so there is nothing to practise from until you set one under Settings → Language packs."}
+              : "Profile created locally with no language chosen yet, so there is nothing to practice from until you set one under Settings → Language packs."}
           </p>
           <button type="button" className="btn btn--primary" onClick={p.onContinue}>
             Start learning

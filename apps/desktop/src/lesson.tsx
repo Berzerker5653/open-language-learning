@@ -177,7 +177,7 @@ export function LessonEncounter({
           <p className="meta lesson__runner">
             {stage.runner
               ? (RUNNER_LABEL[stage.runner] ?? "More practice follows.")
-              : "Not ready to practise yet — there is nothing to do in this step."}
+              : "Not ready to practice yet — there is nothing to do in this step."}
           </p>
           <ul className="lesson__items">
             {stage.content.map((item) => (
@@ -205,7 +205,7 @@ export function LessonEncounter({
           data-testid="lesson-start"
           onClick={onStart}
         >
-          Start practising
+          Start practicing
         </button>
       </div>
     </section>

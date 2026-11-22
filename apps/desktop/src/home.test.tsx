@@ -238,13 +238,13 @@ describe("home", () => {
     ]) {
       const html = render(modality);
       expect(html).toContain('class="plan-item"');
-      expect(html).not.toContain("nothing to practise here yet");
+      expect(html).not.toContain("nothing to practice here yet");
     }
     // A modality with no runner says so instead of offering a dead button.
     // (LETTER-DRILL-TEXT-001: the label is learner language now.)
     const inert = render("comprehension-reading");
     expect(inert).not.toContain('class="plan-item"');
-    expect(inert).toContain("nothing to practise here yet");
+    expect(inert).toContain("nothing to practice here yet");
     // And no handler means no button at all.
     expect(render("recall-meaning", false)).not.toContain('class="plan-item"');
   });
@@ -613,7 +613,7 @@ describe("goal map", () => {
     expect(html).toContain('data-band="A2"');
     expect(html).toContain("familiar routines");
     expect(html).toContain('data-band="other"');
-    expect(html).toContain("Unlabelled");
+    expect(html).toContain("Unlabeled");
   });
 
   it("R09: one strong concept never shows a multi-concept goal as achieved", () => {

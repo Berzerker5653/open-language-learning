@@ -45,7 +45,7 @@ function planRow(app: Mounted, verb: string, group = "Meet something new"): HTML
 async function startActivity(app: Mounted, verb: string): Promise<HTMLElement> {
   await app.click(planRow(app, verb));
   const lesson = app.section("Lesson");
-  await app.click(app.button(lesson, "Start practising"));
+  await app.click(app.button(lesson, "Start practicing"));
   return app.section("Practice");
 }
 
@@ -110,7 +110,7 @@ describe("RU modalities are served by their named runners (RU-MODALITY-PRACTICE-
     // pack's glosses as choices, with the transcript hidden, and plays the
     // reference recording the pack's media manifest declares for the item.
     const plays = trackAudioPlayback();
-    await app.click(app.button(lesson, "Start practising"));
+    await app.click(app.button(lesson, "Start practicing"));
     const listening = app.section("Practice");
     expect(listening.querySelector("h2")?.textContent).toBe("What did you hear?");
     expect(listening.textContent).toContain("synthesized voice (model output)");

@@ -127,7 +127,7 @@ const KIND_LABELS: Record<FirstRunStep["kind"], string> = {
   // §2 words the grouping already follows.
   introduction: "Meet something new",
   review: "Keep it sticking",
-  practice: "Practise it",
+  practice: "Practice it",
 };
 
 /** ADR-0020 §2: introduce, then maintain. */
@@ -159,7 +159,7 @@ export const RUNNABLE_MODALITIES: Record<string, string> = {
   "recall-meaning": "Recall",
   "comprehension-listening": "Listen",
   "phonological-discrimination": "Hear the difference",
-  "orthography-recognition": "Recognise the script",
+  "orthography-recognition": "Recognize the script",
   "production-writing": "Write it",
   "orthographic-encoding": "Type what you hear",
   // RU-MODALITY-PRACTICE-001: mirrors the gate's speaking pass — the
@@ -335,7 +335,7 @@ export function Home(p: HomeProps) {
       ) : p.packsUnknown ? (
         <p className="notice" role="status">
           The app could not read which language pack this profile uses, so it cannot say what to
-          practise. Nothing was changed — this is a failed read, not a missing language.{" "}
+          practice. Nothing was changed — this is a failed read, not a missing language.{" "}
           {p.onChooseLanguage ? (
             <button type="button" className="btn btn--quiet" onClick={p.onChooseLanguage}>
               Check Language packs
@@ -344,7 +344,7 @@ export function Home(p: HomeProps) {
         </p>
       ) : p.noPack ? (
         <p className="notice" role="status">
-          No language is set for this profile yet, so there is nothing to practise from. Choose a
+          No language is set for this profile yet, so there is nothing to practice from. Choose a
           language pack first.{" "}
           {p.onChooseLanguage ? (
             <button type="button" className="btn btn--quiet" onClick={p.onChooseLanguage}>
@@ -554,7 +554,7 @@ export function Home(p: HomeProps) {
                             {label}
                             <span className="meta">
                               {modalityLabel(item.modality)} · ~{item.est_seconds}s
-                              {p.onStart ? " — nothing to practise here yet" : ""}
+                              {p.onStart ? " — nothing to practice here yet" : ""}
                             </span>
                           </>
                         )}
@@ -719,7 +719,7 @@ export function ProgressView({ rows }: { rows: ProgressRow[] }) {
     <section aria-label="Progress">
       <h2>Recorded detail</h2>
       <p>
-        The numbers behind those answers: what you practised, which skill it trains, the state on
+        The numbers behind those answers: what you practiced, which skill it trains, the state on
         record, and how sure the record is. Each skill grows independently — reading does not imply
         speaking.
       </p>
@@ -730,7 +730,7 @@ export function ProgressView({ rows }: { rows: ProgressRow[] }) {
           <table>
             <thead>
               <tr>
-                <th>What you practised</th>
+                <th>What you practiced</th>
                 <th>Skill</th>
                 <th>State</th>
                 <th>Confidence</th>
@@ -825,7 +825,7 @@ const BAND_HEADERS: Record<string, { label: string; gloss: string }> = {
   b2: { label: "B2", gloss: "complex text, argument, fluent interaction" },
   c1: { label: "C1", gloss: "flexible, well-structured use of the language" },
   c2: { label: "C2", gloss: "precise, nuanced, near-native use" },
-  other: { label: "Unlabelled", gloss: "this pack does not band these goals" },
+  other: { label: "Unlabeled", gloss: "this pack does not band these goals" },
 };
 
 export function bandHeader(band: string): { label: string; gloss: string } {

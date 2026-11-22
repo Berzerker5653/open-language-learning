@@ -8,6 +8,7 @@ Project vocabulary defined exactly as used across `docs/`, `tasks/ROADMAP.yaml`,
 - **card** — a unit of board work: an id in `tasks/ROADMAP.yaml` with acceptance, a `state/task-state.json` record and a `tasks/KANBAN.md` row; exactly one may be `in_progress`.
 - **board** — the kanban engine: one card per roadmap task, a fresh worker per card; `tasks/KANBAN.md` columns (now/next/later/owner) mirror it as the planning view.
 - **lane** — a work stream over a disjoint file set (engine lane, app lane) so concurrent agents never share a dirty file; each lane commits separately.
+- **copy** — learner-visible UI and pack text; its spelling standard is en-US (North American audience), machine-checked by the locale rule in `tools/audit_learner_copy.py`.
 - **burst** — one worker run on one card (~45-minute budget); on early exit, a resume recipe in `state/notes/<CARD>.md` steers the next burst.
 - **takeover-commit** — the controller commits a dead worker's complete-but-uncommitted lane under its card id after re-running the gates personally; never re-runs the same battery twice.
 - **resume recipe (takeover note)** — a numbered continuation block in `state/notes/<CARD>.md` telling the next burst what is done, what remains, and what not to re-derive.

@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.cyrillic-a-o-m-t"
 goal_id: "ru.goal.on-ramp.cyrillic"
 title: "Printed Cyrillic: А а, О о, М м, Т т"
-summary: "Start here: your first four printed letters. Each letter is one sound — see its printed forms, learn its name and sound, then recognise it and write it."
+summary: "Start here: your first four printed letters. Each letter is one sound — see its printed forms, learn its name and sound, then recognize it and write it."
 estimated_minutes: 5
 capabilities:
 - script-introduction

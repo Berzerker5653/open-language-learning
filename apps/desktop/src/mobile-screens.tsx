@@ -11,7 +11,7 @@
  * carries the verdict) and as JSON in <pre id="audit-json"> so the capture
  * script can extract them with --dump-dom.
  *
- * Screens: onboarding | today | drill | reader | settings.
+ * Screens: onboarding | today | drill | reader | settings | session.
  */
 import { createRoot } from "react-dom/client";
 import "@openlang/ui/styles.css";
@@ -88,6 +88,18 @@ async function onboard(packName: string): Promise<void> {
 
 async function goto(hash: string): Promise<void> {
   if (hash === "onboarding") return;
+  if (hash === "session") {
+    // SESSION-FLOW-COPY-001 evidence walk: one bounded session, driven to
+    // the moment it advances itself. The capture script catches the
+    // "Next: <what>" bridge as it appears and screenshots it, then checks
+    // the runner opened WITHOUT another Start click.
+    await clickWith("Dana");
+    await clickWith("Start today's plan");
+    await clickWith("Start practicing");
+    await clickWith("how do you do (first meeting)");
+    await clickWith("Continue to next activity");
+    return;
+  }
   const reader = hash === "reader";
   // SETTINGS-SCOPE-001 evidence: the Settings screen under three install
   // shapes (RU-only, JA-only, both) — the seeded scenario is chosen per
@@ -113,7 +125,7 @@ async function goto(hash: string): Promise<void> {
     if (!row) throw new Error('mobile-screens: no RU "Write it" plan row');
     row.click();
     await WAIT(700);
-    await clickWith("Start practising");
+    await clickWith("Start practicing");
     return;
   }
   await onboard("Japanese");
@@ -209,15 +221,21 @@ async function main(): Promise<void> {
     "settings-ja": JA,
     "settings-both": JA,
   };
-  const seeded = hash === "today" || hash === "drill" || hash.startsWith("settings");
+  const seeded =
+    hash === "today" || hash === "drill" || hash === "session" || hash.startsWith("settings");
   const engine = new LearnerEngine(
     seeded
-      ? {
-          profiles: [
-            { id: "katya", display_name: "Katya", active: shape[hash] ?? RU },
-          ],
-          installed: hash === "settings-ja" ? [JA] : hash === "settings-both" ? [RU, JA] : [RU],
-        }
+      ? hash === "session"
+        ? // The session journey's exact shape: one JA profile, two
+          // planned activities (journeys/session.journey.tsx).
+          {
+            profiles: [{ id: "dana", display_name: "Dana", active: JA }],
+            installed: [JA],
+          }
+        : {
+            profiles: [{ id: "katya", display_name: "Katya", active: shape[hash] ?? RU }],
+            installed: hash === "settings-ja" ? [JA] : hash === "settings-both" ? [RU, JA] : [RU],
+          }
       : {},
   );
   (window as unknown as Record<string, unknown>).__TAURI_INTERNALS__ = {
