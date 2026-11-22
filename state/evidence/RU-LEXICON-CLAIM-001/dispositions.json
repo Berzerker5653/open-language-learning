@@ -1,0 +1,12 @@
+{
+  "card": "RU-LEXICON-CLAIM-001",
+  "source_census": "state/evidence/ORPHAN-CONTENT-001/orphan-ids.json",
+  "claimed_count": 192,
+  "dictionary_weight_count": 0,
+  "total": 192,
+  "census_count": 192,
+  "exactly_once": true,
+  "covers_census_exactly": true,
+  "activities": 140,
+  "units_touched": 134
+}

@@ -1,0 +1,11 @@
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.88s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-7647ca427c780ccc)
+
+running 1 test
+test tests::claimed_orphan_lexicon_words_seed_new_material_for_a_b1_band_profile has been running for over 60 seconds
+test tests::claimed_orphan_lexicon_words_seed_new_material_for_a_b1_band_profile ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 224 filtered out; finished in 80.79s
+
+EXIT=0

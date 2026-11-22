@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-22",
-  "active_task": "RU-LEXICON-CLAIM-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2788,16 +2788,22 @@
     "RU-LEXICON-CLAIM-001": {
       "task_id": "RU-LEXICON-CLAIM-001",
       "title": "Disposition of the 192 orphan RU lexicon rows — claim into band units or record as dictionary weight (follow-up of ORPHAN-CONTENT-001)",
-      "status": "in_progress",
-      "attempts": 1,
+      "status": "done",
+      "attempts": 3,
       "dependencies": [
         "ORPHAN-CONTENT-001"
       ],
       "evidence": [
-        "state/notes/RU-LEXICON-CLAIM-001.md"
+        "state/notes/RU-LEXICON-CLAIM-001.md",
+        "state/evidence/RU-LEXICON-CLAIM-001/gates.log",
+        "state/evidence/RU-LEXICON-CLAIM-001/claim-map.json",
+        "state/evidence/RU-LEXICON-CLAIM-001/dispositions.json",
+        "state/evidence/RU-LEXICON-CLAIM-001/orphan-census-after.json",
+        "state/evidence/RU-LEXICON-CLAIM-001/test-band-profile.log"
       ],
       "updated": "2026-11-22",
-      "notes": "board t_55b270c6; follow-up of the deferred claim decision in ORPHAN-CONTENT-001; content lane, pack data only; group-level dispositions per card contract"
+      "notes": "board t_55b270c6; follow-up of the deferred claim decision in ORPHAN-CONTENT-001; content lane, pack data only; group-level dispositions per card contract",
+      "summary": "All 192 orphan RU lexicon rows CLAIMED into band-matched units (content fa13b6f); dictionary-weight column empty by measured decision. Census 4071/4071 claimed, 0 orphans; 192/192 reconciled to exactly one column; claimed refs in content_refs + allowed_vocab. Gates: fmt/langpack/remeasure/band-profile test/pack-install/clippy all 0; qa_stories 20 stories 0 FAIL."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

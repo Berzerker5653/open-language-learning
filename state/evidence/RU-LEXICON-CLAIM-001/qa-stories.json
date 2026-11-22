@@ -1,0 +1,305 @@
+{
+ "stories": [
+  {
+   "slug": "at-the-market",
+   "id": "ru.story.cp.at-the-market",
+   "band": "cp",
+   "level": "a1",
+   "verdict": "PASS",
+   "sentences": 6,
+   "findings": [
+    [
+     "WARN",
+     "stress_unverified",
+     [
+      "холодное"
+     ]
+    ]
+   ]
+  },
+  {
+   "slug": "aukcion-odnoy-kartiny",
+   "id": "ru.story.b2.aukcion-odnoy-kartiny",
+   "band": "b2",
+   "level": "b2",
+   "verdict": "PASS",
+   "sentences": 8,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "50 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "avtobus-ne-prishol",
+   "id": "ru.story.a2.avtobus-ne-prishol",
+   "band": "a2",
+   "level": "a2",
+   "verdict": "PASS",
+   "sentences": 7,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "34 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "dva-bileta-v-odin-teatr",
+   "id": "ru.story.b2.dva-bileta-v-odin-teatr",
+   "band": "b2",
+   "level": "b2",
+   "verdict": "PASS",
+   "sentences": 8,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "77 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "gorod-bez-karty",
+   "id": "ru.story.b2.gorod-bez-karty",
+   "band": "b2",
+   "level": "b2",
+   "verdict": "PASS",
+   "sentences": 8,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "71 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "internet-v-derevne",
+   "id": "ru.story.b1.internet-v-derevne",
+   "band": "b1",
+   "level": "b1",
+   "verdict": "PASS",
+   "sentences": 7,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "45 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "kluch-ot-dachi",
+   "id": "ru.story.b1.kluch-ot-dachi",
+   "band": "b1",
+   "level": "b1",
+   "verdict": "PASS",
+   "sentences": 8,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "49 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "kot-doma",
+   "id": "ru.story.a1.kot-doma",
+   "band": "a1",
+   "level": "a1",
+   "verdict": "PASS",
+   "sentences": 6,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "16 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "morning-of-anna",
+   "id": "ru.story.cp.morning-of-anna",
+   "band": "cp",
+   "level": "a1",
+   "verdict": "PASS",
+   "sentences": 5,
+   "findings": []
+  },
+  {
+   "slug": "moy-den",
+   "id": "ru.story.a1.moy-den",
+   "band": "a1",
+   "level": "a1",
+   "verdict": "PASS",
+   "sentences": 6,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "15 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "noch-v-poezde",
+   "id": "ru.story.b1.noch-v-poezde",
+   "band": "b1",
+   "level": "b1",
+   "verdict": "PASS",
+   "sentences": 8,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "65 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "perevodchik-vse-pereputal",
+   "id": "ru.story.b2.perevodchik-vse-pereputal",
+   "band": "b2",
+   "level": "b2",
+   "verdict": "PASS",
+   "sentences": 8,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "57 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "pismo-ne-temu",
+   "id": "ru.story.b1.pismo-ne-temu",
+   "band": "b1",
+   "level": "b1",
+   "verdict": "PASS",
+   "sentences": 7,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "55 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "podarok-dlya-mamy",
+   "id": "ru.story.a1.podarok-dlya-mamy",
+   "band": "a1",
+   "level": "a1",
+   "verdict": "PASS",
+   "sentences": 6,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "14 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "rybalka-zimoy",
+   "id": "ru.story.a2.rybalka-zimoy",
+   "band": "a2",
+   "level": "a2",
+   "verdict": "PASS",
+   "sentences": 6,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "30 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "shapka-v-parke",
+   "id": "ru.story.a1.shapka-v-parke",
+   "band": "a1",
+   "level": "a1",
+   "verdict": "PASS",
+   "sentences": 6,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "13 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "sosed-s-gitarioy",
+   "id": "ru.story.a2.sosed-s-gitarioy",
+   "band": "a2",
+   "level": "a2",
+   "verdict": "PASS",
+   "sentences": 6,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "29 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "spor-o-budushchem",
+   "id": "ru.story.b2.spor-o-budushchem",
+   "band": "b2",
+   "level": "b2",
+   "verdict": "PASS",
+   "sentences": 8,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "58 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "telefon-v-taksi",
+   "id": "ru.story.a2.telefon-v-taksi",
+   "band": "a2",
+   "level": "a2",
+   "verdict": "PASS",
+   "sentences": 7,
+   "findings": [
+    [
+     "WARN",
+     "no_stress_marks",
+     "33 multi-syllable content words carry no stress mark"
+    ]
+   ]
+  },
+  {
+   "slug": "walk-in-the-forest",
+   "id": "ru.story.cp.walk-in-the-forest",
+   "band": "cp",
+   "level": "a1",
+   "verdict": "PASS",
+   "sentences": 5,
+   "findings": [
+    [
+     "WARN",
+     "stress_unverified",
+     [
+      "сидит"
+     ]
+    ]
+   ]
+  }
+ ],
+ "structural_errors": [],
+ "story_count": 20,
+ "failed": []
+}

@@ -1,0 +1,1322 @@
+{
+  "card": "RU-LEXICON-CLAIM-001",
+  "rule": "topic-group family / story-lemma host / nature -> routines-10; dictionary-weight column empty",
+  "groups": [
+    {
+      "unit": "ru.unit.b2.argue-01",
+      "activity_id": "ru.activity.b2.lexclaim-argue-argue-01",
+      "refs": [
+        "ru.lex.argue.klyatva"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.argue.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.argue-02",
+      "activity_id": "ru.activity.b2.lexclaim-argue-argue-02",
+      "refs": [
+        "ru.lex.argue.kontrargument"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.argue.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.argue-03",
+      "activity_id": "ru.activity.b2.lexclaim-argue-argue-03",
+      "refs": [
+        "ru.lex.argue.podozrevat"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.argue.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.argue-04",
+      "activity_id": "ru.activity.b2.lexclaim-argue-argue-04",
+      "refs": [
+        "ru.lex.argue.rassledovanie"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.argue.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.argue2-01",
+      "activity_id": "ru.activity.b2.lexclaim-argue2-argue2-01",
+      "refs": [
+        "ru.lex.argue2.organizm"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.argue2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.argue2-02",
+      "activity_id": "ru.activity.b2.lexclaim-argue2-argue2-02",
+      "refs": [
+        "ru.lex.argue2.sopostavlyat"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.argue2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.argue3-01",
+      "activity_id": "ru.activity.b2.lexclaim-argue3-argue3-01",
+      "refs": [
+        "ru.lex.argue3.ischerpat"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.argue3.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.critical-01",
+      "activity_id": "ru.activity.b2.lexclaim-critical-critical-01",
+      "refs": [
+        "ru.lex.critical.frazeologizm"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.critical.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.critical-02",
+      "activity_id": "ru.activity.b2.lexclaim-critical-critical-02",
+      "refs": [
+        "ru.lex.critical.naklonenie"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.critical.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.critical-03",
+      "activity_id": "ru.activity.b2.lexclaim-critical-critical-03",
+      "refs": [
+        "ru.lex.critical.rod"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.critical.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.critical-04",
+      "activity_id": "ru.activity.b2.lexclaim-critical-critical-04",
+      "refs": [
+        "ru.lex.critical.zalog"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.critical.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.critical2-01",
+      "activity_id": "ru.activity.b2.lexclaim-critical2-critical2-01",
+      "refs": [
+        "ru.lex.critical2.vozzvanie"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.critical2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.critical3-01",
+      "activity_id": "ru.activity.b2.lexclaim-critical3-critical3-01",
+      "refs": [
+        "ru.lex.critical3.atlas"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.critical3.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.critical3-02",
+      "activity_id": "ru.activity.b2.lexclaim-critical3-critical3-02",
+      "refs": [
+        "ru.lex.critical3.katalog"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.critical3.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.critical4-01",
+      "activity_id": "ru.activity.b2.lexclaim-critical4-critical4-01",
+      "refs": [
+        "ru.lex.critical4.empiricheskiy"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.critical4.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.critical4-02",
+      "activity_id": "ru.activity.b2.lexclaim-critical4-critical4-02",
+      "refs": [
+        "ru.lex.critical4.glubokiy"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.critical4.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.critical4-03",
+      "activity_id": "ru.activity.b2.lexclaim-critical4-critical4-03",
+      "refs": [
+        "ru.lex.critical4.mnogoznachnost"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.critical4.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.critical4-04",
+      "activity_id": "ru.activity.b2.lexclaim-critical4-critical4-04",
+      "refs": [
+        "ru.lex.critical4.neodnoznachnyy"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.critical4.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.critical4-05",
+      "activity_id": "ru.activity.b2.lexclaim-critical4-critical4-05",
+      "refs": [
+        "ru.lex.critical4.neopredelennost"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.critical4.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.critical4-06",
+      "activity_id": "ru.activity.b2.lexclaim-critical4-critical4-06",
+      "refs": [
+        "ru.lex.critical4.poverxnostnyy"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.critical4.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.critical4-07",
+      "activity_id": "ru.activity.b2.lexclaim-critical4-critical4-07",
+      "refs": [
+        "ru.lex.critical4.umozrittelnyy"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.critical4.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.culture-media-01",
+      "activity_id": "ru.activity.b1.lexclaim-culture-culture-media-01",
+      "refs": [
+        "ru.lex.culture.festival"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.culture.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.culture-media-02",
+      "activity_id": "ru.activity.b1.lexclaim-culture-culture-media-02",
+      "refs": [
+        "ru.lex.culture.postanovka"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.culture.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.culture-media-03",
+      "activity_id": "ru.activity.b1.lexclaim-culture-culture-media-03",
+      "refs": [
+        "ru.lex.culture.programmka"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.culture.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.culture-media-04",
+      "activity_id": "ru.activity.b1.lexclaim-culture-culture-media-04",
+      "refs": [
+        "ru.lex.culture.zritel"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.culture.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.feelings-01",
+      "activity_id": "ru.activity.b1.lexclaim-feelings-feelings-01",
+      "refs": [
+        "ru.lex.feelings.antipatiya"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.feelings.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.feelings-02",
+      "activity_id": "ru.activity.b1.lexclaim-feelings-feelings-02",
+      "refs": [
+        "ru.lex.feelings.razocharovat"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.feelings.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.feelings-03",
+      "activity_id": "ru.activity.b1.lexclaim-feelings-feelings-03",
+      "refs": [
+        "ru.lex.feelings.revnost"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.feelings.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.feelings-04",
+      "activity_id": "ru.activity.b1.lexclaim-feelings-feelings-04",
+      "refs": [
+        "ru.lex.feelings.simpatiya"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.feelings.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.feelings-05",
+      "activity_id": "ru.activity.b1.lexclaim-feelings-feelings-05",
+      "refs": [
+        "ru.lex.feelings.skuka"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.feelings.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.feelings-06",
+      "activity_id": "ru.activity.b1.lexclaim-feelings-feelings-06",
+      "refs": [
+        "ru.lex.feelings.zavist"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.feelings.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.future-01",
+      "activity_id": "ru.activity.b1.lexclaim-future-future-01",
+      "refs": [
+        "ru.lex.future.neterpenie"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.future.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.future-02",
+      "activity_id": "ru.activity.b1.lexclaim-future-future-02",
+      "refs": [
+        "ru.lex.future.obman"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.future.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.future-03",
+      "activity_id": "ru.activity.b1.lexclaim-future-future-03",
+      "refs": [
+        "ru.lex.future.predskazanie"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.future.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.future-04",
+      "activity_id": "ru.activity.b1.lexclaim-future-future-04",
+      "refs": [
+        "ru.lex.future.predvidenie"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.future.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.future2-01",
+      "activity_id": "ru.activity.b1.lexclaim-future2-future2-01",
+      "refs": [
+        "ru.lex.future2.dokazyvat"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.future2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.future2-02",
+      "activity_id": "ru.activity.b1.lexclaim-future2-future2-02",
+      "refs": [
+        "ru.lex.future2.opiratsya"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.future2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.future2-03",
+      "activity_id": "ru.activity.b1.lexclaim-future2-future2-03",
+      "refs": [
+        "ru.lex.future2.polagat"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.future2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.future2-04",
+      "activity_id": "ru.activity.b1.lexclaim-future2-future2-04",
+      "refs": [
+        "ru.lex.future2.protivorechie"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.future2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.housing-problems-01",
+      "activity_id": "ru.activity.b1.lexclaim-housing-housing-problems-01",
+      "refs": [
+        "ru.lex.housing.bochka"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.housing.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.housing-problems-02",
+      "activity_id": "ru.activity.b1.lexclaim-housing-housing-problems-02",
+      "refs": [
+        "ru.lex.housing.dacha"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.housing.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.housing-problems-03",
+      "activity_id": "ru.activity.b1.lexclaim-housing-housing-problems-03",
+      "refs": [
+        "ru.lex.housing.klumba"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.housing.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.housing-problems-04",
+      "activity_id": "ru.activity.b1.lexclaim-housing-housing-problems-04",
+      "refs": [
+        "ru.lex.housing.kust"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.housing.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.housing-problems-05",
+      "activity_id": "ru.activity.b1.lexclaim-housing-housing-problems-05",
+      "refs": [
+        "ru.lex.housing.leika"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.housing.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.housing-problems-06",
+      "activity_id": "ru.activity.b1.lexclaim-housing-housing-problems-06",
+      "refs": [
+        "ru.lex.housing.lopata"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.housing.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.housing-problems-07",
+      "activity_id": "ru.activity.b1.lexclaim-housing-housing-problems-07",
+      "refs": [
+        "ru.lex.housing.ogorod"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.housing.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.housing-problems-08",
+      "activity_id": "ru.activity.b1.lexclaim-housing-housing-problems-08",
+      "refs": [
+        "ru.lex.housing.shlang"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.housing.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.housing-problems-09",
+      "activity_id": "ru.activity.b1.lexclaim-housing-housing-problems-09",
+      "refs": [
+        "ru.lex.housing.skvoznyak"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.housing.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.housing-problems-10",
+      "activity_id": "ru.activity.b1.lexclaim-housing-housing-problems-10",
+      "refs": [
+        "ru.lex.housing.urozhay"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.housing.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.learning-work-01",
+      "activity_id": "ru.activity.b1.lexclaim-learning-learning-work-01",
+      "refs": [
+        "ru.lex.learning.dobitsya"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.learning.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.learning-work-02",
+      "activity_id": "ru.activity.b1.lexclaim-learning-learning-work-02",
+      "refs": [
+        "ru.lex.learning.dokhod"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.learning.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.learning-work-03",
+      "activity_id": "ru.activity.b1.lexclaim-learning-learning-work-03",
+      "refs": [
+        "ru.lex.learning.keys"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.learning.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.learning-work-04",
+      "activity_id": "ru.activity.b1.lexclaim-learning-learning-work-04",
+      "refs": [
+        "ru.lex.learning.nagrada"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.learning.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.learning-work-05",
+      "activity_id": "ru.activity.b1.lexclaim-learning-learning-work-05",
+      "refs": [
+        "ru.lex.learning.perspektiva"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.learning.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.learning-work-06",
+      "activity_id": "ru.activity.b1.lexclaim-learning-learning-work-06",
+      "refs": [
+        "ru.lex.learning.podkhod"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.learning.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.learning-work-07",
+      "activity_id": "ru.activity.b1.lexclaim-learning-learning-work-07",
+      "refs": [
+        "ru.lex.learning.programma"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.learning.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.learning-work-08",
+      "activity_id": "ru.activity.b1.lexclaim-learning-learning-work-08",
+      "refs": [
+        "ru.lex.learning.proiznoshenie"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.learning.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.learning-work-09",
+      "activity_id": "ru.activity.b1.lexclaim-learning-learning-work-09",
+      "refs": [
+        "ru.lex.learning.uchenie"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.learning.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.learning-work-10",
+      "activity_id": "ru.activity.b1.lexclaim-learning-learning-work-10",
+      "refs": [
+        "ru.lex.learning.usherb"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.learning.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.media-01",
+      "activity_id": "ru.activity.b1.lexclaim-media-media-01",
+      "refs": [
+        "ru.lex.media.banner"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.media.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.media-02",
+      "activity_id": "ru.activity.b1.lexclaim-media-media-02",
+      "refs": [
+        "ru.lex.media.novost"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.media.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.narration-background-01",
+      "activity_id": "ru.activity.b1.lexclaim-narration2-narration-background-01",
+      "refs": [
+        "ru.lex.narration2.golos"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.narration2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.narration-background-02",
+      "activity_id": "ru.activity.b1.lexclaim-narration2-narration-background-02",
+      "refs": [
+        "ru.lex.narration2.sled"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.narration2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.narration-background-03",
+      "activity_id": "ru.activity.b1.lexclaim-narration2-narration-background-03",
+      "refs": [
+        "ru.lex.narration2.ten"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.narration2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.narration-background-04",
+      "activity_id": "ru.activity.b1.lexclaim-narration2-narration-background-04",
+      "refs": [
+        "ru.lex.narration2.tishina"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.narration2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.narration-background-05",
+      "activity_id": "ru.activity.b1.lexclaim-narration2-narration-background-05",
+      "refs": [
+        "ru.lex.narration2.zvuk"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.narration2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.opinions-01",
+      "activity_id": "ru.activity.b1.lexclaim-opinions-opinions-01",
+      "refs": [
+        "ru.lex.opinions.eksperiment"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.opinions.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.opinions-02",
+      "activity_id": "ru.activity.b1.lexclaim-opinions-opinions-02",
+      "refs": [
+        "ru.lex.opinions.illustraciya"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.opinions.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.opinions-03",
+      "activity_id": "ru.activity.b1.lexclaim-opinions-opinions-03",
+      "refs": [
+        "ru.lex.opinions.issledovanie"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.opinions.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.opinions-04",
+      "activity_id": "ru.activity.b1.lexclaim-opinions-opinions-04",
+      "refs": [
+        "ru.lex.opinions.logika"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.opinions.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.opinions-05",
+      "activity_id": "ru.activity.b1.lexclaim-opinions-opinions-05",
+      "refs": [
+        "ru.lex.opinions.tochka"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.opinions.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.a2.jpast-01",
+      "activity_id": "ru.activity.a2.lexclaim-pastevents-jpast-01",
+      "refs": [
+        "ru.lex.pastevents.chasto"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.pastevents.* claiming units (12 units)"
+    },
+    {
+      "unit": "ru.unit.a2.jpast-02",
+      "activity_id": "ru.activity.a2.lexclaim-pastevents-jpast-02",
+      "refs": [
+        "ru.lex.pastevents.nochyu"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.pastevents.* claiming units (12 units)"
+    },
+    {
+      "unit": "ru.unit.a2.jpast-03",
+      "activity_id": "ru.activity.a2.lexclaim-pastevents-jpast-03",
+      "refs": [
+        "ru.lex.pastevents.proshlyy"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.pastevents.* claiming units (12 units)"
+    },
+    {
+      "unit": "ru.unit.a2.past-events-01",
+      "activity_id": "ru.activity.a2.lexclaim-pastevents-past-events-01",
+      "refs": [
+        "ru.lex.pastevents.redko"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.pastevents.* claiming units (12 units)"
+    },
+    {
+      "unit": "ru.unit.a2.past-events-02",
+      "activity_id": "ru.activity.a2.lexclaim-pastevents-past-events-02",
+      "refs": [
+        "ru.lex.pastevents.smotret"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.pastevents.* claiming units (12 units)"
+    },
+    {
+      "unit": "ru.unit.a2.past-events-03",
+      "activity_id": "ru.activity.a2.lexclaim-pastevents-past-events-03",
+      "refs": [
+        "ru.lex.pastevents.utrom"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.pastevents.* claiming units (12 units)"
+    },
+    {
+      "unit": "ru.unit.a2.past-events-04",
+      "activity_id": "ru.activity.a2.lexclaim-pastevents-past-events-04",
+      "refs": [
+        "ru.lex.pastevents.vecherom"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.pastevents.* claiming units (12 units)"
+    },
+    {
+      "unit": "ru.unit.a2.past-events-05",
+      "activity_id": "ru.activity.a2.lexclaim-pastevents-past-events-05",
+      "refs": [
+        "ru.lex.pastevents.zavtra"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.pastevents.* claiming units (12 units)"
+    },
+    {
+      "unit": "ru.unit.b2.app-01",
+      "activity_id": "ru.activity.b2.lexclaim-prof-app-01",
+      "refs": [
+        "ru.lex.prof.sluzhebnoe"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.prof.* claiming units (40 units)"
+    },
+    {
+      "unit": "ru.unit.b1.relationships-01",
+      "activity_id": "ru.activity.b1.lexclaim-rel-relationships-01",
+      "refs": [
+        "ru.lex.rel.dobryj"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.rel.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.respect-01",
+      "activity_id": "ru.activity.b1.lexclaim-respect-respect-01",
+      "refs": [
+        "ru.lex.respect.glas2"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.respect.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.respect-02",
+      "activity_id": "ru.activity.b1.lexclaim-respect-respect-02",
+      "refs": [
+        "ru.lex.respect.golosa2"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.respect.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.respect-03",
+      "activity_id": "ru.activity.b1.lexclaim-respect-respect-03",
+      "refs": [
+        "ru.lex.respect.mnenie2"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.respect.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.respect-04",
+      "activity_id": "ru.activity.b1.lexclaim-respect-respect-04",
+      "refs": [
+        "ru.lex.respect.pospeshnost"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.respect.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.respect-05",
+      "activity_id": "ru.activity.b1.lexclaim-respect-respect-05",
+      "refs": [
+        "ru.lex.respect.vyvod2"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.respect.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.study-01",
+      "activity_id": "ru.activity.b2.lexclaim-study-study-01",
+      "refs": [
+        "ru.lex.study.beskonechnost"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.study.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.study-02",
+      "activity_id": "ru.activity.b2.lexclaim-study-study-02",
+      "refs": [
+        "ru.lex.study.element"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.study.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.study-03",
+      "activity_id": "ru.activity.b2.lexclaim-study-study-03",
+      "refs": [
+        "ru.lex.study.kub"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.study.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.study-04",
+      "activity_id": "ru.activity.b2.lexclaim-study-study-04",
+      "refs": [
+        "ru.lex.study.piramida"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.study.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.study2-01",
+      "activity_id": "ru.activity.b2.lexclaim-study2-study2-01",
+      "refs": [
+        "ru.lex.study2.sostavlyayushchaya"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.study2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.study3-01",
+      "activity_id": "ru.activity.b2.lexclaim-study3-study3-01",
+      "refs": [
+        "ru.lex.study3.nastavlenie"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.study3.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.summary-01",
+      "activity_id": "ru.activity.b1.lexclaim-summary-summary-01",
+      "refs": [
+        "ru.lex.summary.nyuans"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.summary.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.summary-02",
+      "activity_id": "ru.activity.b1.lexclaim-summary-summary-02",
+      "refs": [
+        "ru.lex.summary.osnova"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.summary.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.summary-03",
+      "activity_id": "ru.activity.b1.lexclaim-summary-summary-03",
+      "refs": [
+        "ru.lex.summary.sterzhen2"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.summary.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.summary2-01",
+      "activity_id": "ru.activity.b1.lexclaim-summary2-summary2-01",
+      "refs": [
+        "ru.lex.summary2.primechanie"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.summary2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.summary2-02",
+      "activity_id": "ru.activity.b1.lexclaim-summary2-summary2-02",
+      "refs": [
+        "ru.lex.summary2.snoska"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.summary2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.summary2-03",
+      "activity_id": "ru.activity.b1.lexclaim-summary2-summary2-03",
+      "refs": [
+        "ru.lex.summary2.ssylka"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.summary2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.synthesis-01",
+      "activity_id": "ru.activity.b2.lexclaim-synthesis-synthesis-01",
+      "refs": [
+        "ru.lex.synthesis.adaptirovat"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.synthesis.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.synthesis-02",
+      "activity_id": "ru.activity.b2.lexclaim-synthesis-synthesis-02",
+      "refs": [
+        "ru.lex.synthesis.almanah"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.synthesis.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.synthesis-03",
+      "activity_id": "ru.activity.b2.lexclaim-synthesis-synthesis-03",
+      "refs": [
+        "ru.lex.synthesis.kompilirovat"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.synthesis.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.synthesis-04",
+      "activity_id": "ru.activity.b2.lexclaim-synthesis-synthesis-04",
+      "refs": [
+        "ru.lex.synthesis.samizdat"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.synthesis.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.synthesis-05",
+      "activity_id": "ru.activity.b2.lexclaim-synthesis-synthesis-05",
+      "refs": [
+        "ru.lex.synthesis.zaimstvovat"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.synthesis.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.synthesis2-01",
+      "activity_id": "ru.activity.b2.lexclaim-synthesis2-synthesis2-01",
+      "refs": [
+        "ru.lex.synthesis2.mgla"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.synthesis2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.synthesis2-02",
+      "activity_id": "ru.activity.b2.lexclaim-synthesis2-synthesis2-02",
+      "refs": [
+        "ru.lex.synthesis2.tma"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.synthesis2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.synthesis3-01",
+      "activity_id": "ru.activity.b2.lexclaim-synthesis3-synthesis3-01",
+      "refs": [
+        "ru.lex.synthesis3.sostyazanie"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.synthesis3.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.synthesis3-02",
+      "activity_id": "ru.activity.b2.lexclaim-synthesis3-synthesis3-02",
+      "refs": [
+        "ru.lex.synthesis3.turnir"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.synthesis3.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.synthesis4-01",
+      "activity_id": "ru.activity.b2.lexclaim-synthesis4-synthesis4-01",
+      "refs": [
+        "ru.lex.synthesis4.gravjura"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.synthesis4.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.synthesis4-02",
+      "activity_id": "ru.activity.b2.lexclaim-synthesis4-synthesis4-02",
+      "refs": [
+        "ru.lex.synthesis4.kolllazh"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.synthesis4.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.synthesis4-03",
+      "activity_id": "ru.activity.b2.lexclaim-synthesis4-synthesis4-03",
+      "refs": [
+        "ru.lex.synthesis4.mashinopis"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.synthesis4.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.synthesis4-04",
+      "activity_id": "ru.activity.b2.lexclaim-synthesis4-synthesis4-04",
+      "refs": [
+        "ru.lex.synthesis4.mozaika"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.synthesis4.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b2.synthesis4-05",
+      "activity_id": "ru.activity.b2.lexclaim-synthesis4-synthesis4-05",
+      "refs": [
+        "ru.lex.synthesis4.peyzazh"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.synthesis4.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.work-processes-01",
+      "activity_id": "ru.activity.b1.lexclaim-work-work-processes-01",
+      "refs": [
+        "ru.lex.work.portfolio"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.work.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.work-processes-02",
+      "activity_id": "ru.activity.b1.lexclaim-work-work-processes-02",
+      "refs": [
+        "ru.lex.work.sertifikat"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.work.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.work-processes-03",
+      "activity_id": "ru.activity.b1.lexclaim-work-work-processes-03",
+      "refs": [
+        "ru.lex.work.ubytok"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.work.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.writing-01",
+      "activity_id": "ru.activity.b1.lexclaim-writing-writing-01",
+      "refs": [
+        "ru.lex.writing.talon"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.writing.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.writing2-01",
+      "activity_id": "ru.activity.b1.lexclaim-writing2-writing2-01",
+      "refs": [
+        "ru.lex.writing2.basnya"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.writing2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.writing2-02",
+      "activity_id": "ru.activity.b1.lexclaim-writing2-writing2-02",
+      "refs": [
+        "ru.lex.writing2.personazh"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.writing2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.writing2-03",
+      "activity_id": "ru.activity.b1.lexclaim-writing2-writing2-03",
+      "refs": [
+        "ru.lex.writing2.pritcha"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.writing2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.writing2-04",
+      "activity_id": "ru.activity.b1.lexclaim-writing2-writing2-04",
+      "refs": [
+        "ru.lex.writing2.prototip"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.writing2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.b1.writing2-05",
+      "activity_id": "ru.activity.b1.lexclaim-writing2-writing2-05",
+      "refs": [
+        "ru.lex.writing2.satira"
+      ],
+      "kind": "topic-family",
+      "source": "family of ru.lex.writing2.* claiming units (10 units)"
+    },
+    {
+      "unit": "ru.unit.a1.routines-01",
+      "activity_id": "ru.activity.a1.story-words-moy-den",
+      "refs": [
+        "ru.lex.stories202611.doska"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.a1.moy-den"
+    },
+    {
+      "unit": "ru.unit.a1.routines-01",
+      "activity_id": "ru.activity.a1.story-words-morning-of-anna",
+      "refs": [
+        "ru.lex.stories202611.nachinatsya",
+        "ru.lex.stories202611.odevatsya",
+        "ru.lex.stories202611.varit",
+        "ru.lex.stories202611.vyhodit"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.cp.morning-of-anna"
+    },
+    {
+      "unit": "ru.unit.a1.routines-10",
+      "activity_id": "ru.activity.a1.story-words-walk-in-the-forest",
+      "refs": [
+        "ru.lex.stories202611.pet",
+        "ru.lex.stories202611.ptichka",
+        "ru.lex.stories202611.svetit",
+        "ru.lex.stories202611.vetka",
+        "ru.lex.stories202611.yarko",
+        "ru.lex.stories202611.zarya"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.cp.walk-in-the-forest"
+    },
+    {
+      "unit": "ru.unit.a1.shopping-01",
+      "activity_id": "ru.activity.a1.story-words-at-the-market",
+      "refs": [
+        "ru.lex.stories202611.baton",
+        "ru.lex.stories202611.goryachiy",
+        "ru.lex.stories202611.nakupit"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.cp.at-the-market"
+    },
+    {
+      "unit": "ru.unit.a1.shopping-09",
+      "activity_id": "ru.activity.a1.story-words-podarok-dlya-mamy",
+      "refs": [
+        "ru.lex.stories202611.tsvet"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.a1.podarok-dlya-mamy"
+    },
+    {
+      "unit": "ru.unit.a2.past-events-01",
+      "activity_id": "ru.activity.a2.story-words-avtobus-ne-prishol",
+      "refs": [
+        "ru.lex.stories202611.fonar",
+        "ru.lex.stories202611.ogon"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.a2.avtobus-ne-prishol"
+    },
+    {
+      "unit": "ru.unit.a2.past-events-03",
+      "activity_id": "ru.activity.a2.story-words-sosed-s-gitarioy",
+      "refs": [
+        "ru.lex.stories202611.gitara"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.a2.sosed-s-gitarioy"
+    },
+    {
+      "unit": "ru.unit.a2.past-events-05",
+      "activity_id": "ru.activity.a2.story-words-telefon-v-taksi",
+      "refs": [
+        "ru.lex.stories202611.sidene"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.a2.telefon-v-taksi"
+    },
+    {
+      "unit": "ru.unit.a2.past-events-10",
+      "activity_id": "ru.activity.a2.story-words-rybalka-zimoy",
+      "refs": [
+        "ru.lex.stories202611.lunka"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.a2.rybalka-zimoy"
+    },
+    {
+      "unit": "ru.unit.b1.narration-sequence-01",
+      "activity_id": "ru.activity.b1.story-words-kluch-ot-dachi",
+      "refs": [
+        "ru.lex.stories202611.karman"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.b1.kluch-ot-dachi"
+    },
+    {
+      "unit": "ru.unit.b1.narration-sequence-02",
+      "activity_id": "ru.activity.b1.story-words-pismo-ne-temu",
+      "refs": [
+        "ru.lex.stories202611.vstretitsya"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.b1.pismo-ne-temu"
+    },
+    {
+      "unit": "ru.unit.b1.narration-sequence-08",
+      "activity_id": "ru.activity.b1.story-words-noch-v-poezde",
+      "refs": [
+        "ru.lex.stories202611.kupe",
+        "ru.lex.stories202611.muzykant",
+        "ru.lex.stories202611.poimat",
+        "ru.lex.stories202611.ulybatsya",
+        "ru.lex.stories202611.zontik"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.b1.noch-v-poezde"
+    },
+    {
+      "unit": "ru.unit.b1.narration-sequence-09",
+      "activity_id": "ru.activity.b1.story-words-internet-v-derevne",
+      "refs": [
+        "ru.lex.stories202611.ded",
+        "ru.lex.stories202611.derevnya",
+        "ru.lex.stories202611.internet",
+        "ru.lex.stories202611.znayushchiy"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.b1.internet-v-derevne"
+    },
+    {
+      "unit": "ru.unit.b2.argue-03",
+      "activity_id": "ru.activity.b2.story-words-spor-o-budushchem",
+      "refs": [
+        "ru.lex.stories202611.fizik",
+        "ru.lex.stories202611.poetessa",
+        "ru.lex.stories202611.ustoyat",
+        "ru.lex.stories202611.utverzhdat",
+        "ru.lex.stories202611.vozrazit"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.b2.spor-o-budushchem"
+    },
+    {
+      "unit": "ru.unit.b2.lex-03",
+      "activity_id": "ru.activity.b2.story-words-perevodchik-vse-pereputal",
+      "refs": [
+        "ru.lex.stories202611.dokladchik",
+        "ru.lex.stories202611.improvizirovat",
+        "ru.lex.stories202611.konferentsiya",
+        "ru.lex.stories202611.perevodchik",
+        "ru.lex.stories202611.yagoda"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.b2.perevodchik-vse-pereputal"
+    },
+    {
+      "unit": "ru.unit.b2.lit-01",
+      "activity_id": "ru.activity.b2.story-words-aukcion-odnoy-kartiny",
+      "refs": [
+        "ru.lex.stories202611.aukcion",
+        "ru.lex.stories202611.kollektsioner",
+        "ru.lex.stories202611.lot",
+        "ru.lex.stories202611.pahnut",
+        "ru.lex.stories202611.rasti"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.b2.aukcion-odnoy-kartiny"
+    },
+    {
+      "unit": "ru.unit.b2.neg-01",
+      "activity_id": "ru.activity.b2.story-words-dva-bileta-v-odin-teatr",
+      "refs": [
+        "ru.lex.stories202611.antrakt",
+        "ru.lex.stories202611.foye",
+        "ru.lex.stories202611.koreshok",
+        "ru.lex.stories202611.pensioner",
+        "ru.lex.stories202611.zanaves"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.b2.dva-bileta-v-odin-teatr"
+    },
+    {
+      "unit": "ru.unit.b2.soc-01",
+      "activity_id": "ru.activity.b2.story-words-gorod-bez-karty",
+      "refs": [
+        "ru.lex.stories202611.khozyayka",
+        "ru.lex.stories202611.lavka",
+        "ru.lex.stories202611.prilavok",
+        "ru.lex.stories202611.torgovka",
+        "ru.lex.stories202611.vyklyuchitsya"
+      ],
+      "kind": "story-words",
+      "source": "ru.story.b2.gorod-bez-karty"
+    },
+    {
+      "unit": "ru.unit.a1.routines-10",
+      "activity_id": "ru.activity.a1.nature-words-walk-in-the-forest",
+      "refs": [
+        "ru.lex.nature.cvetok",
+        "ru.lex.nature.derevo",
+        "ru.lex.nature.dozhd",
+        "ru.lex.nature.gora",
+        "ru.lex.nature.les",
+        "ru.lex.nature.luna",
+        "ru.lex.nature.ozero",
+        "ru.lex.nature.pole",
+        "ru.lex.nature.ptica",
+        "ru.lex.nature.reka",
+        "ru.lex.nature.ryba",
+        "ru.lex.nature.solnce",
+        "ru.lex.nature.trava",
+        "ru.lex.nature.veter",
+        "ru.lex.nature.zvezda"
+      ],
+      "kind": "nature",
+      "source": "ru.story.cp.walk-in-the-forest vocabulary (group family = none)"
+    }
+  ],
+  "dictionary_weight": [],
+  "orphan_total": 192,
+  "covered": 192,
+  "uncovered": []
+}

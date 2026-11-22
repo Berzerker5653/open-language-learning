@@ -1,0 +1,8 @@
+GATE fmt exit=0
+GATE langpack exit=0
+GATE qa_stories exit=2
+GATE remeasure exit=0
+GATE band_profile exit=0
+GATE pack_install exit=0
+GATE clippy_desktop exit=0
+LEXCLAIM-BATTERY-DONE

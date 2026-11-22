@@ -66,6 +66,17 @@ be deleted to return its words to dictionary weight.
   ids.
 - Gates + census under `state/evidence/RU-LEXICON-CLAIM-001/`.
 
+## Run history (board t_55b270c6)
+
+Run 1 died at the 80/80 iteration budget with the lane COMPLETE but uncommitted
+(claims applied, census re-measured 0, qa_stories green, band test written and
+passing). Run 2 stalled with no terminal call. Run 3 (controller) re-verified
+every gate personally on the WIP tree, fixed only its own qa_stories invocation
+(`--pack` flag), reconciled the 192-id census against claim-map.json
+programmatically, and committed. Full controller battery:
+`state/evidence/RU-LEXICON-CLAIM-001/gates.log`. No lane content was changed
+during re-verification.
+
 ## Race note
 
 Same unit yaml files as RU-SENTENCE-CLAIM-001, which is now committed (`3ea574b`) —
