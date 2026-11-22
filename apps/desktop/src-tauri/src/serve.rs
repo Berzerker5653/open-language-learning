@@ -33,10 +33,10 @@
 
 use axum::body::Bytes;
 use axum::extract::Path as AxPath;
-use axum::http::header::CONTENT_TYPE;
-use axum::http::header::ORIGIN;
 use axum::http::HeaderMap;
 use axum::http::StatusCode;
+use axum::http::header::CONTENT_TYPE;
+use axum::http::header::ORIGIN;
 use axum::response::sse::{Event, KeepAlive, Sse};
 use axum::response::{IntoResponse, Response};
 use axum::routing::{get, post};
@@ -45,8 +45,8 @@ use futures_core::stream::Stream;
 use std::convert::Infallible;
 use std::path::{Component, Path, PathBuf};
 use std::pin::Pin;
-use std::sync::mpsc::SyncSender;
 use std::sync::OnceLock;
+use std::sync::mpsc::SyncSender;
 use std::task::{Context, Poll};
 use tokio::sync::broadcast;
 
@@ -363,8 +363,8 @@ fn app_handle_command(cmd: &str, payload: &serde_json::Value) -> Option<IpcReply
 /// install is cancellable through the ordinary `cancel_pack_install`
 /// command exactly like a desktop one).
 fn install_catalog_pack_served(pack_id: &str) -> Result<crate::packs::InstallResult, String> {
-    use std::sync::atomic::AtomicBool;
     use std::sync::Arc;
+    use std::sync::atomic::AtomicBool;
     let flag = Arc::new(AtomicBool::new(false));
     let registered = pack_id.to_string();
     if let Ok(mut m) = crate::install_cancel_registry().lock() {
@@ -496,11 +496,7 @@ async fn capabilities(headers: HeaderMap) -> Json<serde_json::Value> {
             let host = host.split('/').next().unwrap_or("");
             let local =
                 host == "localhost" || host == "127.0.0.1" || host == "[::1]" || host == "::1";
-            if local {
-                Some(true)
-            } else {
-                Some(false)
-            }
+            if local { Some(true) } else { Some(false) }
         }
         None => None,
     };
@@ -1300,10 +1296,12 @@ mod tests {
             v["microphone_names_available"], false,
             "insecure origin must say so: {v}"
         );
-        assert!(v["microphone_names_note"]
-            .as_str()
-            .unwrap()
-            .contains("secure context"));
+        assert!(
+            v["microphone_names_note"]
+                .as_str()
+                .unwrap()
+                .contains("secure context")
+        );
         // Loopback http and any https are secure contexts.
         for origin in [
             "http://localhost:8000",
@@ -1681,10 +1679,12 @@ mod tests {
             6,
             "the toggle hands the operator a 6-digit PIN: {json}"
         );
-        assert!(json["traffic_note"]
-            .as_str()
-            .unwrap()
-            .contains("unencrypted"));
+        assert!(
+            json["traffic_note"]
+                .as_str()
+                .unwrap()
+                .contains("unencrypted")
+        );
 
         // The unpaired LAN peer is refused on every data route...
         let (status, json, _) = request_as(&app, "POST", "/api/app_mode", "{}", peer, None).await;
