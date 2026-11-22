@@ -1,0 +1,84 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling hashbrown v0.17.1
+   Compiling indexmap v2.14.2
+   Compiling syn v3.0.6
+   Compiling serde_derive v1.0.229
+   Compiling serde v1.0.229
+   Compiling serde_yaml v0.9.34+deprecated
+   Compiling lts-speech-api v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/speech-api)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.94s
+     Running unittests src/lib.rs (/home/hunter/game-dev/LTS/target/debug/deps/lts_speech_api-70a7243e107d95a5)
+
+running 6 tests
+test calibration::tests::exact_match_inside_envelope_qualifies_automatic ... ok
+test calibration::tests::measured_limit_breaches_block ... ok
+test calibration::tests::missing_metrics_never_qualify ... ok
+test calibration::tests::outside_envelope_stays_guided ... ok
+test calibration::tests::unfilled_thresholds_never_qualify ... ok
+test calibration::tests::version_or_hash_drift_invalidates ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.00s
+
+EXIT_SPEECH_API=0
+   Compiling lts-domain v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/domain)
+   Compiling tokio-rustls v0.26.6
+   Compiling glib v0.18.5
+   Compiling lts-security v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/security)
+   Compiling lts-speech-api v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/speech-api)
+   Compiling ureq v2.12.1
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/apps/desktop/src-tauri)
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.13.5
+   Compiling lts-speech-runtime v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/speech-runtime)
+   Compiling lts-learner-model v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/learner-model)
+   Compiling lts-scheduler v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/scheduler)
+   Compiling lts-world v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/world)
+   Compiling lts-storage v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/storage)
+   Compiling jsonschema v0.58.5
+   Compiling gio v0.18.4
+   Compiling cairo-rs v0.18.5
+   Compiling atk v0.18.2
+   Compiling javascriptcore-rs v1.1.2
+   Compiling lts-langpack v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/langpack)
+   Compiling lts-activity v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/activity)
+   Compiling pango v0.18.3
+   Compiling gdk-pixbuf v0.18.5
+   Compiling soup3 v0.5.0
+   Compiling gdk v0.18.2
+   Compiling gtk v0.18.2
+   Compiling gdkx11 v0.18.2
+   Compiling webkit2gtk v2.0.2
+   Compiling tao v0.37.1
+   Compiling muda v0.20.0
+   Compiling tauri-runtime v2.12.1
+   Compiling wry v0.57.0
+   Compiling tauri-runtime-wry v2.12.1
+   Compiling tauri v2.12.1
+   Compiling tauri-plugin-single-instance v2.5.2
+error: proc macro panicked
+     --> apps/desktop/src-tauri/src/lib.rs:10879:14
+      |
+10879 |         .run(tauri::generate_context!())
+      |              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+      |
+      = help: message: The `frontendDist` configuration is set to `"../dist"` but this path doesn't exist
+
+error[E0308]: mismatched types
+     --> apps/desktop/src-tauri/src/lib.rs:13481:13
+      |
+13481 | /             entry
+13482 | |                 .as_ref()
+13483 | |                 .and_then(|m| m.files.iter().map(|f| f.sha256.clone()).max())
+      | |_____________________________________________________________________________^ expected `Option<&str>`, found `Option<String>`
+      |
+      = note: expected enum `std::option::Option<&str>`
+                 found enum `std::option::Option<std::string::String>`
+help: try using `.as_deref()` to convert `std::option::Option<std::string::String>` to `std::option::Option<&str>`
+      |
+13483 |                 .and_then(|m| m.files.iter().map(|f| f.sha256.clone()).max()).as_deref()
+      |                                                                              +++++++++++
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `lts-desktop` (lib test) due to 2 previous errors
+EXIT_DESKTOP=101

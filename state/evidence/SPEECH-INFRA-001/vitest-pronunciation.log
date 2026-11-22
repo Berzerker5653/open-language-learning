@@ -1,0 +1,11 @@
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'vitest' run src/pronunciation.test.tsx
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/apps/desktop
+
+
+ Test Files  1 passed (1)
+      Tests  12 passed (12)
+   Start at  23:30:54
+   Duration  149ms (transform 47%, import 31%, tests 18%, worker 3%)
+

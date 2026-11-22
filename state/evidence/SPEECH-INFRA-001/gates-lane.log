@@ -1,0 +1,151 @@
++ echo '=== fmt ==='
+=== fmt ===
++ cargo fmt --all --check
++ echo EXIT_FMT=0
+EXIT_FMT=0
++ echo '=== speech-api full ==='
+=== speech-api full ===
++ cargo test -p lts-speech-api
+   Compiling lts-speech-api v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/speech-api)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.66s
+     Running unittests src/lib.rs (/home/hunter/game-dev/LTS/target/debug/deps/lts_speech_api-70a7243e107d95a5)
+
+running 9 tests
+test calibration::tests::exact_match_inside_envelope_qualifies_automatic ... ok
+test calibration::tests::missing_metrics_never_qualify ... ok
+test calibration::tests::measured_limit_breaches_block ... ok
+test calibration::tests::unfilled_thresholds_never_qualify ... ok
+test calibration::tests::outside_envelope_stays_guided ... ok
+test calibration::tests::version_or_hash_drift_invalidates ... ok
+test tests::mismatch_is_the_only_non_usable_linguistic_signal ... ok
+test tests::providers_are_object_safe ... ok
+test tests::audio_duration_and_serde ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests lts_speech_api
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
++ echo EXIT_SPEECH_API=0
+EXIT_SPEECH_API=0
++ echo '=== desktop lib: new contract tests ==='
+=== desktop lib: new contract tests ===
++ cargo test -p lts-desktop --lib calibration_record_
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.69s
+     Running unittests src/lib.rs (/home/hunter/game-dev/LTS/target/debug/deps/lts_desktop-7647ca427c780ccc)
+
+running 2 tests
+test tests::calibration_record_qualified_for_installed_combination_flips_to_automatic has been running for over 60 seconds
+test tests::calibration_record_with_model_version_drift_fails_closed_to_guided has been running for over 60 seconds
+test tests::calibration_record_qualified_for_installed_combination_flips_to_automatic ... ok
+test tests::calibration_record_with_model_version_drift_fails_closed_to_guided ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 218 filtered out; finished in 90.31s
+
++ echo EXIT_CALIBRATION=0
+EXIT_CALIBRATION=0
++ echo '=== desktop lib: pronunciation regression ==='
+=== desktop lib: pronunciation regression ===
++ cargo test -p lts-desktop --lib pronunciation
+   Compiling aws-lc-sys v0.45.0
+   Compiling x11-dl v2.21.0
+   Compiling libdbus-sys v0.2.7
+   Compiling glib-sys v0.18.1
+   Compiling gobject-sys v0.18.0
+   Compiling gio-sys v0.18.1
+   Compiling gdk-sys v0.18.2
+   Compiling gdk-pixbuf-sys v0.18.0
+   Compiling cairo-sys-rs v0.18.2
+   Compiling pango-sys v0.18.0
+   Compiling atk-sys v0.18.2
+   Compiling javascriptcore-rs-sys v1.1.1
+   Compiling soup3-sys v0.5.0
+   Compiling gdkx11-sys v0.18.2
+   Compiling gtk-sys v0.18.2
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/apps/desktop/src-tauri)
+   Compiling gtk v0.18.2
+   Compiling webkit2gtk-sys v2.0.2
+   Compiling wry v0.57.0
+   Compiling dbus v0.9.12
+   Compiling glib v0.18.5
+   Compiling gdkwayland-sys v0.18.2
+   Compiling gio v0.18.4
+   Compiling cairo-rs v0.18.5
+   Compiling atk v0.18.2
+   Compiling javascriptcore-rs v1.1.2
+   Compiling aws-lc-rs v1.18.1
+   Compiling rustls v0.23.46
+   Compiling rustls-webpki v0.103.16
+   Compiling tokio-rustls v0.26.6
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling ureq v2.12.1
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.13.5
+   Compiling jsonschema v0.58.5
+   Compiling pango v0.18.3
+   Compiling gdk-pixbuf v0.18.5
+   Compiling soup3 v0.5.0
+   Compiling gdk v0.18.2
+   Compiling lts-langpack v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/langpack)
+   Compiling gdkx11 v0.18.2
+   Compiling lts-activity v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/activity)
+   Compiling webkit2gtk v2.0.2
+   Compiling tao v0.37.1
+   Compiling muda v0.20.0
+   Compiling tauri-runtime v2.12.1
+   Compiling tauri-runtime-wry v2.12.1
+   Compiling tauri v2.12.1
+   Compiling tauri-plugin-single-instance v2.5.2
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 39.92s
+     Running unittests src/lib.rs (/home/hunter/game-dev/LTS/target/debug/deps/lts_desktop-7647ca427c780ccc)
+
+running 4 tests
+test tests::pronunciation_check_abstains_when_speech_model_is_off ... ok
+test tests::pronunciation_check_abstains_on_weak_reference_and_mismatch ... ok
+test tests::pronunciation_check_uses_pack_declared_target_without_media has been running for over 60 seconds
+test tests::pronunciation_demo_comes_from_pack_contrasts has been running for over 60 seconds
+test tests::pronunciation_demo_comes_from_pack_contrasts ... ok
+test tests::pronunciation_check_uses_pack_declared_target_without_media ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 216 filtered out; finished in 82.98s
+
++ echo EXIT_PRONUNCIATION=0
+EXIT_PRONUNCIATION=0
++ echo '=== clippy desktop ==='
+=== clippy desktop ===
++ cargo clippy -p lts-desktop --all-targets -- -D warnings
+    Checking lts-domain v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/domain)
+    Checking x11-dl v2.21.0
+    Checking libdbus-sys v0.2.7
+    Checking lts-security v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/security)
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/apps/desktop/src-tauri)
+    Checking lts-speech-api v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/speech-api)
+    Checking dbus v0.9.12
+    Checking lts-speech-runtime v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/speech-runtime)
+    Checking lts-langpack v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/langpack)
+    Checking lts-learner-model v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/learner-model)
+    Checking lts-scheduler v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/scheduler)
+    Checking lts-storage v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/storage)
+    Checking lts-world v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/world)
+    Checking lts-activity v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-speech-infra-work/crates/activity)
+    Checking wry v0.57.0
+    Checking tao v0.37.1
+    Checking tauri-runtime-wry v2.12.1
+    Checking tauri v2.12.1
+    Checking tauri-plugin-single-instance v2.5.2
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 9.46s
++ echo EXIT_CLIPPY=0
+EXIT_CLIPPY=0
++ echo '=== audit_learner_copy ==='
+=== audit_learner_copy ===
++ python3 tools/audit_learner_copy.py
+LEARNER COPY AUDIT v1.5.0: 39 source files scanned, 62 test files skipped, 1848 pack files scanned
+findings: 0
++ echo EXIT_AUDIT=0
+EXIT_AUDIT=0
++ echo GATECHAIN_DONE
+GATECHAIN_DONE
