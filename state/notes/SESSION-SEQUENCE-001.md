@@ -158,3 +158,56 @@ NEXT (TAKEOVER card):
    fix worktree (main tree carries ORTHO WIP that pollutes validation).
 5. Close: unblock+complete t_fb35220d (it is still `running`-claimed by
    the cap-death; takeover closes the parent per the standard recipe).
+
+
+## RUN 121 TAKEOVER record (2026-11-22, board t_426b4251)
+
+Step-2 premise REFUTED by measurement (full numbers + decision in
+state/evidence/SESSION-SEQUENCE-001/takeover-findings.md): in installed
+0.4.6 ZERO units reference `ru.lex.argue.kontrargument` (the 688-bal-09
+lead was an id conflation with `ru.lex.soc.kontrargumentaciya`), and ALL
+818 unit goal_ids are declared. The leak is the raw-lexicon seeding stream
+iterating UNATTACHED entries — 178/4057 RU entries have no unit claiming
+them, so the exclusive goal-lock cannot see them.
+
+Shipped gates (takeover): (1) `weak_skills.retain(!band_locked)` like due
+reviews; (2) fail-CLOSED: unit with non-empty goal_id absent from a
+non-empty goals map is locked (empty-goal_id + empty-map fixture escapes
+kept); (3) lexicon stream: in a pack with a goal map, a lexicon entry
+referenced by no unit is NEW-ineligible. Due/weak retention keeps using
+the goal-locked set only — already-introduced items are never hidden.
+Tests: beginner_plan_never_serves_a_locked_units_content extended (poison
+EVIDENCE now feeds the weak-skill route; weak-skill-reason assertion;
+kontrargument absence), new lexicon_words_outside_the_goal_ladder_are_not_seeded.
+
+REMAINING RECIPE if this run dies mid-way:
+1. Gates run as systemd unit lts-ss1to-gates; logs
+   ~/.hermes/cache/scratch/ss1to-logs/{fmt,test-targeted,test-lib-full,
+   clippy-desktop,clippy-engine}.log + summary.txt + DONE marker. Worktree
+   ~/.hermes/cache/scratch/lts-ss1-to-work (HEAD+fix+tests, media wav
+   symlinks in place; shared CARGO_TARGET_DIR=<repo>/target).
+2. RED demo (optional evidence): revert the 3 code hunks in the worktree
+   (unit_goal_locked `return true`→`false`, the lexicon `ladder_locked_lexicon`
+   guard, the weak_skills retain) keeping the tests → the extended test
+   fails on the weak/unclaimed assertions; restore. Otherwise cite
+   state/evidence/SESSION-SEQUENCE-001/acceptance-home_state* from run 120
+   as the measured RED (rows listed with reasons).
+3. Acceptance: build lts-serve (feature serve) from the worktree, spare
+   port :17641, DEFAULT data dir ~/.local/share/openlang; POST
+   /api/home_state with body key `profileId`, owner
+   prof-e1799551-fc43-494b-ae07-6426bc530ca8 ⇒ zero activities above
+   on-ramp (no argue/argue2*/... content ids in plan). Scheduler rows on
+   disk UNCHANGED (2 argue rows must still be there).
+4. Ledger graft onto HEAD copies IN THE WORKTREE (main tree carries
+   sibling WIP in task-state.json/KANBAN.md): entry SESSION-SEQUENCE-001
+   → done, evidence += takeover-findings.md + takeover-gates.log,
+   summary set; active_task must be null unless another card is
+   in_progress; KANBAN.md done row. validate_handoff
+   --require-explicit-ledger-records IN THE WORKTREE.
+5. Commit: worktree lib.rs blob via git hash-object -w + git update-index
+   (keeps ORTHO WIP unstaged); apply same diff to the dirty main lib.rs
+   with patch -p1 (ORTHO keeps it); git add ONLY: the two blobs,
+   state/notes/SESSION-SEQUENCE-001.md, state/evidence/SESSION-SEQUENCE-001/
+   takeover-*.
+6. Close parent t_fb35220d: unblock then complete --result with shas.
+   Follow-up card: claim orphan lexicon entries into RU/JA units.
