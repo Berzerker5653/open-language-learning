@@ -22,7 +22,15 @@
  *          node scripts/path-view-capture.mjs
  */
 import { spawn } from "node:child_process";
-import { mkdirSync, writeFileSync, mkdtempSync, existsSync, rmSync } from "node:fs";
+import {
+  mkdirSync,
+  writeFileSync,
+  mkdtempSync,
+  existsSync,
+  rmSync,
+  readdirSync,
+  readFileSync,
+} from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { DatabaseSync } from "node:sqlite";
@@ -106,58 +114,103 @@ try {
   result.profileId = profileId;
 
   // ---- seed real progress: submit CORRECT answers until the first unit
-  // earns evidence-backed done status (attendance alone never does it). ----
-  const submitted = new Set();
+  // earns evidence-backed done status (attendance alone never does it).
+  // (The former plan-round phase is retired: the targeted pass below does
+  // the same real traffic, and plan rounds that fail-listening items mark
+  // them MET, which empties the plan's introduction pool and makes
+  // unit_path's fallback re-pin done units seed-to-seed.) ----
   let doneUnits = [];
-  for (let round = 0; round < 8; round++) {
-    const plan = await api("practice_plan", { profileId, minutes: 30 });
-    const items = plan.status === 200 && Array.isArray(plan.value) ? plan.value : [];
-    for (const item of items) {
-      if (submitted.has(item.content_id)) continue;
-      submitted.add(item.content_id);
-      if (submitted.size > 80) break;
-      const task = await api("practice_task", {
-        profileId,
-        contentId: item.content_id,
-        modality: item.modality,
-        revealReading: false,
-      });
-      if (task.status !== 200) continue; // e.g. grammar ids with no drill here
-      const t = task.value ?? {};
-      let submit = null;
-      if (Array.isArray(t.choices) && t.choices.length > 0) {
-        const want = [item.gloss, item.surface, t.reading, t.surface].filter(Boolean);
-        let idx = -1;
-        for (const w of want) {
-          idx = t.choices.findIndex((c) => c === w);
-          if (idx >= 0) break;
-        }
-        if (idx >= 0) submit = { choice_index: idx, answer: null };
-      } else if (item.surface) {
-        submit = { choice_index: 0, answer: item.surface };
+
+  // ---- targeted on-ramp completion. Plan progression has a small per-plan
+  // new-item budget, so plan traffic alone can starve a unit's last ref
+  // (measured 2026-11-22: ru.orth.cyrillic.t never appeared in any 30-min
+  // plan while its three siblings did). The app meets every ref through the
+  // unit's own lesson flow first; this capture reaches the same
+  // evidence-backed state with real practice_task/practice_submit traffic
+  // for exactly the refs the installed pack declares for the unit, choosing
+  // the pack's own symbol/reading strings — the same strings the server
+  // grades by exact match. No engine code pretends about anything. ----
+  const orthById = new Map();
+  {
+    const orthDir = join(REPO, "languages/ru-RU/orthography");
+    for (const f of readdirSync(orthDir).filter((x) => x.endsWith(".jsonl"))) {
+      for (const line of readFileSync(join(orthDir, f), "utf8").split("\n")) {
+        if (!line.trim()) continue;
+        try {
+          const e = JSON.parse(line);
+          if (e?.id) orthById.set(e.id, { symbol: e.symbol, reading: e.reading });
+        } catch {}
       }
-      if (!submit) continue;
-      const g = await api("practice_submit", {
-        profileId,
-        contentId: item.content_id,
-        modality: item.modality,
-        choiceIndex: submit.choice_index,
-        answer: submit.answer,
-        revealReading: false,
-        sessionId: null,
-        stageId: null,
-      });
-      if (g.status !== 200) continue;
     }
-    const up = await api("unit_path", { profileId });
-    const nodes = up.status === 200 && Array.isArray(up.value) ? up.value : [];
-    doneUnits = nodes.filter((n) => n.done);
-    if (doneUnits.length >= 1) break;
+  }
+  const unitsDirOf = (() => {
+    const packsRoot = join(dataDir, "packs", PACK_ID);
+    const version = readdirSync(packsRoot)[0];
+    return join(packsRoot, version, "curriculum", "units");
+  })();
+  const unitRefs = new Map();
+  for (const f of readdirSync(unitsDirOf).filter((x) => x.endsWith(".yaml"))) {
+    const text = readFileSync(join(unitsDirOf, f), "utf8");
+    const idm = /^id: "([^"]+)"/m.exec(text);
+    const actStart = text.indexOf("activities:");
+    const actEnd = text.indexOf("generation_contract:");
+    if (idm && actStart >= 0 && actEnd > actStart) {
+      const act = text.slice(actStart, actEnd);
+      const refs = [...act.matchAll(/content_refs:\s*\[([\s\S]*?)\]/g)].flatMap((m) =>
+        [...m[1].matchAll(/"(ru\.[a-z0-9._-]+)"/g)].map((x) => x[1]),
+      );
+      unitRefs.set(idm[1], refs);
+    }
+  }
+  const seededRefs = new Set();
+  const targetUnits = ((await api("unit_path", { profileId })).value ?? [])
+    .filter((n) => !n.locked && !n.done)
+    .map((n) => n.unit_id)
+    .filter((u) => {
+      const refs = unitRefs.get(u) ?? [];
+      return refs.length > 0 && refs.every((r) => orthById.has(r));
+    })
+    .slice(0, 2);
+  for (const unitId of targetUnits) {
+    for (const ref of unitRefs.get(unitId)) {
+      if (seededRefs.has(ref)) continue;
+      // Four honest repetitions: one lands the Introduced floor (done), the
+      // rest lift the item out of the plan's introduction pool the way real
+      // returned practice does, so the pin moves to material being introduced.
+      for (let attempt = 0; attempt < 4; attempt++) {
+        const task = await api("practice_task", {
+          profileId,
+          contentId: ref,
+          modality: "orthography-recognition",
+          revealReading: false,
+        });
+        if (task.status !== 200) continue;
+        const t = task.value?.task ?? task.value ?? {};
+        if (!Array.isArray(t.choices)) continue;
+        const meta = orthById.get(ref);
+        const idx = [meta.reading, meta.symbol]
+          .map((want) => t.choices.findIndex((c) => c === want))
+          .find((i) => i >= 0);
+        if (idx < 0) continue;
+        const g = await api("practice_submit", {
+          profileId,
+          contentId: ref,
+          modality: "orthography-recognition",
+          choiceIndex: idx,
+          answer: null,
+          revealReading: false,
+          sessionId: null,
+          stageId: null,
+        });
+        if (g.status === 200 && g.value?.correct) seededRefs.add(ref);
+      }
+    }
   }
   const up = await api("unit_path", { profileId });
   const nodes = up.status === 200 && Array.isArray(up.value) ? up.value : [];
   const locked = nodes.filter((n) => n.locked);
   const current = nodes.filter((n) => n.current);
+  doneUnits = nodes.filter((n) => n.done);
   check("unit_path returns nodes", nodes.length > 0, { nodes: nodes.length });
   check("at least one unit earned evidence-backed done", doneUnits.length >= 1, {
     done: doneUnits.map((n) => n.unit_id),
@@ -184,9 +237,12 @@ try {
   await sleep(400);
   {
     const db = new DatabaseSync(join(dataDir, "profiles.db"));
-    const row = db
-      .prepare("SELECT item_id FROM scheduler_state WHERE profile_id = ? ORDER BY due_at LIMIT 1")
-      .get(profileId);
+    const allRows = db
+      .prepare("SELECT item_id FROM scheduler_state WHERE profile_id = ? ORDER BY due_at")
+      .all(profileId);
+    // Back-date a row belonging to a SEEDED unit so the review-due check
+    // measures exactly the unit whose done state we just earned.
+    const row = allRows.find((r) => seededRefs.has(String(r.item_id).split("#")[0])) ?? allRows[0];
     if (row) {
       db.prepare(
         "UPDATE scheduler_state SET due_at = '2020-01-01T00:00:00Z' WHERE profile_id = ? AND item_id = ?",
@@ -411,6 +467,9 @@ try {
   writeFileSync(join(OUT, "result.json"), JSON.stringify(result, null, 2) + "\n");
   chrome?.kill();
   serve?.kill();
+  // Give chrome a beat to release its profile dir before removing it —
+  // rmSync raced the dying process (ENOTEMPTY) on a previous run.
+  await sleep(600);
   if (chromeDir) rmSync(chromeDir, { recursive: true, force: true });
 }
 process.exit(result.failures > 0 ? 1 : 0);
