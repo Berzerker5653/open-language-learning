@@ -1,0 +1,21 @@
+fmt exit=0
+storage exit=0
+tsc exit=0
+vitest exit=0
+serve_build exit=101
+capture exit=1
+owner_audit exit=1
+FRONT-DONE
+serve_build2 exit=101
+desktop_lib exit=101
+clippy_storage exit=0
+clippy_desktop exit=0
+DONE
+capture4 exit=1
+owner_audit4 exit=0
+CLOSE-DONE
+desktop_serve_lib exit=0
+newtests exit=1
+capture5 exit=0
+owner_audit5 exit=0
+CLOSE2-DONE

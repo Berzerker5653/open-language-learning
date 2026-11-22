@@ -1,0 +1,13 @@
+   Compiling lts-storage v0.1.0 (/home/hunter/game-dev/LTS/crates/storage)
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.73s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-7647ca427c780ccc)
+
+running 3 tests
+test tests::a_legacy_earned_review_survives_without_an_encounter_event ... ok
+test tests::a_letter_is_never_tested_before_its_encounter_completes ... ok
+test tests::practice_queue_is_generated_from_encounter_state_never_a_pack_buffet has been running for over 60 seconds
+test tests::practice_queue_is_generated_from_encounter_state_never_a_pack_buffet ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 226 filtered out; finished in 76.56s
+

@@ -2844,18 +2844,20 @@
     "ENCOUNTER-BEFORE-TEST-001": {
       "task_id": "ENCOUNTER-BEFORE-TEST-001",
       "title": "Drills tested a letter the learner had not finished meeting — tests gate on completed encounters; confusables get false-friend copy",
-      "status": "retryable",
-      "attempts": 2,
+      "status": "done",
+      "attempts": 3,
       "dependencies": [
         "SESSION-SEQUENCE-001",
         "PRACTICE-GATE-001"
       ],
       "evidence": [
         "state/notes/ENCOUNTER-BEFORE-TEST-001.md",
-        "state/evidence/ENCOUNTER-BEFORE-TEST-001/gates.log"
+        "state/evidence/ENCOUNTER-BEFORE-TEST-001/gates.log",
+        "state/evidence/ENCOUNTER-BEFORE-TEST-001/plan-audit.md",
+        "state/evidence/ENCOUNTER-BEFORE-TEST-001/encounter-panel.png"
       ],
-      "summary": "Storage + content half shipped via controller takeover: schema v10 encounter_events (append-only, exposure-never-evidence pinned by module test), record_encounter/encountered_content_ids, and cyrillic.jsonl false-friend/friendly-letter copy (11 mnemonics, text-only, rides next RU publish; langpack + qa_stories green). CORRECTION measured at takeover: the encounter_test_allowance gate, encounter_complete IPC and the plan-level red test were NOT on disk despite the dead run's claims — the v10 table has no production writer yet. OPEN: engine gate + IPC + red test, frontend wiring at lesson Start-practicing, confusable screenshot, owner-profile plan audit.",
-      "notes": "Resume recipe + CONTROLLER correction in state/notes/ENCOUNTER-BEFORE-TEST-001.md; controller battery in state/evidence/ENCOUNTER-BEFORE-TEST-001/gates.log.",
+      "summary": "Shipped end-to-end via takeover-2: storage v10 encounter_events + encounter_complete IPC (single command table -> serve too), encounter_test_allowance gate in the ONE eligibility layer (due-review/weak-skill withhold; withheld rows return when the encounter lands; U06 grandfather keeps legacy earned reviews), lesson onStart wiring in App.tsx, and confusable false-friend/friendly-letter copy. Red-first plan test green at commit (GATE-OFF red logged); full lts-desktop lib 226/227 with the 1 failure byte-identical at clean HEAD (pre-existing); serve capture 7/7 incl. IPC-once-per-view; owner-profile plan audit: 0 un-encountered tested letters. Copy rides next RU republish (0.4.9, no re-bake).",
+      "notes": "Full battery + stale-rlib root cause (E0599 was a target-dir artifact, cargo clean -p lts-storage fixed; predecessor WIP needed zero source edits) in gates.log 'WORKER takeover-2' + gates-takeover2/. Vision-check defect (pre-existing, not this lane): lesson card title clips at 390px -> FIX card filed.",
       "updated": "2026-11-22"
     },
     "PATH-WHATSNEXT-001": {

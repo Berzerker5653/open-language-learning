@@ -1,0 +1,69 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "lesson_plan carries the friendly-letter copy for А",
+      "pass": true,
+      "measured": {
+        "explanations": [
+          "Friendly letter: А looks like your A and sounds like the a in father. Recognize the rounded bowl and right stem."
+        ]
+      }
+    },
+    {
+      "name": "lesson_plan carries the false-friend copy for Н",
+      "pass": true,
+      "measured": {
+        "explanations": [
+          "False friend: Н looks like Latin H in your alphabet, but it sounds like N (as in no). A small upright Н-shaped form."
+        ]
+      }
+    },
+    {
+      "name": "home_state offers progression items for a zero-encounter profile",
+      "pass": true,
+      "measured": {
+        "total": 5,
+        "reasons": [
+          "progression"
+        ]
+      }
+    },
+    {
+      "name": "no due-review/weak-skill row for any cyrillic letter pre-encounter",
+      "pass": true,
+      "measured": {
+        "offenders": []
+      }
+    },
+    {
+      "name": "the lesson encounter panel renders with the new copy on-screen",
+      "pass": true,
+      "measured": {
+        "panel": true,
+        "friendly": 12,
+        "falseFriend": 0,
+        "sample": "Friendly letter: А looks like your A and sounds like the a in father. Recognize the rounded bowl and right stem."
+      }
+    },
+    {
+      "name": "lesson 'Start practicing' fires encounter_complete exactly once per view",
+      "pass": true,
+      "measured": {
+        "calls": 1
+      }
+    },
+    {
+      "name": "after Start, the session moved past the encounter view",
+      "pass": true,
+      "measured": {
+        "stillEncounter": false,
+        "bodyHasRunner": true
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-ae857b30-1056-4bbd-8269-bd1b4fa90e8b",
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17877 (trusted network only)\n"
+}

@@ -1,0 +1,20 @@
+node:events:505
+    throw er; // Unhandled 'error' event
+    ^
+
+Error: spawn /home/hunter/game-dev/LTS EACCES
+    at ChildProcess._handle.onexit (node:internal/child_process:315:19)
+    at onErrorNT (node:internal/child_process:553:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+Emitted 'error' event on ChildProcess instance at:
+    at ChildProcess._handle.onexit (node:internal/child_process:321:12)
+    at onErrorNT (node:internal/child_process:553:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+  errno: -13,
+  code: 'EACCES',
+  syscall: 'spawn /home/hunter/game-dev/LTS',
+  path: '/home/hunter/game-dev/LTS',
+  spawnargs: [ '127.0.0.1:17858' ]
+}
+
+Node.js v26.13.1

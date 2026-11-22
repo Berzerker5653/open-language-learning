@@ -1,0 +1,7 @@
+PASS lesson_plan carries the friendly-letter copy for А — {"explanations":["Friendly letter: А looks like your A and sounds like the a in father. Recognize the rounded bowl and right stem.","Friendly letter: О looks like your O and sounds like the o in more. A small closed oval, not a zero digit."]}
+PASS lesson_plan carries the false-friend copy for Н — {"explanations":["Friendly letter: К looks like your K and sounds like the k in kite. The smaller form keeps the two arms.","Friendly letter: Е looks like your E and sounds like the ye in yes. A rounded form with a cross-stroke; no dots."]}
+PASS home_state offers progression items for a zero-encounter profile — {"total":5,"reasons":["progression"]}
+PASS no due-review/weak-skill row for any cyrillic letter pre-encounter — {"offenders":[]}
+PASS the lesson encounter panel renders with the new copy on-screen — {"panel":true,"friendly":12,"falseFriend":0,"sample":"Friendly letter: А looks like your A and sounds like the a in father. Recognize the rounded bowl and right stem."}
+PASS lesson 'Start practicing' fires encounter_complete exactly once per view — {"calls":1}
+PASS after Start, the session moved past the encounter view — {"stillEncounter":false,"bodyHasRunner":true}

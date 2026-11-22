@@ -1,0 +1,43 @@
+{
+  "probe": "list_profiles",
+  "status": 200,
+  "profiles": [
+    {
+      "id": "prof-b01280fa-bbc1-4521-b4f8-e333d9c1cc90",
+      "name": "Hunter",
+      "hidden": false
+    }
+  ]
+}
+{
+  "audit": [
+    {
+      "profile": "prof-b01280fa-bbc1-4521-b4f8-e333d9c1cc90",
+      "name": "Hunter",
+      "plan_items": 6,
+      "letter_test_rows": 3,
+      "unencountered_tested_letters": 0,
+      "detail": [
+        {
+          "content_id": "ru.orth.cyrillic.a",
+          "reason": "weak-skill",
+          "unit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+          "scored_stage_acted": true
+        },
+        {
+          "content_id": "ru.orth.cyrillic.m",
+          "reason": "weak-skill",
+          "unit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+          "scored_stage_acted": true
+        },
+        {
+          "content_id": "ru.orth.cyrillic.o",
+          "reason": "weak-skill",
+          "unit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+          "scored_stage_acted": true
+        }
+      ]
+    }
+  ]
+}
+AUDIT verdict: unencountered tested letters = 0

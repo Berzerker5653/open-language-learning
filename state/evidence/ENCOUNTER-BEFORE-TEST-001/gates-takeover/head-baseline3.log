@@ -1,0 +1,43 @@
+    Blocking waiting for file lock on build directory
+   Compiling lts-domain v0.1.0 (/home/hunter/.hermes/cache/scratch/enc001-head/crates/domain)
+   Compiling lts-security v0.1.0 (/home/hunter/.hermes/cache/scratch/enc001-head/crates/security)
+   Compiling lts-speech-api v0.1.0 (/home/hunter/.hermes/cache/scratch/enc001-head/crates/speech-api)
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/.hermes/cache/scratch/enc001-head/apps/desktop/src-tauri)
+   Compiling lts-speech-runtime v0.1.0 (/home/hunter/.hermes/cache/scratch/enc001-head/crates/speech-runtime)
+   Compiling lts-learner-model v0.1.0 (/home/hunter/.hermes/cache/scratch/enc001-head/crates/learner-model)
+   Compiling lts-langpack v0.1.0 (/home/hunter/.hermes/cache/scratch/enc001-head/crates/langpack)
+   Compiling lts-storage v0.1.0 (/home/hunter/.hermes/cache/scratch/enc001-head/crates/storage)
+   Compiling lts-world v0.1.0 (/home/hunter/.hermes/cache/scratch/enc001-head/crates/world)
+   Compiling lts-scheduler v0.1.0 (/home/hunter/.hermes/cache/scratch/enc001-head/crates/scheduler)
+   Compiling lts-activity v0.1.0 (/home/hunter/.hermes/cache/scratch/enc001-head/crates/activity)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 29.68s
+     Running unittests src/lib.rs (/home/hunter/game-dev/LTS/target/debug/deps/lts_desktop-7647ca427c780ccc)
+
+running 3 tests
+test tests::placement_coverage_names_why_a_rubric_has_no_question ... FAILED
+test tests::dictation_check_matches_spoken_target ... ok
+test tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see ... FAILED
+
+failures:
+
+---- tests::placement_coverage_names_why_a_rubric_has_no_question stdout ----
+
+thread 'tests::placement_coverage_names_why_a_rubric_has_no_question' (2999024) panicked at apps/desktop/src-tauri/src/lib.rs:12003:9:
+assertion `left == right` failed: a listening rubric over a goal with no listening stage abstains
+  left: ("modality-unsupported", Some("builder-refused:comprehension-listening:ja.contrast.demo.vowel-length:unknown practice target"))
+ right: ("no-content", Some("no-activity-at-modality:listening:ja.goal.demo.kana-hiragana"))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see stdout ----
+
+thread 'tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see' (2999025) panicked at apps/desktop/src-tauri/src/lib.rs:19333:79:
+called `Result::unwrap()` on an `Err` value: "no generated audio is present, so this archive could only ship a silent pack: run scripts/generate-pack-audio.py first (ADR-0016; the on-demand synthesis fallback this used to tolerate was removed by ADR-0024)"
+
+
+failures:
+    tests::placement_coverage_names_why_a_rubric_has_no_question
+    tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see
+
+test result: FAILED. 1 passed; 2 failed; 0 ignored; 0 measured; 224 filtered out; finished in 1.69s
+
+error: test failed, to rerun pass `-p lts-desktop --lib`

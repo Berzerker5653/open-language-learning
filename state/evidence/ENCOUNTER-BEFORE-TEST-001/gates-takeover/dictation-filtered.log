@@ -1,0 +1,41 @@
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+error[E0599]: no method named `encountered_unit_ids` found for reference `&Store` in the current scope
+    --> apps/desktop/src-tauri/src/lib.rs:3310:14
+     |
+3309 |           let encountered_units: std::collections::HashSet<String> = store
+     |  ____________________________________________________________________-
+3310 | |             .encountered_unit_ids(profile_id)
+     | |_____________-^^^^^^^^^^^^^^^^^^^^
+     |
+help: there is a method `encountered_content_ids` with a similar name
+     |
+3310 -             .encountered_unit_ids(profile_id)
+3310 +             .encountered_content_ids(profile_id)
+     |
+
+error[E0599]: no method named `encountered_unit_ids` found for struct `Store` in the current scope
+     --> apps/desktop/src-tauri/src/lib.rs:13341:19
+      |
+13341 |             store.encountered_unit_ids(&pid).unwrap(),
+      |                   ^^^^^^^^^^^^^^^^^^^^
+      |
+help: there is a method `encountered_content_ids` with a similar name
+      |
+13341 -             store.encountered_unit_ids(&pid).unwrap(),
+13341 +             store.encountered_content_ids(&pid).unwrap(),
+      |
+
+error[E0599]: no method named `encountered_unit_ids` found for struct `Store` in the current scope
+     --> apps/desktop/src-tauri/src/lib.rs:13398:23
+      |
+13398 |         assert!(store.encountered_unit_ids(&pid).unwrap().is_empty());
+      |                       ^^^^^^^^^^^^^^^^^^^^
+      |
+help: there is a method `encountered_content_ids` with a similar name
+      |
+13398 -         assert!(store.encountered_unit_ids(&pid).unwrap().is_empty());
+13398 +         assert!(store.encountered_content_ids(&pid).unwrap().is_empty());
+      |
+
+For more information about this error, try `rustc --explain E0599`.
+error: could not compile `lts-desktop` (lib test) due to 3 previous errors

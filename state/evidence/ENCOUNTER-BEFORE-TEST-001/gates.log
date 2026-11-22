@@ -29,3 +29,46 @@ Deferred (card stays open): engine gate + IPC + plan-level red test, frontend wi
 encounter_complete at lesson "Start practicing", confusable-line screenshot, owner-profile
 plan audit. Resume recipe: state/notes/ENCOUNTER-BEFORE-TEST-001.md (see its CONTROLLER
 section for the correction above).
+
+ENCOUNTER-BEFORE-TEST-001 — WORKER takeover-2 gate log (2026-11-22 ~14:05-14:50, board t_80bf083b)
+
+Frozen state on arrival: the full remaining lane (engine gate + encounter_complete IPC + red
+tests + frontend wiring + fixture fixes) sat UNCOMMITTED in the main tree from the dead
+takeover (t_fe46aed4); its last gate runs died on error[E0599] `encountered_unit_ids` missing.
+MEASURED: the method WAS present in crates/storage/src/encounter.rs (mtime 12:21) — the E0599
+was the known stale-rlib artifact: the head-baseline worktrees compiled HEAD's lts-storage
+into the shared CARGO_TARGET_DIR. `cargo clean -p lts-storage` fixed it (serve-build3 exit 0).
+Nothing was re-derived; the only tree edit this run made was none — see below.
+
+Battery (main tree at HEAD 2195387 + lane WIP; full logs in gates-takeover2/):
+  cargo fmt --all --check                            exit 0            (fmt.log)
+  cargo test -p lts-storage                          exit 0, all pass   (storage.log)
+  cargo test -p lts-desktop --lib (full 229)         226 pass / 1 fail  (desktop-lib.log)
+      — the 1 failure is tests::placement_coverage_names_why_a_rubric_has_no_question,
+        byte-identical failure at clean HEAD (prior takeover head-baseline3.log):
+        PRE-EXISTING mainline rot, not lane blame. Both NEW tests green in this run:
+        a_letter_is_never_tested_before_its_encounter_completes, a_legacy_earned_review_…
+  cargo clippy -p lts-storage --all-targets -- -D warnings     exit 0 (clippy-storage.log)
+  cargo clippy -p lts-desktop --all-targets -- -D warnings     exit 0 (clippy-desktop.log)
+  npx tsc --noEmit                                   exit 0            (tsc.log)
+  npx vitest run                                     483 pass / 0      (vitest.log)
+  cargo build -p lts-desktop --features serve --bin lts-serve  exit 0  (serve-build3.log, post-clean)
+  cargo test -p lts-desktop --features serve --lib serve::   18 pass   (desktop-serve-lib.log)
+      — incl. every_serve_command_name_resolves_through_the_wiring: encounter_complete is
+        reachable in serve mode through the single command table.
+  cargo test -p lts-desktop --lib encounter          3 pass / 0        (newtests-filtered2.log)
+  node scripts/encounter-capture.mjs (fresh binary+dist)  7/7 PASS     (capture5.log, result.json)
+  node scripts/owner-plan-audit.mjs (snapshot data dir)   verdict 0    (owner-audit5.log)
+  red-first evidence (prior run, retained): gates-takeover/gate-off-red2.log shows the plan
+  test red at assertion level with the GATE-OFF build; green with the gate.
+
+Controller actions: none needed on the source — the WIP compiled and passed everything once
+the stale rlib was cleared. Acceptance png re-vision-checked (see gates-takeover2 note below):
+friendly-letter copy renders legibly at 390px in the encounter panel. DEFECT found by the
+vision check (NOT this lane, pre-existing title rendering): the lesson card title
+"Printed Cyrillic: А а, О о, М м, Т т" overflows its card at 390px, last glyph clipped.
+Follow-up FIX card opened for it.
+
+Artifacts (committed): scripts/encounter-capture.mjs, scripts/owner-plan-audit.mjs (dev-only
+acceptance tooling), encounter-panel.png + result.json + plan-audit.md, this log +
+gates-takeover2/. Untracked repo-root junk from a dead run left alone: c1.png, c4.png.

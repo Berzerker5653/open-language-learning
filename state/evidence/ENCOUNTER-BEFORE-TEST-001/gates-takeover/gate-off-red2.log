@@ -1,0 +1,22 @@
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.84s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-7647ca427c780ccc)
+
+running 1 test
+test tests::a_letter_is_never_tested_before_its_encounter_completes ... FAILED
+
+failures:
+
+---- tests::a_letter_is_never_tested_before_its_encounter_completes stdout ----
+
+thread 'tests::a_letter_is_never_tested_before_its_encounter_completes' (2990110) panicked at apps/desktop/src-tauri/src/lib.rs:13321:9:
+a never-met letter surfaced as a quiz: [("ru.orth.enc.t", DueReview), ("ru.orth.enc.a", Progression), ("ru.orth.enc.o", Progression)]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::a_letter_is_never_tested_before_its_encounter_completes
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 228 filtered out; finished in 0.16s
+
+error: test failed, to rerun pass `-p lts-desktop --lib`

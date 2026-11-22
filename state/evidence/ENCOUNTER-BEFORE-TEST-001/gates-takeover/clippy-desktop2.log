@@ -1,0 +1,93 @@
+    Checking x11-dl v2.21.0
+    Checking libdbus-sys v0.2.7
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Checking lts-storage v0.1.0 (/home/hunter/game-dev/LTS/crates/storage)
+    Checking dbus v0.9.12
+    Checking tao v0.37.1
+    Checking wry v0.57.0
+    Checking tauri-runtime-wry v2.12.1
+    Checking tauri v2.12.1
+    Checking tauri-plugin-single-instance v2.5.2
+error: doc list item without indentation
+    --> apps/desktop/src-tauri/src/lib.rs:3273:5
+     |
+3273 | /// Otherwise the content is WITHHELD — from the due-review and weak-skill
+     |     ^
+     |
+     = help: if this is supposed to be its own paragraph, add a blank line
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#doc_lazy_continuation
+     = note: `-D clippy::doc-lazy-continuation` implied by `-D warnings`
+     = help: to override `-D warnings` add `#[allow(clippy::doc_lazy_continuation)]`
+help: indent this line
+     |
+3273 | ///   Otherwise the content is WITHHELD — from the due-review and weak-skill
+     |     ++
+
+error: doc list item without indentation
+    --> apps/desktop/src-tauri/src/lib.rs:3274:5
+     |
+3274 | /// routes ONLY. Progression (the encounter route) stays untouched, so an
+     |     ^
+     |
+     = help: if this is supposed to be its own paragraph, add a blank line
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#doc_lazy_continuation
+help: indent this line
+     |
+3274 | ///   routes ONLY. Progression (the encounter route) stays untouched, so an
+     |     ++
+
+error: doc list item without indentation
+    --> apps/desktop/src-tauri/src/lib.rs:3275:5
+     |
+3275 | /// interrupted unit resumes at the missing encounter in the pack's own
+     |     ^
+     |
+     = help: if this is supposed to be its own paragraph, add a blank line
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#doc_lazy_continuation
+help: indent this line
+     |
+3275 | ///   interrupted unit resumes at the missing encounter in the pack's own
+     |     ++
+
+error: doc list item without indentation
+    --> apps/desktop/src-tauri/src/lib.rs:3276:5
+     |
+3276 | /// order, and withheld scheduler rows are never deleted — they return the
+     |     ^
+     |
+     = help: if this is supposed to be its own paragraph, add a blank line
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#doc_lazy_continuation
+help: indent this line
+     |
+3276 | ///   order, and withheld scheduler rows are never deleted — they return the
+     |     ++
+
+error: doc list item without indentation
+    --> apps/desktop/src-tauri/src/lib.rs:3277:5
+     |
+3277 | /// moment the encounter lands.
+     |     ^
+     |
+     = help: if this is supposed to be its own paragraph, add a blank line
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#doc_lazy_continuation
+help: indent this line
+     |
+3277 | ///   moment the encounter lands.
+     |     ++
+
+error: doc list item without indentation
+    --> apps/desktop/src-tauri/src/lib.rs:3278:5
+     |
+3278 | /// Returns the withheld content ids.
+     |     ^
+     |
+     = help: if this is supposed to be its own paragraph, add a blank line
+     = help: for further information visit https://rust-lang.github.io/rust-clippy/rust-1.97.0/index.html#doc_lazy_continuation
+help: indent this line
+     |
+3278 | ///   Returns the withheld content ids.
+     |     ++
+
+error: could not compile `lts-desktop` (lib) due to 6 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `lts-desktop` (lib test) due to 6 previous errors

@@ -1,0 +1,14 @@
+$ vitest run --passWithNoTests
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/apps/desktop
+
+
+ Test Files  61 passed (61)
+      Tests  483 passed (483)
+   Start at  12:34:51
+   Duration  3.08s (tests 30%, environment 28%, transform 28%, import 12%, worker 1%)
+
+  Transform  |node| transforming modules took 2.13s · 43% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+

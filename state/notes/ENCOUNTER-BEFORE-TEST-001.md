@@ -86,3 +86,30 @@ premise "engine + serve paths record encounters" is false until then.
 Gates run by the controller before the commit: state/evidence/ENCOUNTER-BEFORE-TEST-001/gates.log
 (incl. the controller fixture fix: the v8 upgrade test now DELETEs schema_migrations version 10).
 Step 5 is DONE (langpack 5 green, qa_stories 0 FAIL). Card stays open on items 1-3.
+
+## CONTROLLER-2 (2026-11-22, takeover-2 t_80bf083b — card CLOSED)
+
+Items 1-3 landed. Frozen state at takeover: the whole remainder sat UNCOMMITTED in the main
+tree (engine gate `encounter_test_allowance` in build_plan's eligibility layer, the
+`encounter_complete` IPC on the single command table, the plan-level red test + legacy-
+grandfather test, App.tsx lesson onStart wiring, fixture fixes for the switching test and
+OrthEntry.mnemonic field, serve-mode capture harness `scripts/encounter-capture.mjs`,
+audit tooling `scripts/owner-plan-audit.mjs`). The predecessor's last gate runs died on
+error[E0599] `encountered_unit_ids` — MEASURED: the method was already in
+crates/storage/src/encounter.rs (mtime 12:21, before the failed runs); the E0599 was the
+stale-rlib artifact of the shared-CARGO_TARGET_DIR HEAD-baseline worktrees. One
+`cargo clean -p lts-storage` and everything compiled. ZERO source edits were needed on top
+of the dead run's WIP.
+
+Battery (full logs state/evidence/ENCOUNTER-BEFORE-TEST-001/gates-takeover2/, roll-up in
+gates.log "WORKER takeover-2" section): fmt 0; lts-storage tests 0; lts-desktop --lib full
+226/227 (the 1 fail — placement_coverage_names_why_a_rubric_has_no_question — is byte-
+identical at clean HEAD: pre-existing mainline rot, separate follow-up); clippy both
+packages --all-targets -D warnings 0; tsc 0; vitest 483 pass; lts-serve builds green with
+--features serve; serve:: suite 18 green incl. command-table resolution for
+encounter_complete; capture 7/7 PASS against the fresh binary+dist (result.json +
+encounter-panel.png, vision-checked); owner-profile plan audit: ZERO un-encountered tested
+letters (plan-audit.md, owner-audit5.log).
+
+Item 4 (pack publish of the new copy) stays with the next RU republish card (0.4.9);
+validator note unchanged: mnemonic text is not audio-consumed, no re-bake.

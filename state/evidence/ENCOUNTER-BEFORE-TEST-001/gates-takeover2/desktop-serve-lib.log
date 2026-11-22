@@ -1,0 +1,26 @@
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 13.19s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-3a52b8074cc2dcc8)
+
+running 18 tests
+test serve::tests::bind_policy_opens_the_wildcard_only_while_lan_access_is_on ... ok
+test serve::tests::pairing_attempts_are_limited_per_peer ... ok
+test serve::tests::parse_bind_refuses_public_and_wildcard ... ok
+test serve::tests::access_and_sessions_survive_a_restart ... ok
+test serve::tests::parse_bind_allows_loopback_rfc1918_and_tailnet ... ok
+test serve::tests::safe_relpath_blocks_traversal ... ok
+test serve::tests::pin_is_issued_six_digit_single_use_and_expiring ... ok
+test serve::tests::the_bridge_delivers_desktop_stage_values_to_subscribers ... ok
+test serve::tests::media_route_blocks_outside_pack_store ... ok
+test serve::tests::capabilities_endpoint_reports_honest_mode ... ok
+test serve::tests::a_reported_stage_reaches_an_sse_subscriber_as_a_data_frame ... ok
+test serve::tests::app_handle_install_commands_route_to_the_same_core ... ok
+test serve::tests::capabilities_report_names_mic_availability_per_origin ... ok
+test serve::tests::ipc_bridge_round_trips_a_command ... ok
+test serve::tests::ipc_bridge_maps_command_rejection_to_error_body ... ok
+test serve::tests::unknown_command_reaches_the_real_ipc_layer ... ok
+test serve::tests::lan_peer_must_pair_before_any_data_route ... ok
+test serve::tests::every_serve_command_name_resolves_through_the_wiring ... ok
+
+test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 229 filtered out; finished in 0.60s
+

@@ -1,0 +1,5 @@
+error: unexpected argument 'a_legacy_earned_review' found
+
+Usage: cargo test [OPTIONS] [TESTNAME] [-- [ARGS]...]
+
+For more information, try '--help'.

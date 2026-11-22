@@ -1,0 +1,10 @@
+Diff in /home/hunter/game-dev/LTS/apps/desktop/src-tauri/src/lib.rs:13374:
+         let plan = build_plan(data, &pid, 5, now_secs).unwrap();
+         assert!(
+             plan.items.iter().any(|i| {
+-                i.content_id == "ru.orth.enc.t"
+-                    && i.reason == lts_scheduler::PlanReason::DueReview
++                i.content_id == "ru.orth.enc.t" && i.reason == lts_scheduler::PlanReason::DueReview
+             }),
+             "the earned review must survive for a grandfathered learner: {:?}",
+             plan.items
