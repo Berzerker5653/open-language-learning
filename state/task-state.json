@@ -2861,15 +2861,16 @@
     "PATH-WHATSNEXT-001": {
       "task_id": "PATH-WHATSNEXT-001",
       "title": "One current offer so learners are never lost after a session (Codemm rule) — phase 2",
-      "status": "retryable",
+      "status": "done",
       "attempts": 2,
       "dependencies": [],
       "evidence": [
         "state/notes/PATH-WHATSNEXT-001.md",
-        "state/evidence/PATH-WHATSNEXT-001/gates.log"
+        "state/evidence/PATH-WHATSNEXT-001/gates.log",
+        "state/evidence/PATH-WHATSNEXT-001/result.json"
       ],
-      "summary": "Code ON MAIN ebd96c8: current_offer IPC (one answer: review-first else next ready unit; engine red-first test green), Today strip + earned review-due chip, after-session card line, PathView two-phase scroll to the offered node, honest journeys mirror, journey test (vitest 483/483 incl. it), capture harness scripts/whatsnext-capture.mjs. Full LANE battery green at the commit (gates.log). OPEN: mobile capture not yet run green — review_due = done && due>0 means the back-date must hit a DONE unit's scheduler row; numbered REMAINING RECIPE in the notes file.",
-      "notes": "ROADMAP declares dependency PATH-VIEW-001; its ENGINE/UI work is merged on main (64489e8) and this lane builds directly on it — omitted from this ledger record only because PATH-VIEW-001 sits retryable (its own screenshot acceptance is open) and the validator gates retryable prerequisites. Two real bugs fixed in the dead attempt's WIP before commit (single-phase scroll; substring unit mapping). review_due semantics + pkill self-SIGTERM trap documented in the recipe. lib.rs/home.tsx hotspot flags stand.",
+      "summary": "Code ON MAIN ebd96c8 + acceptance capture close (takeover t_6cfe22be): whatsnext-capture.mjs strengthened (targeted per-ref seeding, bounded back-date flip loop with flipAttempts, stable-home load gate, strip label minus chip) and green 12/12 at 390x844 — review-first flip, earned chip, answered session walk, after-session card === strip label, path pinned to offered node in viewport. Screenshots + result.json in evidence dir; CONTROLLER CLOSE in gates.log.",
+      "notes": "Capture harness fix commits ride with this record. Non-blocking cosmetic observation for the review lane: at 390px the review-due chip runs against the offer label with no whitespace. Serve-capture flicker lesson banked in the notes file. lib.rs/home.tsx hotspot flags stand.",
       "updated": "2026-11-22"
     }
   },

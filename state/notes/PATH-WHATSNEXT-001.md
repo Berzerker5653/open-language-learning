@@ -92,3 +92,22 @@ Only the mobile capture is open:
   (recipe items 1-3 in state/notes/PATH-VIEW-001.md) — not this card's.
 - Stray c1.png/c4.png at repo root are Nov-21 junk from another lane —
   do NOT commit.
+
+## CLOSED (takeover t_6cfe22be, 2026-11-22)
+
+Mobile capture acceptance shipped. Harness runs green 12/12 (see gates.log
+CONTROLLER CLOSE for the strengthened-harness inventory and the two
+reproduced 11/11 runs). Evidence: state/evidence/PATH-WHATSNEXT-001/
+(result.json + whatsnext-strip-review-first.png, whatsnext-after-session-
+card.png, whatsnext-full-page.png).
+
+Lessons banked for every future serve-capture lane:
+- The home pack line FLICKERS to "No language is set" for ~1s after entering
+  a profile (offer/path paint before pack claims resolve). Wait for a STABLE
+  healthy home (3 consecutive polls) before measuring or screenshotting;
+  re-validate after each shot or the png can show a bogus empty-pack home.
+- The next-offer strip sits mid-page; a viewport-only screenshot of its
+  measurement needs scrollIntoView first.
+- UI walks cannot brute-force Correct answers: grading is server-side and an
+  activity locks after one graded pick (practice.tsx). Measure answered-
+  graded activities in captures; correctness lives in vitest journeys.

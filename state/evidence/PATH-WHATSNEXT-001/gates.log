@@ -36,3 +36,31 @@ against today's letter-first pack was still being probed when the budget
 died (probe2 interrupted by a self-inflicted pkill SIGTERM — run pkill
 ALONE, never in a command whose args contain the pattern).
 Resume recipe: state/notes/PATH-WHATSNEXT-001.md.
+
+== CONTROLLER CLOSE (takeover t_6cfe22be, 2026-11-22) ==
+- Serve binary reused from HEAD build (target/debug/lts-serve, 12:56): string evidence
+  encounter_complete (sibling lane's UNCOMMITTED IPC) = 0 occurrences, current_offer
+  present -> clean HEAD binary. No committed rust change since ebd96c8 -> no rebuild.
+- Strengthened scripts/whatsnext-capture.mjs (no assertions removed or weakened):
+  * targeted per-ref seeding (the proven path-view pattern); the old plan-round
+    seeding wrote ZERO scheduler rows (dead run's result.json);
+  * bounded back-date flip loop logging flipAttempts (review_due = done && due>0);
+  * stable-home gate before any measurement/screenshot: the pack-absence banner
+    FLICKERS ~1s after entering a profile (offer/path paint before the pack
+    record's claims resolve) - an earlier evidence png captured that bogus
+    empty-pack home (probe4/probe5 traces);
+  * strip offer LABEL measured with the chip subtree removed (chip is a child
+    of the strip <p>); strip scrolled into view before the viewport shot;
+  * session walk measures answered-graded activities: the engine never ships
+    the correct answer to the client and practice.tsx locks an activity after
+    one graded pick, so blind on-screen picks cannot guarantee Correct
+    (correct-answer grading is covered by the vitest journeys).
+- Runs green: 13:41 + 13:46 (11/11, pre health-gate), 13:53 (12/12 incl. health
+  gate) - capture logs scratch/wsn/capture-run{2..5}.log. Final result.json committed.
+- Vision-checked whatsnext-strip-review-first.png, whatsnext-after-session-card.png,
+  whatsnext-full-page.png: at 390px the Next: review line, Review due chip, the
+  after-session Next: line and the highlighted review-due path node all render.
+  Non-blocking cosmetic observation for the review lane: at 390px the chip runs
+  against the offer label ("minutesReview due (2)") - no separating whitespace.
+- Gates on this lane: prettier --check scripts/whatsnext-capture.mjs PASS,
+  node --check PASS. No rust/frontend src touched -> no cargo/tsc/vitest surface.

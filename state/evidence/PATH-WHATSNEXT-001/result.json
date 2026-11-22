@@ -1,0 +1,164 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "seeding produced at least one evidence-backed done unit",
+      "pass": true,
+      "measured": {
+        "done": [
+          "ru.unit.on-ramp.cyrillic-a-o-m-t",
+          "ru.unit.on-ramp.cyrillic-k-e-n-s"
+        ]
+      }
+    },
+    {
+      "name": "nothing due: the single offer answers with the next new-material unit",
+      "pass": "ru.unit.on-ramp.cyrillic-b-p-d-g",
+      "measured": {
+        "kind": "introduction",
+        "unit_id": "ru.unit.on-ramp.cyrillic-b-p-d-g",
+        "title": "Printed Cyrillic: Б б, П п, Д д, Г г",
+        "minutes": 3,
+        "total_due": 0
+      }
+    },
+    {
+      "name": "one due scheduler row FLIPS the single answer to review-first",
+      "pass": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+      "measured": {
+        "kind": "review",
+        "unit_id": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+        "title": "Printed Cyrillic: А а, О о, М м, Т т",
+        "minutes": 5,
+        "total_due": 2
+      }
+    },
+    {
+      "name": "the review offer names a unit the path renders (scroll target exists)",
+      "pass": true,
+      "measured": {
+        "offerUnit": "ru.unit.on-ramp.cyrillic-a-o-m-t"
+      }
+    },
+    {
+      "name": "the offer carries the review-due count for the chip",
+      "pass": true,
+      "measured": {
+        "total_due": 2
+      }
+    },
+    {
+      "name": "home reached a stable pack-loaded state before measurement (no load flicker)",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    },
+    {
+      "name": "Today top strip names the review-first offer",
+      "pass": true,
+      "measured": "Next: review Printed Cyrillic: А а, О о, М м, Т т · about 5 minutes"
+    },
+    {
+      "name": "review-due chip names the engine's due count (informational badge, not a tap target)",
+      "pass": true,
+      "measured": {
+        "text": "Next: review Printed Cyrillic: А а, О о, М м, Т т · about 5 minutes",
+        "chip": "Review due (2)",
+        "chipRect": 22
+      }
+    },
+    {
+      "name": "the session walked to its summary with every activity answered on-screen",
+      "pass": true,
+      "measured": {
+        "answered": 6,
+        "correct": 0,
+        "steps": 6
+      }
+    },
+    {
+      "name": "after-session card names the offer (Next: review <unit> · about N minutes)",
+      "pass": true,
+      "measured": "Next: review Printed Cyrillic: А а, О о, М м, Т т · about 5 minutes"
+    },
+    {
+      "name": "one answer, never two: the card and the strip show the SAME offer",
+      "pass": true,
+      "measured": {
+        "card": "Next: review Printed Cyrillic: А а, О о, М м, Т т · about 5 minutes",
+        "strip": "Next: review Printed Cyrillic: А а, О о, М м, Т т · about 5 minutes"
+      }
+    },
+    {
+      "name": "the path scrolled to the offered node (it sits in the phone viewport)",
+      "pass": true,
+      "measured": {
+        "found": true,
+        "top": 390,
+        "bottom": 453,
+        "inViewport": true,
+        "overflow": false
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-26f8e507-8afa-4e43-ae18-83762dea4d08",
+  "offerBefore": {
+    "kind": "introduction",
+    "unit_id": "ru.unit.on-ramp.cyrillic-b-p-d-g",
+    "title": "Printed Cyrillic: Б б, П п, Д д, Г г",
+    "minutes": 3,
+    "total_due": 0
+  },
+  "flipAttempts": [
+    {
+      "itemId": "ru.orth.cyrillic.a#orthography-recognition",
+      "kind": "review"
+    }
+  ],
+  "backdatedItem": "ru.orth.cyrillic.a#orthography-recognition",
+  "offerAfter": {
+    "kind": "review",
+    "unit_id": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    "title": "Printed Cyrillic: А а, О о, М м, Т т",
+    "minutes": 5,
+    "total_due": 2
+  },
+  "sessionTrace": [
+    {
+      "step": 0,
+      "hasChoices": true,
+      "verdict": "wrong"
+    },
+    {
+      "step": 1,
+      "hasChoices": true,
+      "verdict": "wrong"
+    },
+    {
+      "step": 2,
+      "hasChoices": true,
+      "verdict": "wrong"
+    },
+    {
+      "step": 3,
+      "hasChoices": true,
+      "verdict": "wrong"
+    },
+    {
+      "step": 4,
+      "hasChoices": true,
+      "verdict": "wrong"
+    },
+    {
+      "step": 5,
+      "hasChoices": true,
+      "verdict": "wrong"
+    }
+  ],
+  "sessionAnswered": 6,
+  "sessionCorrect": 0,
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17839 (trusted network only)\n"
+}
