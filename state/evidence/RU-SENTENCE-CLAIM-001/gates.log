@@ -1,0 +1,714 @@
+==== cargo fmt --all --check ====
+==== exit=0 : cargo fmt --all --check ====
+==== cargo test -p lts-langpack ====
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.22s
+     Running unittests src/lib.rs (target/debug/deps/lts_langpack-2b5d560d20d73713)
+
+running 5 tests
+test migrate::tests::bare_prerequisites_become_reviewable_records ... ok
+test migrate::tests::bare_prerequisites_are_rejected_by_0_2_schema ... ok
+test migrate::tests::migrated_goal_validates_against_0_2_schema ... ok
+test migrate::tests::migrated_records_trigger_review_warning ... ok
+test audit::tests::lemmas_sidecar_needs_no_manifest_row ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/archive.rs (target/debug/deps/archive-704398598fd4140c)
+
+running 17 tests
+test install_rejects_path_traversal ... ok
+test build_rejects_invalid_pack ... ok
+test install_rejects_unlisted_and_symlink_entries ... ok
+test install_rejects_hash_mismatch ... ok
+test install_enforces_install_mode_gates ... ok
+test a_cancelled_unpack_leaves_the_store_untouched ... ok
+test undeclared_help_promise_installs_payload_less_scenario ... ok
+test build_is_deterministic ... ok
+test install_is_install_with_cancel_that_never_fires ... ok
+test declared_help_promise_blocks_payload_less_scenario_at_build_and_install ... ok
+test install_upgrade_rollback_cycle ... ok
+test same_version_reinstall_swaps_without_ever_gapping_current ... ok
+test failed_reinstall_restores_the_previous_version ... ok
+test install_rejects_manifest_over_the_entry_cap ... ok
+test install_rejects_decompression_bomb ... ok
+test inspect_and_read_entry_reject_decompressed_bombs ... ok
+test install_rejects_zip_with_more_entries_than_the_cap ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.98s
+
+     Running tests/audit.rs (target/debug/deps/audit-1d0ea46ee37a2b76)
+
+running 9 tests
+test clean_chain_audits_and_reports_attribution ... ok
+test reference_only_source_cannot_be_bundled ... ok
+test attribution_requirement_without_entry_fails ... ok
+test by_over_a_by_sa_source_names_the_dropped_obligation ... ok
+test unknown_license_blocks_reference_build ... ok
+test matching_and_unjudgeable_licences_produce_no_finding ... ok
+test source_provenance_flags_gaps_and_term_conflicts ... ok
+test clean_source_chain_has_no_provenance_warnings ... ok
+test seed_pack_licensed_and_reports_sources ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.59s
+
+     Running tests/grammar_labels.rs (target/debug/deps/grammar_labels-bf5aeefdba42d97c)
+
+running 3 tests
+test sidecar_labels_are_exposed_keyed_by_sentence_id ... ok
+test malformed_sidecar_line_surfaces_a_clear_error ... ok
+test pack_without_the_sidecar_loads_unchanged ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/input_methods.rs (target/debug/deps/input_methods-e36d0420690b064f)
+
+running 3 tests
+test absent_input_methods_reads_none_and_changes_nothing ... ok
+test declared_map_is_exposed_id_to_bool_and_validates ... ok
+test malformed_map_is_a_schema_error_and_the_reader_stays_bool_safe ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/ja_contrasts.rs (target/debug/deps/ja_contrasts-851a305fe77a13be)
+
+running 2 tests
+test vowel_length_pairs_declare_mora_derived_targets ... ok
+test contrasts_validate_against_v02_schema ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/ja_dependency_map.rs (target/debug/deps/ja_dependency_map-2b141b23d92bacf2)
+
+running 3 tests
+test politeness_is_contextual_not_binary ... ok
+test concepts_cover_every_goal_required_concept ... ok
+test validator_reports_no_cycles_or_missing_dependencies ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/ja_goal_graph.rs (target/debug/deps/ja_goal_graph-071e85048c6d65d3)
+
+running 4 tests
+test goals_have_modalities_assessments_and_framework_refs ... ok
+test bands_cover_onramp_through_release_band ... ok
+test prerequisites_resolve_and_are_acyclic ... ok
+test every_goal_validates_against_v02_goal_schema ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/ja_orthography.rs (target/debug/deps/ja_orthography-77117f41abc747fa)
+
+running 4 tests
+test reading_and_writing_competencies_are_separate ... ok
+test romaji_fade_is_specified_and_never_gates ... ok
+test scaffold_policy_covers_all_five_scaffolds ... ok
+test scripts_document_validates_against_v02_schema ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/ja_phonology.rs (target/debug/deps/ja_phonology-72d009b864596423)
+
+running 3 tests
+test no_automatic_scoring_without_calibration ... ok
+test required_feature_areas_are_encoded ... ok
+test inventory_validates_against_v02_phonology_schema ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/leximport.rs (target/debug/deps/leximport-18781bf04ff4130d)
+
+running 6 tests
+test deterministic_ids_and_collision_handling ... ok
+test imported_data_never_becomes_teaching_order ... ok
+test non_redistributable_source_is_rejected ... ok
+test attribution_and_license_requirements_are_generated ... ok
+test import_is_reproducible_and_separated_from_curriculum ... ok
+test pack_still_validates_after_import ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests/media.rs (target/debug/deps/media-b31937301714df79)
+
+running 17 tests
+test a_pack_with_audio_addressable_items_and_no_media_manifest_fails_install ... ok
+test partially_built_media_is_refused_in_every_mode ... ok
+test unbuilt_media_blocks_install_and_speaks_once_in_a_checkout ... ok
+test undeclared_media_file_is_caught ... ok
+test a_built_manifest_that_misses_an_addressable_item_fails_the_install_gate ... ok
+test contrast_item_audio_ties_to_the_item_reading_and_counts_reading_gaps ... ok
+test lexicon_row_fed_the_kanji_surface_fails_tie_and_names_the_reading ... ok
+test lexicon_audio_must_speak_a_scripted_reading_never_a_transliteration ... ok
+test narrator_sidecar_is_declared_data_not_an_unlisted_asset ... ok
+test drifting_media_is_refused_by_build ... ok
+test non_synthesized_audio_is_never_judged_against_declared_readings ... ok
+test declared_asset_matching_its_bytes_is_clean ... ok
+test tampered_audio_fails_whatever_the_mode ... ok
+test an_unbuilt_pack_never_builds_since_nothing_falls_back_anymore ... ok
+test a_partially_built_pack_never_builds ... ok
+test dot_segment_media_row_is_refused_before_any_read ... ok
+test synthesized_audio_must_record_the_declared_reading_not_the_surface_or_romaji ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests/media_upgrade.rs (target/debug/deps/media_upgrade-116869765a74e92a)
+
+running 3 tests
+test reinstalling_the_same_version_replaces_the_media_instead_of_merging_it ... ok
+test a_tampered_installed_asset_fails_install_validation ... ok
+test an_upgrade_swaps_the_media_in_force_and_keeps_the_old_bytes_for_rollback ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+     Running tests/perf_install.rs (target/debug/deps/perf_install-c1a37d5ddbdd352b)
+
+running 1 test
+test pack_update_timing ... ignored, requires a ~318 MB network-fetched pack archive via LTS_PERF_PACK_ARCHIVE; measurement evidence, not a CI gate
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/source_matrix.rs (target/debug/deps/source_matrix-576d2fa424703700)
+
+running 3 tests
+test matrix_covers_required_categories ... ok
+test nonshippable_entries_have_alternative_or_blocker ... ok
+test every_entry_is_classified_with_registry_fields ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/transliteration.rs (target/debug/deps/transliteration-4fd444dd63d264c3)
+
+running 8 tests
+test script_label_disagreeing_with_its_own_text_is_flagged ... ok
+test transliteration_reading_with_kana_or_digit_is_flagged_and_names_the_kana ... ok
+test mixed_script_text_keeps_whichever_kana_label_it_carries ... ok
+test sentence_romaji_may_contain_digits ... ok
+test sentence_romaji_with_kana_is_flagged ... ok
+test well_formed_transliteration_is_left_alone ... ok
+test script_neutral_marks_keep_kana_labels_clean ... ok
+test the_validator_adopts_the_romaji_rules_and_nothing_else_from_the_audit ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/unit_gates.rs (target/debug/deps/unit_gates-d23a8c3de9b4f2ad)
+
+running 7 tests
+test a_unit_gated_on_itself_can_never_be_introduced ... ok
+test a_gate_cycle_locks_every_unit_on_it_and_is_rejected ... ok
+test a_gate_target_that_is_not_a_unit_is_rejected ... ok
+test a_gate_state_outside_the_mastery_vocabulary_fails_the_schema ... ok
+test a_gate_on_an_undeclared_id_travels_the_unresolved_reference_path ... ok
+test a_declared_gate_on_a_real_unit_validates_clean ... ok
+test the_japanese_pack_gates_katakana_on_every_hiragana_chart_unit ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.56s
+
+     Running tests/validate.rs (target/debug/deps/validate-13a12f7369d852ef)
+
+running 52 tests
+test lexicon_script_contamination_and_stress_defects_are_caught ... ok
+test bare_prerequisite_ids_fail_in_0_2 ... ok
+test diagnostics_carry_actionable_locations ... ok
+test out_of_range_support_level_fails ... ok
+test dependency_mirror_must_agree_with_content_prerequisites ... ok
+test goals_sharding_accepted ... ok
+test manifest_scripts_must_match_orthography_ids ... ok
+test dead_goal_audit_reports_unreachable_goals ... ok
+test bad_id_grammar_fails ... ok
+test inverted_engine_range_fails ... ok
+test migrated_prerequisites_warn_for_human_review ... ok
+test locale_mismatch_fails ... ok
+test duplicate_ids_fail ... ok
+test cloze_target_not_in_text_fails ... ok
+test draft_unresolved_reference_and_license_gates_block_install ... ok
+test shipped_packs_keep_the_declared_help_promise ... ok
+test prerequisite_cycles_fail_with_cycle_path ... ok
+test deferred_modality_prerequisites_are_representable ... ok
+test generation_contract_envelopes_unit_content ... ok
+test scaffold_draft_is_accepted_as_scaffold_only ... ok
+test matching_dependency_mirror_is_clean ... ok
+test ai_only_approval_cannot_promote_to_verified ... ok
+test status_flip_with_review_record_is_clean ... ok
+test manifest_rejects_non_boolean_scenario_help ... ok
+test stray_file_under_review_dir_flagged ... ok
+test undeclared_reference_warns_in_scaffold_and_errors_in_install ... ok
+test media_assets_load_as_binary_and_pack_stays_clean ... ok
+test review_governance_paths_accepted ... ok
+test engine_version_compatibility_is_checked ... ok
+test capability_declaration_with_items_validates_clean ... ok
+test scenario_choices_help_below_two_options_is_error ... ok
+test sentence_content_validates_in_0_2 ... ok
+test valid_minimal_is_clean_in_both_modes ... ok
+test deep_yaml_flow_nesting_is_a_diagnostic_not_a_stack_overflow ... ok
+test unknown_capability_string_fails_validation ... ok
+test capability_without_items_is_exactly_one_error ... ok
+test payloads_behind_every_required_transfer_validate_clean ... ok
+test a_partially_payloaded_requirement_is_still_a_gap ... ok
+test pack_without_declared_help_promise_is_exempt_from_u07 ... ok
+test a_transfer_requirement_without_payloads_is_rejected ... ok
+test a_removed_requirement_validates_clean ... ok
+test scenario_intent_token_without_label_is_unlabelled_action ... ok
+test scenario_with_labels_and_delivered_help_validates_clean ... ok
+test scenario_without_rungs_or_labels_stays_valid_as_before ... ok
+test scenario_rung_without_payload_is_undelivered_help ... ok
+test unit_without_capabilities_key_validates_as_before ... ok
+test valid_full_covers_every_content_type ... ok
+test per_case_orthography_entity_is_refused_at_bake ... ok
+test russian_declares_exactly_one_script_introduction_unit ... ok
+test japanese_declares_exactly_one_script_introduction_unit ... ok
+test japanese_draft_seed_validates_as_scaffold ... ok
+test japanese_seed_is_install_eligible ... ok
+
+test result: ok. 52 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.59s
+
+     Running tests/word_timings.rs (target/debug/deps/word_timings-bf7ad7b036918de3)
+
+running 3 tests
+test pack_without_the_sidecar_loads_unchanged ... ok
+test malformed_sidecar_line_surfaces_a_clear_error ... ok
+test sidecar_timings_are_exposed_keyed_by_clip_id ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/world.rs (target/debug/deps/world-87fbf44213daceb9)
+
+running 8 tests
+test a_pack_without_the_collection_stays_clean_and_yields_nothing ... ok
+test environment_ids_are_pack_unique ... ok
+test declaring_a_collection_without_rows_is_a_pack_bug ... ok
+test an_unlock_rule_must_point_at_content_the_pack_declares ... ok
+test declared_environments_validate_and_are_returned_typed ... ok
+test an_unlock_on_an_unrecordable_dimension_is_rejected ... ok
+test a_row_is_rejected_when_it_names_a_state_the_engine_does_not_have ... ok
+test a_listening_unlock_needs_audio_the_pack_declares ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+   Doc-tests lts_langpack
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+==== exit=0 : cargo test -p lts-langpack ====
+==== cargo clippy -p lts-langpack --all-targets -- -D warnings ====
+    Checking lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.33s
+==== exit=0 : cargo clippy -p lts-langpack --all-targets -- -D warnings ====
+==== cargo test -p lts-desktop --no-default-features --lib unclaimed_contrast_and_sentence_rows_are_not_seeded ====
+   Compiling aws-lc-sys v0.45.0
+   Compiling libdbus-sys v0.2.7
+   Compiling x11-dl v2.21.0
+   Compiling glib-sys v0.18.1
+   Compiling gobject-sys v0.18.0
+   Compiling gio-sys v0.18.1
+   Compiling gdk-sys v0.18.2
+   Compiling gdk-pixbuf-sys v0.18.0
+   Compiling pango-sys v0.18.0
+   Compiling cairo-sys-rs v0.18.2
+   Compiling atk-sys v0.18.2
+   Compiling soup3-sys v0.5.0
+   Compiling javascriptcore-rs-sys v1.1.1
+   Compiling gdkx11-sys v0.18.2
+   Compiling gtk-sys v0.18.2
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+   Compiling gtk v0.18.2
+   Compiling webkit2gtk-sys v2.0.2
+   Compiling wry v0.57.0
+   Compiling dbus v0.9.12
+   Compiling glib v0.18.5
+   Compiling gdkwayland-sys v0.18.2
+   Compiling aws-lc-rs v1.18.1
+   Compiling rustls v0.23.46
+   Compiling gio v0.18.4
+   Compiling cairo-rs v0.18.5
+   Compiling atk v0.18.2
+   Compiling javascriptcore-rs v1.1.2
+   Compiling rustls-webpki v0.103.16
+   Compiling tokio-rustls v0.26.6
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling ureq v2.12.1
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.13.5
+   Compiling jsonschema v0.58.5
+   Compiling pango v0.18.3
+   Compiling gdk-pixbuf v0.18.5
+   Compiling soup3 v0.5.0
+   Compiling gdk v0.18.2
+   Compiling lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack)
+   Compiling lts-activity v0.1.0 (/home/hunter/game-dev/LTS/crates/activity)
+   Compiling gdkx11 v0.18.2
+   Compiling webkit2gtk v2.0.2
+   Compiling tao v0.37.1
+   Compiling muda v0.20.0
+   Compiling tauri-runtime v2.12.1
+   Compiling tauri-runtime-wry v2.12.1
+   Compiling tauri v2.12.1
+   Compiling tauri-plugin-single-instance v2.5.2
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 47.98s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-d09ef1ba81f6f27e)
+
+running 1 test
+test tests::unclaimed_contrast_and_sentence_rows_are_not_seeded ... FAILED
+
+failures:
+
+---- tests::unclaimed_contrast_and_sentence_rows_are_not_seeded stdout ----
+
+thread 'tests::unclaimed_contrast_and_sentence_rows_are_not_seeded' (2520890) panicked at apps/desktop/src-tauri/src/lib.rs:20343:49:
+called `Result::unwrap()` on an `Err` value: "pack has 161 validation error(s); fix before build (first: \"ru.sent.cp.p01\" is used by the unit but not in the generation contract)"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::unclaimed_contrast_and_sentence_rows_are_not_seeded
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 223 filtered out; finished in 1.15s
+
+error: test failed, to rerun pass `-p lts-desktop --lib`
+==== exit=101 : cargo test -p lts-desktop --no-default-features --lib unclaimed_contrast_and_sentence_rows_are_not_seeded ====
+==== cargo test -p lts-desktop --no-default-features --lib orphan ====
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 2.83s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-d09ef1ba81f6f27e)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 224 filtered out; finished in 0.00s
+
+==== exit=0 : cargo test -p lts-desktop --no-default-features --lib orphan ====
+BATTERY DONE
+==== cargo test -p lts-langpack (post vocab sync) ====
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.12s
+     Running unittests src/lib.rs (target/debug/deps/lts_langpack-2b5d560d20d73713)
+
+running 5 tests
+test migrate::tests::bare_prerequisites_become_reviewable_records ... ok
+test migrate::tests::bare_prerequisites_are_rejected_by_0_2_schema ... ok
+test migrate::tests::migrated_goal_validates_against_0_2_schema ... ok
+test migrate::tests::migrated_records_trigger_review_warning ... ok
+test audit::tests::lemmas_sidecar_needs_no_manifest_row ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/archive.rs (target/debug/deps/archive-704398598fd4140c)
+
+running 17 tests
+test install_rejects_path_traversal ... ok
+test build_rejects_invalid_pack ... ok
+test install_enforces_install_mode_gates ... ok
+test install_rejects_unlisted_and_symlink_entries ... ok
+test install_rejects_hash_mismatch ... ok
+test build_is_deterministic ... ok
+test a_cancelled_unpack_leaves_the_store_untouched ... ok
+test undeclared_help_promise_installs_payload_less_scenario ... ok
+test install_is_install_with_cancel_that_never_fires ... ok
+test declared_help_promise_blocks_payload_less_scenario_at_build_and_install ... ok
+test install_upgrade_rollback_cycle ... ok
+test same_version_reinstall_swaps_without_ever_gapping_current ... ok
+test failed_reinstall_restores_the_previous_version ... ok
+test install_rejects_manifest_over_the_entry_cap ... ok
+test install_rejects_decompression_bomb ... ok
+test inspect_and_read_entry_reject_decompressed_bombs ... ok
+test install_rejects_zip_with_more_entries_than_the_cap ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.02s
+
+     Running tests/audit.rs (target/debug/deps/audit-1d0ea46ee37a2b76)
+
+running 9 tests
+test attribution_requirement_without_entry_fails ... ok
+test by_over_a_by_sa_source_names_the_dropped_obligation ... ok
+test reference_only_source_cannot_be_bundled ... ok
+test clean_chain_audits_and_reports_attribution ... ok
+test matching_and_unjudgeable_licences_produce_no_finding ... ok
+test unknown_license_blocks_reference_build ... ok
+test source_provenance_flags_gaps_and_term_conflicts ... ok
+test clean_source_chain_has_no_provenance_warnings ... ok
+test seed_pack_licensed_and_reports_sources ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.65s
+
+     Running tests/grammar_labels.rs (target/debug/deps/grammar_labels-bf5aeefdba42d97c)
+
+running 3 tests
+test malformed_sidecar_line_surfaces_a_clear_error ... ok
+test pack_without_the_sidecar_loads_unchanged ... ok
+test sidecar_labels_are_exposed_keyed_by_sentence_id ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/input_methods.rs (target/debug/deps/input_methods-e36d0420690b064f)
+
+running 3 tests
+test declared_map_is_exposed_id_to_bool_and_validates ... ok
+test absent_input_methods_reads_none_and_changes_nothing ... ok
+test malformed_map_is_a_schema_error_and_the_reader_stays_bool_safe ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/ja_contrasts.rs (target/debug/deps/ja_contrasts-851a305fe77a13be)
+
+running 2 tests
+test vowel_length_pairs_declare_mora_derived_targets ... ok
+test contrasts_validate_against_v02_schema ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/ja_dependency_map.rs (target/debug/deps/ja_dependency_map-2b141b23d92bacf2)
+
+running 3 tests
+test politeness_is_contextual_not_binary ... ok
+test concepts_cover_every_goal_required_concept ... ok
+test validator_reports_no_cycles_or_missing_dependencies ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/ja_goal_graph.rs (target/debug/deps/ja_goal_graph-071e85048c6d65d3)
+
+running 4 tests
+test bands_cover_onramp_through_release_band ... ok
+test goals_have_modalities_assessments_and_framework_refs ... ok
+test prerequisites_resolve_and_are_acyclic ... ok
+test every_goal_validates_against_v02_goal_schema ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/ja_orthography.rs (target/debug/deps/ja_orthography-77117f41abc747fa)
+
+running 4 tests
+test scaffold_policy_covers_all_five_scaffolds ... ok
+test reading_and_writing_competencies_are_separate ... ok
+test romaji_fade_is_specified_and_never_gates ... ok
+test scripts_document_validates_against_v02_schema ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/ja_phonology.rs (target/debug/deps/ja_phonology-72d009b864596423)
+
+running 3 tests
+test no_automatic_scoring_without_calibration ... ok
+test required_feature_areas_are_encoded ... ok
+test inventory_validates_against_v02_phonology_schema ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/leximport.rs (target/debug/deps/leximport-18781bf04ff4130d)
+
+running 6 tests
+test non_redistributable_source_is_rejected ... ok
+test imported_data_never_becomes_teaching_order ... ok
+test deterministic_ids_and_collision_handling ... ok
+test attribution_and_license_requirements_are_generated ... ok
+test import_is_reproducible_and_separated_from_curriculum ... ok
+test pack_still_validates_after_import ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/media.rs (target/debug/deps/media-b31937301714df79)
+
+running 17 tests
+test a_pack_with_audio_addressable_items_and_no_media_manifest_fails_install ... ok
+test partially_built_media_is_refused_in_every_mode ... ok
+test unbuilt_media_blocks_install_and_speaks_once_in_a_checkout ... ok
+test undeclared_media_file_is_caught ... ok
+test lexicon_row_fed_the_kanji_surface_fails_tie_and_names_the_reading ... ok
+test contrast_item_audio_ties_to_the_item_reading_and_counts_reading_gaps ... ok
+test lexicon_audio_must_speak_a_scripted_reading_never_a_transliteration ... ok
+test a_built_manifest_that_misses_an_addressable_item_fails_the_install_gate ... ok
+test narrator_sidecar_is_declared_data_not_an_unlisted_asset ... ok
+test drifting_media_is_refused_by_build ... ok
+test a_partially_built_pack_never_builds ... ok
+test dot_segment_media_row_is_refused_before_any_read ... ok
+test tampered_audio_fails_whatever_the_mode ... ok
+test declared_asset_matching_its_bytes_is_clean ... ok
+test an_unbuilt_pack_never_builds_since_nothing_falls_back_anymore ... ok
+test non_synthesized_audio_is_never_judged_against_declared_readings ... ok
+test synthesized_audio_must_record_the_declared_reading_not_the_surface_or_romaji ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/media_upgrade.rs (target/debug/deps/media_upgrade-116869765a74e92a)
+
+running 3 tests
+test a_tampered_installed_asset_fails_install_validation ... ok
+test an_upgrade_swaps_the_media_in_force_and_keeps_the_old_bytes_for_rollback ... ok
+test reinstalling_the_same_version_replaces_the_media_instead_of_merging_it ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests/perf_install.rs (target/debug/deps/perf_install-c1a37d5ddbdd352b)
+
+running 1 test
+test pack_update_timing ... ignored, requires a ~318 MB network-fetched pack archive via LTS_PERF_PACK_ARCHIVE; measurement evidence, not a CI gate
+
+test result: ok. 0 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/source_matrix.rs (target/debug/deps/source_matrix-576d2fa424703700)
+
+running 3 tests
+test matrix_covers_required_categories ... ok
+test every_entry_is_classified_with_registry_fields ... ok
+test nonshippable_entries_have_alternative_or_blocker ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/transliteration.rs (target/debug/deps/transliteration-4fd444dd63d264c3)
+
+running 8 tests
+test script_label_disagreeing_with_its_own_text_is_flagged ... ok
+test mixed_script_text_keeps_whichever_kana_label_it_carries ... ok
+test sentence_romaji_with_kana_is_flagged ... ok
+test script_neutral_marks_keep_kana_labels_clean ... ok
+test sentence_romaji_may_contain_digits ... ok
+test well_formed_transliteration_is_left_alone ... ok
+test transliteration_reading_with_kana_or_digit_is_flagged_and_names_the_kana ... ok
+test the_validator_adopts_the_romaji_rules_and_nothing_else_from_the_audit ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/unit_gates.rs (target/debug/deps/unit_gates-d23a8c3de9b4f2ad)
+
+running 7 tests
+test a_unit_gated_on_itself_can_never_be_introduced ... ok
+test a_gate_state_outside_the_mastery_vocabulary_fails_the_schema ... ok
+test a_gate_cycle_locks_every_unit_on_it_and_is_rejected ... ok
+test a_gate_target_that_is_not_a_unit_is_rejected ... ok
+test a_gate_on_an_undeclared_id_travels_the_unresolved_reference_path ... ok
+test a_declared_gate_on_a_real_unit_validates_clean ... ok
+test the_japanese_pack_gates_katakana_on_every_hiragana_chart_unit ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.50s
+
+     Running tests/validate.rs (target/debug/deps/validate-13a12f7369d852ef)
+
+running 52 tests
+test lexicon_script_contamination_and_stress_defects_are_caught ... ok
+test manifest_scripts_must_match_orthography_ids ... ok
+test inverted_engine_range_fails ... ok
+test bad_id_grammar_fails ... ok
+test bare_prerequisite_ids_fail_in_0_2 ... ok
+test locale_mismatch_fails ... ok
+test cloze_target_not_in_text_fails ... ok
+test diagnostics_carry_actionable_locations ... ok
+test out_of_range_support_level_fails ... ok
+test dead_goal_audit_reports_unreachable_goals ... ok
+test duplicate_ids_fail ... ok
+test dependency_mirror_must_agree_with_content_prerequisites ... ok
+test draft_unresolved_reference_and_license_gates_block_install ... ok
+test migrated_prerequisites_warn_for_human_review ... ok
+test shipped_packs_keep_the_declared_help_promise ... ok
+test deferred_modality_prerequisites_are_representable ... ok
+test goals_sharding_accepted ... ok
+test generation_contract_envelopes_unit_content ... ok
+test prerequisite_cycles_fail_with_cycle_path ... ok
+test scaffold_draft_is_accepted_as_scaffold_only ... ok
+test review_governance_paths_accepted ... ok
+test manifest_rejects_non_boolean_scenario_help ... ok
+test media_assets_load_as_binary_and_pack_stays_clean ... ok
+test stray_file_under_review_dir_flagged ... ok
+test ai_only_approval_cannot_promote_to_verified ... ok
+test matching_dependency_mirror_is_clean ... ok
+test scenario_choices_help_below_two_options_is_error ... ok
+test capability_declaration_with_items_validates_clean ... ok
+test status_flip_with_review_record_is_clean ... ok
+test undeclared_reference_warns_in_scaffold_and_errors_in_install ... ok
+test deep_yaml_flow_nesting_is_a_diagnostic_not_a_stack_overflow ... ok
+test unknown_capability_string_fails_validation ... ok
+test sentence_content_validates_in_0_2 ... ok
+test a_removed_requirement_validates_clean ... ok
+test pack_without_declared_help_promise_is_exempt_from_u07 ... ok
+test capability_without_items_is_exactly_one_error ... ok
+test scenario_with_labels_and_delivered_help_validates_clean ... ok
+test scenario_without_rungs_or_labels_stays_valid_as_before ... ok
+test payloads_behind_every_required_transfer_validate_clean ... ok
+test a_partially_payloaded_requirement_is_still_a_gap ... ok
+test a_transfer_requirement_without_payloads_is_rejected ... ok
+test engine_version_compatibility_is_checked ... ok
+test scenario_rung_without_payload_is_undelivered_help ... ok
+test scenario_intent_token_without_label_is_unlabelled_action ... ok
+test valid_minimal_is_clean_in_both_modes ... ok
+test unit_without_capabilities_key_validates_as_before ... ok
+test valid_full_covers_every_content_type ... ok
+test per_case_orthography_entity_is_refused_at_bake ... ok
+test russian_declares_exactly_one_script_introduction_unit ... ok
+test japanese_declares_exactly_one_script_introduction_unit ... ok
+test japanese_draft_seed_validates_as_scaffold ... ok
+test japanese_seed_is_install_eligible ... ok
+
+test result: ok. 52 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.13s
+
+     Running tests/word_timings.rs (target/debug/deps/word_timings-bf7ad7b036918de3)
+
+running 3 tests
+test malformed_sidecar_line_surfaces_a_clear_error ... ok
+test pack_without_the_sidecar_loads_unchanged ... ok
+test sidecar_timings_are_exposed_keyed_by_clip_id ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+     Running tests/world.rs (target/debug/deps/world-87fbf44213daceb9)
+
+running 8 tests
+test environment_ids_are_pack_unique ... ok
+test a_pack_without_the_collection_stays_clean_and_yields_nothing ... ok
+test declared_environments_validate_and_are_returned_typed ... ok
+test an_unlock_rule_must_point_at_content_the_pack_declares ... ok
+test an_unlock_on_an_unrecordable_dimension_is_rejected ... ok
+test declaring_a_collection_without_rows_is_a_pack_bug ... ok
+test a_row_is_rejected_when_it_names_a_state_the_engine_does_not_have ... ok
+test a_listening_unlock_needs_audio_the_pack_declares ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+   Doc-tests lts_langpack
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+==== exit=0 ====
+==== cargo test -p lts-desktop --no-default-features --lib unclaimed_contrast_and_sentence_rows_are_not_seeded (post vocab sync) ====
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.19s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-d09ef1ba81f6f27e)
+
+running 1 test
+test tests::unclaimed_contrast_and_sentence_rows_are_not_seeded has been running for over 60 seconds
+test tests::unclaimed_contrast_and_sentence_rows_are_not_seeded ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 223 filtered out; finished in 79.12s
+
+==== exit=0 ====
+
+==== RU-SENTENCE-CLAIM-001 controller summary (lane tier) ====
+cargo fmt --all --check                                   exit 0
+cargo test -p lts-langpack                                exit 0 (44 test binaries ok, 0 failed)
+cargo clippy -p lts-langpack --all-targets -D warnings    exit 0
+cargo test -p lts-desktop --no-default-features --lib unclaimed_contrast_and_sentence_rows_are_not_seeded
+                                                          exit 0 (1 passed, 79s)
+.venv/bin/python tools/qa_stories.py --pack languages/ru-RU   20 stories, 0 FAIL, exit 0
+.venv/bin/python tools/audit_learner_copy.py              1848 pack files, 0 findings
+.venv/bin/python tools/audit_content_templates.py languages/ru-RU  exit 0
+python3 state/evidence/RU-SENTENCE-CLAIM-001/remeasure.py  rows=945 claimed=945 orphans=0
+                                                            (was 161: a1 24 a2 27 b1 30 b2 40 cp 40)
+acceptance-band-read.py (lts-serve :17647, fresh level-0 profile, dev tree installed
+at runtime)                                               5/5 PASS: 5-item plan, every item
+                                                            unit-attached, zero orphan ids,
+                                                            claimed contrasts seed, and the
+                                                            161 newly claimed ids stay
+                                                            band-locked OUT of the level-0 plan
+
+RUN-1 NOTE (lane bug found by the gate, not a test weakening): the first battery run was
+RED — the pack-build validator rejects a unit that references content outside its
+generation contract ("ru.sent.cp.p01" is used by the unit but not in the generation contract,
+161 errors). Fixed by state/evidence/RU-SENTENCE-CLAIM-001/sync_allowed_vocab.py, which appends
+each claimed ref to the hosting unit's allowed_vocab (161 rows, 32 units, idempotent). The
+langpack test suite alone does NOT run that validator - the desktop install path does, so
+content lanes must run a desktop pack-build test, not only cargo test -p lts-langpack.
+
+DEFERRED (recorded, not self-certified): no band-matched live read (a profile with the
+on-ramp goals at independent comprehension-reading, reading the a1 story material) was run -
+it needs fabricated mastery evidence beyond this card's 45-min budget. Machine evidence for
+the ladder half: orphan census 0 (no sentence sits outside the ladder), the gate test proves
+claimed rows seed and unclaimed rows do not, and the live read proves the claims did not leak
+into the day-0 pool. The claimed rows ride the identical sentence-seeding path as the
+journey sentences already in the same units (e.g. ru.sent.a1.u040 in ru.unit.a1.home-01).

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-22",
-  "active_task": "RU-SENTENCE-CLAIM-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2762,7 +2762,7 @@
     "RU-SENTENCE-CLAIM-001": {
       "task_id": "RU-SENTENCE-CLAIM-001",
       "title": "Claim the 161 orphan RU sentences into band-appropriate units (content campaign follow-up of ORPHAN-CONTENT-001)",
-      "status": "in_progress",
+      "status": "done",
       "attempts": 1,
       "dependencies": [
         "ORPHAN-CONTENT-001"
@@ -2770,11 +2770,20 @@
       "evidence": [
         "state/notes/RU-SENTENCE-CLAIM-001.md",
         "state/evidence/RU-SENTENCE-CLAIM-001/claim-map.json",
-        "state/evidence/RU-SENTENCE-CLAIM-001/apply_claims.py"
+        "state/evidence/RU-SENTENCE-CLAIM-001/apply_claims.py",
+        "state/evidence/RU-SENTENCE-CLAIM-001/sync_allowed_vocab.py",
+        "state/evidence/RU-SENTENCE-CLAIM-001/remeasure.py",
+        "state/evidence/RU-SENTENCE-CLAIM-001/orphan-census-after.json",
+        "state/evidence/RU-SENTENCE-CLAIM-001/gates.log",
+        "state/evidence/RU-SENTENCE-CLAIM-001/qa-stories.json",
+        "state/evidence/RU-SENTENCE-CLAIM-001/acceptance-band-read.py",
+        "state/evidence/RU-SENTENCE-CLAIM-001/acceptance-run.log",
+        "state/evidence/RU-SENTENCE-CLAIM-001/acceptance-result.json",
+        "state/evidence/RU-SENTENCE-CLAIM-001/acceptance-home_state.json"
       ],
-      "summary": "Opened: band rule fixed (sentence band tag == hosting unit goal band, cp -> a1) and the full 161-id claim map validated (37 groups, exact coverage, no non-orphan refs).",
+      "summary": "All 161 orphan RU sentences now hold a ladder position: 16 story series claimed whole into topic-matched units of their own band (a1 stories to home/routines/shopping/city, a2 to a2.past-events, b1 to b1.narration-sequence, b2 to lit/neg/soc/lex/argue), the three cp stories and 24 unstoried cp sentences into a1 units (cp = a1 per tools/qa_stories.py), and loose ru.sent.a2.u116 into its neighbours' unit. Pure content_ref additions plus the allowed_vocab rows the pack-build validator requires - no text/gloss/cloze/media change, so no shard sweep or re-bake. Census after: 945/945 sentence rows unit-referenced (was 784/945). Gates: fmt, cargo test -p lts-langpack, clippy -p lts-langpack -D warnings, desktop gate test unclaimed_contrast_and_sentence_rows_are_not_seeded, qa_stories (20 stories 0 FAIL), learner-copy and content-template audits, plus an lts-serve live read 5/5 PASS - the 161 newly claimed ids stay band-locked out of the level-0 plan. Deferred and recorded: the band-matched (on-ramp-complete) live read.",
       "updated": "2026-11-22",
-      "notes": "board t_34ae2f4b; follow-up of ORPHAN-CONTENT-001 deferred claim decision"
+      "notes": "board t_34ae2f4b; follow-up of ORPHAN-CONTENT-001 deferred claim decision; band rule = sentence band tag == hosting unit goal band (cp -> a1), deviation from 'on-ramp units' recorded in the notes"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

@@ -124,6 +124,21 @@ food-05 (p19), time-plans-05 (p22 p23 p24 p25), routines-10 (p31).
 6. `tools/audit_content_templates.py` + `tools/audit_learner_copy.py` (content
    lane) — no new learner-facing prose is added, so both must stay green.
 
+## STATUS — SHIPPED 2026-11-22 (do not re-run the apply scripts)
+
+Content commit `3ea574b`, card-open commit `d0f16a6`. Sentence orphan census after the
+claim: **0** (was 161) — `state/evidence/RU-SENTENCE-CLAIM-001/orphan-census-after.json`.
+Re-running `apply_claims.py --apply` would duplicate activities; the only idempotent
+script is `sync_allowed_vocab.py`.
+
+Correction to the contract above: the claims DO also extend each hosting unit's
+`generation_contract.allowed_vocab`. The pack BUILD validator refuses a unit that
+references content outside its generation contract (measured: 161 errors, first one
+`"ru.sent.cp.p01" is used by the unit but not in the generation contract`), and that
+validator is NOT exercised by `cargo test -p lts-langpack` — it fires in the desktop
+pack-install path. Content lanes must therefore run a desktop pack-build test, not
+only the langpack suite. `sync_allowed_vocab.py` applies the 161 vocab rows idempotently.
+
 ## Resume recipe (if this card dies mid-flight)
 
 1. `git status --short` — if `languages/ru-RU/curriculum/units/*.yaml` are dirty,

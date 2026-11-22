@@ -1,0 +1,17 @@
+{
+ "profileId": "prof-ab061cd2-8123-4032-88ea-f027905c4e1e",
+ "plan_item_count": 5,
+ "content_ids": [
+  "ru.contrast.voicing.dt",
+  "ru.orth.cyrillic.a",
+  "ru.orth.cyrillic.m",
+  "ru.orth.cyrillic.o"
+ ],
+ "offenders": [],
+ "orphan_rows": [],
+ "contrasts": [
+  "ru.contrast.voicing.dt"
+ ],
+ "newly_claimed_on_plan": [],
+ "failures": 0
+}

@@ -1,0 +1,17 @@
+{
+  "measured_by": "RU-SENTENCE-CLAIM-001",
+  "method": "sentence jsonl ids minus unit-activity content_refs (YAML-parsed), matching the engine's claimed_by_units",
+  "sentence_rows": 945,
+  "claimed": 945,
+  "orphans": 0,
+  "claimed_per_band": {
+    "b1": 233,
+    "b2": 444,
+    "a2": 129,
+    "cp": 40,
+    "a1": 92,
+    "on-ramp": 7
+  },
+  "orphan_per_band": {},
+  "orphan_sentence_ids": []
+}
