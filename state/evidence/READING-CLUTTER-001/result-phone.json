@@ -1,0 +1,72 @@
+{
+  "viewport": "390x844",
+  "mode": "phone",
+  "harness_audit": {
+    "screen": "reader",
+    "error": null,
+    "fails": 0
+  },
+  "measured": {
+    "buttonsInProse": 8,
+    "confirmButtonsInProse": 0,
+    "rawTag": null,
+    "storyControls": 1,
+    "questionVisible": [
+      "Did this story sound right?"
+    ],
+    "docScrollW": 390,
+    "docClientW": 390
+  },
+  "confirmBox": {
+    "top": 581,
+    "bottom": 625,
+    "height": 44
+  },
+  "checks": [
+    {
+      "name": "no confirm control inside the story prose",
+      "pass": true,
+      "measured": {
+        "confirmButtonsInProse": 0,
+        "buttonsInProse": 8
+      }
+    },
+    {
+      "name": "no raw morphology tag in the story text",
+      "pass": true,
+      "measured": {
+        "rawTag": null
+      }
+    },
+    {
+      "name": "exactly one story-level confirm control",
+      "pass": true,
+      "measured": {
+        "storyControls": 1,
+        "questionVisible": [
+          "Did this story sound right?"
+        ]
+      }
+    },
+    {
+      "name": "story confirm control is reachable in the viewport",
+      "pass": true,
+      "measured": {
+        "box": {
+          "top": 581,
+          "bottom": 625,
+          "height": 44
+        },
+        "viewportH": 844
+      }
+    },
+    {
+      "name": "no horizontal overflow",
+      "pass": true,
+      "measured": {
+        "scrollW": 390,
+        "clientW": 390
+      }
+    }
+  ]
+}

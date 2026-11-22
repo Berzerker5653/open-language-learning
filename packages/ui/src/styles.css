@@ -593,29 +593,26 @@ details.prose-note > p {
   text-underline-offset: 3px;
 }
 
-/* GRAMMAR-LABELS-001: compact interlinear grammar labels under inflected
-   words in graded reading. The token rides its own inline-block so the
-   label sits on its own micro-line beneath it; tokens the sidecar does
-   not cover carry an empty placeholder of the same height, so a labeled
-   sentence has one uniform line box and hiding labels (or a missing
-   label) never shifts layout. Token spacing is explicit because the
-   interlinear split removes the source whitespace between inline-blocks. */
-.il-token {
-  display: inline-block;
-  margin-inline-end: 0.25em;
-}
+/* READING-CLUTTER-001: the reader shows no interlinear chips — the pack's
+   label sidecar is internal notation; grammar rides the word card in human
+   form. (The old .il-token/.il-label micro-rail rules were removed with
+   the inline chips.) */
 
-.il-label {
-  display: block;
-  font-size: 0.6875rem;
-  line-height: 1.1;
-  font-weight: 400;
+/* CONTENT-CONFIRM-001 (READING-CLUTTER-001 shape): one quiet
+   learner-agreement control under the whole story — never a button inside
+   the prose. */
+.story-confirm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.75rem;
   color: var(--ink-faint);
-  white-space: nowrap;
+  font-size: 0.875rem;
 }
 
-.il-label--empty::before {
-  content: "\200b";
+.story-confirm .story-confirm-toggle {
+  font-size: 0.875rem;
+  padding: 0.375rem 0.75rem;
 }
 
 /* ------------------------------------------------------------- stepper */
@@ -1047,12 +1044,6 @@ th:last-child {
     background: var(--surface);
     padding-block: 0.5rem;
     margin-bottom: 0;
-  }
-
-  /* Interlinear labels are micro-text already; at phone width the full
-     forms would collide, keep the compact rail. */
-  .il-label {
-    font-size: 0.625rem;
   }
 
   /* Fixed-width instruments (activity calendar SVG, contours) live in

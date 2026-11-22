@@ -3,9 +3,15 @@
  * paragraph, not a button column. The three-interaction budget:
  *   1. word tap  -> word card (gloss, pack status, lemma line, word audio, Mine)
  *   2. sentence tap (anywhere that is not a word) -> that sentence's audio
- *   3. the quiet CONTENT-CONFIRM-001 control at a sentence tail
+ *   3. the quiet CONTENT-CONFIRM-001 control UNDER the story (READING-CLUTTER-001,
+ *      owner ruling 2026-11-21: no confirm control inside the prose)
  * Nothing else is a primary affordance. Reading is formative — nothing here
  * is scored or saved unless the learner mines a word.
+ *
+ * READING-CLUTTER-001: the story flow shows only text the learner reads —
+ * raw morphology tag chips (`nom.sg`) are data, not learner UI, so they
+ * never render in the paragraph; grammar rides the word card in human form
+ * ("nominative singular"). The pack-side `labels` sidecar is unchanged.
  *
  * Direction (RTL-001, ADR-0029): the paragraph itself is pack text, so the
  * `reader-paragraph` element carries the active pack's `dir`/`lang` and the
@@ -54,7 +60,9 @@ export interface StorySentence {
   status: string;
   known: StoryWord[];
   /** Grammar labels for this sentence's open-class tokens; empty when the
-   * pack ships no sidecar (or nothing in the sentence is labelable). */
+   * pack ships no sidecar (or nothing in the sentence is labelable).
+   * READING-CLUTTER-001: these NEVER render inline in the paragraph — they
+   * power the word card's human-form grammar line only. */
   labels: TokenLabel[];
 }
 
@@ -161,9 +169,10 @@ export interface ReadingPanelProps {
   /// the only ones the toggle can retract (the engine scopes it by
   /// profile id; the name match only picks the button's label).
   profileName: string;
-  /// GRAMMAR-LABELS-001: the global show/hide for interlinear grammar
-  /// labels (per-profile display setting; true until the learner turns
-  /// it off). Labels only ever appear where the pack ships them.
+  /// GRAMMAR-LABELS-001 / READING-CLUTTER-001: the global show/hide for
+  /// grammar information (per-profile display setting; true until the
+  /// learner turns it off). It gates the word card's human-form grammar
+  /// line — nothing grammar-shaped renders in the story flow itself.
   grammarLabels: boolean;
   /** READER-FLOW-001: the open word card, or null. */
   wordCard: WordCardState | null;
@@ -196,9 +205,12 @@ export function ReadingPanel(p: ReadingPanelProps) {
   // it through the same handler as the Close button.
   const cardRef = useRef<HTMLDivElement>(null);
   // CONTENT-CONFIRM-001: the only "checked by" surface in the app. The
-  // mark is created ONLY by this explicit button click (acceptance 2),
-  // and the copy says "confirmed by <names>" — never verified, expert,
-  // or reviewed (docs/18).
+  // mark is created ONLY by an explicit click (acceptance 2), and the copy
+  // says "confirmed by <names>" — never verified, expert, or reviewed
+  // (docs/18). READING-CLUTTER-001 (owner ruling 2026-11-21): the control
+  // has left the prose — one quiet story-level control under the paragraph
+  // confirms/retracts every sentence with the SAME content_confirm /
+  // content_unconfirm commands; the word card keeps its per-word control.
   const marksFor = (contentId: string): ConfirmedByName[] =>
     p.storyActive?.confirmations?.[contentId] ?? [];
   const confirmControl = (contentId: string) => {
@@ -208,7 +220,7 @@ export function ReadingPanel(p: ReadingPanelProps) {
       <>
         <button
           type="button"
-          className="btn btn--quiet sentence-confirm"
+          className="btn btn--quiet word-confirm"
           aria-pressed={mine}
           onClick={() => (mine ? p.onUnconfirm(contentId) : p.onConfirm(contentId))}
         >
@@ -222,21 +234,51 @@ export function ReadingPanel(p: ReadingPanelProps) {
       </>
     );
   };
-  // Tokens split on whitespace runs exactly like the sidecar builder
-  // (`build-grammar-labels.py` `tokenize`), so raw tokens (punctuation and
-  // any authored stress intact) verify alignment before a label attaches.
-  // A token the sidecar does not cover stays bare — silent degradation, no
-  // layout shift; a repeated token consumes its labels in sidecar order.
-  const interlinear = (s: StorySentence) => {
-    const remaining = [...s.labels];
-    return s.text
-      .split(/\s+/)
-      .filter(Boolean)
-      .map((tok) => {
-        const at = remaining.findIndex((l) => l.token === tok);
-        const hit = at >= 0 ? remaining.splice(at, 1)[0] : undefined;
-        return hit ? { token: tok, label: hit.label } : { token: tok };
-      });
+  // The story-level attribution is the union over its sentences, each
+  // name at its earliest mark (matching the per-sentence oldest-first
+  // order the engine already gives).
+  const storyMarks = (): ConfirmedByName[] => {
+    const first = new Map<string, ConfirmedByName>();
+    for (const s of p.storyActive?.sentences ?? []) {
+      for (const m of marksFor(s.content_id)) {
+        if (!first.has(m.display_name)) first.set(m.display_name, m);
+      }
+    }
+    return [...first.values()];
+  };
+  const storyConfirmControl = () => {
+    const sentences = p.storyActive?.sentences ?? [];
+    if (sentences.length === 0) return null;
+    // Any of the learner's own marks inside the story makes the control an
+    // Undo of all of them; confirming fills in every sentence at once.
+    const mineSentences = sentences.filter((s) =>
+      marksFor(s.content_id).some((c) => c.display_name === p.profileName),
+    );
+    const mine = mineSentences.length > 0;
+    const marks = storyMarks();
+    return (
+      <p className="story-confirm">
+        <span className="story-confirm-question">
+          <LatinText locale="en">Did this story sound right?</LatinText>
+        </span>{" "}
+        <button
+          type="button"
+          className="btn btn--quiet story-confirm-toggle"
+          aria-pressed={mine}
+          onClick={() => {
+            if (mine) mineSentences.forEach((s) => p.onUnconfirm(s.content_id));
+            else sentences.forEach((s) => p.onConfirm(s.content_id));
+          }}
+        >
+          {mine ? "Undo" : "👍 It sounds right"}
+        </button>
+        {marks.length > 0 && (
+          <span className="notice confirmed-by">
+            {"Confirmed by " + marks.map((c) => c.display_name).join(", ")}
+          </span>
+        )}
+      </p>
+    );
   };
   const cardAt = (contentId: string, token: string) =>
     p.wordCard !== null && p.wordCard.sentenceId === contentId && p.wordCard.token === token;
@@ -292,27 +334,10 @@ export function ReadingPanel(p: ReadingPanelProps) {
       // sentence stays one Ruby run (word taps would mis-annotate it), and
       // the sentence span keeps its audio tap.
       body = <Ruby surface={s.text} furigana={s.furigana} />;
-    } else if (p.grammarLabels && s.labels.length > 0) {
-      // The label rides under its token inside the word button: the compact
-      // form is always visible, the full-form expansion rides the word card.
-      body = interlinear(s).flatMap((w, i) => [
-        i > 0 ? " " : null,
-        wordButton(
-          s,
-          w.token,
-          <>
-            {w.token}
-            {w.label ? (
-              <span className="il-label">{w.label}</span>
-            ) : (
-              <span className="il-label il-label--empty" aria-hidden="true" />
-            )}
-          </>,
-          "il-token",
-          `w${i}`,
-        ),
-      ]);
     } else {
+      // READING-CLUTTER-001: bare word buttons — the pack's `labels`
+      // sidecar never renders inline; the raw tag is internal notation,
+      // and its human form lives in the word card.
       body = surfaceTokens.flatMap((tok, i) => [
         i > 0 ? " " : null,
         wordButton(s, tok, tok, "", `w${i}`),
@@ -327,17 +352,12 @@ export function ReadingPanel(p: ReadingPanelProps) {
             <LatinText>{s.romaji}</LatinText>
           </small>
         )}
-        {/* Quiet tail control: reachable, never the primary affordance. */}
-        <span className="sentence-tail" onClick={(e) => e.stopPropagation()}>
-          {" "}
-          {confirmControl(s.content_id)}
-          {s.gloss && (
-            <small className="sentence-gloss">
-              {" "}
-              <LatinText locale="en">{s.gloss}</LatinText>
-            </small>
-          )}
-        </span>
+        {s.gloss && (
+          <small className="sentence-gloss">
+            {" "}
+            <LatinText locale="en">{s.gloss}</LatinText>
+          </small>
+        )}
       </span>
     );
   };
@@ -424,7 +444,7 @@ export function ReadingPanel(p: ReadingPanelProps) {
         ) : (
           <p className="empty">This word is not in your pack yet.</p>
         )}
-        {tokenLabel && (
+        {p.grammarLabels && tokenLabel && (
           <p className="word-grammar">
             <small>Grammar in this sentence: </small>
             <PackText tag="span">{wc.token}</PackText>
@@ -510,6 +530,9 @@ export function ReadingPanel(p: ReadingPanelProps) {
           <PackText tag="p" className="reader-paragraph">
             {p.storyActive.sentences.flatMap((s, i) => [i > 0 ? " " : null, sentenceSpan(s)])}
           </PackText>
+          {/* READING-CLUTTER-001: the single content-confirm surface for
+              the story — outside the prose, quiet, with undo. */}
+          {storyConfirmControl()}
           {wordCardRegion()}
         </>
       )}

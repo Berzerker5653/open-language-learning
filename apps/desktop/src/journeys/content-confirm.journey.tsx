@@ -1,32 +1,34 @@
 /**
  * Journey — attributed content confirmation (CONTENT-CONFIRM-001, ADR-0040)
- * on the READER-FLOW-001 paragraph reader.
+ * on the READER-FLOW-001 paragraph reader, in its READING-CLUTTER-001 shape
+ * (owner ruling 2026-11-21: no confirm control inside the prose).
  *
  * The only "checked by" mark this project will ever have: an explicit
  * click by the learner reading the text, attributed to their profile.
  * The mounted path pins what the static component test cannot: the story
  * body is one flowing paragraph of sentence spans with inline word
- * buttons; the quiet sentence-tail toggle invokes
- * `content_confirm`/`content_unconfirm` for the right content id; a word
- * tap invokes `word_card` + `story_word_audio` for the exact raw token and
- * opens a card whose confirmation invokes the same commands for the
- * word's content id; another learner's mark is visible but never
- * retractable here; Mine stays inside the card (manual Mine still works);
- * a fixture with no word audio renders no Play button rather than
- * guessing; and no automatic action adds a mark — the engine call list
- * shows only the clicks the learner made.
+ * buttons and NO confirm control among them; one quiet story-level
+ * control under the paragraph invokes `content_confirm`/`content_unconfirm`
+ * for every sentence of the story; a word tap invokes `word_card` +
+ * `story_word_audio` for the exact raw token and opens a card whose
+ * confirmation invokes the same commands for the word's content id;
+ * another learner's mark is visible but never retractable here; Mine stays
+ * inside the card (manual Mine still works); a fixture with no word audio
+ * renders no Play button rather than guessing; and no automatic action
+ * adds a mark — the engine call list shows only the clicks the learner
+ * made.
  */
 import { afterEach, describe, expect, it } from "vitest";
 import { JA, LearnerEngine, mountApp, type Mounted } from "./harness";
 
-describe("content confirmation on the paragraph reader (CONTENT-CONFIRM-001, READER-FLOW-001)", () => {
+describe("content confirmation on the paragraph reader (CONTENT-CONFIRM-001, READING-CLUTTER-001)", () => {
   let app: Mounted;
 
   afterEach(async () => {
     await app?.unmount();
   });
 
-  it("shows another learner's mark, confirms once, and retracts only its own", async () => {
+  it("shows another learner's mark, confirms the story once, retracts only its own", async () => {
     app = await mountApp(
       new LearnerEngine({
         profiles: [
@@ -57,29 +59,46 @@ describe("content confirmation on the paragraph reader (CONTENT-CONFIRM-001, REA
     expect(panel.querySelectorAll(".reader-paragraph").length).toBe(1);
     const sentences = [...panel.querySelectorAll(".sentence")];
     expect(sentences.length).toBe(2);
+    const first = sentences[0] as HTMLElement;
 
-    // Bruno's mark is visible on the sentence before Dana touches anything,
-    // named as a confirmation by a person — never a verified/expert claim.
+    // READING-CLUTTER-001: the prose carries NO confirm control — the
+    // assertion walks interactive elements, not body text (the
+    // WEB-HISTORY-001 lesson: text can pass while the button is gone).
+    const paragraphButtons = [
+      ...(panel.querySelector(".reader-paragraph") as HTMLElement).querySelectorAll("button"),
+    ];
+    expect(paragraphButtons.some((b) => (b.textContent ?? "").includes("looks right"))).toBe(false);
+    // Exactly one story-level control, riding under the paragraph.
+    const storyToggles = [...panel.querySelectorAll("button.story-confirm-toggle")];
+    expect(storyToggles.length).toBe(1);
+
+    // Bruno's mark is visible before Dana touches anything, named as a
+    // confirmation by a person — never a verified/expert claim.
     expect(panel.textContent).toContain("Confirmed by Bruno");
     expect(panel.textContent).not.toMatch(/verified|expert|reviewed/i);
 
-    // The quiet tail control offers Dana her own explicit action, without
-    // opening anything.
-    const first = sentences[0] as HTMLElement;
-    await app.click(app.button(first, "This looks right"));
-    expect(app.engine.lastArgsFor("content_confirm")).toEqual({
-      profileId: "dana",
-      contentId: "ja.sent.journeys.confirm.1",
-    });
+    // One quiet click under the story confirms EVERY sentence of it —
+    // the same content_confirm command, one per sentence, nothing else.
+    await app.click(app.button(panel, "It sounds right"));
+    const confId = (c: { args?: Record<string, unknown> }) =>
+      String((c.args as { contentId?: string })?.contentId);
+    expect(
+      app.engine
+        .appCalls()
+        .filter((c) => c.cmd === "content_confirm")
+        .map(confId),
+    ).toEqual(["ja.sent.journeys.confirm.1", "ja.sent.journeys.confirm.2"]);
 
-    // Both names now stand behind the sentence, oldest first, and Dana can
-    // undo — but only her own mark is ever at stake.
+    // Both names now stand behind the story, and Dana can undo all of it
+    // — but only her own marks are ever at stake.
     expect(panel.textContent).toContain("Confirmed by Bruno, Dana");
-    await app.click(app.button(first, "Undo"));
-    expect(app.engine.lastArgsFor("content_unconfirm")).toEqual({
-      profileId: "dana",
-      contentId: "ja.sent.journeys.confirm.1",
-    });
+    await app.click(app.button(panel, "Undo"));
+    expect(
+      app.engine
+        .appCalls()
+        .filter((c) => c.cmd === "content_unconfirm")
+        .map(confId),
+    ).toEqual(["ja.sent.journeys.confirm.1", "ja.sent.journeys.confirm.2"]);
     expect(panel.textContent).toContain("Confirmed by Bruno");
     expect(panel.textContent).not.toContain("Confirmed by Bruno, Dana");
 
@@ -143,10 +162,17 @@ describe("content confirmation on the paragraph reader (CONTENT-CONFIRM-001, REA
     expect(() => app.section("Word card")).toThrow();
 
     // Nothing confirmed anything automatically: the engine heard exactly
-    // the clicks this learner made — two confirms, one unconfirm.
+    // the clicks this learner made — the story confirm (one call per
+    // sentence), the word-card confirm, and the story undo per marked
+    // sentence.
     const confirmCalls = app.engine.appCalls().filter((c) => c.cmd === "content_confirm");
     const unconfirmCalls = app.engine.appCalls().filter((c) => c.cmd === "content_unconfirm");
-    expect(confirmCalls).toHaveLength(2);
-    expect(unconfirmCalls).toHaveLength(1);
+    expect(confirmCalls).toHaveLength(3);
+    expect(unconfirmCalls).toHaveLength(2);
+    // The word-card confirm targeted only the word, and only Dana's own
+    // marks were retracted.
+    for (const c of [...confirmCalls, ...unconfirmCalls]) {
+      expect((c.args as { profileId?: string }).profileId).toBe("dana");
+    }
   });
 });

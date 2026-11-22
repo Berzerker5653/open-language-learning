@@ -1,0 +1,65 @@
+READING-CLUTTER-001 — LANE gate log (board worker, 2026-11-21)
+
+LANE gates (apps/desktop + packages/ui; no Rust/Cargo files in this
+lane — cargo gates not applicable):
+  npx tsc --noEmit                        exit 0
+  npx vitest run (full, apps/desktop)     59 files / 475 tests passed
+      (tree includes sibling ORTHO-LETTER-UNITS/PRACTICE-GATE WIP —
+      lesson.test.tsx additions included; no failures)
+  targeted re-run while iterating: src/reading.test.tsx +
+      src/journeys/content-confirm.journey.tsx  22 passed
+  npx prettier --check on the five lane files
+      (reading.tsx, reading.test.tsx, content-confirm.journey.tsx,
+      packages/ui/src/styles.css, scripts/reading-clutter-capture.mjs)
+      clean after --write on the two new-shaped files.
+      Pre-existing HEAD prettier offenders (history-nav.ts,
+      journeys/history-nav.journey.tsx, CODING_STANDARDS.md) left
+      untouched — same posture as WORDCARD-OFFSCREEN-001.
+
+RED-FIRST capture (HEAD 4f12237, self-contained worktree build):
+  worktree at ~/.hermes/cache/scratch/lts-reading-red with node_modules
+  symlinked + workspace @openlang links RE-PARSED to the worktree's own
+  packages (plain symlink sharing would have measured the main tree's
+  dirty packages/ui — HEAD bytes verified instead);
+  npx vite build --config vite.mobile-harness.config.ts there;
+  LTS_MOBILE_DIST=<worktree dist> node scripts/reading-clutter-capture.mjs
+    FAIL no confirm control inside the story prose  {2 of 10 prose buttons}
+    PASS no raw morphology tag in the story text    {ja fixture ships none}
+    FAIL exactly one story-level confirm control    {storyControls 0}
+    FAIL story confirm control is reachable         {box null}
+    PASS no horizontal overflow                     {390 = 390}
+    -> exit 1 (RED). before-HEAD-story-flow.png shows the two inline
+       "This looks right" buttons splitting the glosses.
+  result-phone-HEAD-red.json kept beside the GREEN run.
+
+AFTER capture (this tree, rebuilt via npx vite build --config
+vite.mobile-harness.config.ts from the exact working-tree bytes):
+  node scripts/reading-clutter-capture.mjs state/evidence/READING-CLUTTER-001
+    PASS no confirm control inside the story prose  {0 of 8 word buttons}
+    PASS no raw morphology tag in the story text    {rawTag null}
+    PASS exactly one story-level confirm control    {1, question visible}
+    PASS story confirm reachable in viewport        {box 581..625, h=44}
+    PASS no horizontal overflow                     {390 = 390}
+    -> exit 0. phone-0-story-flow.png + phone-1-story-confirm.png.
+  Vision check (both shots): before = two "This looks right" buttons
+  wedged between sentence and gloss; after = prose has NO button chrome,
+  one "Did this story sound right?" row with "👍 It sounds right".
+  No "Confirmed by" line in the after shot is correct: the harness
+  onboards a fresh profile and the reader fixture seeds no marks — the
+  attribution line is pinned by reading.test.tsx and the mounted
+  journey instead.
+
+Chip-removal evidence split: the #reader fixture story is JA and ships
+no labels sidecar, so tag chips cannot appear in the before shot; the
+raw-tag removal is pinned by the RU-label tests in reading.test.tsx
+(bare buttons with labels present; human-form card line; toggle-off).
+The capture harness keeps the raw-tag regex as a prose tripwire.
+
+Race notes: working tree carried sibling ORTHO-LETTER-UNITS-001 /
+PRACTICE-GATE-001 WIP (lib.rs, App.tsx, lesson.tsx, curriculum yaml,
+untracked scripts) — never touched; this lane's files did not overlap
+(App.tsx grammarLabels wiring unchanged: the prop interface stayed
+identical). Sibling's harness.tsx fixture-string edit rides the built
+bundle harmlessly (placement-coverage row, unrelated to #reader).
+
+Deferred: none. All acceptance bullets verified above.
