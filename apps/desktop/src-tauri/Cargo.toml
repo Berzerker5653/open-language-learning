@@ -28,7 +28,7 @@ custom-protocol = ["tauri/custom-protocol"]
 # desktop shell build never carries the HTTP stack; the serve mode reuses
 # the SAME command wiring (wire_commands), driven through Tauri's own IPC
 # layer on a mock runtime — no command logic is duplicated.
-serve = ["dep:axum", "dep:tokio", "tauri/test"]
+serve = ["dep:axum", "dep:tokio", "dep:futures-core", "tauri/test"]
 
 [build-dependencies]
 tauri-build = { version = "2.7.1", features = [] }
@@ -57,7 +57,9 @@ tauri-plugin-single-instance = "2.4.5"
 # WEB-SERVE-001 (feature-gated `serve`): the HTTP bridge stack, never
 # compiled into the desktop shell.
 axum = { version = "0.8", optional = true }
-tokio = { version = "1", features = ["rt-multi-thread", "macros", "net"], optional = true }
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "net", "sync", "time"], optional = true }
+# WEB-PROGRESS-001: the Stream trait for the SSE progress-event bridge.
+futures-core = { version = "0.3", optional = true }
 
 [[bin]]
 name = "lts-serve"
@@ -73,3 +75,5 @@ libc = "0.2"
 tempfile.workspace = true
 # WEB-SERVE-001: drive the serve router in-process (oneshot) in tests.
 tower = { version = "0.5", features = ["util"] }
+# WEB-PROGRESS-001: read streaming SSE response bodies in tests (BodyExt).
+http-body-util = "0.1"

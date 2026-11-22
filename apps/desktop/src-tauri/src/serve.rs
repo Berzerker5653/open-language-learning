@@ -29,12 +29,18 @@ use axum::body::Bytes;
 use axum::extract::Path as AxPath;
 use axum::http::StatusCode;
 use axum::http::header::CONTENT_TYPE;
+use axum::response::sse::{Event, KeepAlive, Sse};
 use axum::response::{IntoResponse, Response};
 use axum::routing::{get, post};
 use axum::{Json, Router};
+use futures_core::stream::Stream;
+use std::convert::Infallible;
 use std::path::{Component, Path, PathBuf};
+use std::pin::Pin;
 use std::sync::OnceLock;
 use std::sync::mpsc::SyncSender;
+use std::task::{Context, Poll};
+use tokio::sync::broadcast;
 
 /// What `lts-serve` was asked to serve. Paths are resolved at startup.
 #[derive(Clone)]
@@ -149,13 +155,93 @@ fn ipc_tx() -> &'static std::sync::mpsc::SyncSender<IpcJob> {
     })
 }
 
-fn noop_progress(_: &crate::progress::Progress) {}
+// -- progress event bridge (WEB-PROGRESS-001) --------------------------------
+//
+// The desktop streams every install stage as an `engine-progress` event
+// (`progress::reporter`). Serve mode previously handed the install commands a
+// no-op reporter, so a 294 MB browser install showed nothing until it landed.
+// The bridge reproduces the SAME channel: the identical `Progress` values the
+// desktop emits are broadcast here, and the SSE endpoint forwards each one as
+// a `data:` frame — one progress vocabulary, two transports.
+
+fn progress_tx() -> &'static broadcast::Sender<crate::progress::Progress> {
+    static TX: OnceLock<broadcast::Sender<crate::progress::Progress>> = OnceLock::new();
+    // A stage is a few hundred bytes; 256 deep means no learner loses stages
+    // because their browser tab paused during a burst of progress.
+    TX.get_or_init(|| broadcast::channel(256).0)
+}
+
+/// The serve-mode reporter passed to the install commands in place of the old
+/// no-op: same stages, same field names, broadcast to every open SSE
+/// subscriber. A send error only means nobody is listening — progress must
+/// never turn into an install error, exactly as on desktop.
+fn serve_progress_reporter(p: &crate::progress::Progress) {
+    let _ = progress_tx().send(p.clone());
+}
+
+/// One browser's SSE subscription: a small mpsc fed by a per-connection pump
+/// off the broadcast. A browser that falls behind skips missed stages
+/// (progress is a nicety; a stale stage is worse than a skipped one) rather
+/// than tearing down the stream, and the pump ends the moment the connection
+/// does — its send fails on the dropped receiver, so a hung-up tab leaks
+/// nothing.
+struct ProgressStream {
+    rx: tokio::sync::mpsc::Receiver<crate::progress::Progress>,
+}
+
+impl Stream for ProgressStream {
+    type Item = Result<Event, Infallible>;
+
+    fn poll_next(mut self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>> {
+        loop {
+            match self.as_mut().get_mut().rx.poll_recv(cx) {
+                Poll::Ready(Some(p)) => {
+                    // `json_data` uses Progress's own serde impl — the exact
+                    // payload the desktop `engine-progress` event carries, so
+                    // the renderer reads identical field names either way.
+                    if let Ok(e) = Event::default().json_data(p) {
+                        return Poll::Ready(Some(Ok(e)));
+                    }
+                    // Unreachable for this Serialize; a bad frame must never
+                    // kill the stream.
+                }
+                Poll::Ready(None) => return Poll::Ready(None),
+                Poll::Pending => return Poll::Pending,
+            }
+        }
+    }
+}
+
+/// GET /api/progress/events: the browser twin of the desktop event stream.
+/// Frames are SSE `data:` frames carrying the same JSON the webview receives;
+/// the frontend adapter feeds both into the same progress UI.
+async fn progress_events() -> Response {
+    let mut stages = progress_tx().subscribe();
+    let (tx, rx) = tokio::sync::mpsc::channel::<crate::progress::Progress>(64);
+    tokio::spawn(async move {
+        loop {
+            match stages.recv().await {
+                Ok(p) => {
+                    if tx.send(p).await.is_err() {
+                        break; // the browser hung up; this pump is done
+                    }
+                }
+                Err(broadcast::error::RecvError::Lagged(_)) => continue,
+                Err(broadcast::error::RecvError::Closed) => break,
+            }
+        }
+    });
+    Sse::new(ProgressStream { rx })
+        .keep_alive(KeepAlive::default())
+        .into_response()
+}
 
 // The five commands whose tauri wrappers take a concrete `tauri::AppHandle`
 // (Wry-bound, so they cannot ride the mock-runtime handler) are routed here
-// to the same underlying functions their wrappers call, with a no-op
-// progress reporter: same work, same result, no progress events (which no
-// browser listener would receive anyway). `smoke_ack` stays harness-only.
+// to the same underlying functions their wrappers call, with the bridge
+// reporter: same work, same result, and the progress stages now reach any
+// open browser listener over /api/progress/events. `smoke_ack` stays
+// harness-only.
 
 fn app_handle_command(cmd: &str, payload: &serde_json::Value) -> Option<IpcReply> {
     use crate::packs;
@@ -186,7 +272,7 @@ fn app_handle_command(cmd: &str, payload: &serde_json::Value) -> Option<IpcReply
                     &crate::data_dir(),
                     &pack_id,
                     None,
-                    noop_progress,
+                    serve_progress_reporter,
                 )
                 .map_or_else(reject, ok_json),
             )
@@ -202,8 +288,12 @@ fn app_handle_command(cmd: &str, payload: &serde_json::Value) -> Option<IpcReply
                 return Some(reject("missing or invalid \"dataB64\" argument".into()));
             };
             Some(
-                packs::import_pack_b64_report(&crate::data_dir(), &data_b64, noop_progress)
-                    .map_or_else(reject, ok_json),
+                packs::import_pack_b64_report(
+                    &crate::data_dir(),
+                    &data_b64,
+                    serve_progress_reporter,
+                )
+                .map_or_else(reject, ok_json),
             )
         }
         "install_model" => {
@@ -211,7 +301,7 @@ fn app_handle_command(cmd: &str, payload: &serde_json::Value) -> Option<IpcReply
                 return Some(reject("missing or invalid \"modelId\" argument".into()));
             };
             Some(
-                crate::install_model_at(&crate::data_dir(), &model_id, noop_progress)
+                crate::install_model_at(&crate::data_dir(), &model_id, serve_progress_reporter)
                     .map_or_else(reject, ok_json),
             )
         }
@@ -234,8 +324,12 @@ fn install_catalog_pack_served(pack_id: &str) -> Result<crate::packs::InstallRes
     if let Ok(mut m) = crate::install_cancel_registry().lock() {
         m.insert(registered.clone(), flag.clone());
     }
-    let joined =
-        crate::packs::install_from_catalog_report(&crate::data_dir(), pack_id, |_| {}, &flag);
+    let joined = crate::packs::install_from_catalog_report(
+        &crate::data_dir(),
+        pack_id,
+        serve_progress_reporter,
+        &flag,
+    );
     // Deregister on every path: a stale flag would silently cancel the
     // learner's next install of the same pack.
     if let Ok(mut m) = crate::install_cancel_registry().lock() {
@@ -321,9 +415,9 @@ fn error_response(error_value: serde_json::Value) -> Response {
 async fn capabilities() -> Json<serde_json::Value> {
     Json(serde_json::json!({
         "mode": "browser-serve",
-        "commands": "all desktop commands share one wiring (wire_commands); installs run identically without progress events",
-        "install_progress_events": false,
-        "install_progress_note": "the desktop streams install stages; in browser mode the result appears when the call lands",
+        "commands": "all desktop commands share one wiring (wire_commands); installs run identically and stream their stages over /api/progress/events",
+        "install_progress_events": true,
+        "install_progress_note": "install stages stream over GET /api/progress/events (SSE) — the same stages the desktop shell receives",
         "microphone_capture": "needs a secure context (https or localhost); over a plain tailnet http URL the browser blocks mic capture, so scoring features are labeled unavailable",
         "privacy_modes": "unchanged — serve mode never rewrites stored mic/privacy settings, it only labels what the browser can do",
         "network": "trusted-network assumption; SEC sign-off is a later WEB-001 concern (state/notes/WEB-SERVE-001.md)",
@@ -450,6 +544,7 @@ pub fn router(cfg: ServeConfig) -> Router {
     let dist_for_fallback = cfg.dist.clone();
     Router::new()
         .route("/api/capabilities", get(capabilities))
+        .route("/api/progress/events", get(progress_events))
         .route("/api/{cmd}", post(api_dispatch))
         .route("/media/{*rest}", get(media_handler))
         .fallback(move |req: axum::extract::Request| {
@@ -484,6 +579,7 @@ mod tests {
     use super::*;
     use axum::body::Body;
     use axum::http::Request;
+    use http_body_util::BodyExt;
     use tower::util::ServiceExt;
 
     fn test_dist() -> PathBuf {
@@ -561,7 +657,15 @@ mod tests {
             .unwrap();
         let v: serde_json::Value = serde_json::from_slice(&bytes).unwrap();
         assert_eq!(v["mode"], "browser-serve");
-        assert_eq!(v["install_progress_events"], false);
+        // WEB-PROGRESS-001: progress is no longer a desktop-only nicety.
+        assert_eq!(v["install_progress_events"], true);
+        assert!(
+            v["install_progress_note"]
+                .as_str()
+                .unwrap()
+                .contains("/api/progress/events"),
+            "capabilities must name the stream it now offers: {v}"
+        );
         assert!(v["privacy_modes"].as_str().unwrap().contains("unchanged"));
     }
 
@@ -649,6 +753,89 @@ mod tests {
         assert_eq!(status, StatusCode::UNPROCESSABLE_ENTITY);
         let message = json["error"].as_str().unwrap_or_default();
         assert!(!message.is_empty());
+    }
+
+    // -- WEB-PROGRESS-001: the event bridge ---------------------------------
+
+    /// Unit test on the bridge itself: what a desktop reporter would emit is
+    /// what an SSE subscriber's broadcast receiver gets — same values, and
+    /// serialized with the field names the renderer reads by name.
+    #[tokio::test]
+    async fn the_bridge_delivers_desktop_stage_values_to_subscribers() {
+        let mut rx = progress_tx().subscribe();
+        serve_progress_reporter(&crate::progress::Progress::with_percent(
+            "install-pack",
+            "org.openlanguage.ja-demo",
+            "install",
+            40,
+        ));
+        let got = rx.recv().await.unwrap();
+        let json = serde_json::to_value(&got).unwrap();
+        assert_eq!(json["operation"], "install-pack");
+        assert_eq!(json["subject"], "org.openlanguage.ja-demo");
+        assert_eq!(json["stage"], "install");
+        assert_eq!(json["percent"], 40);
+    }
+
+    /// Request-level: an open SSE subscription over the real router receives
+    /// a stage reported while a request is in flight — the browser sees the
+    /// install moving, not a frozen button until the call lands. (The full
+    /// install-a-fixture-pack version of this smoke runs as
+    /// scripts/smoke-serve-progress.sh; its log rides in the card evidence.)
+    #[tokio::test]
+    async fn a_reported_stage_reaches_an_sse_subscriber_as_a_data_frame() {
+        let resp = test_router()
+            .oneshot(
+                Request::builder()
+                    .uri("/api/progress/events")
+                    .body(Body::empty())
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+        assert_eq!(resp.status(), StatusCode::OK);
+        let ctype = resp
+            .headers()
+            .get(CONTENT_TYPE)
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or_default()
+            .to_string();
+        assert!(
+            ctype.starts_with("text/event-stream"),
+            "progress endpoint must be SSE, got {ctype:?}"
+        );
+        // The subscription exists by the time the response is returned; report
+        // a stage exactly as an install mid-flight would.
+        serve_progress_reporter(&crate::progress::Progress::stage(
+            "install-pack",
+            "org.openlanguage.ja-demo",
+            "prepare",
+        ));
+        let mut body = resp.into_body();
+        let mut seen = String::new();
+        let deadline = tokio::time::Instant::now() + std::time::Duration::from_secs(5);
+        while !seen.contains("install-pack") {
+            let polled = tokio::time::timeout_at(deadline, body.frame())
+                .await
+                .expect("no SSE frame within 5s");
+            let frame = match polled {
+                Some(Ok(frame)) => frame,
+                Some(Err(e)) => panic!("body error: {e}"),
+                None => break,
+            };
+            if let Ok(bytes) = frame.into_data() {
+                seen.push_str(&String::from_utf8_lossy(&bytes));
+            }
+        }
+        let at = seen
+            .find("data: ")
+            .unwrap_or_else(|| panic!("an SSE data frame in: {seen}"));
+        let line = seen[at + "data: ".len()..].lines().next().unwrap();
+        let v: serde_json::Value = serde_json::from_str(line).expect("data frame is JSON");
+        assert_eq!(v["operation"], "install-pack");
+        assert_eq!(v["subject"], "org.openlanguage.ja-demo");
+        assert_eq!(v["stage"], "prepare");
+        assert_eq!(v["percent"], serde_json::Value::Null);
     }
 
     #[tokio::test]

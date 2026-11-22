@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { fetchCapabilities, httpInvoke, inLtsServeMode } from "./ipc";
+import { fetchCapabilities, httpInvoke, inLtsServeMode, subscribeServeProgress } from "./ipc";
 
 // The desktop vitest container runs every non-journey suite in the node
 // environment (vite.config.ts, JOURNEY-SUITE-001), so this adapter test
@@ -79,14 +79,14 @@ describe("WEB-SERVE-001 http ipc adapter", () => {
       "fetch",
       vi.fn(
         async () =>
-          new Response(JSON.stringify({ mode: "browser-serve", install_progress_events: false }), {
+          new Response(JSON.stringify({ mode: "browser-serve", install_progress_events: true }), {
             status: 200,
           }),
       ),
     );
     const caps = await fetchCapabilities();
     expect(caps?.mode).toBe("browser-serve");
-    expect(caps?.install_progress_events).toBe(false);
+    expect(caps?.install_progress_events).toBe(true);
 
     vi.stubGlobal(
       "fetch",
@@ -101,5 +101,82 @@ describe("WEB-SERVE-001 http ipc adapter", () => {
       }),
     );
     expect(await fetchCapabilities()).toBeNull();
+  });
+});
+
+// WEB-PROGRESS-001: the browser half of the progress bridge. The node test
+// environment has no EventSource, so the adapter's own guard is exercised
+// first, then a fake EventSource proves the frames reach the handler with
+// the field names the progress UI reads.
+describe("WEB-PROGRESS-001 serve progress subscription", () => {
+  type FakeHandler = ((e: { data: string }) => void) | null;
+  class FakeEventSource {
+    static instances: FakeEventSource[] = [];
+    url: string;
+    onmessage: FakeHandler = null;
+    closed = false;
+    constructor(url: string) {
+      this.url = url;
+      FakeEventSource.instances.push(this);
+    }
+    close() {
+      this.closed = true;
+    }
+    emit(data: string) {
+      this.onmessage?.({ data });
+    }
+  }
+
+  beforeEach(() => {
+    FakeEventSource.instances = [];
+    vi.stubGlobal("EventSource", FakeEventSource);
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
+  it("subscribes to the bridge endpoint and delivers parsed stages", () => {
+    const stages: unknown[] = [];
+    const close = subscribeServeProgress((p) => stages.push(p));
+    const es = FakeEventSource.instances[0];
+    if (!es) throw new Error("subscribeServeProgress built no EventSource");
+    expect(es.url).toBe("/api/progress/events");
+    es.emit(
+      JSON.stringify({
+        operation: "install-pack",
+        subject: "org.openlanguage.ru-ru.reference",
+        stage: "fetch",
+        percent: null,
+      }),
+    );
+    expect(stages).toEqual([
+      {
+        operation: "install-pack",
+        subject: "org.openlanguage.ru-ru.reference",
+        stage: "fetch",
+        percent: null,
+      },
+    ]);
+    close();
+    expect(es.closed).toBe(true);
+  });
+
+  it("a malformed or partial frame is ignored, never surfaced", () => {
+    const stages: unknown[] = [];
+    subscribeServeProgress((p) => stages.push(p));
+    const es = FakeEventSource.instances[0];
+    if (!es) throw new Error("subscribeServeProgress built no EventSource");
+    es.emit("{ not json");
+    es.emit(JSON.stringify({ stage: 7 }));
+    expect(stages).toEqual([]);
+  });
+
+  it("without an EventSource (node, older shells) the guard returns a noop", () => {
+    vi.unstubAllGlobals();
+    const close = subscribeServeProgress(() => {
+      throw new Error("must not be called");
+    });
+    close();
   });
 });

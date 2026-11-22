@@ -1,0 +1,42 @@
+== build the fixture archive ==
+built /tmp/tmp.MjdMrKzoNa/ja-demo.lpk (186064 bytes)
+sha256 261a2c0b12a6edad2dea28b5684791db66f704914fb4b204884ea4c559fa40f0
+-rw-r--r-- 1 hunter hunter 186064 Nov 21 18:38 /tmp/tmp.MjdMrKzoNa/ja-demo.lpk
+== start lts-serve on an isolated data dir ==
+== capabilities report (install progress is now streamed) ==
+{
+    "commands": "all desktop commands share one wiring (wire_commands); installs run identically and stream their stages over /api/progress/events",
+    "install_progress_events": true,
+    "install_progress_note": "install stages stream over GET /api/progress/events (SSE) \u2014 the same stages the desktop shell receives",
+    "microphone_capture": "needs a secure context (https or localhost); over a plain tailnet http URL the browser blocks mic capture, so scoring features are labeled unavailable",
+    "mode": "browser-serve",
+    "network": "trusted-network assumption; SEC sign-off is a later WEB-001 concern (state/notes/WEB-SERVE-001.md)",
+    "privacy_modes": "unchanged \u2014 serve mode never rewrites stored mic/privacy settings, it only labels what the browser can do"
+}
+== open the SSE subscription before the install starts ==
+== install the fixture pack (the call stays in flight) ==
+install response: 200 {"pack_id":"org.openlanguage.ja-demo","version":"0.1.0","display_name":"Japanese (demo lexicon, EDRDG-derived)","locale":"ja-JP","trust_state":"community","rtl":false,"scripts":["ja.orth.hiragana"],"input_methods":[],"input_methods_declared":false}
+== raw SSE frames observed over HTTP ==
+data: {"operation":"install-pack","subject":"org.openlanguage.ja-demo","stage":"install","percent":null}
+
+data: {"operation":"install-pack","subject":"org.openlanguage.ja-demo","stage":"record","percent":null}
+
+== assert the install stages streamed ==
+[
+  {
+    "operation": "install-pack",
+    "subject": "org.openlanguage.ja-demo",
+    "stage": "install",
+    "percent": null
+  },
+  {
+    "operation": "install-pack",
+    "subject": "org.openlanguage.ja-demo",
+    "stage": "record",
+    "percent": null
+  }
+]
+PASS: the fixture install streamed its stages over HTTP while the call was in flight
+== server log ==
+lts-serve listening on http://127.0.0.1:17641 (trusted network only)
+SMOKE_EXIT=0

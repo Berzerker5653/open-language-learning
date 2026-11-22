@@ -11,6 +11,8 @@
  * static hosting keep the existing null-bridge behavior.
  */
 
+import type { EngineProgress } from "./progress";
+
 type ServeWindow = Window & { __LTS_SERVE?: boolean };
 
 export function inLtsServeMode(): boolean {
@@ -69,4 +71,32 @@ export async function fetchCapabilities(): Promise<ServeCapabilities | null> {
   } catch {
     return null;
   }
+}
+
+/**
+ * WEB-PROGRESS-001: the browser twin of the desktop `engine-progress`
+ * listener. The serve mode streams the SAME install stages over
+ * `GET /api/progress/events` (SSE); this feeds each frame to the same
+ * handler the desktop listener uses, so the existing progress UI renders
+ * in browser mode. EventSource reconnects on its own; a dropped frame
+ * loses a stage, never an install — progress stays a nicety.
+ * Returns the close function.
+ */
+export function subscribeServeProgress(
+  onStage: (p: EngineProgress) => void,
+): () => void {
+  if (typeof EventSource === "undefined") return () => {};
+  const es = new EventSource("/api/progress/events");
+  es.onmessage = (e: MessageEvent<string>) => {
+    try {
+      const p = JSON.parse(e.data) as EngineProgress;
+      if (p && typeof p.stage === "string" && typeof p.operation === "string") {
+        onStage(p);
+      }
+    } catch {
+      // A malformed frame is ignored exactly like a failed event delivery
+      // on desktop: it must never surface as an error to the learner.
+    }
+  };
+  return () => es.close();
 }

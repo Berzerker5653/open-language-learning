@@ -11,7 +11,7 @@ import {
 } from "./onboarding";
 import { PracticeHub, type HubMode } from "./hub";
 import { remainingPlanSeconds, SessionChrome } from "./session-chrome";
-import { fetchCapabilities, httpInvoke, inLtsServeMode } from "./ipc";
+import { fetchCapabilities, httpInvoke, inLtsServeMode, subscribeServeProgress } from "./ipc";
 import {
   Home,
   type PackUpdate,
@@ -1167,7 +1167,11 @@ export function App() {
         return;
       }
       const parts = [
-        "Browser mode: install progress is not streamed — results appear when the call lands.",
+        // WEB-PROGRESS-001: whether progress streams is the server's report,
+        // not a local assumption — an older serve build still says the truth.
+        caps.install_progress_events
+          ? "Browser mode: install progress streams live, the same stages the desktop shows."
+          : "Browser mode: install progress is not streamed — results appear when the call lands.",
         caps.microphone_capture ?? "",
         caps.privacy_modes ?? "",
       ].filter((s) => s.length > 0);
@@ -1176,9 +1180,17 @@ export function App() {
   }, []);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+    // WEB-PROGRESS-001: in serve mode the stages arrive over the bridge
+    // (`GET /api/progress/events`) and feed the SAME state the desktop
+    // listener feeds — one progress UI, whichever transport carried the stage.
+    if (inLtsServeMode()) return subscribeServeProgress((p) => {
+      progressStages.push(p);
+      setEngineProgress(p);
+    });
     // No bridge (plain browser tab, test DOM) means no event source: importing
     // the Tauri event API there would fail, so the listener is not registered.
-    if (typeof window === "undefined" || !("__TAURI_INTERNALS__" in window)) return;
+    if (!("__TAURI_INTERNALS__" in window)) return;
     let unlisten: (() => void) | undefined;
     let cancelled = false;
     import("@tauri-apps/api/event")
