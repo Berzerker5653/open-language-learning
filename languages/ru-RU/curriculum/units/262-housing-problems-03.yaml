@@ -43,6 +43,12 @@ activities:
   - ru.sent.b1.u262
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.b1.lexclaim-housing-housing-problems-03
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.housing.klumba
 generation_contract:
   allowed_vocab:
   - ru.lex.housing.otoplenie
@@ -53,6 +59,7 @@ generation_contract:
   - ru.sent.b1.u262
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.lex.housing.klumba
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

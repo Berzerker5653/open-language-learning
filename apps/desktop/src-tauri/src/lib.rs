@@ -20398,6 +20398,126 @@ transfer_variants:
         }
     }
 
+    /// RU-LEXICON-CLAIM-001: the 192 claimed orphan lexicon rows must be
+    /// plan-eligibly NEW for a learner AT THEIR BAND. The pack's own gates
+    /// (goal ladder + `requires_unit` phase gates) read derived mastery, so
+    /// the band profile is a derived fixture: mastery through every rung up
+    /// to B1 and nothing above it. Claimed B1/A2/A1 words must seed; a
+    /// claimed B2 word and any unclaimed row must not.
+    #[test]
+    fn claimed_orphan_lexicon_words_seed_new_material_for_a_b1_band_profile() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let pack = "org.openlanguage.ru-ru.reference";
+        install_reference_pack_fast(data, pack).unwrap();
+        let p = create_local_profile(data, "B1 band").unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let version = lts_langpack::archive::current_version(pack, &data.join("packs")).unwrap();
+        store.set_active_pack(&p.id, pack, &version).unwrap();
+        let root = data.join("packs").join(pack).join(&version);
+        use std::io::Write;
+        std::fs::OpenOptions::new()
+            .append(true)
+            .open(root.join("lexicon/everyday.jsonl"))
+            .unwrap()
+            .write_all(
+                r#"{"id":"ru.lex.test.unclaimed-at-b1","status":"draft","forms":[{"text":"сиротство","is_primary":true}],"readings":[{"text":"сиро́тство","script":"cyrillic"}],"glosses":{"en-US":["synthetic unclaimed lexicon row for the band gate test"]},"sources":["ru-original"]}
+"#.as_bytes(),
+            )
+            .unwrap();
+
+        let units = pack_units(&root);
+        let goals = pack_goals(&root);
+        let band_of = |gid: &str| {
+            goals
+                .iter()
+                .find(|g| g.id == gid)
+                .and_then(|g| g.band.as_deref())
+                .unwrap_or("")
+                .to_lowercase()
+        };
+        // The profile has met every rung up to B1: every unit through B1 fully
+        // mastered (opens the phase gates), every required concept of every
+        // hard goal→goal edge whose target sits at or below B1 independent in
+        // the edge's dimension (opens the ladder). B2+ has no evidence and
+        // stays locked — that is what makes this a band profile, not a master.
+        let mut derived: Vec<lts_learner_model::DerivedMastery> = Vec::new();
+        for g in goals.iter() {
+            let band = g.band.clone().unwrap_or_default().to_lowercase();
+            if band == "b2" || band == "c1" {
+                continue;
+            }
+            for edge in &g.prerequisites {
+                let Some(dim) = parse_dimension(&edge.dimension) else {
+                    continue;
+                };
+                if let Some(t) = goals.iter().find(|x| x.id == edge.target) {
+                    let tb = t.band.clone().unwrap_or_default().to_lowercase();
+                    if tb != "b2" && tb != "c1" {
+                        for c in &t.required_concepts {
+                            derived.push(lts_learner_model::DerivedMastery {
+                                content_id: c.clone(),
+                                dimension: dim,
+                                state: lts_domain::MasteryState::Retained,
+                                confidence: 0.85,
+                                needs_refresh: false,
+                                policy_version: "test".into(),
+                                algorithm_version: "test".into(),
+                            });
+                        }
+                    }
+                }
+            }
+        }
+        for u in units.iter() {
+            let band = band_of(&u.goal_id);
+            if band == "b2" || band == "c1" {
+                continue;
+            }
+            for a in &u.activities {
+                for c in &a.content_refs {
+                    derived.push(lts_learner_model::DerivedMastery {
+                        content_id: c.clone(),
+                        dimension: lts_domain::ActivityModality::ComprehensionReading,
+                        state: lts_domain::MasteryState::Retained,
+                        confidence: 0.85,
+                        needs_refresh: false,
+                        policy_version: "test".into(),
+                        algorithm_version: "test".into(),
+                    });
+                }
+            }
+        }
+
+        let mut candidates = Vec::new();
+        add_new_item_candidates(data, &store, &p.id, &derived, &mut candidates, &[]).unwrap();
+        let ids: std::collections::HashSet<String> =
+            candidates.iter().map(|c| c.content_id.clone()).collect();
+
+        // Claimed rows at the learner's own band are NEW-eligible now.
+        for claimed in [
+            "ru.lex.housing.bochka",
+            "ru.lex.stories202611.kupe",
+            "ru.lex.nature.les",
+            "ru.lex.pastevents.chasto",
+        ] {
+            assert!(
+                ids.contains(claimed),
+                "{claimed} is claimed by a unit at or below B1 but never seeded for a B1-band profile"
+            );
+        }
+        // The band ladder stays honest: a claimed B2 word does not leak into
+        // the B1 profile's pool, and fail-CLOSED still refuses unclaimed rows.
+        assert!(
+            !ids.contains("ru.lex.argue.klyatva"),
+            "a claimed B2-band word seeded NEW for a B1-band profile — the goal lock regressed"
+        );
+        assert!(
+            !ids.contains("ru.lex.test.unclaimed-at-b1"),
+            "an unclaimed lexicon row seeded as NEW material at B1 — fail-CLOSED regressed"
+        );
+    }
+
     /// The reference pack's source tree, for reading base counts out of.
     fn reference_source() -> PathBuf {
         PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../../languages/ja-JP")

@@ -56,6 +56,16 @@ activities:
   - ru.sent.b2.dva-bileta-v-odin-teatr.u006
   - ru.sent.b2.dva-bileta-v-odin-teatr.u007
   - ru.sent.b2.dva-bileta-v-odin-teatr.u008
+- id: ru.activity.b2.story-words-dva-bileta-v-odin-teatr
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.stories202611.antrakt
+  - ru.lex.stories202611.foye
+  - ru.lex.stories202611.koreshok
+  - ru.lex.stories202611.pensioner
+  - ru.lex.stories202611.zanaves
 generation_contract:
   allowed_vocab:
   - ru.lex.neg.otkazyvat
@@ -74,6 +84,11 @@ generation_contract:
   - ru.sent.b2.dva-bileta-v-odin-teatr.u006
   - ru.sent.b2.dva-bileta-v-odin-teatr.u007
   - ru.sent.b2.dva-bileta-v-odin-teatr.u008
+  - ru.lex.stories202611.antrakt
+  - ru.lex.stories202611.foye
+  - ru.lex.stories202611.koreshok
+  - ru.lex.stories202611.pensioner
+  - ru.lex.stories202611.zanaves
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

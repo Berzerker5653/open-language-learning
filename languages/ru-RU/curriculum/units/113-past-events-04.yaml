@@ -43,6 +43,12 @@ activities:
   - ru.sent.a2.u113
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.a2.lexclaim-pastevents-past-events-04
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.pastevents.vecherom
 generation_contract:
   allowed_vocab:
   - ru.lex.pastevents.pisat
@@ -53,6 +59,7 @@ generation_contract:
   - ru.sent.a2.u113
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.lex.pastevents.vecherom
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

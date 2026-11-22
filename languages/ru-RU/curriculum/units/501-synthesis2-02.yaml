@@ -43,6 +43,12 @@ activities:
   - ru.sent.b2.u501
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.b2.lexclaim-synthesis2-synthesis2-02
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.synthesis2.tma
 generation_contract:
   allowed_vocab:
   - ru.lex.synthesis2.kanva
@@ -53,6 +59,7 @@ generation_contract:
   - ru.sent.b2.u501
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.lex.synthesis2.tma
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

@@ -43,6 +43,12 @@ activities:
   - ru.sent.b2.u481
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.b2.lexclaim-critical4-critical4-02
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.critical4.glubokiy
 generation_contract:
   allowed_vocab:
   - ru.lex.critical4.nelepica
@@ -53,6 +59,7 @@ generation_contract:
   - ru.sent.b2.u481
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.lex.critical4.glubokiy
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

@@ -56,6 +56,16 @@ activities:
   - ru.sent.b2.aukcion-odnoy-kartiny.u006
   - ru.sent.b2.aukcion-odnoy-kartiny.u007
   - ru.sent.b2.aukcion-odnoy-kartiny.u008
+- id: ru.activity.b2.story-words-aukcion-odnoy-kartiny
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.stories202611.aukcion
+  - ru.lex.stories202611.kollektsioner
+  - ru.lex.stories202611.lot
+  - ru.lex.stories202611.pahnut
+  - ru.lex.stories202611.rasti
 generation_contract:
   allowed_vocab:
   - ru.lex.cult.siuzhetnyy
@@ -74,6 +84,11 @@ generation_contract:
   - ru.sent.b2.aukcion-odnoy-kartiny.u006
   - ru.sent.b2.aukcion-odnoy-kartiny.u007
   - ru.sent.b2.aukcion-odnoy-kartiny.u008
+  - ru.lex.stories202611.aukcion
+  - ru.lex.stories202611.kollektsioner
+  - ru.lex.stories202611.lot
+  - ru.lex.stories202611.pahnut
+  - ru.lex.stories202611.rasti
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

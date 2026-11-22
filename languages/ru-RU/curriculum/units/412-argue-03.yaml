@@ -56,6 +56,22 @@ activities:
   - ru.sent.b2.spor-o-budushchem.u006
   - ru.sent.b2.spor-o-budushchem.u007
   - ru.sent.b2.spor-o-budushchem.u008
+- id: ru.activity.b2.lexclaim-argue-argue-03
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.argue.podozrevat
+- id: ru.activity.b2.story-words-spor-o-budushchem
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.stories202611.fizik
+  - ru.lex.stories202611.poetessa
+  - ru.lex.stories202611.ustoyat
+  - ru.lex.stories202611.utverzhdat
+  - ru.lex.stories202611.vozrazit
 generation_contract:
   allowed_vocab:
   - ru.lex.argue.debaty
@@ -74,6 +90,12 @@ generation_contract:
   - ru.sent.b2.spor-o-budushchem.u006
   - ru.sent.b2.spor-o-budushchem.u007
   - ru.sent.b2.spor-o-budushchem.u008
+  - ru.lex.argue.podozrevat
+  - ru.lex.stories202611.fizik
+  - ru.lex.stories202611.poetessa
+  - ru.lex.stories202611.ustoyat
+  - ru.lex.stories202611.utverzhdat
+  - ru.lex.stories202611.vozrazit
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

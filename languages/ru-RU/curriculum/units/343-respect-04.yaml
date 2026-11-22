@@ -43,6 +43,12 @@ activities:
   - ru.sent.b1.u343
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.b1.lexclaim-respect-respect-04
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.respect.pospeshnost
 generation_contract:
   allowed_vocab:
   - ru.lex.respect.grubost
@@ -53,6 +59,7 @@ generation_contract:
   - ru.sent.b1.u343
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.lex.respect.pospeshnost
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

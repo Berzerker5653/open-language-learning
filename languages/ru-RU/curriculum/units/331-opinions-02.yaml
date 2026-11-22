@@ -43,6 +43,12 @@ activities:
   - ru.sent.b1.u331
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.b1.lexclaim-opinions-opinions-02
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.opinions.illustraciya
 generation_contract:
   allowed_vocab:
   - ru.lex.opinions.somnenie
@@ -53,6 +59,7 @@ generation_contract:
   - ru.sent.b1.u331
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.lex.opinions.illustraciya
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

@@ -56,6 +56,16 @@ activities:
   - ru.sent.b2.perevodchik-vse-pereputal.u006
   - ru.sent.b2.perevodchik-vse-pereputal.u007
   - ru.sent.b2.perevodchik-vse-pereputal.u008
+- id: ru.activity.b2.story-words-perevodchik-vse-pereputal
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.stories202611.dokladchik
+  - ru.lex.stories202611.improvizirovat
+  - ru.lex.stories202611.konferentsiya
+  - ru.lex.stories202611.perevodchik
+  - ru.lex.stories202611.yagoda
 generation_contract:
   allowed_vocab:
   - ru.lex.style.omonimiya
@@ -74,6 +84,11 @@ generation_contract:
   - ru.sent.b2.perevodchik-vse-pereputal.u006
   - ru.sent.b2.perevodchik-vse-pereputal.u007
   - ru.sent.b2.perevodchik-vse-pereputal.u008
+  - ru.lex.stories202611.dokladchik
+  - ru.lex.stories202611.improvizirovat
+  - ru.lex.stories202611.konferentsiya
+  - ru.lex.stories202611.perevodchik
+  - ru.lex.stories202611.yagoda
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

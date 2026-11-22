@@ -56,6 +56,16 @@ activities:
   - ru.sent.b1.noch-v-poezde.u006
   - ru.sent.b1.noch-v-poezde.u007
   - ru.sent.b1.noch-v-poezde.u008
+- id: ru.activity.b1.story-words-noch-v-poezde
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.stories202611.kupe
+  - ru.lex.stories202611.muzykant
+  - ru.lex.stories202611.poimat
+  - ru.lex.stories202611.ulybatsya
+  - ru.lex.stories202611.zontik
 generation_contract:
   allowed_vocab:
   - ru.lex.narration.rasskazal
@@ -74,6 +84,11 @@ generation_contract:
   - ru.sent.b1.noch-v-poezde.u006
   - ru.sent.b1.noch-v-poezde.u007
   - ru.sent.b1.noch-v-poezde.u008
+  - ru.lex.stories202611.kupe
+  - ru.lex.stories202611.muzykant
+  - ru.lex.stories202611.poimat
+  - ru.lex.stories202611.ulybatsya
+  - ru.lex.stories202611.zontik
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

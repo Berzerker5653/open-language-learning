@@ -55,6 +55,19 @@ activities:
   - ru.sent.a2.avtobus-ne-prishol.u005
   - ru.sent.a2.avtobus-ne-prishol.u006
   - ru.sent.a2.avtobus-ne-prishol.u007
+- id: ru.activity.a2.lexclaim-pastevents-past-events-01
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.pastevents.redko
+- id: ru.activity.a2.story-words-avtobus-ne-prishol
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.stories202611.fonar
+  - ru.lex.stories202611.ogon
 generation_contract:
   allowed_vocab:
   - ru.lex.pastevents.vchera
@@ -72,6 +85,9 @@ generation_contract:
   - ru.sent.a2.avtobus-ne-prishol.u005
   - ru.sent.a2.avtobus-ne-prishol.u006
   - ru.sent.a2.avtobus-ne-prishol.u007
+  - ru.lex.pastevents.redko
+  - ru.lex.stories202611.fonar
+  - ru.lex.stories202611.ogon
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

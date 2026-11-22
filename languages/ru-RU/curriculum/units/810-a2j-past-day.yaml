@@ -61,6 +61,12 @@ activities:
   content_refs:
   - ru.sent.a2.j1
   - ru.sent.a2.j2
+- id: ru.activity.a2.lexclaim-pastevents-jpast-01
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.pastevents.chasto
 generation_contract:
   allowed_vocab:
   - ru.sent.a2.j1
@@ -68,6 +74,7 @@ generation_contract:
   - ru.lex.pastevents.vchera
   - ru.lex.pastevents.byli
   - ru.lex.pastevents.gulyat
+  - ru.lex.pastevents.chasto
   allowed_grammar:
   - ru.grammar.a2.past-tense
   - ru.grammar.a2.past-motion-hodil

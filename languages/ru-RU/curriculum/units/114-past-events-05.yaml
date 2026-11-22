@@ -55,6 +55,18 @@ activities:
   - ru.sent.a2.telefon-v-taksi.u005
   - ru.sent.a2.telefon-v-taksi.u006
   - ru.sent.a2.telefon-v-taksi.u007
+- id: ru.activity.a2.lexclaim-pastevents-past-events-05
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.pastevents.zavtra
+- id: ru.activity.a2.story-words-telefon-v-taksi
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.stories202611.sidene
 generation_contract:
   allowed_vocab:
   - ru.lex.pastevents.kogda
@@ -72,6 +84,8 @@ generation_contract:
   - ru.sent.a2.telefon-v-taksi.u005
   - ru.sent.a2.telefon-v-taksi.u006
   - ru.sent.a2.telefon-v-taksi.u007
+  - ru.lex.pastevents.zavtra
+  - ru.lex.stories202611.sidene
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

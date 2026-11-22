@@ -60,6 +60,18 @@ activities:
   support_level: 1
   content_refs:
   - ru.sent.a2.u116
+- id: ru.activity.a2.lexclaim-pastevents-past-events-03
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.pastevents.utrom
+- id: ru.activity.a2.story-words-sosed-s-gitarioy
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.stories202611.gitara
 generation_contract:
   allowed_vocab:
   - ru.lex.pastevents.snachala
@@ -77,6 +89,8 @@ generation_contract:
   - ru.sent.a2.sosed-s-gitarioy.u005
   - ru.sent.a2.sosed-s-gitarioy.u006
   - ru.sent.a2.u116
+  - ru.lex.pastevents.utrom
+  - ru.lex.stories202611.gitara
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

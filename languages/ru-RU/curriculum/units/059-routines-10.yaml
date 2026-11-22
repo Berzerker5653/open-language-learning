@@ -54,6 +54,37 @@ activities:
   support_level: 1
   content_refs:
   - ru.sent.cp.p31
+- id: ru.activity.a1.story-words-walk-in-the-forest
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.stories202611.pet
+  - ru.lex.stories202611.ptichka
+  - ru.lex.stories202611.svetit
+  - ru.lex.stories202611.vetka
+  - ru.lex.stories202611.yarko
+  - ru.lex.stories202611.zarya
+- id: ru.activity.a1.nature-words-walk-in-the-forest
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.nature.cvetok
+  - ru.lex.nature.derevo
+  - ru.lex.nature.dozhd
+  - ru.lex.nature.gora
+  - ru.lex.nature.les
+  - ru.lex.nature.luna
+  - ru.lex.nature.ozero
+  - ru.lex.nature.pole
+  - ru.lex.nature.ptica
+  - ru.lex.nature.reka
+  - ru.lex.nature.ryba
+  - ru.lex.nature.solnce
+  - ru.lex.nature.trava
+  - ru.lex.nature.veter
+  - ru.lex.nature.zvezda
 generation_contract:
   allowed_vocab:
   - ru.lex.routines.spat
@@ -70,6 +101,27 @@ generation_contract:
   - ru.sent.cp.p28
   - ru.sent.cp.p29
   - ru.sent.cp.p31
+  - ru.lex.nature.cvetok
+  - ru.lex.nature.derevo
+  - ru.lex.nature.dozhd
+  - ru.lex.nature.gora
+  - ru.lex.nature.les
+  - ru.lex.nature.luna
+  - ru.lex.nature.ozero
+  - ru.lex.nature.pole
+  - ru.lex.nature.ptica
+  - ru.lex.nature.reka
+  - ru.lex.nature.ryba
+  - ru.lex.nature.solnce
+  - ru.lex.nature.trava
+  - ru.lex.nature.veter
+  - ru.lex.nature.zvezda
+  - ru.lex.stories202611.pet
+  - ru.lex.stories202611.ptichka
+  - ru.lex.stories202611.svetit
+  - ru.lex.stories202611.vetka
+  - ru.lex.stories202611.yarko
+  - ru.lex.stories202611.zarya
   allowed_grammar:
   - ru.grammar.a1.frequency-adverbs
   - ru.grammar.on-ramp.eto-identification

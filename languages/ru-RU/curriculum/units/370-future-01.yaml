@@ -43,6 +43,12 @@ activities:
   - ru.sent.b1.u370
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.b1.lexclaim-future-future-01
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.future.neterpenie
 generation_contract:
   allowed_vocab:
   - ru.lex.future.obstoyatelstvo
@@ -53,6 +59,7 @@ generation_contract:
   - ru.sent.b1.u370
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.lex.future.neterpenie
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

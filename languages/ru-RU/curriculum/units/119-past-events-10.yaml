@@ -54,6 +54,12 @@ activities:
   - ru.sent.a2.rybalka-zimoy.u004
   - ru.sent.a2.rybalka-zimoy.u005
   - ru.sent.a2.rybalka-zimoy.u006
+- id: ru.activity.a2.story-words-rybalka-zimoy
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.stories202611.lunka
 generation_contract:
   allowed_vocab:
   - ru.lex.pastevents.poezdka
@@ -70,6 +76,7 @@ generation_contract:
   - ru.sent.a2.rybalka-zimoy.u004
   - ru.sent.a2.rybalka-zimoy.u005
   - ru.sent.a2.rybalka-zimoy.u006
+  - ru.lex.stories202611.lunka
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

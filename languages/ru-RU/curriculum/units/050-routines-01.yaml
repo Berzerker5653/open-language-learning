@@ -71,6 +71,21 @@ activities:
   content_refs:
   - ru.sent.cp.p07
   - ru.sent.cp.p08
+- id: ru.activity.a1.story-words-moy-den
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.stories202611.doska
+- id: ru.activity.a1.story-words-morning-of-anna
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.stories202611.nachinatsya
+  - ru.lex.stories202611.odevatsya
+  - ru.lex.stories202611.varit
+  - ru.lex.stories202611.vyhodit
 generation_contract:
   allowed_vocab:
   - ru.lex.routines.prosypatsya
@@ -94,6 +109,11 @@ generation_contract:
   - ru.sent.cp.p10
   - ru.sent.cp.p11
   - ru.sent.cp.p20
+  - ru.lex.stories202611.doska
+  - ru.lex.stories202611.nachinatsya
+  - ru.lex.stories202611.odevatsya
+  - ru.lex.stories202611.varit
+  - ru.lex.stories202611.vyhodit
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

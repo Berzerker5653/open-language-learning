@@ -54,6 +54,14 @@ activities:
   - ru.sent.cp.p39
   - ru.sent.cp.p35
   - ru.sent.cp.p37
+- id: ru.activity.a1.story-words-at-the-market
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.stories202611.baton
+  - ru.lex.stories202611.goryachiy
+  - ru.lex.stories202611.nakupit
 generation_contract:
   allowed_vocab:
   - ru.lex.shopping.prodavec
@@ -70,6 +78,9 @@ generation_contract:
   - ru.sent.cp.p36
   - ru.sent.cp.p37
   - ru.sent.cp.p39
+  - ru.lex.stories202611.baton
+  - ru.lex.stories202611.goryachiy
+  - ru.lex.stories202611.nakupit
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

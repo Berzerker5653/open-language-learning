@@ -43,6 +43,12 @@ activities:
   - ru.sent.b1.u220
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+- id: ru.activity.b1.lexclaim-narration2-narration-background-01
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.narration2.golos
 generation_contract:
   allowed_vocab:
   - ru.lex.narration2.vo-vremya
@@ -53,6 +59,7 @@ generation_contract:
   - ru.sent.b1.u220
   - ru.lex.everyday.eto
   - ru.lex.everyday.dom
+  - ru.lex.narration2.golos
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

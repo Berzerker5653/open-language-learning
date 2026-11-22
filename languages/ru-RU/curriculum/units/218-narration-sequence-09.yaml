@@ -55,6 +55,15 @@ activities:
   - ru.sent.b1.internet-v-derevne.u005
   - ru.sent.b1.internet-v-derevne.u006
   - ru.sent.b1.internet-v-derevne.u007
+- id: ru.activity.b1.story-words-internet-v-derevne
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.stories202611.ded
+  - ru.lex.stories202611.derevnya
+  - ru.lex.stories202611.internet
+  - ru.lex.stories202611.znayushchiy
 generation_contract:
   allowed_vocab:
   - ru.lex.narration.ulica
@@ -72,6 +81,10 @@ generation_contract:
   - ru.sent.b1.internet-v-derevne.u005
   - ru.sent.b1.internet-v-derevne.u006
   - ru.sent.b1.internet-v-derevne.u007
+  - ru.lex.stories202611.ded
+  - ru.lex.stories202611.derevnya
+  - ru.lex.stories202611.internet
+  - ru.lex.stories202611.znayushchiy
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula
