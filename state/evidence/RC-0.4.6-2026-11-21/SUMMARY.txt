@@ -1,0 +1,80 @@
+HEAD=96367afc954bd166104524c88001509f9e68337b
+dirty_paths=3
+?? c1.png
+?? c4.png
+?? state/evidence/RC-0.4.6-2026-11-21/
+--- manifests as shipped ---
+31a3d39750fdb12661f5e78ac48a8c12720afe23a34c6488eb850397e483fbbe  languages/ja-JP/manifest.yaml
+version: "0.4.3"
+  content_license: "CC-BY-SA-4.0"
+cd40716cbbd9305a705328ca9d1f0a09c10dea5c5f06e23cb184e0a18d55807f  languages/ru-RU/manifest.yaml
+version: "0.4.6"
+  content_license: "CC0-1.0"
+rc-ru-RU-validate                            exit=0
+rc-ru-RU-lint                                exit=0
+rc-ru-RU-test                                exit=0
+rc-ru-RU-audit-curriculum                    exit=0
+rc-ru-RU-audit-lexicon                       exit=0
+rc-ru-RU-audit-licenses                      exit=0
+rc-ru-RU-audit-sources                       exit=0
+rc-build-ru-RU                               exit=0
+archive: dist/rc-0.4.6/ru-ru-reference-0.4.6.lpk
+bytes=294200200
+ea643982c390ccb7a5d9b0de0f6662c5d263c2087e3ad71491d34b15f27771d9  dist/rc-0.4.6/ru-ru-reference-0.4.6.lpk
+rc-inspect-ru-RU                             exit=0
+archive members=5973 media_members=5018
+manifest_rows=5018 media_members=5018 delta=0
+words_sidecar_member=1
+published 0.4.5 members = 5973   candidate 0.4.6 members = 5973
+identical (size+hash)   = 5958
+added in 0.4.6:
+1819 81a0dae11db9 curriculum/units/002-self-introduction-01.yaml
+1868 79075f45f699 curriculum/units/006-everyday-01.yaml
+1978 535d85a04453 curriculum/units/016-cyrillic-ya-eh-f.yaml
+1990 c55947bf8bdb curriculum/units/017-cyrillic-ts-ch-sh.yaml
+2141 3ca87919d25d curriculum/units/024-personal-details-05.yaml
+2142 fb25a7f1b7ed curriculum/units/018-cyrillic-shch-soft-hard.yaml
+2253 084cebccd40e curriculum/units/013-cyrillic-b-p-d-g.yaml
+2253 4e92adaf564a curriculum/units/011-cyrillic-k-e-n-s.yaml
+2265 19a7f374cf9e curriculum/units/014-cyrillic-l-z-zh-i.yaml
+2265 2fa1889b1fdd curriculum/units/012-cyrillic-r-v-u-kh.yaml
+2306 cac9f6fd6cae curriculum/units/010-cyrillic-a-o-m-t.yaml
+2349 06d414a0bc7a curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+25417 eb8cc6de98d9 orthography/cyrillic.jsonl
+259 69b46595092d language/orthography.yaml
+727 cd40716cbbd9 manifest.yaml
+removed in 0.4.6:
+1819 25145637f83f curriculum/units/002-self-introduction-01.yaml
+1877 cd0487c32fe7 curriculum/units/006-everyday-01.yaml
+1978 dfb6036e4cac curriculum/units/016-cyrillic-ya-eh-f.yaml
+1990 e5e9d7a1fb8c curriculum/units/017-cyrillic-ts-ch-sh.yaml
+2142 05a2ebab4d42 curriculum/units/018-cyrillic-shch-soft-hard.yaml
+2150 8fbdedebea9f curriculum/units/024-personal-details-05.yaml
+2253 0166599890b0 curriculum/units/013-cyrillic-b-p-d-g.yaml
+2253 abfd4ffb6d86 curriculum/units/011-cyrillic-k-e-n-s.yaml
+2265 429c0d19d065 curriculum/units/014-cyrillic-l-z-zh-i.yaml
+2265 5c1b6b216463 curriculum/units/012-cyrillic-r-v-u-kh.yaml
+2317 71ccf25108f0 curriculum/units/010-cyrillic-a-o-m-t.yaml
+2349 61a93e21f627 curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+237 b2b8e7c0884f language/orthography.yaml
+26026 05a86f2e790c orthography/cyrillic.jsonl
+727 9d4d3bc46f95 manifest.yaml
+present on both sides with different bytes:
+  curriculum/units/002-self-introduction-01.yaml
+    0.4.6: 1819 25145637f83f curriculum/units/002-self-introduction-01.yaml.n    0.4.5: 1819 81a0dae11db9 curriculum/units/002-self-introduction-01.yaml
+  curriculum/units/006-everyday-01.yaml
+    0.4.6: 1877 cd0487c32fe7 curriculum/units/006-everyday-01.yaml.n    0.4.5: 1868 79075f45f699 curriculum/units/006-everyday-01.yaml
+  curriculum/units/010-cyrillic-a-o-m-t.yaml
+rc-install-ru-RU                             exit=0
+store layout: dist/rc-0.4.6/store-ru-RU/org.openlanguage.ru-ru.reference dist/rc-0.4.6/store-ru-RU/org.openlanguage.ru-ru.reference/0.4.6 dist/rc-0.4.6/store-ru-RU/org.openlanguage.ru-ru.reference/current 
+current pointer: 0.4.6
+media files in installed tree: 5018
+sidecar in installed tree: 1
+rc-draft-catalog                             exit=0
+      "license": "CC0-1.0",
+      "pack_id": "org.openlanguage.ru-ru.reference",
+      "sha256": "ea643982c390ccb7a5d9b0de0f6662c5d263c2087e3ad71491d34b15f27771d9",
+      "size_bytes": 294200200,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.6/ru-ru-reference-0.4.6.lpk",
+      "version": "0.4.6"
+RC_046_DONE

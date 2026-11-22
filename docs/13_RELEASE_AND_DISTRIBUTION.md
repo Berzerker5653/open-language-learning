@@ -606,6 +606,20 @@ audio-addressable items), so every CI audio-restore leg validated stale rows (`m
 Lesson banked: a pack build must be followed by a content freeze for that release — 0.4.4 was current
 for nine hours. The 0.4.4 and 0.4.3 ru archives stay published and immutable as rollback targets.
 
+**ru-RU 0.4.6 published 2026-11-21** (RU-REPUBLISH-046-001; owner dogfood showed installed
+packs still serving pre-fix letter drills — the pinned 0.4.5 archive predates the
+letter=sound-unit model 294d649). Built by `state/evidence/RC-0.4.6-2026-11-21/build-rc-0.4.6.sh`
+from HEAD 96367af (seven gates exit 0; archive 294,200,200 bytes, sha256
+`ea643982c390ccb7a5d9b0de0f6662c5d263c2087e3ad71491d34b15f27771d9`; manifest rows 5,018 == media
+members 5,018 delta 0; `words.jsonl` sidecar present; install round-trip verified). Accounting vs
+published 0.4.5: 5,958/5,973 members byte-identical — zero audio drift; exactly 14 content members
+changed (12 curriculum units, `language/orthography.yaml`, `orthography/cyrillic.jsonl`), matching the
+letter-fix diff scope exactly. Zero-case-drill proof both directions from the REAL published archives
+(`publish-0.4.6.txt`): the downloaded 0.4.5 archive's `cyrillic.jsonl` carries 66 drill-junk readings,
+the downloaded 0.4.6 archive carries 0. GitHub asset digest equals the catalog pin; release non-draft,
+non-prerelease, immutable. The 0.4.5/0.4.4/0.4.3 ru archives stay published as rollback targets;
+the ja-JP 0.4.3 pin is unchanged.
+
 **Licensing paper corrected after publication.** The published ja-JP 0.4.0
 archive carries three `licenses.jsonl` records. The tree now carries five: the
 baked-audio record was corrected to name the Qwen3-TTS bake engine (ADR-0023; the

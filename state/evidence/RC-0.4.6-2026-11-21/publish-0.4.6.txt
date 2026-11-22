@@ -1,0 +1,55 @@
+RU-REPUBLISH-046-001 — ru-RU 0.4.6 publication evidence (2026-11-21)
+
+Purpose: the catalog-pinned 0.4.5 archive predates the letter=sound-unit
+orthography fixes (294d649, LETTER-UNIT-MODEL-001 + LETTER-DRILL-TEXT-001),
+so real installs still served case-drill copy. 0.4.6 carries the fixed
+content; audio is byte-identical to 0.4.5.
+
+Build (state/evidence/RC-0.4.6-2026-11-21/, unit lts-rc046b):
+- HEAD at build: 96367af (manifest bump 0.4.6 committed before the RC).
+- Seven gates exit 0: validate, lint, test, audit-curriculum, audit-lexicon,
+  audit-licenses, audit-sources (rc-ru-RU-*.txt logs).
+- archive: dist/rc-0.4.6/ru-ru-reference-0.4.6.lpk
+  bytes=294,200,200
+  sha256=ea643982c390ccb7a5d9b0de0f6662c5d263c2087e3ad71491d34b15f27771d9
+- members=5973, media members=5018 == manifest rows 5018 (delta 0),
+  words.jsonl sidecar member present.
+- Member accounting vs published 0.4.5 (diff-045-to-046-ru-RU.txt):
+  5,958/5,973 members byte-identical; exactly 14 changed content members —
+  12 curriculum unit yamls, language/orthography.yaml,
+  orthography/cyrillic.jsonl (+ manifest.yaml version line; the unit-014
+  member changed size, appearing in the add/remove pair). Zero media/audio
+  drift — matches the letter-fix diff scope (git diff 369aaba..HEAD --
+  languages/ru-RU) exactly.
+- Install round-trip: store current=0.4.6, 5,018 wavs, sidecar present.
+
+GitHub publication (standing pack-publish authorization per O-05 precedent):
+- tag org.openlanguage.ru-ru.reference-0.4.6
+  https://github.com/Berzerker5653/open-language-learning/releases/tag/org.openlanguage.ru-ru.reference-0.4.6
+- asset ru-ru-reference-0.4.6.lpk state=uploaded, size=294200200,
+  GitHub digest sha256:ea643982c390ccb7a5d9b0de0f6662c5d263c2087e3ad71491d34b15f27771d9
+  == local sha256 == catalog pin.
+- release read-back: isDraft=false, isPrerelease=false, isImmutable=true.
+
+Downloaded-archive verification (in-repo `gh release download` -> tmp/dl-046.lpk):
+- sha256 of the DOWNLOADED asset equals the catalog pin (unit lts-dl046);
+  bytes=294200200.
+- langpack install of the downloaded archive -> tmp/verify-store-046:
+  orthography/cyrillic.jsonl rows=67, drill-junk entities
+  (uppercase|lowercase|'Letter name') = 0.
+
+Zero-case-drill proof (both directions, from the REAL published archives):
+- published 0.4.5 archive downloaded and installed: cyrillic.jsonl carried
+  66 drill-junk readings ("Letter name: а (a); uppercase." class).
+- published 0.4.6 archive downloaded and installed: 0 such rows.
+  (The owner-reported 63 runtime case-drill rows came from these entities
+  minus case-collapsed pair duplicates; the engine fix in 294d649 also
+  refuses case/property drill dimensions outright, so they cannot recur.)
+- tools/audit_learner_copy.py v1.3 at HEAD: 36 source files, 0 findings.
+
+Audit classification of remaining case mentions: see
+state/notes/RU-REPUBLISH-046-001.md (weekday-capitalization rule note and
+the cyrillic-recognition rubric criterion are legitimate, kept).
+
+Rollback: 0.4.5 / 0.4.4 / 0.4.3 ru archives and ja-JP 0.4.3 stay published,
+immutable and fetchable; the ja-JP catalog entry is unchanged.
