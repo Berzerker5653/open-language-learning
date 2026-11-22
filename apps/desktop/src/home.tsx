@@ -7,7 +7,7 @@
  * streak/attendance surface anywhere (ADR-0002).
  */
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LatinText, PackText } from "@openlang/ui";
 export interface PlannedItem {
   item_id: string;
@@ -299,9 +299,11 @@ export interface HomeProps {
   /// pack re-answers; Home says so while that settles instead of showing a
   /// plan that belongs to the language being left.
   packSwitching?: boolean;
-  /// PATH-VIEW-001: the unit path from the `unit_path` command — engine
-  /// state only. Empty while loading; Home then renders no path section.
   pathNodes?: UnitPathNode[];
+  /// PATH-WHATSNEXT-001: the single current offer from `current_offer` —
+  /// the Today strip's line + review-due chip and the after-session card's
+  /// answer. Undefined while loading, null when the engine abstains.
+  nextOffer?: NextOffer | null;
 }
 
 export function Home(p: HomeProps) {
@@ -435,6 +437,11 @@ export function Home(p: HomeProps) {
               {p.sessionOutcome.minutes < 1
                 ? "Under a minute on the activities."
                 : `About ${p.sessionOutcome.minutes} minutes on the activities.`}
+            </p>
+          ) : null}
+          {p.nextOffer ? (
+            <p className="next-offer next-offer--outcome" data-testid="next-offer-card">
+              {offerLabel(p.nextOffer)}
             </p>
           ) : null}
           {(p.sessionOutcome.forms ?? []).length > 0 ? (
@@ -571,7 +578,22 @@ export function Home(p: HomeProps) {
           })}
         </>
       )}
-      {p.pathNodes && p.pathNodes.length > 0 ? <PathView nodes={p.pathNodes} /> : null}
+      {p.nextOffer ? (
+        <p className="next-offer" data-testid="next-offer">
+          {offerLabel(p.nextOffer)}
+          {p.nextOffer.total_due > 0 ? (
+            <span className="review-due-chip" data-testid="review-due-chip">
+              Review due ({p.nextOffer.total_due})
+            </span>
+          ) : null}
+        </p>
+      ) : null}
+      {p.pathNodes && p.pathNodes.length > 0 ? (
+        <PathView
+          nodes={p.pathNodes}
+          scrollToUnit={p.sessionOutcome && p.nextOffer ? p.nextOffer.unit_id : null}
+        />
+      ) : null}
       {p.nextGoal === undefined ? null : p.nextGoal === null ? (
         <p className="empty next-goal-none">
           This pack declares no learning path yet. Choose one under Settings → Language packs.
@@ -898,6 +920,29 @@ export interface UnitPathNode {
   unlock_hint: string | null;
 }
 
+/**
+ * PATH-WHATSNEXT-001 (the Codemm rule): exactly ONE current offer, computed
+ * engine-side by `current_offer` — a due review first, otherwise the next
+ * ready unit's introduction step. The UI composes the sentence; the engine
+ * owns the answer, so the after-session card, the Today strip and the path
+ * pin can never disagree.
+ */
+export interface NextOffer {
+  kind: "review" | "introduction";
+  unit_id: string;
+  title: string;
+  minutes: number;
+  total_due: number;
+}
+
+/** "Next: <what, roughly how long>" — the phase-2 sentence, pack words for
+ * the unit title, honest shape-names only. */
+export function offerLabel(o: NextOffer): string {
+  return o.kind === "review"
+    ? `Next: review ${o.title} · about ${o.minutes} minutes`
+    : `Next: ${o.title} — new material · about ${o.minutes} minutes`;
+}
+
 /** Engine order is curriculum order; consecutive nodes of one band form one
  * section (On-ramp / Beginner / Elementary …, CEFR as the small subtitle —
  * owner decision 2026-11-22). */
@@ -938,7 +983,16 @@ const PATH_MARKERS: Record<string, string> = {
  * what unlocks it in the pack's own words; done units re-light with a
  * review-due count; scrolling up is the visible history of what was learned.
  */
-export function PathView({ nodes }: { nodes: UnitPathNode[] }) {
+export function PathView({
+  nodes,
+  scrollToUnit,
+}: {
+  nodes: UnitPathNode[];
+  /// PATH-WHATSNEXT-001: when set (the after-session moment), the path
+  /// brings THIS unit's node into view — the offer and the map are one
+  /// answer, never two.
+  scrollToUnit?: string | null;
+}) {
   const sections = pathSections(nodes);
   const pinnedBand = sections.find((s) => s.nodes.some((n) => n.current))?.band;
   // undefined = nobody has tapped yet, so the pinned section opens by
@@ -948,8 +1002,22 @@ export function PathView({ nodes }: { nodes: UnitPathNode[] }) {
   if (sections.length === 0) return null;
   const openBand =
     bandOverride === undefined ? (pinnedBand ?? sections[0]?.band ?? "") : bandOverride;
+
+  const rootRef = useRef<HTMLElement | null>(null);
+  // Two phases, because a collapsed section's node is NOT in the DOM yet:
+  // open the offered node's section first, then scroll once it renders.
+  useEffect(() => {
+    if (!scrollToUnit) return;
+    const target = nodes.find((n) => n.unit_id === scrollToUnit);
+    if (target) setBandOverride(target.band ?? "other");
+  }, [scrollToUnit, nodes]);
+  useEffect(() => {
+    if (!scrollToUnit) return;
+    const el = rootRef.current?.querySelector(`[data-unit="${scrollToUnit}"]`);
+    if (el && typeof el.scrollIntoView === "function") el.scrollIntoView({ block: "center" });
+  }, [scrollToUnit, openBand, nodes]);
   return (
-    <section aria-label="Your path" className="unit-path" data-testid="unit-path">
+    <section aria-label="Your path" className="unit-path" data-testid="unit-path" ref={rootRef}>
       <h2>Your path</h2>
       <p className="meta">
         <small>What you have completed, where you are now, and where this leads.</small>
@@ -979,6 +1047,7 @@ export function PathView({ nodes }: { nodes: UnitPathNode[] }) {
                   return (
                     <li
                       key={n.unit_id}
+                      data-unit={n.unit_id}
                       className={`path-node path-node--${state}`}
                       data-testid={`path-node-${n.unit_id}`}
                       data-state={state}

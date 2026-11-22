@@ -3902,6 +3902,91 @@ async fn unit_path(profile_id: String) -> Result<Vec<UnitPathNodeView>, String> 
         .map_err(|e| format!("unit-path failed: {e}"))?
 }
 
+// ---------------------------------------------------------------------------
+// PATH-WHATSNEXT-001 (PROGRESS-PATH-DESIGN-001 phase 2, the Codemm rule):
+// exactly ONE current offer, computed engine-side so the after-session card,
+// the Today strip and the path pin can never disagree. The rule: a due
+// review first if any exists, otherwise the next ready unit's introduction
+// step from today's plan. The estimate is the session shape's own price
+// (reviews ride the 5-minute default plan; an introduction is one lesson
+// step), never an invented number.
+
+#[derive(Serialize)]
+struct NextOfferView {
+    /// "review" | "introduction" — which side of the rule answered.
+    kind: &'static str,
+    /// The unit the path scrolls to (its node carries the answer).
+    unit_id: String,
+    /// The unit's own title (pack words; never invented prose).
+    title: String,
+    /// Rough minutes for the shape being offered (the card's
+    /// "roughly how long" half of "Next: <what, roughly how long>").
+    minutes: u32,
+    /// Due reviews across the whole path — the Today chip's count.
+    total_due: usize,
+}
+
+fn current_offer_at(data: &Path, profile_id: &str) -> Result<Option<NextOfferView>, String> {
+    let nodes = unit_path_at(data, profile_id)?;
+    let total_due: usize = nodes.iter().map(|n| n.due_count).sum();
+    // Review-first: the first review-due node in curriculum order (the
+    // path's own order is the tie-break — no second priority system).
+    if let Some(n) = nodes.iter().find(|n| n.review_due) {
+        return Ok(Some(NextOfferView {
+            kind: "review",
+            unit_id: n.unit_id.clone(),
+            title: n.title.clone(),
+            minutes: 5,
+            total_due,
+        }));
+    }
+    // Otherwise the next introduction step, mapped to its unit. Same plan
+    // call and 5-minute default `unit_path_at` pins, so the offer names
+    // exactly what "Start today's plan" would run first.
+    let plan = build_plan_view(data, profile_id, 5, now_secs())?;
+    let intro = match plan.items.iter().find(|i| i.kind == "introduction") {
+        Some(i) => i,
+        None => return Ok(None),
+    };
+    for (pack_id, _) in {
+        let store =
+            lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+        store
+            .selected_packs(profile_id)
+            .map_err(|e| e.to_string())?
+    } {
+        let version = match lts_langpack::archive::current_version(&pack_id, &data.join("packs")) {
+            Some(v) => v,
+            None => continue,
+        };
+        let root = data.join("packs").join(&pack_id).join(&version);
+        let units = pack_units(&root);
+        for unit in units.iter() {
+            if unit
+                .activities
+                .iter()
+                .any(|a| a.content_refs.iter().any(|c| c == &intro.content_id))
+            {
+                return Ok(Some(NextOfferView {
+                    kind: "introduction",
+                    unit_id: unit.id.clone(),
+                    title: unit.title.clone(),
+                    minutes: 3,
+                    total_due,
+                }));
+            }
+        }
+    }
+    Ok(None)
+}
+
+#[tauri::command]
+async fn current_offer(profile_id: String) -> Result<Option<NextOfferView>, String> {
+    tauri::async_runtime::spawn_blocking(move || current_offer_at(&data_dir(), &profile_id))
+        .await
+        .map_err(|e| format!("current-offer failed: {e}"))?
+}
+
 /// The content refs of the pack's `script-introduction` unit, in the
 /// pack's own `teaching_order` (unsequenced ones last, refs in declared
 /// order before that). The declaration is the ONLY cue (ADR-0021 rule
@@ -11041,6 +11126,7 @@ macro_rules! lts_command_table {
             complete_onboarding,
             home_state,
             unit_path,
+            current_offer,
             practice_plan,
             practice_queue,
             first_run_steps,
@@ -15256,6 +15342,92 @@ activities:
             first.review_due && first.due_count >= 1,
             "a done unit with due items re-lights as review-due"
         );
+    }
+
+    /// PATH-WHATSNEXT-001 (the Codemm rule): exactly ONE offer — a due
+    /// review first if one exists, otherwise today's introduction step.
+    /// Seeding one due scheduler row must flip the offer to review-first
+    /// and name the unit the path scrolls to.
+    #[test]
+    fn current_offer_flips_to_review_first_when_a_review_is_due() {
+        let ru = "org.openlanguage.ru-ru.reference";
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_reference_pack_fast(data, ru).unwrap();
+        let p = create_local_profile(data, "Hunter").unwrap();
+        finish_onboarding(data, &p.id, Some(ru), false).unwrap();
+
+        // Fresh learner: nothing due, so the answer is the introduction
+        // step today's plan would run, mapped to a unit on the path.
+        let offer = current_offer_at(data, &p.id)
+            .unwrap()
+            .expect("a plan exists");
+        assert_eq!(offer.kind, "introduction", "nothing due: next unit wins");
+        assert!(offer.minutes > 0, "the card always has an estimate");
+        assert_eq!(offer.total_due, 0, "no scheduler rows yet");
+        let nodes = unit_path_at(data, &p.id).unwrap();
+        assert!(
+            nodes.iter().any(|n| n.unit_id == offer.unit_id),
+            "the offer names a unit the path renders (scroll target)"
+        );
+
+        // Light ONE review-due row in a done unit: greetings-01 gets full
+        // evidence, then a scheduler row that is due now.
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let attempt_ru = |target: &str, id: &str| {
+            let mut ev = attempt(
+                target,
+                lts_domain::ActivityModality::ComprehensionReading,
+                "ru.expr.path.a-1",
+                0,
+                "2026-11-22T10:00:00Z",
+                id,
+                &p.id,
+            );
+            ev.pack_id = ru.into();
+            ev
+        };
+        for (i, c) in [
+            "ru.lex.greetings.spasibo",
+            "ru.lex.greetings.zdravstvuyte",
+            "ru.lex.greetings.dobroe-utro",
+            "ru.lex.greetings.dobryy-den",
+            "ru.lex.greetings.dobryy-vecher",
+            "ru.grammar.on-ramp.formulaic-politeness",
+        ]
+        .iter()
+        .enumerate()
+        {
+            store
+                .append_evidence(&attempt_ru(c, &format!("offer-{i}")))
+                .unwrap();
+        }
+        store
+            .save_scheduler_state(
+                &p.id,
+                &lts_storage::SchedulerRecord {
+                    item_id: "ru.lex.greetings.spasibo#comprehension-reading".into(),
+                    scheduler: lts_scheduler::SPIKE_VERSION.into(),
+                    params_json: serde_json::to_string(&lts_scheduler::ItemState {
+                        stability_days: 1.0,
+                        difficulty: 5.0,
+                        reps: 1,
+                        lapses: 0,
+                        last_review: now_secs() as i64 - 3_600,
+                    })
+                    .unwrap(),
+                    due_at: rfc3339_utc(now_secs() - 60),
+                },
+            )
+            .unwrap();
+
+        let offer = current_offer_at(data, &p.id).unwrap().expect("one offer");
+        assert_eq!(
+            offer.kind, "review",
+            "one due row flips the single answer to review-first"
+        );
+        assert_eq!(offer.unit_id, "ru.unit.on-ramp.greetings-01");
+        assert!(offer.total_due >= 1, "the chip counts every due row");
     }
 
     /// K-47: goal-map bands follow the proficiency ladder, not ASCII order.

@@ -1548,6 +1548,45 @@ export class LearnerEngine {
           unlock_hint: null as string | null,
         }));
       }
+      case "current_offer": {
+        // PATH-WHATSNEXT-001: mirror of the engine's single-answer rule for
+        // the fake world — a due review first, else the plan's first
+        // introduction step mapped to its unit. Fixture profiles carry no
+        // due scheduler rows, so they honestly answer "introduction".
+        const nodes = (this.answer("unit_path", args) as {
+          unit_id: string;
+          title: string;
+          review_due: boolean;
+        }[])!;
+        const dueTotal = nodes.reduce((a, n) => a + (n.review_due ? 1 : 0), 0);
+        const review = nodes.find((n) => n.review_due);
+        if (review)
+          return {
+            kind: "review",
+            unit_id: review.unit_id,
+            title: review.title,
+            minutes: 5,
+            total_due: dueTotal,
+          };
+        const p = this.profile(args.profileId);
+        const plan = this.plan(p);
+        const intro = plan.items.find((i) => i.kind === "introduction");
+        if (!intro || !p.active) return null;
+        // The unit owning this content is the schedule row carrying it —
+        // the SAME derivation unit_path renders, so the pin always names a
+        // node that exists. No owner node: abstain, never invent one.
+        const row = p.schedule.find((s) => s.content_id === intro.content_id);
+        if (!row) return null;
+        const owner = nodes.find((n) => n.unit_id === `${p.active}.unit.${row.goal}`);
+        if (!owner) return null;
+        return {
+          kind: "introduction",
+          unit_id: owner.unit_id,
+          title: owner.title,
+          minutes: 3,
+          total_due: 0,
+        };
+      }
       case "world_state":
         return [
           {

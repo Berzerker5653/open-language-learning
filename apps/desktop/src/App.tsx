@@ -29,6 +29,7 @@ import {
   GoalMap,
   CanDoSummary,
   type UnitPathNode,
+  type NextOffer,
   type WorldEnvironment,
   type NextGoalView,
   type FirstRunStep,
@@ -398,6 +399,8 @@ export function App() {
   const [firstRunSteps, setFirstRunSteps] = useState<FirstRunStep[]>([]);
   // PATH-VIEW-001: the Today tab's unit path, straight from `unit_path`.
   const [pathNodes, setPathNodes] = useState<UnitPathNode[]>([]);
+  // PATH-WHATSNEXT-001: the engine's single answer ("what do I do now?").
+  const [nextOffer, setNextOffer] = useState<NextOffer | null | undefined>(undefined);
   const [progress, setProgress] = useState<ProgressRow[]>([]);
   const [progressError, setProgressError] = useState<string | null>(null);
   const [progressLoading, setProgressLoading] = useState(false);
@@ -872,6 +875,7 @@ export function App() {
           const freshSteps = (await inv("first_run_steps", { profileId: p.id })) as FirstRunStep[];
           setFirstRunSteps(freshSteps);
           setPathNodes((await inv("unit_path", { profileId: p.id })) as UnitPathNode[]);
+          setNextOffer((await inv("current_offer", { profileId: p.id })) as NextOffer | null);
           await inv("smoke_ack", { note: `fresh-plan:${home.plan.items.length}` });
           await inv("smoke_ack", { note: `first-run:${freshSteps.length}` });
           setEnvironments((await inv("world_state", { profileId: p.id })) as WorldEnvironment[]);
@@ -1428,6 +1432,7 @@ export function App() {
     setNextGoal(undefined);
     setFirstRunSteps([]);
     setPathNodes([]);
+    setNextOffer(undefined);
     setEnvironments([]);
     setPracticeTarget(null);
     setPracticeTask(null);
@@ -1479,6 +1484,7 @@ export function App() {
       setNextGoal(home.next_goal);
       setFirstRunSteps((await inv("first_run_steps", { profileId })) as FirstRunStep[]);
       setPathNodes((await inv("unit_path", { profileId })) as UnitPathNode[]);
+      setNextOffer((await inv("current_offer", { profileId })) as NextOffer | null);
       if (gen !== packSwitchGen.current) return;
       setEnvironments((await inv("world_state", { profileId })) as WorldEnvironment[]);
       setDisplay((await inv("display_settings", { profileId })) as DisplaySettingsView);
@@ -1833,6 +1839,7 @@ export function App() {
         setNextGoal(home.next_goal);
         setFirstRunSteps((await inv("first_run_steps", { profileId })) as FirstRunStep[]);
         setPathNodes((await inv("unit_path", { profileId })) as UnitPathNode[]);
+        setNextOffer((await inv("current_offer", { profileId })) as NextOffer | null);
         const envs = (await inv("world_state", { profileId })) as WorldEnvironment[];
         setEnvironments(envs);
         setDisplay((await inv("display_settings", { profileId })) as DisplaySettingsView);
@@ -1888,6 +1895,7 @@ export function App() {
       setNextGoal(home.next_goal);
       setFirstRunSteps((await inv("first_run_steps", { profileId: p.id })) as FirstRunStep[]);
       setPathNodes((await inv("unit_path", { profileId: p.id })) as UnitPathNode[]);
+      setNextOffer((await inv("current_offer", { profileId: p.id })) as NextOffer | null);
       const envs = (await inv("world_state", { profileId: p.id })) as WorldEnvironment[];
       setEnvironments(envs);
       setDisplay((await inv("display_settings", { profileId: p.id })) as DisplaySettingsView);
@@ -4882,6 +4890,7 @@ export function App() {
           environments={environments}
           nextGoal={nextGoal}
           pathNodes={pathNodes}
+          nextOffer={nextOffer}
           firstRunSteps={firstRunSteps}
           onStart={(item) => void openPractice(item)}
           onStartSession={() => void startSession()}
