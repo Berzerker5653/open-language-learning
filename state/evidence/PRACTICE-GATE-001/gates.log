@@ -1,0 +1,61 @@
+PRACTICE-GATE-001 — controller gate battery (takeover run 145, 2026-11-22, board t_bad729c6)
+Tree: the committed lane (code 867654e), main working tree == commit content.
+
+LANE gates re-run by the controller at this exact tree:
+- cargo fmt --all --check                          -> exit 0 (FMT-OK)
+- cargo test -p lts-desktop --lib (FULL suite)     -> exit 0; 223 tests, 0 failed
+  (log: scratch pg-gates/libtests-final2.log; LIBTESTS-EXIT=0)
+- cargo clippy -p lts-desktop --all-targets -- -D warnings -> exit 0 (clippy-desktop3.log;
+  one controller fix en route: unused `family` in seed helper -> _family)
+- cargo clippy -p lts-langpack --all-targets -- -D warnings -> exit 0 (clippy-langpack.log)
+- cargo test -p lts-langpack                        -> all targets ok (langpack-tests.log,
+  includes the ORTHO per_case_orthography_entity red-first test)
+- npx tsc --noEmit                                 -> exit 0 (dirty tree, lane bytes)
+- npx vitest run                                   -> 59 files, 477 tests, all passed
+- PYTHONPATH=tools .venv/bin/python -m unittest scripts/test_new_pack.py tools/test_audit_learner_copy.py
+                                                   -> 31 tests OK (bare invocation without
+  PYTHONPATH=tools ModuleNotFoundEs is an invocation-path artifact, not a lane bug)
+
+Targeted contract battery (filtered): dictation + shadowing + practice_queue
+-> 12 tests green after the controller MET implementation; one aligner-vendor
+flaky failure (dictation_check_matches_spoken_target, "aligner-unavailable")
+reproduced once under parallel load, green isolated AND green in the full
+suite — vendor-gated flake, not a lane bug.
+
+Controller findings and fixes (see state/notes/PRACTICE-GATE-001.md):
+1. Run 128's MET allow-list was NOTES-ONLY. Debug probe on the failing
+   practice_queue test: units=818 goals=60 locked=4697 yet the day-0 queue
+   held unclaimed B2 lexicon + ru.sent.cp.* — unclaimed ids are in NEITHER
+   lock set (goal_locked_new_content is exclusive by contract). Implemented
+   practice_met_content + practice_eligible; wired dictation, shadowing,
+   writing and practice_queue; pack-scoped pools for dictation/shadowing/
+   queue, profile-union pools for writing.
+2. Two pre-gating JA shadowing fixtures rewritten to the NEW contract:
+   seed_all_pack_kana_learned seeds kana recognition evidence; day-one
+   shadow pool asserted EMPTY; the WORD-TIMING "second unspanned item"
+   assertion became "only met vocabulary shadows" (ja-demo references
+   exactly one lexicon row from units).
+
+Entanglement: this lane commits together with ORTHO-LETTER-UNITS-001 in ONE
+commit (sanctioned entangled-takeover rule): the practice_queue test asserts
+the merged `ru.orth.cyrillic.a` id which only exists after the ORTHO pack
+rename. Verified: with HEAD's 67-row per-case pack the assertion cannot pass.
+
+DEFERRED (named, non-blocking):
+- 'Preview what's ahead' name-only affordance — optional per card.
+- Frontend rendering of the practice_queue IPC itself (IPC live via
+  SERVE_COMMAND_NAMES; tab's visible change comes from the gated streams).
+- Mobile before/after screenshots (scripts/practice-gate-capture.mjs): the
+  harness aborts in this headless session (node core-dump 134, no result.
+  json; SERVE_DIST must be dist/index.html, NOT the dist dir — EISDIR).
+  RESUME RECIPE:
+    1) cargo build -q -p lts-desktop --features serve --bin lts-serve   # after
+       cp target/debug/lts-serve <scratch>/lts-serve-after
+    2) git worktree add --detach <wt> 867654e^ ; in <wt>: ln -s <repo>/apps/desktop/dist
+       apps/desktop/dist, CARGO_TARGET_DIR=<scratch>/target cargo build the same way  # before
+    3) cargo run -q -p lts-langpack-cli -- build languages/ru-RU --out <scratch>/ru.lpk
+    4) SERVE_BIN=<bin> SERVE_DIST=<repo>/apps/desktop/dist/index.html PACK_LPK=<ru.lpk> \
+       node scripts/practice-gate-capture.mjs <before|after>
+       (runs fine where headless chrome works, e.g. with WAYLAND_DISPLAY set —
+       MOBILE-UX-001/SETTINGS-SCOPE harnesses ran before; the engine-level
+       machine gates in result.json are the load-bearing part)
