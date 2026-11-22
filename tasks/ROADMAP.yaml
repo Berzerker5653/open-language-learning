@@ -3218,6 +3218,21 @@ tasks:
   - the langpack validation suite and the story-accuracy gate stay green over the rewritten units
   - a band-matched live plan read shows the claimed sentences seeding for a learner at that band, and the orphan-gating test stays green
   required_for_desktop_1_0: false
+- id: RU-LEXICON-CLAIM-001
+  milestone: M11
+  priority: P2
+  title: Disposition of the 192 orphan RU lexicon rows — claim them into band units or record them as permanent dictionary weight
+  dependencies: [ORPHAN-CONTENT-001]
+  read_first:
+  - state/notes/RU-LEXICON-CLAIM-001.md
+  - state/notes/ORPHAN-CONTENT-001.md
+  - state/evidence/ORPHAN-CONTENT-001/orphan-ids.json
+  acceptance:
+  - each of the 192 orphan lexicon ids sits in exactly one disposition column (claimed or dictionary-weight) with counts reconciled against a re-measurement of the orphan census
+  - claimed ids appear in unit activity content_refs and in the hosting unit generation_contract.allowed_vocab, with no lexicon text, gloss or audio change
+  - the langpack validation suite and tools/qa_stories.py stay green over the rewritten units
+  - a targeted test or live read shows at least one claimed word seeding plan-eligibly for its band profile
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3350,4 +3365,5 @@ execution_scope:
   - ORTHO-LETTER-UNITS-001
   - ORPHAN-CONTENT-001
   - RU-SENTENCE-CLAIM-001
+  - RU-LEXICON-CLAIM-001
   public_publication_authorized: false

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-22",
-  "active_task": null,
+  "active_task": "RU-LEXICON-CLAIM-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -2784,6 +2784,20 @@
       "summary": "All 161 orphan RU sentences now hold a ladder position: 16 story series claimed whole into topic-matched units of their own band (a1 stories to home/routines/shopping/city, a2 to a2.past-events, b1 to b1.narration-sequence, b2 to lit/neg/soc/lex/argue), the three cp stories and 24 unstoried cp sentences into a1 units (cp = a1 per tools/qa_stories.py), and loose ru.sent.a2.u116 into its neighbours' unit. Pure content_ref additions plus the allowed_vocab rows the pack-build validator requires - no text/gloss/cloze/media change, so no shard sweep or re-bake. Census after: 945/945 sentence rows unit-referenced (was 784/945). Gates: fmt, cargo test -p lts-langpack, clippy -p lts-langpack -D warnings, desktop gate test unclaimed_contrast_and_sentence_rows_are_not_seeded, qa_stories (20 stories 0 FAIL), learner-copy and content-template audits, plus an lts-serve live read 5/5 PASS - the 161 newly claimed ids stay band-locked out of the level-0 plan. Deferred and recorded: the band-matched (on-ramp-complete) live read.",
       "updated": "2026-11-22",
       "notes": "board t_34ae2f4b; follow-up of ORPHAN-CONTENT-001 deferred claim decision; band rule = sentence band tag == hosting unit goal band (cp -> a1), deviation from 'on-ramp units' recorded in the notes"
+    },
+    "RU-LEXICON-CLAIM-001": {
+      "task_id": "RU-LEXICON-CLAIM-001",
+      "title": "Disposition of the 192 orphan RU lexicon rows — claim into band units or record as dictionary weight (follow-up of ORPHAN-CONTENT-001)",
+      "status": "in_progress",
+      "attempts": 1,
+      "dependencies": [
+        "ORPHAN-CONTENT-001"
+      ],
+      "evidence": [
+        "state/notes/RU-LEXICON-CLAIM-001.md"
+      ],
+      "updated": "2026-11-22",
+      "notes": "board t_55b270c6; follow-up of the deferred claim decision in ORPHAN-CONTENT-001; content lane, pack data only; group-level dispositions per card contract"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
