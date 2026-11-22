@@ -13437,6 +13437,153 @@ activities:
         assert!(res.corrections.is_empty());
     }
 
+    // SPEECH-INFRA-001: the calibration contract end to end. The registry
+    // and the guided/automatic gate shipped in 2c722a5; these tests pin the
+    // CONTRACT the calibration campaign will rely on: a Qualified record
+    // dropped into the installed pack's speech/calibration/ flips the
+    // production path from guided to automatic — calibration flips a data
+    // file, not the architecture — and a record bound to the wrong model
+    // version fails closed back to guided with a machine-readable reason
+    // (docs/17 §97). Vendor-gated like the rest of the speech pipeline:
+    // the gate sits behind a successful alignment, so these need the real
+    // aligner; the registry's own unit tests (crates/speech-api) run
+    // everywhere.
+
+    /// Write a calibration record for the drilled feature, bound to exactly
+    /// the combination the gate itself resolves (catalog model version+hash,
+    /// interpreter info, pack version, pack locale). `model_version` and
+    /// `model_sha` override the binding to stage drift.
+    fn write_calibration_record(
+        data: &Path,
+        pack_id: &str,
+        model_version: Option<&str>,
+        model_sha: Option<Option<&str>>,
+    ) {
+        let packs_root = data.join("packs");
+        let version = lts_langpack::archive::current_version(pack_id, &packs_root).unwrap();
+        let pack_dir = packs_root.join(pack_id).join(&version);
+        let variety = pack_target_locale(&pack_dir).unwrap();
+        let info = lts_speech_api::PronunciationInterpreter::info(
+            &lts_speech_runtime::VowelLengthInterpreter::default(),
+        );
+        let pref = models::load_speech_pref(data);
+        let entry = models::load_catalog()
+            .models
+            .into_iter()
+            .find(|m| m.id == pref.asr_model);
+        let bound_version = model_version.map(Into::into).unwrap_or_else(|| {
+            entry
+                .as_ref()
+                .map(|m| m.version.clone())
+                .unwrap_or_default()
+        });
+        let bound_sha: Option<String> = match model_sha {
+            Some(explicit) => explicit.map(str::to_owned),
+            None => entry
+                .as_ref()
+                .and_then(|m| m.files.iter().map(|f| f.sha256.clone()).max()),
+        };
+        let sha_line = match bound_sha {
+            Some(s) => format!("  sha256: \"{s}\"\n"),
+            None => String::new(),
+        };
+        let yaml = format!(
+            "feature_id: ja.phon.vowel-length\n\
+             revision: infra-test-1\n\
+             provider:\n  id: whisper.cpp\n  version: \"\"\n\
+             model:\n  id: {}\n  version: \"{bound_version}\"\n{sha_line}\
+             interpreter:\n  id: {}\n  version: \"{}\"\n\
+             pack:\n  id: {pack_id}\n  version: \"{version}\"\n\
+             target_ids: []\n\
+             reference_variety: {variety}\n\
+             protocol: {{ path: benchmarks/speech/protocols/test.yaml, sha256: protohash }}\n\
+             dataset: {{ path: benchmarks/speech/datasets/test/manifest.yaml, sha256: datahash }}\n\
+             results: {{ path: benchmarks/speech/results/test/summary.json, sha256: reshash }}\n\
+             thresholds:\n  max_false_correction_rate: 0.05\n  min_scoring_coverage: 0.6\n  min_label_agreement: 0.7\n\
+             measured:\n  false_correction_rate: 0.01\n  scoring_coverage: 0.9\n  label_agreement: 0.95\n  n_speakers: 30\n  n_attempts: 300\n\
+             envelope:\n  varieties: [\"{variety}\"]\n  contexts: [\"pronunciation-practice\"]\n",
+            pref.asr_model, info.id, info.version
+        );
+        let cal_dir = pack_dir.join("speech").join("calibration");
+        std::fs::create_dir_all(&cal_dir).unwrap();
+        std::fs::write(cal_dir.join("ja.phon.vowel-length-infra-test-1.yaml"), yaml).unwrap();
+    }
+
+    /// The obasan/obaasan attempt the existing pipeline tests score: two
+    /// demo recordings concatenated, which the vendor aligner verifies.
+    fn concatenated_obasan_attempt(data: &Path) -> PronunciationAttempt {
+        use base64::Engine;
+        let packs_root = data.join("packs");
+        let demo_ver =
+            lts_langpack::archive::current_version("org.openlanguage.ja-demo", &packs_root)
+                .unwrap();
+        let media = packs_root
+            .join("org.openlanguage.ja-demo")
+            .join(&demo_ver)
+            .join("media");
+        let sb = lts_speech_runtime::from_wav16(
+            &std::fs::read(media.join("ja.lex.demo.obasan.wav")).unwrap(),
+        )
+        .unwrap();
+        let lb = lts_speech_runtime::from_wav16(
+            &std::fs::read(media.join("ja.lex.demo.obaasan.wav")).unwrap(),
+        )
+        .unwrap();
+        let mut samples = sb.samples.clone();
+        samples.extend(
+            std::iter::repeat_n(0.0f32, (0.2 * sb.sample_rate_hz as f32) as usize)
+                .chain(lb.samples.clone()),
+        );
+        let attempt_wav = lts_speech_runtime::to_wav16(&lts_speech_api::AudioBuffer {
+            samples,
+            sample_rate_hz: sb.sample_rate_hz,
+        });
+        PronunciationAttempt {
+            pack_id: "org.openlanguage.ja-jp.reference".into(),
+            short_unit: "ja.contrast.vowel-length.obasan.short".into(),
+            long_unit: "ja.contrast.vowel-length.obasan.long".into(),
+            short_text: "おばさん".into(),
+            long_text: "おばあさん".into(),
+            wav_b64: base64::engine::general_purpose::STANDARD.encode(&attempt_wav),
+        }
+    }
+
+    #[test]
+    fn calibration_record_qualified_for_installed_combination_flips_to_automatic() {
+        let Some(tmp) = dictation_vendor() else {
+            return;
+        };
+        let data = tmp.path();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
+        write_calibration_record(data, "org.openlanguage.ja-jp.reference", None, None);
+        let res = pronunciation_check_at(data, concatenated_obasan_attempt(data)).unwrap();
+        // Same scored outcome as the ungated pipeline test — the record only
+        // changes the POSTURE label, never the audio path.
+        assert_eq!(res.abstain_reason, None, "got {:?}", res.abstain_reason);
+        assert_eq!(res.mode, "automatic", "got reason {:?}", res.mode_reason);
+        assert_eq!(res.mode_reason, None);
+    }
+
+    #[test]
+    fn calibration_record_with_model_version_drift_fails_closed_to_guided() {
+        let Some(tmp) = dictation_vendor() else {
+            return;
+        };
+        let data = tmp.path();
+        install_reference_pack_fast(data, "org.openlanguage.ja-jp.reference").unwrap();
+        write_calibration_record(
+            data,
+            "org.openlanguage.ja-jp.reference",
+            Some("0.0.0-decoy"),
+            None,
+        );
+        let res = pronunciation_check_at(data, concatenated_obasan_attempt(data)).unwrap();
+        // Feedback still runs (guided), but the automatic label never rides a
+        // record whose binding drifted (docs/17 §97).
+        assert_eq!(res.mode, "guided");
+        assert_eq!(res.mode_reason.as_deref(), Some("model-version-drift"));
+    }
+
     fn dictation_vendor() -> Option<tempfile::TempDir> {
         let vendor = std::env::var("LTS_BENCH_VENDOR")
             .map(PathBuf::from)
