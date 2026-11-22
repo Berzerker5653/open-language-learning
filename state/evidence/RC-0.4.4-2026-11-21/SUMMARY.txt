@@ -1,0 +1,51 @@
+HEAD=8e54d27f551b7cc6097b78db272280359ba02971
+worktree=/home/hunter/.hermes/cache/scratch/lts-ja044/work (detached, built from main HEAD; status shows the hardlinked gitignored media only)
+dirty_paths=0
+--- manifests as shipped ---
+c640e7de6f1b5d6ae211ae472d179324fa5bea589082a32bbb41f63a28e7ccf0  languages/ja-JP/manifest.yaml
+version: "0.4.4"
+  content_license: "CC-BY-SA-4.0"
+c6271479cb1b01bc02bc4337ef0de7a3bc03dafb175a0e14bc4b7c1b6ad070af  languages/ru-RU/manifest.yaml
+version: "0.4.6"
+  content_license: "CC0-1.0"
+rc-ja-JP-validate                            exit=0
+rc-ja-JP-lint                                exit=0
+rc-ja-JP-test                                exit=0
+rc-ja-JP-audit-curriculum                    exit=0
+rc-ja-JP-audit-lexicon                       exit=0
+rc-ja-JP-audit-licenses                      exit=0
+rc-ja-JP-audit-sources                       exit=0
+rc-build-ja-JP                               exit=0
+archive: dist/rc-0.4.4/ja-jp-reference-0.4.4.lpk
+bytes=298271601
+637d94495eed1a543cd347a7f800c3ad85b5a37f301a741891f87555408ad7f1  dist/rc-0.4.4/ja-jp-reference-0.4.4.lpk
+rc-inspect-ja-JP                             exit=0
+archive members=5925 media_members=4935
+manifest_rows=4935 media_members=4935 delta=0
+words_sidecar_member=1
+--- ja-JP: PUBLISHED 0.4.3 (CATALOG-PINNED) -> CANDIDATE 0.4.4 (bytes + 12-hex hash + path) ---
+published 0.4.3 members = 5876   candidate 0.4.4 members = 5925
+identical (size+hash)   = 5352
+added in 0.4.4:
+100111 ad8dabe91878 grammar/concepts.jsonl
+1032 bbdd2af441c0 language/orthography.yaml
+103724 0d441a83b1fb media/ja.lex.advice2.youchuu.wav
+103724 7cd27e08ec96 media/ja.sent.b2reg-mono-ka-seigi.wav
+rc-install-ja-JP                             exit=0
+store layout: dist/rc-0.4.4/store-ja-JP/org.openlanguage.ja-jp.reference dist/rc-0.4.4/store-ja-JP/org.openlanguage.ja-jp.reference/0.4.4 dist/rc-0.4.4/store-ja-JP/org.openlanguage.ja-jp.reference/current 
+current pointer: 0.4.4
+media files in installed tree: 4935
+sidecar in installed tree: 1
+inst_root=dist/rc-0.4.4/store-ja-JP/org.openlanguage.ja-jp.reference/0.4.4
+installed content equality vs repo HEAD (md5 of tracked pack files):
+content files equal=988 mismatched=0
+installed reviews.jsonl rows: 3019
+installed media/manifest.jsonl rows: 4935
+rc-draft-catalog                             exit=0
+      "license": "CC-BY-SA-4.0",
+      "pack_id": "org.openlanguage.ja-jp.reference",
+      "sha256": "637d94495eed1a543cd347a7f800c3ad85b5a37f301a741891f87555408ad7f1",
+      "size_bytes": 298271601,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.4/ja-jp-reference-0.4.4.lpk",
+      "version": "0.4.4"
+RC_044_DONE

@@ -1,0 +1,2152 @@
+--- ja-JP: PUBLISHED 0.4.3 (CATALOG-PINNED) -> CANDIDATE 0.4.4 (bytes + 12-hex hash + path) ---
+published 0.4.3 members = 5876   candidate 0.4.4 members = 5925
+identical (size+hash)   = 5352
+added in 0.4.4:
+100111 ad8dabe91878 grammar/concepts.jsonl
+1032 bbdd2af441c0 language/orthography.yaml
+103724 0d441a83b1fb media/ja.lex.advice2.youchuu.wav
+103724 7cd27e08ec96 media/ja.sent.b2reg-mono-ka-seigi.wav
+10610 5be2cb77e44f lexicon/questions.jsonl
+107564 2230ed699dde media/ja.lex.tech.debisu.wav
+107564 2a31f87be279 media/ja.sent.eat-fruit.wav
+107564 3aad2a3fae00 media/ja.lex.rel.kokoro-bazuka.wav
+107564 4976f569e2b7 media/ja.lex.work.nobun.wav
+107564 5fec259fba57 media/ja.lex.tech2.saisei.wav
+107564 9b73b9ed4660 media/ja.lex.rel.omoide-no-tabi.wav
+109964 ea05585985da media/ja.lex.health3.junren.wav
+111404 5bb9a4016893 media/ja.lex.weather2.kijitsu.wav
+111404 67ee1ab45ca1 media/ja.sent.finish-work.wav
+111404 b667de00c164 media/ja.lex.society.riso.wav
+111404 ced71a23082c media/ja.sent.decision-essay.wav
+115244 3715aeafe081 media/ja.lex.health3.hanko.wav
+115244 8a9d062d5ca7 media/ja.sent.play-soccer.wav
+115244 8e744030fc1f media/ja.sent.on-sale.wav
+115244 c5b76c372813 media/ja.sent.interview-prep.wav
+115244 feb77a790895 media/ja.sent.pollution-problem.wav
+119084 fc3b6945ffd6 media/ja.sent.take-prevention.wav
+122924 4c4b01e0a99f media/ja.sent.b2reg-suiyoubi-ikaga.wav
+122924 6973dfdf8ac9 media/ja.sent.debate-basics.wav
+122924 80b642ee3323 media/ja.sent.keep-receipt.wav
+122924 b6bbcb9daa6f media/ja.lex.media.media-habits.wav
+12323 317f1ec64718 grammar/dependencies.yaml
+126764 11e60f0b61de media/ja.lex.health2.chouryou.wav
+126764 145485d945a9 media/ja.lex.admin.nyuusatsu.wav
+126764 2ed31687cf2a media/ja.sent.b2reg-soncho-okaeshi.wav
+126764 8fbd401f5cc1 media/ja.lex.body.fukkyuu.wav
+130604 0908b07eb749 media/ja.lex.edu2.chushi.wav
+130604 714b70898307 media/ja.sent.border-docs.wav
+130604 bc33be5a3bf4 media/ja.sent.apology.wav
+130604 fa6b4ec9075d media/ja.sent.diet-culture.wav
+134444 5eecde149b14 media/ja.sent.write-dialogue.wav
+134444 8738bc4280b3 media/ja.sent.water-issue.wav
+134444 9962901a26a5 media/ja.lex.debate.kika.wav
+138284 2fa3ff4ed22a media/ja.sent.use-evidence.wav
+138284 808b01b71ef0 media/ja.sent.health-check.wav
+138284 82a22985fda8 media/ja.sent.insurance-card.wav
+138284 8c32d0e37fae media/ja.sent.sleep-habit.wav
+138284 b1a550c92727 media/ja.sent.b2reg-jouhou-dake-dewa.wav
+142124 1dcc6b2536cb media/ja.lex.health2.tsuuka2.wav
+142124 451f53da4157 media/ja.sent.explain-grammar.wav
+142124 9e59cee5587a media/ja.sent.recovery-onsen.wav
+142124 bf399c2f527c media/ja.sent.call-police.wav
+1461 c640e7de6f1b manifest.yaml
+149804 d41207016e46 media/ja.sent.narrative-structure.wav
+149804 f8079f1ad333 media/ja.lex.culture.tsuuke.wav
+1512535 41f954341fa3 reviews.jsonl
+153644 2ce5e2c1f0b5 media/ja.sent.booking-change.wav
+153644 33c6d15f2921 media/ja.sent.ceremony-congrats.wav
+153644 85f15fa2a23a media/ja.lex.env2.nouhin.wav
+153644 ab75340419a0 media/ja.sent.network-message.wav
+15461 9062705457aa lexicon/health4.jsonl
+157484 7a4505779adb media/ja.sent.suspense-build.wav
+157484 94e29e2ea56e media/ja.sent.encouragement.wav
+165164 20a3f1de0cf6 media/ja.sent.b1-disc-ni-yori-chigaimasu.wav
+165164 5473983fdb8c media/ja.sent.fact-speculation.wav
+169004 1be468d7afe6 media/ja.sent.evidence-conclusion.wav
+169004 cc6f1380f701 media/ja.sent.b2reg-ba-nyuujou.wav
+172844 1a59e7c51eb7 media/ja.sent.describe-symptom.wav
+172844 6f171ff808d3 media/ja.sent.city-hall.wav
+172844 cfa57da6e878 media/ja.sent.personal-essay.wav
+176684 6f15e8694128 media/ja.sent.empathy.wav
+176684 b8491952427e media/ja.sent.b2reg-soncho-irassharimasu.wav
+180524 39686a1bf247 media/ja.sent.grievance-box.wav
+180524 8383a0bb7854 media/ja.sent.opinion-before-decision.wav
+180524 c7b8b5692bbf media/ja.sent.write-ending.wav
+188204 983ef78106fc media/ja.sent.gentle-persuade.wav
+188204 b0e427bfe55a media/ja.sent.b2reg-mono-da-shijou.wav
+188204 d5cb9f435623 media/ja.sent.b2reg-houhou-ni-yotte.wav
+192044 0475aa5037c7 media/ja.sent.news-morning.wav
+192044 408a1374a146 media/ja.sent.pride-craft.wav
+192044 d413e9bfbea7 media/ja.sent.b2reg-ashita-itsudemo-gozaimasu.wav
+19244 77c231c5de51 media/ja.lex.work2.keiri.wav
+195884 1162df625608 media/ja.sent.b2reg-shinjitsu-toiu-mono.wav
+195884 797fe9987992 media/ja.sent.library-card.wav
+203564 41d30867021d media/ja.sent.b1-repair-yasashii-nihongo-de.wav
+207404 f2051093952b media/ja.sent.craft-washi.wav
+211244 803bb05a9f86 media/ja.sent.essay-observation.wav
+211244 e105246657e1 media/ja.sent.food-waste.wav
+215084 44e1a0a8140f media/ja.sent.guided-tour.wav
+215564 e06030576572 media/ja.sent.union-talks.wav
+218924 2e84a36a9261 media/ja.sent.tech-problem-fix.wav
+218924 5ede3038a028 media/ja.sent.rating-system.wav
+218924 6892715a5e9d media/ja.sent.b2reg-anou-mouichido-onegai.wav
+222764 4acd141d7d7e media/ja.sent.quarrel-reconcile.wav
+222764 a143aae3a44d media/ja.sent.debate-point.wav
+222764 a826fa03cd8a media/ja.sent.b1-news-hatsuden-tomattemasu.wav
+22317 9390909e36eb lexicon/tech.jsonl
+2257 f42461d1093b curriculum/units/834-technology-revision.yaml
+226604 8c00f8a92f3e media/ja.sent.b1-repair-iimashita-to-iu-imika.wav
+226604 acc188c3b037 media/ja.sent.b1-repair-tsumari-iinchigaindesuka.wav
+226604 b6e1bba813b1 media/ja.sent.topic-choice.wav
+2284 0a09e6bce0b3 curriculum/units/837-environment-revision.yaml
+2285 88814beec2e4 curriculum/units/836-society-rules-revision.yaml
+2288 469a2e0fbee2 curriculum/units/831-b1j-media-news-revision.yaml
+2297 e432dd86b8ce curriculum/units/840-advice-opinion-revision.yaml
+2299 648cc5b26d3d curriculum/units/838-travel-extended-revision.yaml
+2302 f4d5a2270e1a curriculum/units/841-comparison-debate-revision.yaml
+230444 7cc3fb857d00 media/ja.sent.b1-repair-osshatte-itadakasu.wav
+230444 f9530fb9f364 media/ja.sent.itinerary-plan.wav
+2305 81277a661daa curriculum/units/842-health-wellness-revision.yaml
+2313 3ebc889d7e57 curriculum/units/835-culture-tradition-revision.yaml
+2326 4018dd81223f curriculum/units/833-education-academic-revision.yaml
+234284 2948af31c1c4 media/ja.sent.senpai-help.wav
+234284 aa29853ab7c3 media/ja.sent.news-discuss.wav
+234284 d35c8ef58d5a media/ja.sent.b2reg-wake-da-saiban.wav
+234284 faada234ee2e media/ja.sent.support-reception.wav
+2343 59efae060dec curriculum/units/832-b1j-storytelling-revision.yaml
+2357 8bb5166dc1c5 curriculum/units/839-emotions-personality-revision.yaml
+241964 183ca2f69171 media/ja.sent.b1-disc-keredo-wakarimasendeshita.wav
+241964 99c7478d1a3e media/ja.sent.b1-repair-kikoemasendeshita.wav
+241964 a53d69688308 media/ja.sent.shrine-visit.wav
+245804 a6195c85615d media/ja.sent.b1-repair-ukagatte-mo-iidesuka.wav
+2476 69d07af8b58e curriculum/units/235-work-professional-revision.yaml
+2487 244bce67752d curriculum/units/826-b1j-news-reading.yaml
+249644 b8ef6c249069 media/ja.sent.compromise-write.wav
+25108 dfd142cf33f1 assessments/definitions.jsonl
+253484 a2c1bc1f6525 media/ja.sent.polite-disagree.wav
+25562 940be84883b4 lexicon/env2.jsonl
+25762 3f399519ecf4 lexicon/emotion2.jsonl
+25826 9f78833acdf7 lexicon/debate2.jsonl
+26045 fef81e876b59 lexicon/travel.jsonl
+26101 fe577ae8d949 lexicon/media2.jsonl
+26124 009cd19ce818 lexicon/health3.jsonl
+26309 165cc6b2b862 lexicon/culture2.jsonl
+26460 596e503407d3 lexicon/society.jsonl
+2651 9e84adb6fef7 curriculum/units/827-b2j-register-polite-phone.yaml
+26526 9a50119d84cb lexicon/story.jsonl
+268844 555a515a7121 media/ja.sent.voting-candidate.wav
+268844 85014ce48f13 media/ja.sent.b1-disc-mazu-sorekara.wav
+26924 54c65d0b0881 media/ja.lex.rel.omoide-no-uta.wav
+26924 a6bd44181b03 media/ja.lex.culture.shaji.wav
+2707 ad12692b90be curriculum/units/829-b2j-register-casual-opinions.yaml
+2708 b2759aa80781 curriculum/units/828-b2j-register-formal-writing.yaml
+27156 5d09301fa9e9 lexicon/advice.jsonl
+276524 7b5400f92328 media/ja.sent.b1-news-genjyou-tenkyuu.wav
+276524 a0a0f63d2013 media/ja.sent.pros-cons.wav
+284204 8abbefbe637a media/ja.sent.community-worry.wav
+2855 557b4bcbfe24 curriculum/units/825-b1j-discourse-connect.yaml
+2875 f46b0a230710 curriculum/units/830-b2j-register-honorific-office.yaml
+2882 e2034fce81ec curriculum/units/250-reading-news.yaml
+2910 ed2ac23ad49a curriculum/units/310-weather-versus-climate.yaml
+2943 17118a4b867a curriculum/units/355-giving-advice.yaml
+295724 46d411193ef6 media/ja.sent.device-daily.wav
+2974 74d1130599c7 curriculum/units/370-product-reviews.yaml
+2987 68dc84b8ca64 curriculum/units/265-daily-devices.yaml
+3026 3689da8566ff curriculum/units/237-lecture-notes.yaml
+3034 29ce3a9aa5a1 curriculum/units/400-wellness-routines.yaml
+3039 9f4bf304e448 curriculum/units/356-soft-advice.yaml
+3041 531499521c6b curriculum/units/396-polite-humor.yaml
+3041 80d441fbe481 curriculum/units/385-narrative-structure.yaml
+3045 2c8878d6aed0 curriculum/units/295-everyday-laws.yaml
+3046 8cd5548c693b curriculum/units/235-university-system.yaml
+3053 fd18ea0c2c6e curriculum/units/322-food-waste.yaml
+3057 5876e71612d4 curriculum/units/272-digital-habits.yaml
+3063 7523a1bea3f6 curriculum/units/264-media-ethics.yaml
+3064 1f42baff2c82 curriculum/units/220-job-interview-prep.yaml
+3068 800fb2c1bf18 curriculum/units/312-energy-choices.yaml
+30764 15878a65b5c3 media/ja.lex.weather2.naru.wav
+30764 7ad58f1c44ec media/ja.lex.culture.denkyou.wav
+30764 808e8fd93faa media/ja.lex.travel2.keihaku.wav
+30764 a897d09aaa9d media/ja.lex.env2.bousai-houzu.wav
+3080 1d8ae631f827 curriculum/units/395-anecdote-telling.yaml
+3083 43550b00f622 curriculum/units/325-itinerary-planning.yaml
+3084 bb94856c1e07 curriculum/units/313-reducing-waste.yaml
+3087 d1dcada50255 curriculum/units/296-rights-and-duties.yaml
+3089 6c26d85ea574 curriculum/units/273-comparing-gadgets.yaml
+3090 225bb5386159 curriculum/units/251-headline-style.yaml
+3090 412529db32fd curriculum/units/364-expressing-hope.yaml
+3090 4d4d86a5b1eb curriculum/units/368-decision-talk.yaml
+3100 59dc9a42b8a9 curriculum/units/256-checking-misinformation.yaml
+3100 f0297aa0f48a curriculum/units/262-current-events.yaml
+3103 32a03aad386d curriculum/units/398-story-retelling.yaml
+3104 4fa7affcf68a curriculum/units/397-folktale-reading.yaml
+3107 19d738c39773 curriculum/units/246-exam-strategy.yaml
+3107 222fd2e660ea curriculum/units/412-diet-culture.yaml
+3107 bc7de1eb50cf curriculum/units/387-plot-sequencing.yaml
+3108 659daa68db70 curriculum/units/275-coding-basics.yaml
+3108 968a6b8d30e1 curriculum/units/298-public-ethics.yaml
+3111 c545979293e4 curriculum/units/318-sustainable-shopping.yaml
+3112 8700983ffbd8 curriculum/units/376-using-evidence.yaml
+3113 0f5ae7d18a04 curriculum/units/259-broadcast-style.yaml
+3113 61f8ad5ae73d curriculum/units/319-environmental-policy.yaml
+3115 939d02de1f94 curriculum/units/230-team-conflict.yaml
+3116 72b262ac8a78 curriculum/units/245-academic-email.yaml
+3116 e9edc5da10a3 curriculum/units/394-story-revision.yaml
+3118 08bc3f0a7f5e curriculum/units/369-reflection-essay.yaml
+3118 621c2ffb7673 curriculum/units/278-technology-change.yaml
+3118 c7b72d87f39a curriculum/units/378-conceding-points.yaml
+3120 971048a7ddd5 curriculum/units/279-digital-detox.yaml
+3120 a8f290f7af8c curriculum/units/327-travel-essay.yaml
+3121 87e238fd5d11 curriculum/units/357-opinion-structure.yaml
+3121 8bfeddfe882b curriculum/units/321-water-issues.yaml
+3123 81e1563a9976 curriculum/units/384-decision-essay.yaml
+3124 b920ce86d56e curriculum/units/406-habit-change.yaml
+3125 1b15761cb3f2 curriculum/units/375-debate-basics.yaml
+3125 66528d46381a curriculum/units/276-smart-home.yaml
+3125 d586c08fe0ae curriculum/units/239-citation-basics.yaml
+3127 3f04e0914381 curriculum/units/363-expressing-regret.yaml
+3127 8f2cff4a47b9 curriculum/units/380-review-posts.yaml
+3128 aa490609a9e5 curriculum/units/258-photo-captions.yaml
+3128 ba6888dbedd7 curriculum/units/240-choosing-a-topic.yaml
+3129 0f245e0c4b07 curriculum/units/414-health-debate.yaml
+3130 cd483d479602 curriculum/units/314-eco-transport.yaml
+3131 64b440ec2c4a curriculum/units/269-online-services.yaml
+3132 3e722767ad20 curriculum/units/410-care-and-aging.yaml
+3134 d60515e46fc2 curriculum/units/330-travel-safety.yaml
+3141 231ab904da1f curriculum/units/280-explaining-customs.yaml
+3144 342469374b05 curriculum/units/268-software-help.yaml
+3144 c86c916bed3d curriculum/units/238-seminar-discussion.yaml
+3145 f90b4319c446 curriculum/units/407-quitting-habits.yaml
+3148 bbc857abd8f1 curriculum/units/349-coping-habits.yaml
+3148 cc4e6eaaadfd curriculum/units/261-responding-to-news.yaml
+3148 d8682cd09793 curriculum/units/255-social-media-use.yaml
+3149 df0dd7212053 curriculum/units/393-writing-endings.yaml
+3150 5e007922b9b4 curriculum/units/270-tech-problems.yaml
+3150 c029bc40bd40 curriculum/units/333-guided-tours.yaml
+3151 5a80220426f2 curriculum/units/328-hosting-interaction.yaml
+3154 07e20c2cd667 curriculum/units/392-perspective-shifts.yaml
+3154 8afda5fe92e6 curriculum/units/267-privacy-settings.yaml
+3155 a937e96dcb73 curriculum/units/254-discussing-news.yaml
+3156 11428ed10de5 curriculum/units/382-budget-comparison.yaml
+3157 30e55f29593f curriculum/units/358-partial-agreement.yaml
+3157 bfcf412c6e04 curriculum/units/366-stating-priorities.yaml
+3159 a9620e145f12 curriculum/units/391-writing-dialogue.yaml
+3160 c2c9e7f198db curriculum/units/311-recycling-systems.yaml
+3161 595caeceef1a curriculum/units/241-essay-structure.yaml
+3163 6d793b339b9e curriculum/units/253-article-summary.yaml
+3164 01e736c9ec2a curriculum/units/824-b1j-repair-workplace.yaml
+3165 a231536451ab curriculum/units/337-route-changes.yaml
+3166 5dcf436fc87e curriculum/units/236-application-essay.yaml
+3166 e88c15d92183 curriculum/units/401-sleep-habits.yaml
+3167 47c73e090bbc curriculum/units/334-travel-companions.yaml
+3167 d4d0713aac2a curriculum/units/289-cultural-pride.yaml
+3169 37a785d49016 curriculum/units/413-wellbeing-apps.yaml
+3169 ae8b9400af3a curriculum/units/324-personal-footprint.yaml
+3172 388670a130ba curriculum/units/271-ai-tool-talk.yaml
+3172 b7be6cff5a0b curriculum/units/316-wildlife-discussion.yaml
+3173 3c421d5dcce7 curriculum/units/377-counter-arguments.yaml
+3173 46de2e691e71 curriculum/units/399-personal-essay.yaml
+3173 a8b7ea215cba curriculum/units/308-polite-protest.yaml
+3176 1a1c6438786d curriculum/units/232-presentation-structure.yaml
+3176 ab0a4326e21b curriculum/units/266-internet-safety.yaml
+3177 5c769de1e0ad curriculum/units/345-sincere-apology.yaml
+3179 dda4300fd1d8 curriculum/units/263-class-debate.yaml
+3181 52c559c21b0b curriculum/units/317-pollution-problems.yaml
+3183 d370e34be2fc curriculum/units/403-exercise-planning.yaml
+3183 f1a2729cc31c curriculum/units/371-service-comparison.yaml
+3184 da4cd7b454ce curriculum/units/338-travel-reflection.yaml
+3185 0a034733be76 curriculum/units/288-tradition-change.yaml
+3186 486f0d8ff50e curriculum/units/248-academic-presentation.yaml
+3189 00d995a67d75 curriculum/units/226-giving-feedback.yaml
+3191 15f50bd1b4cd curriculum/units/386-background-setting.yaml
+3192 8b3d50d5f881 curriculum/units/346-deepened-gratitude.yaml
+3192 b3a25eed4c95 curriculum/units/372-pros-and-cons.yaml
+3194 35ce0a55eff7 curriculum/units/352-emotional-advice.yaml
+3195 cb35066e2d39 curriculum/units/373-explaining-choices.yaml
+3196 b2ec01e54b33 curriculum/units/306-urban-versus-rural.yaml
+3196 e7e1432f4908 curriculum/units/344-conflict-feelings.yaml
+3198 4edba8d481cc curriculum/units/404-stress-management.yaml
+3199 7a861e7aeb47 curriculum/units/379-writing-conclusions.yaml
+3199 a3af608cfb58 curriculum/units/402-balanced-nutrition.yaml
+3200 d1326c993d16 curriculum/units/359-polite-disagreement.yaml
+3200 debd84b5f978 curriculum/units/252-opinion-versus-fact.yaml
+3201 4faae3f446c5 curriculum/units/381-rating-systems.yaml
+3201 5f776939c7af curriculum/units/383-travel-comparison.yaml
+3201 78e2b6aa9e87 curriculum/units/277-online-communities.yaml
+3202 bf2c2c6f6a83 curriculum/units/354-self-reflection.yaml
+3203 be4873798068 curriculum/units/408-medical-information.yaml
+3205 10a151566e6b curriculum/units/315-nature-protection.yaml
+3205 7aa5dc1d59cb curriculum/units/326-booking-problems.yaml
+3206 01a999db0c66 curriculum/units/367-compromise-writing.yaml
+3206 01c988680146 curriculum/units/320-disaster-preparation.yaml
+3206 35e250349bf8 curriculum/units/242-argument-paragraphs.yaml
+3207 4da816382d07 curriculum/units/374-ranking-with-reasons.yaml
+3208 66881f75e25d curriculum/units/365-explaining-preference.yaml
+3209 477e01f7818c curriculum/units/247-library-research.yaml
+3210 2351fbcc1f91 curriculum/units/348-stress-discussion.yaml
+3210 96ab3fb5d68f curriculum/units/225-deadline-negotiation.yaml
+3212 ddd98cdd1b99 curriculum/units/329-culture-shock.yaml
+3213 8522cceddb84 curriculum/units/285-culture-comparison.yaml
+3214 552800dd3770 curriculum/units/249-degree-conversations.yaml
+3214 a4705a45b117 curriculum/units/274-tech-support-visit.yaml
+3214 b4fda1f2c116 curriculum/units/299-volunteering.yaml
+3214 e91b6dc53e21 curriculum/units/339-postcard-writing.yaml
+3219 2cba8ceb1325 curriculum/units/323-green-cities.yaml
+3220 24e2931df384 curriculum/units/332-homestay-letters.yaml
+3220 434e03dcec79 curriculum/units/257-media-habits.yaml
+3220 73834a1bcbfa curriculum/units/221-writing-a-resume.yaml
+3221 00b7b148750d curriculum/units/287-historical-sites.yaml
+3221 aa7ad2665ce3 curriculum/units/340-personality-description.yaml
+3224 90841272ef47 curriculum/units/233-networking-messages.yaml
+3224 9e33143ae2a6 curriculum/units/227-accepting-feedback.yaml
+3224 f7f0f388a37e curriculum/units/361-suggestion-forms.yaml
+3225 32912496c1ea curriculum/units/388-character-description.yaml
+3225 6ada8fe376b4 curriculum/units/222-workplace-communication.yaml
+3226 a2bc64e0862e curriculum/units/411-fitness-club-life.yaml
+3227 b5f523324e19 curriculum/units/224-project-reports.yaml
+3228 44f17546e1cb curriculum/units/228-career-change-plans.yaml
+3231 2f45e2f06ba4 curriculum/units/243-study-abroad-plans.yaml
+3231 aafd8427ffc8 curriculum/units/290-host-and-guest.yaml
+3233 c70e4969af44 curriculum/units/360-gentle-persuasion.yaml
+3238 597053c41caa curriculum/units/291-gift-customs.yaml
+3238 c3484ee01b07 curriculum/units/389-setting-description.yaml
+3238 e8177f753829 curriculum/units/282-traditional-crafts.yaml
+3243 fa97e5d695bd curriculum/units/297-neighborhood-rules.yaml
+3245 60d8c6f98971 curriculum/units/286-museum-exhibits.yaml
+3246 d2adf277af73 curriculum/units/336-travel-budgeting.yaml
+3247 39316d0577d2 curriculum/units/331-border-documentation.yaml
+3255 a686d248d533 curriculum/units/304-social-issues.yaml
+3255 d462787e9118 curriculum/units/234-promotion-conversations.yaml
+3256 702be554d433 curriculum/units/353-reconciliation.yaml
+3258 39a90575b6bf curriculum/units/281-festival-details.yaml
+3259 4e397eaca410 curriculum/units/283-etiquette-rules.yaml
+3260 18248c313d4f curriculum/units/347-encouragement-words.yaml
+3260 1d4c7f51f7de curriculum/units/244-scholarship-writing.yaml
+3262 8e4a86544ac9 curriculum/units/343-expressing-empathy.yaml
+3262 d7c6461f025f curriculum/units/409-vaccination-discussion.yaml
+3263 320081f5ff7e curriculum/units/302-local-government.yaml
+3263 56896b05b390 curriculum/units/405-mental-health-talk.yaml
+3266 b41a84ac0b6a curriculum/units/390-building-suspense.yaml
+3267 75f80a0d2854 curriculum/units/303-voting-information.yaml
+3270 134f5154a601 curriculum/units/351-emotional-story.yaml
+3270 15fdc724530d curriculum/units/362-polite-warnings.yaml
+3273 abbab48471aa curriculum/units/300-community-problems.yaml
+3273 f2cb1b69251d curriculum/units/231-customer-escalation.yaml
+3275 e1aca2537427 curriculum/units/335-lost-belongings.yaml
+3277 e6a8e5734289 curriculum/units/229-professional-email.yaml
+3278 363f4a35cf52 curriculum/units/307-generational-difference.yaml
+3281 2f20c8b7d8ff curriculum/units/223-meeting-opinions.yaml
+3292 e9280f874164 curriculum/units/341-emotion-vocabulary.yaml
+3295 9c5a7e1cebe5 curriculum/units/294-culture-essay.yaml
+3308 ed4587541447 curriculum/units/305-inequality-discussion.yaml
+3309 f8fadb730040 curriculum/units/292-polite-taboos.yaml
+3316 154d923423a4 curriculum/units/260-reading-editorials.yaml
+3321 f05c12535293 curriculum/units/301-writing-petitions.yaml
+3343 afe4c1bdf0c7 curriculum/units/309-civic-participation.yaml
+3348 c8673f285f8a curriculum/units/284-regional-cultures.yaml
+3351 00c3079c5d0b curriculum/units/342-mood-conversation.yaml
+3351 27796516c594 curriculum/units/293-attending-ceremonies.yaml
+3370 3b1ab7c3ad74 curriculum/units/350-temperament-comparison.yaml
+34604 2c6d2a98ebf9 media/ja.lex.rel.kyoudai-shita.wav
+34604 4948eda56893 media/ja.lex.media.hassha.wav
+34604 61ddb0e46e8f media/ja.lex.shopping.keshi.wav
+34604 7cac812886c5 media/ja.lex.ent.taimu.wav
+34604 985065aa42d6 media/ja.lex.advice.ato.wav
+34604 b930ed70ee21 media/ja.lex.body.kaffa.wav
+34604 c96c332ff150 media/ja.lex.society2.houchi.wav
+34604 f9129c0fb531 media/ja.lex.admin.taishu-kin.wav
+34604 f9b9a776fede media/ja.lex.tech2.kikan.wav
+3468 c37e5f4cf657 curriculum/units/823-b1j-repair-clarify.yaml
+3545130 bcc8223ea70e media/manifest.jsonl
+368684 cfe4ca73fef8 media/ja.sent.energy-wind.wav
+37246 248555968001 orthography/hiragana.jsonl
+380204 78663c571b5b media/ja.sent.b1-disc-kara-maeniawanakatta.wav
+38444 104be5fdfbc6 media/ja.lex.ent.joju.wav
+38444 1ee88a62ecca media/ja.lex.health3.kyoubu.wav
+38444 5fc82cd763bc media/ja.lex.media.toron.wav
+38444 6ebd343271f4 media/ja.lex.travel.shin.wav
+38444 86b958b84647 media/ja.lex.rel.omoide-no-kioku.wav
+38444 a1e1f64ac208 media/ja.lex.debate.kento.wav
+38444 dd85dbeb2fd2 media/ja.lex.food.tsukemono.wav
+421402 4b9ef0a68853 sentences/entries.jsonl
+42284 089699cd50bc media/ja.lex.shopping.fukuban.wav
+42284 098280385d26 media/ja.lex.story2.kikkai.wav
+42284 26fa2281ed83 media/ja.lex.health2.seka.wav
+42284 463280fc59b2 media/ja.lex.body.taisha.wav
+42284 690a76ebdd57 media/ja.lex.story2.dokugeki.wav
+42284 86901a169c06 media/ja.lex.advice.shouko.wav
+42284 875a24165ffe media/ja.lex.sports.kessan.wav
+42284 9864864634bd media/ja.lex.media2.taaron.wav
+42284 9f199f8faea7 media/ja.lex.travel.nyukan.wav
+42284 a0c95aa1994f media/ja.lex.edu.tsuujou.wav
+42284 cc97cef152a6 media/ja.lex.emotion.shoujin.wav
+42284 f4aa75ed6468 media/ja.lex.media2.kaiken.wav
+4230 827921000244 activities/scenarios/b2-register-client-call.yaml
+46124 224bd5c125c4 media/ja.lex.health3.taikyu2.wav
+46124 3016e5fad919 media/ja.lex.advice2.tetsudo.wav
+46124 345a5712f84d media/ja.lex.env.kiko.wav
+46124 45d4ab7daa91 media/ja.lex.edu2.kenta.wav
+46124 5a07cb508d9d media/ja.lex.edu2.denja.wav
+46124 5d2238ce4785 media/ja.lex.media.kaga.wav
+46124 64e19488cad1 media/ja.lex.tech2.shinko.wav
+46124 75686cf593cc media/ja.lex.tech2.kosei.wav
+46124 760ed5a92e51 media/ja.lex.health3.ureba.wav
+46124 7dfa29c80861 media/ja.lex.edu2.ryuji.wav
+46124 86d73a512ea5 media/ja.lex.edu.wakamatsu.wav
+46124 8aede6cf8f01 media/ja.lex.debate2.akari2.wav
+46124 a6b2852a8a4c media/ja.lex.emotion.tenko.wav
+46124 a8e523d38ba4 media/ja.lex.rel.tsuui.wav
+46124 c2b98616d10b media/ja.lex.culture2.shugo.wav
+46124 db5114ea5639 media/ja.lex.edu.kounai.wav
+46124 dd9192a835b5 media/ja.lex.tech2.forumu.wav
+46124 f63d3bde4e13 media/ja.lex.media2.ronsa.wav
+48762 5946aaa829fb lexicon/sports.jsonl
+49964 1b049095e5ca media/ja.lex.story2.fukkyaku.wav
+49964 1ede9a43a604 media/ja.lex.tech2.onkyou.wav
+49964 2ae51afad982 media/ja.lex.travel2.kyoka-sho.wav
+49964 43552cc3c8cd media/ja.lex.travel2.ryouga.wav
+49964 46402015d6ed media/ja.lex.media.hadan.wav
+49964 614d5b506db9 media/ja.lex.travel.taihen.wav
+49964 63b12b523172 media/ja.lex.leisure.tabehou.wav
+49964 a8100069d822 media/ja.lex.edu2.sentai.wav
+49964 aee6952fbea6 media/ja.lex.culture.teaji.wav
+49964 b8c3c79bde3f media/ja.lex.rel.omoide-bako.wav
+49964 d9418aba0db6 media/ja.lex.emotion2.kibune.wav
+49964 ddb26e2907bb media/ja.lex.rel.omoide-no-hito.wav
+49964 ddbdfee967d7 media/ja.lex.debate2.kyara.wav
+49964 e73faf0ce455 media/ja.lex.admin.mibungou.wav
+49964 e775f6efe6d5 media/ja.lex.work2.shoubei.wav
+49964 fc664ad1eb1e media/ja.lex.society2.kensei.wav
+50393 79f9dba66807 lexicon/shopping.jsonl
+50563 d28e4c5f0f0f lexicon/entertainment.jsonl
+50577 61a03bb5b250 lexicon/admin.jsonl
+50656 6d4d11021439 lexicon/leisure.jsonl
+510273 1b33419a94f6 media/words.jsonl
+51436 fd2908b08030 lexicon/media.jsonl
+51555 a60c9151c333 lexicon/edu2.jsonl
+51637 362a979a022e lexicon/env.jsonl
+51916 e3252fb9c086 lexicon/tech2.jsonl
+51950 d24cde1cf246 lexicon/food.jsonl
+51981 1fb6d80f7787 lexicon/body.jsonl
+52166 a7db5e7b237e lexicon/work.jsonl
+52176 3e90122ede20 lexicon/relationships.jsonl
+52340 d5a1b439b2d9 lexicon/health2.jsonl
+52479 58fa3f6b1968 lexicon/emotion.jsonl
+52568 d90b469d083a lexicon/travel2.jsonl
+52730 241a531a1838 lexicon/debate.jsonl
+52975 408b4dbd5b75 lexicon/story2.jsonl
+53080 172eb0f72bb0 lexicon/work2.jsonl
+53242 a58fd9017dde lexicon/edu.jsonl
+53527 5d842962e469 lexicon/city.jsonl
+53723 8b60184bf420 lexicon/weather2.jsonl
+53804 06050e55d281 media/ja.lex.body.junyou.wav
+53804 08eae34fdc61 media/ja.lex.edu2.yakku.wav
+53804 0e1e81d5307c media/ja.lex.edu.kachou.wav
+53804 0e9bc6dcef21 media/ja.lex.health2.junou.wav
+53804 14711e832523 media/ja.lex.edu2.mouhibiki.wav
+53804 1a61868e86de media/ja.lex.health2.seikatsu2.wav
+53804 1ba8c84c6b37 media/ja.lex.travel.henkyo.wav
+53804 2b9e1c593d75 media/ja.lex.rel.kazoku-no-uni.wav
+53804 398d3e397dcb media/ja.lex.edu2.rissho.wav
+53804 537b1485654e media/ja.lex.admin.jushou-todoke.wav
+53804 5bfa0082b071 media/ja.lex.weather2.naga.wav
+53804 6a03d1fe3352 media/ja.lex.story2.yokai.wav
+53804 779aed8fbac9 media/ja.lex.rel.yori-modosu.wav
+53804 781f584625ea media/ja.lex.edu2.yakuseki.wav
+53804 7dc76c7fa79c media/ja.lex.edu.shokuba-ryou.wav
+53804 8d9fe52a56de media/ja.lex.work.taishita.wav
+53804 9f6af08ef750 media/ja.lex.advice.hatsu.wav
+53804 bade194e9c38 media/ja.lex.rel.aishi.wav
+53804 be5b4fe26585 media/ja.lex.leisure.ryoushuu.wav
+53804 e155cefb4ba9 media/ja.lex.society.hatsuyaku.wav
+53804 f247ce45b08a media/ja.lex.culture.koge.wav
+53804 f3f129361066 media/ja.lex.env2.shinan.wav
+53804 f960c77b6e97 media/ja.lex.env.eco-kuruma.wav
+53985 b25f71e01eb1 lexicon/culture.jsonl
+54321 c98d60ca93a5 lexicon/society2.jsonl
+54548 5a3f1f62a8c4 lexicon/advice2.jsonl
+55795 04f60c0c9488 lexicon/transport.jsonl
+57644 047ddd1dabbc media/ja.lex.society2.chuga.wav
+57644 1ddec52473c8 media/ja.lex.health2.koku2.wav
+57644 3bf36b32f5e7 media/ja.lex.city.kanen.wav
+57644 435e21c44c23 media/ja.lex.edu2.kronji.wav
+57644 62b595c6a965 media/ja.lex.emotion.akui.wav
+57644 9b9986b35b0f media/ja.lex.admin.kessaku.wav
+57644 b2f0dad560ca media/ja.lex.media2.sesaku.wav
+57644 b364176a0458 media/ja.lex.tech2.koui.wav
+57644 d567f3ff2a4a media/ja.lex.travel2.hikou-min.wav
+57644 f9fda290f058 media/ja.lex.media.fukkyuu-saigai.wav
+61484 015edaa75337 media/ja.lex.tech2.koi.wav
+61484 0422f465a852 media/ja.lex.health2.kinyu.wav
+61484 44fc74017483 media/ja.lex.work2.kouchiku.wav
+61484 496e9d48af13 media/ja.lex.story.keimatsu.wav
+61484 794c40a7c514 media/ja.lex.env.ene.wav
+61484 a2d42010222d media/ja.lex.health3.uebi.wav
+61484 a3f166b62831 media/ja.lex.emotion.shougi.wav
+61484 bb74dc32f1b0 media/ja.lex.rel.kyoudai-ue.wav
+61484 bde5a43e3667 media/ja.lex.sports.taekwondo.wav
+61484 bffc2a7eea1b media/ja.lex.emotion.shouki.wav
+61484 d9995ed8311c media/ja.lex.media2.kouchou.wav
+61484 e3acf093096b media/ja.lex.env2.resucha.wav
+62054 aae37591f41c curriculum/goals.yaml
+65324 0d6aaf7a6077 media/ja.lex.edu.kai-ken.wav
+65324 2793298a76af media/ja.lex.travel2.tenkan.wav
+65324 2e56b94b3659 media/ja.lex.sports.onsen-tou.wav
+65324 2fc80fb23ee1 media/ja.lex.travel2.nyuuryoku.wav
+65324 345153ce71e0 media/ja.lex.edu.kaihen.wav
+65324 362a1f6e8271 media/ja.lex.health3.choushin.wav
+65324 5528fdc732b8 media/ja.lex.rel.omoide-no-hi.wav
+65324 583de275f988 media/ja.lex.culture2.kousatsu.wav
+65324 730b7937a9d2 media/ja.lex.debate.shojitsu.wav
+65324 9ff9c69396e6 media/ja.lex.emotion.ousetsu.wav
+65324 a93935f9f817 media/ja.lex.health2.jousho.wav
+65324 b512f8c55833 media/ja.lex.emotion.mottai.wav
+65324 bb1a8da3460c media/ja.lex.edu.denwa-ban.wav
+65324 ca362f0e752d media/ja.lex.work2.tanpin.wav
+65324 d489df904f52 media/ja.lex.env.puratsu.wav
+65324 d7761892e467 media/ja.lex.media.head.wav
+65324 df418ef9de32 media/ja.lex.health3.taizen2.wav
+65324 ed292d4bf65d media/ja.lex.debate.fusan.wav
+65324 fd86a19bfd03 media/ja.lex.env.seita.wav
+69164 1ae101e0bf7b media/ja.lex.food.houshi.wav
+69164 280c2df0454e media/ja.lex.society2.kyuugyou.wav
+69164 34e385f1db5b media/ja.lex.culture2.kansen.wav
+69164 4f8c4930ead6 media/ja.lex.weather2.yukidoke.wav
+69164 94b1cb9dc490 media/ja.lex.edu2.fuyuujunou.wav
+69164 be0f66cee2e5 media/ja.lex.rel.obaa-chan.wav
+69164 c6fe380b0cae media/ja.lex.travel.itinerari.wav
+69164 dcb56bf15561 media/ja.lex.health2.kessha.wav
+69164 dd43fe4b9165 media/ja.lex.advice2.kokuhan.wav
+69164 defdf92c83d0 media/ja.lex.edu2.senkyuu.wav
+69164 e0978fcd6c0b media/ja.lex.sports.joutairyoku.wav
+69164 e0e59b884204 media/ja.lex.work.hakkou.wav
+69164 e14a659ccf81 media/ja.lex.edu.jugyou-ryaku.wav
+69164 e3b26c7ee49d media/ja.lex.tech2.hanare.wav
+69164 e748df42f33c media/ja.lex.edu2.kenji.wav
+69164 edad3ff6e9e1 media/ja.lex.travel2.gaido.wav
+73004 066408f000c4 media/ja.lex.shopping.mon.wav
+73004 2055ee0aa7f6 media/ja.lex.env.ene-ki.wav
+73004 3cb274016006 media/ja.lex.debate.koryo.wav
+73004 5541bf33fd68 media/ja.lex.media.maruke.wav
+73004 6146ffc55caf media/ja.lex.env.seisi.wav
+73004 6b6dda17cefb media/ja.lex.society2.akusei.wav
+73004 85ba6a2df494 media/ja.lex.rel.omoide-no-ki.wav
+73004 98be6b6f611b media/ja.lex.edu2.ronshu.wav
+73004 9ce6e4eb8b09 media/ja.lex.debate.hifun.wav
+73004 df3d5b446a1d media/ja.lex.travel2.engaki.wav
+73004 f7d38e468b91 media/ja.lex.rel.omoide-no-sora.wav
+76844 3b0367b26dad media/ja.lex.edu2.zensho.wav
+76844 6a98bc58d6e6 media/ja.lex.travel2.keikou.wav
+76844 9407d9b1136a media/ja.lex.society2.hosei.wav
+76844 b2a28a97b2c8 media/ja.lex.work.shigyou.wav
+76844 bd84214d599f media/ja.lex.rel.jijou-betsu.wav
+7945 bcd946ec61bd sentences/b2-register-2026-11-20.jsonl
+80684 27f6abcbeaf1 media/ja.lex.env2.yokei.wav
+8315 c5e9044d9cfb sentences/b1-independent-2026-11-20.jsonl
+84524 0982bdea0f0b media/ja.lex.health2.fuka.wav
+84524 2397b5362a68 media/ja.sent.address-registration.wav
+84524 3bc5b3e63126 media/ja.lex.work2.roushi.wav
+84524 54c6db2b8fe9 media/ja.lex.advice2.inoko2.wav
+84524 6a67cdf9dce2 media/ja.lex.story2.hairon.wav
+84524 763dcb6de98e media/ja.lex.leisure.basuketta.wav
+84524 9248badb6790 media/ja.lex.admin.kin-yuu.wav
+88364 08bed213e801 media/ja.lex.society2.yuuutsu.wav
+88364 0c491705c429 media/ja.lex.edu2.kashu-sho.wav
+88364 181da302e667 media/ja.lex.culture.shinko-zai.wav
+88364 5b0d28239268 media/ja.lex.culture2.engi.wav
+88364 a635b202511c media/ja.lex.culture.fuhaku.wav
+88364 cdd8eff2e015 media/ja.lex.edu.kenkai.wav
+88364 d800c5fa1af6 media/ja.lex.tech.purinto.wav
+91244 8ba2ab0e939e media/ja.lex.transport.chakubatsu.wav
+92204 04d3f094d9f1 media/ja.lex.advice.koudan.wav
+92204 15d3d2714e9a media/ja.lex.advice.ketai.wav
+92204 6b28ca40c9f1 media/ja.lex.media.gijou.wav
+92204 cf2241d386c8 media/ja.lex.shopping.shouhyou.wav
+92204 e7272eaf585c media/ja.lex.society.yimu.wav
+96044 0981fd6aa80a media/ja.lex.advice2.suusei.wav
+96044 1eb70ad4396c media/ja.lex.culture.saiho.wav
+96044 2921f062cf92 media/ja.lex.body.fukatsu.wav
+96044 7e90f620f006 media/ja.lex.rel.omoide-no-machi.wav
+96044 8380ca79b458 media/ja.lex.health2.taikyuu.wav
+96044 c7bdc9618a6d media/ja.sent.fitness-club.wav
+96044 ed90c28741d8 media/ja.lex.env.koushou.wav
+99884 1cfa7976b73f media/ja.sent.check-balance.wav
+99884 4ae005a7d169 media/ja.sent.remote-control.wav
+99884 e5e944820c41 media/ja.lex.body.shoumyou.wav
+99884 faf744635e55 media/ja.sent.pay-bill.wav
+99884 fd149f217af7 media/ja.lex.weather2.yuki-yinga.wav
+removed in 0.4.4:
+103724 966aec4bd9e6 media/ja.sent.decision-essay.wav
+10610 c187528f1e7f lexicon/questions.jsonl
+107564 2d09addddea6 media/ja.lex.culture.tsuuke.wav
+111404 20e26a4579eb media/ja.sent.finish-work.wav
+111404 52421b267608 media/ja.lex.health3.taikyu2.wav
+111404 555214e98de4 media/ja.sent.insurance-card.wav
+111404 c8df7e302aa5 media/ja.sent.personal-essay.wav
+111404 d9fe1d49e5d7 media/ja.lex.work.taishita.wav
+115244 63446d69c980 media/ja.sent.check-balance.wav
+115244 786c198526fa media/ja.sent.debate-basics.wav
+115244 c61c0de488e9 media/ja.sent.call-police.wav
+119084 1e451d7ed743 media/ja.sent.recovery-onsen.wav
+119084 3c612669a9c7 media/ja.sent.suspense-build.wav
+119084 ac62350ed753 media/ja.sent.fitness-club.wav
+119084 b3a365f4d7f2 media/ja.sent.compromise-write.wav
+12020 bf5daf15e605 grammar/dependencies.yaml
+122924 ffb18ac515a6 media/ja.sent.narrative-structure.wav
+126764 409b0df44926 media/ja.sent.pay-bill.wav
+126764 4902e8043f1f media/ja.sent.opinion-before-decision.wav
+126764 fe637652ce39 media/ja.sent.health-check.wav
+130604 87dfb69beaa9 media/ja.sent.ceremony-congrats.wav
+134444 a228924fac2b media/ja.sent.booking-change.wav
+134444 b71d0fe4c791 media/ja.sent.diet-culture.wav
+134444 fb29e1be3e80 media/ja.sent.quarrel-reconcile.wav
+138284 f1e3976e5b21 media/ja.sent.senpai-help.wav
+138284 f6b7034dd5b5 media/ja.lex.rel.omoide-no-uta.wav
+142124 1c1f108cff7c media/ja.sent.pollution-problem.wav
+142124 272eddd108bd media/ja.sent.rating-system.wav
+145964 02800534faef media/ja.lex.work2.shoubei.wav
+145964 ebc7f880c870 media/ja.sent.play-soccer.wav
+149804 230b4da0cca8 media/ja.sent.water-issue.wav
+149804 46f7e77b59af media/ja.sent.news-discuss.wav
+149804 47a287f549d6 media/ja.sent.eat-fruit.wav
+149804 9b87f0cd3651 media/ja.sent.empathy.wav
+151244 a9ecc9cff03d media/ja.sent.network-message.wav
+153644 4aea46c98ab8 media/ja.sent.evidence-conclusion.wav
+15404 9b9f6646fee4 lexicon/health4.jsonl
+157484 dcad68b3399d media/ja.sent.write-ending.wav
+161324 8d21ea342920 media/ja.sent.topic-choice.wav
+165164 17c6d34ad955 media/ja.sent.food-waste.wav
+165164 ba5b20e2d884 media/ja.sent.guided-tour.wav
+169004 2d387b94da87 media/ja.sent.keep-receipt.wav
+169004 5ee033531e79 media/ja.lex.advice2.inoko2.wav
+169004 9282d58ead09 media/ja.sent.write-dialogue.wav
+169004 99be8fa53df9 media/ja.sent.remote-control.wav
+169004 9be7a28de786 media/ja.sent.encouragement.wav
+172844 816cacdd0a38 media/ja.sent.take-prevention.wav
+176684 6d1deefe656a media/ja.sent.border-docs.wav
+176684 dd08798425fe media/ja.sent.essay-observation.wav
+179084 7f34c1a2caa2 media/ja.sent.grievance-box.wav
+188204 60d4cc8be76d media/ja.sent.community-worry.wav
+188204 9e145f3735eb media/ja.sent.library-card.wav
+192044 0c4879de7e94 media/ja.sent.craft-washi.wav
+192044 bc29c415bb0c media/ja.sent.debate-point.wav
+195884 a9bae794add8 media/ja.sent.gentle-persuade.wav
+199724 bbbe1cb2e623 media/ja.sent.voting-candidate.wav
+199724 f013189a3f3e media/ja.sent.sleep-habit.wav
+203564 ac1fc2373429 media/ja.sent.energy-wind.wav
+203564 b243a958e399 media/ja.sent.support-reception.wav
+2044 f67b354a7c0c curriculum/units/312-energy-choices.yaml
+2047 9c2023248a8a curriculum/units/322-food-waste.yaml
+2053 2df85fb5d086 curriculum/units/230-team-conflict.yaml
+2056 d70468512600 curriculum/units/250-reading-news.yaml
+2060 1223d8c47f83 curriculum/units/310-weather-versus-climate.yaml
+2060 7311da4a706d curriculum/units/313-reducing-waste.yaml
+2061 177f9bf8dc47 curriculum/units/321-water-issues.yaml
+2065 2e9f489d9062 curriculum/units/356-soft-advice.yaml
+2067 3d6c603f9d26 curriculum/units/255-social-media-use.yaml
+2067 8624599c3f5c curriculum/units/237-lecture-notes.yaml
+2071 1d1ce086487e curriculum/units/240-choosing-a-topic.yaml
+2071 eedb30f4a71c curriculum/units/272-digital-habits.yaml
+2072 0daf3315bfa3 curriculum/units/396-polite-humor.yaml
+2077 0ad2fc410894 curriculum/units/314-eco-transport.yaml
+2080 1a996948e638 curriculum/units/265-daily-devices.yaml
+2089 0c7d146586e1 curriculum/units/256-checking-misinformation.yaml
+2090 7a7a0346cb23 curriculum/units/323-green-cities.yaml
+2090 b90ee9fb20b4 curriculum/units/246-exam-strategy.yaml
+2094 236bd9bf502f curriculum/units/270-tech-problems.yaml
+2095 d0440b9f6e0b curriculum/units/395-anecdote-telling.yaml
+2099 0c869f057b39 curriculum/units/364-expressing-hope.yaml
+2100 e7d7c2134fd5 curriculum/units/279-digital-detox.yaml
+2104 23a54e8c4d38 curriculum/units/269-online-services.yaml
+2106 41206fa04277 curriculum/units/253-article-summary.yaml
+2106 51225cc4adfe curriculum/units/263-class-debate.yaml
+2108 05e7817f8b1f curriculum/units/319-environmental-policy.yaml
+2108 0f4faa7b41fa curriculum/units/355-giving-advice.yaml
+2111 1dd25a300480 curriculum/units/266-internet-safety.yaml
+2111 d0e5b13d6f14 curriculum/units/316-wildlife-discussion.yaml
+211244 605d905c42bd media/ja.sent.itinerary-plan.wav
+2114 6c721d8de692 curriculum/units/397-folktale-reading.yaml
+2115 0b6a00782c95 curriculum/units/276-smart-home.yaml
+2115 2fc906963c9c curriculum/units/401-sleep-habits.yaml
+2115 fad402835d14 curriculum/units/247-library-research.yaml
+2117 d8231f4d7fed curriculum/units/271-ai-tool-talk.yaml
+2118 b753f9a23841 curriculum/units/268-software-help.yaml
+2119 136a208a97e5 curriculum/units/349-coping-habits.yaml
+2119 806f0ba90699 curriculum/units/311-recycling-systems.yaml
+2122 c5cb1ee4bf5f curriculum/units/370-product-reviews.yaml
+2122 d294f2f21330 curriculum/units/275-coding-basics.yaml
+2123 758e70ecb057 curriculum/units/236-application-essay.yaml
+2123 b4e313c61f5c curriculum/units/368-decision-talk.yaml
+2124 6d3cf9348326 curriculum/units/241-essay-structure.yaml
+2124 9c3ce10002fa curriculum/units/387-plot-sequencing.yaml
+2124 ea5130b24e34 curriculum/units/398-story-retelling.yaml
+2125 231ea0d51c48 curriculum/units/249-degree-conversations.yaml
+2125 6cc1fd4af4c7 curriculum/units/273-comparing-gadgets.yaml
+2125 772eb5a28e5e curriculum/units/261-responding-to-news.yaml
+2125 a0275160c6ce curriculum/units/393-writing-endings.yaml
+2126 123b0a08de14 curriculum/units/391-writing-dialogue.yaml
+2126 1b63a1a1576e curriculum/units/239-citation-basics.yaml
+2126 3c35bd9fd7a6 curriculum/units/376-using-evidence.yaml
+2126 922ac5e01877 curriculum/units/317-pollution-problems.yaml
+2126 ede3570725a5 curriculum/units/412-diet-culture.yaml
+2128 725a8bf3b04d curriculum/units/254-discussing-news.yaml
+2128 961d7aab7bd5 curriculum/units/394-story-revision.yaml
+2128 e328ec4bd145 curriculum/units/318-sustainable-shopping.yaml
+2129 8b191f44032b curriculum/units/372-pros-and-cons.yaml
+2133 415057c9e85f curriculum/units/378-conceding-points.yaml
+2134 66f60c448d3d curriculum/units/363-expressing-regret.yaml
+2135 181d86a054c0 curriculum/units/233-networking-messages.yaml
+2135 28cb2c81145d curriculum/units/369-reflection-essay.yaml
+2135 8084d618a480 curriculum/units/333-guided-tours.yaml
+2135 f20af2552012 curriculum/units/252-opinion-versus-fact.yaml
+2137 fe8cafc19e2b curriculum/units/410-care-and-aging.yaml
+2138 258531947e06 curriculum/units/384-decision-essay.yaml
+2138 5c96e11884fa curriculum/units/375-debate-basics.yaml
+2140 281cbe8b2d0f curriculum/units/289-cultural-pride.yaml
+2141 1852af2a36b7 curriculum/units/406-habit-change.yaml
+2142 6784b60c1b22 curriculum/units/259-broadcast-style.yaml
+2142 999726946392 curriculum/units/257-media-habits.yaml
+2143 32b4b539b7ef curriculum/units/386-background-setting.yaml
+2143 98203c2467cb curriculum/units/345-sincere-apology.yaml
+2145 10cf214e4926 curriculum/units/337-route-changes.yaml
+2145 c47a780e21b5 curriculum/units/258-photo-captions.yaml
+2146 34148fadb3b2 curriculum/units/330-travel-safety.yaml
+2147 20849a5ea200 curriculum/units/346-deepened-gratitude.yaml
+2147 64ee86aa7518 curriculum/units/366-stating-priorities.yaml
+2147 91161b55c938 curriculum/units/392-perspective-shifts.yaml
+2147 bc9b8d8cd19f curriculum/units/380-review-posts.yaml
+2147 f2703f2b04b3 curriculum/units/235-university-system.yaml
+2148 f7c21ee177d3 curriculum/units/339-postcard-writing.yaml
+2149 2ff205a6671c curriculum/units/373-explaining-choices.yaml
+215084 1f4defb53aa3 media/ja.sent.news-morning.wav
+215084 6c761555029b media/ja.sent.shrine-visit.wav
+215084 dc0b01df67a7 media/ja.sent.device-daily.wav
+2151 24e53e0f9737 curriculum/units/358-partial-agreement.yaml
+2154 23a8a5325b8f curriculum/units/287-historical-sites.yaml
+2154 fffaaad25365 curriculum/units/242-argument-paragraphs.yaml
+2155 18b5b9905811 curriculum/units/267-privacy-settings.yaml
+2155 723cc30e8a33 curriculum/units/296-rights-and-duties.yaml
+2155 e5a633331b0a curriculum/units/320-disaster-preparation.yaml
+2155 fcd0c7569139 curriculum/units/327-travel-essay.yaml
+2156 5801162eadb8 curriculum/units/329-culture-shock.yaml
+2157 2464a440b449 curriculum/units/277-online-communities.yaml
+2158 3eabea3f55a9 curriculum/units/226-giving-feedback.yaml
+2158 aa9c98d67569 curriculum/units/399-personal-essay.yaml
+2159 14fbf4029171 curriculum/units/357-opinion-structure.yaml
+2159 ee93793eb55f curriculum/units/315-nature-protection.yaml
+2161 6ee5c9154a17 curriculum/units/245-academic-email.yaml
+2162 12b0605e8a50 curriculum/units/224-project-reports.yaml
+2162 721b1279ebad curriculum/units/402-balanced-nutrition.yaml
+2162 765831d2a159 curriculum/units/407-quitting-habits.yaml
+2163 595b483ecb47 curriculum/units/324-personal-footprint.yaml
+2164 a11579a79266 curriculum/units/234-promotion-conversations.yaml
+2164 c151cbcd18ad curriculum/units/362-polite-warnings.yaml
+2165 7fb9208affb4 curriculum/units/264-media-ethics.yaml
+2165 984a0b42e634 curriculum/units/388-character-description.yaml
+2165 a6e2e0a8d805 curriculum/units/278-technology-change.yaml
+2166 2fa2e6be7d07 curriculum/units/282-traditional-crafts.yaml
+2168 338bf8093b87 curriculum/units/251-headline-style.yaml
+2168 f7096055882d curriculum/units/328-hosting-interaction.yaml
+2170 2abdd113948d curriculum/units/274-tech-support-visit.yaml
+2172 7091bb73ede9 curriculum/units/382-budget-comparison.yaml
+2173 c0b694a4abb9 curriculum/units/306-urban-versus-rural.yaml
+2174 1059d797294c curriculum/units/377-counter-arguments.yaml
+2174 cf358c7a1a24 curriculum/units/326-booking-problems.yaml
+2177 aff349264b5a curriculum/units/403-exercise-planning.yaml
+2178 613291cac8d9 curriculum/units/295-everyday-laws.yaml
+2178 d18df71814f2 curriculum/units/262-current-events.yaml
+2179 36e9efe38833 curriculum/units/414-health-debate.yaml
+2180 6a0f73ec3f3a curriculum/units/332-homestay-letters.yaml
+2180 ccc22821a6ef curriculum/units/371-service-comparison.yaml
+2180 d61e2bc7998e curriculum/units/292-polite-taboos.yaml
+2182 c0d9149c6331 curriculum/units/389-setting-description.yaml
+2182 ccd02c67cb80 curriculum/units/381-rating-systems.yaml
+2184 f346d9b4d21f curriculum/units/227-accepting-feedback.yaml
+2185 9cc5ce82a679 curriculum/units/413-wellbeing-apps.yaml
+2186 c1128b7168a0 curriculum/units/359-polite-disagreement.yaml
+2187 a896af15c111 curriculum/units/243-study-abroad-plans.yaml
+2187 e2f529830d78 curriculum/units/283-etiquette-rules.yaml
+2188 7b32902f40e1 curriculum/units/408-medical-information.yaml
+2189 586c458f4bfd curriculum/units/291-gift-customs.yaml
+218924 90e0d507f1fd media/ja.sent.pride-craft.wav
+2190 2baf4b86b9a2 curriculum/units/338-travel-reflection.yaml
+2190 4d27f73885f1 curriculum/units/390-building-suspense.yaml
+2191 310b427fb79c curriculum/units/411-fitness-club-life.yaml
+2192 391fa69e74ab curriculum/units/404-stress-management.yaml
+2192 59d3f271111d curriculum/units/231-customer-escalation.yaml
+2192 71821d6b2429 curriculum/units/298-public-ethics.yaml
+2193 3a222148709a curriculum/units/360-gentle-persuasion.yaml
+2193 a51e5a0d0a7c curriculum/units/374-ranking-with-reasons.yaml
+2195 15064a8fb25f curriculum/units/334-travel-companions.yaml
+2198 59e0a772a1bb curriculum/units/367-compromise-writing.yaml
+2198 d0f2db9ad1ab curriculum/units/304-social-issues.yaml
+2200 24f89d3e32d0 curriculum/units/383-travel-comparison.yaml
+2201 2562e42d4192 curriculum/units/299-volunteering.yaml
+2202 4c1f1a316a18 curriculum/units/229-professional-email.yaml
+2203 3154a3884ea7 curriculum/units/221-writing-a-resume.yaml
+2204 2c3d2480c725 curriculum/units/280-explaining-customs.yaml
+2205 5f1459bb9578 curriculum/units/297-neighborhood-rules.yaml
+2205 e6c0a915ce90 curriculum/units/344-conflict-feelings.yaml
+2205 f305595dd56a curriculum/units/222-workplace-communication.yaml
+2208 8f426b2b1401 curriculum/units/385-narrative-structure.yaml
+2208 a3ff2ad95187 curriculum/units/354-self-reflection.yaml
+2208 c021942e8a5c curriculum/units/342-mood-conversation.yaml
+2209 3368dbc1c031 curriculum/units/290-host-and-guest.yaml
+2210 d1ba54b4272d curriculum/units/347-encouragement-words.yaml
+2211 c2bbaf3bfa26 curriculum/units/335-lost-belongings.yaml
+2212 9d610d6a155e curriculum/units/286-museum-exhibits.yaml
+2213 b776910f5352 curriculum/units/288-tradition-change.yaml
+2215 2080257f02bc curriculum/units/400-wellness-routines.yaml
+2217 4161abd9747a curriculum/units/238-seminar-discussion.yaml
+2217 8dabbb18454a curriculum/units/232-presentation-structure.yaml
+2218 513d43e0e476 curriculum/units/281-festival-details.yaml
+2218 ca509c93c517 curriculum/units/336-travel-budgeting.yaml
+2220 60421f0086f6 curriculum/units/348-stress-discussion.yaml
+2220 b3139fb7a145 curriculum/units/343-expressing-empathy.yaml
+2222 51e90f22cfd1 curriculum/units/325-itinerary-planning.yaml
+2223 4744102c00c5 curriculum/units/220-job-interview-prep.yaml
+22230 a59ec67f25ae lexicon/tech.jsonl
+2224 1add1798bf7c curriculum/units/248-academic-presentation.yaml
+2224 7f075cca4e72 curriculum/units/361-suggestion-forms.yaml
+2226 266d675d620f curriculum/units/353-reconciliation.yaml
+2226 36612a5a12c8 curriculum/units/352-emotional-advice.yaml
+2226 5a9644957030 curriculum/units/302-local-government.yaml
+2226 9aafb0e47721 curriculum/units/300-community-problems.yaml
+2226 fe4489111e1d curriculum/units/405-mental-health-talk.yaml
+2227 979054d2fb4a curriculum/units/303-voting-information.yaml
+222764 54a186fa5f2d media/ja.sent.apology.wav
+2230 a55a78fcd491 curriculum/units/284-regional-cultures.yaml
+2231 6502a1a16f51 curriculum/units/351-emotional-story.yaml
+2232 87ba235d04bf curriculum/units/294-culture-essay.yaml
+2232 ed6c27bb7215 curriculum/units/260-reading-editorials.yaml
+2235 2cdc5ff6f7ca curriculum/units/365-explaining-preference.yaml
+2236 21b324435a50 curriculum/units/308-polite-protest.yaml
+2237 71fb52dccacd curriculum/units/331-border-documentation.yaml
+2240 67a6820119c7 curriculum/units/409-vaccination-discussion.yaml
+2241 3bfb93e28d3c curriculum/units/341-emotion-vocabulary.yaml
+2245 0abfe43abac8 curriculum/units/301-writing-petitions.yaml
+2246 3ef2f3840f4a curriculum/units/244-scholarship-writing.yaml
+2246 86ed6a763201 curriculum/units/285-culture-comparison.yaml
+2247 0b747a71ad36 curriculum/units/225-deadline-negotiation.yaml
+2248 7a4bcf5d345f curriculum/units/223-meeting-opinions.yaml
+2262 969b195690cc curriculum/units/305-inequality-discussion.yaml
+2265 579227c443f2 curriculum/units/379-writing-conclusions.yaml
+2265 7de63ce884eb curriculum/units/293-attending-ceremonies.yaml
+2269 30f655237034 curriculum/units/309-civic-participation.yaml
+2269 4494bcbdd2c8 curriculum/units/340-personality-description.yaml
+2272 8b73d3b7771e curriculum/units/307-generational-difference.yaml
+2273 e5236e721ce0 curriculum/units/350-temperament-comparison.yaml
+2288 cdc92f39df89 curriculum/units/228-career-change-plans.yaml
+234284 3e925c7d17e5 media/ja.lex.env.kiko.wav
+23606 d14b4ef3c2be assessments/definitions.jsonl
+241964 2b7fb0f9e966 media/ja.sent.pros-cons.wav
+241964 71bfde425800 media/ja.sent.tech-problem-fix.wav
+241964 c974672e8bb7 media/ja.sent.city-hall.wav
+249644 408416fb2df2 media/ja.sent.union-talks.wav
+25304 4aa10b39ffba lexicon/env2.jsonl
+25698 174ac382cd7f lexicon/emotion2.jsonl
+25786 2411e30485f7 lexicon/health3.jsonl
+25790 a01efe522636 lexicon/media2.jsonl
+25807 e960f8160923 lexicon/travel.jsonl
+25864 d8f9db776c62 lexicon/debate2.jsonl
+26065 e00ed117a994 lexicon/culture2.jsonl
+260752 c8c9aec7e7fc media/words.jsonl
+26287 0efbceff5e04 lexicon/society.jsonl
+265004 ce10b624655f media/ja.lex.edu2.fuyuujunou.wav
+265004 fcc773d0a22c media/ja.sent.polite-disagree.wav
+26586 c09adf24c2fb lexicon/story.jsonl
+26765 a7dc9b16ca2e lexicon/advice.jsonl
+26924 632d8a993c9b media/ja.lex.media2.kaiken.wav
+26924 b258f0c917dc media/ja.lex.emotion.akui.wav
+26924 cf60296efe03 media/ja.lex.tech2.koi.wav
+272684 fbc73fa0b1bd media/ja.sent.fact-speculation.wav
+30764 05e6329e7ebf media/ja.lex.edu2.rissho.wav
+30764 07c4678b0e35 media/ja.lex.tech2.kikan.wav
+30764 2058a4aac12e media/ja.lex.travel2.gaido.wav
+30764 21e0a7390eb8 media/ja.lex.culture2.engi.wav
+30764 4724037db798 media/ja.lex.tech2.koui.wav
+30764 5d3880344a0d media/ja.lex.advice.ato.wav
+30764 6ab5f770a911 media/ja.lex.society2.akusei.wav
+34604 183f4bddbc43 media/ja.lex.tech2.kosei.wav
+34604 44c1c1ee8003 media/ja.lex.rel.tsuui.wav
+34604 4dc8c5961558 media/ja.lex.health2.taikyuu.wav
+34604 849b7274d476 media/ja.lex.media.toron.wav
+34604 898926aabfaa media/ja.lex.env2.yokei.wav
+34604 9cae27d41cff media/ja.lex.story2.yokai.wav
+34604 c77907fb4958 media/ja.lex.media.head.wav
+3504169 be31502d784a media/manifest.jsonl
+38444 0e8fd542cd7a media/ja.lex.health3.kyoubu.wav
+38444 0fd1092416ee media/ja.lex.shopping.mon.wav
+38444 432dc40fa86b media/ja.lex.story2.dokugeki.wav
+38444 68785b9374ab media/ja.lex.env2.shinan.wav
+38444 69f03054b09d media/ja.lex.tech.purinto.wav
+38444 975ea3561c3b media/ja.lex.media.hassha.wav
+38444 c23acdbbbc39 media/ja.lex.media.kaga.wav
+38444 c265cc09854c media/ja.lex.health3.taizen2.wav
+38444 c42be3f6937f media/ja.lex.edu.kenkai.wav
+38444 e44a5eb135c4 media/ja.lex.health2.fuka.wav
+38444 ee39574c827f media/ja.lex.body.kaffa.wav
+38444 f5722c10b5c8 media/ja.lex.travel2.tenkan.wav
+39907 8684e9cf0a1f orthography/hiragana.jsonl
+414502 5f21368ebd4f sentences/entries.jsonl
+42284 255762628a93 media/ja.lex.travel.henkyo.wav
+42284 65c6d753fde0 media/ja.lex.culture.shinko-zai.wav
+42284 72b7a55f6cff media/ja.lex.society2.yuuutsu.wav
+42284 741e36a3641b media/ja.lex.advice2.youchuu.wav
+42284 75001847c015 media/ja.lex.emotion.ousetsu.wav
+42284 750f48ccefbe media/ja.lex.media.hadan.wav
+42284 7c82f02338c0 media/ja.lex.env.seisi.wav
+42284 9e9a7b252958 media/ja.lex.work2.tanpin.wav
+42284 ba4898280a55 media/ja.lex.emotion2.kibune.wav
+42284 c88db049260e media/ja.lex.edu2.ryuji.wav
+42284 e01483ad53b1 media/ja.lex.work.nobun.wav
+42284 f4cb005d36a5 media/ja.lex.edu2.chushi.wav
+42284 f5855bc0d73e media/ja.lex.culture.saiho.wav
+46124 006e667fd9b7 media/ja.lex.edu2.denja.wav
+46124 03e2957aadfe media/ja.lex.society2.hosei.wav
+46124 0a9dbb9d1089 media/ja.lex.health3.junren.wav
+46124 1445aa50c5b2 media/ja.lex.health2.seka.wav
+46124 1c990bc6b700 media/ja.lex.travel2.engaki.wav
+46124 1ef29a1a9a72 media/ja.lex.weather2.naga.wav
+46124 2321167a4bb1 media/ja.lex.advice2.suusei.wav
+46124 4b908d065e32 media/ja.lex.edu2.kenji.wav
+46124 86576688b7ff media/ja.lex.culture.koge.wav
+46124 8acd79a0225b media/ja.lex.health3.ureba.wav
+46124 a09fd94071f0 media/ja.lex.health2.kessha.wav
+46124 a8a57d8f9680 media/ja.lex.advice.koudan.wav
+46124 b6f284002002 media/ja.lex.edu2.kenta.wav
+46124 ec49f65561b4 media/ja.lex.society2.kensei.wav
+46124 f69cdcd65b98 media/ja.lex.health2.koku2.wav
+46124 fa14a042c5bd media/ja.lex.debate.kika.wav
+46124 fc4b96dc1cac media/ja.lex.body.taisha.wav
+48285 d4a479b52a0f lexicon/sports.jsonl
+49816 6f827131ff1d lexicon/admin.jsonl
+49964 163c701d909a media/ja.lex.edu2.mouhibiki.wav
+49964 31f0adbf356b media/ja.lex.travel2.ryouga.wav
+49964 3a487456000e media/ja.lex.culture.denkyou.wav
+49964 401d136b21e0 media/ja.lex.edu.kachou.wav
+49964 4d3f166cab66 media/ja.lex.travel2.hikou-min.wav
+49964 5856e7052c3f media/ja.lex.media2.ronsa.wav
+49964 589cd1e14d47 media/ja.lex.media2.kouchou.wav
+49964 5a7e60fd5115 media/ja.lex.env.puratsu.wav
+49964 6117e1d608c8 media/ja.lex.travel.taihen.wav
+49964 7069b9b9d3b2 media/ja.lex.admin.nyuusatsu.wav
+49964 7d70c5ec5707 media/ja.lex.edu2.sentai.wav
+49964 825dc47dda16 media/ja.lex.debate2.kyara.wav
+49964 8d3bb460ab92 media/ja.lex.travel.itinerari.wav
+49964 90588f6448e5 media/ja.lex.body.fukatsu.wav
+49964 a2b5918f6559 media/ja.lex.advice.shouko.wav
+49964 ceedb43b8771 media/ja.lex.body.fukkyuu.wav
+49964 fe476b0287ba media/ja.lex.leisure.ryoushuu.wav
+50012 33e6e41c533f lexicon/shopping.jsonl
+50124 fb163b22f093 lexicon/leisure.jsonl
+50313 a5272940444d lexicon/entertainment.jsonl
+50348 40ec15bdf11d lexicon/relationships.jsonl
+50547 410a05f793e7 lexicon/edu2.jsonl
+50829 c8b447b74779 lexicon/media.jsonl
+51257 9f130ff36445 lexicon/body.jsonl
+51286 8284470969cc lexicon/env.jsonl
+51559 894853904bb6 lexicon/tech2.jsonl
+51609 342bb4bea086 lexicon/food.jsonl
+51876 dc41f3e18bf6 lexicon/work.jsonl
+51888 a98c9c0176b3 lexicon/health2.jsonl
+52042 3c4541be9897 lexicon/emotion.jsonl
+52253 793abd8ebcb9 lexicon/travel2.jsonl
+52408 bf138665a742 lexicon/debate.jsonl
+52832 82631c7bdad5 lexicon/story2.jsonl
+52844 f38f94ec20da media/ja.lex.health3.hanko.wav
+52848 5cc08868b8e0 lexicon/edu.jsonl
+52861 4d22ddbe6bde lexicon/work2.jsonl
+53203 25eaa80374f3 lexicon/weather2.jsonl
+53408 dbcb77e37586 lexicon/city.jsonl
+53482 8889ac7b3911 lexicon/culture.jsonl
+53804 03d789a5aa96 media/ja.lex.admin.kin-yuu.wav
+53804 1173c4ea9e31 media/ja.lex.emotion.shougi.wav
+53804 2b2fb1a1c26f media/ja.lex.rel.aishi.wav
+53804 3756fc06fefa media/ja.lex.debate2.akari2.wav
+53804 380c3cca59e8 media/ja.lex.advice.hatsu.wav
+53804 4b49775c52d9 media/ja.lex.env.ene-ki.wav
+53804 63f28fc704a1 media/ja.lex.emotion.tenko.wav
+53804 7a0897f2e2c6 media/ja.lex.story2.fukkyaku.wav
+53804 85d8c4e39b0d media/ja.lex.travel2.keikou.wav
+53804 8cc0d6062781 media/ja.lex.culture.teaji.wav
+53804 9a60f83cb852 media/ja.lex.work.shigyou.wav
+53804 ab42149b3701 media/ja.lex.travel2.nyuuryoku.wav
+53804 b2d7e29c661b media/ja.lex.env2.nouhin.wav
+53804 c24ffb822d8e media/ja.lex.story2.hairon.wav
+53804 c6713fa0fda7 media/ja.lex.culture.shaji.wav
+53804 cae6d5abfa2a media/ja.lex.emotion.mottai.wav
+53804 d296e7eb8541 media/ja.lex.edu.kaihen.wav
+53804 d332a4724506 media/ja.lex.body.junyou.wav
+53804 d9cf30873393 media/ja.lex.debate.koryo.wav
+53804 de1d79154f2a media/ja.lex.shopping.keshi.wav
+53804 f66420905eaf media/ja.lex.work2.roushi.wav
+53804 f9580b2ea734 media/ja.lex.food.houshi.wav
+53871 544fd0be1ccd lexicon/society2.jsonl
+54373 c14554092728 lexicon/advice2.jsonl
+55640 842b11abef06 lexicon/transport.jsonl
+57644 220c5262698e media/ja.lex.sports.taekwondo.wav
+57644 31ce4d7dee00 media/ja.lex.food.tsukemono.wav
+57644 335e44a52738 media/ja.lex.edu2.yakuseki.wav
+57644 3924f284c559 media/ja.lex.advice.ketai.wav
+57644 45fac8e23214 media/ja.lex.advice2.kokuhan.wav
+57644 472520843d3e media/ja.lex.story2.kikkai.wav
+57644 5b93c86a701a media/ja.lex.city.kanen.wav
+57644 5e0a77b90e8d media/ja.lex.env.seita.wav
+57644 61e34a3389a6 media/ja.lex.culture.fuhaku.wav
+57644 6487cbb5c569 media/ja.lex.health3.uebi.wav
+57644 6c6cf232093b media/ja.lex.leisure.tabehou.wav
+57644 760769578949 media/ja.lex.health2.jousho.wav
+57644 8957b5175767 media/ja.lex.env.ene.wav
+57644 943f6c3574f2 media/ja.lex.admin.mibungou.wav
+57644 a86c620b2fc5 media/ja.lex.emotion.shoujin.wav
+57644 a97342373070 media/ja.lex.rel.omoide-no-tabi.wav
+57644 cec8810686aa media/ja.lex.edu2.yakku.wav
+57644 cf2a34c530c8 media/ja.lex.media2.sesaku.wav
+57644 f1dec8438464 media/ja.lex.edu.shokuba-ryou.wav
+57644 f3d7445cd8c1 media/ja.lex.admin.kessaku.wav
+57644 f8b6f1126325 media/ja.lex.media.gijou.wav
+57644 fa34886e7f64 media/ja.lex.travel2.kyoka-sho.wav
+60189 0a4fcf2936a7 curriculum/goals.yaml
+61484 06d5672911dc media/ja.lex.edu.denwa-ban.wav
+61484 172af52f8b34 media/ja.lex.ent.taimu.wav
+61484 1816d554f1fe media/ja.lex.debate.hifun.wav
+61484 1d6e37ddbc0d media/ja.lex.rel.kyoudai-ue.wav
+61484 1dd555a62401 media/ja.lex.weather2.kijitsu.wav
+61484 380ce1e4b3f5 media/ja.lex.rel.kazoku-no-uni.wav
+61484 38b3ca25601e media/ja.lex.media2.taaron.wav
+61484 62cfd1463aaa media/ja.lex.society.riso.wav
+61484 655017c5301d media/ja.lex.health2.chouryou.wav
+61484 70b794486ad8 media/ja.lex.rel.omoide-no-hi.wav
+61484 7fa680f24e4d media/ja.lex.emotion.shouki.wav
+61484 80c1bbb706e5 media/ja.lex.travel.nyukan.wav
+61484 815f5f020c8d media/ja.lex.tech2.hanare.wav
+61484 98365a50b27b media/ja.lex.edu2.kronji.wav
+61484 b8404e4d04dc media/ja.lex.work2.keiri.wav
+61484 bf01a0d8ce1e media/ja.lex.society2.kyuugyou.wav
+61484 c9ecceed4234 media/ja.lex.society2.houchi.wav
+63884 41b6e1779a3d media/ja.lex.health2.tsuuka2.wav
+65324 2789faf5d384 media/ja.lex.advice2.tetsudo.wav
+65324 2829ac8cca13 media/ja.lex.edu.tsuujou.wav
+65324 2d09aeb7e8af media/ja.lex.shopping.fukuban.wav
+65324 40ccd4aa0acc media/ja.lex.work2.kouchiku.wav
+65324 6935ce1aa73f media/ja.lex.sports.joutairyoku.wav
+65324 6a5dccad9fb0 media/ja.lex.leisure.basuketta.wav
+65324 7024179c05f8 media/ja.lex.tech2.onkyou.wav
+65324 752801993b81 media/ja.lex.weather2.yukidoke.wav
+65324 77c58f77fdeb media/ja.lex.edu2.senkyuu.wav
+65324 945cfafceabd media/ja.lex.edu.kai-ken.wav
+65324 9717f2c21fa5 media/ja.lex.edu.jugyou-ryaku.wav
+65324 9c528c51862c media/ja.lex.shopping.shouhyou.wav
+65324 a68fb0324386 media/ja.lex.tech2.forumu.wav
+65324 d3ada6d2c582 media/ja.lex.story.keimatsu.wav
+65324 e6f3b3b45e83 media/ja.lex.rel.omoide-no-sora.wav
+65324 e8dec42dde65 media/ja.lex.rel.omoide-bako.wav
+69164 03f7de912151 media/ja.lex.env2.resucha.wav
+69164 0f5304eaf37f media/ja.lex.society2.chuga.wav
+69164 38df119e6b4d media/ja.lex.tech.debisu.wav
+69164 5061e3434418 media/ja.lex.rel.jijou-betsu.wav
+69164 80aaf51259f0 media/ja.lex.sports.onsen-tou.wav
+69164 840f8b1629c5 media/ja.lex.env.eco-kuruma.wav
+69164 8c2dd84f3586 media/ja.lex.rel.kyoudai-shita.wav
+69164 9843e907bf63 media/ja.lex.sports.kessan.wav
+69164 a4f46390a0cd media/ja.lex.media.media-habits.wav
+69164 cc63ef3c2b30 media/ja.lex.culture2.kansen.wav
+69164 ee3f3f8701ea media/ja.lex.work.hakkou.wav
+69164 f88bde493dab media/ja.lex.edu2.kashu-sho.wav
+73004 0f2606d10ea0 media/ja.lex.rel.obaa-chan.wav
+73004 3f4e7c002b45 media/ja.lex.tech2.shinko.wav
+73004 5835b4118b31 media/ja.lex.edu.wakamatsu.wav
+73004 7b43e8c1e83f media/ja.lex.debate.shojitsu.wav
+73004 924f5286ca92 media/ja.lex.society.hatsuyaku.wav
+73004 ad38f41b7206 media/ja.lex.culture2.kousatsu.wav
+73004 c779fb6ed0c9 media/ja.lex.ent.joju.wav
+73004 caa703bea7c5 media/ja.lex.rel.yori-modosu.wav
+73004 ea8d43f9df78 media/ja.lex.health2.seikatsu2.wav
+73004 f02545eafb13 media/ja.lex.travel2.keihaku.wav
+73004 fc7e29ef0326 media/ja.lex.edu2.ronshu.wav
+76844 4ead29d7aeb4 media/ja.lex.env2.bousai-houzu.wav
+76844 7cb5e012c443 media/ja.lex.body.shoumyou.wav
+76844 8918c73b7e4c media/ja.lex.rel.omoide-no-kioku.wav
+76844 f30ff42fcd2a media/ja.lex.health2.junou.wav
+76844 f380ba651f03 media/ja.lex.media.fukkyuu-saigai.wav
+76844 fab28cf064ec media/ja.lex.admin.jushou-todoke.wav
+794 7dbd7891eb58 manifest.yaml
+80684 1ab5b46f3fb5 media/ja.lex.weather2.yuki-yinga.wav
+80684 58b681a51303 media/ja.sent.address-registration.wav
+80684 650f6d068460 media/ja.lex.env.koushou.wav
+80684 7a41c55e79fe media/ja.lex.tech2.saisei.wav
+80684 849c9f932005 media/ja.lex.admin.taishu-kin.wav
+80684 bd4a7592b61a media/ja.lex.health2.kinyu.wav
+84524 3abeaaf45ea7 media/ja.lex.rel.kokoro-bazuka.wav
+84524 6dbf2a121867 media/ja.lex.rel.omoide-no-ki.wav
+84524 949940bc7eed media/ja.lex.culture2.shugo.wav
+84524 b0cc6ff7b6fe media/ja.lex.edu2.zensho.wav
+84524 d1d1c78c0d75 media/ja.sent.on-sale.wav
+87404 156423b917e4 media/ja.lex.debate.kento.wav
+88364 64610be95c4f media/ja.lex.rel.omoide-no-machi.wav
+88364 7154f9f6fdac media/ja.lex.weather2.naru.wav
+88364 7b0aeef8fadf media/ja.lex.media.maruke.wav
+88364 7dadc86a06df media/ja.lex.health3.choushin.wav
+88364 afb283dc0c74 media/ja.lex.edu.kounai.wav
+88364 cbaa4425359b media/ja.sent.explain-grammar.wav
+88364 e6106b62628a media/ja.sent.interview-prep.wav
+92204 3a2b90486481 media/ja.sent.describe-symptom.wav
+949 f82efc934951 language/orthography.yaml
+96044 068d7a65ce7c media/ja.lex.transport.chakubatsu.wav
+96044 34e0ad26d82e media/ja.sent.use-evidence.wav
+96044 87ce97d9552f media/ja.lex.debate.fusan.wav
+96044 cd95ca16df02 media/ja.lex.society.yimu.wav
+96044 d1086c1b32f7 media/ja.lex.travel.shin.wav
+99831 e742d0505e7e grammar/concepts.jsonl
+99884 7f6c0936d364 media/ja.lex.rel.omoide-no-hito.wav
+present on both sides with different bytes:
+  assessments/definitions.jsonl
+    0.4.4: 23606 d14b4ef3c2be assessments/definitions.jsonl.n    0.4.3: 25108 dfd142cf33f1 assessments/definitions.jsonl
+  curriculum/goals.yaml
+    0.4.4: 60189 0a4fcf2936a7 curriculum/goals.yaml.n    0.4.3: 62054 aae37591f41c curriculum/goals.yaml
+  curriculum/units/220-job-interview-prep.yaml
+    0.4.4: 2223 4744102c00c5 curriculum/units/220-job-interview-prep.yaml.n    0.4.3: 3064 1f42baff2c82 curriculum/units/220-job-interview-prep.yaml
+  curriculum/units/221-writing-a-resume.yaml
+    0.4.4: 2203 3154a3884ea7 curriculum/units/221-writing-a-resume.yaml.n    0.4.3: 3220 73834a1bcbfa curriculum/units/221-writing-a-resume.yaml
+  curriculum/units/222-workplace-communication.yaml
+    0.4.4: 2205 f305595dd56a curriculum/units/222-workplace-communication.yaml.n    0.4.3: 3225 6ada8fe376b4 curriculum/units/222-workplace-communication.yaml
+  curriculum/units/223-meeting-opinions.yaml
+    0.4.4: 2248 7a4bcf5d345f curriculum/units/223-meeting-opinions.yaml.n    0.4.3: 3281 2f20c8b7d8ff curriculum/units/223-meeting-opinions.yaml
+  curriculum/units/224-project-reports.yaml
+    0.4.4: 2162 12b0605e8a50 curriculum/units/224-project-reports.yaml.n    0.4.3: 3227 b5f523324e19 curriculum/units/224-project-reports.yaml
+  curriculum/units/225-deadline-negotiation.yaml
+    0.4.4: 2247 0b747a71ad36 curriculum/units/225-deadline-negotiation.yaml.n    0.4.3: 3210 96ab3fb5d68f curriculum/units/225-deadline-negotiation.yaml
+  curriculum/units/226-giving-feedback.yaml
+    0.4.4: 2158 3eabea3f55a9 curriculum/units/226-giving-feedback.yaml.n    0.4.3: 3189 00d995a67d75 curriculum/units/226-giving-feedback.yaml
+  curriculum/units/227-accepting-feedback.yaml
+    0.4.4: 2184 f346d9b4d21f curriculum/units/227-accepting-feedback.yaml.n    0.4.3: 3224 9e33143ae2a6 curriculum/units/227-accepting-feedback.yaml
+  curriculum/units/228-career-change-plans.yaml
+    0.4.4: 2288 cdc92f39df89 curriculum/units/228-career-change-plans.yaml.n    0.4.3: 3228 44f17546e1cb curriculum/units/228-career-change-plans.yaml
+  curriculum/units/229-professional-email.yaml
+    0.4.4: 2202 4c1f1a316a18 curriculum/units/229-professional-email.yaml.n    0.4.3: 3277 e6a8e5734289 curriculum/units/229-professional-email.yaml
+  curriculum/units/230-team-conflict.yaml
+    0.4.4: 2053 2df85fb5d086 curriculum/units/230-team-conflict.yaml.n    0.4.3: 3115 939d02de1f94 curriculum/units/230-team-conflict.yaml
+  curriculum/units/231-customer-escalation.yaml
+    0.4.4: 2192 59d3f271111d curriculum/units/231-customer-escalation.yaml.n    0.4.3: 3273 f2cb1b69251d curriculum/units/231-customer-escalation.yaml
+  curriculum/units/232-presentation-structure.yaml
+    0.4.4: 2217 8dabbb18454a curriculum/units/232-presentation-structure.yaml.n    0.4.3: 3176 1a1c6438786d curriculum/units/232-presentation-structure.yaml
+  curriculum/units/233-networking-messages.yaml
+    0.4.4: 2135 181d86a054c0 curriculum/units/233-networking-messages.yaml.n    0.4.3: 3224 90841272ef47 curriculum/units/233-networking-messages.yaml
+  curriculum/units/234-promotion-conversations.yaml
+    0.4.4: 2164 a11579a79266 curriculum/units/234-promotion-conversations.yaml.n    0.4.3: 3255 d462787e9118 curriculum/units/234-promotion-conversations.yaml
+  curriculum/units/235-university-system.yaml
+    0.4.4: 2147 f2703f2b04b3 curriculum/units/235-university-system.yaml.n    0.4.3: 3046 8cd5548c693b curriculum/units/235-university-system.yaml
+  curriculum/units/236-application-essay.yaml
+    0.4.4: 2123 758e70ecb057 curriculum/units/236-application-essay.yaml.n    0.4.3: 3166 5dcf436fc87e curriculum/units/236-application-essay.yaml
+  curriculum/units/237-lecture-notes.yaml
+    0.4.4: 2067 8624599c3f5c curriculum/units/237-lecture-notes.yaml.n    0.4.3: 3026 3689da8566ff curriculum/units/237-lecture-notes.yaml
+  curriculum/units/238-seminar-discussion.yaml
+    0.4.4: 2217 4161abd9747a curriculum/units/238-seminar-discussion.yaml.n    0.4.3: 3144 c86c916bed3d curriculum/units/238-seminar-discussion.yaml
+  curriculum/units/239-citation-basics.yaml
+    0.4.4: 2126 1b63a1a1576e curriculum/units/239-citation-basics.yaml.n    0.4.3: 3125 d586c08fe0ae curriculum/units/239-citation-basics.yaml
+  curriculum/units/240-choosing-a-topic.yaml
+    0.4.4: 2071 1d1ce086487e curriculum/units/240-choosing-a-topic.yaml.n    0.4.3: 3128 ba6888dbedd7 curriculum/units/240-choosing-a-topic.yaml
+  curriculum/units/241-essay-structure.yaml
+    0.4.4: 2124 6d3cf9348326 curriculum/units/241-essay-structure.yaml.n    0.4.3: 3161 595caeceef1a curriculum/units/241-essay-structure.yaml
+  curriculum/units/242-argument-paragraphs.yaml
+    0.4.4: 2154 fffaaad25365 curriculum/units/242-argument-paragraphs.yaml.n    0.4.3: 3206 35e250349bf8 curriculum/units/242-argument-paragraphs.yaml
+  curriculum/units/243-study-abroad-plans.yaml
+    0.4.4: 2187 a896af15c111 curriculum/units/243-study-abroad-plans.yaml.n    0.4.3: 3231 2f45e2f06ba4 curriculum/units/243-study-abroad-plans.yaml
+  curriculum/units/244-scholarship-writing.yaml
+    0.4.4: 2246 3ef2f3840f4a curriculum/units/244-scholarship-writing.yaml.n    0.4.3: 3260 1d4c7f51f7de curriculum/units/244-scholarship-writing.yaml
+  curriculum/units/245-academic-email.yaml
+    0.4.4: 2161 6ee5c9154a17 curriculum/units/245-academic-email.yaml.n    0.4.3: 3116 72b262ac8a78 curriculum/units/245-academic-email.yaml
+  curriculum/units/246-exam-strategy.yaml
+    0.4.4: 2090 b90ee9fb20b4 curriculum/units/246-exam-strategy.yaml.n    0.4.3: 3107 19d738c39773 curriculum/units/246-exam-strategy.yaml
+  curriculum/units/247-library-research.yaml
+    0.4.4: 2115 fad402835d14 curriculum/units/247-library-research.yaml.n    0.4.3: 3209 477e01f7818c curriculum/units/247-library-research.yaml
+  curriculum/units/248-academic-presentation.yaml
+    0.4.4: 2224 1add1798bf7c curriculum/units/248-academic-presentation.yaml.n    0.4.3: 3186 486f0d8ff50e curriculum/units/248-academic-presentation.yaml
+  curriculum/units/249-degree-conversations.yaml
+    0.4.4: 2125 231ea0d51c48 curriculum/units/249-degree-conversations.yaml.n    0.4.3: 3214 552800dd3770 curriculum/units/249-degree-conversations.yaml
+  curriculum/units/250-reading-news.yaml
+    0.4.4: 2056 d70468512600 curriculum/units/250-reading-news.yaml.n    0.4.3: 2882 e2034fce81ec curriculum/units/250-reading-news.yaml
+  curriculum/units/251-headline-style.yaml
+    0.4.4: 2168 338bf8093b87 curriculum/units/251-headline-style.yaml.n    0.4.3: 3090 225bb5386159 curriculum/units/251-headline-style.yaml
+  curriculum/units/252-opinion-versus-fact.yaml
+    0.4.4: 2135 f20af2552012 curriculum/units/252-opinion-versus-fact.yaml.n    0.4.3: 3200 debd84b5f978 curriculum/units/252-opinion-versus-fact.yaml
+  curriculum/units/253-article-summary.yaml
+    0.4.4: 2106 41206fa04277 curriculum/units/253-article-summary.yaml.n    0.4.3: 3163 6d793b339b9e curriculum/units/253-article-summary.yaml
+  curriculum/units/254-discussing-news.yaml
+    0.4.4: 2128 725a8bf3b04d curriculum/units/254-discussing-news.yaml.n    0.4.3: 3155 a937e96dcb73 curriculum/units/254-discussing-news.yaml
+  curriculum/units/255-social-media-use.yaml
+    0.4.4: 2067 3d6c603f9d26 curriculum/units/255-social-media-use.yaml.n    0.4.3: 3148 d8682cd09793 curriculum/units/255-social-media-use.yaml
+  curriculum/units/256-checking-misinformation.yaml
+    0.4.4: 2089 0c7d146586e1 curriculum/units/256-checking-misinformation.yaml.n    0.4.3: 3100 59dc9a42b8a9 curriculum/units/256-checking-misinformation.yaml
+  curriculum/units/257-media-habits.yaml
+    0.4.4: 2142 999726946392 curriculum/units/257-media-habits.yaml.n    0.4.3: 3220 434e03dcec79 curriculum/units/257-media-habits.yaml
+  curriculum/units/258-photo-captions.yaml
+    0.4.4: 2145 c47a780e21b5 curriculum/units/258-photo-captions.yaml.n    0.4.3: 3128 aa490609a9e5 curriculum/units/258-photo-captions.yaml
+  curriculum/units/259-broadcast-style.yaml
+    0.4.4: 2142 6784b60c1b22 curriculum/units/259-broadcast-style.yaml.n    0.4.3: 3113 0f5ae7d18a04 curriculum/units/259-broadcast-style.yaml
+  curriculum/units/260-reading-editorials.yaml
+    0.4.4: 2232 ed6c27bb7215 curriculum/units/260-reading-editorials.yaml.n    0.4.3: 3316 154d923423a4 curriculum/units/260-reading-editorials.yaml
+  curriculum/units/261-responding-to-news.yaml
+    0.4.4: 2125 772eb5a28e5e curriculum/units/261-responding-to-news.yaml.n    0.4.3: 3148 cc4e6eaaadfd curriculum/units/261-responding-to-news.yaml
+  curriculum/units/262-current-events.yaml
+    0.4.4: 2178 d18df71814f2 curriculum/units/262-current-events.yaml.n    0.4.3: 3100 f0297aa0f48a curriculum/units/262-current-events.yaml
+  curriculum/units/263-class-debate.yaml
+    0.4.4: 2106 51225cc4adfe curriculum/units/263-class-debate.yaml.n    0.4.3: 3179 dda4300fd1d8 curriculum/units/263-class-debate.yaml
+  curriculum/units/264-media-ethics.yaml
+    0.4.4: 2165 7fb9208affb4 curriculum/units/264-media-ethics.yaml.n    0.4.3: 3063 7523a1bea3f6 curriculum/units/264-media-ethics.yaml
+  curriculum/units/265-daily-devices.yaml
+    0.4.4: 2080 1a996948e638 curriculum/units/265-daily-devices.yaml.n    0.4.3: 2987 68dc84b8ca64 curriculum/units/265-daily-devices.yaml
+  curriculum/units/266-internet-safety.yaml
+    0.4.4: 2111 1dd25a300480 curriculum/units/266-internet-safety.yaml.n    0.4.3: 3176 ab0a4326e21b curriculum/units/266-internet-safety.yaml
+  curriculum/units/267-privacy-settings.yaml
+    0.4.4: 2155 18b5b9905811 curriculum/units/267-privacy-settings.yaml.n    0.4.3: 3154 8afda5fe92e6 curriculum/units/267-privacy-settings.yaml
+  curriculum/units/268-software-help.yaml
+    0.4.4: 2118 b753f9a23841 curriculum/units/268-software-help.yaml.n    0.4.3: 3144 342469374b05 curriculum/units/268-software-help.yaml
+  curriculum/units/269-online-services.yaml
+    0.4.4: 2104 23a54e8c4d38 curriculum/units/269-online-services.yaml.n    0.4.3: 3131 64b440ec2c4a curriculum/units/269-online-services.yaml
+  curriculum/units/270-tech-problems.yaml
+    0.4.4: 2094 236bd9bf502f curriculum/units/270-tech-problems.yaml.n    0.4.3: 3150 5e007922b9b4 curriculum/units/270-tech-problems.yaml
+  curriculum/units/271-ai-tool-talk.yaml
+    0.4.4: 2117 d8231f4d7fed curriculum/units/271-ai-tool-talk.yaml.n    0.4.3: 3172 388670a130ba curriculum/units/271-ai-tool-talk.yaml
+  curriculum/units/272-digital-habits.yaml
+    0.4.4: 2071 eedb30f4a71c curriculum/units/272-digital-habits.yaml.n    0.4.3: 3057 5876e71612d4 curriculum/units/272-digital-habits.yaml
+  curriculum/units/273-comparing-gadgets.yaml
+    0.4.4: 2125 6cc1fd4af4c7 curriculum/units/273-comparing-gadgets.yaml.n    0.4.3: 3089 6c26d85ea574 curriculum/units/273-comparing-gadgets.yaml
+  curriculum/units/274-tech-support-visit.yaml
+    0.4.4: 2170 2abdd113948d curriculum/units/274-tech-support-visit.yaml.n    0.4.3: 3214 a4705a45b117 curriculum/units/274-tech-support-visit.yaml
+  curriculum/units/275-coding-basics.yaml
+    0.4.4: 2122 d294f2f21330 curriculum/units/275-coding-basics.yaml.n    0.4.3: 3108 659daa68db70 curriculum/units/275-coding-basics.yaml
+  curriculum/units/276-smart-home.yaml
+    0.4.4: 2115 0b6a00782c95 curriculum/units/276-smart-home.yaml.n    0.4.3: 3125 66528d46381a curriculum/units/276-smart-home.yaml
+  curriculum/units/277-online-communities.yaml
+    0.4.4: 2157 2464a440b449 curriculum/units/277-online-communities.yaml.n    0.4.3: 3201 78e2b6aa9e87 curriculum/units/277-online-communities.yaml
+  curriculum/units/278-technology-change.yaml
+    0.4.4: 2165 a6e2e0a8d805 curriculum/units/278-technology-change.yaml.n    0.4.3: 3118 621c2ffb7673 curriculum/units/278-technology-change.yaml
+  curriculum/units/279-digital-detox.yaml
+    0.4.4: 2100 e7d7c2134fd5 curriculum/units/279-digital-detox.yaml.n    0.4.3: 3120 971048a7ddd5 curriculum/units/279-digital-detox.yaml
+  curriculum/units/280-explaining-customs.yaml
+    0.4.4: 2204 2c3d2480c725 curriculum/units/280-explaining-customs.yaml.n    0.4.3: 3141 231ab904da1f curriculum/units/280-explaining-customs.yaml
+  curriculum/units/281-festival-details.yaml
+    0.4.4: 2218 513d43e0e476 curriculum/units/281-festival-details.yaml.n    0.4.3: 3258 39a90575b6bf curriculum/units/281-festival-details.yaml
+  curriculum/units/282-traditional-crafts.yaml
+    0.4.4: 2166 2fa2e6be7d07 curriculum/units/282-traditional-crafts.yaml.n    0.4.3: 3238 e8177f753829 curriculum/units/282-traditional-crafts.yaml
+  curriculum/units/283-etiquette-rules.yaml
+    0.4.4: 2187 e2f529830d78 curriculum/units/283-etiquette-rules.yaml.n    0.4.3: 3259 4e397eaca410 curriculum/units/283-etiquette-rules.yaml
+  curriculum/units/284-regional-cultures.yaml
+    0.4.4: 2230 a55a78fcd491 curriculum/units/284-regional-cultures.yaml.n    0.4.3: 3348 c8673f285f8a curriculum/units/284-regional-cultures.yaml
+  curriculum/units/285-culture-comparison.yaml
+    0.4.4: 2246 86ed6a763201 curriculum/units/285-culture-comparison.yaml.n    0.4.3: 3213 8522cceddb84 curriculum/units/285-culture-comparison.yaml
+  curriculum/units/286-museum-exhibits.yaml
+    0.4.4: 2212 9d610d6a155e curriculum/units/286-museum-exhibits.yaml.n    0.4.3: 3245 60d8c6f98971 curriculum/units/286-museum-exhibits.yaml
+  curriculum/units/287-historical-sites.yaml
+    0.4.4: 2154 23a8a5325b8f curriculum/units/287-historical-sites.yaml.n    0.4.3: 3221 00b7b148750d curriculum/units/287-historical-sites.yaml
+  curriculum/units/288-tradition-change.yaml
+    0.4.4: 2213 b776910f5352 curriculum/units/288-tradition-change.yaml.n    0.4.3: 3185 0a034733be76 curriculum/units/288-tradition-change.yaml
+  curriculum/units/289-cultural-pride.yaml
+    0.4.4: 2140 281cbe8b2d0f curriculum/units/289-cultural-pride.yaml.n    0.4.3: 3167 d4d0713aac2a curriculum/units/289-cultural-pride.yaml
+  curriculum/units/290-host-and-guest.yaml
+    0.4.4: 2209 3368dbc1c031 curriculum/units/290-host-and-guest.yaml.n    0.4.3: 3231 aafd8427ffc8 curriculum/units/290-host-and-guest.yaml
+  curriculum/units/291-gift-customs.yaml
+    0.4.4: 2189 586c458f4bfd curriculum/units/291-gift-customs.yaml.n    0.4.3: 3238 597053c41caa curriculum/units/291-gift-customs.yaml
+  curriculum/units/292-polite-taboos.yaml
+    0.4.4: 2180 d61e2bc7998e curriculum/units/292-polite-taboos.yaml.n    0.4.3: 3309 f8fadb730040 curriculum/units/292-polite-taboos.yaml
+  curriculum/units/293-attending-ceremonies.yaml
+    0.4.4: 2265 7de63ce884eb curriculum/units/293-attending-ceremonies.yaml.n    0.4.3: 3351 27796516c594 curriculum/units/293-attending-ceremonies.yaml
+  curriculum/units/294-culture-essay.yaml
+    0.4.4: 2232 87ba235d04bf curriculum/units/294-culture-essay.yaml.n    0.4.3: 3295 9c5a7e1cebe5 curriculum/units/294-culture-essay.yaml
+  curriculum/units/295-everyday-laws.yaml
+    0.4.4: 2178 613291cac8d9 curriculum/units/295-everyday-laws.yaml.n    0.4.3: 3045 2c8878d6aed0 curriculum/units/295-everyday-laws.yaml
+  curriculum/units/296-rights-and-duties.yaml
+    0.4.4: 2155 723cc30e8a33 curriculum/units/296-rights-and-duties.yaml.n    0.4.3: 3087 d1dcada50255 curriculum/units/296-rights-and-duties.yaml
+  curriculum/units/297-neighborhood-rules.yaml
+    0.4.4: 2205 5f1459bb9578 curriculum/units/297-neighborhood-rules.yaml.n    0.4.3: 3243 fa97e5d695bd curriculum/units/297-neighborhood-rules.yaml
+  curriculum/units/298-public-ethics.yaml
+    0.4.4: 2192 71821d6b2429 curriculum/units/298-public-ethics.yaml.n    0.4.3: 3108 968a6b8d30e1 curriculum/units/298-public-ethics.yaml
+  curriculum/units/299-volunteering.yaml
+    0.4.4: 2201 2562e42d4192 curriculum/units/299-volunteering.yaml.n    0.4.3: 3214 b4fda1f2c116 curriculum/units/299-volunteering.yaml
+  curriculum/units/300-community-problems.yaml
+    0.4.4: 2226 9aafb0e47721 curriculum/units/300-community-problems.yaml.n    0.4.3: 3273 abbab48471aa curriculum/units/300-community-problems.yaml
+  curriculum/units/301-writing-petitions.yaml
+    0.4.4: 2245 0abfe43abac8 curriculum/units/301-writing-petitions.yaml.n    0.4.3: 3321 f05c12535293 curriculum/units/301-writing-petitions.yaml
+  curriculum/units/302-local-government.yaml
+    0.4.4: 2226 5a9644957030 curriculum/units/302-local-government.yaml.n    0.4.3: 3263 320081f5ff7e curriculum/units/302-local-government.yaml
+  curriculum/units/303-voting-information.yaml
+    0.4.4: 2227 979054d2fb4a curriculum/units/303-voting-information.yaml.n    0.4.3: 3267 75f80a0d2854 curriculum/units/303-voting-information.yaml
+  curriculum/units/304-social-issues.yaml
+    0.4.4: 2198 d0f2db9ad1ab curriculum/units/304-social-issues.yaml.n    0.4.3: 3255 a686d248d533 curriculum/units/304-social-issues.yaml
+  curriculum/units/305-inequality-discussion.yaml
+    0.4.4: 2262 969b195690cc curriculum/units/305-inequality-discussion.yaml.n    0.4.3: 3308 ed4587541447 curriculum/units/305-inequality-discussion.yaml
+  curriculum/units/306-urban-versus-rural.yaml
+    0.4.4: 2173 c0b694a4abb9 curriculum/units/306-urban-versus-rural.yaml.n    0.4.3: 3196 b2ec01e54b33 curriculum/units/306-urban-versus-rural.yaml
+  curriculum/units/307-generational-difference.yaml
+    0.4.4: 2272 8b73d3b7771e curriculum/units/307-generational-difference.yaml.n    0.4.3: 3278 363f4a35cf52 curriculum/units/307-generational-difference.yaml
+  curriculum/units/308-polite-protest.yaml
+    0.4.4: 2236 21b324435a50 curriculum/units/308-polite-protest.yaml.n    0.4.3: 3173 a8b7ea215cba curriculum/units/308-polite-protest.yaml
+  curriculum/units/309-civic-participation.yaml
+    0.4.4: 2269 30f655237034 curriculum/units/309-civic-participation.yaml.n    0.4.3: 3343 afe4c1bdf0c7 curriculum/units/309-civic-participation.yaml
+  curriculum/units/310-weather-versus-climate.yaml
+    0.4.4: 2060 1223d8c47f83 curriculum/units/310-weather-versus-climate.yaml.n    0.4.3: 2910 ed2ac23ad49a curriculum/units/310-weather-versus-climate.yaml
+  curriculum/units/311-recycling-systems.yaml
+    0.4.4: 2119 806f0ba90699 curriculum/units/311-recycling-systems.yaml.n    0.4.3: 3160 c2c9e7f198db curriculum/units/311-recycling-systems.yaml
+  curriculum/units/312-energy-choices.yaml
+    0.4.4: 2044 f67b354a7c0c curriculum/units/312-energy-choices.yaml.n    0.4.3: 3068 800fb2c1bf18 curriculum/units/312-energy-choices.yaml
+  curriculum/units/313-reducing-waste.yaml
+    0.4.4: 2060 7311da4a706d curriculum/units/313-reducing-waste.yaml.n    0.4.3: 3084 bb94856c1e07 curriculum/units/313-reducing-waste.yaml
+  curriculum/units/314-eco-transport.yaml
+    0.4.4: 2077 0ad2fc410894 curriculum/units/314-eco-transport.yaml.n    0.4.3: 3130 cd483d479602 curriculum/units/314-eco-transport.yaml
+  curriculum/units/315-nature-protection.yaml
+    0.4.4: 2159 ee93793eb55f curriculum/units/315-nature-protection.yaml.n    0.4.3: 3205 10a151566e6b curriculum/units/315-nature-protection.yaml
+  curriculum/units/316-wildlife-discussion.yaml
+    0.4.4: 2111 d0e5b13d6f14 curriculum/units/316-wildlife-discussion.yaml.n    0.4.3: 3172 b7be6cff5a0b curriculum/units/316-wildlife-discussion.yaml
+  curriculum/units/317-pollution-problems.yaml
+    0.4.4: 2126 922ac5e01877 curriculum/units/317-pollution-problems.yaml.n    0.4.3: 3181 52c559c21b0b curriculum/units/317-pollution-problems.yaml
+  curriculum/units/318-sustainable-shopping.yaml
+    0.4.4: 2128 e328ec4bd145 curriculum/units/318-sustainable-shopping.yaml.n    0.4.3: 3111 c545979293e4 curriculum/units/318-sustainable-shopping.yaml
+  curriculum/units/319-environmental-policy.yaml
+    0.4.4: 2108 05e7817f8b1f curriculum/units/319-environmental-policy.yaml.n    0.4.3: 3113 61f8ad5ae73d curriculum/units/319-environmental-policy.yaml
+  curriculum/units/320-disaster-preparation.yaml
+    0.4.4: 2155 e5a633331b0a curriculum/units/320-disaster-preparation.yaml.n    0.4.3: 3206 01c988680146 curriculum/units/320-disaster-preparation.yaml
+  curriculum/units/321-water-issues.yaml
+    0.4.4: 2061 177f9bf8dc47 curriculum/units/321-water-issues.yaml.n    0.4.3: 3121 8bfeddfe882b curriculum/units/321-water-issues.yaml
+  curriculum/units/322-food-waste.yaml
+    0.4.4: 2047 9c2023248a8a curriculum/units/322-food-waste.yaml.n    0.4.3: 3053 fd18ea0c2c6e curriculum/units/322-food-waste.yaml
+  curriculum/units/323-green-cities.yaml
+    0.4.4: 2090 7a7a0346cb23 curriculum/units/323-green-cities.yaml.n    0.4.3: 3219 2cba8ceb1325 curriculum/units/323-green-cities.yaml
+  curriculum/units/324-personal-footprint.yaml
+    0.4.4: 2163 595b483ecb47 curriculum/units/324-personal-footprint.yaml.n    0.4.3: 3169 ae8b9400af3a curriculum/units/324-personal-footprint.yaml
+  curriculum/units/325-itinerary-planning.yaml
+    0.4.4: 2222 51e90f22cfd1 curriculum/units/325-itinerary-planning.yaml.n    0.4.3: 3083 43550b00f622 curriculum/units/325-itinerary-planning.yaml
+  curriculum/units/326-booking-problems.yaml
+    0.4.4: 2174 cf358c7a1a24 curriculum/units/326-booking-problems.yaml.n    0.4.3: 3205 7aa5dc1d59cb curriculum/units/326-booking-problems.yaml
+  curriculum/units/327-travel-essay.yaml
+    0.4.4: 2155 fcd0c7569139 curriculum/units/327-travel-essay.yaml.n    0.4.3: 3120 a8f290f7af8c curriculum/units/327-travel-essay.yaml
+  curriculum/units/328-hosting-interaction.yaml
+    0.4.4: 2168 f7096055882d curriculum/units/328-hosting-interaction.yaml.n    0.4.3: 3151 5a80220426f2 curriculum/units/328-hosting-interaction.yaml
+  curriculum/units/329-culture-shock.yaml
+    0.4.4: 2156 5801162eadb8 curriculum/units/329-culture-shock.yaml.n    0.4.3: 3212 ddd98cdd1b99 curriculum/units/329-culture-shock.yaml
+  curriculum/units/330-travel-safety.yaml
+    0.4.4: 2146 34148fadb3b2 curriculum/units/330-travel-safety.yaml.n    0.4.3: 3134 d60515e46fc2 curriculum/units/330-travel-safety.yaml
+  curriculum/units/331-border-documentation.yaml
+    0.4.4: 2237 71fb52dccacd curriculum/units/331-border-documentation.yaml.n    0.4.3: 3247 39316d0577d2 curriculum/units/331-border-documentation.yaml
+  curriculum/units/332-homestay-letters.yaml
+    0.4.4: 2180 6a0f73ec3f3a curriculum/units/332-homestay-letters.yaml.n    0.4.3: 3220 24e2931df384 curriculum/units/332-homestay-letters.yaml
+  curriculum/units/333-guided-tours.yaml
+    0.4.4: 2135 8084d618a480 curriculum/units/333-guided-tours.yaml.n    0.4.3: 3150 c029bc40bd40 curriculum/units/333-guided-tours.yaml
+  curriculum/units/334-travel-companions.yaml
+    0.4.4: 2195 15064a8fb25f curriculum/units/334-travel-companions.yaml.n    0.4.3: 3167 47c73e090bbc curriculum/units/334-travel-companions.yaml
+  curriculum/units/335-lost-belongings.yaml
+    0.4.4: 2211 c2bbaf3bfa26 curriculum/units/335-lost-belongings.yaml.n    0.4.3: 3275 e1aca2537427 curriculum/units/335-lost-belongings.yaml
+  curriculum/units/336-travel-budgeting.yaml
+    0.4.4: 2218 ca509c93c517 curriculum/units/336-travel-budgeting.yaml.n    0.4.3: 3246 d2adf277af73 curriculum/units/336-travel-budgeting.yaml
+  curriculum/units/337-route-changes.yaml
+    0.4.4: 2145 10cf214e4926 curriculum/units/337-route-changes.yaml.n    0.4.3: 3165 a231536451ab curriculum/units/337-route-changes.yaml
+  curriculum/units/338-travel-reflection.yaml
+    0.4.4: 2190 2baf4b86b9a2 curriculum/units/338-travel-reflection.yaml.n    0.4.3: 3184 da4cd7b454ce curriculum/units/338-travel-reflection.yaml
+  curriculum/units/339-postcard-writing.yaml
+    0.4.4: 2148 f7c21ee177d3 curriculum/units/339-postcard-writing.yaml.n    0.4.3: 3214 e91b6dc53e21 curriculum/units/339-postcard-writing.yaml
+  curriculum/units/340-personality-description.yaml
+    0.4.4: 2269 4494bcbdd2c8 curriculum/units/340-personality-description.yaml.n    0.4.3: 3221 aa7ad2665ce3 curriculum/units/340-personality-description.yaml
+  curriculum/units/341-emotion-vocabulary.yaml
+    0.4.4: 2241 3bfb93e28d3c curriculum/units/341-emotion-vocabulary.yaml.n    0.4.3: 3292 e9280f874164 curriculum/units/341-emotion-vocabulary.yaml
+  curriculum/units/342-mood-conversation.yaml
+    0.4.4: 2208 c021942e8a5c curriculum/units/342-mood-conversation.yaml.n    0.4.3: 3351 00c3079c5d0b curriculum/units/342-mood-conversation.yaml
+  curriculum/units/343-expressing-empathy.yaml
+    0.4.4: 2220 b3139fb7a145 curriculum/units/343-expressing-empathy.yaml.n    0.4.3: 3262 8e4a86544ac9 curriculum/units/343-expressing-empathy.yaml
+  curriculum/units/344-conflict-feelings.yaml
+    0.4.4: 2205 e6c0a915ce90 curriculum/units/344-conflict-feelings.yaml.n    0.4.3: 3196 e7e1432f4908 curriculum/units/344-conflict-feelings.yaml
+  curriculum/units/345-sincere-apology.yaml
+    0.4.4: 2143 98203c2467cb curriculum/units/345-sincere-apology.yaml.n    0.4.3: 3177 5c769de1e0ad curriculum/units/345-sincere-apology.yaml
+  curriculum/units/346-deepened-gratitude.yaml
+    0.4.4: 2147 20849a5ea200 curriculum/units/346-deepened-gratitude.yaml.n    0.4.3: 3192 8b3d50d5f881 curriculum/units/346-deepened-gratitude.yaml
+  curriculum/units/347-encouragement-words.yaml
+    0.4.4: 2210 d1ba54b4272d curriculum/units/347-encouragement-words.yaml.n    0.4.3: 3260 18248c313d4f curriculum/units/347-encouragement-words.yaml
+  curriculum/units/348-stress-discussion.yaml
+    0.4.4: 2220 60421f0086f6 curriculum/units/348-stress-discussion.yaml.n    0.4.3: 3210 2351fbcc1f91 curriculum/units/348-stress-discussion.yaml
+  curriculum/units/349-coping-habits.yaml
+    0.4.4: 2119 136a208a97e5 curriculum/units/349-coping-habits.yaml.n    0.4.3: 3148 bbc857abd8f1 curriculum/units/349-coping-habits.yaml
+  curriculum/units/350-temperament-comparison.yaml
+    0.4.4: 2273 e5236e721ce0 curriculum/units/350-temperament-comparison.yaml.n    0.4.3: 3370 3b1ab7c3ad74 curriculum/units/350-temperament-comparison.yaml
+  curriculum/units/351-emotional-story.yaml
+    0.4.4: 2231 6502a1a16f51 curriculum/units/351-emotional-story.yaml.n    0.4.3: 3270 134f5154a601 curriculum/units/351-emotional-story.yaml
+  curriculum/units/352-emotional-advice.yaml
+    0.4.4: 2226 36612a5a12c8 curriculum/units/352-emotional-advice.yaml.n    0.4.3: 3194 35ce0a55eff7 curriculum/units/352-emotional-advice.yaml
+  curriculum/units/353-reconciliation.yaml
+    0.4.4: 2226 266d675d620f curriculum/units/353-reconciliation.yaml.n    0.4.3: 3256 702be554d433 curriculum/units/353-reconciliation.yaml
+  curriculum/units/354-self-reflection.yaml
+    0.4.4: 2208 a3ff2ad95187 curriculum/units/354-self-reflection.yaml.n    0.4.3: 3202 bf2c2c6f6a83 curriculum/units/354-self-reflection.yaml
+  curriculum/units/355-giving-advice.yaml
+    0.4.4: 2108 0f4faa7b41fa curriculum/units/355-giving-advice.yaml.n    0.4.3: 2943 17118a4b867a curriculum/units/355-giving-advice.yaml
+  curriculum/units/356-soft-advice.yaml
+    0.4.4: 2065 2e9f489d9062 curriculum/units/356-soft-advice.yaml.n    0.4.3: 3039 9f4bf304e448 curriculum/units/356-soft-advice.yaml
+  curriculum/units/357-opinion-structure.yaml
+    0.4.4: 2159 14fbf4029171 curriculum/units/357-opinion-structure.yaml.n    0.4.3: 3121 87e238fd5d11 curriculum/units/357-opinion-structure.yaml
+  curriculum/units/358-partial-agreement.yaml
+    0.4.4: 2151 24e53e0f9737 curriculum/units/358-partial-agreement.yaml.n    0.4.3: 3157 30e55f29593f curriculum/units/358-partial-agreement.yaml
+  curriculum/units/359-polite-disagreement.yaml
+    0.4.4: 2186 c1128b7168a0 curriculum/units/359-polite-disagreement.yaml.n    0.4.3: 3200 d1326c993d16 curriculum/units/359-polite-disagreement.yaml
+  curriculum/units/360-gentle-persuasion.yaml
+    0.4.4: 2193 3a222148709a curriculum/units/360-gentle-persuasion.yaml.n    0.4.3: 3233 c70e4969af44 curriculum/units/360-gentle-persuasion.yaml
+  curriculum/units/361-suggestion-forms.yaml
+    0.4.4: 2224 7f075cca4e72 curriculum/units/361-suggestion-forms.yaml.n    0.4.3: 3224 f7f0f388a37e curriculum/units/361-suggestion-forms.yaml
+  curriculum/units/362-polite-warnings.yaml
+    0.4.4: 2164 c151cbcd18ad curriculum/units/362-polite-warnings.yaml.n    0.4.3: 3270 15fdc724530d curriculum/units/362-polite-warnings.yaml
+  curriculum/units/363-expressing-regret.yaml
+    0.4.4: 2134 66f60c448d3d curriculum/units/363-expressing-regret.yaml.n    0.4.3: 3127 3f04e0914381 curriculum/units/363-expressing-regret.yaml
+  curriculum/units/364-expressing-hope.yaml
+    0.4.4: 2099 0c869f057b39 curriculum/units/364-expressing-hope.yaml.n    0.4.3: 3090 412529db32fd curriculum/units/364-expressing-hope.yaml
+  curriculum/units/365-explaining-preference.yaml
+    0.4.4: 2235 2cdc5ff6f7ca curriculum/units/365-explaining-preference.yaml.n    0.4.3: 3208 66881f75e25d curriculum/units/365-explaining-preference.yaml
+  curriculum/units/366-stating-priorities.yaml
+    0.4.4: 2147 64ee86aa7518 curriculum/units/366-stating-priorities.yaml.n    0.4.3: 3157 bfcf412c6e04 curriculum/units/366-stating-priorities.yaml
+  curriculum/units/367-compromise-writing.yaml
+    0.4.4: 2198 59e0a772a1bb curriculum/units/367-compromise-writing.yaml.n    0.4.3: 3206 01a999db0c66 curriculum/units/367-compromise-writing.yaml
+  curriculum/units/368-decision-talk.yaml
+    0.4.4: 2123 b4e313c61f5c curriculum/units/368-decision-talk.yaml.n    0.4.3: 3090 4d4d86a5b1eb curriculum/units/368-decision-talk.yaml
+  curriculum/units/369-reflection-essay.yaml
+    0.4.4: 2135 28cb2c81145d curriculum/units/369-reflection-essay.yaml.n    0.4.3: 3118 08bc3f0a7f5e curriculum/units/369-reflection-essay.yaml
+  curriculum/units/370-product-reviews.yaml
+    0.4.4: 2122 c5cb1ee4bf5f curriculum/units/370-product-reviews.yaml.n    0.4.3: 2974 74d1130599c7 curriculum/units/370-product-reviews.yaml
+  curriculum/units/371-service-comparison.yaml
+    0.4.4: 2180 ccc22821a6ef curriculum/units/371-service-comparison.yaml.n    0.4.3: 3183 f1a2729cc31c curriculum/units/371-service-comparison.yaml
+  curriculum/units/372-pros-and-cons.yaml
+    0.4.4: 2129 8b191f44032b curriculum/units/372-pros-and-cons.yaml.n    0.4.3: 3192 b3a25eed4c95 curriculum/units/372-pros-and-cons.yaml
+  curriculum/units/373-explaining-choices.yaml
+    0.4.4: 2149 2ff205a6671c curriculum/units/373-explaining-choices.yaml.n    0.4.3: 3195 cb35066e2d39 curriculum/units/373-explaining-choices.yaml
+  curriculum/units/374-ranking-with-reasons.yaml
+    0.4.4: 2193 a51e5a0d0a7c curriculum/units/374-ranking-with-reasons.yaml.n    0.4.3: 3207 4da816382d07 curriculum/units/374-ranking-with-reasons.yaml
+  curriculum/units/375-debate-basics.yaml
+    0.4.4: 2138 5c96e11884fa curriculum/units/375-debate-basics.yaml.n    0.4.3: 3125 1b15761cb3f2 curriculum/units/375-debate-basics.yaml
+  curriculum/units/376-using-evidence.yaml
+    0.4.4: 2126 3c35bd9fd7a6 curriculum/units/376-using-evidence.yaml.n    0.4.3: 3112 8700983ffbd8 curriculum/units/376-using-evidence.yaml
+  curriculum/units/377-counter-arguments.yaml
+    0.4.4: 2174 1059d797294c curriculum/units/377-counter-arguments.yaml.n    0.4.3: 3173 3c421d5dcce7 curriculum/units/377-counter-arguments.yaml
+  curriculum/units/378-conceding-points.yaml
+    0.4.4: 2133 415057c9e85f curriculum/units/378-conceding-points.yaml.n    0.4.3: 3118 c7b72d87f39a curriculum/units/378-conceding-points.yaml
+  curriculum/units/379-writing-conclusions.yaml
+    0.4.4: 2265 579227c443f2 curriculum/units/379-writing-conclusions.yaml.n    0.4.3: 3199 7a861e7aeb47 curriculum/units/379-writing-conclusions.yaml
+  curriculum/units/380-review-posts.yaml
+    0.4.4: 2147 bc9b8d8cd19f curriculum/units/380-review-posts.yaml.n    0.4.3: 3127 8f2cff4a47b9 curriculum/units/380-review-posts.yaml
+  curriculum/units/381-rating-systems.yaml
+    0.4.4: 2182 ccd02c67cb80 curriculum/units/381-rating-systems.yaml.n    0.4.3: 3201 4faae3f446c5 curriculum/units/381-rating-systems.yaml
+  curriculum/units/382-budget-comparison.yaml
+    0.4.4: 2172 7091bb73ede9 curriculum/units/382-budget-comparison.yaml.n    0.4.3: 3156 11428ed10de5 curriculum/units/382-budget-comparison.yaml
+  curriculum/units/383-travel-comparison.yaml
+    0.4.4: 2200 24f89d3e32d0 curriculum/units/383-travel-comparison.yaml.n    0.4.3: 3201 5f776939c7af curriculum/units/383-travel-comparison.yaml
+  curriculum/units/384-decision-essay.yaml
+    0.4.4: 2138 258531947e06 curriculum/units/384-decision-essay.yaml.n    0.4.3: 3123 81e1563a9976 curriculum/units/384-decision-essay.yaml
+  curriculum/units/385-narrative-structure.yaml
+    0.4.4: 2208 8f426b2b1401 curriculum/units/385-narrative-structure.yaml.n    0.4.3: 3041 80d441fbe481 curriculum/units/385-narrative-structure.yaml
+  curriculum/units/386-background-setting.yaml
+    0.4.4: 2143 32b4b539b7ef curriculum/units/386-background-setting.yaml.n    0.4.3: 3191 15f50bd1b4cd curriculum/units/386-background-setting.yaml
+  curriculum/units/387-plot-sequencing.yaml
+    0.4.4: 2124 9c3ce10002fa curriculum/units/387-plot-sequencing.yaml.n    0.4.3: 3107 bc7de1eb50cf curriculum/units/387-plot-sequencing.yaml
+  curriculum/units/388-character-description.yaml
+    0.4.4: 2165 984a0b42e634 curriculum/units/388-character-description.yaml.n    0.4.3: 3225 32912496c1ea curriculum/units/388-character-description.yaml
+  curriculum/units/389-setting-description.yaml
+    0.4.4: 2182 c0d9149c6331 curriculum/units/389-setting-description.yaml.n    0.4.3: 3238 c3484ee01b07 curriculum/units/389-setting-description.yaml
+  curriculum/units/390-building-suspense.yaml
+    0.4.4: 2190 4d27f73885f1 curriculum/units/390-building-suspense.yaml.n    0.4.3: 3266 b41a84ac0b6a curriculum/units/390-building-suspense.yaml
+  curriculum/units/391-writing-dialogue.yaml
+    0.4.4: 2126 123b0a08de14 curriculum/units/391-writing-dialogue.yaml.n    0.4.3: 3159 a9620e145f12 curriculum/units/391-writing-dialogue.yaml
+  curriculum/units/392-perspective-shifts.yaml
+    0.4.4: 2147 91161b55c938 curriculum/units/392-perspective-shifts.yaml.n    0.4.3: 3154 07e20c2cd667 curriculum/units/392-perspective-shifts.yaml
+  curriculum/units/393-writing-endings.yaml
+    0.4.4: 2125 a0275160c6ce curriculum/units/393-writing-endings.yaml.n    0.4.3: 3149 df0dd7212053 curriculum/units/393-writing-endings.yaml
+  curriculum/units/394-story-revision.yaml
+    0.4.4: 2128 961d7aab7bd5 curriculum/units/394-story-revision.yaml.n    0.4.3: 3116 e9edc5da10a3 curriculum/units/394-story-revision.yaml
+  curriculum/units/395-anecdote-telling.yaml
+    0.4.4: 2095 d0440b9f6e0b curriculum/units/395-anecdote-telling.yaml.n    0.4.3: 3080 1d8ae631f827 curriculum/units/395-anecdote-telling.yaml
+  curriculum/units/396-polite-humor.yaml
+    0.4.4: 2072 0daf3315bfa3 curriculum/units/396-polite-humor.yaml.n    0.4.3: 3041 531499521c6b curriculum/units/396-polite-humor.yaml
+  curriculum/units/397-folktale-reading.yaml
+    0.4.4: 2114 6c721d8de692 curriculum/units/397-folktale-reading.yaml.n    0.4.3: 3104 4fa7affcf68a curriculum/units/397-folktale-reading.yaml
+  curriculum/units/398-story-retelling.yaml
+    0.4.4: 2124 ea5130b24e34 curriculum/units/398-story-retelling.yaml.n    0.4.3: 3103 32a03aad386d curriculum/units/398-story-retelling.yaml
+  curriculum/units/399-personal-essay.yaml
+    0.4.4: 2158 aa9c98d67569 curriculum/units/399-personal-essay.yaml.n    0.4.3: 3173 46de2e691e71 curriculum/units/399-personal-essay.yaml
+  curriculum/units/400-wellness-routines.yaml
+    0.4.4: 2215 2080257f02bc curriculum/units/400-wellness-routines.yaml.n    0.4.3: 3034 29ce3a9aa5a1 curriculum/units/400-wellness-routines.yaml
+  curriculum/units/401-sleep-habits.yaml
+    0.4.4: 2115 2fc906963c9c curriculum/units/401-sleep-habits.yaml.n    0.4.3: 3166 e88c15d92183 curriculum/units/401-sleep-habits.yaml
+  curriculum/units/402-balanced-nutrition.yaml
+    0.4.4: 2162 721b1279ebad curriculum/units/402-balanced-nutrition.yaml.n    0.4.3: 3199 a3af608cfb58 curriculum/units/402-balanced-nutrition.yaml
+  curriculum/units/403-exercise-planning.yaml
+    0.4.4: 2177 aff349264b5a curriculum/units/403-exercise-planning.yaml.n    0.4.3: 3183 d370e34be2fc curriculum/units/403-exercise-planning.yaml
+  curriculum/units/404-stress-management.yaml
+    0.4.4: 2192 391fa69e74ab curriculum/units/404-stress-management.yaml.n    0.4.3: 3198 4edba8d481cc curriculum/units/404-stress-management.yaml
+  curriculum/units/405-mental-health-talk.yaml
+    0.4.4: 2226 fe4489111e1d curriculum/units/405-mental-health-talk.yaml.n    0.4.3: 3263 56896b05b390 curriculum/units/405-mental-health-talk.yaml
+  curriculum/units/406-habit-change.yaml
+    0.4.4: 2141 1852af2a36b7 curriculum/units/406-habit-change.yaml.n    0.4.3: 3124 b920ce86d56e curriculum/units/406-habit-change.yaml
+  curriculum/units/407-quitting-habits.yaml
+    0.4.4: 2162 765831d2a159 curriculum/units/407-quitting-habits.yaml.n    0.4.3: 3145 f90b4319c446 curriculum/units/407-quitting-habits.yaml
+  curriculum/units/408-medical-information.yaml
+    0.4.4: 2188 7b32902f40e1 curriculum/units/408-medical-information.yaml.n    0.4.3: 3203 be4873798068 curriculum/units/408-medical-information.yaml
+  curriculum/units/409-vaccination-discussion.yaml
+    0.4.4: 2240 67a6820119c7 curriculum/units/409-vaccination-discussion.yaml.n    0.4.3: 3262 d7c6461f025f curriculum/units/409-vaccination-discussion.yaml
+  curriculum/units/410-care-and-aging.yaml
+    0.4.4: 2137 fe8cafc19e2b curriculum/units/410-care-and-aging.yaml.n    0.4.3: 3132 3e722767ad20 curriculum/units/410-care-and-aging.yaml
+  curriculum/units/411-fitness-club-life.yaml
+    0.4.4: 2191 310b427fb79c curriculum/units/411-fitness-club-life.yaml.n    0.4.3: 3226 a2bc64e0862e curriculum/units/411-fitness-club-life.yaml
+  curriculum/units/412-diet-culture.yaml
+    0.4.4: 2126 ede3570725a5 curriculum/units/412-diet-culture.yaml.n    0.4.3: 3107 222fd2e660ea curriculum/units/412-diet-culture.yaml
+  curriculum/units/413-wellbeing-apps.yaml
+    0.4.4: 2185 9cc5ce82a679 curriculum/units/413-wellbeing-apps.yaml.n    0.4.3: 3169 37a785d49016 curriculum/units/413-wellbeing-apps.yaml
+  curriculum/units/414-health-debate.yaml
+    0.4.4: 2179 36e9efe38833 curriculum/units/414-health-debate.yaml.n    0.4.3: 3129 0f245e0c4b07 curriculum/units/414-health-debate.yaml
+  grammar/concepts.jsonl
+    0.4.4: 99831 e742d0505e7e grammar/concepts.jsonl.n    0.4.3: 100111 ad8dabe91878 grammar/concepts.jsonl
+  grammar/dependencies.yaml
+    0.4.4: 12020 bf5daf15e605 grammar/dependencies.yaml.n    0.4.3: 12323 317f1ec64718 grammar/dependencies.yaml
+  language/orthography.yaml
+    0.4.4: 949 f82efc934951 language/orthography.yaml.n    0.4.3: 1032 bbdd2af441c0 language/orthography.yaml
+  lexicon/admin.jsonl
+    0.4.4: 49816 6f827131ff1d lexicon/admin.jsonl.n    0.4.3: 50577 61a03bb5b250 lexicon/admin.jsonl
+  lexicon/advice.jsonl
+    0.4.4: 26765 a7dc9b16ca2e lexicon/advice.jsonl.n    0.4.3: 27156 5d09301fa9e9 lexicon/advice.jsonl
+  lexicon/advice2.jsonl
+    0.4.4: 54373 c14554092728 lexicon/advice2.jsonl.n    0.4.3: 54548 5a3f1f62a8c4 lexicon/advice2.jsonl
+  lexicon/body.jsonl
+    0.4.4: 51257 9f130ff36445 lexicon/body.jsonl.n    0.4.3: 51981 1fb6d80f7787 lexicon/body.jsonl
+  lexicon/city.jsonl
+    0.4.4: 53408 dbcb77e37586 lexicon/city.jsonl.n    0.4.3: 53527 5d842962e469 lexicon/city.jsonl
+  lexicon/culture.jsonl
+    0.4.4: 53482 8889ac7b3911 lexicon/culture.jsonl.n    0.4.3: 53985 b25f71e01eb1 lexicon/culture.jsonl
+  lexicon/culture2.jsonl
+    0.4.4: 26065 e00ed117a994 lexicon/culture2.jsonl.n    0.4.3: 26309 165cc6b2b862 lexicon/culture2.jsonl
+  lexicon/debate.jsonl
+    0.4.4: 52408 bf138665a742 lexicon/debate.jsonl.n    0.4.3: 52730 241a531a1838 lexicon/debate.jsonl
+  lexicon/debate2.jsonl
+    0.4.4: 25864 d8f9db776c62 lexicon/debate2.jsonl.n    0.4.3: 25826 9f78833acdf7 lexicon/debate2.jsonl
+  lexicon/edu.jsonl
+    0.4.4: 52848 5cc08868b8e0 lexicon/edu.jsonl.n    0.4.3: 53242 a58fd9017dde lexicon/edu.jsonl
+  lexicon/edu2.jsonl
+    0.4.4: 50547 410a05f793e7 lexicon/edu2.jsonl.n    0.4.3: 51555 a60c9151c333 lexicon/edu2.jsonl
+  lexicon/emotion.jsonl
+    0.4.4: 52042 3c4541be9897 lexicon/emotion.jsonl.n    0.4.3: 52479 58fa3f6b1968 lexicon/emotion.jsonl
+  lexicon/emotion2.jsonl
+    0.4.4: 25698 174ac382cd7f lexicon/emotion2.jsonl.n    0.4.3: 25762 3f399519ecf4 lexicon/emotion2.jsonl
+  lexicon/entertainment.jsonl
+    0.4.4: 50313 a5272940444d lexicon/entertainment.jsonl.n    0.4.3: 50563 d28e4c5f0f0f lexicon/entertainment.jsonl
+  lexicon/env.jsonl
+    0.4.4: 51286 8284470969cc lexicon/env.jsonl.n    0.4.3: 51637 362a979a022e lexicon/env.jsonl
+  lexicon/env2.jsonl
+    0.4.4: 25304 4aa10b39ffba lexicon/env2.jsonl.n    0.4.3: 25562 940be84883b4 lexicon/env2.jsonl
+  lexicon/food.jsonl
+    0.4.4: 51609 342bb4bea086 lexicon/food.jsonl.n    0.4.3: 51950 d24cde1cf246 lexicon/food.jsonl
+  lexicon/health2.jsonl
+    0.4.4: 51888 a98c9c0176b3 lexicon/health2.jsonl.n    0.4.3: 52340 d5a1b439b2d9 lexicon/health2.jsonl
+  lexicon/health3.jsonl
+    0.4.4: 25786 2411e30485f7 lexicon/health3.jsonl.n    0.4.3: 26124 009cd19ce818 lexicon/health3.jsonl
+  lexicon/health4.jsonl
+    0.4.4: 15404 9b9f6646fee4 lexicon/health4.jsonl.n    0.4.3: 15461 9062705457aa lexicon/health4.jsonl
+  lexicon/leisure.jsonl
+    0.4.4: 50124 fb163b22f093 lexicon/leisure.jsonl.n    0.4.3: 50656 6d4d11021439 lexicon/leisure.jsonl
+  lexicon/media.jsonl
+    0.4.4: 50829 c8b447b74779 lexicon/media.jsonl.n    0.4.3: 51436 fd2908b08030 lexicon/media.jsonl
+  lexicon/media2.jsonl
+    0.4.4: 25790 a01efe522636 lexicon/media2.jsonl.n    0.4.3: 26101 fe577ae8d949 lexicon/media2.jsonl
+  lexicon/questions.jsonl
+    0.4.4: 10610 c187528f1e7f lexicon/questions.jsonl.n    0.4.3: 10610 5be2cb77e44f lexicon/questions.jsonl
+  lexicon/relationships.jsonl
+    0.4.4: 50348 40ec15bdf11d lexicon/relationships.jsonl.n    0.4.3: 52176 3e90122ede20 lexicon/relationships.jsonl
+  lexicon/shopping.jsonl
+    0.4.4: 50012 33e6e41c533f lexicon/shopping.jsonl.n    0.4.3: 50393 79f9dba66807 lexicon/shopping.jsonl
+  lexicon/society.jsonl
+    0.4.4: 26287 0efbceff5e04 lexicon/society.jsonl.n    0.4.3: 26460 596e503407d3 lexicon/society.jsonl
+  lexicon/society2.jsonl
+    0.4.4: 53871 544fd0be1ccd lexicon/society2.jsonl.n    0.4.3: 54321 c98d60ca93a5 lexicon/society2.jsonl
+  lexicon/sports.jsonl
+    0.4.4: 48285 d4a479b52a0f lexicon/sports.jsonl.n    0.4.3: 48762 5946aaa829fb lexicon/sports.jsonl
+  lexicon/story.jsonl
+    0.4.4: 26586 c09adf24c2fb lexicon/story.jsonl.n    0.4.3: 26526 9a50119d84cb lexicon/story.jsonl
+  lexicon/story2.jsonl
+    0.4.4: 52832 82631c7bdad5 lexicon/story2.jsonl.n    0.4.3: 52975 408b4dbd5b75 lexicon/story2.jsonl
+  lexicon/tech.jsonl
+    0.4.4: 22230 a59ec67f25ae lexicon/tech.jsonl.n    0.4.3: 22317 9390909e36eb lexicon/tech.jsonl
+  lexicon/tech2.jsonl
+    0.4.4: 51559 894853904bb6 lexicon/tech2.jsonl.n    0.4.3: 51916 e3252fb9c086 lexicon/tech2.jsonl
+  lexicon/transport.jsonl
+    0.4.4: 55640 842b11abef06 lexicon/transport.jsonl.n    0.4.3: 55795 04f60c0c9488 lexicon/transport.jsonl
+  lexicon/travel.jsonl
+    0.4.4: 25807 e960f8160923 lexicon/travel.jsonl.n    0.4.3: 26045 fef81e876b59 lexicon/travel.jsonl
+  lexicon/travel2.jsonl
+    0.4.4: 52253 793abd8ebcb9 lexicon/travel2.jsonl.n    0.4.3: 52568 d90b469d083a lexicon/travel2.jsonl
+  lexicon/weather2.jsonl
+    0.4.4: 53203 25eaa80374f3 lexicon/weather2.jsonl.n    0.4.3: 53723 8b60184bf420 lexicon/weather2.jsonl
+  lexicon/work.jsonl
+    0.4.4: 51876 dc41f3e18bf6 lexicon/work.jsonl.n    0.4.3: 52166 a7db5e7b237e lexicon/work.jsonl
+  lexicon/work2.jsonl
+    0.4.4: 52861 4d22ddbe6bde lexicon/work2.jsonl.n    0.4.3: 53080 172eb0f72bb0 lexicon/work2.jsonl
+  manifest.yaml
+    0.4.4: 794 7dbd7891eb58 manifest.yaml.n    0.4.3: 1461 c640e7de6f1b manifest.yaml
+  media/ja.lex.admin.jushou-todoke.wav
+    0.4.4: 76844 fab28cf064ec media/ja.lex.admin.jushou-todoke.wav.n    0.4.3: 53804 537b1485654e media/ja.lex.admin.jushou-todoke.wav
+  media/ja.lex.admin.kessaku.wav
+    0.4.4: 57644 f3d7445cd8c1 media/ja.lex.admin.kessaku.wav.n    0.4.3: 57644 9b9986b35b0f media/ja.lex.admin.kessaku.wav
+  media/ja.lex.admin.kin-yuu.wav
+    0.4.4: 53804 03d789a5aa96 media/ja.lex.admin.kin-yuu.wav.n    0.4.3: 84524 9248badb6790 media/ja.lex.admin.kin-yuu.wav
+  media/ja.lex.admin.mibungou.wav
+    0.4.4: 57644 943f6c3574f2 media/ja.lex.admin.mibungou.wav.n    0.4.3: 49964 e73faf0ce455 media/ja.lex.admin.mibungou.wav
+  media/ja.lex.admin.nyuusatsu.wav
+    0.4.4: 49964 7069b9b9d3b2 media/ja.lex.admin.nyuusatsu.wav.n    0.4.3: 126764 145485d945a9 media/ja.lex.admin.nyuusatsu.wav
+  media/ja.lex.admin.taishu-kin.wav
+    0.4.4: 80684 849c9f932005 media/ja.lex.admin.taishu-kin.wav.n    0.4.3: 34604 f9129c0fb531 media/ja.lex.admin.taishu-kin.wav
+  media/ja.lex.advice.ato.wav
+    0.4.4: 30764 5d3880344a0d media/ja.lex.advice.ato.wav.n    0.4.3: 34604 985065aa42d6 media/ja.lex.advice.ato.wav
+  media/ja.lex.advice.hatsu.wav
+    0.4.4: 53804 380c3cca59e8 media/ja.lex.advice.hatsu.wav.n    0.4.3: 53804 9f6af08ef750 media/ja.lex.advice.hatsu.wav
+  media/ja.lex.advice.ketai.wav
+    0.4.4: 57644 3924f284c559 media/ja.lex.advice.ketai.wav.n    0.4.3: 92204 15d3d2714e9a media/ja.lex.advice.ketai.wav
+  media/ja.lex.advice.koudan.wav
+    0.4.4: 46124 a8a57d8f9680 media/ja.lex.advice.koudan.wav.n    0.4.3: 92204 04d3f094d9f1 media/ja.lex.advice.koudan.wav
+  media/ja.lex.advice.shouko.wav
+    0.4.4: 49964 a2b5918f6559 media/ja.lex.advice.shouko.wav.n    0.4.3: 42284 86901a169c06 media/ja.lex.advice.shouko.wav
+  media/ja.lex.advice2.inoko2.wav
+    0.4.4: 169004 5ee033531e79 media/ja.lex.advice2.inoko2.wav.n    0.4.3: 84524 54c6db2b8fe9 media/ja.lex.advice2.inoko2.wav
+  media/ja.lex.advice2.kokuhan.wav
+    0.4.4: 57644 45fac8e23214 media/ja.lex.advice2.kokuhan.wav.n    0.4.3: 69164 dd43fe4b9165 media/ja.lex.advice2.kokuhan.wav
+  media/ja.lex.advice2.suusei.wav
+    0.4.4: 46124 2321167a4bb1 media/ja.lex.advice2.suusei.wav.n    0.4.3: 96044 0981fd6aa80a media/ja.lex.advice2.suusei.wav
+  media/ja.lex.advice2.tetsudo.wav
+    0.4.4: 65324 2789faf5d384 media/ja.lex.advice2.tetsudo.wav.n    0.4.3: 46124 3016e5fad919 media/ja.lex.advice2.tetsudo.wav
+  media/ja.lex.advice2.youchuu.wav
+    0.4.4: 42284 741e36a3641b media/ja.lex.advice2.youchuu.wav.n    0.4.3: 103724 0d441a83b1fb media/ja.lex.advice2.youchuu.wav
+  media/ja.lex.body.fukatsu.wav
+    0.4.4: 49964 90588f6448e5 media/ja.lex.body.fukatsu.wav.n    0.4.3: 96044 2921f062cf92 media/ja.lex.body.fukatsu.wav
+  media/ja.lex.body.fukkyuu.wav
+    0.4.4: 49964 ceedb43b8771 media/ja.lex.body.fukkyuu.wav.n    0.4.3: 126764 8fbd401f5cc1 media/ja.lex.body.fukkyuu.wav
+  media/ja.lex.body.junyou.wav
+    0.4.4: 53804 d332a4724506 media/ja.lex.body.junyou.wav.n    0.4.3: 53804 06050e55d281 media/ja.lex.body.junyou.wav
+  media/ja.lex.body.kaffa.wav
+    0.4.4: 38444 ee39574c827f media/ja.lex.body.kaffa.wav.n    0.4.3: 34604 b930ed70ee21 media/ja.lex.body.kaffa.wav
+  media/ja.lex.body.shoumyou.wav
+    0.4.4: 76844 7cb5e012c443 media/ja.lex.body.shoumyou.wav.n    0.4.3: 99884 e5e944820c41 media/ja.lex.body.shoumyou.wav
+  media/ja.lex.body.taisha.wav
+    0.4.4: 46124 fc4b96dc1cac media/ja.lex.body.taisha.wav.n    0.4.3: 42284 463280fc59b2 media/ja.lex.body.taisha.wav
+  media/ja.lex.city.kanen.wav
+    0.4.4: 57644 5b93c86a701a media/ja.lex.city.kanen.wav.n    0.4.3: 57644 3bf36b32f5e7 media/ja.lex.city.kanen.wav
+  media/ja.lex.culture.denkyou.wav
+    0.4.4: 49964 3a487456000e media/ja.lex.culture.denkyou.wav.n    0.4.3: 30764 7ad58f1c44ec media/ja.lex.culture.denkyou.wav
+  media/ja.lex.culture.fuhaku.wav
+    0.4.4: 57644 61e34a3389a6 media/ja.lex.culture.fuhaku.wav.n    0.4.3: 88364 a635b202511c media/ja.lex.culture.fuhaku.wav
+  media/ja.lex.culture.koge.wav
+    0.4.4: 46124 86576688b7ff media/ja.lex.culture.koge.wav.n    0.4.3: 53804 f247ce45b08a media/ja.lex.culture.koge.wav
+  media/ja.lex.culture.saiho.wav
+    0.4.4: 42284 f5855bc0d73e media/ja.lex.culture.saiho.wav.n    0.4.3: 96044 1eb70ad4396c media/ja.lex.culture.saiho.wav
+  media/ja.lex.culture.shaji.wav
+    0.4.4: 53804 c6713fa0fda7 media/ja.lex.culture.shaji.wav.n    0.4.3: 26924 a6bd44181b03 media/ja.lex.culture.shaji.wav
+  media/ja.lex.culture.shinko-zai.wav
+    0.4.4: 42284 65c6d753fde0 media/ja.lex.culture.shinko-zai.wav.n    0.4.3: 88364 181da302e667 media/ja.lex.culture.shinko-zai.wav
+  media/ja.lex.culture.teaji.wav
+    0.4.4: 53804 8cc0d6062781 media/ja.lex.culture.teaji.wav.n    0.4.3: 49964 aee6952fbea6 media/ja.lex.culture.teaji.wav
+  media/ja.lex.culture.tsuuke.wav
+    0.4.4: 107564 2d09addddea6 media/ja.lex.culture.tsuuke.wav.n    0.4.3: 149804 f8079f1ad333 media/ja.lex.culture.tsuuke.wav
+  media/ja.lex.culture2.engi.wav
+    0.4.4: 30764 21e0a7390eb8 media/ja.lex.culture2.engi.wav.n    0.4.3: 88364 5b0d28239268 media/ja.lex.culture2.engi.wav
+  media/ja.lex.culture2.kansen.wav
+    0.4.4: 69164 cc63ef3c2b30 media/ja.lex.culture2.kansen.wav.n    0.4.3: 69164 34e385f1db5b media/ja.lex.culture2.kansen.wav
+  media/ja.lex.culture2.kousatsu.wav
+    0.4.4: 73004 ad38f41b7206 media/ja.lex.culture2.kousatsu.wav.n    0.4.3: 65324 583de275f988 media/ja.lex.culture2.kousatsu.wav
+  media/ja.lex.culture2.shugo.wav
+    0.4.4: 84524 949940bc7eed media/ja.lex.culture2.shugo.wav.n    0.4.3: 46124 c2b98616d10b media/ja.lex.culture2.shugo.wav
+  media/ja.lex.debate.fusan.wav
+    0.4.4: 96044 87ce97d9552f media/ja.lex.debate.fusan.wav.n    0.4.3: 65324 ed292d4bf65d media/ja.lex.debate.fusan.wav
+  media/ja.lex.debate.hifun.wav
+    0.4.4: 61484 1816d554f1fe media/ja.lex.debate.hifun.wav.n    0.4.3: 73004 9ce6e4eb8b09 media/ja.lex.debate.hifun.wav
+  media/ja.lex.debate.kento.wav
+    0.4.4: 87404 156423b917e4 media/ja.lex.debate.kento.wav.n    0.4.3: 38444 a1e1f64ac208 media/ja.lex.debate.kento.wav
+  media/ja.lex.debate.kika.wav
+    0.4.4: 46124 fa14a042c5bd media/ja.lex.debate.kika.wav.n    0.4.3: 134444 9962901a26a5 media/ja.lex.debate.kika.wav
+  media/ja.lex.debate.koryo.wav
+    0.4.4: 53804 d9cf30873393 media/ja.lex.debate.koryo.wav.n    0.4.3: 73004 3cb274016006 media/ja.lex.debate.koryo.wav
+  media/ja.lex.debate.shojitsu.wav
+    0.4.4: 73004 7b43e8c1e83f media/ja.lex.debate.shojitsu.wav.n    0.4.3: 65324 730b7937a9d2 media/ja.lex.debate.shojitsu.wav
+  media/ja.lex.debate2.akari2.wav
+    0.4.4: 53804 3756fc06fefa media/ja.lex.debate2.akari2.wav.n    0.4.3: 46124 8aede6cf8f01 media/ja.lex.debate2.akari2.wav
+  media/ja.lex.debate2.kyara.wav
+    0.4.4: 49964 825dc47dda16 media/ja.lex.debate2.kyara.wav.n    0.4.3: 49964 ddbdfee967d7 media/ja.lex.debate2.kyara.wav
+  media/ja.lex.edu.denwa-ban.wav
+    0.4.4: 61484 06d5672911dc media/ja.lex.edu.denwa-ban.wav.n    0.4.3: 65324 bb1a8da3460c media/ja.lex.edu.denwa-ban.wav
+  media/ja.lex.edu.jugyou-ryaku.wav
+    0.4.4: 65324 9717f2c21fa5 media/ja.lex.edu.jugyou-ryaku.wav.n    0.4.3: 69164 e14a659ccf81 media/ja.lex.edu.jugyou-ryaku.wav
+  media/ja.lex.edu.kachou.wav
+    0.4.4: 49964 401d136b21e0 media/ja.lex.edu.kachou.wav.n    0.4.3: 53804 0e1e81d5307c media/ja.lex.edu.kachou.wav
+  media/ja.lex.edu.kai-ken.wav
+    0.4.4: 65324 945cfafceabd media/ja.lex.edu.kai-ken.wav.n    0.4.3: 65324 0d6aaf7a6077 media/ja.lex.edu.kai-ken.wav
+  media/ja.lex.edu.kaihen.wav
+    0.4.4: 53804 d296e7eb8541 media/ja.lex.edu.kaihen.wav.n    0.4.3: 65324 345153ce71e0 media/ja.lex.edu.kaihen.wav
+  media/ja.lex.edu.kenkai.wav
+    0.4.4: 38444 c42be3f6937f media/ja.lex.edu.kenkai.wav.n    0.4.3: 88364 cdd8eff2e015 media/ja.lex.edu.kenkai.wav
+  media/ja.lex.edu.kounai.wav
+    0.4.4: 88364 afb283dc0c74 media/ja.lex.edu.kounai.wav.n    0.4.3: 46124 db5114ea5639 media/ja.lex.edu.kounai.wav
+  media/ja.lex.edu.shokuba-ryou.wav
+    0.4.4: 57644 f1dec8438464 media/ja.lex.edu.shokuba-ryou.wav.n    0.4.3: 53804 7dc76c7fa79c media/ja.lex.edu.shokuba-ryou.wav
+  media/ja.lex.edu.tsuujou.wav
+    0.4.4: 65324 2829ac8cca13 media/ja.lex.edu.tsuujou.wav.n    0.4.3: 42284 a0c95aa1994f media/ja.lex.edu.tsuujou.wav
+  media/ja.lex.edu.wakamatsu.wav
+    0.4.4: 73004 5835b4118b31 media/ja.lex.edu.wakamatsu.wav.n    0.4.3: 46124 86d73a512ea5 media/ja.lex.edu.wakamatsu.wav
+  media/ja.lex.edu2.chushi.wav
+    0.4.4: 42284 f4cb005d36a5 media/ja.lex.edu2.chushi.wav.n    0.4.3: 130604 0908b07eb749 media/ja.lex.edu2.chushi.wav
+  media/ja.lex.edu2.denja.wav
+    0.4.4: 46124 006e667fd9b7 media/ja.lex.edu2.denja.wav.n    0.4.3: 46124 5a07cb508d9d media/ja.lex.edu2.denja.wav
+  media/ja.lex.edu2.fuyuujunou.wav
+    0.4.4: 265004 ce10b624655f media/ja.lex.edu2.fuyuujunou.wav.n    0.4.3: 69164 94b1cb9dc490 media/ja.lex.edu2.fuyuujunou.wav
+  media/ja.lex.edu2.kashu-sho.wav
+    0.4.4: 69164 f88bde493dab media/ja.lex.edu2.kashu-sho.wav.n    0.4.3: 88364 0c491705c429 media/ja.lex.edu2.kashu-sho.wav
+  media/ja.lex.edu2.kenji.wav
+    0.4.4: 46124 4b908d065e32 media/ja.lex.edu2.kenji.wav.n    0.4.3: 69164 e748df42f33c media/ja.lex.edu2.kenji.wav
+  media/ja.lex.edu2.kenta.wav
+    0.4.4: 46124 b6f284002002 media/ja.lex.edu2.kenta.wav.n    0.4.3: 46124 45d4ab7daa91 media/ja.lex.edu2.kenta.wav
+  media/ja.lex.edu2.kronji.wav
+    0.4.4: 61484 98365a50b27b media/ja.lex.edu2.kronji.wav.n    0.4.3: 57644 435e21c44c23 media/ja.lex.edu2.kronji.wav
+  media/ja.lex.edu2.mouhibiki.wav
+    0.4.4: 49964 163c701d909a media/ja.lex.edu2.mouhibiki.wav.n    0.4.3: 53804 14711e832523 media/ja.lex.edu2.mouhibiki.wav
+  media/ja.lex.edu2.rissho.wav
+    0.4.4: 30764 05e6329e7ebf media/ja.lex.edu2.rissho.wav.n    0.4.3: 53804 398d3e397dcb media/ja.lex.edu2.rissho.wav
+  media/ja.lex.edu2.ronshu.wav
+    0.4.4: 73004 fc7e29ef0326 media/ja.lex.edu2.ronshu.wav.n    0.4.3: 73004 98be6b6f611b media/ja.lex.edu2.ronshu.wav
+  media/ja.lex.edu2.ryuji.wav
+    0.4.4: 42284 c88db049260e media/ja.lex.edu2.ryuji.wav.n    0.4.3: 46124 7dfa29c80861 media/ja.lex.edu2.ryuji.wav
+  media/ja.lex.edu2.senkyuu.wav
+    0.4.4: 65324 77c58f77fdeb media/ja.lex.edu2.senkyuu.wav.n    0.4.3: 69164 defdf92c83d0 media/ja.lex.edu2.senkyuu.wav
+  media/ja.lex.edu2.sentai.wav
+    0.4.4: 49964 7d70c5ec5707 media/ja.lex.edu2.sentai.wav.n    0.4.3: 49964 a8100069d822 media/ja.lex.edu2.sentai.wav
+  media/ja.lex.edu2.yakku.wav
+    0.4.4: 57644 cec8810686aa media/ja.lex.edu2.yakku.wav.n    0.4.3: 53804 08eae34fdc61 media/ja.lex.edu2.yakku.wav
+  media/ja.lex.edu2.yakuseki.wav
+    0.4.4: 57644 335e44a52738 media/ja.lex.edu2.yakuseki.wav.n    0.4.3: 53804 781f584625ea media/ja.lex.edu2.yakuseki.wav
+  media/ja.lex.edu2.zensho.wav
+    0.4.4: 84524 b0cc6ff7b6fe media/ja.lex.edu2.zensho.wav.n    0.4.3: 76844 3b0367b26dad media/ja.lex.edu2.zensho.wav
+  media/ja.lex.emotion.akui.wav
+    0.4.4: 26924 b258f0c917dc media/ja.lex.emotion.akui.wav.n    0.4.3: 57644 62b595c6a965 media/ja.lex.emotion.akui.wav
+  media/ja.lex.emotion.mottai.wav
+    0.4.4: 53804 cae6d5abfa2a media/ja.lex.emotion.mottai.wav.n    0.4.3: 65324 b512f8c55833 media/ja.lex.emotion.mottai.wav
+  media/ja.lex.emotion.ousetsu.wav
+    0.4.4: 42284 75001847c015 media/ja.lex.emotion.ousetsu.wav.n    0.4.3: 65324 9ff9c69396e6 media/ja.lex.emotion.ousetsu.wav
+  media/ja.lex.emotion.shougi.wav
+    0.4.4: 53804 1173c4ea9e31 media/ja.lex.emotion.shougi.wav.n    0.4.3: 61484 a3f166b62831 media/ja.lex.emotion.shougi.wav
+  media/ja.lex.emotion.shoujin.wav
+    0.4.4: 57644 a86c620b2fc5 media/ja.lex.emotion.shoujin.wav.n    0.4.3: 42284 cc97cef152a6 media/ja.lex.emotion.shoujin.wav
+  media/ja.lex.emotion.shouki.wav
+    0.4.4: 61484 7fa680f24e4d media/ja.lex.emotion.shouki.wav.n    0.4.3: 61484 bffc2a7eea1b media/ja.lex.emotion.shouki.wav
+  media/ja.lex.emotion.tenko.wav
+    0.4.4: 53804 63f28fc704a1 media/ja.lex.emotion.tenko.wav.n    0.4.3: 46124 a6b2852a8a4c media/ja.lex.emotion.tenko.wav
+  media/ja.lex.emotion2.kibune.wav
+    0.4.4: 42284 ba4898280a55 media/ja.lex.emotion2.kibune.wav.n    0.4.3: 49964 d9418aba0db6 media/ja.lex.emotion2.kibune.wav
+  media/ja.lex.ent.joju.wav
+    0.4.4: 73004 c779fb6ed0c9 media/ja.lex.ent.joju.wav.n    0.4.3: 38444 104be5fdfbc6 media/ja.lex.ent.joju.wav
+  media/ja.lex.ent.taimu.wav
+    0.4.4: 61484 172af52f8b34 media/ja.lex.ent.taimu.wav.n    0.4.3: 34604 7cac812886c5 media/ja.lex.ent.taimu.wav
+  media/ja.lex.env.eco-kuruma.wav
+    0.4.4: 69164 840f8b1629c5 media/ja.lex.env.eco-kuruma.wav.n    0.4.3: 53804 f960c77b6e97 media/ja.lex.env.eco-kuruma.wav
+  media/ja.lex.env.ene-ki.wav
+    0.4.4: 53804 4b49775c52d9 media/ja.lex.env.ene-ki.wav.n    0.4.3: 73004 2055ee0aa7f6 media/ja.lex.env.ene-ki.wav
+  media/ja.lex.env.ene.wav
+    0.4.4: 57644 8957b5175767 media/ja.lex.env.ene.wav.n    0.4.3: 61484 794c40a7c514 media/ja.lex.env.ene.wav
+  media/ja.lex.env.kiko.wav
+    0.4.4: 234284 3e925c7d17e5 media/ja.lex.env.kiko.wav.n    0.4.3: 46124 345a5712f84d media/ja.lex.env.kiko.wav
+  media/ja.lex.env.koushou.wav
+    0.4.4: 80684 650f6d068460 media/ja.lex.env.koushou.wav.n    0.4.3: 96044 ed90c28741d8 media/ja.lex.env.koushou.wav
+  media/ja.lex.env.puratsu.wav
+    0.4.4: 49964 5a7e60fd5115 media/ja.lex.env.puratsu.wav.n    0.4.3: 65324 d489df904f52 media/ja.lex.env.puratsu.wav
+  media/ja.lex.env.seisi.wav
+    0.4.4: 42284 7c82f02338c0 media/ja.lex.env.seisi.wav.n    0.4.3: 73004 6146ffc55caf media/ja.lex.env.seisi.wav
+  media/ja.lex.env.seita.wav
+    0.4.4: 57644 5e0a77b90e8d media/ja.lex.env.seita.wav.n    0.4.3: 65324 fd86a19bfd03 media/ja.lex.env.seita.wav
+  media/ja.lex.env2.bousai-houzu.wav
+    0.4.4: 76844 4ead29d7aeb4 media/ja.lex.env2.bousai-houzu.wav.n    0.4.3: 30764 a897d09aaa9d media/ja.lex.env2.bousai-houzu.wav
+  media/ja.lex.env2.nouhin.wav
+    0.4.4: 53804 b2d7e29c661b media/ja.lex.env2.nouhin.wav.n    0.4.3: 153644 85f15fa2a23a media/ja.lex.env2.nouhin.wav
+  media/ja.lex.env2.resucha.wav
+    0.4.4: 69164 03f7de912151 media/ja.lex.env2.resucha.wav.n    0.4.3: 61484 e3acf093096b media/ja.lex.env2.resucha.wav
+  media/ja.lex.env2.shinan.wav
+    0.4.4: 38444 68785b9374ab media/ja.lex.env2.shinan.wav.n    0.4.3: 53804 f3f129361066 media/ja.lex.env2.shinan.wav
+  media/ja.lex.env2.yokei.wav
+    0.4.4: 34604 898926aabfaa media/ja.lex.env2.yokei.wav.n    0.4.3: 80684 27f6abcbeaf1 media/ja.lex.env2.yokei.wav
+  media/ja.lex.food.houshi.wav
+    0.4.4: 53804 f9580b2ea734 media/ja.lex.food.houshi.wav.n    0.4.3: 69164 1ae101e0bf7b media/ja.lex.food.houshi.wav
+  media/ja.lex.food.tsukemono.wav
+    0.4.4: 57644 31ce4d7dee00 media/ja.lex.food.tsukemono.wav.n    0.4.3: 38444 dd85dbeb2fd2 media/ja.lex.food.tsukemono.wav
+  media/ja.lex.health2.chouryou.wav
+    0.4.4: 61484 655017c5301d media/ja.lex.health2.chouryou.wav.n    0.4.3: 126764 11e60f0b61de media/ja.lex.health2.chouryou.wav
+  media/ja.lex.health2.fuka.wav
+    0.4.4: 38444 e44a5eb135c4 media/ja.lex.health2.fuka.wav.n    0.4.3: 84524 0982bdea0f0b media/ja.lex.health2.fuka.wav
+  media/ja.lex.health2.jousho.wav
+    0.4.4: 57644 760769578949 media/ja.lex.health2.jousho.wav.n    0.4.3: 65324 a93935f9f817 media/ja.lex.health2.jousho.wav
+  media/ja.lex.health2.junou.wav
+    0.4.4: 76844 f30ff42fcd2a media/ja.lex.health2.junou.wav.n    0.4.3: 53804 0e9bc6dcef21 media/ja.lex.health2.junou.wav
+  media/ja.lex.health2.kessha.wav
+    0.4.4: 46124 a09fd94071f0 media/ja.lex.health2.kessha.wav.n    0.4.3: 69164 dcb56bf15561 media/ja.lex.health2.kessha.wav
+  media/ja.lex.health2.kinyu.wav
+    0.4.4: 80684 bd4a7592b61a media/ja.lex.health2.kinyu.wav.n    0.4.3: 61484 0422f465a852 media/ja.lex.health2.kinyu.wav
+  media/ja.lex.health2.koku2.wav
+    0.4.4: 46124 f69cdcd65b98 media/ja.lex.health2.koku2.wav.n    0.4.3: 57644 1ddec52473c8 media/ja.lex.health2.koku2.wav
+  media/ja.lex.health2.seikatsu2.wav
+    0.4.4: 73004 ea8d43f9df78 media/ja.lex.health2.seikatsu2.wav.n    0.4.3: 53804 1a61868e86de media/ja.lex.health2.seikatsu2.wav
+  media/ja.lex.health2.seka.wav
+    0.4.4: 46124 1445aa50c5b2 media/ja.lex.health2.seka.wav.n    0.4.3: 42284 26fa2281ed83 media/ja.lex.health2.seka.wav
+  media/ja.lex.health2.taikyuu.wav
+    0.4.4: 34604 4dc8c5961558 media/ja.lex.health2.taikyuu.wav.n    0.4.3: 96044 8380ca79b458 media/ja.lex.health2.taikyuu.wav
+  media/ja.lex.health2.tsuuka2.wav
+    0.4.4: 63884 41b6e1779a3d media/ja.lex.health2.tsuuka2.wav.n    0.4.3: 142124 1dcc6b2536cb media/ja.lex.health2.tsuuka2.wav
+  media/ja.lex.health3.choushin.wav
+    0.4.4: 88364 7dadc86a06df media/ja.lex.health3.choushin.wav.n    0.4.3: 65324 362a1f6e8271 media/ja.lex.health3.choushin.wav
+  media/ja.lex.health3.hanko.wav
+    0.4.4: 52844 f38f94ec20da media/ja.lex.health3.hanko.wav.n    0.4.3: 115244 3715aeafe081 media/ja.lex.health3.hanko.wav
+  media/ja.lex.health3.junren.wav
+    0.4.4: 46124 0a9dbb9d1089 media/ja.lex.health3.junren.wav.n    0.4.3: 109964 ea05585985da media/ja.lex.health3.junren.wav
+  media/ja.lex.health3.kyoubu.wav
+    0.4.4: 38444 0e8fd542cd7a media/ja.lex.health3.kyoubu.wav.n    0.4.3: 38444 1ee88a62ecca media/ja.lex.health3.kyoubu.wav
+  media/ja.lex.health3.taikyu2.wav
+    0.4.4: 111404 52421b267608 media/ja.lex.health3.taikyu2.wav.n    0.4.3: 46124 224bd5c125c4 media/ja.lex.health3.taikyu2.wav
+  media/ja.lex.health3.taizen2.wav
+    0.4.4: 38444 c265cc09854c media/ja.lex.health3.taizen2.wav.n    0.4.3: 65324 df418ef9de32 media/ja.lex.health3.taizen2.wav
+  media/ja.lex.health3.uebi.wav
+    0.4.4: 57644 6487cbb5c569 media/ja.lex.health3.uebi.wav.n    0.4.3: 61484 a2d42010222d media/ja.lex.health3.uebi.wav
+  media/ja.lex.health3.ureba.wav
+    0.4.4: 46124 8acd79a0225b media/ja.lex.health3.ureba.wav.n    0.4.3: 46124 760ed5a92e51 media/ja.lex.health3.ureba.wav
+  media/ja.lex.leisure.basuketta.wav
+    0.4.4: 65324 6a5dccad9fb0 media/ja.lex.leisure.basuketta.wav.n    0.4.3: 84524 763dcb6de98e media/ja.lex.leisure.basuketta.wav
+  media/ja.lex.leisure.ryoushuu.wav
+    0.4.4: 49964 fe476b0287ba media/ja.lex.leisure.ryoushuu.wav.n    0.4.3: 53804 be5b4fe26585 media/ja.lex.leisure.ryoushuu.wav
+  media/ja.lex.leisure.tabehou.wav
+    0.4.4: 57644 6c6cf232093b media/ja.lex.leisure.tabehou.wav.n    0.4.3: 49964 63b12b523172 media/ja.lex.leisure.tabehou.wav
+  media/ja.lex.media.fukkyuu-saigai.wav
+    0.4.4: 76844 f380ba651f03 media/ja.lex.media.fukkyuu-saigai.wav.n    0.4.3: 57644 f9fda290f058 media/ja.lex.media.fukkyuu-saigai.wav
+  media/ja.lex.media.gijou.wav
+    0.4.4: 57644 f8b6f1126325 media/ja.lex.media.gijou.wav.n    0.4.3: 92204 6b28ca40c9f1 media/ja.lex.media.gijou.wav
+  media/ja.lex.media.hadan.wav
+    0.4.4: 42284 750f48ccefbe media/ja.lex.media.hadan.wav.n    0.4.3: 49964 46402015d6ed media/ja.lex.media.hadan.wav
+  media/ja.lex.media.hassha.wav
+    0.4.4: 38444 975ea3561c3b media/ja.lex.media.hassha.wav.n    0.4.3: 34604 4948eda56893 media/ja.lex.media.hassha.wav
+  media/ja.lex.media.head.wav
+    0.4.4: 34604 c77907fb4958 media/ja.lex.media.head.wav.n    0.4.3: 65324 d7761892e467 media/ja.lex.media.head.wav
+  media/ja.lex.media.kaga.wav
+    0.4.4: 38444 c23acdbbbc39 media/ja.lex.media.kaga.wav.n    0.4.3: 46124 5d2238ce4785 media/ja.lex.media.kaga.wav
+  media/ja.lex.media.maruke.wav
+    0.4.4: 88364 7b0aeef8fadf media/ja.lex.media.maruke.wav.n    0.4.3: 73004 5541bf33fd68 media/ja.lex.media.maruke.wav
+  media/ja.lex.media.media-habits.wav
+    0.4.4: 69164 a4f46390a0cd media/ja.lex.media.media-habits.wav.n    0.4.3: 122924 b6bbcb9daa6f media/ja.lex.media.media-habits.wav
+  media/ja.lex.media.toron.wav
+    0.4.4: 34604 849b7274d476 media/ja.lex.media.toron.wav.n    0.4.3: 38444 5fc82cd763bc media/ja.lex.media.toron.wav
+  media/ja.lex.media2.kaiken.wav
+    0.4.4: 26924 632d8a993c9b media/ja.lex.media2.kaiken.wav.n    0.4.3: 42284 f4aa75ed6468 media/ja.lex.media2.kaiken.wav
+  media/ja.lex.media2.kouchou.wav
+    0.4.4: 49964 589cd1e14d47 media/ja.lex.media2.kouchou.wav.n    0.4.3: 61484 d9995ed8311c media/ja.lex.media2.kouchou.wav
+  media/ja.lex.media2.ronsa.wav
+    0.4.4: 49964 5856e7052c3f media/ja.lex.media2.ronsa.wav.n    0.4.3: 46124 f63d3bde4e13 media/ja.lex.media2.ronsa.wav
+  media/ja.lex.media2.sesaku.wav
+    0.4.4: 57644 cf2a34c530c8 media/ja.lex.media2.sesaku.wav.n    0.4.3: 57644 b2f0dad560ca media/ja.lex.media2.sesaku.wav
+  media/ja.lex.media2.taaron.wav
+    0.4.4: 61484 38b3ca25601e media/ja.lex.media2.taaron.wav.n    0.4.3: 42284 9864864634bd media/ja.lex.media2.taaron.wav
+  media/ja.lex.rel.aishi.wav
+    0.4.4: 53804 2b2fb1a1c26f media/ja.lex.rel.aishi.wav.n    0.4.3: 53804 bade194e9c38 media/ja.lex.rel.aishi.wav
+  media/ja.lex.rel.jijou-betsu.wav
+    0.4.4: 69164 5061e3434418 media/ja.lex.rel.jijou-betsu.wav.n    0.4.3: 76844 bd84214d599f media/ja.lex.rel.jijou-betsu.wav
+  media/ja.lex.rel.kazoku-no-uni.wav
+    0.4.4: 61484 380ce1e4b3f5 media/ja.lex.rel.kazoku-no-uni.wav.n    0.4.3: 53804 2b9e1c593d75 media/ja.lex.rel.kazoku-no-uni.wav
+  media/ja.lex.rel.kokoro-bazuka.wav
+    0.4.4: 84524 3abeaaf45ea7 media/ja.lex.rel.kokoro-bazuka.wav.n    0.4.3: 107564 3aad2a3fae00 media/ja.lex.rel.kokoro-bazuka.wav
+  media/ja.lex.rel.kyoudai-shita.wav
+    0.4.4: 69164 8c2dd84f3586 media/ja.lex.rel.kyoudai-shita.wav.n    0.4.3: 34604 2c6d2a98ebf9 media/ja.lex.rel.kyoudai-shita.wav
+  media/ja.lex.rel.kyoudai-ue.wav
+    0.4.4: 61484 1d6e37ddbc0d media/ja.lex.rel.kyoudai-ue.wav.n    0.4.3: 61484 bb74dc32f1b0 media/ja.lex.rel.kyoudai-ue.wav
+  media/ja.lex.rel.obaa-chan.wav
+    0.4.4: 73004 0f2606d10ea0 media/ja.lex.rel.obaa-chan.wav.n    0.4.3: 69164 be0f66cee2e5 media/ja.lex.rel.obaa-chan.wav
+  media/ja.lex.rel.omoide-bako.wav
+    0.4.4: 65324 e8dec42dde65 media/ja.lex.rel.omoide-bako.wav.n    0.4.3: 49964 b8c3c79bde3f media/ja.lex.rel.omoide-bako.wav
+  media/ja.lex.rel.omoide-no-hi.wav
+    0.4.4: 61484 70b794486ad8 media/ja.lex.rel.omoide-no-hi.wav.n    0.4.3: 65324 5528fdc732b8 media/ja.lex.rel.omoide-no-hi.wav
+  media/ja.lex.rel.omoide-no-hito.wav
+    0.4.4: 99884 7f6c0936d364 media/ja.lex.rel.omoide-no-hito.wav.n    0.4.3: 49964 ddb26e2907bb media/ja.lex.rel.omoide-no-hito.wav
+  media/ja.lex.rel.omoide-no-ki.wav
+    0.4.4: 84524 6dbf2a121867 media/ja.lex.rel.omoide-no-ki.wav.n    0.4.3: 73004 85ba6a2df494 media/ja.lex.rel.omoide-no-ki.wav
+  media/ja.lex.rel.omoide-no-kioku.wav
+    0.4.4: 76844 8918c73b7e4c media/ja.lex.rel.omoide-no-kioku.wav.n    0.4.3: 38444 86b958b84647 media/ja.lex.rel.omoide-no-kioku.wav
+  media/ja.lex.rel.omoide-no-machi.wav
+    0.4.4: 88364 64610be95c4f media/ja.lex.rel.omoide-no-machi.wav.n    0.4.3: 96044 7e90f620f006 media/ja.lex.rel.omoide-no-machi.wav
+  media/ja.lex.rel.omoide-no-sora.wav
+    0.4.4: 65324 e6f3b3b45e83 media/ja.lex.rel.omoide-no-sora.wav.n    0.4.3: 73004 f7d38e468b91 media/ja.lex.rel.omoide-no-sora.wav
+  media/ja.lex.rel.omoide-no-tabi.wav
+    0.4.4: 57644 a97342373070 media/ja.lex.rel.omoide-no-tabi.wav.n    0.4.3: 107564 9b73b9ed4660 media/ja.lex.rel.omoide-no-tabi.wav
+  media/ja.lex.rel.omoide-no-uta.wav
+    0.4.4: 138284 f6b7034dd5b5 media/ja.lex.rel.omoide-no-uta.wav.n    0.4.3: 26924 54c65d0b0881 media/ja.lex.rel.omoide-no-uta.wav
+  media/ja.lex.rel.tsuui.wav
+    0.4.4: 34604 44c1c1ee8003 media/ja.lex.rel.tsuui.wav.n    0.4.3: 46124 a8e523d38ba4 media/ja.lex.rel.tsuui.wav
+  media/ja.lex.rel.yori-modosu.wav
+    0.4.4: 73004 caa703bea7c5 media/ja.lex.rel.yori-modosu.wav.n    0.4.3: 53804 779aed8fbac9 media/ja.lex.rel.yori-modosu.wav
+  media/ja.lex.shopping.fukuban.wav
+    0.4.4: 65324 2d09aeb7e8af media/ja.lex.shopping.fukuban.wav.n    0.4.3: 42284 089699cd50bc media/ja.lex.shopping.fukuban.wav
+  media/ja.lex.shopping.keshi.wav
+    0.4.4: 53804 de1d79154f2a media/ja.lex.shopping.keshi.wav.n    0.4.3: 34604 61ddb0e46e8f media/ja.lex.shopping.keshi.wav
+  media/ja.lex.shopping.mon.wav
+    0.4.4: 38444 0fd1092416ee media/ja.lex.shopping.mon.wav.n    0.4.3: 73004 066408f000c4 media/ja.lex.shopping.mon.wav
+  media/ja.lex.shopping.shouhyou.wav
+    0.4.4: 65324 9c528c51862c media/ja.lex.shopping.shouhyou.wav.n    0.4.3: 92204 cf2241d386c8 media/ja.lex.shopping.shouhyou.wav
+  media/ja.lex.society.hatsuyaku.wav
+    0.4.4: 73004 924f5286ca92 media/ja.lex.society.hatsuyaku.wav.n    0.4.3: 53804 e155cefb4ba9 media/ja.lex.society.hatsuyaku.wav
+  media/ja.lex.society.riso.wav
+    0.4.4: 61484 62cfd1463aaa media/ja.lex.society.riso.wav.n    0.4.3: 111404 b667de00c164 media/ja.lex.society.riso.wav
+  media/ja.lex.society.yimu.wav
+    0.4.4: 96044 cd95ca16df02 media/ja.lex.society.yimu.wav.n    0.4.3: 92204 e7272eaf585c media/ja.lex.society.yimu.wav
+  media/ja.lex.society2.akusei.wav
+    0.4.4: 30764 6ab5f770a911 media/ja.lex.society2.akusei.wav.n    0.4.3: 73004 6b6dda17cefb media/ja.lex.society2.akusei.wav
+  media/ja.lex.society2.chuga.wav
+    0.4.4: 69164 0f5304eaf37f media/ja.lex.society2.chuga.wav.n    0.4.3: 57644 047ddd1dabbc media/ja.lex.society2.chuga.wav
+  media/ja.lex.society2.hosei.wav
+    0.4.4: 46124 03e2957aadfe media/ja.lex.society2.hosei.wav.n    0.4.3: 76844 9407d9b1136a media/ja.lex.society2.hosei.wav
+  media/ja.lex.society2.houchi.wav
+    0.4.4: 61484 c9ecceed4234 media/ja.lex.society2.houchi.wav.n    0.4.3: 34604 c96c332ff150 media/ja.lex.society2.houchi.wav
+  media/ja.lex.society2.kensei.wav
+    0.4.4: 46124 ec49f65561b4 media/ja.lex.society2.kensei.wav.n    0.4.3: 49964 fc664ad1eb1e media/ja.lex.society2.kensei.wav
+  media/ja.lex.society2.kyuugyou.wav
+    0.4.4: 61484 bf01a0d8ce1e media/ja.lex.society2.kyuugyou.wav.n    0.4.3: 69164 280c2df0454e media/ja.lex.society2.kyuugyou.wav
+  media/ja.lex.society2.yuuutsu.wav
+    0.4.4: 42284 72b7a55f6cff media/ja.lex.society2.yuuutsu.wav.n    0.4.3: 88364 08bed213e801 media/ja.lex.society2.yuuutsu.wav
+  media/ja.lex.sports.joutairyoku.wav
+    0.4.4: 65324 6935ce1aa73f media/ja.lex.sports.joutairyoku.wav.n    0.4.3: 69164 e0978fcd6c0b media/ja.lex.sports.joutairyoku.wav
+  media/ja.lex.sports.kessan.wav
+    0.4.4: 69164 9843e907bf63 media/ja.lex.sports.kessan.wav.n    0.4.3: 42284 875a24165ffe media/ja.lex.sports.kessan.wav
+  media/ja.lex.sports.onsen-tou.wav
+    0.4.4: 69164 80aaf51259f0 media/ja.lex.sports.onsen-tou.wav.n    0.4.3: 65324 2e56b94b3659 media/ja.lex.sports.onsen-tou.wav
+  media/ja.lex.sports.taekwondo.wav
+    0.4.4: 57644 220c5262698e media/ja.lex.sports.taekwondo.wav.n    0.4.3: 61484 bde5a43e3667 media/ja.lex.sports.taekwondo.wav
+  media/ja.lex.story.keimatsu.wav
+    0.4.4: 65324 d3ada6d2c582 media/ja.lex.story.keimatsu.wav.n    0.4.3: 61484 496e9d48af13 media/ja.lex.story.keimatsu.wav
+  media/ja.lex.story2.dokugeki.wav
+    0.4.4: 38444 432dc40fa86b media/ja.lex.story2.dokugeki.wav.n    0.4.3: 42284 690a76ebdd57 media/ja.lex.story2.dokugeki.wav
+  media/ja.lex.story2.fukkyaku.wav
+    0.4.4: 53804 7a0897f2e2c6 media/ja.lex.story2.fukkyaku.wav.n    0.4.3: 49964 1b049095e5ca media/ja.lex.story2.fukkyaku.wav
+  media/ja.lex.story2.hairon.wav
+    0.4.4: 53804 c24ffb822d8e media/ja.lex.story2.hairon.wav.n    0.4.3: 84524 6a67cdf9dce2 media/ja.lex.story2.hairon.wav
+  media/ja.lex.story2.kikkai.wav
+    0.4.4: 57644 472520843d3e media/ja.lex.story2.kikkai.wav.n    0.4.3: 42284 098280385d26 media/ja.lex.story2.kikkai.wav
+  media/ja.lex.story2.yokai.wav
+    0.4.4: 34604 9cae27d41cff media/ja.lex.story2.yokai.wav.n    0.4.3: 53804 6a03d1fe3352 media/ja.lex.story2.yokai.wav
+  media/ja.lex.tech.debisu.wav
+    0.4.4: 69164 38df119e6b4d media/ja.lex.tech.debisu.wav.n    0.4.3: 107564 2230ed699dde media/ja.lex.tech.debisu.wav
+  media/ja.lex.tech.purinto.wav
+    0.4.4: 38444 69f03054b09d media/ja.lex.tech.purinto.wav.n    0.4.3: 88364 d800c5fa1af6 media/ja.lex.tech.purinto.wav
+  media/ja.lex.tech2.forumu.wav
+    0.4.4: 65324 a68fb0324386 media/ja.lex.tech2.forumu.wav.n    0.4.3: 46124 dd9192a835b5 media/ja.lex.tech2.forumu.wav
+  media/ja.lex.tech2.hanare.wav
+    0.4.4: 61484 815f5f020c8d media/ja.lex.tech2.hanare.wav.n    0.4.3: 69164 e3b26c7ee49d media/ja.lex.tech2.hanare.wav
+  media/ja.lex.tech2.kikan.wav
+    0.4.4: 30764 07c4678b0e35 media/ja.lex.tech2.kikan.wav.n    0.4.3: 34604 f9b9a776fede media/ja.lex.tech2.kikan.wav
+  media/ja.lex.tech2.koi.wav
+    0.4.4: 26924 cf60296efe03 media/ja.lex.tech2.koi.wav.n    0.4.3: 61484 015edaa75337 media/ja.lex.tech2.koi.wav
+  media/ja.lex.tech2.kosei.wav
+    0.4.4: 34604 183f4bddbc43 media/ja.lex.tech2.kosei.wav.n    0.4.3: 46124 75686cf593cc media/ja.lex.tech2.kosei.wav
+  media/ja.lex.tech2.koui.wav
+    0.4.4: 30764 4724037db798 media/ja.lex.tech2.koui.wav.n    0.4.3: 57644 b364176a0458 media/ja.lex.tech2.koui.wav
+  media/ja.lex.tech2.onkyou.wav
+    0.4.4: 65324 7024179c05f8 media/ja.lex.tech2.onkyou.wav.n    0.4.3: 49964 1ede9a43a604 media/ja.lex.tech2.onkyou.wav
+  media/ja.lex.tech2.saisei.wav
+    0.4.4: 80684 7a41c55e79fe media/ja.lex.tech2.saisei.wav.n    0.4.3: 107564 5fec259fba57 media/ja.lex.tech2.saisei.wav
+  media/ja.lex.tech2.shinko.wav
+    0.4.4: 73004 3f4e7c002b45 media/ja.lex.tech2.shinko.wav.n    0.4.3: 46124 64e19488cad1 media/ja.lex.tech2.shinko.wav
+  media/ja.lex.transport.chakubatsu.wav
+    0.4.4: 96044 068d7a65ce7c media/ja.lex.transport.chakubatsu.wav.n    0.4.3: 91244 8ba2ab0e939e media/ja.lex.transport.chakubatsu.wav
+  media/ja.lex.travel.henkyo.wav
+    0.4.4: 42284 255762628a93 media/ja.lex.travel.henkyo.wav.n    0.4.3: 53804 1ba8c84c6b37 media/ja.lex.travel.henkyo.wav
+  media/ja.lex.travel.itinerari.wav
+    0.4.4: 49964 8d3bb460ab92 media/ja.lex.travel.itinerari.wav.n    0.4.3: 69164 c6fe380b0cae media/ja.lex.travel.itinerari.wav
+  media/ja.lex.travel.nyukan.wav
+    0.4.4: 61484 80c1bbb706e5 media/ja.lex.travel.nyukan.wav.n    0.4.3: 42284 9f199f8faea7 media/ja.lex.travel.nyukan.wav
+  media/ja.lex.travel.shin.wav
+    0.4.4: 96044 d1086c1b32f7 media/ja.lex.travel.shin.wav.n    0.4.3: 38444 6ebd343271f4 media/ja.lex.travel.shin.wav
+  media/ja.lex.travel.taihen.wav
+    0.4.4: 49964 6117e1d608c8 media/ja.lex.travel.taihen.wav.n    0.4.3: 49964 614d5b506db9 media/ja.lex.travel.taihen.wav
+  media/ja.lex.travel2.engaki.wav
+    0.4.4: 46124 1c990bc6b700 media/ja.lex.travel2.engaki.wav.n    0.4.3: 73004 df3d5b446a1d media/ja.lex.travel2.engaki.wav
+  media/ja.lex.travel2.gaido.wav
+    0.4.4: 30764 2058a4aac12e media/ja.lex.travel2.gaido.wav.n    0.4.3: 69164 edad3ff6e9e1 media/ja.lex.travel2.gaido.wav
+  media/ja.lex.travel2.hikou-min.wav
+    0.4.4: 49964 4d3f166cab66 media/ja.lex.travel2.hikou-min.wav.n    0.4.3: 57644 d567f3ff2a4a media/ja.lex.travel2.hikou-min.wav
+  media/ja.lex.travel2.keihaku.wav
+    0.4.4: 73004 f02545eafb13 media/ja.lex.travel2.keihaku.wav.n    0.4.3: 30764 808e8fd93faa media/ja.lex.travel2.keihaku.wav
+  media/ja.lex.travel2.keikou.wav
+    0.4.4: 53804 85d8c4e39b0d media/ja.lex.travel2.keikou.wav.n    0.4.3: 76844 6a98bc58d6e6 media/ja.lex.travel2.keikou.wav
+  media/ja.lex.travel2.kyoka-sho.wav
+    0.4.4: 57644 fa34886e7f64 media/ja.lex.travel2.kyoka-sho.wav.n    0.4.3: 49964 2ae51afad982 media/ja.lex.travel2.kyoka-sho.wav
+  media/ja.lex.travel2.nyuuryoku.wav
+    0.4.4: 53804 ab42149b3701 media/ja.lex.travel2.nyuuryoku.wav.n    0.4.3: 65324 2fc80fb23ee1 media/ja.lex.travel2.nyuuryoku.wav
+  media/ja.lex.travel2.ryouga.wav
+    0.4.4: 49964 31f0adbf356b media/ja.lex.travel2.ryouga.wav.n    0.4.3: 49964 43552cc3c8cd media/ja.lex.travel2.ryouga.wav
+  media/ja.lex.travel2.tenkan.wav
+    0.4.4: 38444 f5722c10b5c8 media/ja.lex.travel2.tenkan.wav.n    0.4.3: 65324 2793298a76af media/ja.lex.travel2.tenkan.wav
+  media/ja.lex.weather2.kijitsu.wav
+    0.4.4: 61484 1dd555a62401 media/ja.lex.weather2.kijitsu.wav.n    0.4.3: 111404 5bb9a4016893 media/ja.lex.weather2.kijitsu.wav
+  media/ja.lex.weather2.naga.wav
+    0.4.4: 46124 1ef29a1a9a72 media/ja.lex.weather2.naga.wav.n    0.4.3: 53804 5bfa0082b071 media/ja.lex.weather2.naga.wav
+  media/ja.lex.weather2.naru.wav
+    0.4.4: 88364 7154f9f6fdac media/ja.lex.weather2.naru.wav.n    0.4.3: 30764 15878a65b5c3 media/ja.lex.weather2.naru.wav
+  media/ja.lex.weather2.yuki-yinga.wav
+    0.4.4: 80684 1ab5b46f3fb5 media/ja.lex.weather2.yuki-yinga.wav.n    0.4.3: 99884 fd149f217af7 media/ja.lex.weather2.yuki-yinga.wav
+  media/ja.lex.weather2.yukidoke.wav
+    0.4.4: 65324 752801993b81 media/ja.lex.weather2.yukidoke.wav.n    0.4.3: 69164 4f8c4930ead6 media/ja.lex.weather2.yukidoke.wav
+  media/ja.lex.work.hakkou.wav
+    0.4.4: 69164 ee3f3f8701ea media/ja.lex.work.hakkou.wav.n    0.4.3: 69164 e0e59b884204 media/ja.lex.work.hakkou.wav
+  media/ja.lex.work.nobun.wav
+    0.4.4: 42284 e01483ad53b1 media/ja.lex.work.nobun.wav.n    0.4.3: 107564 4976f569e2b7 media/ja.lex.work.nobun.wav
+  media/ja.lex.work.shigyou.wav
+    0.4.4: 53804 9a60f83cb852 media/ja.lex.work.shigyou.wav.n    0.4.3: 76844 b2a28a97b2c8 media/ja.lex.work.shigyou.wav
+  media/ja.lex.work.taishita.wav
+    0.4.4: 111404 d9fe1d49e5d7 media/ja.lex.work.taishita.wav.n    0.4.3: 53804 8d9fe52a56de media/ja.lex.work.taishita.wav
+  media/ja.lex.work2.keiri.wav
+    0.4.4: 61484 b8404e4d04dc media/ja.lex.work2.keiri.wav.n    0.4.3: 19244 77c231c5de51 media/ja.lex.work2.keiri.wav
+  media/ja.lex.work2.kouchiku.wav
+    0.4.4: 65324 40ccd4aa0acc media/ja.lex.work2.kouchiku.wav.n    0.4.3: 61484 44fc74017483 media/ja.lex.work2.kouchiku.wav
+  media/ja.lex.work2.roushi.wav
+    0.4.4: 53804 f66420905eaf media/ja.lex.work2.roushi.wav.n    0.4.3: 84524 3bc5b3e63126 media/ja.lex.work2.roushi.wav
+  media/ja.lex.work2.shoubei.wav
+    0.4.4: 145964 02800534faef media/ja.lex.work2.shoubei.wav.n    0.4.3: 49964 e775f6efe6d5 media/ja.lex.work2.shoubei.wav
+  media/ja.lex.work2.tanpin.wav
+    0.4.4: 42284 9e9a7b252958 media/ja.lex.work2.tanpin.wav.n    0.4.3: 65324 ca362f0e752d media/ja.lex.work2.tanpin.wav
+  media/ja.sent.address-registration.wav
+    0.4.4: 80684 58b681a51303 media/ja.sent.address-registration.wav.n    0.4.3: 84524 2397b5362a68 media/ja.sent.address-registration.wav
+  media/ja.sent.apology.wav
+    0.4.4: 222764 54a186fa5f2d media/ja.sent.apology.wav.n    0.4.3: 130604 bc33be5a3bf4 media/ja.sent.apology.wav
+  media/ja.sent.booking-change.wav
+    0.4.4: 134444 a228924fac2b media/ja.sent.booking-change.wav.n    0.4.3: 153644 2ce5e2c1f0b5 media/ja.sent.booking-change.wav
+  media/ja.sent.border-docs.wav
+    0.4.4: 176684 6d1deefe656a media/ja.sent.border-docs.wav.n    0.4.3: 130604 714b70898307 media/ja.sent.border-docs.wav
+  media/ja.sent.call-police.wav
+    0.4.4: 115244 c61c0de488e9 media/ja.sent.call-police.wav.n    0.4.3: 142124 bf399c2f527c media/ja.sent.call-police.wav
+  media/ja.sent.ceremony-congrats.wav
+    0.4.4: 130604 87dfb69beaa9 media/ja.sent.ceremony-congrats.wav.n    0.4.3: 153644 33c6d15f2921 media/ja.sent.ceremony-congrats.wav
+  media/ja.sent.check-balance.wav
+    0.4.4: 115244 63446d69c980 media/ja.sent.check-balance.wav.n    0.4.3: 99884 1cfa7976b73f media/ja.sent.check-balance.wav
+  media/ja.sent.city-hall.wav
+    0.4.4: 241964 c974672e8bb7 media/ja.sent.city-hall.wav.n    0.4.3: 172844 6f171ff808d3 media/ja.sent.city-hall.wav
+  media/ja.sent.community-worry.wav
+    0.4.4: 188204 60d4cc8be76d media/ja.sent.community-worry.wav.n    0.4.3: 284204 8abbefbe637a media/ja.sent.community-worry.wav
+  media/ja.sent.compromise-write.wav
+    0.4.4: 119084 b3a365f4d7f2 media/ja.sent.compromise-write.wav.n    0.4.3: 249644 b8ef6c249069 media/ja.sent.compromise-write.wav
+  media/ja.sent.craft-washi.wav
+    0.4.4: 192044 0c4879de7e94 media/ja.sent.craft-washi.wav.n    0.4.3: 207404 f2051093952b media/ja.sent.craft-washi.wav
+  media/ja.sent.debate-basics.wav
+    0.4.4: 115244 786c198526fa media/ja.sent.debate-basics.wav.n    0.4.3: 122924 6973dfdf8ac9 media/ja.sent.debate-basics.wav
+  media/ja.sent.debate-point.wav
+    0.4.4: 192044 bc29c415bb0c media/ja.sent.debate-point.wav.n    0.4.3: 222764 a143aae3a44d media/ja.sent.debate-point.wav
+  media/ja.sent.decision-essay.wav
+    0.4.4: 103724 966aec4bd9e6 media/ja.sent.decision-essay.wav.n    0.4.3: 111404 ced71a23082c media/ja.sent.decision-essay.wav
+  media/ja.sent.describe-symptom.wav
+    0.4.4: 92204 3a2b90486481 media/ja.sent.describe-symptom.wav.n    0.4.3: 172844 1a59e7c51eb7 media/ja.sent.describe-symptom.wav
+  media/ja.sent.device-daily.wav
+    0.4.4: 215084 dc0b01df67a7 media/ja.sent.device-daily.wav.n    0.4.3: 295724 46d411193ef6 media/ja.sent.device-daily.wav
+  media/ja.sent.diet-culture.wav
+    0.4.4: 134444 b71d0fe4c791 media/ja.sent.diet-culture.wav.n    0.4.3: 130604 fa6b4ec9075d media/ja.sent.diet-culture.wav
+  media/ja.sent.eat-fruit.wav
+    0.4.4: 149804 47a287f549d6 media/ja.sent.eat-fruit.wav.n    0.4.3: 107564 2a31f87be279 media/ja.sent.eat-fruit.wav
+  media/ja.sent.empathy.wav
+    0.4.4: 149804 9b87f0cd3651 media/ja.sent.empathy.wav.n    0.4.3: 176684 6f15e8694128 media/ja.sent.empathy.wav
+  media/ja.sent.encouragement.wav
+    0.4.4: 169004 9be7a28de786 media/ja.sent.encouragement.wav.n    0.4.3: 157484 94e29e2ea56e media/ja.sent.encouragement.wav
+  media/ja.sent.energy-wind.wav
+    0.4.4: 203564 ac1fc2373429 media/ja.sent.energy-wind.wav.n    0.4.3: 368684 cfe4ca73fef8 media/ja.sent.energy-wind.wav
+  media/ja.sent.essay-observation.wav
+    0.4.4: 176684 dd08798425fe media/ja.sent.essay-observation.wav.n    0.4.3: 211244 803bb05a9f86 media/ja.sent.essay-observation.wav
+  media/ja.sent.evidence-conclusion.wav
+    0.4.4: 153644 4aea46c98ab8 media/ja.sent.evidence-conclusion.wav.n    0.4.3: 169004 1be468d7afe6 media/ja.sent.evidence-conclusion.wav
+  media/ja.sent.explain-grammar.wav
+    0.4.4: 88364 cbaa4425359b media/ja.sent.explain-grammar.wav.n    0.4.3: 142124 451f53da4157 media/ja.sent.explain-grammar.wav
+  media/ja.sent.fact-speculation.wav
+    0.4.4: 272684 fbc73fa0b1bd media/ja.sent.fact-speculation.wav.n    0.4.3: 165164 5473983fdb8c media/ja.sent.fact-speculation.wav
+  media/ja.sent.finish-work.wav
+    0.4.4: 111404 20e26a4579eb media/ja.sent.finish-work.wav.n    0.4.3: 111404 67ee1ab45ca1 media/ja.sent.finish-work.wav
+  media/ja.sent.fitness-club.wav
+    0.4.4: 119084 ac62350ed753 media/ja.sent.fitness-club.wav.n    0.4.3: 96044 c7bdc9618a6d media/ja.sent.fitness-club.wav
+  media/ja.sent.food-waste.wav
+    0.4.4: 165164 17c6d34ad955 media/ja.sent.food-waste.wav.n    0.4.3: 211244 e105246657e1 media/ja.sent.food-waste.wav
+  media/ja.sent.gentle-persuade.wav
+    0.4.4: 195884 a9bae794add8 media/ja.sent.gentle-persuade.wav.n    0.4.3: 188204 983ef78106fc media/ja.sent.gentle-persuade.wav
+  media/ja.sent.grievance-box.wav
+    0.4.4: 179084 7f34c1a2caa2 media/ja.sent.grievance-box.wav.n    0.4.3: 180524 39686a1bf247 media/ja.sent.grievance-box.wav
+  media/ja.sent.guided-tour.wav
+    0.4.4: 165164 ba5b20e2d884 media/ja.sent.guided-tour.wav.n    0.4.3: 215084 44e1a0a8140f media/ja.sent.guided-tour.wav
+  media/ja.sent.health-check.wav
+    0.4.4: 126764 fe637652ce39 media/ja.sent.health-check.wav.n    0.4.3: 138284 808b01b71ef0 media/ja.sent.health-check.wav
+  media/ja.sent.insurance-card.wav
+    0.4.4: 111404 555214e98de4 media/ja.sent.insurance-card.wav.n    0.4.3: 138284 82a22985fda8 media/ja.sent.insurance-card.wav
+  media/ja.sent.interview-prep.wav
+    0.4.4: 88364 e6106b62628a media/ja.sent.interview-prep.wav.n    0.4.3: 115244 c5b76c372813 media/ja.sent.interview-prep.wav
+  media/ja.sent.itinerary-plan.wav
+    0.4.4: 211244 605d905c42bd media/ja.sent.itinerary-plan.wav.n    0.4.3: 230444 f9530fb9f364 media/ja.sent.itinerary-plan.wav
+  media/ja.sent.keep-receipt.wav
+    0.4.4: 169004 2d387b94da87 media/ja.sent.keep-receipt.wav.n    0.4.3: 122924 80b642ee3323 media/ja.sent.keep-receipt.wav
+  media/ja.sent.library-card.wav
+    0.4.4: 188204 9e145f3735eb media/ja.sent.library-card.wav.n    0.4.3: 195884 797fe9987992 media/ja.sent.library-card.wav
+  media/ja.sent.narrative-structure.wav
+    0.4.4: 122924 ffb18ac515a6 media/ja.sent.narrative-structure.wav.n    0.4.3: 149804 d41207016e46 media/ja.sent.narrative-structure.wav
+  media/ja.sent.network-message.wav
+    0.4.4: 151244 a9ecc9cff03d media/ja.sent.network-message.wav.n    0.4.3: 153644 ab75340419a0 media/ja.sent.network-message.wav
+  media/ja.sent.news-discuss.wav
+    0.4.4: 149804 46f7e77b59af media/ja.sent.news-discuss.wav.n    0.4.3: 234284 aa29853ab7c3 media/ja.sent.news-discuss.wav
+  media/ja.sent.news-morning.wav
+    0.4.4: 215084 1f4defb53aa3 media/ja.sent.news-morning.wav.n    0.4.3: 192044 0475aa5037c7 media/ja.sent.news-morning.wav
+  media/ja.sent.on-sale.wav
+    0.4.4: 84524 d1d1c78c0d75 media/ja.sent.on-sale.wav.n    0.4.3: 115244 8e744030fc1f media/ja.sent.on-sale.wav
+  media/ja.sent.opinion-before-decision.wav
+    0.4.4: 126764 4902e8043f1f media/ja.sent.opinion-before-decision.wav.n    0.4.3: 180524 8383a0bb7854 media/ja.sent.opinion-before-decision.wav
+  media/ja.sent.pay-bill.wav
+    0.4.4: 126764 409b0df44926 media/ja.sent.pay-bill.wav.n    0.4.3: 99884 faf744635e55 media/ja.sent.pay-bill.wav
+  media/ja.sent.personal-essay.wav
+    0.4.4: 111404 c8df7e302aa5 media/ja.sent.personal-essay.wav.n    0.4.3: 172844 cfa57da6e878 media/ja.sent.personal-essay.wav
+  media/ja.sent.play-soccer.wav
+    0.4.4: 145964 ebc7f880c870 media/ja.sent.play-soccer.wav.n    0.4.3: 115244 8a9d062d5ca7 media/ja.sent.play-soccer.wav
+  media/ja.sent.polite-disagree.wav
+    0.4.4: 265004 fcc773d0a22c media/ja.sent.polite-disagree.wav.n    0.4.3: 253484 a2c1bc1f6525 media/ja.sent.polite-disagree.wav
+  media/ja.sent.pollution-problem.wav
+    0.4.4: 142124 1c1f108cff7c media/ja.sent.pollution-problem.wav.n    0.4.3: 115244 feb77a790895 media/ja.sent.pollution-problem.wav
+  media/ja.sent.pride-craft.wav
+    0.4.4: 218924 90e0d507f1fd media/ja.sent.pride-craft.wav.n    0.4.3: 192044 408a1374a146 media/ja.sent.pride-craft.wav
+  media/ja.sent.pros-cons.wav
+    0.4.4: 241964 2b7fb0f9e966 media/ja.sent.pros-cons.wav.n    0.4.3: 276524 a0a0f63d2013 media/ja.sent.pros-cons.wav
+  media/ja.sent.quarrel-reconcile.wav
+    0.4.4: 134444 fb29e1be3e80 media/ja.sent.quarrel-reconcile.wav.n    0.4.3: 222764 4acd141d7d7e media/ja.sent.quarrel-reconcile.wav
+  media/ja.sent.rating-system.wav
+    0.4.4: 142124 272eddd108bd media/ja.sent.rating-system.wav.n    0.4.3: 218924 5ede3038a028 media/ja.sent.rating-system.wav
+  media/ja.sent.recovery-onsen.wav
+    0.4.4: 119084 1e451d7ed743 media/ja.sent.recovery-onsen.wav.n    0.4.3: 142124 9e59cee5587a media/ja.sent.recovery-onsen.wav
+  media/ja.sent.remote-control.wav
+    0.4.4: 169004 99be8fa53df9 media/ja.sent.remote-control.wav.n    0.4.3: 99884 4ae005a7d169 media/ja.sent.remote-control.wav
+  media/ja.sent.senpai-help.wav
+    0.4.4: 138284 f1e3976e5b21 media/ja.sent.senpai-help.wav.n    0.4.3: 234284 2948af31c1c4 media/ja.sent.senpai-help.wav
+  media/ja.sent.shrine-visit.wav
+    0.4.4: 215084 6c761555029b media/ja.sent.shrine-visit.wav.n    0.4.3: 241964 a53d69688308 media/ja.sent.shrine-visit.wav
+  media/ja.sent.sleep-habit.wav
+    0.4.4: 199724 f013189a3f3e media/ja.sent.sleep-habit.wav.n    0.4.3: 138284 8c32d0e37fae media/ja.sent.sleep-habit.wav
+  media/ja.sent.support-reception.wav
+    0.4.4: 203564 b243a958e399 media/ja.sent.support-reception.wav.n    0.4.3: 234284 faada234ee2e media/ja.sent.support-reception.wav
+  media/ja.sent.suspense-build.wav
+    0.4.4: 119084 3c612669a9c7 media/ja.sent.suspense-build.wav.n    0.4.3: 157484 7a4505779adb media/ja.sent.suspense-build.wav
+  media/ja.sent.take-prevention.wav
+    0.4.4: 172844 816cacdd0a38 media/ja.sent.take-prevention.wav.n    0.4.3: 119084 fc3b6945ffd6 media/ja.sent.take-prevention.wav
+  media/ja.sent.tech-problem-fix.wav
+    0.4.4: 241964 71bfde425800 media/ja.sent.tech-problem-fix.wav.n    0.4.3: 218924 2e84a36a9261 media/ja.sent.tech-problem-fix.wav
+  media/ja.sent.topic-choice.wav
+    0.4.4: 161324 8d21ea342920 media/ja.sent.topic-choice.wav.n    0.4.3: 226604 b6e1bba813b1 media/ja.sent.topic-choice.wav
+  media/ja.sent.union-talks.wav
+    0.4.4: 249644 408416fb2df2 media/ja.sent.union-talks.wav.n    0.4.3: 215564 e06030576572 media/ja.sent.union-talks.wav
+  media/ja.sent.use-evidence.wav
+    0.4.4: 96044 34e0ad26d82e media/ja.sent.use-evidence.wav.n    0.4.3: 138284 2fa3ff4ed22a media/ja.sent.use-evidence.wav
+  media/ja.sent.voting-candidate.wav
+    0.4.4: 199724 bbbe1cb2e623 media/ja.sent.voting-candidate.wav.n    0.4.3: 268844 555a515a7121 media/ja.sent.voting-candidate.wav
+  media/ja.sent.water-issue.wav
+    0.4.4: 149804 230b4da0cca8 media/ja.sent.water-issue.wav.n    0.4.3: 134444 8738bc4280b3 media/ja.sent.water-issue.wav
+  media/ja.sent.write-dialogue.wav
+    0.4.4: 169004 9282d58ead09 media/ja.sent.write-dialogue.wav.n    0.4.3: 134444 5eecde149b14 media/ja.sent.write-dialogue.wav
+  media/ja.sent.write-ending.wav
+    0.4.4: 157484 dcad68b3399d media/ja.sent.write-ending.wav.n    0.4.3: 180524 c7b8b5692bbf media/ja.sent.write-ending.wav
+  media/manifest.jsonl
+    0.4.4: 3504169 be31502d784a media/manifest.jsonl.n    0.4.3: 3545130 bcc8223ea70e media/manifest.jsonl
+  media/words.jsonl
+    0.4.4: 260752 c8c9aec7e7fc media/words.jsonl.n    0.4.3: 510273 1b33419a94f6 media/words.jsonl
+  orthography/hiragana.jsonl
+    0.4.4: 39907 8684e9cf0a1f orthography/hiragana.jsonl.n    0.4.3: 37246 248555968001 orthography/hiragana.jsonl
+  sentences/entries.jsonl
+    0.4.4: 414502 5f21368ebd4f sentences/entries.jsonl.n    0.4.3: 421402 4b9ef0a68853 sentences/entries.jsonl
+

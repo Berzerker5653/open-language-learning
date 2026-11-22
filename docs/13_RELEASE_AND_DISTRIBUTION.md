@@ -620,6 +620,27 @@ the downloaded 0.4.6 archive carries 0. GitHub asset digest equals the catalog p
 non-prerelease, immutable. The 0.4.5/0.4.4/0.4.3 ru archives stay published as rollback targets;
 the ja-JP 0.4.3 pin is unchanged.
 
+**ja-JP 0.4.4 published 2026-11-21** (JA-REPUBLISH-044-001; the pinned 0.4.3 archive
+(2026-11-09) predates the whole ja review campaign). Built by
+`state/evidence/RC-0.4.4-2026-11-21/build-rc-0.4.4.sh` from HEAD 8e54d27 — in an isolated
+detached worktree at HEAD (sibling lanes held WIP in `crates/langpack`; a release archive is
+built and gated by HEAD code), with the gitignored `.wav` bytes hardlinked from the main tree.
+Seven gates exit 0; archive 298,271,601 bytes, sha256
+`637d94495eed1a543cd347a7f800c3ad85b5a37f301a741891f87555408ad7f1`; manifest rows 4,935 == media
+members 4,935 delta 0; `words.jsonl` sidecar present; install round-trip verified and the
+installed tree byte-equal to the repo pack files (988/988 content files md5-equal). Accounting
+vs published 0.4.3 (`diff-043-to-044-ja-JP.txt`): 5,876 -> 5,925 members, 5,352 byte-identical,
+49 added (24 new audio clips + 25 new content files: `reviews.jsonl`, B1/B2 journey and revision
+units, register scenario, dated sentence shards), 0 removed, 524 changed-bytes — of which exactly
+**280 media wavs**, equal to the 280 `media/manifest.jsonl` row changes (re-bakes) measured from
+git between the 0.4.3 tag and HEAD. Shipped delta: 3,019 band-review records (384
+changes-requested fixes), 68 rewritten sentence texts, 280 re-baked clips. Both-direction proof
+from the REAL published archives (`publish-0.4.4.txt`): installed 0.4.3 carries all 68 old
+sentence texts and none of the new; installed 0.4.4 carries all 68 new texts, 0 old, with 280
+changed + 24 added manifest rows. GitHub asset digest equals the catalog pin; release non-draft,
+non-prerelease, immutable. The ja-JP 0.4.3/0.4.2/0.4.1/0.4.0 archives stay published as rollback
+targets; the ru-RU 0.4.6 pin is unchanged.
+
 **Licensing paper corrected after publication.** The published ja-JP 0.4.0
 archive carries three `licenses.jsonl` records. The tree now carries five: the
 baked-audio record was corrected to name the Qwen3-TTS bake engine (ADR-0023; the

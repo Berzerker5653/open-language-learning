@@ -1,0 +1,9 @@
+store layout: dist/rc-0.4.4/store-ja-JP/org.openlanguage.ja-jp.reference dist/rc-0.4.4/store-ja-JP/org.openlanguage.ja-jp.reference/0.4.4 dist/rc-0.4.4/store-ja-JP/org.openlanguage.ja-jp.reference/current 
+current pointer: 0.4.4
+media files in installed tree: 4935
+sidecar in installed tree: 1
+inst_root=dist/rc-0.4.4/store-ja-JP/org.openlanguage.ja-jp.reference/0.4.4
+installed content equality vs repo HEAD (md5 of tracked pack files):
+content files equal=988 mismatched=0
+installed reviews.jsonl rows: 3019
+installed media/manifest.jsonl rows: 4935

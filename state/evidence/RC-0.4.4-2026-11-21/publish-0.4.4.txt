@@ -1,0 +1,60 @@
+JA-REPUBLISH-044-001 — ja-JP 0.4.4 publication evidence (2026-11-21)
+
+Purpose: the catalog-pinned ja-JP archive is 0.4.3 (published 2026-11-09). Since that
+tag the reviewed ja content landed on main: 3,019 band-review records (384
+changes-requested verdicts shipped as fixes), 68 rewritten sentence texts, and 280
+re-baked audio clips + 24 new media rows. Real installs still served pre-review
+content and pre-repair audio. 0.4.4 carries the reviewed pack.
+
+Build (state/evidence/RC-0.4.4-2026-11-21/, systemd-run unit lts-rc044):
+- HEAD at build: 8e54d27 (manifest bump 0.4.4 committed before the RC).
+- ISOLATED BUILD: the gates and the archive build ran in a detached git worktree at
+  HEAD, not the main working tree — sibling lanes held WIP in crates/langpack (a new
+  validate-time orthography rule), and a release archive must be produced and gated
+  by HEAD code with frozen pack bytes. The worktree's gitignored .wav bytes are
+  hardlinks to the main tree (read-only for the build; 4,937 media entries).
+- Seven gates exit 0: validate, lint, test, audit-curriculum, audit-lexicon,
+  audit-licenses, audit-sources (rc-ja-JP-*.txt logs); no exit=127 rows in SUMMARY.
+- archive: dist/rc-0.4.4/ja-jp-reference-0.4.4.lpk
+  bytes=298,271,601
+  sha256=637d94495eed1a543cd347a7f800c3ad85b5a37f301a741891f87555408ad7f1
+- members=5,925, media members=4,935 == manifest rows 4,935 (delta 0),
+  words.jsonl sidecar member present.
+- Member accounting vs published 0.4.3 (diff-043-to-044-ja-JP.txt):
+  published members 5,876 -> candidate 5,925; 5,352 byte-identical; 49 added
+  (24 new media wavs + 25 new content files: reviews.jsonl, 24 B1/B2 journey/revision
+  curriculum units, register scenario, dated sentence shards); 0 removed;
+  524 changed-bytes members = 280 media wavs + 244 content files (lexicons,
+  curriculum units, sentences, grammar, orthography, media/manifest.jsonl,
+  media/words.jsonl, manifest.yaml version line). The 280 changed wavs match exactly
+  the 280 media/manifest.jsonl row changes measured from git between the 0.4.3 tag and
+  HEAD — the audio delta is the re-bake campaigns, nothing else.
+- Install round-trip: store current=0.4.4, 4,935 wavs, sidecar present; installed tree
+  byte-equal to the repo HEAD pack files (988 content files md5-equal, 0 mismatched);
+  installed reviews.jsonl 3,019 rows, installed media/manifest.jsonl 4,935 rows.
+
+GitHub publication (standing pack-publish authorization per O-05 precedent — same
+pattern as ru 0.4.4/0.4.5/0.4.6):
+- tag org.openlanguage.ja-jp.reference-0.4.4
+  https://github.com/Berzerker5653/open-language-learning/releases/tag/org.openlanguage.ja-jp.reference-0.4.4
+- asset ja-jp-reference-0.4.4.lpk state=uploaded, size=298271601,
+  GitHub digest sha256:637d94495eed1a543cd347a7f800c3ad85b5a37f301a741891f87555408ad7f1
+  == local sha256 == catalog pin.
+- release read-back: isDraft=false, isPrerelease=false, isImmutable=true.
+
+Downloaded-archive verification (in-repo `gh release download` -> tmp/dl-044.lpk):
+- sha256 of the DOWNLOADED asset equals the catalog pin; bytes=298,271,601.
+- langpack install of the downloaded archive -> tmp/verify-store-044:
+  current=0.4.4, 4,935 wavs, words.jsonl sidecar present, manifest rows 4,935,
+  reviews.jsonl 3,019 rows; `langpack validate <installed tree> --mode install`
+  = 0 errors, 0 warnings.
+
+Rewritten-content proof (both directions, from the REAL published archives):
+- the 68 sentence ids whose learner-facing text changed between the 0.4.3 tag and HEAD:
+  installed 0.4.3 archive carries all 68 OLD texts and 0 NEW ones;
+  installed 0.4.4 archive carries all 68 NEW texts and 0 OLD ones.
+- installed manifests: 0.4.3 = 4,911 rows, 0.4.4 = 4,935 rows; 280 clip ids changed
+  sha, 24 added; spot sha256 of 3 changed installed wavs equals their 0.4.4 rows.
+
+Rollback: ja-JP 0.4.3 / 0.4.2 / 0.4.1 / 0.4.0 and all ru archives stay published,
+immutable and fetchable; the ru-RU catalog entry (0.4.6) is unchanged by this lane.

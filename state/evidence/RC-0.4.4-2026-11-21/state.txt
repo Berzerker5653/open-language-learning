@@ -1,0 +1,10 @@
+HEAD=8e54d27f551b7cc6097b78db272280359ba02971
+worktree=/home/hunter/.hermes/cache/scratch/lts-ja044/work (detached, built from main HEAD; status shows the hardlinked gitignored media only)
+dirty_paths=0
+--- manifests as shipped ---
+c640e7de6f1b5d6ae211ae472d179324fa5bea589082a32bbb41f63a28e7ccf0  languages/ja-JP/manifest.yaml
+version: "0.4.4"
+  content_license: "CC-BY-SA-4.0"
+c6271479cb1b01bc02bc4337ef0de7a3bc03dafb175a0e14bc4b7c1b6ad070af  languages/ru-RU/manifest.yaml
+version: "0.4.6"
+  content_license: "CC0-1.0"
