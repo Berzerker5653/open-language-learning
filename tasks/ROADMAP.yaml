@@ -3227,6 +3227,21 @@ tasks:
   - an owner-profile plan audit via API read shows zero un-encountered tested letters
   - an after-screenshot of one confusable encounter line lands under state/evidence/ENCOUNTER-BEFORE-TEST-001
   required_for_desktop_1_0: false
+- id: LESSON-TITLE-FIT-001
+  milestone: M11
+  priority: P2
+  title: The lesson encounter title rendered badly at 390px (an orphaned one-glyph line, one step from clipped overflow), so the title now wraps balanced with a machine-checked fit gate
+  dependencies: [ENCOUNTER-BEFORE-TEST-001]
+  read_first:
+  - state/notes/LESSON-TITLE-FIT-001.md
+  - state/evidence/LESSON-TITLE-FIT-001/gates.log
+  - packages/ui/src/styles.css
+  - scripts/encounter-capture.mjs
+  acceptance:
+  - the lesson title fits the narrow column at 390px with no glyph overflowing its box, verified by the h1 line-rect gate inside scripts/encounter-capture.mjs
+  - the wrap reads as balanced lines rather than an orphaned single glyph at mobile width
+  - after-capture evidence lands under state/evidence/LESSON-TITLE-FIT-001 with the lane harness re-run green
+  required_for_desktop_1_0: false
 - id: ORTHO-LETTER-UNITS-001
   milestone: M8
   priority: P1
@@ -3422,4 +3437,5 @@ execution_scope:
   - PATH-VIEW-001
   - ENCOUNTER-BEFORE-TEST-001
   - PATH-WHATSNEXT-001
+  - LESSON-TITLE-FIT-001
   public_publication_authorized: false

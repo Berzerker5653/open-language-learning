@@ -1,0 +1,8 @@
+PASS lesson_plan carries the friendly-letter copy for А — {"explanations":["Friendly letter: А looks like your A and sounds like the a in father. Recognize the rounded bowl and right stem."]}
+PASS lesson_plan carries the false-friend copy for Н — {"explanations":["False friend: Н looks like Latin H in your alphabet, but it sounds like N (as in no). A small upright Н-shaped form."]}
+PASS home_state offers progression items for a zero-encounter profile — {"total":5,"reasons":["progression"]}
+PASS no due-review/weak-skill row for any cyrillic letter pre-encounter — {"offenders":[]}
+PASS the lesson title wraps inside its column with no overflow at 390px (LESSON-TITLE-FIT-001) — {"text":"Printed Cyrillic: А а, О о, М м, Т т","clientW":358,"scrollW":358,"lineCount":2,"widestLineW":186.796875,"docScrollW":390,"viewportW":390}
+PASS the lesson encounter panel renders with the new copy on-screen — {"panel":true,"friendly":12,"falseFriend":0,"sample":"Friendly letter: А looks like your A and sounds like the a in father. Recognize the rounded bowl and right stem."}
+PASS lesson 'Start practicing' fires encounter_complete exactly once per view — {"calls":1}
+PASS after Start, the session moved past the encounter view — {"stillEncounter":false,"bodyHasRunner":true}

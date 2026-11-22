@@ -1,0 +1,45 @@
+LESSON-TITLE-FIT-001 — gates and verification log (worker t_fb1ef1b7, 2026-11-22)
+
+REPRO FINDING (before any change)
+- Live DOM probe at HEAD 3b4f332 (serve + headless Chrome, 390x844 emulation,
+  same nav as the lane harness): the lesson title h1 had white-space: normal,
+  clientW == scrollW == 358, two text-line rects (widest 343.6px),
+  document.scrollWidth == 390. So NO horizontal clipping existed at HEAD:
+  the committed encounter-panel.png (390x2507) shows the title already
+  wrapped — but badly: line 1 "Printed Cyrillic: А а, О о, М м, Т", line 2 a
+  lone orphaned "т" (pixel-measured ink runs y506-524 x16-358, y542-551 x16-27).
+- The teal "card" border around the title in the png is the :focus-visible
+  outline: the lesson heading holds document focus (probe: activeElement=H1),
+  outline 2px accent + 2px offset at x12/376 — NOT a clipping card border.
+- The filed defect ("one line, last glyph clipped") does not reproduce at
+  HEAD against the committed png; the real mobile-width defect is the
+  orphaned one-glyph wrap. Fixed the FIT of the wrap and added a machine
+  gate so any regression to actual clipping fails the harness, not vision.
+
+CHANGE
+- packages/ui/src/styles.css: `.lesson h1 { text-wrap: balance; overflow-wrap: break-word; }`
+- scripts/encounter-capture.mjs: new check
+  "the lesson title wraps inside its column with no overflow at 390px
+  (LESSON-TITLE-FIT-001)" — measures the h1's own Range line rects
+  (scrollW<=clientW, widestLineW<=clientW+1, docScrollW<=viewportW).
+
+GATES (all run at HEAD+lane diff, dist rebuilt from the lane tree)
+1. npx tsc --noEmit                      -> clean (TSC-OK)
+2. npx vite build                        -> ok (dist/assets/index-dfzXzob3.js, CSS rehashed)
+3. npx vitest run                        -> 61 files / 483 tests, all passed
+4. SERVE_BIN=target/debug/lts-serve SERVE_DIST=apps/desktop/dist \
+   node scripts/encounter-capture.mjs    -> 8/8 PASS (was 7 checks, +1 new fit gate),
+   full output in capture-rerun.log. Measured after-fix:
+   {"clientW":358,"scrollW":358,"lineCount":2,"widestLineW":186.8,
+    "docScrollW":390,"viewportW":390}
+5. Vision check of the regenerated capture title region (3x crop):
+   title renders "Printed Cyrillic:" / "А а, О о, М м, Т т" — pairs kept on
+   one line, zero clipping/overhang at any edge, balanced lines.
+   Verdict PASS (see title-after-crop.png, encounter-panel-after.png).
+
+EVIDENCE FILES (this dir)
+- capture-rerun.log            full harness output, 8/8 PASS
+- encounter-panel-after.png    regenerated full capture (identical bytes also
+                               refresh state/evidence/ENCOUNTER-BEFORE-TEST-001/encounter-panel.png
+                               + result.json per the card's re-run instruction)
+- title-after-crop.png         3x zoom of the title box used for the vision verdict

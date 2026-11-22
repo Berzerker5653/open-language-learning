@@ -2874,6 +2874,25 @@
       "summary": "Code ON MAIN ebd96c8 + acceptance capture close (takeover t_6cfe22be): whatsnext-capture.mjs strengthened (targeted per-ref seeding, bounded back-date flip loop with flipAttempts, stable-home load gate, strip label minus chip) and green 12/12 at 390x844 — review-first flip, earned chip, answered session walk, after-session card === strip label, path pinned to offered node in viewport. Screenshots + result.json in evidence dir; CONTROLLER CLOSE in gates.log.",
       "notes": "Capture harness fix commits ride with this record. Non-blocking cosmetic observation for the review lane: at 390px the review-due chip runs against the offer label with no whitespace. Serve-capture flicker lesson banked in the notes file. lib.rs/home.tsx hotspot flags stand.",
       "updated": "2026-11-22"
+    },
+    "LESSON-TITLE-FIT-001": {
+      "task_id": "LESSON-TITLE-FIT-001",
+      "title": "Lesson encounter title fit at mobile width — balanced wrap plus a machine-checked title line-rect gate in the capture harness",
+      "status": "done",
+      "attempts": 1,
+      "dependencies": [
+        "ENCOUNTER-BEFORE-TEST-001"
+      ],
+      "evidence": [
+        "state/notes/LESSON-TITLE-FIT-001.md",
+        "state/evidence/LESSON-TITLE-FIT-001/gates.log",
+        "state/evidence/LESSON-TITLE-FIT-001/capture-rerun.log",
+        "state/evidence/LESSON-TITLE-FIT-001/encounter-panel-after.png",
+        "state/evidence/LESSON-TITLE-FIT-001/title-after-crop.png"
+      ],
+      "summary": "Repro at HEAD showed the title already wrapping but orphaning a lone glyph on line 2 (no clipping reproduced; the teal 'card' in the png is the heading's :focus-visible outline). Shipped .lesson h1 { text-wrap: balance; overflow-wrap: break-word } plus a new LESSON-TITLE-FIT-001 fit gate inside scripts/encounter-capture.mjs measuring the h1's own line rects (scrollW<=clientW, widestLineW<=clientW+1, docScrollW<=viewportW). Harness 8/8 PASS at 390px: title wraps 'Printed Cyrillic:' / 'А а, О о, М м, Т т', widest line 186.8px in a 358px column; vision verdict clean, no glyph touches any edge.",
+      "notes": "Balanced wrap fix + regression-proof machine gate; the original filed clipping did not reproduce at HEAD — recorded honestly in gates.log.",
+      "updated": "2026-11-22"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
