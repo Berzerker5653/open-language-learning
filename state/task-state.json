@@ -2804,6 +2804,24 @@
       "updated": "2026-11-22",
       "notes": "board t_55b270c6; follow-up of the deferred claim decision in ORPHAN-CONTENT-001; content lane, pack data only; group-level dispositions per card contract",
       "summary": "All 192 orphan RU lexicon rows CLAIMED into band-matched units (content fa13b6f); dictionary-weight column empty by measured decision. Census 4071/4071 claimed, 0 orphans; 192/192 reconciled to exactly one column; claimed refs in content_refs + allowed_vocab. Gates: fmt/langpack/remeasure/band-profile test/pack-install/clippy all 0; qa_stories 20 stories 0 FAIL."
+    },
+    "RU-REPUBLISH-048-001": {
+      "task_id": "RU-REPUBLISH-048-001",
+      "title": "Republish ru-RU as 0.4.8 (0.4.7 invalid against the per-case orthography entity install gate); mark 0.4.7 superseded",
+      "status": "done",
+      "dependencies": [
+        "RU-CONTENT-FREEZE-047-001",
+        "ORTHO-LETTER-UNITS-001"
+      ],
+      "attempts": 2,
+      "updated": "2026-11-22",
+      "evidence": [
+        "state/evidence/RC-0.4.8-2026-11-22/SUMMARY.txt",
+        "state/evidence/RC-0.4.8-2026-11-22/archive-ru-RU.txt",
+        "state/evidence/RC-0.4.8-2026-11-22/install-ru-RU.txt",
+        "state/evidence/RC-0.4.8-2026-11-22/diff-047-to-048-ru-RU.txt",
+        "state/evidence/RC-0.4.8-2026-11-22/publish-proof.txt"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

@@ -1,0 +1,45 @@
+worktree=/home/hunter/.hermes/cache/scratch/lts-ru048/work (detached at HEAD=62aa6f75c0802bddb66e672db3680a19fe1cdfff; built from main HEAD)
+HEAD=62aa6f75c0802bddb66e672db3680a19fe1cdfff
+media hardlinked from /home/hunter/game-dev/LTS (gitignored bytes; manifest tracked at HEAD)
+--- manifests as shipped ---
+dc4d6a2f849696836a1a386eb7f14ad3d4a985bef8d244f8dee15207029fcfe8  languages/ru-RU/manifest.yaml
+version: "0.4.8"
+  content_license: "CC0-1.0"
+rc-ru-RU-validate                            exit=0
+rc-ru-RU-lint                                exit=0
+rc-ru-RU-test                                exit=0
+rc-ru-RU-audit-curriculum                    exit=0
+rc-ru-RU-audit-lexicon                       exit=0
+rc-ru-RU-audit-licenses                      exit=0
+rc-ru-RU-audit-sources                       exit=0
+rc-build-ru-RU                               exit=0
+archive: /home/hunter/.hermes/cache/scratch/lts-ru048/work/dist/rc-0.4.8/ru-ru-reference-0.4.8.lpk
+bytes=293649417
+4d25115adec2938700c991edba3cfe6ec5aceca1d261b7d9d811d69d6b05c3fb  /home/hunter/.hermes/cache/scratch/lts-ru048/work/dist/rc-0.4.8/ru-ru-reference-0.4.8.lpk
+rc-inspect-ru-RU                             exit=0
+archive members=5987 media_members=5032
+manifest_rows=5032 media_members=5032 delta=0
+words_sidecar_member=1
+--- ru-RU: PUBLISHED 0.4.7 (SUPERSEDED) -> CANDIDATE 0.4.8 (bytes + 12-hex hash + path) ---
+published 0.4.7 members = 5987   candidate 0.4.8 members = 5987
+identical (size+hash)   = 5825
+added in 0.4.8:
+1472 70a4d5b9752b curriculum/units/016-cyrillic-ya-eh-f.yaml
+1589 3db69ded39cd curriculum/units/011-cyrillic-k-e-n-s.yaml
+1597 cd463da2e38c curriculum/units/012-cyrillic-r-v-u-kh.yaml
+1597 efc1427ad8cf curriculum/units/014-cyrillic-l-z-zh-i.yaml
+rc-install-ru-RU                             exit=0
+store layout: /home/hunter/.hermes/cache/scratch/lts-ru048/work/dist/rc-0.4.8/store-ru-RU/org.openlanguage.ru-ru.reference /home/hunter/.hermes/cache/scratch/lts-ru048/work/dist/rc-0.4.8/store-ru-RU/org.openlanguage.ru-ru.reference/0.4.8 /home/hunter/.hermes/cache/scratch/lts-ru048/work/dist/rc-0.4.8/store-ru-RU/org.openlanguage.ru-ru.reference/current 
+current pointer: 0.4.8
+media files in installed tree: 5032
+sidecar in installed tree: 1
+rows_checked=5032 installed_mismatches=0
+rc-draft-catalog                             exit=0
+      "license": "CC0-1.0",
+      "pack_id": "org.openlanguage.ru-ru.reference",
+      "sha256": "4d25115adec2938700c991edba3cfe6ec5aceca1d261b7d9d811d69d6b05c3fb",
+      "size_bytes": 293649417,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.8/ru-ru-reference-0.4.8.lpk",
+      "version": "0.4.8"
+install-gate-proof(fetch-script)             exit=0
+RC_048_DONE

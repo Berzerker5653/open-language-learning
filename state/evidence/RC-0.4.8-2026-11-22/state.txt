@@ -1,0 +1,7 @@
+worktree=/home/hunter/.hermes/cache/scratch/lts-ru048/work (detached at HEAD=62aa6f75c0802bddb66e672db3680a19fe1cdfff; built from main HEAD)
+HEAD=62aa6f75c0802bddb66e672db3680a19fe1cdfff
+media hardlinked from /home/hunter/game-dev/LTS (gitignored bytes; manifest tracked at HEAD)
+--- manifests as shipped ---
+dc4d6a2f849696836a1a386eb7f14ad3d4a985bef8d244f8dee15207029fcfe8  languages/ru-RU/manifest.yaml
+version: "0.4.8"
+  content_license: "CC0-1.0"

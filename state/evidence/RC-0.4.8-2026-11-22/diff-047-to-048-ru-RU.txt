@@ -1,0 +1,817 @@
+--- ru-RU: PUBLISHED 0.4.7 (SUPERSEDED) -> CANDIDATE 0.4.8 (bytes + 12-hex hash + path) ---
+published 0.4.7 members = 5987   candidate 0.4.8 members = 5987
+identical (size+hash)   = 5825
+added in 0.4.8:
+1472 70a4d5b9752b curriculum/units/016-cyrillic-ya-eh-f.yaml
+1589 3db69ded39cd curriculum/units/011-cyrillic-k-e-n-s.yaml
+1597 cd463da2e38c curriculum/units/012-cyrillic-r-v-u-kh.yaml
+1597 efc1427ad8cf curriculum/units/014-cyrillic-l-z-zh-i.yaml
+16255 1cafbfa412d2 orthography/cyrillic.jsonl
+1642 cde8ce54a5f8 curriculum/units/010-cyrillic-a-o-m-t.yaml
+1701 63796c1eba86 curriculum/units/017-cyrillic-ts-ch-sh.yaml
+1734 b697ca3cd687 curriculum/units/026-personal-details-07.yaml
+1802 c40b8c5e01e7 curriculum/units/060-food-01.yaml
+1809 de8627a9b9bb curriculum/units/018-cyrillic-shch-soft-hard.yaml
+1827 5efe74e65568 curriculum/units/064-food-05.yaml
+1845 d2173f0993e4 curriculum/units/053-routines-04.yaml
+1846 f79d8b6bd682 curriculum/units/321-media-02.yaml
+1868 64c7a807d28e curriculum/units/290-relationships-01.yaml
+1871 e539c112012a curriculum/units/282-work-processes-03.yaml
+1875 02be07e50365 curriculum/units/280-work-processes-01.yaml
+1883 147a4a31da7c curriculum/units/052-routines-03.yaml
+1884 89b7074f5251 curriculum/units/061-food-02.yaml
+1885 b653e432d1b0 curriculum/units/320-media-01.yaml
+1893 a249c049f688 curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+1900 fecdd3a29ad4 curriculum/units/361-summary2-02.yaml
+1911 2ea41ef0c53f curriculum/units/266-housing-problems-07.yaml
+1911 6dc0f9475ff0 curriculum/units/263-housing-problems-04.yaml
+1912 9f72317201da curriculum/units/281-work-processes-02.yaml
+1915 28fc1c42650a curriculum/units/340-respect-01.yaml
+1915 64ec80ed6082 curriculum/units/262-housing-problems-03.yaml
+1921 5be4610cf133 curriculum/units/362-summary2-03.yaml
+1921 c296c2839b19 curriculum/units/013-cyrillic-b-p-d-g.yaml
+1923 8d8191cdd660 curriculum/units/272-learning-work-03.yaml
+1924 2875e497d551 curriculum/units/100-basic-messages-01.yaml
+1924 d4799f3c5948 curriculum/units/261-housing-problems-02.yaml
+1924 ee569e5f553a curriculum/units/310-culture-media-01.yaml
+1926 715568e06e35 curriculum/units/275-learning-work-06.yaml
+1927 959cea95457d curriculum/units/371-future-02.yaml
+1928 4d9ee5575f05 curriculum/units/313-culture-media-04.yaml
+1930 8c4e408d5a2b curriculum/units/265-housing-problems-06.yaml
+1930 9762898b8ff4 curriculum/units/269-housing-problems-10.yaml
+1931 3e57322fc3c9 curriculum/units/264-housing-problems-05.yaml
+1931 a4b59aff86b9 curriculum/units/500-synthesis2-01.yaml
+1934 350a429d504b curriculum/units/533-study-04.yaml
+1934 c1f060e5efb0 curriculum/units/222-narration-background-03.yaml
+1936 ae263d6429c8 curriculum/units/267-housing-problems-08.yaml
+1937 5913881dc39a curriculum/units/420-argue2-01.yaml
+1937 aa89fe1a4918 curriculum/units/300-feelings-01.yaml
+1939 92b3464a1bc7 curriculum/units/260-housing-problems-01.yaml
+1940 99e53e65b319 curriculum/units/532-study-03.yaml
+1941 7d3a594ce785 curriculum/units/350-summary-01.yaml
+1943 13f850ff495b curriculum/units/113-past-events-04.yaml
+1947 d02f3248dde4 curriculum/units/550-study3-01.yaml
+1950 9d2431496e24 curriculum/units/111-past-events-02.yaml
+1950 ca47e329850e curriculum/units/051-routines-02.yaml
+1951 a8e5a31257b1 curriculum/units/390-writing-01.yaml
+1952 2365e7885c70 curriculum/units/501-synthesis2-02.yaml
+1952 8c62bdfd74b4 curriculum/units/430-argue3-01.yaml
+1952 e37f0e5358c4 curriculum/units/400-writing2-01.yaml
+1958 229a147e8ac3 curriculum/units/452-critical-03.yaml
+1959 0656593db139 curriculum/units/360-summary2-01.yaml
+1959 fa8c24c282ef curriculum/units/273-learning-work-04.yaml
+1960 71218532e505 curriculum/units/600-app-01.yaml
+1961 143dda8d3214 curriculum/units/054-routines-05.yaml
+1961 3204b902862c curriculum/units/351-summary-02.yaml
+1961 f9d05676475b curriculum/units/413-argue-04.yaml
+1964 538ede8698ac curriculum/units/421-argue2-02.yaml
+1966 36253c9043a9 curriculum/units/311-culture-media-02.yaml
+1966 9844df2c6105 curriculum/units/279-learning-work-10.yaml
+1967 3b367c1bcd1c curriculum/units/271-learning-work-02.yaml
+1967 fe7227ee46de curriculum/units/274-learning-work-05.yaml
+1968 61f68803caba curriculum/units/410-argue-01.yaml
+1970 b724ce8c7e1c curriculum/units/304-feelings-05.yaml
+1970 eac6116a4298 curriculum/units/343-respect-04.yaml
+1971 1d84e3f64b5d curriculum/units/370-future-01.yaml
+1972 d8e05f32f269 curriculum/units/481-critical4-02.yaml
+1975 3492795f6eb9 curriculum/units/523-synthesis4-04.yaml
+1975 8e8b8274d4cb curriculum/units/382-future2-03.yaml
+1976 aa1aa0a94a49 curriculum/units/268-housing-problems-09.yaml
+1978 824c3dc15948 curriculum/units/352-summary-03.yaml
+1978 aa20149188d4 curriculum/units/342-respect-03.yaml
+1979 d5cfde5f3b17 curriculum/units/411-argue-02.yaml
+1979 d6e24a1b8732 curriculum/units/380-future2-01.yaml
+1980 1146901ffe34 curriculum/units/531-study-02.yaml
+1980 3ac806768d7f curriculum/units/453-critical-04.yaml
+1980 a021156aa0f9 curriculum/units/341-respect-02.yaml
+1981 49b5c169161c curriculum/units/530-study-01.yaml
+1984 008be192b085 curriculum/units/373-future-04.yaml
+1989 ec7130eabf7d curriculum/units/312-culture-media-03.yaml
+1991 b03a1314c94a curriculum/units/305-feelings-06.yaml
+1992 6bfa33064135 curriculum/units/404-writing2-05.yaml
+1996 eafeca71bf48 curriculum/units/460-critical2-01.yaml
+1999 4da56f6700af curriculum/units/334-opinions-05.yaml
+2001 7ab23368b377 curriculum/units/223-narration-background-04.yaml
+2002 7934f3f9f87b curriculum/units/302-feelings-03.yaml
+2002 a1962f1bb277 curriculum/units/372-future-03.yaml
+2004 ca66188b13d6 curriculum/units/301-feelings-02.yaml
+2005 0888e25c4a81 curriculum/units/224-narration-background-05.yaml
+2006 9352d400a0a6 curriculum/units/104-basic-messages-05.yaml
+2007 bd6d67488648 curriculum/units/381-future2-02.yaml
+2010 cb1d6f47ca30 curriculum/units/020-personal-details-01.yaml
+2010 fed1417d73af curriculum/units/491-synthesis-02.yaml
+2012 ff4f66067fb7 curriculum/units/401-writing2-02.yaml
+2014 4f80457d370a curriculum/units/278-learning-work-09.yaml
+2014 93d302a066f3 curriculum/units/276-learning-work-07.yaml
+2015 6eeb1c532258 curriculum/units/330-opinions-01.yaml
+2015 7569c8041a5a curriculum/units/333-opinions-04.yaml
+2018 ffe18716da3e curriculum/units/094-time-plans-05.yaml
+2019 99b3f5606d71 curriculum/units/402-writing2-03.yaml
+2019 ba3b6f118526 curriculum/units/524-synthesis4-05.yaml
+2019 d457f55dbe22 curriculum/units/332-opinions-03.yaml
+2020 4e05e0c489eb curriculum/units/383-future2-04.yaml
+2023 5081f088b869 curriculum/units/470-critical3-01.yaml
+2024 0568acc547f5 curriculum/units/331-opinions-02.yaml
+2030 f3dbd16fa40e curriculum/units/494-synthesis-05.yaml
+2032 82e285ff40c1 curriculum/units/486-critical4-07.yaml
+2035 612da34ded44 curriculum/units/450-critical-01.yaml
+2036 110c7c393230 curriculum/units/270-learning-work-01.yaml
+2036 b446c7f145b0 curriculum/units/303-feelings-04.yaml
+2038 c637ae31718b curriculum/units/540-study2-01.yaml
+2039 36d656334170 curriculum/units/220-narration-background-01.yaml
+2041 4c4ac851bd5c curriculum/units/471-critical3-02.yaml
+2043 1b632b46748a curriculum/units/403-writing2-04.yaml
+2045 5856c726202f curriculum/units/344-respect-05.yaml
+2046 762a3a0a77ee curriculum/units/482-critical4-03.yaml
+2048 5e4e5bbbd866 curriculum/units/484-critical4-05.yaml
+2050 1229d4013c18 curriculum/units/493-synthesis-04.yaml
+2051 c8f1989c747b curriculum/units/490-synthesis-01.yaml
+2054 718c8edb5419 curriculum/units/485-critical4-06.yaml
+2061 8601cec85595 curriculum/units/492-synthesis-03.yaml
+2061 e28214e827f8 curriculum/units/480-critical4-01.yaml
+2062 a05563b32936 curriculum/units/221-narration-background-02.yaml
+2064 e1bb9f11060e curriculum/units/520-synthesis4-01.yaml
+2065 4a24d320efc4 curriculum/units/277-learning-work-08.yaml
+2070 c067bce66e7c curriculum/units/511-synthesis3-02.yaml
+2075 1ff650fa0ba0 curriculum/units/483-critical4-04.yaml
+2077 8b39f5179160 curriculum/units/521-synthesis4-02.yaml
+2091 3ed5bee5b791 curriculum/units/510-synthesis3-01.yaml
+2098 012ab0441993 curriculum/units/522-synthesis4-03.yaml
+2107 dee97b1bac12 curriculum/units/451-critical-02.yaml
+2233 a27b5af7e11a curriculum/units/811-a2j-past-workday.yaml
+2243 0a58d6b37282 curriculum/units/812-a2j-past-revision.yaml
+2252 45ae7f3aba4a curriculum/units/022-personal-details-03.yaml
+2315 6585b798d4b7 curriculum/units/089-city-10.yaml
+2408 e3f91f54f8aa curriculum/units/040-home-01.yaml
+2460 5c9a145929d7 curriculum/units/070-shopping-01.yaml
+2514 ae992de57eb4 curriculum/units/119-past-events-10.yaml
+2519 d4aa054200d7 curriculum/units/078-shopping-09.yaml
+2647 fd415e84b3ce curriculum/units/210-narration-sequence-01.yaml
+2657 1ed2f78b6cba curriculum/units/211-narration-sequence-02.yaml
+2717 e8ffe53003ca curriculum/units/810-a2j-past-day.yaml
+2786 fb0cddc23b98 curriculum/units/114-past-events-05.yaml
+2799 a8d1cab46d8b curriculum/units/218-narration-sequence-09.yaml
+2863 18e4932b58f8 curriculum/units/110-past-events-01.yaml
+2910 c884548bc668 curriculum/units/217-narration-sequence-08.yaml
+2924 5063054bcce0 curriculum/units/112-past-events-03.yaml
+3035 4e9d066be858 curriculum/units/650-soc-01.yaml
+3075 1166cbd02f3d curriculum/units/730-lit-01.yaml
+3076 08491cb77c45 curriculum/units/610-neg-01.yaml
+3087 1d76a4d9f906 curriculum/units/412-argue-03.yaml
+3217 88696d611e40 curriculum/units/772-lex-03.yaml
+3387 f70f7a05dbe7 curriculum/units/050-routines-01.yaml
+3561 41667d02d41e curriculum/units/059-routines-10.yaml
+3957 76eeecdd3a83 curriculum/units/019-cyrillic-stress-review.yaml
+67348 c06d6dcd3a96 curriculum/goals.yaml
+946 dc4d6a2f8496 manifest.yaml
+removed in 0.4.8:
+1570 1d3092f5d6ba curriculum/units/026-personal-details-07.yaml
+1650 35c1480d08d3 curriculum/units/060-food-01.yaml
+1656 f3845ec195d5 curriculum/units/061-food-02.yaml
+1675 60b839608e27 curriculum/units/064-food-05.yaml
+1675 d7a148733ec9 curriculum/units/321-media-02.yaml
+1689 2c69f83ba8ea curriculum/units/053-routines-04.yaml
+1692 88db70ab588d curriculum/units/280-work-processes-01.yaml
+1694 b8427e64d9ce curriculum/units/282-work-processes-03.yaml
+1695 e9651f76f0ef curriculum/units/290-relationships-01.yaml
+1712 d29942ab949a curriculum/units/412-argue-03.yaml
+1714 9ea26eae3a34 curriculum/units/320-media-01.yaml
+1717 96ec412925a0 curriculum/units/361-summary2-02.yaml
+1718 2d1f505fdd90 curriculum/units/040-home-01.yaml
+1723 9bb9fe1df01c curriculum/units/266-housing-problems-07.yaml
+1727 8ea3b3601eeb curriculum/units/262-housing-problems-03.yaml
+1727 b0fe3e028bca curriculum/units/052-routines-03.yaml
+1727 bb38e2c4a147 curriculum/units/263-housing-problems-04.yaml
+1727 f4883296c795 curriculum/units/281-work-processes-02.yaml
+1731 bf434ccf7788 curriculum/units/218-narration-sequence-09.yaml
+1735 c695991d1468 curriculum/units/310-culture-media-01.yaml
+1736 2e80f3bdb00d curriculum/units/275-learning-work-06.yaml
+1738 3a46af90a839 curriculum/units/362-summary2-03.yaml
+1738 a37b397691a5 curriculum/units/340-respect-01.yaml
+1738 af728c9fa7c1 curriculum/units/261-housing-problems-02.yaml
+1739 3178156fbc9d curriculum/units/222-narration-background-03.yaml
+1739 c0733aa8bd42 curriculum/units/272-learning-work-03.yaml
+1739 f914db69dccd curriculum/units/059-routines-10.yaml
+1740 23ee48bcd14e curriculum/units/269-housing-problems-10.yaml
+1742 110d593b3f62 curriculum/units/265-housing-problems-06.yaml
+1743 9654f7e73cac curriculum/units/313-culture-media-04.yaml
+1744 63846abb2d34 curriculum/units/500-synthesis2-01.yaml
+1745 6b0e67875dcb curriculum/units/264-housing-problems-05.yaml
+1746 2a82121887ec curriculum/units/094-time-plans-05.yaml
+1746 4f0c24443df5 curriculum/units/300-feelings-01.yaml
+1747 0a411e3f6442 curriculum/units/113-past-events-04.yaml
+1748 b7dc51850de2 curriculum/units/267-housing-problems-08.yaml
+1749 452f490f14b3 curriculum/units/078-shopping-09.yaml
+1751 77413cb806e4 curriculum/units/260-housing-problems-01.yaml
+1751 aff6c8242f44 curriculum/units/110-past-events-01.yaml
+1754 58e3aa3910e5 curriculum/units/371-future-02.yaml
+1756 ae1baaa015c7 curriculum/units/111-past-events-02.yaml
+1758 7d1b1f237ef2 curriculum/units/420-argue2-01.yaml
+1759 d0d2b11fe21c curriculum/units/533-study-04.yaml
+1762 7a10a54042f1 curriculum/units/350-summary-01.yaml
+1762 859d18e6bbc6 curriculum/units/550-study3-01.yaml
+1762 c1c27ca7ff10 curriculum/units/100-basic-messages-01.yaml
+1766 4882781cc17f curriculum/units/360-summary2-01.yaml
+1767 4f92ac7eba70 curriculum/units/501-synthesis2-02.yaml
+1769 4fd9095f549d curriculum/units/400-writing2-01.yaml
+1769 d520d31882fc curriculum/units/274-learning-work-05.yaml
+1769 ef1549d78ac7 curriculum/units/273-learning-work-04.yaml
+1771 c15ab7dab03f curriculum/units/430-argue3-01.yaml
+1773 545f95eb7c3e curriculum/units/311-culture-media-02.yaml
+1774 e6aa7477edfb curriculum/units/390-writing-01.yaml
+1775 42b217d99a29 curriculum/units/532-study-03.yaml
+1775 ef9046b0f015 curriculum/units/089-city-10.yaml
+1776 de53160a3326 curriculum/units/413-argue-04.yaml
+1777 9e291e5cba7a curriculum/units/421-argue2-02.yaml
+1777 f5f97ffb2844 curriculum/units/210-narration-sequence-01.yaml
+1778 6a0fc8752480 curriculum/units/279-learning-work-10.yaml
+1778 8f94ae0c5e78 curriculum/units/114-past-events-05.yaml
+1778 924819636f69 curriculum/units/610-neg-01.yaml
+1779 3179f73aaa7c curriculum/units/271-learning-work-02.yaml
+1781 32dbd1677b82 curriculum/units/343-respect-04.yaml
+1781 382b70590cfe curriculum/units/481-critical4-02.yaml
+1781 f582deb3dd41 curriculum/units/452-critical-03.yaml
+1782 0fd4528f56f9 curriculum/units/268-housing-problems-09.yaml
+1782 4bb5dbf0c506 curriculum/units/351-summary-02.yaml
+1782 5f1f94ccbb82 curriculum/units/523-synthesis4-04.yaml
+1786 3a1de8132821 curriculum/units/600-app-01.yaml
+1787 b7a5a99db21f curriculum/units/070-shopping-01.yaml
+1788 cda191395f4a curriculum/units/370-future-01.yaml
+1789 839c5701833a curriculum/units/304-feelings-05.yaml
+1793 f283532992db curriculum/units/352-summary-03.yaml
+1794 0d22764e525f curriculum/units/051-routines-02.yaml
+1794 a8e4a14cdc99 curriculum/units/411-argue-02.yaml
+1794 d627f7a4211f curriculum/units/380-future2-01.yaml
+1794 e4d6df809331 curriculum/units/382-future2-03.yaml
+1795 2a8f936a040b curriculum/units/410-argue-01.yaml
+1796 4c8dee4ed7e5 curriculum/units/217-narration-sequence-08.yaml
+1796 698d1e6723f9 curriculum/units/530-study-01.yaml
+1796 98bdfd75bc25 curriculum/units/312-culture-media-03.yaml
+1797 6a6c05323151 curriculum/units/342-respect-03.yaml
+1798 d0fdcbac09e6 curriculum/units/223-narration-background-04.yaml
+1799 1c5ad3604cd8 curriculum/units/373-future-04.yaml
+1799 f45825c264dc curriculum/units/341-respect-02.yaml
+1799 ffb59096667d curriculum/units/453-critical-04.yaml
+1800 c47beff8df94 curriculum/units/119-past-events-10.yaml
+1803 e8828e224d4d curriculum/units/460-critical2-01.yaml
+1805 1f0ea782a2c8 curriculum/units/054-routines-05.yaml
+1807 fb9b59e7b3c5 curriculum/units/531-study-02.yaml
+1808 32a227987787 curriculum/units/224-narration-background-05.yaml
+1808 9d910f174207 curriculum/units/305-feelings-06.yaml
+1809 5fdd91eae861 curriculum/units/404-writing2-05.yaml
+1809 ea0a3f3c8a97 curriculum/units/301-feelings-02.yaml
+1810 919ca4c9a65b curriculum/units/112-past-events-03.yaml
+1815 30dc6cde4a25 curriculum/units/730-lit-01.yaml
+1815 c94fe213ad92 curriculum/units/372-future-03.yaml
+1816 471dfdb7b9d1 curriculum/units/334-opinions-05.yaml
+1817 ee8043d40f01 curriculum/units/302-feelings-03.yaml
+1820 8390988a67eb curriculum/units/276-learning-work-07.yaml
+1821 91946fbb9dc4 curriculum/units/491-synthesis-02.yaml
+1822 ed1f8a8971c1 curriculum/units/330-opinions-01.yaml
+1822 ffce12ac3262 curriculum/units/381-future2-02.yaml
+1823 7096a402da7d curriculum/units/401-writing2-02.yaml
+1824 82ba4bcd7b5b curriculum/units/278-learning-work-09.yaml
+1824 aa963a12a13f curriculum/units/332-opinions-03.yaml
+1826 f6eb005ae1e4 curriculum/units/524-synthesis4-05.yaml
+1827 aa6d3da1a6f5 curriculum/units/383-future2-04.yaml
+1829 a2e0eb5d41a5 curriculum/units/331-opinions-02.yaml
+1831 8ef57d7f4dae curriculum/units/486-critical4-07.yaml
+1832 644c443023d2 curriculum/units/333-opinions-04.yaml
+1833 743bf31598f5 curriculum/units/494-synthesis-05.yaml
+1834 a4eea3aa4aae curriculum/units/402-writing2-03.yaml
+1838 ef198aaab101 curriculum/units/470-critical3-01.yaml
+1839 3288698f2e5e curriculum/units/540-study2-01.yaml
+1840 7f9795ccb709 curriculum/units/220-narration-background-01.yaml
+1840 d41cbad89956 curriculum/units/450-critical-01.yaml
+1843 035f4b474a9e curriculum/units/482-critical4-03.yaml
+1843 1f8a97c6d878 curriculum/units/484-critical4-05.yaml
+1844 c121ea270823 curriculum/units/104-basic-messages-05.yaml
+1844 d6c10846d90a curriculum/units/270-learning-work-01.yaml
+1845 a79624d0db86 curriculum/units/772-lex-03.yaml
+1846 49897d354693 curriculum/units/020-personal-details-01.yaml
+1847 696c75534c6d curriculum/units/303-feelings-04.yaml
+1850 11ea2b128064 curriculum/units/050-routines-01.yaml
+1852 610771478a51 curriculum/units/471-critical3-02.yaml
+1853 d78f78f1342c curriculum/units/485-critical4-06.yaml
+1854 277f35499385 curriculum/units/490-synthesis-01.yaml
+1856 87e8031ea7f0 curriculum/units/403-writing2-04.yaml
+1859 aa2afc5f2236 curriculum/units/493-synthesis-04.yaml
+1860 5bc0c57ed907 curriculum/units/480-critical4-01.yaml
+1862 ff0afeab87ef curriculum/units/492-synthesis-03.yaml
+1863 41d15fc23e51 curriculum/units/211-narration-sequence-02.yaml
+1863 4bef3b27fd21 curriculum/units/277-learning-work-08.yaml
+1865 68703f48daf7 curriculum/units/650-soc-01.yaml
+1865 d174e79f28dc curriculum/units/221-narration-background-02.yaml
+1866 215740459e6f curriculum/units/344-respect-05.yaml
+1869 b74dd35b7eb6 curriculum/units/520-synthesis4-01.yaml
+1872 7456bb125a94 curriculum/units/483-critical4-04.yaml
+1879 55edc34930e0 curriculum/units/511-synthesis3-02.yaml
+1882 7ca0ccc4c0a1 curriculum/units/521-synthesis4-02.yaml
+1890 66651a18aefd curriculum/units/510-synthesis3-01.yaml
+1899 725dc2b3568f curriculum/units/522-synthesis4-03.yaml
+1916 d2b629b51c07 curriculum/units/451-critical-02.yaml
+1978 04ac75e8c7f2 curriculum/units/016-cyrillic-ya-eh-f.yaml
+1990 9650d834321a curriculum/units/017-cyrillic-ts-ch-sh.yaml
+2047 1410bab60407 curriculum/units/811-a2j-past-workday.yaml
+2053 0a2b4377df10 curriculum/units/812-a2j-past-revision.yaml
+2088 5c08208cd167 curriculum/units/022-personal-details-03.yaml
+2142 16ad8112bc15 curriculum/units/018-cyrillic-shch-soft-hard.yaml
+2253 0eec90883aa5 curriculum/units/013-cyrillic-b-p-d-g.yaml
+2253 e188fb4a10f9 curriculum/units/011-cyrillic-k-e-n-s.yaml
+2265 9713b45d40ae curriculum/units/014-cyrillic-l-z-zh-i.yaml
+2265 af126b4467c4 curriculum/units/012-cyrillic-r-v-u-kh.yaml
+2306 6e40f9d820af curriculum/units/010-cyrillic-a-o-m-t.yaml
+2349 ad6486e241f1 curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+2531 940aeeb10dba curriculum/units/810-a2j-past-day.yaml
+25417 eb8cc6de98d9 orthography/cyrillic.jsonl
+6774 6628c29431a8 curriculum/units/019-cyrillic-stress-review.yaml
+68471 2062178229e7 curriculum/goals.yaml
+946 1103ea454945 manifest.yaml
+present on both sides with different bytes:
+  curriculum/goals.yaml
+    0.4.8: 68471 2062178229e7 curriculum/goals.yaml
+    0.4.7: 67348 c06d6dcd3a96 curriculum/goals.yaml
+  curriculum/units/010-cyrillic-a-o-m-t.yaml
+    0.4.8: 2306 6e40f9d820af curriculum/units/010-cyrillic-a-o-m-t.yaml
+    0.4.7: 1642 cde8ce54a5f8 curriculum/units/010-cyrillic-a-o-m-t.yaml
+  curriculum/units/011-cyrillic-k-e-n-s.yaml
+    0.4.8: 2253 e188fb4a10f9 curriculum/units/011-cyrillic-k-e-n-s.yaml
+    0.4.7: 1589 3db69ded39cd curriculum/units/011-cyrillic-k-e-n-s.yaml
+  curriculum/units/012-cyrillic-r-v-u-kh.yaml
+    0.4.8: 2265 af126b4467c4 curriculum/units/012-cyrillic-r-v-u-kh.yaml
+    0.4.7: 1597 cd463da2e38c curriculum/units/012-cyrillic-r-v-u-kh.yaml
+  curriculum/units/013-cyrillic-b-p-d-g.yaml
+    0.4.8: 2253 0eec90883aa5 curriculum/units/013-cyrillic-b-p-d-g.yaml
+    0.4.7: 1921 c296c2839b19 curriculum/units/013-cyrillic-b-p-d-g.yaml
+  curriculum/units/014-cyrillic-l-z-zh-i.yaml
+    0.4.8: 2265 9713b45d40ae curriculum/units/014-cyrillic-l-z-zh-i.yaml
+    0.4.7: 1597 efc1427ad8cf curriculum/units/014-cyrillic-l-z-zh-i.yaml
+  curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+    0.4.8: 2349 ad6486e241f1 curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+    0.4.7: 1893 a249c049f688 curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+  curriculum/units/016-cyrillic-ya-eh-f.yaml
+    0.4.8: 1978 04ac75e8c7f2 curriculum/units/016-cyrillic-ya-eh-f.yaml
+    0.4.7: 1472 70a4d5b9752b curriculum/units/016-cyrillic-ya-eh-f.yaml
+  curriculum/units/017-cyrillic-ts-ch-sh.yaml
+    0.4.8: 1990 9650d834321a curriculum/units/017-cyrillic-ts-ch-sh.yaml
+    0.4.7: 1701 63796c1eba86 curriculum/units/017-cyrillic-ts-ch-sh.yaml
+  curriculum/units/018-cyrillic-shch-soft-hard.yaml
+    0.4.8: 2142 16ad8112bc15 curriculum/units/018-cyrillic-shch-soft-hard.yaml
+    0.4.7: 1809 de8627a9b9bb curriculum/units/018-cyrillic-shch-soft-hard.yaml
+  curriculum/units/019-cyrillic-stress-review.yaml
+    0.4.8: 6774 6628c29431a8 curriculum/units/019-cyrillic-stress-review.yaml
+    0.4.7: 3957 76eeecdd3a83 curriculum/units/019-cyrillic-stress-review.yaml
+  curriculum/units/020-personal-details-01.yaml
+    0.4.8: 1846 49897d354693 curriculum/units/020-personal-details-01.yaml
+    0.4.7: 2010 cb1d6f47ca30 curriculum/units/020-personal-details-01.yaml
+  curriculum/units/022-personal-details-03.yaml
+    0.4.8: 2088 5c08208cd167 curriculum/units/022-personal-details-03.yaml
+    0.4.7: 2252 45ae7f3aba4a curriculum/units/022-personal-details-03.yaml
+  curriculum/units/026-personal-details-07.yaml
+    0.4.8: 1570 1d3092f5d6ba curriculum/units/026-personal-details-07.yaml
+    0.4.7: 1734 b697ca3cd687 curriculum/units/026-personal-details-07.yaml
+  curriculum/units/040-home-01.yaml
+    0.4.8: 1718 2d1f505fdd90 curriculum/units/040-home-01.yaml
+    0.4.7: 2408 e3f91f54f8aa curriculum/units/040-home-01.yaml
+  curriculum/units/050-routines-01.yaml
+    0.4.8: 1850 11ea2b128064 curriculum/units/050-routines-01.yaml
+    0.4.7: 3387 f70f7a05dbe7 curriculum/units/050-routines-01.yaml
+  curriculum/units/051-routines-02.yaml
+    0.4.8: 1794 0d22764e525f curriculum/units/051-routines-02.yaml
+    0.4.7: 1950 ca47e329850e curriculum/units/051-routines-02.yaml
+  curriculum/units/052-routines-03.yaml
+    0.4.8: 1727 b0fe3e028bca curriculum/units/052-routines-03.yaml
+    0.4.7: 1883 147a4a31da7c curriculum/units/052-routines-03.yaml
+  curriculum/units/053-routines-04.yaml
+    0.4.8: 1689 2c69f83ba8ea curriculum/units/053-routines-04.yaml
+    0.4.7: 1845 d2173f0993e4 curriculum/units/053-routines-04.yaml
+  curriculum/units/054-routines-05.yaml
+    0.4.8: 1805 1f0ea782a2c8 curriculum/units/054-routines-05.yaml
+    0.4.7: 1961 143dda8d3214 curriculum/units/054-routines-05.yaml
+  curriculum/units/059-routines-10.yaml
+    0.4.8: 1739 f914db69dccd curriculum/units/059-routines-10.yaml
+    0.4.7: 3561 41667d02d41e curriculum/units/059-routines-10.yaml
+  curriculum/units/060-food-01.yaml
+    0.4.8: 1650 35c1480d08d3 curriculum/units/060-food-01.yaml
+    0.4.7: 1802 c40b8c5e01e7 curriculum/units/060-food-01.yaml
+  curriculum/units/061-food-02.yaml
+    0.4.8: 1656 f3845ec195d5 curriculum/units/061-food-02.yaml
+    0.4.7: 1884 89b7074f5251 curriculum/units/061-food-02.yaml
+  curriculum/units/064-food-05.yaml
+    0.4.8: 1675 60b839608e27 curriculum/units/064-food-05.yaml
+    0.4.7: 1827 5efe74e65568 curriculum/units/064-food-05.yaml
+  curriculum/units/070-shopping-01.yaml
+    0.4.8: 1787 b7a5a99db21f curriculum/units/070-shopping-01.yaml
+    0.4.7: 2460 5c9a145929d7 curriculum/units/070-shopping-01.yaml
+  curriculum/units/078-shopping-09.yaml
+    0.4.8: 1749 452f490f14b3 curriculum/units/078-shopping-09.yaml
+    0.4.7: 2519 d4aa054200d7 curriculum/units/078-shopping-09.yaml
+  curriculum/units/089-city-10.yaml
+    0.4.8: 1775 ef9046b0f015 curriculum/units/089-city-10.yaml
+    0.4.7: 2315 6585b798d4b7 curriculum/units/089-city-10.yaml
+  curriculum/units/094-time-plans-05.yaml
+    0.4.8: 1746 2a82121887ec curriculum/units/094-time-plans-05.yaml
+    0.4.7: 2018 ffe18716da3e curriculum/units/094-time-plans-05.yaml
+  curriculum/units/100-basic-messages-01.yaml
+    0.4.8: 1762 c1c27ca7ff10 curriculum/units/100-basic-messages-01.yaml
+    0.4.7: 1924 2875e497d551 curriculum/units/100-basic-messages-01.yaml
+  curriculum/units/104-basic-messages-05.yaml
+    0.4.8: 1844 c121ea270823 curriculum/units/104-basic-messages-05.yaml
+    0.4.7: 2006 9352d400a0a6 curriculum/units/104-basic-messages-05.yaml
+  curriculum/units/110-past-events-01.yaml
+    0.4.8: 1751 aff6c8242f44 curriculum/units/110-past-events-01.yaml
+    0.4.7: 2863 18e4932b58f8 curriculum/units/110-past-events-01.yaml
+  curriculum/units/111-past-events-02.yaml
+    0.4.8: 1756 ae1baaa015c7 curriculum/units/111-past-events-02.yaml
+    0.4.7: 1950 9d2431496e24 curriculum/units/111-past-events-02.yaml
+  curriculum/units/112-past-events-03.yaml
+    0.4.8: 1810 919ca4c9a65b curriculum/units/112-past-events-03.yaml
+    0.4.7: 2924 5063054bcce0 curriculum/units/112-past-events-03.yaml
+  curriculum/units/113-past-events-04.yaml
+    0.4.8: 1747 0a411e3f6442 curriculum/units/113-past-events-04.yaml
+    0.4.7: 1943 13f850ff495b curriculum/units/113-past-events-04.yaml
+  curriculum/units/114-past-events-05.yaml
+    0.4.8: 1778 8f94ae0c5e78 curriculum/units/114-past-events-05.yaml
+    0.4.7: 2786 fb0cddc23b98 curriculum/units/114-past-events-05.yaml
+  curriculum/units/119-past-events-10.yaml
+    0.4.8: 1800 c47beff8df94 curriculum/units/119-past-events-10.yaml
+    0.4.7: 2514 ae992de57eb4 curriculum/units/119-past-events-10.yaml
+  curriculum/units/210-narration-sequence-01.yaml
+    0.4.8: 1777 f5f97ffb2844 curriculum/units/210-narration-sequence-01.yaml
+    0.4.7: 2647 fd415e84b3ce curriculum/units/210-narration-sequence-01.yaml
+  curriculum/units/211-narration-sequence-02.yaml
+    0.4.8: 1863 41d15fc23e51 curriculum/units/211-narration-sequence-02.yaml
+    0.4.7: 2657 1ed2f78b6cba curriculum/units/211-narration-sequence-02.yaml
+  curriculum/units/217-narration-sequence-08.yaml
+    0.4.8: 1796 4c8dee4ed7e5 curriculum/units/217-narration-sequence-08.yaml
+    0.4.7: 2910 c884548bc668 curriculum/units/217-narration-sequence-08.yaml
+  curriculum/units/218-narration-sequence-09.yaml
+    0.4.8: 1731 bf434ccf7788 curriculum/units/218-narration-sequence-09.yaml
+    0.4.7: 2799 a8d1cab46d8b curriculum/units/218-narration-sequence-09.yaml
+  curriculum/units/220-narration-background-01.yaml
+    0.4.8: 1840 7f9795ccb709 curriculum/units/220-narration-background-01.yaml
+    0.4.7: 2039 36d656334170 curriculum/units/220-narration-background-01.yaml
+  curriculum/units/221-narration-background-02.yaml
+    0.4.8: 1865 d174e79f28dc curriculum/units/221-narration-background-02.yaml
+    0.4.7: 2062 a05563b32936 curriculum/units/221-narration-background-02.yaml
+  curriculum/units/222-narration-background-03.yaml
+    0.4.8: 1739 3178156fbc9d curriculum/units/222-narration-background-03.yaml
+    0.4.7: 1934 c1f060e5efb0 curriculum/units/222-narration-background-03.yaml
+  curriculum/units/223-narration-background-04.yaml
+    0.4.8: 1798 d0fdcbac09e6 curriculum/units/223-narration-background-04.yaml
+    0.4.7: 2001 7ab23368b377 curriculum/units/223-narration-background-04.yaml
+  curriculum/units/224-narration-background-05.yaml
+    0.4.8: 1808 32a227987787 curriculum/units/224-narration-background-05.yaml
+    0.4.7: 2005 0888e25c4a81 curriculum/units/224-narration-background-05.yaml
+  curriculum/units/260-housing-problems-01.yaml
+    0.4.8: 1751 77413cb806e4 curriculum/units/260-housing-problems-01.yaml
+    0.4.7: 1939 92b3464a1bc7 curriculum/units/260-housing-problems-01.yaml
+  curriculum/units/261-housing-problems-02.yaml
+    0.4.8: 1738 af728c9fa7c1 curriculum/units/261-housing-problems-02.yaml
+    0.4.7: 1924 d4799f3c5948 curriculum/units/261-housing-problems-02.yaml
+  curriculum/units/262-housing-problems-03.yaml
+    0.4.8: 1727 8ea3b3601eeb curriculum/units/262-housing-problems-03.yaml
+    0.4.7: 1915 64ec80ed6082 curriculum/units/262-housing-problems-03.yaml
+  curriculum/units/263-housing-problems-04.yaml
+    0.4.8: 1727 bb38e2c4a147 curriculum/units/263-housing-problems-04.yaml
+    0.4.7: 1911 6dc0f9475ff0 curriculum/units/263-housing-problems-04.yaml
+  curriculum/units/264-housing-problems-05.yaml
+    0.4.8: 1745 6b0e67875dcb curriculum/units/264-housing-problems-05.yaml
+    0.4.7: 1931 3e57322fc3c9 curriculum/units/264-housing-problems-05.yaml
+  curriculum/units/265-housing-problems-06.yaml
+    0.4.8: 1742 110d593b3f62 curriculum/units/265-housing-problems-06.yaml
+    0.4.7: 1930 8c4e408d5a2b curriculum/units/265-housing-problems-06.yaml
+  curriculum/units/266-housing-problems-07.yaml
+    0.4.8: 1723 9bb9fe1df01c curriculum/units/266-housing-problems-07.yaml
+    0.4.7: 1911 2ea41ef0c53f curriculum/units/266-housing-problems-07.yaml
+  curriculum/units/267-housing-problems-08.yaml
+    0.4.8: 1748 b7dc51850de2 curriculum/units/267-housing-problems-08.yaml
+    0.4.7: 1936 ae263d6429c8 curriculum/units/267-housing-problems-08.yaml
+  curriculum/units/268-housing-problems-09.yaml
+    0.4.8: 1782 0fd4528f56f9 curriculum/units/268-housing-problems-09.yaml
+    0.4.7: 1976 aa1aa0a94a49 curriculum/units/268-housing-problems-09.yaml
+  curriculum/units/269-housing-problems-10.yaml
+    0.4.8: 1740 23ee48bcd14e curriculum/units/269-housing-problems-10.yaml
+    0.4.7: 1930 9762898b8ff4 curriculum/units/269-housing-problems-10.yaml
+  curriculum/units/270-learning-work-01.yaml
+    0.4.8: 1844 d6c10846d90a curriculum/units/270-learning-work-01.yaml
+    0.4.7: 2036 110c7c393230 curriculum/units/270-learning-work-01.yaml
+  curriculum/units/271-learning-work-02.yaml
+    0.4.8: 1779 3179f73aaa7c curriculum/units/271-learning-work-02.yaml
+    0.4.7: 1967 3b367c1bcd1c curriculum/units/271-learning-work-02.yaml
+  curriculum/units/272-learning-work-03.yaml
+    0.4.8: 1739 c0733aa8bd42 curriculum/units/272-learning-work-03.yaml
+    0.4.7: 1923 8d8191cdd660 curriculum/units/272-learning-work-03.yaml
+  curriculum/units/273-learning-work-04.yaml
+    0.4.8: 1769 ef1549d78ac7 curriculum/units/273-learning-work-04.yaml
+    0.4.7: 1959 fa8c24c282ef curriculum/units/273-learning-work-04.yaml
+  curriculum/units/274-learning-work-05.yaml
+    0.4.8: 1769 d520d31882fc curriculum/units/274-learning-work-05.yaml
+    0.4.7: 1967 fe7227ee46de curriculum/units/274-learning-work-05.yaml
+  curriculum/units/275-learning-work-06.yaml
+    0.4.8: 1736 2e80f3bdb00d curriculum/units/275-learning-work-06.yaml
+    0.4.7: 1926 715568e06e35 curriculum/units/275-learning-work-06.yaml
+  curriculum/units/276-learning-work-07.yaml
+    0.4.8: 1820 8390988a67eb curriculum/units/276-learning-work-07.yaml
+    0.4.7: 2014 93d302a066f3 curriculum/units/276-learning-work-07.yaml
+  curriculum/units/277-learning-work-08.yaml
+    0.4.8: 1863 4bef3b27fd21 curriculum/units/277-learning-work-08.yaml
+    0.4.7: 2065 4a24d320efc4 curriculum/units/277-learning-work-08.yaml
+  curriculum/units/278-learning-work-09.yaml
+    0.4.8: 1824 82ba4bcd7b5b curriculum/units/278-learning-work-09.yaml
+    0.4.7: 2014 4f80457d370a curriculum/units/278-learning-work-09.yaml
+  curriculum/units/279-learning-work-10.yaml
+    0.4.8: 1778 6a0fc8752480 curriculum/units/279-learning-work-10.yaml
+    0.4.7: 1966 9844df2c6105 curriculum/units/279-learning-work-10.yaml
+  curriculum/units/280-work-processes-01.yaml
+    0.4.8: 1692 88db70ab588d curriculum/units/280-work-processes-01.yaml
+    0.4.7: 1875 02be07e50365 curriculum/units/280-work-processes-01.yaml
+  curriculum/units/281-work-processes-02.yaml
+    0.4.8: 1727 f4883296c795 curriculum/units/281-work-processes-02.yaml
+    0.4.7: 1912 9f72317201da curriculum/units/281-work-processes-02.yaml
+  curriculum/units/282-work-processes-03.yaml
+    0.4.8: 1694 b8427e64d9ce curriculum/units/282-work-processes-03.yaml
+    0.4.7: 1871 e539c112012a curriculum/units/282-work-processes-03.yaml
+  curriculum/units/290-relationships-01.yaml
+    0.4.8: 1695 e9651f76f0ef curriculum/units/290-relationships-01.yaml
+    0.4.7: 1868 64c7a807d28e curriculum/units/290-relationships-01.yaml
+  curriculum/units/300-feelings-01.yaml
+    0.4.8: 1746 4f0c24443df5 curriculum/units/300-feelings-01.yaml
+    0.4.7: 1937 aa89fe1a4918 curriculum/units/300-feelings-01.yaml
+  curriculum/units/301-feelings-02.yaml
+    0.4.8: 1809 ea0a3f3c8a97 curriculum/units/301-feelings-02.yaml
+    0.4.7: 2004 ca66188b13d6 curriculum/units/301-feelings-02.yaml
+  curriculum/units/302-feelings-03.yaml
+    0.4.8: 1817 ee8043d40f01 curriculum/units/302-feelings-03.yaml
+    0.4.7: 2002 7934f3f9f87b curriculum/units/302-feelings-03.yaml
+  curriculum/units/303-feelings-04.yaml
+    0.4.8: 1847 696c75534c6d curriculum/units/303-feelings-04.yaml
+    0.4.7: 2036 b446c7f145b0 curriculum/units/303-feelings-04.yaml
+  curriculum/units/304-feelings-05.yaml
+    0.4.8: 1789 839c5701833a curriculum/units/304-feelings-05.yaml
+    0.4.7: 1970 b724ce8c7e1c curriculum/units/304-feelings-05.yaml
+  curriculum/units/305-feelings-06.yaml
+    0.4.8: 1808 9d910f174207 curriculum/units/305-feelings-06.yaml
+    0.4.7: 1991 b03a1314c94a curriculum/units/305-feelings-06.yaml
+  curriculum/units/310-culture-media-01.yaml
+    0.4.8: 1735 c695991d1468 curriculum/units/310-culture-media-01.yaml
+    0.4.7: 1924 ee569e5f553a curriculum/units/310-culture-media-01.yaml
+  curriculum/units/311-culture-media-02.yaml
+    0.4.8: 1773 545f95eb7c3e curriculum/units/311-culture-media-02.yaml
+    0.4.7: 1966 36253c9043a9 curriculum/units/311-culture-media-02.yaml
+  curriculum/units/312-culture-media-03.yaml
+    0.4.8: 1796 98bdfd75bc25 curriculum/units/312-culture-media-03.yaml
+    0.4.7: 1989 ec7130eabf7d curriculum/units/312-culture-media-03.yaml
+  curriculum/units/313-culture-media-04.yaml
+    0.4.8: 1743 9654f7e73cac curriculum/units/313-culture-media-04.yaml
+    0.4.7: 1928 4d9ee5575f05 curriculum/units/313-culture-media-04.yaml
+  curriculum/units/320-media-01.yaml
+    0.4.8: 1714 9ea26eae3a34 curriculum/units/320-media-01.yaml
+    0.4.7: 1885 b653e432d1b0 curriculum/units/320-media-01.yaml
+  curriculum/units/321-media-02.yaml
+    0.4.8: 1675 d7a148733ec9 curriculum/units/321-media-02.yaml
+    0.4.7: 1846 f79d8b6bd682 curriculum/units/321-media-02.yaml
+  curriculum/units/330-opinions-01.yaml
+    0.4.8: 1822 ed1f8a8971c1 curriculum/units/330-opinions-01.yaml
+    0.4.7: 2015 6eeb1c532258 curriculum/units/330-opinions-01.yaml
+  curriculum/units/331-opinions-02.yaml
+    0.4.8: 1829 a2e0eb5d41a5 curriculum/units/331-opinions-02.yaml
+    0.4.7: 2024 0568acc547f5 curriculum/units/331-opinions-02.yaml
+  curriculum/units/332-opinions-03.yaml
+    0.4.8: 1824 aa963a12a13f curriculum/units/332-opinions-03.yaml
+    0.4.7: 2019 d457f55dbe22 curriculum/units/332-opinions-03.yaml
+  curriculum/units/333-opinions-04.yaml
+    0.4.8: 1832 644c443023d2 curriculum/units/333-opinions-04.yaml
+    0.4.7: 2015 7569c8041a5a curriculum/units/333-opinions-04.yaml
+  curriculum/units/334-opinions-05.yaml
+    0.4.8: 1816 471dfdb7b9d1 curriculum/units/334-opinions-05.yaml
+    0.4.7: 1999 4da56f6700af curriculum/units/334-opinions-05.yaml
+  curriculum/units/340-respect-01.yaml
+    0.4.8: 1738 a37b397691a5 curriculum/units/340-respect-01.yaml
+    0.4.7: 1915 28fc1c42650a curriculum/units/340-respect-01.yaml
+  curriculum/units/341-respect-02.yaml
+    0.4.8: 1799 f45825c264dc curriculum/units/341-respect-02.yaml
+    0.4.7: 1980 a021156aa0f9 curriculum/units/341-respect-02.yaml
+  curriculum/units/342-respect-03.yaml
+    0.4.8: 1797 6a6c05323151 curriculum/units/342-respect-03.yaml
+    0.4.7: 1978 aa20149188d4 curriculum/units/342-respect-03.yaml
+  curriculum/units/343-respect-04.yaml
+    0.4.8: 1781 32dbd1677b82 curriculum/units/343-respect-04.yaml
+    0.4.7: 1970 eac6116a4298 curriculum/units/343-respect-04.yaml
+  curriculum/units/344-respect-05.yaml
+    0.4.8: 1866 215740459e6f curriculum/units/344-respect-05.yaml
+    0.4.7: 2045 5856c726202f curriculum/units/344-respect-05.yaml
+  curriculum/units/350-summary-01.yaml
+    0.4.8: 1762 7a10a54042f1 curriculum/units/350-summary-01.yaml
+    0.4.7: 1941 7d3a594ce785 curriculum/units/350-summary-01.yaml
+  curriculum/units/351-summary-02.yaml
+    0.4.8: 1782 4bb5dbf0c506 curriculum/units/351-summary-02.yaml
+    0.4.7: 1961 3204b902862c curriculum/units/351-summary-02.yaml
+  curriculum/units/352-summary-03.yaml
+    0.4.8: 1793 f283532992db curriculum/units/352-summary-03.yaml
+    0.4.7: 1978 824c3dc15948 curriculum/units/352-summary-03.yaml
+  curriculum/units/360-summary2-01.yaml
+    0.4.8: 1766 4882781cc17f curriculum/units/360-summary2-01.yaml
+    0.4.7: 1959 0656593db139 curriculum/units/360-summary2-01.yaml
+  curriculum/units/361-summary2-02.yaml
+    0.4.8: 1717 96ec412925a0 curriculum/units/361-summary2-02.yaml
+    0.4.7: 1900 fecdd3a29ad4 curriculum/units/361-summary2-02.yaml
+  curriculum/units/362-summary2-03.yaml
+    0.4.8: 1738 3a46af90a839 curriculum/units/362-summary2-03.yaml
+    0.4.7: 1921 5be4610cf133 curriculum/units/362-summary2-03.yaml
+  curriculum/units/370-future-01.yaml
+    0.4.8: 1788 cda191395f4a curriculum/units/370-future-01.yaml
+    0.4.7: 1971 1d84e3f64b5d curriculum/units/370-future-01.yaml
+  curriculum/units/371-future-02.yaml
+    0.4.8: 1754 58e3aa3910e5 curriculum/units/371-future-02.yaml
+    0.4.7: 1927 959cea95457d curriculum/units/371-future-02.yaml
+  curriculum/units/372-future-03.yaml
+    0.4.8: 1815 c94fe213ad92 curriculum/units/372-future-03.yaml
+    0.4.7: 2002 a1962f1bb277 curriculum/units/372-future-03.yaml
+  curriculum/units/373-future-04.yaml
+    0.4.8: 1799 1c5ad3604cd8 curriculum/units/373-future-04.yaml
+    0.4.7: 1984 008be192b085 curriculum/units/373-future-04.yaml
+  curriculum/units/380-future2-01.yaml
+    0.4.8: 1794 d627f7a4211f curriculum/units/380-future2-01.yaml
+    0.4.7: 1979 d6e24a1b8732 curriculum/units/380-future2-01.yaml
+  curriculum/units/381-future2-02.yaml
+    0.4.8: 1822 ffce12ac3262 curriculum/units/381-future2-02.yaml
+    0.4.7: 2007 bd6d67488648 curriculum/units/381-future2-02.yaml
+  curriculum/units/382-future2-03.yaml
+    0.4.8: 1794 e4d6df809331 curriculum/units/382-future2-03.yaml
+    0.4.7: 1975 8e8b8274d4cb curriculum/units/382-future2-03.yaml
+  curriculum/units/383-future2-04.yaml
+    0.4.8: 1827 aa6d3da1a6f5 curriculum/units/383-future2-04.yaml
+    0.4.7: 2020 4e05e0c489eb curriculum/units/383-future2-04.yaml
+  curriculum/units/390-writing-01.yaml
+    0.4.8: 1774 e6aa7477edfb curriculum/units/390-writing-01.yaml
+    0.4.7: 1951 a8e5a31257b1 curriculum/units/390-writing-01.yaml
+  curriculum/units/400-writing2-01.yaml
+    0.4.8: 1769 4fd9095f549d curriculum/units/400-writing2-01.yaml
+    0.4.7: 1952 e37f0e5358c4 curriculum/units/400-writing2-01.yaml
+  curriculum/units/401-writing2-02.yaml
+    0.4.8: 1823 7096a402da7d curriculum/units/401-writing2-02.yaml
+    0.4.7: 2012 ff4f66067fb7 curriculum/units/401-writing2-02.yaml
+  curriculum/units/402-writing2-03.yaml
+    0.4.8: 1834 a4eea3aa4aae curriculum/units/402-writing2-03.yaml
+    0.4.7: 2019 99b3f5606d71 curriculum/units/402-writing2-03.yaml
+  curriculum/units/403-writing2-04.yaml
+    0.4.8: 1856 87e8031ea7f0 curriculum/units/403-writing2-04.yaml
+    0.4.7: 2043 1b632b46748a curriculum/units/403-writing2-04.yaml
+  curriculum/units/404-writing2-05.yaml
+    0.4.8: 1809 5fdd91eae861 curriculum/units/404-writing2-05.yaml
+    0.4.7: 1992 6bfa33064135 curriculum/units/404-writing2-05.yaml
+  curriculum/units/410-argue-01.yaml
+    0.4.8: 1795 2a8f936a040b curriculum/units/410-argue-01.yaml
+    0.4.7: 1968 61f68803caba curriculum/units/410-argue-01.yaml
+  curriculum/units/411-argue-02.yaml
+    0.4.8: 1794 a8e4a14cdc99 curriculum/units/411-argue-02.yaml
+    0.4.7: 1979 d5cfde5f3b17 curriculum/units/411-argue-02.yaml
+  curriculum/units/412-argue-03.yaml
+    0.4.8: 1712 d29942ab949a curriculum/units/412-argue-03.yaml
+    0.4.7: 3087 1d76a4d9f906 curriculum/units/412-argue-03.yaml
+  curriculum/units/413-argue-04.yaml
+    0.4.8: 1776 de53160a3326 curriculum/units/413-argue-04.yaml
+    0.4.7: 1961 f9d05676475b curriculum/units/413-argue-04.yaml
+  curriculum/units/420-argue2-01.yaml
+    0.4.8: 1758 7d1b1f237ef2 curriculum/units/420-argue2-01.yaml
+    0.4.7: 1937 5913881dc39a curriculum/units/420-argue2-01.yaml
+  curriculum/units/421-argue2-02.yaml
+    0.4.8: 1777 9e291e5cba7a curriculum/units/421-argue2-02.yaml
+    0.4.7: 1964 538ede8698ac curriculum/units/421-argue2-02.yaml
+  curriculum/units/430-argue3-01.yaml
+    0.4.8: 1771 c15ab7dab03f curriculum/units/430-argue3-01.yaml
+    0.4.7: 1952 8c62bdfd74b4 curriculum/units/430-argue3-01.yaml
+  curriculum/units/450-critical-01.yaml
+    0.4.8: 1840 d41cbad89956 curriculum/units/450-critical-01.yaml
+    0.4.7: 2035 612da34ded44 curriculum/units/450-critical-01.yaml
+  curriculum/units/451-critical-02.yaml
+    0.4.8: 1916 d2b629b51c07 curriculum/units/451-critical-02.yaml
+    0.4.7: 2107 dee97b1bac12 curriculum/units/451-critical-02.yaml
+  curriculum/units/452-critical-03.yaml
+    0.4.8: 1781 f582deb3dd41 curriculum/units/452-critical-03.yaml
+    0.4.7: 1958 229a147e8ac3 curriculum/units/452-critical-03.yaml
+  curriculum/units/453-critical-04.yaml
+    0.4.8: 1799 ffb59096667d curriculum/units/453-critical-04.yaml
+    0.4.7: 1980 3ac806768d7f curriculum/units/453-critical-04.yaml
+  curriculum/units/460-critical2-01.yaml
+    0.4.8: 1803 e8828e224d4d curriculum/units/460-critical2-01.yaml
+    0.4.7: 1996 eafeca71bf48 curriculum/units/460-critical2-01.yaml
+  curriculum/units/470-critical3-01.yaml
+    0.4.8: 1838 ef198aaab101 curriculum/units/470-critical3-01.yaml
+    0.4.7: 2023 5081f088b869 curriculum/units/470-critical3-01.yaml
+  curriculum/units/471-critical3-02.yaml
+    0.4.8: 1852 610771478a51 curriculum/units/471-critical3-02.yaml
+    0.4.7: 2041 4c4ac851bd5c curriculum/units/471-critical3-02.yaml
+  curriculum/units/480-critical4-01.yaml
+    0.4.8: 1860 5bc0c57ed907 curriculum/units/480-critical4-01.yaml
+    0.4.7: 2061 e28214e827f8 curriculum/units/480-critical4-01.yaml
+  curriculum/units/481-critical4-02.yaml
+    0.4.8: 1781 382b70590cfe curriculum/units/481-critical4-02.yaml
+    0.4.7: 1972 d8e05f32f269 curriculum/units/481-critical4-02.yaml
+  curriculum/units/482-critical4-03.yaml
+    0.4.8: 1843 035f4b474a9e curriculum/units/482-critical4-03.yaml
+    0.4.7: 2046 762a3a0a77ee curriculum/units/482-critical4-03.yaml
+  curriculum/units/483-critical4-04.yaml
+    0.4.8: 1872 7456bb125a94 curriculum/units/483-critical4-04.yaml
+    0.4.7: 2075 1ff650fa0ba0 curriculum/units/483-critical4-04.yaml
+  curriculum/units/484-critical4-05.yaml
+    0.4.8: 1843 1f8a97c6d878 curriculum/units/484-critical4-05.yaml
+    0.4.7: 2048 5e4e5bbbd866 curriculum/units/484-critical4-05.yaml
+  curriculum/units/485-critical4-06.yaml
+    0.4.8: 1853 d78f78f1342c curriculum/units/485-critical4-06.yaml
+    0.4.7: 2054 718c8edb5419 curriculum/units/485-critical4-06.yaml
+  curriculum/units/486-critical4-07.yaml
+    0.4.8: 1831 8ef57d7f4dae curriculum/units/486-critical4-07.yaml
+    0.4.7: 2032 82e285ff40c1 curriculum/units/486-critical4-07.yaml
+  curriculum/units/490-synthesis-01.yaml
+    0.4.8: 1854 277f35499385 curriculum/units/490-synthesis-01.yaml
+    0.4.7: 2051 c8f1989c747b curriculum/units/490-synthesis-01.yaml
+  curriculum/units/491-synthesis-02.yaml
+    0.4.8: 1821 91946fbb9dc4 curriculum/units/491-synthesis-02.yaml
+    0.4.7: 2010 fed1417d73af curriculum/units/491-synthesis-02.yaml
+  curriculum/units/492-synthesis-03.yaml
+    0.4.8: 1862 ff0afeab87ef curriculum/units/492-synthesis-03.yaml
+    0.4.7: 2061 8601cec85595 curriculum/units/492-synthesis-03.yaml
+  curriculum/units/493-synthesis-04.yaml
+    0.4.8: 1859 aa2afc5f2236 curriculum/units/493-synthesis-04.yaml
+    0.4.7: 2050 1229d4013c18 curriculum/units/493-synthesis-04.yaml
+  curriculum/units/494-synthesis-05.yaml
+    0.4.8: 1833 743bf31598f5 curriculum/units/494-synthesis-05.yaml
+    0.4.7: 2030 f3dbd16fa40e curriculum/units/494-synthesis-05.yaml
+  curriculum/units/500-synthesis2-01.yaml
+    0.4.8: 1744 63846abb2d34 curriculum/units/500-synthesis2-01.yaml
+    0.4.7: 1931 a4b59aff86b9 curriculum/units/500-synthesis2-01.yaml
+  curriculum/units/501-synthesis2-02.yaml
+    0.4.8: 1767 4f92ac7eba70 curriculum/units/501-synthesis2-02.yaml
+    0.4.7: 1952 2365e7885c70 curriculum/units/501-synthesis2-02.yaml
+  curriculum/units/510-synthesis3-01.yaml
+    0.4.8: 1890 66651a18aefd curriculum/units/510-synthesis3-01.yaml
+    0.4.7: 2091 3ed5bee5b791 curriculum/units/510-synthesis3-01.yaml
+  curriculum/units/511-synthesis3-02.yaml
+    0.4.8: 1879 55edc34930e0 curriculum/units/511-synthesis3-02.yaml
+    0.4.7: 2070 c067bce66e7c curriculum/units/511-synthesis3-02.yaml
+  curriculum/units/520-synthesis4-01.yaml
+    0.4.8: 1869 b74dd35b7eb6 curriculum/units/520-synthesis4-01.yaml
+    0.4.7: 2064 e1bb9f11060e curriculum/units/520-synthesis4-01.yaml
+  curriculum/units/521-synthesis4-02.yaml
+    0.4.8: 1882 7ca0ccc4c0a1 curriculum/units/521-synthesis4-02.yaml
+    0.4.7: 2077 8b39f5179160 curriculum/units/521-synthesis4-02.yaml
+  curriculum/units/522-synthesis4-03.yaml
+    0.4.8: 1899 725dc2b3568f curriculum/units/522-synthesis4-03.yaml
+    0.4.7: 2098 012ab0441993 curriculum/units/522-synthesis4-03.yaml
+  curriculum/units/523-synthesis4-04.yaml
+    0.4.8: 1782 5f1f94ccbb82 curriculum/units/523-synthesis4-04.yaml
+    0.4.7: 1975 3492795f6eb9 curriculum/units/523-synthesis4-04.yaml
+  curriculum/units/524-synthesis4-05.yaml
+    0.4.8: 1826 f6eb005ae1e4 curriculum/units/524-synthesis4-05.yaml
+    0.4.7: 2019 ba3b6f118526 curriculum/units/524-synthesis4-05.yaml
+  curriculum/units/530-study-01.yaml
+    0.4.8: 1796 698d1e6723f9 curriculum/units/530-study-01.yaml
+    0.4.7: 1981 49b5c169161c curriculum/units/530-study-01.yaml
+  curriculum/units/531-study-02.yaml
+    0.4.8: 1807 fb9b59e7b3c5 curriculum/units/531-study-02.yaml
+    0.4.7: 1980 1146901ffe34 curriculum/units/531-study-02.yaml
+  curriculum/units/532-study-03.yaml
+    0.4.8: 1775 42b217d99a29 curriculum/units/532-study-03.yaml
+    0.4.7: 1940 99e53e65b319 curriculum/units/532-study-03.yaml
+  curriculum/units/533-study-04.yaml
+    0.4.8: 1759 d0d2b11fe21c curriculum/units/533-study-04.yaml
+    0.4.7: 1934 350a429d504b curriculum/units/533-study-04.yaml
+  curriculum/units/540-study2-01.yaml
+    0.4.8: 1839 3288698f2e5e curriculum/units/540-study2-01.yaml
+    0.4.7: 2038 c637ae31718b curriculum/units/540-study2-01.yaml
+  curriculum/units/550-study3-01.yaml
+    0.4.8: 1762 859d18e6bbc6 curriculum/units/550-study3-01.yaml
+    0.4.7: 1947 d02f3248dde4 curriculum/units/550-study3-01.yaml
+  curriculum/units/600-app-01.yaml
+    0.4.8: 1786 3a1de8132821 curriculum/units/600-app-01.yaml
+    0.4.7: 1960 71218532e505 curriculum/units/600-app-01.yaml
+  curriculum/units/610-neg-01.yaml
+    0.4.8: 1778 924819636f69 curriculum/units/610-neg-01.yaml
+    0.4.7: 3076 08491cb77c45 curriculum/units/610-neg-01.yaml
+  curriculum/units/650-soc-01.yaml
+    0.4.8: 1865 68703f48daf7 curriculum/units/650-soc-01.yaml
+    0.4.7: 3035 4e9d066be858 curriculum/units/650-soc-01.yaml
+  curriculum/units/730-lit-01.yaml
+    0.4.8: 1815 30dc6cde4a25 curriculum/units/730-lit-01.yaml
+    0.4.7: 3075 1166cbd02f3d curriculum/units/730-lit-01.yaml
+  curriculum/units/772-lex-03.yaml
+    0.4.8: 1845 a79624d0db86 curriculum/units/772-lex-03.yaml
+    0.4.7: 3217 88696d611e40 curriculum/units/772-lex-03.yaml
+  curriculum/units/810-a2j-past-day.yaml
+    0.4.8: 2531 940aeeb10dba curriculum/units/810-a2j-past-day.yaml
+    0.4.7: 2717 e8ffe53003ca curriculum/units/810-a2j-past-day.yaml
+  curriculum/units/811-a2j-past-workday.yaml
+    0.4.8: 2047 1410bab60407 curriculum/units/811-a2j-past-workday.yaml
+    0.4.7: 2233 a27b5af7e11a curriculum/units/811-a2j-past-workday.yaml
+  curriculum/units/812-a2j-past-revision.yaml
+    0.4.8: 2053 0a2b4377df10 curriculum/units/812-a2j-past-revision.yaml
+    0.4.7: 2243 0a58d6b37282 curriculum/units/812-a2j-past-revision.yaml
+  manifest.yaml
+    0.4.8: 946 1103ea454945 manifest.yaml
+    0.4.7: 946 dc4d6a2f8496 manifest.yaml
+  orthography/cyrillic.jsonl
+    0.4.8: 25417 eb8cc6de98d9 orthography/cyrillic.jsonl
+    0.4.7: 16255 1cafbfa412d2 orthography/cyrillic.jsonl
+

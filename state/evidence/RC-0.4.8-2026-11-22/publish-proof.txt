@@ -1,0 +1,27 @@
+== RU-REPUBLISH-048-001 publish cycle (controller pass 2, 2026-11-22) ==
+Attempt-1 worker completed build+publish then died pre-complete; controller verified and
+finished the remaining steps.
+
+--- release read-back (gh release view org.openlanguage.ru-ru.reference-0.4.8 --json) ---
+name: Russian Reference Pack 0.4.8 | isDraft=false isPrerelease=false isImmutable=true
+asset ru-ru-reference-0.4.8.lpk size=293649417 state=uploaded
+GitHub digest  sha256:4d25115adec2938700c991edba3cfe6ec5aceca1d261b7d9d811d69d6b05c3fb
+local archive  4d25115adec2938700c991edba3cfe6ec5aceca1d261b7d9d811d69d6b05c3fb  dist/rc-0.4.8/ru-ru-reference-0.4.8.lpk
+=> digest equals catalog pin (4-line surgical re-pin in catalog/packs.json).
+
+--- 0.4.7 superseded (body edit; release NOT deleted, assets kept for auditability) ---
+gh release edit org.openlanguage.ru-ru.reference-0.4.7 --notes-file ...
+prepended line verified by read-back:
+  SUPERSEDED — failed install validation (per-case orthography entities); use 0.4.8
+
+--- CI-equivalent acceptance proof (downloaded-archive install gate) ---
+$ time scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU --work-dir <scratch>/fetch-048-proof
+fetch-pack-audio: restoring org.openlanguage.ru-ru.reference 0.4.8 audio into languages/ru-RU (archive ru-ru-reference-0.4.8.lpk)
+installed org.openlanguage.ru-ru.reference v0.4.8 at <scratch>/fetch-048-proof/store/org.openlanguage.ru-ru.reference/0.4.8
+fetch-pack-audio: summary languages/ru-RU: rows checked=5032 files valid=5032 files restored=0 files already valid=5032 rows failing=0
+EXIT=0 (57 s wall; download from GitHub + install-gate unpack through lts-langpack-cli)
+This is the exact CI 'Restore reference-pack audio' path against the re-pinned catalog: green.
+
+Prior RC-build gates (attempt 1, verified in SUMMARY.txt): seven gates exit=0, no exit=127
+rows; members 5987, manifest rows 5032 == media members 5032 delta 0; sidecar present;
+install round-trip rows_checked=5032 mismatches=0; local-archive install-gate proof exit=0.

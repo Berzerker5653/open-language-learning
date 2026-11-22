@@ -666,6 +666,32 @@ catalog pin; release non-draft, non-prerelease, immutable. The
 0.4.6/0.4.5/0.4.4/0.4.3 ru archives stay published as rollback targets; the
 ja-JP 0.4.4 pin is unchanged.
 
+**ru-RU 0.4.8 published 2026-11-22** (RU-REPUBLISH-048-001; the 0.4.7 archive
+was published 07:38, *before* the ORTHO-LETTER-UNITS-001 per-case orthography
+entity guard merged 09:18 the same day — install validation of the pinned 0.4.7
+archive fails with 66 `per_case_orthography_entity` errors, so every CI
+`Restore reference-pack audio` leg was red against it and owner installs of the
+pinned version would fail too). Built by
+`state/evidence/RC-0.4.8-2026-11-22/build-rc-0.4.8.sh` from HEAD 62aa6f75 in an
+isolated detached worktree (gitignored `.wav` bytes hardlinked from the main
+tree). Seven gates exit 0; archive 293,649,417 bytes, sha256
+`4d25115adec2938700c991edba3cfe6ec5aceca1d261b7d9d811d69d6b05c3fb`; manifest
+rows 5,032 == media members 5,032 delta 0; `words.jsonl` sidecar present;
+install round-trip verified — 5,032/5,032 installed rows sha-match the
+manifest, 0 mismatches. Accounting vs published 0.4.7
+(`diff-047-to-048-ru-RU.txt`): 5,987 -> 5,987 members — 5,825 byte-identical,
+162 content files changed-bytes (curriculum goals/units and
+`orthography/cyrillic.jsonl` — the entity-shape fix itself), **0 media wav
+changes and 0 net added/removed members**: 0.4.8 audio is byte-identical to
+0.4.7. Post-publish proof (`publish-proof.txt`): GitHub asset digest equals the
+catalog pin, release non-draft, non-prerelease, immutable; and the CI-equivalent
+`scripts/fetch-pack-audio.sh --pack-dir languages/ru-RU` against the *published*
+0.4.8 archive is green (rows checked 5,032, failing 0). The 0.4.7 release stays
+published with its body prepended "SUPERSEDED — failed install validation
+(per-case orthography entities); use 0.4.8" — assets kept for auditability, not
+deleted. The 0.4.7/0.4.6/0.4.5/0.4.4/0.4.3 ru archives stay published as
+rollback targets; the ja-JP 0.4.4 pin is unchanged.
+
 **Licensing paper corrected after publication.** The published ja-JP 0.4.0
 archive carries three `licenses.jsonl` records. The tree now carries five: the
 baked-audio record was corrected to name the Qwen3-TTS bake engine (ADR-0023; the

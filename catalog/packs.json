@@ -29,10 +29,10 @@
       "tested_platforms": ["linux"],
       "community_confirmed_platforms": [],
       "untested_platforms": ["windows", "macos"],
-      "sha256": "b2f564a8eb3b88f0632c4a3909468e12a8a539b31ddd9afe47bf1a883f6050f2",
-      "size_bytes": 293645025,
-      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.7/ru-ru-reference-0.4.7.lpk",
-      "version": "0.4.7"
+      "sha256": "4d25115adec2938700c991edba3cfe6ec5aceca1d261b7d9d811d69d6b05c3fb",
+      "size_bytes": 293649417,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.8/ru-ru-reference-0.4.8.lpk",
+      "version": "0.4.8"
     }
   ],
   "tested_platforms": ["linux"],

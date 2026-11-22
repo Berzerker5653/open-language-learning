@@ -3162,6 +3162,19 @@ tasks:
   - all 20 gate-v5 drift drill clips are repaired via the Piper ladder or best-of fallback and re-audited green by the production gate
   - a ru content freeze note records the publish window and the reviewer queue for soft-sign homophone spot-audition
   required_for_desktop_1_0: false
+- id: RU-REPUBLISH-048-001
+  milestone: M8
+  priority: P0
+  title: Republish ru-RU as 0.4.8 because the published 0.4.7 predates the per-case orthography entity guard and fails install validation
+  dependencies: [RU-CONTENT-FREEZE-047-001, ORTHO-LETTER-UNITS-001]
+  read_first:
+  - state/evidence/RC-0.4.8-2026-11-22/SUMMARY.txt
+  - state/evidence/RC-0.4.8-2026-11-22/publish-proof.txt
+  acceptance:
+  - a 0.4.8 GitHub release exists whose asset digest equals the catalog pin and whose archive passes the install gate with 5032 of 5032 media rows verified
+  - fetch-pack-audio.sh against the published 0.4.8 archive exits green with zero failing rows
+  - the 0.4.7 release body carries a SUPERSEDED notice and its assets stay downloadable for auditability
+  required_for_desktop_1_0: false
 - id: PRACTICE-GATE-001
   milestone: M11
   priority: P1
@@ -3361,6 +3374,7 @@ execution_scope:
   - LAN-TOGGLE-PIN-001
   - RU-STORIES-MEDIA-001
   - RU-CONTENT-FREEZE-047-001
+  - RU-REPUBLISH-048-001
   - PRACTICE-GATE-001
   - ORTHO-LETTER-UNITS-001
   - ORPHAN-CONTENT-001
