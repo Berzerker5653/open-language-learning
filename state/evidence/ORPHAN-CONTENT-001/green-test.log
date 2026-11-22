@@ -1,0 +1,13 @@
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.19s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-7647ca427c780ccc)
+
+running 3 tests
+test tests::beginner_plan_never_serves_a_locked_units_content has been running for over 60 seconds
+test tests::lexicon_words_outside_the_goal_ladder_are_not_seeded has been running for over 60 seconds
+test tests::unclaimed_contrast_and_sentence_rows_are_not_seeded has been running for over 60 seconds
+test tests::lexicon_words_outside_the_goal_ladder_are_not_seeded ... ok
+test tests::unclaimed_contrast_and_sentence_rows_are_not_seeded ... ok
+test tests::beginner_plan_never_serves_a_locked_units_content ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 221 filtered out; finished in 83.43s
+

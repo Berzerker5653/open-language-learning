@@ -1,0 +1,16 @@
+{
+ "profileId": "prof-3b728a5f-abdf-44b3-afb3-3562f87a0f19",
+ "plan_item_count": 5,
+ "content_ids": [
+  "ru.contrast.voicing.dt",
+  "ru.orth.cyrillic.a",
+  "ru.orth.cyrillic.m",
+  "ru.orth.cyrillic.o"
+ ],
+ "offenders": [],
+ "orphan_rows": [],
+ "contrasts": [
+  "ru.contrast.voicing.dt"
+ ],
+ "failures": 0
+}

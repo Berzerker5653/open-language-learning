@@ -1,0 +1,34 @@
+ORPHAN-CONTENT-001 — controller gate battery (attempt 2, t_e34dadda)
+2026-11-22, run as systemd-run unit lts-orphan-gates2 on the uncommitted
+attempt-1 lane tree (lane WIP verified to contain only this card's hunks:
+lib.rs diff holds only the ladder-stream + test hunks; last lib.rs touch was
+867654e/PRACTICE-GATE, its lane committed).
+
+RC_SUMMARY fmt=0 clippy=0 targeted=0 langpack=0 audit_templates=2 audit_learner=0 serve_build=0 acceptance=0
+
+- fmt.log: cargo fmt --all --check, clean (empty log = green).
+- clippy.log: cargo clippy -p lts-desktop --all-targets -- -D warnings, 0 warnings.
+- targeted-test.log: cargo test -p lts-desktop --lib filtered to the three
+  ladder tests BY NAME (unclaimed_contrast_and_sentence_rows_are_not_seeded
+  NEW this card + lexicon_words_outside_the_goal_ladder_are_not_seeded +
+  beginner_plan_never_serves_a_locked_units_content): 3 passed / 0 failed.
+  red-test.log + green-test.log are the dead run's TDD pair, kept.
+- langpack-test.log: cargo test -p lts-langpack, all targets green (biggest
+  binary 52 passed; zero failures).
+- audit_templates=2 was a controller script bug (missing the packs argument
+  in my battery script), NOT a lane failure. Re-invoked exactly like CI
+  (scripts/ci.sh line: languages/ja-JP languages/ru-RU): rc=0, advisory
+  identical-grammar-sets findings unchanged — audit-templates.log.
+- audit-learner-copy.log: tools/audit_learner_copy.py, rc=0.
+- serve-build.log: cargo build -p lts-desktop --bin lts-serve --features serve.
+- acceptance-run.log / acceptance-result.json / acceptance-home_state.json:
+  scripts/orphan-content-acceptance.py against a fresh lts-serve built from
+  THIS tree, fresh level-0 profile, dev pack via serve's own install_pack:
+  4/4 PASS — plan non-empty (5 items), every plan item derives from
+  unit-attached content, zero orphan ids on the plan, claimed beginner
+  contrasts still seed (ru.contrast.voicing.dt on the plan; the red-first
+  test asserts all eight seed candidates exist).
+- Full desktop lib suite NOT re-run at this commit (lane tier per owner
+  directive 2026-11-19); the 3 ladder tests + session-sequence siblings ran
+  green, and the full suite ran 218/1 (triaged ASR load flake) at parent
+  a731028.

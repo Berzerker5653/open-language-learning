@@ -1,0 +1,4 @@
+PASS plan non-empty for a fresh level-0 profile — 5
+PASS every plan item derives from unit-attached content — 5 ids
+PASS zero orphan (zero-unit-referenced) ids on the plan — 0
+PASS claimed beginner contrasts still seed the plan — ['ru.contrast.voicing.dt']

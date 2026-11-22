@@ -1,0 +1,67 @@
+{
+ "display_name": "Orphan Acceptance",
+ "plan": {
+  "items": [
+   {
+    "item_id": "ru.orth.cyrillic.a:comprehensionreading",
+    "content_id": "ru.orth.cyrillic.a",
+    "modality": "comprehension-reading",
+    "reason": "progression",
+    "kind": "introduction",
+    "est_seconds": 60,
+    "surface": "а",
+    "gloss": "sound a — name а"
+   },
+   {
+    "item_id": "ru.orth.cyrillic.a:orthographyrecognition",
+    "content_id": "ru.orth.cyrillic.a",
+    "modality": "orthography-recognition",
+    "reason": "progression",
+    "kind": "introduction",
+    "est_seconds": 60,
+    "surface": "а",
+    "gloss": "sound a — name а"
+   },
+   {
+    "item_id": "ru.orth.cyrillic.o:orthographyrecognition",
+    "content_id": "ru.orth.cyrillic.o",
+    "modality": "orthography-recognition",
+    "reason": "progression",
+    "kind": "introduction",
+    "est_seconds": 60,
+    "surface": "о",
+    "gloss": "sound o — name о"
+   },
+   {
+    "item_id": "ru.orth.cyrillic.m:orthographyrecognition",
+    "content_id": "ru.orth.cyrillic.m",
+    "modality": "orthography-recognition",
+    "reason": "progression",
+    "kind": "introduction",
+    "est_seconds": 60,
+    "surface": "м",
+    "gloss": "sound m — name эм"
+   },
+   {
+    "item_id": "ru.contrast.voicing.dt:phonologicaldiscrimination",
+    "content_id": "ru.contrast.voicing.dt",
+    "modality": "phonological-discrimination",
+    "reason": "progression",
+    "kind": "introduction",
+    "est_seconds": 60,
+    "surface": "дом",
+    "gloss": "Voiced [d] versus voiceless [t] in word-initial stops."
+   }
+  ],
+  "total_seconds": 300,
+  "budget_minutes": 5,
+  "seed": 0,
+  "planner_version": "session-planner-0.1.0"
+ },
+ "next_goal": {
+  "pack_id": "org.openlanguage.ru-ru.reference",
+  "goal_id": "ru.goal.on-ramp.cyrillic",
+  "description": "Recognize and copy all printed Cyrillic letter case forms and interpret the teaching stress mark.",
+  "band": "on-ramp"
+ }
+}
