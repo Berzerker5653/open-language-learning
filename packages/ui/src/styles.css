@@ -2235,3 +2235,83 @@ th:last-child {
   background: var(--accent);
   transform: scale(1.35);
 }
+
+/* ------------------------------------------------------ FEEL-LOADING-001 */
+/* Loading & pending feedback primitives. The feel audit (sections 4-6,9)
+   found every IPC read treated as instant: My Words rendered the previous
+   list mid-fetch, Settings filled six silent reads late, Progress reflowed
+   as its staggered arrivals landed. A skeleton row breathes in place of
+   content that is honestly still coming — no fake progress, no spinner
+   theatre. The keyframe is pulse-NAMED on purpose: the motion-budget pin
+   (motion-contract.test.ts) allows only *pulse* loops past 300ms, and the
+   global prefers-reduced-motion block flattens the breathing. */
+@keyframes skeleton-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.skeleton-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 1rem 0;
+}
+
+.skeleton-row {
+  height: 1.1rem;
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunk);
+  border: 1px solid var(--line);
+  animation: skeleton-pulse 1.4s var(--ease-in-out) infinite;
+}
+
+.skeleton-row:nth-child(1) {
+  width: 100%;
+}
+.skeleton-row:nth-child(2) {
+  width: 72%;
+}
+.skeleton-row:nth-child(3) {
+  width: 55%;
+}
+
+/* Layout reservation: each Progress section keeps its approximate final
+   height while the staggered reads are in flight, so the page never jumps
+   when they land. Heights mirror the settled sections at phone width. */
+.skeleton-block {
+  border-radius: var(--radius-sm);
+  background: var(--surface-sunk);
+  border: 1px solid var(--line);
+  margin: 0 0 1rem;
+  animation: skeleton-pulse 1.4s var(--ease-in-out) infinite;
+}
+.skeleton-block--facts {
+  min-height: 3rem;
+}
+.skeleton-block--summary {
+  min-height: 8rem;
+}
+.skeleton-block--stats {
+  min-height: 5rem;
+}
+.skeleton-block--map {
+  min-height: 12rem;
+}
+.skeleton-block--tree {
+  min-height: 15rem;
+}
+
+/* The quiet confirmation after a Settings write lands: a notice re-declared
+   AFTER .notice so the tie is won by source order, switched to the ok
+   family — saved is a success, not a warning. role="status" carries the
+   live-region semantics; no motion beyond the notice fade-up it inherits. */
+.save-tick {
+  border-color: var(--ok);
+  background: var(--ok-soft);
+  animation: fade-up var(--dur) var(--ease-out);
+}

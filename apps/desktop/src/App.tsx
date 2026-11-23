@@ -445,6 +445,9 @@ export function App() {
   const [alignerStatus, setAlignerStatus] = useState<AlignerStatus | null>(null);
   const [buildIdentity, setBuildIdentity] = useState<BuildIdentity | null>(null);
   const [speechModels, setSpeechModels] = useState<SpeechModel[]>([]);
+  // FEEL-LOADING-001: the model whose install_model transfer is in flight;
+  // the Download button must not stay live through a hundreds-of-MB pull.
+  const [installingSpeechModel, setInstallingSpeechModel] = useState<string | null>(null);
   const [speechModel, setSpeechModel] = useState<string>("off");
   const [deviceTier, setDeviceTier] = useState<DeviceTier | null>(null);
   const [onboardError, setOnboardError] = useState<string | null>(null);
@@ -598,6 +601,9 @@ export function App() {
   const [placementHits, setPlacementHits] = useState(0);
   const [placementFinished, setPlacementFinished] = useState(false);
   const [placementError, setPlacementError] = useState<string | null>(null);
+  // FEEL-LOADING-001: the first placement fetch (plan + first task) is slow
+  // enough to double-tap; while it runs the Start button is disabled.
+  const [placementLoading, setPlacementLoading] = useState(false);
   // U05: what the engine made of every declared rubric — `planned` rows plus
   // honest abstentions with machine-readable reasons. Fetched when the
   // Placement surface opens, never in the boot batch (the scan is a full
@@ -658,6 +664,19 @@ export function App() {
   const [settingsDeleteArmed, setSettingsDeleteArmed] = useState(false);
   const [settingsSwitchArmed, setSettingsSwitchArmed] = useState(false);
   const [settingsError, setSettingsError] = useState<string | null>(null);
+  // FEEL-LOADING-001: the six prime reads of openSettings land at their own
+  // pace and used to populate the page silently; the tick confirms the six
+  // toggles/selects whose IPC write used to fire with no feedback. The
+  // timer ref clears the tick without leaving pending state in a render.
+  const [settingsLoading, setSettingsLoading] = useState(false);
+  const [settingsSaveNotice, setSettingsSaveNotice] = useState<string | null>(null);
+  const saveTickTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  function markSettingsSaved() {
+    setSettingsSaveNotice("Saved");
+    if (saveTickTimer.current) clearTimeout(saveTickTimer.current);
+    saveTickTimer.current = setTimeout(() => setSettingsSaveNotice(null), 2500);
+  }
 
   const [practiceDraft, setPracticeDraft] = useState("");
   // A route change, a wizard step change, a lesson page and an activity-card
@@ -760,6 +779,9 @@ export function App() {
   }>({ el: null, closing: false });
   const [storyError, setStoryError] = useState<string | null>(null);
   const [mineItems, setMineItems] = useState<MineItem[]>([]);
+  // FEEL-LOADING-001: while openWords awaits mine_list the panel must not
+  // render the PREVIOUS list as if it were current (the stale-list bug).
+  const [wordsLoading, setWordsLoading] = useState(false);
   const [mineSurface, setMineSurface] = useState("");
   const [mineReading, setMineReading] = useState("");
   const [mineGloss, setMineGloss] = useState("");
@@ -1640,6 +1662,9 @@ export function App() {
 
   async function installSpeechModel(modelId: string) {
     if (!inv) return;
+    // FEEL-LOADING-001: a hundreds-of-MB transfer gets an honest state —
+    // Settings disables every model button and names this one as installing.
+    setInstallingSpeechModel(modelId);
     try {
       await inv("install_model", { modelId });
       setLangError(null);
@@ -1647,6 +1672,7 @@ export function App() {
       setLangError(String(e));
     } finally {
       setEngineProgress(null);
+      setInstallingSpeechModel(null);
     }
     try {
       await refreshSpeech();
@@ -1702,6 +1728,7 @@ export function App() {
     setLangError(null);
     try {
       await inv("set_speech_model", { modelId });
+      markSettingsSaved();
     } catch (e) {
       setLangError(String(e));
     }
@@ -2032,6 +2059,17 @@ export function App() {
     setSettingsExportPath(null);
     setSettingsDeleteArmed(false);
     if (!inv || !profileId) return;
+    // FEEL-LOADING-001: six reads, no signal, until now.
+    setSettingsLoading(true);
+    try {
+      await primeSettingsReads();
+    } finally {
+      setSettingsLoading(false);
+    }
+  }
+
+  async function primeSettingsReads() {
+    if (!inv || !profileId) return;
     // Sweep finding 20: one failed read must not abort the other primes —
     // a broken speech catalogue takes neither the pack list nor the mic
     // pickers down with it. Each block reports its own failure.
@@ -2104,6 +2142,7 @@ export function App() {
     setSettingsError(null);
     try {
       setMicEnabled((await inv("set_microphone_enabled", { profileId, enabled })) as boolean);
+      markSettingsSaved();
     } catch (e) {
       setSettingsError(String(e));
     }
@@ -2114,6 +2153,7 @@ export function App() {
     setSettingsError(null);
     try {
       setMicDevice((await inv("set_microphone_device", { profileId, deviceId })) as string | null);
+      markSettingsSaved();
     } catch (e) {
       setSettingsError(String(e));
     }
@@ -2126,6 +2166,7 @@ export function App() {
       setPlaybackDevice(
         (await inv("set_playback_device", { profileId, deviceId })) as string | null,
       );
+      markSettingsSaved();
     } catch (e) {
       setSettingsError(String(e));
     }
@@ -2136,6 +2177,7 @@ export function App() {
     setSettingsError(null);
     try {
       setRomajiMode((await inv("set_romaji_mode", { profileId, mode })) as RomajiMode);
+      markSettingsSaved();
     } catch (e) {
       setSettingsError(String(e));
     }
@@ -2148,6 +2190,7 @@ export function App() {
     setSettingsError(null);
     try {
       setKanaKeyboard((await inv("set_kana_keyboard", { profileId, mode })) as KanaKeyboardMode);
+      markSettingsSaved();
     } catch (e) {
       setSettingsError(String(e));
     }
@@ -2881,6 +2924,9 @@ export function App() {
     setPlacementCoverage([]);
     const inv = detectInvoke();
     if (!inv || !profileId) return;
+    // FEEL-LOADING-001: plan + first task are two round trips; the Start
+    // button disables while they run so a double tap cannot double-submit.
+    setPlacementLoading(true);
     try {
       const planned = (await inv("placement_plan", { profileId })) as typeof placementItems;
       const seq = planned.flatMap((p) => [p, p]);
@@ -2916,6 +2962,8 @@ export function App() {
       );
     } catch {
       setPlacementCoverage([]);
+    } finally {
+      setPlacementLoading(false);
     }
   }
 
@@ -3334,8 +3382,15 @@ export function App() {
     setErrReview(null);
     setErrError(null);
     setErrNotice(null);
-    await refreshMine();
-    await refreshErrorReviews();
+    // FEEL-LOADING-001: prime with the flag up so the panel shows skeleton
+    // rows instead of yesterday's list (or a false empty state).
+    setWordsLoading(true);
+    try {
+      await refreshMine();
+      await refreshErrorReviews();
+    } finally {
+      setWordsLoading(false);
+    }
   }
 
   async function addMine(sourceCitation?: string) {
@@ -4552,6 +4607,7 @@ export function App() {
         <>
           <MyWordsPanel
             items={mineItems}
+            loading={wordsLoading}
             review={mineReview}
             intervalPreview={minePreview}
             error={mineError}
@@ -4643,9 +4699,11 @@ export function App() {
               <button
                 type="button"
                 className="btn btn--primary"
+                disabled={placementLoading}
+                aria-busy={placementLoading || undefined}
                 onClick={() => void openPlacement()}
               >
-                Start placement
+                {placementLoading ? "Starting…" : "Start placement"}
               </button>
             </div>
           )}
@@ -4731,18 +4789,32 @@ export function App() {
               </button>
             </p>
           )}
-          {progressLoading && <p className="empty">Loading progress…</p>}
-          {!progressError && (
-            <>
-              {/* WARM-MOMENTS-001: memory, not debt — above the capability
+          {/* FEEL-LOADING-001: the four Progress reads land at different
+              moments and used to reflow the page as each arrived. While any
+              is in flight one reserved shell holds every section's height in
+              final order — the content lands settled, and the page never
+              jumps under the learner. */}
+          {progressLoading ? (
+            <div className="progress-skeleton" role="status" aria-label="Loading progress">
+              <div className="skeleton-block skeleton-block--facts" />
+              <div className="skeleton-block skeleton-block--summary" />
+              <div className="skeleton-block skeleton-block--stats" />
+              <div className="skeleton-block skeleton-block--map" />
+              <div className="skeleton-block skeleton-block--tree" />
+            </div>
+          ) : (
+            !progressError && (
+              <>
+                {/* WARM-MOMENTS-001: memory, not debt — above the capability
                   answers, below nothing; it abstains when the wire failed. */}
-              <GentleFacts facts={learningFacts} />
-              <CanDoSummary goals={goals} rows={progress} nextGoal={nextGoal} />
-              {/* PROGRESS-STATS-001 (U14): instruments above the tree. */}
-              {memoryStats ? <MemoryStatsStrip stats={memoryStats} /> : null}
-              <GoalMap goals={goals} />
-              <ProgressView rows={progress} />
-            </>
+                <GentleFacts facts={learningFacts} />
+                <CanDoSummary goals={goals} rows={progress} nextGoal={nextGoal} />
+                {/* PROGRESS-STATS-001 (U14): instruments above the tree. */}
+                {memoryStats ? <MemoryStatsStrip stats={memoryStats} /> : null}
+                <GoalMap goals={goals} />
+                <ProgressView rows={progress} />
+              </>
+            )
           )}
         </>
       ) : route === "writing" ? (
@@ -4888,6 +4960,9 @@ export function App() {
             onCancelSwitch={() => setSettingsSwitchArmed(false)}
             onConfirmSwitch={() => void switchProfile()}
             error={settingsError}
+            loading={settingsLoading}
+            saveNotice={settingsSaveNotice}
+            installingModelId={installingSpeechModel}
           />
         </>
       ) : practiceTarget && practiceTask ? (

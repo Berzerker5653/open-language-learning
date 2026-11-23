@@ -53,6 +53,10 @@ export interface MineDraft {
 
 export interface MyWordsPanelProps {
   items: MineItem[];
+  /// FEEL-LOADING-001: the `mine_list` read is in flight. The panel then
+  /// shows breathing skeleton rows — NOT the previous list (the stale-list
+  /// bug the audit named) and not the "nothing mined yet" story either.
+  loading?: boolean;
   review: { item: MineItem; revealed: boolean } | null;
   error: string | null;
   notice: string | null;
@@ -232,7 +236,16 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
           </button>
         </div>
       </div>
-      {p.items.length === 0 ? (
+      {p.loading ? (
+        // FEEL-LOADING-001: the read is in flight — say so in place of the
+        // list itself. Never the previous list (the stale-list bug), never
+        // the "nothing mined yet" story for data that is merely arriving.
+        <div className="skeleton-list" role="status" aria-label="Loading saved words">
+          <span className="skeleton-row" />
+          <span className="skeleton-row" />
+          <span className="skeleton-row" />
+        </div>
+      ) : p.items.length === 0 ? (
         <p className="empty">Nothing mined yet. Add a word above or from a story lookup.</p>
       ) : (
         <ul>

@@ -43,7 +43,7 @@ describe("FEEL-LOADING-001 skeleton primitives (styles.css)", () => {
   it("a pulse-named breathing keyframe exists (motion-budget legal)", () => {
     const m = /@keyframes\s+skeleton-pulse\s*\{([\s\S]*?)\n\}/.exec(css);
     expect(m, "styles.css must define @keyframes skeleton-pulse").not.toBeNull();
-    expect(m![1].replace(/\s+/g, " ")).toContain("0.55");
+    expect((m![1] ?? "").replace(/\s+/g, " ")).toContain("0.55");
   });
 
   it(".skeleton-row is a surface-sunk block that breathes", () => {
@@ -265,7 +265,7 @@ describe("FEEL-LOADING-001 pair result is styled with live semantics", () => {
   });
 
   it("the Pair request itself is single-flight: guard + disabled button in source", () => {
-    const pairFn = /async function onPair\(\) \{[\s\S]*?\n  \}/.exec(settingsTsx);
+    const pairFn = /async function onPair\(\) \{[\s\S]*?\n {2}\}/.exec(settingsTsx);
     expect(pairFn, "LanAccessCard.onPair must exist").not.toBeNull();
     expect(pairFn![0]).toMatch(/if \(pairing\) return;/);
     expect(pairFn![0]).toMatch(/setPairing\(true\)/);
@@ -278,14 +278,14 @@ describe("FEEL-LOADING-001 pair result is styled with live semantics", () => {
 
 describe("FEEL-LOADING-001 App container wires the loading flags", () => {
   it("openWords primes with wordsLoading and finally clears it", () => {
-    const fn = /async function openWords\(\) \{[\s\S]*?\n  \}/.exec(appTsx);
+    const fn = /async function openWords\(\) \{[\s\S]*?\n {2}\}/.exec(appTsx);
     expect(fn, "openWords must exist").not.toBeNull();
     expect(fn![0]).toContain("setWordsLoading(true)");
     expect(fn![0]).toContain("setWordsLoading(false)");
   });
 
   it("openSettings primes with settingsLoading and finally clears it", () => {
-    const fn = /async function openSettings\(\) \{[\s\S]*?\n  \}/.exec(appTsx);
+    const fn = /async function openSettings\(\) \{[\s\S]*?\n {2}\}/.exec(appTsx);
     expect(fn, "openSettings must exist").not.toBeNull();
     expect(fn![0]).toContain("setSettingsLoading(true)");
     expect(fn![0]).toContain("setSettingsLoading(false)");
@@ -299,7 +299,7 @@ describe("FEEL-LOADING-001 App container wires the loading flags", () => {
   });
 
   it("a speech install marks the model installing around the IPC call", () => {
-    const fn = /async function installSpeechModel\(modelId: string\) \{[\s\S]*?\n  \}/.exec(appTsx);
+    const fn = /async function installSpeechModel\(modelId: string\) \{[\s\S]*?\n {2}\}/.exec(appTsx);
     expect(fn, "installSpeechModel must exist").not.toBeNull();
     expect(fn![0]).toContain("setInstallingSpeechModel(modelId)");
     expect(fn![0]).toMatch(/finally[\s\S]*setInstallingSpeechModel\(null\)/);
@@ -318,14 +318,15 @@ describe("FEEL-LOADING-001 App container wires the loading flags", () => {
       expect(fn, `${setter} must exist`).not.toBeNull();
       expect(fn![0], `${setter} must confirm the save`).toContain("markSettingsSaved()");
     }
-    const select =
-      /async function selectSpeechModel\(modelId: string\) \{[\s\S]*?\n  \}/.exec(appTsx);
+    const select = /async function selectSpeechModel\(modelId: string\) \{[\s\S]*?\n {2}\}/.exec(
+      appTsx,
+    );
     expect(select).not.toBeNull();
     expect(select![0]).toContain("markSettingsSaved()");
   });
 
   it("placement first fetch is single-flight and shows a pending label", () => {
-    const fn = /async function openPlacement\(\) \{[\s\S]*?\n  \}/.exec(appTsx);
+    const fn = /async function openPlacement\(\) \{[\s\S]*?\n {2}\}/.exec(appTsx);
     expect(fn, "openPlacement must exist").not.toBeNull();
     expect(fn![0]).toContain("setPlacementLoading(true)");
     expect(fn![0]).toContain("setPlacementLoading(false)");

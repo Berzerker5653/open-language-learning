@@ -145,6 +145,19 @@ export interface SettingsProps {
   /** Release identity this binary reports; null until the read resolves. */
   buildIdentity: BuildIdentity | null;
   error: string | null;
+  /** FEEL-LOADING-001: the `openSettings` prime chain is in flight (six
+   *  independent reads today populate silently, late). True renders a
+   *  breathing skeleton row set so the page announces it is filling. */
+  loading?: boolean;
+  /** FEEL-LOADING-001: a Settings write just landed in the engine — the
+   *  container sets this on the SUCCESS path of a toggle/select and clears
+   *  it on a timer. Rendered as a quiet "✓ Saved" live status. */
+  saveNotice?: string | null;
+  /** FEEL-LOADING-001: the model id whose `install_model` is in flight.
+   *  Its button reads "Installing…" with aria-busy, and every model button
+   *  (Download and Remove) disables while any install runs — one installer
+   *  at a time is the honest state. */
+  installingModelId?: string | null;
 }
 
 const ROMAJI_MODES: { value: RomajiMode; label: string }[] = [
@@ -250,6 +263,29 @@ export function Settings(p: SettingsProps) {
   return (
     <section aria-label="Settings">
       <h2>Settings</h2>
+      {p.loading && (
+        // FEEL-LOADING-001: six prime reads land at their own pace today
+        // with no signal at all — the skeleton says "filling in".
+        <div
+          className="skeleton-list"
+          role="status"
+          aria-label="Loading settings"
+          data-testid="settings-loading-skeleton"
+        >
+          <span className="skeleton-row" />
+          <span className="skeleton-row" />
+          <span className="skeleton-row" />
+        </div>
+      )}
+      {p.saveNotice && (
+        // FEEL-LOADING-001: the write landed. A quiet live status — role=
+        // "status" so assistive tech hears it, .save-tick (ok family) so it
+        // reads as success, never as a warning.
+        <p role="status" className="notice save-tick" data-testid="settings-save-tick">
+          <span aria-hidden="true">✓ </span>
+          {p.saveNotice}
+        </p>
+      )}
       {p.error && (
         <p role="alert" className="alert">
           {p.error}
@@ -573,36 +609,52 @@ export function Settings(p: SettingsProps) {
 
         {p.speechModels.length > 0 && (
           <ul className="pack-list">
-            {p.speechModels.map((m) => (
-              <li key={m.id}>
-                {SPEECH_MODEL_LABELS[m.id] ?? m.id} — {megabytes(m.size_bytes)} MB, {m.license_code}
-                {m.installed ? " (installed)" : ""}
-                {p.deviceTier?.recommended_model === m.id ? (
-                  <span className="badge">recommended for this device</span>
-                ) : null}
-                {m.installed ? (
-                  <button
-                    type="button"
-                    className="btn btn--quiet"
-                    onClick={() => p.onDeleteModel(m.id)}
-                    aria-label={`Remove ${SPEECH_MODEL_LABELS[m.id] ?? m.id}`}
-                  >
-                    Remove
-                  </button>
-                ) : m.installable ? (
-                  <button
-                    type="button"
-                    className="btn btn--primary"
-                    onClick={() => p.onInstallModel(m.id)}
-                    aria-label={`Download ${SPEECH_MODEL_LABELS[m.id] ?? m.id}, about ${megabytes(m.size_bytes)} megabytes`}
-                  >
-                    Download ~{megabytes(m.size_bytes)} MB
-                  </button>
-                ) : (
-                  <span className="meta">not published in this build</span>
-                )}
-              </li>
-            ))}
+            {p.speechModels.map((m) => {
+              // FEEL-LOADING-001: a model install is a real hundreds-of-MB
+              // transfer. The button names the state, and no model button
+              // stays live while an install is in flight.
+              const installing = p.installingModelId === m.id;
+              const installBusy = p.installingModelId != null;
+              return (
+                <li key={m.id}>
+                  {SPEECH_MODEL_LABELS[m.id] ?? m.id} — {megabytes(m.size_bytes)} MB,{" "}
+                  {m.license_code}
+                  {m.installed ? " (installed)" : ""}
+                  {p.deviceTier?.recommended_model === m.id ? (
+                    <span className="badge">recommended for this device</span>
+                  ) : null}
+                  {m.installed ? (
+                    <button
+                      type="button"
+                      className="btn btn--quiet"
+                      onClick={() => p.onDeleteModel(m.id)}
+                      aria-label={`Remove ${SPEECH_MODEL_LABELS[m.id] ?? m.id}`}
+                      disabled={installBusy}
+                    >
+                      Remove
+                    </button>
+                  ) : m.installable ? (
+                    installing ? (
+                      <button type="button" className="btn btn--primary" aria-busy="true" disabled>
+                        Installing…
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="btn btn--primary"
+                        onClick={() => p.onInstallModel(m.id)}
+                        aria-label={`Download ${SPEECH_MODEL_LABELS[m.id] ?? m.id}, about ${megabytes(m.size_bytes)} megabytes`}
+                        disabled={installBusy}
+                      >
+                        Download ~{megabytes(m.size_bytes)} MB
+                      </button>
+                    )
+                  ) : (
+                    <span className="meta">not published in this build</span>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         )}
 
@@ -707,11 +759,36 @@ interface LanStatusPayload {
   traffic_note: string;
 }
 
+/**
+ * FEEL-LOADING-001: the pair request's answer, styled and made live. An
+ * unstyled bare paragraph next to a form reads as nothing happened; success
+ * rides the notice treatment and failure the alert, both in a polite live
+ * region so assistive tech announces the outcome without stealing focus.
+ * Extracted as a presentational component so the contract is testable.
+ */
+export function PairResult(p: { ok: boolean; text: string }) {
+  return (
+    <p
+      className={p.ok ? "notice" : "alert"}
+      role={p.ok ? "status" : "alert"}
+      aria-live="polite"
+      data-testid="lan-pair-message"
+    >
+      {p.text}
+    </p>
+  );
+}
+
 export function LanAccessCard() {
   const [status, setStatus] = useState<LanStatusPayload | null>(null);
   const [lanError, setLanError] = useState<string | null>(null);
   const [pairPin, setPairPin] = useState("");
-  const [pairMessage, setPairMessage] = useState<string | null>(null);
+  const [pairResult, setPairResult] = useState<{ ok: boolean; text: string } | null>(null);
+  // FEEL-LOADING-001: a Pair click today fires again and again — the second
+  // request spends nothing but confuses the learner (and a spent PIN makes
+  // the first answer look like a failure). One request in flight, button
+  // disabled while it runs.
+  const [pairing, setPairing] = useState(false);
 
   useEffect(() => {
     let alive = true;
@@ -766,15 +843,24 @@ export function LanAccessCard() {
   }
 
   async function onPair() {
-    setPairMessage(null);
+    if (pairing) return;
+    setPairResult(null);
+    setPairing(true);
     try {
       const result = (await postJson("/pair", { pin: pairPin })) as { paired: boolean };
-      setPairMessage(
-        result.paired ? "Paired — this device reconnects without a PIN." : "Pairing failed.",
+      setPairResult(
+        result.paired
+          ? { ok: true, text: "Paired — this device reconnects without a PIN." }
+          : { ok: false, text: "Pairing failed." },
       );
       setPairPin("");
     } catch (e) {
-      setPairMessage(e instanceof Error ? e.message : "That PIN did not work.");
+      setPairResult({
+        ok: false,
+        text: e instanceof Error ? e.message : "That PIN did not work.",
+      });
+    } finally {
+      setPairing(false);
     }
   }
 
@@ -797,7 +883,13 @@ export function LanAccessCard() {
           {status.traffic_note}
         </p>
       )}
-      {lanError && <p className="error">{lanError}</p>}
+      {/* FEEL-LOADING-001: `class="error"` matched no rule in styles.css —
+          the failure was literally invisible. The alert treatment, once. */}
+      {lanError && (
+        <p role="alert" className="alert">
+          {lanError}
+        </p>
+      )}
       {status?.enabled && (
         <>
           <p>
@@ -837,11 +929,17 @@ export function LanAccessCard() {
               onChange={(e) => setPairPin(e.target.value)}
             />
           </label>{" "}
-          <button type="button" id="lan-pair" onClick={onPair}>
+          <button
+            type="button"
+            id="lan-pair"
+            onClick={onPair}
+            disabled={pairing}
+            aria-busy={pairing || undefined}
+          >
             Pair
           </button>
         </p>
-        {pairMessage && <p data-testid="lan-pair-message">{pairMessage}</p>}
+        {pairResult && <PairResult ok={pairResult.ok} text={pairResult.text} />}
       </fieldset>
     </div>
   );
