@@ -82,7 +82,7 @@ describe("remove is reversible: row leaves, chip lives 4s, delete deferred", () 
     const onRemove = vi.fn();
     const h = mount(onRemove);
     act(() => {
-      removeButtons(h)[0].click();
+      removeButtons(h)[0]!.click();
     });
     expect(chip(h)).not.toBeNull();
     expect(onRemove).not.toHaveBeenCalled();
@@ -90,7 +90,7 @@ describe("remove is reversible: row leaves, chip lives 4s, delete deferred", () 
     expect(onRemove).not.toHaveBeenCalled();
     act(() => void vi.advanceTimersByTime(2));
     expect(onRemove).toHaveBeenCalledTimes(1);
-    expect(onRemove.mock.calls[0][0]).toBe("a");
+    expect(onRemove.mock.calls[0]![0]).toBe("a");
     expect(chip(h)).toBeNull();
   });
 
@@ -98,7 +98,7 @@ describe("remove is reversible: row leaves, chip lives 4s, delete deferred", () 
     const onRemove = vi.fn();
     const h = mount(onRemove);
     act(() => {
-      removeButtons(h)[0].click();
+      removeButtons(h)[0]!.click();
     });
     const c = chip(h);
     expect(c).not.toBeNull();
@@ -114,26 +114,26 @@ describe("remove is reversible: row leaves, chip lives 4s, delete deferred", () 
     const onRemove = vi.fn();
     const h = mount(onRemove);
     act(() => {
-      removeButtons(h)[0].click();
+      removeButtons(h)[0]!.click();
     });
     act(() => {
-      removeButtons(h)[0].click(); // "b" now — "a" is still pending
+      removeButtons(h)[0]!.click(); // "b" now — "a" is still pending
     });
     expect(onRemove).toHaveBeenCalledTimes(1);
-    expect(onRemove.mock.calls[0][0]).toBe("a");
+    expect(onRemove.mock.calls[0]![0]).toBe("a");
   });
 
   it("unmounting with a pending delete flushes it (nav away keeps the word gone)", () => {
     const onRemove = vi.fn();
     const h = mount(onRemove);
     act(() => {
-      removeButtons(h)[0].click();
+      removeButtons(h)[0]!.click();
     });
     act(() => {
       root!.unmount();
     });
     root = null;
     expect(onRemove).toHaveBeenCalledTimes(1);
-    expect(onRemove.mock.calls[0][0]).toBe("a");
+    expect(onRemove.mock.calls[0]![0]).toBe("a");
   });
 });

@@ -10,8 +10,37 @@
  * stay untouched.
  */
 import { PackText, usePackTextAttrs } from "@openlang/ui";
+import { useEffect, useRef, useState } from "react";
 import { useKanaIME } from "./kana-ime";
 import type { ImeCandidate } from "./ime-candidates";
+
+/// FEEL-MYWORDS-001: how long the UNDO chip lives after a Remove, per the
+/// target mockup's motion legend ("the UNDO chip fades in after release and
+/// lives 4s, so a mis-swipe is always one tap from back").
+const UNDO_LIFE_MS = 4000;
+
+/**
+ * FEEL-MYWORDS-001: the audit flagged the raw ISO slice (`due_at.slice(0,10)`)
+ * as the due-date treatment — a machine date in a learning surface. The due
+ * pill speaks the learner's own tense instead: yesterday / today / tomorrow /
+ * in N days, with honest bigger units (months, years) for long intervals.
+ * Calendar-day math in the learner's timezone — an interval is a day count,
+ * not an instant delta.
+ */
+export function relativeDueLabel(iso: string, now: Date = new Date()): string {
+  const due = new Date(iso);
+  if (!Number.isFinite(due.getTime())) return "soon";
+  const midnight = (d: Date) => new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  const days = Math.round((midnight(due) - midnight(now)) / 86_400_000);
+  if (days < -1) return `${-days} days overdue`;
+  if (days === -1) return "yesterday";
+  if (days === 0) return "today";
+  if (days === 1) return "tomorrow";
+  if (days <= 60) return `in ${days} days`;
+  if (days <= 365) return `in ~${Math.round(days / 30.44)} months`;
+  const years = Math.round(days / 365.25);
+  return `in ~${years} year${years === 1 ? "" : "s"}`;
+}
 
 /**
  * SESSION-CHROME-001 (U6, Quizlet/Anki idiom): a grade button states the
@@ -64,6 +93,9 @@ export interface MyWordsPanelProps {
   onDraftChange(field: keyof MineDraft, value: string): void;
   onAdd(): void;
   onRemove(id: string): void;
+  /// FEEL-MYWORDS-001: id of the word that just landed from an add — that
+  /// row plays the one-shot success pulse (`mine-card--flash`). Null clears.
+  flashId?: string | null;
   onGrade(again: boolean): void;
   onReviewNow(id: string): void;
   onStartNewReview(): void;
@@ -88,6 +120,50 @@ export interface MyWordsPanelProps {
 
 export function MyWordsPanel(p: MyWordsPanelProps) {
   const packAttrs = usePackTextAttrs();
+  // FEEL-MYWORDS-001: Remove is no longer a one-click silent delete. The row
+  // leaves at once and a UNDO chip lives UNDO_LIFE_MS where it stood; the
+  // engine delete fires only when that life expires. UNDO cancels; a second
+  // Remove commits the previous pending one first (never two racing chips);
+  // unmounting mid-window flushes the delete, so navigating away never
+  // resurrects a word the learner already dismissed. The mockup's swipe-to-
+  // reveal is the same recovery story behind a gesture; on this pointer-
+  // first surface the chip carries it.
+  const [pending, setPending] = useState<{ id: string; surface: string } | null>(null);
+  const pendingRef = useRef(pending);
+  pendingRef.current = pending;
+  const commitRef = useRef(p.onRemove);
+  commitRef.current = p.onRemove;
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const clearTimer = () => {
+    if (timerRef.current !== null) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  };
+  function queueRemove(id: string, surface: string) {
+    clearTimer();
+    const previous = pendingRef.current;
+    if (previous) commitRef.current(previous.id);
+    setPending({ id, surface });
+    timerRef.current = setTimeout(() => {
+      timerRef.current = null;
+      const it = pendingRef.current;
+      setPending(null);
+      if (it) commitRef.current(it.id);
+    }, UNDO_LIFE_MS);
+  }
+  function undoPending() {
+    clearTimer();
+    setPending(null);
+  }
+  useEffect(
+    () => () => {
+      if (timerRef.current !== null) clearTimeout(timerRef.current);
+      const it = pendingRef.current;
+      if (it) commitRef.current(it.id);
+    },
+    [],
+  );
   const kanaSurface = useKanaIME({
     enabled: p.kanaInput === true,
     value: p.draft.surface,
@@ -118,12 +194,14 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
         </p>
       )}
       {p.review ? (
-        <div className="field">
+        // FEEL-MYWORDS-001: the review card enters with card-in and the
+        // revealed answer rises with fade-up — both FEEL-GLOBAL keyframes.
+        <div className="field review-card">
           <PackText tag="p" className="prompt">
             {p.review.item.surface}
           </PackText>
           {p.review.revealed ? (
-            <>
+            <div className="review-reveal">
               {p.review.item.gloss ? (
                 <p>{p.review.item.gloss}</p>
               ) : p.review.item.reading ? (
@@ -169,7 +247,7 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
                   ) : null}
                 </button>
               </div>
-            </>
+            </div>
           ) : (
             <div className="btn-row">
               <button type="button" className="btn btn--primary" onClick={p.onReveal}>
@@ -248,42 +326,66 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
       ) : p.items.length === 0 ? (
         <p className="empty">Nothing mined yet. Add a word above or from a story lookup.</p>
       ) : (
-        <ul>
-          {p.items.map((m) => (
-            <li key={m.id}>
-              <PackText tag="span">{m.surface}</PackText>
-              {m.reading ? (
-                <>
-                  {" ("}
-                  <PackText tag="span">{m.reading}</PackText>
-                  {")"}
-                </>
-              ) : (
-                ""
-              )}
-              {m.gloss ? ` — ${m.gloss}` : ""}
-              {"  ·  "}
-              <small>
-                {m.source_citation}
-                {m.due_at ? ` · due ${m.due_at.slice(0, 10)}` : " · not scheduled yet"}
-              </small>
-              {"  "}
-              {!m.due_at && (
+        <div className="mine-list">
+          {p.items.map((m) =>
+            pending && pending.id === m.id ? (
+              // The row left at once; the chip keeps it one tap from back.
+              <div key={m.id} className="undo-chip-row">
                 <button
                   type="button"
-                  className="btn btn--quiet"
-                  onClick={() => p.onReviewNow(m.id)}
+                  className="undo-chip"
+                  aria-label={`Undo removing ${m.surface}`}
+                  onClick={undoPending}
                 >
-                  Review now
+                  UNDO “{m.surface}”
                 </button>
-              )}
-              {"  "}
-              <button type="button" className="btn btn--quiet" onClick={() => p.onRemove(m.id)}>
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
+              </div>
+            ) : (
+              <div
+                key={m.id}
+                className={p.flashId === m.id ? "mine-card mine-card--flash" : "mine-card"}
+              >
+                <span className="w">
+                  <PackText tag="span">{m.surface}</PackText>
+                </span>
+                {m.reading ? (
+                  <span className="g">
+                    (<PackText tag="span">{m.reading}</PackText>)
+                  </span>
+                ) : (
+                  ""
+                )}
+                {m.gloss ? <span className="g">{m.gloss}</span> : ""}
+                {m.due_at ? (
+                  <span className="due">{relativeDueLabel(m.due_at)}</span>
+                ) : (
+                  <span className="due due--new">new</span>
+                )}
+                <div className="mine-sub">
+                  <small>{m.source_citation}</small>
+                  <span className="btn-row mine-actions">
+                    {!m.due_at && (
+                      <button
+                        type="button"
+                        className="btn btn--quiet"
+                        onClick={() => p.onReviewNow(m.id)}
+                      >
+                        Review now
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      className="btn btn--quiet"
+                      onClick={() => queueRemove(m.id, m.surface)}
+                    >
+                      Remove
+                    </button>
+                  </span>
+                </div>
+              </div>
+            ),
+          )}
+        </div>
       )}
     </section>
   );

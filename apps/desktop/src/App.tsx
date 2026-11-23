@@ -779,6 +779,9 @@ export function App() {
   }>({ el: null, closing: false });
   const [storyError, setStoryError] = useState<string | null>(null);
   const [mineItems, setMineItems] = useState<MineItem[]>([]);
+  // FEEL-MYWORDS-001: the id the engine returns from mine_add; the landed
+  // row plays the one-shot success pulse once.
+  const [mineFlashId, setMineFlashId] = useState<string | null>(null);
   // FEEL-LOADING-001: while openWords awaits mine_list the panel must not
   // render the PREVIOUS list as if it were current (the stale-list bug).
   const [wordsLoading, setWordsLoading] = useState(false);
@@ -3382,6 +3385,7 @@ export function App() {
     setErrReview(null);
     setErrError(null);
     setErrNotice(null);
+    setMineFlashId(null);
     // FEEL-LOADING-001: prime with the flag up so the panel shows skeleton
     // rows instead of yesterday's list (or a false empty state).
     setWordsLoading(true);
@@ -3410,6 +3414,9 @@ export function App() {
       if (!res.was_new) {
         setMineNotice(`"${mineSurface.trim()}" is already in My words — kept the original entry.`);
       }
+      // FEEL-MYWORDS-001: the add lands with a pulse on the row that
+      // arrived — or on the kept original when the mine was a repeat.
+      setMineFlashId(res.id);
       setMineSurface("");
       setMineReading("");
       setMineGloss("");
@@ -4608,6 +4615,7 @@ export function App() {
           <MyWordsPanel
             items={mineItems}
             loading={wordsLoading}
+            flashId={mineFlashId}
             review={mineReview}
             intervalPreview={minePreview}
             error={mineError}

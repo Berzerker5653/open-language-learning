@@ -2315,3 +2315,124 @@ th:last-child {
   background: var(--ok-soft);
   animation: fade-up var(--dur) var(--ease-out);
 }
+
+/* ------------------------------------------------------ FEEL-MYWORDS-001 */
+/* The weakest hierarchy in the audit: bare list rows, a raw ISO due slice,
+   a silent delete. Rows become rounded cards on warm paper (hairline
+   border, near-invisible shadow, generous gaps, no dividers, no streak
+   counters — the target mock's posture); the due date rises into an
+   accent pill whose clock glyph means the color never carries the message
+   alone; Remove becomes a 4s-undoable action via the chip; the add pulse
+   and the review motion ride the FEEL-GLOBAL keyframes and tokens, and
+   the global prefers-reduced-motion block flattens all of it. */
+.mine-list {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem 0;
+}
+.mine-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.6rem;
+}
+.mine-card .w {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+.mine-card .g {
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+}
+.mine-sub {
+  flex-basis: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.mine-sub .btn-row {
+  margin: 0;
+}
+.due {
+  margin-left: auto;
+  flex: none;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--accent-ink);
+  background: var(--accent-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.2rem 0.7rem;
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+.due::before {
+  content: "\25F7"; /* ◷ clock: meaning never rides color alone */
+  font-size: 0.875rem;
+}
+.due--new {
+  color: var(--ink-faint);
+  background: var(--surface-sunk);
+}
+
+/* The landed word pulses once: it rises with fade-up while a teal wash
+   fades from accent-soft back to the card surface. One-shot, token
+   durations — the motion budget never sees it twice. */
+@keyframes mine-arrive {
+  from {
+    background-color: var(--accent-soft);
+  }
+  to {
+    background-color: var(--surface);
+  }
+}
+.mine-card--flash {
+  animation:
+    fade-up var(--dur) var(--ease-out),
+    mine-arrive var(--dur-slow) var(--ease-out);
+}
+
+/* The removal the learner can take back: the chip fades in where the row
+   stood and the engine delete waits for its 4s life (words.tsx). */
+.undo-chip-row {
+  margin: -0.2rem 0 0.7rem;
+}
+.undo-chip {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  padding: 0.3rem 0.85rem;
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  cursor: pointer;
+  animation: fade-up var(--dur) var(--ease-out);
+}
+.undo-chip::before {
+  content: "\21BA"; /* ↺ */
+  font-size: 1rem;
+}
+
+/* Review motion rides the global library: card enters with card-in,
+   the revealed answer rises with fade-up. */
+.review-card {
+  animation: card-in var(--dur-slow) var(--ease-out);
+}
+.review-reveal {
+  animation: fade-up var(--dur) var(--ease-out);
+}

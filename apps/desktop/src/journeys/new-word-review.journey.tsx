@@ -41,9 +41,12 @@ describe("a saved word reaches its first review (U03)", () => {
     await app.click(app.button(panel, "Add to my words"));
 
     // The row states the truth — unscheduled — and the panel offers the
-    // engine-backed entry points, never a false "due".
+    // engine-backed entry points, never a false "due". FEEL-MYWORDS-001:
+    // the truth now rides a quiet "new" pill, not scheduled prose.
     const list = app.section("My words");
-    expect(list.textContent).toContain("not scheduled yet");
+    const newPill = list.querySelector(".due--new");
+    expect(newPill, "unscheduled words wear the quiet new pill").not.toBeNull();
+    expect(newPill!.textContent).toBe("new");
     expect(app.button(list, "Review now")).toBeTruthy();
     expect(app.button(list, "Review new words")).toBeTruthy();
 
@@ -61,7 +64,7 @@ describe("a saved word reaches its first review (U03)", () => {
     // per-word action needed no second engine read.
     const row = app.section("My words");
     expect(row.textContent).toContain("due");
-    expect(row.textContent).not.toContain("not scheduled yet");
+    expect(row.querySelector(".due--new")).toBeNull();
     expect(engine.lastArgsFor("mine_grade")?.itemId).toMatch(/^mine-/);
     expect(engine.argsFor("mine_new")).toBeUndefined();
 
