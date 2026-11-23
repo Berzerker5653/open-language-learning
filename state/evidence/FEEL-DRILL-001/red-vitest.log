@@ -1,0 +1,4990 @@
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'vitest' run src/drill-feel.test.ts src/practice.test.tsx src/journeys/drill-dots.journey.tsx
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/apps/desktop
+
+ ❯ |node| src/drill-feel.test.ts (10 tests | 10 failed) 22ms
+   ❯ FEEL-DRILL-001 session bar (1)
+     × the bar fill eases its width over the slow token (mid-glide, not a snap) 4ms
+   ❯ FEEL-DRILL-001 graded-choice reveal (4)
+     × the correct pick reveals a scaling ring + soft ok-soft fill at the fast token 2ms
+     × the reveal carries a check badge — state is ring + check, not color alone 1ms
+     × a wrong tap shakes once; the tapped pick presses; the rest dim 5ms
+     × practice.tsx marks reveal/tapped/wrong/dim and reveals on a correct pick too 1ms
+   ❯ FEEL-DRILL-001 end-of-session cards (3)
+     × .session-summary gains the calm warm card rules (they had none) 1ms
+     × .session-panel gains the calm warm card rules (they had none) 1ms
+     × the card-in keyframe is the fade + 0.98 to 1 scale from the mock legend 0ms
+   ❯ FEEL-DRILL-001 step dots in the embedded runners (2)
+     × session-chrome.tsx exports the StepDots component (progress semantics, no reward words) 2ms
+     × both embedded runners render their dots — placement by question, kanji by stage 3ms
+ ❯ |node| src/practice.test.tsx (18 tests | 1 failed) 23ms
+   ❯ practice runner (18)
+     × reveals the right pick with the ring marker and dims the rest as the answers lock (FEEL-DRILL-001) 5ms
+ ❯ |dom| src/journeys/drill-dots.journey.tsx (1 test | 1 failed) 75ms
+   ❯ kanji drill shows per-stage step dots (FEEL-DRILL-001) (1)
+     × renders stage dots and advances them meaning -> reading 74ms
+
+⎯⎯⎯⎯⎯⎯ Failed Tests 12 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |dom| src/journeys/drill-dots.journey.tsx > kanji drill shows per-stage step dots (FEEL-DRILL-001) > renders stage dots and advances them meaning -> reading
+Error: no button carrying "Kanji" in "Routes" (saw: Today | Practice | My Words | Progress | Settings)
+ ❯ Object.button src/journeys/harness.tsx:2465:15
+    2463|       const found = at === -1 ? undefined : buttons[at];
+    2464|       if (!found) {
+    2465|         throw new Error(
+       |               ^
+    2466|           `no button carrying "${label}" in "${root.getAttribute("aria…
+    2467|             `" (saw: ${labels.join(" | ")})`,
+ ❯ src/journeys/drill-dots.journey.tsx:30:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/12]⎯
+
+ FAIL  |node| src/drill-feel.test.ts > FEEL-DRILL-001 session bar > the bar fill eases its width over the slow token (mid-glide, not a snap)
+AssertionError: expected 'display: block; height: 100%; backgro…' to match /transition:[^;]*width[^;]*var\(--dur-…/
+
+- Expected:
+/transition:[^;]*width[^;]*var\(--dur-slow\)/
+
++ Received:
+"display: block; height: 100%; background: var(--accent);"
+
+ ❯ src/drill-feel.test.ts:37:18
+     35|   it("the bar fill eases its width over the slow token (mid-glide, not…
+     36|     const body = ruleBody(".session-bar-fill");
+     37|     expect(body).toMatch(/transition:[^;]*width[^;]*var\(--dur-slow\)/…
+       |                  ^
+     38|     expect(body).toContain("var(--ease-out)");
+     39|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/12]⎯
+
+ FAIL  |node| src/drill-feel.test.ts > FEEL-DRILL-001 graded-choice reveal > the correct pick reveals a scaling ring + soft ok-soft fill at the fast token
+AssertionError: expected 'border-color: var(--ok); box-shadow: …' to contain 'var(--ok-soft)'
+
+Expected: "var(--ok-soft)"
+Received: "border-color: var(--ok); box-shadow: 0 0 0 2px var(--ok); animation: pop var(--dur) var(--ease-out);"
+
+ ❯ src/drill-feel.test.ts:45:18
+     43|   it("the correct pick reveals a scaling ring + soft ok-soft fill at t…
+     44|     const body = ruleBody(".choice--correct");
+     45|     expect(body).toContain("var(--ok-soft)");
+       |                  ^
+     46|     expect(body).toMatch(/animation:[^;]*choice-reveal[^;]*var\(--dur-…
+     47|     expect(css).toContain("@keyframes choice-reveal");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/12]⎯
+
+ FAIL  |node| src/drill-feel.test.ts > FEEL-DRILL-001 graded-choice reveal > the reveal carries a check badge — state is ring + check, not color alone
+AssertionError: styles.css must define a ".choice--correct::after" rule: expected null not to be null
+ ❯ ruleBody src/drill-feel.test.ts:30:64
+     28|   const esc = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+     29|   const m = new RegExp(`^\\s*${esc}\\s*\\{([^}]*)\\}`, "m").exec(css);
+     30|   expect(m, `styles.css must define a "${selector}" rule`).not.toBeNul…
+       |                                                                ^
+     31|   return (m![1] ?? "").replace(/\s+/g, " ").trim();
+     32| }
+ ❯ src/drill-feel.test.ts:51:19
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/12]⎯
+
+ FAIL  |node| src/drill-feel.test.ts > FEEL-DRILL-001 graded-choice reveal > a wrong tap shakes once; the tapped pick presses; the rest dim
+AssertionError: expected '/**\n * Open Language Learning Platfo…' to contain '@keyframes shake-x'
+
+- Expected
++ Received
+
+- @keyframes shake-x
++ /**
++  * Open Language Learning Platform — design system.
++  *
++  * Direction: a calm, warm, editorial learning workspace. Warm paper
++  * neutrals, one deep-teal accent, serif display headings over a system
++  * sans body with Japanese-capable fallbacks (docs/11: prefer system
++  * font stacks; no distributed font files). Hairline borders and flat
++  * surfaces carry structure; shadows are near-invisible. Semantic colors
++  * are reserved for feedback (correct / warning / error). Never encode
++  * state through color alone: every state also has text or shape.
++  *
++  * Selectors here intentionally target elements that AppShell pins in
++  * tests (bare <header>, <main id="main>, a[href="#main"]) plus
++  * semantic class names owned by the views.
++  */
++
++ /* ---------------------------------------------------------------- tokens */
++ :root {
++   color-scheme: light;
++
++   /* warm neutrals */
++   --bg: #f5f1e9;
++   --surface: #fffdf9;
++   --surface-sunk: #ece5d8;
++   --ink: #241f18;
++   --ink-soft: #5c544a;
++   --ink-faint: #756c5d; /* AA: >=4.5 on both bg and surface (K-33 audit) */
++   --line: #e2dacc;
++   --line-strong: #c9beab;
++
++   /* single accent */
++   --accent: #14615e;
++   --accent-ink: #0e4a47;
++   --accent-soft: #e2eeeb;
++
++   /* semantic feedback only */
++   --ok: #2e7d46;
++   --ok-ink: #276b3c;
++   --ok-soft: #e8f0e6;
++   --warn: #8a6116;
++   --warn-soft: #f6ecd7;
++   --err: #b23a2e;
++   --err-soft: #f7e5e1;
++
++   --font-sans:
++     system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans JP", "Hiragino Sans",
++     "Yu Gothic UI", "Meiryo", sans-serif;
++   --font-display:
++     ui-serif, "Iowan Old Style", "Palatino Linotype", Georgia, "Noto Serif JP",
++     "Hiragino Mincho ProN", "Yu Mincho", serif;
++   --font-mono:
++     ui-monospace, "SF Mono", "Cascadia Mono", "Noto Sans Mono", Menlo, Consolas, monospace;
++
++   --radius: 8px;
++   --radius-sm: 6px;
++   --shadow: 0 1px 2px rgb(36 31 24 / 0.05);
++   /* UI-HYGIENE-001 (visual-ui-audit U1): one content-width token shared
++      by the header bar, the page column, and the card/list containers
++      inside it, so their left edges align at every breakpoint. Readable
++      measure stays per-element (p at 70ch etc.). */
++   --content-max: 46rem;
++
++   /* FEEL-GLOBAL-001: the motion family (docs/design/PROGRESSION-UX-AUDIT-2026-11-22.md,
++      FEEL-TARGETS-2026-11-22 motion legend): 120ms press, 250ms normal move,
++      300ms sheet/entry — all ease-out. --ease-spring matches the path ring's
++      spring cubic-bezier from PATH-FEEL-MOTION-001. */
++   --dur-fast: 120ms;
++   --dur: 250ms;
++   --dur-slow: 300ms;
++   --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
++   --ease-in-out: cubic-bezier(0.645, 0.045, 0.355, 1);
++   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
++
++   /* FEEL-GLOBAL-001: spacing scale — new work reaches for these first;
++      existing literals converge here over time. */
++   --space-1: 0.25rem;
++   --space-2: 0.5rem;
++   --space-3: 0.75rem;
++   --space-4: 1rem;
++   --space-5: 1.5rem;
++   --space-6: 2rem;
++
++   /* FEEL-GLOBAL-001: the only global stacking layers in the sheet. A local
++      z-index (e.g. z-index: 1 inside the path) is relative ordering, not a
++      layer, and stays a literal by design. */
++   --z-header: 10;
++   --z-skip: 20;
++   --z-bubble: 40;
++   --z-word-card: 45;
++ }
++
++ /* LETTER-DRILL-TEXT-001 (d): on wide panels — the owner's 4K desktop and
++    the dogfood VM at 1920 — the 46rem measure is a narrow sliver with a
++    huge dead gutter beside it, which read as the column "hanging right".
++    One token bump at wide viewports widens the measure and keeps the
++    header/column/card left edges aligned; margin-inline: auto keeps the
++    column centered at every width. */
++ @media (min-width: 100rem) {
++   :root {
++     --content-max: 64rem;
++   }
++ }
++
++ /* ------------------------------------------------------------------ base */
++ *,
++ *::before,
++ *::after {
++   box-sizing: border-box;
++ }
++
++ html {
++   -webkit-text-size-adjust: 100%;
++ }
++
++ body {
++   margin: 0;
++   background: var(--bg);
++   color: var(--ink);
++   font-family: var(--font-sans);
++   font-size: 1rem;
++   line-height: 1.6;
++ }
++
++ h1,
++ h2,
++ h3 {
++   font-family: var(--font-display);
++   line-height: 1.25;
++   margin: 0 0 0.5rem;
++ }
++
++ h1 {
++   font-size: 1.75rem;
++   font-weight: 600;
++ }
++
++ /* LESSON-TITLE-FIT-001: the lesson encounter title ("Printed Cyrillic: А а,
++    О о, М м, Т т") must always FIT the narrow card column — never a glyph
++    hanging past its edge. Wrapping is already the default (no nowrap rides
++    this heading), so this rule fixes the FIT of the wrap: balance keeps the
++    lines even instead of orphaning one glyph on its own line, and
++    break-word is the safety net for any long unbreakable token at the small
++    end of the phone range. The harness gate in scripts/encounter-capture.mjs
++    measures the h1's own line rects, so a regression to clipping fails
++    machine-checked, not just on vision. */
++ .lesson h1 {
++   text-wrap: balance;
++   overflow-wrap: break-word;
++ }
++
++ h2 {
++   font-size: 1.3rem;
++   font-weight: 600;
++   margin-top: 2rem;
++ }
++
++ h3 {
++   font-size: 1.05rem;
++   font-weight: 600;
++ }
++
++ p {
++   margin: 0 0 0.75rem;
++   max-width: 70ch;
++ }
++
++ small {
++   font-size: 0.875rem;
++   color: var(--ink-soft);
++ }
++
++ a {
++   color: var(--accent);
++   text-decoration-thickness: 1px;
++   text-underline-offset: 2px;
++ }
++
++ code {
++   font-family: var(--font-mono);
++   font-size: 0.85em;
++   background: var(--surface-sunk);
++   border-radius: 4px;
++   padding: 0.1em 0.35em;
++   overflow-wrap: anywhere;
++ }
++
++ :lang(ja) {
++   line-height: 1.7;
++ }
++
++ :focus-visible {
++   outline: 2px solid var(--accent);
++   outline-offset: 2px;
++ }
++
++ /* ----------------------------------------------------------------- shell */
++ a[href="#main"] {
++   position: absolute;
++   left: -100vw;
++   top: 0;
++   z-index: var(--z-skip);
++   background: var(--surface);
++   border: 1px solid var(--accent);
++   border-radius: var(--radius-sm);
++   padding: 0.5rem 1rem;
++ }
++
++ a[href="#main"]:focus {
++   left: 0.75rem;
++   top: 0.75rem;
++ }
++
++ header {
++   position: sticky;
++   top: 0;
++   z-index: var(--z-header);
++   background: var(--surface);
++   border-bottom: 1px solid var(--line);
++ }
++
++ .shell-bar {
++   display: flex;
++   align-items: center;
++   flex-wrap: wrap;
++   gap: 0.5rem 1.25rem;
++   max-width: var(--content-max);
++   margin-inline: auto;
++   padding: 0.5rem 1.25rem;
++   min-height: 3.5rem;
++ }
++
++ .brand {
++   font-family: var(--font-display);
++   font-size: 1.1rem;
++   font-weight: 600;
++   letter-spacing: 0.01em;
++   margin-right: auto;
++ }
++
++ header nav[aria-label="Primary"] ul {
++   list-style: none;
++   display: flex;
++   gap: 1rem;
++   margin: 0;
++   padding: 0;
++ }
++
++ header nav[aria-label="Primary"] a {
++   color: var(--ink-soft);
++   text-decoration: none;
++   font-size: 0.9375rem;
++ }
++
++ header nav[aria-label="Primary"] a:hover {
++   color: var(--accent);
++   text-decoration: underline;
++ }
++
++ /* route tabs (interactive route switcher) */
++ .routes {
++   display: flex;
++   flex-wrap: wrap;
++   gap: 0.25rem;
++   overflow-x: auto;
++   position: relative;
++ }
++
++ .tab {
++   appearance: none;
++   background: none;
++   border: 0;
++   border-bottom: 2px solid transparent;
++   color: var(--ink-soft);
++   font: inherit;
++   font-size: 0.9375rem;
++   font-weight: 600;
++   padding: 0.625rem 0.75rem;
++   min-height: 2.75rem;
++   cursor: pointer;
++   white-space: nowrap;
++   transition:
++     color var(--dur) var(--ease-out),
++     background var(--dur-fast) var(--ease-out),
++     transform var(--dur-fast) var(--ease-out);
++ }
++
++ .tab:hover {
++   color: var(--ink);
++ }
++
++ .tab:active {
++   color: var(--accent-ink);
++   background: var(--accent-soft);
++   transform: translateY(1px);
++ }
++
++ .tab[aria-current="page"] {
++   color: var(--accent-ink);
++   border-bottom-color: var(--accent);
++ }
++
++ /* FEEL-GLOBAL-001: GLIDING TAB UNDERLINE (global-states target: "the old
++    underline does not snap, it glides" — 250ms ease-out). ONE indicator on
++    the nav rides --tab-x/--tab-w measured by the routes effect in App.tsx
++    and fades in once measured (--tab-live). While it is live the active
++    tab's own border steps aside, so at rest there is exactly one underline;
++    before JS measures (SSR / first paint) the static border holds. */
++ .routes::after {
++   content: "";
++   position: absolute;
++   left: 0;
++   bottom: 0;
++   height: 2px;
++   width: var(--tab-w, 0px);
++   transform: translateX(var(--tab-x, 0px));
++   background: var(--accent);
++   opacity: var(--tab-live, 0);
++   pointer-events: none;
++   transition:
++     transform var(--dur) var(--ease-out),
++     width var(--dur) var(--ease-out),
++     opacity var(--dur-fast) linear;
++ }
++
++ .routes--glides .tab[aria-current="page"] {
++   border-bottom-color: transparent;
++ }
++
++ main {
++   display: block;
++ }
++
++ .page {
++   max-width: var(--content-max);
++   margin-inline: auto;
++   padding: 1.75rem 1.25rem 4rem;
++ }
++
++ /* --------------------------------------------------------------- buttons */
++ .btn {
++   display: inline-flex;
++   align-items: center;
++   justify-content: center;
++   gap: 0.4rem;
++   min-height: 2.75rem;
++   padding: 0.5rem 1.125rem;
++   border-radius: var(--radius-sm);
++   border: 1px solid var(--line-strong);
++   background: var(--surface);
++   color: var(--ink);
++   font: inherit;
++   font-size: 0.9375rem;
++   font-weight: 600;
++   cursor: pointer;
++   text-align: center;
++   /* FEEL-GLOBAL-001: state moves, never snaps. */
++   transition:
++     background var(--dur-fast) var(--ease-out),
++     border-color var(--dur-fast) var(--ease-out),
++     color var(--dur-fast) var(--ease-out),
++     transform var(--dur-fast) var(--ease-out),
++     filter var(--dur-fast) var(--ease-out);
++ }
++
++ .btn:hover:not(:disabled) {
++   background: var(--surface-sunk);
++   border-color: var(--ink-faint);
++ }
++
++ /* FEEL-GLOBAL-001: the chunky press from the global-states target mock —
++    2px down in 120ms. These sit AFTER the hover rules so source order wins
++    the specificity tie while a mouse press always coexists with :hover. */
++ .btn:not(:disabled):active {
++   transform: translateY(2px);
++ }
++
++ .btn--primary {
++   background: var(--accent);
++   border-color: var(--accent);
++   color: #fff;
++ }
++
++ .btn--primary:hover:not(:disabled) {
++   background: var(--accent-ink);
++   border-color: var(--accent-ink);
++ }
++
++ .btn--primary:not(:disabled):active {
++   /* press keeps ONE accent (the mock's darkest step): the accent-ink fill
++      plus a brightness filter — no new color token exists for presses. */
++   background: var(--accent-ink);
++   border-color: var(--accent-ink);
++   filter: brightness(0.92);
++ }
++
++ .btn--quiet {
++   background: var(--surface);
++   border-color: var(--line-strong);
++   color: var(--ink);
++ }
++
++ .btn--quiet:hover:not(:disabled) {
++   background: var(--surface-sunk);
++ }
++
++ .btn:disabled {
++   opacity: 0.45;
++   color: var(--ink-soft);
++   border-color: var(--line);
++   background: var(--surface-sunk);
++   cursor: not-allowed;
++ }
++
++ .btn-row {
++   display: flex;
++   flex-wrap: wrap;
++   gap: 0.5rem;
++   margin: 0.75rem 0 1rem;
++ }
++
++ /* segmented control (time budget) */
++ .seg {
++   display: inline-flex;
++   flex-wrap: wrap;
++   border: 1px solid var(--line-strong);
++   border-radius: var(--radius);
++   background: var(--surface);
++   overflow: hidden;
++ }
++
++ .seg-btn {
++   appearance: none;
++   background: none;
++   border: 0;
++   border-left: 1px solid var(--line);
++   font: inherit;
++   font-size: 0.9375rem;
++   font-weight: 600;
++   color: var(--ink-soft);
++   padding: 0.5rem 1rem;
++   min-height: 2.75rem;
++   cursor: pointer;
++   transition:
++     background var(--dur-fast) var(--ease-out),
++     color var(--dur-fast) var(--ease-out),
++     transform var(--dur-fast) var(--ease-out);
++ }
++
++ .seg-btn:first-child {
++   border-left: 0;
++ }
++
++ .seg-btn:hover {
++   background: var(--surface-sunk);
++ }
++
++ .seg-btn:active {
++   transform: translateY(1px);
++ }
++
++ .seg-btn[aria-pressed="true"] {
++   /* UI-HYGIENE-001 (U1): selected segment reads at a glance — solid
++      fill, not a tint; text colour is supplementary, aria-pressed is
++      the semantic state. */
++   background: var(--accent);
++   color: #ffffff;
++   font-weight: 700;
++ }
++
++ /* ---------------------------------------------------------------- forms */
++ .field {
++   margin: 0.75rem 0 1rem;
++   max-width: 24rem;
++ }
++
++ .field > label {
++   display: block;
++   font-weight: 600;
++   font-size: 0.9375rem;
++   margin-bottom: 0.25rem;
++ }
++
++ input[type="text"] {
++   width: 100%;
++   min-height: 2.75rem;
++   padding: 0.5rem 0.75rem;
++   border: 1px solid var(--line-strong);
++   border-radius: var(--radius-sm);
++   background: var(--surface);
++   color: var(--ink);
++   font: inherit;
++ }
++
++ input[type="text"]:focus-visible {
++   border-color: var(--accent);
++ }
++
++ input[type="radio"] {
++   width: 1.15rem;
++   height: 1.15rem;
++   accent-color: var(--accent);
++   margin: 0;
++ }
++
++ input[type="file"] {
++   font: inherit;
++   color: var(--ink-soft);
++   max-width: 100%;
++ }
++
++ fieldset {
++   border: 1px solid var(--line);
++   border-radius: var(--radius);
++   background: var(--surface);
++   padding: 0.75rem 1rem 1rem;
++   margin: 0 0 1rem;
++ }
++
++ legend {
++   font-size: 0.875rem;
++   font-weight: 600;
++   color: var(--ink-soft);
++   padding: 0 0.375rem;
++ }
++
++ .radio-row {
++   display: flex;
++   align-items: center;
++   flex-wrap: wrap;
++   gap: 0.5rem 0.75rem;
++   padding: 0.75rem 0.5rem;
++   border-bottom: 1px solid var(--line);
++ }
++
++ .radio-row:last-of-type {
++   border-bottom: 0;
++ }
++
++ .radio-row label {
++   display: inline-flex;
++   align-items: center;
++   gap: 0.625rem;
++   flex: 1 1 14rem;
++   cursor: pointer;
++ }
++
++ /* ------------------------------------------------------------- surfaces */
++ .card {
++   background: var(--surface);
++   border: 1px solid var(--line);
++   border-radius: var(--radius);
++   box-shadow: var(--shadow);
++   padding: 1.5rem 1.5rem 1.25rem;
++   margin: 1rem 0;
++   /* FEEL-GLOBAL-001: transitions on the shared class list (audit gap:
++      0 transitions repo-wide); the 1px press lets a card holding controls
++      sink under the thumb without pretending the whole card is a button. */
++   transition:
++     transform var(--dur-fast) var(--ease-out),
++     border-color var(--dur-fast) var(--ease-out);
++ }
++
++ .card:active {
++   transform: translateY(1px);
++ }
++
++ /* SETTINGS-TEXT-COLLAPSE-001: folded prose behind a native details/summary
++    disclosure. The collapsed summary reads exactly like the `small` prose it
++    stands in for, so folding changes length, not style; the expanded body is
++    the same `small` text unchanged. Keyboard focus rides the global
++    :focus-visible rule; no JS, no custom widget. */
++ details.prose-note {
++   margin: 0 0 0.75rem;
++   max-width: 70ch;
++ }
++
++ details.prose-note > summary {
++   font-size: 0.875rem;
++   color: var(--ink-soft);
++   cursor: pointer;
++ }
++
++ details.prose-note[open] > summary {
++   margin-bottom: 0.4rem;
++ }
++
++ details.prose-note > p {
++   margin-bottom: 0;
++ }
++
++ .empty {
++   border: 1px dashed var(--line-strong);
++   border-radius: var(--radius);
++   background: var(--surface);
++   color: var(--ink-soft);
++   padding: 1rem 1.25rem;
++   margin: 1rem 0;
++ }
++
++ .notice {
++   background: var(--warn-soft);
++   border: 1px solid var(--warn);
++   border-left-width: 4px;
++   border-radius: var(--radius-sm);
++   padding: 0.75rem 1rem;
++   margin: 0.75rem 0 1rem;
++   max-width: none;
++   animation: fade-up var(--dur) var(--ease-out);
++ }
++
++ .alert {
++   background: var(--err-soft);
++   border: 1px solid var(--err);
++   border-left-width: 4px;
++   border-radius: var(--radius-sm);
++   padding: 0.75rem 1rem;
++   margin: 0.75rem 0 1rem;
++   max-width: none;
++   animation: fade-up var(--dur) var(--ease-out);
++ }
++
++ /* badges — always carry text; color is supplementary */
++ .badge {
++   display: inline-block;
++   font-size: 0.75rem;
++   font-weight: 700;
++   letter-spacing: 0.02em;
++   padding: 0.1rem 0.5rem;
++   border-radius: 4px;
++   border: 1px solid var(--line-strong);
++   color: var(--ink-soft);
++   background: var(--surface-sunk);
++   vertical-align: baseline;
++ }
++
++ .badge--open {
++   color: var(--ok-ink);
++   border-color: var(--ok);
++   background: var(--ok-soft);
++ }
++
++ .badge--active {
++   color: var(--accent-ink);
++   border-color: var(--accent);
++   background: var(--accent-soft);
++ }
++
++ /* UI-HYGIENE-001 (visual-ui-audit U2): the AI-content honesty line is a
++    small monospace badge (NuanceDeck idiom), not greeting prose; the
++    tooltip carries the full policy. */
++ .badge--mono {
++   font-family: var(--font-mono);
++   font-size: 0.6875rem;
++   text-transform: uppercase;
++   letter-spacing: 0.05em;
++ }
++
++ .pack-posture-badge {
++   vertical-align: middle;
++   cursor: help;
++ }
++
++ /* UI-HYGIENE-001 (visual-ui-audit U13): the profile chooser renders one
++    aligned card per real profile — initials avatar, pack line, last
++    studied, one-line state. Cards align on the shared content width. */
++ .profile-grid {
++   display: grid;
++   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
++   gap: 0.75rem;
++   margin: 0.75rem 0 1rem;
++ }
++
++ .profile-card {
++   display: flex;
++   flex-direction: column;
++   align-items: flex-start;
++   gap: 0.35rem;
++   background: var(--surface);
++   border: 1px solid var(--line);
++   border-bottom: 1px solid var(--line-strong);
++   border-radius: var(--radius);
++   box-shadow: var(--shadow);
++   padding: 1rem;
++   transition:
++     transform var(--dur-fast) var(--ease-out),
++     border-color var(--dur-fast) var(--ease-out);
++ }
++
++ .profile-card:active {
++   transform: translateY(1px);
++   border-color: var(--line-strong);
++ }
++
++ .profile-avatar {
++   display: inline-flex;
++   align-items: center;
++   justify-content: center;
++   width: 2.5rem;
++   height: 2.5rem;
++   border-radius: 50%;
++   background: var(--accent-soft);
++   color: var(--accent-ink);
++   font-weight: 700;
++   font-size: 0.9375rem;
++   letter-spacing: 0.02em;
++ }
++
++ .profile-name {
++   font-size: 1.05rem;
++ }
++
++ .profile-card .btn-row {
++   margin-top: 0.35rem;
++ }
++
++ /* K-41: stressed-vowel highlight (data-driven; color supplementary,
++    the combining mark itself stays visible) */
++ .stress {
++   color: var(--accent-ink);
++   font-weight: 700;
++   text-decoration: underline;
++   text-decoration-thickness: 2px;
++   text-underline-offset: 3px;
++ }
++
++ /* READING-CLUTTER-001: the reader shows no interlinear chips — the pack's
++    label sidecar is internal notation; grammar rides the word card in human
++    form. (The old .il-token/.il-label micro-rail rules were removed with
++    the inline chips.) */
++
++ /* CONTENT-CONFIRM-001 (READING-CLUTTER-001 shape): one quiet
++    learner-agreement control under the whole story — never a button inside
++    the prose. */
++ .story-confirm {
++   display: flex;
++   flex-wrap: wrap;
++   align-items: center;
++   gap: 0.25rem 0.75rem;
++   color: var(--ink-faint);
++   font-size: 0.875rem;
++ }
++
++ .story-confirm .story-confirm-toggle {
++   font-size: 0.875rem;
++   padding: 0.375rem 0.75rem;
++ }
++
++ /* ------------------------------------------------------------- stepper */
++ .stepper {
++   counter-reset: step;
++   list-style: none;
++   display: flex;
++   flex-wrap: wrap;
++   gap: 0.375rem 1.5rem;
++   padding: 0;
++   margin: 0 0 1.25rem;
++ }
++
++ .stepper li {
++   counter-increment: step;
++   display: inline-flex;
++   align-items: center;
++   gap: 0.5rem;
++   font-size: 0.875rem;
++   color: var(--ink-faint);
++ }
++
++ .stepper li::before {
++   content: counter(step);
++   display: grid;
++   place-items: center;
++   width: 1.5rem;
++   height: 1.5rem;
++   border: 1px solid currentColor;
++   border-radius: 50%;
++   font-size: 0.8125rem;
++   font-weight: 600;
++ }
++
++ .stepper li[aria-current="step"] {
++   color: var(--accent-ink);
++   font-weight: 700;
++ }
++
++ /* ---------------------------------------------------------- plan lists */
++ .plan-summary {
++   color: var(--ink-soft);
++   font-weight: 600;
++ }
++
++ .plan-list {
++   list-style: none;
++   display: grid;
++   gap: 0.5rem;
++   padding: 0;
++   margin: 0.75rem 0 1rem;
++ }
++
++ .plan-list > li {
++   display: flex;
++   align-items: baseline;
++   flex-wrap: wrap;
++   gap: 0.25rem 0.75rem;
++   background: var(--surface);
++   border: 1px solid var(--line);
++   border-radius: var(--radius);
++   padding: 0.75rem 1rem;
++ }
++
++ .plan-reason {
++   font-weight: 600;
++ }
++
++ .meta {
++   color: var(--ink-faint);
++   font-size: 0.875rem;
++ }
++
++ .plan-item {
++   display: flex;
++   align-items: baseline;
++   flex-wrap: wrap;
++   gap: 0.25rem 0.75rem;
++   width: 100%;
++   text-align: left;
++   background: none;
++   border: none;
++   color: inherit;
++   font: inherit;
++   padding: 0;
++   cursor: pointer;
++ }
++
++ .plan-surface {
++   font-size: 1.125rem;
++ }
++
++ .plan-gloss {
++   color: var(--ink-faint);
++ }
++
++ /* environments */
++ .place-list {
++   list-style: none;
++   display: grid;
++   gap: 0.5rem;
++   padding: 0;
++   margin: 0.75rem 0;
++ }
++
++ .place-list > li {
++   display: flex;
++   align-items: baseline;
++   flex-wrap: wrap;
++   gap: 0.25rem 0.75rem;
++   padding: 0.75rem 1rem;
++   border: 1px solid var(--line);
++   border-radius: var(--radius);
++   background: var(--surface);
++ }
++
++ .place-list > li[data-unlocked="no"] {
++   background: var(--bg);
++ }
++
++ /* ---------------------------------------------------------------- table */
++ .table-wrap {
++   overflow-x: auto;
++   border: 1px solid var(--line);
++   border-radius: var(--radius);
++   background: var(--surface);
++ }
++
++ table {
++   border-collapse: collapse;
++   width: 100%;
++   font-size: 0.9375rem;
++ }
++
++ th,
++ td {
++   text-align: left;
++   padding: 0.625rem 1rem;
++   border-bottom: 1px solid var(--line);
++ }
++
++ thead th {
++   font-size: 0.75rem;
++   font-weight: 700;
++   letter-spacing: 0.06em;
++   text-transform: uppercase;
++   color: var(--ink-faint);
++   background: var(--bg);
++ }
++
++ tbody tr:last-child th,
++ tbody tr:last-child td {
++   border-bottom: 0;
++ }
++
++ td:last-child,
++ th:last-child {
++   text-align: right;
++ }
++
++ /* ------------------------------------------------------- practice views */
++ .prompt {
++   font-size: 1.125rem;
++   max-width: 60ch;
++ }
++
++ .target-word {
++   font-size: 1.35rem;
++   font-weight: 700;
++ }
++
++ .feedback {
++   list-style: none;
++   display: grid;
++   gap: 0.5rem;
++   padding: 0;
++   margin: 0.75rem 0;
++ }
++
++ .feedback > li {
++   border: 1px solid var(--line);
++   border-left: 4px solid var(--ink-faint);
++   border-radius: var(--radius-sm);
++   background: var(--surface);
++   padding: 0.75rem 1rem;
++   max-width: 65ch;
++ }
++
++ .feedback > li[data-band="possible-issue"] {
++   border-left-color: var(--warn);
++   background: var(--warn-soft);
++ }
++
++ .feedback > li[data-band="close"],
++ .feedback > li[data-band="match"] {
++   border-left-color: var(--ok);
++   background: var(--ok-soft);
++ }
++
++ /* graded answer feedback: text + glyph, never color alone */
++ .verdict {
++   font-weight: 700;
++   margin: 0.75rem 0;
++   animation: fade-up var(--dur) var(--ease-out);
++ }
++
++ .verdict--correct {
++   color: var(--ok);
++ }
++
++ /* LETTER-DRILL-TEXT-001: after a miss the runner POINTS at the right
++    choice (complaint 4g: a hint that states the answer trains nothing);
++    the correct button carries this marker. */
++ .choice--correct {
++   border-color: var(--ok);
++   box-shadow: 0 0 0 2px var(--ok);
++   animation: pop var(--dur) var(--ease-out);
++ }
++
++ .verdict--correct::before {
++   content: "\2713\00a0"; /* check mark */
++ }
++
++ .verdict--retry {
++   color: var(--warn);
++ }
++
++ .verdict--retry::before {
++   content: "\21bb\00a0"; /* open, non-punitive retry marker */
++ }
++
++ /* pitch contour comparison */
++ .contour {
++   display: block;
++   background: var(--surface);
++   border: 1px solid var(--line);
++   border-radius: var(--radius-sm);
++   margin: 0.5rem 0;
++   max-width: 100%;
++ }
++
++ .contour--reference {
++   stroke: var(--ink-faint);
++ }
++
++ .contour--attempt {
++   stroke: var(--accent);
++ }
++
++ /* -------------------------------------------------- language management */
++ .pack-list {
++   list-style: none;
++   display: grid;
++   gap: 0.5rem;
++   padding: 0;
++   margin: 0.75rem 0 1rem;
++ }
++
++ .pack-list > li {
++   display: flex;
++   align-items: center;
++   flex-wrap: wrap;
++   gap: 0.375rem 0.75rem;
++   background: var(--surface);
++   border: 1px solid var(--line);
++   border-radius: var(--radius);
++   padding: 0.875rem 1rem;
++ }
++
++ .pack-list > li[data-active="yes"] {
++   border-color: var(--accent);
++ }
++
++ .meta-list {
++   list-style: none;
++   display: flex;
++   flex-wrap: wrap;
++   gap: 0.125rem 1rem;
++   padding: 0;
++   margin: 0.25rem 0 0;
++   width: 100%;
++ }
++
++ .meta-list li {
++   color: var(--ink-faint);
++   font-size: 0.8125rem;
++ }
++
++ /* --------------------------------------------------------- responsive */
++ /* MOBILE-UX-001 (owner standard 2026-11-21: "look and run good on phones"):
++    a real phone layout tier at 44rem — comfortable type, a compact one-row
++    route bar, generous touch targets, and lists that stack. The wide-screen
++    measure token above (LETTER-DRILL-TEXT-001) is reused, not duplicated:
++    every rule here works off --content-max and the existing tokens.
++    44rem = 704px covers the 390/412px card viewports and the landscape
++    gap; the 24rem (384px) tier catches the small end of the phone range. */
++ @media (max-width: 44rem) {
++   /* Typography at phone distance: body keeps the 1rem base (comfortable
++      at 30cm), headings scale down so they stop eating the narrow column. */
++   h1 {
++     font-size: 1.5rem;
++   }
++
++   h2 {
++     font-size: 1.1875rem;
++     margin-top: 1.5rem;
++   }
++
++   /* Shell collapses to a compact bar: brand line, then the route tabs as
++      a full-width strip. Five tabs at this padding measure ~350px, so the
++      strip stays one row at 390/412px instead of scrolling or stacking
++      twice. */
++   .shell-bar {
++     padding: 0.5rem 1rem 0;
++     min-height: 0;
++     row-gap: 0;
++   }
++
++   .brand {
++     margin-right: 0;
++     width: 100%;
++     font-size: 1rem;
++   }
++
++   .routes {
++     width: 100%;
++     /* Measured at 390px: five tabs' intrinsic text (with "Progress") is
++        ~360px and overflowed a nowrap row into a clipped, internally
++        scrolling strip. Wrapping keeps every route visible with zero
++        sideways movement; at 412px the row stays single-line. */
++     flex-wrap: wrap;
++     row-gap: 0.25rem;
++     padding-bottom: 0.25rem;
++   }
++
++   .tab {
++     flex: 1 1 auto;
++     justify-content: center;
++     /* 2.75rem = 44px exactly: the WCAG 2.2 AA target size, kept at the
++        narrow padding, not dropped with it */
++     min-height: 2.75rem;
++     padding: 0.5rem 0.5rem;
++     font-size: 0.875rem;
++   }
++
++   .page {
++     padding: 1.25rem 1rem 3rem;
++   }
++
++   .card {
++     padding: 1.125rem 1rem;
++   }
++
++   .btn {
++     flex: 1 1 auto;
++   }
++
++   .btn-row .btn {
++     min-width: 9rem;
++   }
++
++   /* Touch targets (card §2): drill options and reader controls ride .btn
++      (min-height 2.75rem — verified by the tap-target audit in
++      state/evidence/MOBILE-UX-001/). The small controls that are NOT .btn
++      join the 44px floor here. */
++   .seg-btn {
++     min-height: 2.75rem;
++     padding-inline: 0.875rem;
++   }
++
++   details.prose-note > summary {
++     min-height: 2.75rem;
++     display: flex;
++     align-items: center;
++   }
++
++   .input-mode-bubble__button {
++     min-height: 2.75rem;
++     padding: 0.5rem 1rem;
++   }
++
++   /* Session chrome stacks: progress bar above the meta line so the
++      nowrap estimate never squeezes against the bar edge. */
++   .session-chrome {
++     flex-wrap: wrap;
++     row-gap: 0.25rem;
++   }
++
++   /* Reader at phone distance: the story text is the point of the screen,
++      so it gets a comfortable display size and looser leading. Word taps
++      ride inline buttons — the leading makes each tap row ~40px tall; the
++      audit records inline text as the one honest exception to the 44px
++      floor (word-level accuracy needs it, and the word card is the
++      fallback surface). */
++   .reader-paragraph {
++     font-size: 1.1875rem;
++     line-height: 2.1;
++     margin-bottom: 1rem;
++   }
++
++   .word-card .word-headword {
++     font-size: 1.5rem;
++   }
++
++   /* WORDCARD-OFFSCREEN-001: the word card is an inline-flow element
++      appended after the whole reading paragraph, so at phone height it
++      rendered ~640px BELOW the fold (measured y=1486 on an 844px viewport)
++      and the tap looked dead. At phone width it becomes a fixed bottom
++      sheet: always inside the viewport, scrollable inside itself, and the
++      Close row sticks to its bottom edge so it never hides behind long
++      content. Wide viewports keep the inline card (no rule there). */
++   .word-card {
++     position: fixed;
++     left: 0;
++     right: 0;
++     bottom: 0;
++     z-index: var(--z-word-card);
++     margin: 0;
++     border-inline: 0;
++     border-block-end: 0;
++     border-end-start-radius: 0;
++     border-end-end-radius: 0;
++     max-height: 70svh;
++     overflow-y: auto;
++     overscroll-behavior: contain;
++
++     /* FEEL-GLOBAL-001: the phone sheet slides up into place. */
++     animation: slide-up var(--dur-slow) var(--ease-out);
++   }
++
++   .word-card .btn-row {
++     position: sticky;
++     bottom: 0;
++     background: var(--surface);
++     padding-block: 0.5rem;
++     margin-bottom: 0;
++   }
++
++   /* Fixed-width instruments (activity calendar SVG, contours) live in
++      their own scroll container instead of widening the document. */
++   .memory-calendar {
++     overflow-x: auto;
++   }
++
++   /* Settings at phone width (measured by the harness audit, 390px):
++      a long speech-model <select> was 479px intrinsic and pushed the
++      DOCUMENT to 512px horizontal scroll — selects ride the column. */
++   select {
++     width: 100%;
++     max-width: 100%;
++     min-height: 2.75rem;
++     font-size: 1rem;
++   }
++
++   /* The destructive-delete confirmation checkbox (settings.tsx) renders at
++      the UA default 13x13 — unusable with a thumb; the row carries the
++      label, the box itself joins the 44px floor. */
++   input[type="checkbox"] {
++     width: 2.75rem;
++     height: 2.75rem;
++   }
++ }
++
++ @media (max-width: 24rem) {
++   .tab {
++     font-size: 0.8125rem;
++     padding-inline: 0.375rem;
++   }
++ }
++
++ /* ------------------------------------------- input-mode bubble (IME-TOGGLE-UX-001) */
++ /* Pinned to the app chrome so it rides every in-app route; the caller only
++  * renders it while the active pack declares an in-app keyboard. */
++ .input-mode-bubble {
++   position: fixed;
++   right: 1rem;
++   bottom: 1rem;
++   z-index: var(--z-bubble);
++ }
++
++ .input-mode-bubble__button {
++   display: inline-flex;
++   align-items: center;
++   gap: 0.5rem;
++   padding: 0.5rem 0.875rem;
++   border: 1px solid var(--line);
++   border-radius: 999px;
++   background: var(--surface);
++   color: var(--ink);
++   font: inherit;
++   font-size: 0.875rem;
++   cursor: pointer;
++   box-shadow: 0 2px 8px rgb(0 0 0 / 12%);
++ }
++
++ .input-mode-bubble__button[aria-pressed="true"] {
++   border-color: var(--accent);
++   color: var(--accent);
++ }
++
++ .input-mode-bubble__button:hover {
++   border-color: var(--accent);
++ }
++
++ @media (prefers-color-scheme: dark) {
++   .input-mode-bubble__button {
++     box-shadow: 0 2px 8px rgb(0 0 0 / 40%);
++   }
++ }
++
++ /* ------------------------------------------- WORD-TIMING-001 karaoke text */
++ /* Pack surfaces with word timings render each timed word as a pressable
++    token; the token whose clip span covers the playback clock carries
++    `word--active`. Untimed surfaces never get these classes at all. */
++ .word {
++   border: 0;
++   padding: 0;
++   margin: 0;
++   background: none;
++   color: inherit;
++   font: inherit;
++   cursor: pointer;
++   transition:
++     background var(--dur-fast) var(--ease-out),
++     color var(--dur-fast) var(--ease-out);
++ }
++
++ .word:focus-visible {
++   outline: 2px solid var(--accent);
++   outline-offset: 2px;
++ }
++
++ .word--active {
++   background: var(--accent-soft);
++   color: var(--accent-ink);
++   border-radius: var(--radius-sm);
++ }
++
++ /* ------------------------------------------------------ reduced motion */
++ @media (prefers-reduced-motion: reduce) {
++   *,
++   *::before,
++   *::after {
++     animation-duration: 0.01ms !important;
++     animation-iteration-count: 1 !important;
++     transition-duration: 0.01ms !important;
++     scroll-behavior: auto !important;
++   }
++ }
++
++ /* ------------------------------------------------ SESSION-CHROME-001 */
++ /* In-session chrome (visual-ui-audit U3): a thin bar plus n-of-N and a
++    remaining-time estimate, mounted above every activity route while a
++    session runs. Accent is reserved for progress semantics only. */
++ .session-chrome {
++   display: flex;
++   align-items: center;
++   gap: 0.75rem;
++   margin: 0 0 1rem;
++ }
++
++ .session-bar {
++   flex: 1 1 auto;
++   height: 0.5rem;
++   background: var(--surface-sunk);
++   border: 1px solid var(--line);
++   border-radius: 999px;
++   overflow: hidden;
++ }
++
++ .session-bar-fill {
++   display: block;
++   height: 100%;
++   background: var(--accent);
++ }
++
++ .session-chrome-meta {
++   margin: 0;
++   color: var(--ink-soft);
++   font-size: 0.875rem;
++   white-space: nowrap;
++ }
++
++ /* SESSION-FLOW-COPY-001: the inter-activity bridge — a calm, announced
++    transition, not a gate: centered, quiet, and carrying its own pause
++    control so the auto-advance never outruns the learner. */
++ .session-bridge {
++   display: flex;
++   flex-direction: column;
++   align-items: center;
++   gap: 0.9rem;
++   padding: 2.2rem 1rem;
++   text-align: center;
++   animation: fade-up var(--dur) var(--ease-out);
++ }
++ .session-bridge-label {
++   margin: 0;
++   font-size: 1.25rem;
++   color: var(--ink);
++ }
++ .notice-line {
++   display: block;
++ }
++
++ /* U6: dues expressed as a time budget, and the predicted interval
++    printed inside a review grade button. */
++ .plan-due-budget {
++   margin: 0.1rem 0 0.5rem;
++   color: var(--ink-soft);
++ }
++
++ .grade-preview {
++   color: var(--ink-soft);
++   font-weight: 400;
++ }
++
++ /* U3: the graded/formative distinction as a badge on hub mode cards. */
++ .mode-grade-badge {
++   display: inline-block;
++   padding: 0.1rem 0.5rem;
++   border: 1px solid var(--line-strong);
++   border-radius: 999px;
++   font-size: 0.75rem;
++   font-weight: 600;
++   color: var(--ink-soft);
++   background: var(--surface-sunk);
++ }
++
++ .mode-grade-badge--graded {
++   background: var(--accent-soft);
++   border-color: var(--accent);
++   color: var(--accent-ink);
++ }
++
++ /* PROGRESS-STATS-001 (visual-ui-audit U7/U14): progress instruments.
++    Dependency-free SVG; contrast comes from strokes and lightness steps,
++    never from hue alone. */
++ .dim-progress {
++   display: inline-block;
++   vertical-align: middle;
++   margin-inline-start: 0.5rem;
++ }
++
++ .dim-progress-track {
++   fill: var(--surface-sunk);
++   stroke: var(--line);
++ }
++
++ .dim-progress-fill {
++   fill: var(--accent);
++ }
++
++ .memory-stats-facts {
++   list-style: none;
++   padding: 0;
++   margin: 0.5rem 0;
++ }
++
++ .memory-retention ul {
++   list-style: none;
++   padding: 0;
++ }
++
++ .memory-calendar svg {
++   display: block;
++ }
++
++ .memory-cal-cell {
++   stroke: var(--line);
++ }
++
++ .memory-cal-cell--0 {
++   fill: var(--surface-sunk);
++ }
++
++ .memory-cal-cell--1 {
++   fill: var(--accent);
++   fill-opacity: 0.3;
++ }
++
++ .memory-cal-cell--2 {
++   fill: var(--accent);
++   fill-opacity: 0.55;
++ }
++
++ .memory-cal-cell--3 {
++   fill: var(--accent);
++   fill-opacity: 0.8;
++ }
++
++ .memory-cal-cell--4 {
++   fill: var(--accent);
++   fill-opacity: 1;
++ }
++
++ /* PATH-VIEW-001 + PATH-VISUAL-001: the Today tab's unit path rendered as
++    a JOURNEY, not a list (owner dogfood 2026-11-22: "I wanted it to look
++    and feel like the other apps"). A winding vertical track: circular
++    node rings that sway along a wave, dashed connectors between them,
++    section banners between node groups. States: locked = dim ring + lock,
++    ready = open ring, in-progress = the ring arc FILLED to the honest
++    proven-ref fraction, done = filled + check, review-due = a re-lit
++    ring. Mobile-first: every control and node meets the 44px touch floor
++    (the ring is 3rem = 48px). */
++ .unit-path {
++   display: grid;
++   gap: 0.75rem;
++   margin-top: 1.25rem;
++ }
++
++ .path-section {
++   border: none;
++   border-radius: 0;
++   background: none;
++ }
++
++ /* Section breaks ride wide banners: friendly name big, CEFR subtitle
++    small, the proven-done count honest (never visits or encounters). */
++ .path-section-toggle {
++   display: grid;
++   grid-template-columns: 1fr auto;
++   grid-template-areas:
++     "name count"
++     "cefr count";
++   align-items: center;
++   gap: 0.1rem 0.75rem;
++   width: 100%;
++   min-height: 3.25rem;
++   padding: 0.65rem 0.9rem;
++   background: var(--surface);
++   border: 1px solid var(--line);
++   border-radius: 0.9rem;
++   color: inherit;
++   font: inherit;
++   text-align: left;
++   cursor: pointer;
++   /* PATH-FEEL-MOTION-001: the banner is a real control, so it takes a
++      press: 120ms down-shift per the FEEL-TARGETS button legend. */
++   transition:
++     transform 120ms ease-out,
++     background-color 120ms ease-out,
++     border-color 120ms ease-out;
++ }
++
++ .path-section-toggle:active,
++ .path-next-up:active {
++   transform: translateY(2px);
++   background-color: var(--surface-sunk);
++   border-color: var(--line-strong);
++ }
++
++ .path-section-name {
++   grid-area: name;
++   font-weight: 700;
++   font-size: 1.15rem;
++ }
++
++ .path-section-cefr {
++   grid-area: cefr;
++   color: var(--ink-faint);
++   font-size: 0.85rem;
++ }
++
++ .path-section-count {
++   grid-area: count;
++   color: var(--ink-faint);
++   font-size: 0.875rem;
++   white-space: nowrap;
++ }
++
++ /* The winding column: nodes sway along `--path-sway` (computed in the
++    component), and each ring carries dashed connector stubs angled to its
++    neighbours. No border rail — the connectors ARE the road. */
++ .path-nodes {
++   list-style: none;
++   display: grid;
++   gap: 0.75rem;
++   margin: 0.5rem 0 0;
++   padding: 0.25rem 0.5rem 0.5rem;
++ }
++
++ .path-node {
++   display: grid;
++   /* FIX-PATH-VISUAL-001-1: the ring column must CONTAIN the whole sway
++      excursion. The wave reaches ±29px (34px amplitude rounded through
++      sin), and the widest ring is the current node's 3.5rem dial — its
++      right edge rides at columnCentre + 1.75rem + 29px. At the old 4rem
++      column the ring crossed ~15px into the label at sway peaks (the
++      owner's overlap complaint); 6.75rem keeps ≥3px clearance for even
++      the current ring at every node index, and the ring never leaves
++      the row box at the left extreme. The label column stays a
++      straight, readable stack — the road winds, the text does not. */
++   grid-template-columns: 6.75rem minmax(0, 1fr);
++   align-items: center;
++   gap: 0.4rem;
++   min-height: 4.75rem;
++   padding: 0.1rem 0.25rem;
++   border-radius: 0.75rem;
++ }
++
++ .path-node-ring {
++   position: relative;
++   width: 3rem;
++   height: 3rem;
++   justify-self: center;
++   display: grid;
++   place-items: center;
++   /* the wave: the ring sways along the deterministic path */
++   transform: translateX(var(--path-sway, 0px));
++   /* PATH-FEEL-MOTION-001: the press springs (Duolingo node pop), so a
++      tap reads with a tiny overshoot on the way back, never a snap. */
++   transition: transform 160ms cubic-bezier(0.34, 1.56, 0.64, 1);
++ }
++
++ .path-node-dial {
++   position: absolute;
++   inset: 0;
++   width: 100%;
++   height: 100%;
++   transform: rotate(-90deg);
++ }
++
++ .path-node-track {
++   fill: var(--surface-raised, var(--surface));
++   stroke: var(--line-strong);
++   stroke-width: 2.5;
++   /* PATH-FEEL-MOTION-001: state colors (done/review/current) fade, not
++      flip — 200ms ease-out per the FEEL-TARGETS motion language. */
++   transition:
++     fill 200ms ease-out,
++     stroke 200ms ease-out;
++ }
++
++ .path-node-arc {
++   fill: none;
++   stroke: var(--accent);
++   stroke-width: 3.5;
++   stroke-linecap: round;
++   /* PATH-FEEL-MOTION-001: RING FILL — when the engine's honest
++      proven-ref fraction changes, the ring EASES to the new value
++      (~300ms ease-out, the FEEL-TARGETS legend for progress fills). */
++   transition:
++     stroke-dasharray 300ms ease-out,
++     stroke 200ms ease-out;
++ }
++
++ .path-node-marker {
++   position: relative;
++   z-index: 1;
++   display: grid;
++   place-items: center;
++   font-size: 1.15rem;
++   font-weight: 700;
++ }
++
++ /* PATH-NODE-TYPES-001: the kind pictogram in the ring center — a drawn
++    SVG (never emoji) that inherits currentColor, so every existing state
++    color rule keeps painting it like it paints the lock. */
++ .path-node-glyph {
++   width: 1.05rem;
++   height: 1.05rem;
++   display: block;
++ }
++
++ /* PATH-NODE-TYPES-001 (a11y floor): the screen-reader kind word under
++    every path node — the glyph must never be the only signal. */
++ .sr-only {
++   position: absolute;
++   width: 1px;
++   height: 1px;
++   padding: 0;
++   margin: -1px;
++   overflow: hidden;
++   clip-path: inset(50%);
++   white-space: nowrap;
++   border: 0;
++ }
++
++ .path-node-lock {
++   width: 1rem;
++   height: 1rem;
++   color: var(--ink-faint);
++ }
++
++ /* The road: dashed stubs angled from this ring toward the next one. */
++ .path-conn {
++   position: absolute;
++   left: 50%;
++   width: 0;
++   height: 2.9rem;
++   border-left: 3px dashed var(--line-strong);
++   opacity: 0.7;
++ }
++
++ .path-conn--down {
++   top: calc(100% - 0.3rem);
++   transform: translateX(-50%) rotate(var(--path-conn-down, 0deg));
++   transform-origin: top center;
++ }
++
++ .path-conn--up {
++   bottom: calc(100% - 0.3rem);
++   transform: translateX(-50%) rotate(var(--path-conn-up, 0deg));
++   transform-origin: bottom center;
++ }
++
++ .path-node-body {
++   display: grid;
++   gap: 0.15rem;
++   min-width: 0;
++ }
++
++ .path-node-title {
++   font-size: 1rem;
++   line-height: 1.3;
++ }
++
++ /* States — engine-derived, never invented here. */
++ .path-node--locked {
++   opacity: 0.55;
++ }
++
++ .path-node--locked .path-node-arc {
++   stroke: transparent;
++ }
++
++ .path-node--done .path-node-track {
++   fill: var(--ok);
++   stroke: var(--ok);
++ }
++
++ .path-node--done .path-node-arc {
++   stroke: var(--ok);
++ }
++
++ .path-node--done .path-node-marker {
++   color: var(--surface, #fff);
++ }
++
++ .path-node--review-due .path-node-track {
++   stroke: var(--warn);
++ }
++
++ .path-node--review-due .path-node-arc {
++   stroke: var(--warn);
++ }
++
++ .path-node--review-due .path-node-ring {
++   box-shadow: 0 0 0 4px var(--warn-soft);
++   border-radius: 50%;
++ }
++
++ .path-node--review-due .path-node-marker {
++   color: var(--warn);
++   /* FEEL-GLOBAL-001: the review-due marker breathes softly — calm
++      attention, never a nag; killing it (reduced motion) leaves the static
++      marker. */
++   animation: pulse-soft 2.4s var(--ease-in-out) infinite;
++ }
++
++ .path-node--current .path-node-track {
++   fill: var(--accent-soft);
++   stroke: var(--accent);
++   stroke-width: 3.5;
++ }
++
++ .path-node--current .path-node-ring {
++   width: 3.5rem;
++   height: 3.5rem;
++   box-shadow: 0 0 0 5px var(--accent-soft);
++   border-radius: 50%;
++ }
++
++ .path-node--current .path-node-marker {
++   color: var(--accent);
++ }
++
++ /* PATH-VISUAL-001: started-but-unproven. The arc fills to the honest
++    proven-ref fraction (0 when the learner only MET the material), and
++    the row names the fraction — the honest answer to the dogfood
++    contradiction "pinned past a unit, yet 0/20 done". */
++ .path-node--in-progress .path-node-track {
++   stroke: var(--accent);
++ }
++
++ .path-node-pin {
++   display: inline-block;
++   color: var(--accent-ink, var(--accent));
++   font-size: 0.85rem;
++   font-weight: 600;
++ }
++
++ .path-node-progress {
++   color: var(--ink-faint);
++   font-size: 0.85rem;
++ }
++
++ .path-node-review {
++   display: block;
++   color: var(--warn);
++   font-size: 0.85rem;
++ }
++
++ .path-node-hint {
++   display: block;
++   color: var(--ink-faint);
++   font-size: 0.85rem;
++ }
++
++ /* UNIT-CAPSTONE-001: the checkpoint's own action — a real control on the
++    node (44px floor, the same press family as .path-next-up), never a
++    celebration (ADR-0002): one accent outline, honest words. */
++ .path-node-capstone-start {
++   display: inline-flex;
++   align-items: center;
++   min-height: 2.75rem;
++   margin-top: 0.5rem;
++   padding: 0.6rem 1rem;
++   background: var(--surface);
++   border: 1px solid var(--accent);
++   border-radius: 0.9rem;
++   color: var(--accent-ink, var(--accent));
++   font: inherit;
++   font-size: 0.9rem;
++   font-weight: 600;
++   cursor: pointer;
++   transition:
++     transform 120ms ease-out,
++     background-color 120ms ease-out;
++ }
++
++ .path-node-capstone-start:active {
++   transform: scale(0.97);
++ }
++
++ /* UNIT-CAPSTONE-001: the one calm fact line after a review — status
++    copy, not a reward banner (ADR-0002). */
++ .path-capstone-result {
++   margin: 0.35rem 0 0.6rem;
++   color: var(--ink);
++   font-size: 0.92rem;
++ }
++
++ /* WARM-MOMENTS-001 (ADR-0002 amended): the unit-finish card. Quiet by
++    design — one bordered surface, one accent edge, existing tokens only.
++    No confetti palette, no animation theatrics; honest warmth lives in
++    the copy, not in visual noise. */
++ .path-finish {
++   margin: 0.5rem 0 0.8rem;
++   padding: 0.8rem 1rem;
++   background: var(--surface);
++   border: 1px solid var(--line-strong);
++   border-left: 3px solid var(--accent);
++   border-radius: 10px;
++ }
++
++ .path-finish h3 {
++   margin: 0 0 0.35rem;
++   font-size: 1.02rem;
++   color: var(--ink);
++ }
++
++ .path-finish p {
++   margin: 0.2rem 0;
++   font-size: 0.92rem;
++ }
++
++ /* WARM-MOMENTS-001: gentle facts on the Progress tab — a calm strip,
++    never a scoreboard: no big numerals, no colors that grade you. */
++ .gentle-facts {
++   margin: 0 0 1.1rem;
++   padding: 0.75rem 1rem;
++   background: var(--surface);
++   border: 1px solid var(--line);
++   border-radius: 10px;
++ }
++
++ .gentle-facts h2 {
++   margin: 0 0 0.3rem;
++   font-size: 0.98rem;
++ }
++
++ .gentle-facts p {
++   margin: 0.15rem 0;
++ }
++
++ /* PATH-PIN-CONSISTENCY-001 (owner dogfood 2026-11-22 complaint 10): the
++    next-up recommendation rides the path HEADER strip — the market
++    pattern (position pin on the trail, action chip above it) — so the
++    track keeps exactly ONE marker: "where I am". The chip is a real
++    44px+ control; tapping it jumps the journey to the offered unit. */
++ .path-next-up {
++   display: flex;
++   align-items: center;
++   gap: 0.5rem;
++   min-height: 2.75rem;
++   padding: 0.65rem 0.9rem;
++   background: var(--surface);
++   border: 1px solid var(--line);
++   border-radius: 0.9rem;
++   color: inherit;
++   font: inherit;
++   font-size: 0.95rem;
++   text-align: left;
++   cursor: pointer;
++   /* PATH-FEEL-MOTION-001: same 120ms press family as the banners. */
++   transition:
++     transform 120ms ease-out,
++     background-color 120ms ease-out,
++     border-color 120ms ease-out;
++ }
++
++ /* PATH-FEEL-SCROLL-001 (Duolingo parity for the viewport): the floating
++    "jump to my spot" control. The IntersectionObserver in home.tsx flips
++    data-visible the moment the pinned node leaves the viewport; this CSS
++    owns the announcement — opacity + visibility only (display:none would
++    jump the layout), a soft rise-in, and the arrow rotated toward wherever
++    my-spot lives. A fixed 52px circle (44px+ target rule), one accent,
++    180ms ease-out: the calm-but-warm family, and motion-not-reward per
++    ADR-0002 — it exists to save a scroll hunt, not to motivate. The
++    global prefers-reduced-motion block flattens the fade; the control
++    itself still appears (it is a navigation affordance, not animation). */
++ .path-jump-to-pin {
++   position: fixed;
++   right: 1rem;
++   bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
++   z-index: var(--z-bubble);
++   width: 3.25rem;
++   height: 3.25rem;
++   display: grid;
++   place-items: center;
++   border-radius: 50%;
++   background: var(--surface);
++   border: 1px solid var(--line-strong);
++   box-shadow: 0 2px 10px rgb(36 31 24 / 0.18);
++   color: var(--accent);
++   cursor: pointer;
++   opacity: 0;
++   visibility: hidden;
++   transform: translateY(10px) scale(0.92);
++   transition:
++     opacity 180ms ease-out,
++     transform 180ms ease-out,
++     visibility 0s linear 180ms;
++ }
++
++ .path-jump-to-pin[data-visible="true"] {
++   opacity: 1;
++   visibility: visible;
++   transform: none;
++   transition:
++     opacity 180ms ease-out,
++     transform 180ms ease-out;
++ }
++
++ .path-jump-to-pin:active {
++   transform: scale(0.92);
++ }
++
++ .path-jump-to-pin svg {
++   width: 1.5rem;
++   height: 1.5rem;
++   transition: transform 180ms ease-out;
++ }
++
++ /* The arrow points WHERE my-spot is: up by default, flipped down when
++    the pin sits below the current view. */
++ .path-jump-to-pin[data-dir="below"] svg {
++   transform: rotate(180deg);
++ }
++
++ /* ======================================================== PATH-FEEL-MOTION-001
++    Motion pass on the journey (Duolingo parity for the ROAD — ADR-0002 safe:
++    these are transitions and keyframes, never reward mechanics; the calm-but-
++    warm posture from docs/design/PROGRESSION-UX-AUDIT-2026-11-22.md holds:
++    120-300ms ease-out, 8-12px rises, one accent, no confetti — the durations
++    match the FEEL-TARGETS-2026-11-22 motion legends). The card's acceptance
++    gate (scripts/path-motion-capture.mjs) measures these as COMPUTED styles
++    in the live app and re-measures them under emulated prefers-reduced-motion
++    (the global reduce block near the end of this file flattens every duration
++    below — nothing here may assume motion exists). */
++ @keyframes path-node-in {
++   /* SECTION EXPAND: a band's nodes cascade in with a small rise + fade.
++      The stagger rides --path-i (the node's row index, set by the
++      component) and is CAPPED at 10 rows so even a huge band finishes
++      under ~0.6s — the track reveals, it never drumrolls. */
++   from {
++     opacity: 0;
++     transform: translateY(-0.6rem);
++   }
++   to {
++     opacity: 1;
++     transform: none;
++   }
++ }
++
++ @keyframes path-nodes-close {
++   /* SECTION COLLAPSE: the collapse is SEEN — the component keeps the
++      list mounted for this exit, then unmounts. */
++   from {
++     opacity: 1;
++     transform: none;
++   }
++   to {
++     opacity: 0;
++     transform: translateY(-0.5rem);
++   }
++ }
++
++ @keyframes path-marker-pop {
++   /* the done check pops in (the market's check-medallion feel), riding
++      the same row stagger so a band's checks land in sequence, bottom-
++      light: one small overshoot, no burst. */
++   0% {
++     opacity: 0;
++     transform: scale(0.5);
++   }
++   70% {
++     opacity: 1;
++     transform: scale(1.08);
++   }
++   100% {
++     opacity: 1;
++     transform: scale(1);
++   }
++ }
++
++ @keyframes path-current-pulse {
++   /* CURRENT-NODE PULSE: the frontier node breathes a soft accent halo
++      (the market's glowing frontier ring) — slow, low-contrast, never
++      blinking. The static ring shadow stays underneath so reduced
++      motion still reads "this one is now". */
++   0%,
++   100% {
++     opacity: 0.9;
++     transform: scale(0.92);
++   }
++   50% {
++     opacity: 0.35;
++     transform: scale(1.18);
++   }
++ }
++
++ .path-node {
++   animation: path-node-in 240ms ease-out backwards;
++   animation-delay: calc(min(var(--path-i, 0), 10) * 30ms);
++ }
++
++ .path-nodes--closing {
++   animation: path-nodes-close 180ms ease-in forwards;
++   pointer-events: none;
++ }
++
++ .path-node--done .path-node-marker {
++   animation: path-marker-pop 260ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
++   animation-delay: calc(min(var(--path-i, 0), 10) * 30ms + 120ms);
++ }
++
++ /* NODE TAP: the press lives on BOTH a JS pointer class (path-node--
++    pressed, set by the component — touch browsers only honor :active on
++    elements with handlers, and the serve mode runs on phones) and plain
++    :active for mouse users. The ring squashes 10%; the spring transition
++    on .path-node-ring brings it back with the Duolingo pop. */
++ .path-node--pressed .path-node-ring,
++ .path-node:active .path-node-ring {
++   transform: translateX(var(--path-sway, 0px)) scale(0.9);
++ }
++
++ /* CURRENT-NODE PULSE host: a pseudo-element halo so the breathing never
++    resizes or repaints the ring itself. Base style = the static halo
++    (reduced-motion safe: killing the animation leaves it standing). */
++ .path-node--current .path-node-ring::after {
++   content: "";
++   position: absolute;
++   inset: -2px;
++   border-radius: 50%;
++   box-shadow: 0 0 0 5px var(--accent-soft);
++   animation: path-current-pulse 2.4s ease-in-out infinite;
++ }
++
++ /* ========================================================== FEEL-GLOBAL-001
++    The global keyframe library for ENTERING feedback and soft attention.
++    The audit (docs/design/PROGRESSION-UX-AUDIT-2026-11-22.md) found the
++    app outside the journey carrying no motion at all; these four carry the
++    FEEL-TARGETS motion legend: entries rise ~12px and fade over 250ms
++    ease-out, the phone sheet slides up over 300ms, rings pop in once, and
++    review attention breathes softly. Motion is motion — no reward
++    mechanics (ADR-0002) — and the global prefers-reduced-motion switch
++    flattens every one of them. */
++ @keyframes fade-up {
++   from {
++     opacity: 0;
++     transform: translateY(0.75rem); /* 12px, per the motion legend */
++   }
++   to {
++     opacity: 1;
++     transform: none;
++   }
++ }
++
++ @keyframes slide-up {
++   from {
++     transform: translateY(100%);
++   }
++   to {
++     transform: none;
++   }
++ }
++
++ @keyframes pop {
++   0% {
++     opacity: 0;
++     transform: scale(0.85);
++   }
++   70% {
++     opacity: 1;
++     transform: scale(1.04);
++   }
++   100% {
++     opacity: 1;
++     transform: scale(1);
++   }
++ }
++
++ @keyframes pulse-soft {
++   0%,
++   100% {
++     opacity: 1;
++   }
++   50% {
++     opacity: 0.65;
++   }
++ }
++
+
+ ❯ src/drill-feel.test.ts:58:17
+     56|
+     57|   it("a wrong tap shakes once; the tapped pick presses; the rest dim",…
+     58|     expect(css).toContain("@keyframes shake-x");
+       |                 ^
+     59|     const wrong = ruleBody(".choice--wrong");
+     60|     expect(wrong).toMatch(/animation:[^;]*shake-x[^;]*var\(--dur\)/);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/12]⎯
+
+ FAIL  |node| src/drill-feel.test.ts > FEEL-DRILL-001 graded-choice reveal > practice.tsx marks reveal/tapped/wrong/dim and reveals on a correct pick too
+AssertionError: expected '/**\n * UX-003 first lessons: the run…' to match /p\.graded && choice === p\.correctCho…/
+
+- Expected:
+/p\.graded && choice === p\.correctChoice/
+
++ Received:
+"/**
+ * UX-003 first lessons: the runnable multiple-choice recall-meaning
+ * runner. The UI only sends the chosen index; grading, evidence, and
+ * scheduling happen natively (the correct answer never crosses IPC).
+ *
+ * RU-MODALITY-PRACTICE-001 adds one posture the task itself carries:
+ * `mode: \"guided\"` is formative — speak-along only, never a submit, a
+ * verdict, or a score.
+ */
+import { StressText } from \"./stress\";
+import { Ruby } from \"./ruby\";
+import { useKanaIME } from \"./kana-ime\";
+import type { ImeCandidate } from \"./ime-candidates\";
+import { LatinText, PackText, usePackTextAttrs } from \"@openlang/ui\";
+import type { DictationResult } from \"./dictation\";
+
+export interface PracticeTaskView {
+  item_id: string;
+  /// Null for listening tasks: the transcript must stay hidden for the
+  /// evidence to count (MASTERY_POLICY disqualifying_for).
+  surface?: string | null;
+  /// Reading aid for non-Japanese packs only; Japanese packs use the
+  /// reader fields below (READ-001).
+  reading?: string | null;
+  /// Kana reading above kanji; hidden once reading mastery fades it.
+  furigana?: string | null;
+  romaji?: string | null;
+  faded_by_mastery?: boolean;
+  choices: string[];
+  /// K-12: typed-answer runner (cloze/dictation); choices are empty.
+  typed?: boolean;
+  /// K-42: review posture of the underlying pack record; display-only,
+  /// never affects grading or scheduling.
+  status?: string;
+  /// K-44: phrase slot structure (display-only). Exactly one slot is
+  /// the target; never affects grading or scheduling.
+  slots?: {
+    text: string;
+    alternatives: string[];
+    label?: string | null;
+    target: boolean;
+  }[];
+  /// RU-MODALITY-PRACTICE-001: the scoring posture the runner that built
+  /// this task reports. Absent = scored practice, exactly as before;
+  /// \"guided\" = formative only — no submit, no correct/incorrect, no
+  /// score (mirrors `PracticeTask::mode` in lib.rs, which skips the key
+  /// when the runner is scored).
+  mode?: \"guided\";
+}
+
+export interface PracticeRunnerProps {
+  task: PracticeTaskView;
+  /// When the runner IS the whole route (inline practice), this names
+  /// the route as its single h1. Embedded runners (placement, kanji)
+  /// omit it — their route section already carries the h1.
+  routeHeading?: string;
+  graded: boolean;
+  correct: boolean;
+  correctChoice: string;
+  /// Audio provenance for listening tasks; null when no audio exists.
+  audioSource?: \"licensed-recording\" | \"model-output\" | null;
+  audioError?: string | null;
+  /// True once the learner revealed reading scaffolds this attempt.
+  revealed?: boolean;
+  /// Task question; defaults to the word-meaning prompt. Script
+  /// instruction passes its own (the direction is decided natively).
+  heading?: string;
+  onChoose(index: number): void;
+  onNext(): void;
+  /// Session label for the graded follow-up action; the default is the
+  /// single-activity wording.
+  nextLabel?: string;
+  onPlayAudio?(): void;
+  /// F-07: true while the listening clip is playing; drives the button's
+  /// pressed state and a spoken \"playing\" status.
+  playing?: boolean;
+  /// Issue #2 phase 1: the learner's in-app kana keyboard choice; when on,
+  /// the answer field converts romaji to kana without any system IME.
+  kanaInput?: boolean;
+  /// IN-APP-IME-001 phase 2: pack-lexicon candidate lookup (undefined when
+  /// the active pack's declared input methods rule the method out).
+  imeCandidates?: (kana: string) => Promise<ImeCandidate[]>;
+  onReveal?(): void;
+  /// K-41: highlight U+0301-stressed vowels in readings (display-only).
+  stress?: boolean;
+  /// Typed runner only: the draft answer and grading trigger.
+  draft?: string;
+  onDraft?(value: string): void;
+  onCheck?(): void;
+  /// Guided-speaking card only: the formative speak-along affordances.
+  /// The recording belongs to this card; its free-ASR check result is
+  /// shown as an abstention notice, never as a verdict.
+  speakCheck?: DictationResult | null;
+  recording?: boolean;
+  hasAttempt?: boolean;
+  onRecord?(): void;
+  onStop?(): void;
+  onPlayAttempt?(): void;
+}
+
+/**
+ * RU-MODALITY-PRACTICE-001: the formative guided-speaking card. The
+ * engine already decided the posture (`mode: \"guided\"` on the task);
+ * this view mirrors it — the declared sentence, its reading, and
+ * speak-along affordances only. There is no submit control because a
+ * speaking attempt is refused natively (`practice_submit` answers
+ * \"speaking attempts are never scored\"), and nothing here renders a
+ * score, a correct/incorrect verdict, or a matched badge
+ * (ADR-0017 decision 1).
+ */
+function speakCheckNotice(result: DictationResult): string {
+  if (result.abstain_reason === \"pack-locale-unknown\")
+    return \"The spoken check abstained: this pack declares no target locale, so the app has no speech-recognition language to compare your recording against. Nothing was judged, and nothing here is scored.\";
+  if (result.abstain_reason)
+    return `The spoken check abstained (${result.abstain_reason}). Nothing was judged, and nothing here is scored.`;
+  if (result.heard)
+    return `The check heard: “${result.heard}”. Compare it with the sentence yourself — nothing here is scored.`;
+  return \"The spoken check came back with nothing to report. Nothing here is scored.\";
+}
+
+export function PracticeRunner(p: PracticeRunnerProps) {
+  const packAttrs = usePackTextAttrs();
+  const kanaIme = useKanaIME({
+    enabled: p.kanaInput === true,
+    value: p.draft ?? \"\",
+    onDraft: (v) => p.onDraft?.(v),
+    candidates: p.imeCandidates,
+  });
+  if (p.task.mode === \"guided\") {
+    return (
+      <section aria-label=\"Practice\" className=\"practice-guided\">
+        {p.routeHeading ? <h1>{p.routeHeading}</h1> : null}
+        <h2>Say the sentence aloud</h2>
+        <p className=\"prompt\" {...packAttrs}>
+          <Ruby surface={p.task.surface ?? \"\"} furigana={p.task.furigana} />
+        </p>
+        {p.task.reading ? (
+          <p {...packAttrs}>
+            <small>{p.stress ? <StressText text={p.task.reading} /> : p.task.reading}</small>
+          </p>
+        ) : null}
+        {p.audioError ? (
+          <p className=\"notice\">{p.audioError}</p>
+        ) : (
+          <div className=\"btn-row\">
+            <button
+              type=\"button\"
+              className=\"btn btn--primary\"
+              aria-label=\"Play the model audio\"
+              onClick={() => p.onPlayAudio?.()}
+            >
+              ▶ Play the sentence
+            </button>
+            {p.audioSource === \"model-output\" && (
+              <small className=\"notice\">synthesized voice (model output)</small>
+            )}
+          </div>
+        )}
+        <div role=\"group\" aria-label=\"Recording\" className=\"btn-row\">
+          {p.recording ? (
+            <button type=\"button\" className=\"btn btn--primary\" onClick={() => p.onStop?.()}>
+              Stop
+            </button>
+          ) : (
+            <button type=\"button\" className=\"btn btn--primary\" onClick={() => p.onRecord?.()}>
+              Record yourself
+            </button>
+          )}
+          <button
+            type=\"button\"
+            className=\"btn btn--quiet\"
+            onClick={() => p.onPlayAttempt?.()}
+            disabled={!p.hasAttempt}
+          >
+            Hear your recording
+          </button>
+        </div>
+        <div aria-live=\"polite\">
+          {p.speakCheck ? (
+            <p data-testid=\"speak-check\" className=\"notice\">
+              {speakCheckNotice(p.speakCheck)}
+            </p>
+          ) : null}
+        </div>
+        <p>
+          <small data-testid=\"guided-mode\">
+            Speaking practice is formative: it is not scored, and it never counts toward mastery.
+          </small>
+        </p>
+      </section>
+    );
+  }
+
+  return (
+    <section aria-label=\"Practice\">
+      {p.routeHeading ? <h1>{p.routeHeading}</h1> : null}
+      {p.task.surface ? (
+        <>
+          <h2>{p.heading ?? \"What does this mean?\"}</h2>
+          <p className=\"prompt\" {...packAttrs}>
+            <Ruby surface={p.task.surface} furigana={p.task.furigana} />
+          </p>
+          {p.task.slots && p.task.slots.length > 0 ? (
+            <div className=\"meta\" role=\"group\" aria-label=\"Phrase structure\">
+              {p.task.slots.map((slot, i) => (
+                <p key={i}>
+                  <PackText tag=\"span\" className={slot.target ? \"badge\" : undefined}>
+                    {slot.text}
+                  </PackText>
+                  {slot.target ? \" — the part to change\" : \"\"}
+                  {slot.label ? ` (${slot.label})` : \"\"}
+                  {slot.alternatives.length > 0 ? (
+                    <small>
+                      can also be: <PackText>{slot.alternatives.join(\", \")}</PackText>
+                    </small>
+                  ) : null}
+                </p>
+              ))}
+            </div>
+          ) : null}
+          {p.task.reading && (
+            <p {...packAttrs}>
+              <small>{p.stress ? <StressText text={p.task.reading} /> : p.task.reading}</small>
+            </p>
+          )}
+          {p.task.romaji && (
+            <p>
+              <small>
+                <LatinText>{p.task.romaji}</LatinText>
+              </small>
+            </p>
+          )}
+          {!p.graded && !p.revealed && p.onReveal && (
+            <div className=\"btn-row\">
+              <button type=\"button\" className=\"btn btn--quiet\" onClick={() => p.onReveal?.()}>
+                Show reading
+              </button>
+            </div>
+          )}
+        </>
+      ) : (
+        <>
+          <h2>What did you hear?</h2>
+          {p.audioError ? (
+            <p className=\"notice\">{p.audioError}</p>
+          ) : (
+            <div className=\"btn-row\">
+              <button
+                type=\"button\"
+                className=\"btn btn--primary\"
+                aria-label=\"Play the audio\"
+                aria-pressed={p.playing === true}
+                onClick={() => p.onPlayAudio?.()}
+              >
+                ▶ Play
+              </button>
+              <small className=\"notice\" role=\"status\">
+                {p.playing ? \"playing\" : \"\"}
+              </small>
+              {p.audioSource === \"model-output\" && (
+                <small className=\"notice\">synthesized voice (model output)</small>
+              )}
+            </div>
+          )}
+        </>
+      )}
+      {p.task.typed ? (
+        <div className=\"field\">
+          <label htmlFor=\"practice-answer\">Type your answer</label>
+          <input
+            id=\"practice-answer\"
+            type=\"text\"
+            value={p.draft ?? \"\"}
+            disabled={p.graded}
+            onKeyDown={kanaIme.onKeyDown}
+            onChange={(e) => {
+              kanaIme.noteExternalEdit();
+              p.onDraft?.(e.target.value);
+            }}
+          />
+          <div className=\"btn-row\">
+            <button
+              type=\"button\"
+              className=\"btn btn--primary\"
+              disabled={p.graded || (p.draft ?? \"\").trim() === \"\"}
+              onClick={() => p.onCheck?.()}
+            >
+              Check
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div role=\"group\" aria-label=\"Choices\" className=\"btn-row\">
+          {p.task.choices.map((choice, i) => (
+            <button
+              key={choice}
+              type=\"button\"
+              className={
+                p.graded && !p.correct && choice === p.correctChoice
+                  ? \"btn btn--quiet choice--correct\"
+                  : \"btn btn--quiet\"
+              }
+              disabled={p.graded}
+              onClick={() => p.onChoose(i)}
+            >
+              <PackText>{choice}</PackText>
+            </button>
+          ))}
+        </div>
+      )}
+      <p
+        role=\"status\"
+        aria-live=\"polite\"
+        className={
+          p.graded ? (p.correct ? \"verdict verdict--correct\" : \"verdict verdict--retry\") : undefined
+        }
+      >
+        {p.graded
+          ? p.correct
+            ? \"Correct\"
+            : // LETTER-DRILL-TEXT-001: the verdict points at the right
+              // choice, it never states it — a hint that spells the
+              // answer trains nothing.
+              \"Not quite — the highlighted choice is the right one.\"
+          : \"\"}
+      </p>
+      {p.graded && (
+        <div className=\"btn-row\">
+          <button type=\"button\" className=\"btn btn--primary\" onClick={p.onNext}>
+            {p.nextLabel ?? \"Back to plan\"}
+          </button>
+        </div>
+      )}
+    </section>
+  );
+}
+"
+
+ ❯ src/drill-feel.test.ts:69:22
+     67|   it("practice.tsx marks reveal/tapped/wrong/dim and reveals on a corr…
+     68|     // The reveal no longer waits for a miss: graded + the right choic…
+     69|     expect(practice).toMatch(/p\.graded && choice === p\.correctChoice…
+       |                      ^
+     70|     expect(practice).toContain("choice--tapped");
+     71|     expect(practice).toContain("choice--wrong");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/12]⎯
+
+ FAIL  |node| src/drill-feel.test.ts > FEEL-DRILL-001 end-of-session cards > .session-summary gains the calm warm card rules (they had none)
+AssertionError: styles.css must define a ".session-summary" rule: expected null not to be null
+ ❯ ruleBody src/drill-feel.test.ts:30:64
+     28|   const esc = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+     29|   const m = new RegExp(`^\\s*${esc}\\s*\\{([^}]*)\\}`, "m").exec(css);
+     30|   expect(m, `styles.css must define a "${selector}" rule`).not.toBeNul…
+       |                                                                ^
+     31|   return (m![1] ?? "").replace(/\s+/g, " ").trim();
+     32| }
+ ❯ src/drill-feel.test.ts:79:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/12]⎯
+
+ FAIL  |node| src/drill-feel.test.ts > FEEL-DRILL-001 end-of-session cards > .session-panel gains the calm warm card rules (they had none)
+AssertionError: styles.css must define a ".session-panel" rule: expected null not to be null
+ ❯ ruleBody src/drill-feel.test.ts:30:64
+     28|   const esc = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+     29|   const m = new RegExp(`^\\s*${esc}\\s*\\{([^}]*)\\}`, "m").exec(css);
+     30|   expect(m, `styles.css must define a "${selector}" rule`).not.toBeNul…
+       |                                                                ^
+     31|   return (m![1] ?? "").replace(/\s+/g, " ").trim();
+     32| }
+ ❯ src/drill-feel.test.ts:79:20
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/12]⎯
+
+ FAIL  |node| src/drill-feel.test.ts > FEEL-DRILL-001 end-of-session cards > the card-in keyframe is the fade + 0.98 to 1 scale from the mock legend
+AssertionError: styles.css must define @keyframes card-in: expected null not to be null
+ ❯ src/drill-feel.test.ts:89:64
+     87|   it("the card-in keyframe is the fade + 0.98 to 1 scale from the mock…
+     88|     const m = /@keyframes card-in\s*\{([\s\S]*?)\n\}/.exec(css);
+     89|     expect(m, "styles.css must define @keyframes card-in").not.toBeNul…
+       |                                                                ^
+     90|     const body = (m![1] ?? "").replace(/\s+/g, " ");
+     91|     expect(body).toContain("scale(0.98)");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/12]⎯
+
+ FAIL  |node| src/drill-feel.test.ts > FEEL-DRILL-001 step dots in the embedded runners > session-chrome.tsx exports the StepDots component (progress semantics, no reward words)
+AssertionError: expected '/**\n * SESSION-CHROME-001 (visual-ui…' to contain 'export function StepDots'
+
+- Expected
++ Received
+
+- export function StepDots
++ /**
++  * SESSION-CHROME-001 (visual-ui-audit U3): the thin in-session chrome that
++  * rides every activity route while a bounded session is running — a slim
++  * progress bar, an "n of N" step count, and a remaining-time estimate.
++  *
++  * Honesty rules, mirroring the session panel's contract in home.tsx:
++  * - `total` is the queue snapshot taken when the session began, so the
++  *   count never drifts under the learner when the plan re-plans.
++  * - The time estimate comes from the engine's own per-item `est_seconds`
++  *   (docs/01: the planner already prices every activity). An absent
++  *   estimate renders NO time at all — never a fabricated number.
++  * - No XP, streak, streak-guilt, or reward language anywhere (ADR-0002).
++  */
++
++ export interface SessionChromeProps {
++   /** Activities finished so far in this session. */
++   done: number;
++   /** Snapshot size fixed when the session began. */
++   total: number;
++   /**
++    * Engine-estimated seconds still to work (remaining planned items,
++    * including the one currently open). Null when the engine has not
++    * priced the rest — the chrome then shows no time figure.
++    */
++   remainingSeconds: number | null;
++   status?: "running" | "paused";
++ }
++
++ /**
++  * SESSION-TIMER-001: the seconds still to work in a session queue, from
++  * `index` (the open item included) to the end. The engine prices every
++  * planned item, so the header's estimate is that price summed — the whole
++  * queue at the first question, the rest as the session advances. An
++  * unpriced queue derives to 0, and `remainingTimeLabel` then hides the
++  * label rather than printing "0 min left".
++  */
++ export function remainingPlanSeconds(
++   items: readonly { est_seconds: number }[],
++   index: number,
++ ): number {
++   return items.slice(Math.max(0, index)).reduce((s, it) => s + it.est_seconds, 0);
++ }
++
++ /**
++  * "~X min left" from an engine estimate. A zero/unknown estimate renders
++  * nothing rather than promising "0 minutes"; any positive estimate rounds
++  * to whole minutes with a floor of 1, and is marked as an estimate.
++  */
++ export function remainingTimeLabel(seconds: number | null): string | null {
++   if (seconds === null || seconds <= 0) return null;
++   return `~${Math.max(1, Math.round(seconds / 60))} min left`;
++ }
++
++ export function SessionChrome(p: SessionChromeProps) {
++   if (p.total <= 0) return null;
++   const done = Math.min(p.done, p.total);
++   const pct = Math.round((done / p.total) * 100);
++   // The step the learner is in right now; once everything is done the
++   // counter parks at N of N rather than promising an N+1th step.
++   const step = Math.min(done + 1, p.total);
++   const remaining = remainingTimeLabel(p.remainingSeconds);
++   return (
++     <div className="session-chrome" data-session-chrome aria-label="Session progress">
++       <div
++         className="session-bar"
++         role="progressbar"
++         aria-valuenow={done}
++         aria-valuemin={0}
++         aria-valuemax={p.total}
++         aria-label={`${done} of ${p.total} activities done`}
++       >
++         <span className="session-bar-fill" style={{ width: `${pct}%` }} />
++       </div>
++       <p className="session-chrome-meta">
++         {p.status === "paused" ? "Session paused — " : ""}
++         {step} of {p.total}
++         {remaining ? ` · ${remaining}` : ""}
++       </p>
++     </div>
++   );
++ }
++
+
+ ❯ src/drill-feel.test.ts:98:20
+     96| describe("FEEL-DRILL-001 step dots in the embedded runners", () => {
+     97|   it("session-chrome.tsx exports the StepDots component (progress sema…
+     98|     expect(chrome).toContain("export function StepDots");
+       |                    ^
+     99|     expect(chrome).toContain("data-step-dots");
+    100|     // ADR-0002: dots mark position, they never score — scan the compo…
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/12]⎯
+
+ FAIL  |node| src/drill-feel.test.ts > FEEL-DRILL-001 step dots in the embedded runners > both embedded runners render their dots — placement by question, kanji by stage
+AssertionError: expected 'import { useEffect, useMemo, useRef, …' to match /<StepDots[^>]*placementItems\.length/
+
+- Expected:
+/<StepDots[^>]*placementItems\.length/
+
++ Received:
+"import { useEffect, useMemo, useRef, useState } from \"react\";
+import { AppShell, PackText } from \"@openlang/ui\";
+import { invoke } from \"@tauri-apps/api/core\";
+import {
+  Onboarding,
+  type OnboardingStep,
+  type SpeechComponent,
+  type PackCandidate,
+  type PrivacyNotice,
+  type ProfileSummary,
+} from \"./onboarding\";
+import { PracticeHub, type HubMode } from \"./hub\";
+import { remainingPlanSeconds, SessionChrome } from \"./session-chrome\";
+import { fetchCapabilities, httpInvoke, inLtsServeMode, subscribeServeProgress } from \"./ipc\";
+import {
+  Home,
+  type PackUpdate,
+  type PlannedItem,
+  ProgressView,
+  type ProgressRow,
+  type SessionPlan,
+  type GoalCard,
+  GoalMap,
+  CanDoSummary,
+  GentleFacts,
+  type UnitPathNode,
+  type NextOffer,
+  type WorldEnvironment,
+  type NextGoalView,
+  type FirstRunStep,
+  RUNNABLE_MODALITIES,
+  type SessionOutcomeView,
+  type SessionStatus,
+  type SessionView,
+  type CapstoneResult,
+  type LearningFacts,
+  bandHeader,
+} from \"./home\";
+import { MemoryStatsStrip, type MemoryStats } from \"./memory-stats\";
+import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from \"./pronunciation\";
+import { DictationPractice, type DictationResult, type DictationSentence } from \"./dictation\";
+import {
+  LanguagePanel,
+  installedPacksDeclareSetting,
+  packPosture,
+  readFileB64,
+  ROMANIZATION_DISPLAY_SETTING,
+  type CatalogEntry,
+  type InstalledPack,
+  type PackClaims,
+  type SpeechModel,
+  type DeviceTier,
+  type AlignerStatus,
+  type InstallOutcome,
+  type InstallReceipt,
+} from \"./language\";
+import { WritingPractice, type WritingTaskView } from \"./writing\";
+import {
+  ErrorReviewPanel,
+  type ErrorReviewCardView,
+  type FormErrorOfferView,
+} from \"./error-review\";
+import { PracticeRunner, type PracticeTaskView } from \"./practice\";
+import { LessonEncounter, drillStageId, stagePositionLabel, type LessonPlan } from \"./lesson\";
+import { installHistoryNav, type AppLocation, type HistoryNav } from \"./history-nav\";
+import { describeKanjiDecomposition } from \"./kanji-decomposition\";
+import { playClip } from \"./playback\";
+import { grammarLabelsEnabled, stressEnabled, type DisplaySettingsView } from \"./stress\";
+import { ReadingPanel, type Story, type StorySummary, type WordCardView } from \"./reading\";
+import { ShadowingPanel, type ShadowTarget } from \"./shadowing\";
+import { attachKaraokeClock, type WordSpan } from \"./word-timing\";
+import { MyWordsPanel, type MineItem } from \"./words\";
+import {
+  ScenarioPanel,
+  type ScenarioOutcomeView,
+  type ScenarioStepResult,
+  type ScenarioSummaryView,
+  type ScenarioView,
+} from \"./scenario\";
+import {
+  Settings,
+  type BuildIdentity,
+  type ImportOutcome,
+  type ImportPreview,
+  type RomajiMode,
+  type KanaKeyboardMode,
+} from \"./settings\";
+import {
+  inAppKeyboardForScripts,
+  inputMethodAllowed,
+  inputModeLabel,
+  packDeclaresInAppKanaKeyboard,
+} from \"./ime\";
+import type { ImeCandidate } from \"./ime-candidates\";
+import { LEXICON_CANDIDATES_METHOD_ID } from \"./ime-candidates\";
+import { InputModeBubble } from \"./kana-ime\";
+import {
+  CaptureOwner,
+  captureLimitReached,
+  listMicrophones,
+  listOutputs,
+  MAX_CAPTURE_SECONDS,
+  openMicrophone,
+  type CaptureSessionLike,
+  type Microphone,
+  type SpeakerOutput,
+} from \"./capture\";
+import { audioFailureMessage, isMediaMissing } from \"./speech-readiness\";
+import type { EngineProgress } from \"./progress\";
+import { PerfProbe } from \"./perf-probe\";
+
+export type Invoke = (cmd: string, args?: Record<string, unknown>) => Promise<unknown>;
+/**
+ * K-62 witness: every stage the engine reports is recorded as it arrives, so
+ * the headless walkthrough can prove the renderer heard the progress channel
+ * rather than trusting that a listener was wired up.
+ */
+const progressStages: EngineProgress[] = [];
+
+// StrictMode invokes mount effects twice in a development build. The launch
+// handshake is idempotent, but this walkthrough drives a real pack install and
+// a full click tour, so it runs once per process instead of twice per mount.
+let walkthroughRan = false;
+
+/** Resolves with `value` after `ms`: a bounded wait, never an open-ended one. */
+function after<T>(ms: number, value: T): Promise<T> {
+  const { promise, resolve } = Promise.withResolvers<T>();
+  setTimeout(() => resolve(value), ms);
+  return promise;
+}
+
+/** Tauri IPC when running inside the native shell; the HTTP bridge when the
+ * page came from `lts-serve` (WEB-SERVE-001, single adapter in ./ipc); null
+ * in plain browser/vitest runs, where the flow stays purely local. */
+function detectInvoke(): Invoke | null {
+  if (typeof window !== \"undefined\" && \"__TAURI_INTERNALS__\" in window) {
+    return (cmd, args) =>
+      invoke(cmd, args).catch((e: unknown) => Promise.reject(explainPackAbsence(e)));
+  }
+  if (inLtsServeMode()) {
+    return (cmd, args) =>
+      httpInvoke(cmd, args).catch((e: unknown) => Promise.reject(explainPackAbsence(e)));
+  }
+  return null;
+}
+
+/**
+ * D7: honest refusal copy for a profile with no active pack. Nothing is
+ * ever built against a guessed pack id, so the message names the fix
+ * (the Settings → Language packs section is where a pack becomes active).
+ */
+export const NO_ACTIVE_PACK =
+  \"No pack is active for this profile. Choose one under Settings → Language packs.\";
+
+/** The engine's fixed tokens for \"this profile has no language chosen yet\".
+ * Every route renders its failure through `String(e)`, so translating once at
+ * the IPC boundary turns a bare token into the sentence that names the fix —
+ * a dead end with a way out is not a dead end (owner 2026-10-12). */
+const PACK_ABSENCE_TOKENS = [\"no active language pack\"] as const;
+
+export function explainPackAbsence(e: unknown): string {
+  const message = e instanceof Error ? e.message : String(e);
+  return (PACK_ABSENCE_TOKENS as readonly string[]).includes(message) ? NO_ACTIVE_PACK : message;
+}
+
+/**
+ * The pack a session practises with, resolved from the profile itself.
+ * `active_pack` returns the ids the profile selected at onboarding: the
+ * first is the active one, an empty list means none is active, and more
+ * than one distinct id is a conflict the app surfaces instead of picking
+ * through silently. Never falls back to a default pack id.
+ */
+export type SessionPack = {
+  packId: string | null;
+  ids: string[];
+  note: string | null;
+};
+
+export async function loadSessionPack(inv: Invoke, profileId: string): Promise<SessionPack> {
+  const ids = (await inv(\"active_pack\", { profileId })) as string[];
+  return { packId: ids[0] ?? null, ids, note: activePackNote(ids) };
+}
+
+/**
+ * A note for the ambiguous case: the profile reports more than one
+ * *different* active pack. The first one is used, and the conflict is
+ * surfaced instead of guessed away. Repeats of one id are not a conflict.
+ */
+export function activePackNote(ids: string[]): string | null {
+  const others = ids.slice(1).filter((id) => id !== ids[0]);
+  return others.length > 0
+    ? `This profile has more than one active pack (${ids.join(\", \")}). Using ${ids[0]}; choose a single pack under Settings → Language packs.`
+    : null;
+}
+
+/**
+ * Outcome of a pack-scoped native call. `ok: false` is the refusal path:
+ * no pack is active, so the command was never invoked.
+ */
+export type PackRequest<T> = { ok: true; packId: string; value: T } | { ok: false; error: string };
+
+/** A pack-scoped command with the pack id at the top level of the payload
+ * (the IPC spelling of the engine's `pack_id` argument). */
+export async function packRequest<T>(
+  inv: Invoke,
+  packId: string | null,
+  cmd: string,
+  args: Record<string, unknown>,
+): Promise<PackRequest<T>> {
+  if (!packId) return { ok: false, error: NO_ACTIVE_PACK };
+  return { ok: true, packId, value: (await inv(cmd, { packId, ...args })) as T };
+}
+
+/** The same guard for the speech attempts, which carry the pack id as
+ * `pack_id` inside the nested `attempt` payload. */
+export async function packAttemptRequest<T>(
+  inv: Invoke,
+  packId: string | null,
+  cmd: string,
+  attempt: Record<string, unknown>,
+): Promise<PackRequest<T>> {
+  if (!packId) return { ok: false, error: NO_ACTIVE_PACK };
+  const payload = { attempt: { pack_id: packId, ...attempt } };
+  return { ok: true, packId, value: (await inv(cmd, payload)) as T };
+}
+
+// SESSION-FLOW-COPY-001: how long the \"Next: <what>\" inter-activity bridge
+// stays up before the session opens the next runner. Short enough that it
+// reads as a transition, long enough to be a calm, announced one.
+const SESSION_BRIDGE_MS = 1200;
+
+const EMPTY_PLAN: SessionPlan = {
+  items: [],
+  total_seconds: 0,
+  budget_minutes: 5,
+  seed: 0,
+  planner_version: \"session-planner-0.1.0\",
+};
+
+/** Mono 16-bit PCM WAV (the native command's audio envelope). */
+function toWav16(samples: Int16Array, rate: number): Uint8Array<ArrayBuffer> {
+  const buf = new ArrayBuffer(44 + samples.length * 2);
+  const v = new DataView(buf);
+  const wstr = (o: number, s: string) => {
+    for (let i = 0; i < s.length; i++) v.setUint8(o + i, s.charCodeAt(i));
+  };
+  wstr(0, \"RIFF\");
+  v.setUint32(4, 36 + samples.length * 2, true);
+  wstr(8, \"WAVE\");
+  wstr(12, \"fmt \");
+  v.setUint32(16, 16, true);
+  v.setUint16(20, 1, true);
+  v.setUint16(22, 1, true);
+  v.setUint32(24, rate, true);
+  v.setUint32(28, rate * 2, true);
+  v.setUint16(32, 2, true);
+  v.setUint16(34, 16, true);
+  wstr(36, \"data\");
+  v.setUint32(40, samples.length * 2, true);
+  for (let i = 0; i < samples.length; i++) v.setInt16(44 + i * 2, samples[i] ?? 0, true);
+  return new Uint8Array(buf);
+}
+
+function toB64(bytes: Uint8Array): string {
+  let bin = \"\";
+  for (let i = 0; i < bytes.length; i++) bin += String.fromCharCode(bytes[i] ?? 0);
+  return btoa(bin);
+}
+
+/**
+ * U05: what the placement pass declined to ask, in the engine's own words.
+ * A rubric with no low-stakes auto-runner is reported, never presented as a
+ * runnable question; the status and reason strings travel from
+ * `placement_coverage` unchanged — this component only groups and labels.
+ */
+function PlacementCoverageNote({
+  rows,
+}: {
+  rows: { assessment_id: string; goal_id: string; status: string; reason?: string }[];
+}) {
+  if (rows.length === 0) return null;
+  const planned = rows.filter((r) => r.status === \"planned\").length;
+  const declined = rows.filter((r) => r.status !== \"planned\");
+  const COPY: Record<string, string> = {
+    \"no-runner\": \"that skill cannot be practiced in the app yet\",
+    \"no-content\": \"no content at the right level can serve that rubric\",
+    \"modality-unsupported\": \"that kind of question is not available yet\",
+  };
+  const byStatus = new Map<string, { n: number; sample?: string }>();
+  for (const r of declined) {
+    const g = byStatus.get(r.status) ?? { n: 0, sample: r.reason };
+    g.n += 1;
+    byStatus.set(r.status, g);
+  }
+  return (
+    <div className=\"field\" data-testid=\"placement-coverage\">
+      <p>
+        {planned} question{planned === 1 ? \"\" : \"s\"} ready
+        {declined.length > 0 ? `, ${declined.length} rubrics the engine will not fake` : \"\"}.
+      </p>
+      {declined.length > 0 && (
+        <ul>
+          {[...byStatus.entries()].map(([status, g]) => (
+            <li key={status}>
+              {g.n} · {COPY[status] ?? status}
+              {g.sample && (
+                <details>
+                  <summary>engine reason</summary>
+                  <code>{g.sample}</code>
+                </details>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Desktop UI host. UX-001 onboarding (privacy notice, local profile,
+ * Japanese pack install, skippable microphone), then UX-002 home /
+ * time-budget practice / capability progress. The smoke handshake
+ * (BOOT-002) runs on mount regardless of route.
+ */
+export function App() {
+  const [step, setStep] = useState<OnboardingStep>(\"welcome\");
+  const [route, setRoute] = useState<
+    | \"practice\"
+    | \"progress\"
+    | \"pronunciation\"
+    | \"dictation\"
+    | \"writing\"
+    | \"scenarios\"
+    | \"shadowing\"
+    | \"reading\"
+    | \"words\"
+    | \"placement\"
+    | \"kanji\"
+    | \"settings\"
+    | \"hub\"
+  >(\"practice\");
+  const [notice, setNotice] = useState<PrivacyNotice>({
+    title: \"Your data stays on this device\",
+    points: [
+      \"Everything runs locally unless you enable an online provider.\",
+      \"No account is required; profiles live on this device.\",
+    ],
+  });
+  const [packs, setPacks] = useState<PackCandidate[]>([]);
+  /** D7: the pack the wizard chose this session. It is also seeded from
+   * the profile's `active_pack` on profile load and on a pack switch, so
+   * a returning session (no wizard) has the profile's own pack and every
+   * pack-scoped call uses it. Null means no pack is active. */
+  const [selectedPack, setSelectedPack] = useState<string | null>(null);
+  const [installedUnknown, setInstalledUnknown] = useState(false);
+  // Sweep finding 19: \"no active pack\" and \"the pack read failed\" are
+  // different states; Home distinguishes them like `installedUnknown` does.
+  const [packsUnknown, setPacksUnknown] = useState(false);
+  const [profileName, setProfileName] = useState(\"\");
+  const [profiles, setProfiles] = useState<ProfileSummary[]>([]);
+  // UI-HYGIENE-001: archived profiles stay out of the chooser unless the
+  // learner asks to see them (so they can be un-archived).
+  const [chooserShowHidden, setChooserShowHidden] = useState(false);
+  const [profileId, setProfileId] = useState<string | null>(null);
+  const [displayName, setDisplayName] = useState(\"\");
+  const [budget, setBudget] = useState(5);
+  const [plan, setPlan] = useState<SessionPlan>(EMPTY_PLAN);
+  // Review finding R04: the engine needs an attempt identity to tell a
+  // retry apart from genuine variation. One id per presented plan: retries
+  // of a task the learner is looking at collapse into a single observation
+  // (docs/03 §5), while a refetched plan — budget change, refresh, profile
+  // switch — is a new session and its attempts are new observations. It is
+  // never derived from the plan's contents or the clock: a fresh id per
+  // call collapses nothing, a clock-derived id merges unrelated days.
+  const planSessionRef = useRef(\"\");
+  // U02: every pack-scoped async fill carries the generation it started
+  // under; a language switch bumps the generation so late old-pack
+  // responses are dropped instead of repopulating the screen.
+  const packSwitchGen = useRef(0);
+  const [packSwitching, setPackSwitching] = useState(false);
+  // R04: a supplied reading and a romaji reveal disqualify different
+  // mastery dimensions, so the engine needs which hint was used, not just
+  // that some hint was.
+  const [writingHintKind, setWritingHintKind] = useState<\"reading\" | \"romaji\" | null>(null);
+  function applyPlan(next: SessionPlan) {
+    planSessionRef.current =
+      typeof crypto !== \"undefined\" && typeof crypto.randomUUID === \"function\"
+        ? crypto.randomUUID()
+        : `plan-${Math.random().toString(36).slice(2, 10)}`;
+    setPlan(next);
+  }
+  // K-66: derived guidance from the engine. `undefined` = home_state has
+  // not answered; `null` = the pack declares no goal map. The app never
+  // composes these strings itself (ADR-0020).
+  const [nextGoal, setNextGoal] = useState<NextGoalView | null | undefined>(undefined);
+  const [firstRunSteps, setFirstRunSteps] = useState<FirstRunStep[]>([]);
+  // PATH-VIEW-001: the Today tab's unit path, straight from `unit_path`.
+  const [pathNodes, setPathNodes] = useState<UnitPathNode[]>([]);
+  // PATH-WHATSNEXT-001: the engine's single answer (\"what do I do now?\").
+  const [nextOffer, setNextOffer] = useState<NextOffer | null | undefined>(undefined);
+  const [progress, setProgress] = useState<ProgressRow[]>([]);
+  const [progressError, setProgressError] = useState<string | null>(null);
+  const [progressLoading, setProgressLoading] = useState(false);
+  const [writingLoaded, setWritingLoaded] = useState(false);
+  const [pronResult, setPronResult] = useState<PronunciationResult | null>(null);
+  // No hardcoded language here (U04): the target arrives from the ACTIVE
+  // pack's sentence pool; switching packs refetches, and a fetch failure
+  // clears it rather than leaving another language behind.
+  const [dictTarget, setDictTarget] = useState(\"\");
+  const [dictResult, setDictResult] = useState<DictationResult | null>(null);
+  const [dictSentence, setDictSentence] = useState<DictationSentence | null>(null);
+  const [dictOffset, setDictOffset] = useState(0);
+  const [recording, setRecording] = useState(false);
+  const [attemptUrl, setAttemptUrl] = useState<string | null>(null);
+  const [environments, setEnvironments] = useState<WorldEnvironment[]>([]);
+  // R14: a failed playback must be something the learner can see, not a
+  // silent Audio error in the console.
+  const [playbackError, setPlaybackError] = useState<string | null>(null);
+  // F-07 (run L1): while a listening clip plays, the play button carries a
+  // pressed state and a status region says \"playing\" — start/stop must be
+  // perceivable without sight of the waveform.
+  const [clipPlaying, setClipPlaying] = useState(false);
+  // R14: a retained recording URL lives until it is replaced or this screen
+  // goes away. Nothing else may revoke it while state still holds it.
+  useEffect(() => {
+    return () => {
+      if (attemptUrl) URL.revokeObjectURL(attemptUrl);
+    };
+  }, [attemptUrl]);
+  const [goals, setGoals] = useState<GoalCard[]>([]);
+  // PROGRESS-STATS-001: memory instruments for the progress route; null
+  // until read, and a failed read stays silent (the strip is an extra,
+  // never a reason to withhold the progress page itself).
+  const [memoryStats, setMemoryStats] = useState<MemoryStats | null>(null);
+  const [installed, setInstalled] = useState<InstalledPack[]>([]);
+  const [claims, setClaims] = useState<PackClaims[] | null>(null);
+  const [activeIds, setActiveIds] = useState<string[]>([]);
+  const [catalog, setCatalog] = useState<CatalogEntry[]>([]);
+  const [catalogStatus, setCatalogStatus] = useState(\"no-catalog-url\");
+  const [audioMsg, setAudioMsg] = useState<string | null>(null);
+  const [langError, setLangError] = useState<string | null>(null);
+  const [installOutcome, setInstallOutcome] = useState<InstallOutcome | null>(null);
+  const [installReceipt, setInstallReceipt] = useState<InstallReceipt | null>(null);
+  const [alignerStatus, setAlignerStatus] = useState<AlignerStatus | null>(null);
+  const [buildIdentity, setBuildIdentity] = useState<BuildIdentity | null>(null);
+  const [speechModels, setSpeechModels] = useState<SpeechModel[]>([]);
+  const [speechModel, setSpeechModel] = useState<string>(\"off\");
+  const [deviceTier, setDeviceTier] = useState<DeviceTier | null>(null);
+  const [onboardError, setOnboardError] = useState<string | null>(null);
+  const [installingPack, setInstallingPack] = useState<string | null>(null);
+  const [micChosen, setMicChosen] = useState(false);
+  const [speechComponents, setSpeechComponents] = useState<SpeechComponent[]>([]);
+  const [speechInstalling, setSpeechInstalling] = useState(false);
+  const [writingTask, setWritingTask] = useState<WritingTaskView | null>(null);
+  const [writingScaffold, setWritingScaffold] = useState<{
+    reading?: string;
+    romaji?: string;
+  }>({});
+  const [writingDraft, setWritingDraft] = useState(\"\");
+  const [writingGraded, setWritingGraded] = useState(false);
+  const [writingCorrect, setWritingCorrect] = useState(false);
+  const [writingExpected, setWritingExpected] = useState(\"\");
+  // FIX-ERR-SRS-LOOP-001-2 (D3): the per-form review OFFER the writing
+  // verdict carried, and the ledger ids the learner has accepted in this
+  // view. A card exists ONLY behind an explicit `error_review_accept`
+  // click — these states track that act, they never cause it.
+  const [writingOffer, setWritingOffer] = useState<FormErrorOfferView | null>(null);
+  const [acceptedOffers, setAcceptedOffers] = useState<string[]>([]);
+  const [writingUsedHint, setWritingUsedHint] = useState(false);
+  const [writingError, setWritingError] = useState<string | null>(null);
+  const [practiceTarget, setPracticeTarget] = useState<{
+    contentId: string;
+    modality: string;
+  } | null>(null);
+  const [practiceTask, setPracticeTask] = useState<PracticeTaskView | null>(null);
+  const [display, setDisplay] = useState<DisplaySettingsView | null>(null);
+  const [practiceGraded, setPracticeGraded] = useState(false);
+  const [practiceCorrect, setPracticeCorrect] = useState(false);
+  const [practiceCorrectChoice, setPracticeCorrectChoice] = useState(\"\");
+  const [practiceError, setPracticeError] = useState<string | null>(null);
+  // R11: the journey the pack authored the item with, and whether the
+  // learner has moved past its encounter into the drill.
+  const [lesson, setLesson] = useState<LessonPlan | null>(null);
+  const [lessonSeen, setLessonSeen] = useState(false);
+  const [practiceRevealed, setPracticeRevealed] = useState(false);
+  // One bounded session over the plan the planner already produced. The
+  // queue is a snapshot taken when the learner begins, so \"3 of 5\" cannot
+  // drift when the plan is re-planned after each activity. It lives in a ref
+  // because the loop advances inside async handlers, and it is deliberately
+  // not persisted: a session is for this sitting.
+  const [session, setSession] = useState<SessionView | null>(null);
+  const [sessionOutcome, setSessionOutcome] = useState<SessionOutcomeView | null>(null);
+  const sessionQueueRef = useRef<{
+    items: PlannedItem[];
+    index: number;
+    done: number;
+    notRunnable: number;
+  } | null>(null);
+  // UNIT-CAPSTONE-001: while a section review session runs, it owns the
+  // attempt-group id for every graded submit: finishPractice re-keys
+  // planSessionRef after each activity (the refreshed plan is a new plan),
+  // but one review must stay ONE attempt group from its first item to
+  // `capstone_complete`, which recounts the items engine-side.
+  const capstoneSessionRef = useRef<{ packId: string; band: string; id: string } | null>(null);
+  const [capstoneResult, setCapstoneResult] = useState<CapstoneResult | null>(null);
+  // WARM-MOMENTS-001: gentle facts for the Progress tab; null until the
+  // engine answers — GentleFacts then abstains rather than faking zeroes.
+  const [learningFacts, setLearningFacts] = useState<LearningFacts | null>(null);
+
+  function activeSessionId(): string {
+    return capstoneSessionRef.current ? capstoneSessionRef.current.id : planSessionRef.current;
+  }
+  // SESSION-CHROME-001: start instant of the running session, for the
+  // measured time the end-of-session summary reports. Not persisted — a
+  // session is for this sitting, and its clock is too.
+  const sessionStartedAtRef = useRef<number | null>(null);
+  // SESSION-FLOW-COPY-001 (owner phone dogfood): one start per session.
+  // Between activities the session shows a short \"Next: <what>\" bridge and
+  // opens the next runner itself — no second \"Start practicing\" wall. The
+  // bridge is a transition, not a gate: it is cancelable by the same pause
+  // control that owns the session, and reduced-motion users skip it.
+  const [sessionBridge, setSessionBridge] = useState<string | null>(null);
+  const bridgeRef = useRef<{
+    timer: ReturnType<typeof setTimeout>;
+    finish: (proceeded: boolean) => void;
+  } | null>(null);
+
+  /// Cancel an in-flight bridge (pause/stop/pack-switch). Resolves the
+  /// pending advance as \"did not proceed\" so the session never opens an
+  /// activity behind the learner's back.
+  function cancelSessionBridge() {
+    const b = bridgeRef.current;
+    if (!b) return;
+    clearTimeout(b.timer);
+    bridgeRef.current = null;
+    setSessionBridge(null);
+    b.finish(false);
+  }
+
+  function sessionBridgeLabel(item: PlannedItem): string {
+    const verb = RUNNABLE_MODALITIES[item.modality] ?? \"more practice\";
+    return `Next: ${verb}`;
+  }
+
+  function prefersReducedMotion(): boolean {
+    return (
+      typeof window !== \"undefined\" &&
+      typeof window.matchMedia === \"function\" &&
+      window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches
+    );
+  }
+
+  /// Show the bridge for SESSION_BRIDGE_MS, then report whether the session
+  /// may proceed. False means the learner (or a navigation) took over.
+  function showSessionBridge(item: PlannedItem): Promise<boolean> {
+    if (prefersReducedMotion()) return Promise.resolve(true);
+    setSessionBridge(sessionBridgeLabel(item));
+    return new Promise<boolean>((resolve) => {
+      const timer = setTimeout(() => {
+        bridgeRef.current = null;
+        setSessionBridge(null);
+        resolve(true);
+      }, SESSION_BRIDGE_MS);
+      bridgeRef.current = {
+        timer,
+        finish: (proceeded) => {
+          setSessionBridge(null);
+          resolve(proceeded);
+        },
+      };
+    });
+  }
+  const [scenarioList, setScenarioList] = useState<ScenarioSummaryView[]>([]);
+  const [scenarioActive, setScenarioActive] = useState<ScenarioView | null>(null);
+  const [scenarioStep, setScenarioStep] = useState<ScenarioStepResult | null>(null);
+  const [scenarioOutcome, setScenarioOutcome] = useState<ScenarioOutcomeView | null>(null);
+  const [scenarioError, setScenarioError] = useState<string | null>(null);
+  // SCENARIO-TRANSFER-001: verdict of the last answer to the open
+  // transfer practice; the engine decides it, the UI only displays it.
+  const [scenarioTransferResult, setScenarioTransferResult] = useState<string | null>(null);
+  const [practiceAudio, setPracticeAudio] = useState<{ wavB64: string; source: string } | null>(
+    null,
+  );
+  const [practiceAudioError, setPracticeAudioError] = useState<string | null>(null);
+  // RU-MODALITY-PRACTICE-001: the free-ASR check for the guided-speaking
+  // card's recording. Formative only: this result feeds that card's
+  // abstention notice, never a verdict, evidence, or mastery.
+  const [practiceSpeakCheck, setPracticeSpeakCheck] = useState<DictationResult | null>(null);
+  const [placementItems, setPlacementItems] = useState<
+    { assessment_id: string; goal_id: string; content_id: string; modality: string }[]
+  >([]);
+  const [placementIdx, setPlacementIdx] = useState(0);
+  const [placementTask, setPlacementTask] = useState<PracticeTaskView | null>(null);
+  const [placementGraded, setPlacementGraded] = useState(false);
+  const [placementCorrect, setPlacementCorrect] = useState(false);
+  const [placementCorrectChoice, setPlacementCorrectChoice] = useState(\"\");
+  const [placementHits, setPlacementHits] = useState(0);
+  const [placementFinished, setPlacementFinished] = useState(false);
+  const [placementError, setPlacementError] = useState<string | null>(null);
+  // U05: what the engine made of every declared rubric — `planned` rows plus
+  // honest abstentions with machine-readable reasons. Fetched when the
+  // Placement surface opens, never in the boot batch (the scan is a full
+  // pack pass with per-pair build verification).
+  const [placementCoverage, setPlacementCoverage] = useState<
+    { assessment_id: string; goal_id: string; status: string; reason?: string }[]
+  >([]);
+  const [kanjiCards, setKanjiCards] = useState<
+    {
+      id: string;
+      character: string;
+      radicals: string[];
+      mnemonic: string | null;
+      status: string;
+      meaning_due: string | null;
+      reading_due: string | null;
+    }[]
+  >([]);
+  const [kanjiActive, setKanjiActive] = useState<(typeof kanjiCards)[number] | null>(null);
+  const [kanjiStage, setKanjiStage] = useState<\"meaning\" | \"reading\" | null>(null);
+  const [kanjiTask, setKanjiTask] = useState<PracticeTaskView | null>(null);
+  const [kanjiGraded, setKanjiGraded] = useState(false);
+  const [kanjiCorrect, setKanjiCorrect] = useState(false);
+  const [kanjiCorrectChoice, setKanjiCorrectChoice] = useState(\"\");
+  const [kanjiError, setKanjiError] = useState<string | null>(null);
+  // I03: the hub advertises the kanji drill only when the active pack has
+  // character data. The answer comes from `kanji_available`, never from
+  // `kanjiCards`: that list is loaded when the mode opens, so gating on it
+  // hides the card and makes the drill unreachable. Unknown counts as
+  // available — a failed capability read must not quietly delete a mode, and
+  // the mode screen itself reports the real error.
+  const [kanjiAvailable, setKanjiAvailable] = useState(true);
+  // SETTINGS-001: engine-backed settings state. micEnabled mirrors the
+  // stored `microphone-enabled`; it gates getUserMedia at the capture
+  // site, so a wrong value here is a privacy bug, not a cosmetic one.
+  const [micEnabled, setMicEnabled] = useState(false);
+  // K-64: the stored capture device (null = system default) plus the list the
+  // browser will name. Labels only exist once access has been granted, so an
+  // empty list is expected on a fresh profile and the copy says so.
+  const [micDevice, setMicDevice] = useState<string | null>(null);
+  const [micDevices, setMicDevices] = useState<Microphone[]>([]);
+  // K-88: the output device this profile plays on (null = system default).
+  const [playbackDevice, setPlaybackDevice] = useState<string | null>(null);
+  const [playbackOutputs, setPlaybackOutputs] = useState<SpeakerOutput[]>([]);
+  const [canRouteOutput, setCanRouteOutput] = useState(false);
+  const [romajiMode, setRomajiMode] = useState<RomajiMode>(\"auto\");
+  const [kanaKeyboard, setKanaKeyboard] = useState<KanaKeyboardMode>(\"off\");
+  const [settingsExportPath, setSettingsExportPath] = useState<string | null>(null);
+  // R06: restoring is preview-first. `restoreChecked` remembers exactly which
+  // path was checked, so editing the field drops a stale preview instead of
+  // letting a confirm write a file the learner never saw.
+  const [restorePath, setRestorePath] = useState(\"\");
+  const [restoreChecked, setRestoreChecked] = useState<{
+    path: string;
+    preview: ImportPreview;
+  } | null>(null);
+  const [restoreOutcome, setRestoreOutcome] = useState<ImportOutcome | null>(null);
+  const [settingsDeleteArmed, setSettingsDeleteArmed] = useState(false);
+  const [settingsSwitchArmed, setSettingsSwitchArmed] = useState(false);
+  const [settingsError, setSettingsError] = useState<string | null>(null);
+
+  const [practiceDraft, setPracticeDraft] = useState(\"\");
+  // A route change, a wizard step change, a lesson page and an activity-card
+  // turn are all navigations: both screen readers and sighted keyboard users
+  // otherwise stay parked in the old content, and Orca announces nothing on
+  // arrival (F-01, owner run L1). Routes, wizard steps and lesson pages swap
+  // the `#main h1` node — a new node gets tabIndex -1 and focus, which IS the
+  // A new card announces its question h2 — the card header's h1 only says
+  // the activity name — and grading never moves focus off the card.
+  // Scrolling resets because the sticky header would
+  // otherwise hide the top of the new page.
+  const routeHeading = useRef<HTMLElement | null>(null);
+  const cardKey = useRef<string | null>(null);
+  // FEEL-GLOBAL-001: the routes underline GLIDES (global-states target:
+  // \"the old underline does not snap, it glides\"). One indicator lives on
+  // the nav (.routes::after); its x/width are measured from the active tab
+  // per route change and on nav resize, and the nav wears .routes--glides
+  // so the active tab's static border steps aside while measured.
+  const routesRef = useRef<HTMLElement | null>(null);
+  const routesRo = useRef<(ResizeObserver & { observedNav?: HTMLElement }) | null>(null);
+  // No dep array: a route change moves aria-current on a STABLE nav node
+  // (so measuring per render is the catch), AND the nav can MOUNT long
+  // after the first render (the profile chooser renders without routeNav;
+  // resuming adds it with no route change at all).
+  useEffect(() => {
+    const nav = routesRef.current;
+    if (!nav) return;
+    const measure = () => {
+      const active = nav.querySelector<HTMLElement>('.tab[aria-current=\"page\"]');
+      if (!active) {
+        nav.style.setProperty(\"--tab-live\", \"0\");
+        return;
+      }
+      nav.classList.add(\"routes--glides\");
+      nav.style.setProperty(\"--tab-x\", `${active.offsetLeft}px`);
+      nav.style.setProperty(\"--tab-w\", `${active.offsetWidth}px`);
+      nav.style.setProperty(\"--tab-live\", \"1\");
+    };
+    measure();
+    if (typeof ResizeObserver === \"undefined\") return;
+    if (routesRo.current?.observedNav === nav) return;
+    routesRo.current?.disconnect();
+    const ro = new ResizeObserver(measure) as ResizeObserver & { observedNav?: HTMLElement };
+    ro.observedNav = nav;
+    ro.observe(nav);
+    routesRo.current = ro;
+  });
+  useEffect(() => {
+    // FEEL-GLOBAL-001: the route reset is a navigation, so it glides; the
+    // browser forces an instant jump when prefers-reduced-motion is set.
+    window.scrollTo({ top: 0, behavior: \"smooth\" });
+    const h1 = document.querySelector<HTMLElement>(\"#main h1\");
+    const item = practiceTask?.item_id ?? null;
+    // The task preloads while the lesson page is still up; the card only
+    // becomes the visible screen when its runner takes the content slot.
+    const cardShown = Boolean(practiceTask) && !(lesson && !lessonSeen);
+    if (item && cardShown && item !== cardKey.current) {
+      // A card just arrived. The card header remounts an h1 too (\"Practice\"),
+      // but the question h2 is what says what to do — announce that.
+      cardKey.current = item;
+      routeHeading.current = h1;
+      const target = document.querySelector<HTMLElement>(\"#main h2\") ?? h1;
+      if (target) {
+        target.tabIndex = -1;
+        target.focus({ preventScroll: true });
+      }
+      return;
+    }
+    if (!item) cardKey.current = null;
+    if (h1 && h1 !== routeHeading.current) {
+      routeHeading.current = h1;
+      h1.tabIndex = -1;
+      h1.focus({ preventScroll: true });
+    }
+  }, [step, route, lesson, lessonSeen, practiceTask?.item_id]);
+  // K-76: null until the first real load answers, so the surface can tell
+  // \"still loading\" apart from \"this pack has no targets\".
+  const [shadowItems, setShadowItems] = useState<ShadowTarget[] | null>(null);
+  const [shadowIdx, setShadowIdx] = useState(0);
+  const [storyList, setStoryList] = useState<StorySummary[]>([]);
+  const [storyActive, setStoryActive] = useState<Story | null>(null);
+  // READER-FLOW-001: the word card open inside the reading paragraph —
+  // which sentence, which raw token, and the `word_card` answer (`card`
+  // null while loading) — plus the word-audio blob URL when
+  // `story_word_audio` answered; null audio means no Play button.
+  const [storyWord, setStoryWord] = useState<{
+    sentenceId: string;
+    token: string;
+    card: WordCardView | null;
+    audioUrl: string | null;
+  } | null>(null);
+  const storyWordGenRef = useRef<{ sentenceId: string; token: string } | null>(null);
+  const storyWordAudioRef = useRef<string | null>(null);
+  // WORDCARD-OFFSCREEN-001: the tapped word's button, remembered so the
+  // phone bottom-sheet card can return focus to it when it closes.
+  // Mutable (not state): a DOM element, and focus moves in an effect.
+  const storyWordAnchorRef = useRef<{
+    el: HTMLElement | null;
+    closing: boolean;
+  }>({ el: null, closing: false });
+  const [storyError, setStoryError] = useState<string | null>(null);
+  const [mineItems, setMineItems] = useState<MineItem[]>([]);
+  const [mineSurface, setMineSurface] = useState(\"\");
+  const [mineReading, setMineReading] = useState(\"\");
+  const [mineGloss, setMineGloss] = useState(\"\");
+  const [mineSource, setMineSource] = useState(\"\");
+  const [mineError, setMineError] = useState<string | null>(null);
+  const [mineNotice, setMineNotice] = useState<string | null>(null);
+  const [mineReview, setMineReview] = useState<{ item: MineItem; revealed: boolean } | null>(null);
+  // FIX-ERR-SRS-LOOP-001-2 (D3): the review-queue drill view over ACCEPTED
+  // error-review cards. Nothing lands here except through an explicit
+  // accept click on a dictation/writing offer (never silent).
+  const [errCards, setErrCards] = useState<ErrorReviewCardView[]>([]);
+  const [errReview, setErrReview] = useState<{
+    card: ErrorReviewCardView;
+    revealed: boolean;
+  } | null>(null);
+  const [errError, setErrError] = useState<string | null>(null);
+  const [errNotice, setErrNotice] = useState<string | null>(null);
+  // SESSION-CHROME-001 (U6): the scheduler's predicted next interval for
+  // the two grade buttons, read from the item's existing state. Null = no
+  // preview fetched (or the fetch failed), and the buttons show no number.
+  const [minePreview, setMinePreview] = useState<{
+    again_seconds: number;
+    good_seconds: number;
+  } | null>(null);
+  useEffect(() => {
+    const inv = detectInvoke();
+    if (!inv || !profileId || !mineReview) {
+      setMinePreview(null);
+      return;
+    }
+    let live = true;
+    void inv(\"srs_interval_preview\", { profileId, itemId: mineReview.item.id })
+      .then((v) => {
+        if (live) setMinePreview(v as { again_seconds: number; good_seconds: number });
+      })
+      .catch(() => {
+        // A failed preview degrades to plain buttons — the grades
+        // themselves work exactly as before.
+        if (live) setMinePreview(null);
+      });
+    return () => {
+      live = false;
+    };
+  }, [mineReview?.item.id, profileId]);
+  const [shadowError, setShadowError] = useState<string | null>(null);
+  // WORD-TIMING-001: the karaoke clock (in-clip seconds, null when nothing
+  // of this clip is playing) plus one retained clip URL per shadowing item.
+  // The retained URL is what makes click-to-hear-word seek the already
+  // loaded clip instead of re-fetching it; it is revoked exactly when the
+  // item or the screen changes.
+  const [shadowTime, setShadowTime] = useState<number | null>(null);
+  const shadowClipRef = useRef<{ contentId: string; url: string } | null>(null);
+  const releaseShadowClip = () => {
+    if (shadowClipRef.current) URL.revokeObjectURL(shadowClipRef.current.url);
+    shadowClipRef.current = null;
+    setShadowTime(null);
+  };
+  useEffect(() => {
+    if (route !== \"shadowing\") releaseShadowClip();
+  });
+
+  useEffect(() => {
+    const inv = detectInvoke();
+    if (!inv) return;
+    void (async () => {
+      let mode: { smoke: boolean; smoke_perf?: boolean } = { smoke: false };
+      try {
+        mode = (await inv(\"app_mode\")) as { smoke: boolean; smoke_perf?: boolean };
+      } catch (e) {
+        // No mode answer: assume the ordinary app and keep booting — the
+        // silent rejection below would strand the learner anyway.
+        console.error(\"app_mode read failed\", e);
+      }
+      if (mode.smoke) {
+        // The headless walkthrough is a once-per-process act, and it belongs
+        // to the smoke branch alone: a StrictMode dev remount — or a test
+        // that mounts the app twice — must still reach the returning-learner
+        // resume below, instead of stranding it at the wizard.
+        if (walkthroughRan) return;
+        walkthroughRan = true;
+        await inv(\"smoke_ack\", { note: \"home\" });
+        // POLISH-001: full-route walkthrough. Drive onboarding
+        // deterministically (local profile + bundled default pack), then
+        // click each route nav button so the real open* handlers run.
+        // Wait n animation frames so React commits and paints.
+        const painted = async (frames: number) => {
+          const { promise, resolve } = Promise.withResolvers<void>();
+          let left = frames;
+          const tick = () => (left-- > 0 ? requestAnimationFrame(tick) : resolve());
+          requestAnimationFrame(tick);
+          await promise;
+        };
+        // Poll until a predicate holds (up to `frames` animation
+        // frames) — needed when the next step depends on React state
+        // landing, not just on a fixed paint budget.
+        const waitUntil = async (pred: () => boolean, frames = 60) => {
+          const { promise, resolve } = Promise.withResolvers<void>();
+          let left = frames;
+          const tick = () => (pred() || left-- <= 0 ? resolve() : requestAnimationFrame(tick));
+          requestAnimationFrame(tick);
+          await promise;
+        };
+        // A frame budget that never completes must produce a readable marker,
+        // not a harness timeout: exit 124 says nothing about where the webview
+        // stopped painting.
+        const paintedOrStall = async (label: string) => {
+          const stalled = await Promise.race([painted(4).then(() => false), after(3000, true)]);
+          if (stalled) await inv(\"smoke_ack\", { note: `paint-stall:${label}` });
+        };
+        try {
+          const existing = (await inv(\"list_profiles\")) as ProfileSummary[];
+          const first = existing[0];
+          const p = first
+            ? ((await inv(\"resume_profile\", {
+                profileId: first.id,
+              })) as ProfileSummary)
+            : ((await inv(\"create_profile\", {
+                displayName: \"smoke\",
+              })) as ProfileSummary);
+          setProfileId(p.id);
+          setDisplayName(p.display_name);
+          // D7: the smoke walkthrough installs the first bundled
+          // candidate — the same list the wizard is shown — instead of
+          // naming a pack id here.
+          const bundled = (await inv(\"available_packs\")) as PackCandidate[];
+          const packId = bundled[0]?.pack_id;
+          if (!packId) throw new Error(\"no bundled pack is available to install\");
+          setSelectedPack(packId);
+          await inv(\"install_pack\", { packId });
+          // K-62: the owner's complaint was an install that gives back no
+          // sign of life. The stages are only worth asserting if the renderer
+          // really heard them, so the smoke run reports each stage by name as
+          // it arrived over the event channel.
+          for (let i = 0; i < 20 && progressStages.length < 3; i++) {
+            await after(50, undefined);
+          }
+          for (const stage of [\"prepare\", \"install\", \"record\"]) {
+            await inv(\"smoke_ack\", {
+              note: `progress:${stage}:${
+                progressStages.some((p2) => p2.operation === \"install-pack\" && p2.stage === stage)
+                  ? \"heard\"
+                  : \"SILENT\"
+              }`,
+            });
+          }
+          await inv(\"complete_onboarding\", {
+            profileId: p.id,
+            packId,
+            micEnabled: false,
+          });
+          setMicEnabled((await inv(\"get_microphone_enabled\", { profileId: p.id })) as boolean);
+          const home = (await inv(\"home_state\", {
+            profileId: p.id,
+          })) as { display_name: string; plan: SessionPlan; next_goal: NextGoalView | null };
+          setDisplayName(home.display_name);
+          applyPlan(home.plan);
+          setNextGoal(home.next_goal);
+          // K-66: on a fresh profile every planned item is an
+          // introduction, and first-run guidance must be non-empty for
+          // the ja-JP pack. The script asserts both markers.
+          const freshSteps = (await inv(\"first_run_steps\", { profileId: p.id })) as FirstRunStep[];
+          setFirstRunSteps(freshSteps);
+          setPathNodes((await inv(\"unit_path\", { profileId: p.id })) as UnitPathNode[]);
+          setNextOffer((await inv(\"current_offer\", { profileId: p.id })) as NextOffer | null);
+          await inv(\"smoke_ack\", { note: `fresh-plan:${home.plan.items.length}` });
+          await inv(\"smoke_ack\", { note: `first-run:${freshSteps.length}` });
+          setEnvironments((await inv(\"world_state\", { profileId: p.id })) as WorldEnvironment[]);
+          setDisplay((await inv(\"display_settings\", { profileId: p.id })) as DisplaySettingsView);
+          const goalRows = (await inv(\"goal_map\", { profileId: p.id })) as GoalCard[];
+          await inv(\"smoke_ack\", { note: `goal-map:${goalRows.length}` });
+          setStep(\"done\");
+          // sweep-walkthrough-stall: no bare frame wait — a frozen rAF must
+          // name itself instead of parking the walkthrough unmarked.
+          await paintedOrStall(\"hub-paint\");
+          const buttons = Array.from(document.querySelectorAll('nav[aria-label=\"Routes\"] button'));
+          for (const b of buttons) {
+            const label = (b.textContent ?? \"\").trim();
+            // K-63: \"switching routes feels slow\" is an impression; this is the
+            // measurement. Timed from the click to the paint a learner would
+            // actually see, inside the real webview over real IPC.
+            const started = performance.now();
+            (b as HTMLButtonElement).click();
+            await paintedOrStall(label);
+            await inv(\"smoke_ack\", {
+              note: `route-ms:${label}:${Math.round(performance.now() - started)}`,
+            });
+            await inv(\"smoke_ack\", { note: `route:${label}` });
+            // K-64: the microphone picker is a Settings control backed by a
+            // stored setting. Walking the route proves it is really rendered,
+            // not just present in the component source.
+            if (label === \"Settings\") {
+              await inv(\"smoke_ack\", {
+                note: `mic-picker:${document.querySelector(\"#mic-device\") ? \"present\" : \"ABSENT\"}`,
+              });
+            }
+          }
+          // K-63-follow: one tab costs six times what every other tab costs, and
+          // (K-77) the heavy tab is now Settings, which carries the folded
+          // Language-packs panel.
+          // the two halves need different fixes. Leave the tab, come back, and
+          // time the return: by now the panel's commands are warm and its data
+          // is memoized, so whatever is left is the remount's fetch chain plus
+          // painting the panel. If the number survives, it is paint.
+          const navTo = (label: string) =>
+            buttons.find((b) => (b.textContent ?? \"\").trim() === label) as
+              HTMLButtonElement | undefined;
+          const away = navTo(\"Today\");
+          const back = navTo(\"Settings\");
+          if (away && back) {
+            away.click();
+            await paintedOrStall(\"Today\");
+            const again = performance.now();
+            back.click();
+            await paintedOrStall(\"Settings\");
+            await inv(\"smoke_ack\", {
+              note: `route-2ms:Settings:${Math.round(performance.now() - again)}`,
+            });
+          }
+          // K-81: the nav is five destinations now; the practice modes hide
+          // behind the hub, so the walk drills the hub the way a learner
+          // does — the route floor counts modes, not just tabs.
+          const practiceTab = navTo(\"Practice\");
+          if (!practiceTab) throw new Error(\"Practice hub tab missing\");
+          for (const mode of [
+            \"Pronunciation\",
+            \"Speaking\",
+            \"Writing\",
+            \"Scenarios\",
+            \"Shadowing\",
+            \"Reading\",
+            \"Kanji\",
+            \"Placement\",
+          ]) {
+            practiceTab.click();
+            await paintedOrStall(\"practice-tab\");
+            const card = Array.from(
+              document.querySelectorAll('[aria-label=\"Practice modes\"] button'),
+            ).find((b) => (b.textContent ?? \"\").trim() === mode) as HTMLButtonElement | undefined;
+            if (!card) throw new Error(`hub card \"${mode}\" missing`);
+            const started = performance.now();
+            card.click();
+            await paintedOrStall(mode);
+            await inv(\"smoke_ack\", {
+              note: `route-ms:${mode}:${Math.round(performance.now() - started)}`,
+            });
+            await inv(\"smoke_ack\", { note: `route:${mode}` });
+            if (mode === \"Shadowing\") {
+              // Owner finding 8: the pass reported Play/Record as grey and
+              // unclickable. Nothing in the code ever disables them, so the
+              // walk records what the live card actually rendered.
+              const sec = document.querySelector('[aria-label=\"Shadowing\"]');
+              const bs = sec
+                ? Array.from(sec.querySelectorAll(\"button\")).map((b) => b as HTMLButtonElement)
+                : [];
+              await inv(\"smoke_ack\", {
+                note: `shadow-buttons:${bs.length}:${bs.filter((b) => b.disabled).length}`,
+              });
+            }
+          }
+          // K-63: route switching was reported as feeling dead. Split the cost
+          // into the commands a route runs and the paint that follows, because
+          // the fix differs by half. These are warm calls: the state a learner
+          // is already in when they click the tab.
+          const timed = async (cmd: string, args?: Record<string, unknown>) => {
+            const t = performance.now();
+            await inv(cmd, args);
+            await inv(\"smoke_ack\", {
+              note: `call-ms:${cmd}:${Math.round(performance.now() - t)}`,
+            });
+          };
+          const warm: Array<[string, Record<string, unknown> | undefined]> = [
+            [\"installed_packs\", undefined],
+            [\"pack_claims\", undefined],
+            [\"catalog_packs\", undefined],
+            [\"available_models\", undefined],
+            [\"aligner_status\", undefined],
+            [\"scenario_list\", { profileId: p.id }],
+            [\"home_state\", { profileId: p.id }],
+            [\"active_pack\", { profileId: p.id }],
+            [\"placement_plan\", { profileId: p.id }],
+            [\"kanji_list\", { profileId: p.id }],
+            [\"goal_map\", { profileId: p.id }],
+            [\"unit_path\", { profileId: p.id }],
+            [\"practice_plan\", { profileId: p.id, minutes: 10 }],
+            [\"writing_task\", { profileId: p.id }],
+            // Not content: this proves the command is actually registered in the
+            // native handler list. The web layer calling a command the Rust side
+            // never registered fails silently outside a typed call site.
+            [\"build_identity\", undefined],
+          ];
+          for (const [cmd, args] of warm) {
+            await timed(cmd, args);
+          }
+          if (mode.smoke_perf) {
+            // PERF-002: the CLI benchmarks cannot answer
+            // app.ui_responsiveness_during_inference.*, so the walkthrough
+            // brackets a real aligner call (whisper sidecar, ADR-0019) with
+            // probe windows and lets the webview report its own numbers.
+            // Three calls: one cold (first subprocess), two warm.
+            const probe = new PerfProbe((note) => inv(\"smoke_ack\", { note }));
+            try {
+              const model = (await inv(\"perf_asr_setup\")) as string;
+              await inv(\"smoke_ack\", { note: `perf:asr-model:${model}` });
+              const attempt = (await inv(\"perf_asr_attempt\")) as {
+                pack_id: string;
+                short_unit: string;
+                long_unit: string;
+                short_text: string;
+                long_text: string;
+                wav_b64: string;
+              };
+              probe.start(\"asr-inference\");
+              for (let i = 0; i < 3; i++) {
+                await inv(\"pronunciation_check\", { attempt });
+              }
+              probe.stop();
+              probe.start(\"idle-baseline\");
+              await new Promise((r) => setTimeout(r, 1500));
+              probe.stop();
+            } catch (e) {
+              // Abstain, don't fake: the marker names why there is no number.
+              await inv(\"smoke_ack\", { note: `perf:asr-skipped:${String(e)}` });
+            }
+            await probe.flush();
+            // app.cancellation.asr_cancel_effect_ms: the shipped whisper-cli
+            // invocation has no cancel seam; inventing one to measure would
+            // measure the invention. State the abstention instead.
+            await inv(\"smoke_ack\", { note: \"perf:cancel-skipped:no-product-seam\" });
+          }
+          // K-60: scenario actions died at the IPC boundary because the
+          // native view structs renamed their keys to kebab-case. Walk
+          // the real click path (nav button -> list row -> Start) so the
+          // regression is caught by the headless walkthrough, not only
+          // by unit tests.
+          const scenarios = (await inv(\"scenario_list\", {
+            profileId: p.id,
+          })) as ScenarioSummaryView[];
+          if (scenarios.length === 0) {
+            await inv(\"smoke_ack\", { note: \"scenario-started:none-locked\" });
+          } else {
+            // K-75: the native list leads with the playable scenario and
+            // marks it as the recommendation, so the walkthrough follows
+            // that row instead of whatever the pack files sort to first.
+            const scen = scenarios.find((s) => s.recommended) ?? scenarios[0];
+            if (!scen) throw new Error(\"scenario list row vanished\");
+            const practiceTab = navTo(\"Practice\");
+            if (!practiceTab) throw new Error(\"Practice tab missing\");
+            practiceTab.click();
+            await painted(4);
+            const scenCard = Array.from(
+              document.querySelectorAll('[aria-label=\"Practice modes\"] button'),
+            ).find((b) => (b.textContent ?? \"\").trim() === \"Scenarios\") as
+              HTMLButtonElement | undefined;
+            if (!scenCard) throw new Error(\"Scenarios hub card missing\");
+            scenCard.click();
+            await painted(4);
+            const row = Array.from(document.querySelectorAll(\"li\")).find((li) =>
+              (li.textContent ?? \"\").includes(scen.title),
+            );
+            if (!row) throw new Error(`scenario row for \"${scen.title}\" missing`);
+            const start = Array.from(row.querySelectorAll(\"button\")).find(
+              (b) => (b.textContent ?? \"\").trim() === \"Start\",
+            ) as HTMLButtonElement | undefined;
+            if (scen.unlocked) {
+              if (!start) throw new Error(\"Start button missing on unlocked scenario\");
+              start.click();
+              await waitUntil(() => !!document.querySelector('[aria-label=\"Scenario\"]'));
+              if (!document.querySelector('[aria-label=\"Scenario\"]'))
+                throw new Error(\"scenario session did not open\");
+              if (document.querySelector('[aria-label=\"Scenario\"] [role=\"alert\"]'))
+                throw new Error(\"scenario start surfaced an error to the learner\");
+              await inv(\"smoke_ack\", { note: `scenario-started:${scen.scenario_id}` });
+              const action = document.querySelector(
+                '[aria-label=\"Ways to respond\"] button',
+              ) as HTMLButtonElement | null;
+              // U07: the button text is the learner-facing label, never
+              // the intent token; the walkthrough reads the machine-side
+              // attribute exactly as the click handler receives it.
+              const intent = (action?.getAttribute(\"data-intent\") ?? \"\").trim();
+              try {
+                if (intent) {
+                  const step = (await inv(\"scenario_attempt\", {
+                    profileId: p.id,
+                    scenarioId: scen.scenario_id,
+                    intent,
+                  })) as ScenarioStepResult;
+                  await inv(\"smoke_ack\", {
+                    note: `scenario-step:${scen.scenario_id}:${step.result}`,
+                  });
+                } else {
+                  await inv(\"smoke_ack\", {
+                    note: `scenario-step:${scen.scenario_id}:abstained`,
+                  });
+                }
+              } catch (e) {
+                await inv(\"smoke_ack\", {
+                  note: `scenario-step:${scen.scenario_id}:error:${String(e)}`,
+                });
+              }
+              // O-06 2026-10-10: the owner reported the Support box and the
+              // Transfer variants \"do nothing\". Click them the way a learner
+              // does and report what visibly changes.
+              const support = document.querySelector(
+                '[aria-label=\"Scenario\"] fieldset.ladder button',
+              ) as HTMLButtonElement | null;
+              if (support) {
+                support.click();
+                await waitUntil(() => support.disabled, 2000);
+                await inv(\"smoke_ack\", {
+                  note: `scenario-support:${scen.scenario_id}:${support.disabled ? \"consumed\" : \"no-visible-change\"}`,
+                });
+              } else {
+                await inv(\"smoke_ack\", { note: `scenario-support:${scen.scenario_id}:no-ladder` });
+              }
+              const transfer = document.querySelector(
+                '[aria-label=\"Scenario\"] fieldset.transfers button',
+              ) as HTMLButtonElement | null;
+              if (transfer) {
+                if (transfer.disabled) {
+                  // SCENARIO-TRANSFER-001: a variant without a practice
+                  // payload is honest dead content by design — it is
+                  // never pressable.
+                  await inv(\"smoke_ack\", {
+                    note: `scenario-transfer:${scen.scenario_id}:no-payload`,
+                  });
+                } else {
+                  transfer.click();
+                  // A press OPENS practice (SCENARIO-TRANSFER-001); it
+                  // never stamps a ✓ by itself. Report which happened.
+                  await waitUntil(
+                    () =>
+                      document.querySelector('[data-testid=\"transfer-practice\"]') !== null ||
+                      (transfer.textContent ?? \"\").includes(\"✓\"),
+                    120,
+                  );
+                  const opened =
+                    document.querySelector('[data-testid=\"transfer-practice\"]') !== null;
+                  const done = (transfer.textContent ?? \"\").includes(\"✓\");
+                  await inv(\"smoke_ack\", {
+                    note: `scenario-transfer:${scen.scenario_id}:${opened ? \"practice-opened\" : done ? \"done\" : \"no-visible-change\"}`,
+                  });
+                }
+              } else {
+                // Branch-B packs (SCENARIO-TRANSFER-001): the section is
+                // gone because nothing is required that cannot be done.
+                await inv(\"smoke_ack\", {
+                  note: `scenario-transfer:${scen.scenario_id}:none-offered`,
+                });
+              }
+            } else {
+              await inv(\"smoke_ack\", {
+                note: `scenario-locked:${scen.scenario_id}:${scen.locked_reason ?? \"?\"}`,
+              });
+            }
+          }
+          // D4 (ADR-0019): the app must be able to state, over real IPC, which
+          // aligner runtime this build carries. The value is build-dependent;
+          // the requirement is that the answer exists.
+          const al = (await inv(\"aligner_status\")) as AlignerStatus;
+          await inv(\"smoke_ack\", {
+            note: `aligner:${al.available ? \"yes\" : \"no\"}:${al.available ? (al.source ?? \"?\") : (al.reason ?? \"?\")}`,
+          });
+          await inv(\"smoke_ack\", {
+            note: `routes-complete:${buttons.length}`,
+          });
+        } catch (e) {
+          await inv(\"smoke_ack\", { note: `walkthrough-error:${String(e)}` });
+        }
+        return;
+      }
+      // K-05: restart resumes an existing profile instead of re-running
+      // onboarding (FIRST-LESSON known limit). This runs first: a pack
+      // or notice failure must never strand a returning learner back at
+      // the wizard.
+      try {
+        const ps = (await inv(\"list_profiles\")) as ProfileSummary[];
+        if (ps.length > 0) {
+          setProfiles(ps);
+          setStep(\"resume\");
+        }
+      } catch (e) {
+        // K-05's stranding rule applies here too: if the resume list
+        // cannot be read the learner must be told, and creating a new
+        // local profile stays reachable from the welcome step.
+        setOnboardError(
+          `Existing profiles could not be checked: ${String(e)} You can create a new local profile, or restart the app to try again.`,
+        );
+      }
+      try {
+        setNotice((await inv(\"privacy_notice\")) as PrivacyNotice);
+        setPacks((await inv(\"available_packs\")) as PackCandidate[]);
+      } catch {
+        /* defaults render; onboarding install step will surface errors */
+      }
+      // sweep-ts-dup-install: installed state is its own read, because a
+      // failure here must not render confident Install buttons for packs
+      // already on the device — the step says the state is unknown instead,
+      // and install() re-checks before moving bytes.
+      await refreshInstalled();
+      // PACK-UPDATE-UX-001: the wizard may name a catalogue version only if
+      // the catalogue has been read, so boot reads it here too (a cached
+      // local read on the engine's blocking pool). A failure leaves the
+      // version prose silent rather than wrong.
+      try {
+        const cat = (await inv(\"catalog_packs\")) as {
+          entries: CatalogEntry[];
+          status: string;
+        };
+        setCatalog(cat.entries);
+        setCatalogStatus(cat.status);
+      } catch {
+        /* no catalogue read: the wizard stays version-silent */
+      }
+    })();
+  }, []);
+
+  // The bridge is app-wide and installed before the first render, so its
+  // identity must be stable: a fresh closure per render re-fires every effect
+  // that lists `inv` as a dependency, and an effect that resets state on
+  // re-entry (kanji availability) then loops forever for any pack that
+  // answers false — an RU pack, for instance.
+  const inv = useMemo(() => detectInvoke(), []);
+  // K-62: one status line driven by what the engine reports, never by a timer
+  // the UI invents. Stages are pushed to a module-level witness as well so the
+  // headless walkthrough can prove the channel actually delivered them.
+  const [engineProgress, setEngineProgress] = useState<EngineProgress | null>(null);
+
+  // WEB-SERVE-001 scope 4: in browser-serve mode the app states honestly
+  // what the serve bridge cannot do (install-progress events, and mic
+  // capture where the browser blocks it). The text comes from the server's
+  // capability report, never invented locally; nothing here changes a
+  // stored privacy mode.
+  const [serveNotice, setServeNotice] = useState<string[] | null>(null);
+  // SETTINGS-SCOPE-001: the same capability report also decides whether the
+  // Settings \"Detect microphones\" button can do anything: in an insecure
+  // context the browser reveals no input names, so the button renders gray
+  // with the server's own reason — the availability truth lives at exactly
+  // one source (/api/capabilities), never in a local guess.
+  const [serveMicNamesAvailable, setServeMicNamesAvailable] = useState<boolean | null>(null);
+  useEffect(() => {
+    if (!inLtsServeMode()) return;
+    void fetchCapabilities().then((caps) => {
+      if (!caps) {
+        setServeNotice([\"Browser mode: the serve bridge is unreachable right now.\"]);
+        return;
+      }
+      if (typeof caps.microphone_names_available === \"boolean\") {
+        setServeMicNamesAvailable(caps.microphone_names_available);
+      }
+      // SESSION-FLOW-COPY-001 (third dogfood repro): the capability lines
+      // were JOINED into one sentence — \"...labeled unavailable unchanged —
+      // serve mode never rewrites...\" read as word-salad. Each line rides as
+      // its own notice row; the one line that floats without context
+      // (privacy_modes starts \"unchanged —\") gets a plain-language lead-in.
+      const parts = [
+        // WEB-PROGRESS-001: whether progress streams is the server's report,
+        // not a local assumption — an older serve build still says the truth.
+        caps.install_progress_events
+          ? \"Browser mode: install progress streams live, the same stages the desktop shows.\"
+          : \"Browser mode: install progress is not streamed — results appear when the call lands.\",
+        caps.microphone_capture ?? \"\",
+        caps.privacy_modes ? `Privacy settings: ${caps.privacy_modes}` : \"\",
+      ].filter((s) => s.length > 0);
+      setServeNotice(parts);
+    });
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === \"undefined\") return;
+    // WEB-PROGRESS-001: in serve mode the stages arrive over the bridge
+    // (`GET /api/progress/events`) and feed the SAME state the desktop
+    // listener feeds — one progress UI, whichever transport carried the stage.
+    if (inLtsServeMode())
+      return subscribeServeProgress((p) => {
+        progressStages.push(p);
+        setEngineProgress(p);
+      });
+    // No bridge (plain browser tab, test DOM) means no event source: importing
+    // the Tauri event API there would fail, so the listener is not registered.
+    if (!(\"__TAURI_INTERNALS__\" in window)) return;
+    let unlisten: (() => void) | undefined;
+    let cancelled = false;
+    import(\"@tauri-apps/api/event\")
+      .then(({ listen }) =>
+        listen<EngineProgress>(\"engine-progress\", (e) => {
+          progressStages.push(e.payload);
+          setEngineProgress(e.payload);
+        }),
+      )
+      .then((un) => {
+        if (cancelled) un();
+        else unlisten = un;
+      })
+      .catch(() => {
+        // Progress is a nicety: losing it must never turn into an error the
+        // learner sees, and the operation itself still reports its own failure.
+      });
+    return () => {
+      cancelled = true;
+      unlisten?.();
+    };
+  }, []);
+
+  // `pid` lets the resume/finish flows prime the Home active-pack
+  // header before the Settings route has been opened (the state
+  // profileId is not yet visible to this closure there).
+  //
+  // K-63: these reads used to be awaited one after another, each landing its
+  // own state update, so opening the tab re-rendered the app several times for
+  // ~4 ms of actual reading. They run together now and commit in one block.
+  async function refreshLanguages(pid?: string) {
+    if (!inv) return;
+    const active = pid ?? profileId;
+    const results = await Promise.all([
+      inv(\"installed_packs\") as Promise<InstalledPack[]>,
+      inv(\"pack_claims\") as Promise<PackClaims[]>,
+      active ? loadSessionPack(inv, active) : Promise.resolve(null),
+      inv(\"catalog_packs\") as Promise<{ entries: CatalogEntry[]; status: string }>,
+    ]).catch((e) => {
+      // Sweep finding 19: a failed pack read leaves the active-pack state
+      // UNKNOWN, not \"none\"; Home attributes the failure instead of
+      // claiming the profile has no language.
+      setPacksUnknown(true);
+      throw e;
+    });
+    const [installed, claims, session, catalog] = results;
+    setPacksUnknown(false);
+    setInstalled(installed);
+    setClaims(claims);
+    if (session) {
+      setActiveIds(session.ids);
+      // D7: the profile's own active pack seeds every pack-scoped call,
+      // so a returning session (no wizard this run) and a pack switch
+      // from Settings both aim at the right pack. No pack here means no pack:
+      // the panels refuse instead of guessing one.
+      setSelectedPack(session.packId);
+      if (session.note) setLangError(session.note);
+    }
+    setCatalog(catalog.entries);
+    setCatalogStatus(catalog.status);
+  }
+
+  // PACK-UPDATE-UX-001: one read, one container update. The wizard used to
+  // keep its own list of installed ids while Settings kept InstalledPack
+  // records, which is exactly how the two drifted apart. Every install path
+  // now re-reads the same records the panel renders, so a pack landing on
+  // the device updates one state and both surfaces see it.
+  async function refreshInstalled(): Promise<InstalledPack[] | null> {
+    if (!inv) return null;
+    try {
+      const fresh = (await inv(\"installed_packs\")) as InstalledPack[];
+      setInstalled(fresh);
+      setInstalledUnknown(false);
+      return fresh;
+    } catch {
+      setInstalledUnknown(true);
+      return null;
+    }
+  }
+
+  // PACK-UPDATE-UX-001: the wizard's Update control. install_catalog_pack is the
+  // same path the Settings panel uses, so there is one write path per source.
+  // Afterwards both containers are refreshed from the engine and the catalogue
+  // rather than edited by hand: a stale row only clears when the records say so.
+  async function updateFromCatalog(id: string) {
+    if (!inv) return;
+    setOnboardError(null);
+    setInstallingPack(id);
+    try {
+      await inv(\"install_catalog_pack\", { packId: id });
+    } catch (e) {
+      setOnboardError(`Could not update that pack: ${String(e)}`);
+      return;
+    } finally {
+      setInstallingPack(null);
+      setEngineProgress(null);
+    }
+    await refreshInstalled();
+    try {
+      const cat = (await inv(\"catalog_packs\")) as {
+        entries: CatalogEntry[];
+        status: string;
+      };
+      setCatalog(cat.entries);
+      setCatalogStatus(cat.status);
+    } catch {
+      // The rows keep the last-known facts; the notice does not invent a version.
+    }
+  }
+
+  // U02: a language change is one coordinated transition, not a settings
+  // refresh. The native switch lands first; then every display the old pack
+  // filled is dropped — plan snapshot, in-flight task, lesson, placement
+  // run, story, shadowing, dictation, phonology demo, kanji drill — before
+  // the new pack answers, so an old card can never submit against the new
+  // pack. Learner-owned state (mined words, profile settings) is kept:
+  // those belong to the learner, not the language. The profile-entry reads
+  // then re-run under a generation guard; `packSwitching` is the loading
+  // promise Home shows while the new context settles.
+  async function switchLearning(packId: string) {
+    if (!inv || !profileId) return;
+    try {
+      await inv(\"switch_pack\", { profileId, packId });
+      setLangError(null);
+    } catch (e) {
+      setLangError(String(e));
+      return;
+    }
+    const gen = ++packSwitchGen.current;
+    setPackSwitching(true);
+    // A session belongs to the pack it was started in: tear it down here so
+    // Home can never offer \"Resume session\" over another pack's items.
+    sessionQueueRef.current = null;
+    capstoneSessionRef.current = null;
+    setCapstoneResult(null);
+    setSession(null);
+    setSessionOutcome(null);
+    setRoute(\"practice\");
+    applyPlan(EMPTY_PLAN);
+    setNextGoal(undefined);
+    setFirstRunSteps([]);
+    setPathNodes([]);
+    setNextOffer(undefined);
+    setEnvironments([]);
+    setPracticeTarget(null);
+    setPracticeTask(null);
+    setPracticeGraded(false);
+    setPracticeCorrect(false);
+    setPracticeCorrectChoice(\"\");
+    setPracticeSpeakCheck(null);
+    setLesson(null);
+    setLessonSeen(false);
+    setPlacementItems([]);
+    setPlacementIdx(0);
+    setPlacementTask(null);
+    setPlacementGraded(false);
+    setPlacementCorrect(false);
+    setPlacementCorrectChoice(\"\");
+    setPlacementHits(0);
+    setPlacementFinished(false);
+    setPlacementError(null);
+    setPlacementCoverage([]);
+    setShadowItems(null);
+    setShadowIdx(0);
+    setStoryList([]);
+    setStoryActive(null);
+    closeStoryWordCard(false);
+    setPronDemo(null);
+    setPronResult(null);
+    setDictSentence(null);
+    setDictTarget(\"\");
+    setDictResult(null);
+    setDictOffset(0);
+    setKanjiCards([]);
+    setKanjiActive(null);
+    setKanjiStage(null);
+    setKanjiTask(null);
+    setKanjiGraded(false);
+    setKanjiCorrect(false);
+    setKanjiCorrectChoice(\"\");
+    setKanjiError(null);
+    try {
+      await refreshLanguages();
+      const home = (await inv(\"home_state\", { profileId })) as {
+        display_name: string;
+        plan: SessionPlan;
+        next_goal: NextGoalView | null;
+      };
+      if (gen !== packSwitchGen.current) return;
+      setDisplayName(home.display_name);
+      applyPlan(home.plan);
+      setNextGoal(home.next_goal);
+      setFirstRunSteps((await inv(\"first_run_steps\", { profileId })) as FirstRunStep[]);
+      setPathNodes((await inv(\"unit_path\", { profileId })) as UnitPathNode[]);
+      setNextOffer((await inv(\"current_offer\", { profileId })) as NextOffer | null);
+      if (gen !== packSwitchGen.current) return;
+      setEnvironments((await inv(\"world_state\", { profileId })) as WorldEnvironment[]);
+      setDisplay((await inv(\"display_settings\", { profileId })) as DisplaySettingsView);
+      await loadProfilePrefs(profileId);
+    } catch (e) {
+      if (gen === packSwitchGen.current) {
+        setLangError(`The language was switched, but the screens could not re-read: ${String(e)}`);
+      }
+    } finally {
+      if (gen === packSwitchGen.current) setPackSwitching(false);
+    }
+  }
+
+  async function installCatalogPack(packId: string) {
+    if (!inv) return;
+    setInstallOutcome(null);
+    setInstallReceipt(null);
+    setLangError(null);
+    try {
+      const res = (await inv(\"install_catalog_pack\", { packId })) as {
+        receipt: InstallReceipt | null;
+      } | null;
+      if (res?.receipt) setInstallReceipt(res.receipt);
+    } catch (e) {
+      const reason = String(e).replace(/^install-catalog-pack failed:\\s*/, \"\");
+      setInstallOutcome(
+        reason.includes(\"install cancelled\")
+          ? { kind: \"cancelled\", pack_id: packId, message: reason }
+          : { kind: \"failed\", pack_id: packId, message: reason },
+      );
+    } finally {
+      setEngineProgress(null);
+    }
+    try {
+      await refreshLanguages();
+    } catch (e) {
+      // The write succeeded; only the re-read failed — say so, and let the
+      // receipt/outcome already on screen stand.
+      setLangError(`The pack list could not be re-read: ${String(e)}`);
+    }
+  }
+
+  // Cancel asks the engine to stop the install whose progress is on screen —
+  // the transfer or the unpack, whichever is running. The engine answers
+  // through the normal failure path with its `install cancelled` reason, so
+  // the outcome shows as cancelled — never as a client-side guess that
+  // nothing happened.
+  async function cancelInstall() {
+    if (!inv) return;
+    const subject = engineProgress?.subject;
+    if (!subject) return;
+    await inv(\"cancel_pack_install\", { packId: subject }).catch(() => undefined);
+  }
+
+  async function importPack(dataB64: string) {
+    if (!inv) return;
+    try {
+      await inv(\"import_pack\", { dataB64 });
+      setLangError(null);
+    } catch (e) {
+      setLangError(String(e));
+    } finally {
+      setEngineProgress(null);
+    }
+    try {
+      await refreshLanguages();
+    } catch (e) {
+      setLangError(`The pack list could not be re-read: ${String(e)}`);
+    }
+  }
+
+  async function refreshAligner() {
+    if (!inv) return;
+    setAlignerStatus((await inv(\"aligner_status\")) as AlignerStatus);
+  }
+
+  // The release identity is app-wide, not per-profile, and ADR-0015 makes a
+  // runtime report worthless without it. Read it as soon as the bridge exists;
+  // a failed read says \"unknown\" rather than pretending to still be loading.
+  useEffect(() => {
+    if (!inv) return;
+    void inv(\"build_identity\")
+      .then((v) => setBuildIdentity(v as BuildIdentity))
+      .catch(() => setBuildIdentity({ version: \"unknown\", commit: \"unknown\", dirty: false }));
+  }, [inv]);
+
+  // I03: ask the engine whether this profile's pack teaches characters, so the
+  // hub can advertise the kanji drill before anything has been opened.
+  useEffect(() => {
+    if (!inv || !profileId) return;
+    let live = true;
+    setKanjiAvailable(true);
+    void inv(\"kanji_available\", { profileId })
+      .then((v) => live && setKanjiAvailable(Boolean(v)))
+      .catch(() => live && setKanjiAvailable(true));
+    return () => {
+      live = false;
+    };
+    // U02: `selectedPack` changes only when the session's active pack does,
+    // so the probe re-runs exactly once per pack change (U01's acceptance)
+    // and never on typing or unrelated display state.
+  }, [inv, profileId, selectedPack]);
+
+  async function installSpeechModel(modelId: string) {
+    if (!inv) return;
+    try {
+      await inv(\"install_model\", { modelId });
+      setLangError(null);
+    } catch (e) {
+      setLangError(String(e));
+    } finally {
+      setEngineProgress(null);
+    }
+    try {
+      await refreshSpeech();
+    } catch (e) {
+      setLangError(`The speech model list could not be re-read: ${String(e)}`);
+    }
+  }
+
+  async function deleteSpeechModel(modelId: string) {
+    if (!inv) return;
+    try {
+      await inv(\"delete_model\", { modelId });
+      setLangError(null);
+    } catch (e) {
+      setLangError(String(e));
+    }
+    try {
+      await refreshSpeech();
+    } catch (e) {
+      setLangError(`The speech model list could not be re-read: ${String(e)}`);
+    }
+  }
+
+  async function refreshSpeech() {
+    if (!inv) return;
+    const models = (await inv(\"available_models\")) as Array<{
+      id: string;
+      version: string;
+      runtime: string;
+      license_code: string;
+      installed: boolean;
+      installable: boolean;
+      size_bytes: number;
+    }>;
+    setSpeechModels(
+      models
+        .filter((m) => m.runtime === \"whisper.cpp\")
+        .map((m) => ({
+          id: m.id,
+          version: m.version,
+          license_code: m.license_code,
+          installed: m.installed,
+          installable: m.installable,
+          size_bytes: m.size_bytes,
+        })),
+    );
+    setSpeechModel((await inv(\"get_speech_model\")) as string);
+    setDeviceTier((await inv(\"recommended_speech_model\")) as DeviceTier);
+  }
+
+  async function selectSpeechModel(modelId: string) {
+    if (!inv) return;
+    setLangError(null);
+    try {
+      await inv(\"set_speech_model\", { modelId });
+    } catch (e) {
+      setLangError(String(e));
+    }
+    try {
+      await refreshSpeech();
+    } catch (e) {
+      setLangError(`The speech model list could not be re-read: ${String(e)}`);
+    }
+  }
+
+  async function createProfile() {
+    setOnboardError(null);
+    if (inv) {
+      try {
+        const p = (await inv(\"create_profile\", { displayName: profileName })) as {
+          id: string;
+          display_name: string;
+        };
+        setProfileId(p.id);
+        setDisplayName(p.display_name);
+      } catch (e) {
+        setOnboardError(
+          `Could not create the local profile: ${String(e)} You can try again; nothing was sent off this device.`,
+        );
+        return;
+      }
+    } else {
+      setProfileId(\"local-dev-profile\");
+      setDisplayName(profileName);
+    }
+    setStep(\"packs\");
+  }
+
+  async function install(id: string) {
+    setOnboardError(null);
+    if (inv) {
+      // sweep-ts-dup-install: the disabled-state may be stale if the launch
+      // read failed; a fresh check keeps the label honest and skips a
+      // pointless call (the engine no-ops an already-current install).
+      const fresh = await refreshInstalled();
+      if (fresh?.some((i) => i.pack_id === id)) return;
+      setInstallingPack(id);
+      try {
+        // K-73 made this command async, so `engine-progress` events now
+        // actually reach the webview while it runs; the stage line above
+        // the pack list is what makes the minute-long wait visible (K-69).
+        await inv(\"install_pack\", { packId: id });
+      } catch (e) {
+        setOnboardError(`Could not install that pack: ${String(e)}`);
+        return;
+      } finally {
+        setInstallingPack(null);
+        setEngineProgress(null);
+      }
+      // PACK-UPDATE-UX-001: take the record from the same authoritative
+      // read every other surface uses. `install_pack` answers a
+      // PackCandidate with no version (lib.rs:422-432), so nothing here
+      // invents one; a failed re-read leaves the step saying its state is
+      // unknown, where retry, another pack, the file input and \"Skip for
+      // now\" all stay available.
+      await refreshInstalled();
+    }
+  }
+
+  // Owner 2026-10-12: a pack downloaded outside the app has to be usable the
+  // moment the wizard asks for a language. Same command and validation as
+  // Settings -> import; the record it returns marks the row Installed and
+  // selects it, so no second install is asked for.
+  async function locatePackOnboarding(file: File) {
+    setOnboardError(null);
+    if (!inv) return;
+    setInstallingPack(\"__locate__\");
+    try {
+      const imported = (await inv(\"import_pack\", {
+        dataB64: await readFileB64(file),
+      })) as InstalledPack;
+      setInstalled((prev) =>
+        prev.some((i) => i.pack_id === imported.pack_id) ? prev : [...prev, imported],
+      );
+      setPacks((await inv(\"available_packs\")) as PackCandidate[]);
+      setSelectedPack(imported.pack_id);
+    } catch (e) {
+      setOnboardError(`That pack file could not be installed: ${String(e)}`);
+    } finally {
+      setInstallingPack(null);
+      setEngineProgress(null);
+    }
+  }
+
+  // Choosing a learning language is not a gate: skipping leaves the profile
+  // with no active pack, and Settings sets it later.
+  function skipPackChoice() {
+    setOnboardError(null);
+    setSelectedPack(null);
+    setStep(\"microphone\");
+  }
+
+  /** K-72: plain names for the speech components, so the onboarding step
+   * reads as capabilities, not raw catalog ids the learner cannot act on.
+   * Since ADR-0024 deleted runtime synthesis the catalog carries recognition
+   * models only, so the model size is what distinguishes the rows. */
+  function speechLabel(m: { id: string; runtime: string }): string {
+    const tail = m.id.slice(m.id.lastIndexOf(\".\") + 1);
+    if (m.runtime === \"whisper.cpp\")
+      return `Speech recognition (Whisper ${tail.charAt(0).toUpperCase()}${tail.slice(1)})`;
+    if (m.runtime === \"sherpa-onnx\") return \"Speech recognition (sherpa-onnx Whisper)\";
+    return m.id;
+  }
+
+  async function loadSpeechComponents() {
+    if (!inv) return;
+    try {
+      const all = (await inv(\"available_models\")) as Array<{
+        id: string;
+        runtime: string;
+        installed: boolean;
+        installable: boolean;
+        size_bytes: number;
+        role: \"recognition\" | \"synthesis\";
+      }>;
+      setSpeechComponents(
+        all.map((m) => ({
+          id: m.id,
+          name: speechLabel(m),
+          installed: m.installed,
+          installable: m.installable,
+          size_bytes: m.size_bytes,
+          role: m.role,
+        })),
+      );
+    } catch {
+      // A failed catalog read leaves the list empty; the step then offers
+      // nothing to install rather than pretending components exist.
+      setSpeechComponents([]);
+    }
+  }
+
+  // K-72: \"yes\" to the microphone does not end setup — it chains into
+  // the speech setup step, so the downloads are handled (or consciously
+  // skipped) the moment the learner opts into speaking.
+  function chooseMicrophone() {
+    setMicChosen(true);
+    setStep(\"speech-setup\");
+    void loadSpeechComponents();
+  }
+
+  async function installSpeechComponents() {
+    if (!inv) return;
+    setOnboardError(null);
+    setSpeechInstalling(true);
+    try {
+      for (const c of speechComponents.filter((x) => !x.installed && x.installable)) {
+        await inv(\"install_model\", { modelId: c.id });
+      }
+    } catch (e) {
+      setOnboardError(`Speech download failed: ${String(e)}`);
+    } finally {
+      setSpeechInstalling(false);
+      setEngineProgress(null);
+    }
+    await loadSpeechComponents();
+  }
+
+  async function finishOnboarding(micEnabled: boolean) {
+    setOnboardError(null);
+    if (inv && profileId) {
+      try {
+        await inv(\"complete_onboarding\", { profileId, packId: selectedPack ?? null, micEnabled });
+      } catch (e) {
+        // Worth stopping for: nothing was recorded, so the same button is the
+        // retry.
+        setOnboardError(`Setup could not be completed: ${String(e)}`);
+        return;
+      }
+      // Same entry invariant as resume — the profile exists from here on, so a
+      // failed fill-in read must not hold the learner inside the wizard.
+      try {
+        const home = (await inv(\"home_state\", { profileId })) as {
+          display_name: string;
+          plan: SessionPlan;
+          next_goal: NextGoalView | null;
+        };
+        setDisplayName(home.display_name);
+        applyPlan(home.plan);
+        setNextGoal(home.next_goal);
+        setFirstRunSteps((await inv(\"first_run_steps\", { profileId })) as FirstRunStep[]);
+        setPathNodes((await inv(\"unit_path\", { profileId })) as UnitPathNode[]);
+        setNextOffer((await inv(\"current_offer\", { profileId })) as NextOffer | null);
+        const envs = (await inv(\"world_state\", { profileId })) as WorldEnvironment[];
+        setEnvironments(envs);
+        setDisplay((await inv(\"display_settings\", { profileId })) as DisplaySettingsView);
+        await loadProfilePrefs(profileId);
+      } catch (e) {
+        console.error(\"setup fill-in reads failed\", e);
+      }
+      void refreshLanguages(profileId).catch(() => {});
+    }
+    setStep(\"done\");
+  }
+
+  // K-05: resume an existing local profile at launch. The native side
+  // validates the id; nothing is sent off this device.
+  // UI-HYGIENE-001: archive a chooser profile (a test run or an old
+  // experiment) without deleting any of its data.
+  async function toggleProfileHidden(id: string, hidden: boolean) {
+    if (!inv) return;
+    try {
+      await inv(\"set_profile_hidden\", { profileId: id, hidden });
+      setProfiles((await inv(\"list_profiles\")) as ProfileSummary[]);
+    } catch (e) {
+      setOnboardError(`Could not update this profile: ${String(e)}`);
+    }
+  }
+
+  async function resumeProfile(id: string) {
+    setOnboardError(null);
+    if (!inv) return;
+    let p: ProfileSummary;
+    try {
+      p = (await inv(\"resume_profile\", { profileId: id })) as ProfileSummary;
+    } catch (e) {
+      setOnboardError(`Could not resume this profile: ${String(e)}`);
+      return;
+    }
+    setProfileId(p.id);
+    setDisplayName(p.display_name);
+    // Owner 2026-10-12: opening your own profile must never depend on a
+    // content read. The step flips here, so every read below only fills the
+    // screens in — if one fails the learner is still inside the app, where
+    // Home says plainly that no language is set, instead of being held at
+    // the resume gate by an error they cannot act on.
+    setStep(\"done\");
+    try {
+      const home = (await inv(\"home_state\", { profileId: p.id })) as {
+        display_name: string;
+        plan: SessionPlan;
+        next_goal: NextGoalView | null;
+      };
+      setDisplayName(home.display_name);
+      applyPlan(home.plan);
+      setNextGoal(home.next_goal);
+      setFirstRunSteps((await inv(\"first_run_steps\", { profileId: p.id })) as FirstRunStep[]);
+      setPathNodes((await inv(\"unit_path\", { profileId: p.id })) as UnitPathNode[]);
+      setNextOffer((await inv(\"current_offer\", { profileId: p.id })) as NextOffer | null);
+      const envs = (await inv(\"world_state\", { profileId: p.id })) as WorldEnvironment[];
+      setEnvironments(envs);
+      setDisplay((await inv(\"display_settings\", { profileId: p.id })) as DisplaySettingsView);
+      await loadProfilePrefs(p.id);
+    } catch (e) {
+      console.error(\"profile entry reads failed\", e);
+    }
+    void refreshLanguages(p.id).catch(() => {});
+  }
+
+  async function changeBudget(minutes: number) {
+    const previous = budget;
+    setBudget(minutes);
+    if (inv && profileId) {
+      const gen = packSwitchGen.current;
+      try {
+        const next = (await inv(\"practice_plan\", { profileId, minutes })) as SessionPlan;
+        if (gen !== packSwitchGen.current) return;
+        applyPlan(next);
+      } catch (e) {
+        // The optimistic value is only real once the engine has rebuilt the
+        // plan around it; otherwise the learner keeps the old budget.
+        setBudget(previous);
+        setSettingsError(
+          `The study budget could not be saved: ${String(e)}. Reverted to ${previous} minutes.`,
+        );
+      }
+    }
+  }
+
+  // K-41: stress-mark visibility toggle (display setting only).
+  async function setStressMode(mode: \"auto\" | \"on\" | \"off\") {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
+      setDisplay(
+        (await inv(\"set_display_settings\", { profileId, stressMode: mode })) as DisplaySettingsView,
+      );
+    } catch (e) {
+      // The engine did not answer, so `display` never changed — the toggle
+      // on screen still shows the real stored value. Say the write failed.
+      setSettingsError(`The stress-mark setting could not be saved: ${String(e)}`);
+    }
+  }
+
+  // GRAMMAR-LABELS-001: the one global show/hide for the interlinear
+  // grammar labels (display setting only — grading and scheduling never
+  // see it). The stress-mode key is sent unchanged so the write cannot
+  // clobber it.
+  async function setGrammarLabelsSetting(on: boolean) {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
+      setDisplay(
+        (await inv(\"set_display_settings\", {
+          profileId,
+          stressMode: display?.stress_mode ?? \"auto\",
+          grammarLabels: on,
+        })) as DisplaySettingsView,
+      );
+    } catch (e) {
+      setSettingsError(`The grammar-label setting could not be saved: ${String(e)}`);
+    }
+  }
+
+  // SETTINGS-001: Settings controls are engine-backed; values come from
+  // and go back to the store via the new commands — no UI-only setting.
+  async function loadProfilePrefs(pid: string) {
+    if (!inv) return;
+    try {
+      setMicEnabled((await inv(\"get_microphone_enabled\", { profileId: pid })) as boolean);
+      setMicDevice((await inv(\"get_microphone_device\", { profileId: pid })) as string | null);
+      setPlaybackDevice((await inv(\"get_playback_device\", { profileId: pid })) as string | null);
+      setRomajiMode((await inv(\"get_romaji_mode\", { profileId: pid })) as RomajiMode);
+      setKanaKeyboard((await inv(\"get_kana_keyboard\", { profileId: pid })) as KanaKeyboardMode);
+    } catch {
+      /* keep the conservative defaults; opening Settings re-reads them */
+    }
+  }
+
+  async function openSettings() {
+    setRoute(\"settings\");
+    setSettingsError(null);
+    setSettingsExportPath(null);
+    setSettingsDeleteArmed(false);
+    if (!inv || !profileId) return;
+    // Sweep finding 20: one failed read must not abort the other primes —
+    // a broken speech catalogue takes neither the pack list nor the mic
+    // pickers down with it. Each block reports its own failure.
+    const fails: string[] = [];
+    const soft = async (label: string, run: () => Promise<unknown>) => {
+      try {
+        await run();
+      } catch (e) {
+        fails.push(`${label}: ${String(e)}`);
+      }
+    };
+    await soft(\"microphone and writing settings\", async () => {
+      setMicEnabled((await inv(\"get_microphone_enabled\", { profileId })) as boolean);
+      setMicDevice((await inv(\"get_microphone_device\", { profileId })) as string | null);
+      setPlaybackDevice((await inv(\"get_playback_device\", { profileId })) as string | null);
+      setRomajiMode((await inv(\"get_romaji_mode\", { profileId })) as RomajiMode);
+      setKanaKeyboard((await inv(\"get_kana_keyboard\", { profileId })) as KanaKeyboardMode);
+    });
+    // K-77: Settings now hosts language-pack management and the speech
+    // runtime status too, so opening it primes the reads the old
+    // Languages tab did. K-90 deleted the synthesis status read.
+    await soft(\"speech models\", refreshSpeech);
+    await soft(\"language packs\", () => refreshLanguages());
+    await soft(\"aligner status\", refreshAligner);
+    await refreshMicrophones();
+    await refreshOutputs();
+    if (fails.length > 0) setSettingsError(fails.join(\" \"));
+  }
+
+  // K-64: names exist only after the browser has granted microphone access
+  // once, and a session with no microphone (or no permission handler) can
+  // refuse the query outright. That must leave Settings intact: the picker
+  // stays empty and the copy explains why. The timeout is not politeness —
+  // WebKitGTK is entitled to sit on a device query it can never answer, and a
+  // settings nicety is not allowed to freeze the app.
+  async function refreshMicrophones() {
+    try {
+      const listed = await Promise.race([
+        listMicrophones(navigator.mediaDevices),
+        after<Microphone[]>(2000, []),
+      ]);
+      setMicDevices(listed);
+    } catch {
+      setMicDevices([]);
+    }
+  }
+
+  // K-88: outputs, same discipline as microphones — WebKitGTK is entitled
+  // to sit on a device query it can never answer, so the race and the empty
+  // list are legal answers. The capability probe is what the Settings copy
+  // branches on: we never show a picker this runtime cannot honour.
+  async function refreshOutputs() {
+    const probe = new Audio();
+    setCanRouteOutput(
+      typeof (probe as HTMLMediaElement & { setSinkId?: unknown }).setSinkId === \"function\",
+    );
+    try {
+      const listed = await Promise.race([
+        listOutputs(navigator.mediaDevices),
+        after<SpeakerOutput[]>(2000, []),
+      ]);
+      setPlaybackOutputs(listed);
+    } catch {
+      setPlaybackOutputs([]);
+    }
+  }
+
+  async function setMicSetting(enabled: boolean) {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
+      setMicEnabled((await inv(\"set_microphone_enabled\", { profileId, enabled })) as boolean);
+    } catch (e) {
+      setSettingsError(String(e));
+    }
+  }
+
+  async function pickMicrophoneSetting(deviceId: string | null) {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
+      setMicDevice((await inv(\"set_microphone_device\", { profileId, deviceId })) as string | null);
+    } catch (e) {
+      setSettingsError(String(e));
+    }
+  }
+
+  async function pickPlaybackSetting(deviceId: string | null) {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
+      setPlaybackDevice(
+        (await inv(\"set_playback_device\", { profileId, deviceId })) as string | null,
+      );
+    } catch (e) {
+      setSettingsError(String(e));
+    }
+  }
+
+  async function setRomajiSetting(mode: RomajiMode) {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
+      setRomajiMode((await inv(\"set_romaji_mode\", { profileId, mode })) as RomajiMode);
+    } catch (e) {
+      setSettingsError(String(e));
+    }
+  }
+
+  // Issue #2 phase 1: the in-app kana keyboard is a profile setting that
+  // never touches the system layout.
+  async function setKanaKeyboardSetting(mode: KanaKeyboardMode) {
+    if (!inv || profileId === null) return;
+    setSettingsError(null);
+    try {
+      setKanaKeyboard((await inv(\"set_kana_keyboard\", { profileId, mode })) as KanaKeyboardMode);
+    } catch (e) {
+      setSettingsError(String(e));
+    }
+  }
+
+  // IME-TOGGLE-UX-001: resolve the active pack's in-app keyboard from its
+  // own manifest `scripts:` plus the converter registry in ime.ts — never
+  // from a locale or a language code. Null means the pack declares no
+  // in-app keyboard: no bubble, no live input layer, and the shortcut
+  // no-ops. The stored per-profile setting names the converter it selects
+  // (phase 1: \"romaji-kana\" is exactly the converter id), so the layer is
+  // live only when the setting and the pack's declaration agree.
+  const activeKeyboard = useMemo(() => {
+    const record = installed.find((i) => i.pack_id === activeIds[0]);
+    if (!record) return null;
+    // IN-APP-IME-001 phase 2: the pack's declared input-method map gates
+    // converters on top of the script grant (absent map = unchanged).
+    return inAppKeyboardForScripts(record.scripts, {
+      declared: record.input_methods_declared,
+      methods: record.input_methods,
+    });
+  }, [installed, activeIds]);
+  // IN-APP-IME-001 phase 2: pack-lexicon conversion candidates for the
+  // kana fields. The engine's `ime_candidates` command answers ONLY from
+  // the active pack's lexicon (plus the separately-labeled aux slice) —
+  // never a baked-in word list — and the pack's declared input-method
+  // allowlist rules the lookup out before it is ever called (absent map =
+  // current behavior). The gate's feature id mirrors the manifest id, so
+  // packs can switch conversion off without an engine change.
+  const imeCandidates = useMemo(() => {
+    if (!inv || profileId === null) return undefined;
+    const record = installed.find((i) => i.pack_id === activeIds[0]);
+    if (!record) return undefined;
+    if (
+      !inputMethodAllowed(
+        { declared: record.input_methods_declared, methods: record.input_methods },
+        LEXICON_CANDIDATES_METHOD_ID,
+      )
+    ) {
+      return undefined;
+    }
+    return (kana: string) => inv(\"ime_candidates\", { kana, profileId }) as Promise<ImeCandidate[]>;
+  }, [installed, activeIds, profileId]);
+  const inAppInputOn =
+    activeKeyboard !== null &&
+    kanaKeyboard !== \"off\" &&
+    activeKeyboard.converter.id === kanaKeyboard;
+
+  // IME-TOGGLE-UX-001 (acceptance 1): the documented in-app shortcut
+  // Ctrl+Shift+K (Cmd+Shift+K on macOS) flips the active pack's in-app
+  // keyboard from any in-app screen, without opening Settings. It writes
+  // the same per-profile setting Settings shows — one value, one write
+  // path, pack capability gating intact — and it no-ops when the active
+  // pack declares no in-app keyboard. The listener sits on window in
+  // capture phase so a focused in-app keyboard field can never eat it, and
+  // `useKanaIME` independently stands down for modified keys.
+  const activeKeyboardRef = useRef(activeKeyboard);
+  useEffect(() => {
+    activeKeyboardRef.current = activeKeyboard;
+  }, [activeKeyboard]);
+  useEffect(() => {
+    if (step !== \"done\") return;
+    const onKey = (e: KeyboardEvent) => {
+      if (!(e.ctrlKey || e.metaKey) || !e.shiftKey || e.altKey) return;
+      if (e.key.toLowerCase() !== \"k\" && e.code !== \"KeyK\") return;
+      const keyboard = activeKeyboardRef.current;
+      if (!keyboard) return;
+      e.preventDefault();
+      e.stopPropagation();
+      void setKanaKeyboardSetting(
+        keyboard.converter.id === kanaKeyboard
+          ? \"off\"
+          : (keyboard.converter.id as KanaKeyboardMode),
+      );
+    };
+    window.addEventListener(\"keydown\", onKey, true);
+    return () => window.removeEventListener(\"keydown\", onKey, true);
+  }, [step, kanaKeyboard, inv, profileId]);
+  async function exportProfileData() {
+    if (!inv || !profileId) return;
+    setSettingsError(null);
+    try {
+      setSettingsExportPath((await inv(\"profile_export\", { profileId })) as string);
+    } catch (e) {
+      setSettingsError(String(e));
+    }
+  }
+  // R06: the check is read-only; the write only happens on the labelled
+  // confirm control, always as a new profile, never over the profile in use.
+  async function previewRestore() {
+    if (!inv) return;
+    setSettingsError(null);
+    setRestoreOutcome(null);
+    const path = restorePath.trim();
+    try {
+      const preview = (await inv(\"profile_import_preview\", {
+        path,
+        mode: \"new\",
+      })) as ImportPreview;
+      setRestoreChecked({ path, preview });
+    } catch (e) {
+      setRestoreChecked(null);
+      setSettingsError(String(e));
+    }
+  }
+
+  async function confirmRestore() {
+    if (!inv || !restoreChecked || !restoreChecked.preview.supported) return;
+    setSettingsError(null);
+    try {
+      const outcome = (await inv(\"profile_import\", {
+        path: restoreChecked.path,
+        mode: \"new\",
+      })) as ImportOutcome;
+      setRestoreOutcome(outcome);
+      // The restored profile is in the picker without a restart.
+      setProfiles((await inv(\"list_profiles\")) as ProfileSummary[]);
+    } catch (e) {
+      setSettingsError(String(e));
+    ...
+
+ ❯ src/drill-feel.test.ts:108:20
+    106|   });
+    107|   it("both embedded runners render their dots — placement by question,…
+    108|     expect(appTsx).toMatch(/<StepDots[^>]*placementItems\.length/);
+       |                    ^
+    109|     expect(appTsx).toMatch(/<StepDots[^>]*placementIdx/);
+    110|     expect(appTsx).toMatch(/<StepDots[^>]*kanjiStage/);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/12]⎯
+
+ FAIL  |node| src/practice.test.tsx > practice runner > reveals the right pick with the ring marker and dims the rest as the answers lock (FEEL-DRILL-001)
+AssertionError: expected '<section aria-label="Practice"><h2>Wh…' to contain 'choice--correct'
+
+Expected: "choice--correct"
+Received: "<section aria-label="Practice"><h2>What does this mean?</h2><p class="prompt">こんにちは</p><p><small>こんにちは</small></p><div role="group" aria-label="Choices" class="btn-row"><button type="button" class="btn btn--quiet" disabled="">I (neutral polite first person)</button><button type="button" class="btn btn--quiet" disabled="">hello</button><button type="button" class="btn btn--quiet" disabled="">aunt</button><button type="button" class="btn btn--quiet" disabled="">how do you do (first meeting)</button></div><p role="status" aria-live="polite" class="verdict verdict--correct">Correct</p><div class="btn-row"><button type="button" class="btn btn--primary">Back to plan</button></div></section>"
+
+ ❯ src/practice.test.tsx:54:18
+     52|     // as the answers lock — the graded board reads at a glance.
+     53|     const html = render({ graded: true, correct: true, correctChoice: …
+     54|     expect(html).toContain("choice--correct");
+       |                  ^
+     55|     expect(html).toContain("choice--dim");
+     56|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/12]⎯
+
+
+ Test Files  3 failed (3)
+      Tests  12 failed | 17 passed (29)
+   Start at  05:33:34
+   Duration  584ms (transform 44%, environment 24%, tests 17%, import 14%, worker 1%)
+

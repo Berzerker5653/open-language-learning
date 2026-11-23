@@ -1,0 +1,27 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "BAR TRANSITION: .session-bar-fill carries the width ease in the slow family",
+      "pass": true,
+      "measured": {
+        "transitionProperty": "width",
+        "transitionDuration": "0.3s",
+        "transitionTiming": "cubic-bezier(0.22, 0.61, 0.36, 1)"
+      }
+    },
+    {
+      "name": "BAR MID-GLIDE: the fill width passes through intermediate values when a card lands",
+      "pass": false,
+      "measured": {
+        "base": 0,
+        "final": 0,
+        "samples": [],
+        "intermediate": -1
+      }
+    }
+  ],
+  "failures": 2,
+  "error": "navigation error: the second activity never opened choices",
+  "profileId": "prof-62e4679b-a60d-41fb-86dc-8966a01adf27"
+}

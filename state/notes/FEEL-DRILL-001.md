@@ -81,3 +81,34 @@ audit — every claim below carries a legend from the committed target mockup
 - MARKET sheet (card attachment `sheet-babbel.png`, local-only): real
   drill players put the progress line at top, ring/check on the picked
   answer, and a quiet summary card — match the feel, keep our tokens.
+
+## RESUME RECIPE (run 204, near cap — code DONE+committed, capture walk only)
+
+State: e34781bd card, 993c8b9d red vitest (log banked), 6db2c26b capstone-wiring chore,
+a7d4da1f ALL lane code (543/543 vitest + tsc + eslint + prettier + learner-copy green at
+commit). Capture script scripts/drill-feel-capture.mjs exists (uncommitted, tested: BAR
+TRANSITION check PASSES live in the real engine; the walk has 2 known bugs left):
+
+1. sampleBarThroughAdvance returned samples:[] — the `.session-bar-fill` probe found no
+   element although the same selector worked minutes earlier. Suspect: after Start
+   practicing + grading, the walk's Continue click (i===3) had already advanced and the
+   runner/bridge swap removed [data-session-chrome] (bridge screen has NO session chrome!
+   probe during bridge => null). Fix: sample BEFORE/at the click, keep sampling across
+   the bridge gap (nulls tolerated, already coded) — and treat done-increment as
+   happening on the CONTINUE click, so sample every ~40ms for the full 1.5s window.
+2. The second activity is lesson-gated again: the bridge loop (section 2) must also
+   click 'Start practicing' before polling for choices (same one-liner as the walk
+   loop). Also poll runnerKind (choices|typed|graded), not only choices.
+
+Remaining steps (takeover):
+1. node scripts/drill-feel-capture.mjs (SERVE_BIN=target/debug/lts-serve already built,
+   SERVE_DIST=apps/desktop/dist already GREEN) -> all checks green
+   -> state/evidence/FEEL-DRILL-001/capture/.
+2. RED at base: `git checkout 6db2c26b -- packages/ui/src/styles.css apps/desktop/src/practice.tsx apps/desktop/src/App.tsx apps/desktop/src/session-chrome.tsx` (tree is CLEAN, work is committed), rebuild dist, run capture with OUT_DIR=state/evidence/FEEL-DRILL-001/red-at-head (expect BAR checks FAIL), then `git checkout HEAD -- <same files>` + rebuild dist GREEN.
+3. gates.log (vitest 543/543 at a7d4da1f, red-vitest.log banked, capture red/green counts),
+   evidence commit (scripts/drill-feel-capture.mjs + state/evidence/FEEL-DRILL-001/**),
+   ledger flip (done + evidence paths incl capture result.jsons, active_task null),
+   python3 tools/validate_handoff.py, ledger commit, push, kanban_complete.
+4. NOTE for ledger/summary: chore 6db2c26b wired the capstone App->Home props
+   (dead feature on main since UNIT-CAPSTONE-001; suggest planner REVIEW or a journey-test
+   follow-up card — harness has no capstone fixture).
