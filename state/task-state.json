@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": null,
+  "active_task": "FEEL-DRILL-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3149,6 +3149,15 @@
       ],
       "updated": "2026-11-23",
       "summary": "Shipped ddbac5d9 (code), evidence 7ba990d0. Global motion foundation: :root dur/ease/space/z tokens, fade-up/slide-up/pop/pulse-soft keyframe library, :active pressed states on .btn/.tab/.seg-btn/.card/.profile-card, measured gliding routes underline, smooth route-reset scroll. Real-engine capture 1/9 red at base vs 9/9 green; 531/531 vitest, tsc clean, reduced-motion kill-switch proven by capture, not trusted."
+    },
+    "FEEL-DRILL-001": {
+      "status": "in_progress",
+      "attempts": 1,
+      "title": "Session drill feel - the progress bar eases its width, the correct pick reveals a ring plus check, choices press and dim, end-of-session cards get real calm styling, embedded runners show step dots",
+      "evidence": [
+        "state/notes/FEEL-DRILL-001.md"
+      ],
+      "updated": "2026-11-23"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

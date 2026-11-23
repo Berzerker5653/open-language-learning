@@ -3513,6 +3513,24 @@ tasks:
   - "The route-tab underline becomes one gliding indicator measured MID-SLIDE by scripts/feel-global-capture.mjs against a real engine, and the route-change scrollTo reset is smooth."
   - "With prefers-reduced-motion reduce emulated every duration this card adds collapses to ~0, while the button-affordance rule-body pins, the a11y focus and contrast contract, and the ADR-0002 banned-token scans stay green unedited."
   required_for_desktop_1_0: false
+- id: FEEL-DRILL-001
+  milestone: M11
+  priority: P1
+  title: Session drill feel - the progress bar eases its width, the correct pick reveals a ring plus check, choices press and dim, end-of-session cards get real calm styling, embedded runners show step dots
+  dependencies: [FEEL-GLOBAL-001]
+  read_first:
+  - state/notes/FEEL-DRILL-001.md
+  - packages/ui/src/styles.css
+  - apps/desktop/src/practice.tsx
+  - apps/desktop/src/session-chrome.tsx
+  - scripts/feel-global-capture.mjs
+  acceptance:
+  - "The session bar fill eases to its new fraction over the slow token (300ms ease-out family), measured MID-GLIDE by a real-engine capture at a phone viewport - red at base where it snaps."
+  - "A correct pick reveals a green ring scaling in plus a soft ok-soft fill fade at the fast duration with a check badge (state is ring + check, not color alone); the tapped choice carries a press marker, a wrong tap shakes once, and the other choices dim as the answers lock."
+  - ".session-summary and .session-panel gain real CSS rules - a calm card surface with a quiet outline and an entrance fade with a 0.98 to 1 scale - per the drill target mock, no confetti, no badges, no reward language (ADR-0002)."
+  - "The inter-activity bridge entrance animation still computes after this lane (regression check), and the placement and kanji runners render per-question step dots with the current step marked, asserted in mounted journeys."
+  - "Every new claim is pinned red-at-base by a new drill-feel vitest contract plus the capture; prefers-reduced-motion collapses every duration this card adds; the button-affordance pins, a11y contract, and ADR-0002 scans stay green unedited."
+  required_for_desktop_1_0: false
 
 execution_scope:
   default_goal: desktop-1.0-release-candidate
@@ -3535,6 +3553,7 @@ execution_scope:
   - PATH-FEEL-MOTION-001
   - PATH-FEEL-SCROLL-001
   - FEEL-GLOBAL-001
+  - FEEL-DRILL-001
   - JA-A1-003
   - JA-A2-002
   - JA-A2-002-FIX-001
