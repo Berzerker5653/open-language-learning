@@ -49,6 +49,12 @@ import type { KanaKeyboardMode, RomajiMode } from "../settings";
  * PACK_ABSENCE_TOKENS); the app translates it into the sentence it shows. */
 const NO_PACK_TOKEN = "no active language pack";
 
+/** lib.rs CAPSTONE_ITEM_CAP / CAPSTONE_ITEM_SECONDS mirrored: the section
+ * review runs at most 16 items, 30 seconds each. The fixture keeps the
+ * engine's own numbers rather than inventing its own. */
+const CAPSTONE_ITEM_CAP = 16;
+const CAPSTONE_ITEM_SECONDS = 30;
+
 export const JA = "org.openlanguage.ja-jp.reference";
 const EO = "org.openlanguage.eo-demo";
 /** RU-MODALITY-PRACTICE-001: the RU pack the modality journeys run on.
@@ -1005,6 +1011,25 @@ interface Profile {
   events: number;
   goals: number;
   savedWords: number;
+  /** CAPSTONE-WIRING-TEST-001: the goals whose units the learner has
+   * completed — what `unit_path` reports done and what unlocks the band
+   * section's capstone node. Only seeded via the scenario's `capstone`
+   * option; every other fixture profile stays exactly as before. */
+  unitsDone: Set<string>;
+  /** Whether this profile's world carries capstone nodes at all — the
+   * scenario opt-in that gates emission, so existing journeys' node
+   * counts never shift. */
+  capstoneWorld: boolean;
+  /** Recorded capstone attempts by section key (band_key mirror): what
+   * `capstone_complete` writes and `unit_path` reads back. */
+  capstoneAttempts: Map<string, { passed: boolean }>;
+  /** Graded practice submits keyed by the engine's attempt-group shape
+   * `<sessionId>:<contentId>` — the evidence rows `capstone_complete`
+   * recounts. The UI's tallies are never trusted, mirroring lib.rs. */
+  gradedGroups: Set<string>;
+  /** Content ids with at least one Correct graded practice event — the
+   * fixture's honest stand-in for the mastery-derived refs_done. */
+  correctContent: Set<string>;
 }
 
 /** What the caller asks the fake world to look like before the app mounts. */
@@ -1021,6 +1046,12 @@ type Scenario = {
     /** The rows this profile's plan is built from, used in place of the
      * pack's fixture schedule (the constructor falls back to it). */
     schedule?: Scheduled[];
+    /** CAPSTONE-WIRING-TEST-001: opt this profile into the capstone world
+     * — `unit_path` then emits the engine's synthesized checkpoint node per
+     * band section (locked until `doneGoals` covers the section), and
+     * `capstone_plan`/`capstone_complete` answer. Profiles without it are
+     * untouched. */
+    capstone?: { doneGoals?: string[] };
   }[];
   installed?: string[];
   /** CONTENT-CONFIRM-001: confirmation marks already on the device, so a
@@ -1183,6 +1214,11 @@ export class LearnerEngine {
         events: seed.events ?? 0,
         goals: seed.goals ?? 2,
         savedWords: seed.savedWords ?? 0,
+        unitsDone: new Set(seed.capstone?.doneGoals ?? []),
+        capstoneWorld: seed.capstone !== undefined,
+        capstoneAttempts: new Map(),
+        gradedGroups: new Set(),
+        correctContent: new Set(),
       });
       this.nextProfile = Math.max(this.nextProfile, this.profiles.size + 1);
     }
@@ -1332,6 +1368,73 @@ export class LearnerEngine {
     };
   }
 
+  /** CAPSTONE-WIRING-TEST-001: the recall pool of a section, mirroring
+   * lib.rs `capstone_pool`: the section's units' content refs that the
+   * graded runners serve WITHOUT audio or ASR. In the fixture world those
+   * are lexicon words (the recall-meaning runner); the engine's pool also
+   * takes orth letters, but no fixture pack ships orth rows, and the
+   * mirror does not pretend otherwise. Deduped in schedule order, then
+   * the engine's item cap. */
+  private capstonePool(p: Profile, pack: Pack, goals: Set<string>): string[] {
+    const pool: string[] = [];
+    for (const row of p.schedule) {
+      if (!goals.has(row.goal)) continue;
+      if (pool.includes(row.content_id)) continue;
+      if (pack.words.some((w) => w.id === row.content_id)) pool.push(row.content_id);
+    }
+    return pool.slice(0, CAPSTONE_ITEM_CAP);
+  }
+
+  /// The section review plan, mirroring `capstone_plan_at`: every item a
+  /// `recall-meaning` over a section word, honest refusals where the
+  /// engine refuses (pack not installed, empty pool).
+  private capstonePlanFixture(p: Profile, packId: string, band: string): SessionPlan {
+    if (!p.active || p.active !== packId) throw "pack not installed";
+    const pack = PACKS[packId];
+    if (!pack) throw "pack not installed";
+    const key = band.trim().toLowerCase() || "other"; // lib.rs band_key
+    // Every fixture pack row sits in the on-ramp section — the same fact
+    // the unit_path mirror stamps on its nodes. A request for another
+    // section honestly finds no pool and refuses like the engine.
+    const goals = new Set<string>(key === "on-ramp" ? p.schedule.map((r) => r.goal) : []);
+    const pool = this.capstonePool(p, pack, goals);
+    if (pool.length === 0) throw "this section has no directly recallable letters or words";
+    const items: PlannedItem[] = pool.map((id) => {
+      const w = this.word(pack, id)!;
+      return {
+        item_id: `${id}#recall-meaning`,
+        content_id: id,
+        modality: "recall-meaning",
+        reason: "capstone",
+        kind: "review",
+        est_seconds: CAPSTONE_ITEM_SECONDS,
+        surface: w.surface,
+        gloss: w.gloss,
+      };
+    });
+    const total = CAPSTONE_ITEM_SECONDS * items.length;
+    return {
+      items,
+      total_seconds: total,
+      budget_minutes: Math.ceil(total / 60),
+      seed: 20261123,
+      planner_version: "capstone-1",
+    };
+  }
+
+  /// Mirror of the engine's attempt-grouped evidence write: a graded
+  /// practice submit with a session id records its event under attempt
+  /// group `<sessionId>:<contentId>` (lib.rs practice_submit_inner), and
+  /// `capstone_complete` recounts THOSE groups — never a UI tally. A
+  /// standalone activity (no session id) records the plain content event.
+  private recordGraded(p: Profile, args: Record<string, unknown>, correct: boolean): void {
+    if (!correct) return;
+    p.correctContent.add(String(args.contentId));
+    if (typeof args.sessionId === "string") {
+      p.gradedGroups.add(`${args.sessionId}:${String(args.contentId)}`);
+    }
+  }
+
   private plan(p: Profile, minutes = p.budget): SessionPlan {
     const pack = p.active ? PACKS[p.active] : undefined;
     const items: PlannedItem[] = p.schedule.map((s) => {
@@ -1448,6 +1551,11 @@ export class LearnerEngine {
           events: 0,
           goals: 2,
           savedWords: 0,
+          unitsDone: new Set(),
+          capstoneWorld: false,
+          capstoneAttempts: new Map(),
+          gradedGroups: new Set(),
+          correctContent: new Set(),
         });
         const p = this.profiles.get(id)!;
         return { id: p.id, display_name: p.display_name };
@@ -1534,14 +1642,33 @@ export class LearnerEngine {
           if (last && last.goal === s.goal) last.refs.add(s.content_id);
           else units.push({ goal: s.goal, refs: new Set([s.content_id]) });
         }
-        return units.map((u) => ({
+        // (Local element type mirrors home's UnitPathNode with `kind`
+        // optional: the fixture's unit nodes pre-date PATH-NODE-TYPES-001
+        // and carry no kind; the capstone node does, as the engine's does.)
+        const nodes: Array<{
+          pack_id: string;
+          unit_id: string;
+          title: string;
+          summary: string;
+          band: string | null;
+          kind?: string;
+          locked: boolean;
+          done: boolean;
+          current: boolean;
+          review_due: boolean;
+          due_count: number;
+          in_progress: boolean;
+          refs_done: number;
+          refs_total: number;
+          unlock_hint: string | null;
+        }> = units.map((u) => ({
           pack_id: pack.id,
           unit_id: `${pack.id}.unit.${u.goal}`,
           title: `${u.goal.replace(/-/g, " ")} unit`,
           summary: "",
           band: "on-ramp" as string | null,
           locked: false,
-          done: false,
+          done: p.unitsDone.has(u.goal),
           current: [...u.refs].some((r) => currentPool.has(r)),
           review_due: false,
           due_count: 0,
@@ -1553,6 +1680,82 @@ export class LearnerEngine {
           refs_total: u.refs.size,
           unlock_hint: null as string | null,
         }));
+        if (p.capstoneWorld) {
+          // CAPSTONE-WIRING-TEST-001: mirror of the engine's capstone
+          // emission (`unit_path_at`): ONE checkpoint node per band section,
+          // emitted AFTER the section's real units — the market's
+          // Checkpoint position. The id is the reserved engine shape
+          // `capstone.<pack>.<band key>` (lib.rs band_key: trim+lowercase,
+          // `other` when no band). Locked until every unit is done, done
+          // only on a PASSED recorded attempt, in-progress after an
+          // unpassed one, and NO node at all when the section's pool is
+          // empty — an empty checkpoint would be decoration, not pedagogy.
+          const sections = new Map<string, { band: string; goals: Set<string> }>();
+          for (const u of units) {
+            // The fixture mirror puts every pack row in the on-ramp band
+            // (see the band line above), so that is the section these
+            // goals form — the same band_key derivation lib.rs uses.
+            const band = "on-ramp";
+            const key = band.trim().toLowerCase() || "other";
+            const sec = sections.get(key) ?? { band, goals: new Set<string>() };
+            sec.goals.add(u.goal);
+            sections.set(key, sec);
+          }
+          for (const [key, sec] of sections) {
+            const pool = this.capstonePool(p, pack, sec.goals);
+            if (pool.length === 0) continue;
+            const attempt = p.capstoneAttempts.get(key);
+            const locked = units.some((u) => sec.goals.has(u.goal) && !p.unitsDone.has(u.goal));
+            nodes.push({
+              pack_id: pack.id,
+              unit_id: `capstone.${pack.id}.${key}`,
+              title: "Section review",
+              summary: "Mixed recall of the letters and words of this section.",
+              band: sec.band as string | null,
+              kind: "capstone",
+              locked,
+              done: attempt?.passed ?? false,
+              current: false,
+              review_due: false,
+              due_count: 0,
+              in_progress: attempt !== undefined && !attempt.passed,
+              refs_done: pool.filter((id) => p.correctContent.has(id)).length,
+              refs_total: pool.length,
+              unlock_hint: locked ? "finish this section's units first" : null,
+            });
+          }
+        }
+        return nodes;
+      }
+      case "capstone_plan": {
+        // CAPSTONE-WIRING-TEST-001: mirror of `capstone_plan_at` — the
+        // section's mixed-recall plan in the SAME SessionPlan shape the
+        // plan session rides (that is the whole point: the existing
+        // runner serves the capstone with zero new UI machinery). Reason
+        // "capstone", kind "review", the engine's own per-item seconds
+        // and item cap.
+        const p = this.profile(args.profileId);
+        return this.capstonePlanFixture(p, String(args.packId), String(args.band));
+      }
+      case "capstone_complete": {
+        // Mirror of `capstone_complete_at`: re-derive the selection, count
+        // the attempt-grouped Correct evidence rows the submit path
+        // already wrote, and record the attempt — pass OR fail, honestly.
+        // The app's own tallies are never trusted. Only a COMPLETED
+        // session lands here; stopping mid-review never calls this and so
+        // records nothing.
+        const p = this.profile(args.profileId);
+        const plan = this.capstonePlanFixture(p, String(args.packId), String(args.band));
+        const sid = String(args.sessionId);
+        const correct = plan.items.filter((i) =>
+          p.gradedGroups.has(`${sid}:${i.content_id}`),
+        ).length;
+        const items = plan.items.length;
+        // lib.rs `capstone_passes` mirrored: a pool of four or more needs
+        // 80 percent recalled; a smaller pool needs a clean sweep.
+        const passed = items >= 4 ? correct * 5 >= items * 4 : correct === items;
+        p.capstoneAttempts.set(String(args.band).trim().toLowerCase() || "other", { passed });
+        return { passed, items, correct };
       }
       case "learning_facts": {
         // WARM-MOMENTS-001: mirror of `learning_facts_at` for the fixture
@@ -2072,17 +2275,24 @@ export class LearnerEngine {
           const choices = pack.sentences.map((s) => s.gloss);
           const index = Number(args.choiceIndex ?? 0);
           p.events += 1;
-          return { correct: choices[index] === sentence.gloss, correct_choice: sentence.gloss };
+          const verdict = {
+            correct: choices[index] === sentence.gloss,
+            correct_choice: sentence.gloss,
+          };
+          this.recordGraded(p, args, verdict.correct);
+          return verdict;
         }
         if (sentence && modality === "production-writing") {
           // Typed grading is exact-match on the trimmed target; the expected
           // string never travels with the task.
           const target = pack.clozeTargets[contentId]?.[0] ?? "";
           p.events += 1;
-          return {
+          const verdict = {
             correct: String(args.answer ?? "").trim() === target,
             correct_choice: target,
           };
+          this.recordGraded(p, args, verdict.correct);
+          return verdict;
         }
         // A kanji id grades against the other characters' meanings/readings,
         // the same choice pool `kanji_task_build` builds.
@@ -2091,16 +2301,20 @@ export class LearnerEngine {
           const task = this.drillTask(pack, drill, String(args.modality));
           const index = Number(args.choiceIndex ?? 0);
           p.events += 1;
-          return {
+          const verdict = {
             correct: task.choices[index] === task.answer,
             correct_choice: task.answer,
           };
+          this.recordGraded(p, args, verdict.correct);
+          return verdict;
         }
         const w = this.word(pack, String(args.contentId));
         const index = Number(args.choiceIndex ?? 0);
         const correct = w?.answer === index;
         p.events += 1;
-        return { correct, correct_choice: w ? w.choices[w.answer] : "" };
+        const verdict = { correct, correct_choice: w ? w.choices[w.answer] : "" };
+        this.recordGraded(p, args, verdict.correct);
+        return verdict;
       }
       case "placement_plan": {
         const pack = this.activePack(this.profile(args.profileId));
@@ -2332,6 +2546,11 @@ export class LearnerEngine {
           events: (bundle.evidence as unknown[]).length,
           goals: (bundle.goals as unknown[]).length,
           savedWords: (bundle.mined_items as unknown[]).length,
+          unitsDone: new Set(),
+          capstoneWorld: false,
+          capstoneAttempts: new Map(),
+          gradedGroups: new Set(),
+          correctContent: new Set(),
         });
         const p = this.profiles.get(id)!;
         return {
