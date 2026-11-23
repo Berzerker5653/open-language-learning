@@ -10,7 +10,7 @@ import {
   type ProfileSummary,
 } from "./onboarding";
 import { PracticeHub, type HubMode } from "./hub";
-import { remainingPlanSeconds, SessionChrome } from "./session-chrome";
+import { remainingPlanSeconds, SessionChrome, StepDots } from "./session-chrome";
 import { fetchCapabilities, httpInvoke, inLtsServeMode, subscribeServeProgress } from "./ipc";
 import {
   Home,
@@ -4622,15 +4622,22 @@ export function App() {
               </div>
             </div>
           ) : placementTask ? (
-            <PracticeRunner
-              task={placementTask}
-              graded={placementGraded}
-              correct={placementCorrect}
-              correctChoice={placementCorrectChoice}
-              onChoose={(i) => void answerPlacement(i)}
-              onNext={() => void nextPlacement()}
-              stress={stressEnabled(display)}
-            />
+            <>
+              <StepDots
+                total={placementItems.length}
+                current={placementIdx}
+                label="Placement question"
+              />
+              <PracticeRunner
+                task={placementTask}
+                graded={placementGraded}
+                correct={placementCorrect}
+                correctChoice={placementCorrectChoice}
+                onChoose={(i) => void answerPlacement(i)}
+                onNext={() => void nextPlacement()}
+                stress={stressEnabled(display)}
+              />
+            </>
           ) : (
             <div className="btn-row">
               <button
@@ -4657,6 +4664,11 @@ export function App() {
           )}
           {kanjiActive && kanjiTask ? (
             <div className="field">
+              <StepDots
+                total={2}
+                current={kanjiStage === "meaning" ? 0 : 1}
+                label="Kanji drill stage"
+              />
               <PackText tag="p" className="prompt">
                 {kanjiActive.character}
               </PackText>
@@ -5073,6 +5085,8 @@ export function App() {
           onResumeSession={() => void resumeSession()}
           onStopSession={() => closeSession("stopped")}
           onDismissSessionSummary={() => setSessionOutcome(null)}
+          onStartCapstone={(node) => void startCapstoneSession(node)}
+          capstoneResult={capstoneResult}
         />
       )}
       {/* WEB-HISTORY-001: leaving an ACTIVE session by browser Back asks
