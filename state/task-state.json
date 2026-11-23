@@ -3242,6 +3242,21 @@
         "state/evidence/FEEL-SETTINGS-001/settings-phone-after.png"
       ],
       "notes": "Shipped code 267f82c4 + capture harness c2e50d09; capture red 1/6 at base vs green 6/6; contract green with the 157-test stay-green set."
+    },
+    "CAPSTONE-WIRING-TEST-001": {
+      "status": "done",
+      "attempts": 2,
+      "updated": "2026-11-23",
+      "title": "Journey test pinning the App-to-Home capstone wiring (onStartCapstone/capstoneResult)",
+      "evidence": [
+        "state/notes/CAPSTONE-WIRING-TEST-001.md",
+        "state/evidence/CAPSTONE-WIRING-TEST-001/gates.log",
+        "state/evidence/CAPSTONE-WIRING-TEST-001/journey-green.log",
+        "state/evidence/CAPSTONE-WIRING-TEST-001/journey-red-on-missing-props.log",
+        "state/evidence/CAPSTONE-WIRING-TEST-001/vitest-full-green.log",
+        "state/evidence/CAPSTONE-WIRING-TEST-001/tsc.log"
+      ],
+      "notes": "Run 214 wrote the journey + harness fixture then hit the iteration cap; run 215 verified and shipped. Journey 2/2 green; full desktop suite 626/626; mutation proof: stripping App's capstone props fails both journey tests."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

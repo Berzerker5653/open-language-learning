@@ -3619,11 +3619,26 @@ tasks:
   - "A contents jump row under the Settings heading offers one chip per visible card (conditional cards get a chip exactly when their card renders), each card carries the matching anchor target with scroll margin below the sticky header, and the chips ride buttons so the screen-router hash stays untouched."
   - "Every claim is pinned red-at-base by the new settings-feel vitest contract plus a feel-settings capture red at base and green after; motion-contract, loading-feel, settings, a11y, mobile-audit, button-affordance, and rtl-direction stay green unedited."
   required_for_desktop_1_0: false
+- id: CAPSTONE-WIRING-TEST-001
+  milestone: M11
+  priority: P1
+  title: Journey test pinning the App-to-Home capstone wiring - harness capstone fixture plus a start-to-result capstone journey that goes red if the props stop travelling
+  dependencies: [UNIT-CAPSTONE-001, PATH-NODE-TYPES-001]
+  read_first:
+  - state/notes/CAPSTONE-WIRING-TEST-001.md
+  - apps/desktop/src/journeys/harness.tsx
+  - apps/desktop/src/journeys/capstone-wiring.journey.tsx
+  acceptance:
+  - "The shared journeys harness carries an opt-in capstone fixture mirroring the engine - a synthesized checkpoint node per band section with the reserved capstone id, capstone_plan and capstone_complete commands recounting attempt-grouped graded evidence, and every non-opt-in profile byte-identical to before."
+  - "A journey mounts the shipped App and walks the capstone end to end - the node's own start action opens the engine-built review, submits share one attempt group, and the recorded result lands back on Home - so a missing onStartCapstone or capstoneResult prop fails the journey, the 6db2c26b regression shape."
+  - "The missing-prop regression is proven red in an isolated worktree and the full desktop vitest suite stays green with the new journey."
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
   required_flag: required_for_desktop_1_0
   optional_tasks:
+  - CAPSTONE-WIRING-TEST-001
   - ADV-001
   - AI-001
   - PACK-UPDATE-REPIN-001
