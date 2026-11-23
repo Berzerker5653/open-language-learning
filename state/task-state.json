@@ -2952,6 +2952,26 @@
       "summary": "The Next-up panel still rendered the pre-letter-model goal string 'Recognize and copy all printed Cyrillic letter case forms and interpret the teaching stress mark' (complaint-09a bottom). Swept both packs' goals/unit/assessment copy: goal description now 'every printed Cyrillic letter, one sound per letter' (stress mark kept as legitimate), unit 019 summary 'every taught letter with its sound', the two on-ramp cyrillic rubrics now name 33 letters not case pairs / 66 letter forms, and unit 090's weekday note reworded to 'no capital initial letter'. Ratchet: tools/audit_learner_copy v1.6.0 gains CASE_FRAMING_RE over unit titles/summaries plus NEW pack-goal and pack-rubric scans, with GoalsScrubTests red-first over the exact old strings. Grep sweep over both packs' curriculum+assessments exits zero-match. Ready for the 0.4.9 publish train; nothing published and manifest stays 0.4.8.",
       "notes": "ADR-0031's quote of the old string is an immutable decision record and stays. ja-JP copy was already clean. Publish follow-up named in state/notes/RU-GOALS-SCRUB-001.md.",
       "updated": "2026-11-22"
+    },
+    "FIX-PATH-VISUAL-001-1": {
+      "task_id": "FIX-PATH-VISUAL-001-1",
+      "title": "Winding Path rings no longer overlap labels at 390px; exactly one You-are-here caption when several units share the current pool",
+      "status": "done",
+      "attempts": 1,
+      "dependencies": [
+        "PATH-VISUAL-001"
+      ],
+      "updated": "2026-11-22",
+      "summary": "Defect 1 (ring-over-label): the 4rem ring column could not contain the ±29px sway excursion — the current node's 3.5rem dial crossed ~15px into the body column at sway peaks. Ring column widened to 6.75rem: measured ring→label clearance 3px at every rendered node, ring stays inside the row box at both extremes, winding preserved (x-spread 58px). Defect 2 (stacked captions): engine marks every pool unit current (3 in the owner scene); policy chosen is ONE caption on the first current node in rendered ladder order, other current nodes keep their current rings — caption policy, never state suppression. Capture harness gained bounding-box gates: 20 rings x 31 labels zero intersections, domPins 1 over apiCurrent 3; 17/17 green at 390px on the final tree. vitest 490/490 incl. new single-caption case; tsc/eslint/prettier clean; also fixed the pre-existing CI web reds (fmt 5 files, eslint 30 errors via Node globals + mechanical script cleanup) as separate chore commits.",
+      "notes": "Collision note: home.tsx remains a hotspot. Lane touched no Rust; lane gates scoped accordingly (gates.log).",
+      "evidence": [
+        "state/evidence/FIX-PATH-VISUAL-001-1/gates.log",
+        "state/evidence/FIX-PATH-VISUAL-001-1/result.json",
+        "state/evidence/FIX-PATH-VISUAL-001-1/capture-run.log",
+        "state/evidence/FIX-PATH-VISUAL-001-1/path-journey-pin-region.png",
+        "state/evidence/FIX-PATH-VISUAL-001-1/path-journey-full.png",
+        "state/notes/FIX-PATH-VISUAL-001-1.md"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

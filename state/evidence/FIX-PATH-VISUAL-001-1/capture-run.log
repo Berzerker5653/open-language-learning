@@ -1,0 +1,17 @@
+PASS a fully-drilled letter unit is DONE on the API — {"done":["ru.unit.on-ramp.cyrillic-a-o-m-t","ru.unit.on-ramp.cyrillic-k-e-n-s"]}
+PASS a three-of-four unit is IN PROGRESS with an honest partial fill — [{"unit":"ru.unit.on-ramp.cyrillic-stress-review","refs_done":8,"refs_total":36}]
+PASS the pin sits on a unit the learner started (never past real progress) — [{"unit":"ru.unit.on-ramp.cyrillic-r-v-u-kh","in_progress":false,"refs_done":0,"refs_total":4},{"unit":"ru.unit.on-ramp.cyrillic-b-p-d-g","in_progress":false,"refs_done":0,"refs_total":7},{"unit":"ru.unit.on-ramp.cyrillic-stress-review","in_progress":true,"refs_done":8,"refs_total":36}]
+PASS units ahead of the visited pair stay locked — {"lockedSample":["ru.unit.on-ramp.greetings-01","ru.unit.on-ramp.greetings-02"]}
+PASS the pinned section counts at least one proven-done unit (no 0-done-past-a-pin) — {"pinBand":"on-ramp","bandDone":2}
+PASS home reached a stable pack-loaded state before measurement (no load flicker) — {"healthyStreak":3}
+PASS every open-section node renders a ring — {"ringCount":20}
+PASS the track WINDS: ring centers sway across the column (flat list would be 0) — {"xSpreadPx":58}
+PASS some current node's ring is FILLED to an honest fraction (never empty past real work) — {"currentFills":["0.00","0.00","0.22"]}
+PASS started-but-unproven work is visible (in-progress node or a filled pin ring) — {"inProgressCount":0,"inProgressLabel":null}
+PASS locked nodes carry a drawn lock glyph — {"lockedWithGlyph":10}
+PASS the open section is a banner with a friendly name and CEFR subtitle — "Getting started / Pre-A1"
+PASS the section counter counts PROVEN-DONE only (matches the API's done nodes) — {"domCounter":"2/20 units done","apiBandDone":2}
+PASS no ring box overlaps any node label at 390px (measured rects at every rendered node) — {"ringCount":20,"labelCount":31,"overlapCount":0,"sample":[]}
+PASS the ring column contains the whole sway wave: ≥1px ring→label clearance on every node — {"minClearancePx":3}
+PASS at most ONE 'You are here' caption renders even when several units are current — {"domPins":1,"pinUnits":["ru.unit.on-ramp.cyrillic-r-v-u-kh"],"apiCurrent":["ru.unit.on-ramp.cyrillic-r-v-u-kh","ru.unit.on-ramp.cyrillic-b-p-d-g","ru.unit.on-ramp.cyrillic-stress-review"]}
+PASS the single caption really renders when the API marks a unit current — {"domPins":1,"apiCurrentCount":3}

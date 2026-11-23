@@ -3286,6 +3286,22 @@ tasks:
   - after-screenshots of the band headers at 390px show exactly one row per band with merged counts
   - LANE-tier gates over the touched packages
   required_for_desktop_1_0: false
+- id: FIX-PATH-VISUAL-001-1
+  milestone: M11
+  priority: P2
+  title: The winding Path no longer rides rings over labels at 390px and pins exactly one You-are-here caption when several units share the current pool
+  dependencies: [PATH-VISUAL-001]
+  read_first:
+  - state/notes/FIX-PATH-VISUAL-001-1.md
+  - state/evidence/FIX-PATH-VISUAL-001-1/gates.log
+  - scripts/path-visual-capture.mjs
+  acceptance:
+  - ring and label bounding boxes never intersect at any rendered node at 390px, measured by the capture harness not eyeballed
+  - at most one You-are-here caption renders while every current node keeps its current ring, with the caption policy documented in the card notes
+  - after-screenshots of the pin region and full journey at 390px land under state/evidence/FIX-PATH-VISUAL-001-1
+  - the single-caption rule is pinned by vitest path-view cases
+  - LANE-tier gates over the touched packages
+  required_for_desktop_1_0: false
 - id: ORTHO-LETTER-UNITS-001
   milestone: M8
   priority: P1
@@ -3484,5 +3500,6 @@ execution_scope:
   - LESSON-TITLE-FIT-001
   - PATH-VISUAL-001
   - PATH-SECTIONS-DEDUP-001
+  - FIX-PATH-VISUAL-001-1
   - RU-GOALS-SCRUB-001
   public_publication_authorized: false

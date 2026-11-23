@@ -1,0 +1,48 @@
+FIX-PATH-VISUAL-001-1 — lane gates (2026-11-22, worker run 186)
+
+Rust untouched (CSS + TSX + harness only): cargo fmt --all --check green;
+no scoped cargo test/clippy required for this lane.
+
+$ npx tsc --noEmit                     # apps/desktop
+TSC-OK
+$ pnpm -r typecheck
+rc=0 (all workspaces)
+$ npx vitest run                       # apps/desktop
+Test Files 61 passed (61) / Tests 490 passed (490)
+  (includes the new single-caption case: "renders exactly ONE 'You are
+  here' caption when three units share the current pool")
+$ pnpm test (root, all workspaces)
+packages/shared 2/2, packages/ui 10/10, apps/desktop 490/490
+$ npx eslint .
+(no problems)
+$ node_modules/.bin/prettier --check .
+All matched files use Prettier code style!
+
+ACCEPTANCE CAPTURE (final committed tree, 390x844, real engine):
+$ SERVE_BIN=$PWD/target/debug/lts-serve SERVE_DIST=$PWD/apps/desktop/dist \
+  OUT_DIR=$PWD/state/evidence/FIX-PATH-VISUAL-001-1 \
+  node scripts/path-visual-capture.mjs
+rc=0 — 17/17 PASS (full log: capture-run.log; values: result.json)
+Key measured numbers for the card's two defects:
+  no ring box overlaps any node label — ringCount 20, labelCount 31,
+    overlapCount 0
+  ring column contains the whole sway wave — minClearancePx 3
+  single caption — domPins 1 over apiCurrent 3
+    (ru.unit.on-ramp.cyrillic-r-v-u-kh captioned; b-p-d-g and
+     stress-review current-ring without captions)
+  winding preserved — xSpreadPx 58
+Screenshots path-journey-pin-region.png + path-journey-full.png
+vision-checked: no ring/text overlap anywhere, exactly one caption
+visible while two current rings render, sway still reads.
+
+CONTROLLER HYGIENE (pre-existing CI web reds fixed on the spot, own
+chore commits — not part of the lane diff):
+- fmt: CODING_STANDARDS.md + 4 scripts normalized (web job had been
+  failing at pnpm fmt:check since 7eb24b1).
+- lint: eslint.config.js + Node fetch global for scripts/**, ignores
+  for dist-mobile/dist-history bundles and state/evidence scripts;
+  mechanical fixes in 9 scripts (commented empty catches, dead
+  initializers, unused imports/vars) + 1 unused type import in App.tsx.
+  All scripts/*.mjs pass node --check; this card's capture re-run
+  green on the final bytes. Other captures not re-run (comment/dead-
+  code-only edits; their next card run re-measures them).
