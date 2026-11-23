@@ -3721,11 +3721,29 @@ tasks:
   - "At least two distinct typed icon glyphs render across visible nodes at 390px."
   - "Existing path vitest contracts stay green (PATH-VISUAL, FIX-PATH-VISUAL-001-1, PATH-LOCK-ORDER-001, PATH-PIN-CONSISTENCY-001)."
   required_for_desktop_1_0: false
+- id: PHONE-NAV-WRAP-001
+  milestone: M11
+  priority: P1
+  title: "Phone tab bar wraps at 390px with Settings orphaned - one app-like row as a fixed bottom tab bar; measured red at HEAD by the phone-nav capture script"
+  dependencies: []
+  read_first:
+  - state/notes/PHONE-NAV-WRAP-001.md
+  - state/notes/UI-VERIFY-2026-11-23.md
+  - packages/ui/src/styles.css
+  - scripts/phone-nav-wrap-capture.mjs
+  acceptance:
+  - "Capture script at CDP 390x844 mobile:true on the live serve REDS at HEAD (two rows with the active underline 48px off the active tab) and goes green after with exactly one row holding all five legible tab labels and zero horizontal document scroll."
+  - "The active-tab indicator stays centered on the active tab inside its slot with its bottom edge on the tab, riding a safe-area sill instead of the physical screen edge."
+  - "Every tab tap target measures at least 44px at 390px, the bar is fixed opaque flush with the viewport bottom, and floating chrome (IME bubble, jump-to-pin) lifts clear of it with page content reserving clearance."
+  - "Desktop chrome, the FEEL-GLOBAL-001 glide pins, the MOBILE-UX-001 audit gates and existing tabs tests stay green unedited; new phone-tier vitest pins lock the bottom-bar shape and its cascade order."
+  - "Before (red) and after (green) screenshots plus a learner inspection of the finished whole are committed under state/evidence/PHONE-NAV-WRAP-001/."
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
   required_flag: required_for_desktop_1_0
   optional_tasks:
+  - PHONE-NAV-WRAP-001
   - PATH-CONNECT-PILL-001
   - BAKEOFF-LIVECAPTURE-001
   - SERVE-BANNER-001

@@ -3334,6 +3334,21 @@
         "state/evidence/PATH-CONNECT-PILL-001/learner-inspection.md"
       ],
       "updated": "2026-11-23"
+    },
+    "PHONE-NAV-WRAP-001": {
+      "status": "done",
+      "attempts": 1,
+      "at": "2026-11-23",
+      "updated": "2026-11-23",
+      "evidence": [
+        "state/notes/PHONE-NAV-WRAP-001.md",
+        "state/evidence/PHONE-NAV-WRAP-001/gates.log",
+        "state/evidence/PHONE-NAV-WRAP-001/capture-red.log",
+        "state/evidence/PHONE-NAV-WRAP-001/capture-green.log",
+        "state/evidence/PHONE-NAV-WRAP-001/audit-green.json",
+        "state/evidence/PHONE-NAV-WRAP-001/learner-inspection.md"
+      ],
+      "notes": "phone tier becomes a fixed bottom tab bar (five 56px slots, safe-area sill, centered inset indicator, chrome lift after base rules); capture red 3 FAIL (2-row orphan, indicator dy 48, not bottom) vs green 7/7 at final bytes; 652 desktop + 10 ui vitest green unedited"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
