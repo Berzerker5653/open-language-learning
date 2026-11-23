@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": null,
+  "active_task": "FEEL-MYWORDS-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3176,6 +3176,15 @@
         "state/evidence/FEEL-LOADING-001/capture-red-at-base.log",
         "state/evidence/FEEL-LOADING-001/capture-green-at-head.log",
         "state/evidence/FEEL-LOADING-001/result.json"
+      ]
+    },
+    "FEEL-MYWORDS-001": {
+      "status": "in_progress",
+      "attempts": 1,
+      "updated": "2026-11-23",
+      "title": "My Words hierarchy - card rows, friendly due pills, undo, add pulse",
+      "evidence": [
+        "state/notes/FEEL-MYWORDS-001.md"
       ]
     }
   },

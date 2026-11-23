@@ -3550,6 +3550,23 @@ tasks:
   - "The LAN Pair button cannot double-submit (disabled plus guard, one POST measured under a double-click) and the pair result renders as a styled notice or alert with live-region semantics."
   - "Placement first fetch shows a disabled Starting state; every new claim is pinned red-at-base by a new loading-feel vitest contract plus the capture, and the prefers-reduced-motion flattening, button-affordance pins, a11y contract, and ADR-0002 scans stay green unedited."
   required_for_desktop_1_0: false
+- id: FEEL-MYWORDS-001
+  milestone: M11
+  priority: P1
+  title: My Words hierarchy - card rows with due-date emphasis, friendly relative due pills, undo on remove, add-word success pulse, review transitions on the global motion layer
+  dependencies: [FEEL-GLOBAL-001, FEEL-LOADING-001]
+  read_first:
+  - state/notes/FEEL-MYWORDS-001.md
+  - packages/ui/src/styles.css
+  - apps/desktop/src/words.tsx
+  - scripts/feel-loading-capture.mjs
+  acceptance:
+  - "Word rows render as rounded cards on warm paper (surface fill, hairline border, near-invisible shadow, generous gaps, no dividers) with the headword as the primary scan target and the citation demoted to a sub-line."
+  - "Due dates read as friendly relative pills - in 3 days, tomorrow, today, yesterday, N days overdue, in ~N months - with a clock glyph so meaning never rides color alone; the raw ISO slice is gone."
+  - "Remove leaves the row at once and offers a 4s UNDO chip that fully restores the word; the engine delete fires only after the chip's life expires, a second Remove commits the previous pending one, and navigation away flushes the pending delete - measured as zero mine_remove calls before 4s in the real-engine capture."
+  - "A successful add pulses the landed row once (fade-up plus a teal wash fading to surface); the review card enters with card-in and the revealed answer rises with fade-up, all on the global duration tokens."
+  - "Every claim is pinned red-at-base by the new mywords-feel vitest contract plus a feel-mywords capture red at base and green after; session-chrome, rtl-direction, loading-feel, motion-contract, button-affordance, a11y, and ADR-0002 scans stay green unedited."
+  required_for_desktop_1_0: false
 
 execution_scope:
   default_goal: desktop-1.0-release-candidate
@@ -3574,6 +3591,7 @@ execution_scope:
   - FEEL-GLOBAL-001
   - FEEL-DRILL-001
   - FEEL-LOADING-001
+  - FEEL-MYWORDS-001
   - JA-A1-003
   - JA-A2-002
   - JA-A2-002-FIX-001
