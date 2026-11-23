@@ -3399,6 +3399,21 @@ tasks:
   - the langpack validation suite and tools/qa_stories.py stay green over the rewritten units
   - a targeted test or live read shows at least one claimed word seeding plan-eligibly for its band profile
   required_for_desktop_1_0: false
+- id: PATH-PIN-CONSISTENCY-001
+  milestone: M11
+  priority: P1
+  title: One journey pin on the track = the in-progress unit; the next-up offer is a separate header affordance
+  dependencies: [PATH-VISUAL-001, FIX-PATH-VISUAL-001-1]
+  read_first:
+  - state/notes/PATH-PIN-CONSISTENCY-001.md
+  - apps/desktop/src/home.tsx
+  - scripts/path-pin-consistency-capture.mjs
+  acceptance:
+  - "Exactly one You-are-here pin exists on the track and it marks the first in-progress unit in ladder order, else the first not-done unlocked unit - never the plan's offered unit when those differ."
+  - "A current_offer naming a different unit renders as a Next-up chip between the path header and the track (tap jumps the journey to it); no chip when it names the pinned unit; the offered node keeps its current ring but never a pin caption."
+  - "Auto-scroll on load lands a little before the pin: pin inside the viewport, not glued to the top edge, context rows above visible - measured by scripts/path-pin-consistency-capture.mjs, which never scrolls the page itself."
+  required_for_desktop_1_0: false
+
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3413,6 +3428,7 @@ execution_scope:
   - TTS-003
   - TTS-004
   - POLISH-001
+  - PATH-PIN-CONSISTENCY-001
   - JA-A1-003
   - JA-A2-002
   - JA-A2-002-FIX-001
