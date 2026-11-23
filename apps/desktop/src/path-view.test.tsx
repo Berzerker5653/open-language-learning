@@ -22,6 +22,7 @@ const node = (over: Partial<UnitPathNode>): UnitPathNode => ({
   refs_done: 0,
   refs_total: 4,
   unlock_hint: null,
+  kind: "words",
   ...over,
 });
 
@@ -47,7 +48,10 @@ describe("unit path (PATH-VIEW-001)", () => {
     );
     expect(html).toContain('data-state="review-due"');
     expect(html).toContain("Review due (4)");
-    expect(html).toContain("⟳");
+    // PATH-NODE-TYPES-001: the text ⟳ gave way to the drawn refresh
+    // pictogram — the caption still carries the signal in words.
+    expect(html).toContain('data-glyph="review"');
+    expect(html).not.toContain("⟳");
   });
 
   it("shows locked-ahead units visible-dim with what unlocks them", () => {
@@ -409,5 +413,70 @@ describe("jump-to-my-spot affordance (PATH-FEEL-SCROLL-001)", () => {
       />,
     );
     expect(html).not.toContain('data-testid="path-jump-to-pin"');
+  });
+});
+
+// PATH-NODE-TYPES-001 (market sheet: Duolingo's pictogram grammar): the
+// ring center carries WHAT the unit teaches (engine-derived kind), the
+// state layer (fill, color, halo, lock, check, captions) carries WHERE the
+// learner is, and the glyph is never the only signal — every node names
+// its kind to the screen reader in words.
+describe("typed node glyphs by activity kind (PATH-NODE-TYPES-001)", () => {
+  it("draws one pictogram per kind in the ring center — the identical text dots are gone", () => {
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({ unit_id: "u-letters", kind: "letters" }),
+          node({ unit_id: "u-listen", kind: "listening" }),
+          node({ unit_id: "u-speak", kind: "speaking" }),
+          node({ unit_id: "u-words", kind: "words" }),
+        ]}
+      />,
+    );
+    for (const kind of ["letters", "listening", "speaking", "words"]) {
+      expect(html).toContain(`data-kind="${kind}"`);
+      expect(html).toContain(`data-glyph="${kind}"`);
+    }
+    // The identical-circle era is over: no •/○/◉/⟳ text dots anywhere on
+    // the track. (The ✓ completion mark is a state mark, not a dot; the
+    // middle-dot unlock-hint separator is a different character.)
+    expect(html).not.toMatch(/[•○◉⟳]/);
+  });
+
+  it("never lets the glyph stand alone: the pictogram is aria-hidden and the row names the kind in words", () => {
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[node({ unit_id: "u-l", kind: "listening", title: "Hear the difference" })]}
+      />,
+    );
+    // decoration for sighted users only...
+    expect(html).toContain('data-glyph="listening" aria-hidden="true"');
+    // ...and the row itself says the kind and shows the visible title.
+    expect(html).toContain(">Listening<");
+    expect(html).toContain("Hear the difference");
+  });
+
+  it("keeps the state layer intact: done keeps the check and names Completed; review-due keeps its caption", () => {
+    const done = renderToStaticMarkup(
+      <PathView nodes={[node({ unit_id: "u-d", kind: "words", done: true })]} />,
+    );
+    expect(done).toContain("✓");
+    expect(done).toContain(">Completed<");
+    const review = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({
+            unit_id: "u-r",
+            kind: "listening",
+            done: true,
+            review_due: true,
+            due_count: 2,
+          }),
+        ]}
+      />,
+    );
+    expect(review).toContain('data-glyph="review"');
+    expect(review).toContain("Review due (2)");
+    expect(review).toContain(">Listening<");
   });
 });

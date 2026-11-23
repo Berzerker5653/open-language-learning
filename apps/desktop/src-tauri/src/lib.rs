@@ -3864,6 +3864,11 @@ struct UnitPathNodeView {
     /// None for a unit the goal map does not place (such a unit renders
     /// locked — see `unit_goal_locked` fail-closed).
     band: Option<String>,
+    /// PATH-NODE-TYPES-001: what the unit TEACHES, for the node's center
+    /// pictogram — `letters | listening | speaking | words`, derived by
+    /// `unit_kind` from the unit's activity data only. `review` is
+    /// deliberately absent: review-due is a STATE (the ring's own layer).
+    kind: String,
     locked: bool,
     done: bool,
     /// Today's plan lives in this unit — the "you are here" pin.
@@ -3891,6 +3896,54 @@ struct UnitPathNodeView {
     /// "What unlocks this" in the pack's own words (goal descriptions,
     /// gating unit titles); never invented prose. None when unlocked.
     unlock_hint: Option<String>,
+}
+
+/// PATH-NODE-TYPES-001: the activity kind the path node's center
+/// pictogram speaks — derived ONLY from what the unit's activities
+/// schedule (never from title prose or unit-id words, the repo's
+/// no-inference rule). Frozen contract in state/notes/PATH-NODE-TYPES-001.md:
+/// - `letters`: the unit schedules orthography content — the content id's
+///   namespace segment is `orth` (ru.orth.* Cyrillic, ja.orth.hira.* kana);
+/// - `listening`/`speaking`: the unit is ORAL-DOMINANT — its oral
+///   activities are at least as many as its reading/writing/interaction
+///   ones, and the oral winner is the more frequent of the two;
+/// - `words`: everything else, the honest default — one stray
+///   listen-and-choose inside a print-dominant vocabulary unit never
+///   relabels it "listening" (measured: 10 letters + 808 words on the RU
+///   dev pack; the grammar lights up as packs add oral-dominant units).
+///
+/// `review` is deliberately NOT a kind: review-due is a state, rendered
+/// by the state layer with its own caption (PATH-VIEW-001 precedent).
+fn unit_kind(unit: &PackUnit) -> &'static str {
+    let mut listening = 0usize;
+    let mut speaking = 0usize;
+    let mut print = 0usize;
+    for activity in &unit.activities {
+        // An orthography ref decides the kind outright, before any
+        // modality census: the Cyrillic/kana ramps drill mostly
+        // reading/writing, and they are still LETTERS units.
+        if activity
+            .content_refs
+            .iter()
+            .any(|r| r.split('.').nth(1) == Some("orth"))
+        {
+            return "letters";
+        }
+        match activity.modality.as_str() {
+            "listening" => listening += 1,
+            "speaking" => speaking += 1,
+            _ => print += 1,
+        }
+    }
+    let oral = listening + speaking;
+    if oral > 0 && oral >= print {
+        return if speaking > listening {
+            "speaking"
+        } else {
+            "listening"
+        };
+    }
+    "words"
 }
 
 fn unit_path_at(data: &Path, profile_id: &str) -> Result<Vec<UnitPathNodeView>, String> {
@@ -4045,6 +4098,7 @@ fn unit_path_at(data: &Path, profile_id: &str) -> Result<Vec<UnitPathNodeView>, 
                 unit_id: unit.id.clone(),
                 title: unit.title.clone(),
                 summary: unit.summary.clone(),
+                kind: unit_kind(unit).to_string(),
                 band: goals
                     .iter()
                     .find(|g| g.id == unit.goal_id)
@@ -15676,6 +15730,89 @@ activities:
             "the furthest concept's own state stays visible, qualified"
         );
         assert_eq!(reading.exemplar.as_deref(), Some("ja.orth.hira.a"));
+    }
+
+    /// PATH-NODE-TYPES-001: the node kind is derived from pack ACTIVITY
+    /// data only — an orthography ref, the modality census of the unit's
+    /// activities — never from title prose or unit-id words. The frozen
+    /// rule (state/notes/PATH-NODE-TYPES-001.md): letters if the unit
+    /// schedules `.orth.` content; listening/speaking if the unit is
+    /// ORAL-DOMINANT (oral >= print); words otherwise (one stray
+    /// listening activity never relabels a print unit).
+    #[test]
+    fn unit_kind_is_derived_from_pack_activity_data_only() {
+        let parse =
+            |yaml: &str| -> PackUnit { serde_yaml::from_str(yaml).expect("fixture unit parses") };
+        assert_eq!(
+            unit_kind(&parse(
+                "goal_id: g\nactivities:\n- modality: reading\n  content_refs: [ja.orth.hira.na]\n"
+            )),
+            "letters",
+            "an orthography ref makes the unit a letters node (any pack namespace)"
+        );
+        assert_eq!(
+            unit_kind(&parse(
+                "goal_id: g\nactivities:\n- modality: listening\n  content_refs: [ru.lex.a]\n- modality: listening\n  content_refs: [ru.lex.b]\n- modality: reading\n  content_refs: [ru.lex.c]\n"
+            )),
+            "listening",
+            "oral-dominant: two listening activities outweigh one print one"
+        );
+        assert_eq!(
+            unit_kind(&parse(
+                "goal_id: g\nactivities:\n- modality: listening\n  content_refs: [ru.lex.a]\n- modality: speaking\n  content_refs: [ru.lex.b]\n- modality: speaking\n  content_refs: [ru.lex.c]\n"
+            )),
+            "speaking",
+            "speaking wins when it outnumbers listening"
+        );
+        assert_eq!(
+            unit_kind(&parse(
+                "goal_id: g\nactivities:\n- modality: reading\n  content_refs: [ru.lex.a]\n- modality: listening\n  content_refs: [ru.lex.b]\n"
+            )),
+            "listening",
+            "the oral/print boundary is inclusive: one oral versus one print is oral"
+        );
+        assert_eq!(
+            unit_kind(&parse(
+                "goal_id: g\nactivities:\n- modality: reading\n  content_refs: [ru.lex.a]\n- modality: writing\n  content_refs: [ru.lex.b]\n- modality: listening\n  content_refs: [ru.lex.c]\n"
+            )),
+            "words",
+            "one stray listening activity never relabels a print-dominant unit"
+        );
+        assert_eq!(
+            unit_kind(&parse(
+                "goal_id: g\nactivities:\n- modality: interaction\n  content_refs: [ru.lex.a]\n"
+            )),
+            "words",
+            "no oral activities at all stays words"
+        );
+    }
+
+    #[test]
+    fn unit_path_names_each_node_kind_on_the_real_pack() {
+        let ru = "org.openlanguage.ru-ru.reference";
+        let tmp = tempfile::tempdir().unwrap();
+        install_reference_pack_fast(tmp.path(), ru).unwrap();
+        let p = create_local_profile(tmp.path(), "Kind").unwrap();
+        finish_onboarding(tmp.path(), &p.id, Some(ru), false).unwrap();
+        let nodes = unit_path_at(tmp.path(), &p.id).unwrap();
+        let kind_of = |unit: &str| {
+            nodes
+                .iter()
+                .find(|n| n.unit_id == unit)
+                .unwrap_or_else(|| panic!("{unit} is on the path"))
+                .kind
+                .clone()
+        };
+        assert_eq!(
+            kind_of("ru.unit.on-ramp.cyrillic-a-o-m-t"),
+            "letters",
+            "the first printed-Cyrillic ramp unit is a letters node"
+        );
+        assert_eq!(
+            kind_of("ru.unit.on-ramp.greetings-01"),
+            "words",
+            "a reading/writing vocabulary unit stays a words node"
+        );
     }
 
     /// PATH-VIEW-001: the unit path derives every node state from the

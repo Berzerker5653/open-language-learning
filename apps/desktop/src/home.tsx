@@ -913,6 +913,11 @@ export interface UnitPathNode {
   title: string;
   summary: string;
   band: string | null;
+  /** PATH-NODE-TYPES-001: the engine-derived activity kind — letters |
+   * listening | speaking | words — computed from pack activity data only
+   * (`unit_kind` in lib.rs; review stays a STATE, never a kind). The ring
+   * center shows the kind pictogram; state stays in ring/fill/captions. */
+  kind: string;
   locked: boolean;
   done: boolean;
   current: boolean;
@@ -1004,16 +1009,78 @@ export function pathNodeState(n: UnitPathNode): string {
   return "ready";
 }
 
-const PATH_MARKERS: Record<string, string> = {
-  locked: "•",
-  ready: "○",
-  current: "◉",
-  done: "✓",
-  "review-due": "⟳",
-  // PATH-VISUAL-001: the half-filled ring is drawn, not glyphed — the
-  // ring arc itself is the state marker.
-  "in-progress": "",
+/** PATH-NODE-TYPES-001 (the market sheet: Duolingo's pictogram grammar):
+ * the ring center carries WHAT the unit teaches — a drawn SVG pictogram
+ * for the engine-derived `kind` — while the state layer (ring fill,
+ * color, halo, pin, lock, check, captions) stays the ONLY thing that says
+ * where the learner is. The identical `•/○/◉/⟳` text dots are gone. */
+export const PATH_KIND_NAMES: Record<string, string> = {
+  letters: "Letters",
+  listening: "Listening",
+  speaking: "Speaking",
+  words: "Words",
 };
+
+/** The pictograms — drawn (never emoji), currentColor like PathLockGlyph
+ * so the state color rules keep painting them, aria-hidden because the
+ * row spells the kind in words (the sr-only word in the node body).
+ * `review` is a STATE glyph and rides the same drawer. */
+function PathGlyph({ glyph }: { glyph: string }) {
+  return (
+    <svg viewBox="0 0 16 16" className="path-node-glyph" data-glyph={glyph} aria-hidden="true">
+      {glyph === "listening" ? (
+        <>
+          <path
+            d="M3.2 11.4v-2.9a4.8 4.8 0 0 1 9.6 0v2.9"
+            fill="none"
+            strokeWidth="1.5"
+            stroke="currentColor"
+          />
+          <rect x="2" y="10" width="2.6" height="4.4" rx="1.1" fill="currentColor" />
+          <rect x="11.4" y="10" width="2.6" height="4.4" rx="1.1" fill="currentColor" />
+        </>
+      ) : glyph === "speaking" ? (
+        <>
+          <rect x="6.4" y="1.8" width="3.2" height="7.4" rx="1.6" fill="currentColor" />
+          <path
+            d="M4.3 8a3.7 3.7 0 0 0 7.4 0M8 11.7v2.1M6 13.8h4"
+            fill="none"
+            strokeWidth="1.4"
+            stroke="currentColor"
+          />
+        </>
+      ) : glyph === "letters" ? (
+        <path
+          d="M3.4 13.2 8 2.8l4.6 10.4M5.3 9.7h5.4"
+          fill="none"
+          strokeWidth="1.5"
+          stroke="currentColor"
+        />
+      ) : glyph === "review" ? (
+        <>
+          <path
+            d="M12.8 8a4.8 4.8 0 1 1-1.9-3.8"
+            fill="none"
+            strokeWidth="1.5"
+            stroke="currentColor"
+          />
+          <path d="M13.4 2 11.4 4.6l2.7.6z" fill="currentColor" />
+        </>
+      ) : (
+        // words, and any kind we do not know yet: the open book.
+        <>
+          <path
+            d="M8 4.3C6.9 3.4 4.9 3 2.6 3.2v9c2.3-.2 4.3.2 5.4 1.1 1.1-.9 3.1-1.3 5.4-1.1v-9c-2.3-.2-4.3.2-5.4 1.1z"
+            fill="none"
+            strokeWidth="1.4"
+            stroke="currentColor"
+          />
+          <path d="M8 4.3v9" fill="none" strokeWidth="1.4" stroke="currentColor" />
+        </>
+      )}
+    </svg>
+  );
+}
 
 /** PATH-VISUAL-001 winding track: node sway follows a smooth wave down
  * the column (Duolingo's grammar), never random jitter — deterministic
@@ -1293,6 +1360,7 @@ export function PathView({
                       }`}
                       data-testid={`path-node-${n.unit_id}`}
                       data-state={state}
+                      data-kind={n.kind}
                       style={style}
                       onPointerDown={() => setPressedUnit(n.unit_id)}
                       onPointerUp={() => setPressedUnit((p) => (p === n.unit_id ? null : p))}
@@ -1321,10 +1389,33 @@ export function PathView({
                           />
                         </svg>
                         <span className="path-node-marker">
-                          {state === "locked" ? <PathLockGlyph /> : PATH_MARKERS[state]}
+                          {state === "locked" ? (
+                            <PathLockGlyph />
+                          ) : state === "done" ? (
+                            // The market's completion mark: the kind
+                            // pictogram gives way to the check, exactly as
+                            // Duolingo's star does — and the sr-only word
+                            // below names it in words.
+                            "✓"
+                          ) : state === "review-due" ? (
+                            <PathGlyph glyph="review" />
+                          ) : (
+                            // ready / current / in-progress: the KIND
+                            // pictogram replaces the old •/○/◉ text dot.
+                            <PathGlyph glyph={n.kind} />
+                          )}
                         </span>
                       </span>
                       <span className="path-node-body">
+                        {/* PATH-NODE-TYPES-001 (a11y floor): the glyph is
+                            never the only signal — every node names its
+                            kind to the screen reader, and a done unit
+                            (plain or review-due: both ARE completed) names
+                            its completion in words too. */}
+                        <span className="sr-only">{PATH_KIND_NAMES[n.kind] ?? n.kind}</span>
+                        {state === "done" || state === "review-due" ? (
+                          <span className="sr-only">Completed</span>
+                        ) : null}
                         <span className="path-node-title">{n.title}</span>
                         {n.unit_id === pinTarget ? (
                           // PATH-PIN-CONSISTENCY-001: the ONE pin marks
