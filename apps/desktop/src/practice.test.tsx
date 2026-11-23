@@ -46,6 +46,15 @@ describe("practice runner", () => {
     expect(html).toContain("Correct");
   });
 
+  it("reveals the right pick with the ring marker and dims the rest as the answers lock (FEEL-DRILL-001)", () => {
+    // FEEL-TARGETS drill mock: the reveal lands on the CORRECT choice
+    // whether the learner hit it or missed it, and the other choices dim
+    // as the answers lock — the graded board reads at a glance.
+    const html = render({ graded: true, correct: true, correctChoice: "hello" });
+    expect(html).toContain("choice--correct");
+    expect(html).toContain("choice--dim");
+  });
+
   it("hides the transcript and offers audio for listening tasks", () => {
     const html = render({
       task: {
