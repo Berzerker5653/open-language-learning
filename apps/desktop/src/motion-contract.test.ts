@@ -29,7 +29,9 @@ function ruleBody(selector: string): string {
   const esc = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const m = new RegExp(`^\\s*${esc}\\s*\\{([^}]*)\\}`, "m").exec(css);
   expect(m, `styles.css must define a "${selector}" rule`).not.toBeNull();
-  return m![1] ?? "";
+  // whitespace-normalized: prettier may wrap long declarations, and CI
+  // fmt:check owns that formatting — the assertion is about the declaration.
+  return (m![1] ?? "").replace(/\s+/g, " ").trim();
 }
 
 describe("FEEL-GLOBAL-001 token layer", () => {
@@ -45,9 +47,7 @@ describe("FEEL-GLOBAL-001 token layer", () => {
   it(":root carries a spacing scale and a named z-index scale", () => {
     const root = ruleBody(":root");
     for (const step of [1, 2, 3, 4, 5, 6]) {
-      expect(root, `--space-${step} missing`).toMatch(
-        new RegExp(`--space-${step}:\\s*[\\d.]+rem`),
-      );
+      expect(root, `--space-${step} missing`).toMatch(new RegExp(`--space-${step}:\\s*[\\d.]+rem`));
     }
     expect(root).toContain("--z-header: 10");
     expect(root).toContain("--z-skip: 20");
@@ -62,12 +62,7 @@ describe("FEEL-GLOBAL-001 token layer", () => {
     expect(css).toContain("z-index: var(--z-word-card)");
     // the global literals are gone from the sheet (a local path z-index: 1
     // is relative stacking inside the path, not a global layer)
-    for (const dead of [
-      /z-index:\s*10;/,
-      /z-index:\s*20;/,
-      /z-index:\s*40;/,
-      /z-index:\s*45;/,
-    ]) {
+    for (const dead of [/z-index:\s*10;/, /z-index:\s*20;/, /z-index:\s*40;/, /z-index:\s*45;/]) {
       expect(css, `z-index literal must ride a token: ${dead}`).not.toMatch(dead);
     }
   });
@@ -76,9 +71,7 @@ describe("FEEL-GLOBAL-001 token layer", () => {
 describe("FEEL-GLOBAL-001 keyframe library", () => {
   for (const name of ["fade-up", "slide-up", "pop", "pulse-soft"]) {
     it(`@keyframes ${name} exists`, () => {
-      expect(css, `@keyframes ${name} missing`).toMatch(
-        new RegExp(`@keyframes\\s+${name}\\s*\\{`),
-      );
+      expect(css, `@keyframes ${name} missing`).toMatch(new RegExp(`@keyframes\\s+${name}\\s*\\{`));
     });
   }
 
@@ -91,17 +84,13 @@ describe("FEEL-GLOBAL-001 keyframe library", () => {
   });
 
   it("the choice ring arrives with pop, the mobile word-card sheet slides up", () => {
-    expect(ruleBody(".choice--correct")).toContain(
-      "animation: pop var(--dur) var(--ease-out)",
-    );
-    expect(ruleBody(".word-card")).toContain(
-      "animation: slide-up var(--dur-slow) var(--ease-out)",
-    );
+    expect(ruleBody(".choice--correct")).toContain("animation: pop var(--dur) var(--ease-out)");
+    expect(ruleBody(".word-card")).toContain("animation: slide-up var(--dur-slow) var(--ease-out)");
   });
 
-  it("the jump-to-pin arrow breathes pulse-soft only while visible", () => {
-    expect(ruleBody('.path-jump-to-pin[data-visible="true"]')).toContain(
-      "animation: pulse-soft",
+  it("the review-due marker breathes pulse-soft (calm attention, never a nag)", () => {
+    expect(ruleBody(".path-node--review-due .path-node-marker")).toContain(
+      "animation: pulse-soft 2.4s var(--ease-in-out) infinite",
     );
   });
 
@@ -152,7 +141,7 @@ describe("FEEL-GLOBAL-001 gliding tab underline", () => {
   });
 
   it("while the indicator is live the per-tab border steps aside", () => {
-    const glide = ruleBody(".routes--glides .tab[aria-current=\"page\"]");
+    const glide = ruleBody('.routes--glides .tab[aria-current="page"]');
     expect(glide).toContain("border-bottom-color: transparent");
   });
 

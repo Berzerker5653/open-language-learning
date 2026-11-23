@@ -671,8 +671,44 @@ export function App() {
   // otherwise hide the top of the new page.
   const routeHeading = useRef<HTMLElement | null>(null);
   const cardKey = useRef<string | null>(null);
+  // FEEL-GLOBAL-001: the routes underline GLIDES (global-states target:
+  // "the old underline does not snap, it glides"). One indicator lives on
+  // the nav (.routes::after); its x/width are measured from the active tab
+  // per route change and on nav resize, and the nav wears .routes--glides
+  // so the active tab's static border steps aside while measured.
+  const routesRef = useRef<HTMLElement | null>(null);
+  const routesRo = useRef<(ResizeObserver & { observedNav?: HTMLElement }) | null>(null);
+  // No dep array: a route change moves aria-current on a STABLE nav node
+  // (so measuring per render is the catch), AND the nav can MOUNT long
+  // after the first render (the profile chooser renders without routeNav;
+  // resuming adds it with no route change at all).
   useEffect(() => {
-    window.scrollTo(0, 0);
+    const nav = routesRef.current;
+    if (!nav) return;
+    const measure = () => {
+      const active = nav.querySelector<HTMLElement>('.tab[aria-current="page"]');
+      if (!active) {
+        nav.style.setProperty("--tab-live", "0");
+        return;
+      }
+      nav.classList.add("routes--glides");
+      nav.style.setProperty("--tab-x", `${active.offsetLeft}px`);
+      nav.style.setProperty("--tab-w", `${active.offsetWidth}px`);
+      nav.style.setProperty("--tab-live", "1");
+    };
+    measure();
+    if (typeof ResizeObserver === "undefined") return;
+    if (routesRo.current?.observedNav === nav) return;
+    routesRo.current?.disconnect();
+    const ro = new ResizeObserver(measure) as ResizeObserver & { observedNav?: HTMLElement };
+    ro.observedNav = nav;
+    ro.observe(nav);
+    routesRo.current = ro;
+  });
+  useEffect(() => {
+    // FEEL-GLOBAL-001: the route reset is a navigation, so it glides; the
+    // browser forces an instant jump when prefers-reduced-motion is set.
+    window.scrollTo({ top: 0, behavior: "smooth" });
     const h1 = document.querySelector<HTMLElement>("#main h1");
     const item = practiceTask?.item_id ?? null;
     // The task preloads while the lesson page is still up; the card only
@@ -4305,7 +4341,7 @@ export function App() {
       packDirection={activeRecord?.rtl ? "rtl" : "ltr"}
       packLocale={activeRecord?.locale}
       routeNav={
-        <nav aria-label="Routes" className="routes">
+        <nav ref={routesRef} aria-label="Routes" className="routes">
           {/* K-81 option A (owner 2026-10-10): five destinations. The modes
               behind Practice are unchanged routes; the hub replaced tabs. */}
           <button
