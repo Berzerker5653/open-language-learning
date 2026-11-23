@@ -1572,3 +1572,24 @@ th:last-child {
   color: var(--ink-faint);
   font-size: 0.85rem;
 }
+
+/* PATH-PIN-CONSISTENCY-001 (owner dogfood 2026-11-22 complaint 10): the
+   next-up recommendation rides the path HEADER strip — the market
+   pattern (position pin on the trail, action chip above it) — so the
+   track keeps exactly ONE marker: "where I am". The chip is a real
+   44px+ control; tapping it jumps the journey to the offered unit. */
+.path-next-up {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.9rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  color: inherit;
+  font: inherit;
+  font-size: 0.95rem;
+  text-align: left;
+  cursor: pointer;
+}

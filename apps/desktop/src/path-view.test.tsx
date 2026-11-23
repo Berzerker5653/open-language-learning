@@ -172,6 +172,120 @@ describe("unit path (PATH-VIEW-001)", () => {
   });
 });
 
+// PATH-PIN-CONSISTENCY-001 (owner dogfood 2026-11-22 complaint 10): the
+// track showed node 1 (А а О о М м Т т) as "In progress (3/4 learned)"
+// while the "You are here" pin sat three nodes later on Б б П п Д д Г г —
+// the plan's next-NEW-material suggestion. Two contradictory markers on
+// one track read as "the course starts mid-branch". The rule under test:
+// the journey has exactly ONE pin, and it marks WHERE THE LEARNER IS —
+// the in-progress (or first-not-done) unit, never the recommendation.
+// A next-up offer that belongs to a different unit rides a separate
+// "next up" chip in the path header (the market pattern: pin on the
+// trail, action chip in the header strip), never as the track pin.
+describe("one pin = where I am; next-up is a header chip (PATH-PIN-CONSISTENCY-001)", () => {
+  // The owner's exact scene in pack order: one proven-done unit, the
+  // in-progress unit (3/4 learned), and the plan's next NEW-material
+  // offer further down the same band.
+  const ownerScene = (): UnitPathNode[] => [
+    node({
+      unit_id: "ru.unit.a",
+      title: "А а О о М м Т т",
+      done: true,
+      refs_done: 4,
+      refs_total: 4,
+    }),
+    node({
+      unit_id: "ru.unit.b",
+      title: "Б б П п Д д Г г",
+      in_progress: true,
+      refs_done: 3,
+      refs_total: 4,
+    }),
+    node({ unit_id: "ru.unit.c", title: "Н н" }),
+    node({ unit_id: "ru.unit.d", title: "В в", current: true }),
+  ];
+
+  it("pins the IN-PROGRESS unit even when the plan offers a later unit", () => {
+    const html = renderToStaticMarkup(<PathView nodes={ownerScene()} />);
+    // Exactly one caption on the whole track.
+    expect(html.split("You are here").length - 1).toBe(1);
+    // The caption rides inside the in-progress unit's markup...
+    const pinnedUnit = html.indexOf('data-testid="path-node-ru.unit.b"');
+    const pin = html.indexOf('data-testid="path-pin"');
+    const offerNode = html.indexOf('data-testid="path-node-ru.unit.d"');
+    expect(pinnedUnit).toBeGreaterThan(-1);
+    expect(pin).toBeGreaterThan(pinnedUnit);
+    expect(pin).toBeLessThan(offerNode);
+    // ...and the offered node keeps its engine-honest current ring but
+    // NEVER a second pin — the recommendation is not "where I am".
+    expect(html).toContain('data-state="current"');
+    expect(html.slice(offerNode)).not.toContain("path-node-pin");
+  });
+
+  it("with nothing in progress, pins the FIRST not-done unit, not a later offered one", () => {
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({ unit_id: "ru.unit.done", done: true, refs_done: 4, refs_total: 4 }),
+          node({ unit_id: "ru.unit.first-ready" }),
+          node({ unit_id: "ru.unit.offered", current: true }),
+        ]}
+      />,
+    );
+    expect(html.split("You are here").length - 1).toBe(1);
+    const firstReady = html.indexOf('data-testid="path-node-ru.unit.first-ready"');
+    const pin = html.indexOf('data-testid="path-pin"');
+    const offered = html.indexOf('data-testid="path-node-ru.unit.offered"');
+    expect(pin).toBeGreaterThan(firstReady);
+    expect(pin).toBeLessThan(offered);
+  });
+
+  it("shows a next-up offer that belongs to another unit as a header chip, never a second pin", () => {
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={ownerScene()}
+        nextOffer={{
+          kind: "introduction",
+          unit_id: "ru.unit.d",
+          title: "В в",
+          minutes: 3,
+          total_due: 0,
+        }}
+      />,
+    );
+    // The chip lives in the path header zone — before any track node.
+    const chip = html.indexOf('data-testid="path-next-up"');
+    expect(chip).toBeGreaterThan(-1);
+    expect(html).toContain("Next up: В в");
+    expect(chip).toBeLessThan(html.indexOf('<ol class="path-nodes"'));
+    // The track keeps exactly ONE pin, still on the in-progress unit.
+    expect(html.split("You are here").length - 1).toBe(1);
+    const pinnedUnit = html.indexOf('data-testid="path-node-ru.unit.b"');
+    const pin = html.indexOf('data-testid="path-pin"');
+    expect(pin).toBeGreaterThan(pinnedUnit);
+    expect(html.slice(html.indexOf('data-testid="path-node-ru.unit.d"'))).not.toContain(
+      "path-node-pin",
+    );
+  });
+
+  it("renders no next-up chip when the offer names the pinned unit itself", () => {
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={ownerScene()}
+        nextOffer={{
+          kind: "introduction",
+          unit_id: "ru.unit.b",
+          title: "Б б П п Д д Г г",
+          minutes: 3,
+          total_due: 0,
+        }}
+      />,
+    );
+    expect(html).not.toContain('data-testid="path-next-up"');
+    expect(html.split("You are here").length - 1).toBe(1);
+  });
+});
+
 // PATH-SECTIONS-DEDUP-001 (owner dogfood 2026-11-22 complaint 09a): the
 // path shows ONE section row per band. The pack's late-appended journey
 // groups (files 810–818: A2 past-events, B1 practical-problems, B2

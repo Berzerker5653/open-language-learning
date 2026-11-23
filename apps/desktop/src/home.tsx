@@ -592,6 +592,7 @@ export function Home(p: HomeProps) {
         <PathView
           nodes={p.pathNodes}
           scrollToUnit={p.sessionOutcome && p.nextOffer ? p.nextOffer.unit_id : null}
+          nextOffer={p.nextOffer ?? null}
         />
       ) : null}
       {p.nextGoal === undefined ? null : p.nextGoal === null ? (
@@ -1050,26 +1051,37 @@ function PathLockGlyph() {
 export function PathView({
   nodes,
   scrollToUnit,
+  nextOffer,
 }: {
   nodes: UnitPathNode[];
   /// PATH-WHATSNEXT-001: when set (the after-session moment), the path
   /// brings THIS unit's node into view — the offer and the map are one
   /// answer, never two.
   scrollToUnit?: string | null;
+  /// PATH-PIN-CONSISTENCY-001 (owner dogfood 2026-11-22 complaint 10):
+  /// the single current offer from `current_offer`. When it names a unit
+  /// OTHER than the pinned one, it rides a "next up" chip in the path
+  /// header — the market pattern (pin on the trail, action chip in the
+  /// header strip) — never as the track pin.
+  nextOffer?: NextOffer | null;
 }) {
   const sections = pathSections(nodes);
-  const pinnedBand = sections.find((s) => s.nodes.some((n) => n.current))?.band;
-  // FIX-PATH-VISUAL-001-1 single-caption policy: the engine may mark
-  // SEVERAL units current at once (they share the introduction pool —
-  // the owner's path had three), but the journey pins exactly ONE
-  // "You are here" caption: the FIRST current node in rendered
-  // (canonical-ladder) order — the learner reads the path top-down, so
-  // the topmost current node IS "here". The other current nodes keep
-  // their current ring styling (engine truth, never hidden) but render
-  // no caption, so captions can never stack and collide.
-  // Policy rationale lives in state/notes/FIX-PATH-VISUAL-001-1.md.
-  const pinTarget =
-    sections.flatMap((s) => s.nodes).find((n) => pathNodeState(n) === "current")?.unit_id ?? null;
+  // PATH-PIN-CONSISTENCY-001: the pin is WHERE THE LEARNER IS, not what
+  // the plan suggests next. Two contradictory markers on one track (the
+  // owner's screenshot: node 1 honestly "In progress (3/4 learned)"
+  // while "You are here" sat three nodes later on the next NEW-material
+  // suggestion) read as "the course starts mid-branch". Rule: exactly
+  // one pin, on the first IN-PROGRESS unit in rendered (ladder) order,
+  // else the first not-done unlocked unit. A node the engine marks
+  // current keeps its engine-honest current ring (never hidden — the
+  // FIX-PATH-VISUAL-001-1 single-caption precedent stands) but never a
+  // pin; the offer itself rides the header chip below.
+  // Policy rationale lives in state/notes/PATH-PIN-CONSISTENCY-001.md.
+  const openUnits = sections.flatMap((s) => s.nodes).filter((n) => !n.locked && !n.done);
+  const pinTarget = openUnits.find((n) => n.in_progress)?.unit_id ?? openUnits[0]?.unit_id ?? null;
+  const pinnedBand = pinTarget
+    ? sections.find((s) => s.nodes.some((n) => n.unit_id === pinTarget))?.band
+    : undefined;
   // undefined = nobody has tapped yet, so the pinned section opens by
   // default; an explicit null collapses everything, an override re-opens
   // the tapped band even after the pack data refreshes underneath.
@@ -1081,22 +1093,55 @@ export function PathView({
   const rootRef = useRef<HTMLElement | null>(null);
   // Two phases, because a collapsed section's node is NOT in the DOM yet:
   // open the offered node's section first, then scroll once it renders.
+  // PATH-PIN-CONSISTENCY-001: one focus pipeline for both jump sources —
+  // the after-session scroll (the scrollToUnit prop) and a next-up chip
+  // tap (internal state) — so a tap opens a collapsed band then lands.
+  const [focusUnit, setFocusUnit] = useState<string | null>(null);
   useEffect(() => {
-    if (!scrollToUnit) return;
-    const target = nodes.find((n) => n.unit_id === scrollToUnit);
+    if (scrollToUnit) setFocusUnit(scrollToUnit);
+  }, [scrollToUnit]);
+  useEffect(() => {
+    if (!focusUnit) return;
+    const target = nodes.find((n) => n.unit_id === focusUnit);
     if (target) setBandOverride(target.band ?? "other");
-  }, [scrollToUnit, nodes]);
+  }, [focusUnit, nodes]);
   useEffect(() => {
-    if (!scrollToUnit) return;
-    const el = rootRef.current?.querySelector(`[data-unit="${scrollToUnit}"]`);
+    if (!focusUnit) return;
+    const el = rootRef.current?.querySelector(`[data-unit="${focusUnit}"]`);
     if (el && typeof el.scrollIntoView === "function") el.scrollIntoView({ block: "center" });
-  }, [scrollToUnit, openBand, nodes]);
+  }, [focusUnit, openBand, nodes]);
+  // PATH-PIN-CONSISTENCY-001: auto-scroll on load lands a little BEFORE
+  // the pin (the pin centered, never glued to the top edge) so the
+  // completed/started context above the pin stays visible — the learner
+  // reads their history INTO the pin instead of arriving at a bare node.
+  const autoScrolled = useRef<string | null>(null);
+  useEffect(() => {
+    if (scrollToUnit) return; // the after-session jump owns the scroll
+    if (!pinTarget || autoScrolled.current === pinTarget) return;
+    autoScrolled.current = pinTarget;
+    const el = rootRef.current?.querySelector(`[data-unit="${pinTarget}"]`);
+    if (el && typeof el.scrollIntoView === "function") el.scrollIntoView({ block: "center" });
+  }, [pinTarget, scrollToUnit]);
   return (
     <section aria-label="Your path" className="unit-path" data-testid="unit-path" ref={rootRef}>
       <h2>Your path</h2>
       <p className="meta">
         <small>What you have completed, where you are now, and where this leads.</small>
       </p>
+      {nextOffer && nextOffer.unit_id !== pinTarget ? (
+        // PATH-PIN-CONSISTENCY-001: the recommendation lives in the
+        // header strip, never on the track — the pin stays the single
+        // "where I am" marker. Tapping the chip jumps the journey to
+        // the offered unit (its band opens first if collapsed).
+        <button
+          type="button"
+          className="path-next-up"
+          data-testid="path-next-up"
+          onClick={() => setFocusUnit(nextOffer.unit_id)}
+        >
+          Next up: {nextOffer.title} · ~{nextOffer.minutes} min
+        </button>
+      ) : null}
       {sections.map((s) => {
         const header = bandHeader(s.band);
         const isOpen = openBand === s.band;
@@ -1176,7 +1221,11 @@ export function PathView({
                       </span>
                       <span className="path-node-body">
                         <span className="path-node-title">{n.title}</span>
-                        {state === "current" && n.unit_id === pinTarget ? (
+                        {n.unit_id === pinTarget ? (
+                          // PATH-PIN-CONSISTENCY-001: the ONE pin marks
+                          // where the learner is (in-progress or first
+                          // not-done), regardless of which unit the plan
+                          // currently offers.
                           <span className="path-node-pin" data-testid="path-pin">
                             You are here
                           </span>
