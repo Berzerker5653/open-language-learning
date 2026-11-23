@@ -454,7 +454,7 @@ describe("locked nodes render strictly below the frontier (PATH-LOCK-ORDER-001)"
 
   it("sibling locked nodes sharing one gate state the unlock reason ONCE", () => {
     const html = renderToStaticMarkup(<PathView nodes={freshProfile()} />);
-    expect(html.split('finish &quot;the Cyrillic letters&quot;').length - 1).toBe(1);
+    expect(html.split("finish &quot;the Cyrillic letters&quot;").length - 1).toBe(1);
     // Distinct gates still each get their own reason — dedup never hides a
     // gate nobody has heard yet. (All-locked track: with no pin the first
     // section renders open.)

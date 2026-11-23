@@ -321,8 +321,7 @@ try {
       await sleep(300);
       streak2 = (await homeHealthy()) ? streak2 + 1 : 0;
     }
-    if (streak2 < 3)
-      throw new Error("navigation error: home dropped pack state after the shots");
+    if (streak2 < 3) throw new Error("navigation error: home dropped pack state after the shots");
     await shot("lockorder-fold0", true);
     await shot("lockorder-fullpath", false);
   }
