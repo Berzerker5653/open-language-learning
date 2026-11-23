@@ -1,0 +1,41 @@
+PATH-FEEL-SCROLL-001 lane gate log (controller-run, 2026-11-23)
+
+Frontend-only lane: home.tsx + styles.css + path-view.test.tsx + new capture
+harness. No Rust touched -> cargo fmt/clippy/test intentionally not run.
+
+RED proofs (before implementation):
+- npx vitest run src/path-view.test.tsx -> 1 failed | 18 passed (19)
+  (the "ships the jump control hidden" test fails at HEAD: control absent)
+- node scripts/path-scroll-capture.mjs @ HEAD (dist = HEAD 03:16 build):
+  PASS seed, PASS home stable, PASS load-centered (pinCenter 451 vs 422, tol 80),
+  FAIL control ships hidden (present:false),
+  FAIL scroll-away shows control (present:false),
+  PASS pin off-screen above (bottom -589) [honest geometry measurement],
+  FAIL arrow dir above (no control),
+  abort: "jump control vanished before the tap" -> red-at-head/result.json
+  (an earlier head run aborted on a harness scroll-selection bug, fixed in the
+  harness before the recorded red run; the fix is scroll-strategy only, not a
+  weakening of any check).
+
+GREEN (implementation at working tree == committed bytes; dist rebuilt):
+- npx vitest run src/path-view.test.tsx -> 19/19
+- npx vitest run (full desktop suite)          -> Test Files 61 passed, Tests 497 passed (497)
+- npm run -s typecheck                         -> clean
+- npx eslint src/home.tsx src/path-view.test.tsx -> clean
+- npx prettier --write on the 4 changed files  -> formatted
+- npm run build -> dist rebuilt (index-DYYu6bsl.js)
+- node scripts/path-scroll-capture.mjs         -> 11/11 PASS (result.json)
+    load-centered 451 vs 422; hidden on load (opacity 0 / visibility hidden);
+    away: shown (opacity 1, rect 322,776 52px) with dir=above, pin bottom -589;
+    tap: pin back to 411 vs 422, control hidden again;
+    top: pin top 4262 > 844, control shown with dir=below.
+- scripts/path-pin-consistency-capture.mjs regression over patched DOM
+  -> 10/10 PASS (pin-regression/result.json; 2nd echo count 10 of 10)
+- python3 tools/audit_learner_copy.py -> findings: 0 (1852 pack files scanned)
+- python3 tools/validate_handoff.py -> see ledger commit; run pre-push
+
+Vision QA of evidence (two-oracle posture): load shot = pin centered, NO
+floating control; away shot = white circle bottom-right, teal up-arrow,
+on-brand palette, no overlap from the FAB itself. One out-of-scope
+observation recorded in the notes file (sticky header clips a node title at
+scroll end; pre-existing chrome, untouched by this lane).

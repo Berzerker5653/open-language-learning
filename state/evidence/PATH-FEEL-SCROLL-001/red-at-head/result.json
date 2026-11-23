@@ -1,0 +1,83 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "the scene seeded: four DONE units and one honest IN PROGRESS unit",
+      "pass": true,
+      "measured": {
+        "drilledFully": 48,
+        "drilledPartial": 8
+      }
+    },
+    {
+      "name": "home reached a stable pack-loaded state before measurement (no load flicker)",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    },
+    {
+      "name": "the journey OPENS centered on the pin on load (|center - VH/2| <= tol)",
+      "pass": true,
+      "measured": {
+        "pinCenter": 451,
+        "viewportCenter": 422,
+        "tol": 80
+      }
+    },
+    {
+      "name": "the jump control ships in the DOM but is HIDDEN while my-spot is on screen",
+      "pass": false,
+      "measured": {
+        "present": false
+      }
+    },
+    {
+      "name": "scrolling my-spot away ABOVE makes the floating control VISIBLE (computed opacity ~1, in the viewport)",
+      "pass": false,
+      "measured": {
+        "present": false
+      }
+    },
+    {
+      "name": "the pin is truly off-screen above before the arrow-claim is measured",
+      "pass": true,
+      "measured": {
+        "top": -665,
+        "bottom": -589,
+        "center": -627
+      }
+    },
+    {
+      "name": "the arrow points TOWARD my-spot: data-dir='above' while the pin is above the view",
+      "pass": false,
+      "measured": {}
+    }
+  ],
+  "failures": 4,
+  "error": "navigation error: jump control vanished before the tap",
+  "profileId": "prof-11b1273d-adc0-48b2-92b2-df8bca2a738b",
+  "seed": {
+    "doneUnits": [
+      "ru.unit.on-ramp.cyrillic-a-o-m-t",
+      "ru.unit.on-ramp.cyrillic-k-e-n-s",
+      "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+      "ru.unit.on-ramp.cyrillic-l-z-zh-i"
+    ],
+    "drilledFully": 48,
+    "pinUnit": "ru.unit.on-ramp.cyrillic-ya-eh-f",
+    "drilledPartial": [
+      "ru.orth.cyrillic.ya",
+      "ru.orth.cyrillic.eh",
+      "ru.orth.cyrillic.f",
+      "ru.orth.cyrillic.ya",
+      "ru.orth.cyrillic.eh",
+      "ru.orth.cyrillic.f",
+      "ru.orth.cyrillic.ya",
+      "ru.orth.cyrillic.eh"
+    ],
+    "partialTotal": 9
+  },
+  "scrollMode": "window",
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17640 (trusted network only)\n"
+}

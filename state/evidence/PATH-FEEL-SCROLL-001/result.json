@@ -1,0 +1,157 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "the scene seeded: four DONE units and one honest IN PROGRESS unit",
+      "pass": true,
+      "measured": {
+        "drilledFully": 48,
+        "drilledPartial": 8
+      }
+    },
+    {
+      "name": "home reached a stable pack-loaded state before measurement (no load flicker)",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    },
+    {
+      "name": "the journey OPENS centered on the pin on load (|center - VH/2| <= tol)",
+      "pass": true,
+      "measured": {
+        "pinCenter": 451,
+        "viewportCenter": 422,
+        "tol": 80
+      }
+    },
+    {
+      "name": "the jump control ships in the DOM but is HIDDEN while my-spot is on screen",
+      "pass": true,
+      "measured": {
+        "present": true,
+        "dataVisible": "false",
+        "dir": "above",
+        "opacity": "0",
+        "visibility": "hidden",
+        "inViewport": true,
+        "rect": {
+          "top": 788,
+          "left": 324,
+          "w": 48
+        }
+      }
+    },
+    {
+      "name": "scrolling my-spot away ABOVE makes the floating control VISIBLE (computed opacity ~1, in the viewport)",
+      "pass": true,
+      "measured": {
+        "present": true,
+        "dataVisible": "true",
+        "dir": "above",
+        "opacity": "1",
+        "visibility": "visible",
+        "inViewport": true,
+        "rect": {
+          "top": 776,
+          "left": 322,
+          "w": 52
+        }
+      }
+    },
+    {
+      "name": "the pin is truly off-screen above before the arrow-claim is measured",
+      "pass": true,
+      "measured": {
+        "top": -665,
+        "bottom": -589,
+        "center": -627
+      }
+    },
+    {
+      "name": "the arrow points TOWARD my-spot: data-dir='above' while the pin is above the view",
+      "pass": true,
+      "measured": {
+        "dir": "above"
+      }
+    },
+    {
+      "name": "tapping the control returns the pin CENTERED in the viewport",
+      "pass": true,
+      "measured": {
+        "pinCenter": 411,
+        "viewportCenter": 422,
+        "tol": 80
+      }
+    },
+    {
+      "name": "with my-spot back on screen, the control is HIDDEN again",
+      "pass": true,
+      "measured": {
+        "present": true,
+        "dataVisible": "false",
+        "dir": "above",
+        "opacity": "0",
+        "visibility": "hidden",
+        "inViewport": true,
+        "rect": {
+          "top": 788,
+          "left": 324,
+          "w": 48
+        }
+      }
+    },
+    {
+      "name": "scrolling to the very top puts my-spot BELOW the viewport",
+      "pass": true,
+      "measured": {
+        "top": 4262,
+        "bottom": 4338,
+        "center": 4300
+      }
+    },
+    {
+      "name": "the control is visible with the arrow flipped DOWN (data-dir='below')",
+      "pass": true,
+      "measured": {
+        "present": true,
+        "dataVisible": "true",
+        "dir": "below",
+        "opacity": "1",
+        "visibility": "visible",
+        "inViewport": true,
+        "rect": {
+          "top": 776,
+          "left": 322,
+          "w": 52
+        }
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-ccb52b1c-f038-4e6c-8607-260e8ce6adee",
+  "seed": {
+    "doneUnits": [
+      "ru.unit.on-ramp.cyrillic-a-o-m-t",
+      "ru.unit.on-ramp.cyrillic-k-e-n-s",
+      "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+      "ru.unit.on-ramp.cyrillic-l-z-zh-i"
+    ],
+    "drilledFully": 48,
+    "pinUnit": "ru.unit.on-ramp.cyrillic-ya-eh-f",
+    "drilledPartial": [
+      "ru.orth.cyrillic.ya",
+      "ru.orth.cyrillic.eh",
+      "ru.orth.cyrillic.f",
+      "ru.orth.cyrillic.ya",
+      "ru.orth.cyrillic.eh",
+      "ru.orth.cyrillic.f",
+      "ru.orth.cyrillic.ya",
+      "ru.orth.cyrillic.eh"
+    ],
+    "partialTotal": 9
+  },
+  "scrollMode": "window",
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17673 (trusted network only)\n"
+}
