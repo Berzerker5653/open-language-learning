@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": "SERVE-BANNER-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3290,14 +3290,20 @@
       "notes": "code f665b2ea (red contract 2ce3919b, evidence next commit); section order done->open->locked, unlock reason once per gate; capture red 3 FAIL (locked-above-frontier 10) vs green 6/6 at 390x844; firstscreen 8/8 unedited"
     },
     "SERVE-BANNER-001": {
-      "status": "in_progress",
+      "status": "done",
       "attempts": 1,
       "at": "2026-11-23",
       "updated": "2026-11-23",
       "evidence": [
-        "state/notes/SERVE-BANNER-001.md"
+        "state/notes/SERVE-BANNER-001.md",
+        "state/evidence/SERVE-BANNER-001/gates.log",
+        "state/evidence/SERVE-BANNER-001/capture-red-at-base.log",
+        "state/evidence/SERVE-BANNER-001/capture-green.log",
+        "state/evidence/SERVE-BANNER-001/result-green.json",
+        "state/evidence/SERVE-BANNER-001/servebanner-fold0-green.png",
+        "state/evidence/SERVE-BANNER-001/servebanner-settings-about-green.png"
       ],
-      "notes": "opened; red contract + red-at-base capture this commit; code next"
+      "notes": "code e336ac01 (red contract 892e8ab6, evidence 94cf7093); capability notes moved to Settings About, one degraded-mic badge max on Today; capture red 4 FAIL (document-top infra stack) vs green 7/7 at 390x844; firstscreen 8/8 and path-lock-order 6/6 unedited"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
