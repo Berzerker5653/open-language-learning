@@ -1,0 +1,60 @@
+FEEL-ONBOARD-001 — lane gates + real-engine capture (run 211)
+
+Real-engine capture (scripts/feel-onboard-capture.mjs, lts-serve + headless
+Chrome at 390x844 + raw CDP; the wizard is walked with REAL typed input and
+REAL clicks, the chooser drives real engine hide/unhide/resume writes; ONLY
+the SSE progress/events leg is replayed from canned install-pack stage
+frames — that leg's semantics are Rust-pinned):
+- GREEN at HEAD: 11/11 PASS — capture-green-at-head.log, result.json,
+  screenshots wizard-packs-step.png (done dot green+check, active ring,
+  unbroken connectors), install-bar.png (45% fill matches the honest
+  "45% done" line), resume-cards.png (varied avatar discs, real ids),
+  warm-empty.png (dashed ring glyph + calm sentence), after-resume-home.
+- RED at base (lane tracked files checked out at the red-test commit
+  cdc3fec3, dist rebuilt, SAME fixed harness): 11/11 FAIL —
+  capture-red-at-base.log, red/ screenshots + red/result.json.
+- Harness iteration (recorded): first green run sampled the app-entry
+  glide 150ms after Skip while finishOnboarding's async chain was still
+  running (10/11); the check now polls up to 2.5s. First stepper frame
+  used the old wrapping horizontal layout and vision QA caught stranded
+  connector segments at 390px — the stepper was re-rendered as the mock's
+  column layout (fix commit after dc4aac50) and both captures were re-run
+  with the final tree. Red and green were finally produced back-to-back
+  with the identical final harness (red 0/11, green 11/11).
+- Vision QA of after-shots: resume-cards shows varied pastel avatar discs
+  (green/teal/orange) with readable initials; warm-empty shows the dashed
+  ring glyph + zero confetti; install-bar shows bar fill ≈ the stated
+  percent; wizard-packs-step single row, no dangling connector, no
+  caption wrapping. A teal rectangular focus outline on the "Welcome
+  back" h1 appears in GREEN AND RED captures alike — pre-existing focus
+  chrome on page load, not this lane.
+
+Lane gates (apps/desktop unless noted):
+- npx vitest run src/onboard-feel.test.tsx: 17/17 green (red 16/17 at base).
+- npx vitest run (full desktop suite): 614 tests green incl. motion-contract,
+  onboarding, a11y, button-affordance, loading-feel, session-chrome,
+  rtl-direction — all UNEDITED.
+- packages/ui vitest: 10 green (AppShell contentClassName additive).
+- npx tsc --noEmit: green.
+- prettier --check on all touched files + harness: green (eslint clean).
+- python3 tools/validate_handoff.py --require-explicit-ledger-records: 0 FAIL.
+- No Rust/engine changes: git diff shows no *.rs; EngineProgress, the SSE
+  stream, list_profiles and install commands untouched.
+- Motion budget: every new duration rides var(--dur/--dur-fast/--dur-slow);
+  the only >300ms loop is pulse-sweep (pulse-named, scan-legal). The
+  motion-contract seconds scan stayed green UNEDITED.
+- Celebration scan: no confetti/emoji/congrats strings; the empty state is
+  line art + the existing sentence.
+
+Deviations from the mock (recorded at card open, honored):
+- No MB byte counts on the install line — EngineProgress carries percent or
+  null, never bytes; inventing "132 MB of 293 MB" would fake progress.
+- Stepper captions sit under the dots (the mock's shape); the horizontal
+  one-line chip layout was replaced in the fix commit after capture vision
+  QA showed dangling connectors at 390px.
+- Observation (honest, not a defect): avatar variants hash from engine uuids,
+  so some profile sets collapse toward one variant (the run hashed three
+  ids to v3, one to v0 — variation >=2 held). Per-id stability across
+  renders/reloads is the contract and is verified; forced pairwise
+  distinctness would make the color a function of the roster, not the
+  person, and was deliberately not done.

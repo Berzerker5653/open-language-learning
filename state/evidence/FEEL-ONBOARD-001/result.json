@@ -1,0 +1,154 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "active-dot ring fades in (ring-in, soft accent ring)",
+      "pass": true,
+      "measured": {
+        "animationName": "ring-in",
+        "boxShadow": "rgb(226, 238, 235) 0px 0px 0px 4px",
+        "step": "Welcome"
+      }
+    },
+    {
+      "name": "step cards glide on step changes (step-in on the fresh card)",
+      "pass": true,
+      "measured": {
+        "clickedCreate": true,
+        "glide": {
+          "animationName": "step-in",
+          "animationDuration": "0.25s"
+        }
+      }
+    },
+    {
+      "name": "completed step reads done (ok dot, drawn check, filled connector)",
+      "pass": true,
+      "measured": {
+        "label": "Welcome",
+        "beforeBackground": "rgb(46, 125, 70)",
+        "connectorAnimation": "link-fill",
+        "connectorBackground": "rgb(46, 125, 70)",
+        "checkAnimation": "check-draw",
+        "checkDasharray": "16px"
+      }
+    },
+    {
+      "name": "packs→microphone advances by real click with installed row selectable",
+      "pass": true,
+      "measured": {
+        "selected": {
+          "installedRow": true
+        },
+        "cont": true,
+        "micStep": true
+      }
+    },
+    {
+      "name": "entering the app glides (app-in on the content page, wizard gone)",
+      "pass": true,
+      "measured": {
+        "hasClass": true,
+        "animationName": "app-in",
+        "inWizard": false
+      }
+    },
+    {
+      "name": "install bar is a real determinate bar (aria 45, eased width)",
+      "pass": true,
+      "measured": {
+        "role": "progressbar",
+        "valuenow": "45",
+        "valuetext": "Downloading the language pack — 45% done",
+        "transition": "width",
+        "widthRatio": 45
+      }
+    },
+    {
+      "name": "percent-less stage: honest indeterminate sweep, no claimed value",
+      "pass": true,
+      "measured": {
+        "unknownClass": true,
+        "valuenow": null,
+        "sweepAnimation": "pulse-sweep"
+      }
+    },
+    {
+      "name": "initials avatars vary deterministically per profile id",
+      "pass": true,
+      "measured": {
+        "rendered": [
+          [
+            "Onboard Feel",
+            "OF",
+            3
+          ],
+          [
+            "Aiko Tanaka",
+            "AT",
+            3
+          ],
+          [
+            "Jordan James",
+            "JJ",
+            0
+          ],
+          [
+            "Mika Virtanen",
+            "MV",
+            0
+          ]
+        ],
+        "expected": [
+          [
+            "Onboard Feel",
+            3
+          ],
+          [
+            "Aiko Tanaka",
+            3
+          ],
+          [
+            "Mika Virtanen",
+            0
+          ],
+          [
+            "Jordan James",
+            0
+          ]
+        ]
+      }
+    },
+    {
+      "name": "profile cards lift on hover (real mouse, 1px up)",
+      "pass": true,
+      "measured": {
+        "transform": "matrix(1, 0, 0, 1, 0, -1)",
+        "border": "rgb(201, 190, 171)"
+      }
+    },
+    {
+      "name": "first-run empty state is warm and designed (ring glyph, fade-up, sentence intact)",
+      "pass": true,
+      "measured": {
+        "sentence": true,
+        "hasGlyph": true,
+        "animationName": "fade-up",
+        "glyphColor": "rgb(20, 97, 94)"
+      }
+    },
+    {
+      "name": "resume Continue glides into the app (app-in, chooser gone)",
+      "pass": true,
+      "measured": {
+        "resumed": true,
+        "entry2": {
+          "hasClass": true,
+          "animationName": "app-in",
+          "chooserGone": true
+        }
+      }
+    }
+  ],
+  "failures": 0
+}

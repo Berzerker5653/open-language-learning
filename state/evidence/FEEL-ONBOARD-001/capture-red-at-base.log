@@ -1,0 +1,12 @@
+FAIL active-dot ring fades in (ring-in, soft accent ring) — {"animationName":"none","boxShadow":"none","step":"Welcome"}
+FAIL step cards glide on step changes (step-in on the fresh card) — {"clickedCreate":true,"glide":null}
+FAIL completed step reads done (ok dot, drawn check, filled connector) — null
+FAIL packs→microphone advances by real click with installed row selectable — {"selected":{"installedRow":true},"cont":true,"micStep":false}
+FAIL entering the app glides (app-in on the content page, wizard gone) — {"hasClass":false,"animationName":"none","inWizard":false}
+FAIL install bar is a real determinate bar (aria 45, eased width) — null
+FAIL percent-less stage: honest indeterminate sweep, no claimed value — null
+FAIL initials avatars vary deterministically per profile id — {"rendered":[["Onboard Feel","OF",null],["Mika Virtanen","MV",null],["Aiko Tanaka","AT",null],["Jordan James","JJ",null]],"expected":[["Onboard Feel",0],["Aiko Tanaka",0],["Mika Virtanen",2],["Jordan James",2]]}
+FAIL profile cards lift on hover (real mouse, 1px up) — {"transform":"none","border":"rgb(226, 218, 204)"}
+FAIL first-run empty state is warm and designed (ring glyph, fade-up, sentence intact) — null
+FAIL resume Continue glides into the app (app-in, chooser gone) — {"resumed":true,"entry2":{"hasClass":false,"animationName":"none","chooserGone":true}}
+DONE: 11/11 checks failing

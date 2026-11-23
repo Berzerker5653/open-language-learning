@@ -1,0 +1,129 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "active-dot ring fades in (ring-in, soft accent ring)",
+      "pass": false,
+      "measured": {
+        "animationName": "none",
+        "boxShadow": "none",
+        "step": "Welcome"
+      }
+    },
+    {
+      "name": "step cards glide on step changes (step-in on the fresh card)",
+      "pass": false,
+      "measured": {
+        "clickedCreate": true,
+        "glide": null
+      }
+    },
+    {
+      "name": "completed step reads done (ok dot, drawn check, filled connector)",
+      "pass": false,
+      "measured": null
+    },
+    {
+      "name": "packs→microphone advances by real click with installed row selectable",
+      "pass": false,
+      "measured": {
+        "selected": {
+          "installedRow": true
+        },
+        "cont": true,
+        "micStep": false
+      }
+    },
+    {
+      "name": "entering the app glides (app-in on the content page, wizard gone)",
+      "pass": false,
+      "measured": {
+        "hasClass": false,
+        "animationName": "none",
+        "inWizard": false
+      }
+    },
+    {
+      "name": "install bar is a real determinate bar (aria 45, eased width)",
+      "pass": false,
+      "measured": null
+    },
+    {
+      "name": "percent-less stage: honest indeterminate sweep, no claimed value",
+      "pass": false,
+      "measured": null
+    },
+    {
+      "name": "initials avatars vary deterministically per profile id",
+      "pass": false,
+      "measured": {
+        "rendered": [
+          [
+            "Onboard Feel",
+            "OF",
+            null
+          ],
+          [
+            "Mika Virtanen",
+            "MV",
+            null
+          ],
+          [
+            "Aiko Tanaka",
+            "AT",
+            null
+          ],
+          [
+            "Jordan James",
+            "JJ",
+            null
+          ]
+        ],
+        "expected": [
+          [
+            "Onboard Feel",
+            0
+          ],
+          [
+            "Aiko Tanaka",
+            0
+          ],
+          [
+            "Mika Virtanen",
+            2
+          ],
+          [
+            "Jordan James",
+            2
+          ]
+        ]
+      }
+    },
+    {
+      "name": "profile cards lift on hover (real mouse, 1px up)",
+      "pass": false,
+      "measured": {
+        "transform": "none",
+        "border": "rgb(226, 218, 204)"
+      }
+    },
+    {
+      "name": "first-run empty state is warm and designed (ring glyph, fade-up, sentence intact)",
+      "pass": false,
+      "measured": null
+    },
+    {
+      "name": "resume Continue glides into the app (app-in, chooser gone)",
+      "pass": false,
+      "measured": {
+        "resumed": true,
+        "entry2": {
+          "hasClass": false,
+          "animationName": "none",
+          "chooserGone": true
+        }
+      }
+    }
+  ],
+  "failures": 11
+}
