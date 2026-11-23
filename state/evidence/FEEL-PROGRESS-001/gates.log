@@ -1,0 +1,39 @@
+FEEL-PROGRESS-001 — lane gates + real-engine capture (run 210 takeover controller)
+
+RUN 210 CONTROLLER (takeover of run 209, capped 80/80 with the lane WIP
+complete but uncommitted; executed run 209's frozen resume recipe):
+
+Real-engine capture (scripts/feel-progress-capture.mjs, lts-serve + headless
+Chrome + raw CDP; fakes ONLY the memory_stats leg, everything else real engine):
+- GREEN at tree (WIP dist, harness as committed): 5/5 PASS —
+  capture-green-at-head.log, result.json, screenshots zero-state.png,
+  bars-mid-glide.png, bars-and-calendar.png, hover-tip.png.
+- RED at base (lane tracked files stashed, dist rebuilt from HEAD 85922a3b,
+  same fixed harness): 5/5 FAIL — capture-red-at-base.log, red/ screenshots.
+- Harness fix during this takeover: the zero-state shot sat at scrollTo(0,0)
+  where the .progress-zero card is below the 390x844 fold (green and red
+  zero-state.png were byte-identical — the shot proved nothing); the shot now
+  scrollIntoViews the asserted card (zero-state on green, the strip on base).
+  A mid-glide bars frame (shot while the 400ms dim-glide is in flight) was
+  added per the contract's promised screenshots. Both red and green reran
+  with the fixed harness; the 07:14-era logs are superseded.
+- Vision QA of after-shots: zero-state.png shows the dashed card + empty
+  circle + "Nothing studied yet" + "your first session is on Today", no strip;
+  red/zero-state.png shows the strip ("Your memory, by the numbers" + band
+  rows + empty calendar); bars-mid-glide.png shows the A1 fill ~1/3 of the
+  track mid-flight; hover-tip.png shows the dark chip "Nov 8 · 2 exercises"
+  over the calendar. A stray-looking teal underline under the "Settings" tab
+  is pre-existing tab chrome, not this lane (visible in pre-lane captures too).
+
+Lane gates (apps/desktop unless noted):
+- npx tsc --noEmit: green.
+- npx vitest run: 68 files / 597 tests passed (includes progress-feel.test.tsx
+  contract pins + motion-contract, button-affordance, a11y, loading-feel,
+  progress.test untouched and green).
+- npx prettier --check on all touched files + harness: green.
+- npx eslint on touched src files: no findings.
+- python3 tools/audit_learner_copy.py (repo root): findings: 0.
+- No Rust/engine changes (git diff HEAD -- '*.rs' empty); memory_stats,
+  learning_facts, placement commands and Rust pins untouched.
+- Celebration scan of the lane diff: only code comments forbidding celebration
+  copy; no congrats/emoji/confetti strings.

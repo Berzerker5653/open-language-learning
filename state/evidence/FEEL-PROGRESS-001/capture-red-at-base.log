@@ -1,0 +1,6 @@
+FAIL ZERO: fresh profile gets the designed honest zero-state (strip absent, fades up) — {"present":false,"strip":true}
+FAIL GLIDE: dim bars grow from the last shown width over the 400ms data-fill token — {"glideEarly":{"present":true,"name":"none","dur":"0s","fillFrom":"","widthNow":"74.4px"},"glideFinal":{"present":true,"widthFinal":"74.4px","attr":"74.4"}}
+FAIL CAL: every in-window cell is labeled, tab-reachable, and fills in staggered — {"n":84,"labeled":false,"tabbable":false,"animName":"none","animDur":"0s","maxStagger":-1,"svgHidden":true}
+FAIL HOVER: a real CDP hover scales the day 1.15x and opens the dark tip with date + summary — {"target":null,"hover":{"present":true,"transform":"none","tipText":null,"tipAnim":null,"tipOpacity":null,"tipBg":null}}
+FAIL KEYS: keyboard focus on a cell opens the same date+summary tip — {"focused":false,"label":null,"tipText":null,"tipHtml":null,"codepoints":null}
+CAPTURE RED (5 failing checks)
