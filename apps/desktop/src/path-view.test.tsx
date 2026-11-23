@@ -123,6 +123,25 @@ describe("unit path (PATH-VIEW-001)", () => {
     expect(html).toContain("0/2 units done");
   });
 
+  it("PATH-FEEL-MOTION-001: nodes carry the entrance-cascade index for the CSS stagger", () => {
+    // The section-expand cascade rides --path-i (CSS caps the stagger
+    // at 10 rows). The live-animation proof is the capture gate
+    // (scripts/path-motion-capture.mjs); this pins the markup contract
+    // the CSS depends on: every node knows its row, in order.
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({ unit_id: "ru.unit.a" }),
+          node({ unit_id: "ru.unit.b" }),
+          node({ unit_id: "ru.unit.c" }),
+        ]}
+      />,
+    );
+    expect(html).toContain("--path-i:0");
+    expect(html).toContain("--path-i:1");
+    expect(html).toContain("--path-i:2");
+  });
+
   it("winds: node rings sway along a deterministic wave with connector stubs", () => {
     // PATH-VISUAL-001: the flat list is what the owner rejected. The
     // markup must carry the winding geometry — a sway that is a pure

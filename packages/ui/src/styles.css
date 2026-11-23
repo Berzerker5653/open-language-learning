@@ -1354,6 +1354,19 @@ th:last-child {
   font: inherit;
   text-align: left;
   cursor: pointer;
+  /* PATH-FEEL-MOTION-001: the banner is a real control, so it takes a
+     press: 120ms down-shift per the FEEL-TARGETS button legend. */
+  transition:
+    transform 120ms ease-out,
+    background-color 120ms ease-out,
+    border-color 120ms ease-out;
+}
+
+.path-section-toggle:active,
+.path-next-up:active {
+  transform: translateY(2px);
+  background-color: var(--surface-sunk);
+  border-color: var(--line-strong);
 }
 
 .path-section-name {
@@ -1414,6 +1427,9 @@ th:last-child {
   place-items: center;
   /* the wave: the ring sways along the deterministic path */
   transform: translateX(var(--path-sway, 0px));
+  /* PATH-FEEL-MOTION-001: the press springs (Duolingo node pop), so a
+     tap reads with a tiny overshoot on the way back, never a snap. */
+  transition: transform 160ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .path-node-dial {
@@ -1428,6 +1444,11 @@ th:last-child {
   fill: var(--surface-raised, var(--surface));
   stroke: var(--line-strong);
   stroke-width: 2.5;
+  /* PATH-FEEL-MOTION-001: state colors (done/review/current) fade, not
+     flip — 200ms ease-out per the FEEL-TARGETS motion language. */
+  transition:
+    fill 200ms ease-out,
+    stroke 200ms ease-out;
 }
 
 .path-node-arc {
@@ -1435,6 +1456,12 @@ th:last-child {
   stroke: var(--accent);
   stroke-width: 3.5;
   stroke-linecap: round;
+  /* PATH-FEEL-MOTION-001: RING FILL — when the engine's honest
+     proven-ref fraction changes, the ring EASES to the new value
+     (~300ms ease-out, the FEEL-TARGETS legend for progress fills). */
+  transition:
+    stroke-dasharray 300ms ease-out,
+    stroke 200ms ease-out;
 }
 
 .path-node-marker {
@@ -1592,4 +1619,118 @@ th:last-child {
   font-size: 0.95rem;
   text-align: left;
   cursor: pointer;
+  /* PATH-FEEL-MOTION-001: same 120ms press family as the banners. */
+  transition:
+    transform 120ms ease-out,
+    background-color 120ms ease-out,
+    border-color 120ms ease-out;
+}
+
+/* ======================================================== PATH-FEEL-MOTION-001
+   Motion pass on the journey (Duolingo parity for the ROAD — ADR-0002 safe:
+   these are transitions and keyframes, never reward mechanics; the calm-but-
+   warm posture from docs/design/PROGRESSION-UX-AUDIT-2026-11-22.md holds:
+   120-300ms ease-out, 8-12px rises, one accent, no confetti — the durations
+   match the FEEL-TARGETS-2026-11-22 motion legends). The card's acceptance
+   gate (scripts/path-motion-capture.mjs) measures these as COMPUTED styles
+   in the live app and re-measures them under emulated prefers-reduced-motion
+   (the global reduce block near the end of this file flattens every duration
+   below — nothing here may assume motion exists). */
+@keyframes path-node-in {
+  /* SECTION EXPAND: a band's nodes cascade in with a small rise + fade.
+     The stagger rides --path-i (the node's row index, set by the
+     component) and is CAPPED at 10 rows so even a huge band finishes
+     under ~0.6s — the track reveals, it never drumrolls. */
+  from {
+    opacity: 0;
+    transform: translateY(-0.6rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes path-nodes-close {
+  /* SECTION COLLAPSE: the collapse is SEEN — the component keeps the
+     list mounted for this exit, then unmounts. */
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-0.5rem);
+  }
+}
+
+@keyframes path-marker-pop {
+  /* the done check pops in (the market's check-medallion feel), riding
+     the same row stagger so a band's checks land in sequence, bottom-
+     light: one small overshoot, no burst. */
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes path-current-pulse {
+  /* CURRENT-NODE PULSE: the frontier node breathes a soft accent halo
+     (the market's glowing frontier ring) — slow, low-contrast, never
+     blinking. The static ring shadow stays underneath so reduced
+     motion still reads "this one is now". */
+  0%,
+  100% {
+    opacity: 0.9;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(1.18);
+  }
+}
+
+.path-node {
+  animation: path-node-in 240ms ease-out backwards;
+  animation-delay: calc(min(var(--path-i, 0), 10) * 30ms);
+}
+
+.path-nodes--closing {
+  animation: path-nodes-close 180ms ease-in forwards;
+  pointer-events: none;
+}
+
+.path-node--done .path-node-marker {
+  animation: path-marker-pop 260ms cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+  animation-delay: calc(min(var(--path-i, 0), 10) * 30ms + 120ms);
+}
+
+/* NODE TAP: the press lives on BOTH a JS pointer class (path-node--
+   pressed, set by the component — touch browsers only honor :active on
+   elements with handlers, and the serve mode runs on phones) and plain
+   :active for mouse users. The ring squashes 10%; the spring transition
+   on .path-node-ring brings it back with the Duolingo pop. */
+.path-node--pressed .path-node-ring,
+.path-node:active .path-node-ring {
+  transform: translateX(var(--path-sway, 0px)) scale(0.9);
+}
+
+/* CURRENT-NODE PULSE host: a pseudo-element halo so the breathing never
+   resizes or repaints the ring itself. Base style = the static halo
+   (reduced-motion safe: killing the animation leaves it standing). */
+.path-node--current .path-node-ring::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 5px var(--accent-soft);
+  animation: path-current-pulse 2.4s ease-in-out infinite;
 }

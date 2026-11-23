@@ -1086,6 +1086,21 @@ export function PathView({
   // default; an explicit null collapses everything, an override re-opens
   // the tapped band even after the pack data refreshes underneath.
   const [bandOverride, setBandOverride] = useState<string | null | undefined>(undefined);
+  // PATH-FEEL-MOTION-001 (Duolingo parity for the ROAD; ADR-0002 safe —
+  // motion is not a reward mechanic):
+  // - closingBand keeps the collapsing band's list MOUNTED for one short
+  //   exit animation, then it unmounts: the collapse is seen, not just
+  //   done. The timing matches the .path-nodes--closing keyframe (180ms)
+  //   with slack; reduced-motion users pay at most this same 200ms.
+  // - pressedUnit drives the node press on touch (browsers only honor
+  //   :active on elements with handlers, and serve mode runs on phones).
+  const [closingBand, setClosingBand] = useState<string | null>(null);
+  const [pressedUnit, setPressedUnit] = useState<string | null>(null);
+  useEffect(() => {
+    if (closingBand === null) return;
+    const t = setTimeout(() => setClosingBand(null), 200);
+    return () => clearTimeout(t);
+  }, [closingBand]);
   if (sections.length === 0) return null;
   const openBand =
     bandOverride === undefined ? (pinnedBand ?? sections[0]?.band ?? "") : bandOverride;
@@ -1154,7 +1169,15 @@ export function PathView({
               type="button"
               className="path-section-toggle"
               aria-expanded={isOpen}
-              onClick={() => setBandOverride(isOpen ? null : s.band)}
+              onClick={() => {
+                if (isOpen) {
+                  setClosingBand(s.band);
+                  setBandOverride(null);
+                } else {
+                  setClosingBand(null);
+                  setBandOverride(s.band);
+                }
+              }}
             >
               <span className="path-section-name">{header.friendly ?? header.label}</span>
               <small className="path-section-cefr">{header.cefr ?? header.gloss}</small>
@@ -1162,8 +1185,11 @@ export function PathView({
                 {doneCount}/{s.nodes.length} units done
               </span>
             </button>
-            {isOpen ? (
-              <ol className="path-nodes">
+            {isOpen || closingBand === s.band ? (
+              <ol
+                className={`path-nodes${isOpen ? "" : " path-nodes--closing"}`}
+                data-closing={isOpen ? undefined : "true"}
+              >
                 {s.nodes.map((n, i) => {
                   const state = pathNodeState(n);
                   const fill = n.refs_total > 0 ? Math.min(1, n.refs_done / n.refs_total) : 0;
@@ -1184,15 +1210,24 @@ export function PathView({
                     "--path-sway": `${sway}px`,
                     "--path-conn-down": `${downDeg}deg`,
                     "--path-conn-up": `${upDeg}deg`,
+                    // PATH-FEEL-MOTION-001: the entrance cascade index
+                    // (CSS caps the stagger at 10 rows).
+                    "--path-i": String(i),
                   } as CSSProperties;
                   return (
                     <li
                       key={n.unit_id}
                       data-unit={n.unit_id}
-                      className={`path-node path-node--${state}`}
+                      className={`path-node path-node--${state}${
+                        pressedUnit === n.unit_id ? " path-node--pressed" : ""
+                      }`}
                       data-testid={`path-node-${n.unit_id}`}
                       data-state={state}
                       style={style}
+                      onPointerDown={() => setPressedUnit(n.unit_id)}
+                      onPointerUp={() => setPressedUnit((p) => (p === n.unit_id ? null : p))}
+                      onPointerLeave={() => setPressedUnit((p) => (p === n.unit_id ? null : p))}
+                      onPointerCancel={() => setPressedUnit((p) => (p === n.unit_id ? null : p))}
                     >
                       <span
                         className={`path-node-ring path-node-ring--${state}`}
