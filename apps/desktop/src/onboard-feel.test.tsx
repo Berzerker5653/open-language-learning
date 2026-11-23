@@ -24,7 +24,7 @@ const css = readFileSync(repoRoot + "packages/ui/src/styles.css", "utf8");
 const appTsx = readFileSync(repoRoot + "apps/desktop/src/App.tsx", "utf8");
 
 function ruleBody(selector: string): string {
-  const esc = selector.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\$&");
+  const esc = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const m = new RegExp(`^\\s*${esc}\\s*\\{([^}]*)\\}`, "m").exec(css);
   expect(m, `styles.css must define a "${selector}" rule`).not.toBeNull();
   return (m![1] ?? "").replace(/\s+/g, " ").trim();
@@ -164,7 +164,7 @@ describe("FEEL-ONBOARD-001 pack-install progress bar (honest to EngineProgress)"
     expect(html).toContain('role="progressbar"');
     expect(html).toContain('aria-valuenow="45"');
     expect(html).toContain("width:45%");
-    expect(html).toContain("class=\"install-bar-fill\"");
+    expect(html).toContain('class="install-bar-fill"');
     // The honest progressLine text stays.
     expect(html).toContain("Downloading the language pack — 45% done");
   });

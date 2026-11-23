@@ -19,6 +19,13 @@ export interface AppShellProps {
   packDirection?: "ltr" | "rtl";
   /** Manifest locale of that pack, applied as `lang` on pack-text elements. */
   packLocale?: string;
+  /**
+   * FEEL-ONBOARD-001: optional extra class on the content page. The app
+   * branch passes `app-enter` so the whole page glides in once (app-in)
+   * when the class first appears — entering the app after onboarding or
+   * resume moves instead of snapping.
+   */
+  contentClassName?: string;
 }
 
 /**
@@ -33,6 +40,7 @@ export function AppShell({
   children,
   packDirection,
   packLocale,
+  contentClassName,
 }: AppShellProps) {
   return (
     <>
@@ -56,7 +64,7 @@ export function AppShell({
       </header>
       <main id="main">
         <PackDirectionProvider rtl={packDirection === "rtl"} locale={packLocale}>
-          <div className="page">{children}</div>
+          <div className={contentClassName ? `page ${contentClassName}` : "page"}>{children}</div>
         </PackDirectionProvider>
       </main>
     </>

@@ -4403,6 +4403,7 @@ export function App() {
       nav={[]}
       packDirection={activeRecord?.rtl ? "rtl" : "ltr"}
       packLocale={activeRecord?.locale}
+      contentClassName="app-enter"
       routeNav={
         <nav ref={routesRef} aria-label="Routes" className="routes">
           {/* K-81 option A (owner 2026-10-10): five destinations. The modes

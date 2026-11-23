@@ -176,6 +176,42 @@ export interface OnboardingProps {
   onUpdatePack(packId: string): void;
 }
 
+// FEEL-ONBOARD-001: the wizard sequence, so completed steps can be derived.
+// `resume` never joins the stepper (existing pin), and the Speech step only
+// exists once the mic was chosen (K-72).
+const STEP_LABELS: Record<Exclude<OnboardingStep, "resume">, string> = {
+  welcome: "Welcome",
+  packs: "Language",
+  microphone: "Microphone",
+  "speech-setup": "Speech",
+  done: "Start",
+};
+
+const STEP_ORDER: Exclude<OnboardingStep, "resume">[] = [
+  "welcome",
+  "packs",
+  "microphone",
+  "speech-setup",
+  "done",
+];
+
+const AVATAR_VARIANTS = 4;
+
+/**
+ * FEEL-ONBOARD-001: deterministic color variation for initials avatars.
+ * FNV-1a over the profile id — the same person keeps the same color across
+ * renders, restarts and machines; the palette pairs (styles.css) reuse
+ * pinned token pairs only.
+ */
+export function avatarVariant(id: string): number {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < id.length; i++) {
+    h ^= id.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h % AVATAR_VARIANTS;
+}
+
 export function Onboarding(p: OnboardingProps) {
   // Continue needs a pack the engine can actually read: a selected pack that
   // is already on the device (bundled, catalog-installed, or located from a
@@ -194,29 +230,90 @@ export function Onboarding(p: OnboardingProps) {
   const canStartSpeech = p.speechComponents.some((c) => c.installed && c.role === "recognition");
   return (
     <section aria-label="Onboarding">
-      {p.step !== "resume" && (
-        <ol aria-label="Progress" className="stepper">
-          <li aria-current={p.step === "welcome" ? "step" : undefined}>Welcome</li>
-          <li aria-current={p.step === "packs" ? "step" : undefined}>Language</li>
-          <li aria-current={p.step === "microphone" ? "step" : undefined}>Microphone</li>
-          {p.micChosen && (
-            <li aria-current={p.step === "speech-setup" ? "step" : undefined}>Speech</li>
-          )}
-          <li aria-current={p.step === "done" ? "step" : undefined}>Start</li>
-        </ol>
-      )}
+      {p.step !== "resume" &&
+        (() => {
+          const order = p.micChosen ? STEP_ORDER : STEP_ORDER.filter((s) => s !== "speech-setup");
+          const current = order.indexOf(p.step as (typeof order)[number]);
+          const isDone = (i: number) => current >= 0 && i < current;
+          return (
+            <ol aria-label="Progress" className="stepper">
+              {order.map((s, i) => (
+                <li
+                  key={s}
+                  aria-current={p.step === s ? "step" : undefined}
+                  className={isDone(i) ? "stepper-done" : undefined}
+                >
+                  {/* FEEL-ONBOARD-001: completed steps carry a drawn stroke
+                      check (check-draw) inside the ok-filled dot; the
+                      connector behind them fills left→right (link-fill). */}
+                  {isDone(i) ? (
+                    <svg
+                      className="step-check"
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <path
+                        d="M5 10.5l3.4 3.4L15 7.3"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  ) : null}
+                  {STEP_LABELS[s]}
+                </li>
+              ))}
+            </ol>
+          );
+        })()}
       {p.error && (
         <p role="alert" className="alert">
           {p.error}
         </p>
       )}
       {p.progress && (
-        // K-62: installing a full language pack is not instant. This line names
+        // K-62: installing a full language pack is not instant. The line names
         // the stage the engine reported; it never implies a percentage the
-        // engine did not send.
-        <p role="status" aria-live="polite" className="notice">
-          {progressLine(p.progress)}
-        </p>
+        // engine did not send. FEEL-ONBOARD-001 adds the bar the audit asked
+        // for: it shows ONLY what EngineProgress carries — an eased fill when
+        // a percent arrived, an honest indeterminate sweep (no aria value)
+        // when it did not. No invented byte counts.
+        <div className="install-progress" data-testid="install-progress">
+          <p
+            role="status"
+            aria-live="polite"
+            className="notice"
+            data-testid="install-progress-line"
+          >
+            {progressLine(p.progress)}
+          </p>
+          {(() => {
+            const pct =
+              typeof p.progress!.percent === "number" && p.progress!.percent >= 0
+                ? Math.min(100, p.progress!.percent)
+                : null;
+            return (
+              <div
+                className={pct === null ? "install-bar install-bar--unknown" : "install-bar"}
+                data-testid="install-progress-bar"
+                role="progressbar"
+                aria-label={progressLine(p.progress)}
+                aria-valuemin={pct === null ? undefined : 0}
+                aria-valuemax={pct === null ? undefined : 100}
+                aria-valuenow={pct === null ? undefined : pct}
+                aria-valuetext={pct === null ? undefined : progressLine(p.progress)}
+              >
+                <span
+                  className="install-bar-fill"
+                  style={pct === null ? undefined : { width: `${pct}%` }}
+                />
+              </div>
+            );
+          })()}
+        </div>
       )}
 
       {p.step === "resume" && (
@@ -249,7 +346,10 @@ export function Onboarding(p: OnboardingProps) {
                 <div role="group" aria-label="Profiles" className="profile-grid">
                   {deduped.map((profile) => (
                     <div key={profile.id} className="profile-card">
-                      <span className="profile-avatar" aria-hidden="true">
+                      <span
+                        className={`profile-avatar profile-avatar--v${avatarVariant(profile.id)}`}
+                        aria-hidden="true"
+                      >
                         {profileInitials(profile.display_name)}
                       </span>
                       <strong className="profile-name">{profile.display_name}</strong>
@@ -288,7 +388,37 @@ export function Onboarding(p: OnboardingProps) {
                   ))}
                 </div>
                 {deduped.length === 0 ? (
-                  <p className="empty">No profiles on this device yet.</p>
+                  <div className="empty empty--warm" role="status" data-testid="profiles-empty">
+                    {/* FEEL-ONBOARD-001: the first-run empty state gets calm
+                      visual warmth — a line-art ring echoing the serif
+                      identity — never confetti, sentence unchanged. */}
+                    <svg
+                      className="empty-glyph"
+                      viewBox="0 0 32 32"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <circle
+                        cx="16"
+                        cy="16"
+                        r="11"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeDasharray="3 4"
+                        strokeLinecap="round"
+                      />
+                      <circle
+                        cx="16"
+                        cy="16"
+                        r="3.5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      />
+                    </svg>
+                    <p>No profiles on this device yet.</p>
+                  </div>
                 ) : null}
                 {hiddenCount > 0 && !p.showHiddenProfiles ? (
                   <p className="meta">
@@ -328,7 +458,7 @@ export function Onboarding(p: OnboardingProps) {
       )}
 
       {p.step === "welcome" && (
-        <div className="card">
+        <div className="card card--step">
           <h1>{p.notice.title}</h1>
           <p>No account required. Everything stays on this device.</p>
           <ul>
@@ -365,7 +495,7 @@ export function Onboarding(p: OnboardingProps) {
       )}
 
       {p.step === "packs" && (
-        <div className="card">
+        <div className="card card--step">
           <h1>Choose a language pack</h1>
           {p.installedUnknown && (
             <p role="status" aria-live="polite" className="notice">
@@ -511,7 +641,7 @@ export function Onboarding(p: OnboardingProps) {
       )}
 
       {p.step === "microphone" && (
-        <div className="card">
+        <div className="card card--step">
           <h1>Microphone (optional)</h1>
           <p>
             Speaking activities need a microphone, but it is never required. Skip it and everything
@@ -530,7 +660,7 @@ export function Onboarding(p: OnboardingProps) {
         </div>
       )}
       {p.step === "speech-setup" && (
-        <div className="card">
+        <div className="card card--step">
           <h1>Speech setup</h1>
           <p>
             Speech components are downloaded once to this computer and shared by every language.
@@ -618,7 +748,7 @@ export function Onboarding(p: OnboardingProps) {
       )}
 
       {p.step === "done" && (
-        <div className="card">
+        <div className="card card--step">
           <h1>Ready</h1>
           <p>
             {p.selectedPack

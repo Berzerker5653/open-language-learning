@@ -603,6 +603,30 @@ details.prose-note > p {
   margin: 1rem 0;
 }
 
+/* FEEL-ONBOARD-001: the first-run empty state gets calm visual warmth —
+   a line-art ring that echoes the serif identity, centered, breathing on
+   the accent hairline, entering via fade-up. No confetti, no mascot, no
+   invented copy (ADR-0002). */
+.empty--warm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 1.25rem;
+  border-color: var(--accent);
+  animation: fade-up var(--dur) var(--ease-out);
+}
+
+.empty-glyph {
+  width: 2rem;
+  height: 2rem;
+  color: var(--accent);
+}
+
+.empty--warm p {
+  margin: 0;
+}
+
 .notice {
   background: var(--warn-soft);
   border: 1px solid var(--warn);
@@ -689,7 +713,16 @@ details.prose-note > p {
   padding: 1rem;
   transition:
     transform var(--dur-fast) var(--ease-out),
-    border-color var(--dur-fast) var(--ease-out);
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+/* FEEL-ONBOARD-001: cards answer the pointer — hover lifts 1px with a
+   deeper edge; the pinned :active press (declared after) still wins. */
+.profile-card:hover {
+  transform: translateY(-1px);
+  border-color: var(--line-strong);
+  box-shadow: 0 2px 6px rgb(36 31 24 / 0.08);
 }
 
 .profile-card:active {
@@ -709,6 +742,25 @@ details.prose-note > p {
   font-weight: 700;
   font-size: 0.9375rem;
   letter-spacing: 0.02em;
+}
+
+/* FEEL-ONBOARD-001: deterministic initials-avatar color variation — the
+   variant index comes from the profile id (avatarVariant), and every
+   palette pair below reuses ALREADY-PINNED a11y token pairs. No new color
+   tokens; identity, not decoration. */
+.profile-avatar--v1 {
+  background: var(--ok-soft);
+  color: var(--ok-ink);
+}
+
+.profile-avatar--v2 {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.profile-avatar--v3 {
+  background: var(--surface-sunk);
+  color: var(--ink-soft);
 }
 
 .profile-name {
@@ -786,6 +838,130 @@ details.prose-note > p {
 .stepper li[aria-current="step"] {
   color: var(--accent-ink);
   font-weight: 700;
+}
+
+/* FEEL-ONBOARD-001 (mock legend): completed steps read as done — the ok
+   circle, a check that draws along its stroke over 300ms, and a connector
+   that fills left→right over 250ms; the active dot's soft accent ring
+   fades in over 150ms. All durations ride the FEEL-GLOBAL tokens. */
+.stepper li {
+  position: relative;
+}
+
+.stepper li::after {
+  content: "";
+  width: 1.25rem;
+  height: 2px;
+  border-radius: 1px;
+  background: var(--line-strong);
+  transform-origin: left;
+}
+
+.stepper li:last-child::after {
+  display: none;
+}
+
+.stepper li.stepper-done {
+  color: var(--ink-soft);
+}
+
+.stepper li.stepper-done::before {
+  content: "";
+  background: var(--ok);
+  border-color: var(--ok-ink);
+  color: transparent;
+}
+
+.stepper li.stepper-done::after {
+  background: var(--ok);
+  transform-origin: left;
+  animation: link-fill var(--dur) var(--ease-out);
+}
+
+.stepper li[aria-current="step"]::before {
+  box-shadow: 0 0 0 4px var(--accent-soft);
+  animation: ring-in var(--dur-fast) var(--ease-out);
+}
+
+.step-check {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0.1875rem;
+  color: #fff;
+}
+
+.step-check path {
+  stroke-dasharray: 16px;
+  animation: check-draw var(--dur-slow) var(--ease-out);
+}
+
+@keyframes check-draw {
+  from {
+    stroke-dashoffset: 16px;
+  }
+}
+
+@keyframes link-fill {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+@keyframes ring-in {
+  from {
+    box-shadow: 0 0 0 0 var(--accent-soft);
+  }
+}
+
+/* FEEL-ONBOARD-001: step cards glide in on step changes (React mounts the
+   new step's branch, so the entry animation fires exactly on the cut). */
+.card--step {
+  animation: step-in var(--dur) var(--ease-out);
+}
+
+@keyframes step-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+}
+
+/* FEEL-ONBOARD-001: the pack-install bar. It shows exactly what
+   EngineProgress carries — a determinate eased fill when the engine sent a
+   percent, an indeterminate sweep (pulse-named loop, motion-budget legal)
+   when it did not. No invented byte counts, no fake progress. */
+.install-bar {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--surface-sunk);
+  border: 1px solid var(--line);
+  overflow: hidden;
+  margin: 0 0 1rem;
+}
+
+.install-bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+  transition: width var(--dur) var(--ease-out);
+}
+
+.install-bar--unknown .install-bar-fill {
+  width: 40%;
+  animation: pulse-sweep 1.6s var(--ease-in-out) infinite;
+}
+
+@keyframes pulse-sweep {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(350%);
+  }
 }
 
 /* ---------------------------------------------------------- plan lists */
@@ -2260,6 +2436,26 @@ th:last-child {
   from {
     opacity: 0;
     transform: translateY(0.75rem); /* 12px, per the motion legend */
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* FEEL-ONBOARD-001: entering the app glides the whole content page in
+   once. The .page node is shared between the onboarding branch and the
+   app branch, so it does NOT remount on Continue — the animation fires
+   because AppShell adds the app-enter class when step becomes done, not
+   on React mount. */
+.app-enter {
+  animation: app-in var(--dur-slow) var(--ease-out);
+}
+
+@keyframes app-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
   }
   to {
     opacity: 1;
