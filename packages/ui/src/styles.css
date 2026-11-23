@@ -1002,6 +1002,26 @@ th:last-child {
   transition: opacity var(--dur) var(--ease-out);
 }
 
+/* FEEL-DRILL-001 (run 205 live capture): the runner disables every choice
+   the instant an answer lands (practice.tsx locks the activity), and the
+   generic `.btn:disabled` treatment (0-2-0) outranked these state classes
+   (0-1-0) — the reveal's fill, ring border and the locked-board dim never
+   reached the learner's screen. Re-declare the four state properties at
+   `.btn` specificity; placed after `.btn:disabled`, the cascade now lets
+   the drill states win while the affordance contract stays intact. */
+.btn.choice--correct {
+  border-color: var(--ok);
+  background: var(--ok-soft);
+}
+
+.btn.choice--wrong {
+  border-color: var(--warn);
+}
+
+.btn.choice--dim {
+  opacity: 0.55;
+}
+
 .verdict--correct::before {
   content: "\2713\00a0"; /* check mark */
 }
