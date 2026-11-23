@@ -1,0 +1,14 @@
+   Compiling lts-storage v0.1.0 (/home/hunter/game-dev/LTS/crates/storage)
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 3.95s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-7647ca427c780ccc)
+
+running 3 tests
+test tests::capstone_pass_rule_holds_the_checkpoint_bar ... ok
+test tests::capstone_node_runs_the_full_ladder_on_the_reference_pack has been running for over 60 seconds
+test tests::capstone_plan_is_deterministic_letters_first_and_capped has been running for over 60 seconds
+test tests::capstone_plan_is_deterministic_letters_first_and_capped ... ok
+test tests::capstone_node_runs_the_full_ladder_on_the_reference_pack ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 234 filtered out; finished in 80.90s
+

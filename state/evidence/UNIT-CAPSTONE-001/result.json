@@ -1,0 +1,137 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "the path carries engine-synthesized capstone nodes (kind capstone)",
+      "pass": true,
+      "measured": {
+        "nodes": 823,
+        "capstones": [
+          "capstone.org.openlanguage.ru-ru.reference.on-ramp",
+          "capstone.org.openlanguage.ru-ru.reference.a1",
+          "capstone.org.openlanguage.ru-ru.reference.a2",
+          "capstone.org.openlanguage.ru-ru.reference.b1",
+          "capstone.org.openlanguage.ru-ru.reference.b2"
+        ]
+      }
+    },
+    {
+      "name": "at most ONE capstone per section band",
+      "pass": true,
+      "measured": {
+        "bands": [
+          "on-ramp",
+          "a1",
+          "a2",
+          "b1",
+          "b2"
+        ]
+      }
+    },
+    {
+      "name": "capstone ids are the reserved capstone.<pack>.<band-key> shape",
+      "pass": true,
+      "measured": {
+        "sample": [
+          "capstone.org.openlanguage.ru-ru.reference.on-ramp",
+          "capstone.org.openlanguage.ru-ru.reference.a1",
+          "capstone.org.openlanguage.ru-ru.reference.a2"
+        ]
+      }
+    },
+    {
+      "name": "the on-ramp section ends with its checkpoint, LOCKED for a fresh learner",
+      "pass": true,
+      "measured": {
+        "locked": true,
+        "done": false,
+        "in_progress": false
+      }
+    },
+    {
+      "name": "the locked checkpoint names its gate in words",
+      "pass": true,
+      "measured": {
+        "hint": "finish this section's units first"
+      }
+    },
+    {
+      "name": "the checkpoint ring carries an honest pool fraction (letters+words pool)",
+      "pass": true,
+      "measured": {
+        "refs_done": 0,
+        "refs_total": 84
+      }
+    },
+    {
+      "name": "the checkpoint sits AFTER every unit of its section",
+      "pass": true,
+      "measured": {
+        "capIdx": 818
+      }
+    },
+    {
+      "name": "capstone_plan serves a capped, letters-first interleaved mixed recall",
+      "pass": true,
+      "measured": {
+        "status": 200,
+        "items": 16,
+        "first": [
+          "ru.orth.cyrillic.a:orthography-recognition",
+          "ru.lex.classroom.bukva:recall-meaning",
+          "ru.orth.cyrillic.b:orthography-recognition",
+          "ru.lex.classroom.chitayte:recall-meaning"
+        ]
+      }
+    },
+    {
+      "name": "the same section serves the SAME review every time (engine recounts later)",
+      "pass": true,
+      "measured": {
+        "same": true
+      }
+    },
+    {
+      "name": "exactly ONE capstone node renders (the open section) and it is LOCKED with no start control",
+      "pass": true,
+      "measured": {
+        "capCount": 1,
+        "state": "locked",
+        "hint": true,
+        "startButton": false,
+        "lockGlyph": true,
+        "lastNodeInSection": true,
+        "count": "0/21 done",
+        "nodesInSection": 21,
+        "unitsDoneLabel": false
+      }
+    },
+    {
+      "name": "the checkpoint is the LAST rendered node of its section and the lock mark wears it (the flag glyph shows once unlocked — vitest covers that state)",
+      "pass": true,
+      "measured": {
+        "lastNodeInSection": true,
+        "lockGlyph": true
+      }
+    },
+    {
+      "name": "the section counter counts the checkpoint and says \"done\", never \"units done\"",
+      "pass": true,
+      "measured": {
+        "count": "0/21 done",
+        "nodesInSection": 21,
+        "unitsDoneLabel": false
+      }
+    },
+    {
+      "name": "the locked checkpoint was scrolled into view and screenshotted",
+      "pass": true,
+      "measured": {
+        "scrolled": true
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-32625e60-8741-4544-8694-0818de2a81a5"
+}

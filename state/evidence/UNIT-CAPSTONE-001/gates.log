@@ -1,0 +1,31 @@
+state/evidence/UNIT-CAPSTONE-001 — gate log (controller-run, run 199)
+
+Lane: UNIT-CAPSTONE-001 section capstone review node. Run 198 shipped the
+engine+frontend WIP unverified; run 199 finished the remaining recipe
+(TS runnable[0] guard -> openPractice(first); CSS .path-node-capstone-start
+44px floor + .path-capstone-result; Rust tests; vitest capstone posture
+suite; gates; capture pair; ledger).
+
+All gates run in-tree at commit time:
+- cargo fmt --all --check                        FMT-OK (fmt.log)
+- cargo test -p lts-storage                      11 passed (test-storage.log)
+- cargo test -p lts-desktop --lib capstone       3 passed: full ladder on the
+  real RU pack, plan determinism/cap/interleave, pass-rule boundaries
+  (test-desktop-capstone.log)
+- cargo clippy -p lts-storage -p lts-desktop --all-targets -- -D warnings
+  green after two fixes the controller made over run 198's WIP: doc list
+  indentation in migrations.rs (doc_lazy_continuation) and div_ceil in
+  capstone_plan_at (clippy.log)
+- npx tsc --noEmit                               clean (tsc.log)
+- npx vitest run                                 61 files / 505 tests pass
+  (vitest.log; includes 5 new capstone render tests + "units done"->"done"
+  label updates)
+- capture pair (scripts/capstone-capture.mjs):
+  red-at-head: HEAD=c81e8470 detached worktree, lts-serve built there with
+  shared CARGO_TARGET_DIR, gitignored pack media hardlinked in (cp -al -n);
+  every capstone check FAIL -> capture-red-at-head.log + red-at-head/
+  green: 13/13 PASS -> capture-green.log + result.json +
+  path-capstone-node.png
+
+Deferred: none. ADR-0002 posture honored (no XP/celebration); owner stance
+pending only on celebration COPY, which this card never ships.
