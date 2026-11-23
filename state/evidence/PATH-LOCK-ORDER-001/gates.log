@@ -1,0 +1,15 @@
+PATH-LOCK-ORDER-001 lane gates (re-run by the worker at code commit f665b2ea, tree clean of sibling WIP):
+- npx tsc --noEmit (apps/desktop): clean
+- npx vitest run (apps/desktop full): 636/636 passed (72 files) incl. the 3 new PATH-LOCK-ORDER-001 pins
+  (base was 3 FAIL / 35 passed in src/path-view.test.tsx at the red contract commit 2ce3919b)
+- npx eslint src/home.tsx src/path-view.test.tsx: clean
+- npx prettier --check src/home.tsx src/path-view.test.tsx scripts/path-lock-order-capture.mjs: clean (post --write)
+- python3 tools/audit_learner_copy.py: findings 0
+- scripts/path-lock-order-capture.mjs red-at-base (dist built at 2ce3919b, unfixed home.tsx; serve bin 09:12 build, no Rust changes):
+  locked-above-frontier = 10 (owner's two number-words nodes among them), lockedAboveOpen = 100,
+  11 hint renderings for 2 distinct gates -> 3 CHECK(S) FAILED, exit 1 -> capture-red-at-base.log
+- scripts/path-lock-order-capture.mjs green at f665b2ea (dist rebuilt from the exact committed tree): 6/6 PASS, exit 0 -> capture-green.log
+  locked-above-frontier = 0, lockedAboveOpen = 0, doneBelowOpen = 0, hints 2/2 distinct (once per gate), 11 locked nodes still on screen (non-vacuous)
+- TODAY-FIRSTSCREEN-001 regression: scripts/firstscreen-capture.mjs re-run against the fixed dist: 8/8 PASS (pill on the pin, meta out of fold, one tap to practice); its evidence dir left clean (regression-tag files removed)
+- no Rust/pack changes: cargo gates not applicable; no gate edge, goal, or unit file touched
+- visual inspection gate: lockorder-fold0-green.png read as a learner (pin on the topmost visible node, one Start pill on its row, zero padlocks above the pin, no repeated unlock sentence) and lockorder-fullpath-green.png (open letter nodes -> pin -> all locked nodes last, unlock text appears once)
