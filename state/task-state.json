@@ -3304,6 +3304,23 @@
         "state/evidence/SERVE-BANNER-001/servebanner-settings-about-green.png"
       ],
       "notes": "code e336ac01 (red contract 892e8ab6, evidence 94cf7093); capability notes moved to Settings About, one degraded-mic badge max on Today; capture red 4 FAIL (document-top infra stack) vs green 7/7 at 390x844; firstscreen 8/8 and path-lock-order 6/6 unedited"
+    },
+    "BAKEOFF-LIVECAPTURE-001": {
+      "status": "done",
+      "attempts": 1,
+      "at": "2026-11-23",
+      "updated": "2026-11-23",
+      "evidence": [
+        "state/evidence/BAKEOFF-LIVECAPTURE-001/audit-live.json",
+        "state/evidence/BAKEOFF-LIVECAPTURE-001/capture-green.log",
+        "state/evidence/BAKEOFF-LIVECAPTURE-001/gates.log",
+        "state/evidence/BAKEOFF-LIVECAPTURE-001/learner-inspection.md",
+        "state/evidence/BAKEOFF-LIVECAPTURE-001/bakeoff-fold0-live.png",
+        "state/evidence/BAKEOFF-LIVECAPTURE-001/bakeoff-document-top-live.png",
+        "state/evidence/BAKEOFF-LIVECAPTURE-001/bakeoff-fullpath-live.png",
+        "state/evidence/BAKEOFF-LIVECAPTURE-001/bakeoff-after-pill-tap-live.png"
+      ],
+      "notes": "capture-only card (7 prior board attempts were omarchy/Inkling lane-infra deaths, no work lost); live serve on :17631 at 390x844 fresh profile: 7/7 PASS - frontier pin + single 101px Start pill fully in fold0, zero infra strings at load fold and document top, 0 locked nodes above the pin (11 below), one tap lands in the day's first lesson (1 of 4); learner visual read in learner-inspection.md incl. the clipped top half-line finding; stale :17631 serve incident + store cleanup in gates.log"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

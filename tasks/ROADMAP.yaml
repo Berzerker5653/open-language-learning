@@ -3685,11 +3685,28 @@ tasks:
   - "Install-progress streaming, the Settings mic control graying, and every engine call behave exactly as before; desktop mode renders no serve notice at all."
   - "Red contract first via the settings vitest pins and the serveDegradedBadge pin, and the firstscreen and path-lock-order captures stay green unedited."
   required_for_desktop_1_0: false
+- id: BAKEOFF-LIVECAPTURE-001
+  milestone: M11
+  priority: P1
+  title: Live phone-viewport capture of the fixed Today first screen as visual-inspection gate evidence
+  dependencies: [TODAY-FIRSTSCREEN-001, PATH-LOCK-ORDER-001, SERVE-BANNER-001, WEB-SERVE-001]
+  read_first:
+  - state/notes/TODAY-FIRSTSCREEN-001.md
+  - docs/design/PROGRESSION-UX-AUDIT-2026-11-22.md
+  - scripts/firstscreen-capture.mjs
+  - scripts/bakeoff-today-livecapture.mjs
+  acceptance:
+  - "Real lts-serve on 127.0.0.1:17631 serving the current dist, headless Chrome at 390x844 mobile:true, a FRESH profile with no seeded traffic."
+  - "The first fully-visible fold carries the pinned frontier node with exactly one Start pill riding its row, and zero serve-mode infra strings at the load fold and at document top."
+  - "Zero locked path nodes render above the pinned node on document coordinates, and locked nodes plus capability cards sit strictly below."
+  - "One tap on the Start pill lands inside the day's first activity (lesson surface with the step counter), with the reading recorded as a learner over the committed PNGs."
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
   required_flag: required_for_desktop_1_0
   optional_tasks:
+  - BAKEOFF-LIVECAPTURE-001
   - SERVE-BANNER-001
   - PATH-LOCK-ORDER-001
   - CAPSTONE-WIRING-TEST-001
