@@ -1,0 +1,60 @@
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'vitest' run src/journeys/capstone-wiring.journey.tsx
+
+ RUN  v5.0.3 /home/hunter/.hermes/cache/scratch/lts-capstone-red/apps/desktop
+
+stderr | src/journeys/capstone-wiring.journey.tsx > capstone wiring App -> Home (journey) > the path's start action opens the review and the engine's verdict flows back to Home
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+stderr | src/journeys/capstone-wiring.journey.tsx > capstone wiring App -> Home (journey) > the path's start action opens the review and the engine's verdict flows back to Home
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+stderr | src/journeys/capstone-wiring.journey.tsx > capstone wiring App -> Home (journey) > a not-yet-passed review states one plain fact and offers the review again
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+stderr | src/journeys/capstone-wiring.journey.tsx > capstone wiring App -> Home (journey) > a not-yet-passed review states one plain fact and offers the review again
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+Encountered two children with the same key, `org.openlanguage.ru-ru.reference.goal.style-register`. Keys should be unique so that components maintain their identity across updates. Non-unique keys may cause children to be duplicated and/or omitted — the behavior is unsupported and could change in a future version.
+
+ ❯ |dom| src/journeys/capstone-wiring.journey.tsx (2 tests | 2 failed) 94ms
+   ❯ capstone wiring App -> Home (journey) (2)
+     × the path's start action opens the review and the engine's verdict flows back to Home 65ms
+     × a not-yet-passed review states one plain fact and offers the review again 28ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |dom| src/journeys/capstone-wiring.journey.tsx > capstone wiring App -> Home (journey) > the path's start action opens the review and the engine's verdict flows back to Home
+Error: no button carrying "Start section review" in "Your path" (saw: Jump to my spot | Getting startedPre-A11/2 done)
+ ❯ Object.button src/journeys/harness.tsx:2684:15
+    2682|       const found = at === -1 ? undefined : buttons[at];
+    2683|       if (!found) {
+    2684|         throw new Error(
+       |               ^
+    2685|           `no button carrying "${label}" in "${root.getAttribute("aria…
+    2686|             `" (saw: ${labels.join(" | ")})`,
+ ❯ src/journeys/capstone-wiring.journey.tsx:108:23
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  |dom| src/journeys/capstone-wiring.journey.tsx > capstone wiring App -> Home (journey) > a not-yet-passed review states one plain fact and offers the review again
+Error: no button carrying "Start section review" in "Your path" (saw: Jump to my spot | Getting startedPre-A11/2 done)
+ ❯ Object.button src/journeys/harness.tsx:2684:15
+    2682|       const found = at === -1 ? undefined : buttons[at];
+    2683|       if (!found) {
+    2684|         throw new Error(
+       |               ^
+    2685|           `no button carrying "${label}" in "${root.getAttribute("aria…
+    2686|             `" (saw: ${labels.join(" | ")})`,
+ ❯ src/journeys/capstone-wiring.journey.tsx:170:25
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed (2)
+   Start at  08:56:11
+   Duration  626ms (transform 44%, environment 28%, tests 17%, import 11%)
+

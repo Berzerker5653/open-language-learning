@@ -1,0 +1,42 @@
+CAPSTONE-WIRING-TEST-001 — controller gate battery (run 215, 2026-11-23)
+
+Context: run 214 hit the 80/80 iteration cap with the lane finished but
+uncommitted (heartbeat 08:xx: "Journey written red-first and now green
+(2/2); harness capstone fixture implemented. Running full gates...").
+Run 215 verified the WIP in the main tree, completed the gates and the
+mutation red proof, and committed. No card work was re-derived.
+
+LANE FILES (exactly two, both card-owned):
+  apps/desktop/src/journeys/harness.tsx        (+225/-6 — capstone fixture)
+  apps/desktop/src/journeys/capstone-wiring.journey.tsx (new, 202 lines)
+
+GATES (all run at this tree, main tree, apps/desktop):
+  npx tsc --noEmit                              exit 0            -> tsc.log
+  npx vitest run  (FULL desktop suite)          71 files, 626/626 -> vitest-full-green.log
+  npx vitest run capstone-wiring.journey.tsx    2/2 passed        -> journey-green.log
+  npx eslint <both lane files>                  clean
+  npx prettier --check <both lane files>        all matched files OK
+  python3 tools/audit_learner_copy.py           findings: 0
+  No Rust touched (fixture is pure harness-side; engine helpers not needed).
+
+MUTATION RED PROOF (the 6db2c26b regression shape):
+  git worktree add <scratch>/lts-capstone-red HEAD (a4d56cce); lane files
+  copied in; App.tsx Home call-site stripped of
+      onStartCapstone={(node) => void startCapstoneSession(node)}
+      capstoneResult={capstoneResult}
+  (Home declares both props optional, so tsc stays green — the journey is
+  the only tripwire, exactly why this card exists.)
+  Result: BOTH journey tests FAIL, first at
+      Error: no button carrying "Start section review" in "Your path"
+  i.e. the click on the capstone node's action dies the moment App stops
+  passing the prop; the result-flow assertion is the second tripwire
+  (finish card / fact line render only from capstoneResult).
+  Log: journey-red-on-missing-props.log. Worktree removed after the run.
+
+NOTES:
+  - vitest 5.0.3 has no --reporter=basic; use the default reporter (run 214's
+    first full-suite attempt died on that flag).
+  - stray c1.png/c4.png (root-level junk from run 214's vision check) were
+    removed, never committed.
+  - The harness's duplicate-key stderr seen mid-suite is pre-existing
+    fixture noise (same set as prior runs' full-suite logs).

@@ -1,0 +1,11 @@
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'vitest' run src/journeys/capstone-wiring.journey.tsx
+
+ RUN  v5.0.3 /home/hunter/game-dev/LTS/apps/desktop
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  08:56:32
+   Duration  8.65s (tests 95%, transform 3%, environment 2%, import 1%)
+
