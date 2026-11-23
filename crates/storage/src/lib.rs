@@ -8,6 +8,7 @@
 //! - evidence is append-only: corrections reference prior events and
 //!   duplicate event ids are rejected, so retries cannot double-count.
 
+mod capstone;
 mod confirm;
 mod encounter;
 mod error;
@@ -22,6 +23,7 @@ mod packs;
 mod profile;
 mod scheduler;
 
+pub use capstone::NewCapstoneAttempt;
 pub use confirm::{ConfirmedBy, ContentConfirmation};
 pub use encounter::{EncounterEvent, NewEncounter};
 pub use error::Error;

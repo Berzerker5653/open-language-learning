@@ -4007,6 +4007,16 @@ fn unit_path_at(data: &Path, profile_id: &str) -> Result<Vec<UnitPathNodeView>, 
         let root = data.join("packs").join(&pack_id).join(&version);
         let units = pack_units(&root);
         let goals = pack_goals(&root);
+        // UNIT-CAPSTONE-001: per-section tallies for the capstone node —
+        // keyed by the SAME band key the frontend's `pathSections` groups
+        // by (PATH-SECTIONS-DEDUP-001), counting only units that render
+        // (a unit with no content refs is skipped below, and it must not
+        // hold the section gate open forever).
+        let mut section_tallies: std::collections::HashMap<String, (usize, usize)> =
+            Default::default();
+        let mut section_raw_band: std::collections::HashMap<String, Option<String>> =
+            Default::default();
+        let mut section_order: Vec<String> = Vec::new();
         // pack_units sorted the file paths — the pack's own numbered
         // curriculum order, which IS the path order.
         for unit in units.iter() {
@@ -4093,6 +4103,27 @@ fn unit_path_at(data: &Path, profile_id: &str) -> Result<Vec<UnitPathNodeView>, 
             } else {
                 None
             };
+            let section_key = band_key(
+                goals
+                    .iter()
+                    .find(|g| g.id == unit.goal_id)
+                    .and_then(|g| g.band.as_deref()),
+            );
+            let tally = section_tallies.entry(section_key.clone()).or_insert((0, 0));
+            tally.0 += 1;
+            if done {
+                tally.1 += 1;
+            }
+            if !section_raw_band.contains_key(&section_key) {
+                section_raw_band.insert(
+                    section_key.clone(),
+                    goals
+                        .iter()
+                        .find(|g| g.id == unit.goal_id)
+                        .and_then(|g| g.band.clone()),
+                );
+                section_order.push(section_key);
+            }
             out.push(UnitPathNodeView {
                 pack_id: pack_id.clone(),
                 unit_id: unit.id.clone(),
@@ -4114,6 +4145,76 @@ fn unit_path_at(data: &Path, profile_id: &str) -> Result<Vec<UnitPathNodeView>, 
                 unlock_hint,
             });
         }
+        // UNIT-CAPSTONE-001: one capstone review node per section, emitted
+        // AFTER the section's real units. The frontend groups by band
+        // (PATH-SECTIONS-DEDUP-001), so emitting per section at the tail
+        // of the pack's node run lands the node LAST inside its own
+        // section — the market's Checkpoint position. A section whose
+        // pool is empty (no directly recallable letters or words) gets no
+        // node: there is nothing to review, and an empty checkpoint would
+        // be decoration, not pedagogy.
+        for key in &section_order {
+            let (units_total, units_done) = section_tallies.get(key).copied().unwrap_or((0, 0));
+            let section_units: Vec<&PackUnit> = units
+                .iter()
+                .filter(|u| {
+                    u.activities.iter().any(|a| !a.content_refs.is_empty())
+                        && band_key(
+                            goals
+                                .iter()
+                                .find(|g| g.id == u.goal_id)
+                                .and_then(|g| g.band.as_deref()),
+                        ) == *key
+                })
+                .collect();
+            let (letters, words) = capstone_pool(&section_units);
+            if letters.is_empty() && words.is_empty() {
+                continue;
+            }
+            let refs_total = letters.len() + words.len();
+            let refs_done = letters
+                .iter()
+                .chain(words.iter())
+                .filter(|c| {
+                    derived.iter().any(|d| {
+                        d.content_id == **c && d.state >= lts_domain::MasteryState::Introduced
+                    })
+                })
+                .count();
+            let passed = store
+                .capstone_passed(profile_id, &pack_id, key)
+                .map_err(|e| e.to_string())?;
+            let locked = units_done < units_total;
+            let in_progress = !locked
+                && !passed
+                && store
+                    .capstone_attempted_unpassed(profile_id, &pack_id, key)
+                    .map_err(|e| e.to_string())?;
+            out.push(UnitPathNodeView {
+                pack_id: pack_id.clone(),
+                // Reserved id shape: real unit ids are pack-namespaced
+                // (`ru.unit.*`), a capstone is engine-synthesized and says
+                // so in its own id.
+                unit_id: format!("capstone.{pack_id}.{key}"),
+                title: "Section review".into(),
+                summary: "Mixed recall of the letters and words of this section.".into(),
+                band: section_raw_band.get(key).cloned().flatten(),
+                kind: "capstone".into(),
+                locked,
+                done: passed,
+                current: false,
+                review_due: false,
+                due_count: 0,
+                in_progress,
+                refs_done,
+                refs_total,
+                unlock_hint: if locked {
+                    Some("finish this section's units first".into())
+                } else {
+                    None
+                },
+            });
+        }
     }
     Ok(out)
 }
@@ -4123,6 +4224,284 @@ async fn unit_path(profile_id: String) -> Result<Vec<UnitPathNodeView>, String> 
     tauri::async_runtime::spawn_blocking(move || unit_path_at(&data_dir(), &profile_id))
         .await
         .map_err(|e| format!("unit-path failed: {e}"))?
+}
+
+// ---------------------------------------------------------------------------
+// UNIT-CAPSTONE-001 (PROGRESSION-UX-AUDIT-2026-11-22 §B8, the B8-lite
+// "ship now" row): every section of the journey ends with ONE capstone
+// review node — a mixed recall of the section's letters and words, the
+// Busuu Checkpoint / Rosetta Milestone / HelloChinese Pit Stop pattern.
+// It unlocks only after every unit of its section is done, and passing it
+// flips the section header counter's last slot. Pedagogy, not
+// gamification: no XP, no celebration copy, no badges — the counter and
+// plain honest words carry the signal (ADR-0002 posture, owner stance
+// pending the ADR amendment). Frozen contract:
+// state/notes/UNIT-CAPSTONE-001.md.
+// ---------------------------------------------------------------------------
+
+/// The review runs at most this many items from the section's recall pool
+/// (letters and words interleaved); the engine prices each at 30 s, so a
+/// full capstone is an ~8-minute sitting on the biggest sections.
+const CAPSTONE_ITEM_CAP: usize = 16;
+const CAPSTONE_ITEM_SECONDS: u32 = 30;
+
+/// The section key the capstone synthesizer and the frontend's
+/// `pathSections` (PATH-SECTIONS-DEDUP-001) agree on: the pack's band
+/// string trimmed and lower-cased, `other` when the unit's goal declares
+/// no band. Capstones group into the SAME sections the UI renders.
+fn band_key(band: Option<&str>) -> String {
+    match band.map(str::trim).filter(|b| !b.is_empty()) {
+        Some(b) => b.to_lowercase(),
+        None => "other".to_string(),
+    }
+}
+
+/// The recall pool of a section: the content refs its rendered units
+/// schedule that the existing graded runners can serve WITHOUT audio or
+/// ASR — `orth` letters (the orthography-recognition runner) and `lex`
+/// words (the recall-meaning runner). Sentence, grammar and journey refs
+/// are not directly recallable by any runner, so they never join the
+/// pool: the capstone recalls LETTERS and WORDS, per the card. Deduped
+/// and sorted by id — never file order, never the clock.
+fn capstone_pool(section_units: &[&PackUnit]) -> (Vec<String>, Vec<String>) {
+    let mut letters: std::collections::HashSet<&str> = Default::default();
+    let mut words: std::collections::HashSet<&str> = Default::default();
+    for unit in section_units {
+        for activity in &unit.activities {
+            for r in &activity.content_refs {
+                match r.split('.').nth(1) {
+                    Some("orth") => {
+                        letters.insert(r.as_str());
+                    }
+                    Some("lex") => {
+                        words.insert(r.as_str());
+                    }
+                    _ => {}
+                }
+            }
+        }
+    }
+    let mut letters: Vec<String> = letters.into_iter().map(String::from).collect();
+    let mut words: Vec<String> = words.into_iter().map(String::from).collect();
+    letters.sort();
+    words.sort();
+    (letters, words)
+}
+
+/// The deterministic mixed-recall selection: letters and words interleave
+/// LETTERS-FIRST (the section is taught letters-then-words; the review
+/// recalls in the taught direction), and when one side runs out the other
+/// continues. Sorted ids, no clock, no profile salt — the same section
+/// serves the same review every time, which is what lets
+/// `capstone_complete` re-derive engine-side the exact items the session
+/// ran. The UI never claims scores; the engine recomputes them.
+fn capstone_select(letters: &[String], words: &[String]) -> Vec<(String, &'static str)> {
+    let mut out = Vec::new();
+    let (mut li, mut wi) = (0usize, 0usize);
+    while out.len() < CAPSTONE_ITEM_CAP && (li < letters.len() || wi < words.len()) {
+        if li < letters.len() {
+            out.push((letters[li].clone(), "orthography-recognition"));
+            li += 1;
+            if out.len() >= CAPSTONE_ITEM_CAP {
+                break;
+            }
+        }
+        if wi < words.len() {
+            out.push((words[wi].clone(), "recall-meaning"));
+            wi += 1;
+        }
+    }
+    out
+}
+
+/// The section gate math for `capstone_complete`: pools of four or more
+/// need 80 percent recalled (the Busuu-style checkpoint bar); smaller
+/// pools — tiny custom-pack sections — need a clean sweep, because 3 out
+/// of 4 is 75 percent and would silently round under the bar.
+fn capstone_passes(items: usize, correct: usize) -> bool {
+    if items >= 4 {
+        correct * 5 >= items * 4
+    } else {
+        correct == items
+    }
+}
+
+/// UNIT-CAPSTONE-001: the section review session, built from the pack's
+/// own pool — same PlanView shape the Today plan rides, so the existing
+/// session runner, runner screens and grading path serve the capstone
+/// with zero new UI machinery. `reason: "capstone"` names itself honestly
+/// (kind stays `review` — this is maintenance recall, not new material).
+fn capstone_plan_at(
+    data: &Path,
+    _profile_id: &str,
+    pack_id: &str,
+    band: &str,
+) -> Result<PlanView, String> {
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let root = data.join("packs").join(pack_id).join(&version);
+    let units = pack_units(&root);
+    let goals = pack_goals(&root);
+    let key = band_key(Some(band));
+    let section_units: Vec<&PackUnit> = units
+        .iter()
+        .filter(|u| {
+            let has_refs = u.activities.iter().any(|a| !a.content_refs.is_empty());
+            has_refs
+                && band_key(
+                    goals
+                        .iter()
+                        .find(|g| g.id == u.goal_id)
+                        .and_then(|g| g.band.as_deref()),
+                ) == key
+        })
+        .collect();
+    let (letters, words) = capstone_pool(&section_units);
+    let selected = capstone_select(&letters, &words);
+    if selected.is_empty() {
+        return Err("this section has no directly recallable letters or words".into());
+    }
+    // Display info for the runner previews, from the pack's own records
+    // (never invented): words show their surface + gloss, letters their
+    // symbol + reading.
+    let mut surface_of: std::collections::HashMap<String, (String, Option<String>)> =
+        Default::default();
+    if let Ok(entries) = lexicon_entries(data, pack_id, &version) {
+        for e in entries {
+            surface_of
+                .entry(e.id.clone())
+                .or_insert((e.surface.clone(), Some(e.gloss.clone())));
+        }
+    }
+    if let Ok(entries) = orth_entries(data, pack_id, &version) {
+        for e in entries {
+            surface_of
+                .entry(e.id.clone())
+                .or_insert((e.symbol.clone(), Some(e.reading.clone())));
+        }
+    }
+    let items: Vec<PlanItemView> = selected
+        .into_iter()
+        .map(|(content_id, dim)| {
+            let (surface, gloss) = surface_of
+                .get(&content_id)
+                .cloned()
+                .unwrap_or_else(|| (String::new(), None));
+            PlanItemView {
+                item_id: format!("{content_id}#{dim}"),
+                content_id: content_id.clone(),
+                modality: dim,
+                reason: "capstone",
+                kind: "review",
+                est_seconds: CAPSTONE_ITEM_SECONDS,
+                surface: if surface.is_empty() {
+                    None
+                } else {
+                    Some(surface)
+                },
+                gloss,
+            }
+        })
+        .collect();
+    let total_seconds = CAPSTONE_ITEM_SECONDS * items.len() as u32;
+    Ok(PlanView {
+        items,
+        total_seconds,
+        budget_minutes: total_seconds.div_ceil(60),
+        seed: fnv1a(&format!("capstone:{pack_id}:{key}")),
+        planner_version: "capstone-1".into(),
+    })
+}
+
+#[tauri::command]
+async fn capstone_plan(
+    profile_id: String,
+    pack_id: String,
+    band: String,
+) -> Result<PlanView, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        capstone_plan_at(&data_dir(), &profile_id, &pack_id, &band)
+    })
+    .await
+    .map_err(|e| format!("capstone-plan failed: {e}"))?
+}
+
+/// Honest end-of-review facts the path renders: never a score claim from
+/// the UI, always recomputed from the attempt-grouped evidence the
+/// practice submit path already wrote.
+#[derive(Serialize)]
+struct CapstoneResultView {
+    passed: bool,
+    items: usize,
+    correct: usize,
+}
+
+/// Close a section review: re-derive the selection, count every selected
+/// item the learner recalled (an evidence event with attempt group
+/// `<session>:<content_id>` scored Correct), record the attempt — pass
+/// OR fail, honestly — and report the gate. Only a COMPLETED session
+/// lands here: stopping mid-review records nothing.
+fn capstone_complete_at(
+    data: &Path,
+    profile_id: &str,
+    pack_id: &str,
+    band: &str,
+    session_id: &str,
+) -> Result<CapstoneResultView, String> {
+    let plan = capstone_plan_at(data, profile_id, pack_id, band)?;
+    let items = plan.items.len();
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let events = store
+        .evidence_for_profile(profile_id)
+        .map_err(|e| e.to_string())?;
+    let correct = plan
+        .items
+        .iter()
+        .filter(|item| {
+            let group = format!("{session_id}:{}", item.content_id);
+            events.iter().any(|e| {
+                e.attempt_group_id.as_deref() == Some(group.as_str())
+                    && e.score == Some(lts_domain::Score::Correct)
+            })
+        })
+        .count();
+    let passed = capstone_passes(items, correct);
+    let now = now_secs();
+    let at = rfc3339_utc(now);
+    let key = band_key(Some(band));
+    store
+        .record_capstone_attempt(
+            profile_id,
+            &lts_storage::NewCapstoneAttempt {
+                pack_id,
+                band: &key,
+                session_id,
+                items: items as i64,
+                correct: correct as i64,
+                passed,
+                occurred_at: &at,
+            },
+        )
+        .map_err(|e| e.to_string())?;
+    Ok(CapstoneResultView {
+        passed,
+        items,
+        correct,
+    })
+}
+
+#[tauri::command]
+async fn capstone_complete(
+    profile_id: String,
+    pack_id: String,
+    band: String,
+    session_id: String,
+) -> Result<CapstoneResultView, String> {
+    tauri::async_runtime::spawn_blocking(move || {
+        capstone_complete_at(&data_dir(), &profile_id, &pack_id, &band, &session_id)
+    })
+    .await
+    .map_err(|e| format!("capstone-complete failed: {e}"))?
 }
 
 // ---------------------------------------------------------------------------
@@ -11424,6 +11803,8 @@ macro_rules! lts_command_table {
             complete_onboarding,
             home_state,
             unit_path,
+            capstone_plan,
+            capstone_complete,
             current_offer,
             practice_plan,
             practice_queue,
@@ -15813,6 +16194,223 @@ activities:
             "words",
             "a reading/writing vocabulary unit stays a words node"
         );
+    }
+
+    /// UNIT-CAPSTONE-001: the section checkpoint node runs its FULL
+    /// ladder on the real reference pack — synthesised as the LAST node
+    /// of its section, locked until every unit of the section is done,
+    /// ring = honest pool coverage, failed review = in-progress, passed
+    /// review = done.
+    #[test]
+    fn capstone_node_runs_the_full_ladder_on_the_reference_pack() {
+        let ru = "org.openlanguage.ru-ru.reference";
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_reference_pack_fast(data, ru).unwrap();
+        let p = create_local_profile(data, "Cap").unwrap();
+        finish_onboarding(data, &p.id, Some(ru), false).unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let cap_id = "capstone.org.openlanguage.ru-ru.reference.on-ramp";
+        fn find_cap<'n>(nodes: &'n [UnitPathNodeView], cap_id: &str) -> &'n UnitPathNodeView {
+            nodes
+                .iter()
+                .find(|n| n.unit_id == cap_id)
+                .expect("the on-ramp section ends with its checkpoint")
+        }
+
+        // (a) A fresh learner sees the checkpoint LOCKED, with the gate
+        // in words, and its ring says 0 of a real pool.
+        let nodes = unit_path_at(data, &p.id).unwrap();
+        let cap = find_cap(&nodes, cap_id);
+        assert_eq!(cap.kind, "capstone", "the checkpoint is its own kind");
+        assert_eq!(cap.title, "Section review");
+        assert!(cap.locked && !cap.done, "section unfinished: locked");
+        assert_eq!(
+            cap.unlock_hint.as_deref(),
+            Some("finish this section's units first"),
+            "a locked checkpoint names its gate"
+        );
+        assert!(
+            cap.refs_total > 0,
+            "the on-ramp pool has directly recallable letters and words"
+        );
+        // The market's Checkpoint position: LAST inside its section.
+        let cap_idx = nodes.iter().position(|n| n.unit_id == cap_id).unwrap();
+        for (i, n) in nodes.iter().enumerate() {
+            if n.band.as_deref() == Some("on-ramp") && n.unit_id != cap_id {
+                assert!(
+                    i < cap_idx,
+                    "the checkpoint sits after every unit of its section"
+                );
+            }
+        }
+
+        // (b) Done-every-unit: seed evidence on EVERY ref each rendered
+        // on-ramp unit schedules (the PATH-VIEW-001 done rule), then the
+        // checkpoint must unlock with a full, honest ring.
+        let version = lts_langpack::archive::current_version(ru, &data.join("packs")).unwrap();
+        let root = data.join("packs").join(ru).join(&version);
+        let goals = pack_goals(&root);
+        let seed = |target: &str, id: &str, group: Option<&str>| {
+            let mut ev = attempt(
+                target,
+                lts_domain::ActivityModality::ComprehensionReading,
+                "ru.expr.capstone.a-1",
+                0,
+                "2026-11-23T10:00:00Z",
+                id,
+                &p.id,
+            );
+            // R07: the shared helper stamps the ja pack — restamp for ru.
+            ev.pack_id = ru.into();
+            if let Some(g) = group {
+                ev.attempt_group_id = Some(g.into());
+            }
+            ev
+        };
+        let mut seeded = 0usize;
+        for unit in pack_units(&root).iter() {
+            let band = goals
+                .iter()
+                .find(|g| g.id == unit.goal_id)
+                .and_then(|g| g.band.clone());
+            if band.as_deref() != Some("on-ramp") {
+                continue;
+            }
+            for r in unit.activities.iter().flat_map(|a| a.content_refs.iter()) {
+                store
+                    .append_evidence(&seed(r, &format!("cap-done-{seeded}"), None))
+                    .unwrap();
+                seeded += 1;
+            }
+        }
+        let nodes = unit_path_at(data, &p.id).unwrap();
+        let cap = find_cap(&nodes, cap_id);
+        assert!(
+            !cap.locked,
+            "every unit of the section done: the checkpoint unlocks"
+        );
+        assert!(
+            !cap.done && !cap.in_progress,
+            "unlocked but never attempted: neither done nor in-progress"
+        );
+        assert_eq!(
+            cap.refs_done, cap.refs_total,
+            "the ring shows the honest pool fraction — full after every pool ref was proved"
+        );
+
+        // (c) A completed review that recalled NOTHING records an honest
+        // failure: in-progress, not done.
+        let plan = capstone_plan_at(data, &p.id, ru, "on-ramp").unwrap();
+        let res = capstone_complete_at(data, &p.id, ru, "on-ramp", "cap-sess-fail").unwrap();
+        assert_eq!(
+            res.items,
+            plan.items.len(),
+            "the engine sizes the review itself"
+        );
+        assert_eq!(res.correct, 0, "no grouped Correct means zero recalled");
+        assert!(
+            !res.passed,
+            "a review with zero recall is honestly not passed"
+        );
+        let nodes2 = unit_path_at(data, &p.id).unwrap();
+        let cap = find_cap(&nodes2, cap_id);
+        assert!(
+            cap.in_progress && !cap.done,
+            "a failed review shows as started, never as done"
+        );
+
+        // (d) Passing the SAME review: evidence carrying the session's own
+        // attempt groups for every selected item — the engine recounts
+        // from evidence, and the section flips.
+        let sid = "cap-sess-pass";
+        for (i, item) in plan.items.iter().enumerate() {
+            let group = format!("{sid}:{}", item.content_id);
+            store
+                .append_evidence(&seed(
+                    &item.content_id,
+                    &format!("cap-pass-{i}"),
+                    Some(&group),
+                ))
+                .unwrap();
+        }
+        let res = capstone_complete_at(data, &p.id, ru, "on-ramp", sid).unwrap();
+        assert_eq!(res.correct, res.items, "every grouped Correct was counted");
+        assert!(res.passed, "a clean sweep passes");
+        let nodes3 = unit_path_at(data, &p.id).unwrap();
+        let cap = find_cap(&nodes3, cap_id);
+        assert!(
+            cap.done && !cap.locked && !cap.in_progress,
+            "a passed checkpoint closes the section (the counter's last slot flips)"
+        );
+    }
+
+    /// UNIT-CAPSTONE-001: the review session is deterministic — same
+    /// section, same items, every time (this is what lets
+    /// `capstone_complete` recount engine-side), capped, letters-first
+    /// interleaved, and every item rides a graded-no-audio runner.
+    #[test]
+    fn capstone_plan_is_deterministic_letters_first_and_capped() {
+        let ru = "org.openlanguage.ru-ru.reference";
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_reference_pack_fast(data, ru).unwrap();
+        let p = create_local_profile(data, "Plan").unwrap();
+        finish_onboarding(data, &p.id, Some(ru), false).unwrap();
+
+        let a = capstone_plan_at(data, &p.id, ru, "on-ramp").unwrap();
+        let b = capstone_plan_at(data, &p.id, ru, "on-ramp").unwrap();
+        let shape = |plan: &PlanView| -> Vec<(String, String)> {
+            plan.items
+                .iter()
+                .map(|i| (i.content_id.clone(), i.modality.to_string()))
+                .collect()
+        };
+        assert_eq!(shape(&a), shape(&b), "same section serves the same review");
+        assert_eq!(
+            a.items.len(),
+            16,
+            "the on-ramp pool is bigger than the 16-item cap"
+        );
+        for (i, item) in a.items.iter().take(8).enumerate() {
+            assert_eq!(
+                item.modality,
+                if i % 2 == 0 {
+                    "orthography-recognition"
+                } else {
+                    "recall-meaning"
+                },
+                "letters-first interleave (L,W,L,W,...)"
+            );
+            assert_eq!(item.reason, "capstone", "the item names itself honestly");
+            assert_eq!(
+                item.kind, "review",
+                "recall is maintenance, not new material"
+            );
+            assert_eq!(item.est_seconds, 30, "the engine's own honest price");
+        }
+        // A section with no directly recallable refs gets no fake review.
+        assert!(capstone_plan_at(data, &p.id, ru, "no-such-band").is_err());
+    }
+
+    /// UNIT-CAPSTONE-001 pass rule: big pools hold the 80% checkpoint
+    /// bar; tiny pools need a clean sweep (3-of-4 would silently round
+    /// under the bar).
+    #[test]
+    fn capstone_pass_rule_holds_the_checkpoint_bar() {
+        assert!(capstone_passes(16, 13), "13/16 = 81% passes");
+        assert!(!capstone_passes(16, 12), "12/16 = 75% is under the bar");
+        assert!(capstone_passes(5, 4), "4/5 = exactly 80% passes");
+        assert!(capstone_passes(4, 4), "a 4-pool needs the clean sweep");
+        assert!(
+            !capstone_passes(4, 3),
+            "3/4 rounds under the bar: sweep rule"
+        );
+        assert!(
+            capstone_passes(3, 3),
+            "a tiny pool passes only on a clean sweep"
+        );
+        assert!(!capstone_passes(3, 2), "one miss fails a tiny pool");
     }
 
     /// PATH-VIEW-001: the unit path derives every node state from the

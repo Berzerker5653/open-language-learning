@@ -1623,6 +1623,40 @@ th:last-child {
   font-size: 0.85rem;
 }
 
+/* UNIT-CAPSTONE-001: the checkpoint's own action — a real control on the
+   node (44px floor, the same press family as .path-next-up), never a
+   celebration (ADR-0002): one accent outline, honest words. */
+.path-node-capstone-start {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  margin-top: 0.5rem;
+  padding: 0.6rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: 0.9rem;
+  color: var(--accent-ink, var(--accent));
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 120ms ease-out,
+    background-color 120ms ease-out;
+}
+
+.path-node-capstone-start:active {
+  transform: scale(0.97);
+}
+
+/* UNIT-CAPSTONE-001: the one calm fact line after a review — status
+   copy, not a reward banner (ADR-0002). */
+.path-capstone-result {
+  margin: 0.35rem 0 0.6rem;
+  color: var(--ink);
+  font-size: 0.92rem;
+}
+
 /* PATH-PIN-CONSISTENCY-001 (owner dogfood 2026-11-22 complaint 10): the
    next-up recommendation rides the path HEADER strip — the market
    pattern (position pin on the trail, action chip above it) — so the

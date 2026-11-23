@@ -89,7 +89,7 @@ describe("unit path (PATH-VIEW-001)", () => {
     expect(html).not.toContain('data-testid="path-node-ru.unit.a1.later"');
     expect(html).toContain("Beginner");
     expect(html).toContain(">A1<");
-    expect(html).toContain("0/1 units done");
+    expect(html).toContain("0/1 done");
   });
 
   it("locks win over every other state", () => {
@@ -124,7 +124,7 @@ describe("unit path (PATH-VIEW-001)", () => {
     expect(html).toContain('stroke-dasharray="75 25"');
     expect(html).toContain("In progress (3/4 learned)");
     // And the section counter still counts PROVEN-DONE only.
-    expect(html).toContain("0/2 units done");
+    expect(html).toContain("0/2 done");
   });
 
   it("PATH-FEEL-MOTION-001: nodes carry the entrance-cascade index for the CSS stagger", () => {
@@ -478,5 +478,119 @@ describe("typed node glyphs by activity kind (PATH-NODE-TYPES-001)", () => {
     expect(review).toContain('data-glyph="review"');
     expect(review).toContain("Review due (2)");
     expect(review).toContain(">Listening<");
+  });
+});
+
+// UNIT-CAPSTONE-001: the section checkpoint node. The engine synthesizes
+// it (the live-wire shape is proven by capstone-capture.mjs); THIS file
+// pins what the view does with those nodes — the calm-but-warm posture
+// (ADR-0002): a real control, plain words, no celebration.
+describe("section capstone node (UNIT-CAPSTONE-001)", () => {
+  const cap = (over: Partial<UnitPathNode>): UnitPathNode =>
+    node({
+      unit_id: "capstone.org.openlanguage.ru-ru.reference.on-ramp",
+      kind: "capstone",
+      title: "Section review",
+      summary: "Mixed recall of the letters and words of this section.",
+      refs_total: 84,
+      unlock_hint: "finish this section's units first",
+      ...over,
+    });
+
+  it("renders a locked checkpoint with its gate hint and NO start control", () => {
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[node({ unit_id: "ru.unit.x", current: true }), cap({ locked: true })]}
+      />,
+    );
+    expect(html).toContain('data-kind="capstone"');
+    expect(html).toContain('data-state="locked"');
+    expect(html).toContain("finish this section&#x27;s units first");
+    expect(html).not.toContain("Start section review");
+  });
+
+  it("offers a real start control on an unlocked, unattempted checkpoint and wires it", () => {
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({ unit_id: "ru.unit.x", done: true }),
+          cap({ unlock_hint: null, refs_done: 84 }),
+        ]}
+        onStartCapstone={() => {}}
+      />,
+    );
+    // The flag pictogram appears once the lock lifts (state-layer rule
+    // from PATH-NODE-TYPES-001: locked nodes wear the lock, not the kind).
+    expect(html).toContain('data-glyph="capstone"');
+    expect(html).toContain("Start section review");
+    expect(html).toContain('data-testid="capstone-start-capstone.org.openlanguage.ru-ru.reference.on-ramp"');
+    expect(html).toContain("Section review");
+  });
+
+  it("invites a retry on a started-but-unpassed checkpoint and states the record on a passed one", () => {
+    const again = renderToStaticMarkup(
+      <PathView
+        nodes={[node({ unit_id: "ru.unit.x", done: true }), cap({ in_progress: true })]}
+        onStartCapstone={() => {}}
+      />,
+    );
+    expect(again).toContain("Run the section review again");
+    const passed = renderToStaticMarkup(
+      <PathView nodes={[node({ unit_id: "ru.unit.x", done: true }), cap({ done: true })]} />,
+    );
+    expect(passed).toContain("Section review recorded");
+    expect(passed).not.toContain("Start section review");
+    // ADR-0002: the recorded state is a fact, not a trophy — the only
+    // celebration-free copy is the plain record caption, with no XP or
+    // badge tokens (word-boundary + case-sensitive: aria-expanded is not XP).
+    expect(passed).not.toContain("Congrats");
+    expect(passed).not.toMatch(/\bXP\b|badge|celebration/i);
+  });
+
+  it("states a finished review once, calmly, with the engine's honest counts", () => {
+    const pass = renderToStaticMarkup(
+      <PathView
+        nodes={[node({ unit_id: "ru.unit.x", current: true })]}
+        capstoneResult={{ passed: true, items: 16, correct: 13, friendly: "On-ramp" }}
+      />,
+    );
+    expect(pass).toContain("Section review recorded — 13 of 16 recalled. On-ramp complete.");
+    expect(pass).toContain('role="status"');
+    const fail = renderToStaticMarkup(
+      <PathView
+        nodes={[node({ unit_id: "ru.unit.x", current: true })]}
+        capstoneResult={{ passed: false, items: 16, correct: 9, friendly: "On-ramp" }}
+      />,
+    );
+    expect(fail).toContain(
+      "Section review recorded — 9 of 16 recalled. Not passed yet — keep practicing this section, then run the review again.",
+    );
+    expect(fail).not.toContain("Congrats");
+    const err = renderToStaticMarkup(
+      <PathView
+        nodes={[node({ unit_id: "ru.unit.x", current: true })]}
+        capstoneResult={{
+          passed: false,
+          items: 0,
+          correct: 0,
+          friendly: "On-ramp",
+          error: "pack not installed",
+        }}
+      />,
+    );
+    expect(err).toContain("Could not record the section review: pack not installed");
+  });
+
+  it("counts the checkpoint in the section counter and flips its last slot on pass", () => {
+    // 1 unit + 1 checkpoint: the checkpoint is one of the counted nodes,
+    // and passing it is what takes the counter from 1/2 to 2/2.
+    const before = renderToStaticMarkup(
+      <PathView nodes={[node({ unit_id: "ru.unit.x", done: true }), cap({})]} />,
+    );
+    expect(before).toContain("1/2 done");
+    const after = renderToStaticMarkup(
+      <PathView nodes={[node({ unit_id: "ru.unit.x", done: true }), cap({ done: true })]} />,
+    );
+    expect(after).toContain("2/2 done");
   });
 });

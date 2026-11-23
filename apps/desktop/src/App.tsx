@@ -31,6 +31,8 @@ import {
   type SessionOutcomeView,
   type SessionStatus,
   type SessionView,
+  type CapstoneResult,
+  bandHeader,
 } from "./home";
 import { MemoryStatsStrip, type MemoryStats } from "./memory-stats";
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
@@ -493,6 +495,17 @@ export function App() {
     done: number;
     notRunnable: number;
   } | null>(null);
+  // UNIT-CAPSTONE-001: while a section review session runs, it owns the
+  // attempt-group id for every graded submit: finishPractice re-keys
+  // planSessionRef after each activity (the refreshed plan is a new plan),
+  // but one review must stay ONE attempt group from its first item to
+  // `capstone_complete`, which recounts the items engine-side.
+  const capstoneSessionRef = useRef<{ packId: string; band: string; id: string } | null>(null);
+  const [capstoneResult, setCapstoneResult] = useState<CapstoneResult | null>(null);
+
+  function activeSessionId(): string {
+    return capstoneSessionRef.current ? capstoneSessionRef.current.id : planSessionRef.current;
+  }
   // SESSION-CHROME-001: start instant of the running session, for the
   // measured time the end-of-session summary reports. Not persisted — a
   // session is for this sitting, and its clock is too.
@@ -1419,6 +1432,8 @@ export function App() {
     // A session belongs to the pack it was started in: tear it down here so
     // Home can never offer "Resume session" over another pack's items.
     sessionQueueRef.current = null;
+    capstoneSessionRef.current = null;
+    setCapstoneResult(null);
     setSession(null);
     setSessionOutcome(null);
     setRoute("practice");
@@ -2374,7 +2389,7 @@ export function App() {
           answer: writingDraft,
           usedHint: writingUsedHint,
           hintKind: writingHintKind,
-          sessionId: planSessionRef.current,
+          sessionId: activeSessionId(),
         })) as { correct: boolean; expected?: string; offer?: FormErrorOfferView };
         setWritingCorrect(grade.correct);
         setWritingExpected(grade.correct ? "" : (grade.expected ?? ""));
@@ -2505,7 +2520,7 @@ export function App() {
         modality: practiceTarget.modality,
         choiceIndex: index,
         revealReading: practiceRevealed,
-        sessionId: planSessionRef.current,
+        sessionId: activeSessionId(),
         stageId: drillStageId(lesson),
       })) as { correct: boolean; correct_choice: string };
       setPracticeCorrect(g.correct);
@@ -2528,7 +2543,7 @@ export function App() {
         choiceIndex: 0,
         answer: practiceDraft,
         revealReading: practiceRevealed,
-        sessionId: planSessionRef.current,
+        sessionId: activeSessionId(),
         stageId: drillStageId(lesson),
       })) as { correct: boolean; correct_choice: string };
       setPracticeCorrect(g.correct);
@@ -2637,6 +2652,10 @@ export function App() {
     sessionStartedAtRef.current = null;
     setSession(null);
     setSessionOutcome(outcome);
+    // UNIT-CAPSTONE-001: completing the queue of a section review closes
+    // the review — the engine records the attempt (pass OR fail). Stopping
+    // mid-review never reaches this line: no queue exhaustion, no attempt.
+    if (capstoneSessionRef.current) await finishCapstoneSession();
   }
 
   /// SESSION-CHROME-001 (U3): the end-of-session card. Time is measured
@@ -2671,6 +2690,9 @@ export function App() {
     const q = sessionQueueRef.current;
     if (!q) return;
     cancelSessionBridge();
+    // UNIT-CAPSTONE-001: stopping mid-review records NOTHING — an attempt
+    // exists only when the whole review ran to the end.
+    capstoneSessionRef.current = null;
     const outcome = sessionOutcomeFrom(q, reason);
     sessionQueueRef.current = null;
     sessionStartedAtRef.current = null;
@@ -2701,6 +2723,92 @@ export function App() {
     if (!current) return; // an exhausted queue has already closed the session
     publishSession("running");
     await openPractice(current);
+  }
+
+  // UNIT-CAPSTONE-001: the section review rides the same session runner as
+  // the plan — the engine serves the item list (`capstone_plan`), the
+  // runner grades every item through the normal submit path, and closing
+  // the review asks the engine to recount the recall itself
+  // (`capstone_complete`), never trusting the UI's tallies.
+  async function startCapstoneSession(node: UnitPathNode) {
+    if (!inv || !profileId) return;
+    setCapstoneResult(null);
+    try {
+      const p = (await inv("capstone_plan", {
+        profileId,
+        packId: node.pack_id,
+        band: node.band ?? "other",
+      })) as SessionPlan;
+      const runnable = p.items.filter(isSessionRunnable);
+      const first = runnable[0];
+      if (!first) {
+        setCapstoneResult({
+          passed: false,
+          items: 0,
+          correct: 0,
+          friendly: bandHeader(node.band ?? "other").friendly ?? node.band ?? "Section",
+          error: "this section's review has no runnable activities in this build",
+        });
+        return;
+      }
+      // Same id discipline as a plan session: one id per presented review;
+      // its attempt groups collapse retries inside the sitting (docs/03 §5).
+      const sid =
+        typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+          ? crypto.randomUUID()
+          : `capstone-${Math.random().toString(36).slice(2, 10)}`;
+      capstoneSessionRef.current = { packId: node.pack_id, band: node.band ?? "other", id: sid };
+      sessionQueueRef.current = {
+        items: runnable,
+        index: 0,
+        done: 0,
+        notRunnable: p.items.length - runnable.length,
+      };
+      sessionStartedAtRef.current = Date.now();
+      setSessionOutcome(null);
+      publishSession("running");
+      await openPractice(first, { showLessonCard: false });
+    } catch (e) {
+      capstoneSessionRef.current = null;
+      setSession(null);
+      setCapstoneResult({
+        passed: false,
+        items: 0,
+        correct: 0,
+        friendly: bandHeader(node.band ?? "other").friendly ?? node.band ?? "Section",
+        error: String(e),
+      });
+    }
+  }
+
+  /// Closes a finished review honestly: the engine recounts which selected
+  /// items the learner actually recalled (attempt-grouped evidence),
+  /// records the attempt — pass OR fail — and the path refreshes so the
+  /// flipped counter/lock state shows immediately.
+  async function finishCapstoneSession() {
+    const c = capstoneSessionRef.current;
+    capstoneSessionRef.current = null;
+    if (!c || !inv || !profileId) return;
+    try {
+      const res = (await inv("capstone_complete", {
+        profileId,
+        packId: c.packId,
+        band: c.band,
+        sessionId: c.id,
+      })) as { passed: boolean; items: number; correct: number };
+      const header = bandHeader(c.band);
+      setCapstoneResult({ ...res, friendly: header.friendly ?? header.label });
+      setPathNodes((await inv("unit_path", { profileId })) as UnitPathNode[]);
+    } catch (e) {
+      const header = bandHeader(c.band);
+      setCapstoneResult({
+        passed: false,
+        items: 0,
+        correct: 0,
+        friendly: header.friendly ?? header.label,
+        error: String(e),
+      });
+    }
   }
 
   // K-15: placement — low-stakes diagnosis per pack assessment. Each
@@ -2767,7 +2875,7 @@ export function App() {
         contentId: item.content_id,
         modality: item.modality,
         choiceIndex: index,
-        sessionId: planSessionRef.current,
+        sessionId: activeSessionId(),
       })) as { correct: boolean; correct_choice: string };
       if (g.correct) setPlacementHits((c) => c + 1);
       setPlacementCorrect(g.correct);
@@ -2859,7 +2967,7 @@ export function App() {
         modality: kanjiStage === "meaning" ? "recall-meaning" : "orthography-recognition",
         choiceIndex: index,
         revealReading: false,
-        sessionId: planSessionRef.current,
+        sessionId: activeSessionId(),
       })) as { correct: boolean; correct_choice: string };
       setKanjiCorrect(g.correct);
       setKanjiCorrectChoice(g.correct_choice);

@@ -13,7 +13,7 @@ export interface PlannedItem {
   item_id: string;
   content_id: string;
   modality: string;
-  reason: "due-review" | "saved-review" | "weak-skill" | "progression";
+  reason: "due-review" | "saved-review" | "weak-skill" | "progression" | "capstone";
   /** K-66: the engine's own classification of why this item is here —
    * `review` keeps something alive, `introduction` is material the
    * learner has never met. Derived from `reason` on the Rust side
@@ -113,6 +113,8 @@ const REASON_LABELS: Record<PlannedItem["reason"], string> = {
   // (mined) scheduler. It never touches pack mastery.
   "saved-review": "Review a saved word",
   "weak-skill": "Strengthen a weak spot",
+  // UNIT-CAPSTONE-001: one item of the section checkpoint review.
+  capstone: "Section review",
   progression: "New material",
 };
 
@@ -259,6 +261,10 @@ export interface HomeProps {
   onBudget(minutes: number): void;
   environments?: WorldEnvironment[];
   onStart?(item: PlannedItem): void;
+  /// UNIT-CAPSTONE-001: open the section review behind a capstone node,
+  /// and the facts of the review that just finished (rendered once).
+  onStartCapstone?(node: UnitPathNode): void;
+  capstoneResult?: CapstoneResult | null;
   /// Owner 2026-10-07: the active pack is named once on Home with its
   /// pack-level posture statement (derived from the pack's own review
   /// tallies by `packPosture` in language.tsx). Null when no pack is
@@ -593,6 +599,8 @@ export function Home(p: HomeProps) {
           nodes={p.pathNodes}
           scrollToUnit={p.sessionOutcome && p.nextOffer ? p.nextOffer.unit_id : null}
           nextOffer={p.nextOffer ?? null}
+          onStartCapstone={p.onStartCapstone}
+          capstoneResult={p.capstoneResult ?? null}
         />
       ) : null}
       {p.nextGoal === undefined ? null : p.nextGoal === null ? (
@@ -1019,6 +1027,8 @@ export const PATH_KIND_NAMES: Record<string, string> = {
   listening: "Listening",
   speaking: "Speaking",
   words: "Words",
+  // UNIT-CAPSTONE-001: the section checkpoint (Busuu Checkpoint pattern).
+  capstone: "Section review",
 };
 
 /** The pictograms — drawn (never emoji), currentColor like PathLockGlyph
@@ -1066,6 +1076,20 @@ function PathGlyph({ glyph }: { glyph: string }) {
           />
           <path d="M13.4 2 11.4 4.6l2.7.6z" fill="currentColor" />
         </>
+      ) : glyph === "capstone" ? (
+        // UNIT-CAPSTONE-001: the checkpoint flag — the market's
+        // Checkpoint/Milestone grammar (Busuu, Rosetta), drawn like every
+        // other glyph here, never a trophy or badge (ADR-0002).
+        <>
+          <path
+            d="M5 14.2V2.6"
+            fill="none"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+          <path d="M5 3.1h6.8l-1.9 2.2 1.9 2.2H5z" fill="currentColor" />
+        </>
       ) : (
         // words, and any kind we do not know yet: the open book.
         <>
@@ -1106,6 +1130,20 @@ function PathLockGlyph() {
   );
 }
 
+/** UNIT-CAPSTONE-001: the honest facts of a just-finished section review
+ * (engine-counted, never UI-claimed). The path renders one calm line from
+ * these — no congrats, no XP, no celebration (ADR-0002). */
+export interface CapstoneResult {
+  passed: boolean;
+  items: number;
+  correct: number;
+  /** The section's own friendly name, from the pack's band ladder. */
+  friendly: string;
+  /** Set when the review could not be served or recorded at all — the
+   * banner then attributes the failure instead of faking a score line. */
+  error?: string;
+}
+
 /**
  * The path itself: a scrolling journey of unit nodes. Only the section that
  * holds the pin is open by default — the pack carries 818 units and the
@@ -1119,6 +1157,8 @@ export function PathView({
   nodes,
   scrollToUnit,
   nextOffer,
+  onStartCapstone,
+  capstoneResult,
 }: {
   nodes: UnitPathNode[];
   /// PATH-WHATSNEXT-001: when set (the after-session moment), the path
@@ -1131,6 +1171,12 @@ export function PathView({
   /// header — the market pattern (pin on the trail, action chip in the
   /// header strip) — never as the track pin.
   nextOffer?: NextOffer | null;
+  /// UNIT-CAPSTONE-001: the action behind an unlocked, not-yet-passed
+  /// capstone node — the app opens the engine-built section review.
+  onStartCapstone?: (node: UnitPathNode) => void;
+  /// UNIT-CAPSTONE-001: facts from the review that just finished; the
+  /// path states them once, calmly.
+  capstoneResult?: CapstoneResult | null;
 }) {
   const sections = pathSections(nodes);
   // PATH-PIN-CONSISTENCY-001: the pin is WHERE THE LEARNER IS, not what
@@ -1254,6 +1300,18 @@ export function PathView({
       <p className="meta">
         <small>What you have completed, where you are now, and where this leads.</small>
       </p>
+      {capstoneResult ? (
+        // UNIT-CAPSTONE-001: one plain factual line — what the review
+        // measured and what it means for the section. Calm copy only
+        // (ADR-0002): no congrats, no XP, no celebration tokens.
+        <p className="path-capstone-result" data-testid="path-capstone-result" role="status">
+          {capstoneResult.error
+            ? `Could not record the section review: ${capstoneResult.error}`
+            : capstoneResult.passed
+              ? `Section review recorded — ${capstoneResult.correct} of ${capstoneResult.items} recalled. ${capstoneResult.friendly} complete.`
+              : `Section review recorded — ${capstoneResult.correct} of ${capstoneResult.items} recalled. Not passed yet — keep practicing this section, then run the review again.`}
+        </p>
+      ) : null}
       {nextOffer && nextOffer.unit_id !== pinTarget ? (
         // PATH-PIN-CONSISTENCY-001: the recommendation lives in the
         // header strip, never on the track — the pin stays the single
@@ -1299,6 +1357,10 @@ export function PathView({
         const isOpen = openBand === s.band;
         // PATH-VISUAL-001: the counter counts PROVEN-DONE only — refs the
         // learner actually proved — never visits or encounters.
+        // UNIT-CAPSTONE-001: every section's capstone node is one of the
+        // nodes counted, and passing it flips the LAST slot; the label
+        // says "done", never "units done", because the checkpoint is not
+        // a unit.
         const doneCount = s.nodes.filter((n) => n.done).length;
         return (
           <div key={s.band} className="path-section" data-band={s.band}>
@@ -1319,7 +1381,7 @@ export function PathView({
               <span className="path-section-name">{header.friendly ?? header.label}</span>
               <small className="path-section-cefr">{header.cefr ?? header.gloss}</small>
               <span className="path-section-count">
-                {doneCount}/{s.nodes.length} units done
+                {doneCount}/{s.nodes.length} done
               </span>
             </button>
             {isOpen || closingBand === s.band ? (
@@ -1437,6 +1499,30 @@ export function PathView({
                             data-testid={`path-review-${n.unit_id}`}
                           >
                             Review due ({n.due_count})
+                          </span>
+                        ) : null}
+                        {n.kind === "capstone" && !n.locked && !n.done && onStartCapstone ? (
+                          // UNIT-CAPSTONE-001: the checkpoint's own action
+                          // — a real control (44px+ in CSS), never a
+                          // celebration. Opening it starts the engine-built
+                          // mixed-recall session.
+                          <button
+                            type="button"
+                            className="path-node-capstone-start"
+                            data-testid={`capstone-start-${n.unit_id}`}
+                            onClick={() => onStartCapstone(n)}
+                          >
+                            {n.in_progress
+                              ? "Run the section review again"
+                              : "Start section review"}
+                          </button>
+                        ) : null}
+                        {n.kind === "capstone" && n.done ? (
+                          <span
+                            className="path-node-caption"
+                            data-testid={`capstone-recorded-${n.unit_id}`}
+                          >
+                            Section review recorded
                           </span>
                         ) : null}
                         {state === "locked" && n.unlock_hint ? (

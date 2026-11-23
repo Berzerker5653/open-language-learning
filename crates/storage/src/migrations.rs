@@ -26,11 +26,15 @@
 //!    (VOCAB-BUILDER-001).
 //! 9. `profiles.hidden` — archived profiles stay on disk but leave the
 //!    chooser (UI-HYGIENE-001, visual-ui-audit U13).
+//! 10. `encounter_events` — completed encounter records
+//!     (ENCOUNTER-BEFORE-TEST-001).
+//! 11. `capstone_attempts` — section capstone review attempts
+//!     (UNIT-CAPSTONE-001).
 
 use crate::error::Error;
 use rusqlite::{Connection, Transaction, TransactionBehavior};
 
-pub const SCHEMA_VERSION: i64 = 10;
+pub const SCHEMA_VERSION: i64 = 11;
 
 struct Migration {
     version: i64,
@@ -319,6 +323,30 @@ CREATE INDEX IF NOT EXISTS idx_encounter_events_profile
   ON encounter_events(profile_id);
 ",
     },
+    Migration {
+        version: 11,
+        sql: "
+-- UNIT-CAPSTONE-001: section capstone attempts. Every completed section
+-- review is recorded honestly (pass OR fail) so the path can show an
+-- honest started-but-not-passed state and `done` can read only passed
+-- rows. Scores are NOT duplicated here: the item-level truth stays in
+-- evidence_events (attempt group <session>:<content>); these two counts
+-- are what the path node renders.
+CREATE TABLE IF NOT EXISTS capstone_attempts (
+  profile_id TEXT NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+  pack_id TEXT NOT NULL,
+  band TEXT NOT NULL,
+  session_id TEXT NOT NULL,
+  items INTEGER NOT NULL,
+  correct INTEGER NOT NULL,
+  passed INTEGER NOT NULL,
+  occurred_at TEXT NOT NULL,
+  PRIMARY KEY (profile_id, pack_id, band, session_id)
+);
+CREATE INDEX IF NOT EXISTS idx_capstone_attempts_profile
+  ON capstone_attempts(profile_id, pack_id, band);
+",
+    },
 ];
 
 pub(crate) fn migrate(conn: &Connection) -> Result<(), Error> {
@@ -444,6 +472,8 @@ mod tests {
              DELETE FROM schema_migrations WHERE version = 8;
              DELETE FROM schema_migrations WHERE version = 9;
              DELETE FROM schema_migrations WHERE version = 10;
+             DELETE FROM schema_migrations WHERE version = 11;
+             DROP TABLE IF EXISTS capstone_attempts;
              DROP TABLE IF EXISTS error_review_cards;
              DROP TABLE IF EXISTS error_ledger;
              DROP TABLE IF EXISTS content_confirmations;
@@ -573,6 +603,17 @@ mod tests {
                 // the artifact of v10.
                 conn.query_row(
                     "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = 'encounter_events'",
+                    [],
+                    |r| r.get::<_, i64>(0),
+                )
+                .unwrap()
+                    == 1
+            }
+            11 => {
+                // UNIT-CAPSTONE-001: the section capstone attempt table is
+                // the artifact of v11.
+                conn.query_row(
+                    "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = 'capstone_attempts'",
                     [],
                     |r| r.get::<_, i64>(0),
                 )
