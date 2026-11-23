@@ -1,0 +1,178 @@
+{
+  "viewport": "390x844",
+  "port": 17631,
+  "tag": "live",
+  "checks": [
+    {
+      "name": "fresh home reached a stable pack-loaded state with exactly one pin before measurement",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    },
+    {
+      "name": "A1a: the pinned frontier node + its single Start pill sit fully inside the first fold (no scroll)",
+      "pass": true,
+      "measured": {
+        "scrollY": 1170,
+        "unit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+        "pinTop": 407,
+        "pinBottom": 589,
+        "pinVisible": true,
+        "pillCount": 1,
+        "pillOnPinRow": true,
+        "pillLabel": "Start today's plan — 5 activities, about 5 minutes",
+        "pillHeight": 101,
+        "pillInFold": true,
+        "foldInfraHits": 0,
+        "foldInfraSnippets": [],
+        "greetingShown": false,
+        "budgetShown": false
+      }
+    },
+    {
+      "name": "A1b: zero serve-mode infra strings inside the first fold",
+      "pass": true,
+      "measured": {
+        "foldInfraHits": 0,
+        "foldInfraSnippets": []
+      }
+    },
+    {
+      "name": "A1c: Today meta (greeting h1, time budget) does not occupy the pin-centred first fold",
+      "pass": true,
+      "measured": {
+        "greetingShown": false,
+        "budgetShown": false
+      }
+    },
+    {
+      "name": "A1d: at document top (scrollY 0) the first fold carries zero infra strings",
+      "pass": true,
+      "measured": {
+        "foldInfraHits": 0,
+        "foldInfraSnippets": []
+      }
+    },
+    {
+      "name": "A2: ZERO locked path nodes render above the pinned/current node",
+      "pass": true,
+      "measured": {
+        "lockedAboveCount": 0,
+        "lockedAbove": [],
+        "pinIndex": 0,
+        "lockedBelowCount": 11
+      }
+    },
+    {
+      "name": "A3: one tap on the frontier Start pill reaches the first practice/drill question",
+      "pass": true,
+      "measured": {
+        "taps": 1,
+        "practice": {
+          "surface": "lesson",
+          "prompt": "Printed Cyrillic: А а, О о, М м, Т т",
+          "choiceCount": 0
+        }
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-9e8a2f97-eb81-4b4f-80bc-2a415107487a",
+  "fold": {
+    "scrollY": 1170,
+    "unit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    "pinTop": 407,
+    "pinBottom": 589,
+    "pinVisible": true,
+    "pillCount": 1,
+    "pillOnPinRow": true,
+    "pillLabel": "Start today's plan — 5 activities, about 5 minutes",
+    "pillHeight": 101,
+    "pillInFold": true,
+    "foldInfraHits": 0,
+    "foldInfraSnippets": [],
+    "greetingShown": false,
+    "budgetShown": false
+  },
+  "atDocumentTop": {
+    "scrollY": 0,
+    "foldInfraHits": 0,
+    "foldInfraSnippets": [],
+    "topVisibleTexts": [
+      {
+        "top": 10,
+        "text": "Skip to main content"
+      },
+      {
+        "top": 12,
+        "text": "Open Language Learning Platform"
+      },
+      {
+        "top": 44,
+        "text": "Today"
+      },
+      {
+        "top": 44,
+        "text": "Practice"
+      },
+      {
+        "top": 44,
+        "text": "My Words"
+      },
+      {
+        "top": 44,
+        "text": "Progress"
+      },
+      {
+        "top": 92,
+        "text": "Settings"
+      },
+      {
+        "top": 153,
+        "text": "Hi"
+      }
+    ],
+    "pinTopAtDocTop": 1577,
+    "pinBottomAtDocTop": 1759,
+    "pinFullyVisibleAtDocTop": false
+  },
+  "pathOrder": {
+    "rowCount": 21,
+    "pinIndex": 0,
+    "pinUnit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    "pinPageTop": 1577,
+    "lockedAboveCount": 0,
+    "lockedAbove": [],
+    "lockedBelowCount": 11,
+    "states": [
+      "current",
+      "ready",
+      "ready",
+      "current",
+      "ready",
+      "ready",
+      "ready",
+      "ready",
+      "ready",
+      "current",
+      "locked",
+      "locked",
+      "locked",
+      "locked",
+      "locked",
+      "locked",
+      "locked",
+      "locked",
+      "locked",
+      "locked",
+      "locked"
+    ]
+  },
+  "practice": {
+    "surface": "lesson",
+    "prompt": "Printed Cyrillic: А а, О о, М м, Т т",
+    "choiceCount": 0
+  }
+}

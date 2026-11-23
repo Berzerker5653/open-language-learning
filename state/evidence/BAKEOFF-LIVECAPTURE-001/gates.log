@@ -1,0 +1,23 @@
+BAKEOFF-LIVECAPTURE-001 — lane-tier gate log (worker t_244fe76a, run 227, default/flash-next)
+
+LANE TIER (capture-only card; no app-code files touched):
+1. node --check scripts/bakeoff-today-livecapture.mjs          -> exit 0
+2. cargo build --bin lts-serve --features serve                -> Finished dev profile (fresh binary 2026-11-23 ~14:09, HEAD e336ac01 serve wiring)
+3. npm run -s build (apps/desktop)                             -> built in 918ms (fresh dist at capture time)
+4. CAPTURE_TAG=live node scripts/bakeoff-today-livecapture.mjs -> ALL CHECKS PASS 7/7, exit 0  (capture-green.log)
+5. python3 tools/validate_handoff.py --require-explicit-ledger-records -> see below (run at ledger commit)
+
+NOT RUN (out of tier): frontend tsc/vitest — no frontend source changed; full workspace sweeps are RELEASE tier only.
+
+INCIDENT NOTE (honesty trail; why two runs exist):
+- First harness attempt at ~14:09 found :17631 ALREADY HELD by a stale serve instance (pid 1004798,
+  started 07:23 in a dead hermes-worker scope, exe deleted by the rebuild — i.e. pre-SERVE-BANNER-001
+  binary). The harness's capabilities poll answered from that stale server, so that run measured
+  current dist against a stale binary and created its "Bakeoff Fresh" profile in the DEFAULT store.
+  Its artifacts were overwritten; it is NOT the evidence.
+- Remediation: profiles.db backed up to profiles.db.pre-bakeoff-cleanup-2026-11-23; the Bakeoff Fresh
+  profile deleted with PRAGMA foreign_keys=ON; orphan counts verified 0. Stale serve killed.
+- The captured evidence below is from the CLEAN re-run: harness-spawned HEAD binary serving HEAD dist
+  on 127.0.0.1:17631 with an isolated fresh LTS_DATA_DIR (no seeded traffic).
+- The owner-facing serve was then restarted on :17631 with the fresh binary + current dist
+  (persisted process; capabilities verified healthy, store holds only the owner's profiles).

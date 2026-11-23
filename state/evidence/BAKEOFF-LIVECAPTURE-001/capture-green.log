@@ -1,0 +1,17 @@
+$ SERVE_BIN=$PWD/target/debug/lts-serve SERVE_DIST=$PWD/apps/desktop/dist CAPTURE_TAG=live node scripts/bakeoff-today-livecapture.mjs
+(canon run — harness-spawned HEAD serve on 127.0.0.1:17631, isolated fresh data dir, fresh profile "Bakeoff Fresh")
+
+PASS fresh home reached a stable pack-loaded state with exactly one pin before measurement — {"healthyStreak":3}
+PASS A1a: the pinned frontier node + its single Start pill sit fully inside the first fold (no scroll) — {"scrollY":1170,"unit":"ru.unit.on-ramp.cyrillic-a-o-m-t","pinTop":407,"pinBottom":589,"pinVisible":true,"pillCount":1,"pillOnPinRow":true,"pillLabel":"Start today's plan — 5 activities, about 5 minutes","pillHeight":101,"pillInFold":true,"foldInfraHits":0,"foldInfraSnippets":[],"greetingShown":false,"budgetShown":false}
+PASS A1b: zero serve-mode infra strings inside the first fold — {"foldInfraHits":0,"foldInfraSnippets":[]}
+PASS A1c: Today meta (greeting h1, time budget) does not occupy the pin-centred first fold — {"greetingShown":false,"budgetShown":false}
+PASS A1d: at document top (scrollY 0) the first fold carries zero infra strings — {"foldInfraHits":0,"foldInfraSnippets":[]}
+PASS A2: ZERO locked path nodes render above the pinned/current node — {"lockedAboveCount":0,"lockedAbove":[],"pinIndex":0,"lockedBelowCount":11}
+PASS A3: one tap on the frontier Start pill reaches the first practice/drill question — {"taps":1,"practice":{"surface":"lesson","prompt":"Printed Cyrillic: А а, О о, М м, Т т","choiceCount":0}}
+ALL CHECKS PASS
+exit=0
+
+Artifacts: audit-live.json, bakeoff-fold0-live.png, bakeoff-document-top-live.png,
+bakeoff-fullpath-live.png, bakeoff-after-pill-tap-live.png. See learner-inspection.md
+for the read-as-a-learner verdict and honest nuances, gates.log for the stale-serve
+incident note (first attempt measured a pre-fix binary on the busy port and was discarded).
