@@ -180,10 +180,9 @@ describe("FEEL-SETTINGS-001 contents jump row", () => {
       "Speech runtimes",
       "About this build",
     ]) {
-      expect(
-        html,
-        `chip button for ${label} missing`,
-      ).toMatch(new RegExp(`class="contents-chip"[^>]*>${label}</button>`));
+      expect(html, `chip button for ${label} missing`).toMatch(
+        new RegExp(`class="contents-chip"[^>]*>${label}</button>`),
+      );
     }
   });
 
