@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": null,
+  "active_task": "PATH-NODE-TYPES-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3076,6 +3076,22 @@
         "state/evidence/PATH-FEEL-SCROLL-001/path-scroll-jumped.png",
         "state/evidence/PATH-FEEL-SCROLL-001/path-scroll-below.png",
         "state/notes/PATH-FEEL-SCROLL-001.md"
+      ]
+    },
+    "PATH-NODE-TYPES-001": {
+      "task_id": "PATH-NODE-TYPES-001",
+      "title": "Typed node glyphs by activity kind (letters, listening, speaking, words, review) replace identical circle dots, glyph never the only signal",
+      "status": "in_progress",
+      "attempts": 1,
+      "dependencies": [
+        "PATH-VISUAL-001",
+        "PATH-PIN-CONSISTENCY-001"
+      ],
+      "updated": "2026-11-23",
+      "summary": "In progress: engine-derived node kind on the unit_path wire + aria-hidden SVG pictogram grammar (letter/headphones/mic/book, check stays for done, refresh arrow for review-due) + sr-only kind words; capture gate scripts/path-node-types-capture.mjs.",
+      "notes": "Frozen contract + honest RU-pack distribution (10 letters / 808 words) in state/notes/PATH-NODE-TYPES-001.md.",
+      "evidence": [
+        "state/notes/PATH-NODE-TYPES-001.md"
       ]
     }
   },

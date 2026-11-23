@@ -3447,6 +3447,22 @@ tasks:
   - "The control is a fixed 52px circle with an accessible label, uses only the existing tokens, respects prefers-reduced-motion, and adds zero reward mechanics (ADR-0002)."
   required_for_desktop_1_0: false
 
+- id: PATH-NODE-TYPES-001
+  milestone: M11
+  priority: P1
+  title: Typed node glyphs by activity kind (letters, listening, speaking, words, review) replace identical circle dots, Duolingo pictogram grammar, glyph never the only signal
+  dependencies: [PATH-VISUAL-001, PATH-PIN-CONSISTENCY-001]
+  read_first:
+  - state/notes/PATH-NODE-TYPES-001.md
+  - apps/desktop/src/home.tsx
+  - scripts/path-scroll-capture.mjs
+  acceptance:
+  - "The engine derives a unit node's kind (letters, listening, speaking, words) from pack activity data only, per the frozen derivation in the notes, and ships it as a kind field on the unit_path wire."
+  - "The track center shows one aria-hidden SVG pictogram per kind (with padlock for locked, check for done, refresh arrow for review-due), and the old text dot markers are gone from the track."
+  - "Glyph is never the only signal: every node carries data-kind, a screen-reader kind word, the sr-only Completed word on done nodes, and all existing captions stay."
+  - "A real-engine capture script measures the grammar on the live app, with the same script failing at HEAD as the red proof."
+  required_for_desktop_1_0: false
+
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3455,6 +3471,7 @@ execution_scope:
   - ADV-001
   - AI-001
   - PACK-UPDATE-REPIN-001
+  - PATH-NODE-TYPES-001
   - PLAT-002
   - WEB-001
   - TTS-002
