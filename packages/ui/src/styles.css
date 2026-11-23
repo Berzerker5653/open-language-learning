@@ -1442,30 +1442,62 @@ th:last-child {
     font-size: 1rem;
   }
 
+  /* PHONE-NAV-WRAP-001: phone chrome = the market-standard BOTTOM tab
+     bar. Five tabs with legible labels cannot share one top row at
+     390px: the wrap orphaned Settings on a 2nd row and left the
+     gliding underline 48px below the active tab (red capture:
+     state/evidence/PHONE-NAV-WRAP-001/audit-red.json). At phone width
+     the nav detaches from the header and rides the bottom edge as a
+     fixed one-row bar; the brand line stays as the slim top app bar. */
   .routes {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--z-header);
     width: 100%;
-    /* Measured at 390px: five tabs' intrinsic text (with "Progress") is
-       ~360px and overflowed a nowrap row into a clipped, internally
-       scrolling strip. Wrapping keeps every route visible with zero
-       sideways movement; at 412px the row stays single-line. */
-    flex-wrap: wrap;
-    row-gap: 0.25rem;
-    padding-bottom: 0.25rem;
+    flex-wrap: nowrap;
+    row-gap: 0;
+    /* a 0.375rem inner sill (plus any device safe area) keeps the
+       indicator off the physical screen edge — flush-to-edge read as
+       clipped; the ::after bottom below matches the sill exactly */
+    padding: 0 0.25rem calc(0.375rem + env(safe-area-inset-bottom, 0px));
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+  }
+
+  /* Keep the gliding underline on the tab row (at the tabs' own bottom
+     edge) against the sill + safe area (base rule owns the indicator
+     itself), and inset it to sit centered under the label rather than
+     spanning the whole equal-slot (labels are centered in the slot —
+     a full-slot left-anchored rule reads detached from the word). */
+  .routes::after {
+    bottom: calc(0.375rem + env(safe-area-inset-bottom, 0px));
+    width: calc(var(--tab-w, 0px) * 0.6);
+    transform: translateX(calc(var(--tab-x, 0px) + var(--tab-w, 0px) * 0.2));
   }
 
   .tab {
-    flex: 1 1 auto;
+    flex: 1 1 0;
+    min-width: 0;
     justify-content: center;
-    /* 2.75rem = 44px exactly: the WCAG 2.2 AA target size, kept at the
-       narrow padding, not dropped with it */
-    min-height: 2.75rem;
-    padding: 0.5rem 0.5rem;
-    font-size: 0.875rem;
+    /* 3.5rem = 56px: market bottom-bar height, comfortably over the
+       44px WCAG 2.2 AA floor; 5 equal slots at 390px keep every label
+       one line (measured green in the card's capture) */
+    min-height: 3.5rem;
+    padding: 0.5rem 0.25rem;
+    font-size: 0.8125rem;
   }
 
   .page {
-    padding: 1.25rem 1rem 3rem;
+    /* clearance so content scrolls out from under the fixed bar */
+    padding: 1.25rem 1rem calc(4.5rem + env(safe-area-inset-bottom, 0px));
   }
+
+  /* The word-card sheet (higher z) may cover the bar while open — it
+     is sheet-modal. The two floating chrome pieces that must NOT sit
+     behind the bar get their lift below their own base rules instead
+     (equal specificity, source order decides). */
 
   .card {
     padding: 1.125rem 1rem;
@@ -2570,6 +2602,21 @@ th:last-child {
    the pin sits below the current view. */
 .path-jump-to-pin[data-dir="below"] svg {
   transform: rotate(180deg);
+}
+
+/* PHONE-NAV-WRAP-001: at phone widths the fixed bottom tab bar owns the
+   bottom edge, so the floating chrome (IME bubble, jump-to-pin FAB)
+   lifts clear of it. Declared after the base rules on purpose — equal
+   specificity, source order must favour the lift. The word-card sheet
+   keeps its own covering behavior (higher z, sheet-modal). */
+@media (max-width: 44rem) {
+  .input-mode-bubble {
+    bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+  }
+
+  .path-jump-to-pin {
+    bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 /* ======================================================== PATH-FEEL-MOTION-001
