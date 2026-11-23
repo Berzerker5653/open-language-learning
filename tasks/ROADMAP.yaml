@@ -3413,6 +3413,22 @@ tasks:
   - "A current_offer naming a different unit renders as a Next-up chip between the path header and the track (tap jumps the journey to it); no chip when it names the pinned unit; the offered node keeps its current ring but never a pin caption."
   - "Auto-scroll on load lands a little before the pin: pin inside the viewport, not glued to the top edge, context rows above visible - measured by scripts/path-pin-consistency-capture.mjs, which never scrolls the page itself."
   required_for_desktop_1_0: false
+- id: PATH-FEEL-MOTION-001
+  milestone: M11
+  priority: P1
+  title: Motion pass on the journey road - ring fills ease, taps spring, bands expand and collapse animated, current node breathes (ADR-0002 safe, reduced-motion honored)
+  dependencies: [PATH-VISUAL-001, PATH-PIN-CONSISTENCY-001]
+  read_first:
+  - state/notes/PATH-FEEL-MOTION-001.md
+  - state/notes/PATH-PIN-CONSISTENCY-001.md
+  - apps/desktop/src/home.tsx
+  - scripts/path-motion-capture.mjs
+  acceptance:
+  - "Ring fills, node taps, section expand/collapse and the current-node pulse exist as COMPUTED animation styles in the live app - measured by scripts/path-motion-capture.mjs against a real engine, with the same script failing at HEAD as the red proof."
+  - "The collapse is seen not just done - the band list plays an exit keyframe while still mounted, then unmounts (no stuck ghosts)."
+  - "With prefers-reduced-motion reduce emulated, every animation and transition duration collapses to ~0 and the infinite pulse stops iterating, while the static halo still marks the current node."
+  - "Motion stays motion - no reward mechanics appear anywhere (ADR-0002), durations stay in the FEEL-TARGETS 120-300ms calm-but-warm family."
+  required_for_desktop_1_0: false
 
 execution_scope:
   default_goal: desktop-1.0-release-candidate
@@ -3429,6 +3445,7 @@ execution_scope:
   - TTS-004
   - POLISH-001
   - PATH-PIN-CONSISTENCY-001
+  - PATH-FEEL-MOTION-001
   - JA-A1-003
   - JA-A2-002
   - JA-A2-002-FIX-001

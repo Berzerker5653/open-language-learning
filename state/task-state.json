@@ -3032,6 +3032,27 @@
         "state/evidence/DOGFOOD-2026-11-22/complaint-10-path-branch-order.jpg",
         "state/notes/PATH-PIN-CONSISTENCY-001.md"
       ]
+    },
+    "PATH-FEEL-MOTION-001": {
+      "task_id": "PATH-FEEL-MOTION-001",
+      "title": "Motion pass on the journey road - ring fills ease, taps spring, bands animate open/close, current node breathes; reduced-motion collapses everything",
+      "status": "done",
+      "attempts": 3,
+      "dependencies": [
+        "PATH-VISUAL-001",
+        "PATH-PIN-CONSISTENCY-001"
+      ],
+      "updated": "2026-11-23",
+      "summary": "Duolingo-parity motion on the path as computed styles: arc fills ease stroke-dasharray 300ms; node taps spring (160ms overshoot transition + pressed class under real CDP touch, scale 0.9->1); band expand cascades path-node-in rise+fade staggered 30ms/row capped at 10; collapse plays path-nodes-close while still mounted then unmounts; current ring breathes a 2.4s infinite accent halo (static halo remains under reduced motion); done check pops. Reduced motion proven via the pre-existing global reduce block (durations -> ~0, pulse iterations -> 1). Red proof: same capture at HEAD 7/17 with the 10 motion checks failing; green 17/17 re-run by the controller on the committed bytes; pin regression capture 10/10 over the patched DOM. vitest 495/495 (+1 markup test), tsc/prettier/eslint clean. Attempts 1-2 died on model no-reply leaving the full lane uncommitted; run 3 adopted the WIP per the race rule and re-verified every gate.",
+      "notes": "Frontend-only lane, no Rust. Motion is not gamification (ADR-0002): zero reward mechanics, durations per FEEL-TARGETS legends. home.tsx remains a hotspot (flagged before).",
+      "evidence": [
+        "state/evidence/PATH-FEEL-MOTION-001/gates.log",
+        "state/evidence/PATH-FEEL-MOTION-001/result.json",
+        "state/evidence/PATH-FEEL-MOTION-001/red-at-head/result.json",
+        "state/evidence/PATH-FEEL-MOTION-001/path-motion-full.png",
+        "state/evidence/PATH-FEEL-MOTION-001/path-motion-reduced.png",
+        "state/notes/PATH-FEEL-MOTION-001.md"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
