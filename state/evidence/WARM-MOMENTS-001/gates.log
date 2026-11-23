@@ -1,0 +1,36 @@
+WARM-MOMENTS-001 — controller gate log (run by the card worker, GamingPC, 2026-11-23)
+
+RED (before implementation, base d87b12a6; tests committed as 11966869):
+- npx vitest run src/path-view.test.tsx src/home.test.tsx
+  -> 6 failed | 58 passed (finish moment renders nothing special on a
+     passed capstone; GentleFacts unbuilt). red-vitest.log
+- cargo test -p lts-desktop --lib learning_facts
+  -> E0425 cannot find function `learning_facts_at` (x4). red-rust.log
+
+GREEN (implementation in this commit):
+- npx tsc --noEmit                       -> clean
+- npx vitest run                         -> 512/512 (505 pre-existing + 7 new)
+- cargo fmt --all --check                -> clean (fmt applied to lane code only)
+- cargo test -p lts-desktop --lib        -> 236 passed, 0 failed, 2 ignored
+  (note: the first full run showed tests::dictation_check_abstains_on_silence
+  FAIL under suite load; passes in isolation and did NOT reproduce on the
+  clean re-run above — vendor-gated timing flake per the standing
+  observation, lane touches no dictation code)
+- cargo clippy -p lts-desktop --all-targets -- -D warnings -> clean
+
+Evidence pair: red-vitest.log + red-rust.log vs this table (vitest/cargo
+outputs above re-run by the controller in-session).
+
+Screenshots of the finish card / gentle facts: DEFERRED — reaching the
+moment in serve mode needs the full on-ramp ladder + capstone pass in the
+browser harness (capstone-capture.mjs ends at the pass record); the
+presence/absence contract is machine-gated in vitest instead. A follow-up
+capture can ride the next visual lane without changing any assertion.
+
+Scope notes:
+- ADR-0002 amended in docs/adr/0002-no-streaks.md (status line +
+  Amendment section + Alternatives note).
+- Sound cue NOT shipped (permitted, recorded as optional in the notes
+  file and the ADR text).
+- time learned NOT wired: sessions table has no writer in the tree; an
+  estimate would invent a number. Deferred honestly.
