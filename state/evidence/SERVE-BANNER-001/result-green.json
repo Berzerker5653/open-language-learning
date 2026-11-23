@@ -1,0 +1,93 @@
+{
+  "viewport": "390x844",
+  "tag": "green",
+  "checks": [
+    {
+      "name": "home reached a stable pack-loaded state with exactly one pin before measurement",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    },
+    {
+      "name": "Today first fold contains ZERO serve-mode infra strings (meta off the first screen)",
+      "pass": true,
+      "measured": {
+        "foldHits": 0,
+        "hitStrings": [],
+        "hitSnippets": []
+      }
+    },
+    {
+      "name": "no degraded-capability badge on Today while the server reports the microphone healthy",
+      "pass": true,
+      "measured": {
+        "badgeCount": 0,
+        "badgeText": null
+      }
+    },
+    {
+      "name": "zero serve-mode infra strings stacked above learner content at the document top",
+      "pass": true,
+      "measured": {
+        "scrollY": 0,
+        "foldHits": 0,
+        "hitStrings": [],
+        "hitSnippets": [],
+        "noticeBanner": 0
+      }
+    },
+    {
+      "name": "the About this build card carries a serve-notice block with every capability line",
+      "pass": true,
+      "measured": {
+        "hasNoticeBlock": true,
+        "missingLines": []
+      }
+    },
+    {
+      "name": "each infra line exists exactly once in the whole app, inside the About card",
+      "pass": true,
+      "measured": {
+        "docBrowserMode": 1,
+        "cardBrowserMode": 1
+      }
+    },
+    {
+      "name": "the notes ride inside the card below the build identity lines",
+      "pass": true,
+      "measured": {
+        "belowCommit": true
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "capabilities": {
+    "microphone_names_available": true,
+    "install_progress_events": true
+  },
+  "profileId": "prof-28d7c249-d9bf-4878-bb52-8c7ca301ba07",
+  "fold": {
+    "foldHits": 0,
+    "hitStrings": [],
+    "hitSnippets": [],
+    "badgeCount": 0,
+    "badgeText": null,
+    "bodyHasInfra": []
+  },
+  "atDocumentTop": {
+    "scrollY": 0,
+    "foldHits": 0,
+    "hitStrings": [],
+    "hitSnippets": [],
+    "noticeBanner": 0
+  },
+  "about": {
+    "hasNoticeBlock": true,
+    "missingLines": [],
+    "docBrowserMode": 1,
+    "cardBrowserMode": 1,
+    "belowCommit": true
+  }
+}

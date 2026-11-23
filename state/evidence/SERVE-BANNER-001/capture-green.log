@@ -1,0 +1,8 @@
+PASS home reached a stable pack-loaded state with exactly one pin before measurement — {"healthyStreak":3}
+PASS Today first fold contains ZERO serve-mode infra strings (meta off the first screen) — {"foldHits":0,"hitStrings":[],"hitSnippets":[]}
+PASS no degraded-capability badge on Today while the server reports the microphone healthy — {"badgeCount":0,"badgeText":null}
+PASS zero serve-mode infra strings stacked above learner content at the document top — {"scrollY":0,"foldHits":0,"hitStrings":[],"hitSnippets":[],"noticeBanner":0}
+PASS the About this build card carries a serve-notice block with every capability line — {"hasNoticeBlock":true,"missingLines":[]}
+PASS each infra line exists exactly once in the whole app, inside the About card — {"docBrowserMode":1,"cardBrowserMode":1}
+PASS the notes ride inside the card below the build identity lines — {"belowCommit":true}
+ALL CHECKS PASS

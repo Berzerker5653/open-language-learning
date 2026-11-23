@@ -1,0 +1,24 @@
+SERVE-BANNER-001 lane gates (re-run by the worker at code commit e336ac01; tree clean of sibling WIP — path-view.test.tsx + path-lock-order-capture.mjs stayed unstaged, prettier quote hunks belong to PATH-LOCK-ORDER residue):
+- npx tsc --noEmit (apps/desktop): clean
+- npx vitest run (apps/desktop full): 642/642 passed (73 files) incl. the 6 new SERVE-BANNER-001 pins
+  (base measured 5 FAIL at the red contract commit 892e8ab6 -> vitest-red-at-base.log)
+- npx eslint src/App.tsx src/settings.tsx src/settings.test.tsx src/serve-banner.test.tsx: clean
+- npx prettier --check on all touched files + scripts/serve-banner-capture.mjs: clean (one --write on the new test file rode the code commit)
+- python3 tools/audit_learner_copy.py: findings 0
+- scripts/serve-banner-capture.mjs red-at-base (dist built from the base frontend tree; serve bin = existing target/debug/lts-serve, no Rust changes):
+  4 CHECK(S) FAILED, exit 1 -> capture-red-at-base.log:
+  TODAY first fold at the loading viewport hides the banner only because TODAY-FIRSTSCREEN-001's frontier auto-scroll pushes it out of view —
+  at the DOCUMENT TOP (scroll 0) the harness measures 4 infra strings ("Browser mode", "install progress", "secure context",
+  "Privacy settings") stacked above all learner content, notice banner present; About card carries no serve-notice; "Browser mode" occurrence
+  doc=1 card=0.
+- scripts/serve-banner-capture.mjs green at e336ac01 (dist rebuilt from the exact committed tree): 7/7 PASS, exit 0 -> capture-green.log
+  fold hits 0, document-top hits 0 with zero banner nodes, badge 0 on the healthy localhost report (harness pre-reads /api/capabilities WITH the
+  Origin header — the bridge answers per origin and reports null without one), About card carries every line exactly once below the build identity.
+- regressions on the green dist (CAPTURE_TAG=regression, tag files removed after): firstscreen-capture 8/8 PASS, path-lock-order-capture 6/6 PASS.
+- degraded-badge behavior (one microphone-naming line only when microphone_names_available === false): vitest-pinned (4 pins: degraded, healthy,
+  unreachable, older bridge); the real-engine capture honestly measures only the healthy localhost origin (serve binds loopback = secure context),
+  so no on-page badge shot exists by design — no fake badge evidence claimed.
+- visual inspection gate: servebanner-settings-about-green.png read as a learner (version/commit line, fold note, then three quiet gray meta rows:
+  Browser mode / secure context / Privacy settings); servebanner-fold0-green.png at document top read as a learner (divider then the greeting and
+  "what to practice now" — zero infra text between tabs and content).
+- no Rust/pack changes; install-progress SSE, SETTINGS-SCOPE-001 mic graying, and engine calls untouched.
