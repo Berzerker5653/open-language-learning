@@ -1137,6 +1137,50 @@ export function PathView({
     const el = rootRef.current?.querySelector(`[data-unit="${pinTarget}"]`);
     if (el && typeof el.scrollIntoView === "function") el.scrollIntoView({ block: "center" });
   }, [pinTarget, scrollToUnit]);
+  // PATH-FEEL-SCROLL-001 (Duolingo parity for the viewport): the journey
+  // opens centered on the pin (the auto-scroll above) AND once the learner
+  // scrolls their spot away, a floating "jump to my spot" arrow fades in,
+  // pointing back toward it. The IntersectionObserver watches the pinned
+  // node against the VIEWPORT — it works whether the page or a container
+  // scrolls — and boundingClientRect tells whether my-spot is above or
+  // below the current view so the arrow points the right way. A manually
+  // collapsed band unmounts the pin node: my-spot is not on screen either,
+  // so the arrow re-opens the band instead of scrolling.
+  const [pinOffscreen, setPinOffscreen] = useState<"above" | "below" | null>(null);
+  useEffect(() => {
+    if (!pinTarget || typeof IntersectionObserver === "undefined") {
+      setPinOffscreen(null);
+      return;
+    }
+    const el = rootRef.current?.querySelector(`[data-unit="${pinTarget}"]`);
+    if (!el) {
+      setPinOffscreen("above");
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        const e = entries[entries.length - 1];
+        if (!e) return;
+        setPinOffscreen(e.isIntersecting ? null : e.boundingClientRect.top > 0 ? "below" : "above");
+      },
+      { threshold: 0 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [pinTarget, openBand, nodes]);
+  const jumpToPin = () => {
+    if (!pinTarget) return;
+    const el = rootRef.current?.querySelector(`[data-unit="${pinTarget}"]`);
+    if (!el) {
+      // The pinned band was collapsed under us: opening it puts the pin
+      // back in the DOM (and the next observer pass re-arms the arrow).
+      setBandOverride(pinnedBand ?? null);
+      return;
+    }
+    const reduce =
+      typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+  };
   return (
     <section aria-label="Your path" className="unit-path" data-testid="unit-path" ref={rootRef}>
       <h2>Your path</h2>
@@ -1155,6 +1199,32 @@ export function PathView({
           onClick={() => setFocusUnit(nextOffer.unit_id)}
         >
           Next up: {nextOffer.title} · ~{nextOffer.minutes} min
+        </button>
+      ) : null}
+      {pinTarget ? (
+        // PATH-FEEL-SCROLL-001: the market's viewport pattern — invisible
+        // while my-spot is on screen, a floating circle bottom-right once
+        // the observer says it is not, arrow pointing toward it (CSS
+        // never display:none: opacity+visibility only, no layout shift).
+        <button
+          type="button"
+          className="path-jump-to-pin"
+          data-testid="path-jump-to-pin"
+          data-visible={pinOffscreen ? "true" : "false"}
+          data-dir={pinOffscreen ?? "above"}
+          aria-label="Jump to my spot"
+          onClick={jumpToPin}
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M12 19V6M5.5 12.5 12 6l6.5 6.5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.4"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
       ) : null}
       {sections.map((s) => {

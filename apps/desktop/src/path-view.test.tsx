@@ -377,3 +377,37 @@ describe("path sections are the canonical band ladder (PATH-SECTIONS-DEDUP-001)"
     }
   });
 });
+
+// PATH-FEEL-SCROLL-001 (Duolingo parity for the viewport): the journey
+// opens centered on the pin, and once the learner scrolls their spot away
+// a floating "jump to my spot" arrow appears, pointing back toward it.
+// The live proof (offscreen flip, arrow direction, jump-back) is the
+// capture gate scripts/path-scroll-capture.mjs; these tests pin the
+// markup contract the observer + CSS depend on: the control SHIPS hidden
+// and only exists when the track has a pin to jump to.
+describe("jump-to-my-spot affordance (PATH-FEEL-SCROLL-001)", () => {
+  it("ships the jump control hidden in the markup, ready for the offscreen flip", () => {
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({ unit_id: "ru.unit.a", done: true, refs_done: 4, refs_total: 4 }),
+          node({ unit_id: "ru.unit.b", in_progress: true, refs_done: 3, refs_total: 4 }),
+        ]}
+      />,
+    );
+    expect(html).toContain('data-testid="path-jump-to-pin"');
+    // Hidden until the pin node leaves the viewport — the IntersectionObserver
+    // flips data-visible, the CSS animates opacity only (no layout jump).
+    expect(html).toContain('data-visible="false"');
+    expect(html).toContain('aria-label="Jump to my spot"');
+  });
+
+  it("has no jump affordance when the track has no pin (nothing left open)", () => {
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[node({ unit_id: "ru.unit.a", done: true, refs_done: 4, refs_total: 4 })]}
+      />,
+    );
+    expect(html).not.toContain('data-testid="path-jump-to-pin"');
+  });
+});

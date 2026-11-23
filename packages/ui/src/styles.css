@@ -1626,6 +1626,65 @@ th:last-child {
     border-color 120ms ease-out;
 }
 
+/* PATH-FEEL-SCROLL-001 (Duolingo parity for the viewport): the floating
+   "jump to my spot" control. The IntersectionObserver in home.tsx flips
+   data-visible the moment the pinned node leaves the viewport; this CSS
+   owns the announcement — opacity + visibility only (display:none would
+   jump the layout), a soft rise-in, and the arrow rotated toward wherever
+   my-spot lives. A fixed 52px circle (44px+ target rule), one accent,
+   180ms ease-out: the calm-but-warm family, and motion-not-reward per
+   ADR-0002 — it exists to save a scroll hunt, not to motivate. The
+   global prefers-reduced-motion block flattens the fade; the control
+   itself still appears (it is a navigation affordance, not animation). */
+.path-jump-to-pin {
+  position: fixed;
+  right: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 40;
+  width: 3.25rem;
+  height: 3.25rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 2px 10px rgb(36 31 24 / 0.18);
+  color: var(--accent);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) scale(0.92);
+  transition:
+    opacity 180ms ease-out,
+    transform 180ms ease-out,
+    visibility 0s linear 180ms;
+}
+
+.path-jump-to-pin[data-visible="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 180ms ease-out,
+    transform 180ms ease-out;
+}
+
+.path-jump-to-pin:active {
+  transform: scale(0.92);
+}
+
+.path-jump-to-pin svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  transition: transform 180ms ease-out;
+}
+
+/* The arrow points WHERE my-spot is: up by default, flipped down when
+   the pin sits below the current view. */
+.path-jump-to-pin[data-dir="below"] svg {
+  transform: rotate(180deg);
+}
+
 /* ======================================================== PATH-FEEL-MOTION-001
    Motion pass on the journey (Duolingo parity for the ROAD — ADR-0002 safe:
    these are transitions and keyframes, never reward mechanics; the calm-but-
