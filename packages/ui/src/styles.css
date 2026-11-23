@@ -1107,7 +1107,10 @@ details.prose-note > p {
   font-weight: 600;
 }
 
-.plan-list {
+/* ARCH-HOTSPOT: .pack-list (language management below) styles the same
+   stack-list primitive and shared this rule body verbatim - merged. */
+.plan-list,
+.pack-list {
   list-style: none;
   display: grid;
   gap: 0.5rem;
@@ -1159,7 +1162,10 @@ details.prose-note > p {
 }
 
 /* environments */
-.place-list {
+/* ARCH-HOTSPOT: the practice .feedback list (results below) shared this
+   rule body verbatim - merged into the same stack-list rule. */
+.place-list,
+.feedback {
   list-style: none;
   display: grid;
   gap: 0.5rem;
@@ -1231,14 +1237,6 @@ th:last-child {
 .target-word {
   font-size: 1.35rem;
   font-weight: 700;
-}
-
-.feedback {
-  list-style: none;
-  display: grid;
-  gap: 0.5rem;
-  padding: 0;
-  margin: 0.75rem 0;
 }
 
 .feedback > li {
@@ -1372,14 +1370,6 @@ th:last-child {
 }
 
 /* -------------------------------------------------- language management */
-.pack-list {
-  list-style: none;
-  display: grid;
-  gap: 0.5rem;
-  padding: 0;
-  margin: 0.75rem 0 1rem;
-}
-
 .pack-list > li {
   display: flex;
   align-items: center;

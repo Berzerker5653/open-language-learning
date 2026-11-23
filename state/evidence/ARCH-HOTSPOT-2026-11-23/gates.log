@@ -1,0 +1,16 @@
+ARCH-HOTSPOT 2026-11-23 lane gates (frontend touched; lane tier only)
+
+$ npx tsc --noEmit            # in apps/desktop (repo root has no tsconfig)
+exit 0
+
+$ npx vitest run              # in apps/desktop, includes all styles.css rule-body pin tests
+Test Files  73 passed (73)
+Tests       642 passed (642)
+Duration    9.45s
+
+Equivalence check (python, HEAD vs worktree rule parse):
+ALL BODIES EQUAL: True; selectors lost: []; gained: []
+
+Race note: tree was dirty with sibling WIP in apps/desktop/src/path-view.test.tsx
+and scripts/path-lock-order-capture.mjs - untouched by this lane; vitest was
+run with that WIP present and is fully green either way.
