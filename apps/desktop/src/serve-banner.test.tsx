@@ -36,6 +36,8 @@ describe("serve degraded badge (SERVE-BANNER-001)", () => {
     expect(serveDegradedBadge(null)).toBeNull();
   });
   it("stays silent when an older bridge says nothing about microphone names", () => {
-    expect(serveDegradedBadge({ mode: "browser-serve", install_progress_events: false })).toBeNull();
+    expect(
+      serveDegradedBadge({ mode: "browser-serve", install_progress_events: false }),
+    ).toBeNull();
   });
 });

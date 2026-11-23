@@ -11,7 +11,13 @@ import {
 } from "./onboarding";
 import { PracticeHub, type HubMode } from "./hub";
 import { remainingPlanSeconds, SessionChrome, StepDots } from "./session-chrome";
-import { fetchCapabilities, httpInvoke, inLtsServeMode, subscribeServeProgress } from "./ipc";
+import {
+  fetchCapabilities,
+  httpInvoke,
+  inLtsServeMode,
+  subscribeServeProgress,
+  type ServeCapabilities,
+} from "./ipc";
 import {
   Home,
   type PackUpdate,
@@ -192,6 +198,24 @@ export function activePackNote(ids: string[]): string | null {
   return others.length > 0
     ? `This profile has more than one active pack (${ids.join(", ")}). Using ${ids[0]}; choose a single pack under Settings → Language packs.`
     : null;
+}
+
+/**
+ * SERVE-BANNER-001 (market meta rule, PROGRESSION-UX-AUDIT-2026-11-22): the
+ * full capability report lives in Settings > About this build — meta never
+ * occupies the learner's first screen. A screen may carry AT MOST this
+ * one-line badge, and only when the server's own report degrades a
+ * capability for the current origin: the secure-context rule says this
+ * address cannot reach the microphone, so speaking activities will say so.
+ * Healthy localhost serve, an older bridge that says nothing, and an
+ * unreachable bridge all render NO badge — those notes are for About.
+ */
+export function serveDegradedBadge(caps: ServeCapabilities | null): string | null {
+  if (!caps) return null;
+  if (caps.microphone_names_available === false) {
+    return "Speaking here is limited: this address is not a secure context, so the browser blocks the microphone — open the app over https or localhost.";
+  }
+  return null;
 }
 
 /**
@@ -1318,7 +1342,12 @@ export function App() {
   // capture where the browser blocks it). The text comes from the server's
   // capability report, never invented locally; nothing here changes a
   // stored privacy mode.
+  // SERVE-BANNER-001 (market meta rule): these lines no longer stack above
+  // every screen — they live in Settings > About this build, where the
+  // build identity already lives. The App keeps them only to hand to the
+  // Settings panel; Today may carry AT MOST the one-line degraded badge.
   const [serveNotice, setServeNotice] = useState<string[] | null>(null);
+  const [serveBadge, setServeBadge] = useState<string | null>(null);
   // SETTINGS-SCOPE-001: the same capability report also decides whether the
   // Settings "Detect microphones" button can do anything: in an insecure
   // context the browser reveals no input names, so the button renders gray
@@ -1350,6 +1379,7 @@ export function App() {
         caps.privacy_modes ? `Privacy settings: ${caps.privacy_modes}` : "",
       ].filter((s) => s.length > 0);
       setServeNotice(parts);
+      setServeBadge(serveDegradedBadge(caps));
     });
   }, []);
 
@@ -4466,16 +4496,14 @@ export function App() {
         </nav>
       }
     >
-      {/* WEB-SERVE-001 scope 4: browser-serve mode labels its limits
-          honestly (no progress streaming; mic capture depends on the
-          browser's secure-context rule) instead of failing silently. */}
-      {serveNotice ? (
-        <p role="status" className="notice" data-testid="serve-notice">
-          {serveNotice.map((line) => (
-            <span key={line} className="notice-line">
-              {line}
-            </span>
-          ))}
+      {/* WEB-SERVE-001 scope 4 labels the browser bridge honestly; per
+          SERVE-BANNER-001 (market meta rule) the full capability lines
+          moved to Settings > About this build. Only a genuinely degraded
+          capability rides the screen: at most this one quiet line, and
+          only when the server's own report blocks the microphone here. */}
+      {serveBadge ? (
+        <p role="status" className="meta" data-testid="serve-badge">
+          {serveBadge}
         </p>
       ) : null}
       {playbackError ? (
@@ -4980,6 +5008,7 @@ export function App() {
             loading={settingsLoading}
             saveNotice={settingsSaveNotice}
             installingModelId={installingSpeechModel}
+            serveNotice={serveNotice}
           />
         </>
       ) : practiceTarget && practiceTask ? (

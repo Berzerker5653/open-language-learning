@@ -158,6 +158,11 @@ export interface SettingsProps {
    *  (Download and Remove) disables while any install runs — one installer
    *  at a time is the honest state. */
   installingModelId?: string | null;
+  /** SERVE-BANNER-001: the serve bridge's capability lines (market meta
+   *  rule: this meta never rides the learner's first screen). The App
+   *  collected them from the server's own report; they render quietly in
+   *  the About this build card, under the build identity. */
+  serveNotice?: string[] | null;
 }
 
 const ROMAJI_MODES: { value: RomajiMode; label: string }[] = [
@@ -775,6 +780,19 @@ export function Settings(p: SettingsProps) {
         ) : (
           <p className="meta">Loading build information…</p>
         )}
+        {/* SERVE-BANNER-001: the serve bridge's capability lines moved here
+            from the banner above every screen (market meta rule: meta never
+            occupies the learner's first screen). Serve mode only — the
+            desktop shell has no serveNotice, so desktop renders nothing. */}
+        {p.serveNotice && p.serveNotice.length > 0 ? (
+          <div data-testid="serve-notice" role="status">
+            {p.serveNotice.map((line) => (
+              <p key={line} className="meta">
+                {line}
+              </p>
+            ))}
+          </div>
+        ) : null}
       </div>
     </section>
   );
