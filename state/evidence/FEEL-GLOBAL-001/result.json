@@ -1,0 +1,104 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "TOKENS LIVE: the motion family + z scale resolve on :root in the running page",
+      "pass": true,
+      "measured": {
+        "durFast": ".12s",
+        "dur": ".25s",
+        "durSlow": ".3s",
+        "easeOut": "cubic-bezier(.22, .61, .36, 1)",
+        "zWordCard": "45"
+      }
+    },
+    {
+      "name": "BUTTON TRANSITION: the primary button animates its state changes (not snap)",
+      "pass": true,
+      "measured": {
+        "x": 195,
+        "y": 422.265625,
+        "transition": "background, border-color, color, transform, filter",
+        "duration": "0.12s, 0.12s, 0.12s, 0.12s, 0.12s"
+      }
+    },
+    {
+      "name": "BUTTON PRESS: a real mouse press translates the button down 2px + darkens, and it springs back",
+      "pass": true,
+      "measured": {
+        "pressed": {
+          "transform": "matrix(1, 0, 0, 1, 0, 2)",
+          "filter": "brightness(0.92)"
+        },
+        "released": {
+          "transform": "none"
+        }
+      }
+    },
+    {
+      "name": "UNDERLINE AT REST: one measured indicator sits on the active tab (the per-tab border steps aside)",
+      "pass": true,
+      "measured": {
+        "dx": 0,
+        "width": 71,
+        "opacity": 1,
+        "glides": true,
+        "activeX": 0,
+        "activeW": 71,
+        "tabBorder": "rgba(0, 0, 0, 0)"
+      }
+    },
+    {
+      "name": "UNDERLINE MID-SLIDE: ~110ms after the route change the indicator is strictly BETWEEN the two tabs (glides, no snap)",
+      "pass": true,
+      "measured": {
+        "fromX": 0,
+        "midX": 59.3969,
+        "toX": 75
+      }
+    },
+    {
+      "name": "UNDERLINE PARKED: after the slide the indicator measures exactly onto the new tab",
+      "pass": true,
+      "measured": {
+        "dx": 75,
+        "width": 86,
+        "endX": 75,
+        "endW": 86
+      }
+    },
+    {
+      "name": "SHARED CLASS MOTION: transitions compute on .btn/.tab/.seg-btn/.card and the entry keyframes on notice/verdict/bridge/sheet/ring/pulse",
+      "pass": true,
+      "measured": {
+        "notice": "fade-up 0.25s",
+        "sheet": "slide-up 0.3s",
+        "pulse": "pulse-soft 2.4s",
+        "tabTransition": "0.25s, 0.12s, 0.12s"
+      }
+    },
+    {
+      "name": "SMOOTH ROUTE SCROLL: the route reset passes through intermediate positions on its way to the top",
+      "pass": true,
+      "measured": {
+        "start": 4246,
+        "midCount": 40,
+        "last": 0
+      }
+    },
+    {
+      "name": "REDUCED MOTION: every duration this card adds collapses to ~0 under the emulated switch",
+      "pass": true,
+      "measured": {
+        "btn": "0s",
+        "tab": "1e-05s",
+        "underline": "1e-05s",
+        "notice": "1e-05s",
+        "sheet": "1e-05s"
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-3d11578e-46a5-45aa-b044-3100675d88d2"
+}

@@ -1,0 +1,69 @@
+FEEL-GLOBAL-001 — lane gates (RUN 3 controller, 2026-11-23)
+
+Context: attempt 2 died at the 80/80 iteration cap mid-close (RUN 202 HANDOFF
+comment carries the recipe). RUN 3 executed the recipe, fixed four harness
+bugs and one real App.tsx bug found by the live capture, then closed.
+
+RED (at card commit aa3619e6, frontend bytes = HEAD):
+- npx vitest run (motion-contract.test.ts): 17 failed | 2 passed (19)
+  -> red-vitest.log
+- scripts/feel-global-capture.mjs (real engine: lts-serve + headless Chrome,
+  390x844): 1/9 checks passed — the only pass is the reduced-motion
+  kill-switch, which is vacuously true at base (no motion to flatten).
+  Measured at base: no :root tokens, button transition "all 0s", press
+  transform none, no measured underline (glides:false), no entry
+  keyframes, route scroll midCount 0.
+  -> red-at-head/result.json + red-at-head/*.png
+  NOTE: red-at-head was initially captured with a stale lts-serve (install_pack
+  'unknown pack id') and a pre-fix harness; after fixing the harness, RED was
+  RE-RUN at HEAD with the FINAL script so the red/green diff uses one frozen
+  capture.
+
+GREEN (with the committed styles.css + App.tsx, dist built from these bytes):
+- scripts/feel-global-capture.mjs: 9/9 checks passed
+  -> result.json + button-pressed.png, underline-on-practice.png,
+     reduced-motion.png
+  Highlights (computed, not grepped): press lands matrix(1,0,0,1,0,2) +
+  brightness(0.92) and springs back to none; underline measured at rest
+  (glides:true), strictly mid-slide 110ms after the route change, parked
+  exactly on the new tab; fade-up/slide-up/pop/pulse-soft all compute;
+  route-reset scroll midCount 40 intermediate positions; everything
+  collapses to ~0 under prefers-reduced-motion:reduce.
+
+LANE GATES (frontend only; no Rust touched by this card):
+- npx tsc --noEmit (apps/desktop): clean.
+- npx vitest run (apps/desktop): 531 passed | 0 failed (62 files), includes
+  motion-contract.test.ts 19/19, button-affordance.test.ts rule-body pins,
+  the a11y focus/contrast contract, and the ADR-0002 banned-token scan —
+  none edited to pass.
+- npx prettier --check on all four touched files: clean (fmt:check-safe).
+
+RUN 3 CONTROLLER FIXES (on top of the dead runs' WIP):
+1. capture harness: shot() passed {} as the CDP sessionId (crash: "Message
+   may have string 'sessionId'"); removed the third arg (flatten:true
+   session rides send()'s default).
+2. capture harness: getComputedStyle(null) crashes when .btn--primary is
+   absent on the Progress/Practice routes — guarded, FAILs instead of dying.
+3. capture harness: section-5 scroll IIFE had unbalanced parens
+   ("Unexpected end of input") — closed.
+4. capture harness: primary button was measured at y=-1907 (off-viewport
+   after the resume auto-scroll) so the CDP press landed nowhere — added
+   scrollIntoView before measuring; press/release now also wait for the
+   120ms family transitions to settle (settled state is check 3's claim;
+   transition-presence is check 2's claim, unchanged).
+5. capture harness: token check compared literal '120ms' but Chrome
+   normalizes custom-property times to '.12s' — compare semantically.
+6. REAL BUG (App.tsx): the gliding-underline effect keyed on [route] never
+   measured the nav after profile resume (chooser renders without routeNav;
+   resume mounts the nav with no route change). Now the effect runs per
+   render, measures every time (route changes move aria-current on a stable
+   nav node), and re-arms the ResizeObserver only when the nav node
+   changes.
+7. motion-contract.test.ts: ruleBody() whitespace-normalizes so prettier's
+   (CI-mandated) declaration wrapping can't break the token assertions;
+   assertions unchanged in substance, still RED at base.
+8. stale lts-storage rlib (worktree artifact, skill pitfall) made HEAD
+   uncompilable ('NewCapstoneAttempt not found'); cargo clean -p
+   lts-storage + rebuild fixed it. No source change.
+
+DEFERRED: none.

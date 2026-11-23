@@ -1,0 +1,104 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "TOKENS LIVE: the motion family + z scale resolve on :root in the running page",
+      "pass": false,
+      "measured": {
+        "durFast": "",
+        "dur": "",
+        "durSlow": "",
+        "easeOut": "",
+        "zWordCard": ""
+      }
+    },
+    {
+      "name": "BUTTON TRANSITION: the primary button animates its state changes (not snap)",
+      "pass": false,
+      "measured": {
+        "x": 195,
+        "y": 422.265625,
+        "transition": "all",
+        "duration": "0s"
+      }
+    },
+    {
+      "name": "BUTTON PRESS: a real mouse press translates the button down 2px + darkens, and it springs back",
+      "pass": false,
+      "measured": {
+        "pressed": {
+          "transform": "none",
+          "filter": "none"
+        },
+        "released": {
+          "transform": "none"
+        }
+      }
+    },
+    {
+      "name": "UNDERLINE AT REST: one measured indicator sits on the active tab (the per-tab border steps aside)",
+      "pass": false,
+      "measured": {
+        "dx": null,
+        "width": null,
+        "opacity": 1,
+        "glides": false,
+        "activeX": 16,
+        "activeW": 71,
+        "tabBorder": "rgb(20, 97, 94)"
+      }
+    },
+    {
+      "name": "UNDERLINE MID-SLIDE: ~110ms after the route change the indicator is strictly BETWEEN the two tabs (glides, no snap)",
+      "pass": false,
+      "measured": {
+        "fromX": 16,
+        "midX": null,
+        "toX": 91
+      }
+    },
+    {
+      "name": "UNDERLINE PARKED: after the slide the indicator measures exactly onto the new tab",
+      "pass": false,
+      "measured": {
+        "dx": null,
+        "width": null,
+        "endX": 91,
+        "endW": 86
+      }
+    },
+    {
+      "name": "SHARED CLASS MOTION: transitions compute on .btn/.tab/.seg-btn/.card and the entry keyframes on notice/verdict/bridge/sheet/ring/pulse",
+      "pass": false,
+      "measured": {
+        "notice": "none 0s",
+        "sheet": "none 0s",
+        "pulse": "none 0s",
+        "tabTransition": "0s"
+      }
+    },
+    {
+      "name": "SMOOTH ROUTE SCROLL: the route reset passes through intermediate positions on its way to the top",
+      "pass": false,
+      "measured": {
+        "start": 4246,
+        "midCount": 0,
+        "last": 0
+      }
+    },
+    {
+      "name": "REDUCED MOTION: every duration this card adds collapses to ~0 under the emulated switch",
+      "pass": true,
+      "measured": {
+        "btn": "0s",
+        "tab": "1e-05s",
+        "underline": "1e-05s",
+        "notice": "1e-05s",
+        "sheet": "1e-05s"
+      }
+    }
+  ],
+  "failures": 8,
+  "error": null,
+  "profileId": "prof-f19cd328-9274-42a0-81b9-90b2caf0df68"
+}
