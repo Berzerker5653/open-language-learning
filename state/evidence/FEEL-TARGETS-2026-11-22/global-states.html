@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FEEL global states — TARGET</title>
+<style>
+
+/* tokens verbatim from packages/ui/src/styles.css :root */
+:root {
+  color-scheme: light;
+  --bg: #f5f1e9;
+  --surface: #fffdf9;
+  --surface-sunk: #ece5d8;
+  --ink: #241f18;
+  --ink-soft: #5c544a;
+  --ink-faint: #756c5d;
+  --line: #e2dacc;
+  --line-strong: #c9beab;
+  --accent: #14615e;
+  --accent-ink: #0e4a47;
+  --accent-soft: #e2eeeb;
+  --ok: #2e7d46;
+  --ok-ink: #276b3c;
+  --ok-soft: #e8f0e6;
+  --warn: #8a6116;
+  --warn-soft: #f6ecd7;
+  --err: #b23a2e;
+  --err-soft: #f7e5e1;
+  --font-sans:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans JP", "Hiragino Sans",
+    "Yu Gothic UI", "Meiryo", sans-serif;
+  --font-display:
+    ui-serif, "Iowan Old Style", "Palatino Linotype", Georgia, "Noto Serif JP",
+    "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-mono:
+    ui-monospace, "SF Mono", "Cascadia Mono", "Noto Sans Mono", Menlo, Consolas, monospace;
+  --radius: 8px;
+  --radius-sm: 6px;
+  --shadow: 0 1px 2px rgb(36 31 24 / 0.05);
+  --content-max: 46rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font-sans); font-size: 1rem; line-height: 1.6;
+  width: 390px;
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.25; margin: 0 0 0.5rem; }
+h1 { font-size: 1.75rem; font-weight: 600; }
+h2 { font-size: 1.3rem; font-weight: 600; }
+.target-banner {
+  font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 700;
+  color: var(--warn); background: var(--warn-soft);
+  border-bottom: 2px dashed var(--warn); padding: 0.5rem 1.25rem;
+}
+.legend {
+  margin: 0; padding: 0.625rem 1.25rem 0.75rem;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+  font-size: 0.8125rem; color: var(--ink-soft); line-height: 1.5;
+}
+.legend strong { color: var(--ink); }
+.legend ul { margin: 0.25rem 0 0; padding-left: 1.1rem; }
+header { background: var(--surface); border-bottom: 1px solid var(--line); }
+.shell-bar {
+  display: flex; align-items: center; gap: 0.5rem 1.25rem;
+  padding: 0.5rem 1.25rem; min-height: 3.5rem;
+}
+.brand {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 600;
+  letter-spacing: 0.01em; margin-right: auto;
+}
+.routes { display: flex; gap: 0.25rem; position: relative; border-bottom: 1px solid var(--line); }
+.tab {
+  appearance: none; background: none; border: 0;
+  border-bottom: 2px solid transparent; color: var(--ink-soft);
+  font: inherit; font-size: 0.9375rem; font-weight: 600;
+  padding: 0.625rem 0.4rem; min-height: 2.75rem; cursor: pointer;
+  white-space: nowrap; flex: 1; text-align: center;
+}
+.tab:hover { color: var(--ink); }
+.tab[aria-current="page"] { color: var(--accent-ink); border-bottom-color: var(--accent); }
+.page { padding: 1.25rem 1.25rem 2.5rem; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+  min-height: 2.75rem; padding: 0.5rem 1.125rem;
+  border-radius: var(--radius-sm); border: 1px solid var(--line-strong);
+  background: var(--surface); color: var(--ink); font: inherit;
+  font-size: 0.9375rem; font-weight: 600; cursor: pointer; text-align: center;
+}
+.btn--primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn--quiet { background: var(--surface); border-color: var(--line-strong); color: var(--ink); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 1rem; }
+.cap {
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--warn);
+  line-height: 1.5; margin: 0.35rem 0 1.1rem;
+}
+.t-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 0.9rem 1rem;
+}
+.sec-title {
+  font-size: 0.8125rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--ink-faint); margin: 1.4rem 0 0.5rem;
+}
+.fold-note {
+  text-align: center; font-family: var(--font-mono); font-size: 0.75rem;
+  color: var(--ink-faint); border-top: 1px dashed var(--line-strong);
+  margin: 1.75rem 0; padding-top: 0.75rem;
+}
+.bar-track {
+  height: 8px; border-radius: 999px; background: var(--surface-sunk);
+  border: 1px solid var(--line); overflow: hidden;
+}
+.bar-fill { height: 100%; border-radius: 999px; background: var(--accent); }
+
+.routes--mid .tab-underline {
+  position: absolute; bottom: -1px; left: 39px; width: 78px; height: 2px;
+  background: var(--accent);
+}
+.routes--mid .tab[aria-current="page"] { border-bottom-color: transparent; }
+.routes--mid .tab--heading { color: var(--ink); }
+.state-lab { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--ink-faint);
+  text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem; }
+.btn--hover { background: var(--accent-ink); border-color: var(--accent-ink); }
+.btn--pressed {
+  background: var(--accent-ink); border-color: var(--accent-ink);
+  transform: translateY(2px); box-shadow: inset 0 2px 3px rgb(14 74 71 / 0.45);
+}
+.toast {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--surface); border: 1px solid var(--line-strong);
+  border-radius: var(--radius); box-shadow: 0 4px 12px rgb(36 31 24 / 0.14);
+  padding: 0.6rem 0.9rem; font-size: 0.9375rem; font-weight: 600;
+}
+.tick {
+  width: 1.25rem; height: 1.25rem; border-radius: 50%; background: var(--ok-soft);
+  border: 1.5px solid var(--ok); color: var(--ok); display: inline-flex;
+  align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700;
+  flex: none;
+}
+.sheet-stage { position: relative; height: 300px; border: 1px solid var(--line);
+  border-radius: var(--radius); overflow: hidden; background: var(--surface-sunk); }
+.sheet-stage .ghost { padding: 0.75rem 1rem; color: var(--ink-faint); font-size: 0.875rem; }
+.scrim { position: absolute; inset: 0; background: rgb(36 31 24 / 0.22); }
+.sheet {
+  position: absolute; left: 0; right: 0; bottom: 0; background: var(--surface);
+  border-top: 1px solid var(--line-strong); border-radius: 14px 14px 0 0;
+  box-shadow: 0 -6px 18px rgb(36 31 24 / 0.12); padding: 0.6rem 1.1rem 1.1rem;
+  transform: translateY(40%);
+}
+.sheet .grab { width: 34px; height: 4px; border-radius: 999px; background: var(--line-strong);
+  margin: 0 auto 0.7rem; }
+.sheet .word { font-family: var(--font-display); font-size: 1.75rem; font-weight: 600; }
+.sheet .gloss { color: var(--ink-soft); margin: 0.1rem 0 0.75rem; }
+
+</style>
+</head>
+<body>
+<div class="target-banner">TARGET for FEEL-GLOBAL-STATES — reference only</div>
+<div class="legend"><strong>Motion legend — every animation shown as one static mid-frame:</strong>
+<ul>
+<li>Tab underline slides between routes — 250ms ease-out; drawn at the ~50% frame.</li>
+<li>Primary button: hover darkens to --accent-ink; :active presses down translateY(2px) with a darker shade — 120ms.</li>
+<li>Toast rises 12px + fades in over 250ms ease-out, auto-dismisses after 2.5s — drawn mid-rise.</li>
+<li>Bottom sheet slides up over 300ms ease-out behind a dim scrim — drawn at ~60% travel.</li>
+</ul>
+</div>
+<header>
+  <div class="shell-bar"><span class="brand">Open Language Learning Platform</span></div>
+  <nav aria-label="Routes" class="routes">
+  <button type="button" class="tab" aria-current="page">Today</button>
+  <button type="button" class="tab">Practice</button>
+  <button type="button" class="tab">My words</button>
+  <button type="button" class="tab">Progress</button>
+  <button type="button" class="tab">Settings</button>
+  
+</nav>
+</header>
+<main class="page" id="main">
+
+<div class="sec-title">Tab bar — sliding underline (mid-slide frame)</div>
+<nav aria-label="Routes" class="routes routes--mid">
+  <button type="button" class="tab" aria-current="page">Today</button>
+  <button type="button" class="tab tab--heading">Practice</button>
+  <button type="button" class="tab">My words</button>
+  <button type="button" class="tab">Progress</button>
+  <button type="button" class="tab">Settings</button>
+  <span class="tab-underline"></span>
+</nav>
+<div class="cap">(underline slides 250ms ease-out — frame at ~50% from Today toward Practice; the old underline does not snap, it glides)</div>
+
+<div class="sec-title">Primary button — rest / hover / pressed</div>
+<div style="display:flex; gap:0.6rem;">
+  <div><div class="state-lab">rest</div><button class="btn btn--primary">Continue</button></div>
+  <div><div class="state-lab">hover</div><button class="btn btn--primary btn--hover">Continue</button></div>
+  <div><div class="state-lab">:active pressed</div><button class="btn btn--primary btn--pressed">Continue</button></div>
+</div>
+<div class="cap">(press = translateY(2px) + darker shade --accent-ink, 120ms ease-out; a chunky Duolingo-style press, still our deep teal — one accent, no extra color)</div>
+
+<div class="sec-title">“Saved” toast (mid-rise frame)</div>
+<div class="toast"><span class="tick">✓</span>“бить” saved to My words</div>
+<div class="cap">(toast rises 12px + fades in 250ms ease-out, sits above the tab bar, fades away after 2.5s; the ✓ tick is shape + text, never color alone)</div>
+
+<div class="sec-title">Word card — bottom sheet (half-slid-up frame)</div>
+<div class="sheet-stage">
+  <div class="ghost">My words · 12 cards</div>
+  <div class="scrim"></div>
+  <div class="sheet">
+    <div class="grab"></div>
+    <div class="word">дом</div>
+    <div class="gloss">house; home</div>
+    <div class="btn-row" style="margin:0;">
+      <button class="btn btn--primary">Review now</button>
+      <button class="btn btn--quiet">Due in 3 days</button>
+    </div>
+  </div>
+</div>
+<div class="cap">(sheet slides up 300ms ease-out, scrim dims behind it — frame at ~60% of travel; drag handle + rounded top for a soft, warm edge)</div>
+
+</main>
+</body>
+</html>

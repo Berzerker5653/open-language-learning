@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FEEL drill — TARGET</title>
+<style>
+
+/* tokens verbatim from packages/ui/src/styles.css :root */
+:root {
+  color-scheme: light;
+  --bg: #f5f1e9;
+  --surface: #fffdf9;
+  --surface-sunk: #ece5d8;
+  --ink: #241f18;
+  --ink-soft: #5c544a;
+  --ink-faint: #756c5d;
+  --line: #e2dacc;
+  --line-strong: #c9beab;
+  --accent: #14615e;
+  --accent-ink: #0e4a47;
+  --accent-soft: #e2eeeb;
+  --ok: #2e7d46;
+  --ok-ink: #276b3c;
+  --ok-soft: #e8f0e6;
+  --warn: #8a6116;
+  --warn-soft: #f6ecd7;
+  --err: #b23a2e;
+  --err-soft: #f7e5e1;
+  --font-sans:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans JP", "Hiragino Sans",
+    "Yu Gothic UI", "Meiryo", sans-serif;
+  --font-display:
+    ui-serif, "Iowan Old Style", "Palatino Linotype", Georgia, "Noto Serif JP",
+    "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-mono:
+    ui-monospace, "SF Mono", "Cascadia Mono", "Noto Sans Mono", Menlo, Consolas, monospace;
+  --radius: 8px;
+  --radius-sm: 6px;
+  --shadow: 0 1px 2px rgb(36 31 24 / 0.05);
+  --content-max: 46rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font-sans); font-size: 1rem; line-height: 1.6;
+  width: 390px;
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.25; margin: 0 0 0.5rem; }
+h1 { font-size: 1.75rem; font-weight: 600; }
+h2 { font-size: 1.3rem; font-weight: 600; }
+.target-banner {
+  font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 700;
+  color: var(--warn); background: var(--warn-soft);
+  border-bottom: 2px dashed var(--warn); padding: 0.5rem 1.25rem;
+}
+.legend {
+  margin: 0; padding: 0.625rem 1.25rem 0.75rem;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+  font-size: 0.8125rem; color: var(--ink-soft); line-height: 1.5;
+}
+.legend strong { color: var(--ink); }
+.legend ul { margin: 0.25rem 0 0; padding-left: 1.1rem; }
+header { background: var(--surface); border-bottom: 1px solid var(--line); }
+.shell-bar {
+  display: flex; align-items: center; gap: 0.5rem 1.25rem;
+  padding: 0.5rem 1.25rem; min-height: 3.5rem;
+}
+.brand {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 600;
+  letter-spacing: 0.01em; margin-right: auto;
+}
+.routes { display: flex; gap: 0.25rem; position: relative; border-bottom: 1px solid var(--line); }
+.tab {
+  appearance: none; background: none; border: 0;
+  border-bottom: 2px solid transparent; color: var(--ink-soft);
+  font: inherit; font-size: 0.9375rem; font-weight: 600;
+  padding: 0.625rem 0.4rem; min-height: 2.75rem; cursor: pointer;
+  white-space: nowrap; flex: 1; text-align: center;
+}
+.tab:hover { color: var(--ink); }
+.tab[aria-current="page"] { color: var(--accent-ink); border-bottom-color: var(--accent); }
+.page { padding: 1.25rem 1.25rem 2.5rem; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+  min-height: 2.75rem; padding: 0.5rem 1.125rem;
+  border-radius: var(--radius-sm); border: 1px solid var(--line-strong);
+  background: var(--surface); color: var(--ink); font: inherit;
+  font-size: 0.9375rem; font-weight: 600; cursor: pointer; text-align: center;
+}
+.btn--primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn--quiet { background: var(--surface); border-color: var(--line-strong); color: var(--ink); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 1rem; }
+.cap {
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--warn);
+  line-height: 1.5; margin: 0.35rem 0 1.1rem;
+}
+.t-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 0.9rem 1rem;
+}
+.sec-title {
+  font-size: 0.8125rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--ink-faint); margin: 1.4rem 0 0.5rem;
+}
+.fold-note {
+  text-align: center; font-family: var(--font-mono); font-size: 0.75rem;
+  color: var(--ink-faint); border-top: 1px dashed var(--line-strong);
+  margin: 1.75rem 0; padding-top: 0.75rem;
+}
+.bar-track {
+  height: 8px; border-radius: 999px; background: var(--surface-sunk);
+  border: 1px solid var(--line); overflow: hidden;
+}
+.bar-fill { height: 100%; border-radius: 999px; background: var(--accent); }
+
+.sess-head { display: flex; justify-content: space-between; font-size: 0.875rem;
+  color: var(--ink-soft); font-weight: 600; margin-bottom: 0.3rem; }
+.kicker { font-size: 0.8125rem; color: var(--ink-faint); font-weight: 600; margin: 0 0 0.25rem; }
+.glyph-tile {
+  background: var(--surface-sunk); border: 1px solid var(--line); border-radius: var(--radius);
+  width: 96px; height: 96px; margin: 0.6rem auto; display: flex;
+  align-items: center; justify-content: center;
+  font-family: var(--font-display); font-size: 3.25rem; font-weight: 600;
+}
+.q-prompt { text-align: center; color: var(--ink-soft); font-size: 0.9375rem; margin: 0.25rem 0 0.9rem; }
+.choice {
+  display: flex; align-items: center; justify-content: space-between; width: 100%;
+  min-height: 3rem; padding: 0.5rem 0.9rem; margin-bottom: 0.5rem;
+  border-radius: var(--radius); border: 1px solid var(--line-strong);
+  background: var(--surface); font: inherit; font-size: 1rem; font-weight: 600;
+  color: var(--ink); cursor: pointer;
+}
+.choice--correct {
+  border: 2px solid var(--ok); background: var(--ok-soft); color: var(--ok-ink);
+  box-shadow: 0 0 0 3px var(--ok-soft);
+}
+.glyph { font-family: var(--font-mono); font-weight: 700; }
+.choice .ring {
+  width: 1.5rem; height: 1.5rem; border-radius: 50%; background: var(--ok);
+  color: #fff; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 0.875rem; font-weight: 700;
+}
+.verdict { border-left: 3px solid var(--ok); background: var(--ok-soft);
+  border-radius: var(--radius); padding: 0.8rem 1rem; }
+.verdict .v-title { font-weight: 700; color: var(--ok-ink); }
+.verdict .v-sub { color: var(--ink-soft); font-size: 0.9375rem; }
+.summary {
+  border: 1px solid var(--line-strong); border-radius: 12px; background: var(--surface);
+  padding: 1.4rem 1.2rem 1.5rem; text-align: center; box-shadow: var(--shadow);
+}
+.summary .s-line { color: var(--ink-soft); margin: 0 0 1.1rem; }
+
+</style>
+</head>
+<body>
+<div class="target-banner">TARGET for FEEL-DRILL — reference only</div>
+<div class="legend"><strong>Motion legend — every animation shown as one static mid-frame:</strong>
+<ul>
+<li>Session bar eases to its new fraction over 300ms ease-out each time a card lands — drawn at 60%.</li>
+<li>Correct choice: green ring scales in + soft fill fades, 150ms; wrong taps shake once (not drawn).</li>
+<li>Verdict card slides up 8px + fades in 200ms ease-out.</li>
+<li>End-of-session card fades + scales 0.98→1 over 250ms — calm close: no confetti, no badges, no flames.</li>
+</ul>
+</div>
+<header>
+  <div class="shell-bar"><span class="brand">Open Language Learning Platform</span></div>
+  <nav aria-label="Routes" class="routes">
+  <button type="button" class="tab">Today</button>
+  <button type="button" class="tab" aria-current="page">Practice</button>
+  <button type="button" class="tab">My words</button>
+  <button type="button" class="tab">Progress</button>
+  <button type="button" class="tab">Settings</button>
+  
+</nav>
+</header>
+<main class="page" id="main">
+
+<div class="sec-title">Session progress (mid-fill frame)</div>
+<div class="t-card">
+  <div class="sess-head"><span>Session · 3 of 5 cards</span><span>60%</span></div>
+  <div class="bar-track"><div class="bar-fill" style="width:60%;"></div></div>
+  <div class="cap">(fill eases to the new fraction over 300ms ease-out when each card lands — frame at 60%; the bar is a session line, not an XP meter)</div>
+</div>
+
+<div class="sec-title">Recognition question</div>
+<div class="t-card">
+  <div class="kicker">Recognize the script · ~40s</div>
+  <h2>Printed Cyrillic: Б б, П п, Д д, Г г</h2>
+  <div class="glyph-tile">б</div>
+  <div class="q-prompt">Which sound does this letter make?</div>
+  <button class="choice choice--correct">b <span class="ring">✓</span></button>
+  <button class="choice" style="opacity:0.6;">p</button>
+  <button class="choice" style="opacity:0.6;">d</button>
+  <button class="choice" style="opacity:0.6;">g</button>
+  <div class="cap">(correct pick: ring scales in + soft --ok-soft fill fades 150ms; the other choices dim as the answers lock — state is ring + check, not color alone)</div>
+</div>
+
+<div class="sec-title">Verdict (mid-rise frame)</div>
+<div class="verdict">
+  <div class="v-title">✓ Correct — <span class="glyph">б</span> makes the sound b</div>
+  <div class="v-sub">As in бить · “to hit”</div>
+</div>
+<div class="cap">(verdict slides up 8px + fades in 200ms ease-out; next card follows on its own — one quiet motion, no celebration burst)</div>
+
+<div class="fold-note">— below the fold —</div>
+
+<div class="summary">
+  <h2>Session complete</h2>
+  <p class="s-line">4 of 5 learned — бить comes back tomorrow</p>
+  <button class="btn btn--primary">Back to your path</button>
+  <div class="cap">(card fades + scales 0.98→1 over 250ms ease-out; quiet outline, single primary action — calm-but-warm, never confetti)</div>
+</div>
+
+</main>
+</body>
+</html>

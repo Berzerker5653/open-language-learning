@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FEEL progress — TARGET</title>
+<style>
+
+/* tokens verbatim from packages/ui/src/styles.css :root */
+:root {
+  color-scheme: light;
+  --bg: #f5f1e9;
+  --surface: #fffdf9;
+  --surface-sunk: #ece5d8;
+  --ink: #241f18;
+  --ink-soft: #5c544a;
+  --ink-faint: #756c5d;
+  --line: #e2dacc;
+  --line-strong: #c9beab;
+  --accent: #14615e;
+  --accent-ink: #0e4a47;
+  --accent-soft: #e2eeeb;
+  --ok: #2e7d46;
+  --ok-ink: #276b3c;
+  --ok-soft: #e8f0e6;
+  --warn: #8a6116;
+  --warn-soft: #f6ecd7;
+  --err: #b23a2e;
+  --err-soft: #f7e5e1;
+  --font-sans:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans JP", "Hiragino Sans",
+    "Yu Gothic UI", "Meiryo", sans-serif;
+  --font-display:
+    ui-serif, "Iowan Old Style", "Palatino Linotype", Georgia, "Noto Serif JP",
+    "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-mono:
+    ui-monospace, "SF Mono", "Cascadia Mono", "Noto Sans Mono", Menlo, Consolas, monospace;
+  --radius: 8px;
+  --radius-sm: 6px;
+  --shadow: 0 1px 2px rgb(36 31 24 / 0.05);
+  --content-max: 46rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font-sans); font-size: 1rem; line-height: 1.6;
+  width: 390px;
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.25; margin: 0 0 0.5rem; }
+h1 { font-size: 1.75rem; font-weight: 600; }
+h2 { font-size: 1.3rem; font-weight: 600; }
+.target-banner {
+  font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 700;
+  color: var(--warn); background: var(--warn-soft);
+  border-bottom: 2px dashed var(--warn); padding: 0.5rem 1.25rem;
+}
+.legend {
+  margin: 0; padding: 0.625rem 1.25rem 0.75rem;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+  font-size: 0.8125rem; color: var(--ink-soft); line-height: 1.5;
+}
+.legend strong { color: var(--ink); }
+.legend ul { margin: 0.25rem 0 0; padding-left: 1.1rem; }
+header { background: var(--surface); border-bottom: 1px solid var(--line); }
+.shell-bar {
+  display: flex; align-items: center; gap: 0.5rem 1.25rem;
+  padding: 0.5rem 1.25rem; min-height: 3.5rem;
+}
+.brand {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 600;
+  letter-spacing: 0.01em; margin-right: auto;
+}
+.routes { display: flex; gap: 0.25rem; position: relative; border-bottom: 1px solid var(--line); }
+.tab {
+  appearance: none; background: none; border: 0;
+  border-bottom: 2px solid transparent; color: var(--ink-soft);
+  font: inherit; font-size: 0.9375rem; font-weight: 600;
+  padding: 0.625rem 0.4rem; min-height: 2.75rem; cursor: pointer;
+  white-space: nowrap; flex: 1; text-align: center;
+}
+.tab:hover { color: var(--ink); }
+.tab[aria-current="page"] { color: var(--accent-ink); border-bottom-color: var(--accent); }
+.page { padding: 1.25rem 1.25rem 2.5rem; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+  min-height: 2.75rem; padding: 0.5rem 1.125rem;
+  border-radius: var(--radius-sm); border: 1px solid var(--line-strong);
+  background: var(--surface); color: var(--ink); font: inherit;
+  font-size: 0.9375rem; font-weight: 600; cursor: pointer; text-align: center;
+}
+.btn--primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn--quiet { background: var(--surface); border-color: var(--line-strong); color: var(--ink); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 1rem; }
+.cap {
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--warn);
+  line-height: 1.5; margin: 0.35rem 0 1.1rem;
+}
+.t-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 0.9rem 1rem;
+}
+.sec-title {
+  font-size: 0.8125rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--ink-faint); margin: 1.4rem 0 0.5rem;
+}
+.fold-note {
+  text-align: center; font-family: var(--font-mono); font-size: 0.75rem;
+  color: var(--ink-faint); border-top: 1px dashed var(--line-strong);
+  margin: 1.75rem 0; padding-top: 0.75rem;
+}
+.bar-track {
+  height: 8px; border-radius: 999px; background: var(--surface-sunk);
+  border: 1px solid var(--line); overflow: hidden;
+}
+.bar-fill { height: 100%; border-radius: 999px; background: var(--accent); }
+
+.dim { margin-bottom: 0.9rem; }
+.dim-head { display: flex; justify-content: space-between; font-size: 0.9375rem;
+  font-weight: 600; margin-bottom: 0.25rem; }
+.dim-head .pct { font-family: var(--font-mono); font-weight: 400; color: var(--ink-soft); font-size: 0.8125rem; }
+.cal-wrap { position: relative; }
+.cal { display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px; }
+.cell { aspect-ratio: 1; border-radius: 3px; background: var(--surface-sunk); border: 1px solid var(--line); }
+.cell--1 { background: var(--accent-soft); }
+.cell--2 { background: #bcd7d2; }
+.cell--3 { background: var(--accent); border-color: var(--accent-ink); }
+.cell--hover { outline: 2px solid var(--accent-ink); transform: scale(1.15); position: relative; z-index: 2; }
+.tip {
+  position: absolute; bottom: calc(100% + 7px); left: 50%; transform: translateX(-50%);
+  background: var(--ink); color: var(--surface); font-size: 0.75rem;
+  font-family: var(--font-mono); border-radius: var(--radius-sm);
+  padding: 0.3rem 0.55rem; white-space: nowrap; z-index: 4;
+}
+.tip::after { content: ""; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+  border: 5px solid transparent; border-top-color: var(--ink); }
+/* hovered cell sits near the grid's right edge: anchor the tip rightward so it never spills past the page */
+.cell--hover .tip { left: auto; right: -8px; transform: none; }
+.cell--hover .tip::after { left: auto; right: 12px; transform: none; }
+.cal-cap-row { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--ink-faint); margin-top: 0.4rem; }
+.empty {
+  border: 1px dashed var(--line-strong); border-radius: var(--radius);
+  background: var(--surface); padding: 1.5rem 1.1rem; text-align: center;
+  color: var(--ink-soft); font-size: 0.9375rem;
+}
+.empty .e-title { font-family: var(--font-display); font-size: 1.1rem; color: var(--ink); margin-bottom: 0.2rem; }
+.empty .e-mark { font-size: 1.5rem; color: var(--ink-faint); margin-bottom: 0.4rem; }
+
+</style>
+</head>
+<body>
+<div class="target-banner">TARGET for FEEL-PROGRESS — reference only</div>
+<div class="legend"><strong>Motion legend — every animation shown as one static mid-frame:</strong>
+<ul>
+<li>Dimension bars grow from their previous value over 400ms ease-out, % label counting up — drawn mid-fill.</li>
+<li>Calendar cell hover scales the cell 1.15x (120ms) and the tooltip fades in over 150ms — frame with tooltip open.</li>
+<li>Empty state fades in over 250ms; it is honest (no invented numbers) and points to Today.</li>
+</ul>
+</div>
+<header>
+  <div class="shell-bar"><span class="brand">Open Language Learning Platform</span></div>
+  <nav aria-label="Routes" class="routes">
+  <button type="button" class="tab">Today</button>
+  <button type="button" class="tab">Practice</button>
+  <button type="button" class="tab">My words</button>
+  <button type="button" class="tab" aria-current="page">Progress</button>
+  <button type="button" class="tab">Settings</button>
+  
+</nav>
+</header>
+<main class="page" id="main">
+
+<h1>Progress</h1>
+<div class="sec-title">Dimensions (mid-fill frame)</div>
+<div class="dim">
+  <div class="dim-head"><span>Script</span><span class="pct">62%</span></div>
+  <div class="bar-track"><div class="bar-fill" style="width:62%;"></div></div>
+</div>
+<div class="dim">
+  <div class="dim-head"><span>Vocabulary</span><span class="pct">45%</span></div>
+  <div class="bar-track"><div class="bar-fill" style="width:45%;"></div></div>
+</div>
+<div class="dim">
+  <div class="dim-head"><span>Listening</span><span class="pct">30%</span></div>
+  <div class="bar-track"><div class="bar-fill" style="width:30%;"></div></div>
+</div>
+<div class="cap">(bars grow from the last visited value over 400ms ease-out while the % counts up — frame at ~70% of travel; one accent, no gold/gems)</div>
+
+<div class="sec-title">Last 12 weeks</div>
+<div class="cal-wrap">
+  <div class="cal">
+    <div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--2"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell cell--3"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div>
+    <div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell cell--3"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell cell--2"></div><div class="cell"></div><div class="cell"></div>
+    <div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell cell--2"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell cell--1 cell--hover"><div class="tip">Nov 20 · 2 sessions</div></div><div class="cell cell--2"></div><div class="cell"></div>
+    <div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell cell--2"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div>
+    <div class="cell"></div><div class="cell cell--1"></div><div class="cell cell--3"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell cell--1"></div><div class="cell cell--2"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div>
+    <div class="cell cell--1"></div><div class="cell"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--2"></div><div class="cell cell--1"></div><div class="cell"></div>
+    <div class="cell"></div><div class="cell cell--1"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell cell--2"></div><div class="cell"></div><div class="cell cell--1"></div><div class="cell"></div><div class="cell cell--1"></div>
+  </div>
+  <div class="cal-cap-row"><span>← 12 weeks ago</span><span>this week →</span></div>
+</div>
+<div class="cap">(hovered cell scales 1.15x over 120ms, tooltip fades in 150ms — frame mid-hover; density is shape + text on tap, never color alone)</div>
+
+<div class="sec-title">Fresh profile</div>
+<div class="empty">
+  <div class="e-mark">◌</div>
+  <div class="e-title">Nothing studied yet</div>
+  your first session is on <strong>Today</strong>
+</div>
+<div class="cap">(empty state fades in 250ms ease-out; honest copy pointing at the Today tab — no invented streak, no fake history)</div>
+
+</main>
+</body>
+</html>

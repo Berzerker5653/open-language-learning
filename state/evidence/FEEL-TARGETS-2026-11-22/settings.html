@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FEEL settings — TARGET</title>
+<style>
+
+/* tokens verbatim from packages/ui/src/styles.css :root */
+:root {
+  color-scheme: light;
+  --bg: #f5f1e9;
+  --surface: #fffdf9;
+  --surface-sunk: #ece5d8;
+  --ink: #241f18;
+  --ink-soft: #5c544a;
+  --ink-faint: #756c5d;
+  --line: #e2dacc;
+  --line-strong: #c9beab;
+  --accent: #14615e;
+  --accent-ink: #0e4a47;
+  --accent-soft: #e2eeeb;
+  --ok: #2e7d46;
+  --ok-ink: #276b3c;
+  --ok-soft: #e8f0e6;
+  --warn: #8a6116;
+  --warn-soft: #f6ecd7;
+  --err: #b23a2e;
+  --err-soft: #f7e5e1;
+  --font-sans:
+    system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans JP", "Hiragino Sans",
+    "Yu Gothic UI", "Meiryo", sans-serif;
+  --font-display:
+    ui-serif, "Iowan Old Style", "Palatino Linotype", Georgia, "Noto Serif JP",
+    "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-mono:
+    ui-monospace, "SF Mono", "Cascadia Mono", "Noto Sans Mono", Menlo, Consolas, monospace;
+  --radius: 8px;
+  --radius-sm: 6px;
+  --shadow: 0 1px 2px rgb(36 31 24 / 0.05);
+  --content-max: 46rem;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font-sans); font-size: 1rem; line-height: 1.6;
+  width: 390px;
+}
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.25; margin: 0 0 0.5rem; }
+h1 { font-size: 1.75rem; font-weight: 600; }
+h2 { font-size: 1.3rem; font-weight: 600; }
+.target-banner {
+  font-family: var(--font-mono); font-size: 0.8125rem; font-weight: 700;
+  color: var(--warn); background: var(--warn-soft);
+  border-bottom: 2px dashed var(--warn); padding: 0.5rem 1.25rem;
+}
+.legend {
+  margin: 0; padding: 0.625rem 1.25rem 0.75rem;
+  background: var(--surface); border-bottom: 1px solid var(--line);
+  font-size: 0.8125rem; color: var(--ink-soft); line-height: 1.5;
+}
+.legend strong { color: var(--ink); }
+.legend ul { margin: 0.25rem 0 0; padding-left: 1.1rem; }
+header { background: var(--surface); border-bottom: 1px solid var(--line); }
+.shell-bar {
+  display: flex; align-items: center; gap: 0.5rem 1.25rem;
+  padding: 0.5rem 1.25rem; min-height: 3.5rem;
+}
+.brand {
+  font-family: var(--font-display); font-size: 1.1rem; font-weight: 600;
+  letter-spacing: 0.01em; margin-right: auto;
+}
+.routes { display: flex; gap: 0.25rem; position: relative; border-bottom: 1px solid var(--line); }
+.tab {
+  appearance: none; background: none; border: 0;
+  border-bottom: 2px solid transparent; color: var(--ink-soft);
+  font: inherit; font-size: 0.9375rem; font-weight: 600;
+  padding: 0.625rem 0.4rem; min-height: 2.75rem; cursor: pointer;
+  white-space: nowrap; flex: 1; text-align: center;
+}
+.tab:hover { color: var(--ink); }
+.tab[aria-current="page"] { color: var(--accent-ink); border-bottom-color: var(--accent); }
+.page { padding: 1.25rem 1.25rem 2.5rem; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+  min-height: 2.75rem; padding: 0.5rem 1.125rem;
+  border-radius: var(--radius-sm); border: 1px solid var(--line-strong);
+  background: var(--surface); color: var(--ink); font: inherit;
+  font-size: 0.9375rem; font-weight: 600; cursor: pointer; text-align: center;
+}
+.btn--primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn--quiet { background: var(--surface); border-color: var(--line-strong); color: var(--ink); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 1rem; }
+.cap {
+  font-family: var(--font-mono); font-size: 0.75rem; color: var(--warn);
+  line-height: 1.5; margin: 0.35rem 0 1.1rem;
+}
+.t-card {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--radius); box-shadow: var(--shadow); padding: 0.9rem 1rem;
+}
+.sec-title {
+  font-size: 0.8125rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--ink-faint); margin: 1.4rem 0 0.5rem;
+}
+.fold-note {
+  text-align: center; font-family: var(--font-mono); font-size: 0.75rem;
+  color: var(--ink-faint); border-top: 1px dashed var(--line-strong);
+  margin: 1.75rem 0; padding-top: 0.75rem;
+}
+.bar-track {
+  height: 8px; border-radius: 999px; background: var(--surface-sunk);
+  border: 1px solid var(--line); overflow: hidden;
+}
+.bar-fill { height: 100%; border-radius: 999px; background: var(--accent); }
+
+.field { margin: 0.5rem 0 0.25rem; }
+.field > label { display: block; font-weight: 600; font-size: 0.9375rem; margin-bottom: 0.25rem; }
+select.styled {
+  appearance: none; -webkit-appearance: none; width: 100%;
+  min-height: 2.75rem; padding: 0.5rem 2.4rem 0.5rem 0.75rem;
+  border: 1px solid var(--accent); border-radius: var(--radius-sm);
+  background: var(--surface)
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="9" viewBox="0 0 14 9"><path d="M1 1l6 6 6-6" fill="none" stroke="%235c544a" stroke-width="2" stroke-linecap="round"/></svg>')
+    right 0.75rem center no-repeat;
+  font: inherit; font-size: 0.9375rem; color: var(--ink);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.tog-row { display: flex; align-items: center; gap: 0.75rem; }
+.switch {
+  width: 46px; height: 28px; border-radius: 999px; background: var(--accent);
+  border: 1px solid var(--accent-ink); position: relative; flex: none;
+}
+.switch .knob { position: absolute; top: 2px; right: 3px; width: 22px; height: 22px;
+  border-radius: 50%; background: #fff; box-shadow: 0 1px 2px rgb(36 31 24 / 0.25); }
+.saved { color: var(--ok-ink); font-size: 0.875rem; font-weight: 700; white-space: nowrap; }
+.det { border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+.det > .det-head { display: flex; justify-content: space-between; padding: 0.7rem 1rem;
+  font-weight: 600; font-size: 0.9375rem; }
+.det .chev { color: var(--ink-faint); transform: rotate(180deg); font-size: 0.8125rem; }
+.det-body-clip { max-height: 46px; overflow: hidden; border-top: 1px solid var(--line);
+  padding: 0.6rem 1rem 0; color: var(--ink-soft); font-size: 0.875rem; }
+
+</style>
+</head>
+<body>
+<div class="target-banner">TARGET for FEEL-SETTINGS — reference only</div>
+<div class="legend"><strong>Motion legend — every animation shown as one static mid-frame:</strong>
+<ul>
+<li>Select: native arrow removed, custom chevron drawn; focus ring (--accent border + 3px --accent-soft halo) fades in over 120ms — frame with focus on.</li>
+<li>Toggle: knob slides across over 150ms; the green "Saved ✓" fades in over 200ms then fades out after 1.5s — frame with both settled.</li>
+<li>Disclosure: content expands over 250ms ease-out while the chevron rotates 180° — frame at ~60% open height.</li>
+</ul>
+</div>
+<header>
+  <div class="shell-bar"><span class="brand">Open Language Learning Platform</span></div>
+  <nav aria-label="Routes" class="routes">
+  <button type="button" class="tab">Today</button>
+  <button type="button" class="tab">Practice</button>
+  <button type="button" class="tab">My words</button>
+  <button type="button" class="tab">Progress</button>
+  <button type="button" class="tab" aria-current="page">Settings</button>
+  
+</nav>
+</header>
+<main class="page" id="main">
+
+<h1>Settings</h1>
+<div class="sec-title">Sounds — styled select (focus frame)</div>
+<div class="t-card">
+  <div class="field">
+    <label for="rate">Practice voice speed</label>
+    <select id="rate" class="styled">
+      <option>Slow — clearly separated</option>
+      <option>Comfortable</option>
+      <option>Natural pace</option>
+    </select>
+  </div>
+  <div class="cap">(custom chevron replaces the native arrow; on focus the border takes --accent and a 3px --accent-soft halo fades in over 120ms — frame mid-focus, value applies instantly so no Save button is needed)</div>
+</div>
+
+<div class="sec-title">Reading — toggle with micro-feedback</div>
+<div class="t-card">
+  <div class="tog-row">
+    <span class="switch"><span class="knob"></span></span>
+    <span>Show transliteration under Cyrillic</span>
+    <span class="saved">Saved ✓</span>
+  </div>
+  <div class="cap">(knob slid across in 150ms; "Saved ✓" faded in over 200ms and fades out after 1.5s — confirmation is text + check, not just green)</div>
+</div>
+
+<div class="sec-title">Disclosure mid-expand (frame at ~60%)</div>
+<div class="det">
+  <div class="det-head"><span>About your data</span><span class="chev">▾</span></div>
+  <div class="det-body-clip">
+    Your learning data lives on this device. Progress, My words and session
+    history are stored in your local profile folder and never leave it
+    unless you export them yourself. Deleting a profile removes its data
+    completely — no hidden retention, no cloud sync.
+  </div>
+</div>
+<div class="cap">(panel expanded over 250ms ease-out, chevron rotating 180° at the same time — frame clipped mid-height; the full text continues below the cut)</div>
+
+</main>
+</body>
+</html>
