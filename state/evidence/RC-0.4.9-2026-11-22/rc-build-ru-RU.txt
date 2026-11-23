@@ -1,0 +1,4 @@
+$ cargo run -q -p lts-langpack-cli -- build languages/ru-RU -o /home/hunter/.hermes/cache/scratch/lts-ru049/work/dist/rc-0.4.9/ru-ru-reference-0.4.9.lpk
+built /home/hunter/.hermes/cache/scratch/lts-ru049/work/dist/rc-0.4.9/ru-ru-reference-0.4.9.lpk (293649651 bytes)
+sha256 dd84461efb208e85b755ffc71322aebf7a42dc5d2b24721cf7e78c80d5d562e4
+EXIT=0

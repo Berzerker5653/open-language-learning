@@ -1,0 +1,2 @@
+cp: cannot stat '/home/hunter/.hermes/cache/scratch/lts-ru049/work/dist/rc-0.4.9/packs.json': No such file or directory
+grep: /home/hunter/.hermes/cache/scratch/lts-ru049/work/dist/rc-0.4.9/packs.json: No such file or directory

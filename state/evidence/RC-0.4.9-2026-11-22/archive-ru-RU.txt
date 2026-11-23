@@ -1,0 +1,3 @@
+archive: /home/hunter/.hermes/cache/scratch/lts-ru049/work/dist/rc-0.4.9/ru-ru-reference-0.4.9.lpk
+bytes=293649651
+dd84461efb208e85b755ffc71322aebf7a42dc5d2b24721cf7e78c80d5d562e4  /home/hunter/.hermes/cache/scratch/lts-ru049/work/dist/rc-0.4.9/ru-ru-reference-0.4.9.lpk

@@ -1,0 +1,7 @@
+== install-gate proof: fetch-pack-audio.sh against RC archive ==
+$ scripts/fetch-pack-audio.sh --pack-dir /home/hunter/.hermes/cache/scratch/lts-ru049/work/tmp/proof-ru049/pack/ru-RU --catalog /home/hunter/.hermes/cache/scratch/lts-ru049/work/tmp/proof-ru049/catalog.json --work-dir /home/hunter/.hermes/cache/scratch/lts-ru049/work/tmp/proof-ru049/dl
+fetch-pack-audio: restoring org.openlanguage.ru-ru.reference 0.4.9 audio into /home/hunter/.hermes/cache/scratch/lts-ru049/work/tmp/proof-ru049/pack/ru-RU (archive ru-ru-reference-0.4.9.lpk)
+fetch-pack-audio: unpacking through: cargo run -q -p lts-langpack-cli -- install
+installed org.openlanguage.ru-ru.reference v0.4.9 at /home/hunter/.hermes/cache/scratch/lts-ru049/work/tmp/proof-ru049/dl/store/org.openlanguage.ru-ru.reference/0.4.9
+fetch-pack-audio: summary /home/hunter/.hermes/cache/scratch/lts-ru049/work/tmp/proof-ru049/pack/ru-RU: rows checked=5032 files valid=5032 files restored=5032 files already valid=0 rows failing=0
+PROOF_EXIT=0

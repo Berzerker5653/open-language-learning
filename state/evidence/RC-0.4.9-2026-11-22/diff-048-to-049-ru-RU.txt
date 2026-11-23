@@ -1,0 +1,37 @@
+--- ru-RU: PUBLISHED 0.4.8 (SUPERSEDED) -> CANDIDATE 0.4.9 (bytes + 12-hex hash + path) ---
+published 0.4.8 members = 5987   candidate 0.4.9 members = 5987
+identical (size+hash)   = 5981
+added in 0.4.9:
+106277 4d1cea422090 assessments/definitions.jsonl
+17111 b25dfc991685 orthography/cyrillic.jsonl
+1810 91b830e48fb4 curriculum/units/090-time-plans-01.yaml
+3968 9b0352006107 curriculum/units/019-cyrillic-stress-review.yaml
+67362 251925d66a58 curriculum/goals.yaml
+946 45d184c3d261 manifest.yaml
+removed in 0.4.9:
+106299 a2128107fdca assessments/definitions.jsonl
+16255 1cafbfa412d2 orthography/cyrillic.jsonl
+1804 8b20229f51f6 curriculum/units/090-time-plans-01.yaml
+3957 76eeecdd3a83 curriculum/units/019-cyrillic-stress-review.yaml
+67348 c06d6dcd3a96 curriculum/goals.yaml
+946 dc4d6a2f8496 manifest.yaml
+present on both sides with different bytes:
+  assessments/definitions.jsonl
+    0.4.9: 106299 a2128107fdca assessments/definitions.jsonl
+    0.4.8: 106277 4d1cea422090 assessments/definitions.jsonl
+  curriculum/goals.yaml
+    0.4.9: 67348 c06d6dcd3a96 curriculum/goals.yaml
+    0.4.8: 67362 251925d66a58 curriculum/goals.yaml
+  curriculum/units/019-cyrillic-stress-review.yaml
+    0.4.9: 3957 76eeecdd3a83 curriculum/units/019-cyrillic-stress-review.yaml
+    0.4.8: 3968 9b0352006107 curriculum/units/019-cyrillic-stress-review.yaml
+  curriculum/units/090-time-plans-01.yaml
+    0.4.9: 1804 8b20229f51f6 curriculum/units/090-time-plans-01.yaml
+    0.4.8: 1810 91b830e48fb4 curriculum/units/090-time-plans-01.yaml
+  manifest.yaml
+    0.4.9: 946 dc4d6a2f8496 manifest.yaml
+    0.4.8: 946 45d184c3d261 manifest.yaml
+  orthography/cyrillic.jsonl
+    0.4.9: 16255 1cafbfa412d2 orthography/cyrillic.jsonl
+    0.4.8: 17111 b25dfc991685 orthography/cyrillic.jsonl
+
