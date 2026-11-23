@@ -1,0 +1,35 @@
+FEEL-SETTINGS-001 controller gate log (worker t_8fdcaf12, run 212, 2026-11-23)
+
+Lane tier (no Rust touched — cargo tests scoped: none needed; serve wiring unchanged):
+- cargo fmt --all --check ................ FMT_OK
+- npx tsc --noEmit (apps/desktop) ........ TSC_OK
+- npx prettier --check (styles.css, settings.tsx, settings-feel.test.tsx) .. all prettier-clean
+- npx vitest run settings-feel + stay-green set (settings, motion-contract,
+  loading-feel, a11y, mobile-audit, button-affordance, rtl-direction):
+  Test Files 8 passed (8) / Tests 157 passed (157) — stay-green set unedited
+- python3 tools/audit_learner_copy.py .... 0 findings
+- vitest settings-feel contract: RED at base (9/9 failing incl. wrong-anchor fix),
+  GREEN after code (all passing at f61e0796+fix).
+
+Real-engine capture (scripts/feel-settings-capture.mjs — first FEEL capture run
+DESKTOP-first (1280x900) because the audit hole is the desktop; phone pass
+390x844 guards the surviving media rule):
+- RED at base 60d29515: 1/6 (only PHONE passes; selects measured appearance:auto,
+  no contents nav, no rotation, no jump) -> capture-red-at-base.log
+- GREEN at code+fix: 6/6 -> capture-green-at-head.log, result.json
+- screenshots: settings-desk-before/after.png, settings-phone-after.png
+
+Capture fixes made mid-card (measured, not guessed):
+- halo/chevron measured after their transitions land (350ms/450ms) — mid-glide
+  computed values interpolate and read as failures;
+- jump measured on a MID-page target (the last card cannot reach its scroll
+  offset — document bottom stops the scroll);
+- scroll-margin-top 4.5rem -> 10rem (measured header ~114px desktop, ~160px
+  phone with wrapped shell bar; landing top=203 vs header bottom=114 settled).
+
+Vision QA of the after captures (crops at native resolution — the full-page
+downscale made the vision critic confabulate an unrelated app): selects are
+custom boxes with teal chevron + comfortable padding; chip row labels exact;
+disclosure chevron up when open / down when closed; focus ring on the select
+was biting the label above -> fixed with outline-offset: 0 on
+select:focus-visible (global outline kept).

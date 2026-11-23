@@ -1,0 +1,8 @@
+FAIL CONTENTS: one chip per visible card (RU pack hides romaji/kana; serve shows LAN) and anchors match — {"present":false}
+FAIL SELECTS: desktop selects lose UA chrome - appearance none, drawn chevron, surface fill, line-strong border, radius token, chevron padding — [{"id":"mic-device","appearance":"auto","chevron":false,"border":"1px solid rgb(118, 118, 118)","radius":"0px","padRight":"0px","bg":"rgb(239, 239, 239)"},{"id":"speech-model","appearance":"auto","chevron":false,"border":"1px solid rgb(118, 118, 118)","radius":"0px","padRight":"0px","bg":"rgb(239, 239, 239)"}]
+FAIL FOCUS: Tab-focus on a select puts the accent border + 3px accent-soft halo (plus the global outline) on it — {"focusedId":"mic-device","id":"mic-device","border":"rgb(118, 118, 118)","shadow":"none","outline":"2px solid","transition":"all"}
+FAIL DISCLOSURE: real click opens - UA marker hidden, drawn chevron rotates 180deg, body reveals via disclosure-reveal over 0.25s ease-out — {"closed":{"present":true,"open":false,"marker":"disclosure-closed","chevron":false,"beforeTransform":"none"},"opened":{"open":true,"beforeTransform":"none","animName":"none","animDur":"0s","animEase":"ease"}}
+FAIL JUMP: the Speech chip scrolls the page below the sticky header without touching location.hash — {"hashBefore":"","hashAfter":"","land":null}
+PASS PHONE: selects still ride the column at 390px - no document h-scroll, full-width select, 44px floor — {"scrollW":390,"clientW":390,"selWidth":324,"selHeight":44}
+
+RESULT: 1/6 checks passed

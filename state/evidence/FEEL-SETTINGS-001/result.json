@@ -1,0 +1,114 @@
+{
+  "checks": [
+    {
+      "name": "CONTENTS: one chip per visible card (RU pack hides romaji/kana; serve shows LAN) and anchors match",
+      "pass": true,
+      "measured": {
+        "present": true,
+        "labels": [
+          "Microphone",
+          "Profile data",
+          "Speech",
+          "Speech runtimes",
+          "Local network",
+          "About this build"
+        ],
+        "anchors": [
+          "settings-mic",
+          "settings-profile",
+          "settings-speech",
+          "settings-runtimes",
+          "settings-lan",
+          "settings-build"
+        ],
+        "shortChips": 0,
+        "romajiChip": false,
+        "kanaChip": false,
+        "lanChip": true
+      }
+    },
+    {
+      "name": "SELECTS: desktop selects lose UA chrome - appearance none, drawn chevron, surface fill, line-strong border, radius token, chevron padding",
+      "pass": true,
+      "measured": [
+        {
+          "id": "mic-device",
+          "appearance": "none",
+          "chevron": true,
+          "border": "1px solid rgb(201, 190, 171)",
+          "radius": "6px",
+          "padRight": "36px",
+          "bg": "rgb(255, 253, 249)"
+        },
+        {
+          "id": "speech-model",
+          "appearance": "none",
+          "chevron": true,
+          "border": "1px solid rgb(201, 190, 171)",
+          "radius": "6px",
+          "padRight": "36px",
+          "bg": "rgb(255, 253, 249)"
+        }
+      ]
+    },
+    {
+      "name": "FOCUS: Tab-focus on a select puts the accent border + 3px accent-soft halo (plus the global outline) on it",
+      "pass": true,
+      "measured": {
+        "focusedId": "mic-device",
+        "id": "mic-device",
+        "border": "rgb(20, 97, 94)",
+        "shadow": "rgb(226, 238, 235) 0px 0px 0px 3px",
+        "outline": "2px solid",
+        "transition": "border-color, box-shadow"
+      }
+    },
+    {
+      "name": "DISCLOSURE: real click opens - UA marker hidden, drawn chevron rotates 180deg, body reveals via disclosure-reveal over 0.25s ease-out",
+      "pass": true,
+      "measured": {
+        "closed": {
+          "present": true,
+          "open": false,
+          "marker": "none",
+          "chevron": true,
+          "beforeTransform": "none"
+        },
+        "opened": {
+          "open": true,
+          "beforeTransform": "matrix(-1, 0, 0, -1, 0, 0)",
+          "animName": "disclosure-reveal",
+          "animDur": "0.25s",
+          "animEase": "cubic-bezier(0.22, 0.61, 0.36, 1)"
+        }
+      }
+    },
+    {
+      "name": "JUMP: the Speech chip scrolls the page below the sticky header without touching location.hash",
+      "pass": true,
+      "measured": {
+        "hashBefore": "",
+        "hashAfter": "",
+        "land": {
+          "settled": true,
+          "top": 203,
+          "hb": 114,
+          "scrollY": 3357
+        }
+      }
+    },
+    {
+      "name": "PHONE: selects still ride the column at 390px - no document h-scroll, full-width select, 44px floor",
+      "pass": true,
+      "measured": {
+        "scrollW": 390,
+        "clientW": 390,
+        "selWidth": 324,
+        "selHeight": 44
+      }
+    }
+  ],
+  "failures": 0,
+  "profileId": "prof-8f1a2aa7-7df7-4aa1-bb2f-d0314d5b9c40",
+  "summary": "6/6 checks passed"
+}
