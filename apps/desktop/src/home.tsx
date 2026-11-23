@@ -1061,7 +1061,15 @@ export function offerLabel(o: NextOffer): string {
  * spawned a second A2/B1/B2 row under the main ladder. Grouping is now by
  * band with a fixed section order: the BAND_HEADERS ladder (on-ramp → C2 →
  * unlabeled), then any custom pack band in first-occurrence order.
- * Nodes inside a section keep engine/curriculum order. The section `band`
+ * PATH-LOCK-ORDER-001 (owner phone 2026-11-23: two locked number-words
+ * nodes rendered above the pin): inside a section the MARKET LOCK RULE
+ * orders the rows — proven-done first, then open (frontier-side) nodes,
+ * then locked strictly last. The sort is stable, so curriculum order
+ * survives inside each group; what it can no longer do is let pack FILE
+ * numbering place a gated unit above the unlocked units it waits for
+ * (files 000–009 words are goal-gated on the 010+ Cyrillic units — the
+ * gate is honest, the file placement was not; see state/notes/
+ * PATH-LOCK-ORDER-001.md). The section `band`
  * stays the pack's own raw string (first occurrence) so data-band selectors
  * and the pinned-section logic are unchanged. */
 export function pathSections(nodes: UnitPathNode[]): { band: string; nodes: UnitPathNode[] }[] {
@@ -1086,7 +1094,24 @@ export function pathSections(nodes: UnitPathNode[]): { band: string; nodes: Unit
   }
   return [...byKey.values()]
     .sort((a, b) => a.rank - b.rank)
-    .map((s) => ({ band: s.band, nodes: s.nodes }));
+    .map((s) => ({
+      band: s.band,
+      // PATH-LOCK-ORDER-001: done -> open -> locked. Stable sort, so
+      // curriculum order holds inside each group; a locked node can never
+      // ride above the frontier it waits behind, whatever the pack's file
+      // numbering says.
+      nodes: [...s.nodes].sort((a, b) => pathOrderRank(a) - pathOrderRank(b)),
+    }));
+}
+
+/** PATH-LOCK-ORDER-001: the market lock rule's display ranks — proven-done
+ * history at the top (0), the open frontier run in the middle (1), locked
+ * strictly at the bottom (2). `review-due` is a done node's state, so it
+ * rides group 0; an engine-`current` or in-progress node is open. */
+function pathOrderRank(n: UnitPathNode): number {
+  if (n.done) return 0;
+  if (n.locked) return 2;
+  return 1;
 }
 
 /** One honest state per node for styling and the mobile audit. Locked wins
@@ -1337,6 +1362,12 @@ export function PathView({
     return () => clearTimeout(t);
   }, [closingBand]);
   if (sections.length === 0) return null;
+  // PATH-LOCK-ORDER-001: the unlock reason renders ONCE per distinct gate
+  // across the rendered path — sibling locked units that share one gate
+  // (the owner's phone: two number-words nodes, the same sentence twice)
+  // never repeat it under each other. Per-render Set: re-expanding another
+  // band re-derives which reasons are on screen.
+  const hintsShown = new Set<string>();
   const openBand =
     bandOverride === undefined ? (pinnedBand ?? sections[0]?.band ?? "") : bandOverride;
 
@@ -1582,6 +1613,15 @@ export function PathView({
                     // (CSS caps the stagger at 10 rows).
                     "--path-i": String(i),
                   } as CSSProperties;
+                  // PATH-LOCK-ORDER-001: the FIRST node to carry a given
+                  // unlock sentence renders it; locked siblings sharing the
+                  // same gate stay quiet. Check-then-register in rows'
+                  // display order — rows map top to bottom.
+                  const showHint =
+                    state === "locked" &&
+                    Boolean(n.unlock_hint) &&
+                    !hintsShown.has(n.unlock_hint as string);
+                  if (n.unlock_hint) hintsShown.add(n.unlock_hint);
                   return (
                     <li
                       key={n.unit_id}
@@ -1716,8 +1756,10 @@ export function PathView({
                             Section review recorded
                           </span>
                         ) : null}
-                        {state === "locked" && n.unlock_hint ? (
-                          <small className="path-node-hint">{n.unlock_hint}</small>
+                        {showHint ? (
+                          <small className="path-node-hint" data-testid={`path-hint-${n.unit_id}`}>
+                            {n.unlock_hint}
+                          </small>
                         ) : null}
                       </span>
                     </li>
