@@ -55,6 +55,11 @@ read-only code inventory of our Today path (file:line evidence in
 18. **Sound cues** — completion chimes everywhere; we have zero audio feedback on the path.
 19. **Habit reminders** (Babbel illustrated nudges) — no scheduler-driven nudges today.
 
+## Owner decision (2026-11-22, via dogfood session): **Calm but warm** = option 2.
+Celebrate unit completions, show gentle facts (days active, units done), NO streak
+punishment/freezes, NO XP, NO leagues, NO hearts. ADR-0002 gets amended to carve out
+warm-but-non-manipulative moments; banned-token tests are re-scoped, not deleted.
+
 ## Recommendation split
 - **Ship now (A1–A6, B8-lite):** motion pass, pulse, open-at-current + jump-back
   arrow, typed node glyphs, unit-capstone review node (it's pedagogy, not gamification —
