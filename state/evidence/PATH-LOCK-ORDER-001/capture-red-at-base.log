@@ -1,0 +1,7 @@
+PASS home reached a stable pack-loaded state with exactly one pin before measurement — {"healthyStreak":3}
+FAIL locked-above-frontier == 0 (no locked node renders above the pinned node) — {"pinUnit":"ru.unit.on-ramp.cyrillic-a-o-m-t","lockedAboveFrontier":10,"lockedRows":["ru.unit.on-ramp.greetings-01","ru.unit.on-ramp.greetings-02","ru.unit.on-ramp.self-introduction-01","ru.unit.on-ramp.self-introduction-02","ru.unit.on-ramp.classroom-01","ru.unit.on-ramp.classroom-02","ru.unit.on-ramp.everyday-01","ru.unit.on-ramp.everyday-02","ru.unit.on-ramp.numbers-01","ru.unit.on-ramp.numbers-02","capstone.org.openlanguage.ru-ru.reference.on-ramp"]}
+FAIL no locked row renders above any open row (done -> current -> locked) — {"lockedAboveOpen":100,"doneBelowOpen":0}
+FAIL each distinct unlock sentence renders exactly once (no sibling duplication) — {"hintCount":11,"distinctHints":2}
+PASS the audited screen really contains locked nodes (non-vacuous gate) — {"lockedRows":["ru.unit.on-ramp.greetings-01","ru.unit.on-ramp.greetings-02","ru.unit.on-ramp.self-introduction-01","ru.unit.on-ramp.self-introduction-02","ru.unit.on-ramp.classroom-01","ru.unit.on-ramp.classroom-02","ru.unit.on-ramp.everyday-01","ru.unit.on-ramp.everyday-02","ru.unit.on-ramp.numbers-01","ru.unit.on-ramp.numbers-02","capstone.org.openlanguage.ru-ru.reference.on-ramp"]}
+PASS screenshots re-validated: home still pack-loaded and pinned on the path — {}
+3 CHECK(S) FAILED

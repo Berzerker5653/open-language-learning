@@ -3650,11 +3650,29 @@ tasks:
   - "One tap on the pill lands on the practice surface; lock rendering (PATH-LOCK-ORDER-001) and the serve banner (SERVE-BANNER-001) are untouched."
   - "Every claim is pinned red-at-base by the path-view and home vitest contract plus the firstscreen capture (red 3 FAIL + no pill at 572e5d7e, green 8/8), and the session/whatsnext/capstone journeys stay green unedited."
   required_for_desktop_1_0: false
+- id: PATH-LOCK-ORDER-001
+  milestone: M11
+  priority: P1
+  title: Locked path nodes render strictly below the frontier; unlock reason renders once per distinct gate
+  dependencies: [PATH-SECTIONS-DEDUP-001, PATH-PIN-CONSISTENCY-001, TODAY-FIRSTSCREEN-001]
+  read_first:
+  - state/notes/PATH-LOCK-ORDER-001.md
+  - docs/design/PROGRESSION-UX-AUDIT-2026-11-22.md
+  - apps/desktop/src/home.tsx
+  - scripts/path-lock-order-capture.mjs
+  acceptance:
+  - "Inside every rendered path section the display order is proven-done first, then open frontier-side nodes, then locked nodes, with curriculum order preserved inside each group."
+  - "Zero locked nodes render above the pinned frontier node on a fresh-profile 390x844 real-engine capture (the new path-lock-order harness; red-at-base measures ten locked on-ramp word nodes above the pin)."
+  - "Each distinct unlock reason sentence renders at most once among rendered nodes; sibling locked units sharing one gate never repeat it under each other."
+  - "The number-words units keep their honest goal-level gate on the Cyrillic goal - no pack gate edges change; the fix lives in display layout, with the root cause documented in the notes."
+  - "Red contract first via path-view vitest ordering and dedup pins plus the capture harness, and the firstscreen capture, session/whatsnext/capstone journeys stay green unedited."
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
   required_flag: required_for_desktop_1_0
   optional_tasks:
+  - PATH-LOCK-ORDER-001
   - CAPSTONE-WIRING-TEST-001
   - ADV-001
   - AI-001

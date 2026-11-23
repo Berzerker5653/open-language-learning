@@ -382,6 +382,105 @@ describe("path sections are the canonical band ladder (PATH-SECTIONS-DEDUP-001)"
   });
 });
 
+// PATH-LOCK-ORDER-001 (owner phone live inspection 2026-11-23): two LOCKED
+// number-words nodes rendered ABOVE the "You are here" pin, each repeating
+// the same unlock sentence. Market rule (docs/design/
+// PROGRESSION-UX-AUDIT-2026-11-22.md): completed above, current in the
+// middle, locked strictly below — nothing locked sits above the learner.
+// The number-words units are honestly gated on the Cyrillic goal (goal-level
+// hard prerequisite, no requires_unit edge); what lied was the placement —
+// curriculum FILE order put them before it. Display order must follow the
+// gates, not the file numbering. Root cause in state/notes/PATH-LOCK-ORDER-001.md.
+describe("locked nodes render strictly below the frontier (PATH-LOCK-ORDER-001)", () => {
+  // The fresh-profile on-ramp shape: word units (locked until Cyrillic
+  // independence) ride AHEAD of the Cyrillic units in file order — exactly
+  // the pack's real numbering (files 000–009 words, 010+ Cyrillic).
+  const freshProfile = (): UnitPathNode[] => [
+    node({
+      unit_id: "ru.unit.on-ramp.greetings-01",
+      locked: true,
+      unlock_hint: 'finish "the Cyrillic letters"',
+    }),
+    node({
+      unit_id: "ru.unit.on-ramp.numbers-01",
+      locked: true,
+      unlock_hint: 'finish "the Cyrillic letters"',
+    }),
+    node({
+      unit_id: "ru.unit.on-ramp.numbers-02",
+      locked: true,
+      unlock_hint: 'finish "the Cyrillic letters"',
+    }),
+    node({ unit_id: "ru.unit.on-ramp.cyrillic-a-o-m-t" }),
+    node({ unit_id: "ru.unit.on-ramp.cyrillic-k-e-n-s" }),
+    node({
+      unit_id: "ru.unit.on-ramp.stress-review",
+      done: true,
+      refs_done: 4,
+      refs_total: 4,
+    }),
+  ];
+
+  it("orders each section done -> open -> locked, curriculum order inside each group", () => {
+    const sections = pathSections(freshProfile());
+    expect(sections).toHaveLength(1);
+    expect(sections[0]!.nodes.map((n) => n.unit_id)).toEqual([
+      "ru.unit.on-ramp.stress-review",
+      "ru.unit.on-ramp.cyrillic-a-o-m-t",
+      "ru.unit.on-ramp.cyrillic-k-e-n-s",
+      "ru.unit.on-ramp.greetings-01",
+      "ru.unit.on-ramp.numbers-01",
+      "ru.unit.on-ramp.numbers-02",
+    ]);
+  });
+
+  it("renders zero locked nodes above the pinned frontier node", () => {
+    const html = renderToStaticMarkup(<PathView nodes={freshProfile()} />);
+    const pinNode = html.indexOf('data-testid="path-node-ru.unit.on-ramp.cyrillic-a-o-m-t"');
+    const pin = html.indexOf('data-testid="path-pin"');
+    expect(pinNode).toBeGreaterThan(-1);
+    expect(pin).toBeGreaterThan(pinNode);
+    for (const lockedId of [
+      "ru.unit.on-ramp.greetings-01",
+      "ru.unit.on-ramp.numbers-01",
+      "ru.unit.on-ramp.numbers-02",
+    ]) {
+      expect(
+        html.indexOf(`data-testid="path-node-${lockedId}"`),
+        `${lockedId} must render BELOW the pin`,
+      ).toBeGreaterThan(pin);
+    }
+  });
+
+  it("sibling locked nodes sharing one gate state the unlock reason ONCE", () => {
+    const html = renderToStaticMarkup(<PathView nodes={freshProfile()} />);
+    expect(html.split('finish &quot;the Cyrillic letters&quot;').length - 1).toBe(1);
+    // Distinct gates still each get their own reason — dedup never hides a
+    // gate nobody has heard yet. (All-locked track: with no pin the first
+    // section renders open.)
+    const distinct = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({
+            unit_id: "ru.unit.novice.a",
+            band: "novice",
+            locked: true,
+            unlock_hint: "finish Warm-up first",
+          }),
+          node({
+            unit_id: "ru.unit.novice.b",
+            band: "novice",
+            locked: true,
+            unlock_hint: "finish Starter first",
+          }),
+        ]}
+      />,
+    );
+    expect(distinct).toContain("finish Warm-up first");
+    expect(distinct).toContain("finish Starter first");
+  });
+});
+
 // PATH-FEEL-SCROLL-001 (Duolingo parity for the viewport): the journey
 // opens centered on the pin, and once the learner scrolls their spot away
 // a floating "jump to my spot" arrow appears, pointing back toward it.
