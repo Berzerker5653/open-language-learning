@@ -3603,6 +3603,22 @@ tasks:
   - "Every claim is pinned red-at-base by the new onboard-feel vitest contract plus a feel-onboard capture red at base and green after; motion-contract, onboarding, a11y, loading-feel, session-chrome, rtl-direction, and ADR-0002 scans stay green unedited."
   required_for_desktop_1_0: false
 
+- id: FEEL-SETTINGS-001
+  milestone: M11
+  priority: P1
+  title: Settings screen consistency - desktop select styling with drawn chevron and focus halo, animated details disclosures, per-domain contents jump row
+  dependencies: [FEEL-GLOBAL-001, FEEL-LOADING-001]
+  read_first:
+  - state/notes/FEEL-SETTINGS-001.md
+  - packages/ui/src/styles.css
+  - apps/desktop/src/settings.tsx
+  - scripts/feel-progress-capture.mjs
+  acceptance:
+  - "A top-level desktop select rule styles every select in the designed cards - appearance none, drawn teal chevron, surface fill with line-strong border and radius token, comfortable padding, and a focus frame where the accent border plus 3px accent-soft halo arrives over --dur-fast; the phone-width column-fit select rule stays untouched."
+  - "details/summary prose disclosures expand over --dur ease-out with the drawn summary chevron rotating 180 degrees on open; the native marker is hidden and the platform details/summary semantics stay, with no JS widget."
+  - "A contents jump row under the Settings heading offers one chip per visible card (conditional cards get a chip exactly when their card renders), each card carries the matching anchor target with scroll margin below the sticky header, and the chips ride buttons so the screen-router hash stays untouched."
+  - "Every claim is pinned red-at-base by the new settings-feel vitest contract plus a feel-settings capture red at base and green after; motion-contract, loading-feel, settings, a11y, mobile-audit, button-affordance, and rtl-direction stay green unedited."
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3629,6 +3645,7 @@ execution_scope:
   - FEEL-MYWORDS-001
   - FEEL-PROGRESS-001
   - FEEL-ONBOARD-001
+  - FEEL-SETTINGS-001
   - JA-A1-003
   - JA-A2-002
   - JA-A2-002-FIX-001
