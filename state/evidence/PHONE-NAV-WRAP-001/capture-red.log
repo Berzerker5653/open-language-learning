@@ -1,0 +1,15 @@
+CAPTURE_TAG=red SERVE_BIN=target/debug/lts-serve SERVE_DIST=apps/desktop/dist (dist built from HEAD styles.css)
+node scripts/phone-nav-wrap-capture.mjs — exit 1 (final script version, same run regenerates both colors)
+
+PASS fresh home reached a stable pack-loaded state with all five tabs before measurement — {"healthyStreak":3}
+FAIL N1: the tab bar is exactly ONE row containing every tab (no wrap, no orphan row) — {"rowCount":2,"labels":["Today","Practice","My Words","Progress","Settings"]}
+PASS N1b: no document-level horizontal scroll at 390px — {"scrollWidth":390,"clientWidth":390}
+PASS N2: every tab label legible (non-empty, unclipped, font >= 12px) — {"bad":[]}
+PASS N4: every tab tap target >= 44x44 — {"small":[]}
+FAIL N3: the active-tab indicator is geometrically aligned with the active label rect (centered ±2, inside the slot, bottom edge on the tab) — {"live":1,"dCenter":0,"indicatorW":71,"slotW":71,"dyBottom":48,"active":"Today"}
+FAIL N5: at phone width the bar is a fixed, opaque tab bar flush with the viewport bottom and tappable through — {"position":"relative","bottom":130,"viewportH":844,"hitIsTab":true,"hitLabel":"Settings","opaque":false}
+3 CHECK(S) FAILED
+
+= the audit's defect reproduced in geometry: 2 rows (Settings orphan),
+indicator 48px below the active tab, nav sitting in the header (relative,
+y-bottom 130), not the bottom bar.

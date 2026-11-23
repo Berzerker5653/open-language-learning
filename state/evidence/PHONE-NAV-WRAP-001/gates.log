@@ -1,0 +1,47 @@
+PHONE-NAV-WRAP-001 gate log (lane tier; GamingPC, 2026-11-23)
+
+BASE: HEAD af098664 (ledger PATH-CONNECT-PILL-001). git status at start:
+clean except other cards' untracked dirs (RU-CONTENT-FREEZE-047-001,
+RU-STORIES-MEDIA-001) — untouched per shared-dir race rule.
+
+ACCEPTANCE HARNESS (scripts/phone-nav-wrap-capture.mjs, real engine):
+- RED at HEAD (dist built from HEAD styles.css, CAPTURE_TAG=red):
+  exit 1 — N1 FAIL (rowCount 2, Settings orphan), N3 FAIL (indicator
+  dyBottom +48 off the active tab), N5 FAIL (position relative, bar in
+  header at y-bottom 130, transparent). capture-red.log.
+- GREEN at final bytes (dist rebuilt with this card's CSS):
+  exit 0 — 7/7 PASS: rowCount 1 all five labels; indicator centered
+  (dCenter 0) 44px rule inside a 73px slot sitting on the tab bottom
+  edge over a 6px sill; fixed opaque bar flush at y=844, hit-test lands
+  on a tab. capture-green.log + audit-red.json/audit-green.json.
+- Both colors run with the FINAL script version (regenerated red so the
+  committed script is the one that reds at HEAD).
+
+LANE GATES:
+- npx tsc --noEmit (apps/desktop) -> exit 0.
+- npx vitest run (apps/desktop) -> 74 files / 652 tests passed, includes
+  the new phone-nav.test.ts (5 pins), mobile-audit.test.ts (MOBILE-UX-001
+  gates green UNEDITED — the dev-only mobile-screens harness renders no
+  Routes nav, so the bottom-bar change measures no regression there),
+  motion-contract.test.ts (FEEL-GLOBAL-001 glide pins green UNEDITED —
+  base .routes/.routes::after rules untouched), a11y + App tab tests.
+- npx vitest run (packages/ui) -> 10 passed.
+- prettier --write on touched files -> styles.css/test unchanged;
+  scripts .mjs normalized before commit.
+- cargo fmt: N/A — zero Rust diff (CSS + one test + harness script only).
+
+FINDINGS DURING THE CARD:
+1. Cascade trap caught pre-ship: the chrome lift for .input-mode-bubble /
+   .path-jump-to-pin must be declared AFTER those base rules (equal
+   specificity; a lift inside the earlier phone tier loses). phone-nav.test.ts
+   pins the source order.
+2. Learner vision passes drove two polish iterations on the final shape:
+   indicator off the physical screen edge (sill), and inset/centered under
+   the label (see learner-inspection.md). Green harness alone did not
+   close this card.
+3. Interim green runs (pre-tweak) were overwritten by re-captures at the
+   final committed bytes; red+green evidence share the final script.
+
+DEFERRED: none for this card's acceptance. Text-only bar (no icons),
+typography and active-ink color-match noted as FEEL-lane items in
+learner-inspection.md.

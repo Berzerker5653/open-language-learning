@@ -1,0 +1,10 @@
+CAPTURE_TAG=green SERVE_BIN=target/debug/lts-serve SERVE_DIST=apps/desktop/dist (dist rebuilt from the committed sources + this card's styles.css)
+node scripts/phone-nav-wrap-capture.mjs — exit 0, ALL CHECKS PASS (final bytes, final script)
+
+PASS fresh home reached a stable pack-loaded state with all five tabs before measurement — {"healthyStreak":3}
+PASS N1: the tab bar is exactly ONE row containing every tab (no wrap, no orphan row) — {"rowCount":1,"labels":["Today","Practice","My Words","Progress","Settings"]}
+PASS N1b: no document-level horizontal scroll at 390px — {"scrollWidth":390,"clientWidth":390}
+PASS N2: every tab label legible (non-empty, unclipped, font >= 12px) — {"bad":[]}
+PASS N4: every tab tap target >= 44x44 — {"small":[]}
+PASS N3: the active-tab indicator is geometrically aligned with the active label rect (centered ±2, inside the slot, bottom edge on the tab) — {"live":1,"dCenter":0,"indicatorW":44,"slotW":73,"dyBottom":0,"active":"Today"}
+PASS N5: at phone width the bar is a fixed, opaque tab bar flush with the viewport bottom and tappable through — {"position":"fixed","bottom":844,"viewportH":844,"hitIsTab":true,"hitLabel":"My Words","opaque":true}

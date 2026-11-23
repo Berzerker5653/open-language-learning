@@ -1,0 +1,177 @@
+{
+  "viewport": "390x844",
+  "port": 17637,
+  "tag": "red",
+  "checks": [
+    {
+      "name": "fresh home reached a stable pack-loaded state with all five tabs before measurement",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    },
+    {
+      "name": "N1: the tab bar is exactly ONE row containing every tab (no wrap, no orphan row)",
+      "pass": false,
+      "measured": {
+        "rowCount": 2,
+        "labels": [
+          "Today",
+          "Practice",
+          "My Words",
+          "Progress",
+          "Settings"
+        ]
+      }
+    },
+    {
+      "name": "N1b: no document-level horizontal scroll at 390px",
+      "pass": true,
+      "measured": {
+        "scrollWidth": 390,
+        "clientWidth": 390
+      }
+    },
+    {
+      "name": "N2: every tab label legible (non-empty, unclipped, font >= 12px)",
+      "pass": true,
+      "measured": {
+        "bad": []
+      }
+    },
+    {
+      "name": "N4: every tab tap target >= 44x44",
+      "pass": true,
+      "measured": {
+        "small": []
+      }
+    },
+    {
+      "name": "N3: the active-tab indicator is geometrically aligned with the active label rect (centered ±2, inside the slot, bottom edge on the tab)",
+      "pass": false,
+      "measured": {
+        "live": 1,
+        "dCenter": 0,
+        "indicatorW": 71,
+        "slotW": 71,
+        "dyBottom": 48,
+        "active": "Today"
+      }
+    },
+    {
+      "name": "N5: at phone width the bar is a fixed, opaque tab bar flush with the viewport bottom and tappable through",
+      "pass": false,
+      "measured": {
+        "position": "relative",
+        "bottom": 130,
+        "viewportH": 844,
+        "hitIsTab": true,
+        "hitLabel": "Settings",
+        "opaque": false
+      }
+    }
+  ],
+  "failures": 3,
+  "error": null,
+  "profileId": "prof-1b028737-2795-4d19-998e-b0b1859eb4c5",
+  "navRows": {
+    "rowCount": 2,
+    "rects": [
+      {
+        "label": "Today",
+        "x": 16,
+        "y": 33.59375,
+        "w": 70.921875,
+        "h": 44
+      },
+      {
+        "label": "Practice",
+        "x": 90.921875,
+        "y": 33.59375,
+        "w": 86,
+        "h": 44
+      },
+      {
+        "label": "My Words",
+        "x": 180.921875,
+        "y": 33.59375,
+        "w": 98.546875,
+        "h": 44
+      },
+      {
+        "label": "Progress",
+        "x": 283.46875,
+        "y": 33.59375,
+        "w": 90.53125,
+        "h": 44
+      },
+      {
+        "label": "Settings",
+        "x": 16,
+        "y": 81.59375,
+        "w": 358,
+        "h": 44
+      }
+    ],
+    "docScrollWidth": 390,
+    "docClientWidth": 390,
+    "navRect": {
+      "x": 16,
+      "y": 33.59375,
+      "w": 358,
+      "h": 96
+    }
+  },
+  "legibility": [
+    {
+      "label": "Today",
+      "clipped": false,
+      "fontSizePx": 14
+    },
+    {
+      "label": "Practice",
+      "clipped": false,
+      "fontSizePx": 14
+    },
+    {
+      "label": "My Words",
+      "clipped": false,
+      "fontSizePx": 14
+    },
+    {
+      "label": "Progress",
+      "clipped": false,
+      "fontSizePx": 14
+    },
+    {
+      "label": "Settings",
+      "clipped": false,
+      "fontSizePx": 14
+    }
+  ],
+  "indicator": {
+    "present": true,
+    "live": 1,
+    "indicator": {
+      "x": 16,
+      "w": 71,
+      "top": 123.59375,
+      "bottom": 125.59375
+    },
+    "activeTab": {
+      "label": "Today",
+      "x": 16,
+      "w": 70.921875,
+      "top": 33.59375,
+      "bottom": 77.59375
+    }
+  },
+  "bottomBar": {
+    "position": "relative",
+    "bottom": 130,
+    "viewportH": 844,
+    "hitIsTab": true,
+    "hitLabel": "Settings",
+    "opaque": false
+  }
+}
