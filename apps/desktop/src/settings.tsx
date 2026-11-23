@@ -259,10 +259,50 @@ function ProseNote(p: {
   );
 }
 
+/** FEEL-SETTINGS-001: the jump target for one Settings card. The jump rides
+ *  buttons + scrollIntoView, NEVER an `<a href="#…">` — mobile-screens.tsx
+ *  reads location.hash for screen routing, so a hash anchor would route the
+ *  app instead of scrolling the page. */
+function scrollToSettingsSection(id: string): void {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+  el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+}
+
 export function Settings(p: SettingsProps) {
+  // FEEL-SETTINGS-001: per-domain contents row for the long Settings scroll.
+  // One chip per VISIBLE card — conditional cards get a chip exactly when
+  // their card renders, so a chip never jumps to nothing.
+  const sections: { id: string; label: string }[] = [
+    { id: "settings-mic", label: "Microphone" },
+    ...(p.packDeclaresRomanizationDisplay ? [{ id: "settings-romaji", label: "Romaji" }] : []),
+    ...(p.packDeclaresKanaKeyboard ? [{ id: "settings-kana", label: "Kana keyboard" }] : []),
+    { id: "settings-profile", label: "Profile data" },
+    { id: "settings-speech", label: "Speech" },
+    { id: "settings-runtimes", label: "Speech runtimes" },
+    ...(inLtsServeMode() ? [{ id: "settings-lan", label: "Local network" }] : []),
+    { id: "settings-build", label: "About this build" },
+  ];
   return (
     <section aria-label="Settings">
       <h2>Settings</h2>
+      <nav
+        aria-label="Settings sections"
+        className="settings-contents"
+        data-testid="settings-contents"
+      >
+        {sections.map((s) => (
+          <button
+            key={s.id}
+            type="button"
+            className="contents-chip"
+            onClick={() => scrollToSettingsSection(s.id)}
+          >
+            {s.label}
+          </button>
+        ))}
+      </nav>
       {p.loading && (
         // FEEL-LOADING-001: six prime reads land at their own pace today
         // with no signal at all — the skeleton says "filling in".
@@ -292,7 +332,7 @@ export function Settings(p: SettingsProps) {
         </p>
       )}
 
-      <div className="card">
+      <div className="card" id="settings-mic" data-settings-anchor="settings-mic">
         <h3>Microphone</h3>
         <label htmlFor="mic-enabled" className="radio-row">
           <input
@@ -363,7 +403,7 @@ export function Settings(p: SettingsProps) {
           learner never sees a Japanese-only control — the packs'
           declarations decide, never a language constant in this page. */}
       {p.packDeclaresRomanizationDisplay && (
-        <div className="card">
+        <div className="card" id="settings-romaji" data-settings-anchor="settings-romaji">
           <h3>Romaji (romanisation) display</h3>
           <fieldset>
             <legend>Show romaji alongside Japanese text</legend>
@@ -392,7 +432,7 @@ export function Settings(p: SettingsProps) {
           Cyrillic-only pack never sees the control, because the pack never
           granted it — not because the app knows "Russian". */}
       {p.packDeclaresKanaKeyboard && (
-        <div className="card">
+        <div className="card" id="settings-kana" data-settings-anchor="settings-kana">
           <h3>Kana keyboard (in-app)</h3>
           <fieldset>
             <legend>Type Japanese in the app without changing the system keyboard</legend>
@@ -419,7 +459,7 @@ export function Settings(p: SettingsProps) {
         </div>
       )}
 
-      <div className="card">
+      <div className="card" id="settings-profile" data-settings-anchor="settings-profile">
         <h3>Profile data</h3>
         <ProseNote summary="Export, restore, and switching all live here; an export is a readable JSON file, and no audio is ever part of one.">
           The privacy notice promises you can export or delete your local profile data at any time —
@@ -562,7 +602,7 @@ export function Settings(p: SettingsProps) {
         </ProseNote>
       </div>
 
-      <div className="card">
+      <div className="card" id="settings-speech" data-settings-anchor="settings-speech">
         <h3>Speech</h3>
         {/* I03: this summary sits above the picker on purpose — the status is
             read before the controls are offered, not after a dead end. */}
@@ -701,7 +741,7 @@ export function Settings(p: SettingsProps) {
         )}
       </div>
 
-      <div className="card">
+      <div className="card" id="settings-runtimes" data-settings-anchor="settings-runtimes">
         <h3>Speech runtimes</h3>
         <ProseNote summary="The engines this build ships and can load — honest status, not a choice.">
           The engines this build ships and can load — honest status, not a choice. Pronunciation
@@ -716,7 +756,7 @@ export function Settings(p: SettingsProps) {
           shell runs no HTTP server to configure. */}
       {inLtsServeMode() && <LanAccessCard />}
 
-      <div className="card">
+      <div className="card" id="settings-build" data-settings-anchor="settings-build">
         <h3>About this build</h3>
         {p.buildIdentity ? (
           <>
@@ -865,7 +905,12 @@ export function LanAccessCard() {
   }
 
   return (
-    <div className="card" data-testid="lan-access-card">
+    <div
+      className="card"
+      data-testid="lan-access-card"
+      id="settings-lan"
+      data-settings-anchor="settings-lan"
+    >
       <h3>Local network access</h3>
       <p>
         <label htmlFor="lan-enabled">

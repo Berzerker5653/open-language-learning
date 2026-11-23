@@ -501,6 +501,40 @@ input[type="text"]:focus-visible {
   border-color: var(--accent);
 }
 
+/* FEEL-SETTINGS-001 (audit §6, the biggest visual-consistency hole): the
+   only select rule in the sheet lived inside the phone media query, so
+   everywhere else raw UA select boxes sat inside the designed cards. Full
+   restyle at top level: UA arrow removed (appearance none), a drawn teal
+   chevron painted instead, and the same surface fill / line-strong border
+   / radius the text inputs already carry. Focus rides the mock's frame —
+   accent border plus a 3px accent-soft halo arriving over --dur-fast; the
+   global :focus-visible outline stays (never color/halo alone). */
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: var(--surface);
+  color: var(--ink);
+  font: inherit;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 2.25rem 0.5rem 0.75rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%2314615e' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+select:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  /* the label above sits 4px clear of the box; the default 2px outline
+     offset pushed the ring into the label text (capture vision QA) — flush
+     it to the edge, the accent border + halo carry the ring either way */
+  outline-offset: 0;
+}
+
 input[type="radio"] {
   width: 1.15rem;
   height: 1.15rem;
@@ -584,6 +618,98 @@ details.prose-note > summary {
   font-size: 0.875rem;
   color: var(--ink-soft);
   cursor: pointer;
+  /* FEEL-SETTINGS-001: the UA marker is replaced by a drawn chevron so the
+     rotation below has something to turn. */
+  list-style: none;
+}
+
+details.prose-note > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.prose-note > summary::before {
+  content: "";
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-right: 0.4rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%23756c5d' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+/* FEEL-SETTINGS-001: the disclosure expands instead of hard-cutting — the
+   chevron turns 180 degrees over the shared --dur ease-out, and the body
+   (unrendered while closed, so this fires exactly on open) reveals with a
+   short fade-and-rise. The platform details/summary semantics are untouched. */
+details.prose-note[open] > summary::before {
+  transform: rotate(180deg);
+}
+
+details.prose-note[open] > p {
+  animation: disclosure-reveal var(--dur) var(--ease-out);
+}
+
+@keyframes disclosure-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-0.25rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FEEL-SETTINGS-001: per-domain contents row for the long Settings scroll —
+   quiet token chips; the jumps ride buttons (never hash anchors, which the
+   screen router would route on), and every card carries
+   data-settings-anchor with scroll-margin so a jump lands below the sticky
+   header. The phone-width touch-target rule for summary stays as-is. */
+.settings-contents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 var(--space-5);
+}
+
+.contents-chip {
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: var(--space-2) var(--space-4);
+  min-height: 2.75rem;
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out),
+    background var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.contents-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.contents-chip:active {
+  background: var(--accent-soft);
+  transform: translateY(1px);
+}
+
+[data-settings-anchor] {
+  /* Sized from the live header: the jump must land the card below the
+     sticky header at BOTH widths (measured: ~106px desktop, ~160px phone
+     where the shell bar wraps) — 10rem clears both, and landing a touch
+     deeper on the desktop is comfortable, not broken. */
+  scroll-margin-top: 10rem;
 }
 
 details.prose-note[open] > summary {
