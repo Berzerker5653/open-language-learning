@@ -1,0 +1,96 @@
+{
+  "viewport": "390x844",
+  "tag": "green",
+  "checks": [
+    {
+      "name": "home reached a stable pack-loaded state before measurement (no load flicker)",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    },
+    {
+      "name": "the frontier node sits fully inside the first viewport on load (no manual scroll)",
+      "pass": true,
+      "measured": {
+        "unit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+        "top": 428,
+        "bottom": 610,
+        "innerHeight": 844,
+        "pinVisible": true,
+        "scrollY": 2838,
+        "greetingShown": false,
+        "budgetShown": false,
+        "docHeight": 5760
+      }
+    },
+    {
+      "name": "meta (greeting, time budget) does not occupy the pin-centred first screen",
+      "pass": true,
+      "measured": {
+        "greetingShown": false,
+        "budgetShown": false
+      }
+    },
+    {
+      "name": "exactly one start pill exists and rides the pinned node's row",
+      "pass": true,
+      "measured": {
+        "count": 1,
+        "present": true,
+        "onPinRow": true,
+        "label": "Start today's plan — 5 activities, about 5 minutes",
+        "height": 101,
+        "bg": "rgb(20, 97, 94)",
+        "intersectsViewport": true,
+        "planCtaCount": 1,
+        "planCtaIsPill": true
+      }
+    },
+    {
+      "name": "the pill is prominent: >=44px tall, accent-filled, and visible in the first viewport",
+      "pass": true,
+      "measured": {
+        "height": 101,
+        "bg": "rgb(20, 97, 94)",
+        "intersectsViewport": true
+      }
+    },
+    {
+      "name": "the pill is the ONLY plan CTA on Today (the begin block moved, never duplicated)",
+      "pass": true,
+      "measured": {
+        "planCtaCount": 1,
+        "planCtaIsPill": true
+      }
+    },
+    {
+      "name": "fold-0 screenshot re-validated: home still pack-loaded and on the path",
+      "pass": true,
+      "measured": {
+        "retaken": false
+      }
+    },
+    {
+      "name": "one tap on the pill lands on the practice surface (lesson card or first choices)",
+      "pass": true,
+      "measured": {
+        "taps": 1
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-917fb4e8-9ee3-40fa-b5b4-2cfd64102913",
+  "fold": {
+    "unit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    "top": 428,
+    "bottom": 610,
+    "innerHeight": 844,
+    "pinVisible": true,
+    "scrollY": 2838,
+    "greetingShown": false,
+    "budgetShown": false,
+    "docHeight": 5760
+  }
+}

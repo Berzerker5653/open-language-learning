@@ -1,0 +1,9 @@
+PASS home reached a stable pack-loaded state before measurement (no load flicker) — {"healthyStreak":3}
+PASS the frontier node sits fully inside the first viewport on load (no manual scroll) — {"unit":"ru.unit.on-ramp.cyrillic-a-o-m-t","top":428,"bottom":610,"innerHeight":844,"pinVisible":true,"scrollY":2838,"greetingShown":false,"budgetShown":false,"docHeight":5760}
+PASS meta (greeting, time budget) does not occupy the pin-centred first screen — {"greetingShown":false,"budgetShown":false}
+PASS exactly one start pill exists and rides the pinned node's row — {"count":1,"present":true,"onPinRow":true,"label":"Start today's plan — 5 activities, about 5 minutes","height":101,"bg":"rgb(20, 97, 94)","intersectsViewport":true,"planCtaCount":1,"planCtaIsPill":true}
+PASS the pill is prominent: >=44px tall, accent-filled, and visible in the first viewport — {"height":101,"bg":"rgb(20, 97, 94)","intersectsViewport":true}
+PASS the pill is the ONLY plan CTA on Today (the begin block moved, never duplicated) — {"planCtaCount":1,"planCtaIsPill":true}
+PASS fold-0 screenshot re-validated: home still pack-loaded and on the path — {"retaken":false}
+PASS one tap on the pill lands on the practice surface (lesson card or first choices) — {"taps":1}
+ALL CHECKS PASS

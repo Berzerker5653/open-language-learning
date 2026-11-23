@@ -1,0 +1,8 @@
+PASS home reached a stable pack-loaded state before measurement (no load flicker) — {"healthyStreak":3}
+PASS the frontier node sits fully inside the first viewport on load (no manual scroll) — {"unit":"ru.unit.on-ramp.cyrillic-a-o-m-t","top":481,"bottom":557,"innerHeight":844,"pinVisible":true,"scrollY":2851,"greetingShown":false,"budgetShown":false,"docHeight":5720}
+PASS meta (greeting, time budget) does not occupy the pin-centred first screen — {"greetingShown":false,"budgetShown":false}
+FAIL exactly one start pill exists and rides the pinned node's row — {"count":0,"present":false}
+FAIL the pill is prominent: >=44px tall, accent-filled, and visible in the first viewport — {}
+FAIL the pill is the ONLY plan CTA on Today (the begin block moved, never duplicated) — {}
+PASS fold-0 screenshot re-validated: home still pack-loaded and on the path — {"retaken":false}
+navigation/measure error: navigation error: no start pill to tap

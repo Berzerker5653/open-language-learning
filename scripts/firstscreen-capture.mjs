@@ -255,7 +255,11 @@ try {
       docHeight: Math.round(document.documentElement.scrollHeight),
     };
   })()`);
-  check("the frontier node sits fully inside the first viewport on load (no manual scroll)", fold.pinVisible, fold);
+  check(
+    "the frontier node sits fully inside the first viewport on load (no manual scroll)",
+    fold.pinVisible,
+    fold,
+  );
   check(
     "meta (greeting, time budget) does not occupy the pin-centred first screen",
     !fold.greetingShown && !fold.budgetShown,
@@ -286,10 +290,18 @@ try {
       planCtaIsPill: planCtas.length === 1 && planCtas[0] === p,
     };
   })()`);
-  check("exactly one start pill exists and rides the pinned node's row", pill.present && pill.count === 1 && pill.onPinRow === true, pill);
+  check(
+    "exactly one start pill exists and rides the pinned node's row",
+    pill.present && pill.count === 1 && pill.onPinRow === true,
+    pill,
+  );
   check(
     "the pill is prominent: >=44px tall, accent-filled, and visible in the first viewport",
-    pill.present && pill.height >= 44 && pill.bg !== "rgba(0, 0, 0, 0)" && pill.bg !== "transparent" && pill.intersectsViewport === true,
+    pill.present &&
+      pill.height >= 44 &&
+      pill.bg !== "rgba(0, 0, 0, 0)" &&
+      pill.bg !== "transparent" &&
+      pill.intersectsViewport === true,
     { height: pill.height, bg: pill.bg, intersectsViewport: pill.intersectsViewport },
   );
   check(
@@ -306,10 +318,13 @@ try {
       await sleep(300);
       streak2 = (await homeHealthy()) ? streak2 + 1 : 0;
     }
-    if (streak2 < 3) throw new Error("navigation error: home dropped pack state after the fold-0 shot");
+    if (streak2 < 3)
+      throw new Error("navigation error: home dropped pack state after the fold-0 shot");
     await shot("firstscreen-fold0", true);
   }
-  check("fold-0 screenshot re-validated: home still pack-loaded and on the path", true, { retaken: false });
+  check("fold-0 screenshot re-validated: home still pack-loaded and on the path", true, {
+    retaken: false,
+  });
 
   // ---- one tap from the pill to the practice surface. ----
   const tapped = await evaluate(`(() => {
@@ -327,11 +342,17 @@ try {
         Boolean(document.querySelector('[aria-label="Choices"] button'));
     })()`);
   }
-  check("one tap on the pill lands on the practice surface (lesson card or first choices)", inPractice, { taps: 1 });
+  check(
+    "one tap on the pill lands on the practice surface (lesson card or first choices)",
+    inPractice,
+    { taps: 1 },
+  );
   if (inPractice) await shot("firstscreen-after-pill-tap", true);
   await send("Emulation.clearDeviceMetricsOverride", {}, sessionId);
 
-  result.failures === 0 ? console.log("ALL CHECKS PASS") : console.log(`${result.failures} CHECK(S) FAILED`);
+  result.failures === 0
+    ? console.log("ALL CHECKS PASS")
+    : console.log(`${result.failures} CHECK(S) FAILED`);
 } catch (e) {
   result.error = String(e?.message ?? e);
   console.error(`navigation/measure error: ${result.error}`);

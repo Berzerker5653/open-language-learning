@@ -1,0 +1,75 @@
+{
+  "viewport": "390x844",
+  "tag": "red",
+  "checks": [
+    {
+      "name": "home reached a stable pack-loaded state before measurement (no load flicker)",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    },
+    {
+      "name": "the frontier node sits fully inside the first viewport on load (no manual scroll)",
+      "pass": true,
+      "measured": {
+        "unit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+        "top": 481,
+        "bottom": 557,
+        "innerHeight": 844,
+        "pinVisible": true,
+        "scrollY": 2851,
+        "greetingShown": false,
+        "budgetShown": false,
+        "docHeight": 5720
+      }
+    },
+    {
+      "name": "meta (greeting, time budget) does not occupy the pin-centred first screen",
+      "pass": true,
+      "measured": {
+        "greetingShown": false,
+        "budgetShown": false
+      }
+    },
+    {
+      "name": "exactly one start pill exists and rides the pinned node's row",
+      "pass": false,
+      "measured": {
+        "count": 0,
+        "present": false
+      }
+    },
+    {
+      "name": "the pill is prominent: >=44px tall, accent-filled, and visible in the first viewport",
+      "pass": false,
+      "measured": {}
+    },
+    {
+      "name": "the pill is the ONLY plan CTA on Today (the begin block moved, never duplicated)",
+      "pass": false,
+      "measured": {}
+    },
+    {
+      "name": "fold-0 screenshot re-validated: home still pack-loaded and on the path",
+      "pass": true,
+      "measured": {
+        "retaken": false
+      }
+    }
+  ],
+  "failures": 4,
+  "error": "navigation error: no start pill to tap",
+  "profileId": "prof-13086831-fe11-46fc-b15b-d9ec5a5ab69b",
+  "fold": {
+    "unit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    "top": 481,
+    "bottom": 557,
+    "innerHeight": 844,
+    "pinVisible": true,
+    "scrollY": 2851,
+    "greetingShown": false,
+    "budgetShown": false,
+    "docHeight": 5720
+  }
+}
