@@ -51,7 +51,7 @@ describe("first screen is the path, start pill on the pin (TODAY-FIRSTSCREEN-001
 
     // 2. The pill is the only plan CTA — the begin block moved onto it.
     const planCtas = [...document.querySelectorAll("button")].filter((b) =>
-      (b.textContent ?? "").includes("Start today's plan"),
+      (b.textContent ?? "").includes("Start ·"),
     );
     expect(planCtas).toHaveLength(1);
     expect(planCtas[0]).toBe(pill);

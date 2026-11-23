@@ -69,7 +69,7 @@ describe("never-lost loop (PATH-WHATSNEXT-001)", () => {
     expect(document.querySelector('[data-unit$=".unit.greetings"]')).toBeTruthy();
 
     // Walk the session to its honest end (same shape as session.journey).
-    await app.click(app.button(app.section("Practice"), "Start today's plan"));
+    await app.click(app.button(app.section("Practice"), "Start ·"));
     await app.settle();
     await doActivity(app, "how do you do (first meeting)");
     await app.click(app.button(app.section("Practice"), "Continue to next activity"));

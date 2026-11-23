@@ -153,7 +153,7 @@ describe("restarting resumes instead of re-onboarding (journey g)", () => {
     // A session is started, then PAUSED: the panel and the
     // "Resume session" offer are exactly the state that must not
     // outlive a profile switch or delete.
-    await app.click(app.button(app.section("Practice"), "Start today's plan"));
+    await app.click(app.button(app.section("Practice"), "Start ·"));
     await app.settle();
     await app.click(document.querySelector("[data-session-pause]")!);
     await app.settle();
@@ -182,7 +182,7 @@ describe("restarting resumes instead of re-onboarding (journey g)", () => {
     ).toBe(false);
 
     // And deleting a profile mid-session tears the same state down.
-    await app.click(app.button(app.section("Practice"), "Start today's plan"));
+    await app.click(app.button(app.section("Practice"), "Start ·"));
     await app.settle();
     await app.click(document.querySelector("[data-session-pause]")!);
     await app.settle();

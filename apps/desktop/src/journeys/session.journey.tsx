@@ -51,9 +51,11 @@ describe("one bounded session (journey e)", () => {
     app = await mountLearner();
 
     // One begin action, and it names both the scope and the exit.
-    const begin = app.button(app.section("Practice"), "Start today's plan");
+    const begin = app.button(app.section("Practice"), "Start ·");
     expect(begin.textContent).toContain("2 activities");
-    expect(begin.textContent).toContain("about 3 minutes");
+    // PATH-CONNECT-PILL-001 (R2): the scope stays in the one-line capsule,
+    // now in the "~N min" short form.
+    expect(begin.textContent).toContain("~3 min");
     expect(app.section("Practice").textContent).toContain("You can stop at any point");
     expect(app.section("Practice").textContent).toContain("what you finish is saved");
 
@@ -122,7 +124,7 @@ describe("one bounded session (journey e)", () => {
 
   it("stops honestly: nothing was done, and the plan says so", async () => {
     app = await mountLearner();
-    await app.click(app.button(app.section("Practice"), "Start today's plan"));
+    await app.click(app.button(app.section("Practice"), "Start ·"));
     await app.settle();
 
     await app.click(sessionExit().stop);

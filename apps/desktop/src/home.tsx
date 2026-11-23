@@ -619,9 +619,12 @@ export function Home(p: HomeProps) {
           startPlan={p.plan.items.length > 0 ? p.onStartSession : undefined}
           startPlanLabel={
             p.plan.items.length > 0
-              ? `Start today's plan — ${p.plan.items.length} activities${
-                  planMinutesLabel(p.plan.total_seconds)
-                    ? `, ${planMinutesLabel(p.plan.total_seconds)}`
+              ? // PATH-CONNECT-PILL-001 (R2): the pill is a one-line overlay
+                // on the pinned row now — the scope stays in its label, but
+                // in the short capsule form ("Start · 6 activities · ~5 min").
+                `Start · ${p.plan.items.length} activities${
+                  p.plan.total_seconds > 0
+                    ? ` · ~${Math.max(1, Math.round(p.plan.total_seconds / 60))} min`
                     : ""
                 }`
               : undefined
@@ -1230,6 +1233,20 @@ export function pathSway(index: number): number {
   return Math.round(PATH_SWAY_AMP_PX * Math.sin((index * 2 * Math.PI) / 6));
 }
 
+/**
+ * PATH-CONNECT-PILL-001 (R5): every `letters` unit once rendered the SAME
+ * "A" pictogram — ten Cyrillic-letter nodes in a row all read "A", which
+ * is what the owner saw. The market grammar (Duolingo's unit circles)
+ * shows the unit's OWN head letter. The pack's letter units all name
+ * their letters in the title ("Printed Cyrillic: Б б, В в…"); the first
+ * letter after the colon is that unit's typed glyph. No colon (or a
+ * non-letter unit) falls back to the kind pictogram.
+ */
+export function pathTypedLetterGlyph(title: string): string | null {
+  const m = /[:：]\s*(\p{L})/u.exec(title);
+  return m?.[1] ?? null;
+}
+
 /** The lock on a locked node — drawn, never an emoji (the ring itself
  * is the state; this just names WHY the node is inert). */
 function PathLockGlyph() {
@@ -1592,6 +1609,9 @@ export function PathView({
                 {s.nodes.map((n, i) => {
                   const state = pathNodeState(n);
                   const fill = n.refs_total > 0 ? Math.min(1, n.refs_done / n.refs_total) : 0;
+                  // PATH-CONNECT-PILL-001 (R5): a letters unit shows its OWN
+                  // head letter (typed) instead of the shared "A" pictogram.
+                  const typedLetter = n.kind === "letters" ? pathTypedLetterGlyph(n.title) : null;
                   // The winding geometry: a deterministic sway wave, and
                   // dashed connector stubs whose angle rides the sway
                   // delta to the neighbours — stubs are attached to the
@@ -1602,8 +1622,12 @@ export function PathView({
                     i + 1 < s.nodes.length
                       ? (Math.atan2(pathSway(i + 1) - sway, dy) * 180) / Math.PI
                       : 0;
+                  // PATH-CONNECT-PILL-001: the UP stub must point AT the
+                  // previous ring. The old sign mirrored the x-component,
+                  // so the up stubs leaned away from their neighbour — the
+                  // owner's "stray stub / none of the lines connect".
                   const upDeg =
-                    i > 0 ? (Math.atan2(sway - pathSway(i - 1), dy) * 180) / Math.PI : 0;
+                    i > 0 ? (Math.atan2(pathSway(i - 1) - sway, dy) * 180) / Math.PI : 0;
                   const style = {
                     "--path-fill": String(fill),
                     "--path-sway": `${sway}px`,
@@ -1644,6 +1668,28 @@ export function PathView({
                         data-fill={fill.toFixed(2)}
                         aria-hidden="true"
                       >
+                        {/* PATH-CONNECT-PILL-001 (R4): the visible track gets
+                            a head — a drawn flag cap on the first node of the
+                            open band, so the learner sees where the road
+                            STARTS instead of a mid-stream slice. */}
+                        {i === 0 ? (
+                          <span
+                            className="path-node-head"
+                            data-testid="path-head-cap"
+                            aria-hidden="true"
+                          >
+                            <svg viewBox="0 0 16 16" className="path-node-head-glyph">
+                              <path
+                                d="M8 14.6V3.2"
+                                fill="none"
+                                strokeWidth="1.6"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                              <path d="M8 1.6h6.4l-1.9 2.1 1.9 2.1H8z" fill="currentColor" />
+                            </svg>
+                          </span>
+                        ) : null}
                         {i > 0 ? <span className="path-conn path-conn--up" /> : null}
                         {i + 1 < s.nodes.length ? (
                           <span className="path-conn path-conn--down" />
@@ -1670,6 +1716,17 @@ export function PathView({
                             "✓"
                           ) : state === "review-due" ? (
                             <PathGlyph glyph="review" />
+                          ) : typedLetter ? (
+                            // PATH-CONNECT-PILL-001 (R5): the unit's own
+                            // head letter — data-glyph keeps the
+                            // PATH-NODE-TYPES-001 kind contract green.
+                            <span
+                              className="path-node-letter"
+                              data-glyph={n.kind}
+                              aria-hidden="true"
+                            >
+                              {typedLetter}
+                            </span>
                           ) : (
                             // ready / current / in-progress: the KIND
                             // pictogram replaces the old •/○/◉ text dot.

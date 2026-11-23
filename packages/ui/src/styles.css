@@ -2046,7 +2046,14 @@ th:last-child {
 .path-nodes {
   list-style: none;
   display: grid;
-  gap: 0.75rem;
+  /* PATH-CONNECT-PILL-001 (R1): the row pitch is PATH_ROW_PITCH_PX (76px)
+     and inviolable — every row box is exactly that tall and rows touch,
+     so consecutive ring centers sit exactly one nominal pitch apart and
+     the connector stubs (computed against that pitch) bridge ring to
+     ring. No in-flow element may grow a row; content overflow is bounded
+     to the row's own column so a long unlock hint can never push a
+     neighbor (or a connector) out of the lattice. */
+  gap: 0;
   margin: 0.5rem 0 0;
   padding: 0.25rem 0.5rem 0.5rem;
 }
@@ -2063,9 +2070,18 @@ th:last-child {
      the row box at the left extreme. The label column stays a
      straight, readable stack — the road winds, the text does not. */
   grid-template-columns: 6.75rem minmax(0, 1fr);
+  /* PATH-CONNECT-PILL-001 (R1): fixed row height AND a fixed single row
+     track = PATH_ROW_PITCH_PX. The old min-height let the start pill
+     inflate this row to 194px, and even with a fixed box an auto/1fr
+     track grows to a tall label stack (a 110px unlock-hint row pushed
+     that ring 19px off the lattice — 1fr alone is minmax(AUTO, 1fr)).
+     The track can never grow; a long label stack spills symmetrically
+     inside the text column only. */
+  grid-template-rows: minmax(0, 1fr);
   align-items: center;
   gap: 0.4rem;
-  min-height: 4.75rem;
+  height: 4.75rem;
+  position: relative;
   padding: 0.1rem 0.25rem;
   border-radius: 0.75rem;
 }
@@ -2154,24 +2170,29 @@ th:last-child {
   color: var(--ink-faint);
 }
 
-/* The road: dashed stubs angled from this ring toward the next one. */
+/* The road: dashed stubs angled from this ring toward the next one.
+   PATH-CONNECT-PILL-001 (R3+A2): each stub ANCHORS ON THE RING CENTER —
+   its rotated line IS the center-to-center segment, so the midpoint of
+   that segment always rides drawn dash pixels. Length 3.6rem reaches
+   under the neighbour ring's opaque fill (the next ring paints over the
+   stub end, tucking the road under the node). */
 .path-conn {
   position: absolute;
   left: 50%;
   width: 0;
-  height: 2.9rem;
+  height: 3.6rem;
   border-left: 3px dashed var(--line-strong);
   opacity: 0.7;
 }
 
 .path-conn--down {
-  top: calc(100% - 0.3rem);
+  top: 50%;
   transform: translateX(-50%) rotate(var(--path-conn-down, 0deg));
   transform-origin: top center;
 }
 
 .path-conn--up {
-  bottom: calc(100% - 0.3rem);
+  bottom: 50%;
   transform: translateX(-50%) rotate(var(--path-conn-up, 0deg));
   transform-origin: bottom center;
 }
@@ -2310,21 +2331,31 @@ th:last-child {
    market (a big accent capsule right on the node you stand on) painted
    ONLY with our tokens and calm posture — no pulse, no badge, no XP.
    The accent fill + #fff ink matches .btn--primary exactly, and the
-   44px floor keeps it a phone tap target (mobile-audit). */
+   44px floor keeps it a phone tap target (mobile-audit).
+   PATH-CONNECT-PILL-001 (R2): the pill is an OVERLAY — absolutely
+   positioned, vertically centered on the pinned row, ONE line, starting
+   right of the connector channel (6.75rem ring column + the row gap).
+   It can never inflate the row again. */
 .path-node-start {
+  position: absolute;
+  top: 50%;
+  left: 7.4rem;
+  right: 0.25rem;
+  transform: translateY(-50%);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-height: 2.75rem;
-  min-width: 10rem;
-  margin-top: 0.6rem;
-  padding: 0.7rem 1.5rem;
+  padding: 0.4rem 1.1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   background: var(--accent);
   border: 1px solid var(--accent);
   border-radius: 999px;
   color: #fff;
   font: inherit;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
   transition:
@@ -2341,7 +2372,68 @@ th:last-child {
   background: var(--accent-ink);
   border-color: var(--accent-ink);
   filter: brightness(0.92);
-  transform: scale(0.97);
+  transform: translateY(-50%) scale(0.97);
+}
+
+/* PATH-CONNECT-PILL-001: on the row the pill rides, the label stack
+   yields the row center to the capsule — title clamps to one line at
+   the top, "You are here" drops to the row's bottom edge (right of the
+   ring, R4), and the progress line stays in the ring's fill arc where
+   it is already encoded. */
+.path-node:has(.path-node-start) .path-node-body {
+  align-self: start;
+  /* the pill band is rows 16..60 of the fixed 76px box; lift the title
+     clear of it so the current lesson's name is fully readable */
+  margin-top: -0.35rem;
+}
+
+.path-node:has(.path-node-start) .path-node-title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.path-node:has(.path-node-start) .path-node-pin {
+  position: absolute;
+  left: 7.4rem;
+  right: 0.25rem;
+  bottom: 0.15rem;
+  font-size: 0.8rem;
+  line-height: 1.15;
+}
+
+.path-node:has(.path-node-start) .path-node-progress {
+  display: none;
+}
+
+/* PATH-CONNECT-PILL-001 (R5): the letters unit's OWN head letter, typed
+   (the shared "A" pictogram made every Cyrillic node identical). */
+.path-node-letter {
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* PATH-CONNECT-PILL-001 (R4): the drawn track head — a small flag above
+   the first ring of the open band, marking where the road starts. */
+.path-node-head {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 1px);
+  transform: translateX(-50%);
+  color: var(--accent);
+  pointer-events: none;
+}
+
+.path-node-head-glyph {
+  width: 1.15rem;
+  height: 1.15rem;
+  display: block;
+}
+
+.path-node--locked .path-node-head {
+  color: var(--ink-faint);
 }
 
 /* UNIT-CAPSTONE-001: the one calm fact line after a review — status

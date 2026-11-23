@@ -102,7 +102,7 @@ describe("browser history walk (WEB-HISTORY-001)", () => {
 
     // Starting the session opens its first activity in one action, but
     // history still learns both levels: session, then stage.
-    await app.click(app.button(app.section("Practice"), "Start today's plan"));
+    await app.click(app.button(app.section("Practice"), "Start ·"));
     await app.settle();
     expect(fake.stack).toEqual(["", "session", "session/stage"]);
     expect(fake.pos).toBe(2);
@@ -135,7 +135,7 @@ describe("browser history walk (WEB-HISTORY-001)", () => {
 
   it("forward re-enters the SAME activity the session is on — never the next one", async () => {
     app = await mountWithHistory();
-    await app.click(app.button(app.section("Practice"), "Start today's plan"));
+    await app.click(app.button(app.section("Practice"), "Start ·"));
     await app.settle();
 
     // Remember what the running activity shows, then pause via Back.
@@ -162,7 +162,7 @@ describe("browser history walk (WEB-HISTORY-001)", () => {
     await fake.fakeBack();
     await app.settle();
     expect(fake.top()).toBe("");
-    expect(app.text('[aria-label="Practice"]')).toContain("Start today's plan");
+    expect(app.text('[aria-label="Practice"]')).toContain("Start ·");
   });
 
   it("without the serve/harness flag nothing touches history (desktop unchanged)", async () => {
@@ -175,7 +175,7 @@ describe("browser history walk (WEB-HISTORY-001)", () => {
       }),
     );
     await app.click(app.button(app.section("Profiles"), "Dana"));
-    await app.click(app.button(app.section("Practice"), "Start today's plan"));
+    await app.click(app.button(app.section("Practice"), "Start ·"));
     await app.settle();
     // Only the unlabeled arrival entry — no replaceState label, no pushes.
     expect(fake.stack).toEqual([null]);

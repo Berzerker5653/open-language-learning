@@ -101,7 +101,7 @@ describe("a language change refreshes the learner context (U02)", () => {
 
     // A session over the Japanese plan is running: its queue items belong
     // to this pack, and answering them writes evidence for this pack.
-    await app.click(app.button(app.section("Practice"), "Start today's plan"));
+    await app.click(app.button(app.section("Practice"), "Start ·"));
     await app.settle();
     expect(document.querySelector('[aria-label="Lesson"]')).toBeTruthy();
 

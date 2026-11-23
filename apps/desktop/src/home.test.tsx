@@ -910,9 +910,12 @@ describe("start CTA moves to the pin when the path renders (TODAY-FIRSTSCREEN-00
     // The honest exit note stays with the plan (journey e: scope + exit
     // is ONE contract; the pill carries the scope, this line the exit).
     expect(html).toContain("One activity at a time");
-    expect((html.match(/Start today/g) ?? []).length).toBe(1);
+    // PATH-CONNECT-PILL-001 (R2): the pill is a one-line capsule now —
+    // "Start · N activities · ~M min". Still exactly one start CTA.
+    expect((html.match(/Start ·/g) ?? []).length).toBe(1);
+    expect(html).not.toContain("Start today's plan");
     // And the pill names its scope, exactly like the block it replaced.
-    expect(html).toContain("3 activities, about 2 minutes");
+    expect(html).toContain("3 activities · ~2 min");
   });
 
   it("keeps the begin block exactly where it was when no path renders", () => {

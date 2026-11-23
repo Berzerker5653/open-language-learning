@@ -4,8 +4,15 @@
 // are visible with their unlock hint, done units re-light when reviews are
 // due, and sections carry friendly names with CEFR as the small subtitle.
 import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
 import { renderToStaticMarkup } from "react-dom/server";
-import { PathView, pathNodeState, pathSections, type UnitPathNode } from "./home";
+import {
+  PathView,
+  pathNodeState,
+  pathSections,
+  pathTypedLetterGlyph,
+  type UnitPathNode,
+} from "./home";
 
 const node = (over: Partial<UnitPathNode>): UnitPathNode => ({
   pack_id: "org.openlanguage.ru-ru.reference",
@@ -916,5 +923,88 @@ describe("start pill rides the frontier pin (TODAY-FIRSTSCREEN-001)", () => {
     expect(html).toContain(
       'data-testid="capstone-start-capstone.org.openlanguage.ru-ru.reference.on-ramp"',
     );
+  });
+});
+
+// PATH-CONNECT-PILL-001 (owner dogfood 2026-11-23: "none of the lines
+// connect and you're starting in the middle"). The frozen contract lives
+// in state/notes/PATH-CONNECT-PILL-001.md: fixed row pitch, overlay start
+// pill, connector stubs bridging ring centers, a track head cap, and
+// per-unit typed glyphs. The live-geometry gates A1-A5 are the capture
+// harness (scripts/path-connect-pill-capture.mjs); these contracts pin
+// the markup + CSS rules that make that geometry possible.
+describe("track connects: pitch, pill overlay, head cap, typed glyphs (PATH-CONNECT-PILL-001)", () => {
+  const css = readFileSync(new URL("../../../packages/ui/src/styles.css", import.meta.url), "utf8");
+  const ruleBody = (selector: string): string => {
+    const esc = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const m = new RegExp(`^\\s*${esc}\\s*\\{([^}]*)\\}`, "m").exec(css);
+    if (!m) throw new Error(`styles.css must define a "${selector}" rule`);
+    return (m[1] ?? "").replace(/\s+/g, " ");
+  };
+
+  it("R1 CSS: rows are exactly PATH_ROW_PITCH_PX tall and touch (gap 0)", () => {
+    expect(ruleBody(".path-nodes")).toContain("gap: 0");
+    const row = ruleBody(".path-node");
+    expect(row).toContain("height: 4.75rem"); // = 76px = PATH_ROW_PITCH_PX
+    expect(row).toContain("grid-template-rows: minmax(0, 1fr)"); // the TRACK cannot grow
+    expect(row).toContain("position: relative");
+    expect(row).not.toContain("min-height: 4.75rem");
+  });
+
+  it("R3/A2 CSS: connector stubs anchor ON the ring center line", () => {
+    expect(ruleBody(".path-conn--down")).toContain("top: 50%");
+    expect(ruleBody(".path-conn--up")).toContain("bottom: 50%");
+    expect(ruleBody(".path-conn")).toContain("height: 3.6rem");
+  });
+
+  it("R2 CSS: the start pill is an absolutely-positioned one-line overlay", () => {
+    const pill = ruleBody(".path-node-start");
+    expect(pill).toContain("position: absolute");
+    expect(pill).toContain("white-space: nowrap");
+  });
+
+  it("R4: exactly one track head cap, on the FIRST node of the open band", () => {
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({ unit_id: "ru.unit.head", in_progress: true }),
+          node({ unit_id: "ru.unit.two" }),
+          node({ unit_id: "ru.unit.three", locked: true }),
+        ]}
+      />,
+    );
+    expect(html.match(/data-testid="path-head-cap"/g)).toHaveLength(1);
+    const firstRow = html.slice(
+      html.indexOf('data-unit="ru.unit.head"'),
+      html.indexOf('data-unit="ru.unit.two"'),
+    );
+    expect(firstRow).toContain('data-testid="path-head-cap"');
+  });
+
+  it("R5: letters units wear their OWN head letter, not the shared A pictogram", () => {
+    expect(pathTypedLetterGlyph("Printed Cyrillic: Б б, В в, Г г, Д д")).toBe("Б");
+    expect(pathTypedLetterGlyph("No colon here")).toBeNull();
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({
+            unit_id: "ru.unit.letters.a",
+            kind: "letters",
+            title: "Printed Cyrillic: А а, О о, М м, Т т",
+            in_progress: true,
+          }),
+          node({
+            unit_id: "ru.unit.letters.k",
+            kind: "letters",
+            title: "Printed Cyrillic: К к, Е е, Н н, С с",
+          }),
+        ]}
+      />,
+    );
+    expect(html).toContain('class="path-node-letter" data-glyph="letters"');
+    expect(html).toContain(">А</span>");
+    expect(html).toContain(">К</span>");
+    // The two open letter rings no longer share one identical drawing.
+    expect(html.match(/path-node-letter/g)!.length).toBe(2);
   });
 });
