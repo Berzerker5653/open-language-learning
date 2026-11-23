@@ -136,15 +136,7 @@ describe("home", () => {
     // with learning) live on the Progress tab as memory, never on the
     // Today screen as pressure. Unit-completion warmth lives on the
     // path card inside Home, and its own test asserts it is token-free.
-    for (const banned of [
-      "streak",
-      "day",
-      "attendance",
-      "points",
-      "heart",
-      "league",
-      "freeze",
-    ]) {
+    for (const banned of ["streak", "day", "attendance", "points", "heart", "league", "freeze"]) {
       expect(html.toLowerCase()).not.toContain(banned);
     }
     // "xp" needs word boundaries: prose like "explain" is not a point system.
@@ -913,10 +905,14 @@ describe("start CTA moves to the pin when the path renders (TODAY-FIRSTSCREEN-00
       <Home {...base} onStartSession={() => {}} pathNodes={pathNodes} />,
     );
     expect(html).toContain('data-testid="path-start-pill"');
-    // The old block is gone: no duplicate plan CTA anywhere on the screen.
+    // The old BLOCK is gone: no second plan CTA anywhere on the screen.
     expect(html).not.toContain("data-session-begin");
-    expect(html).not.toContain("One activity at a time");
+    // The honest exit note stays with the plan (journey e: scope + exit
+    // is ONE contract; the pill carries the scope, this line the exit).
+    expect(html).toContain("One activity at a time");
     expect((html.match(/Start today/g) ?? []).length).toBe(1);
+    // And the pill names its scope, exactly like the block it replaced.
+    expect(html).toContain("3 activities, about 2 minutes");
   });
 
   it("keeps the begin block exactly where it was when no path renders", () => {

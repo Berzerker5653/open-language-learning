@@ -2315,6 +2315,45 @@ th:last-child {
   transform: scale(0.97);
 }
 
+/* TODAY-FIRSTSCREEN-001 (MARKET NAVIGATION RULES): THE start pill,
+   anchored to the frontier node. Prominence grammar borrowed from the
+   market (a big accent capsule right on the node you stand on) painted
+   ONLY with our tokens and calm posture — no pulse, no badge, no XP.
+   The accent fill + #fff ink matches .btn--primary exactly, and the
+   44px floor keeps it a phone tap target (mobile-audit). */
+.path-node-start {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  min-width: 10rem;
+  margin-top: 0.6rem;
+  padding: 0.7rem 1.5rem;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  color: #fff;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) ease,
+    border-color var(--dur-fast) ease;
+}
+
+.path-node-start:hover {
+  background: var(--accent-ink);
+  border-color: var(--accent-ink);
+}
+
+.path-node-start:active {
+  background: var(--accent-ink);
+  border-color: var(--accent-ink);
+  filter: brightness(0.92);
+  transform: scale(0.97);
+}
+
 /* UNIT-CAPSTONE-001: the one calm fact line after a review — status
    copy, not a reward banner (ADR-0002). */
 .path-capstone-result {

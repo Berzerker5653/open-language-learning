@@ -318,6 +318,11 @@ export function Home(p: HomeProps) {
   // so the promise ADR-0020 §4 makes — the first three steps — is a
   // rendering guarantee, not a hope about the API.
   const firstRun = (p.firstRunSteps ?? []).slice(0, FIRST_RUN_MAX);
+  // TODAY-FIRSTSCREEN-001: when the path renders, the ONE plan CTA is the
+  // pill on the frontier pin (moved there by PathView, exact same label) —
+  // the mid-page begin block must not stand beside it. Without a declared
+  // path, Home keeps its own begin block exactly where it was.
+  const hasPath = (p.pathNodes?.length ?? 0) > 0;
   // `undefined` means home_state has not answered yet, and nothing is
   // claimed; `null` is the engine stating that the active pack declares
   // no goal map at all.
@@ -484,7 +489,7 @@ export function Home(p: HomeProps) {
             ) : null}
           </div>
         </section>
-      ) : p.plan.items.length > 0 && p.onStartSession ? (
+      ) : p.plan.items.length > 0 && p.onStartSession && !hasPath ? (
         <div className="session-begin">
           <button
             type="button"
@@ -502,6 +507,15 @@ export function Home(p: HomeProps) {
             rest stays on your plan.
           </p>
         </div>
+      ) : p.plan.items.length > 0 && p.onStartSession && hasPath ? (
+        // TODAY-FIRSTSCREEN-001: the begin BUTTON moved onto the frontier
+        // pin, but the honest exit note stays with the plan (journey e
+        // names scope + exit as one contract; the pill carries the scope,
+        // this line keeps the exit promise).
+        <p className="meta session-begin-note">
+          One activity at a time. You can stop at any point: what you finish is saved, and the rest
+          stays on your plan.
+        </p>
       ) : null}
       {p.plan.items.length === 0 ? (
         p.noPack ? null : (
@@ -602,6 +616,16 @@ export function Home(p: HomeProps) {
           nextOffer={p.nextOffer ?? null}
           onStartCapstone={p.onStartCapstone}
           capstoneResult={p.capstoneResult ?? null}
+          startPlan={p.plan.items.length > 0 ? p.onStartSession : undefined}
+          startPlanLabel={
+            p.plan.items.length > 0
+              ? `Start today's plan — ${p.plan.items.length} activities${
+                  planMinutesLabel(p.plan.total_seconds)
+                    ? `, ${planMinutesLabel(p.plan.total_seconds)}`
+                    : ""
+                }`
+              : undefined
+          }
         />
       ) : null}
       {p.nextGoal === undefined ? null : p.nextGoal === null ? (
@@ -1227,6 +1251,7 @@ export function PathView({
   onStartCapstone,
   capstoneResult,
   startPlan,
+  startPlanLabel,
 }: {
   nodes: UnitPathNode[];
   /// PATH-WHATSNEXT-001: when set (the after-session moment), the path
@@ -1247,12 +1272,11 @@ export function PathView({
   capstoneResult?: CapstoneResult | null;
   /// TODAY-FIRSTSCREEN-001: the whatsnext CTA moved onto the pin — when
   /// today's plan is startable, the pill on the frontier node runs it.
-  /// (Contract landed red-first in state/notes/TODAY-FIRSTSCREEN-001.md;
-  /// the pill renders in the code commit of this lane.)
   startPlan?: () => void;
+  /// TODAY-FIRSTSCREEN-001: the CTA's scope wording (journey e pins that
+  /// the begin action names how many activities and roughly how long).
+  startPlanLabel?: string;
 }) {
-  // Declared ahead of the pill render so the red contract compiles.
-  void startPlan;
   const sections = pathSections(nodes);
   // PATH-PIN-CONSISTENCY-001: the pin is WHERE THE LEARNER IS, not what
   // the plan suggests next. Two contradictory markers on one track (the
@@ -1270,6 +1294,29 @@ export function PathView({
   const pinnedBand = pinTarget
     ? sections.find((s) => s.nodes.some((n) => n.unit_id === pinTarget))?.band
     : undefined;
+  // TODAY-FIRSTSCREEN-001 (MARKET NAVIGATION RULES): the start action
+  // lives ON the frontier. One pill rides the pinned node's row — the
+  // whatsnext CTA moved here from mid-page Home, never duplicated.
+  // Primary: today's plan. Fallback when the plan has nothing to start:
+  // the pin's own section review, when one is unlocked and unpassed. A
+  // pinned capstone node never gets a pill — it already wears its own
+  // start control (UNIT-CAPSTONE-001), and two buttons on one node is
+  // the duplication this card bans.
+  const pinNode = pinTarget ? (nodes.find((n) => n.unit_id === pinTarget) ?? null) : null;
+  const pinSectionCap =
+    pinNode && pinNode.kind !== "capstone"
+      ? ((sections.find((s) => s.nodes.some((n) => n.unit_id === pinTarget))?.nodes ?? []).find(
+          (n) => n.kind === "capstone" && !n.locked && !n.done,
+        ) ?? null)
+      : null;
+  const pillMode: "plan" | "capstone" | null =
+    pinNode && pinNode.kind !== "capstone"
+      ? startPlan
+        ? "plan"
+        : pinSectionCap && onStartCapstone
+          ? "capstone"
+          : null
+      : null;
   // undefined = nobody has tapped yet, so the pinned section opens by
   // default; an explicit null collapses everything, an override re-opens
   // the tapped band even after the pack data refreshes underneath.
@@ -1622,6 +1669,28 @@ export function PathView({
                           >
                             Review due ({n.due_count})
                           </span>
+                        ) : null}
+                        {n.unit_id === pinTarget && pillMode ? (
+                          // TODAY-FIRSTSCREEN-001: THE start action, anchored
+                          // to where the learner stands — one tap from
+                          // app-open to the first question. The label keeps
+                          // the plan CTA's exact words; the fallback names
+                          // the only other startable thing for this unit.
+                          <button
+                            type="button"
+                            className="path-node-start"
+                            data-testid="path-start-pill"
+                            data-mode={pillMode}
+                            onClick={() =>
+                              pillMode === "plan"
+                                ? startPlan?.()
+                                : pinSectionCap && onStartCapstone?.(pinSectionCap)
+                            }
+                          >
+                            {pillMode === "plan"
+                              ? (startPlanLabel ?? "Start today's plan")
+                              : "Start section review"}
+                          </button>
                         ) : null}
                         {n.kind === "capstone" && !n.locked && !n.done && onStartCapstone ? (
                           // UNIT-CAPSTONE-001: the checkpoint's own action

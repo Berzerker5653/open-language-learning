@@ -499,9 +499,7 @@ describe("section capstone node (UNIT-CAPSTONE-001)", () => {
 
   it("renders a locked checkpoint with its gate hint and NO start control", () => {
     const html = renderToStaticMarkup(
-      <PathView
-        nodes={[node({ unit_id: "ru.unit.x", current: true }), cap({ locked: true })]}
-      />,
+      <PathView nodes={[node({ unit_id: "ru.unit.x", current: true }), cap({ locked: true })]} />,
     );
     expect(html).toContain('data-kind="capstone"');
     expect(html).toContain('data-state="locked"');
@@ -523,7 +521,9 @@ describe("section capstone node (UNIT-CAPSTONE-001)", () => {
     // from PATH-NODE-TYPES-001: locked nodes wear the lock, not the kind).
     expect(html).toContain('data-glyph="capstone"');
     expect(html).toContain("Start section review");
-    expect(html).toContain('data-testid="capstone-start-capstone.org.openlanguage.ru-ru.reference.on-ramp"');
+    expect(html).toContain(
+      'data-testid="capstone-start-capstone.org.openlanguage.ru-ru.reference.on-ramp"',
+    );
     expect(html).toContain("Section review");
   });
 
@@ -554,7 +554,13 @@ describe("section capstone node (UNIT-CAPSTONE-001)", () => {
     const pass = renderToStaticMarkup(
       <PathView
         nodes={[node({ unit_id: "ru.unit.x", current: true })]}
-        capstoneResult={{ passed: true, items: 16, correct: 13, friendly: "On-ramp", band: "on-ramp" }}
+        capstoneResult={{
+          passed: true,
+          items: 16,
+          correct: 13,
+          friendly: "On-ramp",
+          band: "on-ramp",
+        }}
       />,
     );
     expect(pass).toContain("Section complete — On-ramp");
@@ -563,7 +569,13 @@ describe("section capstone node (UNIT-CAPSTONE-001)", () => {
     const fail = renderToStaticMarkup(
       <PathView
         nodes={[node({ unit_id: "ru.unit.x", current: true })]}
-        capstoneResult={{ passed: false, items: 16, correct: 9, friendly: "On-ramp", band: "on-ramp" }}
+        capstoneResult={{
+          passed: false,
+          items: 16,
+          correct: 9,
+          friendly: "On-ramp",
+          band: "on-ramp",
+        }}
       />,
     );
     expect(fail).toContain(
@@ -594,7 +606,7 @@ describe("section capstone node (UNIT-CAPSTONE-001)", () => {
     );
     expect(before).toContain("1/2 done");
     const after = renderToStaticMarkup(
-      <PathView nodes={[node({ unit_id: "ru.unit.x", done: true }), cap({ done: true })]} />
+      <PathView nodes={[node({ unit_id: "ru.unit.x", done: true }), cap({ done: true })]} />,
     );
     expect(after).toContain("2/2 done");
   });
@@ -672,7 +684,9 @@ describe("unit-finish moment (WARM-MOMENTS-001)", () => {
   });
 
   it("the card carries warmth without any banned token", () => {
-    expect(pass).not.toMatch(/congrats|celebrat|\bxp\b|badge|league|\bpoints\b|heart|freeze|streak/i);
+    expect(pass).not.toMatch(
+      /congrats|celebrat|\bxp\b|badge|league|\bpoints\b|heart|freeze|streak/i,
+    );
   });
 
   it("an unpassed or failed review never fakes the moment", () => {
@@ -712,7 +726,7 @@ describe("start pill rides the frontier pin (TODAY-FIRSTSCREEN-001)", () => {
     expect(html).toContain('data-testid="path-start-pill"');
     expect(html.match(/data-testid="path-start-pill"/g)).toHaveLength(1);
     // The pill labels itself as the moved whatsnext CTA, same words.
-    expect(html).toContain("Start today&apos;s plan");
+    expect(html).toContain("Start today&#x27;s plan");
     // It rides the PIN row: the pill markup sits inside the pinned node's
     // <li> (before the next node's data-unit marker, after the pin label).
     const pinRow = html.slice(
@@ -761,7 +775,10 @@ describe("start pill rides the frontier pin (TODAY-FIRSTSCREEN-001)", () => {
       />,
     );
     const pill = /data-testid="path-start-pill"[^>]*>([^<]*)/.exec(html);
-    expect(pill, "pill on the pinned unit when only the section review is startable").not.toBeNull();
+    expect(
+      pill,
+      "pill on the pinned unit when only the section review is startable",
+    ).not.toBeNull();
     expect(pill![1]).toContain("Start section review");
     // The pill rides the pinned UNIT row, not the capstone row — the
     // capstone keeps its own control (next assertion: still exactly one).
