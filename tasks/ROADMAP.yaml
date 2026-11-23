@@ -3584,6 +3584,24 @@ tasks:
   - "Placement results land in a calm what-you-know band (eyebrow, matched count line, unlock note, honest zero-hit variant) with no celebration copy; Run again keeps its behavior."
   - "Every claim is pinned red-at-base by the new progress-feel vitest contract plus a feel-progress capture red at base and green after; motion-contract, a11y, loading-feel, progress, session-chrome, rtl-direction, and ADR-0002 scans stay green unedited."
   required_for_desktop_1_0: false
+- id: FEEL-ONBOARD-001
+  milestone: M11
+  priority: P1
+  title: Profile and onboarding flow feel - stepper completed-step state with drawn check and filled connectors, step-change card glide, real install progress bar, profile card hover plus app entry transition, deterministic avatar colors, warm first-run empty state
+  dependencies: [FEEL-GLOBAL-001, FEEL-LOADING-001]
+  read_first:
+  - state/notes/FEEL-ONBOARD-001.md
+  - packages/ui/src/styles.css
+  - apps/desktop/src/onboarding.tsx
+  - scripts/feel-progress-capture.mjs
+  acceptance:
+  - "Steps before the current one read as done - filled ok circle, drawn stroke check over 300ms, connector filling left→right over 250ms, and the active dot's soft accent ring fading in over 150ms; aria-current semantics and the no-stepper-on-resume rule unchanged."
+  - "Step cards enter with the step-in glide (opacity plus half-rem rise on --dur) so step changes move instead of hard-cutting."
+  - "The pack-install notice carries a real progress bar easing to each reported percent over --dur with progressbar aria values, and an honest indeterminate pulse-sweep with no claimed value when the engine sent no percent; no invented byte counts."
+  - "Profile cards lift on hover above the pinned press, entering the app after Continue/Start learning glides via app-in on the content page, and initials avatars vary deterministically per profile id across four existing token pairs with no new color tokens."
+  - "The resume chooser's no-profiles empty state is a warm designed block (dashed line-art ring, calm copy unchanged, fade-up) with no confetti or celebration layer."
+  - "Every claim is pinned red-at-base by the new onboard-feel vitest contract plus a feel-onboard capture red at base and green after; motion-contract, onboarding, a11y, loading-feel, session-chrome, rtl-direction, and ADR-0002 scans stay green unedited."
+  required_for_desktop_1_0: false
 
 execution_scope:
   default_goal: desktop-1.0-release-candidate
@@ -3610,6 +3628,7 @@ execution_scope:
   - FEEL-LOADING-001
   - FEEL-MYWORDS-001
   - FEEL-PROGRESS-001
+  - FEEL-ONBOARD-001
   - JA-A1-003
   - JA-A2-002
   - JA-A2-002-FIX-001

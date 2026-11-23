@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": null,
+  "active_task": "FEEL-ONBOARD-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3203,6 +3203,21 @@
         "state/evidence/FEEL-PROGRESS-001/capture-green-at-head.log",
         "state/evidence/FEEL-PROGRESS-001/result.json"
       ]
+    },
+    "FEEL-ONBOARD-001": {
+      "id": "FEEL-ONBOARD-001",
+      "status": "in_progress",
+      "title": "Profile and onboarding flow feel - stepper done-state motion, install progress bar, card hover + app entry, avatar variation, warm empty state",
+      "dependencies": [
+        "FEEL-GLOBAL-001",
+        "FEEL-LOADING-001"
+      ],
+      "attempts": 1,
+      "updated": "2026-11-23",
+      "evidence": [
+        "state/notes/FEEL-ONBOARD-001.md"
+      ],
+      "notes": "Card opened with frozen contract in state/notes/FEEL-ONBOARD-001.md; board card t_26f10c91."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
