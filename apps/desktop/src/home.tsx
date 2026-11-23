@@ -1059,6 +1059,17 @@ export function PathView({
 }) {
   const sections = pathSections(nodes);
   const pinnedBand = sections.find((s) => s.nodes.some((n) => n.current))?.band;
+  // FIX-PATH-VISUAL-001-1 single-caption policy: the engine may mark
+  // SEVERAL units current at once (they share the introduction pool —
+  // the owner's path had three), but the journey pins exactly ONE
+  // "You are here" caption: the FIRST current node in rendered
+  // (canonical-ladder) order — the learner reads the path top-down, so
+  // the topmost current node IS "here". The other current nodes keep
+  // their current ring styling (engine truth, never hidden) but render
+  // no caption, so captions can never stack and collide.
+  // Policy rationale lives in state/notes/FIX-PATH-VISUAL-001-1.md.
+  const pinTarget =
+    sections.flatMap((s) => s.nodes).find((n) => pathNodeState(n) === "current")?.unit_id ?? null;
   // undefined = nobody has tapped yet, so the pinned section opens by
   // default; an explicit null collapses everything, an override re-opens
   // the tapped band even after the pack data refreshes underneath.
@@ -1110,8 +1121,7 @@ export function PathView({
               <ol className="path-nodes">
                 {s.nodes.map((n, i) => {
                   const state = pathNodeState(n);
-                  const fill =
-                    n.refs_total > 0 ? Math.min(1, n.refs_done / n.refs_total) : 0;
+                  const fill = n.refs_total > 0 ? Math.min(1, n.refs_done / n.refs_total) : 0;
                   // The winding geometry: a deterministic sway wave, and
                   // dashed connector stubs whose angle rides the sway
                   // delta to the neighbours — stubs are attached to the
@@ -1166,8 +1176,10 @@ export function PathView({
                       </span>
                       <span className="path-node-body">
                         <span className="path-node-title">{n.title}</span>
-                        {state === "current" ? (
-                          <span className="path-node-pin">You are here</span>
+                        {state === "current" && n.unit_id === pinTarget ? (
+                          <span className="path-node-pin" data-testid="path-pin">
+                            You are here
+                          </span>
                         ) : null}
                         {state === "in-progress" ? (
                           <span className="path-node-progress">

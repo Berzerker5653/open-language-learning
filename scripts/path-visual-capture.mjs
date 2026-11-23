@@ -25,6 +25,12 @@
  *
  *   usage: SERVE_BIN=<path> SERVE_DIST=<dist dir> \
  *          node scripts/path-visual-capture.mjs
+ *
+ * FIX-PATH-VISUAL-001-1 adds two machine gates for the owner's phone
+ * complaints — ring/label bounding boxes must not intersect at ANY
+ * rendered node, and at most ONE 'You are here' caption may exist even
+ * when the engine marks several units current. OUT_DIR retargets the
+ * evidence dir so this card's shots land under their own card id.
  */
 import { spawn } from "node:child_process";
 import {
@@ -55,7 +61,7 @@ for (const [name, p] of [
   }
 }
 const REPO = resolve(import.meta.dirname, "..");
-const OUT = join(REPO, "state/evidence/PATH-VISUAL-001");
+const OUT = resolve(process.env.OUT_DIR ?? join(REPO, "state/evidence/PATH-VISUAL-001"));
 mkdirSync(OUT, { recursive: true });
 const PACK_ID = "org.openlanguage.ru-ru.reference";
 const PROFILE = "Journey Walker";
@@ -87,7 +93,9 @@ async function startServe() {
     try {
       const r = await fetch(`${BASE}/api/capabilities`);
       if (r.ok) return serve;
-    } catch {}
+    } catch {
+      // capabilities not up yet: retry next tick
+    }
     await sleep(250);
   }
   throw new Error(`serve did not answer capabilities:\n${serveLog.slice(-1200)}`);
@@ -133,7 +141,9 @@ try {
         try {
           const e = JSON.parse(line);
           if (e?.id) orthById.set(e.id, { symbol: e.symbol, reading: e.reading });
-        } catch {}
+        } catch {
+          // skip malformed lines
+        }
       }
     }
   }
@@ -210,7 +220,9 @@ try {
   // ---- API: the engine's honest picture. ----
   const nodes = (await api("unit_path", { profileId })).value ?? [];
   const doneNodes = nodes.filter((n) => n.done);
-  const inProg = nodes.filter((n) => n.in_progress && n.refs_done > 0 && n.refs_done < n.refs_total);
+  const inProg = nodes.filter(
+    (n) => n.in_progress && n.refs_done > 0 && n.refs_done < n.refs_total,
+  );
   const pinned = nodes.filter((n) => n.current);
   const locked = nodes.filter((n) => n.locked);
   check("a fully-drilled letter unit is DONE on the API", doneNodes.length >= 1, {
@@ -221,10 +233,16 @@ try {
     inProg.length >= 1,
     inProg.map((n) => ({ unit: n.unit_id, refs_done: n.refs_done, refs_total: n.refs_total })),
   );
-  check("the pin sits on a unit the learner started (never past real progress)",
-    pinned.length >= 1 &&
-      pinned.every((n) => n.in_progress || n.done || n.current),
-    pinned.map((n) => ({ unit: n.unit_id, in_progress: n.in_progress, refs_done: n.refs_done, refs_total: n.refs_total })));
+  check(
+    "the pin sits on a unit the learner started (never past real progress)",
+    pinned.length >= 1 && pinned.every((n) => n.in_progress || n.done || n.current),
+    pinned.map((n) => ({
+      unit: n.unit_id,
+      in_progress: n.in_progress,
+      refs_done: n.refs_done,
+      refs_total: n.refs_total,
+    })),
+  );
   check("units ahead of the visited pair stay locked", locked.length >= 1, {
     lockedSample: locked.slice(0, 2).map((n) => n.unit_id),
   });
@@ -233,8 +251,11 @@ try {
   // proven-done unit (the fully drilled one).
   const pinBand = pinned[0]?.band;
   const bandDone = nodes.filter((n) => n.band === pinBand && n.done).length;
-  check("the pinned section counts at least one proven-done unit (no 0-done-past-a-pin)",
-    bandDone >= 1, { pinBand, bandDone });
+  check(
+    "the pinned section counts at least one proven-done unit (no 0-done-past-a-pin)",
+    bandDone >= 1,
+    { pinBand, bandDone },
+  );
 
   // ---- browser: the real app on a phone viewport. ----
   const profileDir = mkdtempSync(join(tmpdir(), "lts-pathvisual-chrome-"));
@@ -344,8 +365,11 @@ try {
     await sleep(300);
     healthyStreak = (await homeHealthy()) ? healthyStreak + 1 : 0;
   }
-  check("home reached a stable pack-loaded state before measurement (no load flicker)",
-    healthyStreak >= 3, { healthyStreak });
+  check(
+    "home reached a stable pack-loaded state before measurement (no load flicker)",
+    healthyStreak >= 3,
+    { healthyStreak },
+  );
   if (healthyStreak < 3)
     throw new Error("navigation error: home never settled into a pack-loaded state");
 
@@ -388,10 +412,16 @@ try {
     };
   })()`);
   check("every open-section node renders a ring", dom.ringCount > 0, { ringCount: dom.ringCount });
-  check("the track WINDS: ring centers sway across the column (flat list would be 0)",
-    dom.xSpread >= 20, { xSpreadPx: dom.xSpread });
-  check("some current node's ring is FILLED to an honest fraction (never empty past real work)",
-    dom.currentFills.some((f) => parseFloat(f) > 0), { currentFills: dom.currentFills });
+  check(
+    "the track WINDS: ring centers sway across the column (flat list would be 0)",
+    dom.xSpread >= 20,
+    { xSpreadPx: dom.xSpread },
+  );
+  check(
+    "some current node's ring is FILLED to an honest fraction (never empty past real work)",
+    dom.currentFills.some((f) => parseFloat(f) > 0),
+    { currentFills: dom.currentFills },
+  );
   check(
     "started-but-unproven work is visible (in-progress node or a filled pin ring)",
     dom.inProgressCount > 0 || dom.currentFills.some((f) => parseFloat(f) > 0),
@@ -400,13 +430,81 @@ try {
   check("locked nodes carry a drawn lock glyph", dom.lockedWithGlyph >= 1, {
     lockedWithGlyph: dom.lockedWithGlyph,
   });
-  check("the open section is a banner with a friendly name and CEFR subtitle",
-    dom.bannerName.length > 0 && dom.bannerCefr.length > 0, dom.bannerName + " / " + dom.bannerCefr);
+  check(
+    "the open section is a banner with a friendly name and CEFR subtitle",
+    dom.bannerName.length > 0 && dom.bannerCefr.length > 0,
+    dom.bannerName + " / " + dom.bannerCefr,
+  );
   const claimedDone = Number((dom.sectionCount.match(/^(\d+)\//) ?? [])[1] ?? NaN);
   check(
     "the section counter counts PROVEN-DONE only (matches the API's done nodes)",
     Number.isFinite(claimedDone) && claimedDone >= 1 && claimedDone === bandDone,
     { domCounter: dom.sectionCount, apiBandDone: bandDone },
+  );
+
+  // ---- FIX-PATH-VISUAL-001-1 gates: measure the actual bounding boxes
+  // of every ring and every label element (the owner's two phone
+  // complaints: sway pulling rings over text, and stacked "You are
+  // here" captions). Sub-pixel edge touching under 1px is ignored —
+  // only real intersections fail the gate. ----
+  const geom = await evaluate(`(() => {
+    const rectOf = (el) => {
+      const b = el.getBoundingClientRect();
+      return { x: b.left, y: b.top, w: b.width, h: b.height };
+    };
+    const unitOf = (el) => el.closest('[data-unit]')?.getAttribute('data-unit') ?? '?';
+    const rings = [...document.querySelectorAll('.path-node-ring')].map((el) => ({
+      unit: unitOf(el),
+      ...rectOf(el),
+    }));
+    const labels = [...document.querySelectorAll(
+      '.path-node-title, .path-node-pin, .path-node-progress, .path-node-review, .path-node-hint',
+    )].map((el) => ({ unit: unitOf(el), cls: el.className, ...rectOf(el) }));
+    const overlaps = [];
+    let minClearance = Infinity;
+    for (const r of rings) {
+      for (const l of labels) {
+        const w = Math.min(r.x + r.w, l.x + l.w) - Math.max(r.x, l.x);
+        const h = Math.min(r.y + r.h, l.y + l.h) - Math.max(r.y, l.y);
+        if (w > 1 && h > 1)
+          overlaps.push({ ringUnit: r.unit, labelUnit: l.unit, label: l.cls, px: Math.round(w) + 'x' + Math.round(h) });
+        if (r.unit === l.unit && l.x > r.x) minClearance = Math.min(minClearance, l.x - (r.x + r.w));
+      }
+    }
+    return {
+      ringCount: rings.length,
+      labelCount: labels.length,
+      overlapCount: overlaps.length,
+      overlapSample: overlaps.slice(0, 6),
+      minClearance: Math.round(minClearance),
+      pinCount: document.querySelectorAll('.path-node-pin').length,
+      pinUnits: [...document.querySelectorAll('.path-node-pin')].map(unitOf),
+    };
+  })()`);
+  check(
+    "no ring box overlaps any node label at 390px (measured rects at every rendered node)",
+    geom.overlapCount === 0,
+    {
+      ringCount: geom.ringCount,
+      labelCount: geom.labelCount,
+      overlapCount: geom.overlapCount,
+      sample: geom.overlapSample,
+    },
+  );
+  check(
+    "the ring column contains the whole sway wave: ≥1px ring→label clearance on every node",
+    geom.minClearance >= 1,
+    { minClearancePx: geom.minClearance },
+  );
+  check(
+    "at most ONE 'You are here' caption renders even when several units are current",
+    geom.pinCount <= 1,
+    { domPins: geom.pinCount, pinUnits: geom.pinUnits, apiCurrent: pinned.map((n) => n.unit_id) },
+  );
+  check(
+    "the single caption really renders when the API marks a unit current",
+    pinned.length === 0 ? geom.pinCount === 0 : geom.pinCount === 1,
+    { domPins: geom.pinCount, apiCurrentCount: pinned.length },
   );
 
   await shot("path-journey-pin-region", true);

@@ -1388,7 +1388,16 @@ th:last-child {
 
 .path-node {
   display: grid;
-  grid-template-columns: 4rem minmax(0, 1fr);
+  /* FIX-PATH-VISUAL-001-1: the ring column must CONTAIN the whole sway
+     excursion. The wave reaches ±29px (34px amplitude rounded through
+     sin), and the widest ring is the current node's 3.5rem dial — its
+     right edge rides at columnCentre + 1.75rem + 29px. At the old 4rem
+     column the ring crossed ~15px into the label at sway peaks (the
+     owner's overlap complaint); 6.75rem keeps ≥3px clearance for even
+     the current ring at every node index, and the ring never leaves
+     the row box at the left extreme. The label column stays a
+     straight, readable stack — the road winds, the text does not. */
+  grid-template-columns: 6.75rem minmax(0, 1fr);
   align-items: center;
   gap: 0.4rem;
   min-height: 4.75rem;

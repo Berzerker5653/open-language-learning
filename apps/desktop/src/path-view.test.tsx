@@ -139,6 +139,37 @@ describe("unit path (PATH-VIEW-001)", () => {
     expect(html).toContain("path-conn--down");
     expect(html).toContain("path-conn--up");
   });
+
+  it("renders exactly ONE 'You are here' caption when three units share the current pool", () => {
+    // FIX-PATH-VISUAL-001-1 (owner dogfood 2026-11-22): three units
+    // share the introduction pool, so the engine marks all three
+    // current — and three stacked captions collided on the phone.
+    // Policy (state/notes/FIX-PATH-VISUAL-001-1.md): exactly one
+    // caption, on the FIRST current node in rendered (ladder) order;
+    // the other current nodes keep their current rings — engine truth
+    // stays visible, only the duplicate caption is suppressed.
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({ unit_id: "ru.unit.w.0" }),
+          node({ unit_id: "ru.unit.w.1", current: true, in_progress: true, refs_done: 1 }),
+          node({ unit_id: "ru.unit.w.2", current: true }),
+          node({ unit_id: "ru.unit.w.3", current: true }),
+        ]}
+      />,
+    );
+    expect(html.split("You are here").length - 1).toBe(1);
+    // The caption belongs to the topmost current node: it rides inside
+    // the first current node's markup, before the next node renders.
+    const firstCurrent = html.indexOf('data-testid="path-node-ru.unit.w.1"');
+    const pin = html.indexOf('data-testid="path-pin"');
+    const nextNode = html.indexOf('data-testid="path-node-ru.unit.w.2"');
+    expect(firstCurrent).toBeGreaterThan(-1);
+    expect(pin).toBeGreaterThan(firstCurrent);
+    expect(pin).toBeLessThan(nextNode);
+    // The other two current nodes are still engine-honest current rings.
+    expect(html.split('data-state="current"').length - 1).toBe(3);
+  });
 });
 
 // PATH-SECTIONS-DEDUP-001 (owner dogfood 2026-11-22 complaint 09a): the
