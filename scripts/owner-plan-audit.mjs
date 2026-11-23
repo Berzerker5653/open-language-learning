@@ -11,9 +11,7 @@
  * script invokes no write command.
  */
 import { spawn } from "node:child_process";
-import { mkdtempSync } from "node:fs";
-import { tmpdir } from "node:os";
-import { join, resolve } from "node:path";
+import { resolve } from "node:path";
 
 const SERVE_BIN = resolve(process.env.SERVE_BIN ?? "");
 const SERVE_DIST = resolve(process.env.SERVE_DIST ?? "");
@@ -42,36 +40,60 @@ async function api(command, body) {
   return { status: r.status, value: await r.json().catch(() => null) };
 }
 
-let code = 0;
+let code;
 try {
   for (let i = 0; i < 80; i++) {
     try {
       const r = await fetch(`${BASE}/api/capabilities`);
       if (r.ok) break;
-    } catch {}
+    } catch {
+      // capabilities not up yet: retry next tick
+    }
     await new Promise((r) => setTimeout(r, 250));
   }
 
   const profiles = await api("list_profiles", {});
   const list = Array.isArray(profiles.value) ? profiles.value : [];
-  console.log(JSON.stringify({ probe: "list_profiles", status: profiles.status, profiles: list.map((p) => ({ id: p.id, name: p.display_name, hidden: p.hidden ?? false })) }, null, 2));
+  console.log(
+    JSON.stringify(
+      {
+        probe: "list_profiles",
+        status: profiles.status,
+        profiles: list.map((p) => ({ id: p.id, name: p.display_name, hidden: p.hidden ?? false })),
+      },
+      null,
+      2,
+    ),
+  );
 
   const report = [];
   for (const p of list) {
     if (p.hidden) continue;
     const home = await api("home_state", { profileId: p.id });
     if (home.status !== 200) {
-      report.push({ profile: p.id, name: p.display_name, error: `home_state ${home.status}`, value: home.value });
+      report.push({
+        profile: p.id,
+        name: p.display_name,
+        error: `home_state ${home.status}`,
+        value: home.value,
+      });
       continue;
     }
     const items = home.value?.plan?.items ?? [];
-    const testLetters = items.filter((i) => i.content_id.startsWith("ru.orth.") && i.reason !== "progression");
+    const testLetters = items.filter(
+      (i) => i.content_id.startsWith("ru.orth.") && i.reason !== "progression",
+    );
     const audited = [];
     for (const i of testLetters) {
       const lp = await api("lesson_plan", { profileId: p.id, contentId: i.content_id });
       const stages = lp.value?.stages ?? [];
       const acted = stages.some((s) => s.done && s.stage_kind !== "encounter");
-      audited.push({ content_id: i.content_id, reason: i.reason, unit: lp.value?.unit_id ?? null, scored_stage_acted: acted });
+      audited.push({
+        content_id: i.content_id,
+        reason: i.reason,
+        unit: lp.value?.unit_id ?? null,
+        scored_stage_acted: acted,
+      });
     }
     const unencountered = audited.filter((a) => !a.scored_stage_acted);
     report.push({

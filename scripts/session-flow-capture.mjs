@@ -127,7 +127,6 @@ const check = (name, pass, measured) => {
   console.log(`${pass ? "PASS" : "FAIL"} ${name} — ${JSON.stringify(measured)}`);
 };
 
-let exitCode = 0;
 try {
   await send(
     "Emulation.setDeviceMetricsOverride",
@@ -217,7 +216,6 @@ try {
   }
 } catch (e) {
   check("gate", false, String(e));
-  exitCode = 1;
 }
 
 result.checks = checks;

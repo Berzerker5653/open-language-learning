@@ -24,14 +24,7 @@
  *          node scripts/path-sections-capture.mjs
  */
 import { spawn } from "node:child_process";
-import {
-  mkdirSync,
-  writeFileSync,
-  readFileSync,
-  mkdtempSync,
-  existsSync,
-  rmSync,
-} from "node:fs";
+import { mkdirSync, writeFileSync, readFileSync, mkdtempSync, existsSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 
@@ -61,9 +54,7 @@ const PORT = 17900 + (process.pid % 60);
 const BASE = `http://127.0.0.1:${PORT}`;
 
 // The pack-level truth: every unit -> exactly one band, zero unmapped.
-const audit = JSON.parse(
-  readFileSync(join(OUT, "unit-band-audit.json"), "utf8"),
-);
+const audit = JSON.parse(readFileSync(join(OUT, "unit-band-audit.json"), "utf8"));
 const auditSections = audit.sections; // { band: unitCount }
 
 const result = { viewport: `${VW}x${VH}`, checks: [], failures: 0, error: null };
@@ -89,7 +80,9 @@ async function startServe() {
     try {
       const r = await fetch(`${BASE}/api/capabilities`);
       if (r.ok) return serve;
-    } catch {}
+    } catch {
+      // capabilities not up yet: retry next tick
+    }
     await sleep(250);
   }
   throw new Error(`serve did not answer capabilities:\n${serveLog.slice(-1200)}`);
@@ -150,9 +143,9 @@ try {
   check("API sections carry NO duplicate band label", new Set(apiKeys).size === apiKeys.length, {
     bands: apiKeys,
   });
-  check("API section order is the canonical ladder",
-    apiKeys.join(",") === "on-ramp,a1,a2,b1,b2",
-    { order: apiKeys });
+  check("API section order is the canonical ladder", apiKeys.join(",") === "on-ramp,a1,a2,b1,b2", {
+    order: apiKeys,
+  });
   const countsMatch = Object.entries(auditSections).every(
     ([band, n]) => apiSections.find((s) => s.key === band)?.count === n,
   );
@@ -267,8 +260,11 @@ try {
     await sleep(300);
     healthyStreak = (await homeHealthy()) ? healthyStreak + 1 : 0;
   }
-  check("home reached a stable pack-loaded state before measurement (no load flicker)",
-    healthyStreak >= 3, { healthyStreak });
+  check(
+    "home reached a stable pack-loaded state before measurement (no load flicker)",
+    healthyStreak >= 3,
+    { healthyStreak },
+  );
   if (healthyStreak < 3)
     throw new Error("navigation error: home never settled into a pack-loaded state");
 
@@ -289,27 +285,36 @@ try {
     }));
   })()`);
   const domKeys = dom.map((s) => (s.band ?? "").trim().toLowerCase());
-  check("exactly ONE section header row per band in the DOM",
+  check(
+    "exactly ONE section header row per band in the DOM",
     new Set(domKeys).size === domKeys.length && domKeys.length >= 5,
-    { rows: domKeys.length, bands: domKeys });
-  check("DOM section order is the canonical ladder",
-    domKeys.join(",") === "on-ramp,a1,a2,b1,b2", { order: domKeys });
-  // Counters read "done/total units done" — the TOTAL is what dedup fixes.
-  const totals = Object.fromEntries(dom.map((s) => [
-    (s.band ?? "").trim().toLowerCase(),
-    Number((s.count.match(/\/(\d+)/) ?? [])[1] ?? NaN),
-  ]));
-  const domTotalsMatch = Object.entries(auditSections).every(
-    ([band, n]) => totals[band] === n,
+    { rows: domKeys.length, bands: domKeys },
   );
-  check("DOM per-band TOTALS match the pack audit (merged counts, no 0/3 strays)",
-    domTotalsMatch, { audit: auditSections, domTotals: totals });
-  check("no stray 0/3-style section exists (every total >= 20)",
+  check("DOM section order is the canonical ladder", domKeys.join(",") === "on-ramp,a1,a2,b1,b2", {
+    order: domKeys,
+  });
+  // Counters read "done/total units done" — the TOTAL is what dedup fixes.
+  const totals = Object.fromEntries(
+    dom.map((s) => [
+      (s.band ?? "").trim().toLowerCase(),
+      Number((s.count.match(/\/(\d+)/) ?? [])[1] ?? NaN),
+    ]),
+  );
+  const domTotalsMatch = Object.entries(auditSections).every(([band, n]) => totals[band] === n);
+  check("DOM per-band TOTALS match the pack audit (merged counts, no 0/3 strays)", domTotalsMatch, {
+    audit: auditSections,
+    domTotals: totals,
+  });
+  check(
+    "no stray 0/3-style section exists (every total >= 20)",
     dom.every((s) => Number((s.count.match(/\/(\d+)/) ?? [])[1] ?? 0) >= 20),
-    dom.map((s) => s.count));
-  check("section banners carry friendly name + CEFR subtitle",
+    dom.map((s) => s.count),
+  );
+  check(
+    "section banners carry friendly name + CEFR subtitle",
     dom.every((s) => s.name.length > 0 && (s.cefr.length > 0 || s.band === "on-ramp")),
-    dom.map((s) => `${s.name}/${s.cefr}`));
+    dom.map((s) => `${s.name}/${s.cefr}`),
+  );
 
   // One after-shot PER BAND header, and the shot is only trusted when the
   // header's own rect is provably inside the viewport at capture time
@@ -333,8 +338,11 @@ try {
     await sleep(250);
     await shot(`path-section-${key}-390`, true);
   }
-  check("every band header row was provably in-viewport for its own after-shot",
-    visible.length === 5 && visible.every((v) => v.inView), visible);
+  check(
+    "every band header row was provably in-viewport for its own after-shot",
+    visible.length === 5 && visible.every((v) => v.inView),
+    visible,
+  );
   if (!(await homeHealthy()))
     throw new Error("navigation error: home dropped pack state during the per-band shots");
   await shot("path-sections-full", false);

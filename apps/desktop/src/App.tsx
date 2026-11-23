@@ -11,13 +11,7 @@ import {
 } from "./onboarding";
 import { PracticeHub, type HubMode } from "./hub";
 import { remainingPlanSeconds, SessionChrome } from "./session-chrome";
-import {
-  fetchCapabilities,
-  httpInvoke,
-  inLtsServeMode,
-  subscribeServeProgress,
-  type ServeCapabilities,
-} from "./ipc";
+import { fetchCapabilities, httpInvoke, inLtsServeMode, subscribeServeProgress } from "./ipc";
 import {
   Home,
   type PackUpdate,

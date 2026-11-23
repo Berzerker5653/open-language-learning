@@ -13,6 +13,11 @@ export default tseslint.config(
       "tools/**",
       "audit/**",
       "tmp/**",
+      // Local capture-harness bundles and evidence scripts are dev
+      // artifacts (build outputs / recorded runs), not linted source.
+      "apps/desktop/dist-mobile/**",
+      "apps/desktop/dist-history/**",
+      "state/evidence/**",
     ],
   },
   js.configs.recommended,
@@ -25,6 +30,7 @@ export default tseslint.config(
       globals: {
         process: "readonly",
         console: "readonly",
+        fetch: "readonly",
         setTimeout: "readonly",
         Buffer: "readonly",
         WebSocket: "readonly",

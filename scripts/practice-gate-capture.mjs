@@ -109,13 +109,15 @@ async function seed() {
 }
 
 let chrome = null;
-let exitCode = 0;
+let exitCode;
 try {
   for (let i = 0; i < 80; i++) {
     try {
       const r = await fetch(`${BASE}/api/capabilities`);
       if (r.ok) break;
-    } catch {}
+    } catch {
+      // capabilities not up yet: retry next tick
+    }
     await new Promise((r) => setTimeout(r, 250));
   }
 

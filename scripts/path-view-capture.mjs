@@ -83,7 +83,9 @@ async function startServe() {
     try {
       const r = await fetch(`${BASE}/api/capabilities`);
       if (r.ok) return serve;
-    } catch {}
+    } catch {
+      // capabilities not up yet: retry next tick
+    }
     await sleep(250);
   }
   throw new Error(`serve did not answer capabilities:\n${serveLog.slice(-1200)}`);
@@ -139,7 +141,9 @@ try {
         try {
           const e = JSON.parse(line);
           if (e?.id) orthById.set(e.id, { symbol: e.symbol, reading: e.reading });
-        } catch {}
+        } catch {
+          // skip malformed lines
+        }
       }
     }
   }

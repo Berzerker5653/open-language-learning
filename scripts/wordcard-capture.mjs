@@ -259,6 +259,8 @@ chrome.kill();
 server.close();
 try {
   spawn("rm", ["-rf", profileDir], { stdio: "ignore" });
-} catch {}
+} catch {
+  // best-effort cleanup
+}
 console.log(result.ok ? "WORDCARD GATE PASS" : "WORDCARD GATE FAIL");
 process.exit(result.ok ? 0 : 1);

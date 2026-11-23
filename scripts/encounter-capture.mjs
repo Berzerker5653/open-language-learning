@@ -50,7 +50,6 @@ const REPO = resolve(import.meta.dirname, "..");
 const OUT = join(REPO, "state/evidence/ENCOUNTER-BEFORE-TEST-001");
 mkdirSync(OUT, { recursive: true });
 const PACK_ID = "org.openlanguage.ru-ru.reference";
-const UNIT_AOMT = "ru.unit.on-ramp.cyrillic-a-o-m-t";
 const VW = 390;
 const VH = 844;
 const PORT = 17800 + (process.pid % 90);
@@ -82,13 +81,15 @@ async function api(command, body) {
 }
 
 let chrome = null;
-let exitCode = 0;
+let exitCode;
 try {
   for (let i = 0; i < 80; i++) {
     try {
       const r = await fetch(`${BASE}/api/capabilities`);
       if (r.ok) break;
-    } catch {}
+    } catch {
+      // capabilities not up yet: retry next tick
+    }
     await new Promise((r) => setTimeout(r, 250));
   }
 
@@ -112,9 +113,9 @@ try {
     "lesson_plan carries the friendly-letter copy for А",
     explA.some((e) => e.startsWith("Friendly letter")),
     {
-      explanations: [
-        explA.find((e) => e.startsWith("Friendly letter")) ?? explA[0] ?? "",
-      ].filter(Boolean),
+      explanations: [explA.find((e) => e.startsWith("Friendly letter")) ?? explA[0] ?? ""].filter(
+        Boolean,
+      ),
     },
   );
   const lpN = await api("lesson_plan", { profileId, contentId: "ru.orth.cyrillic.n" });
@@ -122,11 +123,9 @@ try {
     .flatMap((s) => s.content ?? [])
     .map((c) => c.explanation ?? "");
   const nLine = explN.find((e) => e.startsWith("False friend") && e.includes("Н"));
-  check(
-    "lesson_plan carries the false-friend copy for Н",
-    nLine !== undefined,
-    { explanations: [nLine ?? explN[0] ?? ""].filter(Boolean) },
-  );
+  check("lesson_plan carries the false-friend copy for Н", nLine !== undefined, {
+    explanations: [nLine ?? explN[0] ?? ""].filter(Boolean),
+  });
 
   // ---- 4. test routes never outrun the encounter (API level) ----
   const home = await api("home_state", { profileId });
@@ -257,7 +256,8 @@ try {
       return true;
     })()`);
   }
-  if (!resumed) throw new Error("navigation error: profile chooser never offered 'Encounter Tester'");
+  if (!resumed)
+    throw new Error("navigation error: profile chooser never offered 'Encounter Tester'");
   await sleep(700);
 
   // Today -> start the plan; the FIRST session activity shows the lesson
@@ -338,11 +338,9 @@ try {
   if (!startClicked) throw new Error("navigation error: no [data-testid=lesson-start] button");
   await sleep(900);
   const calls = await evaluate(`(window.__enc ?? []).length`);
-  check(
-    "lesson 'Start practicing' fires encounter_complete exactly once per view",
-    calls === 1,
-    { calls },
-  );
+  check("lesson 'Start practicing' fires encounter_complete exactly once per view", calls === 1, {
+    calls,
+  });
 
   // The runner (not the encounter card) is now on-screen — the session
   // resumed at the encounter and moved on, never at a test the learner
