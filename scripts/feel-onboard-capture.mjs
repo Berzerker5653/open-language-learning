@@ -287,6 +287,7 @@ try {
       checkDasharray: path ? getComputedStyle(path).strokeDasharray : null,
     };
   })()`);
+  await shot("wizard-packs-step");
   check(
     "completed step reads done (ok dot, drawn check, filled connector)",
     !!doneState &&
@@ -321,17 +322,21 @@ try {
 
   // 6. app entry glide: Skip for now → finishOnboarding → the app arrives
   await clickByText("Skip for now");
-  await sleep(150); // mid-glide of the app page
-  const entry = await evaluate(`(() => {
-    const page = document.querySelector('main .page');
-    if (!page) return null;
-    const cs = getComputedStyle(page);
-    return {
-      hasClass: page.className.includes('app-enter'),
-      animationName: cs.animationName,
-      inWizard: !!document.querySelector('.stepper'),
-    };
-  })()`);
+  let entry = null;
+  for (let i = 0; i < 25; i++) {
+    await sleep(100);
+    entry = await evaluate(`(() => {
+      const page = document.querySelector('main .page');
+      if (!page) return null;
+      const cs = getComputedStyle(page);
+      return {
+        hasClass: page.className.includes('app-enter'),
+        animationName: cs.animationName,
+        inWizard: !!document.querySelector('.stepper'),
+      };
+    })()`);
+    if (entry && entry.hasClass && entry.animationName === "app-in") break;
+  }
   check(
     "entering the app glides (app-in on the content page, wizard gone)",
     !!entry && entry.hasClass && entry.animationName === "app-in" && !entry.inWizard,
