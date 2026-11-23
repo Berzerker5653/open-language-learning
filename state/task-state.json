@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": "FEEL-ONBOARD-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3206,7 +3206,7 @@
     },
     "FEEL-ONBOARD-001": {
       "id": "FEEL-ONBOARD-001",
-      "status": "in_progress",
+      "status": "done",
       "title": "Profile and onboarding flow feel - stepper done-state motion, install progress bar, card hover + app entry, avatar variation, warm empty state",
       "dependencies": [
         "FEEL-GLOBAL-001",
@@ -3215,9 +3215,17 @@
       "attempts": 1,
       "updated": "2026-11-23",
       "evidence": [
-        "state/notes/FEEL-ONBOARD-001.md"
+        "state/notes/FEEL-ONBOARD-001.md",
+        "state/evidence/FEEL-ONBOARD-001/gates.log",
+        "state/evidence/FEEL-ONBOARD-001/result.json",
+        "state/evidence/FEEL-ONBOARD-001/capture-green-at-head.log",
+        "state/evidence/FEEL-ONBOARD-001/capture-red-at-base.log",
+        "state/evidence/FEEL-ONBOARD-001/wizard-packs-step.png",
+        "state/evidence/FEEL-ONBOARD-001/install-bar.png",
+        "state/evidence/FEEL-ONBOARD-001/resume-cards.png",
+        "state/evidence/FEEL-ONBOARD-001/warm-empty.png"
       ],
-      "notes": "Card opened with frozen contract in state/notes/FEEL-ONBOARD-001.md; board card t_26f10c91."
+      "notes": "Shipped code dc4aac50 + stepper column-layout fix; capture red 0/11 at base vs green 11/11."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
