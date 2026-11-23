@@ -3479,6 +3479,23 @@ tasks:
   - "A passed attempt flips the node to done and the section header counts it with copy that stays honest for a non-unit node, calm only, no congrats, XP, or celebration tokens (ADR-0002)."
   - "Rust tests cover wire shape, lock ladder, pass flip, plan determinism, and score counting, while vitest covers the node grammar and the counter, with a serve capture proving the locked node on the live path."
   required_for_desktop_1_0: false
+- id: WARM-MOMENTS-001
+  milestone: M11
+  priority: P1
+  title: Calm-but-warm owner stance - ADR-0002 amended with the carve-out, quiet unit-finish moment on capstone pass, gentle facts on the Progress tab, banned-token tests re-scoped
+  dependencies: [UNIT-CAPSTONE-001]
+  read_first:
+  - state/notes/WARM-MOMENTS-001.md
+  - docs/adr/0002-no-streaks.md
+  - apps/desktop/src/home.tsx
+  - apps/desktop/src-tauri/src/lib.rs
+  acceptance:
+  - "ADR-0002 carries an amendment section for the calm-but-warm carve-out naming what is allowed (unit-completion celebration moment, gentle facts framed as memory with no break-punishment or freeze mechanics, optional soft sound cue) and what stays banned (xp and points, hearts and lives, leagues and leaderboards, streak counters, streak-freeze or repair, urgency and scarcity copy)."
+  - "A passed section review renders a quiet unit-finish moment on the path naming what was completed, the engine's recall counts and recall pool behind it, and the next section by its friendly name with its live lock state, with no congrats, XP, badge, or confetti-theater copy."
+  - "The Progress tab shows gentle facts (days with learning so far, units completed) from a new engine wire learning_facts counting distinct evidence dates and done non-capstone path nodes, framed as memory with an explicit no-debt note, and abstains when the numbers are unavailable."
+  - "Banned-token tests are re-scoped not deleted: Home, session chrome, and the plan-json asserts keep xp, points, league, heart, freeze, streak, and attendance banned, while the finish moment is asserted present AND token-free."
+  - "Rust tests cover learning_facts day counting and unit counting with the capstone excluded from units_done, vitest covers the finish moment and the gentle facts render plus token absence, with a red run at base recorded before the implementation."
+  required_for_desktop_1_0: false
 
 execution_scope:
   default_goal: desktop-1.0-release-candidate
@@ -3490,6 +3507,7 @@ execution_scope:
   - PACK-UPDATE-REPIN-001
   - PATH-NODE-TYPES-001
   - UNIT-CAPSTONE-001
+  - WARM-MOMENTS-001
   - PLAT-002
   - WEB-001
   - TTS-002
