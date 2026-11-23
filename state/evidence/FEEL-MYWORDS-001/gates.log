@@ -1,0 +1,41 @@
+== LANE gates FEEL-MYWORDS-001 (frontend-only lane; no Rust touched) ==
+
+$ npx tsc --noEmit  -> exit 0
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'tsc' --noEmit
+
+$ npx vitest run (full)  -> exit 0
+ Test Files  67 passed (67)
+      Tests  580 passed (580)
+
+$ npx eslint <touched>  -> exit 0
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'eslint' src/App.tsx src/words.tsx src/mywords-feel.test.tsx src/mywords-undo.test.tsx src/journeys/new-word-review.journey.tsx
+
+$ npx prettier --check <touched + sheet>  -> exit 0
+Checking formatting...
+All matched files use Prettier code style!
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'prettier' --check src/App.tsx src/words.tsx src/mywords-feel.test.tsx src/mywords-undo.test.tsx src/journeys/new-word-review.journey.tsx ../../packages/ui/src/styles.css
+
+$ python3 tools/audit_learner_copy.py  -> exit 0
+LEARNER COPY AUDIT v1.6.0: 39 source files scanned, 70 test files skipped, 1852 pack files scanned
+findings: 0
+
+Capture: scripts/feel-mywords-capture.mjs (real engine via lts-serve; only the mine_*
+legs faked in the page fetch layer — every other command rides the real engine)
+ - RED at base 036b89a6 (worktree scratch/lts-feel-mywords-red): 0/7 checks green
+   (capture-red-at-base.log): no cards (n:0), no pills (texts:[]), no chip,
+   no flash, no review motion.
+ - GREEN at HEAD 8df121be: 7/7 pass (capture-green-at-head.log), shots in this
+   dir + red/: card radius 8px + hairline border measured, pills "in 3 days" /
+   "tomorrow" / "new" with ::before clock glyph, remove -> chip present with ZERO
+   /api/mine_remove calls until t=6525ms (4 s chip life, fired exactly once),
+   UNDO tap cancels for good (row back, afterCancel:1), added row runs
+   fade-up + mine-arrive live, review card enters card-in / reveal rises fade-up.
+
+Note (takeover controller run, attempt 2): the code commit 8df121be and red
+contract b94a90c5 shipped in the dead run 207; this battery was re-run on the
+exact committed bytes at close (all green above). cargo gates not run (no Rust
+in lane). Guardrail suites motion-contract / button-affordance / loading-feel /
+rtl-direction / session-chrome all ride the 580-test green run unedited.

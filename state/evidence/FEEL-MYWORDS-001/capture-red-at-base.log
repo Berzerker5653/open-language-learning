@@ -1,0 +1,9 @@
+FAIL CARDS: word rows render as rounded surface cards with a hairline border — {"n":0}
+FAIL PILLS: friendly relative dates with a clock glyph; no raw ISO slice — {"texts":[],"newPills":[],"glyph":null}
+FAIL UNDO: the row leaves, the chip lives, and ZERO engine deletes have fired — {"clickedAt":-1,"chip":false,"chipText":"","removeCalls":[],"cards":0}
+FAIL UNDO: the delete lands only after the chip's 4 s life (measured call time) — {"removeCalls":[],"chip":false}
+FAIL UNDO: tapping the chip cancels the delete for good — {"cancelClicked":false,"undone":false,"afterCancel":0}
+FAIL FLASH: the landed add pulses once (fade-up + mine-arrive running live) — null
+FAIL MOTION: the review card enters with card-in and the reveal rises with fade-up — {"reviewOpen":null,"revealed":null}
+
+0/7 checks green

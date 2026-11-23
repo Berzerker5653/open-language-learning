@@ -1,0 +1,64 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "CARDS: word rows render as rounded surface cards with a hairline border",
+      "pass": false,
+      "measured": {
+        "n": 0
+      }
+    },
+    {
+      "name": "PILLS: friendly relative dates with a clock glyph; no raw ISO slice",
+      "pass": false,
+      "measured": {
+        "texts": [],
+        "newPills": [],
+        "glyph": null
+      }
+    },
+    {
+      "name": "UNDO: the row leaves, the chip lives, and ZERO engine deletes have fired",
+      "pass": false,
+      "measured": {
+        "clickedAt": -1,
+        "chip": false,
+        "chipText": "",
+        "removeCalls": [],
+        "cards": 0
+      }
+    },
+    {
+      "name": "UNDO: the delete lands only after the chip's 4 s life (measured call time)",
+      "pass": false,
+      "measured": {
+        "removeCalls": [],
+        "chip": false
+      }
+    },
+    {
+      "name": "UNDO: tapping the chip cancels the delete for good",
+      "pass": false,
+      "measured": {
+        "cancelClicked": false,
+        "undone": false,
+        "afterCancel": 0
+      }
+    },
+    {
+      "name": "FLASH: the landed add pulses once (fade-up + mine-arrive running live)",
+      "pass": false,
+      "measured": null
+    },
+    {
+      "name": "MOTION: the review card enters with card-in and the reveal rises with fade-up",
+      "pass": false,
+      "measured": {
+        "reviewOpen": null,
+        "revealed": null
+      }
+    }
+  ],
+  "failures": 7,
+  "profileId": "prof-f91ed1aa-70fa-4698-aef4-832cac9cc050"
+}

@@ -1,0 +1,9 @@
+PASS CARDS: word rows render as rounded surface cards with a hairline border — {"n":3,"radius":"8px","bg":"rgb(255, 253, 249)","border":"1px rgb(226, 218, 204)"}
+PASS PILLS: friendly relative dates with a clock glyph; no raw ISO slice — {"texts":["in 3 days","tomorrow","new"],"newPills":["new"],"glyph":"\"◷\""}
+PASS UNDO: the row leaves, the chip lives, and ZERO engine deletes have fired — {"clickedAt":2525,"chip":true,"chipText":"UNDO “дом”","removeCalls":[],"cards":2}
+PASS UNDO: the delete lands only after the chip's 4 s life (measured call time) — {"removeCalls":[{"id":"mine-cap-a","t":6525}],"chip":false}
+PASS UNDO: tapping the chip cancels the delete for good — {"cancelClicked":true,"undone":true,"afterCancel":1}
+PASS FLASH: the landed add pulses once (fade-up + mine-arrive running live) — {"anim":"fade-up, mine-arrive","n":3}
+PASS MOTION: the review card enters with card-in and the reveal rises with fade-up — {"reviewOpen":{"anim":"card-in"},"revealed":{"anim":"fade-up","text":"to hitMet in: ru.lesson.capsulesI knew it — back in ~3 daysA"}}
+
+7/7 checks green
