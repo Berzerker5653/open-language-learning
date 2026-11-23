@@ -60,6 +60,14 @@ Celebrate unit completions, show gentle facts (days active, units done), NO stre
 punishment/freezes, NO XP, NO leagues, NO hearts. ADR-0002 gets amended to carve out
 warm-but-non-manipulative moments; banned-token tests are re-scoped, not deleted.
 
+## Reference material convention for the FEEL work (added 2026-11-22, owner idea)
+Every FEEL card carries TWO oracles:
+1. TARGET mockups — ours, committed: state/evidence/FEEL-TARGETS-2026-11-22/
+2. MARKET contact sheets — real app screenshots from image-search grids, kept LOCAL
+   ONLY at ~/design-refs/lts-market/ (third-party images must never enter the public
+   repo); attached to the cards via kanban attachments.
+Workers match the market's feel using our own tokens + calm-but-warm posture.
+
 ## Recommendation split
 - **Ship now (A1–A6, B8-lite):** motion pass, pulse, open-at-current + jump-back
   arrow, typed node glyphs, unit-capstone review node (it's pedagogy, not gamification —
