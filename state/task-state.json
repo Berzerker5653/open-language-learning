@@ -3053,6 +3053,30 @@
         "state/evidence/PATH-FEEL-MOTION-001/path-motion-reduced.png",
         "state/notes/PATH-FEEL-MOTION-001.md"
       ]
+    },
+    "PATH-FEEL-SCROLL-001": {
+      "task_id": "PATH-FEEL-SCROLL-001",
+      "title": "Journey opens centered on the pinned unit; floating jump-to-my-spot arrow appears once the pin is scrolled away (viewport parity)",
+      "status": "done",
+      "attempts": 1,
+      "dependencies": [
+        "PATH-PIN-CONSISTENCY-001",
+        "PATH-FEEL-MOTION-001"
+      ],
+      "updated": "2026-11-23",
+      "summary": "Viewport parity shipped: the journey opens centered on the live pin (pin center 451 vs viewport 422 on the phone viewport) and a fixed 52px 'Jump to my spot' circle fades in bottom-right the moment the pinned node leaves the viewport (IntersectionObserver), arrow rotated toward my-spot (data-dir above/below measured both ways). Tap glides the pin back to center (411 vs 422) and the control hides. Red proof: same capture at HEAD fails the control checks (present:false) and aborts at the tap; green 11/11. vitest 497/497 (+2 markup tests), pin-consistency regression 10/10 over the patched DOM, tsc/eslint/prettier/learner-copy clean. Reduced motion: fade flattened by the global block, tap jumps instantly.",
+      "notes": "Frontend-only lane (home.tsx + styles.css + new scripts/path-scroll-capture.mjs), no Rust. ADR-0002 safe: navigation affordance, zero reward mechanics. Seed nuance + sticky-header scroll-end observation recorded in the notes file (out of scope, flagged).",
+      "evidence": [
+        "state/evidence/PATH-FEEL-SCROLL-001/gates.log",
+        "state/evidence/PATH-FEEL-SCROLL-001/result.json",
+        "state/evidence/PATH-FEEL-SCROLL-001/red-at-head/result.json",
+        "state/evidence/PATH-FEEL-SCROLL-001/pin-regression/result.json",
+        "state/evidence/PATH-FEEL-SCROLL-001/path-scroll-load.png",
+        "state/evidence/PATH-FEEL-SCROLL-001/path-scroll-away.png",
+        "state/evidence/PATH-FEEL-SCROLL-001/path-scroll-jumped.png",
+        "state/evidence/PATH-FEEL-SCROLL-001/path-scroll-below.png",
+        "state/notes/PATH-FEEL-SCROLL-001.md"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

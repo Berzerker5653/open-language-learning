@@ -3430,6 +3430,23 @@ tasks:
   - "Motion stays motion - no reward mechanics appear anywhere (ADR-0002), durations stay in the FEEL-TARGETS 120-300ms calm-but-warm family."
   required_for_desktop_1_0: false
 
+- id: PATH-FEEL-SCROLL-001
+  milestone: M11
+  priority: P1
+  title: Journey opens centered on the pinned unit and a floating jump-to-my-spot arrow appears once the pin is scrolled away (Duolingo parity for the viewport)
+  dependencies: [PATH-PIN-CONSISTENCY-001, PATH-FEEL-MOTION-001]
+  read_first:
+  - state/notes/PATH-FEEL-SCROLL-001.md
+  - state/notes/PATH-PIN-CONSISTENCY-001.md
+  - apps/desktop/src/home.tsx
+  - scripts/path-scroll-capture.mjs
+  acceptance:
+  - "On load the pinned node sits centered in the viewport (within 80px of center) on the phone viewport, measured by scripts/path-scroll-capture.mjs against a real engine, with the same script failing at HEAD as the red proof."
+  - "A floating jump control exists in the DOM from the first render but is HIDDEN while the pin is on screen, and becomes visible (computed opacity ~1, inside the viewport) once the pin scrolls out of view."
+  - "The arrow points toward my-spot (data-dir above or below matching the pin's side), and tapping it returns the pin centered while the control hides itself."
+  - "The control is a fixed 52px circle with an accessible label, uses only the existing tokens, respects prefers-reduced-motion, and adds zero reward mechanics (ADR-0002)."
+  required_for_desktop_1_0: false
+
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3446,6 +3463,7 @@ execution_scope:
   - POLISH-001
   - PATH-PIN-CONSISTENCY-001
   - PATH-FEEL-MOTION-001
+  - PATH-FEEL-SCROLL-001
   - JA-A1-003
   - JA-A2-002
   - JA-A2-002-FIX-001
