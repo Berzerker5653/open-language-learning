@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": "PATH-NODE-TYPES-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3081,17 +3081,25 @@
     "PATH-NODE-TYPES-001": {
       "task_id": "PATH-NODE-TYPES-001",
       "title": "Typed node glyphs by activity kind (letters, listening, speaking, words, review) replace identical circle dots, glyph never the only signal",
-      "status": "in_progress",
-      "attempts": 1,
+      "status": "done",
+      "attempts": 2,
       "dependencies": [
         "PATH-VISUAL-001",
         "PATH-PIN-CONSISTENCY-001"
       ],
       "updated": "2026-11-23",
-      "summary": "In progress: engine-derived node kind on the unit_path wire + aria-hidden SVG pictogram grammar (letter/headphones/mic/book, check stays for done, refresh arrow for review-due) + sr-only kind words; capture gate scripts/path-node-types-capture.mjs.",
-      "notes": "Frozen contract + honest RU-pack distribution (10 letters / 808 words) in state/notes/PATH-NODE-TYPES-001.md.",
+      "summary": "Shipped: the unit_path wire carries an engine-derived kind (letters|listening|speaking|words) per the frozen unit_kind derivation (activity data only; review stays a state). Ring center now shows aria-hidden SVG pictograms (letter A, headphones, mic, book; lock for locked, ✓ for done, refresh arrow for review-due) - the identical •/○/◉/⟳ text dots are gone. a11y floor: data-kind + sr-only kind word on every node, sr-only Completed on done/review nodes, all captions kept. Honest RU distribution 10 letters / 808 words.",
+      "notes": "Frozen contract + honest RU-pack distribution (10 letters / 808 words) in state/notes/PATH-NODE-TYPES-001.md. Attempt 1 timed out mid-lane at 80/80 iterations; attempt 2 verified the WIP green and finished the capture pair + gates. All four oral-bearing RU journey units are print-dominant, so the listening/speaking glyphs light up only when packs add oral-dominant units (ja greeting on-ramp unit qualifies).",
       "evidence": [
-        "state/notes/PATH-NODE-TYPES-001.md"
+        "state/notes/PATH-NODE-TYPES-001.md",
+        "state/evidence/PATH-NODE-TYPES-001/vitest-red-at-head.log",
+        "state/evidence/PATH-NODE-TYPES-001/rust-red-at-head.log",
+        "state/evidence/PATH-NODE-TYPES-001/rust-green-filter.log",
+        "state/evidence/PATH-NODE-TYPES-001/capture-red-at-head.log",
+        "state/evidence/PATH-NODE-TYPES-001/capture-green.log",
+        "state/evidence/PATH-NODE-TYPES-001/result.json",
+        "state/evidence/PATH-NODE-TYPES-001/path-node-types-home.png",
+        "state/evidence/PATH-NODE-TYPES-001/path-node-types-review.png"
       ]
     }
   },
