@@ -30,7 +30,7 @@
       "name": "UNDO: the row leaves, the chip lives, and ZERO engine deletes have fired",
       "pass": true,
       "measured": {
-        "clickedAt": 2525,
+        "clickedAt": 2706,
         "chip": true,
         "chipText": "UNDO “дом”",
         "removeCalls": [],
@@ -44,7 +44,7 @@
         "removeCalls": [
           {
             "id": "mine-cap-a",
-            "t": 6525
+            "t": 6707
           }
         ],
         "chip": false
@@ -82,5 +82,5 @@
     }
   ],
   "failures": 0,
-  "profileId": "prof-e6c7fc7e-39f5-4e2d-b9e4-de315e74af82"
+  "profileId": "prof-1a1fb37e-b799-4634-bdab-90e93511ab25"
 }

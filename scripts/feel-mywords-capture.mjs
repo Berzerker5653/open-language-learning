@@ -301,6 +301,12 @@ try {
       border: s.borderTopWidth + ' ' + s.borderTopColor,
     };
   })()`);
+  // Full-page capture renders a position:sticky header at whatever scroll
+  // offset the SPA session left behind (residue of clickByText's
+  // scrollIntoView), which pins the header band mid-page in the shot.
+  // Park at the top first so the at-rest oracle shows the real document.
+  await evaluate("window.scrollTo(0, 0)");
+  await sleep(150);
   await shot("my-words-at-rest", false); // full page: cards + pills
   check(
     "CARDS: word rows render as rounded surface cards with a hairline border",

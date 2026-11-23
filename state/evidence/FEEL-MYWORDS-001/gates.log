@@ -39,3 +39,19 @@ contract b94a90c5 shipped in the dead run 207; this battery was re-run on the
 exact committed bytes at close (all green above). cargo gates not run (no Rust
 in lane). Guardrail suites motion-contract / button-affordance / loading-feel /
 rtl-direction / session-chrome all ride the 580-test green run unedited.
+
+== CAPTURE-LAYER NOTE (controller close, re-run 2) ==
+The first full-page my-words-at-rest.png showed the site header band
+pinned mid-page with clipped buttons below it. NOT a lane regression:
+`header { position: sticky; top: 0 }` is pre-existing CSS (untouched,
+present at the red base too), and the full-page capture mode
+(captureBeyondViewport) renders sticky elements at the residual SPA scroll
+offset left by the harness's clickByText scrollIntoView. Viewport-only
+shots from the same run (mid-undo-chip, add-word-pulse, review-reveal)
+show the header correctly pinned at top with zero overlap. Harness fix:
+scrollTo(0,0) before the full-page shot; re-run green 7/7 and the re-shot
+oracle renders clean (header at top, no clipping, cards + pills correct).
+Known pre-existing cosmetic (red base too): at 390px the wrapped nav's
+teal underline sits under "Settings" while the active teal text is
+"My Words" — header markup, not this lane; candidate for a future
+chrome-polish card.
