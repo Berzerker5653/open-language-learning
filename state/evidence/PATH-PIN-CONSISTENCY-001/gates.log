@@ -1,0 +1,23 @@
+PATH-PIN-CONSISTENCY-001 gate log (2026-11-23, lane touched no Rust)
+
+RED (before fix): vitest src/path-view.test.tsx — 3 failed | 13 passed
+  - "pins the IN-PROGRESS unit even when the plan offers a later unit"
+  - "with nothing in progress, pins the FIRST not-done unit, not a later offered one"
+  - "shows a next-up offer that belongs to another unit as a header chip, never a second pin"
+
+GREEN (after fix): vitest src/path-view.test.tsx — 16/16
+vitest full suite apps/desktop — 494/494 (61 files)
+npm run -s typecheck — clean
+eslint src/home.tsx src/path-view.test.tsx — clean
+prettier --write (home.tsx reformatted; test + styles unchanged) — clean
+cargo test -p lts-desktop --lib — 230/230 on clean re-run
+  NOTE: first full run failed tests::dictation_check_matches_spoken_target with
+  "engine-error"; green standalone twice (main tree AND a HEAD worktree at
+  c0aa98c) and green on the full re-run => pre-existing ASR-under-parallel-load
+  flake, NOT this lane (this lane changed zero Rust).
+cargo test -p lts-storage — green
+cargo clippy --workspace --all-targets -- -D warnings — clean
+cargo fmt --all --check — clean
+python3 tools/audit_learner_copy.py — findings: 0
+python3 tools/validate_handoff.py — HANDOFF VALIDATION PASSED (2232 data files)
+node scripts/path-pin-consistency-capture.mjs — 10/10 PASS (see result.json)
