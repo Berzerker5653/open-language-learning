@@ -3011,6 +3011,27 @@
         "state/evidence/PACK-UPDATE-REPIN-001/capture/settings-before.png",
         "state/evidence/PACK-UPDATE-REPIN-001/capture/settings-after.png"
       ]
+    },
+    "PATH-PIN-CONSISTENCY-001": {
+      "task_id": "PATH-PIN-CONSISTENCY-001",
+      "title": "Exactly one journey pin, on the in-progress/first-not-done unit; the next-up offer rides a header chip, never the track pin",
+      "status": "done",
+      "attempts": 1,
+      "dependencies": [
+        "PATH-VISUAL-001",
+        "FIX-PATH-VISUAL-001-1"
+      ],
+      "updated": "2026-11-23",
+      "summary": "Pin ownership split: the pin is derived from unit state (first in-progress unit in band-ladder order, else first not-done unlocked unit), never from the plan pool; the engine's current flag keeps its honest current ring but can never produce a pin caption. A current_offer naming another unit renders as a .path-next-up chip between the 'Your path' header and the track (tap opens the band and jumps); no chip when the offer names the pinned unit. Auto-scroll on load centers the pin (a little before = context above visible); after-session scrollToUnit still owns the jump. Real-engine capture reproduced the owner mismatch spontaneously (3 units current, offer on r-v-u-kh, pin on stress-review 8/36 in progress): 10/10 gates at 390px. Red-first: 3 new vitest cases red->green; full suites green (vitest 494/494; cargo lib 230/230 after one pre-existing dictation ASR parallel-load flake proven green standalone at HEAD and on re-run).",
+      "notes": "Lane touched no Rust. home.tsx remains a hotspot (flagged before). The load-scroll gate measures the app's own behavior - the capture script scrolls nothing.",
+      "evidence": [
+        "state/evidence/PATH-PIN-CONSISTENCY-001/gates.log",
+        "state/evidence/PATH-PIN-CONSISTENCY-001/result.json",
+        "state/evidence/PATH-PIN-CONSISTENCY-001/path-pin-region.png",
+        "state/evidence/PATH-PIN-CONSISTENCY-001/path-pin-full.png",
+        "state/evidence/DOGFOOD-2026-11-22/complaint-10-path-branch-order.jpg",
+        "state/notes/PATH-PIN-CONSISTENCY-001.md"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
