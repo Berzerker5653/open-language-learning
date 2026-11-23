@@ -1,0 +1,25 @@
+   Compiling lts-scheduler v0.1.0 (/home/hunter/game-dev/LTS/crates/scheduler)
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.84s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-7647ca427c780ccc)
+
+running 1 test
+test tests::placement_coverage_names_why_a_rubric_has_no_question ... FAILED
+
+failures:
+
+---- tests::placement_coverage_names_why_a_rubric_has_no_question stdout ----
+
+thread 'tests::placement_coverage_names_why_a_rubric_has_no_question' (286665) panicked at apps/desktop/src-tauri/src/lib.rs:12248:9:
+assertion `left == right` failed: a listening rubric over a goal with no listening stage abstains
+  left: ("modality-unsupported", Some("builder-refused:comprehension-listening:ja.contrast.demo.vowel-length:unknown practice target"))
+ right: ("no-content", Some("no-activity-at-modality:listening:ja.goal.demo.kana-hiragana"))
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::placement_coverage_names_why_a_rubric_has_no_question
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 229 filtered out; finished in 0.72s
+
+error: test failed, to rerun pass `-p lts-desktop --lib`

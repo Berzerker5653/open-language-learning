@@ -1,0 +1,24 @@
+FIX-PLACEMENT-COVERAGE-001 — LANE gates, 2026-11-22T20:03:51-07:00, tree HEAD 12b920b + this lane
+
+== baseline red (pre-fix, after cargo clean -p lts-scheduler stale-rlib env artifact) ==
+command: cargo test -p lts-desktop --lib placement_coverage_names_why_a_rubric_has_no_question
+result: FAILED — left=("modality-unsupported", Some("builder-refused:comprehension-listening:ja.contrast.demo.vowel-length:unknown practice target"))
+        right=("no-content", Some("no-activity-at-modality:listening:ja.goal.demo.kana-hiragana"))
+red-at-baseline shas: c1ca2fe, 1451aef (PATH-VISUAL-001 controller); stranding merge: 2b13a7b (ORPHAN-CONTENT-001)
+repro log copied as repro-red-at-head.log
+
+== cargo fmt --all --check ==
+exit 0 (clean)
+
+== cargo test -p lts-desktop --lib (full, post-fix) ==
+exit 0 — test result: ok. 228 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 278.58s
+baseline-diff: pre-existing FAILED set was {placement_coverage_names_why_a_rubric_has_no_question} (227/228 green per PATH-VISUAL-001 gates.log); post-fix FAILED set is empty — equals baseline minus this test. Full log: test-full-lib.log
+
+== cargo clippy -p lts-desktop --all-targets -- -D warnings ==
+exit 0 — 0 errors. Log: clippy-lts-desktop.log
+
+== frontend gates ==
+skipped — lane touched no frontend files
+
+== RUN (this worker) CONTROLLER notes ==
+cargo clean -p lts-scheduler was run first (stale rlib from shared CARGO_TARGET_DIR worktree runs, per skill); not a lane change.

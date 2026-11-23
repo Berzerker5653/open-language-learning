@@ -2972,6 +2972,25 @@
         "state/evidence/FIX-PATH-VISUAL-001-1/path-journey-full.png",
         "state/notes/FIX-PATH-VISUAL-001-1.md"
       ]
+    },
+    "FIX-PLACEMENT-COVERAGE-001": {
+      "task_id": "FIX-PLACEMENT-COVERAGE-001",
+      "title": "Placement coverage abstention test rewritten to the post-ORPHAN-CONTENT-001 contract (HEAD-red mainline rot)",
+      "status": "done",
+      "attempts": 1,
+      "dependencies": [
+        "ORPHAN-CONTENT-001"
+      ],
+      "updated": "2026-11-22",
+      "summary": "Test tests::placement_coverage_names_why_a_rubric_has_no_question was HEAD-red (red at c1ca2fe and 1451aef) because 2b13a7b (ORPHAN-CONTENT-001) claimed the demo contrast onto the kana unit with a listen-and-choose listening activity, so the kana-listen rubric's abstention blocker moved from no-activity-at-modality to builder-refused over the contrast pair no comprehension runner serves. Engine semantics unchanged (runner table intentionally maps listen-and-choose+listening to comprehension-listening); test asserted the superseded fixture shape, so it was rewritten to the new contract, plus the sibling assertion's stale rationale string. lts-desktop --lib 228 passed / 0 failed / 2 ignored post-fix; fmt and clippy -p lts-desktop --all-targets -D warnings clean.",
+      "notes": "Stale-rlib env artifact (ERROR_REVIEW_SCHEDULER missing) ruled out first via cargo clean -p lts-scheduler. Whether placement should ever serve contrast discrimination pairs is an engine-roadmap question, deferred.",
+      "evidence": [
+        "state/evidence/FIX-PLACEMENT-COVERAGE-001/gates.log",
+        "state/evidence/FIX-PLACEMENT-COVERAGE-001/repro-red-at-head.log",
+        "state/evidence/FIX-PLACEMENT-COVERAGE-001/test-full-lib.log",
+        "state/evidence/FIX-PLACEMENT-COVERAGE-001/clippy-lts-desktop.log",
+        "state/notes/FIX-PLACEMENT-COVERAGE-001.md"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

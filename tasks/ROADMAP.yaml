@@ -3302,6 +3302,19 @@ tasks:
   - the single-caption rule is pinned by vitest path-view cases
   - LANE-tier gates over the touched packages
   required_for_desktop_1_0: false
+- id: FIX-PLACEMENT-COVERAGE-001
+  milestone: M11
+  priority: P2
+  title: Placement coverage abstention test rewritten to the post-ORPHAN-CONTENT-001 contract (HEAD-red mainline rot)
+  dependencies: [ORPHAN-CONTENT-001]
+  read_first:
+  - state/notes/FIX-PLACEMENT-COVERAGE-001.md
+  - state/evidence/FIX-PLACEMENT-COVERAGE-001/gates.log
+  acceptance:
+  - the named placement coverage test is green at HEAD asserting the new builder-refused contract for the listening rubric, not the superseded no-activity reason
+  - the lts-desktop lib suite FAILED set equals the pre-existing set minus this test, baseline-diffed in the gates log
+  - LANE-tier gates over the touched package logged in state/evidence/FIX-PLACEMENT-COVERAGE-001/gates.log
+  required_for_desktop_1_0: false
 - id: ORTHO-LETTER-UNITS-001
   milestone: M8
   priority: P1
@@ -3501,5 +3514,6 @@ execution_scope:
   - PATH-VISUAL-001
   - PATH-SECTIONS-DEDUP-001
   - FIX-PATH-VISUAL-001-1
+  - FIX-PLACEMENT-COVERAGE-001
   - RU-GOALS-SCRUB-001
   public_publication_authorized: false
