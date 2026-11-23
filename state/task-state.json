@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": "FEEL-SETTINGS-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3228,13 +3228,20 @@
       "notes": "Shipped code dc4aac50 + stepper column-layout fix; capture red 0/11 at base vs green 11/11."
     },
     "FEEL-SETTINGS-001": {
-      "status": "in_progress",
+      "status": "done",
       "attempts": 1,
       "updated": "2026-11-23",
       "title": "Settings screen consistency - desktop select styling, animated disclosures, contents jump row",
       "evidence": [
-        "state/notes/FEEL-SETTINGS-001.md"
-      ]
+        "state/notes/FEEL-SETTINGS-001.md",
+        "state/evidence/FEEL-SETTINGS-001/gates.log",
+        "state/evidence/FEEL-SETTINGS-001/result.json",
+        "state/evidence/FEEL-SETTINGS-001/capture-red-at-base.log",
+        "state/evidence/FEEL-SETTINGS-001/capture-green-at-head.log",
+        "state/evidence/FEEL-SETTINGS-001/settings-desk-after.png",
+        "state/evidence/FEEL-SETTINGS-001/settings-phone-after.png"
+      ],
+      "notes": "Shipped code 267f82c4 + capture harness c2e50d09; capture red 1/6 at base vs green 6/6; contract green with the 157-test stay-green set."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
