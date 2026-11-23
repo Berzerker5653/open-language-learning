@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": null,
+  "active_task": "FEEL-LOADING-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3163,6 +3163,11 @@
         "state/evidence/FEEL-DRILL-001/capture-green.log",
         "state/evidence/FEEL-DRILL-001/capture/result.json"
       ],
+      "updated": "2026-11-23"
+    },
+    "FEEL-LOADING-001": {
+      "status": "in_progress",
+      "attempts": 1,
       "updated": "2026-11-23"
     }
   },

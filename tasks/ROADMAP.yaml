@@ -3532,6 +3532,25 @@ tasks:
   - "Every new claim is pinned red-at-base by a new drill-feel vitest contract plus the capture; prefers-reduced-motion collapses every duration this card adds; the button-affordance pins, a11y contract, and ADR-0002 scans stay green unedited."
   required_for_desktop_1_0: false
 
+- id: FEEL-LOADING-001
+  milestone: M11
+  priority: P1
+  title: Loading and pending feedback across surfaces - skeleton rows while surface opens await IPC, reserved Progress layout, saved tick after Settings toggles, pending states for speech installs pairing and placement first fetch, styled pair result
+  dependencies: [FEEL-GLOBAL-001]
+  read_first:
+  - state/notes/FEEL-LOADING-001.md
+  - packages/ui/src/styles.css
+  - apps/desktop/src/settings.tsx
+  - apps/desktop/src/words.tsx
+  - scripts/feel-global-capture.mjs
+  acceptance:
+  - "Skeleton rows breathe in place while openWords/openSettings/openProgress await IPC - My Words shows no stale list and no false empty state mid-fetch, and Settings announces its six silent primes."
+  - "The Progress route renders reserved skeleton blocks in final order while loading, so staggered arrivals no longer jump the page - measured as a small document-height delta across the load in a real-engine capture."
+  - "A quiet check Saved status appears after each successful Settings toggle or select and fades on its own; the speech-model Download button reads Installing and every model button disables while an install is in flight."
+  - "The LAN Pair button cannot double-submit (disabled plus guard, one POST measured under a double-click) and the pair result renders as a styled notice or alert with live-region semantics."
+  - "Placement first fetch shows a disabled Starting state; every new claim is pinned red-at-base by a new loading-feel vitest contract plus the capture, and the prefers-reduced-motion flattening, button-affordance pins, a11y contract, and ADR-0002 scans stay green unedited."
+  required_for_desktop_1_0: false
+
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3554,6 +3573,7 @@ execution_scope:
   - PATH-FEEL-SCROLL-001
   - FEEL-GLOBAL-001
   - FEEL-DRILL-001
+  - FEEL-LOADING-001
   - JA-A1-003
   - JA-A2-002
   - JA-A2-002-FIX-001
