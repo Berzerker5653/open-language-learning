@@ -3496,6 +3496,23 @@ tasks:
   - "Banned-token tests are re-scoped not deleted: Home, session chrome, and the plan-json asserts keep xp, points, league, heart, freeze, streak, and attendance banned, while the finish moment is asserted present AND token-free."
   - "Rust tests cover learning_facts day counting and unit counting with the capstone excluded from units_done, vitest covers the finish moment and the gentle facts render plus token absence, with a red run at base recorded before the implementation."
   required_for_desktop_1_0: false
+- id: FEEL-GLOBAL-001
+  milestone: M11
+  priority: P1
+  title: App-wide motion foundation - duration easing spacing and z-index tokens, a four-keyframe library, pressed states and transitions on the shared classes, a gliding tab underline, smooth route scroll (ADR-0002 safe, reduced-motion honored)
+  dependencies: [PATH-FEEL-MOTION-001]
+  read_first:
+  - state/notes/FEEL-GLOBAL-001.md
+  - packages/ui/src/styles.css
+  - apps/desktop/src/button-affordance.test.ts
+  - scripts/path-motion-capture.mjs
+  acceptance:
+  - "The :root token layer carries --dur-fast, --dur, --dur-slow, --ease-* easings, a spacing scale, and a z-index scale, and every global z-index literal in styles.css rides the z tokens."
+  - "A four-keyframe library (fade-up, slide-up, pop, pulse-soft) drives the entering feedback surfaces - notices, verdict, choice ring, session bridge, the mobile word-card sheet, and the jump-to-pin arrow."
+  - "Pressed states exist on .btn, .btn--primary, .tab, .seg-btn, .card and .profile-card, and the shared classes carry transitions in the 120-300ms ease-out family - pinned by a new motion-contract vitest with a red run at base."
+  - "The route-tab underline becomes one gliding indicator measured MID-SLIDE by scripts/feel-global-capture.mjs against a real engine, and the route-change scrollTo reset is smooth."
+  - "With prefers-reduced-motion reduce emulated every duration this card adds collapses to ~0, while the button-affordance rule-body pins, the a11y focus and contrast contract, and the ADR-0002 banned-token scans stay green unedited."
+  required_for_desktop_1_0: false
 
 execution_scope:
   default_goal: desktop-1.0-release-candidate
@@ -3517,6 +3534,7 @@ execution_scope:
   - PATH-PIN-CONSISTENCY-001
   - PATH-FEEL-MOTION-001
   - PATH-FEEL-SCROLL-001
+  - FEEL-GLOBAL-001
   - JA-A1-003
   - JA-A2-002
   - JA-A2-002-FIX-001

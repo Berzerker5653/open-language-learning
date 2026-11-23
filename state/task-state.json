@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": null,
+  "active_task": "FEEL-GLOBAL-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3135,6 +3135,16 @@
       "updated": "2026-11-23",
       "summary": "Calm-but-warm shipped: ADR-0002 amended (carve-out + still-banned list), quiet unit-finish card on capstone pass (what you learned / next section live lock state, token-free), gentle facts on Progress via new learning_facts wire (distinct evidence dates; done non-capstone nodes), banned-token tests re-scoped and grown, red-first pair banked. time learned and sound cue honestly deferred per notes.",
       "notes": "Sound cue permitted not shipped; time learned waits for a real session-close recorder (sessions table has no writer)."
+    },
+    "FEEL-GLOBAL-001": {
+      "status": "in_progress",
+      "attempts": 1,
+      "title": "App-wide motion foundation - tokens, keyframe library, pressed states, gliding tab underline, smooth route scroll",
+      "evidence": [
+        "state/notes/FEEL-GLOBAL-001.md"
+      ],
+      "updated": "2026-11-23",
+      "summary": "In progress on board card t_647b2aec."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
