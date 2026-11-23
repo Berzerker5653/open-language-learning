@@ -1,0 +1,80 @@
+{
+  "viewport": "390x844",
+  "latency_ms": 900,
+  "checks": [
+    {
+      "name": "MY WORDS: skeleton rows mid-prime, no false empty state",
+      "pass": false,
+      "measured": {
+        "rows": 0,
+        "live": false,
+        "stale": true
+      }
+    },
+    {
+      "name": "SETTINGS: loading strip mid-prime",
+      "pass": false,
+      "measured": {
+        "strip": false,
+        "rows": 0
+      }
+    },
+    {
+      "name": "PROGRESS: reserved shell holds one stable height; settle adds at most two reflows",
+      "pass": false,
+      "measured": {
+        "shells": 0,
+        "live": false,
+        "height": 1629,
+        "reflow_steps": 0,
+        "heights": [
+          1629
+        ]
+      }
+    },
+    {
+      "name": "SAVED TICK: quiet live confirmation appears only after the write lands",
+      "pass": false,
+      "measured": {
+        "mid_flight": false,
+        "after": null
+      }
+    },
+    {
+      "name": "INSTALL: model button reads Installing (aria-busy) with siblings disabled",
+      "pass": false,
+      "measured": {
+        "text": null,
+        "busy": false,
+        "liveSiblings": 3
+      }
+    },
+    {
+      "name": "PAIR: one POST for a double-click, answer styled .alert with live semantics",
+      "pass": false,
+      "measured": {
+        "posts": 2,
+        "message": {
+          "cls": "",
+          "role": null,
+          "live": null
+        }
+      }
+    },
+    {
+      "name": "PLACEMENT: first fetch shows Starting… disabled",
+      "pass": false,
+      "measured": {
+        "text": "Start placement",
+        "disabled": false
+      }
+    }
+  ],
+  "failures": 7,
+  "profileId": "prof-5bda07a9-4d6e-493f-96b6-6dc12d0fe71f",
+  "pairMessage": {
+    "cls": "",
+    "role": null,
+    "live": null
+  }
+}

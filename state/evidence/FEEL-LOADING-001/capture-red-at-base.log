@@ -1,0 +1,9 @@
+feel-loading-capture.mjs at base commit 6710a9d3 (red tests committed, implementation absent)
+CAPTURE RED: 7/7 checks failed
+FAIL MY WORDS: skeleton rows mid-prime, no false empty state — {"rows": 0, "live": false, "stale": true}
+FAIL SETTINGS: loading strip mid-prime — {"strip": false, "rows": 0}
+FAIL PROGRESS: reserved shell holds one stable height; settle adds at most two reflows — {"shells": 0, "live": false, "height": 1629, "reflow_steps": 0, "heights": [1629]}
+FAIL SAVED TICK: quiet live confirmation appears only after the write lands — {"mid_flight": false, "after": null}
+FAIL INSTALL: model button reads Installing (aria-busy) with siblings disabled — {"text": null, "busy": false, "liveSiblings": 3}
+FAIL PAIR: one POST for a double-click, answer styled .alert with live semantics — {"posts": 2, "message": {"cls": "", "role": null, "live": null}}
+FAIL PLACEMENT: first fetch shows Starting… disabled — {"text": "Start placement", "disabled": false}

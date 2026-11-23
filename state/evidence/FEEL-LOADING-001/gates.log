@@ -1,0 +1,31 @@
+== LANE gates FEEL-LOADING-001 (frontend-only lane; no Rust touched) ==
+
+$ npx tsc --noEmit  -> exit 0
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'tsc' --noEmit
+
+$ npx vitest run (full)  -> exit 0
+[2m Test Files [22m [1m[32m65 passed[39m[22m[90m (65)[39m
+[2m      Tests [22m [1m[32m564 passed[39m[22m[90m (564)[39m
+
+$ npx eslint <touched>  -> exit 0
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'eslint' src/App.tsx src/settings.tsx src/words.tsx src/loading-feel.test.tsx
+
+$ npx prettier --check <touched + sheet>  -> exit 0
+Checking formatting...
+All matched files use Prettier code style!
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'prettier' --check src/App.tsx src/settings.tsx src/words.tsx src/loading-feel.test.tsx ../../packages/ui/src/styles.css
+
+$ python3 tools/audit_learner_copy.py  -> exit 0
+findings: 0
+
+Capture: scripts/feel-loading-capture.mjs (real engine, fetch-latency injection 900ms)
+ - RED at base 6710a9d3: 7/7 checks failed (capture-red-at-base.log)
+   stale list mid-fetch confirmed (stale:true), pair double-POST confirmed (posts:2),
+   pair message unstyled (cls:""), install buttons live mid-install (liveSiblings:3),
+   Start placement enabled mid-fetch.
+ - GREEN at HEAD: 7/7 pass (capture-green-at-head.log), shots in this dir + red/.
+Note: tsc/vitest/eslint/prettier were re-run on the exact committed bytes after the
+final prettier --write on loading-feel.test.tsx; cargo gates not run (no Rust in lane).

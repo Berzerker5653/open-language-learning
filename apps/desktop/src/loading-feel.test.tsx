@@ -299,7 +299,9 @@ describe("FEEL-LOADING-001 App container wires the loading flags", () => {
   });
 
   it("a speech install marks the model installing around the IPC call", () => {
-    const fn = /async function installSpeechModel\(modelId: string\) \{[\s\S]*?\n {2}\}/.exec(appTsx);
+    const fn = /async function installSpeechModel\(modelId: string\) \{[\s\S]*?\n {2}\}/.exec(
+      appTsx,
+    );
     expect(fn, "installSpeechModel must exist").not.toBeNull();
     expect(fn![0]).toContain("setInstallingSpeechModel(modelId)");
     expect(fn![0]).toMatch(/finally[\s\S]*setInstallingSpeechModel\(null\)/);

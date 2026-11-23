@@ -1,0 +1,9 @@
+PASS MY WORDS: skeleton rows mid-prime, no false empty state — {"rows":3,"live":true,"stale":false}
+PASS SETTINGS: loading strip mid-prime — {"strip":true,"rows":3}
+PASS PROGRESS: reserved shell holds one stable height; settle adds at most two reflows — {"shells":5,"live":true,"height":1277,"reflow_steps":1,"heights":[1277,22903]}
+PASS SAVED TICK: quiet live confirmation appears only after the write lands — {"mid_flight":false,"after":{"role":"status","text":"✓ Saved"}}
+PASS INSTALL: model button reads Installing (aria-busy) with siblings disabled — {"text":"Installing…","busy":true,"liveSiblings":0}
+PASS PAIR: one POST for a double-click, answer styled .alert with live semantics — {"posts":1,"message":{"cls":"alert","role":"alert","live":"polite"}}
+PASS PLACEMENT: first fetch shows Starting… disabled — {"text":"Starting…","disabled":true}
+
+CAPTURE GREEN (0 failures)
