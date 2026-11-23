@@ -1,0 +1,10 @@
+FAIL every unit_path node carries a kind in {letters, listening, speaking, words} — {"nodes":818,"kinds":{"undefined":818}}
+FAIL the printed-Cyrillic ramp units arrive as letters nodes — {"cyrillic":10,"sample":["ru.unit.on-ramp.cyrillic-a-o-m-t:undefined","ru.unit.on-ramp.cyrillic-k-e-n-s:undefined","ru.unit.on-ramp.cyrillic-r-v-u-kh:undefined"]}
+FAIL the reading/writing vocabulary ramp unit arrives as a words node — {"kind":null}
+PASS the scene seeded: one letters unit drilled fully toward DONE (real ✓ + review states follow) — {"drilled":4,"refs":4}
+FAIL the drilled letters unit is DONE and review-DUE on the wire (states for the DOM checks) — {"done":true,"review_due":true}
+FAIL every rendered node exposes data-kind, one drawn center mark, and its screen-reader kind word — {"count":20,"bad":{"noKind":20,"wrongKindWord":20,"centerMarks":19,"dotSurvivors":10}}
+FAIL no identical text-dot circles (•/○/◉/⟳) survive on the track — {"markers":20,"dotSurvivors":10}
+FAIL the review-due letters node wears the refresh pictogram BESIDE its Review due caption — {"present":true,"state":"review-due","reviewGlyph":false,"reviewCaption":true,"completedWord":false,"letterWord":false}
+FAIL the review-due node still names its kind (Letters) to the screen reader — {"present":true,"state":"review-due","reviewGlyph":false,"reviewCaption":true,"completedWord":false,"letterWord":false}
+FAIL the review-due node (done + due) wears the review layer; Completed word present — {"doneNode":{"present":false},"seededCompleted":false}

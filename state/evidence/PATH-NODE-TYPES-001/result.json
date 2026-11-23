@@ -1,0 +1,118 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "every unit_path node carries a kind in {letters, listening, speaking, words}",
+      "pass": true,
+      "measured": {
+        "nodes": 818,
+        "kinds": {
+          "words": 808,
+          "letters": 10
+        }
+      }
+    },
+    {
+      "name": "the printed-Cyrillic ramp units arrive as letters nodes",
+      "pass": true,
+      "measured": {
+        "cyrillic": 10,
+        "sample": [
+          "ru.unit.on-ramp.cyrillic-a-o-m-t:letters",
+          "ru.unit.on-ramp.cyrillic-k-e-n-s:letters",
+          "ru.unit.on-ramp.cyrillic-r-v-u-kh:letters"
+        ]
+      }
+    },
+    {
+      "name": "the reading/writing vocabulary ramp unit arrives as a words node",
+      "pass": true,
+      "measured": {
+        "kind": "words"
+      }
+    },
+    {
+      "name": "the scene seeded: one letters unit drilled fully toward DONE (real ✓ + review states follow)",
+      "pass": true,
+      "measured": {
+        "drilled": 4,
+        "refs": 4
+      }
+    },
+    {
+      "name": "the drilled letters unit is DONE and review-DUE on the wire (states for the DOM checks)",
+      "pass": true,
+      "measured": {
+        "done": true,
+        "review_due": true,
+        "kind": "letters"
+      }
+    },
+    {
+      "name": "every rendered node exposes data-kind, one drawn center mark, and its screen-reader kind word",
+      "pass": true,
+      "measured": {
+        "count": 20,
+        "bad": {
+          "noKind": 0,
+          "wrongKindWord": 0,
+          "centerMarks": 0,
+          "dotSurvivors": 0
+        }
+      }
+    },
+    {
+      "name": "no identical text-dot circles (•/○/◉/⟳) survive on the track",
+      "pass": true,
+      "measured": {
+        "markers": 20,
+        "dotSurvivors": 0
+      }
+    },
+    {
+      "name": "the review-due letters node wears the refresh pictogram BESIDE its Review due caption",
+      "pass": true,
+      "measured": {
+        "present": true,
+        "state": "review-due",
+        "kind": "letters",
+        "reviewGlyph": true,
+        "reviewCaption": true,
+        "completedWord": true,
+        "letterWord": true
+      }
+    },
+    {
+      "name": "the review-due node still names its kind (Letters) to the screen reader",
+      "pass": true,
+      "measured": {
+        "present": true,
+        "state": "review-due",
+        "kind": "letters",
+        "reviewGlyph": true,
+        "reviewCaption": true,
+        "completedWord": true,
+        "letterWord": true
+      }
+    },
+    {
+      "name": "the review-due node (done + due) wears the review layer; Completed word present",
+      "pass": true,
+      "measured": {
+        "doneNode": {
+          "present": false
+        },
+        "seededCompleted": true
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-267c5872-3435-42a6-933d-9f8d08eee262",
+  "seed": {
+    "unit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    "refs": 4,
+    "drilled": 4
+  },
+  "backdatedItem": "ru.orth.cyrillic.a#orthography-recognition"
+}

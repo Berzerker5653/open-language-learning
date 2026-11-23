@@ -1,0 +1,10 @@
+PASS every unit_path node carries a kind in {letters, listening, speaking, words} — {"nodes":818,"kinds":{"words":808,"letters":10}}
+PASS the printed-Cyrillic ramp units arrive as letters nodes — {"cyrillic":10,"sample":["ru.unit.on-ramp.cyrillic-a-o-m-t:letters","ru.unit.on-ramp.cyrillic-k-e-n-s:letters","ru.unit.on-ramp.cyrillic-r-v-u-kh:letters"]}
+PASS the reading/writing vocabulary ramp unit arrives as a words node — {"kind":"words"}
+PASS the scene seeded: one letters unit drilled fully toward DONE (real ✓ + review states follow) — {"drilled":4,"refs":4}
+PASS the drilled letters unit is DONE and review-DUE on the wire (states for the DOM checks) — {"done":true,"review_due":true,"kind":"letters"}
+PASS every rendered node exposes data-kind, one drawn center mark, and its screen-reader kind word — {"count":20,"bad":{"noKind":0,"wrongKindWord":0,"centerMarks":0,"dotSurvivors":0}}
+PASS no identical text-dot circles (•/○/◉/⟳) survive on the track — {"markers":20,"dotSurvivors":0}
+PASS the review-due letters node wears the refresh pictogram BESIDE its Review due caption — {"present":true,"state":"review-due","kind":"letters","reviewGlyph":true,"reviewCaption":true,"completedWord":true,"letterWord":true}
+PASS the review-due node still names its kind (Letters) to the screen reader — {"present":true,"state":"review-due","kind":"letters","reviewGlyph":true,"reviewCaption":true,"completedWord":true,"letterWord":true}
+PASS the review-due node (done + due) wears the review layer; Completed word present — {"doneNode":{"present":false},"seededCompleted":true}

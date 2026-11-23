@@ -1,0 +1,45 @@
+    437|       expect(html).toContain(`data-kind="${kind}"`);
+       |                    ^
+    438|       expect(html).toContain(`data-glyph="${kind}"`);
+    439|     }
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯
+
+ FAIL  |node| src/path-view.test.tsx > typed node glyphs by activity kind (PATH-NODE-TYPES-001) > never lets the glyph stand alone: the pictogram is aria-hidden and the row names the kind in words
+AssertionError: expected '<section aria-label="Your path" class…' to contain 'data-glyph="listening" aria-hidden="t…'
+
+Expected: "data-glyph="listening" aria-hidden="true""
+Received: "<section aria-label="Your path" class="unit-path" data-testid="unit-path"><h2>Your path</h2><p class="meta"><small>What you have completed, where you are now, and where this leads.</small></p><button type="button" class="path-jump-to-pin" data-testid="path-jump-to-pin" data-visible="false" data-dir="above" aria-label="Jump to my spot"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V6M5.5 12.5 12 6l6.5 6.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg></button><div class="path-section" data-band="on-ramp"><button type="button" class="path-section-toggle" aria-expanded="true"><span class="path-section-name">Getting started</span><small class="path-section-cefr">Pre-A1</small><span class="path-section-count">0/1 units done</span></button><ol class="path-nodes"><li data-unit="u-l" class="path-node path-node--ready" data-testid="path-node-u-l" data-state="ready" style="--path-fill:0;--path-sway:0px;--path-conn-down:0deg;--path-conn-up:0deg;--path-i:0"><span class="path-node-ring path-node-ring--ready" data-testid="path-ring-u-l" data-fill="0.00" aria-hidden="true"><svg viewBox="0 0 44 44" class="path-node-dial"><circle class="path-node-track" cx="22" cy="22" r="18"></circle><circle class="path-node-arc" cx="22" cy="22" r="18" pathLength="100" stroke-dasharray="0 100"></circle></svg><span class="path-node-marker">○</span></span><span class="path-node-body"><span class="path-node-title">Hear the difference</span><span class="path-node-pin" data-testid="path-pin">You are here</span></span></li></ol></div></section>"
+
+ ❯ src/path-view.test.tsx:453:18
+    451|     );
+    452|     // decoration for sighted users only...
+    453|     expect(html).toContain('data-glyph="listening" aria-hidden="true"'…
+       |                  ^
+    454|     // ...and the row itself says the kind and shows the visible title.
+    455|     expect(html).toContain(">Listening<");
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/4]⎯
+
+ FAIL  |node| src/path-view.test.tsx > typed node glyphs by activity kind (PATH-NODE-TYPES-001) > keeps the state layer intact: done keeps the check and names Completed; review-due keeps its caption
+AssertionError: expected '<section aria-label="Your path" class…' to contain '>Completed<'
+
+Expected: ">Completed<"
+Received: "<section aria-label="Your path" class="unit-path" data-testid="unit-path"><h2>Your path</h2><p class="meta"><small>What you have completed, where you are now, and where this leads.</small></p><div class="path-section" data-band="on-ramp"><button type="button" class="path-section-toggle" aria-expanded="true"><span class="path-section-name">Getting started</span><small class="path-section-cefr">Pre-A1</small><span class="path-section-count">1/1 units done</span></button><ol class="path-nodes"><li data-unit="u-d" class="path-node path-node--done" data-testid="path-node-u-d" data-state="done" style="--path-fill:0;--path-sway:0px;--path-conn-down:0deg;--path-conn-up:0deg;--path-i:0"><span class="path-node-ring path-node-ring--done" data-testid="path-ring-u-d" data-fill="0.00" aria-hidden="true"><svg viewBox="0 0 44 44" class="path-node-dial"><circle class="path-node-track" cx="22" cy="22" r="18"></circle><circle class="path-node-arc" cx="22" cy="22" r="18" pathLength="100" stroke-dasharray="0 100"></circle></svg><span class="path-node-marker">✓</span></span><span class="path-node-body"><span class="path-node-title">Some unit</span></span></li></ol></div></section>"
+
+ ❯ src/path-view.test.tsx:464:18
+    462|     );
+    463|     expect(done).toContain("✓");
+    464|     expect(done).toContain(">Completed<");
+       |                  ^
+    465|     const review = renderToStaticMarkup(
+    466|       <PathView
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/4]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  4 failed | 18 passed (22)
+   Start at  03:42:34
+   Duration  188ms (transform 49%, tests 26%, import 23%, worker 2%)
+
