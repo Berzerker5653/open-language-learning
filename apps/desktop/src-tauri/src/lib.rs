@@ -12184,7 +12184,8 @@ activities:
             )],
             "only assessments with a runnable task of their own declared construct are \
              planned: a second reading rubric over the same single record, a listening \
-             rubric whose goal declares no listening activity, and a reading rubric whose \
+             rubric whose only listening stage drills a contrast pair no comprehension \
+             runner serves, and a reading rubric whose \
              goal ships only printed symbols no recall runner serves all abstain, and no \
              two questions are the same item"
         );
@@ -12245,13 +12246,21 @@ activities:
             ("no-content", Some("every-content-ref-already-planned:1")),
             "the second reading rubric has nothing left that is not already a question"
         );
-        assert_eq!(
-            (cov[2].status, cov[2].reason.as_deref()),
-            (
-                "no-content",
-                Some("no-activity-at-modality:listening:ja.goal.demo.kana-hiragana")
-            ),
-            "a listening rubric over a goal with no listening stage abstains"
+        // ORPHAN-CONTENT-001 claimed the demo contrast on the kana unit to
+        // satisfy the fail-CLOSED ladder rule, so the goal now DOES declare a
+        // listening stage. The pair it drills is one the comprehension runner
+        // cannot serve, so the honest blocker moved from "no activity at
+        // modality" to the builder's own refusal — the same shape cov[3]
+        // reports for printed symbols. Rewritten 2026-11-22 (FIX-PLACEMENT-
+        // COVERAGE-001) to assert this new contract; the engine did not regress.
+        assert_eq!(cov[2].status, "modality-unsupported");
+        let listen_reason = cov[2].reason.as_deref().unwrap();
+        assert!(
+            listen_reason.starts_with(
+                "builder-refused:comprehension-listening:ja.contrast.demo.vowel-length:"
+            ) && listen_reason.contains("unknown practice target"),
+            "the listening rubric abstains with the builder's refusal over the contrast \
+             pair no comprehension runner serves: {listen_reason}"
         );
         assert_eq!(cov[3].status, "modality-unsupported");
         let reason = cov[3].reason.as_deref().unwrap();
