@@ -3463,6 +3463,23 @@ tasks:
   - "A real-engine capture script measures the grammar on the live app, with the same script failing at HEAD as the red proof."
   required_for_desktop_1_0: false
 
+- id: UNIT-CAPSTONE-001
+  milestone: M11
+  priority: P1
+  title: Section capstone review node (Busuu Checkpoint pattern) ends every band section, unlocks after its units, and the header counter flips on pass
+  dependencies: [PATH-VISUAL-001, PATH-NODE-TYPES-001]
+  read_first:
+  - state/notes/UNIT-CAPSTONE-001.md
+  - apps/desktop/src/home.tsx
+  - apps/desktop/src-tauri/src/lib.rs
+  acceptance:
+  - "unit_path wires an engine-synthesized capstone node as the last node of every band section with a non-empty letters+words recall pool, with kind capstone and unit id capstone.<pack>.<band-key>."
+  - "The node unlocks only when every other rendered unit of its section is done, and a locked node names the reason in its unlock hint."
+  - "capstone_plan serves a deterministic mixed recall session (letters interleaved with words, capped at 16 items) over the existing graded runners, and capstone_complete counts recalled items from attempt-grouped evidence, records the attempt, and requires 80 percent on pools of four or more and a clean sweep below that."
+  - "A passed attempt flips the node to done and the section header counts it with copy that stays honest for a non-unit node, calm only, no congrats, XP, or celebration tokens (ADR-0002)."
+  - "Rust tests cover wire shape, lock ladder, pass flip, plan determinism, and score counting, while vitest covers the node grammar and the counter, with a serve capture proving the locked node on the live path."
+  required_for_desktop_1_0: false
+
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3472,6 +3489,7 @@ execution_scope:
   - AI-001
   - PACK-UPDATE-REPIN-001
   - PATH-NODE-TYPES-001
+  - UNIT-CAPSTONE-001
   - PLAT-002
   - WEB-001
   - TTS-002

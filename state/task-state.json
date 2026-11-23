@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": null,
+  "active_task": "UNIT-CAPSTONE-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3101,6 +3101,19 @@
         "state/evidence/PATH-NODE-TYPES-001/path-node-types-home.png",
         "state/evidence/PATH-NODE-TYPES-001/path-node-types-review.png"
       ]
+    },
+    "UNIT-CAPSTONE-001": {
+      "task_id": "UNIT-CAPSTONE-001",
+      "title": "Section capstone review node (Busuu Checkpoint pattern) ends every band section, unlocks after its units, and the header counter flips on pass",
+      "status": "in_progress",
+      "attempts": 1,
+      "dependencies": [
+        "PATH-VISUAL-001",
+        "PATH-NODE-TYPES-001"
+      ],
+      "updated": "2026-11-23",
+      "summary": "Started: engine-synthesized capstone node per band section (kind capstone, id capstone.<pack>.<band-key>), capstone_plan/capstone_complete pair over the existing graded runners, storage v11 capstone_attempts, header counter flips on pass. Frozen contract in state/notes/UNIT-CAPSTONE-001.md.",
+      "notes": "state/notes/UNIT-CAPSTONE-001.md"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
