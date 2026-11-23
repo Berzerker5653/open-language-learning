@@ -51,6 +51,51 @@ export function remainingTimeLabel(seconds: number | null): string | null {
   return `~${Math.max(1, Math.round(seconds / 60))} min left`;
 }
 
+/**
+ * FEEL-DRILL-001: per-question step dots for the EMBEDDED runners — the
+ * placement quiz and the kanji drill — whose position state (question
+ * index, drill stage) App already tracks but never rendered. A quiet row
+ * of pips: done marked, current marked. This is position, not score —
+ * the same honesty posture as the session bar: no XP, no streak, no
+ * reward language anywhere (ADR-0002). A single-step runner renders no
+ * dots at all: one pip says nothing and only adds noise.
+ */
+export interface StepDotsProps {
+  /** Steps in this runner (questions, or drill stages). */
+  total: number;
+  /** Zero-based index of the step the learner is in. */
+  current: number;
+  /** Plain-language name for the screen reader label, e.g. "Placement question". */
+  label: string;
+}
+
+export function StepDots({ total, current, label }: StepDotsProps) {
+  if (total < 2) return null;
+  const step = Math.min(Math.max(0, current) + 1, total);
+  return (
+    <div
+      className="step-dots"
+      data-step-dots
+      role="img"
+      aria-label={`${label} ${step} of ${total}`}
+    >
+      {Array.from({ length: total }, (_, i) => (
+        <span
+          key={i}
+          aria-hidden="true"
+          className={
+            i === current
+              ? "step-dot step-dot--current"
+              : i < current
+                ? "step-dot step-dot--done"
+                : "step-dot"
+          }
+        />
+      ))}
+    </div>
+  );
+}
+
 export function SessionChrome(p: SessionChromeProps) {
   if (p.total <= 0) return null;
   const done = Math.min(p.done, p.total);

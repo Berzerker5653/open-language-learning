@@ -27,7 +27,9 @@ describe("kanji drill shows per-stage step dots (FEEL-DRILL-001)", () => {
     app = await mountApp(engine);
     await app.click(app.button(app.section("Profiles"), "Kim"));
     await app.settle();
-    await app.click(app.button(app.section("Routes"), "Kanji"));
+    await app.click(app.button(app.section("Routes"), "Practice"));
+    await app.settle();
+    await app.click(app.button(app.section("Practice modes"), "Kanji"));
     await app.settle();
 
     const kanji = app.section("Kanji");

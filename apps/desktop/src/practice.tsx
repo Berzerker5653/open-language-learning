@@ -7,6 +7,7 @@
  * `mode: "guided"` is formative — speak-along only, never a submit, a
  * verdict, or a score.
  */
+import { useEffect, useState } from "react";
 import { StressText } from "./stress";
 import { Ruby } from "./ruby";
 import { useKanaIME } from "./kana-ime";
@@ -120,6 +121,13 @@ function speakCheckNotice(result: DictationResult): string {
 
 export function PracticeRunner(p: PracticeRunnerProps) {
   const packAttrs = usePackTextAttrs();
+  // FEEL-DRILL-001: the runner remembers which choice the learner tapped
+  // so the graded board can show the tapped pick (press + one shake on a
+  // wrong tap) while the right answer reveals its ring + check and every
+  // other choice dims as the answers lock. Local to the view; reset when
+  // the runner moves to a new task.
+  const [tapped, setTapped] = useState<number | null>(null);
+  useEffect(() => setTapped(null), [p.task.item_id]);
   const kanaIme = useKanaIME({
     enabled: p.kanaInput === true,
     value: p.draft ?? "",
@@ -296,12 +304,23 @@ export function PracticeRunner(p: PracticeRunnerProps) {
               key={choice}
               type="button"
               className={
-                p.graded && !p.correct && choice === p.correctChoice
-                  ? "btn btn--quiet choice--correct"
-                  : "btn btn--quiet"
+                p.graded && choice === p.correctChoice
+                  ? // The reveal lands on the right answer whether the
+                    // learner hit it or missed it (FEEL-DRILL-001): ring
+                    // scales in + soft fill fade + check badge.
+                    "btn btn--quiet choice--correct"
+                  : p.graded && tapped === i
+                    ? // The learner's own wrong tap: pressed + one shake.
+                      "btn btn--quiet choice--tapped choice--wrong"
+                    : p.graded
+                      ? "btn btn--quiet choice--dim"
+                      : "btn btn--quiet"
               }
               disabled={p.graded}
-              onClick={() => p.onChoose(i)}
+              onClick={() => {
+                setTapped(i);
+                p.onChoose(i);
+              }}
             >
               <PackText>{choice}</PackText>
             </button>

@@ -83,8 +83,15 @@ describe("FEEL-GLOBAL-001 keyframe library", () => {
     }
   });
 
-  it("the choice ring arrives with pop, the mobile word-card sheet slides up", () => {
-    expect(ruleBody(".choice--correct")).toContain("animation: pop var(--dur) var(--ease-out)");
+  it("the choice ring arrives with its reveal, the mobile word-card sheet slides up", () => {
+    // FEEL-DRILL-001 re-pinned this FEEL-GLOBAL-001 assertion on purpose:
+    // the drill mock's legend upgrades the ring arrival from plain `pop`
+    // to choice-reveal (ring scales in WHILE the soft fill fades) at the
+    // fast token. The card names the gate change; the library's pop
+    // keyframe itself stays (PATH lanes' done-check pop rides it).
+    expect(ruleBody(".choice--correct")).toContain(
+      "animation: choice-reveal var(--dur-fast) var(--ease-out)",
+    );
     expect(ruleBody(".word-card")).toContain("animation: slide-up var(--dur-slow) var(--ease-out)");
   });
 

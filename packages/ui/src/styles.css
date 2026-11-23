@@ -955,11 +955,51 @@ th:last-child {
 
 /* LETTER-DRILL-TEXT-001: after a miss the runner POINTS at the right
    choice (complaint 4g: a hint that states the answer trains nothing);
-   the correct button carries this marker. */
+   the correct button carries this marker.
+   FEEL-DRILL-001: the marker now lands on a CORRECT pick too (the drill
+   mock's reveal: ring scales in + soft fill fades, with a check badge —
+   state is ring + check, not color alone), the tapped wrong pick shakes
+   once, and the other choices dim as the answers lock. */
 .choice--correct {
+  position: relative;
+  padding-right: 2.4rem;
   border-color: var(--ok);
   box-shadow: 0 0 0 2px var(--ok);
-  animation: pop var(--dur) var(--ease-out);
+  background: var(--ok-soft);
+  animation: choice-reveal var(--dur-fast) var(--ease-out);
+}
+
+.choice--correct::after {
+  content: "\2713"; /* check badge, white on the ring color */
+  position: absolute;
+  right: 0.55rem;
+  top: 50%;
+  translate: 0 -50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 999px;
+  background: var(--ok);
+  color: var(--surface);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.choice--tapped {
+  transform: translateY(2px);
+  filter: brightness(0.97);
+}
+
+.choice--wrong {
+  animation: shake-x var(--dur) var(--ease-out);
+  border-color: var(--warn);
+}
+
+.choice--dim {
+  opacity: 0.55;
+  transition: opacity var(--dur) var(--ease-out);
 }
 
 .verdict--correct::before {
@@ -1317,6 +1357,9 @@ th:last-child {
   display: block;
   height: 100%;
   background: var(--accent);
+  /* FEEL-DRILL-001: the fill eases to each card's new fraction (300ms
+     ease-out per the drill mock legend) instead of snapping. */
+  transition: width var(--dur-slow) var(--ease-out);
 }
 
 .session-chrome-meta {
@@ -1324,6 +1367,29 @@ th:last-child {
   color: var(--ink-soft);
   font-size: 0.875rem;
   white-space: nowrap;
+}
+
+/* FEEL-DRILL-001: the session cards on the home screen rendered with ZERO
+   rules until now (the owner's calm-but-warm end-of-session decision +
+   the drill mock's "quiet outline, single primary action"). Same card
+   skin for both states; card-in is the mock's fade + 0.98->1 scale — a
+   calm close, never a celebration. */
+.session-summary {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem;
+  margin: 1.25rem 0;
+  animation: card-in var(--dur) var(--ease-out);
+}
+
+.session-panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem;
+  margin: 1.25rem 0;
+  animation: card-in var(--dur) var(--ease-out);
 }
 
 /* SESSION-FLOW-COPY-001: the inter-activity bridge — a calm, announced
@@ -2075,4 +2141,77 @@ th:last-child {
   50% {
     opacity: 0.65;
   }
+}
+
+/* ------------------------------------------------------ FEEL-DRILL-001 */
+/* Drill-layer keyframes from the FEEL-TARGETS drill mock legend: the
+   correct pick's ring scales in while its soft fill fades; a wrong tap
+   shakes once; end-of-session cards fade + scale 0.98 -> 1 for a calm
+   close. All token durations — the global reduced-motion block flattens
+   every one of them. */
+@keyframes choice-reveal {
+  from {
+    box-shadow: 0 0 0 0 var(--ok);
+    background-color: transparent;
+  }
+  to {
+    box-shadow: 0 0 0 2px var(--ok);
+    background-color: var(--ok-soft);
+  }
+}
+
+@keyframes shake-x {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-4px);
+  }
+  40% {
+    transform: translateX(4px);
+  }
+  60% {
+    transform: translateX(-2px);
+  }
+  80% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Step dots: position, not score (ADR-0002) — a quiet row of pips with
+   the current step marked, rendered by embedded multi-question runners. */
+.step-dots {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  margin: 0 0 0.6rem;
+}
+.step-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: var(--surface-sunk);
+  border: 1px solid var(--line);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+.step-dot--done {
+  background: var(--accent);
+}
+.step-dot--current {
+  background: var(--accent);
+  transform: scale(1.35);
 }
