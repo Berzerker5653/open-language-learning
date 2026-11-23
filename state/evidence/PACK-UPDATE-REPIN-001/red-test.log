@@ -1,0 +1,81 @@
+   Compiling aws-lc-sys v0.45.0
+   Compiling x11-dl v2.21.0
+   Compiling libdbus-sys v0.2.7
+   Compiling glib-sys v0.18.1
+   Compiling gobject-sys v0.18.0
+   Compiling gio-sys v0.18.1
+   Compiling gdk-sys v0.18.2
+   Compiling pango-sys v0.18.0
+   Compiling cairo-sys-rs v0.18.2
+   Compiling gdk-pixbuf-sys v0.18.0
+   Compiling atk-sys v0.18.2
+   Compiling javascriptcore-rs-sys v1.1.1
+   Compiling soup3-sys v0.5.0
+   Compiling gtk-sys v0.18.2
+   Compiling gdkx11-sys v0.18.2
+   Compiling gtk v0.18.2
+   Compiling webkit2gtk-sys v2.0.2
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+   Compiling wry v0.57.0
+   Compiling dbus v0.9.12
+   Compiling glib v0.18.5
+   Compiling gdkwayland-sys v0.18.2
+   Compiling aws-lc-rs v1.18.1
+   Compiling rustls v0.23.46
+   Compiling gio v0.18.4
+   Compiling cairo-rs v0.18.5
+   Compiling atk v0.18.2
+   Compiling javascriptcore-rs v1.1.2
+   Compiling rustls-webpki v0.103.16
+   Compiling tokio-rustls v0.26.6
+   Compiling rustls-platform-verifier v0.7.1
+   Compiling ureq v2.12.1
+   Compiling hyper-rustls v0.27.10
+   Compiling reqwest v0.13.5
+   Compiling jsonschema v0.58.5
+   Compiling pango v0.18.3
+   Compiling gdk-pixbuf v0.18.5
+   Compiling soup3 v0.5.0
+   Compiling lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack)
+   Compiling gdk v0.18.2
+   Compiling lts-activity v0.1.0 (/home/hunter/game-dev/LTS/crates/activity)
+   Compiling gdkx11 v0.18.2
+   Compiling webkit2gtk v2.0.2
+   Compiling tao v0.37.1
+   Compiling muda v0.20.0
+   Compiling tauri-runtime v2.12.1
+   Compiling tauri-runtime-wry v2.12.1
+   Compiling tauri v2.12.1
+   Compiling tauri-plugin-single-instance v2.5.2
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 33.44s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-7647ca427c780ccc)
+
+running 2 tests
+test packs::tests::a_stuck_update_click_still_moves_the_learner ... FAILED
+test packs::tests::a_catalogue_update_moves_every_profile_onto_the_new_version ... FAILED
+
+failures:
+
+---- packs::tests::a_stuck_update_click_still_moves_the_learner stdout ----
+
+thread 'packs::tests::a_stuck_update_click_still_moves_the_learner' (533956) panicked at apps/desktop/src-tauri/src/packs.rs:2610:9:
+assertion `left == right` failed: the early return must not leave the learner stranded on 0.4.8
+  left: Some("0.4.8")
+ right: Some("0.4.9")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- packs::tests::a_catalogue_update_moves_every_profile_onto_the_new_version stdout ----
+
+thread 'packs::tests::a_catalogue_update_moves_every_profile_onto_the_new_version' (533955) panicked at apps/desktop/src-tauri/src/packs.rs:2548:9:
+assertion `left == right` failed: the learner is on the version they clicked Update to
+  left: Some("0.4.8")
+ right: Some("0.4.9")
+
+
+failures:
+    packs::tests::a_catalogue_update_moves_every_profile_onto_the_new_version
+    packs::tests::a_stuck_update_click_still_moves_the_learner
+
+test result: FAILED. 0 passed; 2 failed; 0 ignored; 0 measured; 230 filtered out; finished in 0.80s
+
+error: test failed, to rerun pass `-p lts-desktop --lib`

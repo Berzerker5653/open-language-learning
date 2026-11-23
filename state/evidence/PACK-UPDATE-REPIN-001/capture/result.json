@@ -1,0 +1,73 @@
+{
+  "checks": [
+    {
+      "name": "seeded: profile selection is 0.4.8",
+      "pass": true,
+      "measured": {
+        "selection": "0.4.8"
+      }
+    },
+    {
+      "name": "seeded: catalogue join claims installed 0.4.8 against pin 0.4.9 (the incident fact)",
+      "pass": true,
+      "measured": {
+        "installed": "0.4.8",
+        "pin": "0.4.9",
+        "status": "live"
+      }
+    },
+    {
+      "name": "BEFORE card: 'Update to v0.4.9' button stands, no 'installed (v0.4.9)' badge",
+      "pass": true,
+      "measured": {
+        "rowFound": true,
+        "buttons": [
+          "Update to v0.4.9"
+        ],
+        "badges": []
+      }
+    },
+    {
+      "name": "AFTER card: 'installed (v0.4.9)' badge rendered by the flow itself",
+      "pass": true,
+      "measured": {
+        "rowFound": true,
+        "buttons": [],
+        "badges": [
+          "installed (v0.4.9)"
+        ]
+      }
+    },
+    {
+      "name": "AFTER card: no Update button remains (no silent second click ahead)",
+      "pass": true,
+      "measured": {
+        "rowFound": true,
+        "buttons": [],
+        "badges": [
+          "installed (v0.4.9)"
+        ]
+      }
+    },
+    {
+      "name": "profile_pack_selections before/after: 0.4.8 -> 0.4.9 with NO manual repair",
+      "pass": true,
+      "measured": {
+        "before": "0.4.8",
+        "after": "0.4.9"
+      }
+    },
+    {
+      "name": "AFTER catalogue join: installed_version reads 0.4.9",
+      "pass": true,
+      "measured": {
+        "installed": "0.4.9"
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "beforeSelection": "0.4.8",
+  "afterSelection": "0.4.9",
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17845 (trusted network only)\n"
+}

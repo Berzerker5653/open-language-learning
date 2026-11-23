@@ -1,0 +1,8 @@
+FMT_EXIT=0
+CLIPPY_EXIT=0
+TEST_EXIT=0
+test packs::tests::a_catalogue_update_moves_every_profile_onto_the_new_version ... ok
+test packs::tests::a_stuck_update_click_still_moves_the_learner ... ok
+SERVE_BUILD_EXIT=0
+CAPTURE_EXIT=1
+BATTERY-DONE

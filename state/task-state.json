@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "updated": "2026-11-22",
+  "updated": "2026-11-23",
   "active_task": null,
   "tasks": {
     "TTS-003": {
@@ -2991,9 +2991,29 @@
         "state/evidence/FIX-PLACEMENT-COVERAGE-001/clippy-lts-desktop.log",
         "state/notes/FIX-PLACEMENT-COVERAGE-001.md"
       ]
+    },
+    "PACK-UPDATE-REPIN-001": {
+      "task_id": "PACK-UPDATE-REPIN-001",
+      "title": "A pack update must move the learner onto the new version, not just into the store",
+      "status": "done",
+      "attempts": 2,
+      "dependencies": [
+        "PACK-UPDATE-UX-001",
+        "PACK-UPDATE-BANNER-001"
+      ],
+      "updated": "2026-11-23",
+      "summary": "install_from_catalog_report now re-points profile_pack_selections: a successful catalogue install of a newer version moves every profile studying that pack onto it (never enrols outsiders, never downgrades), and the second-click early return repairs a stranded selection so an already-stuck learner self-heals. Settings re-renders to installed (vX) with the Update button gone.",
+      "notes": "Incident 2026-11-22 owner dogfood: 0.4.9 landed in the store but the selection stayed 0.4.8, the card kept claiming v0.4.8 and repeat clicks early-returned silently; orchestrator hot-fixed the live profile via sqlite. Fix: repoint_profile_selections in packs.rs, called on both the install-success and early-return paths; best-effort by design (the repaired early return retries a failed move). Two red tests first (incident symptom left 0.4.8/right 0.4.9) shipped green; lib suite 230/230, fmt/clippy -D warnings green. Acceptance capture on the real engine (serve + headless Chrome): a real click ran the shipped flow, profile_pack_selections 0.4.8->0.4.9 with no manual repair, card badge installed (v0.4.9), no Update button; before/after pngs vision-confirmed. Attempt 1 died at the model layer pre-commit; controller re-ran every gate and fixed three capture-harness bugs (pragma-row pollution, catalog_packs .entries shape, Community-catalog section anchor) — product flow untouched.",
+      "evidence": [
+        "state/evidence/PACK-UPDATE-REPIN-001/gates.log",
+        "state/evidence/PACK-UPDATE-REPIN-001/red-test.log",
+        "state/evidence/PACK-UPDATE-REPIN-001/capture/result.json",
+        "state/evidence/PACK-UPDATE-REPIN-001/capture/settings-before.png",
+        "state/evidence/PACK-UPDATE-REPIN-001/capture/settings-after.png"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
   "current_release_candidate": "Packs: ja-JP 0.4.3 (published 2026-11-09) and ru-RU 0.4.5 (published 2026-11-20) — manifests and catalog/packs.json pins agree (re-measured 2026-11-20, state/evidence/DOC-CONTRACT-RECONCILE-001/audit-2026-11-20.md); the 0.4.4/0.4.2/0.4.1/0.4.0 releases stay live as immutable rollback targets. App: newest published artifact is still open-language-learning-platform-0.4.0-alpha.1 (2026-10-13, Linux pre-release); code identity is 0.4.3-alpha.1 and unpublished — next-artifact decision is owner action O-06. Nothing in the build consumes this field; it is documentation.",
-  "updated_at": "2026-11-22T02:20:00-07:00"
+  "updated_at": "2026-11-23T02:12:41-07:00"
 }

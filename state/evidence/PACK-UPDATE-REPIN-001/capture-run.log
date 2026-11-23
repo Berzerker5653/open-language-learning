@@ -1,0 +1,7 @@
+PASS seeded: profile selection is 0.4.8 — {"selection":"0.4.8"}
+PASS seeded: catalogue join claims installed 0.4.8 against pin 0.4.9 (the incident fact) — {"installed":"0.4.8","pin":"0.4.9","status":"live"}
+PASS BEFORE card: 'Update to v0.4.9' button stands, no 'installed (v0.4.9)' badge — {"rowFound":true,"buttons":["Update to v0.4.9"],"badges":[]}
+PASS AFTER card: 'installed (v0.4.9)' badge rendered by the flow itself — {"rowFound":true,"buttons":[],"badges":["installed (v0.4.9)"]}
+PASS AFTER card: no Update button remains (no silent second click ahead) — {"rowFound":true,"buttons":[],"badges":["installed (v0.4.9)"]}
+PASS profile_pack_selections before/after: 0.4.8 -> 0.4.9 with NO manual repair — {"before":"0.4.8","after":"0.4.9"}
+PASS AFTER catalogue join: installed_version reads 0.4.9 — {"installed":"0.4.9"}

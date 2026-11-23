@@ -2672,6 +2672,32 @@ tasks:
   - No learner-facing string names a ticket or internal table; `tools/audit_learner_copy.py` stays at
     0 findings.
   required_for_desktop_1_0: false
+- id: PACK-UPDATE-REPIN-001
+  milestone: M10
+  priority: P1
+  title: A pack update must move the learner onto the new version, not just into the store
+  dependencies:
+  - PACK-UPDATE-UX-001
+  - PACK-UPDATE-BANNER-001
+  read_first:
+  - apps/desktop/src-tauri/src/packs.rs
+  - crates/storage/src/packs.rs
+  - apps/desktop/src/language.tsx
+  - apps/desktop/src/App.tsx
+  acceptance:
+  - 'Measured 2026-11-22 on the owner''s device: clicking "Update to v0.4.9" downloaded and installed
+    0.4.9 into the store (a `pack_installations` row and the `current` pointer flipped) but the profile
+    selection stayed at 0.4.8, so `installed_version_for`/`installed_packs` kept claiming v0.4.8 and the
+    Update button stood; repeat clicks early-return with zero progress stages, silent forever. Cause:
+    `install_from_catalog_report` never re-points selections.'
+  - After a successful catalogue install of a NEWER version of a pack a profile already studies, that
+    profile moves onto the new version (version-migration semantics); an install never enrols a profile
+    that does not study the pack, and never moves a selection to an older version.
+  - A click when the store already holds the pin must repair a stranded selection instead of returning
+    silently — the already-stuck learner self-heals on the next click.
+  - The Settings card re-renders to installed (vX) with the Update button gone, asserted before/after by
+    a capture on the real engine; the red test first reproduces the stranded-selection incident.
+  required_for_desktop_1_0: false
 - id: WORD-TIMING-001
   milestone: M8
   priority: P2
@@ -3380,6 +3406,7 @@ execution_scope:
   optional_tasks:
   - ADV-001
   - AI-001
+  - PACK-UPDATE-REPIN-001
   - PLAT-002
   - WEB-001
   - TTS-002

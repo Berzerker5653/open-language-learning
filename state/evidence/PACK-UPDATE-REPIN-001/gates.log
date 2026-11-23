@@ -1,0 +1,55 @@
+PACK-UPDATE-REPIN-001 — controller gate battery (re-run 2026-11-23 01:55-02:10, all gates executed by the controller on the tree being committed)
+
+Attempt 1's worker died at the model layer before committing; its lane (packs.rs fix + 2 red tests + capture script) was found uncommitted on main. The worker had already fixed its own clippy needless_borrow (the attempt-1 table below, kept verbatim as history, shows that pre-fix red clippy; the tree at claim time carried the fix). All gates below are the controller's own fresh runs, never the dead run's tables.
+
+---- attempt-1 raw table (superseded; history) ----
+== fmt ==
+OK
+== clippy lts-desktop ==
+error: this expression creates a reference which is immediately dereferenced by the compiler
+    --> apps/desktop/src-tauri/src/packs.rs:1026:56
+     |
+1026 |                 let _ = store.select_pack(&profile.id, &pack_id, version);
+     |                                                        ^^^^^^^^ help: change this to: `pack_id`
+clippy exit recorded as 0 by the worker — false; that battery was red until the borrow fix.
+---- end attempt-1 table ----
+
+== fmt (controller) ==
+cargo fmt --all --check  -> exit 0            (fmt-controller.log)
+
+== clippy (lane tier, controller) ==
+cargo clippy -p lts-desktop --all-targets -- -D warnings -> exit 0   (clippy-controller.log)
+
+== lib suite (lane tier, controller) ==
+cargo test -p lts-desktop --lib -> exit 0
+test result: ok. 230 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out (276.23s)   (test-controller.log)
+New card tests confirmed by NAME in the run (not just counts):
+  packs::tests::a_catalogue_update_moves_every_profile_onto_the_new_version ... ok
+  packs::tests::a_stuck_update_click_still_moves_the_learner ... ok
+
+== red-test-first evidence (written by the implementation run BEFORE the fix) ==
+red-test.log: both card tests FAILED pre-fix with the incident's exact symptom (left "0.4.8", right "0.4.9") — 4 left/right assertion lines.
+
+== acceptance capture (real engine, real browser click) ==
+cargo build -p lts-desktop --bin lts-serve --features serve -> exit 0 (serve-build.log)
+SERVE_BIN=target/debug/lts-serve SERVE_DIST=apps/desktop/dist node scripts/pack-update-repin-capture.mjs -> exit 0
+(capture-run.log; machine facts + pngs in capture/)
+PASS seeded: profile selection is 0.4.8
+PASS seeded: catalogue join claims installed 0.4.8 against pin 0.4.9 (the incident fact)
+PASS BEFORE card: 'Update to v0.4.9' button stands, no 'installed (v0.4.9)' badge
+PASS AFTER card: 'installed (v0.4.9)' badge rendered by the flow itself
+PASS AFTER card: no Update button remains (no silent second click ahead)
+PASS profile_pack_selections before/after: 0.4.8 -> 0.4.9 with NO manual repair
+PASS AFTER catalogue join: installed_version reads 0.4.9
+
+Controller harness fixes to the worker's capture script (harness-only, product flow untouched):
+1. sqlite PRAGMA busy_timeout echoes '5000' as a row and polluted selection() reads — stripped.
+2. catalog_packs returns CatalogResponse {entries, status}; the script probed .packs — now reads .entries.
+3. Settings has TWO .pack-list sections; the probe matched 'Installed packs' (RU row carries 'learning this language'), not 'Community catalog' where the Update button/installed badge live — cardFacts() now anchors on the 'Community catalog' h2 and its sibling ul, with navError fields riding into result.json (MOBILE-UX-001 lesson).
+
+== vision check of the capture pngs ==
+settings-before.png crop: Russian Reference Pack card shows teal button 'Update to v0.4.9'.
+settings-after.png crop: same card shows badge 'installed (v0.4.9)', no action button.
+DOM machine-checks and the vision read agree.
+
+No frontend change was needed: language.tsx renders installed (vX) iff installed_version == pin, and installCatalogPack re-reads the catalog join after the command (App.tsx refreshLanguages) — the flow itself now completes the join by re-pointing selections.
