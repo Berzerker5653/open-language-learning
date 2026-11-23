@@ -909,6 +909,12 @@ pub fn install_from_catalog_report(
     validate_entry(entry)?;
     if let Some(v) = lts_langpack::archive::current_version(pack_id, &data.join("packs")) {
         if v == entry.version {
+            // PACK-UPDATE-REPIN-001: a learner stranded by the old bug —
+            // store at the pin, selection behind it — self-heals here. This
+            // early return is exactly the second click that used to report
+            // zero progress stages forever; it now repairs the selection
+            // instead of going silent.
+            repoint_profile_selections(data, pack_id, &v);
             return Ok(InstallResult {
                 installed: display_for(data, pack_id, &v, "community"),
                 receipt: None,
@@ -978,10 +984,49 @@ pub fn install_from_catalog_report(
                 return Err(e);
             }
         };
+    // PACK-UPDATE-REPIN-001: the version that just landed must become the
+    // version the learner is ON. installed_version_for/installed_packs read
+    // the profile selection first, so a store-only install left the Settings
+    // card claiming the old version with its Update button standing — the
+    // learner clicked Update and the flow never finished the step that
+    // actually moves them.
+    repoint_profile_selections(data, pack_id, &installed.version);
     Ok(InstallResult {
         installed,
         receipt: Some(receipt_for(entry, &bytes, data)),
     })
+}
+
+/// Version-migration semantics (PACK-UPDATE-REPIN-001): when the store gains
+/// a newer version of a pack a profile already studies, that profile follows
+/// onto it. Profiles that do not study the pack are untouched — installing a
+/// pack never enrols a learner — and a selection never moves to an OLDER
+/// version: the same no-downgrade rule that guards the store's `current`
+/// pointer guards the selections. This is what makes the Settings card flip
+/// to "installed vX" and drop its Update button: every surface (Settings,
+/// Home, the hub, the wizard) reads the profile selection first.
+fn repoint_profile_selections(data: &Path, pack_id: &str, version: &str) {
+    let Ok(store) = lts_storage::Store::open(data.join("profiles.db")) else {
+        return;
+    };
+    let Ok(profiles) = store.list_profiles() else {
+        return;
+    };
+    for profile in profiles {
+        let Ok(selections) = store.selected_packs(&profile.id) else {
+            continue;
+        };
+        for (id, selected) in selections {
+            if id == pack_id && version_is_newer(version, &selected) {
+                // Best-effort by design: the install itself has already
+                // succeeded and must not read as failed over a selection
+                // edit. A selection that could not move keeps the store
+                // facts correct, and the next update click (the repaired
+                // early-return path) retries the move.
+                let _ = store.select_pack(&profile.id, pack_id, version);
+            }
+        }
+    }
 }
 
 /// Import a locally supplied archive (bytes never carry paths through IPC;
@@ -2476,5 +2521,143 @@ mod tests {
         );
         let (views, _) = catalog_view_with(data, "");
         assert_eq!(views[0].installed_version.as_deref(), Some("0.4.3"));
+    }
+
+    /// PACK-UPDATE-REPIN-001 (owner dogfood 2026-11-22): a successful
+    /// catalogue UPDATE install must move every profile studying the pack
+    /// onto the new version. The store row and `current` pointer alone left
+    /// the Settings card at the old version with its Update button standing —
+    /// the learner clicked Update and saw nothing happen, twice.
+    #[test]
+    fn a_catalogue_update_moves_every_profile_onto_the_new_version() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let work = data.join("fixture-work");
+        let pack = "org.openlanguage.ja-demo";
+
+        // The device before the click: 0.4.8 installed and selected by two
+        // profiles; the catalogue now pins 0.4.9.
+        let old_bytes = ja_archive_versioned("0.4.8", &work);
+        install_pack_bytes_report(data, &old_bytes, None, &mut no_progress, &never_cancelled)
+            .expect("0.4.8 installs");
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let owner = crate::create_local_profile(data, "Owner").unwrap();
+        let second = crate::create_local_profile(data, "Second").unwrap();
+        let bystander = crate::create_local_profile(data, "Bystander").unwrap();
+        store.select_pack(&owner.id, pack, "0.4.8").unwrap();
+        store.select_pack(&second.id, pack, "0.4.8").unwrap();
+
+        let new_bytes = ja_archive_versioned("0.4.9", &work);
+        let mut e = entry("https://github.com/o/r/releases/download/v0.4.9/ja-demo.lpk");
+        e.pack_id = pack.into();
+        e.version = "0.4.9".into();
+        e.size_bytes = new_bytes.len() as u64;
+        e.sha256 = hex_sha256(&new_bytes);
+        write_cache(
+            data,
+            &PackCatalog {
+                catalog_version: "1".into(),
+                note: String::new(),
+                packs: vec![e.clone()],
+            },
+        );
+
+        // The card fact BEFORE the click: installed 0.4.8 against pin 0.4.9
+        // — exactly the condition language.tsx renders "Update to v0.4.9"
+        // from (installed_version != version).
+        let (views, _) = catalog_view_profile_with(data, "", Some(&owner.id));
+        assert_eq!(views[0].installed_version.as_deref(), Some("0.4.8"));
+        assert_eq!(views[0].version, "0.4.9");
+
+        // The download is satisfied from disk: a complete resumable partial
+        // for exactly this pin, which `fetch_capped_resumable` verifies
+        // against the digest instead of asking the server for anything. The
+        // install then runs the same verification gate a live fetch pays.
+        let partial = PartialDownload::for_entry(data, &e);
+        fs::write(&partial.part, &new_bytes).unwrap();
+        partial.write_meta(&e);
+
+        let res =
+            install_from_catalog_report(data, pack, &mut no_progress, &AtomicBool::new(false))
+                .expect("the pinned update installs");
+        assert_eq!(res.installed.version, "0.4.9");
+        assert!(res.receipt.is_some(), "a fetched install carries a receipt");
+        assert_eq!(
+            lts_langpack::archive::current_version(pack, &data.join("packs")).as_deref(),
+            Some("0.4.9"),
+            "the store pointer moved to the pin"
+        );
+
+        // AFTER the click: every profile studying the pack follows onto the
+        // new version — the fact Settings, Home and the hub all read. (This
+        // is the assertion that was RED: the selections stayed at 0.4.8.)
+        assert_eq!(
+            installed_version_for(data, Some(&owner.id), pack).as_deref(),
+            Some("0.4.9"),
+            "the learner is on the version they clicked Update to"
+        );
+        assert_eq!(
+            installed_version_for(data, Some(&second.id), pack).as_deref(),
+            Some("0.4.9")
+        );
+        let (views, _) = catalog_view_profile_with(data, "", Some(&owner.id));
+        assert_eq!(views[0].installed_version.as_deref(), Some("0.4.9"));
+        assert_eq!(
+            views[0].installed_version.as_deref(),
+            Some(views[0].version.as_str()),
+            "installed == pin: the card renders installed (v0.4.9), no Update button"
+        );
+
+        // Version-migration semantics: a fresh install never enrols a
+        // learner. The bystander selected nothing before and selects nothing
+        // after.
+        assert!(store.selected_packs(&bystander.id).unwrap().is_empty());
+    }
+
+    /// PACK-UPDATE-REPIN-001 second shape: an owner already stranded by the
+    /// bug (store at the pin, selection behind it) must self-heal on the
+    /// next click — the early-return path must not stay silent forever.
+    #[test]
+    fn a_stuck_update_click_still_moves_the_learner() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let work = data.join("fixture-work");
+        let pack = "org.openlanguage.ja-demo";
+        // The measured post-incident device: both versions in the store,
+        // `current` at the pin, the profile selection behind it.
+        for v in ["0.4.8", "0.4.9"] {
+            let bytes = ja_archive_versioned(v, &work);
+            install_pack_bytes_report(data, &bytes, None, &mut no_progress, &never_cancelled)
+                .unwrap_or_else(|e| panic!("{v} should install: {e}"));
+        }
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let owner = crate::create_local_profile(data, "Owner").unwrap();
+        store.select_pack(&owner.id, pack, "0.4.8").unwrap();
+        let mut e = entry("https://github.com/o/r/releases/download/v0.4.9/ja-demo.lpk");
+        e.pack_id = pack.into();
+        e.version = "0.4.9".into();
+        write_cache(
+            data,
+            &PackCatalog {
+                catalog_version: "1".into(),
+                note: String::new(),
+                packs: vec![e],
+            },
+        );
+        // Nothing to fetch: `current` already reads the pin, so this is the
+        // second click that used to early-return with zero progress stages.
+        // It must still repair the stranded selection.
+        let res =
+            install_from_catalog_report(data, pack, &mut no_progress, &AtomicBool::new(false))
+                .expect("the stuck click succeeds");
+        assert!(
+            res.receipt.is_none(),
+            "nothing was fetched, so no receipt is claimed"
+        );
+        assert_eq!(
+            installed_version_for(data, Some(&owner.id), pack).as_deref(),
+            Some("0.4.9"),
+            "the early return must not leave the learner stranded on 0.4.8"
+        );
     }
 }
