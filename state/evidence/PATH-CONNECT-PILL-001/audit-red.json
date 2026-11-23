@@ -1,0 +1,987 @@
+{
+  "viewport": "390x844",
+  "port": 17635,
+  "tag": "red",
+  "checks": [
+    {
+      "name": "fresh home reached a stable pack-loaded state with exactly one pin before measurement",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    },
+    {
+      "name": "A1: every consecutive ring-center dy = 76px ±2 in the open band",
+      "pass": false,
+      "measured": {
+        "rowCount": 21,
+        "offPitch": [
+          {
+            "pair": 0,
+            "units": [
+              "ru.unit.on-ramp.cyrillic-a-o-m-t",
+              "ru.unit.on-ramp.cyrillic-k-e-n-s"
+            ],
+            "dy": 141,
+            "pass": false
+          },
+          {
+            "pair": 1,
+            "units": [
+              "ru.unit.on-ramp.cyrillic-k-e-n-s",
+              "ru.unit.on-ramp.cyrillic-r-v-u-kh"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 2,
+            "units": [
+              "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+              "ru.unit.on-ramp.cyrillic-b-p-d-g"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 3,
+            "units": [
+              "ru.unit.on-ramp.cyrillic-b-p-d-g",
+              "ru.unit.on-ramp.cyrillic-l-z-zh-i"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 4,
+            "units": [
+              "ru.unit.on-ramp.cyrillic-l-z-zh-i",
+              "ru.unit.on-ramp.cyrillic-y-short-i-yo-yu"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 5,
+            "units": [
+              "ru.unit.on-ramp.cyrillic-y-short-i-yo-yu",
+              "ru.unit.on-ramp.cyrillic-ya-eh-f"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 6,
+            "units": [
+              "ru.unit.on-ramp.cyrillic-ya-eh-f",
+              "ru.unit.on-ramp.cyrillic-ts-ch-sh"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 7,
+            "units": [
+              "ru.unit.on-ramp.cyrillic-ts-ch-sh",
+              "ru.unit.on-ramp.cyrillic-shch-soft-hard"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 8,
+            "units": [
+              "ru.unit.on-ramp.cyrillic-shch-soft-hard",
+              "ru.unit.on-ramp.cyrillic-stress-review"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 9,
+            "units": [
+              "ru.unit.on-ramp.cyrillic-stress-review",
+              "ru.unit.on-ramp.greetings-01"
+            ],
+            "dy": 106.7,
+            "pass": false
+          },
+          {
+            "pair": 10,
+            "units": [
+              "ru.unit.on-ramp.greetings-01",
+              "ru.unit.on-ramp.greetings-02"
+            ],
+            "dy": 106.7,
+            "pass": false
+          },
+          {
+            "pair": 11,
+            "units": [
+              "ru.unit.on-ramp.greetings-02",
+              "ru.unit.on-ramp.self-introduction-01"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 12,
+            "units": [
+              "ru.unit.on-ramp.self-introduction-01",
+              "ru.unit.on-ramp.self-introduction-02"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 13,
+            "units": [
+              "ru.unit.on-ramp.self-introduction-02",
+              "ru.unit.on-ramp.classroom-01"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 14,
+            "units": [
+              "ru.unit.on-ramp.classroom-01",
+              "ru.unit.on-ramp.classroom-02"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 15,
+            "units": [
+              "ru.unit.on-ramp.classroom-02",
+              "ru.unit.on-ramp.everyday-01"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 16,
+            "units": [
+              "ru.unit.on-ramp.everyday-01",
+              "ru.unit.on-ramp.everyday-02"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 17,
+            "units": [
+              "ru.unit.on-ramp.everyday-02",
+              "ru.unit.on-ramp.numbers-01"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 18,
+            "units": [
+              "ru.unit.on-ramp.numbers-01",
+              "ru.unit.on-ramp.numbers-02"
+            ],
+            "dy": 88,
+            "pass": false
+          },
+          {
+            "pair": 19,
+            "units": [
+              "ru.unit.on-ramp.numbers-02",
+              "capstone.org.openlanguage.ru-ru.reference.on-ramp"
+            ],
+            "dy": 88,
+            "pass": false
+          }
+        ]
+      }
+    },
+    {
+      "name": "A4: first visible node carries the path-head-cap and every title sits right of its ring",
+      "pass": false,
+      "measured": {
+        "capCount": 0,
+        "capInFirst": false,
+        "firstUnit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+        "labelOff": []
+      }
+    },
+    {
+      "name": "A5: >= 2 distinct marker glyphs across the visible nodes",
+      "pass": true,
+      "measured": {
+        "distinct": 2,
+        "counts": {
+          "letters": 10,
+          "<svg viewBox=\"0 0 16 16\" class=\"path-node-lock\" aria-hidden=\"true\"><path d=\"M5 7": 11
+        }
+      }
+    },
+    {
+      "name": "A5b: >= 2 distinct glyphs among UNLOCKED nodes (the shared 'A' on every letters unit was the owner complaint)",
+      "pass": false,
+      "measured": {
+        "distinctOpen": [
+          "letters"
+        ]
+      }
+    },
+    {
+      "name": "A3: start pill is one line (height <= 56px), absolutely positioned, right of every ring (outside the channel)",
+      "pass": false,
+      "measured": {
+        "present": true,
+        "label": "Start today's plan — 5 activities, about 5 minutes",
+        "height": 101,
+        "linesEstimate": 2,
+        "leftOfEveryRing": true,
+        "gapToNearestRing": 7,
+        "left": 142,
+        "inFlow": true
+      }
+    },
+    {
+      "name": "A2: every consecutive segment midpoint lies on drawn dash pixels (no orphan stubs)",
+      "pass": false,
+      "measured": {
+        "pairsNeeded": 20,
+        "unmeasured": 4,
+        "orphaned": [
+          [
+            "ru.unit.on-ramp.cyrillic-a-o-m-t",
+            "ru.unit.on-ramp.cyrillic-k-e-n-s"
+          ],
+          [
+            "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+            "ru.unit.on-ramp.cyrillic-b-p-d-g"
+          ],
+          [
+            "ru.unit.on-ramp.cyrillic-b-p-d-g",
+            "ru.unit.on-ramp.cyrillic-l-z-zh-i"
+          ],
+          [
+            "ru.unit.on-ramp.cyrillic-y-short-i-yo-yu",
+            "ru.unit.on-ramp.cyrillic-ya-eh-f"
+          ],
+          [
+            "ru.unit.on-ramp.cyrillic-ya-eh-f",
+            "ru.unit.on-ramp.cyrillic-ts-ch-sh"
+          ],
+          [
+            "ru.unit.on-ramp.cyrillic-stress-review",
+            "ru.unit.on-ramp.greetings-01"
+          ],
+          [
+            "ru.unit.on-ramp.greetings-02",
+            "ru.unit.on-ramp.self-introduction-01"
+          ],
+          [
+            "ru.unit.on-ramp.self-introduction-01",
+            "ru.unit.on-ramp.self-introduction-02"
+          ],
+          [
+            "ru.unit.on-ramp.classroom-01",
+            "ru.unit.on-ramp.classroom-02"
+          ],
+          [
+            "ru.unit.on-ramp.classroom-02",
+            "ru.unit.on-ramp.everyday-01"
+          ],
+          [
+            "ru.unit.on-ramp.everyday-02",
+            "ru.unit.on-ramp.numbers-01"
+          ]
+        ]
+      }
+    }
+  ],
+  "failures": 5,
+  "error": null,
+  "profileId": "prof-5a71660c-87cb-48a1-b1d5-8cc12086c89e",
+  "pitch": {
+    "rowCount": 21,
+    "pairs": [
+      {
+        "pair": 0,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-a-o-m-t",
+          "ru.unit.on-ramp.cyrillic-k-e-n-s"
+        ],
+        "dy": 141,
+        "pass": false
+      },
+      {
+        "pair": 1,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-k-e-n-s",
+          "ru.unit.on-ramp.cyrillic-r-v-u-kh"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 2,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+          "ru.unit.on-ramp.cyrillic-b-p-d-g"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 3,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-b-p-d-g",
+          "ru.unit.on-ramp.cyrillic-l-z-zh-i"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 4,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-l-z-zh-i",
+          "ru.unit.on-ramp.cyrillic-y-short-i-yo-yu"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 5,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-y-short-i-yo-yu",
+          "ru.unit.on-ramp.cyrillic-ya-eh-f"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 6,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-ya-eh-f",
+          "ru.unit.on-ramp.cyrillic-ts-ch-sh"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 7,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-ts-ch-sh",
+          "ru.unit.on-ramp.cyrillic-shch-soft-hard"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 8,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-shch-soft-hard",
+          "ru.unit.on-ramp.cyrillic-stress-review"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 9,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-stress-review",
+          "ru.unit.on-ramp.greetings-01"
+        ],
+        "dy": 106.7,
+        "pass": false
+      },
+      {
+        "pair": 10,
+        "units": [
+          "ru.unit.on-ramp.greetings-01",
+          "ru.unit.on-ramp.greetings-02"
+        ],
+        "dy": 106.7,
+        "pass": false
+      },
+      {
+        "pair": 11,
+        "units": [
+          "ru.unit.on-ramp.greetings-02",
+          "ru.unit.on-ramp.self-introduction-01"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 12,
+        "units": [
+          "ru.unit.on-ramp.self-introduction-01",
+          "ru.unit.on-ramp.self-introduction-02"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 13,
+        "units": [
+          "ru.unit.on-ramp.self-introduction-02",
+          "ru.unit.on-ramp.classroom-01"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 14,
+        "units": [
+          "ru.unit.on-ramp.classroom-01",
+          "ru.unit.on-ramp.classroom-02"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 15,
+        "units": [
+          "ru.unit.on-ramp.classroom-02",
+          "ru.unit.on-ramp.everyday-01"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 16,
+        "units": [
+          "ru.unit.on-ramp.everyday-01",
+          "ru.unit.on-ramp.everyday-02"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 17,
+        "units": [
+          "ru.unit.on-ramp.everyday-02",
+          "ru.unit.on-ramp.numbers-01"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 18,
+        "units": [
+          "ru.unit.on-ramp.numbers-01",
+          "ru.unit.on-ramp.numbers-02"
+        ],
+        "dy": 88,
+        "pass": false
+      },
+      {
+        "pair": 19,
+        "units": [
+          "ru.unit.on-ramp.numbers-02",
+          "capstone.org.openlanguage.ru-ru.reference.on-ramp"
+        ],
+        "dy": 88,
+        "pass": false
+      }
+    ]
+  },
+  "head": {
+    "capCount": 0,
+    "capInFirst": false,
+    "firstUnit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    "labelOff": []
+  },
+  "glyphs": {
+    "distinct": [
+      "letters",
+      "<svg viewBox=\"0 0 16 16\" class=\"path-node-lock\" aria-hidden=\"true\"><path d=\"M5 7"
+    ],
+    "distinctOpen": [
+      "letters"
+    ],
+    "counts": {
+      "letters": 10,
+      "<svg viewBox=\"0 0 16 16\" class=\"path-node-lock\" aria-hidden=\"true\"><path d=\"M5 7": 11
+    }
+  },
+  "pill": {
+    "present": true,
+    "label": "Start today's plan — 5 activities, about 5 minutes",
+    "height": 101,
+    "linesEstimate": 2,
+    "leftOfEveryRing": true,
+    "gapToNearestRing": 7,
+    "left": 142,
+    "inFlow": true
+  },
+  "connectorMidpoints": {
+    "pairsNeeded": 20,
+    "pairsMeasured": [
+      {
+        "pair": 0,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-a-o-m-t",
+          "ru.unit.on-ramp.cyrillic-k-e-n-s"
+        ],
+        "midpoint": {
+          "x": 97,
+          "y": 206
+        },
+        "pass": false,
+        "samples": [
+          {
+            "px": 97,
+            "py": 206,
+            "dashes": false
+          },
+          {
+            "px": 95,
+            "py": 201,
+            "dashes": false
+          },
+          {
+            "px": 98,
+            "py": 211,
+            "dashes": false
+          }
+        ]
+      },
+      {
+        "pair": 1,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-k-e-n-s",
+          "ru.unit.on-ramp.cyrillic-r-v-u-kh"
+        ],
+        "midpoint": {
+          "x": 111,
+          "y": 320
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 111,
+            "py": 320,
+            "dashes": true
+          },
+          {
+            "px": 111,
+            "py": 315,
+            "dashes": true
+          },
+          {
+            "px": 111,
+            "py": 325,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 2,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+          "ru.unit.on-ramp.cyrillic-b-p-d-g"
+        ],
+        "midpoint": {
+          "x": 97,
+          "y": 408
+        },
+        "pass": false,
+        "samples": [
+          {
+            "px": 97,
+            "py": 408,
+            "dashes": false
+          },
+          {
+            "px": 98,
+            "py": 404,
+            "dashes": false
+          },
+          {
+            "px": 95,
+            "py": 413,
+            "dashes": false
+          }
+        ]
+      },
+      {
+        "pair": 3,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-b-p-d-g",
+          "ru.unit.on-ramp.cyrillic-l-z-zh-i"
+        ],
+        "midpoint": {
+          "x": 68,
+          "y": 496
+        },
+        "pass": false,
+        "samples": [
+          {
+            "px": 68,
+            "py": 496,
+            "dashes": false
+          },
+          {
+            "px": 69,
+            "py": 492,
+            "dashes": false
+          },
+          {
+            "px": 66,
+            "py": 501,
+            "dashes": false
+          }
+        ]
+      },
+      {
+        "pair": 4,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-l-z-zh-i",
+          "ru.unit.on-ramp.cyrillic-y-short-i-yo-yu"
+        ],
+        "midpoint": {
+          "x": 53,
+          "y": 584
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 53,
+            "py": 584,
+            "dashes": true
+          },
+          {
+            "px": 53,
+            "py": 579,
+            "dashes": true
+          },
+          {
+            "px": 53,
+            "py": 589,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 5,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-y-short-i-yo-yu",
+          "ru.unit.on-ramp.cyrillic-ya-eh-f"
+        ],
+        "midpoint": {
+          "x": 68,
+          "y": 672
+        },
+        "pass": false,
+        "samples": [
+          {
+            "px": 68,
+            "py": 672,
+            "dashes": false
+          },
+          {
+            "px": 66,
+            "py": 668,
+            "dashes": false
+          },
+          {
+            "px": 69,
+            "py": 677,
+            "dashes": false
+          }
+        ]
+      },
+      {
+        "pair": 6,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-ya-eh-f",
+          "ru.unit.on-ramp.cyrillic-ts-ch-sh"
+        ],
+        "midpoint": {
+          "x": 97,
+          "y": 760
+        },
+        "pass": false,
+        "samples": [
+          {
+            "px": 97,
+            "py": 760,
+            "dashes": false
+          },
+          {
+            "px": 95,
+            "py": 756,
+            "dashes": false
+          },
+          {
+            "px": 98,
+            "py": 765,
+            "dashes": false
+          }
+        ]
+      },
+      {
+        "pair": 9,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-stress-review",
+          "ru.unit.on-ramp.greetings-01"
+        ],
+        "midpoint": {
+          "x": 68,
+          "y": 71
+        },
+        "pass": false,
+        "samples": [
+          {
+            "px": 68,
+            "py": 71,
+            "dashes": false
+          },
+          {
+            "px": 69,
+            "py": 66,
+            "dashes": false
+          },
+          {
+            "px": 66,
+            "py": 75,
+            "dashes": false
+          }
+        ]
+      },
+      {
+        "pair": 10,
+        "units": [
+          "ru.unit.on-ramp.greetings-01",
+          "ru.unit.on-ramp.greetings-02"
+        ],
+        "midpoint": {
+          "x": 53,
+          "y": 177
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 53,
+            "py": 177,
+            "dashes": true
+          },
+          {
+            "px": 53,
+            "py": 172,
+            "dashes": true
+          },
+          {
+            "px": 53,
+            "py": 182,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 11,
+        "units": [
+          "ru.unit.on-ramp.greetings-02",
+          "ru.unit.on-ramp.self-introduction-01"
+        ],
+        "midpoint": {
+          "x": 68,
+          "y": 275
+        },
+        "pass": false,
+        "samples": [
+          {
+            "px": 68,
+            "py": 275,
+            "dashes": false
+          },
+          {
+            "px": 66,
+            "py": 270,
+            "dashes": false
+          },
+          {
+            "px": 69,
+            "py": 279,
+            "dashes": false
+          }
+        ]
+      },
+      {
+        "pair": 12,
+        "units": [
+          "ru.unit.on-ramp.self-introduction-01",
+          "ru.unit.on-ramp.self-introduction-02"
+        ],
+        "midpoint": {
+          "x": 97,
+          "y": 363
+        },
+        "pass": false,
+        "samples": [
+          {
+            "px": 97,
+            "py": 363,
+            "dashes": false
+          },
+          {
+            "px": 95,
+            "py": 358,
+            "dashes": false
+          },
+          {
+            "px": 98,
+            "py": 367,
+            "dashes": false
+          }
+        ]
+      },
+      {
+        "pair": 13,
+        "units": [
+          "ru.unit.on-ramp.self-introduction-02",
+          "ru.unit.on-ramp.classroom-01"
+        ],
+        "midpoint": {
+          "x": 111,
+          "y": 451
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 111,
+            "py": 451,
+            "dashes": true
+          },
+          {
+            "px": 111,
+            "py": 446,
+            "dashes": true
+          },
+          {
+            "px": 111,
+            "py": 456,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 14,
+        "units": [
+          "ru.unit.on-ramp.classroom-01",
+          "ru.unit.on-ramp.classroom-02"
+        ],
+        "midpoint": {
+          "x": 97,
+          "y": 539
+        },
+        "pass": false,
+        "samples": [
+          {
+            "px": 97,
+            "py": 539,
+            "dashes": false
+          },
+          {
+            "px": 98,
+            "py": 534,
+            "dashes": false
+          },
+          {
+            "px": 95,
+            "py": 543,
+            "dashes": false
+          }
+        ]
+      },
+      {
+        "pair": 15,
+        "units": [
+          "ru.unit.on-ramp.classroom-02",
+          "ru.unit.on-ramp.everyday-01"
+        ],
+        "midpoint": {
+          "x": 68,
+          "y": 627
+        },
+        "pass": false,
+        "samples": [
+          {
+            "px": 68,
+            "py": 627,
+            "dashes": false
+          },
+          {
+            "px": 69,
+            "py": 622,
+            "dashes": false
+          },
+          {
+            "px": 66,
+            "py": 631,
+            "dashes": false
+          }
+        ]
+      },
+      {
+        "pair": 16,
+        "units": [
+          "ru.unit.on-ramp.everyday-01",
+          "ru.unit.on-ramp.everyday-02"
+        ],
+        "midpoint": {
+          "x": 53,
+          "y": 715
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 53,
+            "py": 715,
+            "dashes": true
+          },
+          {
+            "px": 53,
+            "py": 710,
+            "dashes": true
+          },
+          {
+            "px": 53,
+            "py": 720,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 17,
+        "units": [
+          "ru.unit.on-ramp.everyday-02",
+          "ru.unit.on-ramp.numbers-01"
+        ],
+        "midpoint": {
+          "x": 68,
+          "y": 803
+        },
+        "pass": false,
+        "samples": [
+          {
+            "px": 68,
+            "py": 803,
+            "dashes": false
+          },
+          {
+            "px": 66,
+            "py": 798,
+            "dashes": false
+          },
+          {
+            "px": 69,
+            "py": 807,
+            "dashes": false
+          }
+        ]
+      }
+    ]
+  }
+}

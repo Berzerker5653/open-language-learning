@@ -1,0 +1,63 @@
+# PATH-CONNECT-PILL-001 — controller gate log (run 2026-11-23, single lane)
+
+Shared-dir race check (first action): tree clean of other cards' tracked WIP
+(only untracked RU-CONTENT-FREEZE-047-001/RU-STORIES-MEDIA-001 evidence dirs —
+untouched). HEAD at start: 4b240bf9; HEAD unchanged through the lane.
+
+## Red-at-HEAD (before any source change; dist built from HEAD)
+
+  SERVE_BIN=target/debug/lts-serve SERVE_DIST=apps/desktop/dist CAPTURE_TAG=red \
+    node scripts/path-connect-pill-capture.mjs
+  -> 5/7 checks FAIL (A1 pitch 88/106.7/141 off; A2 11 orphaned midpoints + 4
+     walk gaps; A3 pill 101px in-flow 2-3 lines; A4 capCount 0; A5b single
+     "letters" pictogram on every unlocked node).
+  audit-red.json + connect-*-red.png committed.
+
+## Implementation findings (beyond the frozen notes)
+
+1. TWO extra root causes found by measurement, both in-family:
+   a. `--path-conn-up` angle had the mirrored x-sign (atan2(sway - prev, dy))
+      so every UP stub pointed AWAY from its previous ring — the owner's
+      "stray stub" / "N3->N4 stray" in the before image. Fixed sign; the
+      R3 "keep the math" rule is honoured (down/up now share one formula).
+   b. Stub anchors `top: calc(100% - .3rem)` left the drawn line OFFSET from
+      the center-to-center segment (parallel by ~7px at sway extremes). The
+      stubs now anchor ON the ring center (top/bottom: 50%) so the rotated
+      line IS the segment; A2's midpoint check hits it exactly.
+2. The row-height fix needed MORE than `height: 76px`: the inner grid track
+   auto-grows to the tallest item (a 110px unlock-hint row pushed the ring
+   19px off-lattice even with a fixed box — and bare `1fr` is minmax(AUTO,1fr)).
+   The invariant is `height: 4.75rem` + `grid-template-rows: minmax(0, 1fr)` +
+   column `gap: 0`; long label stacks spill symmetrically in the text column.
+   Evidence: capture-interim-reds.log (pair 9/10 at 94.7/57.3 pre-minmax).
+3. Pinned-row yield: title clamps to one line at the row top, "You are here"
+   absolute at the row bottom (right of ring), progress line suppressed on the
+   pill row (the ring fill arc encodes it). First green screenshot showed the
+   capsule still kissing the title; margin-top -0.35rem lift fixed it,
+   re-verified visually (8-10px gap in the crop review).
+
+## Gates (lane tier; frontend-only lane, no Rust touched)
+
+- cargo fmt --all --check -> FMT-OK (no rust diff; run per protocol)
+- npx tsc --noEmit -> TSC-OK (apps/desktop)
+- npx vitest run (apps/desktop FULL) -> Test Files 73 passed, Tests 647 passed
+  incl. PATH-VISUAL-001, FIX-PATH-VISUAL-001-1, PATH-LOCK-ORDER-001,
+  PATH-PIN-CONSISTENCY-001, PATH-NODE-TYPES-001 (letters contract satisfied
+  via data-glyph on the typed glyph span), motion-contract CSS pins,
+  TODAY-firstscreen/whatsnext/session/history/restart/language-switch journeys.
+- npx prettier --check on every touched file -> All matched files Prettier clean.
+- scripts/path-connect-pill-capture.mjs CAPTURE_TAG=green at the final dist
+  -> ALL CHECKS PASS (7/7), capture-green.log + audit-green.json +
+  connect-*-green.png committed.
+
+## Contract amendments (explicit, not test-weakening)
+
+- TODAY-FIRSTSCREEN-001 pill-label assertions updated to the R2 capsule form
+  ("Start · N activities · ~M min") in home.test.tsx and 6 journey files
+  (button targets "Start ·", session scope assertion "~3 min"). The asserted
+  SEMANTICS are unchanged: exactly one start CTA, it names scope + exit note.
+- A5 was tightened beyond the card's literal ">=2 distinct" (which HEAD passed
+  by counting locks): A5b counts distinct glyphs among UNLOCKED nodes — red
+  at HEAD, this is the owner's actual complaint.
+- New vitest CSS/markup contracts appended in path-view.test.tsx (pitch rules,
+  stub anchors, overlay pill, head-cap count, typed head letters).

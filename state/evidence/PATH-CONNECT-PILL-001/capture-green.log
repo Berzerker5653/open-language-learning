@@ -1,0 +1,8 @@
+PASS fresh home reached a stable pack-loaded state with exactly one pin before measurement — {"healthyStreak":3}
+PASS A1: every consecutive ring-center dy = 76px ±2 in the open band — {"rowCount":21,"offPitch":[]}
+PASS A4: first visible node carries the path-head-cap and every title sits right of its ring — {"capCount":1,"capInFirst":true,"firstUnit":"ru.unit.on-ramp.cyrillic-a-o-m-t","labelOff":[]}
+PASS A5: >= 2 distinct marker glyphs across the visible nodes — {"distinct":11,"counts":{"А":1,"К":1,"Р":1,"Б":1,"Л":1,"Ы":1,"Я":1,"Ц":1,"Щ":1,"letters":1,"<svg viewBox=\"0 0 16 16\" class=\"path-node-lock\" aria-hidden=\"true\"><path d=\"M5 7":11}}
+PASS A5b: >= 2 distinct glyphs among UNLOCKED nodes (the shared 'A' on every letters unit was the owner complaint) — {"distinctOpen":["А","К","Р","Б","Л","Ы","Я","Ц","Щ","letters"]}
+PASS A3: start pill is one line (height <= 56px), absolutely positioned, right of every ring (outside the channel) — {"present":true,"label":"Start · 5 activities · ~5 min","height":44,"linesEstimate":1,"leftOfEveryRing":true,"gapToNearestRing":7,"left":142,"inFlow":false}
+PASS A2: every consecutive segment midpoint lies on drawn dash pixels (no orphan stubs) — {"pairsNeeded":20,"unmeasured":0,"orphaned":[]}
+ALL CHECKS PASS
