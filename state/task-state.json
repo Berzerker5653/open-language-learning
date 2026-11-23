@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": "FEEL-DRILL-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3151,11 +3151,17 @@
       "summary": "Shipped ddbac5d9 (code), evidence 7ba990d0. Global motion foundation: :root dur/ease/space/z tokens, fade-up/slide-up/pop/pulse-soft keyframe library, :active pressed states on .btn/.tab/.seg-btn/.card/.profile-card, measured gliding routes underline, smooth route-reset scroll. Real-engine capture 1/9 red at base vs 9/9 green; 531/531 vitest, tsc clean, reduced-motion kill-switch proven by capture, not trusted."
     },
     "FEEL-DRILL-001": {
-      "status": "in_progress",
+      "status": "done",
       "attempts": 1,
       "title": "Session drill feel - the progress bar eases its width, the correct pick reveals a ring plus check, choices press and dim, end-of-session cards get real calm styling, embedded runners show step dots",
       "evidence": [
-        "state/notes/FEEL-DRILL-001.md"
+        "state/notes/FEEL-DRILL-001.md",
+        "state/evidence/FEEL-DRILL-001/gates.log",
+        "state/evidence/FEEL-DRILL-001/red-vitest.log",
+        "state/evidence/FEEL-DRILL-001/red-capture.log",
+        "state/evidence/FEEL-DRILL-001/red-at-head/result.json",
+        "state/evidence/FEEL-DRILL-001/capture-green.log",
+        "state/evidence/FEEL-DRILL-001/capture/result.json"
       ],
       "updated": "2026-11-23"
     }
