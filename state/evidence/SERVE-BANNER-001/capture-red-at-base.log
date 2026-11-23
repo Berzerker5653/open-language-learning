@@ -1,0 +1,8 @@
+PASS home reached a stable pack-loaded state with exactly one pin before measurement — {"healthyStreak":3}
+PASS Today first fold contains ZERO serve-mode infra strings (meta off the first screen) — {"foldHits":0,"hitStrings":[],"hitSnippets":[]}
+PASS no degraded-capability badge on Today while the server reports the microphone healthy — {"badgeCount":0,"badgeText":null}
+FAIL zero serve-mode infra strings stacked above learner content at the document top — {"scrollY":0,"foldHits":4,"hitStrings":["Browser mode","install progress","secure context","Privacy settings"],"hitSnippets":[{"string":"Browser mode","snippet":"Browser mode: install progress streams live, the same stages the desktop shows."},{"string":"install progress","snippet":"Browser mode: install progress streams live, the same stages the desktop shows."},{"string":"secure context","snippet":"needs a secure context (https or localhost); over a plain tailnet http URL the browser blocks mic capture, so scoring fe"},{"string":"Privacy settings","snippet":"Privacy settings: unchanged — serve mode never rewrites stored mic/privacy settings, it only labels what the browser can"}],"noticeBanner":1}
+FAIL the About this build card carries a serve-notice block with every capability line — {"hasNoticeBlock":false,"missingLines":["Browser mode: install progress streams live","secure context","Privacy settings: unchanged"]}
+FAIL each infra line exists exactly once in the whole app, inside the About card — {"docBrowserMode":1,"cardBrowserMode":0}
+FAIL the notes ride inside the card below the build identity lines — {"belowCommit":false}
+4 CHECK(S) FAILED

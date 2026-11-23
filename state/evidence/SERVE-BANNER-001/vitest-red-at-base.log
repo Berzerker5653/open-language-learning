@@ -1,0 +1,8 @@
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 5 ⎯⎯⎯⎯⎯⎯⎯
+ FAIL  |node| src/serve-banner.test.tsx > serve degraded badge (SERVE-BANNER-001) > names the microphone degradation in ONE line when the report blocks it
+ FAIL  |node| src/serve-banner.test.tsx > serve degraded badge (SERVE-BANNER-001) > stays silent on a healthy localhost serve report — the notes live in Settings
+ FAIL  |node| src/serve-banner.test.tsx > serve degraded badge (SERVE-BANNER-001) > stays silent when the bridge is unreachable — that note also lives in Settings
+ FAIL  |node| src/serve-banner.test.tsx > serve degraded badge (SERVE-BANNER-001) > stays silent when an older bridge says nothing about microphone names
+ FAIL  |node| src/settings.test.tsx > serve-mode capability notes live in About (SERVE-BANNER-001) > renders every capability note inside the About this build card
+ Test Files  2 failed (2)
+      Tests  5 failed | 25 passed (30)

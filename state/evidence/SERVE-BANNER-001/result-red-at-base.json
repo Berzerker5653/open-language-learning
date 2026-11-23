@@ -1,0 +1,150 @@
+{
+  "viewport": "390x844",
+  "tag": "red-at-base",
+  "checks": [
+    {
+      "name": "home reached a stable pack-loaded state with exactly one pin before measurement",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    },
+    {
+      "name": "Today first fold contains ZERO serve-mode infra strings (meta off the first screen)",
+      "pass": true,
+      "measured": {
+        "foldHits": 0,
+        "hitStrings": [],
+        "hitSnippets": []
+      }
+    },
+    {
+      "name": "no degraded-capability badge on Today while the server reports the microphone healthy",
+      "pass": true,
+      "measured": {
+        "badgeCount": 0,
+        "badgeText": null
+      }
+    },
+    {
+      "name": "zero serve-mode infra strings stacked above learner content at the document top",
+      "pass": false,
+      "measured": {
+        "scrollY": 0,
+        "foldHits": 4,
+        "hitStrings": [
+          "Browser mode",
+          "install progress",
+          "secure context",
+          "Privacy settings"
+        ],
+        "hitSnippets": [
+          {
+            "string": "Browser mode",
+            "snippet": "Browser mode: install progress streams live, the same stages the desktop shows."
+          },
+          {
+            "string": "install progress",
+            "snippet": "Browser mode: install progress streams live, the same stages the desktop shows."
+          },
+          {
+            "string": "secure context",
+            "snippet": "needs a secure context (https or localhost); over a plain tailnet http URL the browser blocks mic capture, so scoring fe"
+          },
+          {
+            "string": "Privacy settings",
+            "snippet": "Privacy settings: unchanged — serve mode never rewrites stored mic/privacy settings, it only labels what the browser can"
+          }
+        ],
+        "noticeBanner": 1
+      }
+    },
+    {
+      "name": "the About this build card carries a serve-notice block with every capability line",
+      "pass": false,
+      "measured": {
+        "hasNoticeBlock": false,
+        "missingLines": [
+          "Browser mode: install progress streams live",
+          "secure context",
+          "Privacy settings: unchanged"
+        ]
+      }
+    },
+    {
+      "name": "each infra line exists exactly once in the whole app, inside the About card",
+      "pass": false,
+      "measured": {
+        "docBrowserMode": 1,
+        "cardBrowserMode": 0
+      }
+    },
+    {
+      "name": "the notes ride inside the card below the build identity lines",
+      "pass": false,
+      "measured": {
+        "belowCommit": false
+      }
+    }
+  ],
+  "failures": 4,
+  "error": null,
+  "capabilities": {
+    "microphone_names_available": true,
+    "install_progress_events": true
+  },
+  "profileId": "prof-cc92d817-35ed-49f9-aced-a5e9aafc692b",
+  "fold": {
+    "foldHits": 0,
+    "hitStrings": [],
+    "hitSnippets": [],
+    "badgeCount": 0,
+    "badgeText": null,
+    "bodyHasInfra": [
+      "Browser mode",
+      "install progress",
+      "Privacy settings",
+      "secure context"
+    ]
+  },
+  "atDocumentTop": {
+    "scrollY": 0,
+    "foldHits": 4,
+    "hitStrings": [
+      "Browser mode",
+      "install progress",
+      "secure context",
+      "Privacy settings"
+    ],
+    "hitSnippets": [
+      {
+        "string": "Browser mode",
+        "snippet": "Browser mode: install progress streams live, the same stages the desktop shows."
+      },
+      {
+        "string": "install progress",
+        "snippet": "Browser mode: install progress streams live, the same stages the desktop shows."
+      },
+      {
+        "string": "secure context",
+        "snippet": "needs a secure context (https or localhost); over a plain tailnet http URL the browser blocks mic capture, so scoring fe"
+      },
+      {
+        "string": "Privacy settings",
+        "snippet": "Privacy settings: unchanged — serve mode never rewrites stored mic/privacy settings, it only labels what the browser can"
+      }
+    ],
+    "noticeBanner": 1
+  },
+  "about": {
+    "hasNoticeBlock": false,
+    "missingLines": [
+      "Browser mode: install progress streams live",
+      "secure context",
+      "Privacy settings: unchanged"
+    ],
+    "docBrowserMode": 1,
+    "cardBrowserMode": 0,
+    "belowCommit": false
+  }
+}

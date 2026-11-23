@@ -685,3 +685,26 @@ describe("local network access card (LAN-TOGGLE-PIN-001)", () => {
     expect(html).toContain("lan-access-card");
   });
 });
+
+// SERVE-BANNER-001: the serve-mode capability lines that used to sit as a
+// five-line notice block above every screen (including the Today fold-0)
+// belong in the About this build card, where the build identity already
+// lives. Market rule: meta never occupies the learner's first screen.
+describe("serve-mode capability notes live in About (SERVE-BANNER-001)", () => {
+  const NOTES = [
+    "Browser mode: install progress streams live, the same stages the desktop shows.",
+    "needs a secure context (https or localhost); over a plain tailnet http URL the browser blocks mic capture, so scoring features are labeled unavailable",
+    "Privacy settings: unchanged — serve mode never rewrites stored mic/privacy settings, it only labels what the browser can do",
+  ];
+  it("renders every capability note inside the About this build card", () => {
+    const html = render({ serveNotice: NOTES });
+    expect(html).toContain('data-testid="serve-notice"');
+    const card = html.slice(html.indexOf('id="settings-build"'));
+    for (const line of NOTES) expect(card).toContain(line);
+  });
+  it("renders no serve-notice block when there is nothing to say", () => {
+    expect(render()).not.toContain('data-testid="serve-notice"');
+    expect(render({ serveNotice: null })).not.toContain('data-testid="serve-notice"');
+    expect(render({ serveNotice: [] })).not.toContain('data-testid="serve-notice"');
+  });
+});

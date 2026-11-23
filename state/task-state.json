@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": null,
+  "active_task": "SERVE-BANNER-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3288,6 +3288,16 @@
         "state/evidence/PATH-LOCK-ORDER-001/lockorder-fullpath-green.png"
       ],
       "notes": "code f665b2ea (red contract 2ce3919b, evidence next commit); section order done->open->locked, unlock reason once per gate; capture red 3 FAIL (locked-above-frontier 10) vs green 6/6 at 390x844; firstscreen 8/8 unedited"
+    },
+    "SERVE-BANNER-001": {
+      "status": "in_progress",
+      "attempts": 1,
+      "at": "2026-11-23",
+      "updated": "2026-11-23",
+      "evidence": [
+        "state/notes/SERVE-BANNER-001.md"
+      ],
+      "notes": "opened; red contract + red-at-base capture this commit; code next"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
