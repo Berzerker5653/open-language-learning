@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": "UNIT-CAPSTONE-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3105,15 +3105,22 @@
     "UNIT-CAPSTONE-001": {
       "task_id": "UNIT-CAPSTONE-001",
       "title": "Section capstone review node (Busuu Checkpoint pattern) ends every band section, unlocks after its units, and the header counter flips on pass",
-      "status": "in_progress",
-      "attempts": 1,
+      "status": "done",
+      "attempts": 2,
       "dependencies": [
         "PATH-VISUAL-001",
         "PATH-NODE-TYPES-001"
       ],
       "updated": "2026-11-23",
-      "summary": "Started: engine-synthesized capstone node per band section (kind capstone, id capstone.<pack>.<band-key>), capstone_plan/capstone_complete pair over the existing graded runners, storage v11 capstone_attempts, header counter flips on pass. Frozen contract in state/notes/UNIT-CAPSTONE-001.md.",
-      "notes": "state/notes/UNIT-CAPSTONE-001.md"
+      "summary": "Shipped: engine-synthesized capstone node per band section (kind capstone, id capstone.<pack>.<band-key>) LAST in its section, locked until every unit is done, ring = honest pool coverage; capstone_plan/capstone_complete recount engine-side from attempt-grouped evidence; storage v11 capstone_attempts (done reads passed rows only); pass bar 80% (clean sweep under 4); header counter counts the checkpoint and says N/M done. ADR-0002 posture: no XP, no celebration. Lanes gates all green; red@HEAD vs green 13/13 capture pair.",
+      "notes": "state/notes/UNIT-CAPSTONE-001.md",
+      "evidence": [
+        "state/evidence/UNIT-CAPSTONE-001/gates.log",
+        "state/evidence/UNIT-CAPSTONE-001/capture-green.log",
+        "state/evidence/UNIT-CAPSTONE-001/capture-red-at-head.log",
+        "state/evidence/UNIT-CAPSTONE-001/result.json",
+        "state/evidence/UNIT-CAPSTONE-001/path-capstone-node.png"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
