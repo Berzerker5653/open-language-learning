@@ -18,7 +18,7 @@ import { fileURLToPath } from "node:url";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
 import { DimProgress } from "./dim-progress";
-import { ActivityCalendar, ProgressZeroState, type ActivityDay } from "./memory-stats";
+import { ActivityCalendar, ProgressZeroState } from "./memory-stats";
 import { PlacementResultBand } from "./home";
 
 const repoRoot = fileURLToPath(new URL("../../../", import.meta.url));

@@ -76,6 +76,15 @@ describe("placement asks only runnable questions and reports the rest (U05)", ()
     if (!second) throw new Error("the repeated pair never rendered");
     await app.click(second);
     await app.click(app.button(app.section("Placement"), "Back to plan"));
-    expect(place.textContent).toContain("Placement complete: 2 of 2 correct");
+    // FEEL-PROGRESS-001: the verdict is the calm what-you-know band, not
+    // bare prose (and never celebration copy); Run again keeps its job.
+    expect(place.textContent).toContain("what you know");
+    expect(place.textContent).toContain("2 of 2 quick checks matched");
+    expect(place.textContent).not.toContain("Placement complete:");
+    expect(
+      [...place.querySelectorAll("button")].some((b) =>
+        (b.textContent ?? "").includes("Run again"),
+      ),
+    ).toBe(true);
   });
 });

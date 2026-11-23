@@ -23,6 +23,7 @@ import {
   GoalMap,
   CanDoSummary,
   GentleFacts,
+  PlacementResultBand,
   type UnitPathNode,
   type NextOffer,
   type WorldEnvironment,
@@ -36,7 +37,7 @@ import {
   type LearningFacts,
   bandHeader,
 } from "./home";
-import { MemoryStatsStrip, type MemoryStats } from "./memory-stats";
+import { MemoryStatsStrip, ProgressZeroState, type MemoryStats } from "./memory-stats";
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
 import { DictationPractice, type DictationResult, type DictationSentence } from "./dictation";
 import {
@@ -4671,10 +4672,7 @@ export function App() {
           )}
           {placementFinished ? (
             <div className="field">
-              <p>
-                Placement complete: {placementHits} of {placementItems.length} correct. Known
-                foundations unlock in Practice automatically.
-              </p>
+              <PlacementResultBand hits={placementHits} total={placementItems.length} />
               <div className="btn-row">
                 <button
                   type="button"
@@ -4817,8 +4815,18 @@ export function App() {
                   answers, below nothing; it abstains when the wire failed. */}
                 <GentleFacts facts={learningFacts} />
                 <CanDoSummary goals={goals} rows={progress} nextGoal={nextGoal} />
-                {/* PROGRESS-STATS-001 (U14): instruments above the tree. */}
-                {memoryStats ? <MemoryStatsStrip stats={memoryStats} /> : null}
+                {/* PROGRESS-STATS-001 (U14): instruments above the tree.
+                    FEEL-PROGRESS-001: a learner the engine's OWN lifetime
+                    facts place at zero (days_active and units_done both 0)
+                    gets the designed honest zero-state instead of a strip
+                    of abstentions; a failed facts read never triggers it. */}
+                {learningFacts &&
+                learningFacts.days_active === 0 &&
+                learningFacts.units_done === 0 ? (
+                  <ProgressZeroState />
+                ) : memoryStats ? (
+                  <MemoryStatsStrip stats={memoryStats} />
+                ) : null}
                 <GoalMap goals={goals} />
                 <ProgressView rows={progress} />
               </>

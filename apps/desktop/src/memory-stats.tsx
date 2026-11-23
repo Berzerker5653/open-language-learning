@@ -12,9 +12,17 @@
  *
  * Charts are dependency-free SVG — no chart library is added, and the
  * a11y contract matches SessionChrome's progressbar semantics.
+ *
+ * FEEL-PROGRESS-001: the calendar's 84 cells are no longer anonymous —
+ * each carries a date + summary label, is reachable by keyboard, scales
+ * 1.15x on hover/focus with a teal ring, and opens a dark tip chip
+ * (date · summary) so density is shape + text, never color alone. Bars
+ * and cells fill in on arrival (dim-glide / cal-in) instead of snapping.
  */
-
+import { useState } from "react";
+import type { CSSProperties } from "react";
 import { bandHeader } from "./home";
+import { DimProgress } from "./dim-progress";
 
 export interface BandRetention {
   band: string;
@@ -41,13 +49,36 @@ export interface MemoryStats {
 const DAY_MS = 86_400_000;
 const WEEKS = 12;
 
+/** "Nov 20" — the mock's tip/label date voice, deterministic in UTC. */
+function calDayLabel(iso: string): string {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${iso}T00:00:00Z`));
+}
+
+/** The text half of "shape + text, never color alone" (FEEL-PROGRESS-001). */
+function daySummary(events: number): string {
+  return events === 0 ? "no practice" : `${events} ${events === 1 ? "exercise" : "exercises"}`;
+}
+
 /**
  * 12-week activity calendar: one column per week (Sunday first), one row
  * per weekday, one cell per UTC day the window covers. Days with no events
- * render as empty cells; the whole chart carries a single summary label
- * (screen readers get the story without 84 anonymous boxes).
+ * render as empty cells. The whole chart carries a summary group label AND
+ * (FEEL-PROGRESS-001) every in-window cell carries its own
+ * "<date> · <summary>" aria-label and is tab-reachable; hover/focus/tap
+ * scales the cell and fades in a tip chip with the same text. Cells fill
+ * in on arrival with a capped stagger (cal-in).
  */
 export function ActivityCalendar({ days, today }: { days: ActivityDay[]; today?: string }) {
+  const [tip, setTip] = useState<{
+    date: string;
+    events: number;
+    left: number;
+    top: number;
+  } | null>(null);
   const counts = new Map(days.map((d) => [d.date, d.events]));
   const end = new Date(`${(today ?? new Date().toISOString()).slice(0, 10)}T00:00:00Z`);
   const start = new Date(end.getTime() - (WEEKS * 7 - 1) * DAY_MS);
@@ -70,25 +101,37 @@ export function ActivityCalendar({ days, today }: { days: ActivityDay[]; today?:
   }
   const activeDays = days.filter((d) => d.events > 0).length;
   const busiest = days.reduce((m, d) => Math.max(m, d.events), 0);
+  const showTip = (c: number, r: number, cell: { date: string; events: number }) =>
+    setTip({
+      date: cell.date,
+      events: cell.events,
+      // cell center under the cell: 14px grid, 11px cell
+      left: c * 14 + 5.5,
+      top: r * 14 + 14 + 6,
+    });
   return (
     <div
       className="memory-calendar"
       role="group"
       aria-label={`Activity calendar, last ${WEEKS} weeks: ${activeDays} active ${activeDays === 1 ? "day" : "days"}, busiest day ${busiest} ${busiest === 1 ? "exercise" : "exercises"}`}
     >
-      <svg width={columns.length * 14} height={7 * 14} role="img" aria-hidden="true">
+      <svg width={columns.length * 14} height={7 * 14}>
         {columns.map((week, c) =>
           week.map((cell, r) => {
             if (!cell.inWindow) return null;
             // Lightness speaks volume, not color: events 1..n map to a
             // bounded set of fill levels so contrast never depends on a
-            // hue pair.
+            // hue pair. FEEL-PROGRESS-001 adds the text half: the cell is
+            // labeled and reachable, and hover/focus/tap opens the tip.
             const level =
               cell.events === 0 ? 0 : Math.min(4, 1 + Math.ceil(Math.log2(cell.events)));
             return (
               <rect
                 key={`${cell.date}`}
                 className={`memory-cal-cell memory-cal-cell--${level}`}
+                role="img"
+                aria-label={`${calDayLabel(cell.date)} · ${daySummary(cell.events)}`}
+                tabIndex={0}
                 data-date={cell.date}
                 data-events={cell.events}
                 x={c * 14}
@@ -96,17 +139,53 @@ export function ActivityCalendar({ days, today }: { days: ActivityDay[]; today?:
                 width={11}
                 height={11}
                 rx={2}
+                style={{ "--cell-i": String(Math.min(40, c * 7 + r)) } as CSSProperties}
+                onPointerEnter={() => showTip(c, r, cell)}
+                onPointerLeave={() => setTip(null)}
+                onFocus={() => showTip(c, r, cell)}
+                onBlur={() => setTip(null)}
               />
             );
           }),
         )}
       </svg>
+      {tip ? (
+        <div
+          className="memory-cal-tip"
+          role="tooltip"
+          style={{ left: `${tip.left}px`, top: `${tip.top}px` }}
+        >
+          {calDayLabel(tip.date)} · {daySummary(tip.events)}
+        </div>
+      ) : null}
       <p className="meta">
         <small>
           {activeDays} of the last {WEEKS * 7} days had practice.
         </small>
       </p>
     </div>
+  );
+}
+
+export function ProgressZeroState() {
+  // FEEL-PROGRESS-001: the mock's FRESH PROFILE card. Honest by
+  // construction — App renders it ONLY when the engine's own lifetime
+  // facts (learning_facts) report zero days active AND zero units done,
+  // so it can never contradict a learner who has studied and merely has
+  // an empty 12-week window. No invented streak, no fake history; the
+  // copy points at the Today tab.
+  return (
+    <section
+      aria-label="Progress not started"
+      className="progress-zero"
+      data-testid="progress-zero"
+    >
+      <span className="progress-zero-ring" aria-hidden="true" />
+      <p className="progress-zero-lead">Nothing studied yet</p>
+      <p className="meta">
+        your first session is on <strong>Today</strong>
+      </p>
+    </section>
   );
 }
 
@@ -142,25 +221,11 @@ export function MemoryStatsStrip({ stats, today }: { stats: MemoryStats; today?:
                   {b.retention_pct === null ? (
                     <span className="meta">— no scheduled material in this band yet</span>
                   ) : (
-                    <svg
-                      className="dim-progress"
-                      width="120"
-                      height="8"
-                      role="progressbar"
-                      aria-valuenow={b.retention_pct}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-label={`Band ${header.label}: about ${b.retention_pct}% of ${b.scheduled_items} scheduled ${b.scheduled_items === 1 ? "item is" : "items are"} still retrievable right now`}
-                      data-progress-pct={b.retention_pct}
-                    >
-                      <rect className="dim-progress-track" width="120" height="8" rx="4" />
-                      <rect
-                        className="dim-progress-fill"
-                        width={(120 * Math.min(100, Math.max(0, b.retention_pct))) / 100}
-                        height="8"
-                        rx="2"
-                      />
-                    </svg>
+                    <DimProgress
+                      pct={b.retention_pct}
+                      keyId={`retention:${b.band}`}
+                      ariaLabel={`Band ${header.label}: about ${b.retention_pct}% of ${b.scheduled_items} scheduled ${b.scheduled_items === 1 ? "item is" : "items are"} still retrievable right now`}
+                    />
                   )}
                 </li>
               );

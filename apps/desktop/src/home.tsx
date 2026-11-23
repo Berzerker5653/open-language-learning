@@ -9,6 +9,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { LatinText, PackText } from "@openlang/ui";
+import { DimProgress } from "./dim-progress";
 export interface PlannedItem {
   item_id: string;
   content_id: string;
@@ -697,6 +698,38 @@ export function GentleFacts({ facts }: { facts: LearningFacts | null }) {
   );
 }
 /**
+ * FEEL-PROGRESS-001: placement verdicts used to land as bare prose ("Placement
+ * complete: X of Y correct."). They now land in a calm what-you-know band —
+ * instrument voice, not a report card and never a celebration (ADR-0002; the
+ * one sanctioned warm moment lives with WARM-MOMENTS on the capstone). The
+ * zero-hit variant stays honest: it confirms nothing and promises nothing was
+ * taken away.
+ */
+export function PlacementResultBand({ hits, total }: { hits: number; total: number }) {
+  return (
+    <section className="know-band" data-testid="know-band" aria-label="What you know">
+      <span className="know-band-eyebrow">what you know</span>
+      {hits > 0 ? (
+        <p className="know-band-count">
+          {hits} of {total} quick checks matched what you already know
+        </p>
+      ) : (
+        <p className="know-band-count">
+          No foundations were confirmed this time — everything stays on the path.
+        </p>
+      )}
+      <p className="meta">
+        <small>
+          {hits > 0
+            ? "Known foundations unlock in Practice automatically."
+            : "Nothing was taken away — the path keeps everything."}
+        </small>
+      </p>
+    </section>
+  );
+}
+
+/**
  * Progress answers three questions before it shows any numbers: what the
  * learner can do now, what changed, and what to do next. Every line is derived
  * from what the engine already reports — the pack's own goal text, the
@@ -753,8 +786,8 @@ export function CanDoSummary(p: {
       )}
       <p className="meta">
         <small>
-          This is what the recorded evidence says today; capability state stays the authority,
-          and the gentle counts on this page are memory, not measurement.
+          This is what the recorded evidence says today; capability state stays the authority, and
+          the gentle counts on this page are memory, not measurement.
         </small>
       </p>
       <h2>What to do next</h2>
@@ -1683,25 +1716,11 @@ export function GoalMap({ goals }: { goals: GoalCard[] }) {
                                 modality gate. Dependency-free SVG; the
                                 a11y contract matches SessionChrome's
                                 progressbar semantics. */}
-                            <svg
-                              className="dim-progress"
-                              width="120"
-                              height="8"
-                              role="progressbar"
-                              aria-valuenow={d.progress_pct}
-                              aria-valuemin={0}
-                              aria-valuemax={100}
-                              aria-label={`${modalityLabel(d.modality)} toward “${g.description}”: ${d.progress_pct}% of the gate`}
-                              data-progress-pct={d.progress_pct}
-                            >
-                              <rect className="dim-progress-track" width="120" height="8" rx="4" />
-                              <rect
-                                className="dim-progress-fill"
-                                width={(120 * Math.min(100, Math.max(0, d.progress_pct))) / 100}
-                                height="8"
-                                rx="2"
-                              />
-                            </svg>
+                            <DimProgress
+                              pct={d.progress_pct}
+                              keyId={`goal:${g.id}:${d.modality}`}
+                              ariaLabel={`${modalityLabel(d.modality)} toward “${g.description}”: ${d.progress_pct}% of the gate`}
+                            />
                             {/* R09: the headline state is the weakest declared
                                 concept, so a goal with one strong concept and
                                 several untouched ones cannot read as achieved.
