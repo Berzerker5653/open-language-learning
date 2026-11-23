@@ -3,6 +3,7 @@ import { isValidElement as isElement, type ReactElement, type ReactNode } from "
 import { renderToStaticMarkup } from "react-dom/server";
 import {
   CanDoSummary,
+  GentleFacts,
   GoalMap,
   Home,
   planMinutesLabel,
@@ -128,9 +129,25 @@ describe("home", () => {
     const html = renderToStaticMarkup(
       <Home displayName="Hunter" plan={plan} activeBudget={5} onBudget={() => {}} />,
     );
-    for (const banned of ["streak", "day", "attendance", "points", "heart"]) {
+    // WARM-MOMENTS-001 re-scope (ADR-0002 amended 2026-11-23): the ban
+    // list grew — xp, league, and freeze join streak/attendance/points/
+    // heart. "day" stays banned HERE on purpose: gentle facts (days
+    // with learning) live on the Progress tab as memory, never on the
+    // Today screen as pressure. Unit-completion warmth lives on the
+    // path card inside Home, and its own test asserts it is token-free.
+    for (const banned of [
+      "streak",
+      "day",
+      "attendance",
+      "points",
+      "heart",
+      "league",
+      "freeze",
+    ]) {
       expect(html.toLowerCase()).not.toContain(banned);
     }
+    // "xp" needs word boundaries: prose like "explain" is not a point system.
+    expect(html).not.toMatch(/\bxp\b/i);
   });
 
   it("handles empty plans honestly", () => {
@@ -823,5 +840,33 @@ describe("what you can do now", () => {
     const html = renderToStaticMarkup(<CanDoSummary goals={[unseen]} rows={[]} nextGoal={null} />);
     expect(html).toContain("Nothing has been used well enough yet");
     expect(html).not.toContain("Talk about family");
+  });
+});
+
+// WARM-MOMENTS-001: the gentle-facts surface on the Progress tab. The
+// numbers come from the engine's `learning_facts` wire (distinct
+// evidence dates; done non-capstone path nodes) and are framed as
+// MEMORY, never as debt — no streak shape, no break-punishment, no
+// urgency (ADR-0002, amended calm-but-warm).
+describe("gentle facts (WARM-MOMENTS-001)", () => {
+  it("states days with learning and units completed as memory, not debt", () => {
+    const html = renderToStaticMarkup(<GentleFacts facts={{ days_active: 9, units_done: 14 }} />);
+    expect(html).toContain('data-testid="gentle-facts"');
+    expect(html).toContain("9 days with learning so far");
+    expect(html).toContain("14 units completed");
+    // The memory framing is explicit — nothing here can be "lost".
+    expect(html).toContain("nothing here resets, expires, or counts against you");
+    expect(html).not.toMatch(/streak|\bxp\b|league|freeze|don.t lose|at risk|keep it going/i);
+  });
+
+  it("says day and unit honestly in the singular", () => {
+    const html = renderToStaticMarkup(<GentleFacts facts={{ days_active: 1, units_done: 1 }} />);
+    expect(html).toContain("1 day with learning so far");
+    expect(html).toContain("1 unit completed");
+  });
+
+  it("abstains entirely when the engine has no numbers", () => {
+    // UI-HYGIENE-001 posture: no fake zero tour, no invented facts.
+    expect(renderToStaticMarkup(<GentleFacts facts={null} />)).toBe("");
   });
 });

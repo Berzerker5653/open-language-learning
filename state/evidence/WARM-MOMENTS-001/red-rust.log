@@ -1,0 +1,3 @@
+cargo test -p lts-desktop --lib learning_facts @ base (tests committed first):
+error[E0425]: cannot find function `learning_facts_at` in this scope (x4)
+error: could not compile `lts-desktop` (lib test) — red as designed

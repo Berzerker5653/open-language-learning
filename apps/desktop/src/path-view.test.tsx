@@ -548,18 +548,22 @@ describe("section capstone node (UNIT-CAPSTONE-001)", () => {
   });
 
   it("states a finished review once, calmly, with the engine's honest counts", () => {
+    // WARM-MOMENTS-001 re-scope: the pass branch is now the quiet
+    // unit-finish card (its presence + token suite live in the
+    // unit-finish-moment describe); the calm counts stay the substance.
     const pass = renderToStaticMarkup(
       <PathView
         nodes={[node({ unit_id: "ru.unit.x", current: true })]}
-        capstoneResult={{ passed: true, items: 16, correct: 13, friendly: "On-ramp" }}
+        capstoneResult={{ passed: true, items: 16, correct: 13, friendly: "On-ramp", band: "on-ramp" }}
       />,
     );
-    expect(pass).toContain("Section review recorded — 13 of 16 recalled. On-ramp complete.");
+    expect(pass).toContain("Section complete — On-ramp");
+    expect(pass).toContain("13 of 16 recalled");
     expect(pass).toContain('role="status"');
     const fail = renderToStaticMarkup(
       <PathView
         nodes={[node({ unit_id: "ru.unit.x", current: true })]}
-        capstoneResult={{ passed: false, items: 16, correct: 9, friendly: "On-ramp" }}
+        capstoneResult={{ passed: false, items: 16, correct: 9, friendly: "On-ramp", band: "on-ramp" }}
       />,
     );
     expect(fail).toContain(
@@ -589,8 +593,101 @@ describe("section capstone node (UNIT-CAPSTONE-001)", () => {
     );
     expect(before).toContain("1/2 done");
     const after = renderToStaticMarkup(
-      <PathView nodes={[node({ unit_id: "ru.unit.x", done: true }), cap({ done: true })]} />,
+      <PathView nodes={[node({ unit_id: "ru.unit.x", done: true }), cap({ done: true })]} />
     );
     expect(after).toContain("2/2 done");
+  });
+});
+
+// WARM-MOMENTS-001: the calm-but-warm unit-finish moment (owner decision
+// 2026-11-22, docs/design/PROGRESSION-UX-AUDIT-2026-11-22.md; ADR-0002
+// amended). A PASSED capstone gets one quiet card — what was completed,
+// the honest recall numbers behind it, what comes next. Honest warmth
+// only: the amended ADR still bans every token that could turn warmth
+// into a lever, and this card asserts BOTH presence and token-freedom.
+describe("unit-finish moment (WARM-MOMENTS-001)", () => {
+  const cap = (over: Partial<UnitPathNode>): UnitPathNode =>
+    node({
+      unit_id: "capstone.org.openlanguage.ru-ru.reference.on-ramp",
+      kind: "capstone",
+      title: "Section review",
+      summary: "Mixed recall of the letters and words of this section.",
+      refs_total: 84,
+      ...over,
+    });
+  const finishedSection: UnitPathNode[] = [
+    node({ unit_id: "ru.unit.one", done: true }),
+    node({ unit_id: "ru.unit.two", done: true }),
+    cap({ done: true, refs_done: 84, unlock_hint: null }),
+    node({ unit_id: "ru.unit.a1-first", band: "a1" }),
+  ];
+  const pass = renderToStaticMarkup(
+    <PathView
+      nodes={finishedSection}
+      capstoneResult={{
+        passed: true,
+        items: 16,
+        correct: 13,
+        friendly: "Getting started",
+        band: "on-ramp",
+      }}
+    />,
+  );
+
+  it("a passed capstone renders the quiet completion card with honest counts", () => {
+    expect(pass).toContain('data-testid="unit-finish-moment"');
+    expect(pass).toContain("Section complete — Getting started");
+    expect(pass).toContain("Well done");
+    expect(pass).toContain("13 of 16");
+    // What was learned: the section's units and its proven recall pool.
+    expect(pass).toContain("2 units");
+    expect(pass).toContain("84 of 84");
+  });
+
+  it("the card names the next section by friendly name and live lock state", () => {
+    // The a1 fixture node is unlocked: the card may say it is open.
+    expect(pass).toContain("Up next: Beginner");
+    expect(pass).toContain("open on the path");
+    // And when the next section is still locked, the card says so — it
+    // never claims an unlock that the engine does not report.
+    const lockedNext = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({ unit_id: "ru.unit.one", done: true }),
+          cap({ done: true, refs_done: 84, unlock_hint: null }),
+          node({ unit_id: "ru.unit.a1-first", band: "a1", locked: true }),
+        ]}
+        capstoneResult={{
+          passed: true,
+          items: 16,
+          correct: 13,
+          friendly: "Getting started",
+          band: "on-ramp",
+        }}
+      />,
+    );
+    expect(lockedNext).toContain("Up next: Beginner");
+    expect(lockedNext).toContain("still ahead");
+  });
+
+  it("the card carries warmth without any banned token", () => {
+    expect(pass).not.toMatch(/congrats|celebrat|\bxp\b|badge|league|\bpoints\b|heart|freeze|streak/i);
+  });
+
+  it("an unpassed or failed review never fakes the moment", () => {
+    const fail = renderToStaticMarkup(
+      <PathView
+        nodes={finishedSection}
+        capstoneResult={{
+          passed: false,
+          items: 16,
+          correct: 9,
+          friendly: "Getting started",
+          band: "on-ramp",
+        }}
+      />,
+    );
+    expect(fail).not.toContain('data-testid="unit-finish-moment"');
+    expect(fail).toContain("Not passed yet");
   });
 });

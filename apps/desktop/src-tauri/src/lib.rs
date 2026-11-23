@@ -16345,10 +16345,143 @@ activities:
         );
     }
 
-    /// UNIT-CAPSTONE-001: the review session is deterministic — same
-    /// section, same items, every time (this is what lets
-    /// `capstone_complete` recount engine-side), capped, letters-first
-    /// interleaved, and every item rides a graded-no-audio runner.
+    /// WARM-MOMENTS-001: gentle facts are engine-counted, never UI-claimed.
+    /// `days_active` counts DISTINCT evidence dates (a count, not a
+    /// streak — no adjacency semantics anywhere), `units_done` counts done
+    /// non-capstone path nodes (the checkpoint is a checkpoint, never a
+    /// unit — same honesty rule as the section counter's label).
+    #[test]
+    fn learning_facts_counts_days_and_units_and_never_the_capstone() {
+        let ru = "org.openlanguage.ru-ru.reference";
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        install_reference_pack_fast(data, ru).unwrap();
+        let p = create_local_profile(data, "Facts").unwrap();
+        finish_onboarding(data, &p.id, Some(ru), false).unwrap();
+
+        // A fresh learner: honest zeroes, never an invented first day.
+        let zero = learning_facts_at(data, &p.id).unwrap();
+        assert_eq!(zero.days_active, 0, "no graded practice: no days claimed");
+        assert_eq!(zero.units_done, 0);
+
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let version = lts_langpack::archive::current_version(ru, &data.join("packs")).unwrap();
+        let root = data.join("packs").join(ru).join(&version);
+        let goals = pack_goals(&root);
+        let on_ramp_refs: Vec<String> = pack_units(&root)
+            .iter()
+            .filter(|unit| {
+                goals
+                    .iter()
+                    .find(|g| g.id == unit.goal_id)
+                    .and_then(|g| g.band.clone())
+                    .as_deref()
+                    == Some("on-ramp")
+            })
+            .flat_map(|unit| unit.activities.iter().flat_map(|a| a.content_refs.clone()))
+            .collect();
+        assert!(!on_ramp_refs.is_empty(), "the reference pack has on-ramp refs");
+        let seed = |target: &str, id: &str, at: &str, group: Option<&str>| {
+            let mut ev = attempt(
+                target,
+                lts_domain::ActivityModality::ComprehensionReading,
+                "ru.expr.warm-moments.probe",
+                0,
+                at,
+                id,
+                &p.id,
+            );
+            // R07: the shared helper stamps the ja pack — restamp for ru.
+            ev.pack_id = ru.into();
+            if let Some(g) = group {
+                ev.attempt_group_id = Some(g.into());
+            }
+            ev
+        };
+
+        // Three DISTINCT dates, two events on the first: three days,
+        // never an event count dressed up as presence.
+        let d1 = "2026-11-10T09:00:00Z";
+        let d2 = "2026-11-12T09:00:00Z";
+        let d3 = "2026-11-15T09:00:00Z";
+        store
+            .append_evidence(&seed(&on_ramp_refs[0], "fact-d1a", d1, None))
+            .unwrap();
+        store
+            .append_evidence(&seed(&on_ramp_refs[1], "fact-d1b", "2026-11-10T18:30:00Z", None))
+            .unwrap();
+        store
+            .append_evidence(&seed(&on_ramp_refs[2], "fact-d2", d2, None))
+            .unwrap();
+        store
+            .append_evidence(&seed(&on_ramp_refs[3], "fact-d3", d3, None))
+            .unwrap();
+        let facts = learning_facts_at(data, &p.id).unwrap();
+        assert_eq!(facts.days_active, 3, "distinct dates, not event counts");
+
+        // Done units: seed every ref of every on-ramp unit (the
+        // PATH-VIEW-001 done rule, all on the already-counted d3), then
+        // units_done must equal the path's done non-capstone nodes.
+        for unit in pack_units(&root).iter() {
+            let banded = goals
+                .iter()
+                .find(|g| g.id == unit.goal_id)
+                .and_then(|g| g.band.clone())
+                .as_deref()
+                == Some("on-ramp");
+            if !banded {
+                continue;
+            }
+            for (i, r) in unit.activities.iter().flat_map(|a| a.content_refs.iter()).enumerate() {
+                store
+                    .append_evidence(&seed(r, &format!("fact-done-{i}-{r}"), d3, None))
+                    .unwrap();
+            }
+        }
+        let nodes = unit_path_at(data, &p.id).unwrap();
+        let expected = nodes
+            .iter()
+            .filter(|n| n.done && n.kind != "capstone")
+            .count();
+        assert!(expected > 0, "the seeded section has done units");
+        let facts = learning_facts_at(data, &p.id).unwrap();
+        assert_eq!(facts.units_done as usize, expected);
+        assert_eq!(facts.days_active, 3, "same-date evidence adds no day");
+
+        // Pass the section review: the checkpoint flips done, and
+        // units_done holds — the checkpoint never counts as a unit.
+        let plan = capstone_plan_at(data, &p.id, ru, "on-ramp").unwrap();
+        for (i, item) in plan.items.iter().enumerate() {
+            let group = format!("warm-sess:{}", item.content_id);
+            store
+                .append_evidence(&seed(
+                    &item.content_id,
+                    &format!("warm-pass-{i}"),
+                    "2026-11-15T10:00:00Z",
+                    Some(&group),
+                ))
+                .unwrap();
+        }
+        let res = capstone_complete_at(data, &p.id, ru, "on-ramp", "warm-sess").unwrap();
+        assert!(res.passed, "a clean sweep passes the checkpoint");
+        let nodes2 = unit_path_at(data, &p.id).unwrap();
+        let cap_done = nodes2
+            .iter()
+            .any(|n| n.unit_id == "capstone.org.openlanguage.ru-ru.reference.on-ramp" && n.done);
+        assert!(cap_done, "the passed checkpoint is done on the path");
+        let after = learning_facts_at(data, &p.id).unwrap();
+        let expected_after = nodes2
+            .iter()
+            .filter(|n| n.done && n.kind != "capstone")
+            .count();
+        assert_eq!(
+            after.units_done as usize,
+            expected_after,
+            "the checkpoint is a checkpoint, never a unit"
+        );
+        assert_eq!(after.days_active, 3, "the pass rode an already-counted date");
+    }
+
     #[test]
     fn capstone_plan_is_deterministic_letters_first_and_capped() {
         let ru = "org.openlanguage.ru-ru.reference";
