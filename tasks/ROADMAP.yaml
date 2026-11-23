@@ -3701,11 +3701,32 @@ tasks:
   - "Zero locked path nodes render above the pinned node on document coordinates, and locked nodes plus capability cards sit strictly below."
   - "One tap on the Start pill lands inside the day's first activity (lesson surface with the step counter), with the reading recorded as a learner over the committed PNGs."
   required_for_desktop_1_0: false
+- id: PATH-CONNECT-PILL-001
+  milestone: M11
+  priority: P1
+  title: "The winding track actually connects - fixed row pitch, start pill as an overlay, drawn track head cap; measured red at HEAD by the path capture script"
+  dependencies: []
+  read_first:
+  - state/notes/PATH-CONNECT-PILL-001.md
+  - state/notes/UI-VERIFY-2026-11-23.md
+  - state/evidence/UI-VERIFY-2026-11-23/today_pill.png
+  - apps/desktop/src/home.tsx
+  - packages/ui/src/styles.css
+  - scripts/path-visual-capture.mjs
+  acceptance:
+  - "Capture script at 390x844 REDS at HEAD and goes green after: consecutive ring-center dy equals PATH_ROW_PITCH_PX within 2px for every visible pair in the open band."
+  - "For every consecutive visible pair the straight segment between ring centers lies on drawn connector dash pixels - zero orphan stubs, zero unfed gaps."
+  - "The start pill renders as a one-line overlay (height at most 56px) on the pinned node's row and its rect never intersects the connector channel; both pill modes keep their data-testid."
+  - "The first visible path node carries a drawn track-head cap (data-testid path-head-cap) and every node label sits to the right of its ring, never above."
+  - "At least two distinct typed icon glyphs render across visible nodes at 390px."
+  - "Existing path vitest contracts stay green (PATH-VISUAL, FIX-PATH-VISUAL-001-1, PATH-LOCK-ORDER-001, PATH-PIN-CONSISTENCY-001)."
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
   required_flag: required_for_desktop_1_0
   optional_tasks:
+  - PATH-CONNECT-PILL-001
   - BAKEOFF-LIVECAPTURE-001
   - SERVE-BANNER-001
   - PATH-LOCK-ORDER-001

@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": null,
+  "active_task": "PATH-CONNECT-PILL-001",
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3321,6 +3321,15 @@
         "state/evidence/BAKEOFF-LIVECAPTURE-001/bakeoff-after-pill-tap-live.png"
       ],
       "notes": "capture-only card (7 prior board attempts were omarchy/Inkling lane-infra deaths, no work lost); live serve on :17631 at 390x844 fresh profile: 7/7 PASS - frontier pin + single 101px Start pill fully in fold0, zero infra strings at load fold and document top, 0 locked nodes above the pin (11 below), one tap lands in the day's first lesson (1 of 4); learner visual read in learner-inspection.md incl. the clipped top half-line finding; stale :17631 serve incident + store cleanup in gates.log"
+    },
+    "PATH-CONNECT-PILL-001": {
+      "status": "in_progress",
+      "attempts": 0,
+      "evidence": [
+        "state/notes/PATH-CONNECT-PILL-001.md",
+        "state/evidence/UI-VERIFY-2026-11-23/"
+      ],
+      "updated": "2026-11-23"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
