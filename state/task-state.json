@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-23",
-  "active_task": "FEEL-PROGRESS-001",
+  "active_task": null,
   "tasks": {
     "TTS-003": {
       "status": "done",
@@ -3192,12 +3192,16 @@
       ]
     },
     "FEEL-PROGRESS-001": {
-      "status": "in_progress",
+      "status": "done",
       "attempts": 1,
       "updated": "2026-11-23",
       "title": "Progress tab feel - fill-in motion, calendar tooltips, honest zero-state, what-you-know band",
       "evidence": [
-        "state/notes/FEEL-PROGRESS-001.md"
+        "state/evidence/FEEL-PROGRESS-001/ledger-feel-progress.md",
+        "state/evidence/FEEL-PROGRESS-001/gates.log",
+        "state/evidence/FEEL-PROGRESS-001/capture-red-at-base.log",
+        "state/evidence/FEEL-PROGRESS-001/capture-green-at-head.log",
+        "state/evidence/FEEL-PROGRESS-001/result.json"
       ]
     }
   },
