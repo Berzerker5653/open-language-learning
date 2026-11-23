@@ -3567,6 +3567,23 @@ tasks:
   - "A successful add pulses the landed row once (fade-up plus a teal wash fading to surface); the review card enters with card-in and the revealed answer rises with fade-up, all on the global duration tokens."
   - "Every claim is pinned red-at-base by the new mywords-feel vitest contract plus a feel-mywords capture red at base and green after; session-chrome, rtl-direction, loading-feel, motion-contract, button-affordance, a11y, and ADR-0002 scans stay green unedited."
   required_for_desktop_1_0: false
+- id: FEEL-PROGRESS-001
+  milestone: M11
+  priority: P1
+  title: Progress tab feel - dim-progress bars and calendar cells animate fill-in, calendar tooltips with date+summary, designed honest zero-state, calm what-you-know band on placement results
+  dependencies: [FEEL-GLOBAL-001, FEEL-LOADING-001]
+  read_first:
+  - state/notes/FEEL-PROGRESS-001.md
+  - packages/ui/src/styles.css
+  - apps/desktop/src/memory-stats.tsx
+  - scripts/feel-mywords-capture.mjs
+  acceptance:
+  - "Both dim-progress sites glide the fill in from the bar's last shown value over a --dur-glide (400ms) ease-out on shared DimProgress markup; class, data, and progressbar aria semantics unchanged; the motion-contract seconds scan stays green without edits."
+  - "Every in-window calendar cell is legible - tabbable with a date+summary aria-label, hover/focus scales it 1.15x with a teal focus ring, and a dark tip chip fades in showing the same date + exercise summary (no color-alone density)."
+  - "A fresh learner (engine lifetime facts days_active and units_done both zero) sees a designed zero-state card - dashed border, empty ring, Nothing studied yet, pointing at Today - instead of the instrument strip, fading up on the calm duration; the card never renders when the facts read failed."
+  - "Placement results land in a calm what-you-know band (eyebrow, matched count line, unlock note, honest zero-hit variant) with no celebration copy; Run again keeps its behavior."
+  - "Every claim is pinned red-at-base by the new progress-feel vitest contract plus a feel-progress capture red at base and green after; motion-contract, a11y, loading-feel, progress, session-chrome, rtl-direction, and ADR-0002 scans stay green unedited."
+  required_for_desktop_1_0: false
 
 execution_scope:
   default_goal: desktop-1.0-release-candidate
@@ -3592,6 +3609,7 @@ execution_scope:
   - FEEL-DRILL-001
   - FEEL-LOADING-001
   - FEEL-MYWORDS-001
+  - FEEL-PROGRESS-001
   - JA-A1-003
   - JA-A2-002
   - JA-A2-002-FIX-001
