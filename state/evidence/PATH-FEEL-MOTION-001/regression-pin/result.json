@@ -1,0 +1,176 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "the scene seeded: one DONE unit and one honest IN PROGRESS unit",
+      "pass": true,
+      "measured": {
+        "drilledFully": 12,
+        "drilledPartial": 11
+      }
+    },
+    {
+      "name": "the pin rule has an answer for this scene",
+      "pass": true,
+      "measured": {
+        "wantPin": "ru.unit.on-ramp.cyrillic-stress-review"
+      }
+    },
+    {
+      "name": "home reached a stable pack-loaded state before measurement (no load flicker)",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    },
+    {
+      "name": "exactly ONE 'You are here' pin exists on the track",
+      "pass": true,
+      "measured": {
+        "pinCount": 1,
+        "pinUnit": "ru.unit.on-ramp.cyrillic-stress-review",
+        "engineCurrent": [
+          "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+          "ru.unit.on-ramp.cyrillic-b-p-d-g",
+          "ru.unit.on-ramp.cyrillic-stress-review"
+        ]
+      }
+    },
+    {
+      "name": "the pin marks WHERE THE LEARNER IS — the rule's unit, not the plan's suggestion",
+      "pass": true,
+      "measured": {
+        "domPin": "ru.unit.on-ramp.cyrillic-stress-review",
+        "ruleExpected": "ru.unit.on-ramp.cyrillic-stress-review",
+        "engineCurrent": [
+          "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+          "ru.unit.on-ramp.cyrillic-b-p-d-g",
+          "ru.unit.on-ramp.cyrillic-stress-review"
+        ]
+      }
+    },
+    {
+      "name": "the next-up affordance matches the rule: chip iff the offer names ANOTHER unit than the pin",
+      "pass": true,
+      "measured": {
+        "chipPresent": true,
+        "chipExpected": true,
+        "offerUnit": "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+        "pinUnit": "ru.unit.on-ramp.cyrillic-stress-review",
+        "chipText": "Next up: Printed Cyrillic: Р р, В в, У у, Х х · ~3 min"
+      }
+    },
+    {
+      "name": "the next-up chip lives in the header strip, ABOVE the track",
+      "pass": true,
+      "measured": {
+        "chipAboveTrack": true
+      }
+    },
+    {
+      "name": "the chip never doubles as a track pin",
+      "pass": true,
+      "measured": {
+        "pinUnit": "ru.unit.on-ramp.cyrillic-stress-review",
+        "offerUnit": "ru.unit.on-ramp.cyrillic-r-v-u-kh"
+      }
+    },
+    {
+      "name": "the load scroll lands a little BEFORE the pin: pin in view, not glued to the top",
+      "pass": true,
+      "measured": {
+        "pinTop": 413,
+        "pinInView": true
+      }
+    },
+    {
+      "name": "context above the pin stays visible after the load scroll",
+      "pass": true,
+      "measured": {
+        "nodesAbovePin": 19,
+        "visibleAbove": 5,
+        "aboveDone": 2
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-85facd1b-3bfe-4555-9fdc-a1c97f5d18a9",
+  "seed": {
+    "unitFully": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    "drilledFully": [
+      "ru.orth.cyrillic.a",
+      "ru.orth.cyrillic.o",
+      "ru.orth.cyrillic.m",
+      "ru.orth.cyrillic.t",
+      "ru.orth.cyrillic.a",
+      "ru.orth.cyrillic.o",
+      "ru.orth.cyrillic.m",
+      "ru.orth.cyrillic.t",
+      "ru.orth.cyrillic.a",
+      "ru.orth.cyrillic.o",
+      "ru.orth.cyrillic.m",
+      "ru.orth.cyrillic.t"
+    ],
+    "unitPartial": "ru.unit.on-ramp.cyrillic-k-e-n-s",
+    "drilledPartial": [
+      "ru.orth.cyrillic.k",
+      "ru.orth.cyrillic.e",
+      "ru.orth.cyrillic.n",
+      "ru.orth.cyrillic.s",
+      "ru.orth.cyrillic.k",
+      "ru.orth.cyrillic.e",
+      "ru.orth.cyrillic.n",
+      "ru.orth.cyrillic.s",
+      "ru.orth.cyrillic.k",
+      "ru.orth.cyrillic.e",
+      "ru.orth.cyrillic.n"
+    ],
+    "partialTotal": 12
+  },
+  "api": {
+    "done": [
+      "ru.unit.on-ramp.cyrillic-a-o-m-t",
+      "ru.unit.on-ramp.cyrillic-k-e-n-s"
+    ],
+    "inProgress": [
+      {
+        "unit": "ru.unit.on-ramp.cyrillic-stress-review",
+        "refs_done": 8,
+        "refs_total": 36
+      }
+    ],
+    "engineCurrent": [
+      "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+      "ru.unit.on-ramp.cyrillic-b-p-d-g",
+      "ru.unit.on-ramp.cyrillic-stress-review"
+    ],
+    "expectedPinUnit": "ru.unit.on-ramp.cyrillic-stress-review",
+    "offer": {
+      "kind": "introduction",
+      "unit_id": "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+      "title": "Printed Cyrillic: Р р, В в, У у, Х х",
+      "minutes": 3,
+      "total_due": 0
+    }
+  },
+  "dom": {
+    "pinCount": 1,
+    "pinUnit": "ru.unit.on-ramp.cyrillic-stress-review",
+    "pinTop": 413,
+    "pinInView": true,
+    "nodesAbovePin": 19,
+    "visibleAbove": 5,
+    "aboveDone": 2,
+    "chipPresent": true,
+    "chipText": "Next up: Printed Cyrillic: Р р, В в, У у, Х х · ~3 min",
+    "chipAboveTrack": true,
+    "currentNodes": [
+      "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+      "ru.unit.on-ramp.cyrillic-b-p-d-g",
+      "ru.unit.on-ramp.cyrillic-stress-review"
+    ],
+    "trackPinOnCurrentOnly": true
+  },
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17914 (trusted network only)\n"
+}

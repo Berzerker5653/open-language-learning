@@ -1,0 +1,52 @@
+PATH-FEEL-MOTION-001 — controller gate battery (2026-11-23, board t_4fa82656 run 4)
+
+Context: board attempts 1-2 died on model no-reply before any kanban terminal
+call; they left the lane COMPLETE but uncommitted in the main tree (home.tsx,
+path-view.test.tsx, styles.css, scripts/path-motion-capture.mjs, this evidence
+dir). Per the shared-dir race rule this run adopted the lane WIP, re-verified
+every claim itself, and committed. The green pngs + result.json in this dir are
+the CONTROLLER re-runs below (fresh vite build of the exact bytes committed),
+not the dead run's artifacts; red-at-head/ is the dead run's HEAD-baseline run,
+grounded independently: `git show HEAD:packages/ui/src/styles.css | grep -c
+path-node-in|path-current-pulse|path-marker-pop|path-nodes-close` = 0 (no
+motion keyframes existed at HEAD 25e74cd), and its result.json measured
+transition-property 'all' with 0s durations and animation 'none'.
+
+Lanes touched: frontend only (apps/desktop/src/home.tsx,
+apps/desktop/src/path-view.test.tsx, packages/ui/src/styles.css) + a dev-only
+capture harness. No Rust changes.
+
+GATES (all re-run by the controller at commit time):
+  npm run -s typecheck                exit 0
+  npm run -s test  (vitest)           495/495 pass (61 files; +1 new
+                                      PATH-FEEL-MOTION-001 markup test)
+  prettier --check (4 changed files)  all match
+  eslint (2 changed tsx)              exit 0
+  cargo fmt --all --check             clean (no Rust touched)
+  tools/audit_learner_copy.py         0 findings
+
+CAPTURE (real engine: lts-serve :179xx + headless Chrome 390x844, raw CDP;
+  SERVE_BIN=target/debug/lts-serve @02:20 [Rust unchanged by this lane],
+  SERVE_DIST=apps/desktop/dist freshly built from the committed tree —
+  dist/assets/index-*.css contains path-current-pulse):
+  scripts/path-motion-capture.mjs            17/17 PASS (controller re-run;
+      the card's red->green proof: same script at HEAD measured 7/17 with the
+      10 motion checks failing)
+      - RING FILL: arc transition stroke-dasharray 0.3s ease-out
+      - CURRENT-NODE PULSE: path-current-pulse 2.4s infinite halo
+      - NODE TAP: real CDP touch -> ring scale 0.9 under 160ms spring,
+        release back to ~1.0; toggle press transitions 120ms family
+      - SECTION EXPAND: path-node-in rise+fade, staggered 30ms/row (capped 10)
+      - SECTION COLLAPSE: exit keyframe plays while mounted, then unmounts
+      - REDUCED MOTION: arc 1e-05s, halo 1 iteration, entrance 1e-05s — the
+        global @media (prefers-reduced-motion: reduce) block flattens all of it
+  scripts/path-pin-consistency-capture.mjs   10/10 PASS (regression: the
+      previous card's pin rules still hold over the motion-patched DOM;
+      committed under regression-pin/)
+
+ADR-0002 / posture note: motion only — transitions + keyframes, no reward
+mechanics; durations match the FEEL-TARGETS-2026-11-22 legends (120-300ms
+ease-out, single accent, no confetti). The capture asserts computed styles, so
+it measures the contract, not the source text.
+
+home.tsx remains a hotspot (flagged before).

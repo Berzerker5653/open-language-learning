@@ -1,0 +1,236 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "the scene seeded: one DONE unit and one honest IN PROGRESS unit",
+      "pass": true,
+      "measured": {
+        "drilledFully": 12,
+        "drilledPartial": 11
+      }
+    },
+    {
+      "name": "RING FILL: the arc eases to a new proven fraction (stroke-dasharray transition, ~300ms)",
+      "pass": false,
+      "measured": {
+        "arcTransition": "all",
+        "arcDuration": "0s"
+      }
+    },
+    {
+      "name": "a current node exists in the opened band (pulse host present)",
+      "pass": true,
+      "measured": {
+        "currentPresent": true
+      }
+    },
+    {
+      "name": "CURRENT-NODE PULSE: the current ring wears a breathing halo that iterates forever",
+      "pass": false,
+      "measured": {
+        "haloName": "none",
+        "haloDuration": "0s",
+        "haloIterations": "1"
+      }
+    },
+    {
+      "name": "NODE TAP: the ring has a transform transition so the press springs (not snaps)",
+      "pass": false,
+      "measured": {
+        "ringTransition": "all"
+      }
+    },
+    {
+      "name": "SECTION EXPAND: nodes carry a keyframe entrance (rise + fade)",
+      "pass": false,
+      "measured": [
+        {
+          "name": "none",
+          "delay": "0s",
+          "duration": "0s"
+        },
+        {
+          "name": "none",
+          "delay": "0s",
+          "duration": "0s"
+        },
+        {
+          "name": "none",
+          "delay": "0s",
+          "duration": "0s"
+        },
+        {
+          "name": "none",
+          "delay": "0s",
+          "duration": "0s"
+        },
+        {
+          "name": "none",
+          "delay": "0s",
+          "duration": "0s"
+        }
+      ]
+    },
+    {
+      "name": "SECTION EXPAND: the entrance cascades (delay grows along the track)",
+      "pass": false,
+      "measured": {
+        "delays": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "name": "the done check pops in (marker keyframe present)",
+      "pass": false,
+      "measured": {
+        "markerName": "none",
+        "markerDuration": "0s"
+      }
+    },
+    {
+      "name": "section toggles have a press transition (tap affordance, 120ms family)",
+      "pass": false,
+      "measured": {
+        "toggleTransition": "all"
+      }
+    },
+    {
+      "name": "NODE TAP: pressing the row scales the ring down (press state lands under a real CDP touch tap)",
+      "pass": false,
+      "measured": {
+        "pressedClass": false,
+        "pressedScale": 1,
+        "transform": "matrix(1, 0, 0, 1, 29, 0)",
+        "targetState": "current"
+      }
+    },
+    {
+      "name": "NODE TAP: release springs the ring back to full size",
+      "pass": true,
+      "measured": {
+        "releasedScale": 1,
+        "transform": "matrix(1, 0, 0, 1, 29, 0)"
+      }
+    },
+    {
+      "name": "SECTION EXPAND: the opened band's nodes are mid-entrance right after the tap",
+      "pass": false,
+      "measured": {
+        "mounted": true,
+        "firstNodeAnim": "none",
+        "firstNodeOpacityMid": "0.55"
+      }
+    },
+    {
+      "name": "SECTION COLLAPSE: the list animates out (exit keyframe plays while still mounted)",
+      "pass": false,
+      "measured": {
+        "mounted": false
+      }
+    },
+    {
+      "name": "SECTION COLLAPSE: the list unmounts after the exit plays (no stuck ghosts)",
+      "pass": true,
+      "measured": {
+        "stillMounted": false
+      }
+    },
+    {
+      "name": "REDUCED MOTION: arc fill transition collapses to ~0",
+      "pass": true,
+      "measured": {
+        "arcDur": "1e-05s"
+      }
+    },
+    {
+      "name": "REDUCED MOTION: the pulse stops breathing (one iteration, ~0 duration)",
+      "pass": true,
+      "measured": {
+        "haloDur": "1e-05s",
+        "haloIter": "1"
+      }
+    },
+    {
+      "name": "REDUCED MOTION: the entrance cascade collapses to ~0 (content simply appears)",
+      "pass": true,
+      "measured": {
+        "nodeDur": "1e-05s"
+      }
+    }
+  ],
+  "failures": 10,
+  "error": null,
+  "profileId": "prof-fb80c658-3a24-493f-b38f-06dfad575cf5",
+  "seed": {
+    "unitFully": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    "unitPartial": "ru.unit.on-ramp.cyrillic-k-e-n-s"
+  },
+  "motion": {
+    "arcTransition": "all",
+    "arcDuration": "0s",
+    "currentPresent": true,
+    "haloName": "none",
+    "haloDuration": "0s",
+    "haloIterations": "1",
+    "ringTransition": "all",
+    "markerName": "none",
+    "markerDuration": "0s",
+    "nodeAnim": [
+      {
+        "name": "none",
+        "delay": "0s",
+        "duration": "0s"
+      },
+      {
+        "name": "none",
+        "delay": "0s",
+        "duration": "0s"
+      },
+      {
+        "name": "none",
+        "delay": "0s",
+        "duration": "0s"
+      },
+      {
+        "name": "none",
+        "delay": "0s",
+        "duration": "0s"
+      },
+      {
+        "name": "none",
+        "delay": "0s",
+        "duration": "0s"
+      }
+    ],
+    "toggleTransition": "all"
+  },
+  "press": {
+    "target": {
+      "x": 195,
+      "y": 422,
+      "state": "current",
+      "visibleNodes": 5
+    },
+    "pressed": {
+      "pressedClass": false,
+      "transform": "matrix(1, 0, 0, 1, 29, 0)",
+      "scale": 1
+    },
+    "released": {
+      "transform": "matrix(1, 0, 0, 1, 29, 0)",
+      "scale": 1
+    }
+  },
+  "reducedMotion": {
+    "arcDur": "1e-05s",
+    "haloDur": "1e-05s",
+    "haloIter": "1",
+    "nodeDur": "1e-05s"
+  },
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17953 (trusted network only)\n"
+}

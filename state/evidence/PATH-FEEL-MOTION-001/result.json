@@ -1,0 +1,239 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "the scene seeded: one DONE unit and one honest IN PROGRESS unit",
+      "pass": true,
+      "measured": {
+        "drilledFully": 12,
+        "drilledPartial": 11
+      }
+    },
+    {
+      "name": "RING FILL: the arc eases to a new proven fraction (stroke-dasharray transition, ~300ms)",
+      "pass": true,
+      "measured": {
+        "arcTransition": "stroke-dasharray, stroke",
+        "arcDuration": "0.3s, 0.2s"
+      }
+    },
+    {
+      "name": "a current node exists in the opened band (pulse host present)",
+      "pass": true,
+      "measured": {
+        "currentPresent": true
+      }
+    },
+    {
+      "name": "CURRENT-NODE PULSE: the current ring wears a breathing halo that iterates forever",
+      "pass": true,
+      "measured": {
+        "haloName": "path-current-pulse",
+        "haloDuration": "2.4s",
+        "haloIterations": "infinite"
+      }
+    },
+    {
+      "name": "NODE TAP: the ring has a transform transition so the press springs (not snaps)",
+      "pass": true,
+      "measured": {
+        "ringTransition": "transform"
+      }
+    },
+    {
+      "name": "SECTION EXPAND: nodes carry a keyframe entrance (rise + fade)",
+      "pass": true,
+      "measured": [
+        {
+          "name": "path-node-in",
+          "delay": "0s",
+          "duration": "0.24s"
+        },
+        {
+          "name": "path-node-in",
+          "delay": "0.03s",
+          "duration": "0.24s"
+        },
+        {
+          "name": "path-node-in",
+          "delay": "0.06s",
+          "duration": "0.24s"
+        },
+        {
+          "name": "path-node-in",
+          "delay": "0.09s",
+          "duration": "0.24s"
+        },
+        {
+          "name": "path-node-in",
+          "delay": "0.12s",
+          "duration": "0.24s"
+        }
+      ]
+    },
+    {
+      "name": "SECTION EXPAND: the entrance cascades (delay grows along the track)",
+      "pass": true,
+      "measured": {
+        "delays": [
+          0,
+          0.03,
+          0.06,
+          0.09,
+          0.12
+        ]
+      }
+    },
+    {
+      "name": "the done check pops in (marker keyframe present)",
+      "pass": true,
+      "measured": {
+        "markerName": "path-marker-pop",
+        "markerDuration": "0.26s"
+      }
+    },
+    {
+      "name": "section toggles have a press transition (tap affordance, 120ms family)",
+      "pass": true,
+      "measured": {
+        "toggleTransition": "transform, background-color, border-color"
+      }
+    },
+    {
+      "name": "NODE TAP: pressing the row scales the ring down (press state lands under a real CDP touch tap)",
+      "pass": true,
+      "measured": {
+        "pressedClass": true,
+        "pressedScale": 0.9,
+        "transform": "matrix(0.9, 0, 0, 0.9, 29, 0)",
+        "targetState": "current"
+      }
+    },
+    {
+      "name": "NODE TAP: release springs the ring back to full size",
+      "pass": true,
+      "measured": {
+        "releasedScale": 1.00313,
+        "transform": "matrix(1.00313, 0, 0, 1.00313, 29, 0)"
+      }
+    },
+    {
+      "name": "SECTION EXPAND: the opened band's nodes are mid-entrance right after the tap",
+      "pass": true,
+      "measured": {
+        "mounted": true,
+        "firstNodeAnim": "path-node-in",
+        "firstNodeOpacityMid": "0.416173"
+      }
+    },
+    {
+      "name": "SECTION COLLAPSE: the list animates out (exit keyframe plays while still mounted)",
+      "pass": true,
+      "measured": {
+        "mounted": true,
+        "cls": "path-nodes path-nodes--closing",
+        "anim": "path-nodes-close",
+        "dur": "0.18s"
+      }
+    },
+    {
+      "name": "SECTION COLLAPSE: the list unmounts after the exit plays (no stuck ghosts)",
+      "pass": true,
+      "measured": {
+        "stillMounted": false
+      }
+    },
+    {
+      "name": "REDUCED MOTION: arc fill transition collapses to ~0",
+      "pass": true,
+      "measured": {
+        "arcDur": "1e-05s"
+      }
+    },
+    {
+      "name": "REDUCED MOTION: the pulse stops breathing (one iteration, ~0 duration)",
+      "pass": true,
+      "measured": {
+        "haloDur": "1e-05s",
+        "haloIter": "1"
+      }
+    },
+    {
+      "name": "REDUCED MOTION: the entrance cascade collapses to ~0 (content simply appears)",
+      "pass": true,
+      "measured": {
+        "nodeDur": "1e-05s"
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-b60356e4-5e08-4929-96cb-fc40ea948cf0",
+  "seed": {
+    "unitFully": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    "unitPartial": "ru.unit.on-ramp.cyrillic-k-e-n-s"
+  },
+  "motion": {
+    "arcTransition": "stroke-dasharray, stroke",
+    "arcDuration": "0.3s, 0.2s",
+    "currentPresent": true,
+    "haloName": "path-current-pulse",
+    "haloDuration": "2.4s",
+    "haloIterations": "infinite",
+    "ringTransition": "transform",
+    "markerName": "path-marker-pop",
+    "markerDuration": "0.26s",
+    "nodeAnim": [
+      {
+        "name": "path-node-in",
+        "delay": "0s",
+        "duration": "0.24s"
+      },
+      {
+        "name": "path-node-in",
+        "delay": "0.03s",
+        "duration": "0.24s"
+      },
+      {
+        "name": "path-node-in",
+        "delay": "0.06s",
+        "duration": "0.24s"
+      },
+      {
+        "name": "path-node-in",
+        "delay": "0.09s",
+        "duration": "0.24s"
+      },
+      {
+        "name": "path-node-in",
+        "delay": "0.12s",
+        "duration": "0.24s"
+      }
+    ],
+    "toggleTransition": "transform, background-color, border-color"
+  },
+  "press": {
+    "target": {
+      "x": 195,
+      "y": 451,
+      "state": "current",
+      "visibleNodes": 5
+    },
+    "pressed": {
+      "pressedClass": true,
+      "transform": "matrix(0.9, 0, 0, 0.9, 29, 0)",
+      "scale": 0.9
+    },
+    "released": {
+      "transform": "matrix(1.00313, 0, 0, 1.00313, 29, 0)",
+      "scale": 1.00313
+    }
+  },
+  "reducedMotion": {
+    "arcDur": "1e-05s",
+    "haloDur": "1e-05s",
+    "haloIter": "1",
+    "nodeDur": "1e-05s"
+  },
+  "serveLogTail": "lts-serve listening on http://127.0.0.1:17927 (trusted network only)\n"
+}
