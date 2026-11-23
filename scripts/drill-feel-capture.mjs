@@ -250,7 +250,8 @@ try {
       };
     })()`);
   }
-  if (!chrome0) throw new Error("navigation error: session chrome never appeared after Start today");
+  if (!chrome0)
+    throw new Error("navigation error: session chrome never appeared after Start today");
   check(
     "BAR TRANSITION: .session-bar-fill carries the width ease in the slow family",
     /width/.test(chrome0.transitionProperty) &&
@@ -280,29 +281,69 @@ try {
       b.click();
       return true;
     })()`);
-  async function sampleBarThroughAdvance() {
-    const widths = [];
-    for (let i = 0; i < 24; i++) {
-      const w = await evaluate(`(() => {
-        const e = document.querySelector('[data-session-chrome] .session-bar-fill');
-        return e ? Math.round(e.getBoundingClientRect().width * 100) / 100 : null;
-      })()`);
-      if (w !== null) widths.push(w);
-      if (i === 3) await clickContinue();
-      await sleep(40);
-    }
-    return widths;
-  }
-  const sampleSets = [];
-  let gradedOnChoices = false;
-  for (let item = 0; item < 6 && !gradedOnChoices; item++) {
-    // A lesson card may gate the first card of the session: start it.
-    await evaluate(`(() => {
+  const clickStartPracticing = () =>
+    evaluate(`(() => {
       const b = [...document.querySelectorAll('button')].find((x) =>
         (x.textContent ?? '').trim() === 'Start practicing');
       if (b) { b.click(); return true; }
       return false;
     })()`);
+  const typeAndCheck = () =>
+    evaluate(`(() => {
+      const el = document.querySelector('#practice-answer');
+      if (!el) return false;
+      const set = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
+      set.call(el, '\\u0430');
+      el.dispatchEvent(new Event('input', { bubbles: true }));
+      const b = [...document.querySelectorAll('button')].find((x) => (x.textContent ?? '').trim() === 'Check');
+      if (b && !b.disabled) b.click();
+      return true;
+    })()`);
+  let bridgeStash = null;
+  async function sampleBarThroughAdvance() {
+    // Run 204 pitfall: the Continue click can be a no-op (button not yet
+    // rendered / already advanced), leaving the bar flat or the chrome gone.
+    // Retry the click every poll until it lands, keep the window wide
+    // (bridge gap tolerated via nulls), and report whether a click landed.
+    // The inter-activity bridge rides INSIDE this window (it opens at the
+    // Continue click) — probe for it in the same evaluate and bank it.
+    const widths = [];
+    let clicked = false;
+    let settled = 0;
+    for (let i = 0; i < 60; i++) {
+      const sample = await evaluate(`(() => {
+        const e = document.querySelector('[data-session-chrome] .session-bar-fill');
+        const b = document.querySelector('[data-testid="session-bridge"]');
+        let bridge = null;
+        if (b) {
+          const cs = getComputedStyle(b);
+          bridge = { name: cs.animationName, duration: cs.animationDuration };
+        }
+        return {
+          w: e ? Math.round(e.getBoundingClientRect().width * 100) / 100 : null,
+          bridge,
+        };
+      })()`);
+      if (sample.w !== null) widths.push(sample.w);
+      if (!bridgeStash && sample.bridge) {
+        bridgeStash = sample.bridge;
+        await shot("bridge");
+      }
+      if (!clicked) clicked = await clickContinue();
+      if (clicked && widths.length >= 8) {
+        const tail = widths.slice(-8);
+        if (tail.every((w) => Math.abs(w - tail[tail.length - 1]) < 0.01)) settled++;
+        if (settled >= 2) break; // bar glided and settled; window done
+      }
+      await sleep(40);
+    }
+    return { widths, clicked };
+  }
+  const sampleSets = [];
+  let gradedOnChoices = false;
+  for (let item = 0; item < 6 && !gradedOnChoices; item++) {
+    // A lesson card may gate the first card of the session: start it.
+    await clickStartPracticing();
     let kind = null;
     for (let i = 0; i < 40 && !kind; i++) {
       kind = await runnerKind();
@@ -317,15 +358,7 @@ try {
       break;
     }
     if (kind === "typed") {
-      await evaluate(`(() => {
-        const el = document.querySelector('#practice-answer');
-        const set = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;
-        set.call(el, '\\u0430');
-        el.dispatchEvent(new Event('input', { bubbles: true }));
-        const b = [...document.querySelectorAll('button')].find((x) => (x.textContent ?? '').trim() === 'Check');
-        if (b && !b.disabled) b.click();
-        return true;
-      })()`);
+      await typeAndCheck();
       for (let i = 0; i < 20; i++) {
         if ((await evaluate(`!!document.querySelector('.verdict')`)) || (await clickContinue()))
           break;
@@ -347,8 +380,9 @@ try {
     throw new Error("navigation error: no choices card appeared in the walk");
   }
   let best = { base: 0, final: 0, samples: [], mids: -1 };
-  for (const widths of sampleSets) {
-    if (widths.length < 4) continue;
+  for (const set of sampleSets) {
+    const widths = set.widths;
+    if (!set.clicked || widths.length < 4) continue;
     const b0 = widths[0];
     const f0 = widths[widths.length - 1];
     const mids = widths.filter((w) => w > b0 + 0.5 && w < f0 - 0.5).length;
@@ -364,60 +398,91 @@ try {
   // ---- 2. REVEAL on the next graded pick: ring + badge + fill + dim. ----
   // The bridge lives ~1.2s, then the next runner opens; grade it again.
   let choices2 = 0;
-  for (let i = 0; i < 60 && choices2 === 0; i++) {
-    const bridgeAnim = await evaluate(`(() => {
-      const b = document.querySelector('[data-testid="session-bridge"]');
-      if (!b) return null;
-      const cs = getComputedStyle(b);
-      return { name: cs.animationName, duration: cs.animationDuration };
-    })()`);
-    if (bridgeAnim) {
-      check(
-        "BRIDGE REGRESSION: the inter-activity bridge still enters via fade-up",
-        bridgeAnim.name === "fade-up" && toSec(bridgeAnim.duration) > 0.1,
-        bridgeAnim,
-      );
-      await shot("bridge");
+  let bridgeChecked = false;
+  if (bridgeStash) {
+    check(
+      "BRIDGE REGRESSION: the inter-activity bridge still enters via fade-up",
+      bridgeStash.name === "fade-up" && toSec(bridgeStash.duration) > 0.1,
+      bridgeStash,
+    );
+    bridgeChecked = true;
+  }
+  for (let i = 0; i < 90 && choices2 === 0; i++) {
+    if (!bridgeChecked) {
+      const bridgeAnim = await evaluate(`(() => {
+        const b = document.querySelector('[data-testid="session-bridge"]');
+        if (!b) return null;
+        const cs = getComputedStyle(b);
+        return { name: cs.animationName, duration: cs.animationDuration };
+      })()`);
+      if (bridgeAnim) {
+        check(
+          "BRIDGE REGRESSION: the inter-activity bridge still enters via fade-up",
+          bridgeAnim.name === "fade-up" && toSec(bridgeAnim.duration) > 0.1,
+          bridgeAnim,
+        );
+        await shot("bridge");
+        bridgeChecked = true;
+      }
     }
+    // Run 204 pitfall: the next runner can ride a lesson card or open as
+    // a typed/graded runner — walk past those instead of spinning.
+    await clickStartPracticing();
     choices2 = await evaluate(
       `document.querySelectorAll('[aria-label="Choices"] button:not([disabled])').length`,
     );
-    if (choices2 === 0) await sleep(150);
+    if (choices2 === 0) {
+      const kind = await runnerKind();
+      if (kind === "typed") await typeAndCheck();
+      else if (kind === "graded") await clickContinue();
+      await sleep(150);
+    }
   }
+  if (!bridgeChecked)
+    check("BRIDGE REGRESSION: the inter-activity bridge still enters via fade-up", false, {
+      measured: "bridge screen never observed in the walk",
+    });
   if (choices2 === 0) throw new Error("navigation error: the second activity never opened choices");
   await evaluate(`document.querySelector('[aria-label="Choices"] button:not([disabled])').click()`);
-  let reveal = null;
-  for (let i = 0; i < 30 && !reveal; i++) {
+  let seenRight = false;
+  for (let i = 0; i < 30 && !seenRight; i++) {
     await sleep(100);
-    reveal = await evaluate(`(() => {
-      const right = document.querySelector('.choice--correct');
-      if (!right) return null;
-      const cs = getComputedStyle(right);
-      const badge = getComputedStyle(right, '::after');
-      const dim = [...document.querySelectorAll('.choice--dim')].map((el) =>
-        parseFloat(getComputedStyle(el).opacity));
-      const wrong = document.querySelector('.choice--wrong');
-      return {
-        animationName: cs.animationName,
-        animationDuration: cs.animationDuration,
-        background: cs.backgroundColor,
-        boxShadow: cs.boxShadow,
-        badgeContent: badge.content,
-        badgeBackground: badge.backgroundColor,
-        dimOpacities: dim,
-        tappedWrong: wrong
-          ? {
-              animationName: getComputedStyle(wrong).animationName,
-              hasTapped: wrong.className.includes('choice--tapped'),
-            }
-          : null,
-        verdictAnim: (() => {
-          const v = document.querySelector('.verdict');
-          return v ? getComputedStyle(v).animationName : null;
-        })(),
-      };
-    })()`);
+    seenRight = await evaluate(`!!document.querySelector('.choice--correct')`);
   }
+  if (!seenRight) throw new Error("no .choice--correct reveal computed after grading");
+  // Harness fix (run 205): the reveal ring scales in and the dim fades over
+  // the token durations — measure the SETTLED values; the arrival itself is
+  // asserted via animationName + duration (both persist on the computed
+  // style after the animation finishes).
+  await sleep(600);
+  const reveal = await evaluate(`(() => {
+    const right = document.querySelector('.choice--correct');
+    if (!right) return null;
+    const cs = getComputedStyle(right);
+    const badge = getComputedStyle(right, '::after');
+    const dim = [...document.querySelectorAll('.choice--dim')].map((el) =>
+      parseFloat(getComputedStyle(el).opacity));
+    const wrong = document.querySelector('.choice--wrong');
+    return {
+      animationName: cs.animationName,
+      animationDuration: cs.animationDuration,
+      background: cs.backgroundColor,
+      boxShadow: cs.boxShadow,
+      badgeContent: badge.content,
+      badgeBackground: badge.backgroundColor,
+      dimOpacities: dim,
+      tappedWrong: wrong
+        ? {
+            animationName: getComputedStyle(wrong).animationName,
+            hasTapped: wrong.className.includes('choice--tapped'),
+          }
+        : null,
+      verdictAnim: (() => {
+        const v = document.querySelector('.verdict');
+        return v ? getComputedStyle(v).animationName : null;
+      })(),
+    };
+  })()`);
   if (!reveal) throw new Error("no .choice--correct reveal computed after grading");
   const okSoft = reveal.background === "rgb(232, 240, 230)"; // --ok-soft #e8f0e6
   check(
@@ -435,8 +500,7 @@ try {
   );
   check(
     "DIM: the non-chosen choices sit at the locked-board opacity",
-    reveal.dimOpacities.length >= 1 &&
-      reveal.dimOpacities.every((o) => Math.abs(o - 0.55) < 0.05),
+    reveal.dimOpacities.length >= 1 && reveal.dimOpacities.every((o) => Math.abs(o - 0.55) < 0.05),
     reveal.dimOpacities,
   );
   check(
@@ -496,8 +560,7 @@ try {
   );
   check(
     "SESSION CARD enters via card-in (fade + 0.98->1 scale)",
-    summary.animationName === "card-in" &&
-      Math.abs(toSec(summary.animationDuration) - 0.25) < 0.05,
+    summary.animationName === "card-in" && Math.abs(toSec(summary.animationDuration) - 0.25) < 0.05,
     { animationName: summary.animationName, duration: summary.animationDuration },
   );
   await shot("session-summary");
@@ -550,6 +613,8 @@ try {
     }
   }
   if (serve) serve.kill();
-  console.log(`\n${result.checks.length - result.failures}/${result.checks.length} checks green -> ${join(OUT, "result.json")}`);
+  console.log(
+    `\n${result.checks.length - result.failures}/${result.checks.length} checks green -> ${join(OUT, "result.json")}`,
+  );
   process.exit(result.failures ? 1 : 0);
 }

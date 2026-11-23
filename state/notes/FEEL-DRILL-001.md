@@ -84,6 +84,8 @@ audit — every claim below carries a legend from the committed target mockup
 
 ## RESUME RECIPE (run 204, near cap — code DONE+committed, capture walk only)
 
+> COMPLETED by run 205 takeover — see RUN 205 CLOSEOUT at the end of this file.
+
 State: e34781bd card, 993c8b9d red vitest (log banked), 6db2c26b capstone-wiring chore,
 a7d4da1f ALL lane code (543/543 vitest + tsc + eslint + prettier + learner-copy green at
 commit). Capture script scripts/drill-feel-capture.mjs exists (uncommitted, tested: BAR
@@ -112,3 +114,18 @@ Remaining steps (takeover):
 4. NOTE for ledger/summary: chore 6db2c26b wired the capstone App->Home props
    (dead feature on main since UNIT-CAPSTONE-001; suggest planner REVIEW or a journey-test
    follow-up card — harness has no capstone fixture).
+
+## RUN 205 CLOSEOUT (2026-11-23)
+
+Executed the recipe with two corrections:
+1. Base for the red capture is 993c8b9d, NOT 6db2c26b — the chore at
+   6db2c26b swept run-204's WIP StepDots call sites into App.tsx and cannot
+   build (session-chrome.tsx there lacks the export). Verified by building a
+   detached worktree at each; only 993c8b9d builds.
+2. The live capture caught a cascade bug: after grading, .btn:disabled
+   outranked the choice state classes, killing the reveal fill, the ring
+   border and the dim. Fixed at fdfa726b (.btn.choice--correct/.btn.choice--wrong/
+   .btn.choice--dim after .btn:disabled). Pin suites untouched and green.
+
+Final: capture red 3/10 at 993c8b9d vs green 10/10 at fdfa726b; all lane
+gates green at the fix commit (gates in state/evidence/FEEL-DRILL-001/gates.log).

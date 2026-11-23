@@ -1,0 +1,12 @@
+FAIL BAR TRANSITION: .session-bar-fill carries the width ease in the slow family — {"transitionProperty":"all","transitionDuration":"0s","transitionTiming":"ease"}
+FAIL BAR MID-GLIDE: the fill width passes through intermediate values when a card lands — {"base":0,"final":56.58,"samples":[0,0,0,0,0,0,0,0,56.58,56.58,56.58,56.58,56.58,56.58,56.58,56.58],"intermediate":0}
+PASS BRIDGE REGRESSION: the inter-activity bridge still enters via fade-up — {"name":"fade-up","duration":"0.25s"}
+FAIL REVEAL: the right pick computes the choice-reveal arrival + ring box-shadow — {"animationName":"pop","animationDuration":"0.25s","background":"rgb(236, 229, 216)","boxShadow":"rgb(46, 125, 70) 0px 0px 0px 2px","badgeContent":"none","badgeBackground":"rgba(0, 0, 0, 0)","dimOpacities":[],"tappedWrong":null,"verdictAnim":"fade-up"}
+FAIL REVEAL FILL + CHECK BADGE: soft ok-soft fill and the drawn check (ring + check, not color alone) — {"background":"rgb(236, 229, 216)","badgeContent":"none"}
+FAIL DIM: the non-chosen choices sit at the locked-board opacity — []
+PASS VERDICT enters via fade-up (FEEL-GLOBAL-001 regression) — "fade-up"
+FAIL SESSION CARD: .session-summary computes the calm warm rules (surface fill, line outline, padding, radius) — {"animationName":"none","animationDuration":"0s","background":"rgba(0, 0, 0, 0)","borderStyle":"none","borderColor":"rgb(36, 31, 24)","paddingTop":"0px","borderRadius":"0px"}
+FAIL SESSION CARD enters via card-in (fade + 0.98->1 scale) — {"animationName":"none","duration":"0s"}
+PASS REDUCED MOTION: every duration FEEL-DRILL-001 adds collapses to ~0 — {"summaryAnim":"1e-05s","barTransition":"1e-05s","dotTransition":"1e-05s","correctAnim":"1e-05s","wrongAnim":"1e-05s"}
+
+3/10 checks green -> /home/hunter/game-dev/LTS/state/evidence/FEEL-DRILL-001/red-at-head/result.json

@@ -1,0 +1,42 @@
+FEEL-DRILL-001 controller gates (run 205 takeover, at fdfa726b)
+- npx tsc --noEmit: OK
+- npx vitest run (apps/desktop): Test Files 64 passed; Tests 543 passed (543)
+  (pin suites drill-feel/button-affordance/a11y re-run alone: 72 passed)
+- npx eslint src (apps/desktop): clean
+- npx prettier --check packages/ui/src/styles.css scripts/drill-feel-capture.mjs: clean
+- python3 tools/audit_learner_copy.py: findings 0
+- no Rust touched (capture reuses the existing target/debug/lts-serve binary)
+
+Real-engine capture (scripts/drill-feel-capture.mjs, lts-serve + headless Chrome 390x844):
+- GREEN at HEAD (fdfa726b, dist rebuilt from HEAD): 10/10 checks green
+  -> state/evidence/FEEL-DRILL-001/capture/result.json (+capture-green.log, pngs)
+- RED at base (worktree at 993c8b9d, dist built there): 3/10 checks green
+  -> state/evidence/FEEL-DRILL-001/red-at-head/result.json (+red-capture.log, pngs)
+  Red flips exactly the card's claims: BAR TRANSITION (0s snap), BAR MID-GLIDE
+  (intermediate=0), REVEAL (old 'pop', no check badge), REVEAL FILL+BADGE,
+  DIM (no dimmed choices), SESSION CARD (zero rules), CARD-IN.
+
+RUN 205 notes:
+- Capture harness fixes over the run-204 script (run-204 bug list in
+  state/notes/FEEL-DRILL-001.md): Continue-click retried every poll (the single
+  timed click could no-op), the inter-activity bridge is banked INSIDE the bar
+  sampling window (it opens at the Continue click, so section-2 polling missed
+  it), reveal/dim measured after a 600ms settle (arrival is asserted via
+  animationName + duration, both persist post-animation), a never-observed
+  bridge now fails the BRIDGE check instead of silently skipping it, and the
+  second-activity walk tolerates lesson-gated / typed / graded runners.
+- LIVE CAPTURE FOUND A REAL BUG the unit pins could not see: the runner
+  disables every choice the instant an answer lands, and .btn:disabled
+  (0-2-0) outranked .choice--correct/.choice--wrong/.choice--dim (0-1-0) —
+  the reveal fill/ring-border and the 0.55 dim never rendered (fill fell back
+  to surface-sunk, dim to 0.45). Fixed at fdfa726b by re-declaring the state
+  properties at .btn specificity after .btn:disabled; affordance-contract and
+  a11y pin suites green unedited, no new color tokens.
+- RED BASE DEVIATION from the run-204 recipe (which said 6db2c26b): the tree
+  at 6db2c26b does not build — the capstone-wiring chore swept run-204's WIP
+  StepDots CALL SITES into App.tsx while session-chrome.tsx@6db2c26b does not
+  export StepDots (a sweep-commit pattern; hotspot: apps/desktop/src/App.tsx
+  carried lane WIP in a chore commit). True red-at-base for this card is
+  993c8b9d (red tests committed, no lane code) — used for the red capture.
+- Follow-up suggested to planner: a journey test for the App->Home capstone
+  wiring chore (the shared harness has no capstone fixture).

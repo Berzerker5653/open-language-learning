@@ -1,5 +1,12 @@
 PASS BAR TRANSITION: .session-bar-fill carries the width ease in the slow family — {"transitionProperty":"width","transitionDuration":"0.3s","transitionTiming":"cubic-bezier(0.22, 0.61, 0.36, 1)"}
-FAIL BAR MID-GLIDE: the fill width passes through intermediate values when a card lands — {"base":0,"final":0,"samples":[],"intermediate":-1}
-CAPTURE ERROR: navigation error: the second activity never opened choices
+PASS BAR MID-GLIDE: the fill width passes through intermediate values when a card lands — {"base":0,"final":56.58,"samples":[0,0,0,0,0,0,0,0,16.89,47.05,51.27,54.83,56,56.52,56.58,56.58,56.58,56.58,56.58,56.58,56.58,56.58],"intermediate":5}
+PASS BRIDGE REGRESSION: the inter-activity bridge still enters via fade-up — {"name":"fade-up","duration":"0.25s"}
+PASS REVEAL: the right pick computes the choice-reveal arrival + ring box-shadow — {"animationName":"choice-reveal","animationDuration":"0.12s","background":"rgb(232, 240, 230)","boxShadow":"rgb(46, 125, 70) 0px 0px 0px 2px","badgeContent":"\"✓\"","badgeBackground":"rgb(46, 125, 70)","dimOpacities":[0.55,0.55],"tappedWrong":{"animationName":"shake-x","hasTapped":true},"verdictAnim":"fade-up"}
+PASS REVEAL FILL + CHECK BADGE: soft ok-soft fill and the drawn check (ring + check, not color alone) — {"background":"rgb(232, 240, 230)","badgeContent":"\"✓\""}
+PASS DIM: the non-chosen choices sit at the locked-board opacity — [0.55,0.55]
+PASS VERDICT enters via fade-up (FEEL-GLOBAL-001 regression) — "fade-up"
+PASS SESSION CARD: .session-summary computes the calm warm rules (surface fill, line outline, padding, radius) — {"animationName":"card-in","animationDuration":"0.25s","background":"rgb(255, 253, 249)","borderStyle":"solid","borderColor":"rgb(226, 218, 204)","paddingTop":"17.6px","borderRadius":"8px"}
+PASS SESSION CARD enters via card-in (fade + 0.98->1 scale) — {"animationName":"card-in","duration":"0.25s"}
+PASS REDUCED MOTION: every duration FEEL-DRILL-001 adds collapses to ~0 — {"summaryAnim":"1e-05s","barTransition":"1e-05s","dotTransition":"1e-05s","correctAnim":"1e-05s","wrongAnim":"1e-05s"}
 
-0/2 checks green -> /home/hunter/game-dev/LTS/state/evidence/FEEL-DRILL-001/capture/result.json
+10/10 checks green -> /home/hunter/game-dev/LTS/state/evidence/FEEL-DRILL-001/capture/result.json
