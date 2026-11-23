@@ -3633,6 +3633,23 @@ tasks:
   - "A journey mounts the shipped App and walks the capstone end to end - the node's own start action opens the engine-built review, submits share one attempt group, and the recorded result lands back on Home - so a missing onStartCapstone or capstoneResult prop fails the journey, the 6db2c26b regression shape."
   - "The missing-prop regression is proven red in an isolated worktree and the full desktop vitest suite stays green with the new journey."
   required_for_desktop_1_0: false
+- id: TODAY-FIRSTSCREEN-001
+  milestone: M11
+  priority: P1
+  title: Today first screen is the path - auto-opened at the frontier node with one prominent Start pill anchored on it
+  dependencies: [PATH-PIN-CONSISTENCY-001, PATH-WHATSNEXT-001, UNIT-CAPSTONE-001]
+  read_first:
+  - state/notes/TODAY-FIRSTSCREEN-001.md
+  - docs/design/PROGRESSION-UX-AUDIT-2026-11-22.md
+  - apps/desktop/src/home.tsx
+  - scripts/firstscreen-capture.mjs
+  acceptance:
+  - "On a phone-width Today load the pinned frontier node sits fully inside the first viewport (real-engine capture at 390x844, no manual scroll), with the greeting and time budget scrolled out of the fold."
+  - "Exactly one prominent Start pill renders inside the pinned node row (accent capsule, 44px floor); it starts today's plan with the moved CTA's exact scope wording, falls back to the pin's section review when the plan has nothing to start, and a pinned capstone is never double-pilled."
+  - "With the path rendering, the mid-page session-begin block is not rendered anywhere on Today - the pill is the only plan CTA; without a declared path the begin block stays where it was."
+  - "One tap on the pill lands on the practice surface; lock rendering (PATH-LOCK-ORDER-001) and the serve banner (SERVE-BANNER-001) are untouched."
+  - "Every claim is pinned red-at-base by the path-view and home vitest contract plus the firstscreen capture (red 3 FAIL + no pill at 572e5d7e, green 8/8), and the session/whatsnext/capstone journeys stay green unedited."
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3791,4 +3808,5 @@ execution_scope:
   - FIX-PATH-VISUAL-001-1
   - FIX-PLACEMENT-COVERAGE-001
   - RU-GOALS-SCRUB-001
+  - TODAY-FIRSTSCREEN-001
   public_publication_authorized: false

@@ -1,0 +1,10 @@
+TODAY-FIRSTSCREEN-001 lane gates (re-run by the worker at commit 6c84d2f6, tree clean of sibling WIP):
+- npx tsc --noEmit (apps/desktop): clean
+- npx vitest run (apps/desktop full): 633/633 passed (72 files) incl. 4 path-view + 2 home pins + today-firstscreen journey
+- npx eslint src/home.tsx src/home.test.tsx src/path-view.test.tsx src/journeys/today-firstscreen.journey.tsx: clean
+- npx prettier --check on all touched files: clean
+- python3 tools/audit_learner_copy.py: findings 0
+- scripts/firstscreen-capture.mjs red-at-base (dist+bin built at 572e5d7e via git-stash-at-main-tree recipe): 3 pill/CTA checks FAIL + 'no start pill to tap', exit 1 -> capture-red-at-head.log
+- scripts/firstscreen-capture.mjs green at HEAD (dist+bin from 6c84d2f6): 8/8 PASS, exit 0 -> capture-green.log
+- no Rust changes: cargo gates not applicable (serve bin rebuilt only to switch red/green dist)
+- visual inspection gate: firstscreen-fold0-green.png read as a learner (frontier glowing + Start pill beside 'You are here'; locked nodes above the pin are PATH-LOCK-ORDER-001 jurisdiction and were NOT touched)
