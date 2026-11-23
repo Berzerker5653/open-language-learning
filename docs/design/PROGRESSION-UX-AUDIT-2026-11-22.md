@@ -60,6 +60,21 @@ Celebrate unit completions, show gentle facts (days active, units done), NO stre
 punishment/freezes, NO XP, NO leagues, NO hearts. ADR-0002 gets amended to carve out
 warm-but-non-manipulative moments; banned-token tests are re-scoped, not deleted.
 
+## MARKET NAVIGATION RULES (added 2026-11-23, owner dogfood + real walkthrough frames)
+Observed in a 2026 Duolingo walkthrough frame (~/design-refs/lts-market/vid-duolingo-0m30s.jpg):
+1. The path screen OPENS AT THE FRONTIER NODE — auto-scrolled so the current
+   lesson is the visual center of the first screen. Nothing to scroll past.
+2. COMPLETED lessons are above the frontier; LOCKED lessons are strictly BELOW it.
+   A locked node never sits above where the learner is.
+3. Tapping the frontier node IS the start action — one tap from app-open to first
+   question. No separate start ritual.
+4. Meta (profile, packs, notes) never occupies the first screen of the learning path.
+Our live 2026-11-23 inspection (state/evidence/DOGFOOD-2026-11-23/live-phone-fold0.png)
+violates all four: 5 lines of serve-mode status at top, then greetings, then the
+path opens MID-branch with two LOCKED number-words nodes ABOVE the pin, no start
+affordance on screen, 7 screens of scroll total. Cards: TODAY-FIRSTSCREEN-001,
+PATH-LOCK-ORDER-001, SERVE-BANNER-001.
+
 ## Reference material convention for the FEEL work (added 2026-11-22, owner idea)
 Every FEEL card carries TWO oracles:
 1. TARGET mockups — ours, committed: state/evidence/FEEL-TARGETS-2026-11-22/
