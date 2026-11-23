@@ -1657,6 +1657,49 @@ th:last-child {
   font-size: 0.92rem;
 }
 
+/* WARM-MOMENTS-001 (ADR-0002 amended): the unit-finish card. Quiet by
+   design — one bordered surface, one accent edge, existing tokens only.
+   No confetti palette, no animation theatrics; honest warmth lives in
+   the copy, not in visual noise. */
+.path-finish {
+  margin: 0.5rem 0 0.8rem;
+  padding: 0.8rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-left: 3px solid var(--accent);
+  border-radius: 10px;
+}
+
+.path-finish h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.02rem;
+  color: var(--ink);
+}
+
+.path-finish p {
+  margin: 0.2rem 0;
+  font-size: 0.92rem;
+}
+
+/* WARM-MOMENTS-001: gentle facts on the Progress tab — a calm strip,
+   never a scoreboard: no big numerals, no colors that grade you. */
+.gentle-facts {
+  margin: 0 0 1.1rem;
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.gentle-facts h2 {
+  margin: 0 0 0.3rem;
+  font-size: 0.98rem;
+}
+
+.gentle-facts p {
+  margin: 0.15rem 0;
+}
+
 /* PATH-PIN-CONSISTENCY-001 (owner dogfood 2026-11-22 complaint 10): the
    next-up recommendation rides the path HEADER strip — the market
    pattern (position pin on the trail, action chip above it) — so the

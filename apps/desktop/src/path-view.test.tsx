@@ -578,6 +578,7 @@ describe("section capstone node (UNIT-CAPSTONE-001)", () => {
           items: 0,
           correct: 0,
           friendly: "On-ramp",
+          band: "on-ramp",
           error: "pack not installed",
         }}
       />,

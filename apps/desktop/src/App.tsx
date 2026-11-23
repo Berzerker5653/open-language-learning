@@ -22,6 +22,7 @@ import {
   type GoalCard,
   GoalMap,
   CanDoSummary,
+  GentleFacts,
   type UnitPathNode,
   type NextOffer,
   type WorldEnvironment,
@@ -32,6 +33,7 @@ import {
   type SessionStatus,
   type SessionView,
   type CapstoneResult,
+  type LearningFacts,
   bandHeader,
 } from "./home";
 import { MemoryStatsStrip, type MemoryStats } from "./memory-stats";
@@ -502,6 +504,9 @@ export function App() {
   // `capstone_complete`, which recounts the items engine-side.
   const capstoneSessionRef = useRef<{ packId: string; band: string; id: string } | null>(null);
   const [capstoneResult, setCapstoneResult] = useState<CapstoneResult | null>(null);
+  // WARM-MOMENTS-001: gentle facts for the Progress tab; null until the
+  // engine answers — GentleFacts then abstains rather than faking zeroes.
+  const [learningFacts, setLearningFacts] = useState<LearningFacts | null>(null);
 
   function activeSessionId(): string {
     return capstoneSessionRef.current ? capstoneSessionRef.current.id : planSessionRef.current;
@@ -2314,6 +2319,13 @@ export function App() {
         } catch {
           setMemoryStats(null);
         }
+        // WARM-MOMENTS-001: a gentle-facts read failure degrades ONLY the
+        // gentle facts — the capability page itself stays honest and whole.
+        try {
+          setLearningFacts((await inv("learning_facts", { profileId })) as LearningFacts);
+        } catch {
+          setLearningFacts(null);
+        }
       } catch (e) {
         // An honest alert, never an empty "no progress yet" claim: the data
         // may exist; the read is what failed.
@@ -2747,6 +2759,7 @@ export function App() {
           items: 0,
           correct: 0,
           friendly: bandHeader(node.band ?? "other").friendly ?? node.band ?? "Section",
+          band: node.band ?? "other",
           error: "this section's review has no runnable activities in this build",
         });
         return;
@@ -2776,6 +2789,7 @@ export function App() {
         items: 0,
         correct: 0,
         friendly: bandHeader(node.band ?? "other").friendly ?? node.band ?? "Section",
+        band: node.band ?? "other",
         error: String(e),
       });
     }
@@ -2797,7 +2811,11 @@ export function App() {
         sessionId: c.id,
       })) as { passed: boolean; items: number; correct: number };
       const header = bandHeader(c.band);
-      setCapstoneResult({ ...res, friendly: header.friendly ?? header.label });
+      setCapstoneResult({
+        ...res,
+        friendly: header.friendly ?? header.label,
+        band: c.band,
+      });
       setPathNodes((await inv("unit_path", { profileId })) as UnitPathNode[]);
     } catch (e) {
       const header = bandHeader(c.band);
@@ -2806,6 +2824,7 @@ export function App() {
         items: 0,
         correct: 0,
         friendly: header.friendly ?? header.label,
+        band: c.band,
         error: String(e),
       });
     }
@@ -4667,6 +4686,9 @@ export function App() {
           {progressLoading && <p className="empty">Loading progress…</p>}
           {!progressError && (
             <>
+              {/* WARM-MOMENTS-001: memory, not debt — above the capability
+                  answers, below nothing; it abstains when the wire failed. */}
+              <GentleFacts facts={learningFacts} />
               <CanDoSummary goals={goals} rows={progress} nextGoal={nextGoal} />
               {/* PROGRESS-STATS-001 (U14): instruments above the tree. */}
               {memoryStats ? <MemoryStatsStrip stats={memoryStats} /> : null}

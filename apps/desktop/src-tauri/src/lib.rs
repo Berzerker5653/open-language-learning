@@ -4505,6 +4505,51 @@ async fn capstone_complete(
 }
 
 // ---------------------------------------------------------------------------
+// WARM-MOMENTS-001 (ADR-0002 amendment, calm-but-warm): the gentle-facts
+// wire. Two durable counts, engine-owned like every other number the UI
+// renders: `days_active` is DISTINCT calendar dates holding graded evidence
+// (arithmetic over recorded history — no adjacency, no reset, so it is a
+// memory, not a streak), and `units_done` counts done path nodes that are
+// NOT capstone checkpoints (a checkpoint is a checkpoint, never a unit —
+// the section counter's honesty rule). `time learned` is deliberately NOT
+// wired: per-session wall time is never persisted, and an estimate would
+// invent a number the engine cannot support.
+// ---------------------------------------------------------------------------
+
+#[derive(Serialize, PartialEq, Debug)]
+struct LearningFactsView {
+    days_active: u32,
+    units_done: u32,
+}
+
+fn learning_facts_at(data: &Path, profile_id: &str) -> Result<LearningFactsView, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    // The canonical RFC 3339 UTC shape the storage write boundary enforces
+    // makes the leading YYYY-MM-DD the honest day key (same key the
+    // activity calendar already groups on). A very old `since` = "all
+    // history"; these counts never look forward or reset.
+    let days_active = store
+        .evidence_event_days(profile_id, "0000-01-01T00:00:00Z")
+        .map_err(|e| e.to_string())?
+        .len() as u32;
+    let units_done = unit_path_at(data, profile_id)?
+        .iter()
+        .filter(|n| n.done && n.kind != "capstone")
+        .count() as u32;
+    Ok(LearningFactsView {
+        days_active,
+        units_done,
+    })
+}
+
+#[tauri::command]
+async fn learning_facts(profile_id: String) -> Result<LearningFactsView, String> {
+    tauri::async_runtime::spawn_blocking(move || learning_facts_at(&data_dir(), &profile_id))
+        .await
+        .map_err(|e| format!("learning-facts failed: {e}"))?
+}
+
+// ---------------------------------------------------------------------------
 // PATH-WHATSNEXT-001 (PROGRESS-PATH-DESIGN-001 phase 2, the Codemm rule):
 // exactly ONE current offer, computed engine-side so the after-session card,
 // the Today strip and the path pin can never disagree. The rule: a due
@@ -11806,6 +11851,7 @@ macro_rules! lts_command_table {
             capstone_plan,
             capstone_complete,
             current_offer,
+            learning_facts,
             practice_plan,
             practice_queue,
             first_run_steps,
@@ -14398,9 +14444,21 @@ activities:
         );
 
         // 6. No streak/heart mechanics anywhere in exposed state.
-        let json = serde_json::to_string(&plan).unwrap();
+        // WARM-MOMENTS-001 re-scope (ADR-0002 amended): the same sweep
+        // now also pins points/league/freeze/xp. The gentle-facts wire
+        // (`learning_facts`) is the only warmth on the wire, and it
+        // carries two durable counts — no lever in either direction.
+        let json = serde_json::to_string(&plan).unwrap().to_lowercase();
         assert!(!json.contains("streak"));
         assert!(!json.contains("heart"));
+        assert!(!json.contains("points"));
+        assert!(!json.contains("league"));
+        assert!(!json.contains("freeze"));
+        assert!(
+            !json.contains("xp\""),
+            "no XP field: a bare `xp` is checked as a key boundary, prose \
+             like 'explain' is not a score"
+        );
     }
 
     /// ADR-0019: a staged sidecar payload outranks the development vendor tree,
@@ -16380,7 +16438,10 @@ activities:
             })
             .flat_map(|unit| unit.activities.iter().flat_map(|a| a.content_refs.clone()))
             .collect();
-        assert!(!on_ramp_refs.is_empty(), "the reference pack has on-ramp refs");
+        assert!(
+            !on_ramp_refs.is_empty(),
+            "the reference pack has on-ramp refs"
+        );
         let seed = |target: &str, id: &str, at: &str, group: Option<&str>| {
             let mut ev = attempt(
                 target,
@@ -16408,7 +16469,12 @@ activities:
             .append_evidence(&seed(&on_ramp_refs[0], "fact-d1a", d1, None))
             .unwrap();
         store
-            .append_evidence(&seed(&on_ramp_refs[1], "fact-d1b", "2026-11-10T18:30:00Z", None))
+            .append_evidence(&seed(
+                &on_ramp_refs[1],
+                "fact-d1b",
+                "2026-11-10T18:30:00Z",
+                None,
+            ))
             .unwrap();
         store
             .append_evidence(&seed(&on_ramp_refs[2], "fact-d2", d2, None))
@@ -16432,7 +16498,12 @@ activities:
             if !banded {
                 continue;
             }
-            for (i, r) in unit.activities.iter().flat_map(|a| a.content_refs.iter()).enumerate() {
+            for (i, r) in unit
+                .activities
+                .iter()
+                .flat_map(|a| a.content_refs.iter())
+                .enumerate()
+            {
                 store
                     .append_evidence(&seed(r, &format!("fact-done-{i}-{r}"), d3, None))
                     .unwrap();
@@ -16475,11 +16546,13 @@ activities:
             .filter(|n| n.done && n.kind != "capstone")
             .count();
         assert_eq!(
-            after.units_done as usize,
-            expected_after,
+            after.units_done as usize, expected_after,
             "the checkpoint is a checkpoint, never a unit"
         );
-        assert_eq!(after.days_active, 3, "the pass rode an already-counted date");
+        assert_eq!(
+            after.days_active, 3,
+            "the pass rode an already-counted date"
+        );
     }
 
     #[test]

@@ -667,6 +667,35 @@ export interface ProgressRow {
   confidence: number;
   needs_refresh: boolean;
 }
+
+/** WARM-MOMENTS-001 (ADR-0002 amendment, calm-but-warm): the gentle-facts
+ * wire — durable counts from the engine (`learning_facts`), presented as
+ * memory, never as debt. This surface may NEVER grow reset, penalty,
+ * quota, or consecutive-day semantics: the day count is arithmetic over
+ * recorded history and can only ever grow. */
+export interface LearningFacts {
+  days_active: number;
+  units_done: number;
+}
+
+export function GentleFacts({ facts }: { facts: LearningFacts | null }) {
+  // UI-HYGIENE-001 posture: no numbers, no page — never a fake zero tour.
+  if (!facts) return null;
+  const { days_active: days, units_done: units } = facts;
+  return (
+    <section aria-label="Your time here" className="gentle-facts" data-testid="gentle-facts">
+      <h2>Your time here</h2>
+      <p>
+        {`${days} ${days === 1 ? "day" : "days"} with learning so far · ${units} ${units === 1 ? "unit" : "units"} completed`}
+      </p>
+      <p className="meta">
+        <small>
+          These are memories, not targets: nothing here resets, expires, or counts against you.
+        </small>
+      </p>
+    </section>
+  );
+}
 /**
  * Progress answers three questions before it shows any numbers: what the
  * learner can do now, what changed, and what to do next. Every line is derived
@@ -724,8 +753,8 @@ export function CanDoSummary(p: {
       )}
       <p className="meta">
         <small>
-          This is what the recorded evidence says today; the app keeps capability state, not an
-          activity diary.
+          This is what the recorded evidence says today; capability state stays the authority,
+          and the gentle counts on this page are memory, not measurement.
         </small>
       </p>
       <h2>What to do next</h2>
@@ -1132,13 +1161,18 @@ function PathLockGlyph() {
 
 /** UNIT-CAPSTONE-001: the honest facts of a just-finished section review
  * (engine-counted, never UI-claimed). The path renders one calm line from
- * these — no congrats, no XP, no celebration (ADR-0002). */
+ * these when the review did NOT pass, and the quiet unit-finish card when
+ * it did (WARM-MOMENTS-001, ADR-0002 amended: honest warmth, still no
+ * congrats, no XP, no celebration tokens). */
 export interface CapstoneResult {
   passed: boolean;
   items: number;
   correct: number;
   /** The section's own friendly name, from the pack's band ladder. */
   friendly: string;
+  /** WARM-MOMENTS-001: the section's band key — the finish card finds its
+   * section in `pathSections` by this, never by string-matching `friendly`. */
+  band: string;
   /** Set when the review could not be served or recorded at all — the
    * banner then attributes the failure instead of faking a score line. */
   error?: string;
@@ -1294,22 +1328,69 @@ export function PathView({
       typeof matchMedia === "function" && matchMedia("(prefers-reduced-motion: reduce)").matches;
     el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
   };
+  // WARM-MOMENTS-001 (ADR-0002 amended, calm-but-warm): the unit-finish
+  // moment. A PASSED section review gets one quiet card — what was
+  // completed, the honest numbers behind it, and the next section with
+  // its LIVE lock state. Everything on the card is read from nodes the
+  // engine already reported; the view invents nothing, and the copy
+  // stays token-free (no congrats/XP/badge/celebration — the presence
+  // test and the absence test live together in path-view.test.tsx).
+  const finishBand =
+    capstoneResult && capstoneResult.passed && !capstoneResult.error
+      ? capstoneResult.band.trim().toLowerCase()
+      : null;
+  const finishIdx = finishBand
+    ? sections.findIndex((s) => s.band.trim().toLowerCase() === finishBand)
+    : -1;
+  const finishSection = finishIdx >= 0 ? sections[finishIdx] : null;
+  const finishUnits = finishSection
+    ? finishSection.nodes.filter((n) => n.kind !== "capstone" && n.done).length
+    : 0;
+  const finishPool = finishSection?.nodes.find((n) => n.kind === "capstone") ?? null;
+  const nextSection = finishIdx >= 0 ? (sections[finishIdx + 1] ?? null) : null;
+  // "Open on the path" only when the engine says at least one node of the
+  // next section is actually unlocked — never a claimed unlock.
+  const nextOpen = nextSection ? nextSection.nodes.some((n) => !n.locked) : false;
+  const nextHeader = nextSection ? bandHeader(nextSection.band) : null;
   return (
     <section aria-label="Your path" className="unit-path" data-testid="unit-path" ref={rootRef}>
       <h2>Your path</h2>
       <p className="meta">
         <small>What you have completed, where you are now, and where this leads.</small>
       </p>
-      {capstoneResult ? (
-        // UNIT-CAPSTONE-001: one plain factual line — what the review
-        // measured and what it means for the section. Calm copy only
-        // (ADR-0002): no congrats, no XP, no celebration tokens.
+      {capstoneResult && capstoneResult.passed && !capstoneResult.error ? (
+        // WARM-MOMENTS-001: the quiet unit-finish card (ADR-0002
+        // amendment). Honest warmth only — engine numbers, friendly
+        // section names, live lock state for what is next.
+        <div className="path-finish" data-testid="unit-finish-moment" role="status">
+          <h3>{`Section complete — ${capstoneResult.friendly}`}</h3>
+          <p>
+            {`Well done — ${capstoneResult.friendly} is finished. Section review recorded — ${capstoneResult.correct} of ${capstoneResult.items} recalled.`}
+          </p>
+          {finishSection ? (
+            <p className="meta">
+              {`What you learned: ${finishUnits} ${finishUnits === 1 ? "unit" : "units"} completed, `}
+              {finishPool && finishPool.refs_total > 0
+                ? `${finishPool.refs_done} of ${finishPool.refs_total} letters and words proved by your own answers.`
+                : "this section taught more than directly recallable letters and words."}
+            </p>
+          ) : null}
+          {nextHeader ? (
+            <p className="meta">
+              {`Up next: ${nextHeader.friendly ?? nextHeader.label} — ${nextOpen ? "open on the path below." : "still ahead."}`}
+            </p>
+          ) : (
+            <p className="meta">This is the last section of this pack — reviews keep it fresh.</p>
+          )}
+        </div>
+      ) : capstoneResult ? (
+        // UNIT-CAPSTONE-001: a non-passed or failed review states one
+        // plain factual line. The celebration lives ONLY on the finish
+        // card above; a failed sitting is a fact, never a scold.
         <p className="path-capstone-result" data-testid="path-capstone-result" role="status">
           {capstoneResult.error
             ? `Could not record the section review: ${capstoneResult.error}`
-            : capstoneResult.passed
-              ? `Section review recorded — ${capstoneResult.correct} of ${capstoneResult.items} recalled. ${capstoneResult.friendly} complete.`
-              : `Section review recorded — ${capstoneResult.correct} of ${capstoneResult.items} recalled. Not passed yet — keep practicing this section, then run the review again.`}
+            : `Section review recorded — ${capstoneResult.correct} of ${capstoneResult.items} recalled. Not passed yet — keep practicing this section, then run the review again.`}
         </p>
       ) : null}
       {nextOffer && nextOffer.unit_id !== pinTarget ? (

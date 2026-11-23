@@ -1554,6 +1554,15 @@ export class LearnerEngine {
           unlock_hint: null as string | null,
         }));
       }
+      case "learning_facts": {
+        // WARM-MOMENTS-001: mirror of `learning_facts_at` for the fixture
+        // world — the fake keeps an event counter, not a date ledger, so it
+        // claims at most the one day its scripted session represents; the
+        // fixture path reports no unit done, so units_done stays 0. An
+        // honest mirror, never an invented number.
+        const p = this.profile(args.profileId);
+        return { days_active: p.events > 0 ? 1 : 0, units_done: 0 };
+      }
       case "current_offer": {
         // PATH-WHATSNEXT-001: mirror of the engine's single-answer rule for
         // the fake world — a due review first, else the plan's first

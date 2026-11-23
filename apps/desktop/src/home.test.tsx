@@ -818,7 +818,9 @@ describe("what you can do now", () => {
     expect(html).toContain("1 skill is getting old");
     expect(html).toContain("Next up: ");
     expect(html).toContain("<strong>Greet someone and say who you are</strong>");
-    expect(html).toContain("capability state, not an activity diary");
+    // WARM-MOMENTS-001 re-scope: the diary sentence grew — capability
+    // stays the authority, and the gentle counts are named as memory.
+    expect(html).toContain("memory, not measurement");
     // The headline answer is the pack's text; ids stay in the detail table.
     expect(html).not.toContain("<h1>org.openlanguage");
   });
