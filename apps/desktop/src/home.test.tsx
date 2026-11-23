@@ -10,6 +10,7 @@ import {
   ProgressView,
   type PlannedItem,
   type SessionPlan,
+  type UnitPathNode,
 } from "./home";
 
 const plan: SessionPlan = {
@@ -870,5 +871,57 @@ describe("gentle facts (WARM-MOMENTS-001)", () => {
   it("abstains entirely when the engine has no numbers", () => {
     // UI-HYGIENE-001 posture: no fake zero tour, no invented facts.
     expect(renderToStaticMarkup(<GentleFacts facts={null} />)).toBe("");
+  });
+});
+
+// TODAY-FIRSTSCREEN-001 (MARKET NAVIGATION RULES): on a Today that carries
+// the path, the ONE start CTA lives as the pill on the frontier pin — the
+// mid-page begin block moves there instead of standing beside it.
+describe("start CTA moves to the pin when the path renders (TODAY-FIRSTSCREEN-001)", () => {
+  const pathNode = (over: Partial<UnitPathNode>): UnitPathNode => ({
+    pack_id: "org.openlanguage.ru-ru.reference",
+    unit_id: "ru.unit.x",
+    title: "Some unit",
+    summary: "",
+    band: "on-ramp",
+    locked: false,
+    done: false,
+    current: false,
+    review_due: false,
+    due_count: 0,
+    in_progress: false,
+    refs_done: 0,
+    refs_total: 4,
+    unlock_hint: null,
+    kind: "words",
+    ...over,
+  });
+  const pathNodes = [
+    pathNode({ unit_id: "ru.unit.frontier", in_progress: true }),
+    pathNode({ unit_id: "ru.unit.ahead" }),
+  ];
+  const base = {
+    displayName: "Hunter",
+    plan,
+    activeBudget: 5,
+    onBudget: () => {},
+    onStart: () => {},
+  };
+
+  it("renders the start pill on the pin, not the mid-page begin block", () => {
+    const html = renderToStaticMarkup(
+      <Home {...base} onStartSession={() => {}} pathNodes={pathNodes} />,
+    );
+    expect(html).toContain('data-testid="path-start-pill"');
+    // The old block is gone: no duplicate plan CTA anywhere on the screen.
+    expect(html).not.toContain("data-session-begin");
+    expect(html).not.toContain("One activity at a time");
+    expect((html.match(/Start today/g) ?? []).length).toBe(1);
+  });
+
+  it("keeps the begin block exactly where it was when no path renders", () => {
+    const html = renderToStaticMarkup(<Home {...base} onStartSession={() => {}} />);
+    expect(html).toContain("data-session-begin");
+    expect(html).not.toContain('data-testid="path-start-pill"');
   });
 });

@@ -692,3 +692,113 @@ describe("unit-finish moment (WARM-MOMENTS-001)", () => {
     expect(fail).toContain("Not passed yet");
   });
 });
+
+// TODAY-FIRSTSCREEN-001 (MARKET NAVIGATION RULES, PROGRESSION-UX-AUDIT-2026-11-22):
+// the first screen IS the path and the start action lives ON the frontier
+// node. The whatsnext CTA MOVES to the pin (one pill on the pinned node),
+// it is never copied beside it.
+describe("start pill rides the frontier pin (TODAY-FIRSTSCREEN-001)", () => {
+  it("renders exactly ONE pill inside the pinned node's row and nowhere else", () => {
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({ unit_id: "ru.unit.done-1", done: true }),
+          node({ unit_id: "ru.unit.frontier", in_progress: true }),
+          node({ unit_id: "ru.unit.next" }),
+        ]}
+        startPlan={() => {}}
+      />,
+    );
+    expect(html).toContain('data-testid="path-start-pill"');
+    expect(html.match(/data-testid="path-start-pill"/g)).toHaveLength(1);
+    // The pill labels itself as the moved whatsnext CTA, same words.
+    expect(html).toContain("Start today&apos;s plan");
+    // It rides the PIN row: the pill markup sits inside the pinned node's
+    // <li> (before the next node's data-unit marker, after the pin label).
+    const pinRow = html.slice(
+      html.indexOf('data-unit="ru.unit.frontier"'),
+      html.indexOf('data-unit="ru.unit.next"'),
+    );
+    expect(pinRow).toContain('data-testid="path-pin"');
+    expect(pinRow).toContain('data-testid="path-start-pill"');
+    expect(html.slice(html.indexOf('data-unit="ru.unit.next"'))).not.toContain(
+      'data-testid="path-start-pill"',
+    );
+    expect(html.slice(0, html.indexOf('data-unit="ru.unit.frontier"'))).not.toContain(
+      'data-testid="path-start-pill"',
+    );
+  });
+
+  it("no pill at all when there is no plan to start and no section review to run", () => {
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({ unit_id: "ru.unit.frontier", in_progress: true }),
+          node({
+            unit_id: "capstone.org.openlanguage.ru-ru.reference.on-ramp",
+            kind: "capstone",
+            locked: true,
+          }),
+        ]}
+      />,
+    );
+    expect(html).not.toContain('data-testid="path-start-pill"');
+  });
+
+  it("falls back to the pin's section review when today's plan has nothing to start", () => {
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({ unit_id: "ru.unit.frontier", in_progress: true }),
+          node({
+            unit_id: "capstone.org.openlanguage.ru-ru.reference.on-ramp",
+            kind: "capstone",
+            title: "Section review",
+            unlock_hint: null,
+          }),
+        ]}
+        onStartCapstone={() => {}}
+      />,
+    );
+    const pill = /data-testid="path-start-pill"[^>]*>([^<]*)/.exec(html);
+    expect(pill, "pill on the pinned unit when only the section review is startable").not.toBeNull();
+    expect(pill![1]).toContain("Start section review");
+    // The pill rides the pinned UNIT row, not the capstone row — the
+    // capstone keeps its own control (next assertion: still exactly one).
+    expect(html.match(/data-testid="path-start-pill"/g)).toHaveLength(1);
+    const capRow = html.slice(html.indexOf('data-unit="capstone.org'));
+    expect(capRow).not.toContain('data-testid="path-start-pill"');
+    // And the capstone node's own start control is untouched.
+    expect(
+      html.includes(
+        'data-testid="capstone-start-capstone.org.openlanguage.ru-ru.reference.on-ramp"',
+      ),
+    ).toBe(true);
+  });
+
+  it("never pills a pinned capstone — its own start control already IS the action", () => {
+    const html = renderToStaticMarkup(
+      <PathView
+        nodes={[
+          node({ unit_id: "ru.unit.done-1", done: true }),
+          node({
+            unit_id: "capstone.org.openlanguage.ru-ru.reference.on-ramp",
+            kind: "capstone",
+            title: "Section review",
+            unlock_hint: null,
+            current: true,
+            in_progress: true,
+          }),
+        ]}
+        startPlan={() => {}}
+        onStartCapstone={() => {}}
+      />,
+    );
+    // The pin can land on a checkpoint; that node already carries the
+    // UNIT-CAPSTONE-001 start button — a pill would duplicate it.
+    expect(html).not.toContain('data-testid="path-start-pill"');
+    expect(html).toContain(
+      'data-testid="capstone-start-capstone.org.openlanguage.ru-ru.reference.on-ramp"',
+    );
+  });
+});

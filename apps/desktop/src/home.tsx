@@ -1226,6 +1226,7 @@ export function PathView({
   nextOffer,
   onStartCapstone,
   capstoneResult,
+  startPlan,
 }: {
   nodes: UnitPathNode[];
   /// PATH-WHATSNEXT-001: when set (the after-session moment), the path
@@ -1244,7 +1245,14 @@ export function PathView({
   /// UNIT-CAPSTONE-001: facts from the review that just finished; the
   /// path states them once, calmly.
   capstoneResult?: CapstoneResult | null;
+  /// TODAY-FIRSTSCREEN-001: the whatsnext CTA moved onto the pin — when
+  /// today's plan is startable, the pill on the frontier node runs it.
+  /// (Contract landed red-first in state/notes/TODAY-FIRSTSCREEN-001.md;
+  /// the pill renders in the code commit of this lane.)
+  startPlan?: () => void;
 }) {
+  // Declared ahead of the pill render so the red contract compiles.
+  void startPlan;
   const sections = pathSections(nodes);
   // PATH-PIN-CONSISTENCY-001: the pin is WHERE THE LEARNER IS, not what
   // the plan suggests next. Two contradictory markers on one track (the
