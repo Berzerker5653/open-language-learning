@@ -252,7 +252,7 @@ export function PracticeRunner(p: PracticeRunnerProps) {
           {p.audioError ? (
             <p className="notice">{p.audioError}</p>
           ) : (
-            <div className="btn-row">
+            <div className="btn-row audio-row">
               <button
                 type="button"
                 className="btn btn--primary"
@@ -298,7 +298,7 @@ export function PracticeRunner(p: PracticeRunnerProps) {
           </div>
         </div>
       ) : (
-        <div role="group" aria-label="Choices" className="btn-row">
+        <div role="group" aria-label="Choices" className="btn-row drill-choices">
           {p.task.choices.map((choice, i) => (
             <button
               key={choice}

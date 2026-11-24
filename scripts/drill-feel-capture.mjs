@@ -226,6 +226,11 @@ try {
   let started = false;
   for (let i = 0; i < 20 && !started; i++) {
     started = await evaluate(`(() => {
+      // DRILL-HIERARCHY-001 maintenance: the frontier pill's engine label
+      // on a fresh profile is "Start · N activities · ~N min"; the stable
+      // hook is the pill's test id. Text match kept as the fallback.
+      const pill = document.querySelector('[data-testid="path-start-pill"]');
+      if (pill) { pill.click(); return true; }
       const b = [...document.querySelectorAll('button')].find((x) =>
         (x.textContent ?? '').includes('Start today'));
       if (!b) return false;

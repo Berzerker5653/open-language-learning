@@ -1351,6 +1351,61 @@ th:last-child {
   content: "\21bb\00a0"; /* open, non-punitive retry marker */
 }
 
+/* ======================================================== DRILL-HIERARCHY-001
+   The drill screen had NO visual hierarchy (UI-VERIFY-2026-11-23 defect 2;
+   red capture state/evidence/DRILL-HIERARCHY-001/audit-red.json): answer
+   tiles 176x44 sitting in a wrap-row, Pause/Stop styled IDENTICALLY to the
+   tiles (44px, 15px type, surface fill, 1px border), no divider, and the
+   listening Play button ending 329 against the 374 content grid. The tiles
+   are the dominant tappable objects; the session exit is quiet secondary
+   chrome under a hairline divider; the audio row rides the same content
+   grid as the tiles it answers. Nothing here touches FEEL-DRILL state
+   semantics: these rules declare NO border-color, background, box-shadow
+   or opacity on the tiles, so the pinned reveal rules above (and their
+   post-`.btn:disabled` re-declarations) still own every graded state —
+   the run-205 cascade lesson stays learned. Controls keep the 44px tap
+   floor (MOBILE-UX-001); quiet is fill/type/weight, never a small target. */
+.drill-choices {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.drill-choices .btn {
+  min-height: 3.5rem; /* 56px — comfortably above the 44px tap floor */
+  padding: 0.6rem 1.25rem;
+  border-width: 2px; /* weight, not color: the graded states own color */
+  font-size: 1rem;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+/* The audio prompt answers with the same geometry it asks with: the Play
+   control spans the content grid, flush with the tile edges. */
+.audio-row .btn {
+  flex: 1 1 100%;
+}
+
+/* Session exit = chrome, not a tile: under a hairline divider, right-
+   aligned, smaller type, soft ink, no fill. Height stays at the 44px floor. */
+.session-exit {
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin: 1.25rem 0 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--line);
+}
+
+.session-exit .btn {
+  min-height: 2.75rem;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8125rem;
+  color: var(--ink-soft);
+  border-color: var(--line);
+  background: transparent;
+}
+
 /* pitch contour comparison */
 .contour {
   display: block;

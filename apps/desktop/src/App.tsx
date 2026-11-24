@@ -5122,7 +5122,7 @@ export function App() {
             </>
           )}
           {session ? (
-            <div className="btn-row">
+            <div className="btn-row session-exit">
               <button
                 type="button"
                 className="btn btn--quiet"
