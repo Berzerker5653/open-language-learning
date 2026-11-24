@@ -2815,7 +2815,7 @@ tasks:
   title: Error memory loop — detected production errors become per-form review cards and a recurrence signal (industry-wide open gap, 2026-11 competitive research)
   dependencies: []
   read_first:
-  - docs/competitor-systems-deep-dive-2026-11.md
+  - tasks/KANBAN.md
   - state/notes/CONTENT-CONFIRM-001.md
   acceptance:
   - dictation, speaking-check, and composition mismatches against the pymorphy-expected form are classified (case / aspect / stress / agreement / wrong word) and appended to a per-profile error ledger (surface, lemma, error class, context sentence id, timestamp)
@@ -2872,7 +2872,7 @@ tasks:
   title: Known-words readability gate — generated/sentence content never contains more than one unknown lemma (Russio/NuanceDeck discipline)
   dependencies: []
   read_first:
-  - docs/competitor-systems-deep-dive-2026-11.md
+  - tasks/KANBAN.md
   - docs/PACK_AUTHORING_CONTRACT.md
   - docs/03_CURRICULUM_AND_MASTERY.md
   acceptance:
@@ -2888,7 +2888,7 @@ tasks:
   dependencies: []
   read_first:
   - apps/desktop/src/reading.tsx
-  - docs/competitor-systems-deep-dive-2026-11.md
+  - tasks/KANBAN.md
   - docs/04_LANGUAGE_PACK_SPEC.md
   acceptance:
   - "ru interlinear story text shows, under each inflected word, stress marking plus a compact grammar label (noun/adjective: case+number; verb: aspect+tense) by default, with a global toggle to hide labels"
@@ -2899,10 +2899,10 @@ tasks:
 - id: UI-HYGIENE-001
   milestone: M8
   priority: P2
-  title: Learner-facing hygiene pass — container alignment, copy/token leaks, profile chooser cleanup (visual-ui-audit U1/U2/U13)
+  title: Learner-facing hygiene pass — container alignment, copy/token leaks, profile chooser cleanup (market audit U1/U2/U13)
   dependencies: []
   read_first:
-  - docs/visual-ui-audit-2026-11.md
+  - docs/ui-review-2026-11-23.md
   acceptance:
   - one content-width container token is shared by header, cards, and lists so left edges align at every breakpoint; segmented-control selected state is clearly visible
   - no raw identifiers (pack/lexicon tokens, activity ids) or implementation jargon render in learner-facing surfaces; the AI-content honesty line renders as a small designed badge, not prose in the greeting area
@@ -2912,10 +2912,10 @@ tasks:
 - id: SESSION-CHROME-001
   milestone: M8
   priority: P2
-  title: In-session chrome + SRS transparency — progress bar, step counter, time budget, and next-interval preview on review grades (visual-ui-audit U3/U6)
+  title: In-session chrome + SRS transparency — progress bar, step counter, time budget, and next-interval preview on review grades (market audit U3/U6)
   dependencies: []
   read_first:
-  - docs/visual-ui-audit-2026-11.md
+  - docs/ui-review-2026-11-23.md
   acceptance:
   - every activity type shows a thin session progress bar with n-of-N and a running time estimate; session end shows a plain summary card (activities done, time, forms surfaced) with no XP/streak mechanics
   - review grade buttons display the predicted next interval from the existing FSRS state; the review queue header expresses dues as a time budget (~minutes)
@@ -2929,7 +2929,7 @@ tasks:
   dependencies:
   - SESSION-CHROME-001
   read_first:
-  - docs/visual-ui-audit-2026-11.md
+  - docs/ui-review-2026-11-23.md
   - state/evidence/SESSION-TIMER-001/close-note.md
   acceptance:
   - the header's remaining-time estimate derives from the engine's per-item prices for the queue still to work and is unit-tested at session start and mid-session, so the first question shows a real estimate
@@ -2939,11 +2939,11 @@ tasks:
 - id: PROGRESS-STATS-001
   milestone: M8
   priority: P2
-  title: Progress instruments — per-goal modality progress bars, readable goal references, and a memory stats strip (visual-ui-audit U7/U14)
+  title: Progress instruments — per-goal modality progress bars, readable goal references, and a memory stats strip (market audit U7/U14)
   dependencies:
   - SESSION-CHROME-001
   read_first:
-  - docs/visual-ui-audit-2026-11.md
+  - docs/ui-review-2026-11-23.md
   - docs/03_CURRICULUM_AND_MASTERY.md
   acceptance:
   - each capability goal shows per-modality progress bars (0-100% of the modality gate, sourced from derived mastery state) instead of only textual not-started states
@@ -2958,7 +2958,7 @@ tasks:
   dependencies:
   - SESSION-CHROME-001
   read_first:
-  - docs/visual-ui-audit-2026-11.md
+  - docs/ui-review-2026-11-23.md
   acceptance:
   - no horizontal document scroll at 390x844 or 412x915 on onboarding, today, drill, reader, and settings, asserted by the audit gate in apps/desktop/src/mobile-audit.test.ts
   - every non-inline interactive element measures at least 44x44 at phone widths, with inline reader word taps documented as the one honest exception

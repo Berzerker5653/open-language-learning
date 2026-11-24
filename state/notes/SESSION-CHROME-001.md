@@ -1,4 +1,4 @@
-# SESSION-CHROME-001 — worker notes (visual-ui-audit U3/U6)
+# SESSION-CHROME-001 — worker notes (market audit U3/U6)
 
 **CLOSED 2026-11-20** — lane shipped on main. No STATUS BLOCK active.
 

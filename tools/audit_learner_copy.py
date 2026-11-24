@@ -21,7 +21,7 @@ Identifier families tracked: the ticket ids used across this repo (K-n, BLK-n,
 W-n, RT-n, TTS-n, LEARN-n), ADR numbers, owner decisions (O-0n), pack/release
 and ledger gate ids (PACK-n, REL-n, ACC-n, SEC-n, REVIEW-n, RL-n), the
 per-language content gates (JA-XXn, RU-XXn), and — since UI-HYGIENE-001
-(visual-ui-audit U13) — raw content tokens: dotted/colon pack ids such as
+(market audit U13) — raw content tokens: dotted/colon pack ids such as
 `ja.lex.demo.obaasan` or `ru.sent.b2`, which must never reach a learner's
 eyes as copy (surfaces render human labels instead).
 

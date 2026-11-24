@@ -2306,7 +2306,7 @@
     },
     "UI-HYGIENE-001": {
       "task_id": "UI-HYGIENE-001",
-      "title": "Learner-facing hygiene pass — container alignment, copy/token leaks, profile chooser cleanup (visual-ui-audit U1/U2/U13)",
+      "title": "Learner-facing hygiene pass — container alignment, copy/token leaks, profile chooser cleanup (market audit U1/U2/U13)",
       "status": "done",
       "attempts": 0,
       "updated": "2026-11-21",
@@ -2389,7 +2389,7 @@
     },
     "PROGRESS-STATS-001": {
       "task_id": "PROGRESS-STATS-001",
-      "title": "Progress instruments — per-goal modality progress bars, readable grows-with references, memory stats strip (visual-ui-audit U7/U14)",
+      "title": "Progress instruments — per-goal modality progress bars, readable grows-with references, memory stats strip (market audit U7/U14)",
       "status": "done",
       "attempts": 1,
       "updated": "2026-11-21",
