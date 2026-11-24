@@ -4,10 +4,12 @@ Pack reference resolution and install conformance are the langpack CLI's
 job (cargo tests); this suite covers strict parsing, manifest/record
 schema preflight, and roadmap/task-state consistency.
 """
+import atexit
 import importlib.util
 import json
 from pathlib import Path
 import shutil
+import subprocess
 import tempfile
 import unittest
 
@@ -18,32 +20,62 @@ validator = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(validator)
 ROOT = Path(__file__).resolve().parents[1]
 
+# A working checkout carries generated bulk the validator never reads: pack
+# .wav bytes (gitignored; ADR-0016, restorable with
+# scripts/fetch-pack-audio.sh), the pack-audio work dir, build output and
+# .git. Re-copying ~1.5 GB per case turned this suite into a multi-minute
+# crawl; the baseline below is built ONCE per test run and overlaid per case.
+IGNORE = shutil.ignore_patterns(
+    "__pycache__",
+    ".venv",
+    "target",
+    "node_modules",
+    ".git",
+    "tmp",
+    "dist",
+    "build",
+    "*.wav",
+)
+
+_BASELINE_DIR = None
+_BASELINE_PATH = None
+
+
+def _baseline():
+    """Build the repo baseline once per test run."""
+    global _BASELINE_DIR, _BASELINE_PATH
+    if _BASELINE_PATH is not None:
+        return _BASELINE_PATH
+    _BASELINE_DIR = Path(tempfile.mkdtemp(prefix="lts-mutation-baseline-"))
+    baseline = _BASELINE_DIR / "handoff"
+    shutil.copytree(ROOT, baseline, ignore=IGNORE)
+    _BASELINE_PATH = baseline
+
+    def _cleanup():
+        shutil.rmtree(_BASELINE_DIR, ignore_errors=True)
+
+    atexit.register(_cleanup)
+    return _BASELINE_PATH
+
+
+def _overlay():
+    """Per-case overlay of the pristine baseline.
+
+    Reflink copy (`cp --reflink=auto`) is near-instant on btrfs/xfs; on
+    filesystems without CoW the flag is ignored and cp degrades to a plain
+    copy - same semantics as the original per-case copytree, never wrong.
+    """
+    parent = Path(tempfile.mkdtemp(prefix="lts-mutation-case-"))
+    subprocess.run(["cp", "-r", "--reflink=auto", str(_baseline()),
+                    str(parent / "handoff")], check=True)
+    return parent
+
 
 class HandoffMutationTests(unittest.TestCase):
     def setUp(self):
-        self.temp = tempfile.TemporaryDirectory()
-        self.addCleanup(self.temp.cleanup)
-        self.root = Path(self.temp.name) / "handoff"
-        # A working checkout carries generated bulk the validator never reads:
-        # pack .wav bytes (gitignored; ADR-0016, restorable with
-        # scripts/fetch-pack-audio.sh), the pack-audio work dir, build output
-        # and .git. Copying ~3.4 GB per case turned this 31-test suite into a
-        # multi-minute crawl on any machine that has generated pack audio.
-        shutil.copytree(
-            ROOT,
-            self.root,
-            ignore=shutil.ignore_patterns(
-                "__pycache__",
-                ".venv",
-                "target",
-                "node_modules",
-                ".git",
-                "tmp",
-                "dist",
-                "build",
-                "*.wav",
-            ),
-        )
+        self._parent = _overlay()
+        self.addCleanup(shutil.rmtree, self._parent, True)
+        self.root = self._parent / "handoff"
         self.pack = self.root / "languages/ja-JP"
 
     def audit(self, release=False):

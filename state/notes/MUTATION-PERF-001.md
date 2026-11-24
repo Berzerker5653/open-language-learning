@@ -25,3 +25,29 @@
 - `setUp` today: `shutil.copytree(ROOT, self.root, ignore=shutil.ignore_patterns(...))` — the same 37-case × 2 methods (audit, edit_yaml, edit_state) that survive unchanged.
 - The audit's own ignores list lives at the top of `setUp`; leave it as-is unless the copy is restructured.
 - This is a gate-speed card, not a content or code-change card. Do not widen scope to validator logic.
+
+## RUN 1 HANDOFF — 2026-11-23 (honest partial)
+
+Work shipped (code + evidence, commit in this session):
+- baseline-once + reflink overlay (`_baseline()`/`_overlay()` in tools/test_validate_handoff.py)
+- per-case copy cost: ~10.5s -> 0.17s; baseline build: 0.4s once per run
+- full suite GREEN after the change: Ran 37 tests in 363.061s — OK
+- `state/evidence/MUTATION-PERF-001/gates.log` carries the instrumented breakdown
+
+The ~90s target is NOT met. Profiling the baseline audit shows the suite is
+AUDIT-bound, not copy-bound: every case instantiates a fresh
+validator.Audit over the ~6.9k-file tree (fresh cache, full re-parse);
+~9.7s per case x 37 = ~360s of the ~363s wall time. The sanctioned lever
+(baseline-once + overlay) is exhausted; the remaining lever is a
+validator-side file-hash cache in tools/validate_handoff.py — which this
+card's own contract forbids and which needs its own review.
+
+Genuine remaining acceptance; do NOT re-dispatch this card without an
+owner decision to re-scope:
+  1. re-scope: validator-side file-hash cache (data()/schema across Audit
+     instances, same semantics) — new card, requires owner go
+  2. or accept the ~363s suite as honest and record it as done with the
+     honest verdict (target not met) in the ledger
+
+Do NOT ship a second baseline/overlay attempt hoping it beats the audit —
+it cannot.

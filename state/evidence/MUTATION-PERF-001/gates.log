@@ -1,0 +1,62 @@
+MUTATION-PERF-001 — gates + honest verdict
+Date: 2026-11-23 (GamingPC, btrfs, one run each)
+Validator untouched (tools/validate_handoff.py = HEAD, diff confirms zero changes).
+Sum of before/after: 371.5s -> 363.1s (baseline-once + reflink overlay; per-case copy cost is ~0.17s now, was ~10s).
+
+Before (2026-11-23, pre-change, same machine):
+- Full suite: `python3 -m unittest discover -s tools -p test_validate_handoff.py`
+  Ran 37 tests in 371.529s — OK
+- Per-case copy cost measured in isolation: ~10.5s (incl. baseline build path)
+
+After (2026-11-23, baseline-once + reflink overlay):
+- `python3 -m unittest discover -s tools -p test_validate_handoff.py`
+  Ran 37 tests in 363.061s — OK (user 5m43s, sys 0m16s, real 6m3.6s)
+- Instrumented per-case breakdown (one case, after warm baseline):
+  _baseline()  0.4s (cold, one-time)
+  _overlay()   0.17s (btrfs reflink; 6859 files)
+  validator.Audit(...)  9.7s (errors=0, warnings=2)
+
+Root cause, established by profiling the baseline audit: the suite is
+AUDIT-BOUND, not copy-bound. Every case instantiates a fresh
+validator.Audit over a fresh overlay; the audit re-reads/re-validates
+the whole ~6.9k-file tree (languages/ja-JP + ru-RU lexicon ~4k files,
+schemas/, tasks/ROADMAP.yaml, state/task-state.json). Profiling (cProfile,
+baseline audit, ~27s over-instrumented / ~9.7s real): dominated by
+jsonschema schema validation ("descend" cumtime ~12s), json/yaml parsing
+(~10s combined), and format_checker. Per-case copy cost measured at 0.17s.
+
+Mechanism that was NOT the bottleneck: the per-case shutil.copytree. My
+initial assumption (from the suite's own comment about 3.4 GB per case)
+was that the copy dominated; instrumenting showed the copy was already
+fast on this machine even before the change (a plain `cp -r` of the apps/
+tree took ~1s). The copy was never the wall-time driver; the fresh
+per-case audit is.
+
+Verdict: the ~90s target is NOT MET by the sanctioned lever. Expected
+maximum improvement available in-suite (~10s per case) is exhausted;
+the remaining honest lever is a validator-level cache (e.g. a
+file-hash-keyed cache for data()/schema validation across Audit
+instances, or even a per-case fresh instance sharing a pre-computed
+baseline of read-only artifacts). That is a change to
+tools/validate_handoff.py — which this card's own contract forbids, and
+which would need its own review/sign-off.
+
+Contract compliance as-committed:
+- Test bodies: UNCHANGED (diff of tools/test_validate_handoff.py shows only
+  the setUp/helpers restructure; every test function, assertion and error
+  phrase identical)
+- Baseline/restore semantics: per-case overlay is a fresh temp dir,
+  hardlinked/reflinks from the shared pristine baseline; baseline never
+  mutated (writes go to overlay CoW copies); teardown removes overlay;
+  baseline removed at process exit via atexit
+- No validator change, no test deleted, no gate weakened
+- Historical "44 tests" claims (audit/validator-tests.txt,
+  REVIEW_REPORT.md, VALIDATION_REPORT.md, PACKAGE_MANIFEST.md):
+  recorded, NOT rewritten (they are the Oct-2/4 records of a suite that
+  no longer exists; the v0.2 contract rewrote it Oct 4 fc4ce910 to 37)
+- baseline-once + per-case overlay: shipped, verified
+
+Recommended next step: re-scope MUTATION-PERF-001 to a validator-side
+file-hash cache (or explicit per-case audit skip for mutation-only
+cases, which would need a validator/suite redesign), which is a new
+card needing its own acceptance and review. Kept ready for that.

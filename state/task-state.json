@@ -3421,10 +3421,11 @@
       "notes": "code (this commit); red contract 9841db99 committed 6 FAIL; green 7/7 at 390x844 live serve; tsc clean; 60/60 touched-contract vitest; vision-pass blocked in-session (server has no image input) — objective DOM/geometry inspection recorded in learner-inspection.md"
     },
     "MUTATION-PERF-001": {
-      "status": "ready",
-      "attempts": 0,
+      "status": "blocked",
+      "attempts": 1,
       "updated": "2026-11-23",
-      "notes": "Gate/tooling card - file-mutation verifier speedup. tools/test_validate_handoff.py setUp re-copies the whole repo per case (~10.5s/case, ~371s full suite at 2026-11-23 on this machine). Contract + acceptance in state/notes/MUTATION-PERF-001.md; card in tasks/ROADMAP.yaml and tasks/KANBAN.md; board card lts-MUTATION-PERF-001."
+      "blocker": "Scope conflict: the suite is audit-bound, not copy-bound (fresh validator.Audit re-parses the ~6.9k-file tree per case, ~9.7s x 37 = ~360s of the ~371s wall time). The sanctioned lever (baseline-once + reflink overlay, shipped) freed the copy cost but cannot move wall time. The remaining honest lever is a validator-side file-hash cache in tools/validate_handoff.py — forbidden by this card's own contract and requiring its own review. Honest verdict in state/evidence/MUTATION-PERF-001/gates.log; resume recipe in state/notes/MUTATION-PERF-001.md. Needs owner decision: re-scope to a validator-side cache card, or accept the ~363s partial and mark done-with-caveat.",
+      "notes": "PARTIAL SHIPPED + BLOCKED (2026-11-23): baseline-once + reflink overlay committed - per-case copy 10s -> 0.17s; full suite GREEN (Ran 37 tests in 363.061s, OK); test bodies unchanged; validator untouched. Target ~90s NOT met - audit-bound (see blocker). Ledger evidence: state/evidence/MUTATION-PERF-001/gates.log."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
