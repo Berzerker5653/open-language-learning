@@ -3452,9 +3452,10 @@
       "updated": "2026-11-24",
       "evidence": [
         "state/evidence/MUTATION-PERF-CACHE-001/gates.log",
-        "state/notes/MUTATION-PERF-CACHE-001.md"
+        "state/notes/MUTATION-PERF-CACHE-001.md",
+        "state/evidence/FIX-MUTATION-PERF-CACHE-001/gates.log"
       ],
-      "notes": "RE-SCOPED card (successor to MUTATION-PERF-001, blocked). Validator-side file-hash cache in tools/validate_handoff.py - identical semantics; full suite 363.0s -> 62.2s (target <= ~90s met); test bodies/assertions byte-identical. Code commit eee3e20b; gates.log committed with evidence. Gate itself changes - REVIEW-MUTATION-PERF-CACHE-001 created for the required review before merge."
+      "notes": "RE-SCOPED card (successor to MUTATION-PERF-001, blocked). Validator-side file-hash cache in tools/validate_handoff.py - identical semantics; full suite 363.0s -> 62.2s (target <= ~90s met); test bodies/assertions byte-identical. Code commit eee3e20b; gates.log committed with evidence. Gate itself changes - REVIEW-MUTATION-PERF-CACHE-001 created for the required review before merge. FIX-MUTATION-PERF-CACHE-001 (code cb6a67ee): REVIEW-MUTATION-PERF-CACHE-001 SPEC FAIL closed - cache key now (path.suffix, sha256(raw)); roadmap() deep-copies before the in-place task[field]=[] mutation. 37/37 green, 62.5-63.0s wall."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
