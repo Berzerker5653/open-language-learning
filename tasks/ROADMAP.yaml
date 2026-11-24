@@ -3738,11 +3738,30 @@ tasks:
   - "Desktop chrome, the FEEL-GLOBAL-001 glide pins, the MOBILE-UX-001 audit gates and existing tabs tests stay green unedited; new phone-tier vitest pins lock the bottom-bar shape and its cascade order."
   - "Before (red) and after (green) screenshots plus a learner inspection of the finished whole are committed under state/evidence/PHONE-NAV-WRAP-001/."
   required_for_desktop_1_0: false
+- id: DRILL-HIERARCHY-001
+  milestone: M11
+  priority: P1
+  title: "Drill screen has no visual hierarchy - answer tiles dominate, session controls demoted to quiet chrome, audio row on the tiles' grid; measured red at HEAD by the drill-hierarchy capture script"
+  dependencies: []
+  read_first:
+  - state/notes/DRILL-HIERARCHY-001.md
+  - state/notes/UI-VERIFY-2026-11-23.md
+  - packages/ui/src/styles.css
+  - apps/desktop/src/practice.tsx
+  - scripts/drill-hierarchy-capture.mjs
+  acceptance:
+  - "Capture script at CDP 390x844 mobile:true on the live serve REDS at HEAD (Pause/Stop styled identically to the tiles, tiles 44px, Play right edge 329 vs the 374 grid) and goes green after with 56px full-grid tiles and a strictly quieter controls row."
+  - "Session controls read as secondary chrome - shorter than a tile, smaller soft-ink type, transparent fill, under a hairline divider - while every tap target keeps the 44px floor."
+  - "The listening Play control spans the same content grid as the answer tiles, flush left and right."
+  - "FEEL-DRILL state semantics stay intact - the pinned reveal rules and their post-disabled re-declarations are untouched, the existing drill and FEEL vitest gates and the drill-feel live capture stay green, and new vitest pins lock the hierarchy rules and cascade order."
+  - "Before (red) and after (green) screenshots plus a learner inspection of the finished whole are committed under state/evidence/DRILL-HIERARCHY-001/."
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
   required_flag: required_for_desktop_1_0
   optional_tasks:
+  - DRILL-HIERARCHY-001
   - PHONE-NAV-WRAP-001
   - PATH-CONNECT-PILL-001
   - BAKEOFF-LIVECAPTURE-001
