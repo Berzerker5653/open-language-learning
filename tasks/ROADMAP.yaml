@@ -3774,11 +3774,30 @@ tasks:
   - "The language-switch journey and home/language vitest contracts stay green unedited; new pins lock the corrected strings, the join dot, the posture label+value layout, the clause spans and the zero-hide/unknown-show rule."
   - "Before (red) and after (green) captures plus a copy-changes table old->new are committed under state/evidence/COPY-POLISH-001/."
   required_for_desktop_1_0: false
+- id: HOME-FLASH-001
+  milestone: M11
+  priority: P1
+  title: "No language is set flickers ~2s on profile open with a pinned pack - neutral-while-loading home, never a pack-absent warning on a read in flight"
+  dependencies: [TODAY-FIRSTSCREEN-001]
+  read_first:
+  - state/notes/UI-VERIFY-2026-11-23.md
+  - state/notes/HOME-FLASH-001.md
+  - apps/desktop/src/App.tsx
+  - apps/desktop/src/home.tsx
+  - scripts/home-flash-capture.mjs
+  acceptance:
+  - "Capture script at CDP 390x844 mobile:true on the live serve records zero occurrences of the pack-absent label in the first 5s after entering a profile with an installed+pinned pack (red-at-HEAD baseline: 5 occurrences, t=201/403/605/807/1009ms)."
+  - "While the pack read is in flight Home renders neutral (no pack-absent warning, no pack-unread notice, no posture claim) with the exact HEAD scaffold preserved - no layout jump; a settled no-pack state still renders the warning."
+  - "Home, App and the home vitest contract stay green (664/664 desktop), plus the new packsPending neutral-render pin."
+  - "SERVE-BANNER-001 (no infra stack on the first screen) and TODAY-FIRSTSCREEN-001 pill placement are untouched."
+  - "Red and green captures plus the poll log and learner-inspection note are committed under state/evidence/HOME-FLASH-001/."
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
   required_flag: required_for_desktop_1_0
   optional_tasks:
+  - HOME-FLASH-001
   - DRILL-HIERARCHY-001
   - COPY-POLISH-001
   - PHONE-NAV-WRAP-001

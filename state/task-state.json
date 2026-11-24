@@ -3384,9 +3384,25 @@
         "state/evidence/COPY-POLISH-001/settings-green.png"
       ],
       "notes": "code in tree; first-run join dot, sentence-cased prompt/badge, posture label+value rows, gentle-facts clause spans, known-zero kanji row hidden (unknown stays visible); capture red 6/6 FAIL at HEAD vs green 6/6 at final bytes; 663 desktop vitest green incl. new pins; live re-run green 6/6"
+    },
+    "HOME-FLASH-001": {
+      "status": "done",
+      "attempts": 2,
+      "at": "2026-11-23",
+      "updated": "2026-11-23",
+      "evidence": [
+        "state/notes/HOME-FLASH-001.md",
+        "state/evidence/HOME-FLASH-001/gates.log",
+        "state/evidence/HOME-FLASH-001/result-red-at-HEAD.json",
+        "state/evidence/HOME-FLASH-001/result-green.json",
+        "state/evidence/HOME-FLASH-001/home-red-at-HEAD.png",
+        "state/evidence/HOME-FLASH-001/home-green.png",
+        "state/evidence/HOME-FLASH-001/learner-inspection.md"
+      ],
+      "notes": "code in tree; packsPending gates the home from painting the pack-absent warning while the pack read is in flight (neutral render, HEAD scaffold preserved); red-at-HEAD capture 5 occurrences (t=201/403/605/807/1009ms) vs green 0 occurrences + healthyStreak 3/3 with exactly one path-pin; new home pin for the pending render; full desktop suite 664/664, tsc/eslint/prettier clean"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
   "current_release_candidate": "Packs: ja-JP 0.4.3 (published 2026-11-09) and ru-RU 0.4.5 (published 2026-11-20) — manifests and catalog/packs.json pins agree (re-measured 2026-11-20, state/evidence/DOC-CONTRACT-RECONCILE-001/audit-2026-11-20.md); the 0.4.4/0.4.2/0.4.1/0.4.0 releases stay live as immutable rollback targets. App: newest published artifact is still open-language-learning-platform-0.4.0-alpha.1 (2026-10-13, Linux pre-release); code identity is 0.4.3-alpha.1 and unpublished — next-artifact decision is owner action O-06. Nothing in the build consumes this field; it is documentation.",
-  "updated_at": "2026-11-23T02:12:41-07:00"
+  "updated_at": "2026-11-23T21:19:37-07:00"
 }
