@@ -3792,12 +3792,29 @@ tasks:
   - "SERVE-BANNER-001 (no infra stack on the first screen) and TODAY-FIRSTSCREEN-001 pill placement are untouched."
   - "Red and green captures plus the poll log and learner-inspection note are committed under state/evidence/HOME-FLASH-001/."
   required_for_desktop_1_0: false
+- id: SECONDARY-SURFACES-001
+  milestone: M11
+  priority: P1
+  title: "Secondary surfaces still read wireframe - dashed-border info boxes on Practice/Progress/My Words replaced with solid card surfaces, and the default, unstyled My Words form made a real form; measured red at HEAD by the secondary-surfaces capture script"
+  dependencies: []
+  read_first:
+  - state/notes/SECONDARY-SURFACES-001.md
+  - state/notes/UI-VERIFY-2026-11-23.md
+  - packages/ui/src/styles.css
+  - apps/desktop/src/words.tsx
+  - scripts/secondary-surfaces-capture.mjs
+  acceptance:
+  - "Capture script at CDP 390x844 mobile:true on the live serve REDS at HEAD (6/6 FAIL: dashed .empty and .progress-zero, UA-default narrow My Words inputs, 0.45-opacity disabled Add button) and goes green after - solid card treatments for every shared info box, full-width >= 44px inputs with a visible accent focus state, and a disabled Add button distinct from enabled."
+  - "Tap-target floor (>= 44px) stays green on all three surfaces; no MOBILE-UX-001, FEEL-MYWORDS-001, FEEL-SETTINGS-001, FEEL-PROGRESS-001 or RTL contract is regressed - the one pin that flips (the progress-zero dashed rule, the exact contract this card supersedes) is updated, not weakened."
+  - "Before (red) and after (green) captures plus a learner-inspection note are committed under state/evidence/SECONDARY-SURFACES-001/."
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
   required_flag: required_for_desktop_1_0
   optional_tasks:
   - HOME-FLASH-001
+  - SECONDARY-SURFACES-001
   - DRILL-HIERARCHY-001
   - COPY-POLISH-001
   - PHONE-NAV-WRAP-001

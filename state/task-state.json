@@ -3400,6 +3400,25 @@
         "state/evidence/HOME-FLASH-001/learner-inspection.md"
       ],
       "notes": "code in tree; packsPending gates the home from painting the pack-absent warning while the pack read is in flight (neutral render, HEAD scaffold preserved); red-at-HEAD capture 5 occurrences (t=201/403/605/807/1009ms) vs green 0 occurrences + healthyStreak 3/3 with exactly one path-pin; new home pin for the pending render; full desktop suite 664/664, tsc/eslint/prettier clean"
+    },
+    "SECONDARY-SURFACES-001": {
+      "status": "done",
+      "attempts": 1,
+      "at": "2026-11-23",
+      "updated": "2026-11-23",
+      "evidence": [
+        "state/notes/SECONDARY-SURFACES-001.md",
+        "state/evidence/SECONDARY-SURFACES-001/learner-inspection.md",
+        "state/evidence/SECONDARY-SURFACES-001/audit-red.json",
+        "state/evidence/SECONDARY-SURFACES-001/audit-green.json",
+        "state/evidence/SECONDARY-SURFACES-001/practice-home-red.png",
+        "state/evidence/SECONDARY-SURFACES-001/practice-home-green.png",
+        "state/evidence/SECONDARY-SURFACES-001/progress-red.png",
+        "state/evidence/SECONDARY-SURFACES-001/progress-green.png",
+        "state/evidence/SECONDARY-SURFACES-001/my-words-red.png",
+        "state/evidence/SECONDARY-SURFACES-001/my-words-green.png"
+      ],
+      "notes": "code (this commit); red contract 9841db99 committed 6 FAIL; green 7/7 at 390x844 live serve; tsc clean; 60/60 touched-contract vitest; vision-pass blocked in-session (server has no image input) — objective DOM/geometry inspection recorded in learner-inspection.md"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
