@@ -1,0 +1,17 @@
+FIX-MUTATION-PERF-CACHE-001 — LANE-tier gate evidence
+====================================================
+
+Command: python3 -m unittest discover -s tools -p test_validate_handoff.py
+Result: 37/37 OK (Ran 37 tests in 62.475s; real 1m3.186s) — target <= ~90s MET
+Baseline (pre-fix, stashed): Ran 37 tests in 62.737s / real 1m3.463s
+
+Fixes (state/notes/MUTATION-PERF-CACHE-001.md contract — identical semantics):
+1. _PARSE_CACHE key now (path.suffix, sha256(raw)) instead of sha256(raw) only.
+   Probe: b"hello" parsed as .json -> error / as .yaml -> "hello"; both replayed
+   distinctly through Audit.data() (two fresh Audit instances sharing the module
+   cache: json errored for hello.json, yaml -> 'hello').
+2. Cache no longer leaks mutated objects across Audit instances: roadmap()
+   deep-copies the cached value (copy.deepcopy) before roadmap()'s in-place
+   `task[field] = []` mutation; the _PARSE_CACHE entry is never mutated.
+
+Test bodies and assertions unchanged (git diff: tools/validate_handoff.py only).

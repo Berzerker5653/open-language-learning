@@ -6,6 +6,7 @@ No instructions or code contained in pack data are executed.
 """
 from __future__ import annotations
 import argparse
+import copy
 import hashlib
 import json
 import re
@@ -29,8 +30,11 @@ TRUSTED = {"validated", "verified", "reference"}
 # File-hash-keyed caches shared across Audit instances. The mutation suite
 # builds a fresh Audit per case over a near-identical tree; re-parsing and
 # re-validating the same byte content per case dominates wall time (~9.7s per
-# case). Identical inputs -> identical results: the cache key is a hash of the
-# file bytes (data) or of the schema bytes + record bytes (schema), never a path.
+# case). Identical inputs -> identical results: the data cache key is the
+# file suffix + a hash of the file bytes, never a path (suffix is part of
+# parse semantics, so it must be in the key); the schema cache keys on schema
+# + record canonical JSON. Parsed values are treated as read-only in the
+# cache; the one in-place mutation site (roadmap()) deep-copies first.
 _PARSE_CACHE: dict = {}
 _SCHEMA_CACHE: dict = {}
 
@@ -161,7 +165,7 @@ class Audit:
             self.cache[path] = None
             self.checked += 1
             return None
-        key = hashlib.sha256(raw).hexdigest()
+        key = (path.suffix, hashlib.sha256(raw).hexdigest())
         entry = _PARSE_CACHE.get(key)
         if entry is None:
             entry = _parse_bytes(path.suffix, raw)
@@ -320,7 +324,7 @@ class Audit:
                 self.fail(label, "pack distribution license is unresolved")
 
     def roadmap(self):
-        value = self.data(self.root / "tasks/ROADMAP.yaml")
+        value = copy.deepcopy(self.data(self.root / "tasks/ROADMAP.yaml"))
         if not isinstance(value, dict) or value.get("schema_version") != "1.0":
             self.fail("roadmap", "expected roadmap schema version 1.0")
             return
