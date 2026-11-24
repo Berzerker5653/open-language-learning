@@ -185,6 +185,29 @@ describe("home", () => {
     expect(html).not.toContain("Nothing is due right now");
   });
 
+  // HOME-FLASH-001: the pack read is in flight — Home renders the neutral
+  // state only. The pack-absent warning is honest on a settled no-pack
+  // state (pinned above), never on a read that is still running.
+  it("renders neutral while the pack read is in flight", () => {
+    const html = renderToStaticMarkup(
+      <Home
+        displayName="Hunter"
+        plan={plan}
+        activeBudget={5}
+        onBudget={() => {}}
+        packsPending
+        onChooseLanguage={() => {}}
+      />,
+    );
+    expect(html).not.toContain("No language is set");
+    expect(html).not.toContain("could not read which language pack");
+    expect(html).not.toContain("pack-posture");
+    expect(html).not.toContain("Choose a language");
+    // The plan scaffold renders identically to the settled state (no jump).
+    expect(html).toContain("What to practice now");
+    expect(html).toContain('aria-label="Time budget"');
+  });
+
   it("makes recall-meaning plan items runnable with the actual word", () => {
     const html = renderToStaticMarkup(
       <Home

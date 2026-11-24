@@ -1,0 +1,16 @@
+HOME-FLASH-001 lane gates (worker, HEAD 22a04a1c baseline -> fix in tree):
+- npx tsc --noEmit (apps/desktop): clean
+- npx vitest run (apps/desktop full): 664/664 passed (75 files) incl. the 36/36 home suite and the new HOME-FLASH-001 pin
+- npx eslint apps/desktop/src/App.tsx apps/desktop/src/home.tsx apps/desktop/src/home.test.tsx scripts/home-flash-capture.mjs: clean
+- npx prettier --check on all touched files: clean
+- scripts/home-flash-capture.mjs red-at-HEAD (dist built from the fix tree is NEVER used for red; red ran on the HEAD dist):
+    5 occurrences of the pack-absent label in the first 5s after resume
+    t=201ms  ['No language is set']
+    t=403ms  ['No language is set']
+    t=605ms  ['No language is set']
+    t=807ms  ['No language is set']
+    t=1009ms  ['No language is set']
+    healthy-home streak: 3
+- scripts/home-flash-capture.mjs green at the fixed tree: 0 occurrences; healthy-home streak 3/3, exactly one path-pin
+    green: True, healthy=3
+- no Rust/pack changes; serve bin = existing target/debug/lts-serve; dist rebuilt from the fix tree only for the green run

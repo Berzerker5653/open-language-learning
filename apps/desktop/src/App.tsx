@@ -382,6 +382,10 @@ export function App() {
   // Sweep finding 19: "no active pack" and "the pack read failed" are
   // different states; Home distinguishes them like `installedUnknown` does.
   const [packsUnknown, setPacksUnknown] = useState(false);
+  // HOME-FLASH-001: `true` while the profile-entry pack read is in flight.
+  // Home must render neutral in this window — a pack-absent warning is only
+  // honest on a SETTLED no-pack state, never on a read that is still running.
+  const [packsPending, setPacksPending] = useState(false);
   const [profileName, setProfileName] = useState("");
   const [profiles, setProfiles] = useState<ProfileSummary[]>([]);
   // UI-HYGIENE-001: archived profiles stay out of the chooser unless the
@@ -1429,18 +1433,24 @@ export function App() {
   async function refreshLanguages(pid?: string) {
     if (!inv) return;
     const active = pid ?? profileId;
-    const results = await Promise.all([
-      inv("installed_packs") as Promise<InstalledPack[]>,
-      inv("pack_claims") as Promise<PackClaims[]>,
-      active ? loadSessionPack(inv, active) : Promise.resolve(null),
-      inv("catalog_packs") as Promise<{ entries: CatalogEntry[]; status: string }>,
-    ]).catch((e) => {
+    setPacksPending(true);
+    let results;
+    try {
+      results = await Promise.all([
+        inv("installed_packs") as Promise<InstalledPack[]>,
+        inv("pack_claims") as Promise<PackClaims[]>,
+        active ? loadSessionPack(inv, active) : Promise.resolve(null),
+        inv("catalog_packs") as Promise<{ entries: CatalogEntry[]; status: string }>,
+      ]);
+    } catch (e) {
       // Sweep finding 19: a failed pack read leaves the active-pack state
       // UNKNOWN, not "none"; Home attributes the failure instead of
       // claiming the profile has no language.
       setPacksUnknown(true);
       throw e;
-    });
+    } finally {
+      setPacksPending(false);
+    }
     const [installed, claims, session, catalog] = results;
     setPacksUnknown(false);
     setInstalled(installed);
@@ -1958,6 +1968,9 @@ export function App() {
       } catch (e) {
         console.error("setup fill-in reads failed", e);
       }
+      // HOME-FLASH-001: the pack read is still in flight — Home renders the
+      // neutral state (no pack-absent warning) until refreshLanguages settles.
+      setPacksPending(true);
       void refreshLanguages(profileId).catch(() => {});
     }
     setStep("done");
@@ -1989,6 +2002,9 @@ export function App() {
     }
     setProfileId(p.id);
     setDisplayName(p.display_name);
+    // HOME-FLASH-001: the pack read is still in flight — Home renders the
+    // neutral state (no pack-absent warning) until refreshLanguages settles.
+    setPacksPending(true);
     // Owner 2026-10-12: opening your own profile must never depend on a
     // content read. The step flips here, so every read below only fills the
     // screens in — if one fails the learner is still inside the app, where
@@ -5186,8 +5202,9 @@ export function App() {
         <Home
           displayName={displayName}
           activePack={activePack}
-          noPack={activeIds.length === 0 && !packsUnknown}
+          noPack={activeIds.length === 0 && !packsUnknown && !packsPending}
           packsUnknown={packsUnknown}
+          packsPending={packsPending}
           onChooseLanguage={() => setRoute("settings")}
           updates={packUpdates}
           plan={plan}

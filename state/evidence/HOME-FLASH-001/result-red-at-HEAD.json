@@ -1,0 +1,192 @@
+{
+  "viewport": "390x844",
+  "tag": "red-at-HEAD",
+  "checks": [
+    {
+      "name": "load-flicker contract: zero pack-absent/pack-unread occurrences in the first 5s after resume",
+      "pass": false,
+      "measured": {
+        "occurrenceCount": 5,
+        "occurrences": [
+          {
+            "t": 201,
+            "occurrences": [
+              "No language is set"
+            ]
+          },
+          {
+            "t": 403,
+            "occurrences": [
+              "No language is set"
+            ]
+          },
+          {
+            "t": 605,
+            "occurrences": [
+              "No language is set"
+            ]
+          },
+          {
+            "t": 807,
+            "occurrences": [
+              "No language is set"
+            ]
+          },
+          {
+            "t": 1009,
+            "occurrences": [
+              "No language is set"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "home reached a stable pack-loaded state with exactly one pin before capture",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    }
+  ],
+  "failures": 1,
+  "error": null,
+  "pollLog": [
+    {
+      "t": 201,
+      "occurrences": [
+        "No language is set"
+      ],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nNo language is set for this profile yet, so there is nothing to practice from. Choose a language pack first. Choose a language"
+    },
+    {
+      "t": 403,
+      "occurrences": [
+        "No language is set"
+      ],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nNo language is set for this profile yet, so there is nothing to practice from. Choose a language pack first. Choose a language\n\nStart today's plan — 5 activities, about 5 minutes\n\nOne activi"
+    },
+    {
+      "t": 605,
+      "occurrences": [
+        "No language is set"
+      ],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nNo language is set for this profile yet, so there is nothing to practice from. Choose a language pack first. Choose a language\n\nWhere to begin\n\nFrom the pack you are learning, in its order —"
+    },
+    {
+      "t": 807,
+      "occurrences": [
+        "No language is set"
+      ],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nNo language is set for this profile yet, so there is nothing to practice from. Choose a language pack first. Choose a language\n\nWhere to begin\n\nFrom the pack you are learning, in its order —"
+    },
+    {
+      "t": 1009,
+      "occurrences": [
+        "No language is set"
+      ],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nNo language is set for this profile yet, so there is nothing to practice from. Choose a language pack first. Choose a language\n\nWhere to begin\n\nFrom the pack you are learning, in its order —"
+    },
+    {
+      "t": 1211,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 1412,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 1614,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 1816,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 2017,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 2218,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 2420,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 2622,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 2825,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 3027,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 3228,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 3429,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 3630,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 3832,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 4034,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 4236,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 4437,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 4638,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 4839,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    },
+    {
+      "t": 5041,
+      "occurrences": [],
+      "text": "Skip to main content\nOpen Language Learning Platform\nToday\nPractice\nMy Words\nProgress\nSettings\nHi Home Flash\n\nWhat to practice now\n\nRussian Reference Pack AI-GENERATED CONTENT · NOT HUMAN-REVIEWED\n\nWhere to begin\n\nFrom the pack you are learning, in its order — the plan below carries the buttons.\n\nMe"
+    }
+  ],
+  "profileId": "prof-249c8b47-698e-4bff-880a-3145248d79d6"
+}

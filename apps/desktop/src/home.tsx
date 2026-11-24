@@ -280,6 +280,10 @@ export interface HomeProps {
   /// does not know whether a pack is active. Home attributes the failure
   /// instead of claiming "no language is set" — an unknown is not a none.
   packsUnknown?: boolean;
+  /// HOME-FLASH-001: the active-pack read is in flight. Home renders the
+  /// neutral state — no pack-absent warning, no posture claim, no pack
+  /// notice — until that read settles into one of the three states below.
+  packsPending?: boolean;
   onChooseLanguage?(): void;
   /// PACK-UPDATE-UX-001: stale packs on this device. Empty means the engine and
   /// the catalogue agree on every version, and Home then says nothing about
@@ -360,7 +364,7 @@ export function Home(p: HomeProps) {
             </button>
           ) : null}
         </p>
-      ) : p.noPack ? (
+      ) : p.packsPending ? null : p.noPack ? (
         <p className="notice" role="status">
           No language is set for this profile yet, so there is nothing to practice from. Choose a
           language pack first.{" "}
