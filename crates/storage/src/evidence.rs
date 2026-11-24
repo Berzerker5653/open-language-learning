@@ -86,7 +86,7 @@ impl Store {
             .map_err(Error::from)
     }
 
-    /// PROGRESS-STATS-001 (visual-ui-audit U7): evidence events per UTC
+    /// PROGRESS-STATS-001 (market audit U7): evidence events per UTC
     /// calendar day since `since_rfc` (canonical RFC 3339 UTC), oldest
     /// first, for the 12-week activity calendar. Day keys are the leading
     /// `YYYY-MM-DD` of the canonical `occurred_at` the write path stores;

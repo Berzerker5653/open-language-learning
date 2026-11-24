@@ -1,4 +1,4 @@
-// PROGRESS-STATS-001 (visual-ui-audit U7/U14): the stats strip is an
+// PROGRESS-STATS-001 (market audit U7/U14): the stats strip is an
 // instrument the learner reads about their own memory — every figure local,
 // every abstention honest, every chart dependency-free SVG with the same
 // a11y semantics SessionChrome's progress row is tested for.

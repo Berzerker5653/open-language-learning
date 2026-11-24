@@ -578,7 +578,7 @@ fn switch_pack(profile_id: String, pack_id: String) -> Result<(), String> {
 struct ProfileInfo {
     id: String,
     display_name: String,
-    // UI-HYGIENE-001 (visual-ui-audit U13): the chooser renders one aligned
+    // UI-HYGIENE-001 (market audit U13): the chooser renders one aligned
     // card per real profile, so the listing carries the pack it studies,
     // that pack's entry band, the due count, and the last studied stamp.
     // A failed sub-read yields None (the card omits that line) — the
@@ -4924,7 +4924,7 @@ struct GoalDimensionView {
     /// own status.
     exemplar: Option<String>,
     best_state: &'static str,
-    /// PROGRESS-STATS-001 (visual-ui-audit U14): how far this modality has
+    /// PROGRESS-STATS-001 (market audit U14): how far this modality has
     /// walked toward the goal's gate, 0-100. The gate holds only when EVERY
     /// declared concept reaches the goal's required state, so the bar is the
     /// mean of per-concept ladder weights — one untouched concept always
@@ -5588,7 +5588,7 @@ async fn goal_map(profile_id: String) -> Result<Vec<GoalMapView>, String> {
 }
 
 // ---------------------------------------------------------------------------
-// PROGRESS-STATS-001 (visual-ui-audit U7/U14): the memory stats strip.
+// PROGRESS-STATS-001 (market audit U7/U14): the memory stats strip.
 // Everything below is this profile's OWN local scheduler and evidence data
 // (n=1): an instrument the learner reads about their own memory, never a
 // grade, certificate, or comparison to anyone else.
@@ -10216,7 +10216,7 @@ fn pack_sentence_text(data: &Path, pack_id: &str, content_id: &str) -> Option<St
     None
 }
 
-/// SESSION-CHROME-001 (visual-ui-audit U6): the interval the scheduler
+/// SESSION-CHROME-001 (market audit U6): the interval the scheduler
 /// WOULD give for each grade button on an open review card. `mine_grade`
 /// grades Again/Good only, so those are the only honest buttons to price,
 /// and the prediction comes from the same `FsrsSpike` the grade itself

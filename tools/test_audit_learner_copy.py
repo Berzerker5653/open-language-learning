@@ -81,7 +81,7 @@ class AuditTests(unittest.TestCase):
         self.assertEqual(self.scan({"panel.tsx": CLEAN}), [])
 
     def test_a_raw_content_token_in_learner_copy_is_a_finding(self):
-        # UI-HYGIENE-001 (visual-ui-audit U13): pack/lexicon tokens must
+        # UI-HYGIENE-001 (market audit U13): pack/lexicon tokens must
         # not render as copy, in JSX text or in a string literal.
         source = """
 export function ProgressPanel() {

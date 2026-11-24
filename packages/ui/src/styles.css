@@ -54,7 +54,7 @@
   --radius: 8px;
   --radius-sm: 6px;
   --shadow: 0 1px 2px rgb(36 31 24 / 0.05);
-  /* UI-HYGIENE-001 (visual-ui-audit U1): one content-width token shared
+  /* UI-HYGIENE-001 (market audit U1): one content-width token shared
      by the header bar, the page column, and the card/list containers
      inside it, so their left edges align at every breakpoint. Readable
      measure stays per-element (p at 70ch etc.). */
@@ -812,7 +812,7 @@ details.prose-note > p {
   background: var(--accent-soft);
 }
 
-/* UI-HYGIENE-001 (visual-ui-audit U2): the AI-content honesty line is a
+/* UI-HYGIENE-001 (market audit U2): the AI-content honesty line is a
    small monospace badge (NuanceDeck idiom), not greeting prose; the
    tooltip carries the full policy. */
 .badge--mono {
@@ -827,7 +827,7 @@ details.prose-note > p {
   cursor: help;
 }
 
-/* UI-HYGIENE-001 (visual-ui-audit U13): the profile chooser renders one
+/* UI-HYGIENE-001 (market audit U13): the profile chooser renders one
    aligned card per real profile — initials avatar, pack line, last
    studied, one-line state. Cards align on the shared content width. */
 .profile-grid {
@@ -1780,7 +1780,7 @@ th:last-child {
 }
 
 /* ------------------------------------------------ SESSION-CHROME-001 */
-/* In-session chrome (visual-ui-audit U3): a thin bar plus n-of-N and a
+/* In-session chrome (market audit U3): a thin bar plus n-of-N and a
    remaining-time estimate, mounted above every activity route while a
    session runs. Accent is reserved for progress semantics only. */
 .session-chrome {
@@ -1889,7 +1889,7 @@ th:last-child {
   color: var(--accent-ink);
 }
 
-/* PROGRESS-STATS-001 (visual-ui-audit U7/U14): progress instruments.
+/* PROGRESS-STATS-001 (market audit U7/U14): progress instruments.
    Dependency-free SVG; contrast comes from strokes and lightness steps,
    never from hue alone. */
 .dim-progress {

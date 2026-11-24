@@ -1,4 +1,4 @@
-// SESSION-CHROME-001 (visual-ui-audit U3/U6): the in-session chrome, the
+// SESSION-CHROME-001 (market audit U3/U6): the in-session chrome, the
 // end-of-session summary card, dues-as-minutes, the graded/formative badge,
 // and the FSRS next-interval preview on review grade buttons.
 import { describe, expect, it } from "vitest";

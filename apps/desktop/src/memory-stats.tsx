@@ -1,5 +1,5 @@
 /**
- * PROGRESS-STATS-001 (visual-ui-audit U7/U14): the memory stats strip that
+ * PROGRESS-STATS-001 (market audit U7/U14): the memory stats strip that
  * sits above the capability tree — due today, ~minutes, per-band retention,
  * and a 12-week activity calendar.
  *

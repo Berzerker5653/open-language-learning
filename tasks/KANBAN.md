@@ -35,6 +35,34 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | --- | --- | --- | --- |
 | session-sequence | desktop, engine | **CLOSED 2026-11-22** — the owner dogfood incident (level-0 profile, 4th activity = B2 "Claim" lesson). Run-120 shipped the goal-graph band locks on NEW seeding + due reviews (`2c6f328`, red-then-green `beginner_plan_never_serves_a_locked_units_content`). Takeover closed the remaining two routes measured on the owner live profile: (a) `weak_skills` plan route gated by the same lock set (rows withheld, never deleted); (b) **fail-CLOSED lexicon seeding** — `ru.lex.argue.kontrargument` is shipped in the RU lexicon but referenced by ZERO units (measured on installed 0.4.6; the "undeclared goal_id" lead was an id conflation with `ru.lex.soc.kontrargumentaciya`), so in packs that declare a goal map, lexicon entries no unit references are NEW-ineligible; plus defensive fail-CLOSED for units whose non-empty goal_id is absent from a non-empty goal map (empty-goal_id/empty-map fixture escapes kept). New test `lexicon_words_outside_the_goal_ladder_are_not_seeded`; poison test extended (weak-skill route now fed by evidence); K-70 kana test fixture swapped from orphan word さかな to claimed こんにちは (the takeover rule correctly withholds orphans — fixture now tests the contract on a taught word). Acceptance: rebuilt `lts-serve` read of the owner profile — zero above-on-ramp unit-banded plan activities (no argue/kontrargument ids), poisoned scheduler rows intact on disk. Investigation + decision: `state/evidence/SESSION-SEQUENCE-001/takeover-findings.md`; gates `takeover-gates.log`. Known limitation recorded: unclaimed SENTENCES and PHONOLOGY contrasts still seed (no unit references them; dominated by beginner-appropriate material) — orphan-content follow-up card proposed. | `SESSION-SEQUENCE-001` |
 
+## scope decision — 2026-11-23: G1 + G4 prioritized, G2 close-out is human/AI-verified, G5 rejected
+
+| card | epic | what | maps to |
+| --- | --- | --- | --- |
+| g1-conversation-loop | ux, desktop, speech | **G1 — guided conversation loop, structured around what is being taught (chat-ordered 2026-11-23, NOT yet coded).** Topic pulled from recent lessons / scenario runtime, NOT any-topic chat. Tap-to-speak (no VAD), capped short exchanges, transcript + observations AFTER the call (never mid-reply), cross-session memory of what was talked about. Never produces a score/mastery/accuracy claim (SPEECH-007 gate untouched); observations + "explain why" links, explicitly uncalibrated. Spike first (hours) → ADR → roadmap entry. Provider: local model by default; cloud opt-in with acknowledged privacy. | (new card; roadmap entry required before in_progress) |
+| g4-explain-button | ai, ux | **G4 — instant grammar explanation (chat-ordered 2026-11-23, NOT yet coded).** AI-001 explain control on ANY page where the app is teaching something (exercise cards, lessons, reader): explain in L1 at the moment of need, information only, never a grade or mastery evidence. Local model by default (users without local-model capability may opt into a cloud API with an acknowledged privacy notice of what AI models see — voice/transcript). Smallest first-step; lands before G1. | AI-001 |
+| g2-verification-closeout | qa, owner | **G2 close-out is human/AI verification, not agent self-certification.** ERR-SRS-LOOP-001 + FIX-ERR-SRS-LOOP-001-1/-2 are shipped (classified error ledger, per-form cards, recurrence → personalize_progression, offer UI); "done" requires AI-assisted checks or a human user of the app. No evidence claims of full completion. | ERR-SRS-LOOP-001 |
+
+Rejected: G5 (streaks / energy / hearts / recap rituals / leagues) — owner decision 2026-11-23. No engagement ritual beyond the bounded session.
+
+Deprioritized relative to G1/G4: G3 voice half (reading half shipped), G6 (ASR echo/near-miss rides with G1), G7 content (stays content-lane, not a feature item), G8 platform reach (owner-gated PLAT-001).
+
+
+## UI backlog — 2026-11-23 (from the 2026-11 market/visual audit + docs/ui-review-2026-11-23.md; NOT yet coded)
+
+The visual/UI audit's backlog (U1–U14) is distilled below. Shipped: U3+U6 (SESSION-CHROME-001), U7+U14 (PROGRESS-STATS-001), U5 (GRAMMAR-LABELS-001 word-card grammar line), U2/U13 (UI-HYGIENE-001 — queued, not done). NOT yet a card:
+
+| card | epic | what | maps to |
+| --- | --- | --- | --- |
+| ui-word-state-coloring | ux, desktop | U4: unseen=plain / learning=teal / confirmed=muted coloring inside reader text (LingQ/LangLeap standard). Pairs with READABILITY-GATE-001. | (new) |
+| ui-correction-in-artifact | ux, desktop | U9: dictation/speech feedback marks the wrong form INSIDE the sentence with the corrected form beside it (Praktika pattern), not a separate verdict line. ERR-SRS-LOOP-001 shipped the offer surface but not the in-artifact highlight. | (new) |
+| ui-designed-empty-states | ux, desktop | U10: designed empty states + light line-art glyphs (serif identity); the empty states are honest but bare. | (new) |
+| ui-accumulation-meters | ux, desktop | U11: Today header strip shows accumulation — My Words "forms confirmed" count, worlds "X of Y unlocked". | (new) |
+| ui-copy-hygiene-short-titles | ux, docs | U2 take-two: short task-card phrasing for goal/unit titles (full requirement sentences now render as titles). | UI-HYGIENE-001 (follow-on) |
+
+Also parked by owner 2026-11-18: U8 word-synced karaoke highlight (STORY-LISTEN-001, not resumed). U12 scenario scene view: do only after G1 exists.
+
+
 ## done — 2026-11-21 WEB-PROGRESS-001: browser-mode pack installs show real progress (install stages streamed over SSE)
 
 | card | epic | what | maps to |
@@ -101,7 +129,7 @@ Columns: `now` (start next) · `next` (queued) · `later` (backlog) ·
 | --- | --- | --- | --- |
 | ja-a2-fixes | pack, qa | **CLOSED 2026-11-20** — all 80 `changes-requested` rows from the JA-A2-002 A2 band review corrected in place (content ids untouched; 1:1 review-id→content-id manifest in `state/evidence/JA-A2-002-FIX-001/ledger-note.md`): form/reading/gloss/text fixes across 11 lexicon files + `sentences/entries.jsonl` (傑作=balance, 寡婦=cough, coinage clusters incl. omoide-no-machi→ふるさと, なりすます…). All 63 K-65-invalidated audio assets re-baked (`generate-pack-audio.py`, qwen3-tts/ono_anna; 3 runaway-output clips certified on individual re-rolls; all 63 manifest rows sha-verified vs disk). 62 stale `words.jsonl` timing rows removed (plain-playback fallback; refresh follow-up card). Review verdicts stay as historical record. Gates: langpack validate/lint/audit-*/test on ja-JP — all 0 errors 0 warnings. | `JA-A2-002-FIX-001` |
 
-## done — 2026-11-20 SESSION-CHROME-001: in-session chrome + SRS transparency (visual-ui-audit U3/U6)
+## done — 2026-11-20 SESSION-CHROME-001: in-session chrome + SRS transparency (market audit U3/U6)
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
@@ -132,7 +160,7 @@ Goal: the owner can actually use the app daily. One card at a time, top to botto
 | ~~voice-consistency~~ **DONE 2026-11-18** (0.4.4 published, asset sha-verified) | pack, qa | **Moved to `now` 2026-11-18** (top unblocked card; the guard slice landed — see the `now` row). Owner's one-narrator listen + 0.4.4 publication remain the close-out. | `VOICE-CONSISTENCY-001` |
 | grammar-labels | ux, pack | Interlinear labels: case+number under nouns, aspect+tense under verbs, stress everywhere; precomputed at pack build via pymorphy, golden-sentence tests, graceful degradation. | `GRAMMAR-LABELS-001` |
 | readability-gate | pack, qa | Authoring-time validator: ≤1 unknown lemma/sentence vs band lexicon; regeneration loop with negative hint; owner profile's known-lexicon from the confirm/mine ledger. | `READABILITY-GATE-001` |
-| ui-hygiene | ux, docs | Container-width token alignment, zero raw ids/jargon in learner surfaces, profile chooser cleanup (visual-ui-audit U1/U2/U13). | `UI-HYGIENE-001` |
+| ui-hygiene | ux, docs | Container-width token alignment, zero raw ids/jargon in learner surfaces, profile chooser cleanup (market audit U1/U2/U13). | `UI-HYGIENE-001` |
 | story-listen | ux, pack | After voice-consistency: one explicit listen control per story, continuous one-narrator audio, back to paragraph reader on exit. | `STORY-LISTEN-001` |
 | ~~progress-stats~~ **DONE 2026-11-21** (code `cd70e5c`, ledger `a444cc2` — see done row above) | ux | After session-chrome: per-goal modality progress bars, human labels for references, dependency-free SVG stats strip (due today, ~minutes, retention, 12-wk calendar). | `PROGRESS-STATS-001` |
 

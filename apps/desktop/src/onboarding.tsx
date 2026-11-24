@@ -84,7 +84,7 @@ export interface SpeechComponent {
 export interface ProfileSummary {
   id: string;
   display_name: string;
-  /// UI-HYGIENE-001 (visual-ui-audit U13): the chooser renders aligned
+  /// UI-HYGIENE-001 (market audit U13): the chooser renders aligned
   /// cards, so the listing carries the pack studied, that pack's entry
   /// band, the due count and the last studied stamp. Any of them can be
   /// null when the engine could not read it — the card omits that line

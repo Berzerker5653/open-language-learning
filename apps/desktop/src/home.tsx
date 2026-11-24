@@ -173,7 +173,7 @@ export const RUNNABLE_MODALITIES: Record<string, string> = {
 };
 
 /**
- * UI-HYGIENE-001 (visual-ui-audit U2): engine dimension names are
+ * UI-HYGIENE-001 (market audit U2): engine dimension names are
  * implementation vocabulary; every learner-facing surface shows a human
  * label. An unrecognised dimension is still readable — the kebab is
  * spaced out rather than shown as a token, so a pack can never put raw

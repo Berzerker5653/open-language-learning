@@ -1,5 +1,5 @@
 /**
- * SESSION-CHROME-001 (visual-ui-audit U3): the thin in-session chrome that
+ * SESSION-CHROME-001 (market audit U3): the thin in-session chrome that
  * rides every activity route while a bounded session is running — a slim
  * progress bar, an "n of N" step count, and a remaining-time estimate.
  *

@@ -25,7 +25,7 @@
 //! 8. `word_lookups` — automatic vocabulary builder ledger
 //!    (VOCAB-BUILDER-001).
 //! 9. `profiles.hidden` — archived profiles stay on disk but leave the
-//!    chooser (UI-HYGIENE-001, visual-ui-audit U13).
+//!    chooser (UI-HYGIENE-001, market audit U13).
 //! 10. `encounter_events` — completed encounter records
 //!     (ENCOUNTER-BEFORE-TEST-001).
 //! 11. `capstone_attempts` — section capstone review attempts
@@ -289,7 +289,7 @@ ALTER TABLE mined_items ADD COLUMN context_sentence_id TEXT;
     Migration {
         version: 9,
         sql: "
--- UI-HYGIENE-001 (visual-ui-audit U13): archived profiles. A hidden
+-- UI-HYGIENE-001 (market audit U13): archived profiles. A hidden
 -- profile keeps every row it owns (evidence, scheduler state, exports)
 -- but leaves the learner-facing chooser: automated test runs and old
 -- experiments must never read as real people. 0/false is the default,
