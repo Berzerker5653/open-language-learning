@@ -167,10 +167,12 @@ describe("FEEL-PROGRESS-001 honest zero-state for fresh learners", () => {
     expect(html.toLowerCase()).not.toMatch(/streak|points|score|day [0-9]/);
   });
 
-  it("the card is a dashed design, not a stray paragraph, and it fades up on --dur", () => {
+  it("the card is a solid designed card, not a stray paragraph, and it fades up on --dur", () => {
     const body = ruleBody(".progress-zero");
-    expect(body).toContain("border: 2px dashed var(--line)");
+    expect(body).toContain("border: 1px solid var(--line)");
+    expect(body).not.toContain("dashed");
     expect(body).toContain("animation: fade-up var(--dur) var(--ease-out)");
+    expect(body).toContain("box-shadow: var(--shadow)");
     expect(ruleBody(".progress-zero-ring")).toContain("border-radius: 50%");
   });
 

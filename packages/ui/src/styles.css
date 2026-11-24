@@ -410,9 +410,9 @@ main {
 }
 
 .btn:disabled {
-  opacity: 0.45;
-  color: var(--ink-soft);
-  border-color: var(--line);
+  opacity: 1;
+  color: var(--ink-faint);
+  border-color: var(--line-strong);
   background: var(--surface-sunk);
   cursor: not-allowed;
 }
@@ -480,6 +480,14 @@ main {
 }
 
 .field > label {
+  margin-top: 0.85rem;
+}
+
+.field > label:first-of-type {
+  margin-top: 0;
+}
+
+.field > label {
   display: block;
   font-weight: 600;
   font-size: 0.9375rem;
@@ -499,6 +507,8 @@ input[type="text"] {
 
 input[type="text"]:focus-visible {
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  outline-offset: 0;
 }
 
 /* FEEL-SETTINGS-001 (audit §6, the biggest visual-consistency hole): the
@@ -721,12 +731,13 @@ details.prose-note > p {
 }
 
 .empty {
-  border: 1px dashed var(--line-strong);
+  border: 1px solid var(--line-strong);
   border-radius: var(--radius);
   background: var(--surface);
   color: var(--ink-soft);
   padding: 1rem 1.25rem;
   margin: 1rem 0;
+  box-shadow: var(--shadow);
 }
 
 /* FEEL-ONBOARD-001: the first-run empty state gets calm visual warmth —
@@ -1990,12 +2001,14 @@ th:last-child {
   }
 }
 
-/* FEEL-PROGRESS-001: the honest zero-state — dashed card, empty ring,
+/* FEEL-PROGRESS-001: the honest zero-state — solid card, empty ring,
    copy that points at Today. Fades up on --dur; only ever rendered when
    the engine's lifetime facts say nothing has happened yet. */
 .progress-zero {
-  border: 2px dashed var(--line);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
   padding: 1.5rem 1.25rem;
   margin-block: 1rem;
   text-align: center;

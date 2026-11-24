@@ -272,6 +272,7 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
         <label htmlFor="mine-surface">Word or phrase</label>
         <input
           id="mine-surface"
+          type="text"
           value={p.draft.surface}
           onKeyDown={kanaSurface.onKeyDown}
           onChange={(e) => {
@@ -283,6 +284,7 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
         <label htmlFor="mine-reading">Reading (optional)</label>
         <input
           id="mine-reading"
+          type="text"
           value={p.draft.reading}
           onKeyDown={kanaReading.onKeyDown}
           onChange={(e) => {
@@ -294,12 +296,14 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
         <label htmlFor="mine-gloss">Meaning (optional)</label>
         <input
           id="mine-gloss"
+          type="text"
           value={p.draft.gloss}
           onChange={(e) => p.onDraftChange("gloss", e.target.value)}
         />
         <label htmlFor="mine-source">Where did you meet it? (citation)</label>
         <input
           id="mine-source"
+          type="text"
           value={p.draft.source}
           onChange={(e) => p.onDraftChange("source", e.target.value)}
         />
