@@ -68,6 +68,17 @@ Also parked by owner 2026-11-18: U8 word-synced karaoke highlight (STORY-LISTEN-
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
 | mutation-perf | tooling, tests | **MUTATION-PERF-001** — make the file-mutation verifier fast: the 37-case suite `tools/test_validate_handoff.py` re-copies the whole repo per case (~10.5s/case, ~371s full-suite wall time on this machine at 2026-11-23). Baseline-copy-once + hardlink overlay per case → target at/below ~90s. 37 cases keep their original assertions (diff to test bodies must be empty); no validator change; 44-vs-37 historical doc discrepancy recorded, not rewritten. | `MUTATION-PERF-001` |
+## done — 2026-11-24 FIX-HOME-POSTURE-PENDING-001: stale activePack posture badge gated on settle (REVIEW-HOME-FLASH-001 SPEC FAIL)
+
+| card | epic | what | maps to |
+| --- | --- | --- | --- |
+| home-posture-pending | desktop, ux | **CLOSED 2026-11-24** — code commit + evidence: `home.tsx` renders the pack-posture badge only once the pack read has settled (`activePack && !packsPending`). The REVIEW-HOME-FLASH-001 spec verdict named the defect (the badge rendered from stale `activeIds`/`activeClaims` across the profile-open resume, which sets `packsPending` without clearing those). The HOME-FLASH-001 neutral-render pin was extended to pass a stale `activePack` with `packsPending` and assert the badge + name never render. Full desktop suite 665/665 (was 664 with 1 pre-existing red, separately closed by FIX-BUTTON-AFFORDANCE-PINS-001) + tsc exit 0. `state/notes/FIX-HOME-POSTURE-PENDING-001.md` | `FIX-HOME-POSTURE-PENDING-001` |
+
+## done — 2026-11-24 FIX-BUTTON-AFFORDANCE-PINS-001: button-affordance pin tracks the shipped disabled-button contract
+
+| card | epic | what | maps to |
+| --- | --- | --- | --- |
+| btn-affordance-pins | desktop, tests | **CLOSED 2026-11-24** — re-pinned the `.btn:disabled` affordance pin (`button-affordance.test.ts`) to the design deliberately shipped in 07600536 (SECONDARY-SURFACES-001): opacity 1 + `ink-faint` + `line-strong` + sunk fill + not-allowed cursor, replacing the retired 2026-10-23 0.45-opacity / `ink-soft` / `line` contract that the suite had been red against on main (1 of 665 at f293ef87). Inventory, hover and background pins untouched. `state/notes/FIX-BUTTON-AFFORDANCE-PINS-001.md` | `FIX-BUTTON-AFFORDANCE-PINS-001` |
 
 
 ## done — 2026-11-21 WEB-PROGRESS-001: browser-mode pack installs show real progress (install stages streamed over SSE)

@@ -3792,6 +3792,34 @@ tasks:
   - "SERVE-BANNER-001 (no infra stack on the first screen) and TODAY-FIRSTSCREEN-001 pill placement are untouched."
   - "Red and green captures plus the poll log and learner-inspection note are committed under state/evidence/HOME-FLASH-001/."
   required_for_desktop_1_0: false
+- id: FIX-HOME-POSTURE-PENDING-001
+  milestone: M11
+  priority: P1
+  title: "REVIEW-HOME-FLASH-001 FIX - stale activePack posture badge while the pack read is in flight (home.tsx gates posture on settle)"
+  dependencies: [HOME-FLASH-001]
+  read_first:
+  - state/notes/FIX-HOME-POSTURE-PENDING-001.md
+  - state/evidence/REVIEW-HOME-FLASH-001/spec-verdict.md
+  - apps/desktop/src/home.tsx
+  - apps/desktop/src/home.test.tsx
+  acceptance:
+  - "While packsPending is true, Home renders no pack-posture badge and no activePack name/posture - a stale activePack (e.g. from the previous profile's resume) cannot render a pack-state claim while the read is in flight."
+  - "The HOME-FLASH-001 neutral-render pin is extended to pass a stale activePack with packsPending and assert the badge and name never render; no other assertion is weakened. Settled posture rendering is unchanged."
+  - "Full desktop suite stays green on main (vitest + tsc). No test deleted; the affordance-pin re-pin lives in FIX-BUTTON-AFFORDANCE-PINS-001."
+  required_for_desktop_1_0: false
+- id: FIX-BUTTON-AFFORDANCE-PINS-001
+  milestone: M11
+  priority: P2
+  title: "button-affordance pin tracks the shipped disabled-button contract (re-pin to SECONDARY-SURFACES-001's design)"
+  dependencies: [SECONDARY-SURFACES-001]
+  read_first:
+  - state/notes/FIX-BUTTON-AFFORDANCE-PINS-001.md
+  - apps/desktop/src/button-affordance.test.ts
+  - packages/ui/src/styles.css
+  acceptance:
+  - "The disabled-state pin enforces the contract deliberately shipped in 07600536 (opacity 1, ink-faint text, line-strong border, sunk fill, not-allowed cursor) - it no longer asserts the retired 2026-10-23 contract (0.45 opacity, ink-soft, line)."
+  - "The inventory pin and hover/background pins are unchanged. No assertion weakened beyond the superseded contract; full desktop suite green."
+  required_for_desktop_1_0: false
 - id: SECONDARY-SURFACES-001
   milestone: M11
   priority: P1
@@ -3828,6 +3856,8 @@ execution_scope:
   optional_tasks:
   - MUTATION-PERF-001
   - HOME-FLASH-001
+  - FIX-HOME-POSTURE-PENDING-001
+  - FIX-BUTTON-AFFORDANCE-PINS-001
   - SECONDARY-SURFACES-001
   - DRILL-HIERARCHY-001
   - COPY-POLISH-001
