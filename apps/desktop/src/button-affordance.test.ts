@@ -42,13 +42,18 @@ describe("button affordance contract", () => {
     const rest = ruleBody(".btn");
     const disabled = ruleBody(".btn:disabled");
     expect(disabled).toContain("cursor: not-allowed");
-    expect(disabled).toMatch(/opacity:\s*0?\.\d+/);
+    // SECONDARY-SURFACES-001 (07600536) re-pinned the affordance contract:
+    // the disabled control is distinguished by color/border/background + the
+    // not-allowed cursor, not by a washed-out opacity. Pin the SHIPPED
+    // contract so the test enforces the design, not the retired 0.45-opacity
+    // washout.
+    expect(disabled).toContain("opacity: 1");
     // background must visibly differ from the enabled surface
     expect(disabled).toContain("background: var(--surface-sunk)");
     expect(rest).toContain("background: var(--surface)");
     // and the distinction is not color-blind-only: text and border change too
-    expect(disabled).toContain("color: var(--ink-soft)");
-    expect(disabled).toContain("border-color: var(--line)");
+    expect(disabled).toContain("color: var(--ink-faint)");
+    expect(disabled).toContain("border-color: var(--line-strong)");
   });
 
   it("primary variant hover still wins over the base hover", () => {

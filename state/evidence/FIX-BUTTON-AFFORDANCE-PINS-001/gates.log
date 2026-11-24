@@ -1,0 +1,19 @@
+FIX-BUTTON-AFFORDANCE-PINS-001 — gates
+Date: 2026-11-24 (default lane, /home/hunter/game-dev/LTS, branch main)
+Defect (pre-existing, not introduced by this card): the disabled-.btn
+affordance pin (button-affordance.test.ts) still asserted the retired
+2026-10-23 contract (opacity 0.45, ink-soft, line) — main was red
+663/664 at f293ef87 (1 red, button-affordance: disabled .btn reads as
+disabled).
+
+Fix: re-pinned the three disabled-state assertions to the design
+deliberately shipped in 07600536 (SECONDARY-SURFACES-001, 2026-11-23):
+opacity 1, color ink-faint, border-color line-strong, background sunk,
+cursor not-allowed. Comment documents the superseded contract.
+Inventory pin (bare-btn call sites), hover pin, background-difference
+pin: unchanged.
+
+Gates:
+- npx vitest run — 665/665 (was 664/665 with the 1 red pre-existing failure)
+- No assertion weakened beyond the exact contract the superseding commit
+  changed; inventory/hover pins unchanged.
