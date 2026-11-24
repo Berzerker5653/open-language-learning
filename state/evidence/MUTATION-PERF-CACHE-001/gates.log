@@ -1,0 +1,26 @@
+MUTATION-PERF-CACHE-001 — gates log
+Date: 2026-11-24
+Task: file-hash cache for validator data()/schema validation in tools/validate_handoff.py
+Contract: identical semantics across Audit instances; 37 cases + assertions unchanged
+
+Before (baseline, 2026-11-24, same machine):
+  python3 -m unittest discover -s tools -p test_validate_handoff.py
+  Ran 37 tests in 362.820s — OK
+
+Change (tools/validate_handoff.py):
+  - Module-level _PARSE_CACHE keyed by sha256 of data-file bytes (value or error msg)
+  - Module-level _SCHEMA_CACHE keyed by (schema name, sha256 of canonical schema JSON, sha256 of canonical record JSON)
+  - data(): still reads the file (per-case overlay sees its own mutated content; content hash differs on mutation -> miss -> re-parse); identical content -> hit -> same value/error re-emitted per instance
+  - schema(): cache hit replays identical failure messages; schema-missing branch never cached; schema identity fingerprinted so a mutated/deleted schema file forces a miss
+  - read_data kept as wrapper over the shared _parse_bytes
+  - Instance-level per-Audit cache retained as shortcut; self.checked unchanged
+  - NO changes to test bodies, 37 cases, or assertions
+
+After (this run, same machine, single process):
+  python3 -m unittest discover -s tools -p test_validate_handoff.py
+  Ran 37 tests in 62.242s — OK  (gain 363.0s -> 62.5s, ~5.8x; target <= ~90s MET)
+
+Semantics verification:
+  - Mutation suite green (37/37): every case still fails with its original error phrase; baseline still asserts errors == [] and the scope warning.
+  - Cache keying by content hash means per-case overlays with mutated files re-parse (miss -> correct errors).
+  - Audited files unchanged across cases are parsed/validated once per process.

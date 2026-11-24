@@ -6,6 +6,7 @@ No instructions or code contained in pack data are executed.
 """
 from __future__ import annotations
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -24,6 +25,41 @@ ROOT = Path(__file__).resolve().parents[1]
 # schema-validated; the cap guards against runaway/accidental data files.
 MAX_DATA_BYTES = 8_000_000
 TRUSTED = {"validated", "verified", "reference"}
+
+# File-hash-keyed caches shared across Audit instances. The mutation suite
+# builds a fresh Audit per case over a near-identical tree; re-parsing and
+# re-validating the same byte content per case dominates wall time (~9.7s per
+# case). Identical inputs -> identical results: the cache key is a hash of the
+# file bytes (data) or of the schema bytes + record bytes (schema), never a path.
+_PARSE_CACHE: dict = {}
+_SCHEMA_CACHE: dict = {}
+
+
+def _record_key(value):
+    try:
+        return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")).hexdigest()
+    except Exception:
+        return hashlib.sha256(repr(value).encode("utf-8", "replace")).hexdigest()
+
+
+def _parse_bytes(suffix, raw):
+    """Parse one file's bytes; returns (value, error_message). Same semantics
+    as read_data(), keyed on content rather than path."""
+    if len(raw) > MAX_DATA_BYTES:
+        return None, f"data file exceeds {MAX_DATA_BYTES} bytes"
+    try:
+        value = raw.decode("utf-8")
+        if suffix == ".json":
+            parsed = json.loads(value, object_pairs_hook=strict_json_pairs, parse_constant=reject_constant)
+        elif suffix == ".jsonl":
+            parsed = [json.loads(line, object_pairs_hook=strict_json_pairs, parse_constant=reject_constant)
+                      for line in value.splitlines() if line.strip()]
+        else:
+            parsed = yaml.load(value, Loader=StrictLoader)
+        json.dumps(parsed, allow_nan=False)
+        return parsed, None
+    except (ValueError, TypeError, RecursionError, yaml.YAMLError) as exc:
+        return None, str(exc)
 
 
 class DuplicateKeyError(ValueError):
@@ -66,18 +102,11 @@ def reject_constant(value):
 
 
 def read_data(path):
-    if path.stat().st_size > MAX_DATA_BYTES:
-        raise ValueError(f"data file exceeds {MAX_DATA_BYTES} bytes")
-    value = path.read_text(encoding="utf-8")
-    if path.suffix == ".json":
-        parsed = json.loads(value, object_pairs_hook=strict_json_pairs, parse_constant=reject_constant)
-    elif path.suffix == ".jsonl":
-        parsed = [json.loads(line, object_pairs_hook=strict_json_pairs, parse_constant=reject_constant)
-                  for line in value.splitlines() if line.strip()]
-    else:
-        parsed = yaml.load(value, Loader=StrictLoader)
-    json.dumps(parsed, allow_nan=False)  # reject dates, bytes, NaN and cyclic aliases
-    return parsed
+    raw = path.read_bytes()
+    value, error = _parse_bytes(path.suffix, raw)
+    if error is not None:
+        raise ValueError(error)
+    return value
 
 
 def semver_tuple(value):
@@ -126,9 +155,20 @@ class Audit:
             return self.cache[path]
         label = str(path.relative_to(self.root))
         try:
-            value = read_data(path)
-        except (OSError, ValueError, TypeError, RecursionError, yaml.YAMLError) as exc:
+            raw = path.read_bytes()
+        except OSError as exc:
             self.fail(label, str(exc))
+            self.cache[path] = None
+            self.checked += 1
+            return None
+        key = hashlib.sha256(raw).hexdigest()
+        entry = _PARSE_CACHE.get(key)
+        if entry is None:
+            entry = _parse_bytes(path.suffix, raw)
+            _PARSE_CACHE[key] = entry
+        value, error = entry
+        if error is not None:
+            self.fail(label, error)
             value = None
         self.cache[path] = value
         self.checked += 1
@@ -141,10 +181,16 @@ class Audit:
         if schema is None:
             self.fail(label, f"missing usable schema {name}")
             return False
-        errors = sorted(Draft202012Validator(schema, registry=self.registry, format_checker=FormatChecker()).iter_errors(value), key=lambda e: str(list(e.path)))
-        for error in errors:
-            self.fail(label, f"{'/'.join(map(str,error.path)) or '<root>'}: {error.message}")
-        return not errors
+        schema_key = hashlib.sha256(json.dumps(schema, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")).hexdigest()
+        key = (name, schema_key, _record_key(value))
+        msgs = _SCHEMA_CACHE.get(key)
+        if msgs is None:
+            errors = sorted(Draft202012Validator(schema, registry=self.registry, format_checker=FormatChecker()).iter_errors(value), key=lambda e: str(list(e.path)))
+            msgs = [f"{'/'.join(map(str,error.path)) or '<root>'}: {error.message}" for error in errors]
+            _SCHEMA_CACHE[key] = msgs
+        for msg in msgs:
+            self.fail(label, msg)
+        return not msgs
 
     def records(self, value, label):
         if not isinstance(value, list) or any(not isinstance(v, dict) for v in value):
