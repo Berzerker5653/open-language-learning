@@ -3808,11 +3808,25 @@ tasks:
   - "Tap-target floor (>= 44px) stays green on all three surfaces; no MOBILE-UX-001, FEEL-MYWORDS-001, FEEL-SETTINGS-001, FEEL-PROGRESS-001 or RTL contract is regressed - the one pin that flips (the progress-zero dashed rule, the exact contract this card supersedes) is updated, not weakened."
   - "Before (red) and after (green) captures plus a learner-inspection note are committed under state/evidence/SECONDARY-SURFACES-001/."
   required_for_desktop_1_0: false
+- id: MUTATION-PERF-001
+  milestone: M8
+  priority: P2
+  title: "File-mutation verifier: stop re-copying the repo per case - 37-case suite is ~371s today (10.5s per case), target at or below ~90s"
+  dependencies: []
+  read_first:
+  - tools/test_validate_handoff.py
+  - state/notes/MUTATION-PERF-001.md
+  acceptance:
+  - "Build the baseline copy once per test run instead of once per case, then overlay it per case (hardlink copy), so every case still starts from a byte-pristine tree and the 37 cases keep their original assertions - the diff to test bodies must be empty"
+  - "Full suite stays green before commit and suite wall time is recorded in state/evidence/MUTATION-PERF-001/gates.log (before: ~371s on this machine at 2026-11-23; after: measured), with the 44-vs-37 historical doc discrepancy recorded but not rewritten"
+  - "No change to tools/validate_handoff.py, no weakened assertion anywhere - gate integrity"
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
   required_flag: required_for_desktop_1_0
   optional_tasks:
+  - MUTATION-PERF-001
   - HOME-FLASH-001
   - SECONDARY-SURFACES-001
   - DRILL-HIERARCHY-001

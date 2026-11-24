@@ -3419,6 +3419,12 @@
         "state/evidence/SECONDARY-SURFACES-001/my-words-green.png"
       ],
       "notes": "code (this commit); red contract 9841db99 committed 6 FAIL; green 7/7 at 390x844 live serve; tsc clean; 60/60 touched-contract vitest; vision-pass blocked in-session (server has no image input) — objective DOM/geometry inspection recorded in learner-inspection.md"
+    },
+    "MUTATION-PERF-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-23",
+      "notes": "Gate/tooling card - file-mutation verifier speedup. tools/test_validate_handoff.py setUp re-copies the whole repo per case (~10.5s/case, ~371s full suite at 2026-11-23 on this machine). Contract + acceptance in state/notes/MUTATION-PERF-001.md; card in tasks/ROADMAP.yaml and tasks/KANBAN.md; board card lts-MUTATION-PERF-001."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

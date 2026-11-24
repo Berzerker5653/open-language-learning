@@ -63,6 +63,13 @@ The visual/UI audit's backlog (U1–U14) is distilled below. Shipped: U3+U6 (SES
 Also parked by owner 2026-11-18: U8 word-synced karaoke highlight (STORY-LISTEN-001, not resumed). U12 scenario scene view: do only after G1 exists.
 
 
+## tooling backlog — 2026-11-23 (gate/verifier improvements; NOT yet coded)
+
+| card | epic | what | maps to |
+| --- | --- | --- | --- |
+| mutation-perf | tooling, tests | **MUTATION-PERF-001** — make the file-mutation verifier fast: the 37-case suite `tools/test_validate_handoff.py` re-copies the whole repo per case (~10.5s/case, ~371s full-suite wall time on this machine at 2026-11-23). Baseline-copy-once + hardlink overlay per case → target at/below ~90s. 37 cases keep their original assertions (diff to test bodies must be empty); no validator change; 44-vs-37 historical doc discrepancy recorded, not rewritten. | `MUTATION-PERF-001` |
+
+
 ## done — 2026-11-21 WEB-PROGRESS-001: browser-mode pack installs show real progress (install stages streamed over SSE)
 
 | card | epic | what | maps to |
