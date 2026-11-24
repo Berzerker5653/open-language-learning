@@ -3756,12 +3756,31 @@ tasks:
   - "FEEL-DRILL state semantics stay intact - the pinned reveal rules and their post-disabled re-declarations are untouched, the existing drill and FEEL vitest gates and the drill-feel live capture stay green, and new vitest pins lock the hierarchy rules and cascade order."
   - "Before (red) and after (green) screenshots plus a learner inspection of the finished whole are committed under state/evidence/DRILL-HIERARCHY-001/."
   required_for_desktop_1_0: false
+- id: COPY-POLISH-001
+  milestone: M11
+  priority: P1
+  title: "Learn-copy bugs from the 2026-11-23 phone audit - first-run glue, sentence-cased labels, posture label+value rows, gentle-facts clause wrapping, quiet kanji stat on a no-kanji pack"
+  dependencies: [TODAY-FIRSTSCREEN-001]
+  read_first:
+  - state/notes/UI-VERIFY-2026-11-23.md
+  - state/notes/COPY-POLISH-001.md
+  - apps/desktop/src/home.tsx
+  - apps/desktop/src/language.tsx
+  - packages/ui/src/styles.css
+  - scripts/copy-polish-capture.mjs
+  acceptance:
+  - "Capture script at CDP 390x844 mobile:true on the live serve REDS at HEAD (6/6 FAIL) and goes green after - first-run rows never glue a Latin label to a Cyrillic word, home plan prompt and active-pack badge sentence-cased, Settings review-posture rows are label+value never run-on prose, gentle-facts clauses each hold one line, and a known-zero kanji count never renders on a no-kanji pack."
+  - "A known-zero kanji count hides the row; an unknown count still renders - a failed probe never silently deletes a stat."
+  - "The language-switch journey and home/language vitest contracts stay green unedited; new pins lock the corrected strings, the join dot, the posture label+value layout, the clause spans and the zero-hide/unknown-show rule."
+  - "Before (red) and after (green) captures plus a copy-changes table old->new are committed under state/evidence/COPY-POLISH-001/."
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
   required_flag: required_for_desktop_1_0
   optional_tasks:
   - DRILL-HIERARCHY-001
+  - COPY-POLISH-001
   - PHONE-NAV-WRAP-001
   - PATH-CONNECT-PILL-001
   - BAKEOFF-LIVECAPTURE-001

@@ -3365,6 +3365,25 @@
         "state/evidence/DRILL-HIERARCHY-001/learner-inspection.md"
       ],
       "notes": "code 00391f60 (red evidence c5fa07c1, green evidence 35f4eea1); tiles stack 56px full-grid with 2px borders, session exit demotes to 13px soft-ink ghosts under a hairline divider keeping the 44px floor, Play stretches to the 16..374 grid; capture red 6 FAIL vs green 7/7 at final bytes; drill-feel live regression 10/10 on the new tiles; 662 desktop vitest green unedited"
+    },
+    "COPY-POLISH-001": {
+      "status": "done",
+      "attempts": 2,
+      "at": "2026-11-23",
+      "updated": "2026-11-23",
+      "evidence": [
+        "state/notes/COPY-POLISH-001.md",
+        "state/evidence/COPY-POLISH-001/gates.log",
+        "state/evidence/COPY-POLISH-001/capture-red.log",
+        "state/evidence/COPY-POLISH-001/capture-green.log",
+        "state/evidence/COPY-POLISH-001/audit-red.json",
+        "state/evidence/COPY-POLISH-001/audit-green.json",
+        "state/evidence/COPY-POLISH-001/copy-changes.md",
+        "state/evidence/COPY-POLISH-001/home-green.png",
+        "state/evidence/COPY-POLISH-001/progress-green.png",
+        "state/evidence/COPY-POLISH-001/settings-green.png"
+      ],
+      "notes": "code in tree; first-run join dot, sentence-cased prompt/badge, posture label+value rows, gentle-facts clause spans, known-zero kanji row hidden (unknown stays visible); capture red 6/6 FAIL at HEAD vs green 6/6 at final bytes; 663 desktop vitest green incl. new pins; live re-run green 6/6"
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
