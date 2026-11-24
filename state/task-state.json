@@ -3445,6 +3445,15 @@
         "state/notes/FIX-BUTTON-AFFORDANCE-PINS-001.md"
       ],
       "notes": "Re-pinned the .btn:disabled affordance pin to the shipped contract (07600536: opacity 1, ink-faint, line-strong, sunk fill, not-allowed); the 2026-10-23 0.45-opacity contract was retired by that commit and the pin was never re-pinned (main red 663/664 at f293ef87). Full suite now 665/665. Inventory and hover/background pins untouched. Separate commit from the product-side fix."
+    },
+    "MUTATION-PERF-CACHE-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-24",
+      "evidence": [
+        "state/notes/MUTATION-PERF-CACHE-001.md"
+      ],
+      "notes": "RE-SCOPED card (successor to MUTATION-PERF-001, blocked). Validator-side file-hash cache in tools/validate_handoff.py - identical semantics; full suite measured toward <= ~90s; test bodies/assertions unchanged; 44-vs-37 discrepancy stays recorded. Gate itself changes and needs review before merge."
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

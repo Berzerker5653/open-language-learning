@@ -3836,6 +3836,20 @@ tasks:
   - "Tap-target floor (>= 44px) stays green on all three surfaces; no MOBILE-UX-001, FEEL-MYWORDS-001, FEEL-SETTINGS-001, FEEL-PROGRESS-001 or RTL contract is regressed - the one pin that flips (the progress-zero dashed rule, the exact contract this card supersedes) is updated, not weakened."
   - "Before (red) and after (green) captures plus a learner-inspection note are committed under state/evidence/SECONDARY-SURFACES-001/."
   required_for_desktop_1_0: false
+- id: MUTATION-PERF-CACHE-001
+  milestone: M8
+  priority: P2
+  title: "File-mutation verifier: validator-side file-hash cache - full suite measured toward <= ~90s (re-scoped successor to MUTATION-PERF-001)"
+  dependencies: []
+  read_first:
+  - tools/validate_handoff.py
+  - tools/test_validate_handoff.py
+  - state/notes/MUTATION-PERF-CACHE-001.md
+  acceptance:
+  - "A file-hash-keyed cache for validator data()/schema validation in tools/validate_handoff.py, shared across Audit instances, so the 37 mutation cases do not re-parse the ~6.9k-file tree - full suite wall time measured toward <= ~90s"
+  - "Identical semantics preserved: the same inputs produce the same errors; the per-case overlay still sees its own mutated content; the 37 cases and their assertions remain unchanged"
+  - "The validator is a gate - this change requires review before merge; wall time recorded in state/evidence/MUTATION-PERF-CACHE-001/gates.log"
+  required_for_desktop_1_0: false
 - id: MUTATION-PERF-001
   milestone: M8
   priority: P2
@@ -3855,6 +3869,7 @@ execution_scope:
   required_flag: required_for_desktop_1_0
   optional_tasks:
   - MUTATION-PERF-001
+  - MUTATION-PERF-CACHE-001
   - HOME-FLASH-001
   - FIX-HOME-POSTURE-PENDING-001
   - FIX-BUTTON-AFFORDANCE-PINS-001

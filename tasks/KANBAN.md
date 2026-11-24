@@ -68,6 +68,9 @@ Also parked by owner 2026-11-18: U8 word-synced karaoke highlight (STORY-LISTEN-
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
 | mutation-perf | tooling, tests | **MUTATION-PERF-001** — make the file-mutation verifier fast: the 37-case suite `tools/test_validate_handoff.py` re-copies the whole repo per case (~10.5s/case, ~371s full-suite wall time on this machine at 2026-11-23). Baseline-copy-once + hardlink overlay per case → target at/below ~90s. 37 cases keep their original assertions (diff to test bodies must be empty); no validator change; 44-vs-37 historical doc discrepancy recorded, not rewritten. | `MUTATION-PERF-001` |
+| mutation-perf-cache | tooling, tests | **MUTATION-PERF-CACHE-001** — re-scoped successor to MUTATION-PERF-001 (blocked): validator-side file-hash cache in `tools/validate_handoff.py` so the 37 cases stop re-parsing the ~6.9k-file tree (~9.7s/case). Identical semantics; the gate itself changes and requires review before merge. | `MUTATION-PERF-CACHE-001` |
+
+
 ## done — 2026-11-24 FIX-HOME-POSTURE-PENDING-001: stale activePack posture badge gated on settle (REVIEW-HOME-FLASH-001 SPEC FAIL)
 
 | card | epic | what | maps to |
