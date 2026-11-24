@@ -1,0 +1,19 @@
+GREEN at final bytes — scripts/drill-hierarchy-capture.mjs (dist rebuilt from the fix commit's source; same script, same viewport)
+
+walk 0: kind=null
+walk 1: kind=choices
+PASS G1 TILE-HEIGHT: every answer tile is taller than the 44px floor (>= 50px) — {"tileHeights":[56,56]}
+PASS G2 TILE-GRID: each answer tile spans the content grid (width >= 330 at 390vw) — {"tileWidths":[358,358]}
+PASS G3 CONTROL-SECONDARY: controls are shorter (>=8px), smaller type, transparent fill vs tiles — {"tileHeights":[56,56],"controlHeights":[44,44],"tileFontSize":"16px","controlFontSize":"13px","controlBackgrounds":["rgba(0, 0, 0, 0)","rgba(0, 0, 0, 0)"]}
+PASS G4 SEPARATION: controls row carries a divider (border-top >= 1px) with >= 12px clearance — {"borderTopWidth":"1px","gapTop":20}
+PASS G5 AUDIO-GRID: the Play button's right edge aligns to the tiles' grid (within 2px) — {"play":{"w":358,"h":44,"top":277.1,"bottom":321.1,"left":16,"right":374,"fontSize":"15px","borderTopWidth":"1px","background":"rgb(20, 97, 94)","color":"rgb(255, 255, 255)","text":"▶ Play"},"tileRight":374,"tileLeft":16}
+PASS G6 TAP-FLOOR: every tile and session control keeps >= 44px tap height — [{"what":"дом","h":56},{"what":"том","h":56},{"what":"Pause session","h":44},{"what":"Stop session","h":44}]
+PASS G7 TILE-EMPHASIS: tiles carry a heavier border than the controls (tiles >= 2px, controls <= 1px) — {"tileBorder":2,"controlBorder":1}
+
+7/7 checks green -> state/evidence/DRILL-HIERARCHY-001/audit-green.json (exit 0)
+
+FEEL-DRILL regression (scripts/drill-feel-capture.mjs on the same dist, OUT_DIR=feel-regression): 10/10 green —
+BAR TRANSITION, BAR MID-GLIDE (5 intermediates), BRIDGE fade-up, REVEAL ring+badge
+(ok-soft fill, choice-reveal 0.12s, box-shadow 2px), REVEAL FILL + CHECK BADGE,
+DIM [0.55,0.55], VERDICT fade-up, SESSION CARD rules, SESSION CARD card-in,
+REDUCED MOTION collapse. Pinned FEEL-DRILL state semantics intact on the new tiles.

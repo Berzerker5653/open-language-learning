@@ -1,0 +1,132 @@
+{
+  "viewport": "390x844",
+  "checks": [
+    {
+      "name": "BAR TRANSITION: .session-bar-fill carries the width ease in the slow family",
+      "pass": true,
+      "measured": {
+        "transitionProperty": "width",
+        "transitionDuration": "0.3s",
+        "transitionTiming": "cubic-bezier(0.22, 0.61, 0.36, 1)"
+      }
+    },
+    {
+      "name": "BAR MID-GLIDE: the fill width passes through intermediate values when a card lands",
+      "pass": true,
+      "measured": {
+        "base": 0,
+        "final": 56.58,
+        "samples": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          8.67,
+          40.56,
+          49.39,
+          52.73,
+          55.52,
+          56.33,
+          56.58,
+          56.58,
+          56.58,
+          56.58,
+          56.58,
+          56.58,
+          56.58,
+          56.58
+        ],
+        "intermediate": 5
+      }
+    },
+    {
+      "name": "BRIDGE REGRESSION: the inter-activity bridge still enters via fade-up",
+      "pass": true,
+      "measured": {
+        "name": "fade-up",
+        "duration": "0.25s"
+      }
+    },
+    {
+      "name": "REVEAL: the right pick computes the choice-reveal arrival + ring box-shadow",
+      "pass": true,
+      "measured": {
+        "animationName": "choice-reveal",
+        "animationDuration": "0.12s",
+        "background": "rgb(232, 240, 230)",
+        "boxShadow": "rgb(46, 125, 70) 0px 0px 0px 2px",
+        "badgeContent": "\"✓\"",
+        "badgeBackground": "rgb(46, 125, 70)",
+        "dimOpacities": [
+          0.55,
+          0.55
+        ],
+        "tappedWrong": {
+          "animationName": "shake-x",
+          "hasTapped": true
+        },
+        "verdictAnim": "fade-up"
+      }
+    },
+    {
+      "name": "REVEAL FILL + CHECK BADGE: soft ok-soft fill and the drawn check (ring + check, not color alone)",
+      "pass": true,
+      "measured": {
+        "background": "rgb(232, 240, 230)",
+        "badgeContent": "\"✓\""
+      }
+    },
+    {
+      "name": "DIM: the non-chosen choices sit at the locked-board opacity",
+      "pass": true,
+      "measured": [
+        0.55,
+        0.55
+      ]
+    },
+    {
+      "name": "VERDICT enters via fade-up (FEEL-GLOBAL-001 regression)",
+      "pass": true,
+      "measured": "fade-up"
+    },
+    {
+      "name": "SESSION CARD: .session-summary computes the calm warm rules (surface fill, line outline, padding, radius)",
+      "pass": true,
+      "measured": {
+        "animationName": "card-in",
+        "animationDuration": "0.25s",
+        "background": "rgb(255, 253, 249)",
+        "borderStyle": "solid",
+        "borderColor": "rgb(226, 218, 204)",
+        "paddingTop": "17.6px",
+        "borderRadius": "8px"
+      }
+    },
+    {
+      "name": "SESSION CARD enters via card-in (fade + 0.98->1 scale)",
+      "pass": true,
+      "measured": {
+        "animationName": "card-in",
+        "duration": "0.25s"
+      }
+    },
+    {
+      "name": "REDUCED MOTION: every duration FEEL-DRILL-001 adds collapses to ~0",
+      "pass": true,
+      "measured": {
+        "summaryAnim": "1e-05s",
+        "barTransition": "1e-05s",
+        "dotTransition": "1e-05s",
+        "correctAnim": "1e-05s",
+        "wrongAnim": "1e-05s"
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-f324a129-b923-460f-9b28-7d4a4db16585"
+}

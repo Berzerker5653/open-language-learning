@@ -1,0 +1,33 @@
+# DRILL-HIERARCHY-001 gates log (worker t_173f5e84, 2026-11-23)
+
+HEAD at claim: 8f7de0c3; git status clean of other cards' WIP (only untracked
+RU-CONTENT-FREEZE-047-001 / RU-STORIES-MEDIA-001 artifact dirs — untouched per
+shared-dir race rule).
+
+- npx tsc --noEmit (apps/desktop): exit 0.
+- npx vitest run (apps/desktop): 75 files / 662 tests passed (includes the new
+  drill-hierarchy.test.ts tier and every FEEL-DRILL/motion-contract pin).
+- Rust: not touched — no cargo gates required.
+
+Captures (SERVE_BIN=target/debug/lts-serve, SERVE_DIST=apps/desktop/dist rebuilt
+from the lane bytes, real engine + fresh profile, CDP 390x844 mobile:true):
+
+- RED at HEAD (pre-fix): 1/7 green (audit-red.json) —
+  G1 FAIL tileHeights [44,44]; G2 FAIL tileWidths [176.1,173.9];
+  G3 FAIL controls h44/fs15px/surface-fill identical to tiles;
+  G4 FAIL borderTopWidth 0px; G5 FAIL Play right 329 vs tile right 374;
+  G7 FAIL tileBorder 1 == controlBorder 1; G6 PASS tap floor (guard).
+- GREEN at final bytes: 7/7 (audit-green.json) —
+  tiles [56,56] h, [358,358] w on the 16..374 grid; controls 44px, 13px,
+  rgba(0,0,0,0); divider 1px gapTop 20; Play right 374 == tile right 374;
+  tap floor all >= 44; tileBorder 2 vs controlBorder 1.
+- FEEL-DRILL live regression (drill-feel-capture.mjs on the new dist,
+  OUT_DIR=feel-regression): 10/10 green. One maintenance hunk in that
+  harness's NAVIGATION (fresh-profile start pill test-id; new dists label the
+  pill "Start · N activities · ~N min"); its measured checks unedited.
+
+learner-inspection.md: two vision passes over the green whole (board + graded
+board). Pass-2's "no dim / green check on a miss" observations are the PINNED
+FEEL-DRILL semantics (dim computed 0.55 by the harness; reveal marks the
+correct pick by design; the amber-bordered tile is the tapped-wrong marker) —
+not regressions; pinned selectors untouched.
