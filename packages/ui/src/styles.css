@@ -1450,6 +1450,19 @@ th:last-child {
   width: 100%;
 }
 
+/* COPY-POLISH-001: review-posture rows read as a label + value pair, not
+   run-on "kind: count" prose — the label sits quiet, the value carries. */
+.meta-list li.posture-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.1rem 0.4rem;
+  min-width: 14rem;
+}
+
+.meta-list li.posture-row .posture-label {
+  color: var(--ink-faint);
+}
+
 .meta-list li {
   color: var(--ink-faint);
   font-size: 0.8125rem;
@@ -2572,6 +2585,19 @@ th:last-child {
 
 .gentle-facts p {
   margin: 0.15rem 0;
+}
+
+/* COPY-POLISH-001: each gentle fact is one clause that never breaks
+   mid-phrase at phone width ("0 units / completed"); the line may break
+   only between clauses. */
+.gentle-facts .gentle-facts-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.1rem 0.45rem;
+}
+
+.gentle-facts .gentle-fact {
+  white-space: nowrap;
 }
 
 /* PATH-PIN-CONSISTENCY-001 (owner dogfood 2026-11-22 complaint 10): the

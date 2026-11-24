@@ -167,7 +167,7 @@ describe("home", () => {
     );
     expect(html).toContain("No language is set for this profile yet");
     expect(html).toContain("Choose a language");
-    expect(html).not.toContain("what to practice now");
+    expect(html).not.toContain("What to practice now");
     // No posture statement, no goal, no first steps: with no pack nothing is
     // claimed about a language this profile is not studying.
     expect(html).not.toContain("pack-posture");
@@ -371,6 +371,9 @@ describe("home", () => {
     );
     expect(html).toContain("Where to begin");
     for (const n of [1, 2, 3]) expect(html).toContain(`step ${n}`);
+    // COPY-POLISH-001: the kind label and the pack word are joined by a
+    // visible dot so they never glue into one token ("Meet something newа").
+    expect(html).toContain('class="first-run-join"');
     // ADR-0020 §4 caps first-run guidance at three steps.
     expect(html).not.toContain("step 4");
     expect(html).not.toContain("step 5");
@@ -849,6 +852,9 @@ describe("gentle facts (WARM-MOMENTS-001)", () => {
     expect(html).toContain('data-testid="gentle-facts"');
     expect(html).toContain("9 days with learning so far");
     expect(html).toContain("14 units completed");
+    // COPY-POLISH-001: each fact is its own clause span so the line can
+    // only break between clauses, never mid-phrase at phone width.
+    expect(html.match(/class="gentle-fact"/g)).toHaveLength(2);
     // The memory framing is explicit — nothing here can be "lost".
     expect(html).toContain("nothing here resets, expires, or counts against you");
     expect(html).not.toMatch(/streak|\bxp\b|league|freeze|don.t lose|at risk|keep it going/i);

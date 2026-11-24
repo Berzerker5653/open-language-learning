@@ -105,7 +105,7 @@ describe("pack direction (RTL-001, ADR-0029)", () => {
     expect(banner).not.toContain("dir=");
     // App-authored chrome inside the content region gains no direction either.
     expect(html).toContain("<h1>Hi Hunter</h1>");
-    expect(html).toContain('<p class="prompt">what to practice now</p>');
+    expect(html).toContain('<p class="prompt">What to practice now</p>');
   });
 
   it("leaves an LTR pack unflipped but still language-tagged", () => {

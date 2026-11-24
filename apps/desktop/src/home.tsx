@@ -336,7 +336,7 @@ export function Home(p: HomeProps) {
           Switching languages — the plan, goal and places below update as the new pack answers.
         </p>
       ) : null}
-      {p.noPack || p.packsUnknown ? null : <p className="prompt">what to practice now</p>}
+      {p.noPack || p.packsUnknown ? null : <p className="prompt">What to practice now</p>}
       {p.activePack ? (
         // UI-HYGIENE-001 (U2): the AI-honesty line is a designed badge,
         // not greeting prose — the posture is a standing fact about the
@@ -398,6 +398,12 @@ export function Home(p: HomeProps) {
             {firstRun.map((step) => (
               <li key={step.goal_id ?? step.content_id ?? step.label}>
                 <span className="plan-reason">{KIND_LABELS[step.kind]}</span>
+                {/* COPY-POLISH-001: the label and the pack word must never
+                    glue into one token ("Meet something newа") — the join
+                    dot keeps them two readable words at any width. */}
+                <span className="first-run-join" aria-hidden="true">
+                  {" · "}
+                </span>
                 <PackText tag="span" className="first-run-label">
                   {step.label}
                 </PackText>
@@ -713,8 +719,18 @@ export function GentleFacts({ facts }: { facts: LearningFacts | null }) {
   return (
     <section aria-label="Your time here" className="gentle-facts" data-testid="gentle-facts">
       <h2>Your time here</h2>
-      <p>
-        {`${days} ${days === 1 ? "day" : "days"} with learning so far · ${units} ${units === 1 ? "unit" : "units"} completed`}
+      <p className="gentle-facts-line">
+        {/* COPY-POLISH-001: each fact is one clause that never wraps
+            mid-phrase at phone width ("0 units / completed"). */}
+        <span className="gentle-fact">
+          {`${days} ${days === 1 ? "day" : "days"} with learning so far`}
+        </span>
+        <span className="gentle-fact-sep" aria-hidden="true">
+          ·
+        </span>
+        <span className="gentle-fact">
+          {`${units} ${units === 1 ? "unit" : "units"} completed`}
+        </span>
       </p>
       <p className="meta">
         <small>

@@ -162,7 +162,7 @@ function render(over: Partial<Parameters<typeof LanguagePanel>[0]> = {}) {
 describe("language panel", () => {
   it("marks the active learning language and offers switching", () => {
     const html = render();
-    expect(html).toContain("learning this language");
+    expect(html).toContain("Learning this language");
     expect(html).toContain("Learn this");
     expect(html).toContain("Esperanto Community Pack");
     expect(html).toContain("language you are");
@@ -246,7 +246,11 @@ describe("language panel", () => {
     // Counts and posture distribution surface as the pack's own claims.
     expect(html).toContain("What this pack claims");
     expect(html).toContain("75 communicative goals");
-    expect(html).toContain("lexicon: 3918 AI-generated, unreviewed");
+    // COPY-POLISH-001: posture rows are a label + value layout, never
+    // run-on "kind: count" prose.
+    expect(html).toContain('<span class="posture-label">lexicon</span>');
+    expect(html).toContain("3918 AI-generated, unreviewed");
+    expect(html).not.toContain("lexicon: 3918");
     expect(html).toContain("JF Standard");
     // Honesty: claims never promote the install posture.
     expect(html).toContain("not our verification");
@@ -261,8 +265,21 @@ describe("language panel", () => {
     const statements = html.match(/AI-generated content · not human-reviewed/g);
     expect(statements).toHaveLength(1);
     // The claim tallies keep their numbers with the relabeled posture words.
-    expect(html).toContain("lexicon: 3918 AI-generated, unreviewed");
-    expect(html).toContain("lexicon: 2 awaiting review");
+    expect(html).toContain("3918 AI-generated, unreviewed");
+    expect(html).toContain("2 awaiting review");
+  });
+
+  it("hides a known-zero kanji count but keeps an unknown one (COPY-POLISH-001)", () => {
+    // A Russian pack must not carry "0 kanji entries" noise — but a failed
+    // probe (unknown count) may never silently delete a stat.
+    const zero = structuredClone(allUnreviewedClaims);
+    zero[0]!.counts.kanji = 0;
+    const zeroHtml = render({ claims: zero });
+    expect(zeroHtml).not.toContain("kanji entries");
+    expect(zeroHtml).toContain("3920 lexicon entries");
+    const unknown = structuredClone(allUnreviewedClaims);
+    unknown[0]!.counts.kanji = undefined as unknown as number;
+    expect(render({ claims: unknown })).toContain("kanji entries");
   });
 
   it("makes no reviewed/verified claim when every tally is unreviewed", () => {

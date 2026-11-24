@@ -63,7 +63,7 @@ describe("a language change refreshes the learner context (U02)", () => {
     expect(engine.lastArgsFor("switch_pack")).toEqual({ profileId: "sam", packId: JA });
     expect(count("home_state")).toBe(2);
     const today = app.section("Practice");
-    expect(today.textContent).toContain("what to practice now");
+    expect(today.textContent).toContain("What to practice now");
     expect(app.text('[aria-label="Practice"] h1')).toBe("Hi Sam");
     expect(today.textContent).toContain("はじめまして");
     expect(today.textContent).not.toMatch(/\bru\.(sent|lex|activity)\./);

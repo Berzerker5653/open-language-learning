@@ -364,7 +364,7 @@ export function LanguagePanel(p: LanguagePanelProps) {
                 </PackText>{" "}
                 ({i.locale}) — v{i.version}, {i.trust_state}
                 {p.activeIds.includes(i.pack_id) ? (
-                  <span className="badge badge--active">learning this language</span>
+                  <span className="badge badge--active">Learning this language</span>
                 ) : (
                   <button
                     type="button"
@@ -401,7 +401,12 @@ export function LanguagePanel(p: LanguagePanelProps) {
             <li>{c.counts.sentences} example sentences</li>
             <li>{c.counts.grammar} grammar concepts</li>
             <li>{c.counts.orthography} writing-system symbols</li>
-            <li>{c.counts.kanji} kanji entries</li>
+            {/* COPY-POLISH-001: a known-zero kanji count is noise on packs
+                that have no writing system of that kind (RU shows "0 kanji
+                entries"). Only a KNOWN zero hides the row — an unknown
+                count (null/undefined) still renders, so a failed probe can
+                never silently delete a stat. */}
+            {c.counts.kanji !== 0 && <li>{c.counts.kanji} kanji entries</li>}
             <li>{c.counts.phonological_contrasts} sound contrasts</li>
             <li>{c.counts.stories} reading stories</li>
           </ul>
@@ -410,8 +415,13 @@ export function LanguagePanel(p: LanguagePanelProps) {
               <h4>Review posture (the pack&apos;s own labels)</h4>
               <ul className="meta-list">
                 {c.postures.map((r) => (
-                  <li key={`${r.kind}:${r.posture}`}>
-                    {r.kind}: {r.count} {POSTURE_LABELS[r.posture] ?? r.posture}
+                  <li key={`${r.kind}:${r.posture}`} className="posture-row">
+                    {/* COPY-POLISH-001: label + value layout, never run-on
+                        "kind: count" prose. */}
+                    <span className="posture-label">{r.kind}</span>
+                    <span className="posture-value">
+                      {`${r.count} ${POSTURE_LABELS[r.posture] ?? r.posture}`}
+                    </span>
                   </li>
                 ))}
               </ul>

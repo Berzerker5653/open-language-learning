@@ -1615,7 +1615,7 @@ export class LearnerEngine {
         if (!pack) return [];
         return pack.schedule.slice(0, 3).map((s): FirstRunStep => ({
           kind: s.kind,
-          label: this.word(pack, s.content_id)?.gloss ?? s.content_id,
+          label: this.word(pack, s.content_id)?.gloss ?? pack.sentences.find((x) => x.id === s.content_id)?.gloss ?? s.content_id,
           content_id: s.content_id,
           goal_id: `${pack.id}.goal.${s.goal}`,
         }));
