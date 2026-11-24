@@ -208,6 +208,33 @@ describe("home", () => {
     expect(html).toContain('aria-label="Time budget"');
   });
 
+  // REVIEW-HOME-FLASH-001 FIX: a stale activePack (previous profile's
+  // state, e.g. across the profile-open flow where the resume sets
+  // `packsPending` without clearing `activeIds`/`activeClaims`) must not
+  // render the pack-posture badge while the pack read is in flight —
+  // that badge is a pack-state claim.
+  it("does not claim a pack while the read is in flight", () => {
+    const html = renderToStaticMarkup(
+      <Home
+        displayName="Hunter"
+        plan={plan}
+        activeBudget={5}
+        onBudget={() => {}}
+        activePack={{
+          name: "Previous Profile Pack",
+          posture: "AI-generated content · not human-reviewed",
+        }}
+        packsPending
+        onChooseLanguage={() => {}}
+      />,
+    );
+    expect(html).not.toContain("pack-posture");
+    expect(html).not.toContain("Previous Profile Pack");
+    expect(html).not.toContain("AI-generated content");
+    // The plan scaffold still renders (no layout jump).
+    expect(html).toContain("What to practice now");
+  });
+
   it("makes recall-meaning plan items runnable with the actual word", () => {
     const html = renderToStaticMarkup(
       <Home

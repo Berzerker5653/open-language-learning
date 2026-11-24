@@ -341,7 +341,7 @@ export function Home(p: HomeProps) {
         </p>
       ) : null}
       {p.noPack || p.packsUnknown ? null : <p className="prompt">What to practice now</p>}
-      {p.activePack ? (
+      {p.activePack && !p.packsPending ? (
         // UI-HYGIENE-001 (U2): the AI-honesty line is a designed badge,
         // not greeting prose — the posture is a standing fact about the
         // material, and the tooltip carries the full policy in one line.

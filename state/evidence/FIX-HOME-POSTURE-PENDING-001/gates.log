@@ -1,0 +1,21 @@
+FIX-HOME-POSTURE-PENDING-001 — gates
+Date: 2026-11-24 (default lane, /home/hunter/game-dev/LTS, branch main)
+Contract: REVIEW-HOME-FLASH-001 spec verdict — defect: stale activePack
+badge while packsPending (home.tsx:344 + App.tsx:4438-4446); pin at
+home.test.tsx:189-208 passed no activePack and could not see the gap.
+
+Fix (code commit pending): home.tsx gates the pack-posture badge on settle
+— `{p.activePack && !p.packsPending ? (…)}`. The settled/noPack/packsUnknown
+branches unchanged.
+
+Pin: home.test.tsx — new case "does not claim a pack while the read is in
+flight" passes a stale activePack + packsPending and asserts the badge
+and the stale name/posture NEVER render (scaffold stays: "What to practice
+now").
+
+Gates:
+- npx vitest run — 665/665 (includes the new pin)
+- npx tsc --noEmit — exit 0
+- No test deleted, no assertion weakened (affordance-pin re-pin is a
+  separate card: FIX-BUTTON-AFFORDANCE-PINS-001)
+- validate_handoff — PASSED after ledger edits
