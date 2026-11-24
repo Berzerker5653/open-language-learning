@@ -1,0 +1,13 @@
+RED at HEAD 8f7de0c3 — scripts/drill-hierarchy-capture.mjs (SERVE_BIN=target/debug/lts-serve, SERVE_DIST=apps/desktop/dist at HEAD bytes)
+
+walk 0: kind=null
+walk 1: kind=choices
+FAIL G1 TILE-HEIGHT: every answer tile is taller than the 44px floor (>= 50px) — {"tileHeights":[44,44]}
+FAIL G2 TILE-GRID: each answer tile spans the content grid (width >= 330 at 390vw) — {"tileWidths":[176.1,173.9]}
+FAIL G3 CONTROL-SECONDARY: controls are shorter (>=8px), smaller type, transparent fill vs tiles — {"tileHeights":[44,44],"controlHeights":[44,44],"tileFontSize":"15px","controlFontSize":"15px","controlBackgrounds":["rgb(255, 253, 249)","rgb(255, 253, 249)"]}
+FAIL G4 SEPARATION: controls row carries a divider (border-top >= 1px) with >= 12px clearance — {"borderTopWidth":"0px","gapTop":16}
+FAIL G5 AUDIO-GRID: the Play button's right edge aligns to the tiles' grid (within 2px) — {"play":{"w":313,"h":54,"top":277.1,"bottom":331.1,"left":16,"right":329,"fontSize":"15px","borderTopWidth":"1px","background":"rgb(20, 97, 94)","color":"rgb(255, 255, 255)","text":"▶ Play"},"tileRight":374,"tileLeft":16}
+PASS G6 TAP-FLOOR: every tile and session control keeps >= 44px tap height — [{"what":"дом","h":44},{"what":"том","h":44},{"what":"Pause session","h":44},{"what":"Stop session","h":44}]
+FAIL G7 TILE-EMPHASIS: tiles carry a heavier border than the controls (tiles >= 2px, controls <= 1px) — {"tileBorder":1,"controlBorder":1}
+
+1/7 checks green -> state/evidence/DRILL-HIERARCHY-001/audit-red.json (exit 1)

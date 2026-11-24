@@ -1,0 +1,184 @@
+{
+  "viewport": "390x844",
+  "mobile": true,
+  "tag": "red",
+  "checks": [
+    {
+      "name": "G1 TILE-HEIGHT: every answer tile is taller than the 44px floor (>= 50px)",
+      "pass": false,
+      "measured": {
+        "tileHeights": [
+          44,
+          44
+        ]
+      }
+    },
+    {
+      "name": "G2 TILE-GRID: each answer tile spans the content grid (width >= 330 at 390vw)",
+      "pass": false,
+      "measured": {
+        "tileWidths": [
+          176.1,
+          173.9
+        ]
+      }
+    },
+    {
+      "name": "G3 CONTROL-SECONDARY: controls are shorter (>=8px), smaller type, transparent fill vs tiles",
+      "pass": false,
+      "measured": {
+        "tileHeights": [
+          44,
+          44
+        ],
+        "controlHeights": [
+          44,
+          44
+        ],
+        "tileFontSize": "15px",
+        "controlFontSize": "15px",
+        "controlBackgrounds": [
+          "rgb(255, 253, 249)",
+          "rgb(255, 253, 249)"
+        ]
+      }
+    },
+    {
+      "name": "G4 SEPARATION: controls row carries a divider (border-top >= 1px) with >= 12px clearance",
+      "pass": false,
+      "measured": {
+        "borderTopWidth": "0px",
+        "gapTop": 16
+      }
+    },
+    {
+      "name": "G5 AUDIO-GRID: the Play button's right edge aligns to the tiles' grid (within 2px)",
+      "pass": false,
+      "measured": {
+        "play": {
+          "w": 313,
+          "h": 54,
+          "top": 277.1,
+          "bottom": 331.1,
+          "left": 16,
+          "right": 329,
+          "fontSize": "15px",
+          "borderTopWidth": "1px",
+          "background": "rgb(20, 97, 94)",
+          "color": "rgb(255, 255, 255)",
+          "text": "▶ Play"
+        },
+        "tileRight": 374,
+        "tileLeft": 16
+      }
+    },
+    {
+      "name": "G6 TAP-FLOOR: every tile and session control keeps >= 44px tap height",
+      "pass": true,
+      "measured": [
+        {
+          "what": "дом",
+          "h": 44
+        },
+        {
+          "what": "том",
+          "h": 44
+        },
+        {
+          "what": "Pause session",
+          "h": 44
+        },
+        {
+          "what": "Stop session",
+          "h": 44
+        }
+      ]
+    },
+    {
+      "name": "G7 TILE-EMPHASIS: tiles carry a heavier border than the controls (tiles >= 2px, controls <= 1px)",
+      "pass": false,
+      "measured": {
+        "tileBorder": 1,
+        "controlBorder": 1
+      }
+    }
+  ],
+  "failures": 6,
+  "error": null,
+  "profileId": "prof-edb75ac7-3076-4f3d-91a6-14c41dc5939b",
+  "measured": {
+    "tiles": [
+      {
+        "w": 176.1,
+        "h": 44,
+        "top": 431.5,
+        "bottom": 475.5,
+        "left": 16,
+        "right": 192.1,
+        "fontSize": "15px",
+        "borderTopWidth": "1px",
+        "background": "rgb(255, 253, 249)",
+        "color": "rgb(36, 31, 24)",
+        "text": "дом"
+      },
+      {
+        "w": 173.9,
+        "h": 44,
+        "top": 431.5,
+        "bottom": 475.5,
+        "left": 200.1,
+        "right": 374,
+        "fontSize": "15px",
+        "borderTopWidth": "1px",
+        "background": "rgb(255, 253, 249)",
+        "color": "rgb(36, 31, 24)",
+        "text": "том"
+      }
+    ],
+    "controls": [
+      {
+        "w": 180.5,
+        "h": 44,
+        "top": 491.5,
+        "bottom": 535.5,
+        "left": 16,
+        "right": 196.5,
+        "fontSize": "15px",
+        "borderTopWidth": "1px",
+        "background": "rgb(255, 253, 249)",
+        "color": "rgb(36, 31, 24)",
+        "text": "Pause session"
+      },
+      {
+        "w": 169.5,
+        "h": 44,
+        "top": 491.5,
+        "bottom": 535.5,
+        "left": 204.5,
+        "right": 374,
+        "fontSize": "15px",
+        "borderTopWidth": "1px",
+        "background": "rgb(255, 253, 249)",
+        "color": "rgb(36, 31, 24)",
+        "text": "Stop session"
+      }
+    ],
+    "row": {
+      "borderTopWidth": "0px",
+      "gapTop": 16
+    },
+    "play": {
+      "w": 313,
+      "h": 54,
+      "top": 277.1,
+      "bottom": 331.1,
+      "left": 16,
+      "right": 329,
+      "fontSize": "15px",
+      "borderTopWidth": "1px",
+      "background": "rgb(20, 97, 94)",
+      "color": "rgb(255, 255, 255)",
+      "text": "▶ Play"
+    }
+  }
+}
