@@ -1,0 +1,9 @@
+# REVIEW-MUTATION-PERF-CACHE-001 — STANDARDS verdict
+
+**Verdict: PASS**
+
+- Commit eee3e20b is task-scoped; message asserts verifications that actually ran (37-case suite green, 363.0s → 62.2s recorded in state/evidence/MUTATION-PERF-CACHE-001/gates.log); gates.log present and matches the commit message. Code and evidence committed as one commit (no target-only gates.log split) — acceptable for a gate-changing card; the ledger close (0b60a7fc) honestly declares the review card as the merge gate instead of silently completing.
+- Test bodies and 37 cases byte-identical — `git show --stat eee3e20b` touches only `tools/validate_handoff.py` and the new gates.log; no test/assertion/gate-script edits; no out-of-scope additions. No weakened gate (the validator still fails on the same inputs).
+- Evidence paths exist: state/evidence/MUTATION-PERF-CACHE-001/gates.log and state/notes/MUTATION-PERF-CACHE-001.md; ROADMAP entry present (tasks/ROADMAP.yaml:3839-3852) with existing read_first paths; task-state.json entry MUTATION-PERF-CACHE-001 records done with evidence paths and an honest note ("Gate itself changes - REVIEW-MUTATION-PERF-CACHE-001 created for the required review before merge"); KANBAN.md tooling-backlog row (tasks/KANBAN.md:71) matches.
+- Shared-dir race noted: the working tree is dirty with sibling WIP (apps/desktop/src/App.tsx, home.tsx, home.test.tsx, journeys/harness.tsx, onboarding.tsx, path-view.test.tsx, packages/ui/src/styles.css, serve-pairing.test.tsx, PATH-CONNECT-PILL-001 + RU-CONTENT-FREEZE-047-001 + RU-STORIES-MEDIA-001 evidence dirs) — not touched; review used committed diffs only. Review-only card; no source files edited.
+- Known caveat: full-suite re-run not performed this session (committed work is NOT re-verified — review of the committed diff per board protocol); gates.log evidence accepted as-is. A cheap import + two-file suffix-collision probe was run to confirm the SPEC defect is reproducible, not to re-run the gate.

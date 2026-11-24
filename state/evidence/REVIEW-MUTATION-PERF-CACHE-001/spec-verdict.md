@@ -1,0 +1,11 @@
+# REVIEW-MUTATION-PERF-CACHE-001 — SPEC verdict
+
+**Verdict: FAIL**
+
+The diff does add the requested shared file-hash-keyed cache and the gate-related acceptance (37 cases green, 363.0s → 62.2s, target <= ~90s met, test bodies byte-identical). It does NOT preserve identical semantics, so the "identical semantics" clause fails:
+
+- **Defect 1 — `_PARSE_CACHE` key omits the suffix** (tools/validate_handoff.py:34-35, 152-169). The key is `sha256(raw)` only (line 162). Suffix is part of parse semantics (`.json` vs `.jsonl` vs yaml — tools/validate_handoff.py:47-59). Demonstrated probe: bytes `b"hello"` parse as `.json` → error `"Expecting value: line 1 column 1 (char 0)"` and as `.yaml` → `"hello"`; the cache replays the first result for the second file — a wrong parse with the wrong error, identical inputs replayed with identical wrong semantics. Violates MUTATION-PERF-CACHE-001's "identical semantics" requirement (state/notes/MUTATION-PERF-CACHE-001.md).
+- **Defect 2 — shared mutable parsed objects across Audit instances** (tools/validate_handoff.py:164-168 caches parsed value/error; tools/validate_handoff.py:338-340 mutates the cached dict: `task[field] = []`). The module cache retains the parsed `dict`/`list` instance returned to callers; `roadmap()` (line 340) then mutates it in place. Any later Audit instance (in the same process) reading the same file would see the mutated dict — e.g. a task whose acceptance list was zeroed in one case leaks as `[]` into the next. Unmutated files (schemas, most pack data) are read-only in the audit, so the suite stays green; the leak is real but latent.
+- Minor wording in gates.log: "read_data kept as wrapper over the shared _parse_bytes" — `read_data()` (tools/validate_handoff.py:104-108) is a shared helper, not the shared cache; it does not hit `_PARSE_CACHE`. Cosmetic.
+
+Verified (not re-run — committed work): per-case overlays re-parse (mutated bytes → different hash → miss); schema-missing branch never cached (tools/validate_handoff.py:179-183 — the cache key/check begins only after the `schema is None` return); schema cache fingerprints the schema (tools/validate_handoff.py:184-185); test bodies and 37 cases unchanged (git show --stat eee3e20b — only tools/validate_handoff.py + gates.log).
