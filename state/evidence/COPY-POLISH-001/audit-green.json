@@ -1,0 +1,133 @@
+{
+  "viewport": "390x844",
+  "mobile": true,
+  "tag": "green",
+  "checks": [
+    {
+      "name": "C1 first-run rows never glue label to pack word",
+      "pass": true,
+      "measured": [
+        {
+          "text": "Meet something new · а (sound a — name а)",
+          "glued": false
+        },
+        {
+          "text": "Meet something new · о",
+          "glued": false
+        },
+        {
+          "text": "Meet something new · м",
+          "glued": false
+        }
+      ]
+    },
+    {
+      "name": "C2 home plan prompt is sentence-cased",
+      "pass": true,
+      "measured": [
+        "What to practice now"
+      ]
+    },
+    {
+      "name": "C3 active-pack badge is sentence-cased",
+      "pass": true,
+      "measured": [
+        "Learning this language"
+      ]
+    },
+    {
+      "name": "C4 review-posture rows are label + value, never run-on prose",
+      "pass": true,
+      "measured": [
+        {
+          "text": "units\n818 unlabeled",
+          "label": true,
+          "value": true,
+          "runon": false
+        },
+        {
+          "text": "goals\n60 AI-generated, unreviewed",
+          "label": true,
+          "value": true,
+          "runon": false
+        },
+        {
+          "text": "assessments\n240 AI-generated, unreviewed",
+          "label": true,
+          "value": true,
+          "runon": false
+        },
+        {
+          "text": "lexicon\n4071 AI-generated, unreviewed",
+          "label": true,
+          "value": true,
+          "runon": false
+        },
+        {
+          "text": "sentences\n945 AI-generated, unreviewed",
+          "label": true,
+          "value": true,
+          "runon": false
+        },
+        {
+          "text": "grammar\n169 AI-generated, unreviewed",
+          "label": true,
+          "value": true,
+          "runon": false
+        },
+        {
+          "text": "orthography\n34 AI-generated, unreviewed",
+          "label": true,
+          "value": true,
+          "runon": false
+        },
+        {
+          "text": "phonological contrasts\n8 AI-generated, unreviewed",
+          "label": true,
+          "value": true,
+          "runon": false
+        },
+        {
+          "text": "stories\n20 AI-generated, unreviewed",
+          "label": true,
+          "value": true,
+          "runon": false
+        }
+      ]
+    },
+    {
+      "name": "C5 RU pack claims show no kanji row (known zero)",
+      "pass": true,
+      "measured": [
+        "818 curriculum units",
+        "60 communicative goals",
+        "240 assessment definitions",
+        "4071 lexicon entries",
+        "945 example sentences",
+        "169 grammar concepts",
+        "34 writing-system symbols",
+        "8 sound contrasts",
+        "20 reading stories"
+      ]
+    },
+    {
+      "name": "C6 gentle-facts clauses each hold one line at 390px",
+      "pass": true,
+      "measured": {
+        "text": "0 days with learning so far\n·\n0 units completed",
+        "spanTexts": [
+          "0 days with learning so far",
+          "0 units completed"
+        ],
+        "spanLines": [
+          1,
+          1
+        ],
+        "unitsClauseLines": 1
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-f19ddc0b-065c-4fe9-a434-d50f2e162a53"
+}

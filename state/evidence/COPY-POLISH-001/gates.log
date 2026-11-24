@@ -1,0 +1,18 @@
+# COPY-POLISH-001 gates log (worker t_bcfc8ee7, 2026-11-23)
+
+HEAD at claim: 1363d1a7; working tree carried the crashed attempt 1's WIP
+(same card: home.tsx/language.tsx/styles.css/tests/journeys) — continued, not reset.
+
+- npx tsc --noEmit (apps/desktop): exit 0.
+- npx vitest run (apps/desktop): 75 files / 663 tests passed (after one test-only fix: the
+  language-switch journey pins UI-HYGIENE-001's "no raw ids in the Today
+  section" — the join dot removed the glue that had hidden the fixture's raw-id
+  fallback in the harness, so the harness's first_run_steps label fallback now
+  prefers the sentence gloss over the raw content_id — the fixture emulates
+  the engine contract "labels are pack display strings only").
+- Rust: not touched — no cargo gates required.
+- Dist rebuilt: vite build (55 modules, dist/assets/index-C263nRGi.js).
+- Live capture: SERVE_BIN=target/debug/lts-serve SERVE_DIST=apps/desktop/dist CAPTURE_TAG=green — 6/6 green (audit-green.json):
+  C1 first-run join dot (no glued Latin+Cyrillic, 3/3 rows), C2 prompt sentence-cased,
+  C3 badge sentence-cased, C4 posture rows label+value (9/9), C5 RU pack shows no kanji row,
+  C6 gentle-facts clauses each hold one line at 390px.
