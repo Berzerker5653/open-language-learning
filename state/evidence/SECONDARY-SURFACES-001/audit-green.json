@@ -1,0 +1,199 @@
+{
+  "viewport": "390x844",
+  "mobile": true,
+  "tag": "green",
+  "checks": [
+    {
+      "name": "S1 INFO-BOX: probe .empty renders a solid card (no dashed style)",
+      "pass": true,
+      "measured": {
+        "surfaceProbe": "rgb(255, 253, 249)",
+        "borderStyle": "solid",
+        "borderWidth": "1px",
+        "radius": "8px",
+        "targets": [
+          {
+            "text": "Today",
+            "h": 56
+          },
+          {
+            "text": "Practice",
+            "h": 56
+          },
+          {
+            "text": "My Words",
+            "h": 56
+          },
+          {
+            "text": "Progress",
+            "h": 56
+          },
+          {
+            "text": "Settings",
+            "h": 56
+          },
+          {
+            "text": "5 min",
+            "h": 44
+          },
+          {
+            "text": "10 min",
+            "h": 44
+          },
+          {
+            "text": "20 min",
+            "h": 44
+          },
+          {
+            "text": "30 min",
+            "h": 44
+          },
+          {
+            "text": "New materialаsound a — name аRecognize the script · ~60s",
+            "h": 55
+          },
+          {
+            "text": "New materialоsound o — name оRecognize the script · ~60s",
+            "h": 55
+          },
+          {
+            "text": "New materialмsound m — name эмRecognize the script · ~60s",
+            "h": 55
+          },
+          {
+            "text": "New materialдомVoiced [d] versus voiceless [t] in word-initi",
+            "h": 110
+          },
+          {
+            "text": "",
+            "h": 48
+          },
+          {
+            "text": "Getting startedPre-A10/21 done",
+            "h": 76
+          },
+          {
+            "text": "Start · 5 activities · ~5 min",
+            "h": 44
+          },
+          {
+            "text": "BeginnerA10/91 done",
+            "h": 76
+          },
+          {
+            "text": "ElementaryA20/103 done",
+            "h": 76
+          },
+          {
+            "text": "IntermediateB10/204 done",
+            "h": 76
+          },
+          {
+            "text": "Upper-intermediateB20/404 done",
+            "h": 76
+          }
+        ],
+        "height": 59.59375
+      }
+    },
+    {
+      "name": "S2 ZERO-CARD: .progress-zero is a solid card (not dashed)",
+      "pass": true,
+      "measured": {
+        "style": "solid",
+        "width": "1px",
+        "radius": "8px",
+        "bg": "rgb(255, 253, 249)"
+      }
+    },
+    {
+      "name": "S3 PROGRESS-INFO-BOX: live .empty is a solid card (not dashed)",
+      "pass": true,
+      "measured": {
+        "style": "solid",
+        "width": "1px",
+        "radius": "8px",
+        "bg": "rgb(255, 253, 249)"
+      }
+    },
+    {
+      "name": "S4 MYWORDS-INPUTS: form inputs are full-width and >= 44px tall",
+      "pass": true,
+      "measured": [
+        {
+          "id": "mine-surface",
+          "width": 358,
+          "parentWidth": 358,
+          "minHeight": 44,
+          "borderStyle": "solid",
+          "borderWidth": "1px",
+          "borderColor": "rgb(201, 190, 171)",
+          "borderRadius": "6px"
+        },
+        {
+          "id": "mine-reading",
+          "width": 358,
+          "parentWidth": 358,
+          "minHeight": 44,
+          "borderStyle": "solid",
+          "borderWidth": "1px",
+          "borderColor": "rgb(201, 190, 171)",
+          "borderRadius": "6px"
+        },
+        {
+          "id": "mine-gloss",
+          "width": 358,
+          "parentWidth": 358,
+          "minHeight": 44,
+          "borderStyle": "solid",
+          "borderWidth": "1px",
+          "borderColor": "rgb(201, 190, 171)",
+          "borderRadius": "6px"
+        },
+        {
+          "id": "mine-source",
+          "width": 358,
+          "parentWidth": 358,
+          "minHeight": 44,
+          "borderStyle": "solid",
+          "borderWidth": "1px",
+          "borderColor": "rgb(201, 190, 171)",
+          "borderRadius": "6px"
+        }
+      ]
+    },
+    {
+      "name": "S5 MYWORDS-FOCUS: a focused input shows the app's accent border (visible focus state)",
+      "pass": true,
+      "measured": {
+        "borderColor": "rgb(20, 97, 94)",
+        "outlineStyle": "solid",
+        "boxShadow": "rgb(226, 238, 235) 0px 0px 0px 3px",
+        "expectedAccent": "rgb(20, 97, 94)"
+      }
+    },
+    {
+      "name": "S6 DISABLED-BTN: disabled Add button is clearly distinct and readable",
+      "pass": true,
+      "measured": {
+        "disabled": true,
+        "opacity": 1,
+        "background": "rgb(236, 229, 216)",
+        "color": "rgb(117, 108, 93)",
+        "borderColor": "rgb(201, 190, 171)"
+      }
+    },
+    {
+      "name": "S7 TAP-TARGETS: no visible button below the 44px floor on the three surfaces",
+      "pass": true,
+      "measured": {
+        "practice": [],
+        "progress": [],
+        "words": []
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-4ed12958-76e0-4a02-a9b6-2d202db77b74"
+}
