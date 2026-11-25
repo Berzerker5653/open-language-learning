@@ -91,6 +91,13 @@ Also parked by owner 2026-11-18: U8 word-synced karaoke highlight (STORY-LISTEN-
 | next-offer-chip | desktop, ux | **CLOSED 2026-11-25** — FIX-PATH-WHATSNEXT-003 closes the two defects from REVIEW-PATH-WHATSNEXT-001 (SPEC PASS / STANDARDS PASS-WITH-NOTES, verdicts at state/evidence/REVIEW-PATH-WHATSNEXT-001/): (1) the review-due chip now renders as a styled pill (`.review-due-chip`: warn border/ink on `--warn-soft`, small bold caps-ish label, `--radius-sm`, no-wrap) and the offer strip is `display:flex; justify-content:space-between; gap:var(--space-3)` so the label and chip never run together — `.next-offer` and `.next-offer--outcome` share the rule; (2) the ledger row for PATH-WHATSNEXT-001 exists here (this row). Gates: home.test.tsx (37) + motion-contract (56) green. | `PATH-WHATSNEXT-001` |
 
 
+## done — 2026-11-25 FIX-SECONDARY-SURFACES-LEDGER-001: KANBAN.md done row for SECONDARY-SURFACES-001
+
+| card | epic | what | maps to |
+| --- | --- | --- | --- |
+| secondary-surfaces-ledger | desktop, ux | **CLOSED 2026-11-25** — FIX-SECONDARY-SURFACES-LEDGER-001 adds the missing KANBAN.md done row for SECONDARY-SURFACES-001 (code `07600536`, red `9841db99`, evidence `febcdfbf`, ledger `4cabc8d1`), filed as the FIX follow-up to REVIEW-SECONDARY-SURFACES-001 (SPEC PASS / STANDARDS PASS-WITH-NOTES, verdicts at state/evidence/REVIEW-SECONDARY-SURFACES-001/, `84045c73`). LANDING FACTS: solid card surfaces (`.empty`/`.progress-zero` solid fill+shadow, no more dashed wireframe) + real My Words form (`input[type="text"]`, full width, >=44px, accent focus halo) + disabled Add button at opacity 1 (faint text, line-strong border, sunk fill) — all design-token CSS, semantics unchanged; 7/7 green captures on live serve (was 6/7 red); gates: tsc clean, 60/60 touched vitest contracts. The ledger row was omitted from the 4cabc8d1 close commit; this row closes that gap. No code/test/gate changes. Evidence: `state/evidence/FIX-SECONDARY-SURFACES-LEDGER-001/note.md`. | `SECONDARY-SURFACES-001` |
+
+
 ## done — 2026-11-21 WEB-PROGRESS-001: browser-mode pack installs show real progress (install stages streamed over SSE)
 
 | card | epic | what | maps to |
