@@ -84,6 +84,13 @@ Also parked by owner 2026-11-18: U8 word-synced karaoke highlight (STORY-LISTEN-
 | btn-affordance-pins | desktop, tests | **CLOSED 2026-11-24** — re-pinned the `.btn:disabled` affordance pin (`button-affordance.test.ts`) to the design deliberately shipped in 07600536 (SECONDARY-SURFACES-001): opacity 1 + `ink-faint` + `line-strong` + sunk fill + not-allowed cursor, replacing the retired 2026-10-23 0.45-opacity / `ink-soft` / `line` contract that the suite had been red against on main (1 of 665 at f293ef87). Inventory, hover and background pins untouched. `state/notes/FIX-BUTTON-AFFORDANCE-PINS-001.md` | `FIX-BUTTON-AFFORDANCE-PINS-001` |
 
 
+## done — 2026-11-25 FIX-PATH-WHATSNEXT-003: review-due chip styled + KANBAN.md row for PATH-WHATSNEXT-001
+
+| card | epic | what | maps to |
+| --- | --- | --- | --- |
+| next-offer-chip | desktop, ux | **CLOSED 2026-11-25** — FIX-PATH-WHATSNEXT-003 closes the two defects from REVIEW-PATH-WHATSNEXT-001 (SPEC PASS / STANDARDS PASS-WITH-NOTES, verdicts at state/evidence/REVIEW-PATH-WHATSNEXT-001/): (1) the review-due chip now renders as a styled pill (`.review-due-chip`: warn border/ink on `--warn-soft`, small bold caps-ish label, `--radius-sm`, no-wrap) and the offer strip is `display:flex; justify-content:space-between; gap:var(--space-3)` so the label and chip never run together — `.next-offer` and `.next-offer--outcome` share the rule; (2) the ledger row for PATH-WHATSNEXT-001 exists here (this row). Gates: home.test.tsx (37) + motion-contract (56) green. | `PATH-WHATSNEXT-001` |
+
+
 ## done — 2026-11-21 WEB-PROGRESS-001: browser-mode pack installs show real progress (install stages streamed over SSE)
 
 | card | epic | what | maps to |
