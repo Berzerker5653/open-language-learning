@@ -1149,6 +1149,31 @@ details.prose-note > p {
   font-size: 0.875rem;
 }
 
+/* ONE-CURRENT-OFFER-001 (review defect fix): the offer strip and its
+   review-due chip — the chip is a pill, not inline text, and the label
+   never runs into it. */
+.next-offer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.review-due-chip {
+  flex: none;
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0.1rem var(--space-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--warn);
+  color: var(--warn);
+  background: var(--warn-soft);
+  white-space: nowrap;
+}
+
 .plan-item {
   display: flex;
   align-items: baseline;
