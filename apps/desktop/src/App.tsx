@@ -2187,63 +2187,53 @@ export function App() {
     }
   }
 
-  async function setMicSetting(enabled: boolean) {
+  // K-MODULARIZE: one tiny save path for the engine-backed settings toggles
+  // below — the same guard, clear-error, apply-and-confirm shape was repeated
+  // verbatim in five handlers. `saveSetting` is that shape; each handler is
+  // now one line.
+  async function saveSetting<T>(
+    cmd: string,
+    args: Record<string, unknown>,
+    apply: (result: T) => void,
+  ) {
     if (!inv || !profileId) return;
     setSettingsError(null);
     try {
-      setMicEnabled((await inv("set_microphone_enabled", { profileId, enabled })) as boolean);
+      apply((await inv(cmd, args)) as T);
       markSettingsSaved();
     } catch (e) {
       setSettingsError(String(e));
     }
+  }
+
+  async function setMicSetting(enabled: boolean) {
+    await saveSetting<boolean>("set_microphone_enabled", { profileId, enabled }, setMicEnabled);
   }
 
   async function pickMicrophoneSetting(deviceId: string | null) {
-    if (!inv || !profileId) return;
-    setSettingsError(null);
-    try {
-      setMicDevice((await inv("set_microphone_device", { profileId, deviceId })) as string | null);
-      markSettingsSaved();
-    } catch (e) {
-      setSettingsError(String(e));
-    }
+    await saveSetting<string | null>(
+      "set_microphone_device",
+      { profileId, deviceId },
+      setMicDevice,
+    );
   }
 
   async function pickPlaybackSetting(deviceId: string | null) {
-    if (!inv || !profileId) return;
-    setSettingsError(null);
-    try {
-      setPlaybackDevice(
-        (await inv("set_playback_device", { profileId, deviceId })) as string | null,
-      );
-      markSettingsSaved();
-    } catch (e) {
-      setSettingsError(String(e));
-    }
+    await saveSetting<string | null>(
+      "set_playback_device",
+      { profileId, deviceId },
+      setPlaybackDevice,
+    );
   }
 
   async function setRomajiSetting(mode: RomajiMode) {
-    if (!inv || !profileId) return;
-    setSettingsError(null);
-    try {
-      setRomajiMode((await inv("set_romaji_mode", { profileId, mode })) as RomajiMode);
-      markSettingsSaved();
-    } catch (e) {
-      setSettingsError(String(e));
-    }
+    await saveSetting<RomajiMode>("set_romaji_mode", { profileId, mode }, setRomajiMode);
   }
 
   // Issue #2 phase 1: the in-app kana keyboard is a profile setting that
   // never touches the system layout.
   async function setKanaKeyboardSetting(mode: KanaKeyboardMode) {
-    if (!inv || profileId === null) return;
-    setSettingsError(null);
-    try {
-      setKanaKeyboard((await inv("set_kana_keyboard", { profileId, mode })) as KanaKeyboardMode);
-      markSettingsSaved();
-    } catch (e) {
-      setSettingsError(String(e));
-    }
+    await saveSetting<KanaKeyboardMode>("set_kana_keyboard", { profileId, mode }, setKanaKeyboard);
   }
 
   // IME-TOGGLE-UX-001: resolve the active pack's in-app keyboard from its
