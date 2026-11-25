@@ -1,0 +1,16 @@
+ARCH-HOTSPOT-2026-11-25 gate log
+================================
+Scope: apps/desktop/src/App.tsx settings-save handler collapse
+(saveSetting helper + 5 call sites). Review-only lane; LANE tier.
+
+gate 1: npx tsc --noEmit (apps/desktop)
+  -> only error: src/serve-pairing.test.tsx TS2305 (missing export
+     'ServePairingCard' from ./onboarding) — sibling untracked WIP file,
+     pre-existing at HEAD, not introduced by this diff. No errors in
+     App.tsx or any settings file.
+
+gate 2: npx vitest run src/settings.test.tsx src/settings-feel.test.tsx src/App.test.tsx
+  -> Test Files 3 passed (3); Tests 42 passed (42)
+
+Sibling WIP (untracked): serve-pairing.test.tsx, PATH-CONNECT-PILL-001 evidence,
+RU-CONTENT-FREEZE-047-001 / RU-STORIES-MEDIA-001 evidence dirs — all untouched.
