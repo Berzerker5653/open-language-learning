@@ -1,0 +1,13 @@
+# REVIEW-PATH-WHATSNEXT-001 — SPEC verdict
+
+**Verdict: PASS**
+
+The lane (code `ebd96c8` + harness strengthen `9e11255d` + capture close `2ab8070d`) does exactly what the card asked, nothing more, nothing less:
+
+- **Engine** (`apps/desktop/src-tauri/src/lib.rs`): `current_offer_at` computes EXACTLY ONE answer — first review-due node in curriculum order (path order is the tie-break, no second priority system), else today's plan's first `introduction` item mapped to the unit whose activity references it. Estimates ride the session shape's own price (review = 5 min default plan, introduction = 3 min one lesson step) — never an invented number. `total_due` sums the path's due counts for the chip. Red-first test `current_offer_flips_to_review_first_when_a_review_is_due` green (seeds one due row in a done unit, asserts the flip). Registered in the shared command table so serve gets it too.
+- **Frontend** (home.tsx / App.tsx): `NextOffer` + `offerLabel` ("Next: <what, roughly how long>"), Today top strip `[data-testid=next-offer]` + earned `[data-testid=review-due-chip]` (only when total_due > 0), after-session card line `[data-testid=next-offer-card]` inside the Session summary, `PathView.scrollToUnit` (two-phase: open collapsed section, then scrollIntoView once rendered) + `data-unit` attributes. App loads `current_offer` on every home refresh alongside `unit_path`. Scroll fires only at the after-session moment — one answer, never two.
+- **Journeys mirror** (harness.tsx): honest — fixture profiles carry no due rows, so they answer "introduction"; the owner unit is derived from the SAME schedule-row mapping `unit_path` renders (no invented nodes; abstains with null rather than guessing). journey `whatsnext.journey.tsx` pins: strip names the single offer, no chip while nothing is due, offered node present, full session walk, after-session card text === strip text, pinned node still in DOM.
+- **Acceptance** (`scripts/whatsnext-capture.mjs`): strengthened for today's pack — targeted per-ref seeding, bounded back-date flip loop logging flipAttempts, stable-home load gate, strip label measured without chip subtree, session walk measures answered-graded activities (grading is server-side; correctness lives in vitest journeys). Green 12/12 at 390x844 with `result.json` + 3 pngs committed.
+- **Scope check**: `ebd96c8` touches exactly lib.rs, App.tsx, home.tsx, journeys/harness.tsx, journeys/whatsnext.journey.tsx, scripts/whatsnext-capture.mjs. `9e11255d` touches only the capture harness (no assertions removed or weakened — disclosed in its body). The capture close (`2ab8070d`) touches gates.log, result.json, 3 pngs, notes, task-state. No scope creep.
+
+No missing pieces. No out-of-scope additions.
