@@ -3863,6 +3863,22 @@ tasks:
   - "Full suite stays green before commit and suite wall time is recorded in state/evidence/MUTATION-PERF-001/gates.log (before: ~371s on this machine at 2026-11-23; after: measured), with the 44-vs-37 historical doc discrepancy recorded but not rewritten"
   - "No change to tools/validate_handoff.py, no weakened assertion anywhere - gate integrity"
   required_for_desktop_1_0: false
+- id: SERVE-PAIR-ONBOARD-001
+  milestone: M11
+  priority: P1
+  title: Serve-mode first-contact pairing card - an unpaired device gets the pair form on the onboarding screen instead of a dead welcome step
+  dependencies: [WEB-SERVE-001, LAN-TOGGLE-PIN-001]
+  read_first:
+  - state/notes/SERVE-PAIR-ONBOARD-001.md
+  - apps/desktop/src/onboarding.tsx
+  - apps/desktop/src/settings.tsx
+  - apps/desktop/src/App.tsx
+  acceptance:
+  - "In serve mode an unpaired device opens a first-contact pairing card instead of the welcome step - visibly distinct, naming where the PIN comes from, with the submit disabled until a PIN is entered"
+  - "The card reuses the serve bridge /pair endpoint and never claims a capability the serve bridge does not have - no cloud or internet wording anywhere"
+  - "A paired device in serve mode and all desktop mode render exactly as before"
+  - "The serve-pairing contract test goes red at base and green after; the full desktop suite stays green and validate_handoff passes"
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -3904,6 +3920,7 @@ execution_scope:
   - FEEL-PROGRESS-001
   - FEEL-ONBOARD-001
   - FEEL-SETTINGS-001
+  - SERVE-PAIR-ONBOARD-001
   - JA-A1-003
   - JA-A2-002
   - JA-A2-002-FIX-001

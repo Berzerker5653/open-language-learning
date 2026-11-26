@@ -1,0 +1,11 @@
+SERVE-PAIR-ONBOARD-001 gates (2026-11-25, this session, working tree at a5c3d1)
+- serve-pairing contract test (was red: ServePairingCard undefined): 2/2 green
+- full desktop suite: 76 files, 667/667 (was 665 with 2 red serving-pairing tests)
+- npx tsc --noEmit: clean
+- eslint src/onboarding.tsx src/App.tsx src/serve-pairing.test.tsx: clean
+- prettier --check .: clean
+- python3 tools/validate_handoff.py: HANDOFF VALIDATION PASSED (2281 files)
+- cargo audit --deny warnings: clean (cookie 0.18.3 / url 2.5.9 post-bump)
+- cargo clippy --workspace --locked: clean
+- cargo fmt --check: clean
+- cargo test --workspace: lib 235 passed (1 vendor-gated dictation ASR test flaked once under load; isolated re-run 1/1 ok)
