@@ -1,0 +1,23 @@
+# REVIEW-APP-SPLIT-003A — reviewer re-verification (2026-11-26, MST)
+
+Reviewer ran the lane's gates independently in a clean git worktree at the code
+commit (main-tree node_modules symlinked; packages/, apps/desktop/package.json,
+tsconfig, and lockfiles untouched between 88ce090e and review HEAD — verified via
+git log, so resolution is identical to the lane's environment).
+
+- `git show 88ce090e^:apps/desktop/src/App.tsx | wc -l` -> 4650
+- `git show 88ce090e:apps/desktop/src/App.tsx | wc -l`  -> 4594  (claimed 4591 — see D1)
+- `git show 88ce090e:apps/desktop/src/app/history-wiring.tsx | wc -l` -> 138 (gates.log said 140 — see D1)
+- `npx tsc --noEmit` (apps/desktop, worktree@88ce090e) -> exit 0 PASS
+- `npx vitest run` (apps/desktop, worktree@88ce090e) -> Tests 694 passed (694) PASS, 9.49s
+- `python3 tools/validate_handoff.py --require-explicit-ledger-records` (worktree@88ce090e)
+  -> HANDOFF VALIDATION PASSED (2286 data files checked; pre-existing WARNs only)
+- Hooks-in-App grep at 88ce090e: appLocation (App.tsx:3626), currentLocationRef sync
+  (3633), historyExitAsk useState + historyPopRef useRef (3634-3635), installHistoryNav
+  effect (3660), location-sync effect — all retained. PASS.
+- `grep -rn "handleHistoryPop|confirmHistoryExit|HistoryExitAsk"` across tests/journeys
+  excluding the new module -> no importers. "No re-pins needed" claim holds.
+- `npx prettier --check` on App.tsx@88ce090e^ -> RED (pre-existing serve-probe
+  131-char line); history-wiring.tsx@88ce090e -> clean. Explains N1 hunk.
+
+Worktree removed after; main tree clean (git status --short empty).
