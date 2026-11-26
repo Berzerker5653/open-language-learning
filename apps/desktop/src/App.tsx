@@ -134,6 +134,15 @@ import { PlacementCoverageNote } from "./app/placement-coverage";
 import { runSmokeHandshake } from "./app/walkthrough";
 import { useServeProbe } from "./app/serve-probe";
 import { handleHistoryPop, confirmHistoryExit, HistoryExitAsk } from "./app/history-wiring";
+import {
+  runSettingsPrimes,
+  runProfileExport,
+  runRestorePreview,
+  runRestoreConfirm,
+  runProfileDelete,
+  runProfileSwitch,
+  type SettingsWiringDeps,
+} from "./app/settings-wiring";
 
 export {
   after,
@@ -1474,34 +1483,10 @@ export function App() {
   }
 
   async function primeSettingsReads() {
-    if (!inv || !profileId) return;
-    // Sweep finding 20: one failed read must not abort the other primes —
-    // a broken speech catalogue takes neither the pack list nor the mic
-    // pickers down with it. Each block reports its own failure.
-    const fails: string[] = [];
-    const soft = async (label: string, run: () => Promise<unknown>) => {
-      try {
-        await run();
-      } catch (e) {
-        fails.push(`${label}: ${String(e)}`);
-      }
-    };
-    await soft("microphone and writing settings", async () => {
-      setMicEnabled((await inv("get_microphone_enabled", { profileId })) as boolean);
-      setMicDevice((await inv("get_microphone_device", { profileId })) as string | null);
-      setPlaybackDevice((await inv("get_playback_device", { profileId })) as string | null);
-      setRomajiMode((await inv("get_romaji_mode", { profileId })) as RomajiMode);
-      setKanaKeyboard((await inv("get_kana_keyboard", { profileId })) as KanaKeyboardMode);
-    });
-    // K-77: Settings now hosts language-pack management and the speech
-    // runtime status too, so opening it primes the reads the old
-    // Languages tab did. K-90 deleted the synthesis status read.
-    await soft("speech models", refreshSpeech);
-    await soft("language packs", () => refreshLanguages());
-    await soft("aligner status", refreshAligner);
-    await refreshMicrophones();
-    await refreshOutputs();
-    if (fails.length > 0) setSettingsError(fails.join(" "));
+    // APP-SPLIT-003B: the prime-read bodies live in
+    // ./app/settings-wiring — pure move, zero behavior change. The deps
+    // bundle is built per render at the bottom of App().
+    await runSettingsPrimes(settingsWiringDeps);
   }
 
   // K-64: names exist only after the browser has granted microphone access
@@ -1664,124 +1649,11 @@ export function App() {
     window.addEventListener("keydown", onKey, true);
     return () => window.removeEventListener("keydown", onKey, true);
   }, [step, kanaKeyboard, inv, profileId]);
-  async function exportProfileData() {
-    if (!inv || !profileId) return;
-    setSettingsError(null);
-    try {
-      setSettingsExportPath((await inv("profile_export", { profileId })) as string);
-    } catch (e) {
-      setSettingsError(String(e));
-    }
-  }
-  // R06: the check is read-only; the write only happens on the labelled
-  // confirm control, always as a new profile, never over the profile in use.
-  async function previewRestore() {
-    if (!inv) return;
-    setSettingsError(null);
-    setRestoreOutcome(null);
-    const path = restorePath.trim();
-    try {
-      const preview = (await inv("profile_import_preview", {
-        path,
-        mode: "new",
-      })) as ImportPreview;
-      setRestoreChecked({ path, preview });
-    } catch (e) {
-      setRestoreChecked(null);
-      setSettingsError(String(e));
-    }
-  }
-
-  async function confirmRestore() {
-    if (!inv || !restoreChecked || !restoreChecked.preview.supported) return;
-    setSettingsError(null);
-    try {
-      const outcome = (await inv("profile_import", {
-        path: restoreChecked.path,
-        mode: "new",
-      })) as ImportOutcome;
-      setRestoreOutcome(outcome);
-      // The restored profile is in the picker without a restart.
-      setProfiles((await inv("list_profiles")) as ProfileSummary[]);
-    } catch (e) {
-      setSettingsError(String(e));
-    }
-  }
-
-  // Two-step delete: the first click only arms the confirmation; only
-  // the labelled confirm control fires `profile_delete` (never a
-  // native window.confirm).
-  async function confirmProfileDelete() {
-    if (!inv || !profileId) return;
-    setSettingsError(null);
-    try {
-      await inv("profile_delete", { profileId });
-    } catch (e) {
-      setSettingsError(String(e));
-      return;
-    }
-    // The profile no longer exists: back to the wizard, clean state.
-    setProfileId(null);
-    setDisplayName("");
-    applyPlan(EMPTY_PLAN);
-    setEnvironments(null);
-    setMineCount(null);
-    setGoals([]);
-    setProgress([]);
-    // Sweep finding 15: an in-flight or paused session belongs to the
-    // deleted profile — neither the panel nor the summary may survive it.
-    sessionQueueRef.current = null;
-    setSession(null);
-    setSessionOutcome(null);
-    // D7: a deleted profile's active pack must not be carried into the
-    // next session — there is no active pack until one is chosen.
-    setSelectedPack(null);
-    setActiveIds([]);
-    setMicEnabled(false);
-    setRomajiMode("auto");
-    setSettingsExportPath(null);
-    setSettingsDeleteArmed(false);
-    setStep("welcome");
-  }
-
-  // O-06 2026-10-10 (P1): leave the current profile without deleting it.
-  // Same clean-state discipline as profile deletion — no surface from the
-  // old profile may carry into the next session — but the picker shows the
-  // resume list, not the new-profile wizard. Progress is untouched.
-  async function switchProfile() {
-    if (!inv || !profileId) return;
-    setSettingsError(null);
-    setProfileId(null);
-    setDisplayName("");
-    applyPlan(EMPTY_PLAN);
-    setEnvironments(null);
-    setMineCount(null);
-    setGoals([]);
-    setProgress([]);
-    // Sweep finding 15: same discipline as deletion — the old profile's
-    // session (panel, summary, queue) must not carry into the next one.
-    sessionQueueRef.current = null;
-    setSession(null);
-    setSessionOutcome(null);
-    // D7 discipline: no active pack until the next profile chooses one.
-    setSelectedPack(null);
-    setActiveIds([]);
-    setMicEnabled(false);
-    setRomajiMode("auto");
-    setSettingsExportPath(null);
-    setSettingsDeleteArmed(false);
-    setSettingsSwitchArmed(false);
-    try {
-      setProfiles((await inv("list_profiles")) as ProfileSummary[]);
-      setStep("resume");
-      // Land where a launch-time resume lands, not in Settings.
-      setRoute("practice");
-    } catch (e) {
-      // Honest failure: stay where we are with an error, never strand the
-      // learner on an empty picker.
-      setSettingsError(`The profile list could not be loaded: ${String(e)}`);
-    }
-  }
+  // APP-SPLIT-003B: the export/restore/delete/switch handler bodies live
+  // in ./app/settings-wiring (runProfileExport, runRestorePreview,
+  // runRestoreConfirm, runProfileDelete, runProfileSwitch) — pure move,
+  // zero behavior change; App() passes `settingsWiringDeps` at each
+  // call site below.
   async function openProgress() {
     setRoute("progress");
     setProgressError(null);
@@ -3766,6 +3638,49 @@ export function App() {
         }
       : null;
 
+  // APP-SPLIT-003B: one props bundle (state + setters) for the
+  // settings/import wiring slice in ./app/settings-wiring. Built per
+  // render, AFTER every referenced binding is in scope, so the moved
+  // bodies read exactly what the old inline closures captured. App()
+  // keeps owning every hook; these are plain values and setters.
+  const settingsWiringDeps: SettingsWiringDeps = {
+    inv,
+    profileId,
+    restorePath,
+    restoreChecked,
+    setSettingsError,
+    setRestoreOutcome,
+    setRestoreChecked,
+    setSettingsExportPath,
+    setSettingsDeleteArmed,
+    setSettingsSwitchArmed,
+    setMicEnabled,
+    setMicDevice,
+    setPlaybackDevice,
+    setRomajiMode,
+    setKanaKeyboard,
+    refreshSpeech,
+    refreshLanguages,
+    refreshAligner,
+    refreshMicrophones,
+    refreshOutputs,
+    setProfileId,
+    setDisplayName,
+    applyPlan,
+    setEnvironments,
+    setMineCount,
+    setGoals,
+    setProgress,
+    sessionQueueRef,
+    setSession,
+    setSessionOutcome,
+    setSelectedPack,
+    setActiveIds,
+    setProfiles,
+    setStep,
+    setRoute,
+  };
+
   return (
     <AppShell
       productName="Open Language Learning Platform"
@@ -4319,7 +4234,7 @@ export function App() {
             deviceTier={deviceTier}
             buildIdentity={buildIdentity}
             exportPath={settingsExportPath}
-            onExport={() => void exportProfileData()}
+            onExport={() => void runProfileExport(settingsWiringDeps)}
             restorePath={restorePath}
             restorePreview={
               restoreChecked && restoreChecked.path === restorePath.trim()
@@ -4331,8 +4246,8 @@ export function App() {
               setRestorePath(path);
               setRestoreOutcome(null);
             }}
-            onPreviewRestore={() => void previewRestore()}
-            onConfirmRestore={() => void confirmRestore()}
+            onPreviewRestore={() => void runRestorePreview(settingsWiringDeps)}
+            onConfirmRestore={() => void runRestoreConfirm(settingsWiringDeps)}
             deleteArmed={settingsDeleteArmed}
             onArmDelete={() => setSettingsDeleteArmed(true)}
             onCancelDelete={() => setSettingsDeleteArmed(false)}
@@ -4340,11 +4255,11 @@ export function App() {
             playbackOutputs={playbackOutputs}
             canRouteOutput={canRouteOutput}
             onPickPlaybackDevice={(id) => void pickPlaybackSetting(id)}
-            onConfirmDelete={() => void confirmProfileDelete()}
+            onConfirmDelete={() => void runProfileDelete(settingsWiringDeps)}
             switchArmed={settingsSwitchArmed}
             onArmSwitch={() => setSettingsSwitchArmed(true)}
             onCancelSwitch={() => setSettingsSwitchArmed(false)}
-            onConfirmSwitch={() => void switchProfile()}
+            onConfirmSwitch={() => void runProfileSwitch(settingsWiringDeps)}
             error={settingsError}
             loading={settingsLoading}
             saveNotice={settingsSaveNotice}
