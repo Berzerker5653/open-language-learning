@@ -262,12 +262,22 @@ try {
       !contents.romajiChip &&
       !contents.kanaChip &&
       contents.lanChip &&
-      ["Microphone", "Profile data", "Speech", "Speech runtimes", "Local network", "About this build"].every(
-        (l) => contents.labels.includes(l),
-      ) &&
-      ["settings-mic", "settings-profile", "settings-speech", "settings-runtimes", "settings-lan", "settings-build"].every(
-        (a) => contents.anchors.includes(a),
-      ) &&
+      [
+        "Microphone",
+        "Profile data",
+        "Speech",
+        "Speech runtimes",
+        "Local network",
+        "About this build",
+      ].every((l) => contents.labels.includes(l)) &&
+      [
+        "settings-mic",
+        "settings-profile",
+        "settings-speech",
+        "settings-runtimes",
+        "settings-lan",
+        "settings-build",
+      ].every((a) => contents.anchors.includes(a)) &&
       !contents.anchors.includes("settings-romaji"),
     contents,
   );
@@ -393,7 +403,8 @@ try {
       !closed.open &&
       closed.marker === "none" &&
       closed.chevron &&
-      (closed.beforeTransform === "none" || closed.beforeTransform === "matrix(1, 0, 0, 1, 0, 0)") &&
+      (closed.beforeTransform === "none" ||
+        closed.beforeTransform === "matrix(1, 0, 0, 1, 0, 0)") &&
       opened.open &&
       opened.beforeTransform === "matrix(-1, 0, 0, -1, 0, 0)" &&
       opened.animName === "disclosure-reveal" &&

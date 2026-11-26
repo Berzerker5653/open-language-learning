@@ -26,12 +26,7 @@
  *          node scripts/capstone-capture.mjs
  */
 import { spawn } from "node:child_process";
-import {
-  mkdirSync,
-  writeFileSync,
-  mkdtempSync,
-  existsSync,
-} from "node:fs";
+import { mkdirSync, writeFileSync, mkdtempSync, existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 
@@ -121,11 +116,10 @@ try {
     (n) => n && typeof n === "object",
   );
   const caps = nodes.filter((n) => n.kind === "capstone");
-  check(
-    "the path carries engine-synthesized capstone nodes (kind capstone)",
-    caps.length >= 3,
-    { nodes: nodes.length, capstones: caps.map((c) => c.unit_id) },
-  );
+  check("the path carries engine-synthesized capstone nodes (kind capstone)", caps.length >= 3, {
+    nodes: nodes.length,
+    capstones: caps.map((c) => c.unit_id),
+  });
   const bandsSeen = caps.map((c) => c.unit_id.split(".").pop());
   check(
     "at most ONE capstone per section band",
@@ -142,9 +136,7 @@ try {
   check(
     "the on-ramp section ends with its checkpoint, LOCKED for a fresh learner",
     !!cap && cap.locked === true && cap.done === false && cap.in_progress === false,
-    cap
-      ? { locked: cap.locked, done: cap.done, in_progress: cap.in_progress }
-      : { present: false },
+    cap ? { locked: cap.locked, done: cap.done, in_progress: cap.in_progress } : { present: false },
   );
   check(
     "the locked checkpoint names its gate in words",
@@ -174,9 +166,7 @@ try {
   const items = plan.value?.items ?? [];
   const interleaveOk = items
     .slice(0, 8)
-    .every((it, i) =>
-      it.modality === (i % 2 === 0 ? "orthography-recognition" : "recall-meaning"),
-    );
+    .every((it, i) => it.modality === (i % 2 === 0 ? "orthography-recognition" : "recall-meaning"));
   check(
     "capstone_plan serves a capped, letters-first interleaved mixed recall",
     plan.status === 200 && items.length === 16 && interleaveOk,
@@ -338,11 +328,15 @@ try {
   );
   const countOk = /^\d+\/\d+ done$/.test(dom.count) && !dom.unitsDoneLabel;
   const totalMatchesNodes = Number((dom.count.match(/\/(\d+)/) ?? [])[1]) === dom.nodesInSection;
-  check('the section counter counts the checkpoint and says "done", never "units done"', countOk && totalMatchesNodes, {
-    count: dom.count,
-    nodesInSection: dom.nodesInSection,
-    unitsDoneLabel: dom.unitsDoneLabel,
-  });
+  check(
+    'the section counter counts the checkpoint and says "done", never "units done"',
+    countOk && totalMatchesNodes,
+    {
+      count: dom.count,
+      nodesInSection: dom.nodesInSection,
+      unitsDoneLabel: dom.unitsDoneLabel,
+    },
+  );
 
   // Evidence shot: the locked checkpoint itself in view (below the fold).
   const scrolled = await evaluate(`(() => {
@@ -367,8 +361,6 @@ try {
     }
   }
   writeFileSync(join(OUT, "result.json"), JSON.stringify(result, null, 2) + "\n");
-  console.log(
-    result.error ? `HARNESS ERROR: ${result.error}` : `failures: ${result.failures}`,
-  );
+  console.log(result.error ? `HARNESS ERROR: ${result.error}` : `failures: ${result.failures}`);
   process.exit(result.error || result.failures > 0 ? 1 : 0);
 }

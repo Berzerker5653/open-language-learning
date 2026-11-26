@@ -65,9 +65,22 @@ const BASE = `http://127.0.0.1:${PORT}`;
 
 // The infra strings the first fold must never carry (SERVE-BANNER-001 list,
 // substrings of the server's own /api/capabilities lines).
-const INFRA = ["Browser mode", "serve bridge", "install progress", "Privacy settings", "secure context"];
+const INFRA = [
+  "Browser mode",
+  "serve bridge",
+  "install progress",
+  "Privacy settings",
+  "secure context",
+];
 
-const result = { viewport: `${VW}x${VH}`, port: PORT, tag: TAG, checks: [], failures: 0, error: null };
+const result = {
+  viewport: `${VW}x${VH}`,
+  port: PORT,
+  tag: TAG,
+  checks: [],
+  failures: 0,
+  error: null,
+};
 const check = (name, pass, measured) => {
   result.checks.push({ name, pass, measured });
   if (!pass) result.failures++;
@@ -297,11 +310,10 @@ try {
     fold.pinVisible && fold.pillCount === 1 && fold.pillOnPinRow && fold.pillInFold,
     fold,
   );
-  check(
-    "A1b: zero serve-mode infra strings inside the first fold",
-    fold.foldInfraHits === 0,
-    { foldInfraHits: fold.foldInfraHits, foldInfraSnippets: fold.foldInfraSnippets },
-  );
+  check("A1b: zero serve-mode infra strings inside the first fold", fold.foldInfraHits === 0, {
+    foldInfraHits: fold.foldInfraHits,
+    foldInfraSnippets: fold.foldInfraSnippets,
+  });
   check(
     "A1c: Today meta (greeting h1, time budget) does not occupy the pin-centred first fold",
     !fold.greetingShown && !fold.budgetShown,

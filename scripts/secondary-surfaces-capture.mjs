@@ -63,7 +63,14 @@ const VH = 844;
 const PORT = 18080 + (process.pid % 60);
 const BASE = `http://127.0.0.1:${PORT}`;
 
-const result = { viewport: `${VW}x${VH}`, mobile: true, tag: TAG, checks: [], failures: 0, error: null };
+const result = {
+  viewport: `${VW}x${VH}`,
+  mobile: true,
+  tag: TAG,
+  checks: [],
+  failures: 0,
+  error: null,
+};
 const check = (name, pass, measured) => {
   result.checks.push({ name, pass, measured });
   if (!pass) result.failures++;
@@ -368,14 +375,13 @@ try {
     return { tracked, addDisabled, focus, buttonTargets: allButtons };
   })()`);
 
-  const allInputs = wordsMeasures.tracked.length >= 4 && wordsMeasures.tracked.every((t) => t.minHeight >= 44);
+  const allInputs =
+    wordsMeasures.tracked.length >= 4 && wordsMeasures.tracked.every((t) => t.minHeight >= 44);
   check(
     "S4 MYWORDS-INPUTS: form inputs are full-width and >= 44px tall",
     wordsMeasures.tracked.length >= 4 &&
       allInputs &&
-      wordsMeasures.tracked.every(
-        (t) => t.parentWidth && t.width >= t.parentWidth - 2,
-      ),
+      wordsMeasures.tracked.every((t) => t.parentWidth && t.width >= t.parentWidth - 2),
     wordsMeasures.tracked,
   );
   // Resolve the --accent token to a real rgb() in-page so a focused input

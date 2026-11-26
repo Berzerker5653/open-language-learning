@@ -301,7 +301,11 @@ try {
     rows: document.querySelectorAll('.skeleton-row').length,
   }))()`);
   await shot("mid-settings-skeleton");
-  check("SETTINGS: loading strip mid-prime", settingsMid.strip && settingsMid.rows >= 3, settingsMid);
+  check(
+    "SETTINGS: loading strip mid-prime",
+    settingsMid.strip && settingsMid.rows >= 3,
+    settingsMid,
+  );
   await sleep(LATENCY + 800);
 
   // ---- 3. PROGRESS: reserved shell, no reflow when staggered reads land ----
@@ -470,7 +474,9 @@ try {
 
   writeFileSync(join(OUT, "result.json"), JSON.stringify(result, null, 2));
   console.log(
-    result.failures === 0 ? "\nCAPTURE GREEN (0 failures)" : `\nCAPTURE RED (${result.failures} failures)`,
+    result.failures === 0
+      ? "\nCAPTURE GREEN (0 failures)"
+      : `\nCAPTURE RED (${result.failures} failures)`,
   );
   process.exitCode = result.failures === 0 ? 0 : 1;
 } catch (err) {

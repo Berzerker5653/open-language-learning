@@ -66,7 +66,14 @@ const VH = 844;
 const PORT = 17830 + (process.pid % 90);
 const BASE = `http://127.0.0.1:${PORT}`;
 
-const result = { viewport: `${VW}x${VH}`, mobile: true, tag: TAG, checks: [], failures: 0, error: null };
+const result = {
+  viewport: `${VW}x${VH}`,
+  mobile: true,
+  tag: TAG,
+  checks: [],
+  failures: 0,
+  error: null,
+};
 const check = (name, pass, measured) => {
   result.checks.push({ name, pass, measured });
   if (!pass) result.failures++;

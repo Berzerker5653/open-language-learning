@@ -436,14 +436,10 @@ try {
     avatars.rows.length === 4 &&
     avatars.rows.every((r) => r.rendered !== null && r.rendered === expected(r.name)) &&
     new Set(avatars.rows.map((r) => r.rendered)).size >= 2;
-  check(
-    "initials avatars vary deterministically per profile id",
-    avatarPass,
-    {
-      rendered: avatars?.rows.map((r) => [r.name, r.initials, r.rendered]),
-      expected: NAMES.map((n) => [n, expected(n)]),
-    },
-  );
+  check("initials avatars vary deterministically per profile id", avatarPass, {
+    rendered: avatars?.rows.map((r) => [r.name, r.initials, r.rendered]),
+    expected: NAMES.map((n) => [n, expected(n)]),
+  });
 
   // 8. hover lift with a REAL CDP mouse move over the first card
   const box = await evaluate(`(() => {
@@ -544,7 +540,11 @@ try {
   })()`);
   check(
     "resume Continue glides into the app (app-in, chooser gone)",
-    resumed && !!entry2 && entry2.hasClass && entry2.animationName === "app-in" && entry2.chooserGone,
+    resumed &&
+      !!entry2 &&
+      entry2.hasClass &&
+      entry2.animationName === "app-in" &&
+      entry2.chooserGone,
     { resumed, entry2 },
   );
   await sleep(400);

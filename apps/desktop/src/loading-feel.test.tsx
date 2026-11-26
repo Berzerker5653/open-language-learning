@@ -309,6 +309,12 @@ describe("FEEL-LOADING-001 App container wires the loading flags", () => {
 
   it("the six Settings setters mark a saved tick on success", () => {
     expect(appTsx).toContain("markSettingsSaved()");
+    // All Settings writes route through the shared saveSetting helper, which
+    // is what confirms the save (single tick, error path, etc.). Each setter
+    // must call that helper, and the helper must do the confirm.
+    const helper = /async function saveSetting<T>\([\s\S]*?\n {2}\}/.exec(appTsx);
+    expect(helper, "saveSetting helper must exist").not.toBeNull();
+    expect(helper![0], "saveSetting must confirm the save").toContain("markSettingsSaved()");
     for (const setter of [
       "setMicSetting",
       "pickMicrophoneSetting",
@@ -318,13 +324,15 @@ describe("FEEL-LOADING-001 App container wires the loading flags", () => {
     ]) {
       const fn = new RegExp(`async function ${setter}\\([\\s\\S]*?\\n  \\}`).exec(appTsx);
       expect(fn, `${setter} must exist`).not.toBeNull();
-      expect(fn![0], `${setter} must confirm the save`).toContain("markSettingsSaved()");
+      expect(fn![0], `${setter} must route through saveSetting`).toContain("saveSetting");
     }
+    // selectSpeechModel inlines its own IPC call (distinct model-selection
+    // path, not the profile settings family), so it carries the confirm itself.
     const select = /async function selectSpeechModel\(modelId: string\) \{[\s\S]*?\n {2}\}/.exec(
       appTsx,
     );
-    expect(select).not.toBeNull();
-    expect(select![0]).toContain("markSettingsSaved()");
+    expect(select, "selectSpeechModel must exist").not.toBeNull();
+    expect(select![0], "selectSpeechModel must confirm the save").toContain("markSettingsSaved()");
   });
 
   it("placement first fetch is single-flight and shows a pending label", () => {

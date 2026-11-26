@@ -66,7 +66,12 @@ const VH = 844;
 const PORT = 17700 + (process.pid % 60);
 const BASE = `http://127.0.0.1:${PORT}`;
 const KINDS = new Set(["letters", "listening", "speaking", "words"]);
-const KIND_WORDS = { letters: "Letters", listening: "Listening", speaking: "Speaking", words: "Words" };
+const KIND_WORDS = {
+  letters: "Letters",
+  listening: "Listening",
+  speaking: "Speaking",
+  words: "Words",
+};
 
 const result = { viewport: `${VW}x${VH}`, checks: [], failures: 0, error: null };
 const check = (name, pass, measured) => {
@@ -396,7 +401,10 @@ try {
   })()`);
   check(
     "every rendered node exposes data-kind, one drawn center mark, and its screen-reader kind word",
-    dom.count > 0 && dom.bad.noKind === 0 && dom.bad.centerMarks === 0 && dom.bad.wrongKindWord === 0,
+    dom.count > 0 &&
+      dom.bad.noKind === 0 &&
+      dom.bad.centerMarks === 0 &&
+      dom.bad.wrongKindWord === 0,
     dom,
   );
   check(

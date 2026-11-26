@@ -69,7 +69,14 @@ const VH = 844;
 const PORT = 17920 + (process.pid % 60);
 const BASE = `http://127.0.0.1:${PORT}`;
 
-const result = { viewport: `${VW}x${VH}`, mobile: true, tag: TAG, checks: [], failures: 0, error: null };
+const result = {
+  viewport: `${VW}x${VH}`,
+  mobile: true,
+  tag: TAG,
+  checks: [],
+  failures: 0,
+  error: null,
+};
 const check = (name, pass, measured) => {
   result.checks.push({ name, pass, measured });
   if (!pass) result.failures++;
@@ -265,9 +272,7 @@ try {
   let onSettings = false;
   for (let i = 0; i < 40 && !onSettings; i++) {
     await sleep(250);
-    onSettings = await evaluate(
-      `(() => document.body.innerText.includes('Installed packs'))()`,
-    );
+    onSettings = await evaluate(`(() => document.body.innerText.includes('Installed packs'))()`);
   }
   if (!onSettings) throw new Error("navigation error: settings language panel never rendered");
   await shot(`settings-${TAG}`);
@@ -299,10 +304,15 @@ try {
   const postureOk =
     settingsMeasures.postureRows.length > 0 &&
     settingsMeasures.postureRows.every((r) => r.label && r.value && !r.runon);
-  check("C4 review-posture rows are label + value, never run-on prose", postureOk, settingsMeasures.postureRows);
+  check(
+    "C4 review-posture rows are label + value, never run-on prose",
+    postureOk,
+    settingsMeasures.postureRows,
+  );
   check(
     "C5 RU pack claims show no kanji row (known zero)",
-    settingsMeasures.claimLis.length > 0 && !settingsMeasures.claimLis.some((t) => /kanji/i.test(t)),
+    settingsMeasures.claimLis.length > 0 &&
+      !settingsMeasures.claimLis.some((t) => /kanji/i.test(t)),
     settingsMeasures.claimLis,
   );
 

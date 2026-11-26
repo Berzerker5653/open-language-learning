@@ -389,11 +389,15 @@ try {
   })()`);
   await sleep(4300); // a full life passes with the delete cancelled
   const afterCancel = await evaluate("window.__mineCalls.remove.length");
-  check("UNDO: tapping the chip cancels the delete for good", cancelClicked && undone && afterCancel === 1, {
-    cancelClicked,
-    undone,
-    afterCancel,
-  });
+  check(
+    "UNDO: tapping the chip cancels the delete for good",
+    cancelClicked && undone && afterCancel === 1,
+    {
+      cancelClicked,
+      undone,
+      afterCancel,
+    },
+  );
 
   // ---- 6. the add-word success pulse ----
   await evaluate(`(() => {

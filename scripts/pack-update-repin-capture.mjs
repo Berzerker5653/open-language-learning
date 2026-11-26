@@ -34,7 +34,10 @@ import { join, resolve } from "node:path";
 const REPO = resolve(import.meta.dirname, "..");
 const SERVE_BIN = resolve(process.env.SERVE_BIN ?? "");
 const SERVE_DIST = resolve(process.env.SERVE_DIST ?? "");
-for (const [name, p] of [["SERVE_BIN", SERVE_BIN], ["SERVE_DIST", SERVE_DIST]]) {
+for (const [name, p] of [
+  ["SERVE_BIN", SERVE_BIN],
+  ["SERVE_DIST", SERVE_DIST],
+]) {
   if (!p || !resolve(p)) {
     console.error(`${name} is required`);
     process.exit(2);
@@ -149,7 +152,11 @@ try {
   check(
     "seeded: catalogue join claims installed 0.4.8 against pin 0.4.9 (the incident fact)",
     rowBefore?.installed_version === OLD && rowBefore?.version === NEW,
-    { installed: rowBefore?.installed_version, pin: rowBefore?.version, status: catBefore.value?.status },
+    {
+      installed: rowBefore?.installed_version,
+      pin: rowBefore?.version,
+      status: catBefore.value?.status,
+    },
   );
 
   // ---- real app, real click ----
@@ -290,8 +297,12 @@ try {
       !before.badges.some((b) => b.includes("v0.4.9")),
     before,
   );
-  await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: true }, sessionId).then(
-    (shot) => writeFileSync(join(OUT, "settings-before.png"), Buffer.from(shot.data, "base64")),
+  await send(
+    "Page.captureScreenshot",
+    { format: "png", captureBeyondViewport: true },
+    sessionId,
+  ).then((shot) =>
+    writeFileSync(join(OUT, "settings-before.png"), Buffer.from(shot.data, "base64")),
   );
 
   // The owner's exact action: click Update. The engine sees the pin already
@@ -314,8 +325,12 @@ try {
     !after.buttons.some((b) => b.includes("Update to v")),
     after,
   );
-  await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: true }, sessionId).then(
-    (shot) => writeFileSync(join(OUT, "settings-after.png"), Buffer.from(shot.data, "base64")),
+  await send(
+    "Page.captureScreenshot",
+    { format: "png", captureBeyondViewport: true },
+    sessionId,
+  ).then((shot) =>
+    writeFileSync(join(OUT, "settings-after.png"), Buffer.from(shot.data, "base64")),
   );
 
   result.afterSelection = selection(profileId);
@@ -328,9 +343,13 @@ try {
   const rowAfter = (catAfter.value?.entries ?? catAfter.value?.packs ?? []).find(
     (e) => e.pack_id === PACK_ID,
   );
-  check("AFTER catalogue join: installed_version reads 0.4.9", rowAfter?.installed_version === NEW, {
-    installed: rowAfter?.installed_version,
-  });
+  check(
+    "AFTER catalogue join: installed_version reads 0.4.9",
+    rowAfter?.installed_version === NEW,
+    {
+      installed: rowAfter?.installed_version,
+    },
+  );
 } catch (err) {
   result.error = String(err?.message ?? err);
   result.failures++;

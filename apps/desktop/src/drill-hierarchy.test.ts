@@ -68,9 +68,7 @@ describe("DRILL-HIERARCHY-001 answer tiles dominate", () => {
     expect(hier).toBeGreaterThan(dim);
     // ...and the pinned state re-declarations still sit after the generic
     // disabled rule — the FEEL-DRILL-001 (run 205) shape, unbroken.
-    expect(css.indexOf(".btn.choice--correct {")).toBeGreaterThan(
-      css.indexOf(".btn:disabled {"),
-    );
+    expect(css.indexOf(".btn.choice--correct {")).toBeGreaterThan(css.indexOf(".btn:disabled {"));
   });
 });
 

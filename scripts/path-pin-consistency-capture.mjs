@@ -113,15 +113,7 @@ async function api(command, body) {
 // the canonical ladder order (on-ramp, a1..c2, then custom bands in
 // first-occurrence order), flatten, keep unlocked & not-done units, and
 // take the first in-progress one — else the first not-done one.
-const BAND_LADDER = [
-  "on-ramp",
-  "a1",
-  "a2",
-  "b1",
-  "b2",
-  "c1",
-  "c2",
-];
+const BAND_LADDER = ["on-ramp", "a1", "a2", "b1", "b2", "c1", "c2"];
 function expectedPinUnit(nodes) {
   const byKey = new Map();
   for (const n of nodes) {
@@ -132,11 +124,9 @@ function expectedPinUnit(nodes) {
     if (s.rank < 0) s.rank = BAND_LADDER.size + byKey.size;
     s.nodes.push(n);
   }
-  const flat = [...byKey.values()]
-    .sort((a, b) => a.rank - b.rank)
-    .flatMap((s) => s.nodes);
+  const flat = [...byKey.values()].sort((a, b) => a.rank - b.rank).flatMap((s) => s.nodes);
   const open = flat.filter((n) => !n.locked && !n.done);
-  return (open.find((n) => n.in_progress)?.unit_id ?? open[0]?.unit_id) ?? null;
+  return open.find((n) => n.in_progress)?.unit_id ?? open[0]?.unit_id ?? null;
 }
 
 let serve = null;
@@ -258,10 +248,14 @@ try {
     expectedPinUnit: wantPin,
     offer,
   };
-  check("the scene seeded: one DONE unit and one honest IN PROGRESS unit", drilledFully.length > 0 && drilledPartial.length > 0, {
-    drilledFully: drilledFully.length,
-    drilledPartial: drilledPartial.length,
-  });
+  check(
+    "the scene seeded: one DONE unit and one honest IN PROGRESS unit",
+    drilledFully.length > 0 && drilledPartial.length > 0,
+    {
+      drilledFully: drilledFully.length,
+      drilledPartial: drilledPartial.length,
+    },
+  );
   check("the pin rule has an answer for this scene", wantPin !== null, { wantPin });
 
   // ---- browser: the real app on a phone viewport. NO manual scrolling
@@ -418,11 +412,11 @@ try {
   })()`);
   result.dom = dom;
 
-  check(
-    "exactly ONE 'You are here' pin exists on the track",
-    dom.pinCount === 1,
-    { pinCount: dom.pinCount, pinUnit: dom.pinUnit, engineCurrent: result.api.engineCurrent },
-  );
+  check("exactly ONE 'You are here' pin exists on the track", dom.pinCount === 1, {
+    pinCount: dom.pinCount,
+    pinUnit: dom.pinUnit,
+    engineCurrent: result.api.engineCurrent,
+  });
   check(
     "the pin marks WHERE THE LEARNER IS — the rule's unit, not the plan's suggestion",
     dom.pinUnit === wantPin,
@@ -441,9 +435,13 @@ try {
     },
   );
   if (dom.chipPresent) {
-    check("the next-up chip lives in the header strip, ABOVE the track", dom.chipAboveTrack === true, {
-      chipAboveTrack: dom.chipAboveTrack,
-    });
+    check(
+      "the next-up chip lives in the header strip, ABOVE the track",
+      dom.chipAboveTrack === true,
+      {
+        chipAboveTrack: dom.chipAboveTrack,
+      },
+    );
     check("the chip never doubles as a track pin", dom.pinUnit !== offer?.unit_id, {
       pinUnit: dom.pinUnit,
       offerUnit: offer?.unit_id,
