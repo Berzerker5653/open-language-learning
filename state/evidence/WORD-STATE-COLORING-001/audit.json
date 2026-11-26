@@ -28,6 +28,7 @@
       "unseen states measured",
       "card opened at first word",
       "word mined",
+      "card closed",
       "learning states measured"
     ],
     "unseen": {
@@ -66,7 +67,11 @@
       "unseen states measured",
       "card opened at first word",
       "word mined",
+      "card closed",
       "learning states measured",
+      "card re-opened",
+      "confirm pressed",
+      "card closed",
       "confirmed states measured"
     ],
     "unseen": {
