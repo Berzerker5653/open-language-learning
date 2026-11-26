@@ -980,3 +980,64 @@ describe("start CTA moves to the pin when the path renders (TODAY-FIRSTSCREEN-00
     expect(html).not.toContain('data-testid="path-start-pill"');
   });
 });
+
+describe("accumulation meters (ACCUMULATION-METERS-001 / U11)", () => {
+  const base = {
+    displayName: "Hunter",
+    plan,
+    activeBudget: 5,
+    onBudget: () => {},
+    activePack: { name: "Japanese Reference Pack (Draft)", posture: "AI-generated" },
+  };
+
+  it("renders both meters on the settled state", () => {
+    const html = renderToStaticMarkup(
+      <Home {...base} myWordsCount={7} worlds={{ unlocked: 2, total: 5 }} />,
+    );
+    expect(html).toContain('data-testid="accumulation-meters"');
+    expect(html).toContain('data-testid="meter-my-words"');
+    expect(html).toContain("7 forms confirmed");
+    expect(html).toContain('data-testid="meter-worlds"');
+    expect(html).toContain("2 of 5 unlocked");
+  });
+
+  it("abstains while pending or unsettled — never renders stale counts", () => {
+    for (const partial of [
+      { packsPending: true },
+      { noPack: true },
+      { packsUnknown: true },
+    ] as const) {
+      const html = renderToStaticMarkup(<Home {...base} {...partial} myWordsCount={7} worlds={{ unlocked: 2, total: 5 }} />);
+      expect(html).not.toContain("accumulation-meters");
+    }
+    const pending = renderToStaticMarkup(<Home {...base} packsPending={true} myWordsCount={7} worlds={{ unlocked: 2, total: 5 }} />);
+    expect(pending).not.toContain('data-testid="meter-my-words"');
+    expect(pending).not.toContain('data-testid="meter-worlds"');
+    // no pack at all → no strip
+    const noPack = renderToStaticMarkup(<Home {...base} activePack={null} myWordsCount={7} worlds={{ unlocked: 2, total: 5 }} />);
+    expect(noPack).not.toContain('data-testid="accumulation-meters"');
+    // one meter present → the other absent (abstain, never invent)
+    const onlyMyWords = renderToStaticMarkup(<Home {...base} myWordsCount={3} worlds={null} />);
+    expect(onlyMyWords).toContain('data-testid="meter-my-words"');
+    expect(onlyMyWords).not.toContain('data-testid="meter-worlds"');
+    const onlyWorlds = renderToStaticMarkup(<Home {...base} myWordsCount={null} worlds={{ unlocked: 1, total: 4 }} />);
+    expect(onlyWorlds).toContain('data-testid="meter-worlds"');
+    expect(onlyWorlds).not.toContain('data-testid="meter-my-words"');
+  });
+
+  it("hides the worlds meter when the pack declares zero worlds", () => {
+    const html = renderToStaticMarkup(
+      <Home {...base} myWordsCount={2} worlds={{ unlocked: 0, total: 0 }} />,
+    );
+    expect(html).not.toContain('data-testid="meter-worlds"');
+    expect(html).toContain('data-testid="meter-my-words"');
+  });
+
+  it("uses honest labels, not inflated counts", () => {
+    const html = renderToStaticMarkup(
+      <Home {...base} myWordsCount={1} worlds={{ unlocked: 0, total: 3 }} />,
+    );
+    expect(html).toContain("1 forms confirmed");
+    expect(html).toContain("0 of 3 unlocked");
+  });
+});

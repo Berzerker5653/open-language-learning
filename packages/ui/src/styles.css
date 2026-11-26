@@ -140,6 +140,35 @@ h1 {
   font-weight: 600;
 }
 
+/* ACCUMULATION-METERS-001 (U11): compact one-line accumulation meters in the
+   Today header strip. One row, no wrap, no second line — the strip sits
+   under the greeting and must not push the plan down. Small caps-ish label +
+   plain count, faint ink so it never reads as chrome. */
+.accumulation-strip {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+  align-items: baseline;
+  margin: -0.25rem 0 0.85rem;
+  font-size: 0.8125rem;
+  color: var(--ink-faint);
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+}
+.accumulation-meter {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.accumulation-meter small {
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.6875rem;
+  margin-right: 0.25rem;
+  color: var(--ink-faint);
+}
+
 /* LESSON-TITLE-FIT-001: the lesson encounter title ("Printed Cyrillic: А а,
    О о, М м, Т т") must always FIT the narrow card column — never a glyph
    hanging past its edge. Wrapping is already the default (no nowrap rides

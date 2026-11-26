@@ -443,7 +443,11 @@ export function App() {
   const [dictOffset, setDictOffset] = useState(0);
   const [recording, setRecording] = useState(false);
   const [attemptUrl, setAttemptUrl] = useState<string | null>(null);
-  const [environments, setEnvironments] = useState<WorldEnvironment[]>([]);
+  // ACCUMULATION-METERS-001 (U11): null until the world_state read lands —
+  // the Today-header worlds meter abstains on a pending read.
+  const [environments, setEnvironments] = useState<WorldEnvironment[] | null>(null);
+  // ACCUMULATION-METERS-001 (U11): null until the mine_list read lands.
+  const [mineCount, setMineCount] = useState<number | null>(null);
   // R14: a failed playback must be something the learner can see, not a
   // silent Audio error in the console.
   const [playbackError, setPlaybackError] = useState<string | null>(null);
@@ -1573,7 +1577,8 @@ export function App() {
     setFirstRunSteps([]);
     setPathNodes([]);
     setNextOffer(undefined);
-    setEnvironments([]);
+    setEnvironments(null);
+    setMineCount(null);
     setPracticeTarget(null);
     setPracticeTask(null);
     setPracticeGraded(false);
@@ -1627,6 +1632,7 @@ export function App() {
       setNextOffer((await inv("current_offer", { profileId })) as NextOffer | null);
       if (gen !== packSwitchGen.current) return;
       setEnvironments((await inv("world_state", { profileId })) as WorldEnvironment[]);
+      void refreshMine();
       setDisplay((await inv("display_settings", { profileId })) as DisplaySettingsView);
       await loadProfilePrefs(profileId);
     } catch (e) {
@@ -2049,6 +2055,9 @@ export function App() {
       setNextOffer((await inv("current_offer", { profileId: p.id })) as NextOffer | null);
       const envs = (await inv("world_state", { profileId: p.id })) as WorldEnvironment[];
       setEnvironments(envs);
+      // ACCUMULATION-METERS-001: prime the kept-words count for the Today
+      // header meters in parallel with the world read.
+      void refreshMine();
       setDisplay((await inv("display_settings", { profileId: p.id })) as DisplaySettingsView);
       await loadProfilePrefs(p.id);
     } catch (e) {
@@ -2393,7 +2402,8 @@ export function App() {
     setProfileId(null);
     setDisplayName("");
     applyPlan(EMPTY_PLAN);
-    setEnvironments([]);
+    setEnvironments(null);
+    setMineCount(null);
     setGoals([]);
     setProgress([]);
     // Sweep finding 15: an in-flight or paused session belongs to the
@@ -2422,7 +2432,8 @@ export function App() {
     setProfileId(null);
     setDisplayName("");
     applyPlan(EMPTY_PLAN);
-    setEnvironments([]);
+    setEnvironments(null);
+    setMineCount(null);
     setGoals([]);
     setProgress([]);
     // Sweep finding 15: same discipline as deletion — the old profile's
@@ -3436,7 +3447,10 @@ export function App() {
     const inv = detectInvoke();
     if (!inv || !profileId) return;
     try {
-      setMineItems((await inv("mine_list", { profileId })) as typeof mineItems);
+      const items = (await inv("mine_list", { profileId })) as typeof mineItems;
+      setMineItems(items);
+      // ACCUMULATION-METERS-001: the kept-words count the Today header shows.
+      setMineCount(items.length);
       setMineError(null);
     } catch (e) {
       setMineError(String(e));
@@ -5235,7 +5249,18 @@ export function App() {
           packSwitching={packSwitching}
           activeBudget={budget}
           onBudget={(m) => void changeBudget(m)}
-          environments={environments}
+          environments={environments ?? undefined}
+          myWordsCount={mineCount}
+          worlds={
+            environments == null
+              ? null
+              : environments.length === 0
+                ? null
+                : {
+                    unlocked: environments.filter((e) => e.unlocked).length,
+                    total: environments.length,
+                  }
+          }
           nextGoal={nextGoal}
           pathNodes={pathNodes}
           nextOffer={nextOffer}

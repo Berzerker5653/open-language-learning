@@ -285,6 +285,16 @@ export interface HomeProps {
   /// neutral state — no pack-absent warning, no posture claim, no pack
   /// notice — until that read settles into one of the three states below.
   packsPending?: boolean;
+  /// ACCUMULATION-METERS-001 (U11): "My Words" meter — the count of forms
+  /// in the learner's kept-words list (mine_list), exactly what the My Words
+  /// surface shows; never a superset. Null while that read is pending or the
+  /// list is unavailable: the meter abstains, it never shows a stale count.
+  myWordsCount?: number | null;
+  /// ACCUMULATION-METERS-001 (U11): "Worlds" meter — unlocked/total from the
+  /// pack's own world_state (the GAME-001 capability-gated world layer).
+  /// Null while the world_state read is pending or the pack declares no
+  /// worlds: the meter abstains rather than fabricating a denominator.
+  worlds?: { unlocked: number; total: number } | null;
   onChooseLanguage?(): void;
   /// EMPTY-STATES-001: the no-due empty state's affordance — jump to the
   /// self-directed practice hub. Absent renders no affordance.
@@ -336,9 +346,33 @@ export function Home(p: HomeProps) {
   // no goal map at all.
   const declaredGoal = p.nextGoal ?? null;
   const goalBand = declaredGoal?.band ? bandHeader(declaredGoal.band) : null;
+  // ACCUMULATION-METERS-001 (U11): the header-strip accumulation meters.
+  // Honest by construction: they render only on the settled pack state
+  // (activePack && !packsPending), and each meter abstains on its own
+  // unsettled read — a pending counter never renders from stale pre-settle
+  // state (the HOME-FLASH-001 / FIX-HOME-POSTURE-PENDING-001 pattern).
+  const metersVisible =
+    Boolean(p.activePack) && !p.packsPending && !p.noPack && !p.packsUnknown;
+  const meterMyWords = metersVisible && p.myWordsCount != null ? p.myWordsCount : null;
+  const meterWorlds =
+    metersVisible && p.worlds != null && p.worlds.total > 0 ? p.worlds : null;
   return (
     <section aria-label="Practice">
       <h1>Hi {p.displayName}</h1>
+      {metersVisible && (meterMyWords !== null || meterWorlds !== null) ? (
+        <div className="accumulation-strip" role="group" aria-label="Accumulation" data-testid="accumulation-meters">
+          {meterMyWords !== null ? (
+            <span className="accumulation-meter" data-testid="meter-my-words">
+              <small>My Words</small> {meterMyWords} forms confirmed
+            </span>
+          ) : null}
+          {meterWorlds !== null ? (
+            <span className="accumulation-meter" data-testid="meter-worlds">
+              <small>Worlds</small> {meterWorlds.unlocked} of {meterWorlds.total} unlocked
+            </span>
+          ) : null}
+        </div>
+      ) : null}
       {p.packSwitching ? (
         <p className="notice" role="status">
           Switching languages — the plan, goal and places below update as the new pack answers.

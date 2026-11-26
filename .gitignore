@@ -42,6 +42,7 @@ target/
 dist/
 dist-mobile/
 dist-empty-states/
+dist-accumulation/
 build/
 .venv/
 __pycache__/
