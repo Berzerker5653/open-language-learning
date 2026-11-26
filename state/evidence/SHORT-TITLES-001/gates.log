@@ -1,0 +1,32 @@
+SHORT-TITLES-001 gate log — shorten goal/unit descriptions to task-card phrasing
+Date: 2026-11-25
+
+Scope: languages/{ja-JP,ru-RU}/curriculum/goals.yaml + units/*.yaml.
+Unit surfaces carry `summary` (no description field exists); treated as the unit-level description.
+Rendered title surfaces unchanged (home/path/Today render goal/unit text only).
+
+Before -> after description-length counts (words):
+  ja-JP goals (77):   over-12w 21 (16w max) -> over-12w 0 (max now 12w)
+  ja-JP units (814):  over-12w 28 (25w max) -> over-12w 0 (max now 12w)
+  ru-RU goals (60):   over-12w 3 (17w max)  -> over-12w 0 (max now 12w)
+  ru-RU units (818):  over-12w 33 (37w max) -> over-12w 2 (max now 13w:
+                                             022-personal-details-03 (13w), 026-personal-details-07 (13w) — pedagogical-constraint phrasing kept)
+
+Gate — cargo run -q -p lts-langpack-cli -- validate languages/ja-JP --mode install
+  output: info[media_item_without_reading] media/manifest.jsonl: 8 model-output asset(s) ...
+  validate(install): 0 error(s), 0 warning(s)
+Gate — cargo run -q -p lts-langpack-cli -- validate languages/ru-RU --mode install
+  output: info[media_item_without_reading] media/manifest.jsonl: 3757 model-output asset(s) ...
+  validate(install): 0 error(s), 0 warning(s)
+
+Note: the info[media_item_without_reading] warning is pre-existing (media manifest, authoring
+readings human-pending, K-65) — unchanged by this lane's text edits; same warning text appears
+on main. No other info warnings exist.
+
+Parity spot-check (meaning preserved):
+  - JA 235-work-professional-revision: work-sentence reuse across the job-interview..promotion units kept.
+  - RU 009-numbers-02: digit<->word both-direction mapping kept.
+  - RU 019-cyrillic-stress-review: acute accent + Е/Ё / И/Й / Ь/Ъ contrasts kept.
+  - JA onramp.respond-to-greeting / RU on-ramp.cyrillic (both long-form): recognition+production kept, no new claims.
+
+Done: 63 files edited — 2 goals.yaml files (24 goal descriptions) + 61 unit files (28 ja-JP + 33 ru-RU unit summaries).

@@ -44,10 +44,14 @@
       "summary": "Accumulation meters in the Today header strip (U11): My Words 'N forms confirmed' (mine_list length - the same definition the My Words surface shows) + Worlds 'X of Y unlocked' (the pack's own world_state, GAME-001 layer), rendered only on the settled pack state and each abstaining on its own pending read. One-line compact strip; no wrap/clip at 390px. Red-first vitest pins (4 new); tsc clean; full desktop suite 694/694; 390px capture under state/evidence/ACCUMULATION-METERS-001/."
     },
     "SHORT-TITLES-001": {
-      "status": "ready",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "updated": "2026-11-25",
-      "notes": "Shorten goal/unit descriptions to task-card phrasing (~12 words, meaning preserved) - U2 take-two. Contract: state/notes/SHORT-TITLES-001.md; board card lts-SHORT-TITLES-001."
+      "notes": "Shorten goal/unit descriptions to task-card phrasing (~12 words, meaning preserved) - U2 take-two. Contract: state/notes/SHORT-TITLES-001.md; board card lts-SHORT-TITLES-001.",
+      "evidence": [
+        "state/evidence/SHORT-TITLES-001/gates.log"
+      ],
+      "summary": "Goal/unit descriptions shortened to task-card phrasing (one sentence, ~12 words, meaning preserved): 24 goal descriptions (ja-JP 21 / ru-RU 3) + 61 unit summaries over 12 words (ja-JP 28 / ru-RU 33). Validate: ja-JP and ru-RU --mode install = 0 errors, 0 warnings (pre-existing media-manifest info warning unchanged). Evidence: state/evidence/SHORT-TITLES-001/gates.log."
     },
     "APP-SPLIT-001": {
       "status": "ready",
