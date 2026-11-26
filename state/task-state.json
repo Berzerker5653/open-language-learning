@@ -53,6 +53,12 @@
       ],
       "summary": "Goal/unit descriptions shortened to task-card phrasing (one sentence, ~12 words, meaning preserved): 24 goal descriptions (ja-JP 21 / ru-RU 3) + 61 unit summaries over 12 words (ja-JP 28 / ru-RU 33). Validate: ja-JP and ru-RU --mode install = 0 errors, 0 warnings (pre-existing media-manifest info warning unchanged). Evidence: state/evidence/SHORT-TITLES-001/gates.log."
     },
+    "APP-SPLIT-002": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-25",
+      "notes": "Budgeted per-surface extraction (APP-SPLIT-001 honest partial): extract ONE subtree of the ~5000-line App() component - walkthrough/smoke-handshake slice - zero behavior change. Contract: state/notes/APP-SPLIT-002.md; board card lts-APP-SPLIT-002."
+    },
     "APP-SPLIT-001": {
       "status": "blocked",
       "attempts": 1,
