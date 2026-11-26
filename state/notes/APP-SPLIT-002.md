@@ -12,3 +12,27 @@ Acceptance:
 - If the subtree cannot land green in one session: commit the partial with a numbered resume block in this notes file (append), flip task-state to blocked, block the board card — do not claim done.
 
 Not in scope: settings.tsx / home.tsx / any surface other than the one extracted here; no pack changes.
+
+## Landed 2026-11-26 (done)
+
+The walkthrough smoke-handshake slice landed green in one session:
+
+- Extraction: apps/desktop/src/app/walkthrough.tsx (new, 471 lines) — the
+  module-scope progressStages witness, the walkthroughRan once-per-process
+  guard, and the ~450-line smoke effect, moved verbatim. App() keeps owning
+  every hook and the non-smoke boot path; runSmokeHandshake(inv, hooks) is
+  the only new call shape, and it returns `true` (skip the non-smoke branch)
+  or `false` (boot normally) inside the mount effect. No other file changed;
+  module-scope exports unchanged; zero behavior change.
+- LOC: App.tsx 5158 -> 4758 (-400 net); walkthrough.tsx 471 (incl. ~70 lines
+  of module wrapper: doc header, type imports, WalkthroughHooks interface).
+- Gates (all green): tsc --noEmit clean; full desktop vitest 77 files / 694
+  tests; validate_handoff PASSED (2288 data files). Full log:
+  state/evidence/APP-SPLIT-002/gates.log.
+- Test re-pin: grep of the test tree for progressStages/walkthroughRan shows
+  no pins of the moved module location; the helpers re-exported from "./App"
+  are unchanged. No re-pin required.
+
+APP-SPLIT-001 residual (the remaining ~4700-line App() with ~90 hooks) is
+NOT met by this card by design — the next bounded extraction is a separate
+card.
