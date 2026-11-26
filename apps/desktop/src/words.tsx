@@ -10,6 +10,7 @@
  * stay untouched.
  */
 import { PackText, usePackTextAttrs } from "@openlang/ui";
+import { EmptyState } from "./empty-state";
 import { useEffect, useRef, useState } from "react";
 import { useKanaIME } from "./kana-ime";
 import type { ImeCandidate } from "./ime-candidates";
@@ -328,7 +329,14 @@ export function MyWordsPanel(p: MyWordsPanelProps) {
           <span className="skeleton-row" />
         </div>
       ) : p.items.length === 0 ? (
-        <p className="empty">Nothing mined yet. Add a word above or from a story lookup.</p>
+        <EmptyState
+          glyph="book"
+          title="Nothing mined yet."
+          copy="Add a word above or from a story lookup."
+          actionLabel="Add a word"
+          actionHref="#mine-surface"
+          dataTestId="mywords-empty"
+        />
       ) : (
         <div className="mine-list">
           {p.items.map((m) =>

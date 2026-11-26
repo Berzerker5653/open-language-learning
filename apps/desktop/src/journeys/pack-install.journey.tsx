@@ -1,11 +1,12 @@
 /**
  * Journey (b) — installing a pack is what makes a practice mode reachable.
  *
- * The profile starts with no language chosen, so the hub's Writing card leads
- * to an honest "no pack" answer instead of a drill. Installing the pack from
- * the community catalog and choosing it is the act that turns the same click
- * into a real target: the pack's own prompt, a grade that names the form the
- * pack expected, and the character cards the pack carries.
+ * The profile starts with no language chosen, so the Practice hub shows the
+ * designed empty state (one way out: Settings) instead of offering modes that
+ * cannot run. Installing the pack from the community catalog and choosing it
+ * is the act that turns the same route into a real target: the pack's own
+ * prompt, a grade that names the form the pack expected, and the character
+ * cards the pack carries.
  *
  * The pack chosen here is the one that carries character data, which is what
  * the hub's Kanji card is gated on. The other half of that gate — a pack that
@@ -32,21 +33,16 @@ describe("pack install (journey b)", () => {
     expect(app.text('[aria-label="Practice"] h1')).toBe("Hi Sam");
     expect(app.text('[aria-label="Practice"]')).toContain("No language is set for this profile");
 
-    // The hub still hands the learner the Writing card, and the app answers
-    // honestly: no invented drill, and the way out named.
+    // EMPTY-STATES-001: the hub refuses to offer a mode that cannot run —
+    // one designed empty state, one way out (Settings). The honest refusal
+    // inside the writing screen still exists for deep-linked entry, but the
+    // hub can no longer be clicked into it.
     const routes = app.section("Routes");
     await app.click(app.button(routes, "Practice"));
-    await app.click(app.button(app.section("Practice modes"), "Writing"));
-    const refused = app.section("Writing practice");
-    expect(refused.textContent).toContain(
-      "No pack is active for this profile. Choose one under Settings → Language packs.",
-    );
-    expect(document.querySelector("#writing-answer")).toBeNull();
-    // The mode screens are scoped to the profile's pack, never to whichever
-    // pack the engine happens to have loaded.
-    expect(app.engine.appCalls().filter((c) => c.cmd === "writing_task")).toEqual([
-      { cmd: "writing_task", args: { profileId: "p1" } },
-    ]);
+    const hubEmpty = app.section("Practice modes");
+    expect(hubEmpty.textContent).toContain("No language pack is active");
+    expect(hubEmpty.querySelector("[data-testid=hub-empty]")).not.toBeNull();
+    expect(hubEmpty.textContent).toContain("Choose a pack");
 
     // Settings → the community catalog: the pack is installed, then chosen.
     await app.click(app.button(routes, "Settings"));
@@ -67,10 +63,15 @@ describe("pack install (journey b)", () => {
     await app.click(app.button(chosenRow, "Learn this"));
     expect(app.engine.lastArgsFor("switch_pack")).toEqual({ profileId: "p1", packId: JA });
 
-    // The same Writing click now reaches the pack's own target, and a miss is
+    // The same route now reaches the pack's own target, and a miss is
     // answered with the form the pack asked for.
     await app.click(app.button(routes, "Practice"));
     await app.click(app.button(app.section("Practice modes"), "Writing"));
+    // The mode screens are scoped to the profile's pack, never to whichever
+    // pack the engine happens to have loaded.
+    expect(app.engine.appCalls().filter((c) => c.cmd === "writing_task")).toEqual([
+      { cmd: "writing_task", args: { profileId: "p1" } },
+    ]);
     expect(app.text('[aria-label="Writing practice"]')).toContain(
       "Write the word for: grandmother",
     );

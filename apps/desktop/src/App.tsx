@@ -4566,6 +4566,7 @@ export function App() {
           kanjiAvailable={kanjiAvailable}
           updates={packUpdates}
           onOpenLanguagePacks={() => setRoute("settings")}
+          noPack={activeIds.length === 0 && !packsUnknown && !packsPending}
         />
       ) : route === "pronunciation" ? (
         <>
@@ -4890,7 +4891,7 @@ export function App() {
                 {learningFacts &&
                 learningFacts.days_active === 0 &&
                 learningFacts.units_done === 0 ? (
-                  <ProgressZeroState />
+                  <ProgressZeroState onStart={() => setRoute("practice")} />
                 ) : memoryStats ? (
                   <MemoryStatsStrip stats={memoryStats} />
                 ) : null}
@@ -5228,6 +5229,7 @@ export function App() {
           packsUnknown={packsUnknown}
           packsPending={packsPending}
           onChooseLanguage={() => setRoute("settings")}
+          onExplore={() => setRoute("hub")}
           updates={packUpdates}
           plan={plan}
           packSwitching={packSwitching}

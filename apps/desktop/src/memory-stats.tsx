@@ -23,6 +23,7 @@ import { useState } from "react";
 import type { CSSProperties } from "react";
 import { bandHeader } from "./home";
 import { DimProgress } from "./dim-progress";
+import { EmptyGlyph } from "./empty-state";
 
 export interface BandRetention {
   band: string;
@@ -167,24 +168,32 @@ export function ActivityCalendar({ days, today }: { days: ActivityDay[]; today?:
   );
 }
 
-export function ProgressZeroState() {
+export function ProgressZeroState({ onStart }: { onStart?(): void }) {
   // FEEL-PROGRESS-001: the mock's FRESH PROFILE card. Honest by
   // construction — App renders it ONLY when the engine's own lifetime
   // facts (learning_facts) report zero days active AND zero units done,
   // so it can never contradict a learner who has studied and merely has
   // an empty 12-week window. No invented streak, no fake history; the
   // copy points at the Today tab.
+  // EMPTY-STATES-001: the ring is now a designed line-art glyph in the
+  // serif identity (not a stray CSS circle), and the card carries the one
+  // honest affordance: the Today tab, the tab that starts a session.
   return (
     <section
       aria-label="Progress not started"
       className="progress-zero"
       data-testid="progress-zero"
     >
-      <span className="progress-zero-ring" aria-hidden="true" />
+      <EmptyGlyph kind="ring" />
       <p className="progress-zero-lead">Nothing studied yet</p>
       <p className="meta">
         your first session is on <strong>Today</strong>
       </p>
+      {onStart ? (
+        <button type="button" className="btn btn--quiet progress-zero-action" onClick={onStart}>
+          Start your first session
+        </button>
+      ) : null}
     </section>
   );
 }

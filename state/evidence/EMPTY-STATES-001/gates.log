@@ -1,0 +1,10 @@
+EMPTY-STATES-001 — LANE tier gates (2026-11-25)
+
+tsc: npx tsc --noEmit (apps/desktop) — clean, exit 0
+vitest targeted: npx vitest run src/empty-states.test.tsx — 10/10 passed
+vitest full: npx vitest run (apps/desktop) — 77 files, 690/690 passed
+390px capture: scripts/empty-states-capture.mjs — 5/5 screens show the designed contract
+  (hub-empty / mywords-empty / progress-zero / today-no-plan / path-empty),
+  5 *.audit.json + *.png under state/evidence/EMPTY-STATES-001/
+Note: keyboard.journey.tsx + pack-install.journey.tsx updated for the new hub contract
+  (designed empty state instead of modes-that-cannot-run); no assertions weakened.

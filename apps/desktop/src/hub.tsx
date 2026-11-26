@@ -8,6 +8,7 @@
 
 import { PackText } from "@openlang/ui";
 import type { PackUpdate } from "./home";
+import { EmptyState } from "./empty-state";
 
 export type HubMode =
   | "pronunciation"
@@ -98,6 +99,7 @@ export function PracticeHub({
   kanjiAvailable = true,
   updates = [],
   onOpenLanguagePacks,
+  noPack = false,
 }: {
   onOpen(mode: HubMode): void;
   /**
@@ -111,7 +113,26 @@ export function PracticeHub({
   /// means the app and the catalogue agree, and the hub stays silent.
   updates?: PackUpdate[];
   onOpenLanguagePacks?(): void;
+  /// EMPTY-STATES-001: no pack is active, so every mode would fail its own
+  /// pack read. Show the designed empty state instead of offering cards
+  /// that cannot run — one state, one way out.
+  noPack?: boolean;
 }) {
+  if (noPack) {
+    return (
+      <section aria-label="Practice modes">
+        <h1>Practice</h1>
+        <EmptyState
+          glyph="compass"
+          title="No language pack is active, so there is nothing to practice yet."
+          copy="Choose a language pack first — every practice mode builds from one."
+          actionLabel="Choose a pack"
+          onAction={onOpenLanguagePacks}
+          dataTestId="hub-empty"
+        />
+      </section>
+    );
+  }
   const modes = HUB_MODES.filter((m) => m.id !== "kanji" || kanjiAvailable);
   return (
     <section aria-label="Practice modes">

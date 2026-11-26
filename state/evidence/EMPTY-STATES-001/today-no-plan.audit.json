@@ -1,0 +1,16 @@
+{
+ "screen": "today-no-plan",
+ "overflow": {
+  "scrollWidth": 390,
+  "clientWidth": 390
+ },
+ "emptyState": true,
+ "glyph": true,
+ "title": "Nothing is due right now.",
+ "copy": "Come back when reviews are due, or explore new material.",
+ "action": {
+  "tag": "button",
+  "text": "Open practice modes"
+ },
+ "tapTarget": 44
+}

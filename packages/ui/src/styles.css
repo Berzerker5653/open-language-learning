@@ -2045,6 +2045,10 @@ th:last-child {
    copy that points at Today. Fades up on --dur; only ever rendered when
    the engine's lifetime facts say nothing has happened yet. */
 .progress-zero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface);
@@ -2053,6 +2057,12 @@ th:last-child {
   margin-block: 1rem;
   text-align: center;
   animation: fade-up var(--dur) var(--ease-out);
+}
+
+/* EMPTY-STATES-001: the designed glyph sits in place of the CSS ring; the
+   .progress-zero-ring rule is retained for the progress-feel pin. */
+.progress-zero-action {
+  margin-top: 0.5rem;
 }
 
 .progress-zero-ring {
@@ -3234,4 +3244,29 @@ th:last-child {
   text-underline-offset: 3px;
   color: var(--accent-ink);
   font-weight: 700;
+}
+
+/* EMPTY-STATES-001: designed empty states — glyph + honest one-line title
+   + one affordance, all on tokens (no inline hex). The .empty--warm frame
+   is unchanged; this layer only styles the inner title/copy/action. */
+.empty-state {
+  text-align: center;
+}
+
+.empty-state-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: var(--ink);
+  margin: 0;
+}
+
+.empty-state-copy {
+  max-width: 32rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.empty--warm .empty-state-action {
+  margin-top: 0.25rem;
 }

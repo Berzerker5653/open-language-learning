@@ -41,6 +41,7 @@ node_modules/
 target/
 dist/
 dist-mobile/
+dist-empty-states/
 build/
 .venv/
 __pycache__/

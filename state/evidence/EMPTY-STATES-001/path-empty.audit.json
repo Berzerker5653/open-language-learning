@@ -1,0 +1,16 @@
+{
+ "screen": "path-empty",
+ "overflow": {
+  "scrollWidth": 390,
+  "clientWidth": 390
+ },
+ "emptyState": true,
+ "glyph": true,
+ "title": "This pack declares no learning path yet.",
+ "copy": "Choose a language pack under Settings → Language packs.",
+ "action": {
+  "tag": "button",
+  "text": "Choose a pack"
+ },
+ "tapTarget": 44
+}

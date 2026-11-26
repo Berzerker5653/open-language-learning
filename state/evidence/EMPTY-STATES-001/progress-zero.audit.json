@@ -1,0 +1,16 @@
+{
+ "screen": "progress-zero",
+ "overflow": {
+  "scrollWidth": 390,
+  "clientWidth": 390
+ },
+ "emptyState": true,
+ "glyph": true,
+ "title": "Nothing studied yet",
+ "copy": null,
+ "action": {
+  "tag": "button",
+  "text": "Start your first session"
+ },
+ "tapTarget": 44
+}

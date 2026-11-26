@@ -1,0 +1,16 @@
+{
+ "screen": "mywords-empty",
+ "overflow": {
+  "scrollWidth": 390,
+  "clientWidth": 390
+ },
+ "emptyState": true,
+ "glyph": true,
+ "title": "Nothing mined yet.",
+ "copy": "Add a word above or from a story lookup.",
+ "action": {
+  "tag": "a",
+  "text": "Add a word"
+ },
+ "tapTarget": 44
+}

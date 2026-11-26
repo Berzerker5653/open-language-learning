@@ -10,6 +10,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { LatinText, PackText } from "@openlang/ui";
 import { DimProgress } from "./dim-progress";
+import { EmptyState } from "./empty-state";
 export interface PlannedItem {
   item_id: string;
   content_id: string;
@@ -285,6 +286,9 @@ export interface HomeProps {
   /// notice — until that read settles into one of the three states below.
   packsPending?: boolean;
   onChooseLanguage?(): void;
+  /// EMPTY-STATES-001: the no-due empty state's affordance — jump to the
+  /// self-directed practice hub. Absent renders no affordance.
+  onExplore?(): void;
   /// PACK-UPDATE-UX-001: stale packs on this device. Empty means the engine and
   /// the catalogue agree on every version, and Home then says nothing about
   /// versions at all.
@@ -365,15 +369,14 @@ export function Home(p: HomeProps) {
           ) : null}
         </p>
       ) : p.packsPending ? null : p.noPack ? (
-        <p className="notice" role="status">
-          No language is set for this profile yet, so there is nothing to practice from. Choose a
-          language pack first.{" "}
-          {p.onChooseLanguage ? (
-            <button type="button" className="btn btn--quiet" onClick={p.onChooseLanguage}>
-              Choose a language
-            </button>
-          ) : null}
-        </p>
+        <EmptyState
+          glyph="compass"
+          title="No language is set for this profile yet."
+          copy="So there is nothing to practice from — choose a language pack first, and the plan, goal and places below build from it."
+          actionLabel="Choose a language"
+          onAction={p.onChooseLanguage}
+          dataTestId="no-pack-empty"
+        />
       ) : null}
       {(p.updates ?? []).length > 0 ? (
         <div className="notice pack-updates" role="status">
@@ -529,9 +532,14 @@ export function Home(p: HomeProps) {
       ) : null}
       {p.plan.items.length === 0 ? (
         p.noPack ? null : (
-          <p className="empty">
-            Nothing is due right now. Come back when reviews are due, or explore new material.
-          </p>
+          <EmptyState
+            glyph="sprout"
+            title="Nothing is due right now."
+            copy="Come back when reviews are due, or explore new material."
+            actionLabel="Open practice modes"
+            onAction={p.onExplore}
+            dataTestId="no-due-empty"
+          />
         )
       ) : (
         <>
@@ -642,9 +650,14 @@ export function Home(p: HomeProps) {
         />
       ) : null}
       {p.nextGoal === undefined ? null : p.nextGoal === null ? (
-        <p className="empty next-goal-none">
-          This pack declares no learning path yet. Choose one under Settings → Language packs.
-        </p>
+        <EmptyState
+          glyph="path"
+          title="This pack declares no learning path yet."
+          copy="Choose a language pack under Settings → Language packs."
+          actionLabel="Choose a pack"
+          onAction={p.onChooseLanguage}
+          dataTestId="path-empty"
+        />
       ) : (
         <p className="meta next-goal" data-goal={p.nextGoal.goal_id}>
           Next up: <strong>{p.nextGoal.description}</strong>

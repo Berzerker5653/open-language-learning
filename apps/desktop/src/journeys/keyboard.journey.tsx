@@ -5,8 +5,10 @@
  * offers exactly one next action (their profile has no language yet, so no
  * budget chips and no "0 activities" summary), and uses it to reach
  * Settings; each route change lands the focus on the new page's own heading
- * so screen readers and keyboard users know the navigation happened. No
- * control swallows Enter, so nothing along the path traps the keyboard.
+ * so screen readers and keyboard users know the navigation happened. The
+ * Practice route then shows the designed no-pack empty state (never the
+ * modes, which cannot run). No control swallows Enter, so nothing along the
+ * path traps the keyboard.
  *
  * happy-dom has no sequential Tab and no default Enter activation, so this
  * file models exactly those two browser behaviours — Tab walks the focusable
@@ -118,7 +120,10 @@ describe("keyboard-only route walk", () => {
     expect(
       document.querySelector('nav[aria-label="Routes"] [aria-current="page"]')?.textContent?.trim(),
     ).toBe("Practice");
+    // EMPTY-STATES-001: with no pack active, the hub shows the designed
+    // empty state — never modes that cannot run — with one way out.
     const modes = document.querySelector('[aria-label="Practice modes"]');
-    expect(modes?.textContent).toContain("Pronunciation");
+    expect(modes?.querySelector("[data-testid=hub-empty]")).not.toBeNull();
+    expect(modes?.textContent).toContain("No language pack is active");
   });
 });

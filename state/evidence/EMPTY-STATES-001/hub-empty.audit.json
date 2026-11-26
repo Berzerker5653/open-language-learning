@@ -1,0 +1,16 @@
+{
+ "screen": "hub-empty",
+ "overflow": {
+  "scrollWidth": 390,
+  "clientWidth": 390
+ },
+ "emptyState": true,
+ "glyph": true,
+ "title": "No language pack is active, so there is nothing to practice yet.",
+ "copy": "Choose a language pack first — every practice mode builds from one.",
+ "action": {
+  "tag": "button",
+  "text": "Choose a pack"
+ },
+ "tapTarget": 44
+}
