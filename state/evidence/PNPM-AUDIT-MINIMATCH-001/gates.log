@@ -1,0 +1,95 @@
+=== tsc ===
+$ pnpm -r typecheck
+packages/learner-ui typecheck$ tsc --noEmit
+packages/scenario-ui typecheck$ tsc --noEmit
+packages/shared typecheck$ tsc --noEmit
+packages/schemas typecheck$ tsc --noEmit
+packages/schemas typecheck: Done
+packages/ui typecheck$ tsc --noEmit
+packages/shared typecheck: Done
+packages/learner-ui typecheck: Done
+packages/scenario-ui typecheck: Done
+packages/ui typecheck: Done
+apps/desktop typecheck$ tsc --noEmit
+apps/desktop typecheck: Done
+=== vitest ===
+$ pnpm -r test
+Scope: 6 of 7 workspace projects
+packages/learner-ui test$ vitest run --passWithNoTests
+packages/scenario-ui test$ vitest run --passWithNoTests
+packages/shared test$ vitest run --passWithNoTests
+packages/schemas test$ vitest run --passWithNoTests
+packages/scenario-ui test: 
+packages/scenario-ui test:  RUN  v5.0.3 /home/hunter/game-dev/LTS/packages/scenario-ui
+packages/scenario-ui test: 
+packages/scenario-ui test: No test files found, exiting with code 0
+packages/scenario-ui test: 
+packages/scenario-ui test: include: **/*.{test,spec}.?(c|m)[jt]s?(x)
+packages/scenario-ui test: exclude:  **/node_modules/**, **/.git/**
+packages/scenario-ui test: 
+packages/shared test: 
+packages/shared test:  RUN  v5.0.3 /home/hunter/game-dev/LTS/packages/shared
+packages/shared test: 
+packages/learner-ui test: 
+packages/learner-ui test:  RUN  v5.0.3 /home/hunter/game-dev/LTS/packages/learner-ui
+packages/learner-ui test: 
+packages/learner-ui test: No test files found, exiting with code 0
+packages/learner-ui test: 
+packages/learner-ui test: include: **/*.{test,spec}.?(c|m)[jt]s?(x)
+packages/learner-ui test: exclude:  **/node_modules/**, **/.git/**
+packages/learner-ui test: 
+packages/schemas test: 
+packages/schemas test:  RUN  v5.0.3 /home/hunter/game-dev/LTS/packages/schemas
+packages/schemas test: 
+packages/scenario-ui test: Done
+packages/ui test$ vitest run --passWithNoTests
+packages/schemas test: No test files found, exiting with code 0
+packages/schemas test: 
+packages/schemas test: include: **/*.{test,spec}.?(c|m)[jt]s?(x)
+packages/schemas test: exclude:  **/node_modules/**, **/.git/**
+packages/schemas test: 
+packages/learner-ui test: Done
+packages/schemas test: Done
+packages/shared test: 
+packages/shared test:  Test Files  1 passed (1)
+packages/shared test:       Tests  2 passed (2)
+packages/shared test:    Start at  22:36:09
+packages/shared test:    Duration  106ms (transform 54%, import 27%, tests 10%, worker 9%)
+packages/shared test: 
+packages/shared test: Done
+packages/ui test: 
+packages/ui test:  RUN  v5.0.3 /home/hunter/game-dev/LTS/packages/ui
+packages/ui test: 
+packages/ui test: 
+packages/ui test:  Test Files  2 passed (2)
+packages/ui test:       Tests  10 passed (10)
+packages/ui test:    Start at  22:36:09
+packages/ui test:    Duration  125ms (import 48%, transform 36%, tests 10%, worker 5%)
+packages/ui test: 
+packages/ui test: Done
+apps/desktop test$ vitest run --passWithNoTests
+apps/desktop test: 
+apps/desktop test:  RUN  v5.0.3 /home/hunter/game-dev/LTS/apps/desktop
+apps/desktop test: 
+apps/desktop test: 
+apps/desktop test:  Test Files  76 passed (76)
+apps/desktop test:       Tests  667 passed (667)
+apps/desktop test:    Start at  22:36:09
+apps/desktop test:    Duration  9.40s (tests 41%, transform 24%, environment 23%, import 11%, worker 1%)
+apps/desktop test: 
+apps/desktop test:   Transform  |node| transforming modules took 3.64s · 47% of tracked time, re-done on every run
+apps/desktop test:              persist transforms across runs with fsModuleCache: true
+apps/desktop test:              learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+apps/desktop test: 
+apps/desktop test: Done
+
+=== pnpm audit (moderate) ===
+$ pnpm audit --audit-level=moderate
+No known vulnerabilities found
+
+=== pnpm audit (high) ===
+$ pnpm audit --audit-level=high
+No known vulnerabilities found
+
+=== pnpm why minimatch ===
+minimatch@11.0.9 (resolved via override >=11.0.1)

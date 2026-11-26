@@ -46,10 +46,14 @@
       "notes": "Reconcile README + current_release_candidate with catalog/packs.json + current tree (ja 0.4.4, ru 0.4.9). Contract: state/notes/README-DOC-DRIFT-001.md; board card lts-README-DOC-DRIFT-001."
     },
     "PNPM-AUDIT-MINIMATCH-001": {
-      "status": "ready",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "updated": "2026-11-25",
-      "notes": "pnpm overrides minimatch >=11.0.1 (1 moderate, dev-only transitive via eslint). Contract: state/notes/PNPM-AUDIT-MINIMATCH-001.md; board card lts-PNPM-AUDIT-MINIMATCH-001."
+      "notes": "pnpm overrides minimatch >=11.0.1 (1 moderate, dev-only transitive via eslint). Contract: state/notes/PNPM-AUDIT-MINIMATCH-001.md; board card lts-PNPM-AUDIT-MINIMATCH-001.",
+      "evidence": [
+        "state/evidence/PNPM-AUDIT-MINIMATCH-001/gates.log"
+      ],
+      "summary": "pnpm override minimatch >=11.0.1 in pnpm-workspace.yaml; lockfile re-synced. pnpm audit clean at moderate and high; tsc + vitest green (667 desktop tests)."
     },
     "TTS-003": {
       "status": "done",
