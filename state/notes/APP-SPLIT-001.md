@@ -46,3 +46,16 @@ Splitting it safely needs the following recipe (one card, not this one):
 **If the goal can't be met in one 45-min card:** split the work into one card
 per surface (walkthrough-handshake, settings wiring, Today header/home wiring,
 session/history wiring) rather than expanding this card.
+
+## RUN 2 — serve-probe slice (2026-11-26)
+
+Pure move of the serve-mode probe slice into `apps/desktop/src/app/serve-probe.ts`
+as `useServeProbe(inv)` (pairing probe, engine-progress listener,
+/api/capabilities report → serveNotice/serveBadge/serveMicNamesAvailable).
+App.tsx 4758 -> 4650 lines (5336 -> 4650 total). Gates: tsc clean; vitest 77
+files / 694 tests; validate_handoff PASSED. Code 75ba816c.
+**Goal (<= ~1500) still NOT met** — residual is one ~4650-line stateful App()
+(~90 hooks). Remaining budgeted slices (candidates): session/history wiring,
+settings/import wiring, pack/session/claims refresh wiring, home header/Today
+wiring. Each: one slice, one green checkpoint (tsc + vitest), commit per slice.
+Do NOT stack slices before a green checkpoint; keep App.tsx owning every hook.

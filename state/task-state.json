@@ -65,10 +65,10 @@
     },
     "APP-SPLIT-001": {
       "status": "blocked",
-      "attempts": 1,
-      "updated": "2026-11-25",
+      "attempts": 2,
+      "updated": "2026-11-26",
       "notes": "Split ~5300-line App.tsx into per-surface modules - zero behavior change. Contract: state/notes/APP-SPLIT-001.md; board card lts-APP-SPLIT-001.",
-      "blocker": "Honest partial: pure module-scope helpers extracted to apps/desktop/src/app/{primitives.ts,placement-coverage.tsx} (App.tsx 5336 -> 5158 lines; the goal's <= ~1500 target is NOT met - residual is a single ~5000-line stateful App() component with ~90 hooks). Gates green (tsc clean; vitest 77 files / 694 tests). Resume recipe: state/notes/APP-SPLIT-001.md.",
+      "blocker": "Honest partial: pure module-scope helpers (primitives, placement-coverage), walkthrough slice and serve-probe slice extracted (App.tsx 5336 -> 4650 lines; the <= ~1500 goal is NOT met - residual is one ~4650-line stateful App() with ~90 hooks). Gates green (tsc clean; vitest 77 files / 694 tests; validate_handoff PASSED). Codes ea9c188, 040456ae, 75ba816c. Resume recipe: state/notes/APP-SPLIT-001.md.",
       "evidence": [
         "state/evidence/APP-SPLIT-001/gates.log"
       ]
