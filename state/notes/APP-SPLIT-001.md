@@ -66,6 +66,6 @@ Do NOT stack slices before a green checkpoint; keep App.tsx owning every hook.
 | --- | --- | --- | --- |
 | session/history wiring (APP-SPLIT-003A) | `app/history-wiring.tsx` | **4591** (4650 -> 4591) | 88ce090e |
 | settings/import wiring (APP-SPLIT-003B) | `app/settings-wiring.tsx` | **4509** (4594 -> 4509; wc -l at the 003A base read 4594) | bc0307cb |
+| pack/session/claims refresh wiring (APP-SPLIT-003C) | `app/pack-wiring.ts` | **4448** (4509 -> 4448) | 96a3cc1c |
 
-Remaining slices for siblings 003C-D: pack/session/claims refresh wiring,
-home header/Today wiring.
+Remaining slices for sibling 003D: home header/Today wiring.

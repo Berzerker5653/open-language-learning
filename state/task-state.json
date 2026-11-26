@@ -83,6 +83,16 @@
       ],
       "summary": "Settings/import wiring slice extracted from App() into apps/desktop/src/app/settings-wiring.tsx (primeSettingsReads body + export/restore/delete/switch handler bodies; SettingsWiringDeps props bundle of state+setters; App.tsx keeps every hook and all Settings-route JSX). Pure move verified token-identical per body. App.tsx 4594 -> 4509 lines. Gates: npx tsc --noEmit clean; npx vitest run 77 files / 694 tests. Code bc0307cb."
     },
+    "APP-SPLIT-003C": {
+      "status": "done",
+      "attempts": 1,
+      "updated": "2026-11-26",
+      "notes": "Budgeted slice of APP-SPLIT-001: extract the pack/session/claims refresh wiring slice from App() - pure move, App.tsx keeps every hook. Contract: card body + the RUN-2 recipe in state/notes/APP-SPLIT-001.md; board card lts-APP-SPLIT-003C.",
+      "evidence": [
+        "state/evidence/APP-SPLIT-003C/gates.log"
+      ],
+      "summary": "Pack/session/claims refresh wiring slice extracted from App() into apps/desktop/src/app/pack-wiring.ts (runRefreshLanguages + runRefreshInstalled + runUpdateFromCatalog/runInstallCatalogPack/runCancelInstall/runImportPack; PackWiringDeps props bundle of render values+setters; App.tsx keeps every hook and all pack state). Pure move verified token-identical per body. App.tsx 4509 -> 4448 lines. Gates: npx tsc --noEmit clean; npx vitest run 77 files / 694 tests; prettier clean. Code 96a3cc1c."
+    },
     "APP-SPLIT-001": {
       "status": "blocked",
       "attempts": 2,

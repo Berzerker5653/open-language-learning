@@ -1,0 +1,53 @@
+# APP-SPLIT-003C — gates log (2026-11-26)
+
+Slice of APP-SPLIT-001 (RUN-2 resume recipe): the pack/session/claims
+refresh wiring slice extracted from App() into
+`apps/desktop/src/app/pack-wiring.ts` as a pure move.
+
+## What moved (verbatim; token-identical bodies, see pure-move check)
+
+- `runRefreshLanguages(deps, pid?)` — the `refreshLanguages` body: the
+  four pack reads (installed_packs, pack_claims, loadSessionPack,
+  catalog_packs) run together and commit in one block.
+- `runRefreshInstalled(deps)` — the `refreshInstalled` body (one read,
+  one container update).
+- `runUpdateFromCatalog(deps, id)` — the wizard's Update control body.
+- `runInstallCatalogPack(deps, packId)` — Settings catalogue install.
+- `runCancelInstall(deps)` — cancel the in-flight install.
+- `runImportPack(deps, dataB64)` — Settings pack-file import.
+- `PackWiringDeps` — the props bundle of render values + setters; App()
+  builds `packWiringDeps` once per render and passes it at every call
+  site. Built right after `useServeProbe` (earliest point where every
+  referenced binding is in scope) so the boot effect's async IIFE, which
+  calls `refreshInstalled()` before the first render's tail completes,
+  never hits an uninitialized bundle — verified by the restart-resume /
+  first-run / pack-install journeys.
+
+App.tsx keeps owning every hook (including `useServeProbe` and all pack
+state), the thin wrapper functions, `switchLearning`, the onboarding
+`install()`, and all JSX. No test, gate script, or behavior pin was
+touched. Test tree swept for `from "./App"` imports: all point at the
+primitives re-export shim (App.test.tsx, serve-banner.test.tsx),
+untouched by this slice — no re-exports added or removed.
+
+## LOC
+
+- App.tsx: 4509 -> 4448 (-61). pack-wiring.ts: 187 lines.
+
+## Lane gates (run once at this checkpoint, never stacked)
+
+- `npx tsc --noEmit` -> exit 0 (PASS), apps/desktop.
+- `npx vitest run` -> 77 files passed / 694 tests passed (PASS).
+- `npx prettier --check src/App.tsx src/app/pack-wiring.ts` -> PASS.
+- Security scan of staged added lines (secrets/eval/exec/injection
+  patterns) -> no matches.
+
+## Pure-move verification
+
+Token-level body comparison (strip indentation, the `deps.` prefixes,
+and the `const { inv } = deps;` preamble; map the intra-module calls
+`runRefreshLanguages`/`runRefreshInstalled` back to the old names) of
+each moved body against `git show HEAD:apps/desktop/src/App.tsx` at the
+003B ledger base: refreshLanguages, refreshInstalled, updateFromCatalog,
+installCatalogPack, cancelInstall, importPack — ALL IDENTICAL. Zero
+behavior change.
