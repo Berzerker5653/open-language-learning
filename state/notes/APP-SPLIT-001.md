@@ -67,5 +67,11 @@ Do NOT stack slices before a green checkpoint; keep App.tsx owning every hook.
 | session/history wiring (APP-SPLIT-003A) | `app/history-wiring.tsx` | **4591** (4650 -> 4591) | 88ce090e |
 | settings/import wiring (APP-SPLIT-003B) | `app/settings-wiring.tsx` | **4509** (4594 -> 4509; wc -l at the 003A base read 4594) | bc0307cb |
 | pack/session/claims refresh wiring (APP-SPLIT-003C) | `app/pack-wiring.ts` | **4448** (4509 -> 4448) | 96a3cc1c |
+| home header/Today wiring (APP-SPLIT-003D) | `app/home-wiring.ts` | **4259** (4448 -> 4259) | ba713af4 |
 
-Remaining slices for sibling 003D: home header/Today wiring.
+All four 003 slices (003A-D) are now shipped. Remaining residual is still
+one stateful App() — next-slice candidates if the owner opens follow-ups:
+the practice wiring (openPractice + choose/check/finishPractice + practice
+state, ~300 lines, feeds Home's onStart and the runner), the
+navigate/history effect wiring, and the remaining JSX surfaces. Not in any
+current card's scope.

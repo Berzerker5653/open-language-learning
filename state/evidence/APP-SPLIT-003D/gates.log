@@ -1,0 +1,54 @@
+# APP-SPLIT-003D — gates log (2026-11-26)
+
+Slice of APP-SPLIT-001 (RUN-2 resume recipe): the home header/Today wiring
+slice extracted from App() into `apps/desktop/src/app/home-wiring.ts` as a
+pure move. Boundaries: the session-lifecycle handlers the Today header (and
+the session chrome sharing its state) wires — the slice the RUN-2 recipe
+left as the last 003 sibling. openPractice stays App-owned (practice
+surface, next slice candidate) and is passed into the slice as a callback.
+
+## What moved (verbatim; pure-move check below)
+
+- `runStartSession(deps)` — the `startSession` body (queue snapshot,
+  measured clock start, first openPractice).
+- `runAdvanceSession(deps, counted)` — the `advanceSession` body (bridge,
+  auto-advance, finish, capstone close).
+- `runCloseSession(deps, reason)` / `runPauseSession(deps)` /
+  `runResumeSession(deps)` — stop/pause/resume bodies.
+- `runStartCapstoneSession(deps, node)` / `runFinishCapstoneSession(deps)` —
+  the UNIT-CAPSTONE-001 section-review flow riding the same runner.
+- `publishSession`, `sessionOutcomeFrom`, `isSessionRunnable` — the shared
+  session-outcome helpers (module-private calls, deps passed through).
+- `HomeWiringDeps` + `SessionQueue` — the props bundle (render values +
+  setters + App-owned refs + callbacks); App() builds `sessionWiringDeps`
+  once per render and passes it at each call site.
+
+App.tsx keeps owning every hook (session/capstone/practice state, all
+refs, the bridge state machine), `openPractice` and all other practice
+wiring, `changeBudget`/`setKanaKeyboardSetting` (settings-owned), the path-
+state derivation, and all JSX. Thin wrappers (`advanceSession`,
+`closeSession`, `pauseSession`, `resumeSession`) keep every JSX and
+history-wiring call site unchanged. No test, gate script, or behavior pin
+was touched. Test tree swept for `from "./App"` imports: all point at the
+primitives re-export shim (App.test.tsx) or `App` itself
+(journeys/harness, history-screens, mobile-screens, serve-banner.test) —
+untouched by this slice, no re-exports added or removed.
+
+## LOC
+
+- App.tsx: 4448 -> 4259 (-189). home-wiring.ts: 304 lines.
+
+## Pure-move check
+
+Moved block vs the new module, normalized (deps. prefixes + run-name decls +
+deps params stripped): 4-line diff, all of it one prettier re-wrap of the
+`setPathNodes((await inv("unit_path", { profileId: deps.profileId })) ...)`
+call. Zero logic tokens changed.
+
+## Lane gates (run once at this checkpoint, never stacked)
+
+- `npx tsc --noEmit` -> exit 0 (PASS), apps/desktop.
+- `npx vitest run` -> 77 files passed / 694 tests passed (PASS), re-run
+  after the prettier touch.
+- `npx prettier --check apps/desktop/src/App.tsx apps/desktop/src/app/home-wiring.ts`
+  -> clean (PASS), repo root.

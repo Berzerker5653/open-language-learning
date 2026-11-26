@@ -4006,6 +4006,19 @@ tasks:
   - "tsc clean; full desktop vitest green (one checkpoint per slice, never stacked); App.tsx LOC reduced by the slice"
   - "Evidence under state/evidence/APP-SPLIT-003C/gates.log with before/after LOC"
   required_for_desktop_1_0: false
+- id: APP-SPLIT-003D
+  milestone: M11
+  priority: P2
+  title: Budgeted slice of APP-SPLIT-001 - extract the home header/Today wiring slice from App(), zero behavior change
+  dependencies: []
+  read_first:
+  - state/notes/APP-SPLIT-001.md
+  - apps/desktop/src/App.tsx
+  acceptance:
+  - "Home header/Today wiring slice moved into apps/desktop/src/app/home-wiring.ts as a pure move with App.tsx keeping every hook"
+  - "tsc clean; full desktop vitest green (one checkpoint per slice, never stacked); App.tsx LOC reduced by the slice"
+  - "Evidence under state/evidence/APP-SPLIT-003D/gates.log with before/after LOC"
+  required_for_desktop_1_0: false
 - id: APP-SPLIT-001
   milestone: M11
   priority: P2
@@ -4211,6 +4224,7 @@ execution_scope:
   - APP-SPLIT-003A
   - APP-SPLIT-003B
   - APP-SPLIT-003C
+  - APP-SPLIT-003D
   - README-DOC-DRIFT-001
   - PNPM-AUDIT-MINIMATCH-001
   - LAN-TOGGLE-PIN-001

@@ -93,6 +93,16 @@
       ],
       "summary": "Pack/session/claims refresh wiring slice extracted from App() into apps/desktop/src/app/pack-wiring.ts (runRefreshLanguages + runRefreshInstalled + runUpdateFromCatalog/runInstallCatalogPack/runCancelInstall/runImportPack; PackWiringDeps props bundle of render values+setters; App.tsx keeps every hook and all pack state). Pure move verified token-identical per body. App.tsx 4509 -> 4448 lines. Gates: npx tsc --noEmit clean; npx vitest run 77 files / 694 tests; prettier clean. Code 96a3cc1c."
     },
+    "APP-SPLIT-003D": {
+      "status": "done",
+      "attempts": 1,
+      "updated": "2026-11-26",
+      "notes": "Budgeted slice of APP-SPLIT-001: extract the home header/Today wiring slice from App() - pure move, App.tsx keeps every hook. Contract: card body + the RUN-2 recipe in state/notes/APP-SPLIT-001.md; board card lts-APP-SPLIT-003D.",
+      "evidence": [
+        "state/evidence/APP-SPLIT-003D/gates.log"
+      ],
+      "summary": "Home header/Today wiring slice extracted from App() into apps/desktop/src/app/home-wiring.ts (runStartSession + runAdvanceSession + runCloseSession/runPauseSession/runResumeSession + runStartCapstoneSession/runFinishCapstoneSession + publishSession/sessionOutcomeFrom/isSessionRunnable helpers; HomeWiringDeps props bundle of render values+setters+refs+callbacks; App.tsx keeps every hook and all session/capstone state, openPractice passed in as a callback). Pure move verified (normalized diff = one prettier re-wrap). App.tsx 4448 -> 4259 lines. Gates: npx tsc --noEmit clean; npx vitest run 77 files / 694 tests; prettier clean. Code ba713af4."
+    },
     "APP-SPLIT-001": {
       "status": "blocked",
       "attempts": 2,
