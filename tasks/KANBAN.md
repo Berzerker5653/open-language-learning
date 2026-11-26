@@ -75,7 +75,7 @@ Also parked by owner 2026-11-18: U8 word-synced karaoke highlight (STORY-LISTEN-
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| app-split | code quality | **APP-SPLIT-001** (ready 2026-11-25) — App.tsx is ~5300 lines mixing orchestrator wiring (serve probe, navigation, pack state, onboarding, journey harness) with JSX; extract per-surface modules, zero behavior change. | `APP-SPLIT-001` |
+| app-split | code quality | **APP-SPLIT-001** (blocked 2026-11-25, honest partial) — App.tsx is ~5300 lines mixing orchestrator wiring (serve probe, navigation, pack state, onboarding, journey harness) with JSX; extract per-surface modules, zero behavior change. Partial: pure module-scope helpers extracted to `app/primitives.ts` + `app/placement-coverage.tsx` (App.tsx 5336 -> 5158); tsc clean; vitest 77/694. Goal (<= ~1500) NOT met — residual is the single ~5000-line stateful App() component. Resume recipe: `state/notes/APP-SPLIT-001.md`; code `ea9c188`. | `APP-SPLIT-001` |
 | readme-doc-drift | docs | **README-DOC-DRIFT-001** (ready 2026-11-25) — README + `current_release_candidate` carry stale pack versions/dates/counts (ja 0.4.3 → 0.4.4, ru 0.4.5 → 0.4.9, ja units 801 → 814); reconcile against artifacts, never prose. | `README-DOC-DRIFT-001` |
 
 

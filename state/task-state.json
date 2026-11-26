@@ -54,10 +54,14 @@
       "summary": "Goal/unit descriptions shortened to task-card phrasing (one sentence, ~12 words, meaning preserved): 24 goal descriptions (ja-JP 21 / ru-RU 3) + 61 unit summaries over 12 words (ja-JP 28 / ru-RU 33). Validate: ja-JP and ru-RU --mode install = 0 errors, 0 warnings (pre-existing media-manifest info warning unchanged). Evidence: state/evidence/SHORT-TITLES-001/gates.log."
     },
     "APP-SPLIT-001": {
-      "status": "ready",
-      "attempts": 0,
+      "status": "blocked",
+      "attempts": 1,
       "updated": "2026-11-25",
-      "notes": "Split ~5300-line App.tsx into per-surface modules - zero behavior change. Contract: state/notes/APP-SPLIT-001.md; board card lts-APP-SPLIT-001."
+      "notes": "Split ~5300-line App.tsx into per-surface modules - zero behavior change. Contract: state/notes/APP-SPLIT-001.md; board card lts-APP-SPLIT-001.",
+      "blocker": "Honest partial: pure module-scope helpers extracted to apps/desktop/src/app/{primitives.ts,placement-coverage.tsx} (App.tsx 5336 -> 5158 lines; the goal's <= ~1500 target is NOT met - residual is a single ~5000-line stateful App() component with ~90 hooks). Gates green (tsc clean; vitest 77 files / 694 tests). Resume recipe: state/notes/APP-SPLIT-001.md.",
+      "evidence": [
+        "state/evidence/APP-SPLIT-001/gates.log"
+      ]
     },
     "README-DOC-DRIFT-001": {
       "status": "ready",

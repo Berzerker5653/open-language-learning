@@ -1,0 +1,27 @@
+APP-SPLIT-001 — gates log
+================================================================================
+Before/after LOC (measured 2026-11-25):
+  App.tsx: 5336 -> 5158
+  app/primitives.ts: 175 (new)
+  app/placement-coverage.tsx: 51 (new)
+  Net: ~+40 lines (extracted modules carry docs + re-exports). The card's
+  stated goal (App.tsx <= ~1500) is NOT met — see resume recipe in
+  state/notes/APP-SPLIT-001.md.
+
+Gates run (lane tier, apps/desktop):
+  npx tsc --noEmit        -> PASS (exit 0, no diagnostics)
+  npx vitest run          -> 77 files passed, 694 tests passed (exit 0)
+
+Extraction content (zero behavior change; all relocated code is byte-identical):
+  primitives.ts: Invoke, after, detectInvoke, NO_ACTIVE_PACK, explainPackAbsence,
+    loadSessionPack, activePackNote, serveDegradedBadge, PackRequest/packRequest/
+    packAttemptRequest, SESSION_BRIDGE_MS, EMPTY_PLAN, toWav16, toB64, SessionPack
+  placement-coverage.tsx: PlacementCoverageNote (unchanged)
+  App.tsx keeps: module-scope walkthrough handshake state (progressStages,
+    walkthroughRan), the App component, all walkthrough/ratchet logic.
+  App.tsx re-exports the sibling imports used by tests (NO_ACTIVE_PACK, Invoke,
+    etc.) so existing sibling modules and tests are untouched.
+
+Not in this pass (needs a genuine per-surface refactor; see resume recipe):
+  the ~5000-line App() component with ~90 hooks and ~300 closures/effects/JSX
+  sections — a safe extraction of those is a separate, budgeted card.
