@@ -9,6 +9,7 @@
 import { useState, type FormEvent } from "react";
 import { progressLine, type EngineProgress } from "./progress";
 import { PackText } from "@openlang/ui";
+import { postServeJson } from "./ipc";
 import type { InstalledPack } from "./language";
 
 export interface PrivacyNotice {
@@ -792,20 +793,7 @@ export function ServePairingCard() {
     setPairing(true);
     setError(null);
     try {
-      const res = await fetch("/pair", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ pin }),
-        credentials: "same-origin",
-      });
-      const payload = await res.json().catch(() => null);
-      if (!res.ok) {
-        const message =
-          payload && typeof payload === "object" && "error" in payload
-            ? String((payload as { error: unknown }).error)
-            : `HTTP ${res.status}`;
-        throw new Error(message);
-      }
+      await postServeJson("/pair", { pin });
       // Success — the pairing cookie is set. A fresh boot re-enters the
       // normal flow, which passes the gate.
       window.location.reload();

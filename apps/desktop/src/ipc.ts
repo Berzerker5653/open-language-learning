@@ -51,6 +51,34 @@ export async function httpInvoke(cmd: string, args?: Record<string, unknown>): P
   return payload;
 }
 
+/**
+ * POST to a non-`/api` serve endpoint (the LAN and pairing routes) and
+ * return the parsed JSON body. ARCH-HOTSPOT-2026-11-26: verbatim extraction
+ * of the block this code replaced in LanAccessCard and ServePairingCard —
+ * a failing answer prefers the server's own `{ "error": ... }` value and
+ * falls back to the HTTP status, so error strings are unchanged.
+ */
+export async function postServeJson(
+  path: string,
+  body: Record<string, unknown>,
+): Promise<unknown | null> {
+  const res = await fetch(path, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify(body),
+    credentials: "same-origin",
+  });
+  const payload = await res.json().catch(() => null);
+  if (!res.ok) {
+    const message =
+      payload && typeof payload === "object" && "error" in payload
+        ? String((payload as { error: unknown }).error)
+        : `HTTP ${res.status}`;
+    throw new Error(message);
+  }
+  return payload;
+}
+
 export type ServeCapabilities = {
   mode: string;
   install_progress_events: boolean;

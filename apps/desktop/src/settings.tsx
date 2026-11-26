@@ -17,7 +17,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import type { Microphone, SpeakerOutput } from "./capture";
-import { inLtsServeMode } from "./ipc";
+import { inLtsServeMode, postServeJson } from "./ipc";
 import { megabytes, type AlignerStatus, type DeviceTier } from "./language";
 export type RomajiMode = "auto" | "always" | "off";
 
@@ -863,28 +863,10 @@ export function LanAccessCard() {
     };
   }, []);
 
-  async function postJson(path: string, body: Record<string, unknown>): Promise<unknown | null> {
-    const res = await fetch(path, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(body),
-      credentials: "same-origin",
-    });
-    const payload = await res.json().catch(() => null);
-    if (!res.ok) {
-      const message =
-        payload && typeof payload === "object" && "error" in payload
-          ? String((payload as { error: unknown }).error)
-          : `HTTP ${res.status}`;
-      throw new Error(message);
-    }
-    return payload;
-  }
-
   async function onToggle(enabled: boolean) {
     setLanError(null);
     try {
-      setStatus((await postJson("/lan/enable", { enabled })) as LanStatusPayload);
+      setStatus((await postServeJson("/lan/enable", { enabled })) as LanStatusPayload);
     } catch (e) {
       setLanError(e instanceof Error ? e.message : "Could not change local-network access.");
     }
@@ -893,7 +875,7 @@ export function LanAccessCard() {
   async function onRotate() {
     setLanError(null);
     try {
-      const rotated = (await postJson("/lan/rotate", {})) as { pin: string };
+      const rotated = (await postServeJson("/lan/rotate", {})) as { pin: string };
       setStatus((s) => (s ? { ...s, pin: rotated.pin } : s));
     } catch (e) {
       setLanError(e instanceof Error ? e.message : "Could not refresh the PIN.");
@@ -905,7 +887,7 @@ export function LanAccessCard() {
     setPairResult(null);
     setPairing(true);
     try {
-      const result = (await postJson("/pair", { pin: pairPin })) as { paired: boolean };
+      const result = (await postServeJson("/pair", { pin: pairPin })) as { paired: boolean };
       setPairResult(
         result.paired
           ? { ok: true, text: "Paired — this device reconnects without a PIN." }
