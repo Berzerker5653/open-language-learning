@@ -1,0 +1,29 @@
+{
+  "review": "REVIEW-APP-SPLIT-002",
+  "target": "APP-SPLIT-002",
+  "code_commit": "040456ae",
+  "ledger_commit": "da48d7d3",
+  "date": "2026-11-26",
+  "axes": {
+    "spec": {
+      "verdict": "PASS",
+      "notes": [
+        "Diff touches exactly 3 files: apps/desktop/src/App.tsx (5158->4758, -400 net), new apps/desktop/src/app/walkthrough.tsx (471 lines), state/evidence/APP-SPLIT-002/gates.log. Nothing else.",
+        "Pure move: removed lines in App.tsx are the module-scope progressStages witness + walkthroughRan guard + ~450-line smoke effect body; added in walkthrough.tsx are the same body plus a module wrapper (doc header, type imports, WalkthroughHooks interface, runSmokeHandshake signature) and hook call sites prefixed with hooks.",
+        "Zero behavior change: runSmokeHandshake returns true on smoke path (incl. walkthroughRan guard -> skip non-smoke boot) and false otherwise (boot proceeds) — the same control flow as the original inline IIFE. PerfProbe import moved from App.tsx to walkthrough.tsx; not used elsewhere in App.tsx.",
+        "Module-scope exports unchanged: App.tsx re-exports the same helpers (after, progressStages re-imported back for the engine-progress listener effect); no new exports, no re-pin of tests (grep: no test imports progressStages/walkthroughRan from the old location).",
+        "LOC accounting: App.tsx 5158->4758 (-400); walkthrough.tsx 471 incl. ~70 lines of module wrapper. Gates re-verified on the current tree: npx tsc --noEmit clean (apps/desktop); npx vitest run — 77 files / 694 tests PASS (9.44s). validate_handoff green as recorded in gates.log."
+      ]
+    },
+    "standards": {
+      "verdict": "PASS",
+      "notes": [
+        "Ledger commit da48d7d3 flipped task-state APP-SPLIT-002 to done with evidence path + summary; tasks/KANBAN.md row updated; notes file records 'Landed 2026-11-26 (done)' with the same numbers as the diff.",
+        "Commit hygiene: feat(desktop) message with before/after LOC and gates; task-scoped; evidence committed in 040456ae, not left unstaged.",
+        "Scope discipline: AGENTS.md contract respected — one subtree, zero gate edits, zero feature changes, APP-SPLIT-001 residual honestly left open (not done by this card by design).",
+        "No re-pin invented: test re-pin claim verified by grep (no test references the moved module location)."
+      ]
+    }
+  },
+  "defects": []
+}
