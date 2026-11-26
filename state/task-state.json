@@ -3,6 +3,54 @@
   "updated": "2026-11-25",
   "active_task": null,
   "tasks": {
+    "WORD-STATE-COLORING-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-25",
+      "notes": "Reader text in-text word-state coloring (unseen plain / learning teal / confirmed muted) - U4. Contract: state/notes/WORD-STATE-COLORING-001.md; board card lts-WORD-STATE-COLORING-001."
+    },
+    "CORRECTION-IN-ARTIFACT-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-25",
+      "notes": "Dictation/writing feedback renders the correction inline (wrong form inside the sentence + corrected form beside it) - U9. Contract: state/notes/CORRECTION-IN-ARTIFACT-001.md; board card lts-CORRECTION-IN-ARTIFACT-001."
+    },
+    "EMPTY-STATES-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-25",
+      "notes": "Designed empty states for every surface (glyph + honest copy + one affordance) - U10. Contract: state/notes/EMPTY-STATES-001.md; board card lts-EMPTY-STATES-001."
+    },
+    "ACCUMULATION-METERS-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-25",
+      "notes": "Today header strip accumulation meters (My Words forms confirmed, worlds X of Y unlocked) - U11. Contract: state/notes/ACCUMULATION-METERS-001.md; board card lts-ACCUMULATION-METERS-001."
+    },
+    "SHORT-TITLES-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-25",
+      "notes": "Shorten goal/unit descriptions to task-card phrasing (~12 words, meaning preserved) - U2 take-two. Contract: state/notes/SHORT-TITLES-001.md; board card lts-SHORT-TITLES-001."
+    },
+    "APP-SPLIT-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-25",
+      "notes": "Split ~5300-line App.tsx into per-surface modules - zero behavior change. Contract: state/notes/APP-SPLIT-001.md; board card lts-APP-SPLIT-001."
+    },
+    "README-DOC-DRIFT-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-25",
+      "notes": "Reconcile README + current_release_candidate with catalog/packs.json + current tree (ja 0.4.4, ru 0.4.9). Contract: state/notes/README-DOC-DRIFT-001.md; board card lts-README-DOC-DRIFT-001."
+    },
+    "PNPM-AUDIT-MINIMATCH-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-25",
+      "notes": "pnpm overrides minimatch >=11.0.1 (1 moderate, dev-only transitive via eslint). Contract: state/notes/PNPM-AUDIT-MINIMATCH-001.md; board card lts-PNPM-AUDIT-MINIMATCH-001."
+    },
     "TTS-003": {
       "status": "done",
       "attempts": 1,

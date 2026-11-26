@@ -48,27 +48,35 @@ Rejected: G5 (streaks / energy / hearts / recap rituals / leagues) — owner dec
 Deprioritized relative to G1/G4: G3 voice half (reading half shipped), G6 (ASR echo/near-miss rides with G1), G7 content (stays content-lane, not a feature item), G8 platform reach (owner-gated PLAT-001).
 
 
-## UI backlog — 2026-11-23 (from the 2026-11 market/visual audit + docs/ui-review-2026-11-23.md; NOT yet coded)
+## UI backlog — 2026-11-23 (from the 2026-11 market/visual audit + docs/ui-review-2026-11-23.md; cards created 2026-11-25)
 
-The visual/UI audit's backlog (U1–U14) is distilled below. Shipped: U3+U6 (SESSION-CHROME-001), U7+U14 (PROGRESS-STATS-001), U5 (GRAMMAR-LABELS-001 word-card grammar line), U2/U13 (UI-HYGIENE-001 — queued, not done). NOT yet a card:
+Shipped: U3+U6 (SESSION-CHROME-001), U7+U14 (PROGRESS-STATS-001), U5 (GRAMMAR-LABELS-001 word-card grammar line), U2/U13 (UI-HYGIENE-001 — queued, not done). Cards for the remaining backlog created 2026-11-25 (board card ids `lts-<CARD>`, ledger entries at tasks/ROADMAP.yaml + state/task-state.json, full contract in state/notes/<CARD>.md):
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
-| ui-word-state-coloring | ux, desktop | U4: unseen=plain / learning=teal / confirmed=muted coloring inside reader text (LingQ/LangLeap standard). Pairs with READABILITY-GATE-001. | (new) |
-| ui-correction-in-artifact | ux, desktop | U9: dictation/speech feedback marks the wrong form INSIDE the sentence with the corrected form beside it (Praktika pattern), not a separate verdict line. ERR-SRS-LOOP-001 shipped the offer surface but not the in-artifact highlight. | (new) |
-| ui-designed-empty-states | ux, desktop | U10: designed empty states + light line-art glyphs (serif identity); the empty states are honest but bare. | (new) |
-| ui-accumulation-meters | ux, desktop | U11: Today header strip shows accumulation — My Words "forms confirmed" count, worlds "X of Y unlocked". | (new) |
-| ui-copy-hygiene-short-titles | ux, docs | U2 take-two: short task-card phrasing for goal/unit titles (full requirement sentences now render as titles). | UI-HYGIENE-001 (follow-on) |
+| ui-word-state-coloring | ux, desktop | U4: unseen=plain / learning=teal / confirmed=muted coloring inside reader text (LingQ/LangLeap standard). Pairs with READABILITY-GATE-001. | **WORD-STATE-COLORING-001** (ready 2026-11-25) |
+| ui-correction-in-artifact | ux, desktop | U9: dictation/speech feedback marks the wrong form INSIDE the sentence with the corrected form beside it (Praktika pattern), not a separate verdict line. ERR-SRS-LOOP-001 shipped the offer surface but not the in-artifact highlight. | **CORRECTION-IN-ARTIFACT-001** (ready 2026-11-25) |
+| ui-designed-empty-states | ux, desktop | U10: designed empty states + light line-art glyphs (serif identity); the empty states are honest but bare. | **EMPTY-STATES-001** (ready 2026-11-25) |
+| ui-accumulation-meters | ux, desktop | U11: Today header strip shows accumulation — My Words "forms confirmed" count, worlds "X of Y unlocked". | **ACCUMULATION-METERS-001** (ready 2026-11-25) |
+| ui-copy-hygiene-short-titles | ux, docs | U2 take-two: short task-card phrasing for goal/unit titles (full requirement sentences now render as titles). | **SHORT-TITLES-001** (ready 2026-11-25, follow-on to UI-HYGIENE-001) |
 
 Also parked by owner 2026-11-18: U8 word-synced karaoke highlight (STORY-LISTEN-001, not resumed). U12 scenario scene view: do only after G1 exists.
 
 
-## tooling backlog — 2026-11-23 (gate/verifier improvements; NOT yet coded)
+## tooling backlog — 2026-11-23 (gate/verifier improvements; mutation-perf cards created 2026-11-24, pnpm-audit card created 2026-11-25)
 
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
 | mutation-perf | tooling, tests | **MUTATION-PERF-001** — make the file-mutation verifier fast: the 37-case suite `tools/test_validate_handoff.py` re-copies the whole repo per case (~10.5s/case, ~371s full-suite wall time on this machine at 2026-11-23). Baseline-copy-once + hardlink overlay per case → target at/below ~90s. 37 cases keep their original assertions (diff to test bodies must be empty); no validator change; 44-vs-37 historical doc discrepancy recorded, not rewritten. | `MUTATION-PERF-001` |
 | mutation-perf-cache | tooling, tests | **MUTATION-PERF-CACHE-001** — re-scoped successor to MUTATION-PERF-001 (blocked): validator-side file-hash cache in `tools/validate_handoff.py` so the 37 cases stop re-parsing the ~6.9k-file tree (~9.7s/case). Identical semantics; the gate itself changes and requires review before merge. | `MUTATION-PERF-CACHE-001` |
+| pnpm-audit-minimatch | tooling, tests | **PNPM-AUDIT-MINIMATCH-001** (2026-11-25) — 1 moderate finding (minimatch >=7.0.0 <11.0.1 via eslint, dev-only transitive); pin minimatch >=11.0.1 via pnpm overrides. CI audits at --audit-level=high so nothing fails today; this is dev-side hardening. | `PNPM-AUDIT-MINIMATCH-001` (ready 2026-11-25) |
+
+## docs/hygiene backlog — 2026-11-25 (repo hygiene audit; cards created today)
+
+| card | epic | what | maps to |
+| --- | --- | --- | --- |
+| app-split | code quality | **APP-SPLIT-001** (ready 2026-11-25) — App.tsx is ~5300 lines mixing orchestrator wiring (serve probe, navigation, pack state, onboarding, journey harness) with JSX; extract per-surface modules, zero behavior change. | `APP-SPLIT-001` |
+| readme-doc-drift | docs | **README-DOC-DRIFT-001** (ready 2026-11-25) — README + `current_release_candidate` carry stale pack versions/dates/counts (ja 0.4.3 → 0.4.4, ru 0.4.5 → 0.4.9, ja units 801 → 814); reconcile against artifacts, never prose. | `README-DOC-DRIFT-001` |
 
 
 ## done — 2026-11-24 FIX-HOME-POSTURE-PENDING-001: stale activePack posture badge gated on settle (REVIEW-HOME-FLASH-001 SPEC FAIL)

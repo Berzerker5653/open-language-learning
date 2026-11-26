@@ -3879,6 +3879,121 @@ tasks:
   - "A paired device in serve mode and all desktop mode render exactly as before"
   - "The serve-pairing contract test goes red at base and green after; the full desktop suite stays green and validate_handoff passes"
   required_for_desktop_1_0: false
+- id: WORD-STATE-COLORING-001
+  milestone: M11
+  priority: P1
+  title: Reader text shows no visual distinction between unseen, learning, and confirmed words - color in-text word-state tokens (unseen plain / learning teal / confirmed muted)
+  dependencies: [READABILITY-GATE-001]
+  read_first:
+  - state/notes/WORD-STATE-COLORING-001.md
+  - apps/desktop/src/reading.tsx
+  - docs/ui-review-2026-11-23.md
+  acceptance:
+  - "Vitest pins per state (unseen plain / learning teal / confirmed muted) for the reader surface(s); tsc clean; desktop suite green"
+  - "A mobile 390px capture with learner-inspection note lands under state/evidence/WORD-STATE-COLORING-001"
+  - "State colors route through design tokens, not raw hex"
+  required_for_desktop_1_0: false
+- id: CORRECTION-IN-ARTIFACT-001
+  milestone: M11
+  priority: P2
+  title: Speech/dictation feedback marks the wrong form in a separate verdict line instead of inside the sentence - render the correction inline (Praktika pattern)
+  dependencies: [FIX-ERR-SRS-LOOP-001-2]
+  read_first:
+  - state/notes/CORRECTION-IN-ARTIFACT-001.md
+  - apps/desktop/src/dictation.tsx
+  - apps/desktop/src/writing.tsx
+  - docs/ui-review-2026-11-23.md
+  acceptance:
+  - "Red-first vitest pins (wrong form inside the sentence + corrected form beside it + render-only never calls error_review_accept); tsc and full suite green"
+  - "A 390px capture lands under state/evidence/CORRECTION-IN-ARTIFACT-001"
+  required_for_desktop_1_0: false
+- id: EMPTY-STATES-001
+  milestone: M11
+  priority: P2
+  title: Empty states are honest but bare (Practice hub, My Words, Progress, Today, path view) - design them with glyph + one-line honest copy + one affordance
+  dependencies: []
+  read_first:
+  - state/notes/EMPTY-STATES-001.md
+  - packages/ui/src/styles.css
+  - apps/desktop/src/hub.tsx
+  - apps/desktop/src/words.tsx
+  - apps/desktop/src/memory-stats.tsx
+  - apps/desktop/src/home.tsx
+  acceptance:
+  - "Vitest pin tests per surface (glyph + honest copy render); tokens used, no inline hex"
+  - "390px captures of every empty surface land under state/evidence/EMPTY-STATES-001 with learner-inspection note"
+  - "Desktop suite green; tsc clean"
+  required_for_desktop_1_0: false
+- id: ACCUMULATION-METERS-001
+  milestone: M11
+  priority: P2
+  title: Today header strip shows no accumulation - add My Words "N forms confirmed" + worlds "X of Y unlocked", honest and settle-gated
+  dependencies: []
+  read_first:
+  - state/notes/ACCUMULATION-METERS-001.md
+  - apps/desktop/src/home.tsx
+  - docs/ui-review-2026-11-23.md
+  acceptance:
+  - "Vitest pin tests (render-on-settle, hidden-while-pending, honest labels); 390px capture under state/evidence/ACCUMULATION-METERS-001"
+  - "No stale-pre-settle render (HOME-FLASH / FIX-HOME-POSTURE-PENDING-001 pattern)"
+  - "Desktop suite green; tsc clean"
+  required_for_desktop_1_0: false
+- id: SHORT-TITLES-001
+  milestone: M11
+  priority: P2
+  title: Goal and unit descriptions render as full requirement sentences (the largest remaining copy-hygiene gap) - shorten to task-card phrasing that preserves meaning
+  dependencies: [UI-HYGIENE-001]
+  read_first:
+  - state/notes/SHORT-TITLES-001.md
+  - languages/ja-JP/curriculum/goals.yaml
+  - languages/ru-RU/curriculum/goals.yaml
+  - docs/ui-review-2026-11-23.md
+  acceptance:
+  - "No goal/unit description longer than one sentence (target ~12 words); meaning preserved; both languages parity spot-checked"
+  - "Pack gates pass: validate --mode install 0 errors; info warnings unchanged"
+  - "Evidence: before/after description counts per language under state/evidence/SHORT-TITLES-001/gates.log"
+  required_for_desktop_1_0: false
+- id: APP-SPLIT-001
+  milestone: M11
+  priority: P2
+  title: App.tsx is ~5300 lines and mixes orchestrator wiring (serve probe, navigation, pack state, onboarding, journey harness) with JSX - extract per-surface modules, zero behavior change
+  dependencies: []
+  read_first:
+  - state/notes/APP-SPLIT-001.md
+  - apps/desktop/src/App.tsx
+  acceptance:
+  - "App.tsx is materially smaller (target <= ~1500 lines, measured before commit with before/after counts)"
+  - "tsc clean; full desktop suite green; validate_handoff green"
+  - "Evidence under state/evidence/APP-SPLIT-001/gates.log with the measured line counts"
+  required_for_desktop_1_0: false
+- id: README-DOC-DRIFT-001
+  milestone: M10
+  priority: P2
+  title: README and task-state current_release_candidate carry stale pack versions/dates/counts (ja-JP 0.4.3 -> 0.4.4; ru-RU 0.4.5 -> 0.4.9; ja units 801 -> 814) - reconcile against the artifact, never prose
+  dependencies: []
+  read_first:
+  - state/notes/README-DOC-DRIFT-001.md
+  - README.md
+  - catalog/packs.json
+  - state/task-state.json
+  acceptance:
+  - "Every pack version/date/count claim in README.md and current_release_candidate is measured from an artifact on this tree (catalog/packs.json + current tree), with the date noted"
+  - "README and task-state agree exactly with catalog/packs.json (script compare in gates.log)"
+  - "Evidence under state/evidence/README-DOC-DRIFT-001/gates.log"
+  required_for_desktop_1_0: false
+- id: PNPM-AUDIT-MINIMATCH-001
+  milestone: M10
+  priority: P3
+  title: pnpm audit reports 1 moderate finding (minimatch >=7 <11.0.1, dev-only transitive via eslint) - pin minimatch >=11.0.1 via pnpm overrides
+  dependencies: []
+  read_first:
+  - state/notes/PNPM-AUDIT-MINIMATCH-001.md
+  - pnpm-workspace.yaml
+  acceptance:
+  - "pnpm audit clean at --audit-level=high AND at moderate (0 findings)"
+  - "Lockfile re-synced; install + full desktop suite green"
+  - "Evidence under state/evidence/PNPM-AUDIT-MINIMATCH-001/gates.log"
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -4033,6 +4148,14 @@ execution_scope:
   - READING-CLUTTER-001
   - CONTENT-QA-STORIES-001
   - SESSION-FLOW-COPY-001
+  - WORD-STATE-COLORING-001
+  - CORRECTION-IN-ARTIFACT-001
+  - EMPTY-STATES-001
+  - ACCUMULATION-METERS-001
+  - SHORT-TITLES-001
+  - APP-SPLIT-001
+  - README-DOC-DRIFT-001
+  - PNPM-AUDIT-MINIMATCH-001
   - LAN-TOGGLE-PIN-001
   - RU-STORIES-MEDIA-001
   - RU-CONTENT-FREEZE-047-001
