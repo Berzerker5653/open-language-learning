@@ -144,6 +144,15 @@ import {
   type SettingsWiringDeps,
 } from "./app/settings-wiring";
 import {
+  runAdvanceSession,
+  runCloseSession,
+  runPauseSession,
+  runResumeSession,
+  runStartCapstoneSession,
+  runStartSession,
+  type HomeWiringDeps,
+} from "./app/home-wiring";
+import {
   runCancelInstall,
   runImportPack,
   runInstallCatalogPack,
@@ -1870,252 +1879,54 @@ export function App() {
     }
     // A session keeps working the activities it started with; the refreshed
     // plan is read the next time Home is, not re-selected mid-session.
-    if (sessionQueueRef.current) void advanceSession(1);
+    if (sessionQueueRef.current) void runAdvanceSession(sessionWiringDeps, 1);
   }
 
-  /// An activity belongs to a session only if this build has a practice
-  /// screen for it: the hub's verb table is that guarantee, and a saved word
-  /// opens a review card instead of a runner. Anything else is named in the
-  /// session summary rather than silently dropped.
-  function isSessionRunnable(item: PlannedItem): boolean {
-    return item.reason !== "saved-review" && RUNNABLE_MODALITIES[item.modality] !== undefined;
-  }
-
-  function publishSession(status: SessionStatus | null) {
-    const q = sessionQueueRef.current;
-    setSession(
-      q && status
-        ? {
-            status,
-            total: q.items.length,
-            done: q.done,
-            notRunnable: q.notRunnable,
-            // SESSION-CHROME-001 (U3) + SESSION-TIMER-001: remaining time
-            // is the engine's own price for the items still to work,
-            // including the open one — derived by the tested helper so the
-            // header always starts from the full queue's real estimate.
-            remainingSeconds: remainingPlanSeconds(q.items, q.index),
-          }
-        : null,
-    );
-  }
-
-  async function startSession() {
-    const runnable = plan.items.filter(isSessionRunnable);
-    const notRunnable = plan.items.length - runnable.length;
-    if (runnable.length === 0) {
-      // Nothing this build can run: name that instead of opening a loop.
-      setSessionOutcome({
-        done: 0,
-        total: plan.items.length,
-        reason: "finished",
-        notRunnable,
-        minutes: null,
-        forms: [],
-      });
-      return;
-    }
-    const first = runnable[0];
-    if (!first) return; // the empty case above already covers this
-    sessionQueueRef.current = { items: runnable, index: 0, done: 0, notRunnable };
-    // SESSION-CHROME-001: wall time measured across the whole session,
-    // reported in the summary as time actually spent — never an estimate.
-    sessionStartedAtRef.current = Date.now();
-    setSessionOutcome(null);
-    publishSession("running");
-    await openPractice(first);
-  }
-
-  /// `counted` is the activity that just ended. When the snapshot runs out
-  /// the session closes with a plain summary — no reward language, and no
-  /// claim that an activity the learner never did was finished.
-  async function advanceSession(counted: number) {
-    const q = sessionQueueRef.current;
-    if (!q) return;
-    q.done += counted;
-    q.index += 1;
-    const next = q.items[q.index];
-    if (next) {
-      // SESSION-FLOW-COPY-001: the session advances itself. A short bridge
-      // names what comes next, then the runner opens — no second Start
-      // click. If the learner paused or stopped during the bridge, the
-      // advance resolves as "did not proceed" and nothing opens.
-      publishSession("running");
-      const proceeded = await showSessionBridge(next);
-      if (!proceeded || !sessionQueueRef.current) return;
-      await openPractice(next, { showLessonCard: false });
-      return;
-    }
-    const outcome = sessionOutcomeFrom(q, "finished");
-    sessionQueueRef.current = null;
-    sessionStartedAtRef.current = null;
-    setSession(null);
-    setSessionOutcome(outcome);
-    // UNIT-CAPSTONE-001: completing the queue of a section review closes
-    // the review — the engine records the attempt (pass OR fail). Stopping
-    // mid-review never reaches this line: no queue exhaustion, no attempt.
-    if (capstoneSessionRef.current) await finishCapstoneSession();
-  }
-
-  /// SESSION-CHROME-001 (U3): the end-of-session card. Time is measured
-  /// wall clock, never re-estimated; forms are the surfaces the finished
-  /// items put in front of the learner, deduped in first-seen order.
-  function sessionOutcomeFrom(
-    q: { items: PlannedItem[]; done: number; notRunnable: number },
-    reason: "finished" | "stopped",
-  ): SessionOutcomeView {
-    const start = sessionStartedAtRef.current;
-    const minutes = start === null ? null : Math.round((Date.now() - start) / 60_000);
-    const seen = new Set<string>();
-    const forms: string[] = [];
-    for (const it of q.items.slice(0, Math.min(q.done, q.items.length))) {
-      const s = it.surface;
-      if (s && !seen.has(s)) {
-        seen.add(s);
-        forms.push(s);
-      }
-    }
-    return {
-      done: q.done,
-      total: q.items.length + q.notRunnable,
-      reason,
-      notRunnable: q.notRunnable,
-      minutes,
-      forms,
-    };
+  // APP-SPLIT-003D: the session-lifecycle bodies moved to ./app/home-wiring
+  // (pure move, zero behavior change). App() keeps owning every hook, all
+  // session state and the refs; `sessionWiringDeps` below carries exactly
+  // what the old inline closures captured. Thin wrappers keep every JSX and
+  // history-wiring call site unchanged.
+  function advanceSession(counted: number) {
+    return runAdvanceSession(sessionWiringDeps, counted);
   }
 
   function closeSession(reason: "stopped") {
-    const q = sessionQueueRef.current;
-    if (!q) return;
-    cancelSessionBridge();
-    // UNIT-CAPSTONE-001: stopping mid-review records NOTHING — an attempt
-    // exists only when the whole review ran to the end.
-    capstoneSessionRef.current = null;
-    const outcome = sessionOutcomeFrom(q, reason);
-    sessionQueueRef.current = null;
-    sessionStartedAtRef.current = null;
-    setSession(null);
-    setSessionOutcome(outcome);
-    setPracticeTarget(null);
-    setPracticeTask(null);
-    setLesson(null);
-    setLessonSeen(false);
+    runCloseSession(sessionWiringDeps, reason);
   }
 
   function pauseSession() {
-    if (!sessionQueueRef.current) return;
-    // The bridge is part of the running session: pausing cancels it, and
-    // nothing opens behind the learner.
-    cancelSessionBridge();
-    setPracticeTarget(null);
-    setPracticeTask(null);
-    setLesson(null);
-    setLessonSeen(false);
-    publishSession("paused");
+    runPauseSession(sessionWiringDeps);
   }
 
-  async function resumeSession() {
-    const q = sessionQueueRef.current;
-    if (!q) return;
-    const current = q.items[q.index];
-    if (!current) return; // an exhausted queue has already closed the session
-    publishSession("running");
-    await openPractice(current);
+  function resumeSession() {
+    return runResumeSession(sessionWiringDeps);
   }
 
-  // UNIT-CAPSTONE-001: the section review rides the same session runner as
-  // the plan — the engine serves the item list (`capstone_plan`), the
-  // runner grades every item through the normal submit path, and closing
-  // the review asks the engine to recount the recall itself
-  // (`capstone_complete`), never trusting the UI's tallies.
-  async function startCapstoneSession(node: UnitPathNode) {
-    if (!inv || !profileId) return;
-    setCapstoneResult(null);
-    try {
-      const p = (await inv("capstone_plan", {
-        profileId,
-        packId: node.pack_id,
-        band: node.band ?? "other",
-      })) as SessionPlan;
-      const runnable = p.items.filter(isSessionRunnable);
-      const first = runnable[0];
-      if (!first) {
-        setCapstoneResult({
-          passed: false,
-          items: 0,
-          correct: 0,
-          friendly: bandHeader(node.band ?? "other").friendly ?? node.band ?? "Section",
-          band: node.band ?? "other",
-          error: "this section's review has no runnable activities in this build",
-        });
-        return;
-      }
-      // Same id discipline as a plan session: one id per presented review;
-      // its attempt groups collapse retries inside the sitting (docs/03 §5).
-      const sid =
-        typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
-          ? crypto.randomUUID()
-          : `capstone-${Math.random().toString(36).slice(2, 10)}`;
-      capstoneSessionRef.current = { packId: node.pack_id, band: node.band ?? "other", id: sid };
-      sessionQueueRef.current = {
-        items: runnable,
-        index: 0,
-        done: 0,
-        notRunnable: p.items.length - runnable.length,
-      };
-      sessionStartedAtRef.current = Date.now();
-      setSessionOutcome(null);
-      publishSession("running");
-      await openPractice(first, { showLessonCard: false });
-    } catch (e) {
-      capstoneSessionRef.current = null;
-      setSession(null);
-      setCapstoneResult({
-        passed: false,
-        items: 0,
-        correct: 0,
-        friendly: bandHeader(node.band ?? "other").friendly ?? node.band ?? "Section",
-        band: node.band ?? "other",
-        error: String(e),
-      });
-    }
-  }
-
-  /// Closes a finished review honestly: the engine recounts which selected
-  /// items the learner actually recalled (attempt-grouped evidence),
-  /// records the attempt — pass OR fail — and the path refreshes so the
-  /// flipped counter/lock state shows immediately.
-  async function finishCapstoneSession() {
-    const c = capstoneSessionRef.current;
-    capstoneSessionRef.current = null;
-    if (!c || !inv || !profileId) return;
-    try {
-      const res = (await inv("capstone_complete", {
-        profileId,
-        packId: c.packId,
-        band: c.band,
-        sessionId: c.id,
-      })) as { passed: boolean; items: number; correct: number };
-      const header = bandHeader(c.band);
-      setCapstoneResult({
-        ...res,
-        friendly: header.friendly ?? header.label,
-        band: c.band,
-      });
-      setPathNodes((await inv("unit_path", { profileId })) as UnitPathNode[]);
-    } catch (e) {
-      const header = bandHeader(c.band);
-      setCapstoneResult({
-        passed: false,
-        items: 0,
-        correct: 0,
-        friendly: header.friendly ?? header.label,
-        band: c.band,
-        error: String(e),
-      });
-    }
-  }
+  // The props bundle (state + setters + refs + callbacks) for the
+  // home header/Today wiring slice. Built per render right after every
+  // referenced binding is in scope and before any call site (all consumers
+  // are click handlers and the render tail; no boot effect reads it), so the
+  // moved bodies read exactly what the old inline closures captured.
+  const sessionWiringDeps: HomeWiringDeps = {
+    inv,
+    profileId,
+    plan,
+    sessionQueueRef,
+    sessionStartedAtRef,
+    capstoneSessionRef,
+    setSession,
+    setSessionOutcome,
+    setCapstoneResult,
+    setPathNodes,
+    setPracticeTarget,
+    setPracticeTask,
+    setLesson,
+    setLessonSeen,
+    openPractice,
+    showSessionBridge,
+    cancelSessionBridge,
+  };
 
   // K-15: placement — low-stakes diagnosis per pack assessment. Each
   // assessment gets two support-0 questions, and the session id tells the
@@ -4408,13 +4219,13 @@ export function App() {
           nextOffer={nextOffer}
           firstRunSteps={firstRunSteps}
           onStart={(item) => void openPractice(item)}
-          onStartSession={() => void startSession()}
+          onStartSession={() => void runStartSession(sessionWiringDeps)}
           session={session}
           sessionOutcome={sessionOutcome}
-          onResumeSession={() => void resumeSession()}
-          onStopSession={() => closeSession("stopped")}
+          onResumeSession={() => runResumeSession(sessionWiringDeps)}
+          onStopSession={() => runCloseSession(sessionWiringDeps, "stopped")}
           onDismissSessionSummary={() => setSessionOutcome(null)}
-          onStartCapstone={(node) => void startCapstoneSession(node)}
+          onStartCapstone={(node) => void runStartCapstoneSession(sessionWiringDeps, node)}
           capstoneResult={capstoneResult}
         />
       )}
