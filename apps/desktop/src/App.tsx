@@ -143,6 +143,15 @@ import {
   runProfileSwitch,
   type SettingsWiringDeps,
 } from "./app/settings-wiring";
+import {
+  runCancelInstall,
+  runImportPack,
+  runInstallCatalogPack,
+  runRefreshInstalled,
+  runRefreshLanguages,
+  runUpdateFromCatalog,
+  type PackWiringDeps,
+} from "./app/pack-wiring";
 
 export {
   after,
@@ -782,6 +791,34 @@ export function App() {
     serveMicNamesAvailable,
   } = useServeProbe(inv);
 
+  // APP-SPLIT-003C: one props bundle (state + setters) for the
+  // pack/session/claims refresh wiring slice in ./app/pack-wiring. Built
+  // per render right after the probe slice so every referenced binding is
+  // in scope BEFORE the boot effect can call refreshInstalled() from its
+  // async IIFE; the moved bodies read exactly what the old inline closures
+  // captured. App() keeps owning every hook; these are plain values and
+  // setters.
+  const packWiringDeps: PackWiringDeps = {
+    inv,
+    profileId,
+    engineProgress,
+    setPacksPending,
+    setPacksUnknown,
+    setInstalled,
+    setInstalledUnknown,
+    setClaims,
+    setActiveIds,
+    setSelectedPack,
+    setLangError,
+    setCatalog,
+    setCatalogStatus,
+    setOnboardError,
+    setInstallingPack,
+    setEngineProgress,
+    setInstallOutcome,
+    setInstallReceipt,
+  };
+
   // `pid` lets the resume/finish flows prime the Home active-pack
   // header before the Settings route has been opened (the state
   // profileId is not yet visible to this closure there).
@@ -789,42 +826,12 @@ export function App() {
   // K-63: these reads used to be awaited one after another, each landing its
   // own state update, so opening the tab re-rendered the app several times for
   // ~4 ms of actual reading. They run together now and commit in one block.
+  // APP-SPLIT-003C: the pack/session/claims refresh read lives in
+  // ./app/pack-wiring (runRefreshLanguages) — pure move, zero behavior
+  // change. App() keeps owning every hook; `packWiringDeps` is passed at
+  // each call site.
   async function refreshLanguages(pid?: string) {
-    if (!inv) return;
-    const active = pid ?? profileId;
-    setPacksPending(true);
-    let results;
-    try {
-      results = await Promise.all([
-        inv("installed_packs") as Promise<InstalledPack[]>,
-        inv("pack_claims") as Promise<PackClaims[]>,
-        active ? loadSessionPack(inv, active) : Promise.resolve(null),
-        inv("catalog_packs") as Promise<{ entries: CatalogEntry[]; status: string }>,
-      ]);
-    } catch (e) {
-      // Sweep finding 19: a failed pack read leaves the active-pack state
-      // UNKNOWN, not "none"; Home attributes the failure instead of
-      // claiming the profile has no language.
-      setPacksUnknown(true);
-      throw e;
-    } finally {
-      setPacksPending(false);
-    }
-    const [installed, claims, session, catalog] = results;
-    setPacksUnknown(false);
-    setInstalled(installed);
-    setClaims(claims);
-    if (session) {
-      setActiveIds(session.ids);
-      // D7: the profile's own active pack seeds every pack-scoped call,
-      // so a returning session (no wizard this run) and a pack switch
-      // from Settings both aim at the right pack. No pack here means no pack:
-      // the panels refuse instead of guessing one.
-      setSelectedPack(session.packId);
-      if (session.note) setLangError(session.note);
-    }
-    setCatalog(catalog.entries);
-    setCatalogStatus(catalog.status);
+    await runRefreshLanguages(packWiringDeps, pid);
   }
 
   // PACK-UPDATE-UX-001: one read, one container update. The wizard used to
@@ -832,47 +839,18 @@ export function App() {
   // records, which is exactly how the two drifted apart. Every install path
   // now re-reads the same records the panel renders, so a pack landing on
   // the device updates one state and both surfaces see it.
+  // APP-SPLIT-003C: pure move to ./app/pack-wiring (runRefreshInstalled).
   async function refreshInstalled(): Promise<InstalledPack[] | null> {
-    if (!inv) return null;
-    try {
-      const fresh = (await inv("installed_packs")) as InstalledPack[];
-      setInstalled(fresh);
-      setInstalledUnknown(false);
-      return fresh;
-    } catch {
-      setInstalledUnknown(true);
-      return null;
-    }
+    return runRefreshInstalled(packWiringDeps);
   }
 
   // PACK-UPDATE-UX-001: the wizard's Update control. install_catalog_pack is the
   // same path the Settings panel uses, so there is one write path per source.
   // Afterwards both containers are refreshed from the engine and the catalogue
   // rather than edited by hand: a stale row only clears when the records say so.
+  // APP-SPLIT-003C: pure move to ./app/pack-wiring (runUpdateFromCatalog).
   async function updateFromCatalog(id: string) {
-    if (!inv) return;
-    setOnboardError(null);
-    setInstallingPack(id);
-    try {
-      await inv("install_catalog_pack", { packId: id });
-    } catch (e) {
-      setOnboardError(`Could not update that pack: ${String(e)}`);
-      return;
-    } finally {
-      setInstallingPack(null);
-      setEngineProgress(null);
-    }
-    await refreshInstalled();
-    try {
-      const cat = (await inv("catalog_packs")) as {
-        entries: CatalogEntry[];
-        status: string;
-      };
-      setCatalog(cat.entries);
-      setCatalogStatus(cat.status);
-    } catch {
-      // The rows keep the last-known facts; the notice does not invent a version.
-    }
+    await runUpdateFromCatalog(packWiringDeps, id);
   }
 
   // U02: a language change is one coordinated transition, not a settings
@@ -975,33 +953,10 @@ export function App() {
     }
   }
 
+  // APP-SPLIT-003C: pure moves to ./app/pack-wiring (runInstallCatalogPack,
+  // runCancelInstall, runImportPack).
   async function installCatalogPack(packId: string) {
-    if (!inv) return;
-    setInstallOutcome(null);
-    setInstallReceipt(null);
-    setLangError(null);
-    try {
-      const res = (await inv("install_catalog_pack", { packId })) as {
-        receipt: InstallReceipt | null;
-      } | null;
-      if (res?.receipt) setInstallReceipt(res.receipt);
-    } catch (e) {
-      const reason = String(e).replace(/^install-catalog-pack failed:\s*/, "");
-      setInstallOutcome(
-        reason.includes("install cancelled")
-          ? { kind: "cancelled", pack_id: packId, message: reason }
-          : { kind: "failed", pack_id: packId, message: reason },
-      );
-    } finally {
-      setEngineProgress(null);
-    }
-    try {
-      await refreshLanguages();
-    } catch (e) {
-      // The write succeeded; only the re-read failed — say so, and let the
-      // receipt/outcome already on screen stand.
-      setLangError(`The pack list could not be re-read: ${String(e)}`);
-    }
+    await runInstallCatalogPack(packWiringDeps, packId);
   }
 
   // Cancel asks the engine to stop the install whose progress is on screen —
@@ -1010,27 +965,11 @@ export function App() {
   // the outcome shows as cancelled — never as a client-side guess that
   // nothing happened.
   async function cancelInstall() {
-    if (!inv) return;
-    const subject = engineProgress?.subject;
-    if (!subject) return;
-    await inv("cancel_pack_install", { packId: subject }).catch(() => undefined);
+    await runCancelInstall(packWiringDeps);
   }
 
   async function importPack(dataB64: string) {
-    if (!inv) return;
-    try {
-      await inv("import_pack", { dataB64 });
-      setLangError(null);
-    } catch (e) {
-      setLangError(String(e));
-    } finally {
-      setEngineProgress(null);
-    }
-    try {
-      await refreshLanguages();
-    } catch (e) {
-      setLangError(`The pack list could not be re-read: ${String(e)}`);
-    }
+    await runImportPack(packWiringDeps, dataB64);
   }
 
   async function refreshAligner() {
