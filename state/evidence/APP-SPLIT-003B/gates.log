@@ -1,0 +1,45 @@
+# APP-SPLIT-003B — gates log (2026-11-26)
+
+Slice of APP-SPLIT-001 (RUN-2 resume recipe): the settings/import wiring
+slice extracted from App() into `apps/desktop/src/app/settings-wiring.tsx`
+as a pure move. Code commit bc0307cb.
+
+## What moved (verbatim; verified token-identical, see pure-move check)
+
+- `runSettingsPrimes(deps)` — the `primeSettingsReads` body (six
+  engine-backed prime reads + speech/packs/aligner/mic/output refreshes).
+- `runProfileExport` / `runRestorePreview` / `runRestoreConfirm` /
+  `runProfileDelete` / `runProfileSwitch` — the export/restore/delete/
+  switch handler bodies.
+- `SettingsPrimeDeps` / `SettingsWiringDeps` — the props bundle of state
+  + setters; App() builds `settingsWiringDeps` once per render (after
+  every referenced binding is in scope) and passes it at the five
+  Settings call sites and inside `primeSettingsReads`.
+
+App.tsx keeps owning every hook, all Settings state, `openSettings`, and
+the whole Settings-route JSX. No test, gate script, or behavior pin was
+touched. Test tree swept for `from "./App"` imports: all point at the
+primitives re-export shim, untouched by this slice — no re-exports added
+or removed.
+
+## LOC
+
+- App.tsx: 4594 -> 4509 (-85). settings-wiring.tsx: 235 lines.
+- (Ledger table previously recorded 4591 after 003A; `wc -l` at this
+  slice's base 0e66c227 measured 4594.)
+
+## Lane gates (run once at this checkpoint, never stacked)
+
+- `npx tsc --noEmit` -> exit 0 (PASS), apps/desktop.
+- `npx vitest run` -> 77 files passed / 694 tests passed (PASS), 9.50s.
+- Security scan of staged added lines (secrets/eval/exec/injection/
+  pickle patterns) -> no matches.
+
+## Pure-move verification
+
+Token-level body comparison (strip indentation + the `deps.` prefixes +
+the local destructuring preamble) of each moved body against
+`git show 0e66c227:apps/desktop/src/App.tsx`:
+primeSettingsReads, exportProfileData, previewRestore, confirmRestore,
+confirmProfileDelete, switchProfile — ALL IDENTICAL. Zero behavior
+change.

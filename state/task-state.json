@@ -73,12 +73,22 @@
       ],
       "summary": "Session/history wiring slice extracted from App() into apps/desktop/src/app/history-wiring.tsx (historyPop handler body + confirmHistoryExit + leave-session alertdialog, pure move; refs passed by ref so pop-time timing is exact; App.tsx keeps appLocation derivation, all refs/state, install + sync effects). App.tsx 4650 -> 4591 lines; tsc clean; full desktop vitest 77 files / 694 tests (incl. journeys/history-nav.journey.tsx driving the moved dialog); no re-pins needed."
     },
+    "APP-SPLIT-003B": {
+      "status": "done",
+      "attempts": 1,
+      "updated": "2026-11-26",
+      "notes": "Budgeted slice of APP-SPLIT-001: extract the settings/import wiring slice from App() - pure move, App.tsx keeps every hook. Contract: card body + the RUN-2 recipe in state/notes/APP-SPLIT-001.md; board card lts-APP-SPLIT-003B.",
+      "evidence": [
+        "state/evidence/APP-SPLIT-003B/gates.log"
+      ],
+      "summary": "Settings/import wiring slice extracted from App() into apps/desktop/src/app/settings-wiring.tsx (primeSettingsReads body + export/restore/delete/switch handler bodies; SettingsWiringDeps props bundle of state+setters; App.tsx keeps every hook and all Settings-route JSX). Pure move verified token-identical per body. App.tsx 4594 -> 4509 lines. Gates: npx tsc --noEmit clean; npx vitest run 77 files / 694 tests. Code bc0307cb."
+    },
     "APP-SPLIT-001": {
       "status": "blocked",
       "attempts": 2,
       "updated": "2026-11-26",
       "notes": "Split ~5300-line App.tsx into per-surface modules - zero behavior change. Contract: state/notes/APP-SPLIT-001.md; board card lts-APP-SPLIT-001.",
-      "blocker": "Honest partial: pure module-scope helpers (primitives, placement-coverage), walkthrough slice and serve-probe slice extracted (App.tsx 5336 -> 4650 lines; the <= ~1500 goal is NOT met - residual is one ~4650-line stateful App() with ~90 hooks). Gates green (tsc clean; vitest 77 files / 694 tests; validate_handoff PASSED). Codes ea9c188, 040456ae, 75ba816c. Resume recipe: state/notes/APP-SPLIT-001.md.",
+      "blocker": "Honest partial: pure module-scope helpers (primitives, placement-coverage), walkthrough, serve-probe, session/history (APP-SPLIT-003A) and settings/import (APP-SPLIT-003B) slices extracted (App.tsx 5336 -> 4509 lines; the <= ~1500 goal is NOT met - residual is one ~4509-line stateful App() with ~90 hooks). Gates green (tsc clean; vitest 77 files / 694 tests; validate_handoff PASSED). Codes ea9c188, 040456ae, 75ba816c, 88ce090e, bc0307cb. Resume recipe: state/notes/APP-SPLIT-001.md.",
       "evidence": [
         "state/evidence/APP-SPLIT-001/gates.log"
       ]
