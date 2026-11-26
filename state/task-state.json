@@ -10,10 +10,14 @@
       "notes": "Reader text in-text word-state coloring (unseen plain / learning teal / confirmed muted) - U4. Contract: state/notes/WORD-STATE-COLORING-001.md; board card lts-WORD-STATE-COLORING-001."
     },
     "CORRECTION-IN-ARTIFACT-001": {
-      "status": "ready",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "updated": "2026-11-25",
-      "notes": "Dictation/writing feedback renders the correction inline (wrong form inside the sentence + corrected form beside it) - U9. Contract: state/notes/CORRECTION-IN-ARTIFACT-001.md; board card lts-CORRECTION-IN-ARTIFACT-001."
+      "notes": "Dictation/writing feedback renders the correction inline (wrong form inside the sentence + corrected form beside it) - U9. Contract: state/notes/CORRECTION-IN-ARTIFACT-001.md; board card lts-CORRECTION-IN-ARTIFACT-001.",
+      "evidence": [
+        "state/evidence/CORRECTION-IN-ARTIFACT-001/gates.log"
+      ],
+      "summary": "Correction rendered inline inside the sentence (struck wrong form + corrected form beside it, Praktika pattern) in the dictation and writing result views, additive to the existing offer surface. Red-first vitest pins; tsc clean; full desktop suite 675/675; 390px capture under state/evidence/CORRECTION-IN-ARTIFACT-001/."
     },
     "EMPTY-STATES-001": {
       "status": "ready",
