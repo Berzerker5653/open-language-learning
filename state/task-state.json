@@ -4,10 +4,14 @@
   "active_task": null,
   "tasks": {
     "WORD-STATE-COLORING-001": {
-      "status": "ready",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 2,
       "updated": "2026-11-25",
-      "notes": "Reader text in-text word-state coloring (unseen plain / learning teal / confirmed muted) - U4. Contract: state/notes/WORD-STATE-COLORING-001.md; board card lts-WORD-STATE-COLORING-001."
+      "notes": "Reader text in-text word-state coloring (unseen plain / learning teal / confirmed muted) - U4. Contract: state/notes/WORD-STATE-COLORING-001.md; board card lts-WORD-STATE-COLORING-001.",
+      "evidence": [
+        "state/evidence/WORD-STATE-COLORING-001/gates.log"
+      ],
+      "summary": "Reader in-text word-state coloring (U4): unseen plain / learning teal (--accent) / confirmed muted (--ink-faint), routed through design tokens and derived from the learner record (own confirmation marks + My Words kept-words list), never a parallel store. Red-first vitest pins (5 new); tsc clean; full desktop suite 680/680; 390px capture + learner-inspection note under state/evidence/WORD-STATE-COLORING-001/."
     },
     "CORRECTION-IN-ARTIFACT-001": {
       "status": "done",
