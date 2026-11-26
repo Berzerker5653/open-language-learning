@@ -4,7 +4,7 @@
 id: ja.unit.advice-opinion-revision
 goal_id: ja.goal.b1.advice-opinion
 title: "Review: advice opinion language"
-summary: Delayed reuse of the sentences shared across the advice opinion journey units, plus unit sentences.
+summary: "Delayed reuse of advice/opinion journey shared sentences and unit sentences."
 estimated_minutes: 7
 # K-70/ADR-0022 phase gate: the revision surfaces only after the journey units' content
 # reached `supported`; this is the reuse stage named by every unit's task_sequence, and the

@@ -1,8 +1,7 @@
 id: ru.unit.a1.personal-details-10
 goal_id: ru.goal.a1.personal-details
 title: Completing a simple profile
-summary: Learn the remaining profile fields. Read the student-and-origin model, then assemble a fictional
-  profile with a name, role, origin, age and labeled contact details.
+summary: "Learn the remaining profile fields; assemble a fictional profile with labeled contacts."
 estimated_minutes: 12
 activities:
 - id: ru.activity.a1.u029-read

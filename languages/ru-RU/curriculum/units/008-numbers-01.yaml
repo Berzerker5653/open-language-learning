@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.numbers-01"
 goal_id: "ru.goal.on-ramp.numbers"
 title: "Number words zero through four"
-summary: "Match number words zero through four to digits and write the words. Complete the model identifying the printed digit 0; do not combine numerals with counted nouns."
+summary: "Match number words zero-four to digits; complete the printed-digit-0 model."
 estimated_minutes: 6
 activities:
   - id: "ru.activity.on-ramp.numbers-01-read"

@@ -1,8 +1,7 @@
 id: ru.unit.a1.personal-details-08
 goal_id: ru.goal.a1.personal-details
 title: Age and contact fields
-summary: Read street, apartment, identifier, mail and form labels. Complete the age model and identify
-  the fields used for supplied fictional contact details.
+summary: "Read contact labels; complete the age model; identify supplied contact fields."
 estimated_minutes: 8
 activities:
 - id: ru.activity.a1.u027-read

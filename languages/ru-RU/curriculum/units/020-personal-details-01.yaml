@@ -1,8 +1,7 @@
 id: ru.unit.a1.personal-details-01
 goal_id: ru.goal.a1.personal-details
 title: Subject pronouns and profile labels
-summary: Extend personal reference to we, they and neuter it. Read surname and patronymic labels, then
-  match the eight subject pronouns to explicit people or noun cues.
+summary: "Extend reference to we/they/it; match eight subject pronouns to explicit cues."
 estimated_minutes: 8
 activities:
 - id: ru.activity.a1.u020-read

@@ -2,7 +2,7 @@
 id: ru.unit.b1.jprob-02
 goal_id: ru.goal.b1.practical-problems
 title: "Ответ мастера"
-summary: мастер написал, что заменит деталь — то же сообщение о проблеме глазами мастера.
+summary: "Мастер написал, что заменит деталь — сообщение о проблеме глазами мастера."
 estimated_minutes: 8
 # Reuses journey content (reported speech, request chunk, master/обращение vocab)
 # in the changed situation declared at world/environments.jsonl

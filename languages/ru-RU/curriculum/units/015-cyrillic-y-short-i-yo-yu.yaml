@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.cyrillic-y-short-i-yo-yu"
 goal_id: "ru.goal.on-ramp.cyrillic"
 title: "Printed Cyrillic: Ы ы, Й й, Ё ё, Ю ю"
-summary: "Meet these printed letters. Each letter is one sound — see its printed forms, learn its name and sound, then recognize it and write it."
+summary: "These printed letters: learn name and sound, recognize and write."
 estimated_minutes: 5
 activities:
   - id: "ru.activity.on-ramp.cyrillic-y-short-i-yo-yu-read"

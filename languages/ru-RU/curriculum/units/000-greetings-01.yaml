@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.greetings-01"
 goal_id: "ru.goal.on-ramp.greetings"
 title: "First polite greetings"
-summary: "After units 010-019, learn five fixed greetings or polite expressions. Match their meanings and write the expressions; do not infer productive adjective or verb forms."
+summary: "Learn five fixed greetings; match meanings and write them."
 estimated_minutes: 6
 activities:
   - id: "ru.activity.on-ramp.greetings-01-read"

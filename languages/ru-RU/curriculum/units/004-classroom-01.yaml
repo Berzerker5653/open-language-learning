@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.classroom-01"
 goal_id: "ru.goal.on-ramp.classroom"
 title: "Essential written learning instructions"
-summary: "Read three written task instructions and the labels for word and letter. Treat commands as fixed chunks and complete the polite reading request."
+summary: "Read three instructions and word/letter labels; complete the polite reading request."
 estimated_minutes: 6
 activities:
   - id: "ru.activity.on-ramp.classroom-01-read"

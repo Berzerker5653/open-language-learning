@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.cyrillic-stress-review"
 goal_id: "ru.goal.on-ramp.cyrillic"
 title: "Teaching stress mark and cumulative symbol review"
-summary: "Learn the combining acute accent by attaching it to a taught vowel. Review every taught letter with its sound and contrast Е/Ё, И/Й and Ь/Ъ. Copy a marked vowel; no new word or audio task is introduced."
+summary: "Add the accent to a vowel; review letters; contrast Е/Ё, И/Й, Ь/Ъ."
 estimated_minutes: 8
 activities:
   - id: "ru.activity.on-ramp.cyrillic-stress-review-read"

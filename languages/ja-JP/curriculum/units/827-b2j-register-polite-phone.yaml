@@ -2,7 +2,7 @@
 id: ja.unit.b2-register-polite-phone
 goal_id: ja.goal.b2.register-shift
 title: "Phone register: polite and hedged forms for clients"
-summary: "B2 register work: formal polite ございます, hedged あのう-request, and soft proposal いかがでしょうか, with independent production and scenario transfer."
+summary: "B2 register: ございます, あのう-request, いかがでしょうか — independent production."
 estimated_minutes: 9
 # ADR-0037: this unit claims the b2 register-shift task sequence end to end.
 task_sequence:

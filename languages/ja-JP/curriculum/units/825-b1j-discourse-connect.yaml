@@ -2,7 +2,7 @@
 id: ja.unit.b1-discourse-connect
 goal_id: ja.goal.b1.storytelling
 title: "Linking sentences: first, so, however, by-country"
-summary: "B1 connected discourse: まず...それから sequencing, だから result, けれど contrast, により variation, across multi-sentence passages."
+summary: "B1 connected discourse: sequencing, result, contrast, and variation across passages."
 estimated_minutes: 11
 # ADR-0037: task sequence claimed end to end; cloze passages are multi-sentence (connected discourse, not single sentences).
 task_sequence:

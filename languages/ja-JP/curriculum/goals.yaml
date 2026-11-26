@@ -5,9 +5,7 @@
 # cannot be self-certified; review_status stays draft.
 goals:
   - id: ja.goal.onramp.respond-to-greeting
-    description: >
-      Hear a simple greeting in a supported first-introduction setting and
-      reply with a fitting short response.
+    description: "Hear a greeting and reply with a fitting short response."
     band: on-ramp
     framework_refs: []
     contexts: ["ja.situation.first-meeting"]
@@ -25,8 +23,7 @@ goals:
       date: "2026-10-03"
 
   - id: ja.goal.onramp.kana-hiragana
-    description: Recognize hiragana chart symbols on sight (both directions) well enough
-      to read supported kana text.
+    description: "Recognize hiragana chart symbols on sight to read supported kana text."
     band: on-ramp
     framework_refs: []
     contexts: []
@@ -114,8 +111,7 @@ goals:
       date: '2026-10-03'
 
   - id: ja.goal.onramp.introduce-yourself
-    description: 'Give a first-meeting introduction: name marker and set phrases, in a
-      supported scenario.'
+    description: "Give a first-meeting introduction with name marker and set phrases."
     band: on-ramp
     framework_refs: []
     contexts:
@@ -458,8 +454,7 @@ goals:
       date: '2026-10-03'
 
   - id: ja.goal.a1.conversation-repair
-    description: Keep a conversation going with comprehension-repair phrases (I don't
-      understand; one more time; slowly).
+    description: "Keep a conversation going with comprehension-repair phrases."
     band: A1
     framework_refs: []
     contexts:
@@ -600,8 +595,7 @@ goals:
       model: strata/qwen3.8-flash-next
       date: '2026-10-03'
   - id: ja.goal.a1.transport
-    description: 'Use trains, buses, and basic directions: tickets, boarding, transfers,
-      and simple direction statements.'
+    description: "Use trains, buses, and basic directions for trips."
     band: A1
     framework_refs: []
     contexts:
@@ -632,8 +626,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.a1.health-basics
-    description: 'Describe simple symptoms and understand basic health instructions
-      and visits: symptoms, medicine, clinic exchanges.'
+    description: "Describe simple symptoms and handle basic health instructions and visits."
     band: A1
     framework_refs: []
     contexts:
@@ -664,8 +657,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.a1.free-time
-    description: 'Write about hobbies, favorites, and arrange leisure plans in writing:
-      media, sports, outings, and past experiences.'
+    description: "Write about hobbies and arrange leisure plans."
     band: A1
     framework_refs: []
     contexts:
@@ -696,8 +688,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.a1.home-life
-    description: 'Describe living spaces, objects, chores, and simple housing situations:
-      rooms, furniture, appliances, and household verbs.'
+    description: "Describe living spaces, objects, and chores."
     band: A1
     framework_refs: []
     contexts:
@@ -728,8 +719,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.a1.work-school
-    description: 'Describe familiar work and study tasks, schedules, and simple workplace
-      messages: meetings, school objects, and job-related exchanges.'
+    description: "Describe familiar work and study tasks and workplace messages."
     band: A1
     framework_refs: []
     contexts:
@@ -760,8 +750,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.a1.past-stories
-    description: 'Retell simple past events and stories using past forms, sequencing
-      adverbs, and feeling expressions.'
+    description: "Retell simple past events using past forms and sequencing words."
     band: A1
     framework_refs: []
     contexts:
@@ -792,8 +781,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.a2.city-services
-    description: 'Handle city-service exchanges: post office, bank, ward office,
-      police, signs, and time expressions for schedules.'
+    description: "Handle city-service exchanges — post office, bank, ward office."
     band: A2
     framework_refs: []
     contexts:
@@ -824,8 +812,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.a2.food-cooking
-    description: 'Describe food, tastes, and simple recipes; order and talk about
-      meals using opinion and nominalization forms.'
+    description: "Describe food and recipes; order and talk about meals."
     band: A2
     framework_refs: []
     contexts:
@@ -856,8 +843,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.a2.shopping-services
-    description: 'Complete shopping exchanges: prices, discounts, counters, trying on
-      clothes, and paying, with ability and skill expressions.'
+    description: "Complete shopping exchanges — prices, discounts, counters, paying."
     band: A2
     framework_refs: []
     contexts:
@@ -888,8 +874,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.a2.health-body
-    description: 'Describe health in more detail and handle appointments and care
-      writing: symptoms, clinic visits, prevention, and recovery.'
+    description: "Describe health in more detail and handle appointments and care writing."
     band: A2
     framework_refs: []
     contexts:
@@ -920,8 +905,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.a2.communication
-    description: 'Make simple contacts by phone/email, ask and answer questions, and
-      talk about language learning using reason and conditional forms.'
+    description: "Make simple phone and email contacts and discuss language learning."
     band: A2
     framework_refs: []
     contexts:
@@ -952,8 +936,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.a2.weather-seasons
-    description: 'Describe weather, seasons, and forecasts; express reasons and
-      contrasts with ので and のに.'
+    description: "Describe weather and forecasts; express reasons and contrasts."
     band: A2
     framework_refs: []
     contexts:
@@ -984,8 +967,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.a2.entertainment
-    description: 'Talk about entertainment: venues, music, TV, sports, theater, and
-      parties, using effort and start/finish forms.'
+    description: "Talk about entertainment — venues, music, TV, sports, theater."
     band: A2
     framework_refs: []
     contexts:
@@ -1048,8 +1030,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.a2.relationships
-    description: 'Describe family, friends, and feelings using relationship words,
-      memory forms, and ように/と distinctions.'
+    description: "Describe family, friends, and feelings using relationship words."
     band: A2
     framework_refs: []
     contexts:
@@ -1080,8 +1061,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.a2.daily-admin
-    description: 'Handle daily administration: appointments, schedules, payments,
-      applications, and certificates using confirmation and change words.'
+    description: "Handle daily administration — appointments, payments, certificates."
     band: A2
     framework_refs: []
     contexts:
@@ -1520,7 +1500,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-10-04'
   - id: ja.goal.b1.repair-clarification
-    description: 'Repair and clarify in polite conversation: re-asking, confirming paraphrase, and requesting simpler wording without translation support.'
+    description: "Repair and clarify in polite conversation — re-ask, paraphrase, request simpler wording."
     band: B1
     framework_refs: []
     contexts:
@@ -1550,7 +1530,7 @@ goals:
       model: strata/qwen3.8-flash-next-iq3_s
       date: '2026-11-20'
   - id: ja.goal.b2.register-shift
-    description: 'Shift register for one message: plain casual forms with friends, polite and hedged forms on the phone, formal written style in notices, with honorific awareness for superior/client contexts.'
+    description: "Shift register for one message — casual, polite, formal, and honorific."
     band: B2
     framework_refs: []
     contexts:

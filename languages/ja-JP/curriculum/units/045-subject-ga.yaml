@@ -2,7 +2,7 @@
 id: ja.unit.subject-ga
 goal_id: ja.goal.a1.identify-objects
 title: 'Who and what: the subject marker が'
-summary: が marks the subject; questions that ask who or what; stacking with the topic は.
+summary: "が marks the subject, stacks with は, and drives who/what questions."
 estimated_minutes: 8
 generation_contract:
   allowed_vocab:

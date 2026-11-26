@@ -1,8 +1,7 @@
 id: ru.unit.a1.personal-details-07
 goal_id: ru.goal.a1.personal-details
 title: Names and further countries
-summary: Learn two names and three further countries. Read the origin model, complete its country form
-  and write an analogous identity or origin statement using declared words.
+summary: "Learn two names and three countries; complete the origin model with declared words."
 estimated_minutes: 8
 activities:
 - id: ru.activity.a1.u026-read

@@ -1,9 +1,7 @@
 id: "ja.unit.onramp.greeting"
 goal_id: "ja.goal.onramp.respond-to-greeting"
 title: "Meeting and greeting"
-summary: >
-  Encounter, comprehend, and produce a first-meeting greeting routine,
-  ending in a supported scenario interaction.
+summary: "Use a first-meeting greeting routine in a supported scenario."
 estimated_minutes: 10
 activities:
   - id: "ja.activity.onramp.encounter-greet"

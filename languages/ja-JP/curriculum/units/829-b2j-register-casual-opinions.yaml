@@ -2,7 +2,7 @@
 id: ja.unit.b2-register-casual-opinions
 goal_id: ja.goal.b2.register-shift
 title: "Plain-register opinions: ものだ, わけだ, ものか"
-summary: "B2 casual register: general-tendency ものだ, conclusion わけだ, and strong-denial ものか among colleagues and debate, with independent production."
+summary: "B2 casual register: ものだ, わけだ, and ものか with independent production."
 estimated_minutes: 9
 # ADR-0037: this unit claims the b2 register-shift task sequence end to end.
 task_sequence:

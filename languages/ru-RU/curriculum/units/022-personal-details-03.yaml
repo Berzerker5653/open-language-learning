@@ -1,8 +1,7 @@
 id: ru.unit.a1.personal-details-03
 goal_id: ru.goal.a1.personal-details
 title: Questions about a person
-summary: Read five question words. Match each to the missing information, then change a supplied identity
-  statement into a written yes-no question without adding an auxiliary.
+summary: "Read five question words; match to missing information; make yes-no questions without auxiliary."
 estimated_minutes: 8
 activities:
 - id: ru.activity.a1.u022-read

@@ -1,8 +1,7 @@
 id: ru.unit.a1.personal-details-06
 goal_id: ru.goal.a1.personal-details
 title: Numbers for age and form fields
-summary: Read ten through thirteen and forty, recycling the earlier numbers. Match digits and number words,
-  then choose the supplied year form; calendar cases are reserved for later drills.
+summary: "Read ten-thirteen and forty; match digits and words; choose the year form."
 estimated_minutes: 8
 activities:
 - id: ru.activity.a1.u025-read

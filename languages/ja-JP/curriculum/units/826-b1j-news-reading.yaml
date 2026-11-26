@@ -2,7 +2,7 @@
 id: ja.unit.b1-news-reading
 goal_id: ja.goal.b1.media-news
 title: "Reading short notices: typhoon and current situation"
-summary: "B1 broader reading: news-style short notice (ため nominal cause, ています resultant state) and a society-current-situation sentence, with independent written recall."
+summary: "B1 broader reading: news-style notice and a society current-situation sentence."
 estimated_minutes: 9
 # ADR-0037: task sequence claimed end to end; independent recall at support_level 0 carries the reduced-translation-dependence claim for this unit.
 task_sequence:

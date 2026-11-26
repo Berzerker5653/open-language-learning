@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.everyday-02"
 goal_id: "ru.goal.on-ramp.everyday"
 title: "Simple written identification"
-summary: "Learn five further person/object nouns. Read and complete the book identification, then reuse the same pattern with taught nominative nouns."
+summary: "Learn five more nouns; complete the identification pattern with taught nouns."
 estimated_minutes: 6
 activities:
   - id: "ru.activity.on-ramp.everyday-02-read"

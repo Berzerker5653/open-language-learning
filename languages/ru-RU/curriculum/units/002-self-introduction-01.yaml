@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.self-introduction-01"
 goal_id: "ru.goal.on-ramp.self-introduction"
 title: "Names and personal reference"
-summary: "Read five subject pronouns as whole words. Learn the no-copula identity pattern; practice with names; full-sentence practice comes next."
+summary: "Read five subject pronouns; learn the no-copula identity pattern with names."
 estimated_minutes: 6
 activities:
   - id: "ru.activity.on-ramp.self-introduction-01-read"

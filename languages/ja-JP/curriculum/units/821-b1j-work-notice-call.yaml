@@ -2,7 +2,7 @@
 id: ja.unit.b1-work-notice-call
 goal_id: ja.goal.b1.work-professional
 title: "Meeting notice: the follow-up call"
-summary: "The same notice on the phone: thanking for a notice, asking a question by email."
+summary: "The same notice on the phone: thanking and an email question."
 estimated_minutes: 9
 # Changed context: the office-phone situation is authored as scenario
 # ja.scenario.b1.office.notice-call (situation ja.situation.office); the unit

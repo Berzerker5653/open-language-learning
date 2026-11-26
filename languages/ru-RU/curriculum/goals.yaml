@@ -1,6 +1,6 @@
 goals:
 - id: ru.goal.on-ramp.cyrillic
-  description: Recognize and copy every printed Cyrillic letter, one sound per letter, and interpret the teaching stress mark.
+  description: "Recognize and copy every printed Cyrillic letter and read the stress mark."
   band: on-ramp
   modalities:
   - reading
@@ -58,7 +58,7 @@ goals:
     date: '2026-10-04'
     notes: ai-drafted; needs dictionary sourcing and human review
 - id: ru.goal.on-ramp.greetings
-  description: Read and write taught greetings, farewells, and polite responses in short text exchanges.
+  description: "Read and write taught greetings and polite responses in short exchanges."
   band: on-ramp
   modalities:
   - reading
@@ -205,7 +205,7 @@ goals:
     date: '2026-10-04'
     notes: ai-drafted; needs dictionary sourcing and human review
 - id: ru.goal.a1.personal-details
-  description: Read and complete simple personal profiles with names, origin, age, and contact details.
+  description: "Read and complete simple personal profiles — names, origin, age, contacts."
   band: A1
   modalities:
   - reading

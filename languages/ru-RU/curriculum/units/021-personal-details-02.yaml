@@ -1,8 +1,7 @@
 id: ru.unit.a1.personal-details-02
 goal_id: ru.goal.a1.personal-details
 title: Gender in personal information
-summary: Read country, city and contact labels. Sort the taught nouns by gender, using earlier family
-  and classroom nouns for exceptions rather than guessing from English.
+summary: "Read country/city/contact labels; sort nouns by gender using taught examples."
 estimated_minutes: 8
 activities:
 - id: ru.activity.a1.u021-read

@@ -2,7 +2,7 @@
 id: ja.unit.b1-repair-clarify
 goal_id: ja.goal.b1.repair-clarification
 title: "Keeping the line open: repair and confirmation"
-summary: "B1 conversation repair with polite request forms: もういちど おっしゃって いただけますか, うかがっても いいですか, and つまり paraphrase-checking."
+summary: "B1 conversation repair: polite request forms and つまり paraphrase-checking."
 estimated_minutes: 10
 # ADR-0037: this unit claims its task sequence end to end; transfer and reuse stages are the band's transfer/delayed-reuse checks.
 task_sequence:

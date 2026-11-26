@@ -2,7 +2,7 @@
 id: ru.unit.a2.jpast-02
 goal_id: ru.goal.a2.past-events
 title: "Вчерашний рабочий день"
-summary: была на работе, писала письма — тот же вчерашний рассказ в рабочем окружении.
+summary: "Вчерашний рассказ в рабочем окружении: была на работе, писала письма."
 estimated_minutes: 8
 # Reuses journey content (sentence, grammar, adverbs) in the changed situation
 # declared at world/environments.jsonl `talk-about-yesterday`.

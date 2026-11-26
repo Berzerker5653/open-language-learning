@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.self-introduction-02"
 goal_id: "ru.goal.on-ramp.self-introduction"
 title: "Minimal written introductions"
-summary: "Read two names and three naming expressions. Contrast the fixed polite question with the first-person answer; complete the identity model and write an introduction using a taught name."
+summary: "Contrast question and first-person answer; write an introduction with a taught name."
 estimated_minutes: 6
 activities:
   - id: "ru.activity.on-ramp.self-introduction-02-read"

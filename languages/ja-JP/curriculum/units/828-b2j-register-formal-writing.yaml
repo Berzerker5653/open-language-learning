@@ -2,7 +2,7 @@
 id: ja.unit.b2-register-formal-writing
 goal_id: ja.goal.b2.register-shift
 title: "Formal written style: notices and commentary"
-summary: "B2 genre work: announcement により / ば forms and editorial alone-limit and と definition frames, independent written production, choice-based transfer."
+summary: "B2 genre: により/ば announcements and editorial definition frames."
 estimated_minutes: 9
 # ADR-0037: this unit claims the b2 register-shift task sequence end to end.
 task_sequence:

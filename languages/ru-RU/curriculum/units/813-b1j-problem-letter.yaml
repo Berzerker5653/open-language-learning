@@ -2,7 +2,7 @@
 id: ru.unit.b1.jprob-01
 goal_id: ru.goal.b1.practical-problems
 title: "Письмо о неисправности"
-summary: не работает обогреватель, мастер сказал, что придёт — сообщение о проблеме и сообщение о её причине.
+summary: "не работает обогреватель, придёт мастер — сообщение о проблеме и причине."
 estimated_minutes: 9
 # ADR-0037: this unit claims the b1 practical-problems task sequence end to end.
 task_sequence:

@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.numbers-02"
 goal_id: "ru.goal.on-ramp.numbers"
 title: "Number words five through nine"
-summary: "Match number words five through nine to digits, review all ten and complete the model for printed digit 5. Write words from digits and digits from words."
+summary: "Match number words five-nine to digits; write words and digits both ways."
 estimated_minutes: 6
 activities:
   - id: "ru.activity.on-ramp.numbers-02-read"

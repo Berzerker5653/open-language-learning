@@ -2,7 +2,7 @@
 id: ja.unit.to-together-and-quote
 goal_id: ja.goal.a1.past-stories
 title: 'Together with, and what people said: と'
-summary: と for companions and noun lists; と quoting what someone said or thought.
+summary: "と for companions and noun lists, and for quoting."
 estimated_minutes: 7
 generation_contract:
   allowed_vocab:

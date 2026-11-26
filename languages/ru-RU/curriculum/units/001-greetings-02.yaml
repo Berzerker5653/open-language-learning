@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.greetings-02"
 goal_id: "ru.goal.on-ramp.greetings"
 title: "Farewells and polite responses"
-summary: "Learn five further response expressions, review the earlier greetings and complete the farewell model."
+summary: "Learn five more responses; review greetings; complete the farewell model."
 estimated_minutes: 6
 activities:
   - id: "ru.activity.on-ramp.greetings-02-read"

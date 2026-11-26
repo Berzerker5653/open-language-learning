@@ -2,7 +2,7 @@
 id: ja.unit.b2-film-with-friends
 goal_id: ja.goal.b2.film-analysis
 title: "Film talk after the screening"
-summary: "The same evaluation content talking with a friend: the teacher's point and recommending it on."
+summary: "The same evaluation with a friend: the teacher's point and a recommendation."
 estimated_minutes: 9
 # Changed context: the movie-discussion situation is authored as scenario
 # ja.scenario.b2.film.movie-talk (situation ja.situation.movie-discussion);

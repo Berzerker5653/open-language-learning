@@ -1,8 +1,7 @@
 id: ru.unit.a1.personal-details-09
 goal_id: ru.goal.a1.personal-details
 title: Education and an address
-summary: Read work and education labels. Interpret whose address is identified in the model, complete
-  the genitive ending and label a short fictional profile.
+summary: "Read work/education labels; complete the genitive ending; label a fictional profile."
 estimated_minutes: 8
 activities:
 - id: ru.activity.a1.u028-read

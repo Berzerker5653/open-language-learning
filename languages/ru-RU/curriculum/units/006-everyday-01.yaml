@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.everyday-01"
 goal_id: "ru.goal.on-ramp.everyday"
 title: "Familiar people and objects"
-summary: "Read four familiar nouns and the identification word. Learn that это stays unchanged in the identification pattern; complete sentence practice comes next."
+summary: "Read four nouns and 'это'; learn it unchanged in the identification pattern."
 estimated_minutes: 6
 activities:
   - id: "ru.activity.on-ramp.everyday-01-read"

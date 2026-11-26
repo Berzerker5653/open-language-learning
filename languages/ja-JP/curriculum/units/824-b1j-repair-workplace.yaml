@@ -2,7 +2,7 @@
 id: ja.unit.b1-repair-workplace
 goal_id: ja.goal.b1.repair-clarification
 title: "Office clarification: confirming details politely"
-summary: "B1 workplace clarification: re-asking a name (うかがっても いいですか) and confirming meeting details with つまり, on top of the notice/request chunks from the work-notice unit."
+summary: "B1 workplace clarification: re-asking a name and confirming details with つまり."
 estimated_minutes: 9
 # ADR-0037: task sequence claimed end to end; the transfer stage reuses repair forms in the office situation.
 task_sequence:

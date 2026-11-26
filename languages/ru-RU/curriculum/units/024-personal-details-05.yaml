@@ -1,8 +1,7 @@
 id: ru.unit.a1.personal-details-05
 goal_id: ru.goal.a1.personal-details
 title: Age and the person concerned
-summary: Learn age, year, twenty, thirty and the quantity question word. Match dative pronoun forms to
-  people; the number-year agreement practice comes next.
+summary: "Learn age/year/twenty/thirty words; match dative pronouns to people."
 estimated_minutes: 8
 activities:
 - id: ru.activity.a1.u024-read

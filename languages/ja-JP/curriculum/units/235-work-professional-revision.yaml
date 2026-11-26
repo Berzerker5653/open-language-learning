@@ -4,7 +4,7 @@
 id: ja.unit.work-professional-revision
 goal_id: ja.goal.b1.work-professional
 title: "Review: workplace language"
-summary: Delayed reuse of the meeting/email sentences and the core work words shared across the job-interview, resume, meeting, report, feedback, email, conflict, and promotion units.
+summary: "Delayed reuse of work sentences and core work words across work units."
 estimated_minutes: 7
 # K-70/ADR-0022 phase gate: the revision surfaces only after the journey units' content
 # reached `supported`; this is the reuse stage named by every 220-234 task_sequence, and

@@ -1,7 +1,7 @@
 id: "ru.unit.on-ramp.classroom-02"
 goal_id: "ru.goal.on-ramp.classroom"
 title: "Taught clarification requests"
-summary: "Learn five clarification chunks for text exchanges. Ask for repetition or explanation of a written message and complete the repeat request."
+summary: "Learn five clarification chunks; request repetition or explanation in writing."
 estimated_minutes: 6
 activities:
   - id: "ru.activity.on-ramp.classroom-02-read"

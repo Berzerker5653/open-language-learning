@@ -2,7 +2,7 @@
 id: ja.unit.b2-register-honorific-office
 goal_id: ja.goal.b2.register-shift
 title: "Honorific awareness: reporting about superiors"
-summary: "B2 pragmatics: 尊敬語 forms おかえりになる and いらっしゃる in office reporting, independent production, and the client-call scenario as changed-context transfer."
+summary: "B2 pragmatics: honorifics in office reporting and a client-call transfer."
 estimated_minutes: 9
 # ADR-0037: this unit claims the b2 register-shift task sequence end to end;
 # the client-call scenario (ja.scenario.b2.register.client-call) is this goal's

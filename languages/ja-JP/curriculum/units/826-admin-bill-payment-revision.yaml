@@ -2,7 +2,7 @@
 id: ja.unit.admin-bill-payment-revision
 goal_id: ja.goal.a2.daily-admin
 title: "Review: paying a bill"
-summary: Delayed reuse of the bill-payment counter sentences and the fee and deadline words.
+summary: "Delayed reuse of the bill-payment sentences and fee/deadline words."
 estimated_minutes: 6
 # K-70/ADR-0022 phase gate: reuse surfaces only after the core unit content
 # reached `supported`.
