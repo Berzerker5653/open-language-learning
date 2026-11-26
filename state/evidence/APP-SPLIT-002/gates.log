@@ -1,0 +1,36 @@
+APP-SPLIT-002 — budgeted per-surface extraction (walkthrough slice)
+Date: 2026-11-26 (2026-11-26T06:52Z)
+Branch: main @ 779d8675 (pre-change)
+
+== Extraction ==
+Extracted the journey/walkthrough smoke-handshake slice from App() into
+apps/desktop/src/app/walkthrough.tsx (new file, 471 lines):
+  - module-scope progressStages witness + walkthroughRan once-per-process guard
+  - the ~450-line smoke effect body (mode read + full-route walkthrough), in
+    runSmokeHandshake(inv, hooks) — pure move, zero behavior change
+App.tsx keeps owning all hooks and the non-smoke boot path; module-scope
+exports unchanged (App.tsx re-exports nothing new; the progressStages
+witness is imported back for the progress listener effect).
+
+== Before / after LOC ==
+App.tsx:              5158 lines (pre) -> 4758 lines (post)   (-400 net)
+walkthrough.tsx:      (new) 471 lines (incl. ~70 lines of module wrapper:
+                       doc header, type imports, WalkthroughHooks interface)
+Combined:             5158 -> 5229 total (extraction overhead; App itself shrinks)
+
+== Gates ==
+npx tsc --noEmit (apps/desktop):  exit 0, clean
+npx vitest run - full desktop suite:  77 files / 694 tests PASS
+python3 tools/validate_handoff.py:  HANDOFF VALIDATION PASSED (2288 data files checked)
+
+== Test re-pin ==
+grep for progressStages/walkthroughRan in the test tree: no hits outside
+App.tsx (the moved symbols were module-scope, never exported; no test pins
+their old location). Tests that import helpers from "./App" (App.test.tsx:
+NO_ACTIVE_PACK, activePackNote, explainPackAbsence, loadSessionPack,
+packAttemptRequest, packRequest, Invoke — all unchanged re-exports) still
+pass. No re-pin needed.
+
+== Scope ==
+No other files changed. No settings.tsx/home.tsx or other surface touched.
+No pack changes.
