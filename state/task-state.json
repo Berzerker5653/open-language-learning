@@ -24,10 +24,14 @@
       "summary": "Correction rendered inline inside the sentence (struck wrong form + corrected form beside it, Praktika pattern) in the dictation and writing result views, additive to the existing offer surface. Red-first vitest pins; tsc clean; full desktop suite 675/675; 390px capture under state/evidence/CORRECTION-IN-ARTIFACT-001/."
     },
     "EMPTY-STATES-001": {
-      "status": "ready",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 2,
       "updated": "2026-11-25",
-      "notes": "Designed empty states for every surface (glyph + honest copy + one affordance) - U10. Contract: state/notes/EMPTY-STATES-001.md; board card lts-EMPTY-STATES-001."
+      "notes": "Designed empty states for every surface (glyph + honest copy + one affordance) - U10. Contract: state/notes/EMPTY-STATES-001.md; board card lts-EMPTY-STATES-001.",
+      "evidence": [
+        "state/evidence/EMPTY-STATES-001/gates.log"
+      ],
+      "summary": "Designed empty states everywhere (U10): Practice hub (no pack - no modes offered, one way out), My Words (nothing mined - real link to the add form), Progress (zero lifetime facts - ring glyph + one honest affordance), Today (empty plan - sprout glyph + one way on), path view (no learning path - path glyph + way out). Light line-art glyphs (serif identity, currentColor, no emoji/stock icons), honest copy, one action-appropriate affordance, all on design tokens (no inline hex). Vitest pins per surface (10 new); tsc clean; full desktop suite 690/690; 390px captures + learner-inspection note under state/evidence/EMPTY-STATES-001/."
     },
     "ACCUMULATION-METERS-001": {
       "status": "ready",
