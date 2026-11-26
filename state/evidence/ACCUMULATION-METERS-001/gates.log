@@ -1,0 +1,9 @@
+ACCUMULATION-METERS-001 — LANE tier gates (2026-11-25)
+
+tsc: npx tsc --noEmit (apps/desktop) — clean, exit 0
+vitest targeted: npx vitest run src/home.test.tsx — 41/41 passed
+vitest full: npx vitest run (apps/desktop) — 77 files, 694/694 passed
+390px capture: scripts/accumulation-capture.mjs — today-meters: meters rendered
+  (My Words 7 forms confirmed / Worlds 2 of 5 unlocked), one line, no document
+  overflow (390/390), strip one line (height 21px, scrollW==clientW), screenshot +
+  audit JSON under state/evidence/ACCUMULATION-METERS-001/

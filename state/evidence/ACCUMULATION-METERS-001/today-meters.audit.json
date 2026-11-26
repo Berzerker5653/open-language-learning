@@ -1,0 +1,21 @@
+{
+ "screen": "today-meters",
+ "overflow": {
+  "scrollWidth": 390,
+  "clientWidth": 390
+ },
+ "stripRendered": true,
+ "myWords": {
+  "text": "My Words 7 forms confirmed",
+  "top": 34,
+  "height": 21
+ },
+ "worlds": {
+  "text": "Worlds 2 of 5 unlocked",
+  "top": 34,
+  "height": 21
+ },
+ "stripHeight": 21,
+ "stripScrollW": 390,
+ "stripClientW": 390
+}
