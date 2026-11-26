@@ -1,0 +1,922 @@
+{
+  "viewport": "390x844",
+  "port": 17635,
+  "tag": "check",
+  "checks": [
+    {
+      "name": "fresh home reached a stable pack-loaded state with exactly one pin before measurement",
+      "pass": true,
+      "measured": {
+        "healthyStreak": 3
+      }
+    },
+    {
+      "name": "A1: every consecutive ring-center dy = 76px ±2 in the open band",
+      "pass": true,
+      "measured": {
+        "rowCount": 21,
+        "offPitch": []
+      }
+    },
+    {
+      "name": "A4: first visible node carries the path-head-cap and every title sits right of its ring",
+      "pass": true,
+      "measured": {
+        "capCount": 1,
+        "capInFirst": true,
+        "firstUnit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+        "labelOff": []
+      }
+    },
+    {
+      "name": "A5: >= 2 distinct marker glyphs across the visible nodes",
+      "pass": true,
+      "measured": {
+        "distinct": 11,
+        "counts": {
+          "А": 1,
+          "К": 1,
+          "Р": 1,
+          "Б": 1,
+          "Л": 1,
+          "Ы": 1,
+          "Я": 1,
+          "Ц": 1,
+          "Щ": 1,
+          "letters": 1,
+          "<svg viewBox=\"0 0 16 16\" class=\"path-node-lock\" aria-hidden=\"true\"><path d=\"M5 7": 11
+        }
+      }
+    },
+    {
+      "name": "A5b: >= 2 distinct glyphs among UNLOCKED nodes (the shared 'A' on every letters unit was the owner complaint)",
+      "pass": true,
+      "measured": {
+        "distinctOpen": [
+          "А",
+          "К",
+          "Р",
+          "Б",
+          "Л",
+          "Ы",
+          "Я",
+          "Ц",
+          "Щ",
+          "letters"
+        ]
+      }
+    },
+    {
+      "name": "A3: start pill is one line (height <= 56px), absolutely positioned, right of every ring (outside the channel)",
+      "pass": true,
+      "measured": {
+        "present": true,
+        "label": "Start · 5 activities · ~5 min",
+        "height": 44,
+        "linesEstimate": 1,
+        "leftOfEveryRing": true,
+        "gapToNearestRing": 7,
+        "left": 142,
+        "inFlow": false
+      }
+    },
+    {
+      "name": "A2: every consecutive segment midpoint lies on drawn dash pixels (no orphan stubs)",
+      "pass": true,
+      "measured": {
+        "pairsNeeded": 20,
+        "unmeasured": 0,
+        "orphaned": []
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-0db3c652-abb4-4870-bafb-4e52994b0670",
+  "pitch": {
+    "rowCount": 21,
+    "pairs": [
+      {
+        "pair": 0,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-a-o-m-t",
+          "ru.unit.on-ramp.cyrillic-k-e-n-s"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 1,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-k-e-n-s",
+          "ru.unit.on-ramp.cyrillic-r-v-u-kh"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 2,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+          "ru.unit.on-ramp.cyrillic-b-p-d-g"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 3,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-b-p-d-g",
+          "ru.unit.on-ramp.cyrillic-l-z-zh-i"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 4,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-l-z-zh-i",
+          "ru.unit.on-ramp.cyrillic-y-short-i-yo-yu"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 5,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-y-short-i-yo-yu",
+          "ru.unit.on-ramp.cyrillic-ya-eh-f"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 6,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-ya-eh-f",
+          "ru.unit.on-ramp.cyrillic-ts-ch-sh"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 7,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-ts-ch-sh",
+          "ru.unit.on-ramp.cyrillic-shch-soft-hard"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 8,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-shch-soft-hard",
+          "ru.unit.on-ramp.cyrillic-stress-review"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 9,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-stress-review",
+          "ru.unit.on-ramp.greetings-01"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 10,
+        "units": [
+          "ru.unit.on-ramp.greetings-01",
+          "ru.unit.on-ramp.greetings-02"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 11,
+        "units": [
+          "ru.unit.on-ramp.greetings-02",
+          "ru.unit.on-ramp.self-introduction-01"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 12,
+        "units": [
+          "ru.unit.on-ramp.self-introduction-01",
+          "ru.unit.on-ramp.self-introduction-02"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 13,
+        "units": [
+          "ru.unit.on-ramp.self-introduction-02",
+          "ru.unit.on-ramp.classroom-01"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 14,
+        "units": [
+          "ru.unit.on-ramp.classroom-01",
+          "ru.unit.on-ramp.classroom-02"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 15,
+        "units": [
+          "ru.unit.on-ramp.classroom-02",
+          "ru.unit.on-ramp.everyday-01"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 16,
+        "units": [
+          "ru.unit.on-ramp.everyday-01",
+          "ru.unit.on-ramp.everyday-02"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 17,
+        "units": [
+          "ru.unit.on-ramp.everyday-02",
+          "ru.unit.on-ramp.numbers-01"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 18,
+        "units": [
+          "ru.unit.on-ramp.numbers-01",
+          "ru.unit.on-ramp.numbers-02"
+        ],
+        "dy": 76,
+        "pass": true
+      },
+      {
+        "pair": 19,
+        "units": [
+          "ru.unit.on-ramp.numbers-02",
+          "capstone.org.openlanguage.ru-ru.reference.on-ramp"
+        ],
+        "dy": 76,
+        "pass": true
+      }
+    ]
+  },
+  "head": {
+    "capCount": 1,
+    "capInFirst": true,
+    "firstUnit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    "labelOff": []
+  },
+  "glyphs": {
+    "distinct": [
+      "А",
+      "К",
+      "Р",
+      "Б",
+      "Л",
+      "Ы",
+      "Я",
+      "Ц",
+      "Щ",
+      "letters",
+      "<svg viewBox=\"0 0 16 16\" class=\"path-node-lock\" aria-hidden=\"true\"><path d=\"M5 7"
+    ],
+    "distinctOpen": [
+      "А",
+      "К",
+      "Р",
+      "Б",
+      "Л",
+      "Ы",
+      "Я",
+      "Ц",
+      "Щ",
+      "letters"
+    ],
+    "counts": {
+      "А": 1,
+      "К": 1,
+      "Р": 1,
+      "Б": 1,
+      "Л": 1,
+      "Ы": 1,
+      "Я": 1,
+      "Ц": 1,
+      "Щ": 1,
+      "letters": 1,
+      "<svg viewBox=\"0 0 16 16\" class=\"path-node-lock\" aria-hidden=\"true\"><path d=\"M5 7": 11
+    }
+  },
+  "pill": {
+    "present": true,
+    "label": "Start · 5 activities · ~5 min",
+    "height": 44,
+    "linesEstimate": 1,
+    "leftOfEveryRing": true,
+    "gapToNearestRing": 7,
+    "left": 142,
+    "inFlow": false
+  },
+  "connectorMidpoints": {
+    "pairsNeeded": 20,
+    "pairsMeasured": [
+      {
+        "pair": 0,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-a-o-m-t",
+          "ru.unit.on-ramp.cyrillic-k-e-n-s"
+        ],
+        "midpoint": {
+          "x": 97,
+          "y": 357
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 97,
+            "py": 357,
+            "dashes": true
+          },
+          {
+            "px": 95,
+            "py": 353,
+            "dashes": true
+          },
+          {
+            "px": 98,
+            "py": 362,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 1,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-k-e-n-s",
+          "ru.unit.on-ramp.cyrillic-r-v-u-kh"
+        ],
+        "midpoint": {
+          "x": 111,
+          "y": 433
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 111,
+            "py": 433,
+            "dashes": true
+          },
+          {
+            "px": 111,
+            "py": 428,
+            "dashes": true
+          },
+          {
+            "px": 111,
+            "py": 438,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 2,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-r-v-u-kh",
+          "ru.unit.on-ramp.cyrillic-b-p-d-g"
+        ],
+        "midpoint": {
+          "x": 97,
+          "y": 509
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 97,
+            "py": 509,
+            "dashes": true
+          },
+          {
+            "px": 98,
+            "py": 505,
+            "dashes": true
+          },
+          {
+            "px": 95,
+            "py": 514,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 3,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-b-p-d-g",
+          "ru.unit.on-ramp.cyrillic-l-z-zh-i"
+        ],
+        "midpoint": {
+          "x": 68,
+          "y": 585
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 68,
+            "py": 585,
+            "dashes": true
+          },
+          {
+            "px": 69,
+            "py": 581,
+            "dashes": true
+          },
+          {
+            "px": 66,
+            "py": 590,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 4,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-l-z-zh-i",
+          "ru.unit.on-ramp.cyrillic-y-short-i-yo-yu"
+        ],
+        "midpoint": {
+          "x": 53,
+          "y": 661
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 53,
+            "py": 661,
+            "dashes": true
+          },
+          {
+            "px": 53,
+            "py": 656,
+            "dashes": true
+          },
+          {
+            "px": 53,
+            "py": 666,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 5,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-y-short-i-yo-yu",
+          "ru.unit.on-ramp.cyrillic-ya-eh-f"
+        ],
+        "midpoint": {
+          "x": 68,
+          "y": 737
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 68,
+            "py": 737,
+            "dashes": true
+          },
+          {
+            "px": 66,
+            "py": 733,
+            "dashes": true
+          },
+          {
+            "px": 69,
+            "py": 742,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 6,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-ya-eh-f",
+          "ru.unit.on-ramp.cyrillic-ts-ch-sh"
+        ],
+        "midpoint": {
+          "x": 97,
+          "y": 813
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 97,
+            "py": 813,
+            "dashes": true
+          },
+          {
+            "px": 95,
+            "py": 809,
+            "dashes": true
+          },
+          {
+            "px": 98,
+            "py": 818,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 7,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-ts-ch-sh",
+          "ru.unit.on-ramp.cyrillic-shch-soft-hard"
+        ],
+        "midpoint": {
+          "x": 111,
+          "y": 289
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 111,
+            "py": 289,
+            "dashes": true
+          },
+          {
+            "px": 111,
+            "py": 284,
+            "dashes": true
+          },
+          {
+            "px": 111,
+            "py": 294,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 8,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-shch-soft-hard",
+          "ru.unit.on-ramp.cyrillic-stress-review"
+        ],
+        "midpoint": {
+          "x": 97,
+          "y": 365
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 97,
+            "py": 365,
+            "dashes": true
+          },
+          {
+            "px": 98,
+            "py": 361,
+            "dashes": true
+          },
+          {
+            "px": 95,
+            "py": 370,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 9,
+        "units": [
+          "ru.unit.on-ramp.cyrillic-stress-review",
+          "ru.unit.on-ramp.greetings-01"
+        ],
+        "midpoint": {
+          "x": 68,
+          "y": 441
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 68,
+            "py": 441,
+            "dashes": true
+          },
+          {
+            "px": 69,
+            "py": 437,
+            "dashes": true
+          },
+          {
+            "px": 66,
+            "py": 446,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 10,
+        "units": [
+          "ru.unit.on-ramp.greetings-01",
+          "ru.unit.on-ramp.greetings-02"
+        ],
+        "midpoint": {
+          "x": 53,
+          "y": 517
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 53,
+            "py": 517,
+            "dashes": true
+          },
+          {
+            "px": 53,
+            "py": 512,
+            "dashes": true
+          },
+          {
+            "px": 53,
+            "py": 522,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 11,
+        "units": [
+          "ru.unit.on-ramp.greetings-02",
+          "ru.unit.on-ramp.self-introduction-01"
+        ],
+        "midpoint": {
+          "x": 68,
+          "y": 593
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 68,
+            "py": 593,
+            "dashes": true
+          },
+          {
+            "px": 66,
+            "py": 589,
+            "dashes": true
+          },
+          {
+            "px": 69,
+            "py": 598,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 12,
+        "units": [
+          "ru.unit.on-ramp.self-introduction-01",
+          "ru.unit.on-ramp.self-introduction-02"
+        ],
+        "midpoint": {
+          "x": 97,
+          "y": 669
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 97,
+            "py": 669,
+            "dashes": true
+          },
+          {
+            "px": 95,
+            "py": 665,
+            "dashes": true
+          },
+          {
+            "px": 98,
+            "py": 674,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 13,
+        "units": [
+          "ru.unit.on-ramp.self-introduction-02",
+          "ru.unit.on-ramp.classroom-01"
+        ],
+        "midpoint": {
+          "x": 111,
+          "y": 745
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 111,
+            "py": 745,
+            "dashes": true
+          },
+          {
+            "px": 111,
+            "py": 740,
+            "dashes": true
+          },
+          {
+            "px": 111,
+            "py": 750,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 14,
+        "units": [
+          "ru.unit.on-ramp.classroom-01",
+          "ru.unit.on-ramp.classroom-02"
+        ],
+        "midpoint": {
+          "x": 97,
+          "y": 821
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 97,
+            "py": 821,
+            "dashes": true
+          },
+          {
+            "px": 98,
+            "py": 817,
+            "dashes": true
+          },
+          {
+            "px": 95,
+            "py": 826,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 15,
+        "units": [
+          "ru.unit.on-ramp.classroom-02",
+          "ru.unit.on-ramp.everyday-01"
+        ],
+        "midpoint": {
+          "x": 68,
+          "y": 297
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 68,
+            "py": 297,
+            "dashes": true
+          },
+          {
+            "px": 69,
+            "py": 293,
+            "dashes": true
+          },
+          {
+            "px": 66,
+            "py": 302,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 16,
+        "units": [
+          "ru.unit.on-ramp.everyday-01",
+          "ru.unit.on-ramp.everyday-02"
+        ],
+        "midpoint": {
+          "x": 53,
+          "y": 373
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 53,
+            "py": 373,
+            "dashes": true
+          },
+          {
+            "px": 53,
+            "py": 368,
+            "dashes": true
+          },
+          {
+            "px": 53,
+            "py": 378,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 17,
+        "units": [
+          "ru.unit.on-ramp.everyday-02",
+          "ru.unit.on-ramp.numbers-01"
+        ],
+        "midpoint": {
+          "x": 68,
+          "y": 449
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 68,
+            "py": 449,
+            "dashes": true
+          },
+          {
+            "px": 66,
+            "py": 445,
+            "dashes": true
+          },
+          {
+            "px": 69,
+            "py": 454,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 18,
+        "units": [
+          "ru.unit.on-ramp.numbers-01",
+          "ru.unit.on-ramp.numbers-02"
+        ],
+        "midpoint": {
+          "x": 97,
+          "y": 525
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 97,
+            "py": 525,
+            "dashes": true
+          },
+          {
+            "px": 95,
+            "py": 521,
+            "dashes": true
+          },
+          {
+            "px": 98,
+            "py": 530,
+            "dashes": true
+          }
+        ]
+      },
+      {
+        "pair": 19,
+        "units": [
+          "ru.unit.on-ramp.numbers-02",
+          "capstone.org.openlanguage.ru-ru.reference.on-ramp"
+        ],
+        "midpoint": {
+          "x": 111,
+          "y": 601
+        },
+        "pass": true,
+        "samples": [
+          {
+            "px": 111,
+            "py": 601,
+            "dashes": true
+          },
+          {
+            "px": 111,
+            "py": 596,
+            "dashes": true
+          },
+          {
+            "px": 111,
+            "py": 606,
+            "dashes": true
+          }
+        ]
+      }
+    ]
+  }
+}
