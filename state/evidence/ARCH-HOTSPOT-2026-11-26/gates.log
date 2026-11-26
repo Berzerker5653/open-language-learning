@@ -1,0 +1,18 @@
+# ARCH-HOTSPOT-2026-11-26 — lane-tier gates (apps/desktop, post-diff)
+
+Commands run in /home/hunter/game-dev/LTS/apps/desktop against the dirty tree
+(ipc.ts, settings.tsx, onboarding.tsx touched; no other lane WIP — first-action
+`git status --short` was clean at card start, HEAD d84ec4d1).
+
+$ npx tsc --noEmit
+exit 0 (no output)
+
+$ npx vitest run
+Test Files  77 passed (77)
+Tests       694 passed (694)
+Duration    9.47s
+
+$ npx prettier --check apps/desktop/src/ipc.ts apps/desktop/src/settings.tsx apps/desktop/src/onboarding.tsx
+All matched files use Prettier code style!
+
+No Rust touched (pure TS/TSX diff). No full workspace sweeps per lane-tier rule.
