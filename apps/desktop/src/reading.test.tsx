@@ -407,3 +407,65 @@ describe("lookup state on the word card (VOCAB-BUILDER-001)", () => {
     expect(html).not.toContain("In My words");
   });
 });
+
+describe("in-text word-state coloring (WORD-STATE-COLORING-001)", () => {
+  /** The word button carrying exactly this raw token, class included. */
+  const wordButtonFor = (html: string, token: string) => {
+    const m = new RegExp(`<button type="button" class="(word[^"]*)">${token}</button>`).exec(html);
+    return m ? m[1] : null;
+  };
+
+  it("unseen words render plain — no state class, honest default", () => {
+    const html = render();
+    expect(html).not.toContain("word--learning");
+    expect(html).not.toContain("word--confirmed");
+    expect(wordButtonFor(html, "きょうしつ")).toBe("word");
+    expect(wordButtonFor(html, "ほん")).toBe("word");
+  });
+
+  it("a mined (learning) word renders word--learning (teal)", () => {
+    const html = render({ minedSurfaces: ["ほん"] });
+    expect(wordButtonFor(html, "ほん")).toBe("word word--learning");
+    expect(wordButtonFor(html, "きょうしつ")).toBe("word");
+  });
+
+  it("a word the learner confirmed renders word--confirmed (muted)", () => {
+    const html = render({
+      storyActive: {
+        ...STORY,
+        confirmations: {
+          "ja.lex.test.classroom": [{ display_name: "Carla", at: "2026-11-25T10:00:00Z" }],
+        },
+      },
+    });
+    expect(wordButtonFor(html, "きょうしつ")).toBe("word word--confirmed");
+  });
+
+  it("a confirmation the learner did NOT earn never paints confirmed — other marks stay unpainted", () => {
+    const html = render({
+      storyActive: {
+        ...STORY,
+        confirmations: {
+          "ja.lex.test.classroom": [{ display_name: "Ana", at: "2026-11-25T10:00:00Z" }],
+        },
+      },
+    });
+    // Ana's mark is on the word but is not Carla's own — the word stays plain.
+    expect(wordButtonFor(html, "きょうしつ")).toBe("word");
+    expect(html).not.toContain("word--confirmed");
+  });
+
+  it("an already-confirmed word that is also kept (learning) renders confirmed — confirmation wins", () => {
+    const html = render({
+      minedSurfaces: ["きょうしつ"],
+      storyActive: {
+        ...STORY,
+        confirmations: {
+          "ja.lex.test.classroom": [{ display_name: "Carla", at: "2026-11-25T10:00:00Z" }],
+        },
+      },
+    });
+    expect(wordButtonFor(html, "きょうしつ")).toBe("word word--confirmed");
+    expect(html).not.toContain("word--learning");
+  });
+});

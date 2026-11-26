@@ -1,0 +1,6 @@
+WORD-STATE-COLORING-001 — LANE tier gates (2026-11-25)
+
+tsc: npx tsc --noEmit (apps/desktop) — clean, exit 0
+vitest targeted: npx vitest run src/reading.test.tsx — 26/26 passed
+vitest full: npx vitest run (apps/desktop) — 76 files, 680/680 passed
+390px capture: state/evidence/WORD-STATE-COLORING-001/audit.json (unseen 8 plain / learning 1 teal / confirmed 1 muted); learner-inspection.md; phone-*.png

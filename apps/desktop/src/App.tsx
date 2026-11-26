@@ -3291,6 +3291,9 @@ export function App() {
     setStoryActive(null);
     // Navigation drop, not a learner Close: never arms return-focus.
     closeStoryWordCard(false);
+    // WORD-STATE-COLORING-001: refresh the kept-words list so the in-text
+    // word states (learning = mined) are honest at the moment the reader opens.
+    void refreshMine();
     const inv = detectInvoke();
     if (!inv || !profileId) return;
     try {
@@ -4670,6 +4673,7 @@ export function App() {
           onWordClose={closeStoryWordCard}
           onMine={(surface, reading, gloss) => void mineFromStory(surface, reading, gloss)}
           profileName={displayName}
+          minedSurfaces={mineItems.map((m) => m.surface)}
           grammarLabels={grammarLabelsEnabled(display)}
           onConfirm={(id) => void toggleContentConfirm(id)}
           onUnconfirm={(id) => void toggleContentConfirm(id)}

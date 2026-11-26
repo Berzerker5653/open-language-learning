@@ -161,6 +161,16 @@ export function normToken(token: string): string {
     .normalize("NFC");
 }
 
+/** WORD-STATE-COLORING-001: the per-word reader state, derived from the same
+ * learner record the My Words surface reads — never a parallel store.
+ *   - confirmed: the learner's OWN confirmation mark on this word's content id
+ *     (the same known-word row the word card's confirm button keys off)
+ *   - learning:  the word is in the learner's kept-words list (My Words)
+ *   - unseen:    everything else — plain text, the honest default
+ * Confirmation is only ever claimed for a mark the learner actually earns;
+ * someone else's mark never paints a word as confirmed. */
+export type WordState = "unseen" | "learning" | "confirmed";
+
 export interface ReadingPanelProps {
   storyList: StorySummary[];
   storyActive: Story | null;
@@ -169,6 +179,10 @@ export interface ReadingPanelProps {
   /// the only ones the toggle can retract (the engine scopes it by
   /// profile id; the name match only picks the button's label).
   profileName: string;
+  /// WORD-STATE-COLORING-001: raw surfaces in the learner's kept-words list
+  /// (My Words), exactly the mint of `mine_list`. Optional: absent means
+  /// nothing is learned, which renders every word unseen.
+  minedSurfaces?: string[];
   /// GRAMMAR-LABELS-001 / READING-CLUTTER-001: the global show/hide for
   /// grammar information (per-profile display setting; true until the
   /// learner turns it off). It gates the word card's human-form grammar
@@ -282,36 +296,57 @@ export function ReadingPanel(p: ReadingPanelProps) {
   };
   const cardAt = (contentId: string, token: string) =>
     p.wordCard !== null && p.wordCard.sentenceId === contentId && p.wordCard.token === token;
+  // WORD-STATE-COLORING-001: per-word state from the learner record — the
+  // same known-word rows the word card's confirm button keys off, and the
+  // same kept-words list the My Words surface renders. Confirmation wins
+  // over learning: a word the learner has confirmed is done, not in flight.
+  const minedNorm = new Set((p.minedSurfaces ?? []).map(normToken).filter(Boolean));
+  const knownFor = (s: StorySentence, tok: string) => {
+    const nt = normToken(tok);
+    if (!nt) return undefined;
+    return s.known.find((w) => normToken(w.surface) === nt);
+  };
+  const stateFor = (s: StorySentence, tok: string): WordState => {
+    const known = knownFor(s, tok);
+    if (known) {
+      const marks = p.storyActive?.confirmations?.[known.id] ?? [];
+      if (marks.some((c) => c.display_name === p.profileName)) return "confirmed";
+    }
+    if (minedNorm.has(normToken(tok))) return "learning";
+    return "unseen";
+  };
   // One word token = one button. `word--active` marks the token whose card
   // is open, so the paragraph shows where the card came from.
   const wordButton = (
     s: StorySentence,
     tok: string,
     content: React.ReactNode,
-    extraClass: string,
     key: string,
-  ) => (
-    <button
-      key={key}
-      type="button"
-      className={
-        "word" +
-        (extraClass ? " " + extraClass : "") +
-        (cardAt(s.content_id, tok) ? " word--active" : "")
-      }
-      onClick={(e) => {
-        // The tap belongs to the word; the surrounding sentence span must
-        // not also hear it (that would fire sentence audio too).
-        e.stopPropagation();
-        // WORDCARD-OFFSCREEN-001: hand the tapped button to the caller so
-        // closing the card can return focus to this exact word.
-        p.onWordAnchor?.(e.currentTarget);
-        p.onWordTap(s.content_id, tok);
-      }}
-    >
-      {content}
-    </button>
-  );
+  ) => {
+    const state = stateFor(s, tok);
+    return (
+      <button
+        key={key}
+        type="button"
+        className={
+          "word" +
+          (state === "confirmed" ? " word--confirmed" : state === "learning" ? " word--learning" : "") +
+          (cardAt(s.content_id, tok) ? " word--active" : "")
+        }
+        onClick={(e) => {
+          // The tap belongs to the word; the surrounding sentence span must
+          // not also hear it (that would fire sentence audio too).
+          e.stopPropagation();
+          // WORDCARD-OFFSCREEN-001: hand the tapped button to the caller so
+          // closing the card can return focus to this exact word.
+          p.onWordAnchor?.(e.currentTarget);
+          p.onWordTap(s.content_id, tok);
+        }}
+      >
+        {content}
+      </button>
+    );
+  };
   // The flowing paragraph's per-sentence span: word buttons inline,
   // scaffold small, and the quiet CONTENT-CONFIRM-001 control at the tail.
   const sentenceSpan = (s: StorySentence) => {
@@ -327,7 +362,7 @@ export function ReadingPanel(p: ReadingPanelProps) {
       // one <ruby> per word, the reading annotating the whole word.
       body = surfaceTokens.flatMap((tok, i) => [
         i > 0 ? " " : null,
-        wordButton(s, tok, <Ruby surface={tok} furigana={readingTokens[i]} />, "", `w${i}`),
+        wordButton(s, tok, <Ruby surface={tok} furigana={readingTokens[i]} />, `w${i}`),
       ]);
     } else if (s.furigana !== null) {
       // Furigana whose token runs do not align with the surface: the whole
@@ -340,7 +375,7 @@ export function ReadingPanel(p: ReadingPanelProps) {
       // and its human form lives in the word card.
       body = surfaceTokens.flatMap((tok, i) => [
         i > 0 ? " " : null,
-        wordButton(s, tok, tok, "", `w${i}`),
+        wordButton(s, tok, tok, `w${i}`),
       ]);
     }
     return (
@@ -373,7 +408,7 @@ export function ReadingPanel(p: ReadingPanelProps) {
     const tokenLabel = sentence?.labels.find((l) => l.token === wc.token)?.label;
     // Only words the view already ties to a pack content id can carry a
     // confirmation mark — the same ids `story_view` attributes marks to.
-    const knownId = sentence?.known.find((w) => normToken(w.surface) === normToken(wc.token))?.id;
+    const knownId = sentence ? knownFor(sentence, wc.token)?.id : undefined;
     return (
       <div
         ref={cardRef}

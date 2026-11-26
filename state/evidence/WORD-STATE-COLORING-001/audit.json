@@ -1,0 +1,114 @@
+{
+  "unseen": {
+    "steps": [
+      "onboarded (Japanese)",
+      "reader opened",
+      "unseen states measured"
+    ],
+    "unseen": {
+      "count": 8,
+      "learning": 0,
+      "confirmed": 0,
+      "plain": 8,
+      "learningSurfaces": [],
+      "confirmedSurfaces": [],
+      "firstWordClass": "word",
+      "firstWordColor": "rgb(36, 31, 24)",
+      "docScrollW": 390,
+      "docClientW": 390
+    },
+    "learning": null,
+    "confirmed": null,
+    "confirmButtonPressed": null
+  },
+  "learning": {
+    "steps": [
+      "onboarded (Japanese)",
+      "reader opened",
+      "unseen states measured",
+      "card opened at first word",
+      "word mined",
+      "learning states measured"
+    ],
+    "unseen": {
+      "count": 8,
+      "learning": 0,
+      "confirmed": 0,
+      "plain": 8,
+      "learningSurfaces": [],
+      "confirmedSurfaces": [],
+      "firstWordClass": "word",
+      "firstWordColor": "rgb(36, 31, 24)",
+      "docScrollW": 390,
+      "docClientW": 390
+    },
+    "learning": {
+      "count": 8,
+      "learning": 1,
+      "confirmed": 0,
+      "plain": 7,
+      "learningSurfaces": [
+        "きょうしつ"
+      ],
+      "confirmedSurfaces": [],
+      "firstWordClass": "word word--learning",
+      "firstWordColor": "rgb(20, 97, 94)",
+      "docScrollW": 390,
+      "docClientW": 390
+    },
+    "confirmed": null,
+    "confirmButtonPressed": null
+  },
+  "confirmed": {
+    "steps": [
+      "onboarded (Japanese)",
+      "reader opened",
+      "unseen states measured",
+      "card opened at first word",
+      "word mined",
+      "learning states measured",
+      "confirmed states measured"
+    ],
+    "unseen": {
+      "count": 8,
+      "learning": 0,
+      "confirmed": 0,
+      "plain": 8,
+      "learningSurfaces": [],
+      "confirmedSurfaces": [],
+      "firstWordClass": "word",
+      "firstWordColor": "rgb(36, 31, 24)",
+      "docScrollW": 390,
+      "docClientW": 390
+    },
+    "learning": {
+      "count": 8,
+      "learning": 1,
+      "confirmed": 0,
+      "plain": 7,
+      "learningSurfaces": [
+        "きょうしつ"
+      ],
+      "confirmedSurfaces": [],
+      "firstWordClass": "word word--learning",
+      "firstWordColor": "rgb(20, 97, 94)",
+      "docScrollW": 390,
+      "docClientW": 390
+    },
+    "confirmed": {
+      "count": 8,
+      "learning": 0,
+      "confirmed": 1,
+      "plain": 7,
+      "learningSurfaces": [],
+      "confirmedSurfaces": [
+        "きょうしつ"
+      ],
+      "firstWordClass": "word word--confirmed",
+      "firstWordColor": "rgb(117, 108, 93)",
+      "docScrollW": 390,
+      "docClientW": 390
+    },
+    "confirmButtonPressed": true
+  }
+}

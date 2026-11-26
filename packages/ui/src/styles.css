@@ -1786,11 +1786,26 @@ th:last-child {
   outline-offset: 2px;
 }
 
+/* WORD-STATE-COLORING-001 (U4): in-text word-state coloring in the reader.
+   Unseen words carry no state class at all — plain text, the honest default.
+   Learning (in the learner's kept-words list) and confirmed (the learner's
+   own confirmation mark on the word's content id) both route through tokens
+   so the palette owner controls them. State classes are declared BEFORE
+   .word--active so the open-card marker still wins when both apply. */
+.word--learning {
+  color: var(--accent);
+}
+
+.word--confirmed {
+  color: var(--ink-faint);
+}
+
 .word--active {
   background: var(--accent-soft);
   color: var(--accent-ink);
   border-radius: var(--radius-sm);
 }
+
 
 /* ------------------------------------------------------ reduced motion */
 @media (prefers-reduced-motion: reduce) {
