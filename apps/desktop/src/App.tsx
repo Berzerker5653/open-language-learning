@@ -3,6 +3,7 @@ import { AppShell, PackText } from "@openlang/ui";
 import { invoke } from "@tauri-apps/api/core";
 import {
   Onboarding,
+  ServePairingCard,
   type OnboardingStep,
   type SpeechComponent,
   type PackCandidate,
@@ -1336,6 +1337,29 @@ export function App() {
   // re-entry (kanji availability) then loops forever for any pack that
   // answers false — an RU pack, for instance.
   const inv = useMemo(() => detectInvoke(), []);
+
+  // SERVE-PAIR-ONBOARD-001: an unpaired device in serve mode can reach
+  // neither the profile chooser nor Settings — every engine call is gated.
+  // Probe once on entry; a "pairing required" rejection swaps the whole
+  // wizard for the first-contact pairing card instead of a dead welcome
+  // step. Paired devices and desktop mode are unaffected.
+  const [serveUnpaired, setServeUnpaired] = useState(false);
+  useEffect(() => {
+    if (!inLtsServeMode()) return;
+    if (serveUnpaired) return;
+    let alive = true;
+    (async () => {
+      if (!inv) return;
+      try {
+        await inv("list_profiles");
+      } catch (e) {
+        if (alive && /pairing required/i.test(String(e))) setServeUnpaired(true);
+      }
+    })();
+    return () => {
+      alive = false;
+    };
+  }, [inv, serveUnpaired]);
   // K-62: one status line driven by what the engine reports, never by a timer
   // the UI invents. Stages are pushed to a module-level witness as well so the
   // headless walkthrough can prove the channel actually delivered them.
@@ -4347,40 +4371,44 @@ export function App() {
   if (step !== "done") {
     return (
       <AppShell productName="Open Language Learning Platform" nav={[]}>
-        <Onboarding
-          step={step}
-          notice={notice}
-          packs={wizardPacks}
-          selectedPack={selectedPack}
-          installed={installed}
-          onUpdatePack={(id) => void updateFromCatalog(id)}
-          installedUnknown={installedUnknown}
-          profileName={profileName}
-          onProfileName={setProfileName}
-          onCreateProfile={() => void createProfile()}
-          onSelectPack={setSelectedPack}
-          onInstall={(id) => void install(id)}
-          onLocatePack={(f) => void locatePackOnboarding(f)}
-          onSkipPack={skipPackChoice}
-          onEnableMic={chooseMicrophone}
-          onSkipMic={() => void finishOnboarding(false)}
-          onInstallSpeech={() => void installSpeechComponents()}
-          onSkipSpeech={() => void finishOnboarding(true)}
-          onStartSpeech={() => void finishOnboarding(true)}
-          speechComponents={speechComponents}
-          speechInstalling={speechInstalling}
-          micChosen={micChosen}
-          onContinue={() => setStep("microphone")}
-          profiles={profiles}
-          onResume={(id) => void resumeProfile(id)}
-          onCreateNew={() => setStep("welcome")}
-          showHiddenProfiles={chooserShowHidden}
-          onShowHiddenProfiles={setChooserShowHidden}
-          onToggleHidden={(id, hidden) => void toggleProfileHidden(id, hidden)}
-          error={onboardError}
-          progress={engineProgress}
-          installing={installingPack}
-        />
+        {serveUnpaired ? (
+          <ServePairingCard />
+        ) : (
+          <Onboarding
+            step={step}
+            notice={notice}
+            packs={wizardPacks}
+            selectedPack={selectedPack}
+            installed={installed}
+            onUpdatePack={(id) => void updateFromCatalog(id)}
+            installedUnknown={installedUnknown}
+            profileName={profileName}
+            onProfileName={setProfileName}
+            onCreateProfile={() => void createProfile()}
+            onSelectPack={setSelectedPack}
+            onInstall={(id) => void install(id)}
+            onLocatePack={(f) => void locatePackOnboarding(f)}
+            onSkipPack={skipPackChoice}
+            onEnableMic={chooseMicrophone}
+            onSkipMic={() => void finishOnboarding(false)}
+            onInstallSpeech={() => void installSpeechComponents()}
+            onSkipSpeech={() => void finishOnboarding(true)}
+            onStartSpeech={() => void finishOnboarding(true)}
+            speechComponents={speechComponents}
+            speechInstalling={speechInstalling}
+            micChosen={micChosen}
+            onContinue={() => setStep("microphone")}
+            profiles={profiles}
+            onResume={(id) => void resumeProfile(id)}
+            onCreateNew={() => setStep("welcome")}
+            showHiddenProfiles={chooserShowHidden}
+            onShowHiddenProfiles={setChooserShowHidden}
+            onToggleHidden={(id, hidden) => void toggleProfileHidden(id, hidden)}
+            error={onboardError}
+            progress={engineProgress}
+            installing={installingPack}
+          />
+        )}
       </AppShell>
     );
   }

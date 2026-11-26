@@ -6,6 +6,7 @@
  * speech components (K-72). Presentational component: state and IPC
  * live in the container so every step is renderable in tests.
  */
+import { useState, type FormEvent } from "react";
 import { progressLine, type EngineProgress } from "./progress";
 import { PackText } from "@openlang/ui";
 import type { InstalledPack } from "./language";
@@ -761,5 +762,95 @@ export function Onboarding(p: OnboardingProps) {
         </div>
       )}
     </section>
+  );
+}
+
+/**
+ * SERVE-PAIR-ONBOARD-001: the serve mode's first-contact pairing card.
+ *
+ * An unpaired device opens the served page and can reach neither the
+ * profile chooser (every /api call is gated, `pairing required`) nor
+ * Settings — so this card lives on the static onboarding screen. It renders
+ * before any session exists, names where the PIN comes from (the computer
+ * running LTS), and never claims a capability the serve bridge does not
+ * have: the copy names only local-network pairing. The submit is disabled
+ * until a PIN is entered — a button that cannot do anything is worse than
+ * a visibly disabled one. The pair flow posts to the bridge's own `/pair`
+ * endpoint (same shape as LanAccessCard); the live flow is verified against
+ * a real serve, not the SSR suite.
+ */
+export function ServePairingCard() {
+  const [pin, setPin] = useState("");
+  const [pairing, setPairing] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const ready = pin.trim().length > 0;
+
+  async function onSubmit(e: FormEvent) {
+    e.preventDefault();
+    if (pairing) return;
+    setPairing(true);
+    setError(null);
+    try {
+      const res = await fetch("/pair", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ pin }),
+        credentials: "same-origin",
+      });
+      const payload = await res.json().catch(() => null);
+      if (!res.ok) {
+        const message =
+          payload && typeof payload === "object" && "error" in payload
+            ? String((payload as { error: unknown }).error)
+            : `HTTP ${res.status}`;
+        throw new Error(message);
+      }
+      // Success — the pairing cookie is set. A fresh boot re-enters the
+      // normal flow, which passes the gate.
+      window.location.reload();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Pairing failed.");
+      setPairing(false);
+    }
+  }
+
+  return (
+    <div className="card card--step" data-testid="serve-pairing-card" id="serve-pair-card">
+      <h1>Local network access</h1>
+      <p>
+        This screen is shared over the local network. To pair this device, get the 6-digit pairing
+        PIN from the computer running LTS — Settings → Local network access — then enter it here.
+      </p>
+      <form onSubmit={onSubmit}>
+        <label htmlFor="serve-pair-pin">Pairing PIN</label>{" "}
+        <input
+          id="serve-pair-pin"
+          inputMode="numeric"
+          pattern="[0-9]*"
+          maxLength={6}
+          autoComplete="off"
+          value={pin}
+          onChange={(e) => setPin(e.target.value)}
+        />{" "}
+        <button
+          type="submit"
+          data-testid="serve-pair-submit"
+          disabled={!ready || pairing}
+          aria-busy={pairing || undefined}
+        >
+          Pair this device
+        </button>
+      </form>
+      {error ? (
+        <p role="alert" className="alert">
+          {error}
+        </p>
+      ) : null}
+      <p className="meta">
+        Pairing happens on the local network only — nothing leaves it. A PIN is spent on the first
+        successful device.
+      </p>
+    </div>
   );
 }
