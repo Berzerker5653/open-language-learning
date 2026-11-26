@@ -63,6 +63,16 @@
       ],
       "summary": "Walkthrough smoke-handshake slice extracted from App() into apps/desktop/src/app/walkthrough.tsx (progressStages witness + once-per-process walkthroughRan guard + ~450-line smoke effect, pure move). App.tsx 5158 -> 4758 lines; tsc clean; full desktop vitest 77 files / 694 tests; validate_handoff green. No re-pin needed (moved symbols were module-scope, never exported)."
     },
+    "APP-SPLIT-003A": {
+      "status": "done",
+      "attempts": 1,
+      "updated": "2026-11-26",
+      "notes": "Budgeted slice of APP-SPLIT-001: extract the session/history wiring slice (WEB-HISTORY-001) from App() - pure move, App.tsx keeps every hook. Contract: state/notes/APP-SPLIT-003A.md; board card lts-APP-SPLIT-003A.",
+      "evidence": [
+        "state/evidence/APP-SPLIT-003A/gates.log"
+      ],
+      "summary": "Session/history wiring slice extracted from App() into apps/desktop/src/app/history-wiring.tsx (historyPop handler body + confirmHistoryExit + leave-session alertdialog, pure move; refs passed by ref so pop-time timing is exact; App.tsx keeps appLocation derivation, all refs/state, install + sync effects). App.tsx 4650 -> 4591 lines; tsc clean; full desktop vitest 77 files / 694 tests (incl. journeys/history-nav.journey.tsx driving the moved dialog); no re-pins needed."
+    },
     "APP-SPLIT-001": {
       "status": "blocked",
       "attempts": 2,

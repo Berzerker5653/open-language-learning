@@ -59,3 +59,12 @@ files / 694 tests; validate_handoff PASSED. Code 75ba816c.
 settings/import wiring, pack/session/claims refresh wiring, home header/Today
 wiring. Each: one slice, one green checkpoint (tsc + vitest), commit per slice.
 Do NOT stack slices before a green checkpoint; keep App.tsx owning every hook.
+
+## LEDGER — slice shas and App.tsx LOC after each green checkpoint
+
+| slice | module | App.tsx after | code sha |
+| --- | --- | --- | --- |
+| session/history wiring (APP-SPLIT-003A) | `app/history-wiring.tsx` | **4591** (4650 -> 4591) | 88ce090e |
+
+Remaining slices for siblings 003B-D: settings/import wiring,
+pack/session/claims refresh wiring, home header/Today wiring.

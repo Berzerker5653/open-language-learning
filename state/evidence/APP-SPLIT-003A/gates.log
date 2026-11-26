@@ -1,0 +1,27 @@
+# APP-SPLIT-003A lane gates (2026-11-26, MST)
+
+Slice: session/history wiring (WEB-HISTORY-001) extracted from App() into
+apps/desktop/src/app/history-wiring.tsx (140 lines). Pure move; App.tsx keeps
+every hook (appLocation derivation, refs, both effects stay in App).
+
+## LOC (wc -l, measured at commit)
+- apps/desktop/src/App.tsx: 4650 -> 4591  (net -59)
+- apps/desktop/src/app/history-wiring.tsx: 140 (new; moved bodies:
+  historyPopRef handler, confirmHistoryExit, leave-session alertdialog JSX)
+
+## Gates (LANE tier, one checkpoint — no stacked slices)
+- npx prettier --write on the two touched files (fmt parity; no fmt reds)
+- npx tsc --noEmit                     -> exit 0, PASS
+- npx vitest run                       -> Test Files 77 passed (77),
+  Tests 694 passed (694), PASS (identical counts to the APP-SPLIT-002/serve-
+  probe baselines)
+
+## Behavior-preservation notes
+- src/journeys/history-nav.journey.tsx drives history-exit-ask /
+  history-exit-confirm / history-exit-keep through the live DOM and passes —
+  the moved dialog + confirm body are exercised by the green suite.
+- Deps pass refs (sessionQueueRef, historyNavRef) BY REF, so pop-time reads
+  keep the exact old timing (a render-time snapshot would have been a subtle
+  behavior change; it was not used).
+- No test-tree re-pins needed: grep `from "./App"` shows no test imports this
+  slice; App exports unchanged.
