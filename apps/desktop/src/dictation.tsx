@@ -6,6 +6,7 @@
  * recording and IPC live in the App container so this stays testable.
  */
 
+import type { ReactNode } from "react";
 import { LatinText, usePackTextAttrs } from "@openlang/ui";
 import { useKanaIME } from "./kana-ime";
 import type { ImeCandidate } from "./ime-candidates";
@@ -85,8 +86,51 @@ function reasonLabel(reason: string): string {
   return "No verdict available for that attempt. Please try again.";
 }
 
+/**
+ * CORRECTION-IN-ARTIFACT-001 (U9): mark each mismatched form inline inside
+ * the sentence — the form the grade reported as wrong (struck through)
+ * split into the sentence flow, with the corrected form beside it. Only
+ * forms the grade actually reported are marked; an expected form that is
+ * not literally inside the sentence is never placed by guesswork.
+ */
+function inlineSentenceWithCorrections(text: string, offers: FormErrorOfferView[]): ReactNode {
+  let nodes: ReactNode[] = [text];
+  for (const offer of offers) {
+    if (!offer.expected) continue;
+    const next: ReactNode[] = [];
+    let hit = false;
+    for (const node of nodes) {
+      if (typeof node !== "string") {
+        next.push(node);
+        continue;
+      }
+      let remaining = node;
+      let idx = remaining.indexOf(offer.expected);
+      while (idx >= 0) {
+        hit = true;
+        next.push(remaining.slice(0, idx));
+        next.push(
+          <span key={`${offer.ledger_id}-${idx}`} className="inline-correction" data-testid="inline-correction">
+            <s className="inline-correction__wrong">{offer.produced}</s>
+            <span className="inline-correction__correct">{offer.expected}</span>
+          </span>,
+        );
+        remaining = remaining.slice(idx + offer.expected.length);
+        idx = remaining.indexOf(offer.expected);
+      }
+      if (remaining) next.push(remaining);
+    }
+    if (hit) nodes = next;
+  }
+  return nodes;
+}
+
 export function DictationPractice(props: DictationProps) {
   const { sentence, target, result, recording, hasAttempt } = props;
+  const inlineCorrection =
+    sentence && result?.matched === false && result.error_offers && result.error_offers.length > 0
+      ? inlineSentenceWithCorrections(sentence.text, result.error_offers)
+      : null;
   const packAttrs = usePackTextAttrs();
   const kanaIme = useKanaIME({
     enabled: props.kanaInput === true,
@@ -104,7 +148,7 @@ export function DictationPractice(props: DictationProps) {
       {sentence && (
         <div className="card" data-testid="dict-sentence">
           <blockquote className="target-word" {...packAttrs}>
-            {sentence.text}
+            {inlineCorrection ?? sentence.text}
           </blockquote>
           {sentence.gloss && (
             <p>

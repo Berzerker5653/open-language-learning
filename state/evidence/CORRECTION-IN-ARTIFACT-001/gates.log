@@ -1,0 +1,6 @@
+CORRECTION-IN-ARTIFACT-001 gates (2026-11-25)
+- vitest run src/dictation.test.tsx src/writing.test.tsx: 22 passed (red-first: 2 new tests red before the fix, green after)
+- npx tsc --noEmit: clean (0 errors)
+- npx vitest run (full desktop suite): 76 files / 675 tests passed
+- 390px capture: state/evidence/CORRECTION-IN-ARTIFACT-001/correction-artifact-390.png (dictation surface) and correction-artifact-390-writing.png (writing surface); both show the wrong form struck through with the corrected form beside it (книгу -> книги); no horizontal overflow (scrollWidth = clientWidth = 390); both sections visible in the captures
+- Capture method: temp dev-only static harness (removed before commit), served locally, headless Chromium via CDP Emulation.setDeviceMetricsOverride (390x844, mobile:true, deviceScaleFactor=2); screenshots saved from the live viewport

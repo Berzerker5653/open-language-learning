@@ -3194,3 +3194,29 @@ th:last-child {
 .review-reveal {
   animation: fade-up var(--dur) var(--ease-out);
 }
+
+/* CORRECTION-IN-ARTIFACT-001 (U9): inline Praktika-style correction —
+   the produced (wrong) form struck through, the corrected form marked
+   beside it, inside the artifact sentence. Rendered only from a grade's
+   own per-form feedback — never guessed at. */
+.inline-correction {
+  font-weight: 600;
+  white-space: normal;
+}
+
+.inline-correction__wrong {
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--err);
+  color: var(--ink-faint);
+  margin-right: 0.35em;
+}
+
+.inline-correction__correct {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  color: var(--accent-ink);
+  font-weight: 700;
+}

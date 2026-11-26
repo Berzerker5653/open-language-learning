@@ -128,3 +128,52 @@ describe("writing practice surface", () => {
     expect(russian).not.toContain("Show romaji");
   });
 });
+
+describe("correction inline with the grade (U9)", () => {
+  const OFFER = {
+    ledger_id: "err-1",
+    expected: "книги",
+    produced: "книгу",
+    lemma: "книга",
+    error_class: "case" as const,
+    context_sentence_id: "ru.sentence.p1",
+  };
+  const base = {
+    task: { item_id: "ru.lex.demo.kniga", prompt_text: "Я читаю …" },
+    draft: "книгу",
+    graded: true,
+    correct: false,
+    expected: "книги",
+    onDraft: () => {},
+    onSubmit: () => {},
+    onHint: () => {},
+  };
+
+  it("marks the produced form struck through with the corrected form beside it, additively", () => {
+    const html = renderToStaticMarkup(
+      <WritingPractice {...base} offer={OFFER} onAcceptOffer={() => {}} />,
+    );
+    expect(html).toContain('data-testid="writing-inline-correction"');
+    expect(html).toContain('class="inline-correction__wrong">книгу</s>');
+    expect(html).toContain('class="inline-correction__correct">книги</span>');
+    // The existing expected line is kept (additive).
+    expect(html).toContain('data-testid="writing-expected"');
+  });
+
+  it("renders no inline correction without a graded per-form offer", () => {
+    const html = renderToStaticMarkup(<WritingPractice {...base} />);
+    expect(html).not.toContain("writing-inline-correction");
+  });
+
+  it("rendering the correction never calls the accept handler", () => {
+    const calls: string[] = [];
+    renderToStaticMarkup(
+      <WritingPractice
+        {...base}
+        offer={OFFER}
+        onAcceptOffer={(o) => calls.push(o.ledger_id)}
+      />,
+    );
+    expect(calls).toEqual([]);
+  });
+});

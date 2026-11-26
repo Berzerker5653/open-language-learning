@@ -3,6 +3,7 @@
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { DictationPractice, type DictationResult } from "./dictation";
+import type { FormErrorOfferView } from "./error-review";
 
 const base = {
   sentence: null as { id: string; text: string; reading: string | null; gloss: string } | null,
@@ -152,5 +153,111 @@ describe("dictation practice", () => {
     );
     expect(html).toContain("Посмотрите");
     expect(html).toContain("Please look at the third paragraph");
+  });
+});
+
+describe("correction inline inside the sentence (U9)", () => {
+  const OFFER = {
+    ledger_id: "err-1",
+    expected: "книги",
+    produced: "книгу",
+    lemma: "книга",
+    error_class: "case" as const,
+    context_sentence_id: "ru.sentence.p1",
+  };
+  const SENTENCE = {
+    id: "ru.sent.p1",
+    text: "Я читаю книги.",
+    reading: null,
+    gloss: "I read books.",
+  };
+
+  function render(overrides: Record<string, unknown> = {}) {
+    return renderToStaticMarkup(
+      <DictationPractice
+        {...base}
+        sentence={SENTENCE}
+        target="Я читаю книги."
+        result={{
+          matched: false,
+          heard: "Я читаю книгу.",
+          target: "Я читаю книги.",
+          abstain_reason: null,
+          mode: "guided",
+          error_offers: [OFFER],
+        }}
+        onAcceptOffer={(overrides.onAcceptOffer as ((o: FormErrorOfferView) => void) | undefined) ?? (() => {})}
+        onNewSentence={() => {}}
+        recording={false}
+        hasAttempt={true}
+        onRecord={() => {}}
+        onStop={() => {}}
+        onPlayAttempt={() => {}}
+        {...overrides}
+      />,
+    );
+  }
+
+  it("marks the wrong form inside the sentence with the corrected form beside it", () => {
+    const html = render();
+    const blockquote = html.split("<blockquote")[1]!.split("</blockquote>")[0]!;
+    expect(blockquote).toContain('data-testid="inline-correction"');
+    expect(blockquote).toContain('class="inline-correction__wrong">книгу</s>');
+    expect(blockquote).toContain('class="inline-correction__correct">книги</span>');
+    // The plain text around the marked form survives.
+    expect(blockquote).toContain("Я читаю ");
+  });
+
+  it("renders the sentence unchanged when nothing mismatched was reported", () => {
+    const html = render({
+      result: {
+        matched: false,
+        heard: "Я читаю книгу.",
+        target: "Я читаю книги.",
+        abstain_reason: null,
+        mode: "guided",
+      },
+    });
+    const blockquote = html.split("<blockquote")[1]!.split("</blockquote>")[0]!;
+    expect(blockquote).not.toContain("inline-correction");
+    expect(blockquote).toContain("Я читаю книги.");
+  });
+
+  it("never fabricates an inline mark for forms the grade did not report", () => {
+    const html = render({
+      result: {
+        matched: false,
+        heard: "Я читаю книгу.",
+        target: "Я читаю книги.",
+        abstain_reason: null,
+        mode: "guided",
+        error_offers: [{ ...OFFER, expected: "несуществующаяформа" }],
+      },
+    });
+    const blockquote = html.split("<blockquote")[1]!.split("</blockquote>")[0]!;
+    expect(blockquote).not.toContain("inline-correction");
+    expect(blockquote).toContain("Я читаю книги.");
+  });
+
+  it("rendering the correction never calls the accept handler", () => {
+    const accepted: string[] = [];
+    render({ onAcceptOffer: (o: { ledger_id: string }) => accepted.push(o.ledger_id) });
+    expect(accepted).toEqual([]);
+  });
+
+  it("a matched result renders no inline correction", () => {
+    const html = render({
+      result: {
+        matched: true,
+        heard: "Я читаю книги.",
+        target: "Я читаю книги.",
+        abstain_reason: null,
+        mode: "guided",
+        error_offers: [OFFER],
+      },
+    });
+    const blockquote = html.split("<blockquote")[1]!.split("</blockquote>")[0]!;
+    expect(blockquote).not.toContain("inline-correction");
+    expect(blockquote).toContain("Я читаю книги.");
   });
 });

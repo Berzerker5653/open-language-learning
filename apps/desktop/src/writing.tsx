@@ -126,6 +126,12 @@ export function WritingPractice(p: WritingPracticeProps) {
           The form this task asked for: <strong>{p.expected}</strong>
         </p>
       ) : null}
+      {p.graded && !p.correct && p.offer ? (
+        <p className="inline-correction" data-testid="writing-inline-correction" {...packAttrs}>
+          <s className="inline-correction__wrong">{p.offer.produced}</s>
+          <span className="inline-correction__correct">{p.offer.expected}</span>
+        </p>
+      ) : null}
       {p.offer && p.onAcceptOffer ? (
         <ErrorOfferList
           offers={[p.offer]}
