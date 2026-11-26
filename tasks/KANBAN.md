@@ -76,7 +76,7 @@ Also parked by owner 2026-11-18: U8 word-synced karaoke highlight (STORY-LISTEN-
 | card | epic | what | maps to |
 | --- | --- | --- | --- |
 | app-split | code quality | **APP-SPLIT-001** (blocked 2026-11-25, honest partial) — App.tsx is ~5300 lines mixing orchestrator wiring (serve probe, navigation, pack state, onboarding, journey harness) with JSX; extract per-surface modules, zero behavior change. Partial: pure module-scope helpers extracted to `app/primitives.ts` + `app/placement-coverage.tsx` (App.tsx 5336 -> 5158); tsc clean; vitest 77/694. Goal (<= ~1500) NOT met — residual is the single ~5000-line stateful App() component. Resume recipe: `state/notes/APP-SPLIT-001.md`; code `ea9c188`. | `APP-SPLIT-001` |
-| readme-doc-drift | docs | **README-DOC-DRIFT-001** (ready 2026-11-25) — README + `current_release_candidate` carry stale pack versions/dates/counts (ja 0.4.3 → 0.4.4, ru 0.4.5 → 0.4.9, ja units 801 → 814); reconcile against artifacts, never prose. | `README-DOC-DRIFT-001` |
+| readme-doc-drift | docs | **README-DOC-DRIFT-001** (done 2026-11-25) — README + `current_release_candidate` re-measured from artifacts and reconciled: ja-JP 0.4.4 (published 2026-11-22) / ru-RU 0.4.9 (published 2026-11-23) per gh release list + catalog/packs.json; coverage re-counted on the tree (ja-JP 77 goals / 814 units / 4,875 activities; ru-RU 60 goals / 818 units / 3,430 activities, all goals draft); README + task-state agree with catalog/packs.json exactly (script compare in gates.log); stale 0.4.3/0.4.5/801/4,641/3,248 claims swept. | `README-DOC-DRIFT-001` |
 
 
 ## done — 2026-11-24 FIX-HOME-POSTURE-PENDING-001: stale activePack posture badge gated on settle (REVIEW-HOME-FLASH-001 SPEC FAIL)

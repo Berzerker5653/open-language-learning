@@ -1,0 +1,34 @@
+# README-DOC-DRIFT-001 gates.log — measured 2026-11-25 (MST)
+
+## gh release list (pack releases, read-only)
+Russian Reference Pack 0.4.9	Latest	org.openlanguage.ru-ru.reference-0.4.9	2026-11-23T02:33:03Z
+Russian Reference Pack 0.4.8		org.openlanguage.ru-ru.reference-0.4.8	2026-11-22T14:20:18Z
+ru-ru reference pack 0.4.7		org.openlanguage.ru-ru.reference-0.4.7	2026-11-22T07:38:46Z
+Japanese Reference Pack 0.4.4		org.openlanguage.ja-jp.reference-0.4.4	2026-11-22T05:44:33Z
+Russian Reference Pack 0.4.6		org.openlanguage.ru-ru.reference-0.4.6	2026-11-22T01:48:01Z
+Russian Reference Pack 0.4.5		org.openlanguage.ru-ru.reference-0.4.5	2026-11-20T17:52:47Z
+Russian Reference Pack 0.4.4		org.openlanguage.ru-ru.reference-0.4.4	2026-11-18T22:48:42Z
+Russian Reference Pack 0.4.3		org.openlanguage.ru-ru.reference-0.4.3	2026-11-09T12:48:39Z
+
+## measurement + agreement check
+=== catalog/packs.json (measured) ===
+ja-JP: version=0.4.4 size=298.3 MB sha256=637d94495eed1a54... url=https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.4/ja-jp-reference-0.4.4.lpk
+ru-RU: version=0.4.9 size=293.6 MB sha256=dd84461efb208e85... url=https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.4.9/ru-ru-reference-0.4.9.lpk
+
+=== curriculum counts (counted from tree) ===
+ja-JP: goals=77 units=814 activities=4875 goal_review_status={'draft': 77}
+ru-RU: goals=60 units=818 activities=3430 goal_review_status={'draft': 60}
+
+=== README stale-claim sweep ===
+stale token '0.4.3': 0 hit(s)
+stale token '0.4.5': 0 hit(s)
+stale token '801 units': 0 hit(s)
+stale token '4,641': 0 hit(s)
+stale token '3,248': 0 hit(s)
+stale token '2026-11-20': 0 hit(s)
+
+=== current_release_candidate ===
+Packs: ja-JP 0.4.4 (published 2026-11-22) and ru-RU 0.4.9 (published 2026-11-23) — manifests and catalog/packs.json pins agree (re-measured 2026-11-25, state/evidence/README-DOC-DRIFT-001/gates.log); the superseded release archives stay live as immutable rollback targets. App: newest published artifact is still open-language-learning-platform-0.4.0-alpha.1 (2026-10-13, Linux pre-release); code identity is 0.4.3-alpha.1 and unpublished — next-artifact decision is owner action O-06. Nothing in the build consumes this field; it is documentation.
+
+=== README/task-state vs catalog agreement check ===
+verdict: PASS

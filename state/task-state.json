@@ -64,10 +64,14 @@
       ]
     },
     "README-DOC-DRIFT-001": {
-      "status": "ready",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "updated": "2026-11-25",
-      "notes": "Reconcile README + current_release_candidate with catalog/packs.json + current tree (ja 0.4.4, ru 0.4.9). Contract: state/notes/README-DOC-DRIFT-001.md; board card lts-README-DOC-DRIFT-001."
+      "notes": "Reconcile README + current_release_candidate with catalog/packs.json + current tree (ja 0.4.4, ru 0.4.9). Contract: state/notes/README-DOC-DRIFT-001.md; board card lts-README-DOC-DRIFT-001.",
+      "evidence": [
+        "state/evidence/README-DOC-DRIFT-001/gates.log"
+      ],
+      "summary": "README + task-state current_release_candidate re-measured from artifacts: packs ja-JP 0.4.4 (published 2026-11-22, 298.3 MB) and ru-RU 0.4.9 (published 2026-11-23, 293.6 MB) per gh release list + catalog/packs.json; coverage re-counted on the tree (ja-JP 77 goals / 814 units / 4,875 activities; ru-RU 60 goals / 818 units / 3,430 activities, all goals draft); current_release_candidate prose rewritten to the measured field; stale 0.4.3/0.4.5/801-units/4,641/3,248 claims swept. Lint: no stale-token hits; README + task-state agree with catalog/packs.json exactly (script compare in gates.log)."
     },
     "PNPM-AUDIT-MINIMATCH-001": {
       "status": "done",
@@ -3545,6 +3549,6 @@
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
-  "current_release_candidate": "Packs: ja-JP 0.4.3 (published 2026-11-09) and ru-RU 0.4.5 (published 2026-11-20) \u2014 manifests and catalog/packs.json pins agree (re-measured 2026-11-20, state/evidence/DOC-CONTRACT-RECONCILE-001/audit-2026-11-20.md); the 0.4.4/0.4.2/0.4.1/0.4.0 releases stay live as immutable rollback targets. App: newest published artifact is still open-language-learning-platform-0.4.0-alpha.1 (2026-10-13, Linux pre-release); code identity is 0.4.3-alpha.1 and unpublished \u2014 next-artifact decision is owner action O-06. Nothing in the build consumes this field; it is documentation.",
-  "updated_at": "2026-11-23T21:19:37-07:00"
+  "current_release_candidate": "Packs: ja-JP 0.4.4 (published 2026-11-22) and ru-RU 0.4.9 (published 2026-11-23) \u2014 manifests and catalog/packs.json pins agree (re-measured 2026-11-25, state/evidence/README-DOC-DRIFT-001/gates.log); the superseded release archives stay live as immutable rollback targets. App: newest published artifact is still open-language-learning-platform-0.4.0-alpha.1 (2026-10-13, Linux pre-release); code identity is 0.4.3-alpha.1 and unpublished \u2014 next-artifact decision is owner action O-06. Nothing in the build consumes this field; it is documentation.",
+  "updated_at": "2026-11-25T23:26:28-07:00"
 }
