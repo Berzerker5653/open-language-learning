@@ -1,0 +1,215 @@
+{"id": "ja.lex.adjectives.atarashii", "status": "MISMATCH", "text": "あたらしい", "reasons": ["duration-suspect (1.36s > 1.30s cap)"]}
+{"id": "ja.expr.introduction.hajimemashite", "status": "MISMATCH", "text": "はじめまして", "reasons": ["duration-suspect (1.44s > 1.30s cap)"]}
+{"id": "ja.lex.adjectives.ii", "status": "ok", "ratio": 1.0, "text": "いい", "heard": "いい"}
+{"id": "ja.lex.adjectives.oishii", "status": "MISMATCH", "text": "おいしい", "reasons": ["duration-suspect (1.36s > 1.30s cap)"]}
+{"id": "ja.lex.adjectives.ookii", "status": "MISMATCH", "text": "おおきい", "reasons": ["duration-suspect (1.52s > 1.30s cap)"]}
+{"id": "ja.lex.adjectives.samui", "status": "MISMATCH", "text": "さむい", "reasons": ["duration-suspect (1.60s > 1.30s cap)"]}
+{"id": "ja.contrast.gemination.matta-0", "status": "ok", "ratio": 1.0, "text": "また", "heard": "また。"}
+{"id": "ja.lex.adjectives.kirai", "status": "ok", "ratio": 1.0, "text": "きらい", "heard": "嫌い"}
+{"id": "ja.lex.adjectives.atsui", "status": "ok", "ratio": 1.0, "text": "あつい", "heard": "熱い"}
+{"id": "ja.lex.adjectives.chiisai", "status": "ok", "ratio": 0.86, "text": "ちいさい", "heard": "ちさい"}
+{"id": "ja.contrast.palatalization.hyaku-0", "status": "MISMATCH", "ratio": 0.0, "text": "ひゃく", "heard": "100…"}
+{"id": "ja.lex.adjectives.suki", "status": "ok", "ratio": 1.0, "text": "すき", "heard": "好き"}
+{"id": "ja.lex.adjectives.tanoshii", "status": "ok", "ratio": 1.0, "text": "たのしい", "heard": "楽しい"}
+{"id": "ja.lex.adjectives.yasui", "status": "ok", "ratio": 1.0, "text": "やすい", "heard": "安い"}
+{"id": "ja.lex.adjectives.takai", "status": "ok", "ratio": 1.0, "text": "たかい", "heard": "高い"}
+{"id": "ja.lex.cult2.denki", "status": "MISMATCH", "text": "でんき", "reasons": ["duration-suspect (1.44s > 1.30s cap)"]}
+{"id": "ja.lex.admin2.denki", "status": "MISMATCH", "ratio": 0.67, "text": "でんき", "heard": "ねんき"}
+{"id": "ja.lex.demonstratives.asoko", "status": "MISMATCH", "text": "あそこ", "reasons": ["duration-suspect (1.84s > 1.30s cap)"]}
+{"id": "ja.lex.art2.koen", "status": "MISMATCH", "ratio": 0.67, "text": "こうえん", "heard": "声…"}
+{"id": "ja.lex.demonstratives.kono", "status": "MISMATCH", "text": "この", "reasons": ["duration-suspect (4.56s > 1.30s cap)"]}
+{"id": "ja.lex.demonstratives.kore", "status": "MISMATCH", "text": "これ", "reasons": ["duration-suspect (2.00s > 1.30s cap)"]}
+{"id": "ja.lex.body.mainichi", "status": "ok", "ratio": 1.0, "text": "まいにち", "heard": "毎日…"}
+{"id": "ja.lex.city2.kasa", "status": "ok", "ratio": 1.0, "text": "かさ", "heard": "傘"}
+{"id": "ja.lex.cult.zatsu", "status": "ok", "ratio": 1.0, "text": "ざつ", "heard": "雑…"}
+{"id": "ja.lex.demonstratives.are", "status": "ok", "ratio": 1.0, "text": "あれ", "heard": "あれ?"}
+{"id": "ja.lex.demonstratives.koko", "status": "ok", "ratio": 1.0, "text": "ここ", "heard": "ここ…"}
+{"id": "ja.lex.demonstratives.soko", "status": "ok", "ratio": 1.0, "text": "そこ", "heard": "そこ…"}
+{"id": "ja.lex.demonstratives.sono", "status": "ok", "ratio": 1.0, "text": "その", "heard": "その…"}
+{"id": "ja.lex.demonstratives.sore", "status": "ok", "ratio": 1.0, "text": "それ", "heard": "それ…"}
+{"id": "ja.lex.edu3.gakusei", "status": "ok", "ratio": 1.0, "text": "がくせい", "heard": "学生"}
+{"id": "ja.lex.emotion.tenko", "status": "MISMATCH", "ratio": 0.67, "text": "てんき", "heard": "電気…"}
+{"id": "ja.lex.env.denki", "status": "ok", "ratio": 1.0, "text": "でんき", "heard": "電気…"}
+{"id": "ja.lex.film2.ame", "status": "ok", "ratio": 1.0, "text": "あめ", "heard": "雨"}
+{"id": "ja.lex.film2.asa", "status": "ok", "ratio": 1.0, "text": "あさ", "heard": "朝…"}
+{"id": "ja.lex.film2.yoru", "status": "ok", "ratio": 1.0, "text": "よる", "heard": "夜"}
+{"id": "ja.lex.food-drink.miruku", "status": "MISMATCH", "text": "ミルク", "reasons": ["duration-suspect (2.56s > 1.30s cap)"]}
+{"id": "ja.lex.film2.yuki", "status": "ok", "ratio": 1.0, "text": "ゆき", "heard": "ゆき"}
+{"id": "ja.lex.food-drink.ocha", "status": "MISMATCH", "text": "おちゃ", "reasons": ["duration-suspect (1.47s > 1.30s cap)"]}
+{"id": "ja.lex.food-drink.pan", "status": "MISMATCH", "text": "パン", "reasons": ["duration-suspect (6.16s > 1.30s cap)"]}
+{"id": "ja.lex.food-drink.biiru", "status": "ok", "ratio": 1.0, "text": "ビール", "heard": "ビール"}
+{"id": "ja.lex.food-drink.gohan", "status": "ok", "ratio": 1.0, "text": "ごはん", "heard": "ごはん"}
+{"id": "ja.lex.food-drink.juusu", "status": "ok", "ratio": 1.0, "text": "ジュース", "heard": "ジュース"}
+{"id": "ja.lex.food2.yoru", "status": "MISMATCH", "text": "よる", "reasons": ["duration-suspect (1.44s > 1.30s cap)"]}
+{"id": "ja.lex.food-drink.kohi", "status": "ok", "ratio": 1.0, "text": "コーヒー", "heard": "コーヒー"}
+{"id": "ja.lex.food-drink.mizu", "status": "ok", "ratio": 1.0, "text": "みず", "heard": "水"}
+{"id": "ja.lex.food.oishii", "status": "ok", "ratio": 1.0, "text": "おいしい", "heard": "おいしい"}
+{"id": "ja.lex.greetings.arigatou-gozaimasu", "status": "MISMATCH", "text": "ありがとうございます", "reasons": ["duration-suspect (1.68s > 1.30s cap)"]}
+{"id": "ja.lex.food-drink.ringo", "status": "ok", "ratio": 1.0, "text": "りんご", "heard": "リンゴ"}
+{"id": "ja.lex.greetings.itadakimasu", "status": "MISMATCH", "text": "いただきます", "reasons": ["duration-suspect (1.36s > 1.30s cap)"]}
+{"id": "ja.lex.food2.koohii", "status": "ok", "ratio": 1.0, "text": "コーヒー", "heard": "コーヒー"}
+{"id": "ja.lex.global.aisou", "status": "ok", "ratio": 1.0, "text": "そご", "heard": "そご"}
+{"id": "ja.lex.greeting.konnichiwa", "status": "ok", "ratio": 1.0, "text": "こんにちは", "heard": "こんにちは。"}
+{"id": "ja.lex.greetings.arigatou", "status": "ok", "ratio": 1.0, "text": "ありがとう", "heard": "ありがとう。"}
+{"id": "ja.lex.greetings.ja-ne", "status": "ok", "ratio": 0.89, "text": "じゃあね", "heard": "じゃあねー。"}
+{"id": "ja.lex.greetings.gochisousama", "status": "ok", "ratio": 1.0, "text": "ごちそうさま", "heard": "ごちそうさま"}
+{"id": "ja.lex.greetings.konbanwa", "status": "ok", "ratio": 1.0, "text": "こんばんは", "heard": "こんばんは"}
+{"id": "ja.lex.greetings.shitsurei-shimasu", "status": "MISMATCH", "text": "しつれいします", "reasons": ["duration-suspect (1.52s > 1.30s cap)"]}
+{"id": "ja.lex.greetings.mata-ashita", "status": "ok", "ratio": 1.0, "text": "またあした", "heard": "また明日。"}
+{"id": "ja.lex.health3.isya3", "status": "MISMATCH", "text": "いしゃ", "reasons": ["duration-suspect (1.84s > 1.30s cap)"]}
+{"id": "ja.lex.greetings.namae", "status": "ok", "ratio": 1.0, "text": "なまえ", "heard": "名前"}
+{"id": "ja.lex.greetings.ohayou-gozaimasu", "status": "ok", "ratio": 1.0, "text": "おはようございます", "heard": "おはようございます"}
+{"id": "ja.lex.greetings.oyasumi-nasai", "status": "ok", "ratio": 1.0, "text": "おやすみなさい", "heard": "おやすみなさい。"}
+{"id": "ja.lex.greetings.sumimasen", "status": "ok", "ratio": 1.0, "text": "すみません", "heard": "すみません"}
+{"id": "ja.lex.greetings.sayounara", "status": "ok", "ratio": 1.0, "text": "さようなら", "heard": "さようなら"}
+{"id": "ja.lex.health4.gogo", "status": "ok", "ratio": 0.8, "text": "ごご", "heard": "んごご。"}
+{"id": "ja.lex.home.mada", "status": "ok", "ratio": 1.0, "text": "まだ", "heard": "まだ…"}
+{"id": "ja.lex.home.mata", "status": "ok", "ratio": 1.0, "text": "また", "heard": "また。"}
+{"id": "ja.lex.leisure.miimasu", "status": "ok", "ratio": 1.0, "text": "みす", "heard": "ミス?"}
+{"id": "ja.lex.lit2.jo", "status": "MISMATCH", "ratio": 0.4, "text": "じょ", "heard": "じゃあ…"}
+{"id": "ja.lex.lit2.hen", "status": "MISMATCH", "ratio": 0.0, "text": "ほん", "heard": "お?"}
+{"id": "ja.lex.med2.denki", "status": "MISMATCH", "ratio": 0.67, "text": "でんき", "heard": "元気"}
+{"id": "ja.lex.narrative.yuki", "status": "ok", "ratio": 1.0, "text": "ゆき", "heard": "雪"}
+{"id": "ja.lex.numbers.hon-counter", "status": "MISMATCH", "ratio": 0.0, "text": "ほん", "heard": "はぁ"}
+{"id": "ja.lex.numbers.hyaku", "status": "MISMATCH", "ratio": 0.33, "text": "ひゃく", "heard": "極"}
+{"id": "ja.lex.numbers.juu", "status": "MISMATCH", "ratio": 0.67, "text": "じゅう", "heard": "じゅー"}
+{"id": "ja.lex.numbers.en", "status": "MISMATCH", "ratio": 0.4, "text": "えん", "heard": "うーん。"}
+{"id": "ja.lex.numbers.san", "status": "ok", "ratio": 1.0, "text": "さん", "heard": "さん"}
+{"id": "ja.lex.numbers.satsu", "status": "ok", "ratio": 1.0, "text": "さつ", "heard": "殺..."}
+{"id": "ja.lex.objects.basu", "status": "ok", "ratio": 1.0, "text": "バス", "heard": "バス…"}
+{"id": "ja.lex.people.chichi", "status": "MISMATCH", "text": "ちち", "reasons": ["duration-suspect (1.36s > 1.30s cap)"]}
+{"id": "ja.lex.objects.kasa", "status": "ok", "ratio": 1.0, "text": "かさ", "heard": "傘!"}
+{"id": "ja.lex.objects.pen", "status": "MISMATCH", "ratio": 0.0, "text": "ペン", "heard": "えっ?"}
+{"id": "ja.lex.objects.terebi", "status": "ok", "ratio": 1.0, "text": "テレビ", "heard": "テレビ"}
+{"id": "ja.lex.people.ani", "status": "ok", "ratio": 1.0, "text": "あに", "heard": "兄"}
+{"id": "ja.lex.people.kazoku", "status": "MISMATCH", "text": "かぞく", "reasons": ["duration-suspect (1.36s > 1.30s cap)"]}
+{"id": "ja.lex.philosophy2.zense", "status": "MISMATCH", "text": "ぜんせい", "reasons": ["duration-suspect (1.62s > 1.30s cap)"]}
+{"id": "ja.lex.people.gakusei", "status": "ok", "ratio": 1.0, "text": "がくせい", "heard": "学生"}
+{"id": "ja.lex.objects.hon", "status": "MISMATCH", "ratio": 0.0, "text": "ほん", "heard": "はぁっ"}
+{"id": "ja.lex.places.gakkou", "status": "MISMATCH", "text": "がっこう", "reasons": ["duration-suspect (1.60s > 1.30s cap)"]}
+{"id": "ja.lex.people.haha", "status": "ok", "ratio": 0.8, "text": "はは", "heard": "ははは"}
+{"id": "ja.lex.places.resutoran", "status": "MISMATCH", "text": "レストラン", "reasons": ["duration-suspect (1.68s > 1.30s cap)"]}
+{"id": "ja.lex.people.imouto", "status": "ok", "ratio": 1.0, "text": "いもうと", "heard": "妹"}
+{"id": "ja.lex.places.uchi", "status": "MISMATCH", "text": "うち", "reasons": ["duration-suspect (1.36s > 1.30s cap)"]}
+{"id": "ja.lex.people.isha", "status": "ok", "ratio": 1.0, "text": "いしゃ", "heard": "医者"}
+{"id": "ja.lex.places.depaato", "status": "ok", "ratio": 1.0, "text": "デパート", "heard": "デパート"}
+{"id": "ja.lex.places.eki", "status": "ok", "ratio": 0.8, "text": "えき", "heard": "えきぃ"}
+{"id": "ja.lex.places.kouen", "status": "ok", "ratio": 0.86, "text": "こうえん", "heard": "こえん"}
+{"id": "ja.lex.places.toire", "status": "ok", "ratio": 1.0, "text": "トイレ", "heard": "トイレ?"}
+{"id": "ja.lex.psych.tanoshii", "status": "MISMATCH", "text": "たのしい", "reasons": ["duration-suspect (1.68s > 1.30s cap)"]}
+{"id": "ja.lex.questions.doko", "status": "MISMATCH", "text": "どこ", "reasons": ["duration-suspect (1.68s > 1.30s cap)"]}
+{"id": "ja.lex.play2.ame", "status": "ok", "ratio": 1.0, "text": "あめ", "heard": "雨…"}
+{"id": "ja.lex.play2.uchi", "status": "ok", "ratio": 1.0, "text": "うち", "heard": "うち…"}
+{"id": "ja.lex.play2.yuki", "status": "ok", "ratio": 1.0, "text": "ゆき", "heard": "雪。"}
+{"id": "ja.lex.pronouns.sensei", "status": "ok", "ratio": 1.0, "text": "せんせい", "heard": "先生。"}
+{"id": "ja.lex.questions.ikura", "status": "ok", "ratio": 1.0, "text": "いくら", "heard": "いくら?"}
+{"id": "ja.lex.rel2.tanoshii", "status": "MISMATCH", "text": "たのしい", "reasons": ["duration-suspect (1.60s > 1.30s cap)"]}
+{"id": "ja.lex.pronouns.watashi", "status": "ok", "ratio": 1.0, "text": "わたし", "heard": "私…"}
+{"id": "ja.lex.questions2.mada", "status": "ok", "ratio": 1.0, "text": "まだ", "heard": "まだ…"}
+{"id": "ja.lex.rel.kazoku", "status": "ok", "ratio": 1.0, "text": "かぞく", "heard": "家族…"}
+{"id": "ja.lex.rel1.takai", "status": "ok", "ratio": 1.0, "text": "たかい", "heard": "高い。"}
+{"id": "ja.lex.rel2.takai2", "status": "ok", "ratio": 1.0, "text": "たかい", "heard": "高い。"}
+{"id": "ja.lex.science.denki", "status": "ok", "ratio": 1.0, "text": "でんき", "heard": "電気。"}
+{"id": "ja.lex.shopping.en", "status": "MISMATCH", "ratio": 0.67, "text": "えん", "heard": "ん"}
+{"id": "ja.lex.shopping.hyakuen", "status": "ok", "ratio": 0.89, "text": "ひゃくえん", "heard": "ひゃくん"}
+{"id": "ja.lex.shopping.satsu", "status": "ok", "ratio": 0.8, "text": "さつ", "heard": "さっつ"}
+{"id": "ja.lex.shopping2.yasui", "status": "ok", "ratio": 1.0, "text": "やすい", "heard": "安い"}
+{"id": "ja.lex.society4.kaihyou", "status": "ok", "ratio": 1.0, "text": "きょう", "heard": "きょう…"}
+{"id": "ja.lex.story.ame2", "status": "ok", "ratio": 1.0, "text": "あめ", "heard": "雨"}
+{"id": "ja.lex.story.gogo", "status": "ok", "ratio": 1.0, "text": "ごご", "heard": "ごご"}
+{"id": "ja.lex.story.hare2", "status": "MISMATCH", "ratio": 0.5, "text": "はれ", "heard": "あれ…"}
+{"id": "ja.lex.story.yuki2", "status": "ok", "ratio": 0.8, "text": "ゆき", "heard": "ゆっき"}
+{"id": "ja.lex.story2.chiisai2", "status": "ok", "ratio": 1.0, "text": "ちいさい", "heard": "ちいさい"}
+{"id": "ja.lex.story2.oishii2", "status": "ok", "ratio": 1.0, "text": "おいしい", "heard": "おいしい。"}
+{"id": "ja.lex.story2.ookii2", "status": "ok", "ratio": 0.86, "text": "おおきい", "heard": "おおき"}
+{"id": "ja.lex.story2.takai2", "status": "ok", "ratio": 1.0, "text": "たかい", "heard": "高い。"}
+{"id": "ja.lex.time.asa", "status": "ok", "ratio": 1.0, "text": "あさ", "heard": "朝…"}
+{"id": "ja.lex.time.ashita", "status": "ok", "ratio": 1.0, "text": "あした", "heard": "明日…"}
+{"id": "ja.lex.time.ban", "status": "ok", "ratio": 0.8, "text": "ばん", "heard": "バーン"}
+{"id": "ja.lex.time.getsuyoubi", "status": "ok", "ratio": 1.0, "text": "げつようび", "heard": "月曜日"}
+{"id": "ja.lex.time.han", "status": "ok", "ratio": 0.8, "text": "はん", "heard": "あはん…"}
+{"id": "ja.lex.time.hiru", "status": "ok", "ratio": 0.8, "text": "ひる", "heard": "ひるえ。"}
+{"id": "ja.lex.time.ima", "status": "ok", "ratio": 1.0, "text": "いま", "heard": "今"}
+{"id": "ja.lex.time.kayoubi", "status": "ok", "ratio": 1.0, "text": "かようび", "heard": "火曜日"}
+{"id": "ja.lex.time.kyou", "status": "ok", "ratio": 1.0, "text": "きょう", "heard": "今日…"}
+{"id": "ja.lex.time.mainichi", "status": "ok", "ratio": 1.0, "text": "まいにち", "heard": "毎日"}
+{"id": "ja.lex.verbs.ikimasu", "status": "MISMATCH", "text": "いきます", "reasons": ["duration-suspect (1.36s > 1.30s cap)"]}
+{"id": "ja.lex.verbs.kaerimasu", "status": "MISMATCH", "text": "かえりざく", "reasons": ["duration-suspect (2.72s > 1.30s cap)"]}
+{"id": "ja.lex.time.yoru", "status": "ok", "ratio": 1.0, "text": "よる", "heard": "夜"}
+{"id": "ja.lex.verbs.kaimono-shimasu", "status": "MISMATCH", "text": "かいものします", "reasons": ["duration-suspect (1.44s > 1.30s cap)"]}
+{"id": "ja.lex.time.nanji", "status": "ok", "ratio": 1.0, "text": "なんじ", "heard": "何時?"}
+{"id": "ja.lex.time.shuu", "status": "ok", "ratio": 0.75, "text": "しゅう", "heard": "シュ、シュウ?"}
+{"id": "ja.lex.verbs.arukimasu", "status": "ok", "ratio": 1.0, "text": "あるきだす", "heard": "歩き出す"}
+{"id": "ja.lex.verbs.desu", "status": "ok", "ratio": 1.0, "text": "です", "heard": "です。"}
+{"id": "ja.lex.verbs.kaimasu", "status": "ok", "ratio": 1.0, "text": "かいます", "heard": "買います"}
+{"id": "ja.lex.verbs.okimasu", "status": "MISMATCH", "text": "おきる", "reasons": ["duration-suspect (2.88s > 1.30s cap)"]}
+{"id": "ja.lex.verbs.tabemasu", "status": "MISMATCH", "text": "たべます", "reasons": ["duration-suspect (1.51s > 1.30s cap)"]}
+{"id": "ja.lex.verbs.wakarimasu", "status": "MISMATCH", "text": "わかります", "reasons": ["duration-suspect (2.16s > 1.30s cap)"]}
+{"id": "ja.lex.verbs.masu", "status": "ok", "ratio": 1.0, "text": "ます", "heard": "ます"}
+{"id": "ja.lex.verbs.kimasu", "status": "MISMATCH", "ratio": 0.67, "text": "きます", "heard": "します"}
+{"id": "ja.lex.verbs.mimasu", "status": "ok", "ratio": 1.0, "text": "みす", "heard": "ミス"}
+{"id": "ja.lex.weather.yuki", "status": "MISMATCH", "text": "ゆき", "reasons": ["duration-suspect (1.60s > 1.30s cap)"]}
+{"id": "ja.lex.weather2.amu", "status": "MISMATCH", "text": "あめ", "reasons": ["duration-suspect (1.36s > 1.30s cap)"]}
+{"id": "ja.lex.weather2.atarashii", "status": "MISMATCH", "text": "あたらしい", "reasons": ["duration-suspect (1.36s > 1.30s cap)"]}
+{"id": "ja.lex.verbs.nemasu", "status": "ok", "ratio": 1.0, "text": "ねかす", "heard": "寝かす…"}
+{"id": "ja.lex.verbs.nomimasu", "status": "ok", "ratio": 1.0, "text": "のみます", "heard": "飲みます"}
+{"id": "ja.lex.weather2.ookii", "status": "MISMATCH", "text": "おおきい", "reasons": ["duration-suspect (1.52s > 1.30s cap)"]}
+{"id": "ja.sent.after-meal", "status": "MISMATCH", "text": "ごちそうさまでした", "reasons": ["duration-suspect (1.36s > 1.30s cap)"]}
+{"id": "ja.sent.again-please", "status": "MISMATCH", "text": "もういちど おねがいします", "reasons": ["duration-suspect (2.32s > 1.30s cap)"]}
+{"id": "ja.sent.book-expensive", "status": "MISMATCH", "text": "この ほんは たかいです", "reasons": ["duration-suspect (2.08s > 1.30s cap)"]}
+{"id": "ja.lex.weather.ame", "status": "MISMATCH", "ratio": 0.67, "text": "あめ", "heard": "アーメン"}
+{"id": "ja.sent.cold-tomorrow", "status": "MISMATCH", "text": "あしたは さむいです", "reasons": ["duration-suspect (1.76s > 1.30s cap)"]}
+{"id": "ja.sent.come-home", "status": "MISMATCH", "text": "うちへ かえります", "reasons": ["duration-suspect (2.00s > 1.30s cap)"]}
+{"id": "ja.sent.concert-fun", "status": "MISMATCH", "text": "こんさーとが たのしかったです。", "reasons": ["duration-suspect (2.00s > 1.30s cap)"]}
+{"id": "ja.sent.dislike-coffee", "status": "MISMATCH", "text": "コーヒーが きらいです", "reasons": ["duration-suspect (1.44s > 1.30s cap)"]}
+{"id": "ja.sent.dont-understand", "status": "MISMATCH", "text": "すみません、わかりません", "reasons": ["duration-suspect (2.16s > 1.30s cap)"]}
+{"id": "ja.sent.drink-coffee", "status": "MISMATCH", "text": "コーヒーを のみます", "reasons": ["duration-suspect (3.28s > 1.30s cap)"]}
+{"id": "ja.sent.eat-before-words", "status": "MISMATCH", "text": "いただきます", "reasons": ["duration-suspect (1.76s > 1.30s cap)"]}
+{"id": "ja.sent.eat-breakfast", "status": "MISMATCH", "text": "あさ、ごはんを たべます", "reasons": ["duration-suspect (3.60s > 1.30s cap)"]}
+{"id": "ja.lex.weather.hare", "status": "MISMATCH", "ratio": 0.5, "text": "はれ", "heard": "あれ?"}
+{"id": "ja.sent.family-four", "status": "MISMATCH", "text": "かぞくは よにんいます", "reasons": ["duration-suspect (2.00s > 1.30s cap)"]}
+{"id": "ja.sent.friend-student", "status": "MISMATCH", "text": "ともだちは がくせいです", "reasons": ["duration-suspect (2.00s > 1.30s cap)"]}
+{"id": "ja.sent.go-school", "status": "MISMATCH", "text": "がっこうへ いきます", "reasons": ["duration-suspect (2.32s > 1.30s cap)"]}
+{"id": "ja.sent.go-station", "status": "MISMATCH", "text": "えきへ いきます", "reasons": ["duration-suspect (1.76s > 1.30s cap)"]}
+{"id": "ja.lex.weather.tenki", "status": "ok", "ratio": 1.0, "text": "てんき", "heard": "天気!"}
+{"id": "ja.lex.weather2.chiisai", "status": "ok", "ratio": 0.75, "text": "ちいさい", "heard": "小さい"}
+{"id": "ja.sent.greet-morning", "status": "MISMATCH", "text": "おはようございます", "reasons": ["duration-suspect (1.60s > 1.30s cap)"]}
+{"id": "ja.lex.weather2.kasa", "status": "ok", "ratio": 0.8, "text": "かさ", "heard": "カーサ"}
+{"id": "ja.sent.half-past", "status": "MISMATCH", "text": "さんじはんです", "reasons": ["duration-suspect (1.36s > 1.30s cap)"]}
+{"id": "ja.sent.buy-bread", "status": "ok", "ratio": 1.0, "text": "パンを かいます", "heard": "パンを買います。"}
+{"id": "ja.sent.how-much", "status": "MISMATCH", "text": "いくらですか", "reasons": ["duration-suspect (1.92s > 1.30s cap)"]}
+{"id": "ja.sent.hundred-yen", "status": "MISMATCH", "text": "ひゃくえんです", "reasons": ["duration-suspect (1.60s > 1.30s cap)"]}
+{"id": "ja.sent.i-drink-water", "status": "MISMATCH", "text": "わたしは みずを のみます", "reasons": ["duration-suspect (2.24s > 1.30s cap)"]}
+{"id": "ja.sent.i-eat-rice", "status": "MISMATCH", "text": "わたしは ごはんを たべます", "reasons": ["duration-suspect (2.32s > 1.30s cap)"]}
+{"id": "ja.sent.like-tea", "status": "MISMATCH", "text": "わたしは おちゃが すきです", "reasons": ["duration-suspect (2.24s > 1.30s cap)"]}
+{"id": "ja.sent.my-father-teacher", "status": "MISMATCH", "text": "ちちは せんせいです", "reasons": ["duration-suspect (3.89s > 1.30s cap)"]}
+{"id": "ja.sent.my-name-wa", "status": "MISMATCH", "text": "わたしの なまえは たなかです", "reasons": ["duration-suspect (4.72s > 1.30s cap)"]}
+{"id": "ja.sent.excuse-me", "status": "ok", "ratio": 1.0, "text": "すみません", "heard": "すみません。"}
+{"id": "ja.sent.nice-meet", "status": "MISMATCH", "text": "はじめまして", "reasons": ["duration-suspect (1.52s > 1.30s cap)"]}
+{"id": "ja.sent.nice-to-meet", "status": "MISMATCH", "text": "どうぞ よろしく おねがいします", "reasons": ["duration-suspect (2.64s > 1.30s cap)"]}
+{"id": "ja.sent.rain-today", "status": "MISMATCH", "text": "きょうは あめです", "reasons": ["duration-suspect (2.00s > 1.30s cap)"]}
+{"id": "ja.sent.rice-delicious", "status": "MISMATCH", "text": "ごはんは おいしいです", "reasons": ["duration-suspect (2.00s > 1.30s cap)"]}
+{"id": "ja.sent.see-you-tomorrow", "status": "MISMATCH", "text": "またあした", "reasons": ["duration-suspect (1.84s > 1.30s cap)"]}
+{"id": "ja.sent.sleep-night", "status": "MISMATCH", "text": "よる、ねます", "reasons": ["duration-suspect (2.27s > 1.30s cap)"]}
+{"id": "ja.sent.slowly-please", "status": "MISMATCH", "text": "ゆっくり はなしてください", "reasons": ["duration-suspect (3.20s > 1.30s cap)"]}
+{"id": "ja.sent.station-near", "status": "MISMATCH", "text": "えき は ちかいです。", "reasons": ["duration-suspect (2.48s > 1.30s cap)"]}
+{"id": "ja.sent.thanks-polite", "status": "MISMATCH", "text": "ありがとうございます", "reasons": ["duration-suspect (2.96s > 1.30s cap)"]}
+{"id": "ja.sent.that-is-pen", "status": "MISMATCH", "text": "それは ペンです", "reasons": ["duration-suspect (1.76s > 1.30s cap)"]}
+{"id": "ja.sent.this-is-book", "status": "MISMATCH", "text": "これは ほんです", "reasons": ["duration-suspect (3.20s > 1.30s cap)"]}
+{"id": "ja.sent.three-books", "status": "MISMATCH", "text": "ほんを さんさつ かいます", "reasons": ["duration-suspect (4.00s > 1.30s cap)"]}
+{"id": "ja.sent.three-oclock", "status": "MISMATCH", "text": "いま さんじです", "reasons": ["duration-suspect (1.60s > 1.30s cap)"]}
+{"id": "ja.sent.today-monday", "status": "MISMATCH", "text": "きょうは げつようびです", "reasons": ["duration-suspect (2.00s > 1.30s cap)"]}
+{"id": "ja.sent.tomorrow-tuesday", "status": "MISMATCH", "text": "あしたは かようびです", "reasons": ["duration-suspect (1.84s > 1.30s cap)"]}
+{"id": "ja.sent.umbrella-big", "status": "MISMATCH", "text": "その かさは おおきいです", "reasons": ["duration-suspect (3.16s > 1.30s cap)"]}
+{"id": "ja.sent.greet-day", "status": "ok", "ratio": 1.0, "text": "こんにちは", "heard": "こんにちは"}
+{"id": "ja.sent.wake-up", "status": "MISMATCH", "text": "まいにち じゅうじにおきます", "reasons": ["duration-suspect (2.56s > 1.30s cap)"]}
+{"id": "ja.sent.walk-park", "status": "MISMATCH", "text": "こうえんを あるきます", "reasons": ["duration-suspect (1.76s > 1.30s cap)"]}
+{"id": "ja.sent.weather-good", "status": "MISMATCH", "text": "きょうは てんきが いいです", "reasons": ["duration-suspect (2.80s > 1.30s cap)"]}
+{"id": "ja.sent.what-is-this", "status": "MISMATCH", "text": "これは なんですか", "reasons": ["duration-suspect (2.24s > 1.30s cap)"]}
+{"id": "ja.sent.what-time", "status": "MISMATCH", "text": "いま なんじですか", "reasons": ["duration-suspect (1.92s > 1.30s cap)"]}
+{"id": "ja.sent.where-station", "status": "MISMATCH", "text": "えきは どこですか", "reasons": ["duration-suspect (1.76s > 1.30s cap)"]}
+{"id": "ja.sent.greet-night", "status": "ok", "ratio": 1.0, "text": "おやすみなさい", "heard": "おやすみなさい"}
+{"id": "ja.sent.greet-evening", "status": "ok", "ratio": 1.0, "text": "こんばんは", "heard": "こんばんは"}
+{"id": "ja.sent.here-it-is", "status": "ok", "ratio": 1.0, "text": "ここです", "heard": "ここです"}
+{"id": "ja.sent.name-desu", "status": "ok", "ratio": 1.0, "text": "たなかです", "heard": "田中です。"}
+{"id": "ja.sent.understand", "status": "ok", "ratio": 1.0, "text": "わかります", "heard": "わかります。"}

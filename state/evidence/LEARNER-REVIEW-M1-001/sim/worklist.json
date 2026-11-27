@@ -2,7 +2,7 @@
  "ru": {
   "pack": "org.openlanguage.ru-ru.reference",
   "raw_days": 30,
-  "unique_text_items": 991,
+  "unique_text_items": 1153,
   "items": [
    {
     "text": "A day later the painting was returned to the seller: the paint smelled of yesterday morning.",
@@ -1920,6 +1920,8 @@
     "text": "Essential written learning instructions",
     "first_day": 1,
     "surfaces": [
+     "current_offer",
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -2056,6 +2058,7 @@
     "text": "Familiar people and objects",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -2080,6 +2083,8 @@
     "text": "Farewells and polite responses",
     "first_day": 1,
     "surfaces": [
+     "current_offer",
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -2192,6 +2197,7 @@
     "text": "First polite greetings",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -3280,6 +3286,7 @@
     "text": "Minimal written introductions",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -3432,6 +3439,7 @@
     "text": "Names and personal reference",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -3544,6 +3552,7 @@
     "text": "Number words five through nine",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -3552,6 +3561,7 @@
     "text": "Number words zero through four",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -4152,6 +4162,7 @@
     "text": "Printed Cyrillic: А а, О о, М м, Т т",
     "first_day": 1,
     "surfaces": [
+     "current_offer",
      "lesson_plan",
      "unit_path"
     ],
@@ -4170,6 +4181,8 @@
     "text": "Printed Cyrillic: К к, Е е, Н н, С с",
     "first_day": 1,
     "surfaces": [
+     "current_offer",
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -4178,6 +4191,7 @@
     "text": "Printed Cyrillic: Л л, З з, Ж ж, И и",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -4186,6 +4200,8 @@
     "text": "Printed Cyrillic: Р р, В в, У у, Х х",
     "first_day": 1,
     "surfaces": [
+     "current_offer",
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -4194,6 +4210,7 @@
     "text": "Printed Cyrillic: Ц ц, Ч ч, Ш ш",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -4202,6 +4219,7 @@
     "text": "Printed Cyrillic: Щ щ, Ь ь, Ъ ъ",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -4210,6 +4228,7 @@
     "text": "Printed Cyrillic: Ы ы, Й й, Ё ё, Ю ю",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -4218,6 +4237,7 @@
     "text": "Printed Cyrillic: Я я, Э э, Ф ф",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -5066,6 +5086,7 @@
     "text": "Simple written identification",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -5474,6 +5495,7 @@
     "text": "Taught clarification requests",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -5498,6 +5520,7 @@
     "text": "Teaching stress mark and cumulative symbol review",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -6021,7 +6044,7 @@
      "home_state",
      "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 4
    },
    {
     "text": "Voiced [d] versus voiceless [t] in word-initial stops.",
@@ -6030,7 +6053,7 @@
      "home_state",
      "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 4
    },
    {
     "text": "Voiced [ɡ] versus voiceless [k] in word-initial stops.",
@@ -6039,7 +6062,7 @@
      "home_state",
      "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 4
    },
    {
     "text": "Volume",
@@ -6405,6 +6428,9 @@
     "text": "friend (male)",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -6597,6 +6623,9 @@
     "text": "one (1; masculine citation form)",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -6664,7 +6693,7 @@
      "home_state",
      "practice_plan"
     ],
-    "days_seen": 1
+    "days_seen": 27
    },
    {
     "text": "quickly",
@@ -6702,6 +6731,8 @@
     "text": "she",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -6729,7 +6760,10 @@
     "text": "sound b — name бэ",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
     ],
     "days_seen": 30
    },
@@ -6737,7 +6771,10 @@
     "text": "sound d — name дэ",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
     ],
     "days_seen": 30
    },
@@ -6745,7 +6782,10 @@
     "text": "sound g — name гэ",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
     ],
     "days_seen": 30
    },
@@ -6775,7 +6815,10 @@
     "text": "sound p — name пэ",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
     ],
     "days_seen": 30
    },
@@ -6783,7 +6826,10 @@
     "text": "sound t — name тэ",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
     ],
     "days_seen": 30
    },
@@ -6791,6 +6837,9 @@
     "text": "this; that (unchanging identification word in this lesson)",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -6855,6 +6904,9 @@
     "text": "yes",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -6871,6 +6923,9 @@
     "text": "you (one familiar person)",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -6879,6 +6934,9 @@
     "text": "you (plural or polite singular)",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -7341,7 +7399,7 @@
      "home_state",
      "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 4
    },
    {
     "text": "бы́ли",
@@ -7419,6 +7477,10 @@
     "text": "вы",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -7438,7 +7500,7 @@
      "home_state",
      "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 4
    },
    {
     "text": "город",
@@ -7452,6 +7514,10 @@
     "text": "да",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -7485,9 +7551,11 @@
     "first_day": 1,
     "surfaces": [
      "home_state",
-     "practice_plan"
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
     ],
-    "days_seen": 30
+    "days_seen": 14
    },
    {
     "text": "домо́й",
@@ -7509,6 +7577,10 @@
     "text": "друг",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -7693,6 +7765,8 @@
     "text": "оди́н",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -7701,6 +7775,9 @@
     "text": "один",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -7725,6 +7802,8 @@
     "text": "она",
     "first_day": 1,
     "surfaces": [
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -7733,6 +7812,8 @@
     "text": "она́",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -7861,6 +7942,10 @@
     "text": "ты",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -7925,6 +8010,8 @@
     "text": "э́то",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -7933,34 +8020,1615 @@
     "text": "это",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
    },
    {
-    "text": "due-review",
+    "text": "Plain [l] versus palatalized [lʲ] (marked by the following vowel ю).",
     "first_day": 2,
     "surfaces": [
      "home_state",
      "practice_plan"
     ],
-    "days_seen": 1
+    "days_seen": 28
+   },
+   {
+    "text": "Plain final [t] versus palatalized [tʲ] (marked by the soft sign ь).",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "Voiced postalveolar fricative [ʐ] (ж) versus voiceless [ʃ] (ш).",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "hard sign — no sound of its own; separates the parts of a word",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "soft sign — no sound of its own; softens the consonant before it",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "sound a quick y — name и краткое",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "sound ch — name че",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "sound ih — name ы",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "sound k — name ка",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "sound n — name эн",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "sound s — name эс",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "sound sh — name ша",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "sound shch — name ща",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "sound ts — name цэ",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "sound ye or eh — name е",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "sound yo — name ё",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "sound yu — name ю",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 29
    },
    {
     "text": "weak-skill",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "брат",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 29
+   },
+   {
+    "text": "жить",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "лук",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "Lexical stress distinguishes homographs: за́мок 'castle' versus замо́к 'lock'.",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "Lexical stress distinguishes homographs: му́ка 'flour' versus мука́ 'torment'.",
     "first_day": 3,
     "surfaces": [
      "home_state",
      "practice_plan"
     ],
     "days_seen": 28
+   },
+   {
+    "text": "Pedagogical stress mark above a stressed vowel.",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "due-review",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "sound eh — name э",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "sound f — name эф",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "sound i — name и",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "sound kh — name ха",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "sound l — name эл",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "sound r — name эр",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "sound u — name у",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "sound v — name вэ",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "sound ya — name я",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "sound z — name зэ",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "sound zh — name жэ",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "за́мок",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "му́ка",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "читайте",
+    "first_day": 15,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task",
+     "writing_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "I do not understand (fixed expression)",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "Please read.",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "Please repeat.",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "This is a book.",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "______, пожалуйста.",
+    "first_day": 16,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "book",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "chair",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "choose; select (polite or plural instruction)",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "explain (polite or plural request)",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "father; dad",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "friend (female)",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "help (polite or plural request)",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "house; home",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "letter (alphabet symbol)",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "mother; mom",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "once more; again",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "pen (writing instrument)",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "please; you are welcome",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "read (polite or plural instruction)",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "repeat (polite or plural request)",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "table",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "word",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "write (polite or plural instruction)",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "Повторите, пожалуйста.",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "Читайте, пожалуйста.",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "Это ______.",
+    "first_day": 16,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "Это книга.",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 5
+   },
+   {
+    "text": "бу́ква",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "вы́берите",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "выберите",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "ещё раз",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "кни́га",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "ма́ма",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "не понима́ю",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "объясни́те",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "па́па",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "пиши́те",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "пишите",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "повтори́те",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "подру́га",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "пожа́луйста",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "помоги́те",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "ру́чка",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "сло́во",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "стол",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "стул",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "чита́йте",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "Goodbye!",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "This is five.",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "This is zero.",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "______!",
+    "first_day": 17,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "eight (8)",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "excuse me; I am sorry (polite formula)",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "five (5)",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "four (4)",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "good afternoon; good day",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "good evening",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "good morning",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "goodbye",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "hello (polite greeting)",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "nine (9)",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "no",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "seven (7)",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "six (6)",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "thank you",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "three (3)",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "two (2; masculine or neuter form)",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "zero (0)",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "До свидания!",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "Это ноль.",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "Это пять.",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "буква",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "во́семь",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "два",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "де́вять",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "до свида́ния",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "до́брое у́тро",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "до́брый ве́чер",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "до́брый день",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "здра́вствуйте",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "извини́те",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "нет",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "ноль",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "пожалуйста",
+    "first_day": 17,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "пять",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "семь",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "слово",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "спаси́бо",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "три",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "четы́ре",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan",
+     "practice_task"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "шесть",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "Anna (given name)",
+    "first_day": 18,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "I am Anna.",
+    "first_day": 18,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "Ivan (given name)",
+    "first_day": 18,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "he",
+    "first_day": 18,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "my name is (fixed introduction before a name)",
+    "first_day": 18,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "name (given name)",
+    "first_day": 18,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "what is your name? (fixed polite question)",
+    "first_day": 18,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "А́нна",
+    "first_day": 18,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "Ива́н",
+    "first_day": 18,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "Я ______.",
+    "first_day": 18,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "Я Анна.",
+    "first_day": 18,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "и́мя",
+    "first_day": 18,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "как вас зову́т",
+    "first_day": 18,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "меня́ зову́т",
+    "first_day": 18,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "не понимаю",
+    "first_day": 18,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "объясните",
+    "first_day": 18,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "он",
+    "first_day": 18,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "повторите",
+    "first_day": 18,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "помогите",
+    "first_day": 19,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "книга",
+    "first_day": 20,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "мама",
+    "first_day": 21,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "папа",
+    "first_day": 21,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "подруга",
+    "first_day": 22,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "ручка",
+    "first_day": 22,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "доброе утро",
+    "first_day": 23,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "добрый день",
+    "first_day": 23,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "здравствуйте",
+    "first_day": 23,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "до свидания",
+    "first_day": 24,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "добрый вечер",
+    "first_day": 24,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "спасибо",
+    "first_day": 24,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "извините",
+    "first_day": 25,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "четыре",
+    "first_day": 27,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "восемь",
+    "first_day": 28,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "девять",
+    "first_day": 29,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
    }
   ]
  },
  "ja": {
   "pack": "org.openlanguage.ja-jp.reference",
   "raw_days": 30,
-  "unique_text_items": 968,
+  "unique_text_items": 1350,
   "items": [
    {
     "text": "(particle: marks a question)",
@@ -8095,6 +9763,7 @@
     "text": "Asking where things are",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -8103,6 +9772,9 @@
     "text": "At night, I sleep.",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -8417,6 +10089,7 @@
     "text": "Eating and drinking sentences",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -8465,11 +10138,10 @@
     "text": "Excuse me. / I'm sorry.",
     "first_day": 1,
     "surfaces": [
-     "home_state",
      "lesson_plan",
      "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 21
    },
    {
     "text": "Explaining",
@@ -8491,6 +10163,7 @@
     "text": "Family and what they do",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -8571,6 +10244,7 @@
     "text": "Food, meals, and table phrases",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -8659,6 +10333,7 @@
     "text": "Going places",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -8667,9 +10342,11 @@
     "text": "Good evening.",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 23
    },
    {
     "text": "Good morning.",
@@ -8686,9 +10363,11 @@
     "text": "Good night.",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 24
    },
    {
     "text": "Grandparents and relatives",
@@ -8751,6 +10430,7 @@
     "text": "Hiragana: H, M, Y, R, W rows and ん",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -8759,6 +10439,8 @@
     "text": "Hiragana: S, T, N rows",
     "first_day": 1,
     "surfaces": [
+     "current_offer",
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -8767,6 +10449,7 @@
     "text": "Hiragana: contracted sounds",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -8775,6 +10458,7 @@
     "text": "Hiragana: voiced and semi-voiced marks",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -8783,6 +10467,7 @@
     "text": "Hiragana: vowels and K-row",
     "first_day": 1,
     "surfaces": [
+     "current_offer",
      "lesson_plan",
      "unit_path"
     ],
@@ -8848,6 +10533,9 @@
     "text": "How much is it?",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -8856,6 +10544,9 @@
     "text": "I (polite neutral)",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -8864,6 +10555,8 @@
     "text": "I buy bread.",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -8872,6 +10565,9 @@
     "text": "I get up at ten every day.",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -8880,6 +10576,9 @@
     "text": "I go back home.",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -8888,6 +10587,9 @@
     "text": "I go to school.",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -8912,6 +10614,9 @@
     "text": "In the morning, I eat rice.",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -8928,6 +10633,7 @@
     "text": "Introducing yourself",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -8936,6 +10642,9 @@
     "text": "It's one hundred yen.",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -8944,6 +10653,9 @@
     "text": "It's three o'clock.",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -8968,6 +10680,7 @@
     "text": "Kanji: numbers",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -8976,6 +10689,7 @@
     "text": "Kanji: people, body, basics",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -8993,6 +10707,7 @@
     "text": "Katakana loanwords in the wild",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -9113,6 +10828,8 @@
     "text": "Meeting and greeting",
     "first_day": 1,
     "surfaces": [
+     "current_offer",
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -9233,6 +10950,7 @@
     "text": "My day",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_list",
      "story_view",
      "unit_path"
@@ -9243,6 +10961,8 @@
     "text": "My name is Tanaka.",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -9259,6 +10979,9 @@
     "text": "Nice to meet you (first meeting).",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -9267,6 +10990,7 @@
     "text": "Not ... and ... was: い-adjective endings",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -9468,6 +11192,7 @@
     "text": "Repair phrases",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -9676,6 +11401,7 @@
     "text": "Saying goodbye",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -9684,6 +11410,7 @@
     "text": "Saying what things are like",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -9716,6 +11443,9 @@
     "text": "See you tomorrow.",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -9748,6 +11478,7 @@
     "text": "Shopping and prices",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -9900,6 +11631,7 @@
     "text": "Talking about weather",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -9984,6 +11716,9 @@
     "text": "This book is expensive.",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -9992,6 +11727,9 @@
     "text": "This is a book.",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -10000,6 +11738,7 @@
     "text": "This, that, and over there",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -10008,6 +11747,7 @@
     "text": "Time and days",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -10112,6 +11852,9 @@
     "text": "What is this?",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -10120,6 +11863,9 @@
     "text": "What time is it now?",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -10128,6 +11874,7 @@
     "text": "What you like and don't like",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "unit_path"
     ],
     "days_seen": 30
@@ -10186,12 +11933,15 @@
     "surfaces": [
      "practice_task"
     ],
-    "days_seen": 30
+    "days_seen": 27
    },
    {
     "text": "a daytime greeting; fits some hello uses but not every English 'hello' situation",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -10296,6 +12046,7 @@
     "text": "again",
     "first_day": 1,
     "surfaces": [
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -10560,6 +12311,7 @@
     "text": "bread",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -11720,6 +13472,7 @@
     "text": "every day",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -11752,17 +13505,20 @@
     "text": "excuse me (polite; leaving or intruding)",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 21
    },
    {
     "text": "excuse me / I'm sorry (polite)",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "lesson_plan",
+     "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 21
    },
    {
     "text": "exercise planning",
@@ -11784,6 +13540,7 @@
     "text": "expensive; tall",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -12192,15 +13949,19 @@
     "text": "good evening (polite)",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 23
    },
    {
     "text": "good morning (polite)",
     "first_day": 1,
     "surfaces": [
+     "home_state",
      "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -12209,9 +13970,11 @@
     "text": "good night (polite)",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 23
    },
    {
     "text": "governance essay",
@@ -12385,6 +14148,7 @@
     "text": "home (one's own)",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -12425,6 +14189,7 @@
     "text": "how much",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -12617,41 +14382,55 @@
     "text": "ka",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 13
    },
    {
     "text": "ke",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
     ],
-    "days_seen": 30
+    "days_seen": 13
    },
    {
     "text": "ki",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
     ],
-    "days_seen": 30
+    "days_seen": 13
    },
    {
     "text": "ko",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
     ],
-    "days_seen": 30
+    "days_seen": 13
    },
    {
     "text": "ku",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
     ],
-    "days_seen": 30
+    "days_seen": 13
    },
    {
     "text": "labor law",
@@ -13113,6 +14892,7 @@
     "text": "morning",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -13233,6 +15013,7 @@
     "text": "night",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -13708,7 +15489,7 @@
      "home_state",
      "practice_plan"
     ],
-    "days_seen": 1
+    "days_seen": 30
    },
    {
     "text": "project reports",
@@ -14050,6 +15831,7 @@
     "text": "rice; meal",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -14154,6 +15936,7 @@
     "text": "school",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -14178,6 +15961,9 @@
     "text": "see you tomorrow",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -14610,7 +16396,9 @@
     "text": "thank you (polite)",
     "first_day": 1,
     "surfaces": [
+     "home_state",
      "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -14619,9 +16407,11 @@
     "text": "thanks (casual)",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 21
    },
    {
     "text": "the action stem",
@@ -14635,6 +16425,7 @@
     "text": "the polite ending",
     "first_day": 1,
     "surfaces": [
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -14643,6 +16434,7 @@
     "text": "the thanks",
     "first_day": 1,
     "surfaces": [
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -14651,6 +16443,7 @@
     "text": "the time of day",
     "first_day": 1,
     "surfaces": [
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -14683,6 +16476,8 @@
     "text": "this (before a noun)",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -14691,6 +16486,8 @@
     "text": "this (thing near speaker)",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -14699,6 +16496,9 @@
     "text": "three",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -14707,6 +16507,7 @@
     "text": "to buy",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -14715,6 +16516,7 @@
     "text": "to come",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -14723,6 +16525,7 @@
     "text": "to eat",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -14731,6 +16534,7 @@
     "text": "to go",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15075,6 +16879,8 @@
     "text": "what time",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15083,6 +16889,7 @@
     "text": "when you meet next",
     "first_day": 1,
     "surfaces": [
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15219,6 +17026,7 @@
     "text": "あさ",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15227,6 +17035,8 @@
     "text": "あさ、ごはんを たべます。",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15235,6 +17045,10 @@
     "text": "あした",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15243,7 +17057,10 @@
     "text": "ありがとう",
     "first_day": 1,
     "surfaces": [
+     "home_state",
      "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15252,7 +17069,10 @@
     "text": "ありがとうございます",
     "first_day": 1,
     "surfaces": [
+     "home_state",
      "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15279,6 +17099,7 @@
     "text": "いきます",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15287,6 +17108,7 @@
     "text": "いくら",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15295,6 +17117,8 @@
     "text": "いくらですか。",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15311,6 +17135,8 @@
     "text": "いま さんじです。",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15319,6 +17145,8 @@
     "text": "いま なんじですか。",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15327,6 +17155,7 @@
     "text": "うち",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15335,6 +17164,8 @@
     "text": "うちへ かえります。",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15343,6 +17174,7 @@
     "text": "おいしい",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "writing_task"
     ],
     "days_seen": 30
@@ -15351,6 +17183,7 @@
     "text": "おはよう",
     "first_day": 1,
     "surfaces": [
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15359,7 +17192,10 @@
     "text": "おはようございます",
     "first_day": 1,
     "surfaces": [
+     "home_state",
      "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15378,14 +17214,18 @@
     "text": "おやすみなさい",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
     ],
-    "days_seen": 30
+    "days_seen": 24
    },
    {
     "text": "かいます",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15394,6 +17234,7 @@
     "text": "がっこう",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15402,6 +17243,8 @@
     "text": "がっこうへ いきます。",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15410,6 +17253,7 @@
     "text": "きます",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15418,6 +17262,9 @@
     "text": "この",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15426,6 +17273,8 @@
     "text": "この ほんは たかいです。",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15434,6 +17283,9 @@
     "text": "これ",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15442,6 +17294,8 @@
     "text": "これは なんですか。",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15450,6 +17304,8 @@
     "text": "これは ほんです。",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15458,6 +17314,10 @@
     "text": "こんにちは",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15474,14 +17334,18 @@
     "text": "こんばんは",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
     ],
-    "days_seen": 30
+    "days_seen": 23
    },
    {
     "text": "ございます",
     "first_day": 1,
     "surfaces": [
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15490,6 +17354,7 @@
     "text": "ごはん",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15498,6 +17363,10 @@
     "text": "さん",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15506,9 +17375,12 @@
     "text": "しつれいします",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
     ],
-    "days_seen": 30
+    "days_seen": 21
    },
    {
     "text": "じゅう",
@@ -15522,23 +17394,25 @@
     "text": "すみません",
     "first_day": 1,
     "surfaces": [
-     "lesson_plan"
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
     ],
-    "days_seen": 30
+    "days_seen": 21
    },
    {
     "text": "すみません。",
     "first_day": 1,
     "surfaces": [
-     "home_state",
      "practice_plan"
     ],
-    "days_seen": 30
+    "days_seen": 18
    },
    {
     "text": "たかい",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15555,6 +17429,7 @@
     "text": "たべます",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15579,6 +17454,9 @@
     "text": "なんじ",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15587,6 +17465,7 @@
     "text": "はじめまして",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15595,6 +17474,8 @@
     "text": "はじめまして。",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15611,6 +17492,8 @@
     "text": "ひゃくえんです。",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15619,6 +17502,7 @@
     "text": "ほん",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15627,6 +17511,7 @@
     "text": "まいにち",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15635,6 +17520,8 @@
     "text": "まいにち じゅうじにおきます。",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15651,6 +17538,7 @@
     "text": "また",
     "first_day": 1,
     "surfaces": [
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15659,6 +17547,10 @@
     "text": "またあした",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15667,6 +17559,8 @@
     "text": "またあした。",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15675,6 +17569,7 @@
     "text": "よる",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15683,6 +17578,8 @@
     "text": "よる、ねます。",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15691,6 +17588,10 @@
     "text": "わたし",
     "first_day": 1,
     "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task",
      "story_view"
     ],
     "days_seen": 30
@@ -15699,6 +17600,7 @@
     "text": "わたしの なまえは タナカです。",
     "first_day": 1,
     "surfaces": [
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15707,6 +17609,7 @@
     "text": "パン",
     "first_day": 1,
     "surfaces": [
+     "lesson_plan",
      "story_view"
     ],
     "days_seen": 30
@@ -15715,18 +17618,137 @@
     "text": "パンを かいます。",
     "first_day": 1,
     "surfaces": [
+     "practice_plan",
      "story_view"
     ],
     "days_seen": 30
    },
    {
-    "text": "due-review",
+    "text": "That umbrella is big.",
     "first_day": 2,
     "surfaces": [
      "home_state",
+     "lesson_plan",
      "practice_plan"
     ],
-    "days_seen": 1
+    "days_seen": 23
+   },
+   {
+    "text": "The concert was fun.",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "The station is near.",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "Today the weather is good.",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 21
+   },
+   {
+    "text": "Tomorrow will be cold.",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 21
+   },
+   {
+    "text": "big",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 23
+   },
+   {
+    "text": "cheap",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 23
+   },
+   {
+    "text": "cold (weather)",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 21
+   },
+   {
+    "text": "fun; enjoyable",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "good",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "goodbye (formal; softer everyday forms exist)",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 11
+   },
+   {
+    "text": "hot (weather)",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 21
+   },
+   {
+    "text": "see you (casual)",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 11
+   },
+   {
+    "text": "small",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 23
    },
    {
     "text": "weak-skill",
@@ -15736,6 +17758,3328 @@
      "practice_plan"
     ],
     "days_seen": 29
+   },
+   {
+    "text": "あしたは さむいです",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 21
+   },
+   {
+    "text": "あつい",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 21
+   },
+   {
+    "text": "いい",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "えき は ちかいです。",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "おおきい",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 23
+   },
+   {
+    "text": "おやすみなさい。",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "きょうは てんきが いいです",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 21
+   },
+   {
+    "text": "この ほんは たかいです",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 23
+   },
+   {
+    "text": "こんさーとが たのしかったです。",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "こんばんは。",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "さむい",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 21
+   },
+   {
+    "text": "さようなら",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 11
+   },
+   {
+    "text": "じゃあね",
+    "first_day": 2,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 11
+   },
+   {
+    "text": "その かさは おおきいです",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 23
+   },
+   {
+    "text": "たのしい",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "ちいさい",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 23
+   },
+   {
+    "text": "やすい",
+    "first_day": 2,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 23
+   },
+   {
+    "text": "It's half past three.",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "Monday",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "Today is Monday.",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "Tomorrow is Tuesday.",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "Tuesday",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "due-review",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 28
+   },
+   {
+    "text": "half past",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "today",
+    "first_day": 3,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "tomorrow",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "あしたは かようびです",
+    "first_day": 3,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "いま ______です。",
+    "first_day": 3,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "いま ______ですか。",
+    "first_day": 3,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "いま さんじです",
+    "first_day": 3,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "いま なんじですか",
+    "first_day": 3,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "かようび",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "きょう",
+    "first_day": 3,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "きょうは げつようびです",
+    "first_day": 3,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "げつようび",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "さんじはんです",
+    "first_day": 3,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "はん",
+    "first_day": 3,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "chi",
+    "first_day": 4,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "na",
+    "first_day": 4,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "ne",
+    "first_day": 4,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "ni",
+    "first_day": 4,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "no",
+    "first_day": 4,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "nu",
+    "first_day": 4,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "sa",
+    "first_day": 4,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "se",
+    "first_day": 4,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "shi",
+    "first_day": 4,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "so",
+    "first_day": 4,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "su",
+    "first_day": 4,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "ta",
+    "first_day": 4,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "te",
+    "first_day": 4,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "to",
+    "first_day": 4,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "tsu",
+    "first_day": 4,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "さんじ______です。",
+    "first_day": 4,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "さんじはんです。",
+    "first_day": 4,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "あしたは かようびです。",
+    "first_day": 5,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "きょうは ______です。",
+    "first_day": 5,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "きょうは げつようびです。",
+    "first_day": 5,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 6
+   },
+   {
+    "text": "Today it's rainy.",
+    "first_day": 6,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "clear weather; sunny",
+    "first_day": 6,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "rain",
+    "first_day": 6,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "snow",
+    "first_day": 6,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "weather",
+    "first_day": 6,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "あしたは ______です。",
+    "first_day": 6,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "あめ",
+    "first_day": 6,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "きょうは ______が いいです。",
+    "first_day": 6,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "きょうは あめです",
+    "first_day": 6,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "きょうは てんきが いいです。",
+    "first_day": 6,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "てんき",
+    "first_day": 6,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "はれ",
+    "first_day": 6,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "ゆき",
+    "first_day": 6,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "あしたは さむいです。",
+    "first_day": 7,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "きょうは あめです。",
+    "first_day": 7,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "I'm Tanaka.",
+    "first_day": 8,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 18
+   },
+   {
+    "text": "Pleased to meet you (set phrase).",
+    "first_day": 8,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 18
+   },
+   {
+    "text": "たなかです",
+    "first_day": 8,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 18
+   },
+   {
+    "text": "どうぞ よろしく おねがいします",
+    "first_day": 8,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 18
+   },
+   {
+    "text": "わたしの ______は タナカです。",
+    "first_day": 8,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "わたしの なまえは たなかです",
+    "first_day": 8,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 18
+   },
+   {
+    "text": "That is a pen.",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "book",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 22
+   },
+   {
+    "text": "fu",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "ha",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "he",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "hi",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "ho",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "ma",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "me",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "mi",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "mo",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "mu",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "pen",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "ra",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "re",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "ri",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "ro",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "ru",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "that (before a noun)",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "that (thing away from both)",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "that (thing near listener)",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "umbrella",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 22
+   },
+   {
+    "text": "wa",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "wo",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "ya",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "yo",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "yu",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "あれ",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "かさ",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 22
+   },
+   {
+    "text": "これは ______です。",
+    "first_day": 9,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "これは なんですか",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "これは ほんです",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "その",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "それ",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "それは ペンです",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "どうぞ ______ おねがいします。",
+    "first_day": 9,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "どうぞ よろしく おねがいします。",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "タナカ______。",
+    "first_day": 9,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "タナカです。",
+    "first_day": 9,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "ペン",
+    "first_day": 9,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "The rice is delicious.",
+    "first_day": 10,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "beer",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "bus",
+    "first_day": 10,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "coffee",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "delicious",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "department store",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "juice",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "milk",
+    "first_day": 10,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "new",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "restaurant",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "television",
+    "first_day": 10,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "toilet; restroom",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "あたらしい",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "この ほんは ______です。",
+    "first_day": 10,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "これは ______ですか。",
+    "first_day": 10,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "ごはんは おいしいです",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 20
+   },
+   {
+    "text": "それは ______です。",
+    "first_day": 10,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "それは ペンです。",
+    "first_day": 10,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "コーヒー",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 19
+   },
+   {
+    "text": "ジュース",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "テレビ",
+    "first_day": 10,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "デパート",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "トイレ",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "バス",
+    "first_day": 10,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "ビール",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "ミルク",
+    "first_day": 10,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "レストラン",
+    "first_day": 10,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "Said after eating.",
+    "first_day": 11,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "Said before eating.",
+    "first_day": 11,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "apple",
+    "first_day": 11,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "said after eating",
+    "first_day": 11,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "said before eating",
+    "first_day": 11,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "tea",
+    "first_day": 11,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "water",
+    "first_day": 11,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 18
+   },
+   {
+    "text": "いただきます",
+    "first_day": 11,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "いただきます。",
+    "first_day": 11,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "おちゃ",
+    "first_day": 11,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "ごちそうさま",
+    "first_day": 11,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "ごちそうさまでした",
+    "first_day": 11,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "ごはんは ______です。",
+    "first_day": 11,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "ごはんは おいしいです。",
+    "first_day": 11,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "その かさは ______です。",
+    "first_day": 11,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 4
+   },
+   {
+    "text": "その かさは おおきいです。",
+    "first_day": 11,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 10
+   },
+   {
+    "text": "みず",
+    "first_day": 11,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 18
+   },
+   {
+    "text": "りんご",
+    "first_day": 11,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 17
+   },
+   {
+    "text": "I dislike coffee.",
+    "first_day": 12,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "I like tea.",
+    "first_day": 12,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "dislike; disliked (na-adjective)",
+    "first_day": 12,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "like; liked (na-adjective; used with wa)",
+    "first_day": 12,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "きらい",
+    "first_day": 12,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "ごちそうさまでした。",
+    "first_day": 12,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "すき",
+    "first_day": 12,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "わたしは おちゃが ______です。",
+    "first_day": 12,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "わたしは おちゃが すきです",
+    "first_day": 12,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "わたしは おちゃが すきです。",
+    "first_day": 12,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "コーヒーが ______です。",
+    "first_day": 12,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "コーヒーが きらいです",
+    "first_day": 12,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "コーヒーが きらいです。",
+    "first_day": 12,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "I drink coffee.",
+    "first_day": 13,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 12
+   },
+   {
+    "text": "I drink water.",
+    "first_day": 13,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 12
+   },
+   {
+    "text": "I eat rice.",
+    "first_day": 13,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 12
+   },
+   {
+    "text": "______を のみます。",
+    "first_day": 13,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "the rest wish",
+    "first_day": 13,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "to drink",
+    "first_day": 13,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 12
+   },
+   {
+    "text": "おやすみ",
+    "first_day": 13,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "なさい",
+    "first_day": 13,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "のみます",
+    "first_day": 13,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 12
+   },
+   {
+    "text": "わたしは ごはんを ______。",
+    "first_day": 13,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "わたしは ごはんを たべます",
+    "first_day": 13,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 12
+   },
+   {
+    "text": "わたしは ごはんを たべます。",
+    "first_day": 13,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "わたしは みずを ______。",
+    "first_day": 13,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "わたしは みずを のみます",
+    "first_day": 13,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 12
+   },
+   {
+    "text": "わたしは みずを のみます。",
+    "first_day": 13,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "コーヒーを のみます",
+    "first_day": 13,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 12
+   },
+   {
+    "text": "コーヒーを のみます。",
+    "first_day": 13,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "I go to the station.",
+    "first_day": 14,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "I walk in the park.",
+    "first_day": 14,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "______へ いきます。",
+    "first_day": 14,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "______へ かえります。",
+    "first_day": 14,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "park",
+    "first_day": 14,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "station (train)",
+    "first_day": 14,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "to go back; to come back",
+    "first_day": 14,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "to walk",
+    "first_day": 14,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "あるきだす",
+    "first_day": 14,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "うちへ かえります",
+    "first_day": 14,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "えき",
+    "first_day": 14,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 16
+   },
+   {
+    "text": "えきへ いきます",
+    "first_day": 14,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "えきへ いきます。",
+    "first_day": 14,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 8
+   },
+   {
+    "text": "かえりざく",
+    "first_day": 14,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "がっこうへ いきます",
+    "first_day": 14,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "こうえん",
+    "first_day": 14,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "こうえんを あるきます",
+    "first_day": 14,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "I buy three books.",
+    "first_day": 15,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "______ですか。",
+    "first_day": 15,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "______を あるきます。",
+    "first_day": 15,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "counter for books",
+    "first_day": 15,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "hundred",
+    "first_day": 15,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "to go shopping",
+    "first_day": 15,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "yen (currency)",
+    "first_day": 15,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "いくらですか",
+    "first_day": 15,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "えん",
+    "first_day": 15,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "かいものします",
+    "first_day": 15,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "こうえんを あるきます。",
+    "first_day": 15,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "さつ",
+    "first_day": 15,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "ひゃく",
+    "first_day": 15,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "ひゃく______です。",
+    "first_day": 15,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "ひゃくえんです",
+    "first_day": 15,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "ほんを さんさつ かいます",
+    "first_day": 15,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "パンを かいます",
+    "first_day": 15,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 14
+   },
+   {
+    "text": "It's here.",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "Where is the station?",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "ba",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "be",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "bi",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "bo",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "bu",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "da",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "de",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "do",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "ga",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "ge",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "gi",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "go",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "gu",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "ji",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "over there",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "pa",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "pe",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "pi",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "po",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "pu",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "that place; there",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "this place; here",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "where",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "za",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "ze",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "zo",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "zu",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 15
+   },
+   {
+    "text": "あそこ",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "えきは ______ですか。",
+    "first_day": 16,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "えきは どこですか",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "えきは どこですか。",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "ここ",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "ここです",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "そこ",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "どこ",
+    "first_day": 16,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 9
+   },
+   {
+    "text": "ほんを ______ かいます。",
+    "first_day": 16,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "ほんを さんさつ かいます。",
+    "first_day": 16,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 6
+   },
+   {
+    "text": "パンを ______。",
+    "first_day": 16,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 13
+   },
+   {
+    "text": "______です。",
+    "first_day": 17,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "daytime; noon",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "evening",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "to get up; to wake up",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "to sleep; to go to bed",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "あさ、ごはんを たべます",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "おきる",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "ここです。",
+    "first_day": 17,
+    "surfaces": [
+     "home_state",
+     "practice_plan"
+    ],
+    "days_seen": 6
+   },
+   {
+    "text": "ねかす",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "ばん",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "ひる",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "まいにち じゅうじに______。",
+    "first_day": 17,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "まいにち じゅうじにおきます",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "よる、______。",
+    "first_day": 17,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "よる、ねます",
+    "first_day": 17,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "______、ごはんを たべます。",
+    "first_day": 18,
+    "surfaces": [
+     "practice_task"
+    ],
+    "days_seen": 3
+   },
+   {
+    "text": "bya",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "byo",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "byu",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "cha",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "cho",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "chu",
+    "first_day": 24,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "gya",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "gyo",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "gyu",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "hya",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "hyo",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "hyu",
+    "first_day": 24,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "ja",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "jo",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "ju",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "kya",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "kyo",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "kyu",
+    "first_day": 24,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "mya",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "myo",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "myu",
+    "first_day": 24,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "nya",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "nyo",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "nyu",
+    "first_day": 24,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "rya",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "ryo",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "ryu",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "sha",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "sho",
+    "first_day": 24,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "shu",
+    "first_day": 24,
+    "surfaces": [
+     "home_state",
+     "lesson_plan",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 7
+   },
+   {
+    "text": "きゃ",
+    "first_day": 24,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "きゅ",
+    "first_day": 25,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "きょ",
+    "first_day": 25,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "しゃ",
+    "first_day": 25,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "しゅ",
+    "first_day": 26,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "しょ",
+    "first_day": 26,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "ちゃ",
+    "first_day": 26,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "ちゅ",
+    "first_day": 27,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "ちょ",
+    "first_day": 27,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "にゃ",
+    "first_day": 27,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "にゅ",
+    "first_day": 28,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "にょ",
+    "first_day": 28,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "ひゃ",
+    "first_day": 28,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "My family has four people.",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "My father is a teacher.",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "My friend is a student.",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "doctor",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "family",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "my father (own-family term)",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "my mother (own-family term)",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "my older brother",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "my younger sister",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "student",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "teacher (also used to address teachers)",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "あに",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "いしゃ",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "いもうと",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "かぞく",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "かぞくは よにんいます",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "かぞくは よにんいます。",
+    "first_day": 29,
+    "surfaces": [
+     "practice_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "がくせい",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "せんせい",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "ちち",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "ちちは せんせい です。",
+    "first_day": 29,
+    "surfaces": [
+     "practice_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "ちちは せんせいです",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "ともだちは がくせいです",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "ともだちは がくせいです。",
+    "first_day": 29,
+    "surfaces": [
+     "practice_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "はは",
+    "first_day": 29,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "ひゅ",
+    "first_day": 29,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "ひょ",
+    "first_day": 29,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "みゃ",
+    "first_day": 29,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 2
+   },
+   {
+    "text": "I understand.",
+    "first_day": 30,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 1
+   },
+   {
+    "text": "One more time, please.",
+    "first_day": 30,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 1
+   },
+   {
+    "text": "Please speak slowly.",
+    "first_day": 30,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 1
+   },
+   {
+    "text": "Sorry, I don't understand.",
+    "first_day": 30,
+    "surfaces": [
+     "lesson_plan",
+     "practice_plan"
+    ],
+    "days_seen": 1
+   },
+   {
+    "text": "to understand",
+    "first_day": 30,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 1
+   },
+   {
+    "text": "すみません、わかりません",
+    "first_day": 30,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 1
+   },
+   {
+    "text": "すみません、わかりません。",
+    "first_day": 30,
+    "surfaces": [
+     "practice_plan"
+    ],
+    "days_seen": 1
+   },
+   {
+    "text": "みゅ",
+    "first_day": 30,
+    "surfaces": [
+     "home_state",
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 1
+   },
+   {
+    "text": "みょ",
+    "first_day": 30,
+    "surfaces": [
+     "practice_plan",
+     "practice_task"
+    ],
+    "days_seen": 1
+   },
+   {
+    "text": "もういちど おねがいします",
+    "first_day": 30,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 1
+   },
+   {
+    "text": "もういちど おねがいします。",
+    "first_day": 30,
+    "surfaces": [
+     "practice_plan"
+    ],
+    "days_seen": 1
+   },
+   {
+    "text": "ゆっくり はなしてください",
+    "first_day": 30,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 1
+   },
+   {
+    "text": "ゆっくり はなしてください。",
+    "first_day": 30,
+    "surfaces": [
+     "practice_plan"
+    ],
+    "days_seen": 1
+   },
+   {
+    "text": "りゃ",
+    "first_day": 30,
+    "surfaces": [
+     "practice_plan"
+    ],
+    "days_seen": 1
+   },
+   {
+    "text": "わかります",
+    "first_day": 30,
+    "surfaces": [
+     "lesson_plan"
+    ],
+    "days_seen": 1
    }
   ]
  }

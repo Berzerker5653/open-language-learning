@@ -1,4 +1,4 @@
-# JA Month-1 worklist — 968 unique text items across 30 simulated days
+# JA Month-1 worklist — 1350 unique text items across 30 simulated days
 
 ## Day 1 — 966 new items
 - [story_view] (particle: marks a question)
@@ -17,8 +17,8 @@
 - [unit_path] Appointments
 - [unit_path] Arms, legs, hands
 - [unit_path] Asking for help in a shop
-- [unit_path] Asking where things are
-- [story_view] At night, I sleep.
+- [lesson_plan, unit_path] Asking where things are
+- [home_state, lesson_plan, practice_plan] At night, I sleep.
 - [unit_path] At the clinic
 - [unit_path] At the pharmacy
 - [scenario_list] At the pharmacy counter
@@ -57,16 +57,16 @@
 - [unit_path] Describing a home
 - [unit_path] Dishes
 - [unit_path] Documents
-- [unit_path] Eating and drinking sentences
+- [lesson_plan, unit_path] Eating and drinking sentences
 - [unit_path] Entertainment feelings
 - [unit_path] Entertainment venues
 - [unit_path] Every period
 - [unit_path] Everyday adverbs
 - [scenario_list] Exchanging something at the counter
-- [home_state, lesson_plan, practice_plan] Excuse me. / I'm sorry.
+- [lesson_plan, practice_plan] Excuse me. / I'm sorry.
 - [unit_path] Explaining
 - [unit_path] Family
-- [unit_path] Family and what they do
+- [lesson_plan, unit_path] Family and what they do
 - [unit_path] Family members
 - [unit_path] Feelings
 - [unit_path] Film opinion: concessive が and favor verbs
@@ -76,7 +76,7 @@
 - [scenario_list] First meeting
 - [unit_path] Fitness
 - [unit_path] Fitting room
-- [unit_path] Food, meals, and table phrases
+- [lesson_plan, unit_path] Food, meals, and table phrases
 - [unit_path] Forecast
 - [unit_path] Formal written style: notices and commentary
 - [unit_path] Four seasons
@@ -87,10 +87,10 @@
 - [unit_path] Getting around town
 - [unit_path] Getting on and off
 - [unit_path] Going out
-- [unit_path] Going places
-- [lesson_plan] Good evening.
+- [lesson_plan, unit_path] Going places
+- [home_state, lesson_plan, practice_plan] Good evening.
 - [home_state, lesson_plan, practice_plan] Good morning.
-- [lesson_plan] Good night.
+- [home_state, lesson_plan, practice_plan] Good night.
 - [unit_path] Grandparents and relatives
 - [unit_path] Greetings and intros
 - [lesson_plan, unit_path] Greetings by time of day
@@ -98,11 +98,11 @@
 - [unit_path] Healthy habits
 - [unit_path] Hearing the difference
 - [story_view] Hello (daytime).
-- [unit_path] Hiragana: H, M, Y, R, W rows and ん
-- [unit_path] Hiragana: S, T, N rows
-- [unit_path] Hiragana: contracted sounds
-- [unit_path] Hiragana: voiced and semi-voiced marks
-- [lesson_plan, unit_path] Hiragana: vowels and K-row
+- [lesson_plan, unit_path] Hiragana: H, M, Y, R, W rows and ん
+- [current_offer, lesson_plan, unit_path] Hiragana: S, T, N rows
+- [lesson_plan, unit_path] Hiragana: contracted sounds
+- [lesson_plan, unit_path] Hiragana: voiced and semi-voiced marks
+- [current_offer, lesson_plan, unit_path] Hiragana: vowels and K-row
 - [unit_path] Hobbies and routines
 - [unit_path] Holidays
 - [unit_path] Home adverbs
@@ -110,25 +110,25 @@
 - [unit_path] Hospital
 - [unit_path] Hot and cold
 - [unit_path] Household
-- [story_view] How much is it?
-- [story_view] I (polite neutral)
-- [story_view] I buy bread.
-- [story_view] I get up at ten every day.
-- [story_view] I go back home.
-- [story_view] I go to school.
+- [home_state, lesson_plan, practice_plan] How much is it?
+- [home_state, lesson_plan, practice_plan] I (polite neutral)
+- [lesson_plan, practice_plan, story_view] I buy bread.
+- [home_state, lesson_plan, practice_plan] I get up at ten every day.
+- [home_state, lesson_plan, practice_plan] I go back home.
+- [home_state, lesson_plan, practice_plan] I go to school.
 - [unit_path] In and out verbs
 - [unit_path] In the classroom
-- [story_view] In the morning, I eat rice.
+- [home_state, lesson_plan, practice_plan] In the morning, I eat rice.
 - [unit_path] Insurance
-- [unit_path] Introducing yourself
-- [story_view] It's one hundred yen.
-- [story_view] It's three o'clock.
+- [lesson_plan, unit_path] Introducing yourself
+- [home_state, lesson_plan, practice_plan] It's one hundred yen.
+- [home_state, lesson_plan, practice_plan] It's three o'clock.
 - [unit_path] Japanese flavors
 - [unit_path] Job hunting
-- [unit_path] Kanji: numbers
-- [unit_path] Kanji: people, body, basics
+- [lesson_plan, unit_path] Kanji: numbers
+- [lesson_plan, unit_path] Kanji: people, body, basics
 - [lesson_plan, unit_path] Kanji: time, nature, verbs
-- [unit_path] Katakana loanwords in the wild
+- [lesson_plan, unit_path] Katakana loanwords in the wild
 - [unit_path] Katakana: the full basic set
 - [unit_path] Keeping the line open: repair and confirmation
 - [unit_path] Kitchen tools
@@ -143,7 +143,7 @@
 - [unit_path] Martial arts
 - [unit_path] Meals
 - [unit_path] Medicine and pharmacy
-- [unit_path] Meeting and greeting
+- [current_offer, lesson_plan, unit_path] Meeting and greeting
 - [unit_path] Meeting notice: informing the team
 - [unit_path] Meeting notice: the follow-up call
 - [unit_path] Meetings and introductions
@@ -158,11 +158,11 @@
 - [unit_path] Mountain, river, sea
 - [unit_path] Music events
 - [unit_path] Music, movies, manga
-- [story_list, story_view, unit_path] My day
-- [story_view] My name is Tanaka.
+- [lesson_plan, story_list, story_view] My day
+- [lesson_plan, practice_plan, story_view] My name is Tanaka.
 - [unit_path] Near and far
-- [story_view] Nice to meet you (first meeting).
-- [unit_path] Not ... and ... was: い-adjective endings
+- [home_state, lesson_plan, practice_plan] Nice to meet you (first meeting).
+- [lesson_plan, unit_path] Not ... and ... was: い-adjective endings
 - [unit_path] Numbers and counters
 - [unit_path] Numbers at the shop
 - [unit_path] Office clarification: confirming details politely
@@ -187,7 +187,7 @@
 - [unit_path] Reading and media
 - [unit_path] Reading short notices: typhoon and current situation
 - [unit_path] Recovery
-- [unit_path] Repair phrases
+- [lesson_plan, unit_path] Repair phrases
 - [scenario_list] Reporting a lost item
 - [unit_path] Reserving a table by phone
 - [scenario_list] Reserving by telephone
@@ -213,16 +213,16 @@
 - [unit_path] Roads and crossings
 - [unit_path] Rooms of the home
 - [unit_path] Running
-- [unit_path] Saying goodbye
-- [unit_path] Saying what things are like
+- [lesson_plan, unit_path] Saying goodbye
+- [lesson_plan, unit_path] Saying what things are like
 - [unit_path] School people
 - [unit_path] Seasonings
 - [unit_path] Section review
-- [story_view] See you tomorrow.
+- [home_state, lesson_plan, practice_plan] See you tomorrow.
 - [unit_path] Sending a parcel
 - [unit_path] Seniors and juniors
 - [unit_path] Sequencing adverbs
-- [unit_path] Shopping and prices
+- [lesson_plan, unit_path] Shopping and prices
 - [unit_path] Shops
 - [unit_path] Sick or all right
 - [unit_path] Skills and shopping
@@ -241,7 +241,7 @@
 - [unit_path] TV programs
 - [scenario_list] Talking about a film after watching it
 - [unit_path] Talking about food
-- [unit_path] Talking about weather
+- [lesson_plan, unit_path] Talking about weather
 - [unit_path] Tastes
 - [unit_path] Telling the ward office you moved
 - [unit_path] Temperature
@@ -251,10 +251,10 @@
 - [unit_path] Theater
 - [unit_path] Thinking and remembering
 - [unit_path] This and last
-- [story_view] This book is expensive.
-- [story_view] This is a book.
-- [unit_path] This, that, and over there
-- [unit_path] Time and days
+- [home_state, lesson_plan, practice_plan] This book is expensive.
+- [home_state, lesson_plan, practice_plan] This is a book.
+- [lesson_plan, unit_path] This, that, and over there
+- [lesson_plan, unit_path] Time and days
 - [unit_path] Timetables and speed
 - [unit_path] Tired, breathing, warm
 - [unit_path] Together with, and what people said: と
@@ -267,9 +267,9 @@
 - [unit_path] Ward office
 - [unit_path] Ways of doing
 - [unit_path] Ways to get around
-- [story_view] What is this?
-- [story_view] What time is it now?
-- [unit_path] What you like and don't like
+- [home_state, lesson_plan, practice_plan] What is this?
+- [home_state, lesson_plan, practice_plan] What time is it now?
+- [lesson_plan, unit_path] What you like and don't like
 - [unit_path] Who and what: the subject marker が
 - [unit_path] Winter and water sports
 - [unit_path] Winter things
@@ -277,7 +277,7 @@
 - [unit_path] Work verbs
 - [unit_path] Writing systems
 - [practice_task] ______。
-- [story_view] a daytime greeting; fits some hello uses but not every English 'hello' situation
+- [home_state, lesson_plan, practice_plan] a daytime greeting; fits some hello uses but not every English 'hello' situation
 - [unit_path] abstract writing
 - [unit_path] abstraction ladders
 - [unit_path] absurd humor
@@ -290,7 +290,7 @@
 - [unit_path] advertising critique
 - [unit_path] aesthetics essay
 - [unit_path] aesthetics ideas
-- [story_view] again
+- [practice_task, story_view] again
 - [unit_path] age register
 - [unit_path] aging medicine
 - [unit_path] aging society
@@ -323,7 +323,7 @@
 - [unit_path] booking problems
 - [unit_path] border documentation
 - [unit_path] boundary setting
-- [story_view] bread
+- [lesson_plan, story_view] bread
 - [unit_path] broadcast style
 - [unit_path] budget comparison
 - [unit_path] building suspense
@@ -468,15 +468,15 @@
 - [unit_path] ethics essay
 - [unit_path] ethics of law
 - [unit_path] etiquette rules
-- [story_view] every day
+- [lesson_plan, story_view] every day
 - [unit_path] everyday laws
 - [unit_path] evidence evaluation
 - [unit_path] exam strategy
-- [lesson_plan] excuse me (polite; leaving or intruding)
-- [lesson_plan] excuse me / I'm sorry (polite)
+- [home_state, lesson_plan, practice_plan] excuse me (polite; leaving or intruding)
+- [lesson_plan, practice_plan] excuse me / I'm sorry (polite)
 - [unit_path] exercise planning
 - [unit_path] exhibition writing
-- [story_view] expensive; tall
+- [lesson_plan, story_view] expensive; tall
 - [unit_path] explaining choices
 - [unit_path] explaining customs
 - [unit_path] explaining preference
@@ -502,6 +502,434 @@
 - [unit_path] formal email register
 - [unit_path] formal invitation
 
-## Day 2 — 2 new items
-- [home_state, practice_plan] due-review
+## Day 2 — 32 new items
+- [home_state, lesson_plan, practice_plan] That umbrella is big.
+- [lesson_plan] The concert was fun.
+- [lesson_plan] The station is near.
+- [home_state, lesson_plan, practice_plan] Today the weather is good.
+- [home_state, lesson_plan, practice_plan] Tomorrow will be cold.
+- [lesson_plan] big
+- [lesson_plan] cheap
+- [home_state, lesson_plan, practice_plan] cold (weather)
+- [lesson_plan] fun; enjoyable
+- [home_state, lesson_plan, practice_plan] good
+- [lesson_plan, practice_plan] goodbye (formal; softer everyday forms exist)
+- [home_state, lesson_plan, practice_plan] hot (weather)
+- [home_state, lesson_plan, practice_plan] see you (casual)
+- [lesson_plan] small
 - [home_state, practice_plan] weak-skill
+- [lesson_plan] あしたは さむいです
+- [home_state, lesson_plan, practice_plan] あつい
+- [home_state, lesson_plan, practice_plan] いい
+- [lesson_plan] えき は ちかいです。
+- [lesson_plan] おおきい
+- [home_state, practice_plan] おやすみなさい。
+- [lesson_plan] きょうは てんきが いいです
+- [lesson_plan] この ほんは たかいです
+- [lesson_plan] こんさーとが たのしかったです。
+- [home_state, practice_plan] こんばんは。
+- [home_state, lesson_plan, practice_plan] さむい
+- [lesson_plan, practice_plan, practice_task] さようなら
+- [home_state, lesson_plan, practice_plan] じゃあね
+- [lesson_plan] その かさは おおきいです
+- [lesson_plan] たのしい
+- [lesson_plan] ちいさい
+- [lesson_plan] やすい
+
+## Day 3 — 20 new items
+- [home_state, lesson_plan, practice_plan] It's half past three.
+- [home_state, lesson_plan, practice_plan] Monday
+- [home_state, lesson_plan, practice_plan] Today is Monday.
+- [home_state, lesson_plan, practice_plan] Tomorrow is Tuesday.
+- [home_state, lesson_plan, practice_plan] Tuesday
+- [home_state, practice_plan] due-review
+- [home_state, lesson_plan, practice_plan] half past
+- [lesson_plan, practice_plan] today
+- [home_state, lesson_plan, practice_plan] tomorrow
+- [lesson_plan] あしたは かようびです
+- [practice_task] いま ______です。
+- [practice_task] いま ______ですか。
+- [lesson_plan] いま さんじです
+- [lesson_plan] いま なんじですか
+- [home_state, lesson_plan, practice_plan] かようび
+- [lesson_plan, practice_plan, practice_task] きょう
+- [lesson_plan] きょうは げつようびです
+- [home_state, lesson_plan, practice_plan] げつようび
+- [lesson_plan] さんじはんです
+- [home_state, lesson_plan, practice_plan] はん
+
+## Day 4 — 17 new items
+- [home_state, lesson_plan, practice_plan] chi
+- [lesson_plan, practice_plan, practice_task] na
+- [lesson_plan, practice_plan, practice_task] ne
+- [home_state, lesson_plan, practice_plan] ni
+- [home_state, lesson_plan, practice_plan] no
+- [lesson_plan, practice_plan, practice_task] nu
+- [home_state, lesson_plan, practice_plan] sa
+- [home_state, lesson_plan, practice_plan] se
+- [home_state, lesson_plan, practice_plan] shi
+- [home_state, lesson_plan, practice_plan] so
+- [home_state, lesson_plan, practice_plan] su
+- [home_state, lesson_plan, practice_plan] ta
+- [home_state, lesson_plan, practice_plan] te
+- [lesson_plan, practice_plan, practice_task] to
+- [home_state, lesson_plan, practice_plan] tsu
+- [practice_task] さんじ______です。
+- [home_state, practice_plan] さんじはんです。
+
+## Day 5 — 3 new items
+- [home_state, practice_plan] あしたは かようびです。
+- [practice_task] きょうは ______です。
+- [home_state, practice_plan] きょうは げつようびです。
+
+## Day 6 — 13 new items
+- [home_state, lesson_plan, practice_plan] Today it's rainy.
+- [home_state, lesson_plan, practice_plan] clear weather; sunny
+- [home_state, lesson_plan, practice_plan] rain
+- [lesson_plan, practice_plan] snow
+- [lesson_plan, practice_plan] weather
+- [practice_task] あしたは ______です。
+- [home_state, lesson_plan, practice_plan] あめ
+- [practice_task] きょうは ______が いいです。
+- [lesson_plan] きょうは あめです
+- [home_state, practice_plan] きょうは てんきが いいです。
+- [lesson_plan, practice_plan, practice_task] てんき
+- [home_state, lesson_plan, practice_plan] はれ
+- [lesson_plan, practice_plan, practice_task] ゆき
+
+## Day 7 — 2 new items
+- [home_state, practice_plan] あしたは さむいです。
+- [home_state, practice_plan] きょうは あめです。
+
+## Day 8 — 6 new items
+- [home_state, lesson_plan, practice_plan] I'm Tanaka.
+- [home_state, lesson_plan, practice_plan] Pleased to meet you (set phrase).
+- [lesson_plan] たなかです
+- [lesson_plan] どうぞ よろしく おねがいします
+- [practice_task] わたしの ______は タナカです。
+- [lesson_plan] わたしの なまえは たなかです
+
+## Day 9 — 40 new items
+- [home_state, lesson_plan, practice_plan] That is a pen.
+- [lesson_plan] book
+- [home_state, lesson_plan, practice_plan] fu
+- [home_state, lesson_plan, practice_plan] ha
+- [home_state, lesson_plan, practice_plan] he
+- [home_state, lesson_plan, practice_plan] hi
+- [lesson_plan, practice_plan, practice_task] ho
+- [home_state, lesson_plan, practice_plan] ma
+- [home_state, lesson_plan, practice_plan] me
+- [home_state, lesson_plan, practice_plan] mi
+- [lesson_plan, practice_plan, practice_task] mo
+- [home_state, lesson_plan, practice_plan] mu
+- [lesson_plan] pen
+- [lesson_plan, practice_plan, practice_task] ra
+- [lesson_plan, practice_plan, practice_task] re
+- [home_state, lesson_plan, practice_plan] ri
+- [home_state, lesson_plan, practice_plan] ro
+- [lesson_plan, practice_plan, practice_task] ru
+- [lesson_plan] that (before a noun)
+- [lesson_plan, practice_plan] that (thing away from both)
+- [lesson_plan, practice_plan] that (thing near listener)
+- [lesson_plan] umbrella
+- [home_state, lesson_plan, practice_plan] wa
+- [home_state, lesson_plan, practice_plan] wo
+- [lesson_plan, practice_plan, practice_task] ya
+- [home_state, lesson_plan, practice_plan] yo
+- [home_state, lesson_plan, practice_plan] yu
+- [lesson_plan, practice_plan, practice_task] あれ
+- [lesson_plan] かさ
+- [practice_task] これは ______です。
+- [lesson_plan] これは なんですか
+- [lesson_plan] これは ほんです
+- [lesson_plan] その
+- [lesson_plan, practice_plan, practice_task] それ
+- [lesson_plan] それは ペンです
+- [practice_task] どうぞ ______ おねがいします。
+- [home_state, practice_plan] どうぞ よろしく おねがいします。
+- [practice_task] タナカ______。
+- [home_state, practice_plan] タナカです。
+- [lesson_plan] ペン
+
+## Day 10 — 27 new items
+- [home_state, lesson_plan, practice_plan] The rice is delicious.
+- [lesson_plan] beer
+- [home_state, lesson_plan, practice_plan] bus
+- [lesson_plan] coffee
+- [lesson_plan] delicious
+- [lesson_plan] department store
+- [lesson_plan] juice
+- [home_state, lesson_plan, practice_plan] milk
+- [lesson_plan] new
+- [lesson_plan] restaurant
+- [home_state, lesson_plan, practice_plan] television
+- [lesson_plan, practice_plan] toilet; restroom
+- [lesson_plan] あたらしい
+- [practice_task] この ほんは ______です。
+- [practice_task] これは ______ですか。
+- [lesson_plan] ごはんは おいしいです
+- [practice_task] それは ______です。
+- [home_state, practice_plan] それは ペンです。
+- [lesson_plan] コーヒー
+- [lesson_plan] ジュース
+- [home_state, lesson_plan, practice_plan] テレビ
+- [lesson_plan] デパート
+- [lesson_plan, practice_plan, practice_task] トイレ
+- [home_state, lesson_plan, practice_plan] バス
+- [lesson_plan] ビール
+- [home_state, lesson_plan, practice_plan] ミルク
+- [lesson_plan] レストラン
+
+## Day 11 — 18 new items
+- [home_state, lesson_plan, practice_plan] Said after eating.
+- [home_state, lesson_plan, practice_plan] Said before eating.
+- [lesson_plan] apple
+- [lesson_plan] said after eating
+- [lesson_plan] said before eating
+- [lesson_plan] tea
+- [lesson_plan] water
+- [lesson_plan] いただきます
+- [home_state, practice_plan] いただきます。
+- [lesson_plan] おちゃ
+- [lesson_plan] ごちそうさま
+- [lesson_plan] ごちそうさまでした
+- [practice_task] ごはんは ______です。
+- [home_state, practice_plan] ごはんは おいしいです。
+- [practice_task] その かさは ______です。
+- [home_state, practice_plan] その かさは おおきいです。
+- [lesson_plan] みず
+- [lesson_plan] りんご
+
+## Day 12 — 13 new items
+- [home_state, lesson_plan, practice_plan] I dislike coffee.
+- [home_state, lesson_plan, practice_plan] I like tea.
+- [lesson_plan] dislike; disliked (na-adjective)
+- [lesson_plan] like; liked (na-adjective; used with wa)
+- [lesson_plan] きらい
+- [home_state, practice_plan] ごちそうさまでした。
+- [lesson_plan] すき
+- [practice_task] わたしは おちゃが ______です。
+- [lesson_plan] わたしは おちゃが すきです
+- [home_state, practice_plan] わたしは おちゃが すきです。
+- [practice_task] コーヒーが ______です。
+- [lesson_plan] コーヒーが きらいです
+- [home_state, practice_plan] コーヒーが きらいです。
+
+## Day 13 — 17 new items
+- [home_state, lesson_plan, practice_plan] I drink coffee.
+- [home_state, lesson_plan, practice_plan] I drink water.
+- [home_state, lesson_plan, practice_plan] I eat rice.
+- [practice_task] ______を のみます。
+- [practice_task] the rest wish
+- [lesson_plan] to drink
+- [practice_task] おやすみ
+- [practice_task] なさい
+- [lesson_plan] のみます
+- [practice_task] わたしは ごはんを ______。
+- [lesson_plan] わたしは ごはんを たべます
+- [home_state, practice_plan] わたしは ごはんを たべます。
+- [practice_task] わたしは みずを ______。
+- [lesson_plan] わたしは みずを のみます
+- [home_state, practice_plan] わたしは みずを のみます。
+- [lesson_plan] コーヒーを のみます
+- [home_state, practice_plan] コーヒーを のみます。
+
+## Day 14 — 17 new items
+- [home_state, lesson_plan, practice_plan] I go to the station.
+- [home_state, lesson_plan, practice_plan] I walk in the park.
+- [practice_task] ______へ いきます。
+- [practice_task] ______へ かえります。
+- [lesson_plan] park
+- [lesson_plan] station (train)
+- [lesson_plan] to go back; to come back
+- [lesson_plan] to walk
+- [lesson_plan] あるきだす
+- [lesson_plan] うちへ かえります
+- [lesson_plan] えき
+- [lesson_plan] えきへ いきます
+- [home_state, practice_plan] えきへ いきます。
+- [lesson_plan] かえりざく
+- [lesson_plan] がっこうへ いきます
+- [lesson_plan] こうえん
+- [lesson_plan] こうえんを あるきます
+
+## Day 15 — 17 new items
+- [home_state, lesson_plan, practice_plan] I buy three books.
+- [practice_task] ______ですか。
+- [practice_task] ______を あるきます。
+- [lesson_plan] counter for books
+- [lesson_plan] hundred
+- [lesson_plan] to go shopping
+- [lesson_plan] yen (currency)
+- [lesson_plan] いくらですか
+- [lesson_plan] えん
+- [lesson_plan] かいものします
+- [home_state, practice_plan] こうえんを あるきます。
+- [lesson_plan] さつ
+- [lesson_plan] ひゃく
+- [practice_task] ひゃく______です。
+- [lesson_plan] ひゃくえんです
+- [lesson_plan] ほんを さんさつ かいます
+- [lesson_plan] パンを かいます
+
+## Day 16 — 40 new items
+- [home_state, lesson_plan, practice_plan] It's here.
+- [home_state, lesson_plan, practice_plan] Where is the station?
+- [lesson_plan, practice_plan, practice_task] ba
+- [lesson_plan, practice_plan, practice_task] be
+- [lesson_plan, practice_plan, practice_task] bi
+- [lesson_plan, practice_plan, practice_task] bo
+- [home_state, lesson_plan, practice_plan] bu
+- [home_state, lesson_plan, practice_plan] da
+- [home_state, lesson_plan, practice_plan] de
+- [home_state, lesson_plan, practice_plan] do
+- [home_state, lesson_plan, practice_plan] ga
+- [home_state, lesson_plan, practice_plan] ge
+- [home_state, lesson_plan, practice_plan] gi
+- [home_state, lesson_plan, practice_plan] go
+- [home_state, lesson_plan, practice_plan] gu
+- [home_state, lesson_plan, practice_plan] ji
+- [lesson_plan] over there
+- [home_state, lesson_plan, practice_plan] pa
+- [home_state, lesson_plan, practice_plan] pe
+- [home_state, lesson_plan, practice_plan] pi
+- [lesson_plan, practice_plan, practice_task] po
+- [home_state, lesson_plan, practice_plan] pu
+- [lesson_plan] that place; there
+- [lesson_plan] this place; here
+- [lesson_plan] where
+- [home_state, lesson_plan, practice_plan] za
+- [lesson_plan, practice_plan, practice_task] ze
+- [home_state, lesson_plan, practice_plan] zo
+- [home_state, lesson_plan, practice_plan] zu
+- [lesson_plan] あそこ
+- [practice_task] えきは ______ですか。
+- [lesson_plan] えきは どこですか
+- [home_state, practice_plan] えきは どこですか。
+- [lesson_plan] ここ
+- [lesson_plan] ここです
+- [lesson_plan] そこ
+- [lesson_plan] どこ
+- [practice_task] ほんを ______ かいます。
+- [home_state, practice_plan] ほんを さんさつ かいます。
+- [practice_task] パンを ______。
+
+## Day 17 — 15 new items
+- [practice_task] ______です。
+- [lesson_plan] daytime; noon
+- [lesson_plan] evening
+- [lesson_plan] to get up; to wake up
+- [lesson_plan] to sleep; to go to bed
+- [lesson_plan] あさ、ごはんを たべます
+- [lesson_plan] おきる
+- [home_state, practice_plan] ここです。
+- [lesson_plan] ねかす
+- [lesson_plan] ばん
+- [lesson_plan] ひる
+- [practice_task] まいにち じゅうじに______。
+- [lesson_plan] まいにち じゅうじにおきます
+- [practice_task] よる、______。
+- [lesson_plan] よる、ねます
+
+## Day 18 — 1 new items
+- [practice_task] ______、ごはんを たべます。
+
+## Day 24 — 31 new items
+- [lesson_plan] bya
+- [lesson_plan] byo
+- [lesson_plan] byu
+- [lesson_plan, practice_plan, practice_task] cha
+- [lesson_plan, practice_plan, practice_task] cho
+- [home_state, lesson_plan, practice_plan] chu
+- [lesson_plan] gya
+- [lesson_plan] gyo
+- [lesson_plan] gyu
+- [lesson_plan, practice_plan, practice_task] hya
+- [lesson_plan, practice_plan, practice_task] hyo
+- [home_state, lesson_plan, practice_plan] hyu
+- [lesson_plan] ja
+- [lesson_plan] jo
+- [lesson_plan] ju
+- [lesson_plan, practice_plan, practice_task] kya
+- [lesson_plan, practice_plan, practice_task] kyo
+- [home_state, lesson_plan, practice_plan] kyu
+- [lesson_plan, practice_plan, practice_task] mya
+- [lesson_plan, practice_plan] myo
+- [home_state, lesson_plan, practice_plan] myu
+- [lesson_plan, practice_plan, practice_task] nya
+- [lesson_plan, practice_plan, practice_task] nyo
+- [home_state, lesson_plan, practice_plan] nyu
+- [lesson_plan, practice_plan, practice_task] rya
+- [lesson_plan] ryo
+- [lesson_plan] ryu
+- [lesson_plan, practice_plan, practice_task] sha
+- [lesson_plan, practice_plan, practice_task] sho
+- [home_state, lesson_plan, practice_plan] shu
+- [practice_plan, practice_task] きゃ
+
+## Day 25 — 3 new items
+- [home_state, practice_plan, practice_task] きゅ
+- [practice_plan, practice_task] きょ
+- [practice_plan, practice_task] しゃ
+
+## Day 26 — 3 new items
+- [home_state, practice_plan, practice_task] しゅ
+- [practice_plan, practice_task] しょ
+- [practice_plan, practice_task] ちゃ
+
+## Day 27 — 3 new items
+- [home_state, practice_plan, practice_task] ちゅ
+- [practice_plan, practice_task] ちょ
+- [practice_plan, practice_task] にゃ
+
+## Day 28 — 3 new items
+- [home_state, practice_plan, practice_task] にゅ
+- [practice_plan, practice_task] にょ
+- [practice_plan, practice_task] ひゃ
+
+## Day 29 — 28 new items
+- [lesson_plan, practice_plan] My family has four people.
+- [lesson_plan, practice_plan] My father is a teacher.
+- [lesson_plan, practice_plan] My friend is a student.
+- [lesson_plan] doctor
+- [lesson_plan] family
+- [lesson_plan] my father (own-family term)
+- [lesson_plan] my mother (own-family term)
+- [lesson_plan] my older brother
+- [lesson_plan] my younger sister
+- [lesson_plan] student
+- [lesson_plan] teacher (also used to address teachers)
+- [lesson_plan] あに
+- [lesson_plan] いしゃ
+- [lesson_plan] いもうと
+- [lesson_plan] かぞく
+- [lesson_plan] かぞくは よにんいます
+- [practice_plan] かぞくは よにんいます。
+- [lesson_plan] がくせい
+- [lesson_plan] せんせい
+- [lesson_plan] ちち
+- [practice_plan] ちちは せんせい です。
+- [lesson_plan] ちちは せんせいです
+- [lesson_plan] ともだちは がくせいです
+- [practice_plan] ともだちは がくせいです。
+- [lesson_plan] はは
+- [home_state, practice_plan, practice_task] ひゅ
+- [practice_plan, practice_task] ひょ
+- [practice_plan, practice_task] みゃ
+
+## Day 30 — 15 new items
+- [lesson_plan] I understand.
+- [lesson_plan, practice_plan] One more time, please.
+- [lesson_plan, practice_plan] Please speak slowly.
+- [lesson_plan, practice_plan] Sorry, I don't understand.
+- [lesson_plan] to understand
+- [lesson_plan] すみません、わかりません
+- [practice_plan] すみません、わかりません。
+- [home_state, practice_plan, practice_task] みゅ
+- [practice_plan, practice_task] みょ
+- [lesson_plan] もういちど おねがいします
+- [practice_plan] もういちど おねがいします。
+- [lesson_plan] ゆっくり はなしてください
+- [practice_plan] ゆっくり はなしてください。
+- [practice_plan] りゃ
+- [lesson_plan] わかります

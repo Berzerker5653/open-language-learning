@@ -31,3 +31,67 @@ FIX-M1-PROGRESSION-001. Reviewer passes (2/3) deferred accordingly.
 
 ASR audio re-verification (mech sub-pass): DEFERRED to the post-fix
 re-run — the month-1 audio subset is currently the 6/15-item set.
+
+========================================================================
+RUN 3 — post-FIX-M1-PROGRESSION-001 re-verification (2026-11-27)
+========================================================================
+Parent board card t_a427ed60 died twice at the 80-iteration cap; the
+takeover lanes ran the remaining recipe on main @ 25757ff3+ (fix code
+87786961). TAKEOVER-A (board t_d37d8ea5) owns steps 1-2 (this section);
+the pass-2/pass-3 artifacts already in the tree were produced in the same
+interrupted worker and are verified/closed by TAKEOVER-B.
+
+Journey-sim re-run (step 1, fresh):
+  rm -rf .sim-data + sim/raw day logs only (raw-*.tar.gz archives kept),
+  then scripts/sim_month1.py --pack ru --days 30 ; --pack ja --days 30
+  (run 2026-11-27 ~14:01-14:11 by the first takeover worker).
+    -> 60/60 day logs in sim/raw (serve-ru.log / serve-ja.log each show
+       30 faketime'd lts-serve spawns)
+    -> post-fix signature independently re-verified by TAKEOVER-A:
+       unique served content ids per day grow monotonically
+       (ru day1=32 -> day30=122; ja day1=42 -> day30=294) — the starved
+       engine plateaued at 6/15 from day 2 and never served new material.
+    -> NOTE: sim/sim-{ru,ja}.out are RUN 2 (pre-fix) summary captures,
+       kept for the starvation record; RUN 3 stdout was not recaptured.
+
+Worklist rebuild (step 1):
+  python3 scripts/sim_month1.py --build-worklist
+    -> {ru: 1153, ja: 1350} unique text items (sim/worklist.json)
+       (was 991/968 on the starved inventory)
+
+Mechanical pass (step 1; acceptance: 0 failures, 100% coverage):
+  .venv/bin/python scripts/month1_mech_pass.py
+    ru: 0 failures, 72 warnings, coverage 100.0% (1153 items)
+    ja: 0 failures,  9 warnings, coverage 100.0% (1350 items)
+  Gate-script change NAMED per the GATE INTEGRITY rule (defects.md D-005):
+  occurrence-level answer-key model + plan-payload field exclusion; see
+  sim-changelog entry for 2026-11-27 (month1_mech_pass.py).
+  TAKEOVER-A re-ran the pass at main 873bd3db — same results reproduced.
+
+ASR audio subset (step 2):
+  ids: state/evidence/LEARNER-REVIEW-M1-001/asr-ids-{ru,ja}.txt
+       (149 ru + 215 ja manifest ids intersected with the Month-1 worklist;
+       generator script died with the run-3 worker before commit and is
+       NOT byte-reconstructable — provenance re-verified by TAKEOVER-A
+       instead: id set ⊆ languages/*/media/manifest.jsonl, and the
+       contrast-drill stems (bp/dt/gk/luk/brat/zamok/muka/zhsh…) resolve
+       to curriculum units referenced by the sim's own lesson_plan logs)
+  judge: whisper.cpp ggml-large-v3-turbo (PACK-AUDIO-VERIFICATION-001
+       posture), forced to CPU (GPU at ~31/32.6 GB under the local 27B
+       engine — first attempt's GPU model load crashed).
+  results: asr-ru.jsonl / asr-ja.jsonl, one row per id:
+    ru: 149/149 ok
+    ja: 115/215 ok; 100 flagged = 82 duration-suspect (1.3-1.6s vs 1.30s
+        short-clip cap heuristic) + 18 heard-transcript mismatches, ALL
+        1-2-mora words (ほん/ペン/えん/ひゃく/あめ…). Cross-checked against
+        the closed JA campaign ledger: several are recorded
+        round2:exhausted (ja-JP audio verification retired by owner
+        2026-11-06 — human audio QA Russian-only) -> defects.md D-011
+        known-limit (advisory), not new blockers.
+
+Harness hygiene: one leaked lts-serve (run-3 casualty, PID 1170263) found
+and killed by TAKEOVER-A; no other orphans (lts[-]serve scan clean).
+
+RUN 3 raw day logs archived as sim/raw-{ru,ja}-run3-2026-11-27.tar.gz
+(30 logs each; the pre-fix raw-{ru,ja}.tar.gz from run 2 are kept
+untouched for the starvation record; sim/raw/ itself is working data).

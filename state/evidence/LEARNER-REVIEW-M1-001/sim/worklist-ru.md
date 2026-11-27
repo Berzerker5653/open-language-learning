@@ -1,4 +1,4 @@
-# RU Month-1 worklist — 991 unique text items across 30 simulated days
+# RU Month-1 worklist — 1153 unique text items across 30 simulated days
 
 ## Day 1 — 989 new items
 - [story_view] A day later the painting was returned to the seller: the paint smelled of yesterday morning.
@@ -240,7 +240,7 @@
 - [unit_path] Equipment
 - [unit_path] Equivalence
 - [unit_path] Essence
-- [unit_path] Essential written learning instructions
+- [current_offer, lesson_plan, unit_path] Essential written learning instructions
 - [unit_path] Estates
 - [unit_path] Exaggeration
 - [unit_path] Examination
@@ -257,10 +257,10 @@
 - [unit_path] Extract
 - [unit_path] Fairness
 - [unit_path] Fallacies
-- [unit_path] Familiar people and objects
+- [lesson_plan, unit_path] Familiar people and objects
 - [unit_path] Family at home
 - [unit_path] Family life
-- [unit_path] Farewells and polite responses
+- [current_offer, lesson_plan, unit_path] Farewells and polite responses
 - [unit_path] Feature
 - [unit_path] Feedback
 - [unit_path] Feeling
@@ -274,7 +274,7 @@
 - [unit_path] Financing
 - [unit_path] Finding the way
 - [unit_path] Fines
-- [unit_path] First polite greetings
+- [lesson_plan, unit_path] First polite greetings
 - [unit_path] Flooding
 - [unit_path] Flow
 - [unit_path] Flying
@@ -410,7 +410,7 @@
 - [unit_path] Message verbs
 - [unit_path] Methodology
 - [unit_path] Metrics
-- [unit_path] Minimal written introductions
+- [lesson_plan, unit_path] Minimal written introductions
 - [unit_path] Miscalculation
 - [unit_path] Misunderstanding
 - [unit_path] Mix-ups
@@ -429,7 +429,7 @@
 - [unit_path] Movement
 - [unit_path] Mutuality
 - [unit_path] Names and further countries
-- [unit_path] Names and personal reference
+- [lesson_plan, unit_path] Names and personal reference
 - [unit_path] Narrative
 - [unit_path] Near and far
 - [unit_path] Need and may
@@ -443,8 +443,8 @@
 - [unit_path] Note
 - [unit_path] Novel
 - [unit_path] Novella
-- [unit_path] Number words five through nine
-- [unit_path] Number words zero through four
+- [lesson_plan, unit_path] Number words five through nine
+- [lesson_plan, unit_path] Number words zero through four
 - [unit_path] Numbers for age and form fields
 - [unit_path] Objection
 - [unit_path] Objections
@@ -502,8 +502,198 @@
 - [unit_path] Podcast
 - [unit_path] Poetry
 
-## Day 2 — 1 new items
-- [home_state, practice_plan] due-review
-
-## Day 3 — 1 new items
+## Day 2 — 21 new items
+- [home_state, practice_plan] Plain [l] versus palatalized [lʲ] (marked by the following vowel ю).
+- [home_state, practice_plan] Plain final [t] versus palatalized [tʲ] (marked by the soft sign ь).
+- [home_state, practice_plan] Voiced postalveolar fricative [ʐ] (ж) versus voiceless [ʃ] (ш).
+- [home_state, lesson_plan, practice_plan] hard sign — no sound of its own; separates the parts of a word
+- [home_state, lesson_plan, practice_plan] soft sign — no sound of its own; softens the consonant before it
+- [home_state, lesson_plan, practice_plan] sound a quick y — name и краткое
+- [home_state, lesson_plan, practice_plan] sound ch — name че
+- [home_state, lesson_plan, practice_plan] sound ih — name ы
+- [home_state, lesson_plan, practice_plan] sound k — name ка
+- [home_state, lesson_plan, practice_plan] sound n — name эн
+- [home_state, lesson_plan, practice_plan] sound s — name эс
+- [home_state, lesson_plan, practice_plan] sound sh — name ша
+- [home_state, lesson_plan, practice_plan] sound shch — name ща
+- [home_state, lesson_plan, practice_plan] sound ts — name цэ
+- [home_state, lesson_plan, practice_plan] sound ye or eh — name е
+- [home_state, lesson_plan, practice_plan] sound yo — name ё
+- [home_state, lesson_plan, practice_plan] sound yu — name ю
 - [home_state, practice_plan] weak-skill
+- [home_state, practice_plan] брат
+- [home_state, practice_plan] жить
+- [home_state, practice_plan] лук
+
+## Day 3 — 17 new items
+- [home_state, practice_plan] Lexical stress distinguishes homographs: за́мок 'castle' versus замо́к 'lock'.
+- [home_state, practice_plan] Lexical stress distinguishes homographs: му́ка 'flour' versus мука́ 'torment'.
+- [home_state, lesson_plan, practice_plan] Pedagogical stress mark above a stressed vowel.
+- [home_state, practice_plan] due-review
+- [home_state, lesson_plan, practice_plan] sound eh — name э
+- [home_state, lesson_plan, practice_plan] sound f — name эф
+- [home_state, lesson_plan, practice_plan] sound i — name и
+- [home_state, lesson_plan, practice_plan] sound kh — name ха
+- [home_state, lesson_plan, practice_plan] sound l — name эл
+- [home_state, lesson_plan, practice_plan] sound r — name эр
+- [home_state, lesson_plan, practice_plan] sound u — name у
+- [home_state, lesson_plan, practice_plan] sound v — name вэ
+- [home_state, lesson_plan, practice_plan] sound ya — name я
+- [home_state, lesson_plan, practice_plan] sound z — name зэ
+- [home_state, lesson_plan, practice_plan] sound zh — name жэ
+- [home_state, practice_plan] за́мок
+- [home_state, practice_plan] му́ка
+
+## Day 15 — 1 new items
+- [home_state, practice_plan, practice_task] читайте
+
+## Day 16 — 47 new items
+- [home_state, lesson_plan, practice_plan] I do not understand (fixed expression)
+- [home_state, lesson_plan, practice_plan] Please read.
+- [home_state, lesson_plan, practice_plan] Please repeat.
+- [home_state, lesson_plan, practice_plan] This is a book.
+- [practice_task] ______, пожалуйста.
+- [home_state, lesson_plan, practice_plan] book
+- [home_state, lesson_plan, practice_plan] chair
+- [home_state, lesson_plan, practice_plan] choose; select (polite or plural instruction)
+- [home_state, lesson_plan, practice_plan] explain (polite or plural request)
+- [lesson_plan, practice_plan] father; dad
+- [home_state, lesson_plan, practice_plan] friend (female)
+- [home_state, lesson_plan, practice_plan] help (polite or plural request)
+- [home_state, lesson_plan, practice_plan] house; home
+- [home_state, lesson_plan, practice_plan] letter (alphabet symbol)
+- [home_state, lesson_plan, practice_plan] mother; mom
+- [home_state, lesson_plan, practice_plan] once more; again
+- [home_state, lesson_plan, practice_plan] pen (writing instrument)
+- [lesson_plan, practice_plan] please; you are welcome
+- [home_state, lesson_plan, practice_plan] read (polite or plural instruction)
+- [home_state, lesson_plan, practice_plan] repeat (polite or plural request)
+- [lesson_plan, practice_plan] table
+- [home_state, lesson_plan, practice_plan] word
+- [home_state, lesson_plan, practice_plan] write (polite or plural instruction)
+- [home_state, practice_plan] Повторите, пожалуйста.
+- [home_state, practice_plan] Читайте, пожалуйста.
+- [practice_task] Это ______.
+- [home_state, practice_plan] Это книга.
+- [lesson_plan, practice_task] бу́ква
+- [lesson_plan, practice_task] вы́берите
+- [home_state, practice_plan, practice_task] выберите
+- [home_state, lesson_plan, practice_plan] ещё раз
+- [lesson_plan, practice_task] кни́га
+- [lesson_plan, practice_task] ма́ма
+- [lesson_plan, practice_task] не понима́ю
+- [lesson_plan, practice_task] объясни́те
+- [lesson_plan, practice_task] па́па
+- [lesson_plan, practice_task] пиши́те
+- [home_state, practice_plan, practice_task] пишите
+- [lesson_plan, practice_task] повтори́те
+- [lesson_plan, practice_task] подру́га
+- [lesson_plan, practice_task] пожа́луйста
+- [lesson_plan, practice_task] помоги́те
+- [lesson_plan, practice_task] ру́чка
+- [lesson_plan, practice_task] сло́во
+- [lesson_plan, practice_plan, practice_task] стол
+- [home_state, lesson_plan, practice_plan] стул
+- [lesson_plan, practice_task] чита́йте
+
+## Day 17 — 44 new items
+- [home_state, lesson_plan, practice_plan] Goodbye!
+- [home_state, lesson_plan, practice_plan] This is five.
+- [home_state, lesson_plan, practice_plan] This is zero.
+- [practice_task] ______!
+- [lesson_plan, practice_plan] eight (8)
+- [home_state, lesson_plan, practice_plan] excuse me; I am sorry (polite formula)
+- [home_state, lesson_plan, practice_plan] five (5)
+- [home_state, lesson_plan, practice_plan] four (4)
+- [home_state, lesson_plan, practice_plan] good afternoon; good day
+- [home_state, lesson_plan, practice_plan] good evening
+- [home_state, lesson_plan, practice_plan] good morning
+- [home_state, lesson_plan, practice_plan] goodbye
+- [home_state, lesson_plan, practice_plan] hello (polite greeting)
+- [home_state, lesson_plan, practice_plan] nine (9)
+- [home_state, lesson_plan, practice_plan] no
+- [home_state, lesson_plan, practice_plan] seven (7)
+- [home_state, lesson_plan, practice_plan] six (6)
+- [home_state, lesson_plan, practice_plan] thank you
+- [home_state, lesson_plan, practice_plan] three (3)
+- [home_state, lesson_plan, practice_plan] two (2; masculine or neuter form)
+- [home_state, lesson_plan, practice_plan] zero (0)
+- [home_state, practice_plan] До свидания!
+- [home_state, practice_plan] Это ноль.
+- [home_state, practice_plan] Это пять.
+- [home_state, practice_plan, practice_task] буква
+- [lesson_plan, practice_task] во́семь
+- [home_state, lesson_plan, practice_plan] два
+- [lesson_plan, practice_task] де́вять
+- [lesson_plan, practice_task] до свида́ния
+- [lesson_plan, practice_task] до́брое у́тро
+- [lesson_plan, practice_task] до́брый ве́чер
+- [lesson_plan, practice_task] до́брый день
+- [lesson_plan, practice_task] здра́вствуйте
+- [lesson_plan, practice_task] извини́те
+- [home_state, lesson_plan, practice_plan] нет
+- [home_state, lesson_plan, practice_plan] ноль
+- [practice_plan, practice_task] пожалуйста
+- [home_state, lesson_plan, practice_plan] пять
+- [home_state, lesson_plan, practice_plan] семь
+- [home_state, practice_plan, practice_task] слово
+- [lesson_plan, practice_task] спаси́бо
+- [home_state, lesson_plan, practice_plan] три
+- [lesson_plan, practice_task] четы́ре
+- [home_state, lesson_plan, practice_plan] шесть
+
+## Day 18 — 18 new items
+- [lesson_plan] Anna (given name)
+- [home_state, lesson_plan, practice_plan] I am Anna.
+- [lesson_plan] Ivan (given name)
+- [lesson_plan, practice_plan] he
+- [lesson_plan] my name is (fixed introduction before a name)
+- [lesson_plan] name (given name)
+- [lesson_plan] what is your name? (fixed polite question)
+- [lesson_plan] А́нна
+- [lesson_plan] Ива́н
+- [practice_task] Я ______.
+- [home_state, practice_plan] Я Анна.
+- [lesson_plan] и́мя
+- [lesson_plan] как вас зову́т
+- [lesson_plan] меня́ зову́т
+- [home_state, practice_plan, practice_task] не понимаю
+- [home_state, practice_plan, practice_task] объясните
+- [lesson_plan, practice_plan, practice_task] он
+- [home_state, practice_plan, practice_task] повторите
+
+## Day 19 — 1 new items
+- [home_state, practice_plan, practice_task] помогите
+
+## Day 20 — 1 new items
+- [home_state, practice_plan, practice_task] книга
+
+## Day 21 — 2 new items
+- [home_state, practice_plan, practice_task] мама
+- [practice_plan, practice_task] папа
+
+## Day 22 — 2 new items
+- [home_state, practice_plan, practice_task] подруга
+- [home_state, practice_plan, practice_task] ручка
+
+## Day 23 — 3 new items
+- [home_state, practice_plan, practice_task] доброе утро
+- [home_state, practice_plan, practice_task] добрый день
+- [home_state, practice_plan, practice_task] здравствуйте
+
+## Day 24 — 3 new items
+- [home_state, practice_plan, practice_task] до свидания
+- [home_state, practice_plan, practice_task] добрый вечер
+- [home_state, practice_plan, practice_task] спасибо
+
+## Day 25 — 1 new items
+- [home_state, practice_plan, practice_task] извините
+
+## Day 27 — 1 new items
+- [home_state, practice_plan, practice_task] четыре
+
+## Day 28 — 1 new items
+- [practice_plan, practice_task] восемь
+
+## Day 29 — 1 new items
+- [home_state, practice_plan, practice_task] девять

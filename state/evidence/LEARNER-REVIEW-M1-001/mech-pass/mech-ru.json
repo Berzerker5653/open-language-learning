@@ -2,9 +2,9 @@
  "pack": "ru",
  "days_loaded": 30,
  "coverage": {
-  "unique_item_ids_served": 6,
-  "unique_texts_seen": 994,
-  "worklist_items": 991,
+  "unique_item_ids_served": 108,
+  "unique_texts_seen": 1161,
+  "worklist_items": 1153,
   "worklist_items_unchecked": 0,
   "coverage_pct": 100.0,
   "sample_missing": []
@@ -572,10 +572,349 @@
     "равно",
     "равный"
    ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 2,
+   "surface": "home_state",
+   "text": "sound k — name ка",
+   "word": "ка",
+   "guess": [
+    "ка"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 2,
+   "surface": "practice_plan",
+   "text": "лук",
+   "word": "лук",
+   "guess": [
+    "лук",
+    "лука"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 2,
+   "surface": "lesson_plan",
+   "text": "sound n — name эн",
+   "word": "эн",
+   "guess": [
+    "эн",
+    "эн"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 2,
+   "surface": "lesson_plan",
+   "text": "sound s — name эс",
+   "word": "эс",
+   "guess": [
+    "эс",
+    "эс"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 2,
+   "surface": "lesson_plan",
+   "text": "sound a quick y — name и краткое",
+   "word": "краткое",
+   "guess": [
+    "краткий",
+    "краткий"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 2,
+   "surface": "practice_submit",
+   "text": "люк",
+   "word": "люк",
+   "guess": [
+    "люк",
+    "люк"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 2,
+   "surface": "lesson_plan",
+   "text": "sound ts — name цэ",
+   "word": "цэ",
+   "guess": [
+    "цэ"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 2,
+   "surface": "lesson_plan",
+   "text": "sound sh — name ша",
+   "word": "ша",
+   "guess": [
+    "ша"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 3,
+   "surface": "lesson_plan",
+   "text": "sound v — name вэ",
+   "word": "вэ",
+   "guess": [
+    "вэ"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 3,
+   "surface": "lesson_plan",
+   "text": "sound kh — name ха",
+   "word": "ха",
+   "guess": [
+    "ха"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 3,
+   "surface": "lesson_plan",
+   "text": "sound l — name эл",
+   "word": "эл",
+   "guess": [
+    "эл"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 3,
+   "surface": "lesson_plan",
+   "text": "sound z — name зэ",
+   "word": "зэ",
+   "guess": [
+    "зэ"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 3,
+   "surface": "lesson_plan",
+   "text": "sound zh — name жэ",
+   "word": "жэ",
+   "guess": [
+    "жэ"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 3,
+   "surface": "lesson_plan",
+   "text": "sound f — name эф",
+   "word": "эф",
+   "guess": [
+    "эф",
+    "эф"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 16,
+   "surface": "lesson_plan",
+   "text": "не понима́ю",
+   "word": "понима́ю",
+   "guess": [
+    "понима́ть",
+    "понима́я"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 16,
+   "surface": "lesson_plan",
+   "text": "ещё раз",
+   "word": "раз",
+   "guess": [
+    "раз",
+    "раз"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 17,
+   "surface": "practice_plan",
+   "text": "До свидания!",
+   "word": "До",
+   "guess": [
+    "до"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 17,
+   "surface": "lesson_plan",
+   "text": "до́брое у́тро",
+   "word": "до́брое",
+   "guess": [
+    "до́брой",
+    "до́брой"
+   ]
+  },
+  {
+   "check": "ru.lexicon.unknown-lemma",
+   "day": 18,
+   "surface": "lesson_plan",
+   "text": "меня́ зову́т",
+   "word": "зову́т",
+   "guess": [
+    "зову́т",
+    "зову́т"
+   ]
   }
  ],
+ "rotating_letter_drills": {
+  "ru.orth.cyrillic.a#orthography-recognition": [
+   "sound a — name а",
+   "а"
+  ],
+  "ru.orth.cyrillic.o#orthography-recognition": [
+   "sound o — name о",
+   "о"
+  ],
+  "ru.orth.cyrillic.m#orthography-recognition": [
+   "sound m — name эм",
+   "м"
+  ],
+  "ru.orth.cyrillic.t#orthography-recognition": [
+   "sound t — name тэ",
+   "т"
+  ],
+  "ru.orth.cyrillic.k#orthography-recognition": [
+   "sound k — name ка",
+   "к"
+  ],
+  "ru.orth.cyrillic.e#orthography-recognition": [
+   "sound ye or eh — name е",
+   "е"
+  ],
+  "ru.orth.cyrillic.n#orthography-recognition": [
+   "sound n — name эн",
+   "н"
+  ],
+  "ru.orth.cyrillic.s#orthography-recognition": [
+   "sound s — name эс",
+   "с"
+  ],
+  "ru.orth.cyrillic.r#orthography-recognition": [
+   "sound r — name эр",
+   "р"
+  ],
+  "ru.orth.cyrillic.v#orthography-recognition": [
+   "sound v — name вэ",
+   "в"
+  ],
+  "ru.orth.cyrillic.u#orthography-recognition": [
+   "sound u — name у",
+   "у"
+  ],
+  "ru.orth.cyrillic.kh#orthography-recognition": [
+   "sound kh — name ха",
+   "х"
+  ],
+  "ru.orth.cyrillic.b#orthography-recognition": [
+   "sound b — name бэ",
+   "б"
+  ],
+  "ru.orth.cyrillic.p#orthography-recognition": [
+   "sound p — name пэ",
+   "п"
+  ],
+  "ru.orth.cyrillic.d#orthography-recognition": [
+   "sound d — name дэ",
+   "д"
+  ],
+  "ru.orth.cyrillic.g#orthography-recognition": [
+   "sound g — name гэ",
+   "г"
+  ],
+  "ru.orth.cyrillic.l#orthography-recognition": [
+   "sound l — name эл",
+   "л"
+  ],
+  "ru.orth.cyrillic.z#orthography-recognition": [
+   "sound z — name зэ",
+   "з"
+  ],
+  "ru.orth.cyrillic.zh#orthography-recognition": [
+   "sound zh — name жэ",
+   "ж"
+  ],
+  "ru.orth.cyrillic.i#orthography-recognition": [
+   "sound i — name и",
+   "и"
+  ],
+  "ru.orth.cyrillic.y#orthography-recognition": [
+   "sound ih — name ы",
+   "ы"
+  ],
+  "ru.orth.cyrillic.short-i#orthography-recognition": [
+   "sound a quick y — name и краткое",
+   "й"
+  ],
+  "ru.orth.cyrillic.yo#orthography-recognition": [
+   "sound yo — name ё",
+   "ё"
+  ],
+  "ru.orth.cyrillic.yu#orthography-recognition": [
+   "sound yu — name ю",
+   "ю"
+  ],
+  "ru.orth.cyrillic.ya#orthography-recognition": [
+   "sound ya — name я",
+   "я"
+  ],
+  "ru.orth.cyrillic.eh#orthography-recognition": [
+   "sound eh — name э",
+   "э"
+  ],
+  "ru.orth.cyrillic.f#orthography-recognition": [
+   "sound f — name эф",
+   "ф"
+  ],
+  "ru.orth.cyrillic.ts#orthography-recognition": [
+   "sound ts — name цэ",
+   "ц"
+  ],
+  "ru.orth.cyrillic.ch#orthography-recognition": [
+   "sound ch — name че",
+   "ч"
+  ],
+  "ru.orth.cyrillic.sh#orthography-recognition": [
+   "sound sh — name ша",
+   "ш"
+  ],
+  "ru.orth.cyrillic.shch#orthography-recognition": [
+   "sound shch — name ща",
+   "щ"
+  ],
+  "ru.orth.cyrillic.soft-sign#orthography-recognition": [
+   "soft sign — no sound of its own; softens the consonant before it",
+   "ь"
+  ],
+  "ru.orth.cyrillic.hard-sign#orthography-recognition": [
+   "hard sign — no sound of its own; separates the parts of a word",
+   "ъ"
+  ],
+  "ru.orth.cyrillic.stress-mark#orthography-recognition": [
+   "Pedagogical stress mark above a stressed vowel.",
+   "́"
+  ]
+ },
  "counts": {
   "failures": 0,
-  "warnings": 53
+  "warnings": 72,
+  "rotating_letter_drills": 34
  }
 }

@@ -1,11 +1,11 @@
 # Mechanical pass — RU Month-1 subset
 
 - days loaded: 30
-- unique item ids served: 6
-- unique texts checked: 994
-- worklist coverage: 100.0% (991 items, 0 unchecked)
+- unique item ids served: 108
+- unique texts checked: 1161
+- worklist coverage: 100.0% (1153 items, 0 unchecked)
 - mechanical failures: 0
-- reviewer-bound warnings: 53 (deduped)
+- reviewer-bound warnings: 72 (deduped)
 
 ## Failures
 
@@ -63,3 +63,22 @@
 - {"check": "ru.lexicon.unknown-lemma", "day": 1, "surface": "story_view", "text": "Вечером кругом были только фонари и тишина.", "word": "кругом", "guess": ["кругом", "круг"]}
 - {"check": "ru.lexicon.unknown-lemma", "day": 1, "surface": "story_view", "text": "Потом я писал об этом маме: это был хороший вечер.", "word": "об", "guess": ["о", "об"]}
 - {"check": "ru.lexicon.unknown-lemma", "day": 1, "surface": "story_view", "text": "Автобус не пришёл — и всё равно это был хороший вечер.", "word": "равно", "guess": ["равно", "равный"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 2, "surface": "home_state", "text": "sound k — name ка", "word": "ка", "guess": ["ка"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 2, "surface": "practice_plan", "text": "лук", "word": "лук", "guess": ["лук", "лука"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 2, "surface": "lesson_plan", "text": "sound n — name эн", "word": "эн", "guess": ["эн", "эн"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 2, "surface": "lesson_plan", "text": "sound s — name эс", "word": "эс", "guess": ["эс", "эс"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 2, "surface": "lesson_plan", "text": "sound a quick y — name и краткое", "word": "краткое", "guess": ["краткий", "краткий"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 2, "surface": "practice_submit", "text": "люк", "word": "люк", "guess": ["люк", "люк"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 2, "surface": "lesson_plan", "text": "sound ts — name цэ", "word": "цэ", "guess": ["цэ"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 2, "surface": "lesson_plan", "text": "sound sh — name ша", "word": "ша", "guess": ["ша"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 3, "surface": "lesson_plan", "text": "sound v — name вэ", "word": "вэ", "guess": ["вэ"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 3, "surface": "lesson_plan", "text": "sound kh — name ха", "word": "ха", "guess": ["ха"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 3, "surface": "lesson_plan", "text": "sound l — name эл", "word": "эл", "guess": ["эл"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 3, "surface": "lesson_plan", "text": "sound z — name зэ", "word": "зэ", "guess": ["зэ"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 3, "surface": "lesson_plan", "text": "sound zh — name жэ", "word": "жэ", "guess": ["жэ"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 3, "surface": "lesson_plan", "text": "sound f — name эф", "word": "эф", "guess": ["эф", "эф"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 16, "surface": "lesson_plan", "text": "не понима́ю", "word": "понима́ю", "guess": ["понима́ть", "понима́я"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 16, "surface": "lesson_plan", "text": "ещё раз", "word": "раз", "guess": ["раз", "раз"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 17, "surface": "practice_plan", "text": "До свидания!", "word": "До", "guess": ["до"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 17, "surface": "lesson_plan", "text": "до́брое у́тро", "word": "до́брое", "guess": ["до́брой", "до́брой"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 18, "surface": "lesson_plan", "text": "меня́ зову́т", "word": "зову́т", "guess": ["зову́т", "зову́т"]}

@@ -1,0 +1,149 @@
+{"id": "ru.contrast.stress.zamok-1", "status": "ok", "ratio": 1.0, "text": "замо́к", "heard": "Замок."}
+{"id": "ru.contrast.stress.muka-1", "status": "ok", "ratio": 1.0, "text": "мука́", "heard": "Мука."}
+{"id": "ru.contrast.stress.zamok-0", "status": "ok", "ratio": 1.0, "text": "за́мок", "heard": "замок."}
+{"id": "ru.contrast.stress.muka-0", "status": "ok", "ratio": 1.0, "text": "му́ка", "heard": "Мука,"}
+{"id": "ru.contrast.palatalization.brat-0", "status": "ok", "ratio": 1.0, "text": "брат", "heard": "Брат..."}
+{"id": "ru.contrast.palatalization.luk-0", "status": "ok", "ratio": 1.0, "text": "лук", "heard": "Лук."}
+{"id": "ru.contrast.voicing.gk-0", "status": "ok", "ratio": 0.86, "text": "год", "heard": "Гоот!"}
+{"id": "ru.contrast.voicing.bp-0", "status": "ok", "ratio": 1.0, "text": "бить", "heard": "Бить."}
+{"id": "ru.contrast.voicing.dt-0", "status": "ok", "ratio": 1.0, "text": "дом", "heard": "Дом."}
+{"id": "ru.lex.argue.sporit", "status": "ok", "ratio": 1.0, "text": "спорить", "heard": "Спорить?"}
+{"id": "ru.contrast.voicing.zhsh-0", "status": "ok", "ratio": 1.0, "text": "жить", "heard": "ЖИТЬ!"}
+{"id": "ru.lex.classroom.bukva", "status": "ok", "ratio": 1.0, "text": "бу́ква", "heard": "Буква."}
+{"id": "ru.lex.classroom.chitayte", "status": "ok", "ratio": 1.0, "text": "чита́йте", "heard": "Читайте."}
+{"id": "ru.lex.classroom.ne-ponimayu", "status": "ok", "ratio": 1.0, "text": "не понима́ю", "heard": "Не понимаю."}
+{"id": "ru.lex.classroom.eshchyo-raz", "status": "ok", "ratio": 0.93, "text": "ещё раз", "heard": "И ещё раз..."}
+{"id": "ru.lex.classroom.obyasnite", "status": "ok", "ratio": 1.0, "text": "объясни́те", "heard": "Объясните."}
+{"id": "ru.lex.classroom.pishite", "status": "ok", "ratio": 1.0, "text": "пиши́те", "heard": "Пишите."}
+{"id": "ru.lex.classroom.pomogite", "status": "ok", "ratio": 1.0, "text": "помоги́те", "heard": "Помогите."}
+{"id": "ru.lex.classroom.vyberite", "status": "ok", "ratio": 0.96, "text": "вы́берите", "heard": "Вы уберите."}
+{"id": "ru.lex.comparisons.bystro", "status": "ok", "ratio": 1.0, "text": "бы́стро", "heard": "Быстро!"}
+{"id": "ru.lex.classroom.slovo", "status": "ok", "ratio": 1.0, "text": "сло́во", "heard": "Слово."}
+{"id": "ru.lex.classroom.povtorite", "status": "ok", "ratio": 1.0, "text": "повтори́те", "heard": "Повторите."}
+{"id": "ru.lex.comparisons.uzhe", "status": "ok", "ratio": 1.0, "text": "уже́", "heard": "Уже!"}
+{"id": "ru.lex.critical.rod", "status": "ok", "ratio": 1.0, "text": "род", "heard": "Рот."}
+{"id": "ru.lex.everyday.dom", "status": "ok", "ratio": 1.0, "text": "дом", "heard": "Дом."}
+{"id": "ru.lex.everyday.drug", "status": "ok", "ratio": 1.0, "text": "друг", "heard": "Друг..."}
+{"id": "ru.lex.critical2.zal", "status": "ok", "ratio": 0.8, "text": "зал", "heard": "За..."}
+{"id": "ru.lex.culture.kartina", "status": "ok", "ratio": 1.0, "text": "картина", "heard": "Картина."}
+{"id": "ru.lex.cult.zamok", "status": "ok", "ratio": 1.0, "text": "замок", "heard": "Замок"}
+{"id": "ru.lex.everyday.eto", "status": "ok", "ratio": 0.75, "text": "э́то", "heard": "Эээто..."}
+{"id": "ru.lex.everyday.mama", "status": "ok", "ratio": 1.0, "text": "ма́ма", "heard": "Мама."}
+{"id": "ru.lex.everyday.kniga", "status": "ok", "ratio": 0.86, "text": "кни́га", "heard": "К-книга!"}
+{"id": "ru.lex.everyday.ruchka", "status": "ok", "ratio": 1.0, "text": "ру́чка", "heard": "Ручка."}
+{"id": "ru.lex.everyday.papa", "status": "ok", "ratio": 0.89, "text": "па́па", "heard": "Пахпа!"}
+{"id": "ru.lex.everyday.podruga", "status": "ok", "ratio": 0.86, "text": "подру́га", "heard": "«Подрога...»"}
+{"id": "ru.lex.everyday.stol", "status": "ok", "ratio": 1.0, "text": "стол", "heard": "Стол."}
+{"id": "ru.lex.food.muka", "status": "ok", "ratio": 1.0, "text": "му́ка", "heard": "Мука."}
+{"id": "ru.lex.everyday.stul", "status": "ok", "ratio": 1.0, "text": "стул", "heard": "Стул."}
+{"id": "ru.lex.family.yey", "status": "ok", "ratio": 1.0, "text": "ее́", "heard": "ее."}
+{"id": "ru.lex.family.brat", "status": "ok", "ratio": 1.0, "text": "брат", "heard": "Брат..."}
+{"id": "ru.lex.food.sir", "status": "ok", "ratio": 1.0, "text": "сыр", "heard": "Сыр"}
+{"id": "ru.lex.food.moloko", "status": "ok", "ratio": 0.92, "text": "молоко́", "heard": "Молоко-и."}
+{"id": "ru.lex.food.uzhin", "status": "ok", "ratio": 1.0, "text": "у́жин", "heard": "Ужин!"}
+{"id": "ru.lex.greetings.da", "status": "ok", "ratio": 1.0, "text": "да", "heard": "Да."}
+{"id": "ru.lex.greetings.do-svidaniya", "status": "ok", "ratio": 1.0, "text": "до свида́ния", "heard": "До свидания."}
+{"id": "ru.lex.greetings.dobroe-utro", "status": "ok", "ratio": 0.92, "text": "до́брое у́тро", "heard": "До ёбрае утро."}
+{"id": "ru.lex.greetings.dobryy-den", "status": "ok", "ratio": 1.0, "text": "до́брый день", "heard": "Добрый день!"}
+{"id": "ru.lex.greetings.dobryy-vecher", "status": "ok", "ratio": 1.0, "text": "до́брый ве́чер", "heard": "Добрый вечер!"}
+{"id": "ru.lex.greetings.izvinite", "status": "ok", "ratio": 1.0, "text": "извини́те", "heard": "Извинете..."}
+{"id": "ru.lex.greetings.net", "status": "ok", "ratio": 1.0, "text": "нет", "heard": "Нет."}
+{"id": "ru.lex.greetings.spasibo", "status": "ok", "ratio": 1.0, "text": "спаси́бо", "heard": "Спасибо."}
+{"id": "ru.lex.greetings.pozhaluysta", "status": "ok", "ratio": 1.0, "text": "пожа́луйста", "heard": "Пожалуйста."}
+{"id": "ru.lex.greetings.zdravstvuyte", "status": "ok", "ratio": 0.79, "text": "здра́вствуйте", "heard": "Здрааевствуйте!"}
+{"id": "ru.lex.home.avtobus", "status": "ok", "ratio": 0.8, "text": "авто́бус", "heard": "Автогвуз..."}
+{"id": "ru.lex.home.les", "status": "ok", "ratio": 1.0, "text": "лес", "heard": "Лес."}
+{"id": "ru.lex.home.okno", "status": "ok", "ratio": 1.0, "text": "окно́", "heard": "окно"}
+{"id": "ru.lex.home.rynok", "status": "ok", "ratio": 1.0, "text": "ры́нок", "heard": "Рынок."}
+{"id": "ru.lex.housing.stul", "status": "ok", "ratio": 0.75, "text": "стул", "heard": "Стух."}
+{"id": "ru.lex.instructions.molotok", "status": "ok", "ratio": 0.75, "text": "молото́к", "heard": "МОЛОТАЯК!"}
+{"id": "ru.lex.learning.kniga", "status": "ok", "ratio": 1.0, "text": "книга", "heard": "Книга!"}
+{"id": "ru.lex.nature.les", "status": "ok", "ratio": 1.0, "text": "лес", "heard": "Лез."}
+{"id": "ru.lex.narration.dolgo", "status": "ok", "ratio": 1.0, "text": "до́лго", "heard": "Долго."}
+{"id": "ru.lex.narration2.tishina", "status": "ok", "ratio": 1.0, "text": "тишина́", "heard": "Тишина."}
+{"id": "ru.lex.numbers-time.chetyre", "status": "ok", "ratio": 0.84, "text": "четы́ре", "heard": "Читире."}
+{"id": "ru.lex.numbers-time.devyat", "status": "ok", "ratio": 1.0, "text": "де́вять", "heard": "Девять."}
+{"id": "ru.lex.numbers-time.dva", "status": "ok", "ratio": 1.0, "text": "два", "heard": "Два..."}
+{"id": "ru.lex.numbers-time.nol", "status": "ok", "ratio": 1.0, "text": "ноль", "heard": "Ноль."}
+{"id": "ru.lex.numbers-time.sem", "status": "ok", "ratio": 1.0, "text": "семь", "heard": "Семь."}
+{"id": "ru.lex.numbers-time.odin", "status": "ok", "ratio": 1.0, "text": "оди́н", "heard": "Один."}
+{"id": "ru.lex.numbers-time.pyat", "status": "ok", "ratio": 1.0, "text": "пять", "heard": "ПЯТЬ!"}
+{"id": "ru.lex.numbers-time.shest", "status": "ok", "ratio": 1.0, "text": "шесть", "heard": "ШЕСТЬ"}
+{"id": "ru.lex.numbers-time.tri", "status": "ok", "ratio": 1.0, "text": "три", "heard": "Три."}
+{"id": "ru.lex.numbers-time.vosem", "status": "ok", "ratio": 1.0, "text": "во́семь", "heard": "Восемь."}
+{"id": "ru.lex.pastevents.segodnya", "status": "ok", "ratio": 0.84, "text": "сего́дня", "heard": "Всего дня!"}
+{"id": "ru.lex.pastevents.byl", "status": "ok", "ratio": 1.0, "text": "был", "heard": "Был."}
+{"id": "ru.lex.pastevents.byli", "status": "ok", "ratio": 0.83, "text": "бы́ли", "heard": "Быё ли?"}
+{"id": "ru.lex.pastevents.utrom", "status": "ok", "ratio": 1.0, "text": "у́тром", "heard": "Утром."}
+{"id": "ru.lex.pastevents.uz", "status": "ok", "ratio": 1.0, "text": "уже́", "heard": "Уже..."}
+{"id": "ru.lex.pastevents.vchera", "status": "ok", "ratio": 0.88, "text": "вчера́", "heard": "ВЧЕРАЯ!"}
+{"id": "ru.lex.pastevents.zhit", "status": "ok", "ratio": 1.0, "text": "жить", "heard": "ЖИТЬ!"}
+{"id": "ru.lex.personal.anna", "status": "ok", "ratio": 1.0, "text": "А́нна", "heard": "Анна."}
+{"id": "ru.lex.personal.chto", "status": "ok", "ratio": 1.0, "text": "что", "heard": "Что?"}
+{"id": "ru.lex.pastevents.znal", "status": "ok", "ratio": 0.89, "text": "зна́л", "heard": "ЗНАИЛ."}
+{"id": "ru.lex.personal.god", "status": "ok", "ratio": 1.0, "text": "год", "heard": "Гот."}
+{"id": "ru.lex.personal.gorod", "status": "ok", "ratio": 1.0, "text": "го́род", "heard": "Город."}
+{"id": "ru.lex.personal.imya", "status": "ok", "ratio": 0.75, "text": "и́мя", "heard": "Име."}
+{"id": "ru.lex.personal.ivan", "status": "ok", "ratio": 0.89, "text": "Ива́н", "heard": "Ивану."}
+{"id": "ru.lex.personal.iz", "status": "ok", "ratio": 1.0, "text": "из", "heard": "Из?"}
+{"id": "ru.lex.personal.kak-vas-zovut", "status": "ok", "ratio": 1.0, "text": "как вас зову́т", "heard": "Как вас зовут?"}
+{"id": "ru.lex.personal.menya-zovut", "status": "ok", "ratio": 0.88, "text": "меня́ зову́т", "heard": "Меня зовут Вод."}
+{"id": "ru.lex.personal.on", "status": "ok", "ratio": 1.0, "text": "он", "heard": "Он..."}
+{"id": "ru.lex.personal.ty", "status": "ok", "ratio": 1.0, "text": "ты", "heard": "Ты..."}
+{"id": "ru.lex.personal.ona", "status": "ok", "ratio": 1.0, "text": "она́", "heard": "Она..."}
+{"id": "ru.lex.personal.vy", "status": "ok", "ratio": 1.0, "text": "вы", "heard": "Вы..."}
+{"id": "ru.lex.problems.master", "status": "ok", "ratio": 1.0, "text": "ма́стер", "heard": "Мастер!"}
+{"id": "ru.lex.rel.drug", "status": "ok", "ratio": 1.0, "text": "друг", "heard": "Друг."}
+{"id": "ru.lex.rel.spor", "status": "ok", "ratio": 1.0, "text": "спор", "heard": "Спор"}
+{"id": "ru.lex.routines.den", "status": "ok", "ratio": 1.0, "text": "день", "heard": "День."}
+{"id": "ru.lex.routines.domoy", "status": "ok", "ratio": 1.0, "text": "домо́й", "heard": "Домой."}
+{"id": "ru.lex.routines.god", "status": "ok", "ratio": 1.0, "text": "год", "heard": "Гот."}
+{"id": "ru.lex.routines.noch", "status": "ok", "ratio": 1.0, "text": "ночь", "heard": "Ночь..."}
+{"id": "ru.lex.routines.segodnya", "status": "ok", "ratio": 1.0, "text": "сего́дня", "heard": "Сегодня"}
+{"id": "ru.lex.routines.utrom", "status": "ok", "ratio": 0.77, "text": "у́тром", "heard": "Пуятром."}
+{"id": "ru.lex.routines.vchera", "status": "ok", "ratio": 0.88, "text": "вчера́", "heard": "Вчераю"}
+{"id": "ru.lex.routines.vecher", "status": "ok", "ratio": 1.0, "text": "ве́чер", "heard": "Вечер."}
+{"id": "ru.lex.routines.zhit", "status": "ok", "ratio": 1.0, "text": "жить", "heard": "ЖИТЬ!"}
+{"id": "ru.lex.services.prodavec", "status": "ok", "ratio": 1.0, "text": "продаве́ц", "heard": "Продавец..."}
+{"id": "ru.lex.shopping.prodavec", "status": "ok", "ratio": 1.0, "text": "продаве́ц", "heard": "Продавец."}
+{"id": "ru.lex.shopping.tolko", "status": "ok", "ratio": 1.0, "text": "то́лько", "heard": "Только..."}
+{"id": "ru.lex.socialplans.stol2", "status": "ok", "ratio": 1.0, "text": "стол", "heard": "СТОЛ"}
+{"id": "ru.lex.socialplans.zhdem", "status": "ok", "ratio": 1.0, "text": "ждать", "heard": "ЖДАТЬ!"}
+{"id": "ru.lex.stories202611.aukcion", "status": "ok", "ratio": 0.94, "text": "аукцио́н", "heard": "Аукции ОН"}
+{"id": "ru.lex.stories202611.baton", "status": "ok", "ratio": 1.0, "text": "ба́тон", "heard": "Батон."}
+{"id": "ru.lex.stories202611.kollektsioner", "status": "ok", "ratio": 1.0, "text": "коллекционе́р", "heard": "коллекционер."}
+{"id": "ru.lex.stories202611.lot", "status": "ok", "ratio": 1.0, "text": "лот", "heard": "Лот."}
+{"id": "ru.lex.summary.kraska", "status": "ok", "ratio": 1.0, "text": "краска", "heard": "Краска"}
+{"id": "ru.lex.summary.slovo", "status": "ok", "ratio": 1.0, "text": "слово", "heard": "Слово!"}
+{"id": "ru.lex.timeplans.zhdat", "status": "ok", "ratio": 1.0, "text": "ждать", "heard": "Ждать"}
+{"id": "ru.lex.travel.avtobus", "status": "ok", "ratio": 1.0, "text": "авто́бус", "heard": "Автобус."}
+{"id": "ru.lex.travel.ruchka2", "status": "ok", "ratio": 1.0, "text": "ру́чка", "heard": "Ручка."}
+{"id": "ru.lex.travel2.spasibo2", "status": "ok", "ratio": 0.89, "text": "спаси́бо", "heard": "Спасибо бы!"}
+{"id": "ru.sent.a2.avtobus-ne-prishol.u001", "status": "ok", "ratio": 1.0, "text": "Вчера я очень долго ждал автобус.", "heard": "Вчера я очень долго ждал автобус."}
+{"id": "ru.sent.a2.avtobus-ne-prishol.u002", "status": "ok", "ratio": 1.0, "text": "Автобус не пришёл, и я поехал домой один.", "heard": "Автобус не пришёл, и я поехал домой один."}
+{"id": "ru.sent.a2.avtobus-ne-prishol.u003", "status": "ok", "ratio": 1.0, "text": "Дома уже был ужин, но я был очень рад.", "heard": "Дома уже был ужин, но я был очень рад."}
+{"id": "ru.sent.a2.avtobus-ne-prishol.u004", "status": "ok", "ratio": 0.99, "text": "Вечером кругом были только фонари и тишина.", "heard": "А вечером кругом были только фонари и тишина."}
+{"id": "ru.sent.a2.avtobus-ne-prishol.u005", "status": "ok", "ratio": 0.99, "text": "Я ехал домой и смотрел в окно: огни, ночь.", "heard": "Я ехал домой и смотрел в окно. Огни и ночь."}
+{"id": "ru.sent.a2.avtobus-ne-prishol.u006", "status": "ok", "ratio": 1.0, "text": "Потом я писал об этом маме: это был хороший вечер.", "heard": "Потом я писал об этом маме. Это был хороший вечер."}
+{"id": "ru.sent.a2.avtobus-ne-prishol.u007", "status": "ok", "ratio": 1.0, "text": "Автобус не пришёл — и всё равно это был хороший вечер.", "heard": "Автобус не пришёл, и всё равно это был хороший вечер."}
+{"id": "ru.sent.b2.aukcion-odnoy-kartiny.u001", "status": "ok", "ratio": 1.0, "text": "На аукционе маленького города продавали один лот: картину с лесом, написанную местным мастером.", "heard": "На аукционе маленького города продавали один лот, картину с лесом, написанную местным мастером."}
+{"id": "ru.sent.b2.aukcion-odnoy-kartiny.u002", "status": "ok", "ratio": 1.0, "text": "Два коллекционера спорили, не слушая ни цен, ни друг друга.", "heard": "Два коллекционера спорили, не слушая ни цен, ни друг друга."}
+{"id": "ru.sent.b2.aukcion-odnoy-kartiny.u003", "status": "ok", "ratio": 1.0, "text": "На картине был только лес: ни людей, ни дорог.", "heard": "На картине был только лес, ни людей, ни дорог."}
+{"id": "ru.sent.b2.aukcion-odnoy-kartiny.u004", "status": "ok", "ratio": 1.0, "text": "Цена росла быстро, и продавец поднял молоток.", "heard": "Цена росла быстро, и продавец поднял молоток."}
+{"id": "ru.sent.b2.aukcion-odnoy-kartiny.u005", "status": "ok", "ratio": 1.0, "text": "Второй предложил не спорить и стал ждать.", "heard": "Второй предложил не спорить и стал ждать."}
+{"id": "ru.sent.b2.aukcion-odnoy-kartiny.u006", "status": "ok", "ratio": 1.0, "text": "Картину купил второй, а первый ушёл молча.", "heard": "Картину купил второй, а первый ушёл молча."}
+{"id": "ru.sent.b2.aukcion-odnoy-kartiny.u007", "status": "ok", "ratio": 1.0, "text": "Через день картину вернули продавцу: краска пахла вчерашним утром.", "heard": "Через день картину вернули продавцу. Краска пахла вчерашним утром."}
+{"id": "ru.sent.cp.p17", "status": "ok", "ratio": 1.0, "text": "Хлеб све́жий и вку́сный.", "heard": "Хлеб свежий и вкусный."}
+{"id": "ru.sent.b2.aukcion-odnoy-kartiny.u008", "status": "ok", "ratio": 1.0, "text": "Художник из зала только сказал: «Я знал, что картина новая; я написал её сегодня утром».", "heard": "Художник из зала только сказал, я знал, что картина новая, я написал её сегодня утром."}
+{"id": "ru.sent.cp.p34", "status": "ok", "ratio": 1.0, "text": "Ско́лько стои́т батон хле́ба?", "heard": "Сколько стоит батон хлеба?"}
+{"id": "ru.sent.cp.p36", "status": "ok", "ratio": 0.96, "text": "Откры́тый рынок рабо́тает у́тром.", "heard": "Открытый рынок! Работает уютром!"}
+{"id": "ru.sent.cp.p35", "status": "ok", "ratio": 0.75, "text": "Я пла́чу за проду́кты ка́рточкой.", "heard": "Я плавчу за продой октиках, тачкай."}
+{"id": "ru.sent.cp.p37", "status": "ok", "ratio": 0.88, "text": "Ко́фе горя́чий, а молоко́ хо́лодное.", "heard": "Коёфе горячий, а молокоё холодное."}
+{"id": "ru.sent.cp.p39", "status": "ok", "ratio": 0.83, "text": "Наку́пим сыра́, ма́сла и я́иц.", "heard": "Накупим сырая мауслы яиц."}
+{"id": "ru.sent.on-ramp.anna-introduction", "status": "ok", "ratio": 1.0, "text": "Я Анна.", "heard": "Я... Анна."}
+{"id": "ru.sent.on-ramp.farewell", "status": "ok", "ratio": 1.0, "text": "До свидания!", "heard": "До свидания!"}
+{"id": "ru.sent.on-ramp.read-please", "status": "ok", "ratio": 1.0, "text": "Читайте, пожалуйста.", "heard": "Читайте, пожалуйста."}
+{"id": "ru.sent.on-ramp.repeat-please", "status": "ok", "ratio": 1.0, "text": "Повторите, пожалуйста.", "heard": "Повторите, пожалуйста."}
+{"id": "ru.sent.on-ramp.this-is-book", "status": "ok", "ratio": 0.89, "text": "Это книга.", "heard": "Эта книга..."}
+{"id": "ru.sent.on-ramp.this-is-five", "status": "ok", "ratio": 1.0, "text": "Это пять.", "heard": "Это пять."}
+{"id": "ru.sent.on-ramp.this-is-zero", "status": "ok", "ratio": 1.0, "text": "Это ноль.", "heard": "Это ноль."}

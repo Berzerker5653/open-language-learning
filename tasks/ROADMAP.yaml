@@ -4131,6 +4131,63 @@ tasks:
   - "fresh-data 30-day journey sim yields >=60 RU and >=40 JA unique practice items, >=3 post-first-band units with refs_done > 0, non-null current_offer by day 5, logs archived under state/evidence/FIX-M1-PROGRESSION-001/"
   - "lane gates green (cargo fmt, cargo test -p lts-desktop, clippy -p lts-desktop -D warnings) with gates.log"
   required_for_desktop_1_0: false
+- id: FIX-M1-CONTENT-RU-001
+  milestone: M11
+  priority: P1
+  title: Fix Month-1 RU stress-mark defects (baked into audio) + thin RU early-content supply from the learner review ledger
+  dependencies: []
+  read_first:
+  - state/notes/FIX-M1-CONTENT-RU-001.md
+  - state/evidence/LEARNER-REVIEW-M1-001/defects.md
+  acceptance:
+  - "qa_stories.py green after stress fixes across all sentence shards and story titles"
+  - "re-baked audio for the three touched sentence ids passes scripts/qa-asr.py"
+  - "fresh 30-day journey-sim shows RU unique content items >=150 with archived logs"
+  - "desktop pack-install test green; gates.log under state/evidence/FIX-M1-CONTENT-RU-001/"
+  required_for_desktop_1_0: false
+- id: FIX-M1-CONTENT-JA-001
+  milestone: M11
+  priority: P1
+  title: Fix Month-1 JA kana verb cards (かえりざく/あるきだす/ねかす mismatches) + loanword katakana convention from the learner review ledger
+  dependencies: []
+  read_first:
+  - state/notes/FIX-M1-CONTENT-JA-001.md
+  - state/evidence/LEARNER-REVIEW-M1-001/defects.md
+  acceptance:
+  - "verb rows fixed across shards with a regression check rejecting display/gloss class mismatches"
+  - "loanword row re-baked and ASR green; convention pinned in authoring docs"
+  - "split-item artifact reproduced-or-closed with evidence"
+  - "gates.log under state/evidence/FIX-M1-CONTENT-JA-001/"
+  required_for_desktop_1_0: false
+- id: FIX-M1-PATH-VIS-001
+  milestone: M11
+  priority: P2
+  title: Day-1 path view shows ~800 locked far-future unit titles - collapse bands past the frontier and guard internal slugs from learner copy
+  dependencies: []
+  read_first:
+  - state/notes/FIX-M1-PATH-VIS-001.md
+  - state/evidence/LEARNER-REVIEW-M1-001/experience-review.md
+  acceptance:
+  - "mobile-viewport capture opens at the frontier with zero far-future titles visible and bands collapsed"
+  - "audit_learner_copy.py gains a wire-surface rule for internal enum slugs and stays green"
+  - "existing path/home journey tests re-pinned not weakened; gates.log under state/evidence/FIX-M1-PATH-VIS-001/"
+  required_for_desktop_1_0: false
+- id: LEARNER-REVIEW-M2-001
+  milestone: M11
+  priority: P2
+  title: Audit the full Month-2 learner experience (days 31-60 simulated daily use, RU + JA) - same frozen contract as M1, scoped by M1 defect distribution
+  dependencies: []
+  read_first:
+  - state/notes/LEARNER-REVIEW-M2-001.md
+  - state/notes/LEARNER-REVIEW-M1-001.md
+  acceptance:
+  - "journey-sim logs enumerate days 31-60 content for both packs and form the audit worklist"
+  - "mechanical pass (lexicon/stress/kanji/ASR/answer-key) at 100% coverage of the enumerated set with archived logs"
+  - "fresh-context reviewer verdicts per prose chunk, author and reviewer in separate lanes; ja and ru separate"
+  - "defects.md ledger with severity + disposition; every blocker fixed in-card or in a named follow-up card"
+  - "residual-uncertainty manifest shipped; LEARNER-REVIEW-M3-001 created with this same contract"
+  - "gates.log under state/evidence/LEARNER-REVIEW-M2-001/"
+  required_for_desktop_1_0: false
 - id: PNPM-AUDIT-MINIMATCH-001
   milestone: M10
   priority: P3
