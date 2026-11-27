@@ -50,7 +50,7 @@ The `langpack` CLI is in the tree: `cargo run -q -p lts-langpack-cli -- {validat
 
 ## Reviewing language-pack content
 
-All language content is AI-generated and unreviewed: 5,132 ja-JP rows sit at `draft`, 153 at `review-needed`, 5,073 ru-RU rows at `draft`, and nothing is at `validated` or `verified`. Closing that gap needs human reviewers; one honest pass over a handful of items is a real contribution.
+All language content is AI-generated: ja-JP has 5,256 rows at `draft` and 153 at `review-needed`; ru-RU has 5,308 at `draft`. Nothing in either pack is at `validated` or `verified` — the 3,019 records in ja-JP's `reviews.jsonl` are all `ai-assisted` QA passes, which feed corrections but cannot promote a row (only human reviewer categories can). Closing that gap needs human reviewers; one honest pass over a handful of items is a real contribution. Open calls: [ja-JP review](https://github.com/Berzerker5653/open-language-learning/issues/3) · [ru-RU review](https://github.com/Berzerker5653/open-language-learning/issues/4) · [Windows/macOS runtime reports](https://github.com/Berzerker5653/open-language-learning/issues/5).
 
 A review in 15 minutes:
 
