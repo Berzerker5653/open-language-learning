@@ -58,8 +58,11 @@ macOS artifacts are compiled-check only — nobody has run them on real hardware
 
 ## Install (Linux)
 - `open-language-learning-platform_0.5.0-alpha.1_amd64.deb` — Debian/Ubuntu
-- `Open_Language_Learning_Platform_0.5.0-alpha.1_x86_64.AppImage` — everything else
+- `open-language-learning-platform_0.5.0-alpha.1_amd64.AppImage` — everything else
   (make executable, run it; `--appimage-extract-and-run` if FUSE is unavailable)
+- `…-aligner.deb` / `…-aligner.AppImage` — same app plus the bundled offline
+  whisper.cpp speech aligner (larger download; the base build asks for an
+  external aligner instead)
 
 Requires AVX2-capable x86-64 CPU (aligner variants).
 
