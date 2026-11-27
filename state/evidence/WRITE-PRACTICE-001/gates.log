@@ -1,0 +1,46 @@
+# WRITE-PRACTICE-001 lane gates (controller battery, 2026-11-27, main tree)
+
+Attempt 1 (board run 292) died at the iteration budget with the lane fully
+uncommitted. Attempt 2 (this controller) re-verified the WIP, finished the
+missing wiring (App.tsx openFreeWriting/submitFreeWriting/meters strip;
+WritingMetersStrip; checkError/journalError honesty; journey), fixed the
+gate failures the WIP left, and ran every gate itself. Raw logs:
+gates-backend.log (cargo), gates-frontend.log (tsc + vitest).
+
+## cargo fmt --all --check  -> exit 0
+## cargo clippy -p lts-desktop -p lts-storage --all-targets -- -D warnings -> exit 0
+## cargo test -p lts-storage -> exit 0
+  11+1+6+6+12+5+11 passed / 0 failed across all targets.
+  Includes the new journal tests (record/replay newest-first, per-profile +
+  cascade delete, meters, 7-day window) and the migration-history tests
+  updated for SCHEMA_VERSION 12 (artifact arm + v4-rewind reset).
+## cargo test -p lts-desktop --lib -> exit 0  (256 passed / 0 failed / 2 ignored, 277s)
+  New writing pins:
+  tests::writing_prompt_gives_targets_and_a_cue_and_rotates ... ok
+    (pins the day-one PRACTICE-GATE-001 refusal, then targets+cue+rotation
+     after the cyrillic on-ramp seeds — the WIP's fresh-profile assumption
+     was wrong and the refusal is the product posture)
+  tests::writing_check_classifies_ru_tokens_by_script_and_dictionary ... ok
+  tests::writing_check_ja_flags_unknown_never_wrong_and_accepts_pack_variants ... ok
+  tests::writing_check_performs_zero_mastery_or_scheduler_writes ... ok   <- contract
+  tests::writing_journal_replays_newest_first_and_dies_with_the_profile ... ok
+  tests::writing_targets_are_parsed_once_per_version_root ... ok
+## apps/desktop: npx tsc --noEmit -> exit 0
+## apps/desktop: npx vitest run -> exit 0  (83 files / 725 tests)
+  free-writing.test.tsx 7 pins (usage chips incl. variants, 'not in
+  dictionary' never 'wrong' for ru AND ja tokens, status coloring, completion
+  signal only + no grammar/correction promise, journal newest-first, soft
+  floor nudge, word count) + free-writing.journey.tsx 2 legs (hub-reachable
+  unlocked mode + chips + Progress meters; journal private per profile and
+  alive across a profile switch; write-command denylist empty both legs).
+## python3 tools/audit_learner_copy.py -> findings: 0
+## validate_handoff.py --require-explicit-ledger-records -> see ledger commit
+
+## Controller fixes on top of the dead run's WIP
+1. lib.rs profile_text_hash: import std::hash::{Hash,Hasher} scope fixes.
+2. lib.rs ja_writing_char: dropped unreachable overlap arms (clippy -D).
+3. lib.rs usage matcher: forms.contains(&n) (clippy manual_contains).
+4. lib.rs writing_prompt_at: unused `script` -> explicit locale-gate `let _`.
+5. migrations tests: v12 artifact arm + v12 rows in the v4-rewind reset.
+6. writing_prompt test: day-one refusal pinned (see above).
+7. Frontend wiring completed + harness.type widened to textareas.

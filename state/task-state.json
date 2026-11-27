@@ -3632,11 +3632,15 @@
       ]
     },
     "WRITE-PRACTICE-001": {
-      "status": "ready",
-      "attempts": 0,
-      "updated": "2026-11-26",
-      "notes": "Owner-endorsed 2026-11-26. Free-writing mode, offline dictionary/script feedback + private journal; AI grammar feedback deferred to future WRITE-PRACTICE-002 (AI-001 posture). Contract: state/notes/WRITE-PRACTICE-001.md; board card lts-WRITE-PRACTICE-001.",
-      "evidence": []
+      "status": "done",
+      "attempts": 2,
+      "updated": "2026-11-27",
+      "notes": "Owner-endorsed 2026-11-26. Free-writing mode, offline dictionary/script feedback + private journal; AI grammar feedback deferred to future WRITE-PRACTICE-002 (AI-001 posture). Contract: state/notes/WRITE-PRACTICE-001.md; board card lts-WRITE-PRACTICE-001. Shipped 2026-11-27 (attempt 1 died at the board iteration budget with the lane uncommitted; attempt 2 re-verified that WIP, finished the App wiring, and shipped): writing_prompt/writing_check/writing_journal/writing_meters commands (pack-aware ru/ja, encounter-gated prompt pool with the honest day-one refusal, typing-mode accepted-form matcher for usage chips), schema v12 writing_journal + writing_journal_words (per-profile, ON DELETE CASCADE), Progress accumulation meters settle-gated; word usage is a completion signal only — zero mastery/scheduler writes pinned by the store contract test AND the journey write-command denylist; v1 copy promises no grammar/correction feedback (audit_learner_copy 0). Desktop lib suite 256/0; vitest 83 files/725; tsc 0; clippy+fmt 0.",
+      "evidence": [
+        "state/evidence/WRITE-PRACTICE-001/gates.log",
+        "state/evidence/WRITE-PRACTICE-001/gates-backend.log",
+        "state/evidence/WRITE-PRACTICE-001/gates-frontend.log"
+      ]
     },
     "LEARNER-REVIEW-M1-001": {
       "status": "blocked",
