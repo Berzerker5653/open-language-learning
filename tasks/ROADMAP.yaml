@@ -4118,6 +4118,19 @@ tasks:
   - "residual-uncertainty manifest shipped into known-limits copy; LEARNER-REVIEW-M2-001 created with this same contract"
   - "gates.log under state/evidence/LEARNER-REVIEW-M1-001/"
   required_for_desktop_1_0: false
+- id: FIX-M1-PROGRESSION-001
+  milestone: M11
+  priority: P1
+  title: Fix Month-1 content starvation found by the learner review sim (RU 6 / JA 15 items then reviews-only) - NEW pool must draw unscheduled refs of unlocked units, K-70 gates intact
+  dependencies: []
+  read_first:
+  - state/evidence/LEARNER-REVIEW-M1-001/rca-progression-starvation.md
+  - state/evidence/LEARNER-REVIEW-M1-001/defects.md
+  acceptance:
+  - "red-first tests pin that an evidenced goal still yields NEW-eligible refs of unlocked units, and that gated units stay locked"
+  - "fresh-data 30-day journey sim yields >=60 RU and >=40 JA unique practice items, >=3 post-first-band units with refs_done > 0, non-null current_offer by day 5, logs archived under state/evidence/FIX-M1-PROGRESSION-001/"
+  - "lane gates green (cargo fmt, cargo test -p lts-desktop, clippy -p lts-desktop -D warnings) with gates.log"
+  required_for_desktop_1_0: false
 - id: PNPM-AUDIT-MINIMATCH-001
   milestone: M10
   priority: P3
@@ -4303,6 +4316,7 @@ execution_scope:
   - SPEAK-PRACTICE-001
   - WRITE-PRACTICE-001
   - LEARNER-REVIEW-M1-001
+  - FIX-M1-PROGRESSION-001
   - LAN-TOGGLE-PIN-001
   - RU-STORIES-MEDIA-001
   - RU-CONTENT-FREEZE-047-001

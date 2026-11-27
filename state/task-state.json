@@ -3643,15 +3643,30 @@
       ]
     },
     "LEARNER-REVIEW-M1-001": {
-      "status": "ready",
-      "attempts": 0,
+      "status": "blocked",
+      "attempts": 2,
       "updated": "2026-11-27",
-      "notes": "Owner directive 2026-11-26: audit days 1-30 of the real learner experience (both packs) after the two practice modes land. Blocked by SPEAK-PRACTICE-001 + WRITE-PRACTICE-001. Chains: on completion create LEARNER-REVIEW-M2-001 (same contract) - never drop the chain. Contract: state/notes/LEARNER-REVIEW-M1-001.md; board card lts-LEARNER-REVIEW-M1-001. | UNBLOCKED 2026-11-27: both practice cards verified done (code 6e5bc83e, e858ca0d).",
+      "notes": "Owner directive 2026-11-26: audit days 1-30 of the real learner experience (both packs) after the two practice modes land. Blocked by SPEAK-PRACTICE-001 + WRITE-PRACTICE-001. Chains: on completion create LEARNER-REVIEW-M2-001 (same contract) - never drop the chain. Contract: state/notes/LEARNER-REVIEW-M1-001.md; board card lts-LEARNER-REVIEW-M1-001. | UNBLOCKED 2026-11-27: both practice cards verified done (code 6e5bc83e, e858ca0d). | RUN 1 2026-11-27: journey-sim harness scripts/sim_month1.py (lts-serve + libfaketime, real-engine HTTP walk); 30-day RU+JA raw logs + worklists in state/evidence/LEARNER-REVIEW-M1-001/sim/. Mechanical pass + fresh-context reviews in progress - see state/notes/LEARNER-REVIEW-M1-001.md resume recipe. | RUN 2 2026-11-27: both packs fully simulated days 1-30 (raw logs + tar.gz archives committed); worklist built (RU 991 / JA 968 items); mechanical pass 0 failures 100% coverage (RU 53 reviewer-bound warnings; JA 0). BLOCKER D-001 found: engine starves Month-1 content after day 1 (RU 6 / JA 15 items forever, offer null, gate units stuck 3/4) -> RCA + defects ledger committed; board card FIX-M1-PROGRESSION-001 (t_ead922d2) is this card's parent - M1 auto-resumes when it lands, then re-runs mech pass + review passes on the real inventory. Resume recipe: state/notes/LEARNER-REVIEW-M1-001.md RUN 2 HANDOFF.",
       "blocked_by": [
         "SPEAK-PRACTICE-001",
         "WRITE-PRACTICE-001"
       ],
-      "evidence": []
+      "evidence": [
+        "state/evidence/LEARNER-REVIEW-M1-001/defects.md",
+        "state/evidence/LEARNER-REVIEW-M1-001/gates.log",
+        "state/evidence/LEARNER-REVIEW-M1-001/rca-progression-starvation.md"
+      ],
+      "blocker": "Depends on FIX-M1-PROGRESSION-001 (board t_ead922d2): D-001 content starvation makes the audit inventory degenerate (6/15 practice items); passes 2/3 (fresh-context review, experience review) and the ASR subset re-run are meaningless until NEW-content selection is fixed. RCA: state/evidence/LEARNER-REVIEW-M1-001/rca-progression-starvation.md"
+    },
+    "FIX-M1-PROGRESSION-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-27",
+      "notes": "Blocker D-001 from LEARNER-REVIEW-M1-001 journey-sim: progression_items() only accepts untouched goals (first concept + first modality) and the lexicon NEW pool is locked behind never-finishable gate units, so the learner gets 6 (RU) / 15 (JA) items then reviews-only forever. Contract + frozen RCA: state/evidence/LEARNER-REVIEW-M1-001/rca-progression-starvation.md; board card lts-FIX-M1-PROGRESSION-001-v2 (t_ead922d2). Parent of LEARNER-REVIEW-M1-001 on the board.",
+      "evidence": [
+        "state/evidence/LEARNER-REVIEW-M1-001/rca-progression-starvation.md",
+        "state/evidence/LEARNER-REVIEW-M1-001/defects.md"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
