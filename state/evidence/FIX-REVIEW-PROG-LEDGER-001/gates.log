@@ -1,0 +1,16 @@
+FIX-REVIEW-PROG-LEDGER-001 gate log — 2026-11-27 (controller-direct)
+
+Acceptance:
+1. Erratum exists + quotes artifacts: state/evidence/REVIEW-FIX-M1-PROGRESSION-001/erratum-60-day.md
+   (facts re-measured, not quoted: both FIX-M1 sim tarballs = 30 dayNNN files; both RUN-3 tarballs =
+   30 day files; acceptance-digest.json "days": 30 x2; gates.log:50 "30 days").
+2. task-state 60-day claims: grep -c '60-day sim acceptance PASS' state/task-state.json -> 0 after
+   fix (was 2; both the FIX-M1-PROGRESSION-001 entry and the propagated LEARNER-REVIEW-M1-001 note
+   corrected, surgical text patches, JSON lint clean).
+3. state/notes/FIX-M1-PROGRESSION-001.md committed; contract section machine-verified VERBATIM
+   against board card t_ead922d2 '== Card ==' body (diff equal).
+4. python3 tools/validate_handoff.py --require-explicit-ledger-records -> HANDOFF VALIDATION
+   PASSED (2358 data files checked) at HEAD with these changes (pre-existing HEAD failure was
+   cleared by f0213ca1 under FIX-ROADMAP-OPTIONAL-001).
+
+Commits: fb3e60f6 (erratum) + 21251e7a (notes contract restore).
