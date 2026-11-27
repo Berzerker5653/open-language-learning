@@ -1,0 +1,16 @@
+# REVIEW-APP-SPLIT-003D — reviewer gate log (2026-11-27, HEAD 469922c3)
+
+Independent re-run at current HEAD (nothing between ba713af4 and HEAD touched the
+home-wiring slice — App.tsx edits after 003D were G4-EXPLAIN/003E/practice lanes).
+
+- `npx tsc --noEmit` (apps/desktop) -> exit 0 (PASS)
+- `npx vitest run` (apps/desktop) -> 83 files / 725 tests passed (PASS)
+  (card checkpoint was 77/694; later cards grew the suite)
+- `python3 tools/validate_handoff.py --require-explicit-ledger-records` ->
+  HANDOFF VALIDATION PASSED (2289 data files)
+- Pure-move normalization diff -> scaffolding only (see spec-verdict.md)
+- `npx prettier --check apps/desktop/src/App.tsx apps/desktop/src/app/home-wiring.ts`
+  in a detached worktree at ba713af4 -> "All matched files use Prettier code style!"
+  (PASS at the reviewed commit)
+- `npx prettier --check apps/desktop/src/App.tsx` at HEAD -> [warn] (FAIL, drift
+  introduced by e858ca0d / WRITE-PRACTICE-001 block; see standards-verdict note 1)
