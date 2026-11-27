@@ -18,7 +18,9 @@
       ],
       "license_code": "MIT",
       "license_model": "MIT (OpenAI Whisper weights, upstream terms recorded)",
-      "source": "https://github.com/ggml-org/whisper.cpp"
+      "source": "https://github.com/ggml-org/whisper.cpp",
+      "language": "any",
+      "recommended": false
     },
     {
       "id": "org.openlanguage.speech.whisper-ggml-base",
@@ -36,7 +38,9 @@
       ],
       "license_code": "MIT",
       "license_model": "MIT (OpenAI Whisper weights, upstream terms recorded)",
-      "source": "https://github.com/ggml-org/whisper.cpp"
+      "source": "https://github.com/ggml-org/whisper.cpp",
+      "language": "any",
+      "recommended": true
     },
     {
       "id": "org.openlanguage.speech.whisper-ggml-small",
@@ -54,7 +58,9 @@
       ],
       "license_code": "MIT",
       "license_model": "MIT (OpenAI Whisper weights, upstream terms recorded)",
-      "source": "https://github.com/ggml-org/whisper.cpp"
+      "source": "https://github.com/ggml-org/whisper.cpp",
+      "language": "any",
+      "recommended": false
     },
     {
       "id": "org.openlanguage.speech.sherpa-whisper-tiny",
@@ -84,7 +90,9 @@
       ],
       "license_code": "Apache-2.0",
       "license_model": "OpenAI Whisper weights (upstream terms recorded)",
-      "source": "https://github.com/k2-fsa/sherpa-onnx"
+      "source": "https://github.com/k2-fsa/sherpa-onnx",
+      "language": "any",
+      "recommended": false
     }
   ]
 }

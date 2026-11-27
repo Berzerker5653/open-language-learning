@@ -11,7 +11,7 @@ What the card ships (design authority: `docs/adr/0042-per-language-speech-models
    gains `language: Option<String>` (locale like `ru`; absent/"any" =
    multilingual) and `recommended: bool`. Parsed + validated.
 2. **Remote-updatable catalog**: app prefers cached remote catalog
-   `<data>/models/catalog-remote.json`; `refresh_speech_model_catalog`
+   `<data>/models/catalog-remote.json`; `refresh_model_catalog`
    fetches from the project catalog repo (same trust path as
    `packs::DEFAULT_CATALOG_URL`), adopts ONLY after full validation
    (size cap, `catalog_version >= 2`, unique non-empty ids, every non-local

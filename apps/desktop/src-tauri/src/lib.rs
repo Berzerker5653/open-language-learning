@@ -6344,9 +6344,13 @@ enum AlignerMiss {
 /// 2. `bench` — the development vendor tree (`LTS_BENCH_VENDOR` /
 ///    `~/.cache/lts-bench`), never shipped, taking the model from the installed
 ///    catalog entry when the user installed one.
-fn aligner_probe(data: &Path) -> Result<AlignerSource, AlignerMiss> {
+///
+/// `locale` is the pack's target locale when the caller has one (ADR-0042:
+/// per-locale speech-model overrides); `None` takes the device default.
+fn aligner_probe(data: &Path, locale: Option<&str>) -> Result<AlignerSource, AlignerMiss> {
     let pref = models::load_speech_pref(data);
-    if pref.asr_model == "off" {
+    let asr_model = pref.asr_model_for(locale);
+    if asr_model == "off" {
         return Err(AlignerMiss::ModelOff);
     }
     let bundled = BUNDLED_SIDECAR.get().cloned();
@@ -6356,7 +6360,7 @@ fn aligner_probe(data: &Path) -> Result<AlignerSource, AlignerMiss> {
             .ok()
             .map(|h| PathBuf::from(h).join(".cache/lts-bench")),
     };
-    aligner_probe_with(data, &pref.asr_model, bundled.as_deref(), vendor.as_deref())
+    aligner_probe_with(data, asr_model, bundled.as_deref(), vendor.as_deref())
 }
 
 /// Environment-independent core: `bundled`/`vendor` are passed in so priority,
@@ -6406,8 +6410,9 @@ fn aligner_probe_with(
         return Err(miss());
     }
     // The dev path keeps the model from the model manager when installed, and
-    // from the vendor tree otherwise (the bench harness layout).
-    let entry = models::load_catalog()
+    // from the vendor tree otherwise (the bench harness layout). ADR-0042:
+    // the lookup uses the ACTIVE catalog so remotely-added models resolve.
+    let entry = models::load_catalog_at(data)
         .models
         .into_iter()
         .find(|m| m.id == asr_model);
@@ -6486,7 +6491,7 @@ struct AlignerStatus {
 
 fn aligner_status_at(data: &Path) -> AlignerStatus {
     let floor = bundled_cpu_floor();
-    match aligner_probe(data) {
+    match aligner_probe(data, None) {
         Ok(src) => AlignerStatus {
             available: true,
             source: Some(src.source.into()),
@@ -6650,7 +6655,7 @@ fn pronunciation_check_at(
         Err(_) => return Ok(abstain("pack-locale-unknown".into())),
     };
     let pref = models::load_speech_pref(data);
-    let aligner = match aligner_probe(data) {
+    let aligner = match aligner_probe(data, Some(&target_locale)) {
         Ok(src) => lts_speech_runtime::WhisperConstrainedAligner {
             binary: src.binary,
             model: src.model,
@@ -6777,10 +6782,11 @@ fn pronunciation_check_at(
     // inside its declared envelope; otherwise guided (docs/17 §97).
     use lts_speech_api::calibration::{ComponentRef, InstalledCombination, load_records};
     let info = lts_speech_api::PronunciationInterpreter::info(&interpreter);
-    let model_entry = models::load_catalog()
+    let asr_model = pref.asr_model_for(Some(&target_locale)).to_string();
+    let model_entry = models::load_catalog_at(data)
         .models
         .into_iter()
-        .find(|m| m.id == pref.asr_model);
+        .find(|m| m.id == asr_model);
     let installed = InstalledCombination {
         provider: ComponentRef {
             id: "whisper.cpp".into(),
@@ -6790,7 +6796,7 @@ fn pronunciation_check_at(
             sha256: None,
         },
         model: ComponentRef {
-            id: pref.asr_model.clone(),
+            id: asr_model.clone(),
             version: model_entry
                 .as_ref()
                 .map(|m| m.version.clone())
@@ -6890,10 +6896,12 @@ fn perf_asr_setup() -> Result<String, String> {
     crate::models::save_speech_pref(
         &data,
         &crate::models::SpeechPref {
-            asr_model: "org.openlanguage.speech.whisper-ggml-tiny".into(),
+            schema_version: 2,
+            default_model: "org.openlanguage.speech.whisper-ggml-tiny".into(),
+            per_language: Default::default(),
         },
     )?;
-    match aligner_probe(&data) {
+    match aligner_probe(&data, None) {
         Ok(src) => Ok(src
             .model
             .file_name()
@@ -7021,10 +7029,12 @@ fn dictation_check_at(data: &Path, attempt: DictationAttempt) -> Result<Dictatio
         Ok(lang) => lang,
         Err(_) => return Ok(abstain("pack-locale-unknown".into(), String::new())),
     };
+    // ADR-0042: the model is the pack locale's override when one is set.
+    let target_locale = pack_target_locale(&pack_dir).ok();
     // Dictation needs the recognizer output rather than the aligner object, so it
     // keeps the resolved paths (ADR-0019: one probe, one priority, one vocabulary
     // of reasons).
-    let src = match aligner_probe(data) {
+    let src = match aligner_probe(data, target_locale.as_deref()) {
         Ok(src) => src,
         Err(miss) => return Ok(abstain(aligner_miss_reason(&miss), String::new())),
     };
@@ -7318,7 +7328,9 @@ fn free_speaking_check_at(
         Ok(lang) => lang,
         Err(_) => return Ok(abstain("pack-locale-unknown".into(), String::new())),
     };
-    let src = match aligner_probe(data) {
+    // ADR-0042: the model is the pack locale's override when one is set.
+    let target_locale = pack_target_locale(&pack_dir).ok();
+    let src = match aligner_probe(data, target_locale.as_deref()) {
         Ok(src) => src,
         Err(miss) => return Ok(abstain(aligner_miss_reason(&miss), String::new())),
     };
@@ -11935,7 +11947,7 @@ fn install_model_at(
     model_id: &str,
     report: impl FnMut(&progress::Progress),
 ) -> Result<models::InstalledRecord, String> {
-    let entry = models::load_catalog()
+    let entry = models::load_catalog_at(data)
         .models
         .into_iter()
         .find(|m| m.id == model_id)
@@ -11964,7 +11976,7 @@ async fn install_model(
 #[tauri::command]
 async fn delete_model(model_id: String) -> Result<(), String> {
     tauri::async_runtime::spawn_blocking(move || {
-        let entry = models::load_catalog()
+        let entry = models::load_catalog_at(&data_dir())
             .models
             .into_iter()
             .find(|m| m.id == model_id)
@@ -12066,17 +12078,40 @@ fn recommended_speech_model() -> DeviceTier {
 /// Device-level active speech model: `"off"` or a whisper.cpp catalog id.
 #[tauri::command]
 fn get_speech_model() -> String {
-    models::load_speech_pref(&data_dir()).asr_model
+    models::load_speech_pref(&data_dir()).default_model
+}
+
+/// Device-default setter (compat shape the older UI still calls). Preserves
+/// any per-locale overrides (ADR-0042).
+#[tauri::command]
+fn set_speech_model(model_id: String) -> Result<(), String> {
+    let mut pref = models::load_speech_pref(&data_dir());
+    pref.default_model = model_id;
+    models::save_speech_pref(&data_dir(), &pref)
+}
+
+/// K-98 (ADR-0042): the full speech preference — device default plus the
+/// per-locale override map. The UI language never steers this; the pack's
+/// target locale is the key.
+#[tauri::command]
+fn get_speech_pref() -> models::SpeechPref {
+    models::load_speech_pref(&data_dir())
 }
 
 #[tauri::command]
-fn set_speech_model(model_id: String) -> Result<(), String> {
-    models::save_speech_pref(
-        &data_dir(),
-        &models::SpeechPref {
-            asr_model: model_id,
-        },
-    )
+fn set_speech_pref(pref: models::SpeechPref) -> Result<(), String> {
+    models::save_speech_pref(&data_dir(), &pref)
+}
+
+/// K-98: pull the authoritative model catalog (models.json in the pack repo,
+/// the release channel for this software). Fail-closed: any error or any
+/// validation failure leaves the previous active catalog in place.
+#[tauri::command]
+async fn refresh_model_catalog() -> Result<usize, String> {
+    let url = models::DEFAULT_MODEL_CATALOG_URL.to_string();
+    tauri::async_runtime::spawn_blocking(move || models::refresh_remote_catalog(&data_dir(), &url))
+        .await
+        .map_err(|e| format!("refresh-model-catalog failed: {e}"))?
 }
 
 /// Free-ASR dictation check (roadmap feature B): read a sentence aloud, get an
@@ -12672,6 +12707,9 @@ macro_rules! lts_command_table {
             delete_model,
             get_speech_model,
             set_speech_model,
+            get_speech_pref,
+            set_speech_pref,
+            refresh_model_catalog,
             recommended_speech_model,
             pronunciation_check,
             pronunciation_demo,
@@ -12861,6 +12899,7 @@ pub fn run() {
             // so the first thing a learner does after opening the app is not the
             // slowest thing they do.
             let warm_dir = data_dir();
+            let catalog_check_dir = warm_dir.clone();
             std::thread::spawn(move || warm_installed(&warm_dir));
             // sweep-tmp-audio-privacy: plaintext sidecar WAVs stage in
             // one private directory; a killed or crashed run can leave
@@ -12869,6 +12908,20 @@ pub fn run() {
             lts_speech_runtime::sidecar::sweep_stale_audio_tmp(std::time::Duration::from_secs(
                 3600,
             ));
+            // ADR-0042: the "checks at startup and weekly" promise. Every
+            // start kicks a background catalog check when the cached public
+            // catalog is missing or older than the freshness window, so a new
+            // model pushed to the public catalog reaches installs within a
+            // week without a rebuild and without a click. Failures keep the
+            // last-good cache; the learner never sees a broken state.
+            if models::remote_catalog_is_stale(&catalog_check_dir, std::time::SystemTime::now()) {
+                std::thread::spawn(move || {
+                    let _ = models::refresh_remote_catalog(
+                        &catalog_check_dir,
+                        models::DEFAULT_MODEL_CATALOG_URL,
+                    );
+                });
+            }
             Ok(())
         })
         .run(tauri::generate_context!())
@@ -15373,7 +15426,7 @@ activities:
     #[test]
     fn a_disabled_speech_model_is_reported_as_opted_out() {
         let tmp = tempfile::TempDir::new().unwrap();
-        let miss = aligner_probe(tmp.path()).expect_err("the default preference is off");
+        let miss = aligner_probe(tmp.path(), None).expect_err("the default preference is off");
         assert_eq!(aligner_miss_reason(&miss), "speech-model-off");
     }
 
@@ -15507,7 +15560,9 @@ activities:
         crate::models::save_speech_pref(
             data,
             &crate::models::SpeechPref {
-                asr_model: "org.openlanguage.speech.whisper-ggml-tiny".into(),
+                schema_version: 2,
+                default_model: "org.openlanguage.speech.whisper-ggml-tiny".into(),
+                per_language: Default::default(),
             },
         )
         .unwrap();
@@ -15641,7 +15696,10 @@ activities:
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
         // Privacy default: no speech model is selected, so speaking is not assessed.
-        assert_eq!(crate::models::load_speech_pref(data).asr_model, "off");
+        assert_eq!(
+            crate::models::load_speech_pref(data).asr_model_for(None),
+            "off"
+        );
         let attempt = PronunciationAttempt {
             pack_id: "org.openlanguage.ja-demo".into(),
             short_unit: "ja.lex.demo.obasan".into(),
@@ -15690,10 +15748,10 @@ activities:
             &lts_speech_runtime::VowelLengthInterpreter::default(),
         );
         let pref = models::load_speech_pref(data);
-        let entry = models::load_catalog()
+        let entry = models::load_catalog_at(data)
             .models
             .into_iter()
-            .find(|m| m.id == pref.asr_model);
+            .find(|m| m.id == pref.default_model);
         let bound_version = model_version.map(Into::into).unwrap_or_else(|| {
             entry
                 .as_ref()
@@ -15725,7 +15783,7 @@ activities:
              thresholds:\n  max_false_correction_rate: 0.05\n  min_scoring_coverage: 0.6\n  min_label_agreement: 0.7\n\
              measured:\n  false_correction_rate: 0.01\n  scoring_coverage: 0.9\n  label_agreement: 0.95\n  n_speakers: 30\n  n_attempts: 300\n\
              envelope:\n  varieties: [\"{variety}\"]\n  contexts: [\"pronunciation-practice\"]\n",
-            pref.asr_model, info.id, info.version
+            pref.default_model, info.id, info.version
         );
         let cal_dir = pack_dir.join("speech").join("calibration");
         std::fs::create_dir_all(&cal_dir).unwrap();
@@ -15825,7 +15883,9 @@ activities:
         crate::models::save_speech_pref(
             data,
             &crate::models::SpeechPref {
-                asr_model: "org.openlanguage.speech.whisper-ggml-tiny".into(),
+                schema_version: 2,
+                default_model: "org.openlanguage.speech.whisper-ggml-tiny".into(),
+                per_language: Default::default(),
             },
         )
         .unwrap();
@@ -15963,7 +16023,9 @@ activities:
         crate::models::save_speech_pref(
             data,
             &crate::models::SpeechPref {
-                asr_model: "org.openlanguage.speech.whisper-ggml-tiny".into(),
+                schema_version: 2,
+                default_model: "org.openlanguage.speech.whisper-ggml-tiny".into(),
+                per_language: Default::default(),
             },
         )
         .unwrap();

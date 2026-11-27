@@ -94,6 +94,7 @@ import {
   type ImportPreview,
   type RomajiMode,
   type KanaKeyboardMode,
+  type SpeechPref,
 } from "./settings";
 import {
   inAppKeyboardForScripts,
@@ -349,6 +350,10 @@ export function App() {
   // the Download button must not stay live through a hundreds-of-MB pull.
   const [installingSpeechModel, setInstallingSpeechModel] = useState<string | null>(null);
   const [speechModel, setSpeechModel] = useState<string>("off");
+  // K-98 (ADR-0042): device default + per-locale overrides, and the model-list
+  // refresh in flight. Optional surfaces — Settings renders nothing if absent.
+  const [speechPref, setSpeechPref] = useState<SpeechPref | null>(null);
+  const [catalogBusy, setCatalogBusy] = useState(false);
   const [deviceTier, setDeviceTier] = useState<DeviceTier | null>(null);
   const [onboardError, setOnboardError] = useState<string | null>(null);
   const [installingPack, setInstallingPack] = useState<string | null>(null);
@@ -1107,6 +1112,12 @@ export function App() {
         })),
     );
     setSpeechModel((await inv("get_speech_model")) as string);
+    try {
+      setSpeechPref((await inv("get_speech_pref")) as SpeechPref);
+    } catch {
+      // A pref read that fails leaves the override UI hidden, not wrong.
+      setSpeechPref(null);
+    }
     setDeviceTier((await inv("recommended_speech_model")) as DeviceTier);
   }
 
@@ -1223,6 +1234,52 @@ export function App() {
       return `Speech recognition (Whisper ${tail.charAt(0).toUpperCase()}${tail.slice(1)})`;
     if (m.runtime === "sherpa-onnx") return "Speech recognition (sherpa-onnx Whisper)";
     return m.id;
+  }
+
+  // K-98 (ADR-0042): pull the model list from the internet now. Startup and
+  // the weekly timer do this automatically; this is the "check right now"
+  // affordance the owner asked for — the model may change every release.
+  async function refreshModelCatalog() {
+    if (!inv) return;
+    setLangError(null);
+    setCatalogBusy(true);
+    try {
+      await inv("refresh_model_catalog");
+    } catch (e) {
+      setLangError(`The model list could not be refreshed: ${String(e)}`);
+    } finally {
+      setCatalogBusy(false);
+    }
+    try {
+      await refreshSpeech();
+    } catch (e) {
+      setLangError(`The speech model list could not be re-read: ${String(e)}`);
+    }
+  }
+
+  // K-98: one per-locale override changed. null clears it (back to following
+  // the device default). Keyed by pack target locale, never the UI language.
+  async function selectPackSpeechModel(locale: string, modelId: string | null) {
+    if (!inv || !speechPref) return;
+    setLangError(null);
+    const per_language = { ...speechPref.per_language };
+    if (modelId === null) {
+      delete per_language[locale];
+    } else {
+      per_language[locale] = modelId;
+    }
+    const next: SpeechPref = {
+      schema_version: 2,
+      default_model: speechPref.default_model,
+      per_language,
+    };
+    try {
+      await inv("set_speech_pref", { pref: next });
+      setSpeechPref(next);
+      markSettingsSaved();
+    } catch (e) {
+      setLangError(String(e));
+    }
   }
 
   async function loadSpeechComponents() {
@@ -3126,16 +3183,11 @@ export function App() {
     setFwSubmitting(true);
     setFwCheckError(null);
     try {
-      const req = await packAttemptRequest<WritingCheckResult>(
-        inv,
-        selectedPack,
-        "writing_check",
-        {
-          profile_id: profileId,
-          targets: (fwPrompt?.targets ?? []).map((t) => t.item_id),
-          text: fwText,
-        },
-      );
+      const req = await packAttemptRequest<WritingCheckResult>(inv, selectedPack, "writing_check", {
+        profile_id: profileId,
+        targets: (fwPrompt?.targets ?? []).map((t) => t.item_id),
+        text: fwText,
+      });
       if (!req.ok) {
         setFwCheckError(req.error);
         return;
@@ -4170,6 +4222,15 @@ export function App() {
             onDeleteModel={(id) => void deleteSpeechModel(id)}
             aligner={alignerStatus}
             deviceTier={deviceTier}
+            speechPref={speechPref}
+            speechPackLocales={[
+              ...new Set(installed.map((ip) => ip.locale).filter(Boolean)),
+            ].sort()}
+            onSelectPackSpeechModel={(locale, modelId) =>
+              void selectPackSpeechModel(locale, modelId)
+            }
+            onRefreshCatalog={() => void refreshModelCatalog()}
+            catalogBusy={catalogBusy}
             buildIdentity={buildIdentity}
             exportPath={settingsExportPath}
             onExport={() => void runProfileExport(settingsWiringDeps)}

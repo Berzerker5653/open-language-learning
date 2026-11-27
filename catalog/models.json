@@ -1,0 +1,98 @@
+{
+  "catalog_version": "2",
+  "note": "Public remotely-served speech-model catalog (ADR-0042). Apps fetch this file as their model catalog; adding a model here delivers it to every install without a rebuild. The app validates it hard before adopting (version floor, unique ids, pinned https payloads on github.com/huggingface.co with exact size+sha256, or explicit unpublished placeholders) and keeps the previous copy on any failure. Keep entries in sync with the app-bundled copy in apps/desktop/src-tauri/models/catalog.json when changing pins.",
+  "models": [
+    {
+      "id": "org.openlanguage.speech.whisper-ggml-tiny",
+      "version": "1.0.0",
+      "runtime": "whisper.cpp",
+      "role": "recognition",
+      "tier": "development",
+      "files": [
+        {
+          "path": "ggml-tiny.bin",
+          "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-tiny.bin",
+          "sha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+          "size_bytes": 77691713
+        }
+      ],
+      "license_code": "MIT",
+      "license_model": "MIT (OpenAI Whisper weights, upstream terms recorded)",
+      "source": "https://github.com/ggml-org/whisper.cpp",
+      "language": "any",
+      "recommended": false
+    },
+    {
+      "id": "org.openlanguage.speech.whisper-ggml-base",
+      "version": "1.0.0",
+      "runtime": "whisper.cpp",
+      "role": "recognition",
+      "tier": "development",
+      "files": [
+        {
+          "path": "ggml-base.bin",
+          "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-base.bin",
+          "sha256": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+          "size_bytes": 147951465
+        }
+      ],
+      "license_code": "MIT",
+      "license_model": "MIT (OpenAI Whisper weights, upstream terms recorded)",
+      "source": "https://github.com/ggml-org/whisper.cpp",
+      "language": "any",
+      "recommended": true
+    },
+    {
+      "id": "org.openlanguage.speech.whisper-ggml-small",
+      "version": "1.0.0",
+      "runtime": "whisper.cpp",
+      "role": "recognition",
+      "tier": "development",
+      "files": [
+        {
+          "path": "ggml-small.bin",
+          "url": "https://huggingface.co/ggerganov/whisper.cpp/resolve/main/ggml-small.bin",
+          "sha256": "1be3a9b2063867b937e64e2ec7483364a79917e157fa98c5d94b5c1fffea987b",
+          "size_bytes": 487601967
+        }
+      ],
+      "license_code": "MIT",
+      "license_model": "MIT (OpenAI Whisper weights, upstream terms recorded)",
+      "source": "https://github.com/ggml-org/whisper.cpp",
+      "language": "any",
+      "recommended": false
+    },
+    {
+      "id": "org.openlanguage.speech.sherpa-whisper-tiny",
+      "version": "1.0.0",
+      "runtime": "sherpa-onnx",
+      "role": "recognition",
+      "tier": "development",
+      "files": [
+        {
+          "path": "tiny-encoder.onnx",
+          "url": "https://huggingface.co/csukuangfj/sherpa-onnx-whisper-tiny/resolve/main/tiny-encoder.onnx",
+          "sha256": "42c1d4cbf889632ba21ab6f0d4064c80209755f265ce5cd630db4a6793e7089c",
+          "size_bytes": 37647080
+        },
+        {
+          "path": "tiny-decoder.onnx",
+          "url": "https://huggingface.co/csukuangfj/sherpa-onnx-whisper-tiny/resolve/main/tiny-decoder.onnx",
+          "sha256": "e144c07dc6b55cece24392811f2d934b97013811f5e677d1315d341a0a74a25d",
+          "size_bytes": 114505801
+        },
+        {
+          "path": "tiny-tokens.txt",
+          "url": "https://huggingface.co/csukuangfj/sherpa-onnx-whisper-tiny/resolve/main/tiny-tokens.txt",
+          "sha256": "b34b360dbb493e781e479794586d661700670d65564001f23024971d1f2fa126",
+          "size_bytes": 816730
+        }
+      ],
+      "license_code": "Apache-2.0",
+      "license_model": "OpenAI Whisper weights (upstream terms recorded)",
+      "source": "https://github.com/k2-fsa/sherpa-onnx",
+      "language": "any",
+      "recommended": false
+    }
+  ]
+}

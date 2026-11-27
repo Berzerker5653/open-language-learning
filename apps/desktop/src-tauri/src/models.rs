@@ -63,6 +63,16 @@ pub struct ModelEntry {
     /// a learner who can already speak to the app.
     #[serde(default)]
     pub role: Option<String>,
+    /// K-98 (ADR-0042): the locale (`"ru"`, `"zh"`) this payload is built
+    /// for; `"any"` or absent means multilingual. The picker filters by it,
+    /// and per-language model choice resolves against it.
+    #[serde(default)]
+    pub language: Option<String>,
+    /// K-98 (ADR-0042): the catalog's recommendation marker for its language
+    /// scope. Device-tier caps still decide what is *offered* — this only
+    /// orders what is offered.
+    #[serde(default)]
+    pub recommended: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -76,6 +86,169 @@ pub struct Catalog {
 pub fn load_catalog() -> Catalog {
     serde_json::from_str(include_str!("../models/catalog.json"))
         .expect("bundled model catalog must be valid")
+}
+
+// ---------------------------------------------------------------------------
+// K-98 (ADR-0042): remotely updatable model catalog.
+//
+// Model *files* were always remote (pinned URL + sha256); the catalog that
+// lists them was build-baked. The landscape moves fast, so the catalog moves
+// to the project's public repo too — same repo/path trust as the pack
+// catalog. A refresh is metadata-only and adopts a remote copy ONLY if it
+// fully validates; any failure keeps the last good cache or the bundled
+// copy, so a broken or hostile update can neither brick the picker nor
+// silently re-point model downloads (fail-closed).
+// ---------------------------------------------------------------------------
+
+pub const DEFAULT_MODEL_CATALOG_URL: &str = "https://raw.githubusercontent.com/Berzerker5653/open-language-learning/main/catalog/models.json";
+
+/// Hard cap on the remote metadata body — a catalog is a few KB, anything
+/// bigger is a mistake or an attack and is rejected unread.
+const REMOTE_CATALOG_MAX_BYTES: u64 = 4 * 1024 * 1024;
+
+fn remote_catalog_path(data: &Path) -> PathBuf {
+    models_root(data).join("catalog-remote.json")
+}
+
+/// The trust gate for any non-bundled catalog (see ADR-0042). Every rule
+/// here is fail-closed: reject the whole catalog, never one entry.
+pub fn validate_remote_catalog(catalog: &Catalog) -> Result<(), String> {
+    let version: u32 = catalog
+        .catalog_version
+        .parse()
+        .map_err(|_| "catalog_version must be a number >= 2".to_string())?;
+    if version < 2 {
+        return Err(format!(
+            "remote catalog version {version} is below the v2 schema"
+        ));
+    }
+    if catalog.models.is_empty() || catalog.models.len() > 200 {
+        return Err("remote catalog model count is out of range".to_string());
+    }
+    let mut seen: std::collections::HashSet<&str> = std::collections::HashSet::new();
+    for entry in &catalog.models {
+        if entry.id.is_empty() || entry.id.len() > 200 || !seen.insert(entry.id.as_str()) {
+            return Err(format!(
+                "remote catalog has a bad or duplicate id: {}",
+                entry.id
+            ));
+        }
+        if entry
+            .files
+            .iter()
+            .any(|f| f.path.split('/').any(|p| p == ".."))
+        {
+            return Err(format!(
+                "remote catalog entry {} has an unsafe file path",
+                entry.id
+            ));
+        }
+        // Every payload must pass the ADR-0042 supply-chain host/format gate
+        // (https + github.com/huggingface.co, exact size + sha256), or be an
+        // explicitly unpublished placeholder.
+        if !entry.files.is_empty() && !remote_payload_pinned(entry) {
+            return Err(format!(
+                "remote catalog entry {} fails payload pinning rules",
+                entry.id
+            ));
+        }
+    }
+    Ok(())
+}
+
+/// The supply-chain gate a *remote* catalog's payloads must pass (ADR-0042):
+/// either the entry is an explicitly unpublished placeholder, or every file
+/// is pinned to an https URL on one of the two artifact hosts (no userinfo,
+/// no port), with a positive declared size and a full lowercase sha256.
+/// `install_model_files_report` verifies the digest at install time; this is
+/// the earlier fail-closed check that a hostile catalog update can never
+/// silently re-point the app at an attacker's host.
+fn remote_payload_pinned(entry: &ModelEntry) -> bool {
+    if entry.availability.as_deref() == Some("unpublished") {
+        return true;
+    }
+    if !installable(entry) {
+        return false;
+    }
+    entry.files.iter().all(|f| {
+        let Some(rest) = f.url.strip_prefix("https://") else {
+            return false;
+        };
+        let authority = rest.split('/').next().unwrap_or("");
+        let host_ok = (authority == "github.com" || authority == "huggingface.co")
+            && !authority.contains('@')
+            && !authority.contains(':');
+        host_ok && f.size_bytes > 0 && is_sha256_hex(&f.sha256)
+    })
+}
+
+fn is_sha256_hex(s: &str) -> bool {
+    s.len() == 64
+        && s.bytes()
+            .all(|b| b.is_ascii_digit() || (b'a'..=b'f').contains(&b))
+}
+
+/// Age past which the startup path re-checks the public catalog on its own.
+const REMOTE_CATALOG_MAX_AGE_DAYS: u64 = 7;
+
+/// True when no validated remote cache exists or its last write is older than
+/// the freshness window — the gate the startup path uses so the UI's
+/// "checks at startup and weekly" promise is a mechanism, not a hope. A failed
+/// check silently keeps the last-good cache (fail-closed), so staleness here
+/// can never take a working catalog away.
+pub fn remote_catalog_is_stale(data: &Path, now: std::time::SystemTime) -> bool {
+    let age = match fs::metadata(remote_catalog_path(data)).and_then(|m| m.modified()) {
+        Ok(m) => now
+            .duration_since(m)
+            .unwrap_or(std::time::Duration::from_secs(u64::MAX)),
+        Err(_) => return true,
+    };
+    age > std::time::Duration::from_secs(REMOTE_CATALOG_MAX_AGE_DAYS * 86_400)
+}
+
+/// Fetch the public catalog and, if it validates, cache it for
+/// `load_catalog_at`. Returns the model count on success.
+pub fn refresh_remote_catalog(data: &Path, url: &str) -> Result<usize, String> {
+    let response = ureq::get(url)
+        .timeout(std::time::Duration::from_secs(10))
+        .call()
+        .map_err(|e| format!("catalog fetch failed: {e}"))?;
+    if response.status() != 200 {
+        return Err(format!("catalog fetch returned {}", response.status()));
+    }
+    let mut body = Vec::new();
+    response
+        .into_reader()
+        .take(REMOTE_CATALOG_MAX_BYTES + 1)
+        .read_to_end(&mut body)
+        .map_err(|e| format!("catalog read failed: {e}"))?;
+    if body.len() as u64 > REMOTE_CATALOG_MAX_BYTES {
+        return Err("catalog body exceeds the size cap".to_string());
+    }
+    let catalog: Catalog =
+        serde_json::from_slice(&body).map_err(|e| format!("catalog is not valid JSON: {e}"))?;
+    validate_remote_catalog(&catalog)?;
+    let path = remote_catalog_path(data);
+    if let Some(parent) = path.parent() {
+        fs::create_dir_all(parent).map_err(|e| e.to_string())?;
+    }
+    fs::write(&path, &body).map_err(|e| format!("could not cache the catalog: {e}"))?;
+    Ok(catalog.models.len())
+}
+
+/// The catalog every model UI and install path must use: the last validated
+/// remote cache when present and still valid, else the bundled copy. The
+/// validity re-check on every read means a cache tampered with on disk
+/// (not via refresh) also falls back — the cache is never trusted blindly.
+pub fn load_catalog_at(data: &Path) -> Catalog {
+    if let Ok(text) = fs::read_to_string(remote_catalog_path(data)) {
+        if let Ok(catalog) = serde_json::from_str::<Catalog>(&text) {
+            if validate_remote_catalog(&catalog).is_ok() {
+                return catalog;
+            }
+        }
+    }
+    load_catalog()
 }
 
 pub fn models_root(data: &Path) -> PathBuf {
@@ -101,6 +274,10 @@ pub struct ModelStatus {
     pub installable: bool,
     /// Carried through from the catalog: see `ModelEntry::role`.
     pub role: Option<String>,
+    /// Carried through from the catalog: see `ModelEntry::language` (K-98).
+    pub language: Option<String>,
+    /// Carried through from the catalog: see `ModelEntry::recommended` (K-98).
+    pub recommended: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -214,7 +391,7 @@ fn verify_cached(data: &Path, entry: &ModelEntry) -> bool {
 }
 
 pub fn model_status(data: &Path) -> Vec<ModelStatus> {
-    load_catalog()
+    load_catalog_at(data)
         .models
         .into_iter()
         .map(|m| {
@@ -233,6 +410,8 @@ pub fn model_status(data: &Path) -> Vec<ModelStatus> {
                 version: m.version,
                 runtime: m.runtime,
                 role: m.role,
+                language: m.language,
+                recommended: m.recommended,
                 tier: m.tier,
                 license_code: m.license_code,
                 license_model: m.license_model,
@@ -555,17 +734,43 @@ pub fn stream_download(
 /// privacy-first default: the base app bundles zero models and speaking stays
 /// "not assessed" until the user opts in to a model (docs/08 minimization;
 /// user control, docs/01).
+/// K-98 (ADR-0042) v2 shape: a device default plus per-locale overrides.
+/// The locale key is the pack manifest's target locale (`"ru"`, `"zh"`) —
+/// the same source that decides the ASR language, never the UI language.
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
 pub struct SpeechPref {
+    #[serde(default = "speech_pref_version")]
+    pub schema_version: u32,
     /// `"off"` or a catalog model id whose runtime is `whisper.cpp`.
-    pub asr_model: String,
+    pub default_model: String,
+    /// Locale -> model id (`"off"` allowed). Wins over `default_model`.
+    #[serde(default)]
+    pub per_language: std::collections::BTreeMap<String, String>,
+}
+
+fn speech_pref_version() -> u32 {
+    2
 }
 
 impl Default for SpeechPref {
     fn default() -> Self {
         Self {
-            asr_model: "off".into(),
+            schema_version: 2,
+            default_model: "off".into(),
+            per_language: Default::default(),
         }
+    }
+}
+
+impl SpeechPref {
+    /// The model to use for a language: the per-locale override when set,
+    /// else the device default. `None` locale (no pack context) takes the
+    /// default.
+    pub fn asr_model_for(&self, locale: Option<&str>) -> &str {
+        locale
+            .and_then(|l| self.per_language.get(l))
+            .map(|s| s.as_str())
+            .unwrap_or(&self.default_model)
     }
 }
 
@@ -574,27 +779,52 @@ fn speech_pref_path(data: &Path) -> PathBuf {
 }
 
 pub fn load_speech_pref(data: &Path) -> SpeechPref {
-    fs::read_to_string(speech_pref_path(data))
+    let raw = fs::read_to_string(speech_pref_path(data))
         .ok()
-        .and_then(|s| serde_json::from_str(&s).ok())
-        .unwrap_or_default()
+        .and_then(|s| serde_json::from_str::<serde_json::Value>(&s).ok());
+    match raw {
+        // v1 ({asr_model}) migrates on load: the device-level choice becomes
+        // the device default and per-language overrides start empty.
+        Some(v) if v.get("schema_version").and_then(|x| x.as_u64()) != Some(2) => {
+            match v.get("asr_model").and_then(|x| x.as_str()) {
+                Some(model) => SpeechPref {
+                    schema_version: 2,
+                    default_model: model.to_string(),
+                    per_language: Default::default(),
+                },
+                None => SpeechPref::default(),
+            }
+        }
+        Some(v) => serde_json::from_value::<SpeechPref>(v).unwrap_or_default(),
+        None => SpeechPref::default(),
+    }
 }
 
-/// Persist the choice, validating it is `"off"` or a whisper.cpp catalog model.
+/// Persist the choice. Every model string (default and each per-language
+/// override) must be `"off"` or a whisper.cpp model in the ACTIVE catalog
+/// (remote cache included — ADR-0042).
 pub fn save_speech_pref(data: &Path, pref: &SpeechPref) -> Result<(), String> {
-    if pref.asr_model != "off" {
-        let known = load_catalog()
+    let check = |model: &str| -> Result<(), String> {
+        if model == "off" {
+            return Ok(());
+        }
+        let known = load_catalog_at(data)
             .models
             .iter()
-            .any(|m| m.id == pref.asr_model && m.runtime == "whisper.cpp");
-        if !known {
-            return Err(format!(
-                "unknown or non-whisper speech model: {}",
-                pref.asr_model
-            ));
+            .any(|m| m.id == model && m.runtime == "whisper.cpp");
+        if known {
+            Ok(())
+        } else {
+            Err(format!("unknown or non-whisper speech model: {model}"))
         }
+    };
+    check(&pref.default_model)?;
+    for model in pref.per_language.values() {
+        check(model)?;
     }
-    let json = serde_json::to_string_pretty(pref).map_err(|e| e.to_string())?;
+    let mut out = pref.clone();
+    out.schema_version = 2;
+    let json = serde_json::to_string_pretty(&out).map_err(|e| e.to_string())?;
     fs::write(speech_pref_path(data), json).map_err(|e| e.to_string())
 }
 
@@ -614,6 +844,8 @@ mod tests {
             id: "test.model".into(),
             version: "1.0.0".into(),
             runtime: "test".into(),
+            language: None,
+            recommended: false,
             tier: "development".into(),
             files: vec![ModelFile {
                 path: "f.bin".into(),
@@ -732,6 +964,8 @@ mod tests {
             id: "test.dirmodel".into(),
             version: "1.0.0".into(),
             runtime: "test".into(),
+            language: None,
+            recommended: false,
             tier: "development".into(),
             files: vec![ModelFile {
                 path: "payload".into(),
@@ -852,37 +1086,248 @@ mod tests {
         let tmp = tempfile::tempdir().unwrap();
         let data = tmp.path();
         // Privacy-first default: no speech model until the user opts in.
-        assert_eq!(load_speech_pref(data).asr_model, "off");
+        assert_eq!(load_speech_pref(data).asr_model_for(None), "off");
         // A whisper.cpp catalog model is accepted and round-trips.
         save_speech_pref(
             data,
             &SpeechPref {
-                asr_model: "org.openlanguage.speech.whisper-ggml-base".into(),
+                default_model: "org.openlanguage.speech.whisper-ggml-base".into(),
+                ..Default::default()
             },
         )
         .unwrap();
         assert_eq!(
-            load_speech_pref(data).asr_model,
+            load_speech_pref(data).default_model,
             "org.openlanguage.speech.whisper-ggml-base"
         );
         // Turning speech back off is always allowed.
-        save_speech_pref(
-            data,
-            &SpeechPref {
-                asr_model: "off".into(),
-            },
-        )
-        .unwrap();
-        assert_eq!(load_speech_pref(data).asr_model, "off");
-        // Unknown or non-whisper ids are rejected (no silent typo -> dead aligner).
+        save_speech_pref(data, &SpeechPref::default()).unwrap();
+        assert_eq!(load_speech_pref(data).asr_model_for(None), "off");
+        // Unknown or non-whisper ids are rejected (no silent typo -> dead aligner),
+        // in the device default AND in any per-language override.
         assert!(
             save_speech_pref(
                 data,
                 &SpeechPref {
-                    asr_model: "org.openlanguage.speech.nope".into()
+                    default_model: "org.openlanguage.speech.nope".into(),
+                    ..Default::default()
                 }
             )
             .is_err()
+        );
+        let mut per_language = std::collections::BTreeMap::new();
+        per_language.insert("ru".to_string(), "org.openlanguage.speech.nope".to_string());
+        assert!(
+            save_speech_pref(
+                data,
+                &SpeechPref {
+                    per_language,
+                    ..Default::default()
+                }
+            )
+            .is_err()
+        );
+    }
+
+    /// ADR-0042: a pre-v2 speech.json must migrate on load — the device-level
+    /// choice becomes the default, per-language overrides start empty.
+    #[test]
+    fn speech_pref_v1_migrates_on_load() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        fs::write(
+            data.join("speech.json"),
+            serde_json::json!({"asr_model": "org.openlanguage.speech.whisper-ggml-base"})
+                .to_string(),
+        )
+        .unwrap();
+        let pref = load_speech_pref(data);
+        assert_eq!(pref.schema_version, 2);
+        assert_eq!(
+            pref.default_model,
+            "org.openlanguage.speech.whisper-ggml-base"
+        );
+        assert!(pref.per_language.is_empty());
+        // Saving after migration writes v2, so the next load skips the branch.
+        save_speech_pref(data, &pref).unwrap();
+        let raw: serde_json::Value =
+            serde_json::from_str(&fs::read_to_string(data.join("speech.json")).unwrap()).unwrap();
+        assert_eq!(raw["schema_version"].as_u64(), Some(2));
+    }
+
+    /// ADR-0042: per-locale override wins; unset locales (and no pack
+    /// context) take the device default; "off" is a valid override.
+    #[test]
+    fn speech_pref_per_language_override_resolves() {
+        let mut per_language = std::collections::BTreeMap::new();
+        per_language.insert(
+            "ru".to_string(),
+            "org.openlanguage.speech.whisper-ggml-small".to_string(),
+        );
+        per_language.insert("zh".to_string(), "off".to_string());
+        let pref = SpeechPref {
+            default_model: "org.openlanguage.speech.whisper-ggml-base".into(),
+            per_language,
+            ..Default::default()
+        };
+        assert_eq!(
+            pref.asr_model_for(Some("ru")),
+            "org.openlanguage.speech.whisper-ggml-small"
+        );
+        assert_eq!(pref.asr_model_for(Some("zh")), "off");
+        assert_eq!(
+            pref.asr_model_for(Some("ja")),
+            "org.openlanguage.speech.whisper-ggml-base"
+        );
+        assert_eq!(
+            pref.asr_model_for(None),
+            "org.openlanguage.speech.whisper-ggml-base"
+        );
+    }
+
+    fn catalog_entry(id: &str, url: &str) -> ModelEntry {
+        ModelEntry {
+            id: id.into(),
+            version: "1".into(),
+            runtime: "whisper.cpp".into(),
+            tier: "any".into(),
+            files: vec![ModelFile {
+                path: "model.bin".into(),
+                url: url.into(),
+                sha256: "a".repeat(64),
+                size_bytes: 1,
+                dir: false,
+            }],
+            license_code: "MIT".into(),
+            license_model: "test".into(),
+            source: "test".into(),
+            availability: None,
+            role: Some("recognition".into()),
+            language: Some("any".into()),
+            recommended: false,
+        }
+    }
+
+    /// ADR-0042: the remote-catalog trust gate is fail-closed on every rule —
+    /// a bad version, duplicate ids, non-pinned payloads, or path traversal
+    /// reject the WHOLE catalog, never just one entry.
+    #[test]
+    fn remote_catalog_validation_is_fail_closed() {
+        let good = Catalog {
+            catalog_version: "2".into(),
+            note: String::new(),
+            models: vec![catalog_entry(
+                "m1",
+                "https://github.com/o/r/releases/download/v/m.bin",
+            )],
+        };
+        assert!(validate_remote_catalog(&good).is_ok());
+
+        let mut old_version = good.clone();
+        old_version.catalog_version = "1".into();
+        assert!(validate_remote_catalog(&old_version).is_err());
+
+        let mut duplicated = good.clone();
+        duplicated.models.push(catalog_entry(
+            "m1",
+            "https://huggingface.co/x/resolve/main/m.bin",
+        ));
+        assert!(validate_remote_catalog(&duplicated).is_err());
+
+        let mut bad_host = good.clone();
+        bad_host.models[0].files[0].url = "https://evil.example.com/model.bin".into();
+        assert!(validate_remote_catalog(&bad_host).is_err());
+
+        let mut traversal = good.clone();
+        traversal.models[0].files[0].path = "../escape.bin".into();
+        assert!(validate_remote_catalog(&traversal).is_err());
+
+        let empty = Catalog {
+            models: vec![],
+            ..good.clone()
+        };
+        assert!(validate_remote_catalog(&empty).is_err());
+    }
+
+    /// The startup freshness gate: absent cache is stale, a fresh cache is
+    /// not, and a cache older than the window is — the mechanism behind the
+    /// settings copy's "checks at startup and weekly".
+    #[test]
+    fn remote_catalog_freshness_gate_tracks_cache_age() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let now = std::time::SystemTime::now();
+        assert!(remote_catalog_is_stale(data, now), "no cache yet => stale");
+
+        let cache = remote_catalog_path(data);
+        fs::create_dir_all(cache.parent().unwrap()).unwrap();
+        fs::write(&cache, "{}").unwrap();
+        // A cache written a hair before this check is fresh. `now` must be
+        // taken AFTER the write: a file mtime ahead of the comparison point
+        // is treated as stale on purpose (a future mtime means clock skew or
+        // tampering, and re-checking is the fail-safe direction).
+        assert!(
+            !remote_catalog_is_stale(data, std::time::SystemTime::now()),
+            "fresh cache => not stale"
+        );
+
+        let ancient = now - std::time::Duration::from_secs(8 * 86_400);
+        let ft = std::fs::FileTimes::new().set_modified(
+            std::time::SystemTime::UNIX_EPOCH
+                + ancient
+                    .duration_since(std::time::SystemTime::UNIX_EPOCH)
+                    .unwrap(),
+        );
+        fs::File::options()
+            .write(true)
+            .open(&cache)
+            .unwrap()
+            .set_times(ft)
+            .unwrap();
+        assert!(
+            remote_catalog_is_stale(data, now),
+            "8-day-old cache => stale"
+        );
+    }
+
+    /// ADR-0042: a valid cached remote catalog wins over the bundled copy;
+    /// a cache tampered with on disk falls back to the bundled copy — the
+    /// cache is re-validated on every read, never trusted blindly.
+    #[test]
+    fn remote_catalog_cache_wins_when_valid_and_falls_back_when_tampered() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        assert_eq!(
+            load_catalog_at(data).catalog_version,
+            load_catalog().catalog_version
+        );
+
+        let mut remote = load_catalog();
+        remote.catalog_version = "2".into();
+        remote.models.push(catalog_entry(
+            "org.openlanguage.speech.test-model",
+            "https://github.com/o/r/releases/download/v/m.bin",
+        ));
+        let cache = remote_catalog_path(data);
+        fs::create_dir_all(cache.parent().unwrap()).unwrap();
+        fs::write(&cache, serde_json::to_string(&remote).unwrap()).unwrap();
+        assert!(
+            load_catalog_at(data)
+                .models
+                .iter()
+                .any(|m| m.id == "org.openlanguage.speech.test-model")
+        );
+
+        fs::write(
+            &cache,
+            serde_json::json!({"catalog_version": "999", "models": []}).to_string(),
+        )
+        .unwrap();
+        assert!(
+            !load_catalog_at(data)
+                .models
+                .iter()
+                .any(|m| m.id == "org.openlanguage.speech.test-model")
         );
     }
 

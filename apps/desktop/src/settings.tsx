@@ -36,6 +36,15 @@ export interface SpeechModelPref {
   size_bytes: number;
 }
 
+/** K-98 (ADR-0042): the full speech preference as the engine stores it
+ * (speech-pref.json) — device default plus per-locale overrides keyed by
+ * the pack's TARGET locale, never the app's display language. */
+export interface SpeechPref {
+  schema_version: number;
+  default_model: string;
+  per_language: Record<string, string>;
+}
+
 /** What `build_identity` answers: the release this binary was built from. */
 export interface BuildIdentity {
   version: string;
@@ -164,6 +173,16 @@ export interface SettingsProps {
    *  (Download and Remove) disables while any install runs — one installer
    *  at a time is the honest state. */
   installingModelId?: string | null;
+  /** K-98 (ADR-0042): the full speech preference — device default plus
+   * per-locale overrides keyed by what an installed pack TEACHS, never by
+   * the app's display language. Absent renders no override UI. */
+  speechPref?: SpeechPref | null;
+  /** Target locales of the installed packs, deduped — the override rows. */
+  speechPackLocales?: string[];
+  onSelectPackSpeechModel?: (locale: string, modelId: string | null) => void;
+  /** Pull the model list from the internet now (startup + weekly are automatic). */
+  onRefreshCatalog?: () => void;
+  catalogBusy?: boolean;
   /** SERVE-BANNER-001: the serve bridge's capability lines (market meta
    *  rule: this meta never rides the learner's first screen). The App
    *  collected them from the server's own report; they render quietly in
@@ -724,6 +743,67 @@ export function Settings(p: SettingsProps) {
           This is the app&apos;s one speech-model preference; the models themselves are listed below
           with their sizes, licenses, and downloads.
         </ProseNote>
+
+        {p.onRefreshCatalog && (
+          <p className="meta">
+            <button
+              type="button"
+              className="btn btn--quiet"
+              onClick={p.onRefreshCatalog}
+              disabled={p.catalogBusy}
+              aria-busy={p.catalogBusy || undefined}
+              data-testid="settings-speech-refresh-catalog"
+            >
+              {p.catalogBusy ? "Checking…" : "Check for newer models"}
+            </button>{" "}
+            New speech models arrive from the model list on the internet — the app checks at startup
+            and weekly, and this button checks right now.
+          </p>
+        )}
+        {p.speechPref &&
+          p.speechPackLocales &&
+          p.speechPackLocales.length > 0 &&
+          p.onSelectPackSpeechModel && (
+            <div data-testid="settings-speech-per-locale">
+              <h4>Per-language speech models</h4>
+              <ProseNote summary="Optional per-language overrides of the active speech model, keyed by what an installed pack teaches — never by the app's interface language.">
+                Optional overrides per installed language. These follow what each installed pack{" "}
+                <em>teaches</em>, never the language the app interface is written in. A language
+                with no override follows the active speech model above.
+              </ProseNote>
+              <ProseNote summary="Being straight about what these choices do today: the app's built-in listening check always uses the small speech model that ships with the app, per-language picks take effect for what runs installed models, and Off makes speaking sit out.">
+                Being straight about what these choices do today: the app's built-in listening check
+                always uses the small speech model that ships with the app. Your picks here still
+                matter everywhere: set a language to Off and its speaking activities sit out instead
+                of guessing, and a chosen model is what runs wherever an installed model is used —
+                including every newer model that arrives through the model list.
+              </ProseNote>
+              {p.speechPackLocales.map((locale) => (
+                <label key={locale} htmlFor={`speech-model-${locale}`}>
+                  {locale}
+                  <select
+                    id={`speech-model-${locale}`}
+                    value={p.speechPref!.per_language[locale] ?? ""}
+                    onChange={(e) =>
+                      p.onSelectPackSpeechModel!(
+                        locale,
+                        e.target.value === "" ? null : e.target.value,
+                      )
+                    }
+                  >
+                    <option value="">Follow the active speech model</option>
+                    <option value="off">Off — speaking activities abstain</option>
+                    {p.speechModels.map((m) => (
+                      <option key={m.id} value={m.id}>
+                        {SPEECH_MODEL_LABELS[m.id] ?? m.id}
+                        {m.installed ? "" : " (not downloaded)"}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              ))}
+            </div>
+          )}
 
         <h4>Speech recognition &amp; pronunciation</h4>
         <ProseNote summary="Optional, fully on-device models: nothing is uploaded, feedback is guided only, and model size never changes pronunciation accuracy.">
