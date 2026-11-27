@@ -2285,7 +2285,11 @@ export function App() {
     }
   }
 
-  async function playStoryAudio(sentenceId: string) {
+  // ARCH-HOTSPOT-2026-11-27: ONE story_audio playback path. The reader
+  // (playStoryAudio) and the My-words drill (playMineContext) used to carry
+  // byte-identical copies of the fetch/decode/play block; only where the
+  // failure message lands differed, so that is all each caller supplies now.
+  async function playSentenceClip(sentenceId: string, onError: (message: string) => void) {
     const inv = detectInvoke();
     if (!inv || !profileId) return;
     try {
@@ -2296,8 +2300,12 @@ export function App() {
       const bytes = Uint8Array.from(atob(a.wav_b64), (c) => c.charCodeAt(0));
       playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
     } catch (e) {
-      setStoryError(audioFailureMessage(String(e)));
+      onError(audioFailureMessage(String(e)));
     }
+  }
+
+  async function playStoryAudio(sentenceId: string) {
+    await playSentenceClip(sentenceId, setStoryError);
   }
 
   // READER-FLOW-001: the word tap opens the card at that exact token.
@@ -2490,18 +2498,7 @@ export function App() {
   // was met in, through the SAME `story_audio` sentence path the reader
   // uses — one audio truth, no second clip mechanism.
   async function playMineContext(sentenceId: string) {
-    const inv = detectInvoke();
-    if (!inv || !profileId) return;
-    try {
-      const a = (await inv("story_audio", { profileId, sentenceId })) as {
-        wav_b64: string;
-        source: string;
-      };
-      const bytes = Uint8Array.from(atob(a.wav_b64), (c) => c.charCodeAt(0));
-      playBlobUrl(URL.createObjectURL(new Blob([bytes], { type: "audio/wav" })));
-    } catch (e) {
-      setMineError(audioFailureMessage(String(e)));
-    }
+    await playSentenceClip(sentenceId, setMineError);
   }
 
   // CONTENT-CONFIRM-001 (ADR-0040): the ONLY way a confirmation mark is
