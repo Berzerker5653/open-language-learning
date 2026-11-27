@@ -60,7 +60,14 @@ class Serve:
             str(REPO / "target/debug/lts-serve"),
             f"127.0.0.1:{port}",
         ]
-        self.proc = subprocess.Popen(cmd, env=env, stdout=self.log, stderr=subprocess.STDOUT)
+        # faketime execs lts-serve, but a SIGTERM to the wrapper pid can be
+        # swallowed depending on libfaketime version; run in its own process
+        # group and signal the whole group so a killed worker never leaks
+        # serves (D-002 in LEARNER-REVIEW-M1-001/defects.md).
+        self.proc = subprocess.Popen(
+            cmd, env=env, stdout=self.log, stderr=subprocess.STDOUT,
+            start_new_session=True,
+        )
         for _ in range(120):
             try:
                 r = api(port, "list_profiles", {}, timeout=2)
@@ -71,11 +78,17 @@ class Serve:
         raise RuntimeError(f"serve did not come up under faketime {fake_at}; see {log_path}")
 
     def stop(self):
-        self.proc.send_signal(signal.SIGTERM)
+        try:
+            os.killpg(os.getpgid(self.proc.pid), signal.SIGTERM)
+        except (ProcessLookupError, PermissionError):
+            self.proc.send_signal(signal.SIGTERM)
         try:
             self.proc.wait(10)
         except subprocess.TimeoutExpired:
-            self.proc.kill()
+            try:
+                os.killpg(os.getpgid(self.proc.pid), signal.SIGKILL)
+            except (ProcessLookupError, PermissionError):
+                self.proc.kill()
         self.log.close()
 
 
@@ -304,6 +317,8 @@ def main():
 
     logf = out / f"sim-{args.pack}.log"
     for day in range(args.from_day, args.days + 1):
+        if (raw / f"{args.pack}-day{day:03d}.json").exists():
+            continue  # resumable: committed/partial day logs are never redone
         day_date = start + timedelta(days=day - 1)
         fake_at = f"{day_date.isoformat()} {DAY_START}"
         port = free_port()
