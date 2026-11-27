@@ -14,7 +14,7 @@
 use lts_domain::ActivityModality;
 use serde::{Deserialize, Serialize};
 
-pub const PLANNER_VERSION: &str = "session-planner-0.1.0";
+pub const PLANNER_VERSION: &str = "session-planner-0.2.0";
 
 /// Named budget presets (minutes). "30+" means any budget >= 30 is
 /// accepted; the presets are the product's advertised tiers.
@@ -71,7 +71,10 @@ pub struct PlannerConfig {
     pub budget_minutes: u32,
     /// Recorded in the plan; the current algorithm is seed-independent.
     pub seed: u64,
-    /// Repetition limit: max planned items per modality.
+    /// Repetition limit: max planned items per modality PER OBJECTIVE
+    /// (FIX-M1-PROGRESSION-001: a shared cap let a review/weak backlog of
+    /// the same dimension claim every slot and starve NEW material of the
+    /// same dimension — the second Month-1 starvation mechanism).
     pub max_per_modality: usize,
     /// Budget shares per objective; must sum to 1.0 (±1e-9).
     pub review_share: f64,
@@ -134,6 +137,23 @@ pub struct PlannerInputs {
 
 /// Compose a session plan. Deterministic: same inputs and config
 /// always produce the same plan.
+///
+/// FIX-M1-PROGRESSION-001 (Month-1 starvation, measured in the
+/// LEARNER-REVIEW-M1-001 day logs): each objective's reserved share must be
+/// spendable no matter how deep the other backlogs are. Two mechanisms
+/// starved NEW material (and weak skills) behind the review backlog before
+/// this fix:
+/// 1. every phase-1 fill loop compared the objective's cap against TOTAL
+///    elapsed seconds, so an objective whose turn came after a full stream
+///    could never even start — its own share was already "spent";
+/// 2. the fill phase spent every leftover second sequentially
+///    (all reviews, then all weak, then progression), so the reserved
+///    floors could still be eaten by an earlier stream's surplus.
+///
+/// Now: phase 1 fills each objective against its OWN spent seconds, and
+/// the fill phase spends leftovers strictly round-robin, one item per
+/// objective per cycle, so no objective starves the others — which is what
+/// the old comment already promised.
 pub fn plan_session(
     config: &PlannerConfig,
     inputs: &PlannerInputs,
@@ -179,6 +199,52 @@ pub fn plan_session(
     // Progression keeps curriculum order (stable).
     let progression = inputs.progression.clone();
 
+    // The three streams share one fill engine: urgency/curriculum order in,
+    // item identity out. Objective index: 0 reviews, 1 weak, 2 progression.
+    let est = [
+        config.review_seconds,
+        config.weak_seconds,
+        config.progression_seconds,
+    ];
+    let streams: [Vec<(String, String, ActivityModality, PlanReason)>; 3] = [
+        reviews
+            .iter()
+            .map(|r| {
+                (
+                    r.item_id.clone(),
+                    r.content_id.clone(),
+                    r.modality,
+                    if r.saved {
+                        PlanReason::SavedReview
+                    } else {
+                        PlanReason::DueReview
+                    },
+                )
+            })
+            .collect(),
+        weak.iter()
+            .map(|w| {
+                (
+                    format!("{}:{}", w.content_id, serde_key(w.dimension)),
+                    w.content_id.clone(),
+                    w.dimension,
+                    PlanReason::WeakSkill,
+                )
+            })
+            .collect(),
+        progression
+            .iter()
+            .map(|p| {
+                (
+                    format!("{}:{}", p.content_id, serde_key(p.modality)),
+                    p.content_id.clone(),
+                    p.modality,
+                    PlanReason::Progression,
+                )
+            })
+            .collect(),
+    ];
+
     let mut plan = SessionPlan {
         items: Vec::new(),
         total_seconds: 0,
@@ -186,142 +252,79 @@ pub fn plan_session(
         seed: config.seed,
         planner_version: PLANNER_VERSION.to_string(),
     };
-    let mut per_modality: std::collections::HashMap<ActivityModality, usize> = Default::default();
+    let mut per_modality: std::collections::HashMap<(usize, ActivityModality), usize> =
+        Default::default();
+    let mut cursor = [0usize; 3];
 
-    // Phase 1: fill each objective's reserved share of the budget.
+    // Phase 1: each objective fills its own reserved share, measured in
+    // ITS OWN spent seconds — a full review backlog cannot pre-spend the
+    // weak or progression floor (FIX-M1-PROGRESSION-001 mechanism 1).
     let caps = [
         (budget as f64 * config.review_share) as u32,
         (budget as f64 * config.weak_share) as u32,
         (budget as f64 * config.progression_share) as u32,
     ];
-
-    let mut ri = 0usize;
-    let mut wi = 0usize;
-    let mut pi = 0usize;
-
-    while ri < reviews.len()
-        && plan.total_seconds + config.review_seconds <= caps[0].min(budget - plan.total_seconds)
-    {
-        let r = &reviews[ri];
-        if count(&per_modality, &r.modality) < config.max_per_modality {
-            *per_modality.entry(r.modality).or_insert(0) += 1;
-            plan.items.push(PlannedItem {
-                item_id: r.item_id.clone(),
-                content_id: r.content_id.clone(),
-                modality: r.modality,
-                reason: if r.saved {
-                    PlanReason::SavedReview
-                } else {
-                    PlanReason::DueReview
-                },
-                est_seconds: config.review_seconds,
-            });
-            plan.total_seconds += config.review_seconds;
+    let mut objective_used = [0u32; 3];
+    for k in 0..3 {
+        while cursor[k] < streams[k].len()
+            && objective_used[k] + est[k] <= caps[k]
+            && plan.total_seconds + est[k] <= budget
+        {
+            let (item_id, content_id, modality, reason) = streams[k][cursor[k]].clone();
+            cursor[k] += 1;
+            if count(&per_modality, k, &modality) < config.max_per_modality {
+                *per_modality.entry((k, modality)).or_insert(0) += 1;
+                objective_used[k] += est[k];
+                plan.total_seconds += est[k];
+                plan.items.push(PlannedItem {
+                    item_id,
+                    content_id,
+                    modality,
+                    reason,
+                    est_seconds: est[k],
+                });
+            }
         }
-        ri += 1;
-    }
-    while wi < weak.len()
-        && plan.total_seconds + config.weak_seconds <= caps[1].min(budget - plan.total_seconds)
-    {
-        let w = &weak[wi];
-        if count(&per_modality, &w.dimension) < config.max_per_modality {
-            *per_modality.entry(w.dimension).or_insert(0) += 1;
-            plan.items.push(PlannedItem {
-                item_id: format!("{}:{}", w.content_id, serde_key(w.dimension)),
-                content_id: w.content_id.clone(),
-                modality: w.dimension,
-                reason: PlanReason::WeakSkill,
-                est_seconds: config.weak_seconds,
-            });
-            plan.total_seconds += config.weak_seconds;
-        }
-        wi += 1;
-    }
-    while pi < progression.len()
-        && plan.total_seconds + config.progression_seconds
-            <= caps[2].min(budget - plan.total_seconds)
-    {
-        let p = &progression[pi];
-        if count(&per_modality, &p.modality) < config.max_per_modality {
-            *per_modality.entry(p.modality).or_insert(0) += 1;
-            plan.items.push(PlannedItem {
-                item_id: format!("{}:{}", p.content_id, serde_key(p.modality)),
-                content_id: p.content_id.clone(),
-                modality: p.modality,
-                reason: PlanReason::Progression,
-                est_seconds: config.progression_seconds,
-            });
-            plan.total_seconds += config.progression_seconds;
-        }
-        pi += 1;
     }
 
     // Phase 2: spend any leftover budget on the highest-urgency
     // remaining candidates, cycling objectives review → weak →
-    // progression so no objective starves the others.
+    // progression ONE ITEM AT A TIME so no objective starves the others
+    // (FIX-M1-PROGRESSION-001 mechanism 2 — the old shape drained each
+    // stream fully before touching the next, which is how a beginner's
+    // weak-skill backlog ate the whole plan for a month).
     'fill: while plan.total_seconds < budget {
         let before = plan.total_seconds;
-        for pass in 0..3 {
+        for k in 0..3 {
+            while cursor[k] < streams[k].len() {
+                if plan.total_seconds + est[k] > budget {
+                    break;
+                }
+                let (item_id, content_id, modality, reason) = streams[k][cursor[k]].clone();
+                if count(&per_modality, k, &modality) >= config.max_per_modality {
+                    // Blocked for this objective by the repetition limit:
+                    // never plannable, advance past it.
+                    cursor[k] += 1;
+                    continue;
+                }
+                cursor[k] += 1;
+                *per_modality.entry((k, modality)).or_insert(0) += 1;
+                plan.total_seconds += est[k];
+                plan.items.push(PlannedItem {
+                    item_id,
+                    content_id,
+                    modality,
+                    reason,
+                    est_seconds: est[k],
+                });
+                // One item per objective per cycle: back to the round-robin.
+                break;
+            }
             if plan.total_seconds >= budget {
                 break 'fill;
             }
-            if pass == 0 {
-                while ri < reviews.len() && plan.total_seconds + config.review_seconds <= budget {
-                    let r = &reviews[ri];
-                    if count(&per_modality, &r.modality) < config.max_per_modality {
-                        *per_modality.entry(r.modality).or_insert(0) += 1;
-                        plan.items.push(PlannedItem {
-                            item_id: r.item_id.clone(),
-                            content_id: r.content_id.clone(),
-                            modality: r.modality,
-                            reason: if r.saved {
-                                PlanReason::SavedReview
-                            } else {
-                                PlanReason::DueReview
-                            },
-                            est_seconds: config.review_seconds,
-                        });
-                        plan.total_seconds += config.review_seconds;
-                    }
-                    ri += 1;
-                }
-            } else if pass == 1 {
-                while wi < weak.len() && plan.total_seconds + config.weak_seconds <= budget {
-                    let w = &weak[wi];
-                    if count(&per_modality, &w.dimension) < config.max_per_modality {
-                        *per_modality.entry(w.dimension).or_insert(0) += 1;
-                        plan.items.push(PlannedItem {
-                            item_id: format!("{}:{}", w.content_id, serde_key(w.dimension)),
-                            content_id: w.content_id.clone(),
-                            modality: w.dimension,
-                            reason: PlanReason::WeakSkill,
-                            est_seconds: config.weak_seconds,
-                        });
-                        plan.total_seconds += config.weak_seconds;
-                    }
-                    wi += 1;
-                }
-            } else {
-                while pi < progression.len()
-                    && plan.total_seconds + config.progression_seconds <= budget
-                {
-                    let p = &progression[pi];
-                    if count(&per_modality, &p.modality) < config.max_per_modality {
-                        *per_modality.entry(p.modality).or_insert(0) += 1;
-                        plan.items.push(PlannedItem {
-                            item_id: format!("{}:{}", p.content_id, serde_key(p.modality)),
-                            content_id: p.content_id.clone(),
-                            modality: p.modality,
-                            reason: PlanReason::Progression,
-                            est_seconds: config.progression_seconds,
-                        });
-                        plan.total_seconds += config.progression_seconds;
-                    }
-                    pi += 1;
-                }
-            }
         }
-        // A full pass that added nothing (candidates exhausted, blocked
+        // A full cycle that added nothing (candidates exhausted, blocked
         // by modality caps, or simply too long for the remaining
         // budget): stop. Comparing progress, not candidate positions,
         // is what guarantees termination: candidates can remain while
@@ -334,8 +337,12 @@ pub fn plan_session(
     Ok(plan)
 }
 
-fn count(per: &std::collections::HashMap<ActivityModality, usize>, m: &ActivityModality) -> usize {
-    per.get(m).copied().unwrap_or(0)
+fn count(
+    per: &std::collections::HashMap<(usize, ActivityModality), usize>,
+    objective: usize,
+    m: &ActivityModality,
+) -> usize {
+    per.get(&(objective, *m)).copied().unwrap_or(0)
 }
 
 fn serde_key(m: ActivityModality) -> String {

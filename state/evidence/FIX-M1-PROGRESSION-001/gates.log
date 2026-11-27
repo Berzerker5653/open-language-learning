@@ -1,0 +1,63 @@
+=== fmt ===
+=== clippy ===
+    Checking lts-scheduler v0.1.0 (/home/hunter/game-dev/LTS/crates/scheduler)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.29s
+=== test ===
+   Compiling lts-scheduler v0.1.0 (/home/hunter/game-dev/LTS/crates/scheduler)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.31s
+     Running unittests src/lib.rs (target/debug/deps/lts_scheduler-710b518329432041)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/planner.rs (target/debug/deps/planner-4f6000899b4758dd)
+
+running 9 tests
+test invalid_configs_are_rejected ... ok
+test fill_phase_terminates_when_nothing_fits_anymore ... ok
+test every_planned_item_has_a_learning_reason_no_attendance_objective ... ok
+test balances_due_review_weak_skills_and_progression ... ok
+test learner_owned_reviews_plan_as_saved_reviews_not_pack_reviews ... ok
+test modality_repetition_limit_is_enforced ... ok
+test plans_are_reproducible_with_fixed_input_and_seed ... ok
+test new_material_keeps_its_share_behind_a_weak_skill_backlog ... ok
+test budget_presets_5_10_20_30_plus_all_fit_and_grow ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/spike.rs (target/debug/deps/spike-2ec787332b8a4f97)
+
+running 6 tests
+test degenerate_request_ret_still_yields_a_finite_due_date ... ok
+test deterministic_under_test_clock ... ok
+test items_schedule_by_due_time_not_attendance ... ok
+test stability_grows_on_success_and_falls_on_lapse ... ok
+test unscored_attempts_are_never_reviews ... ok
+test scheduler_state_persists_and_queries_due_items ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+   Doc-tests lts_scheduler
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+=== 60-day sim acceptance (post-fix, 2026-11-27, FIX-M1-PROGRESSION-001) ===
+driver: scripts/sim_month1.py (lts-serve + libfaketime daily learner walk, answer-keys replay)
+runs:   RU org.openlanguage.ru-ru.reference 30 days; JA org.openlanguage.ja-jp.reference 30 days
+metrics script (recompute from sim/raw-*.tar.gz):
+  unique practice item_ids across all home_state plans by day 30
+  first day with non-null current_offer
+  unit_path units with refs_done>0 excluding letter units (RU cyrillic*, JA kana-*)
+RESULTS (all thresholds PASS):
+  RU: unique items 144 (>=60); offer first day 1 (<=5); non-letter units refs_done>0: 803 (>=3)
+  JA: unique items 256 (>=40); offer first day 1 (<=5); non-letter units refs_done>0: 50 (>=3)
+  RU top refs_done: cyrillic-stress-review 36, on-ramp numbers-02 12, on-ramp everyday-02 11,
+    personal-details-06 10, a1 groups 1-2 refs across 130+ units
+  JA top refs_done: kana tables 10-25 (expected), kanji-time-verbs 29, kanji-people-body 14,
+    kanji-numbers 13, telling-time 12, weather-talk 8
+archive: sim/raw-ru.tar.gz + sim/raw-ja.tar.gz (30 day logs + answer-keys + serve logs each)
+digest:  sim/acceptance-digest.json (machine-readable, pass=true both packs)

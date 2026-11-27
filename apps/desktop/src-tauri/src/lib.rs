@@ -2604,8 +2604,29 @@ fn derive_pairs(
         .collect()
 }
 
-/// New-material candidates: goals whose hard prerequisites are met and
-/// which have no evidence yet on any required concept.
+/// New-material candidates: every content_ref a UNLOCKED unit schedules that
+/// the learner has no evidence for yet, on the dimension its drills grade
+/// (FIX-M1-PROGRESSION-001, replacing the untouched-goals funnel).
+///
+/// The old funnel accepted only goals with "no evidence on any required
+/// concept" and emitted only `required_concepts.first()`: the moment a goal
+/// got any day-1 evidence it stopped contributing, so the missing letters of
+/// the CURRENT unit (RU `т`, refs_done stuck 3/4) and every later
+/// unscheduled ref never reached a plan. Per-activity selection fixes the
+/// missing-letter case at the pool level and keeps the ladder honest:
+/// - a unit is unlocked exactly when the goal graph (`unit_goal_locked`,
+///   SESSION-SEQUENCE-001 band edges) and every K-70 `requires_unit` phase
+///   gate (`unit_gate_holds`, ADR-0022) say it is — the same predicates
+///   `practice_met_content` uses, one gating engine, never a fork;
+/// - a ref referenced by both a locked and an unlocked unit stays eligible
+///   (the EXCLUSIVE lock rule, same shape as `goal_locked_new_content`);
+/// - a ref's dimension is resolved from the pack's own tables exactly as the
+///   raw seeding streams in `add_new_item_candidates` resolve them, because
+///   that is the dimension `practice_build` can actually run — an id with no
+///   runner (grammar rows) is deliberately not emitted here; the streams and
+///   the encounter stages still teach it, and the plan must stay clickable;
+/// - reviews of already-introduced items are untouched: a ref with evidence
+///   on the dimension is not NEW on that dimension anymore, full stop.
 fn progression_items(
     data: &Path,
     store: &lts_storage::Store,
@@ -2620,31 +2641,93 @@ fn progression_items(
         let packs_root = data.join("packs");
         let version = lts_langpack::archive::current_version(&pack_id, &packs_root)
             .ok_or_else(|| format!("pack {pack_id} not installed"))?;
-        let goals_path = packs_root
-            .join(&pack_id)
-            .join(version)
-            .join("curriculum/goals.yaml");
-        let Ok(text) = std::fs::read_to_string(&goals_path) else {
-            continue;
+        let root = packs_root.join(&pack_id).join(&version);
+        let units = pack_units(&root);
+        let goals = pack_goals(&root);
+        // Unlock decision per unit (K-70 phase gates + band edges).
+        let unit_unlocked = |unit: &PackUnit| -> bool {
+            !unit_goal_locked(unit, &goals, derived)
+                && unit
+                    .requires_unit
+                    .iter()
+                    .all(|g| unit_gate_holds(g, &units, derived))
         };
-        let goals: PackGoals = serde_yaml::from_str(&text).map_err(|e| e.to_string())?;
-        let all = goals.goals;
-        for goal in &all {
-            let satisfied = !goal_is_locked(goal, &all, derived);
-            let untouched = !goal
-                .required_concepts
-                .iter()
-                .any(|c| derived.iter().any(|d| &d.content_id == c));
-            if satisfied && untouched {
-                if let (Some(concept), Some(modality)) = (
-                    goal.required_concepts.first(),
-                    goal.modalities.first().and_then(|m| parse_goal_modality(m)),
-                ) {
-                    items.push(lts_scheduler::ProgressionItem {
-                        content_id: concept.clone(),
-                        modality,
-                    });
+        // Refs of unlocked units in unit/declared order, deduped.
+        let mut unlocked_refs: Vec<String> = Vec::new();
+        let mut seen: std::collections::HashSet<&str> = std::collections::HashSet::new();
+        for unit in units.iter().filter(|u| unit_unlocked(u)) {
+            for act in &unit.activities {
+                for c in &act.content_refs {
+                    if seen.insert(c.as_str()) {
+                        unlocked_refs.push(c.clone());
+                    }
                 }
+            }
+        }
+        // Dimension resolution from the pack's own tables (the same kinds
+        // and dimensions `add_new_item_candidates` seeds for).
+        let lex_ids: std::collections::HashSet<String> = lexicon_entries(data, &pack_id, &version)?
+            .iter()
+            .map(|e| e.id.clone())
+            .collect();
+        let orth: Vec<OrthEntry> = orth_entries(data, &pack_id, &version)?;
+        let orth_ids: std::collections::HashSet<String> =
+            orth.iter().map(|e| e.id.clone()).collect();
+        let contrast_ids: std::collections::HashSet<String> =
+            contrast_entries(data, &pack_id, &version)?
+                .iter()
+                .map(|e| e.id.clone())
+                .collect();
+        let kanji_ids: std::collections::HashSet<String> = kanji_entries(data, &pack_id, &version)?
+            .iter()
+            .map(|e| e.id.clone())
+            .collect();
+        let sentences: Vec<SentenceEntry> = sentence_entries(data, &pack_id, &version)?;
+        let sentence_ids: std::collections::HashSet<String> =
+            sentences.iter().map(|e| e.id.clone()).collect();
+        let audio_ids = media_ids(&root);
+        for id in unlocked_refs {
+            use lts_domain::ActivityModality as M;
+            let dims: Vec<M> = if lex_ids.contains(&id) {
+                // Words join for typed recall only — same media rationale
+                // as the lexicon stream (ADR-0016: a lexicon row declares
+                // no audio, comprehension-listening rides sentences).
+                vec![M::RecallMeaning]
+            } else if orth_ids.contains(&id) {
+                vec![M::OrthographyRecognition]
+            } else if contrast_ids.contains(&id) {
+                vec![M::PhonologicalDiscrimination]
+            } else if kanji_ids.contains(&id) {
+                vec![M::RecallMeaning, M::OrthographyRecognition]
+            } else if sentence_ids.contains(&id) {
+                let entry = sentences.iter().find(|e| e.id == id);
+                let mut dims = Vec::new();
+                if entry.is_some_and(|e| !e.cloze_targets.is_empty()) {
+                    dims.push(M::ProductionWriting);
+                }
+                dims.push(M::OrthographicEncoding);
+                if audio_ids.contains(&id) {
+                    dims.push(M::ComprehensionListening);
+                }
+                dims
+            } else {
+                // No runner builds this id (grammar rows and any other
+                // non-drillable kind): it is taught by the unit's authored
+                // encounter stage, not minted as a plan item the learner
+                // could tap into a practice_build refusal.
+                continue;
+            };
+            for m in dims {
+                if derived
+                    .iter()
+                    .any(|d| d.content_id == id && d.dimension == m)
+                {
+                    continue;
+                }
+                items.push(lts_scheduler::ProgressionItem {
+                    content_id: id.clone(),
+                    modality: m,
+                });
             }
         }
     }
@@ -7970,11 +8053,41 @@ fn speaking_sentence_task_build(
     Ok((task, entry.text, Vec::new()))
 }
 
+/// K-04 drill direction for one UTC day: `true` = form->sound
+/// (recognize), `false` = sound->form (produce). The runner teaches both
+/// forms; rotating the direction per letter across days keeps tasks
+/// deterministic (no RNG) while letting one letter accumulate evidence
+/// under two prompt families. FIX-M1-PROGRESSION-001 measured the
+/// failure mode of pinning direction to a content hash: one letter, one
+/// family forever, the mastery ladder's `independent` rung (which demands
+/// two distinct families — policy R04/R11) unreachable for the whole
+/// alphabet, and every hard letter-knowledge gate (RU on-ramp greetings)
+/// never completable. Task build and submit both call this with their
+/// own current clock, so they agree except for an attempt open across the
+/// UTC midnight — a rare, self-correcting misattribution of the family
+/// on one attempt, never a wrong answer key within one day.
+fn orth_drill_recognize(content_id: &str, day: i64) -> bool {
+    fnv1a(&format!("{content_id}#{day}")) % 2 == 0
+}
+
+/// The prompt-family identity of one day's letter drill: the runner's
+/// two forms are two prompts, and the evidence must say which ran.
+fn orth_drill_family(content_id: &str, day: i64) -> String {
+    format!(
+        "{content_id}.drill-{}",
+        if orth_drill_recognize(content_id, day) {
+            "recognize"
+        } else {
+            "produce"
+        }
+    )
+}
+
 /// K-04 script-instruction runner: symbol<->reading choice task from
-/// pack-declared orthography units. Direction is deterministic per unit
-/// (half the chart practices symbol->reading, half reading->symbol), so
-/// tasks are stable across runs without RNG. Distractors are other
-/// units' readings/symbols in file order.
+/// pack-declared orthography units. Direction rotates per letter across
+/// days (`orth_drill_recognize`), stable within a day, so tasks stay
+/// deterministic without RNG. Distractors are other units'
+/// readings/symbols in file order.
 fn orth_task_build(
     data: &Path,
     pack_id: &str,
@@ -7986,7 +8099,7 @@ fn orth_task_build(
         .iter()
         .find(|e| e.id == content_id)
         .ok_or("unknown practice target")?;
-    let recognize = fnv1a(content_id) % 2 == 0;
+    let recognize = orth_drill_recognize(content_id, (now_secs() / 86_400) as i64);
     // LETTER-UNIT-MODEL-001 rule 1: the drill dimensions key on
     // sound↔symbol — `sound` is the pack-declared sound, falling back to
     // the reading when the pack does not separate name from sound.
@@ -10710,6 +10823,24 @@ fn practice_submit_inner(
     // item is the prompt — never an invented id, and never a per-event id
     // that manufactures prompt diversity out of repetition (R04).
     let activity_id = opts.diagnostic.or(opts.stage).unwrap_or(content_id);
+    // FIX-M1-PROGRESSION-001: a letter/kana drill has no pack stage and no
+    // diagnostic, but it is NOT one prompt: the runner teaches form->sound
+    // and sound->form, and the ladder's `independent` rung needs two
+    // distinct families. Record which form this attempt presented. Kanji
+    // and any other orth content that is not in the orthography table keep
+    // the item-as-prompt rule unchanged.
+    let drill_family = if opts.diagnostic.is_none()
+        && opts.stage.is_none()
+        && dim == lts_domain::ActivityModality::OrthographyRecognition
+    {
+        orth_entries(data, pack_id, &version)
+            .unwrap_or_default()
+            .iter()
+            .any(|e| e.id == content_id)
+            .then(|| orth_drill_family(content_id, (now.as_secs() / 86_400) as i64))
+    } else {
+        None
+    };
     let mut draft = lts_learner_model::AttemptDraft::new(
         vec![lts_domain::ContentId::parse(content_id).map_err(|_| "invalid item id")?],
         dim,
@@ -10725,11 +10856,12 @@ fn practice_submit_inner(
     // The prompt the learner answered: the pack-declared stage when the app
     // ran one (R11 — the encounter, the supported cloze and the unsupported
     // recall of one word are three prompts, which is what makes Independent
-    // reachable at all), otherwise the content record itself. Either way two
-    // attempts at one prompt are one prompt family, so prompt diversity can
-    // never be manufactured out of repetition (review finding R04).
+    // reachable at all), else the runner drill's prompt form (see above),
+    // otherwise the content record itself. Either way two attempts at one
+    // prompt are one prompt family, so prompt diversity can never be
+    // manufactured out of repetition (review finding R04).
     .prompt_family(
-        lts_domain::ContentId::parse(opts.stage.unwrap_or(content_id))
+        lts_domain::ContentId::parse(opts.stage.or(drill_family.as_deref()).unwrap_or(content_id))
             .map_err(|_| "invalid prompt")?,
     );
     if let Some(session) = opts.session_id {
@@ -17216,9 +17348,26 @@ activities:
             "the Cyrillic prerequisite reports satisfied: {:?}",
             greetings.prerequisites
         );
+        // FIX-M1-PROGRESSION-001 re-pin (superseded contract documented):
+        // the old goal funnel emitted the greetings goal's first required
+        // concept — `ru.grammar.on-ramp.formulaic-politeness` — which
+        // `practice_build` refuses to build a task for, so the old pin was
+        // certifying a plan item the learner could not click. NEW material is
+        // now the unlocked units' drillable refs; grammar keeps being taught
+        // by the unit's authored encounter stage instead. The positive path
+        // is strictly stronger: real vocabulary reaches the stream.
+        let offered_ids = offered("2026-10-08T00:00:00Z");
         assert!(
-            offered("2026-10-08T00:00:00Z").contains(&greeting_entry),
-            "the opened goal offers its first required concept as new material"
+            offered_ids
+                .iter()
+                .any(|s| s == "ru.lex.greetings.zdravstvuyte"),
+            "the opened goal offers its greeting vocabulary as new material: {offered_ids:?}"
+        );
+        assert!(
+            !offered_ids
+                .iter()
+                .any(|s| s == "ru.grammar.on-ramp.formulaic-politeness"),
+            "an id with no runner must never be minted as a NEW plan item"
         );
     }
 
@@ -23310,6 +23459,198 @@ transfer_variants:
         assert!(
             !ids.contains("ru.lex.everyday.eto"),
             "eto is taught only by units behind the cyrillic->independent hard goal edge; the exclusive rule must lock it at zero evidence"
+        );
+    }
+
+    /// FIX-M1-PROGRESSION-001 (D-001, missing-letter case): a learner with
+    /// evidence on the first three letters of an unlocked unit must still be
+    /// offered the fourth as NEW material. The untouched-goals funnel offered
+    /// only a goal's first required concept while the goal had "no evidence
+    /// at all", so `t-cyrillic` never reached a plan and `cyrillic-a-o-m-t`
+    /// stayed stuck at refs_done 3/4 for a whole month. NEW selection is
+    /// per-activity content_ref inside UNLOCKED units, not per-untouched-goal.
+    #[test]
+    fn missing_letter_of_an_unlocked_unit_stays_new_eligible() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let pack = "org.openlanguage.ru-ru.reference";
+        install_reference_pack_fast(data, pack).unwrap();
+        let p = create_local_profile(data, "MissingLetter").unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let version = lts_langpack::archive::current_version(pack, &data.join("packs")).unwrap();
+        store.set_active_pack(&p.id, pack, &version).unwrap();
+
+        // Touch the cyrillic goal: clean evidence on the current unit's
+        // other three letters. Under the old funnel the goal is now
+        // "touched" and contributes nothing any more — the exact incident
+        // shape measured in the LEARNER-REVIEW-M1-001 day logs.
+        for letter in ["a", "o", "m"] {
+            let id = format!("ru.orth.cyrillic.{letter}");
+            for (i, family) in ["a", "b"].iter().enumerate() {
+                let mut ev = attempt(
+                    &id,
+                    lts_domain::ActivityModality::OrthographyRecognition,
+                    &format!("ru.expr.miss-{letter}-{family}"),
+                    0,
+                    &rfc3339_utc(1_795_300_000 + i as u64 * 10),
+                    &format!("ev-miss-{letter}-{i}"),
+                    &p.id,
+                );
+                ev.pack_id = pack.into();
+                store.append_evidence(&ev).unwrap();
+            }
+        }
+        let derived = derive_pairs(&store, &p.id, &rfc3339_utc(1_795_300_000)).unwrap();
+        let pool = progression_items(data, &store, &p.id, &derived).unwrap();
+        assert!(
+            pool.iter().any(|i| i.content_id == "ru.orth.cyrillic.t"
+                && i.modality == lts_domain::ActivityModality::OrthographyRecognition),
+            "the fourth letter of an unlocked unit must stay NEW-eligible after the goal already has other evidence: {:?}",
+            pool.iter()
+                .map(|i| (&i.content_id, i.modality))
+                .collect::<Vec<_>>()
+        );
+    }
+
+    /// FIX-M1-PROGRESSION-001: the per-unit NEW selection must not weaken
+    /// the K-70 phase-gate / goal band-edge contract (ADR-0022). A
+    /// zero-evidence profile may never see the content of a unit behind a
+    /// hard goal edge (greetings is gated at `independent` on the cyrillic
+    /// goal) — while the on-ramp letters it IS allowed to learn stay
+    /// seeded, which is what makes the lock assertions load-bearing.
+    #[test]
+    fn gated_unit_content_never_enters_the_new_selection() {
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let pack = "org.openlanguage.ru-ru.reference";
+        install_reference_pack_fast(data, pack).unwrap();
+        let p = create_local_profile(data, "GatePin").unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let version = lts_langpack::archive::current_version(pack, &data.join("packs")).unwrap();
+        store.set_active_pack(&p.id, pack, &version).unwrap();
+        let derived = derive_pairs(&store, &p.id, &rfc3339_utc(1_795_300_000)).unwrap();
+        let mut pool = progression_items(data, &store, &p.id, &derived).unwrap();
+        add_new_item_candidates(data, &store, &p.id, &derived, &mut pool, &[]).unwrap();
+        for locked in ["ru.lex.greetings.zdravstvuyte", "ru.lex.greetings.spasibo"] {
+            assert!(
+                pool.iter().all(|i| i.content_id != locked),
+                "a gated unit's content entered the NEW pool for a zero-evidence profile: {locked}"
+            );
+        }
+        assert!(
+            pool.iter().any(|i| i.content_id == "ru.orth.cyrillic.a"),
+            "the on-ramp alphabet no longer seeds a zero-evidence profile"
+        );
+    }
+
+    /// FIX-M1-PROGRESSION-001 (gate completability, measured in the RU sim
+    /// walk): the letter drill is the ONLY source of orthography-recognition
+    /// evidence, and with the direction pinned to a content hash every
+    /// letter collected exactly one prompt family forever — so no letter
+    /// could ever reach `independent` and the hard RU letter->greetings
+    /// gate was never completable. Pins: (1) the runner teaches BOTH prompt
+    /// forms over a fortnight, (2) graded evidence records the form that
+    /// ran, (3) two clean drill days across the rotation derive
+    /// `independent` — a real learner can now open the gate.
+    #[test]
+    fn letter_drills_span_two_prompt_families_and_reach_independent() {
+        // (1) Rotation property: within ~14 days every letter has drilled
+        // in both directions, deterministically.
+        let mut forms = std::collections::HashSet::new();
+        for day in 20_400..20_414 {
+            forms.insert(orth_drill_family("ru.orth.cyrillic.a", day));
+        }
+        assert_eq!(
+            forms,
+            std::collections::HashSet::from([
+                "ru.orth.cyrillic.a.drill-recognize".to_string(),
+                "ru.orth.cyrillic.a.drill-produce".to_string(),
+            ]),
+            "two weeks of drills must present both prompt forms"
+        );
+
+        let tmp = tempfile::tempdir().unwrap();
+        let data = tmp.path();
+        let pack = "org.openlanguage.ru-ru.reference";
+        install_reference_pack_fast(data, pack).unwrap();
+        let p = create_local_profile(data, "DrillFamily").unwrap();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        let version = lts_langpack::archive::current_version(pack, &data.join("packs")).unwrap();
+        store.set_active_pack(&p.id, pack, &version).unwrap();
+
+        // (2) The runner submit path stamps the evidence with today's
+        // drill form, not the bare content id.
+        let t = practice_task_at(
+            data,
+            &p.id,
+            "ru.orth.cyrillic.a",
+            "orthography-recognition",
+            false,
+        )
+        .unwrap();
+        let today = (now_secs() / 86_400) as i64;
+        let today_family = orth_drill_family("ru.orth.cyrillic.a", today);
+        let answer_wanted = if orth_drill_recognize("ru.orth.cyrillic.a", today) {
+            "a" // form->sound asks for the sound; a unicameral-safe fallback below
+        } else {
+            "а"
+        };
+        let idx = t
+            .choices
+            .iter()
+            .position(|c| c == answer_wanted || c == "а" || c == "a")
+            .expect("the drill offers the letter's symbol or sound");
+        practice_submit_at(
+            data,
+            &p.id,
+            "ru.orth.cyrillic.a",
+            "orthography-recognition",
+            idx,
+            None,
+            false,
+        )
+        .unwrap();
+        let events = store.evidence_for_profile(&p.id).unwrap();
+        let ev = events
+            .iter()
+            .find(|e| {
+                e.modality == lts_domain::ActivityModality::OrthographyRecognition
+                    && e.targets.iter().any(|x| x.as_str() == "ru.orth.cyrillic.a")
+            })
+            .expect("drill evidence recorded");
+        assert_eq!(
+            ev.prompt_family_id.as_ref().map(|f| f.as_str()),
+            Some(today_family.as_str()),
+            "runner evidence must name the drill form that ran"
+        );
+
+        // (3) One more clean drill day, recorded under the OTHER form:
+        // two successes across two families is the ladder's whole bar for
+        // `independent` at sup 0 — the rung every RU letter gate waits on.
+        let other_family = orth_drill_family("ru.orth.cyrillic.a", today + 1);
+        let mut ev2 = attempt(
+            "ru.orth.cyrillic.a",
+            lts_domain::ActivityModality::OrthographyRecognition,
+            &other_family,
+            0,
+            &rfc3339_utc(now_secs() + 86_400),
+            "ev-drill-second-form",
+            &p.id,
+        );
+        ev2.pack_id = pack.into();
+        store.append_evidence(&ev2).unwrap();
+        let derived = derive_pairs(&store, &p.id, &rfc3339_utc(now_secs() + 86_400)).unwrap();
+        let row = derived
+            .iter()
+            .find(|d| {
+                d.content_id == "ru.orth.cyrillic.a"
+                    && d.dimension == lts_domain::ActivityModality::OrthographyRecognition
+            })
+            .expect("derived row for the drilled letter");
+        assert_eq!(
+            row.state,
+            lts_domain::MasteryState::Independent,
+            "two drill successes across the two prompt forms must derive independent"
         );
     }
 

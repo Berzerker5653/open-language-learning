@@ -120,12 +120,26 @@ fn modality_repetition_limit_is_enforced() {
         ..PlannerConfig::default()
     };
     let p = plan_session(&config, &inputs).unwrap();
-    let listening = p
-        .items
-        .iter()
-        .filter(|i| i.modality == ComprehensionListening)
-        .count();
-    assert_eq!(listening, 3, "modality cap violated");
+    // FIX-M1-PROGRESSION-001 re-pin: the repetition limit is per objective
+    // (a shared cap let the review backlog claim every slot of a dimension
+    // and starve weak practice of the same dimension — the second Month-1
+    // starvation mechanism). Within EACH objective the cap is still hard.
+    let listening = |reason: PlanReason| {
+        p.items
+            .iter()
+            .filter(|i| i.modality == ComprehensionListening && i.reason == reason)
+            .count()
+    };
+    assert_eq!(listening(PlanReason::DueReview), 3, "review cap violated");
+    assert_eq!(listening(PlanReason::WeakSkill), 3, "weak cap violated");
+    assert_eq!(
+        p.items
+            .iter()
+            .filter(|i| i.modality == ComprehensionListening)
+            .count(),
+        6,
+        "only the two populated objectives may spend slots"
+    );
 }
 
 #[test]
@@ -284,4 +298,55 @@ fn fill_phase_terminates_when_nothing_fits_anymore() {
     assert!(plan.total_seconds <= 300);
     // Genuinely packed: no remaining candidate fits the leftover budget.
     assert!(plan.total_seconds + 60 > 300);
+}
+
+/// FIX-M1-PROGRESSION-001 (Month-1 starvation, measured in the
+/// LEARNER-REVIEW-M1-001 day logs): a learner with a weak-skill backlog
+/// must still be introduced to NEW material. The planner used to compare
+/// each objective's reserved cap against TOTAL elapsed time and to spend
+/// every leftover second sequentially (reviews, then weak, then
+/// progression), so with a real beginner's backlog of low-confidence
+/// items the reserved new-item share never got spent and the learner
+/// reviewed the same day-1 six items for a month.
+#[test]
+fn new_material_keeps_its_share_behind_a_weak_skill_backlog() {
+    let inputs = PlannerInputs {
+        due_reviews: reviews(4, 0.4, OrthographyRecognition),
+        weak_skills: (0..30)
+            .map(|i| WeakSkillItem {
+                content_id: format!("w-{i:02}"),
+                dimension: OrthographyRecognition,
+                confidence: 0.15,
+            })
+            .collect(),
+        progression: (0..30)
+            .map(|i| ProgressionItem {
+                content_id: format!("n-{i:02}"),
+                modality: OrthographyRecognition,
+            })
+            .collect(),
+    };
+    let p = plan_session(&cfg(10), &inputs).unwrap();
+    let prog = p
+        .items
+        .iter()
+        .filter(|i| i.reason == PlanReason::Progression)
+        .count();
+    assert!(
+        prog >= 2,
+        "new material starved behind a weak-skill backlog: {:?}",
+        p.items.iter().map(|i| i.reason).collect::<Vec<_>>()
+    );
+    // The reserved share is a floor, not a ceiling the other objectives
+    // collapse into: the weak backlog keeps its own share too.
+    let weak = p
+        .items
+        .iter()
+        .filter(|i| i.reason == PlanReason::WeakSkill)
+        .count();
+    assert!(
+        weak >= 2,
+        "weak skills lost their share once progression was fixed: {:?}",
+        p.items.iter().map(|i| i.reason).collect::<Vec<_>>()
+    );
 }

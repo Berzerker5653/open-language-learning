@@ -1,0 +1,112 @@
+{
+ "lane": "FIX-M1-PROGRESSION-001",
+ "driver": "scripts/sim_month1.py",
+ "run": "2026-11-27",
+ "criteria": {
+  "unique_items_by_day30": ">=60 RU / >=40 JA",
+  "nonletter_units_refs_done_by_day30": ">=3",
+  "offer_first_day": "<=5"
+ },
+ "results": {
+  "ru": {
+   "days": 30,
+   "unique_practice_items": 144,
+   "threshold": 60,
+   "offer_first_day": 1,
+   "nonletter_units_refs_done": 803,
+   "top_units": [
+    [
+     "capstone.org.openlanguage.ru-ru.reference.on-ramp",
+     76
+    ],
+    [
+     "capstone.org.openlanguage.ru-ru.reference.a1",
+     18
+    ],
+    [
+     "ru.unit.on-ramp.numbers-02",
+     12
+    ],
+    [
+     "ru.unit.on-ramp.greetings-02",
+     11
+    ],
+    [
+     "ru.unit.on-ramp.everyday-02",
+     11
+    ],
+    [
+     "ru.unit.a1.personal-details-06",
+     10
+    ],
+    [
+     "ru.unit.on-ramp.classroom-01",
+     7
+    ],
+    [
+     "ru.unit.on-ramp.classroom-02",
+     7
+    ],
+    [
+     "ru.unit.on-ramp.numbers-01",
+     7
+    ],
+    [
+     "ru.unit.on-ramp.greetings-01",
+     5
+    ]
+   ],
+   "pass": true
+  },
+  "ja": {
+   "days": 30,
+   "unique_practice_items": 256,
+   "threshold": 40,
+   "offer_first_day": 1,
+   "nonletter_units_refs_done": 50,
+   "top_units": [
+    [
+     "capstone.org.openlanguage.ja-jp.reference.on-ramp",
+     103
+    ],
+    [
+     "ja.unit.kanji-time-verbs",
+     29
+    ],
+    [
+     "capstone.org.openlanguage.ja-jp.reference.a1",
+     15
+    ],
+    [
+     "ja.unit.kanji-people-body",
+     14
+    ],
+    [
+     "ja.unit.kanji-numbers",
+     13
+    ],
+    [
+     "ja.unit.telling-time",
+     12
+    ],
+    [
+     "ja.unit.weather-talk",
+     8
+    ],
+    [
+     "ja.unit.adjective-not-and-was",
+     7
+    ],
+    [
+     "ja.unit.greetings-times",
+     6
+    ],
+    [
+     "ja.unit.politeness-basics",
+     6
+    ]
+   ],
+   "pass": true
+  }
+ }
+}
