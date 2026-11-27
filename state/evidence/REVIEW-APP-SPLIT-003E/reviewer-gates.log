@@ -1,0 +1,63 @@
+# REVIEW-APP-SPLIT-003E — reviewer battery (2026-11-27, HEAD 52c4b04d)
+
+Reviewed commits: code faa66d00, ledger 425267be. Nothing after faa66d00
+touches the slice: `git log faa66d00..HEAD -- apps/desktop/src/app/practice-wiring.ts`
+is EMPTY (verified).
+
+## Ground truth measured from git blobs (never from memory)
+
+- `git show faa66d00^:apps/desktop/src/App.tsx | wc -l` -> 4314
+- `git show faa66d00:apps/desktop/src/App.tsx | wc -l`  -> 4210  (delta -104, matches claim)
+- practice-wiring.ts at faa66d00: 234 lines.
+- Code commit touches exactly 2 files (App.tsx, practice-wiring.ts);
+  ledger commit touches exactly 4 (gates.log, notes/APP-SPLIT-001.md,
+  task-state.json, tasks/KANBAN.md). No test/gate file touched by the lane.
+- Hook-removal grep over the full diff: '-' lines matching
+  `use[A-Z]*(|useState|useEffect|useMemo|useCallback|useRef` -> 0.
+  "App.tsx keeps every hook" holds.
+
+## Pure-move check (independent, script-based)
+
+Reconstructed the deleted App() bodies from the code diff ('-' lines, minus
+the 2 orphaned-import lines), extracted the four run* bodies from
+practice-wiring.ts by brace matching, normalized: trim, drop the two
+`const { … } = deps;` destructurings, strip `deps.` prefixes, rename
+run*->old names, fold `deps.sessionWiringDeps.sessionQueueRef` to the old
+bare `sessionQueueRef`.
+Result: old 156 lines vs module 155; residual diff is exactly two hunks:
+1. the `UX-003: first lessons…` doc comment moved from inside App() to the
+   module function's doc block (comment relocation, zero logic tokens);
+2. one prettier re-wrap of `if (sessionQueueRef.current) void
+   runAdvanceSession(deps.sessionWiringDeps, 1);` (line grew past the print
+   width once the deps prefix was added).
+All logic lines are token-identical. Comments rode along verbatim elsewhere.
+
+## Lane gates re-run by the reviewer at HEAD 52c4b04d
+
+- `npx tsc --noEmit` (apps/desktop) — PASS (exit 0).
+- `npx vitest run` — PASS: 83 test files / 725 tests, 9.58s. (The card
+  checkpoint reported 79/709; SPEAK-PRACTICE-001 and WRITE-PRACTICE-001
+  added tests after the checkpoint — same growth already recorded in the
+  003D review. Not a regression.)
+- `npx prettier --check src/App.tsx src/app/practice-wiring.ts` —
+  practice-wiring.ts CLEAN; App.tsx CLEAN at HEAD.
+  Cross-check on committed blobs (prettier --list-different --stdin):
+  App.tsx CLEAN at faa66d00 and CLEAN at HEAD. The App.tsx prettier drift
+  flagged by the 003D review (WRITE-PRACTICE-001 block) has been fixed in
+  main by the time of this review.
+- `npx eslint src/App.tsx src/app/practice-wiring.ts` — 11 errors, ALL
+  typescript-eslint/no-unused-vars in App.tsx's re-export shim (pre-existing
+  family); practice-wiring.ts contributes 0. gates.log recorded 12 both at
+  base and at faa66d00 (identical message set); HEAD now shows 11 because a
+  later lane removed one orphaned shim var — not a 003E defect.
+- `python3 tools/validate_handoff.py --require-explicit-ledger-records` —
+  HANDOFF VALIDATION PASSED (2289 data files; 4 pre-existing optional-task
+  WARNs: PLAT-002, ADV-001, WEB-001, STORY-LISTEN-001 — unrelated).
+
+## TDZ / deps-bundle placement (the 003C pitfall, 003D lesson)
+
+At HEAD: sessionWiringDeps declared App.tsx L1841, practiceWiringDeps L1866
+(after it, after every referenced binding in scope). Reads are ONLY inside
+the four hoisted wrappers (L1798-1812), which fire from JSX click handlers
+(L4285-4444) and from home-wiring via `openPractice` passed into
+sessionWiringDeps (L1856). No mount/boot-path reader. Correct placement.
