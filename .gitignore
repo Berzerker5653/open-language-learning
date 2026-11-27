@@ -77,3 +77,4 @@ tmp/
 qs-r*.jsonl
 tmp/jmdict
 dist-history/
+.sim-data/
