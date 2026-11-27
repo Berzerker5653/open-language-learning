@@ -1,0 +1,81 @@
+# REVIEW-APP-SPLIT-003B — reviewer gates log (2026-11-26)
+
+Two-axis review (Pocock pairing) of the settings/import wiring slice:
+code bc0307cb (parent 0e66c227), ledger 5738ccf4. Card directive: re-measure
+claims, do NOT re-execute the lane's gate batteries.
+
+## Commands run by the reviewer (all read-only or worktree-scoped)
+
+1. `git show bc0307cb` + `git show 5738ccf4` — full diff read line by line
+   (App.tsx hunks: import block, primeSettingsReads delegation, handler-family
+   removal, deps-bundle insert, 5 JSX call-site swaps; ledger: gates.log,
+   notes table, task-state, KANBAN.md, ROADMAP card + optional_tasks).
+2. **Independent verbatim-body comparison** (python3, stdlib): brace-matched
+   extraction of the six functions from `git show 0e66c227:apps/desktop/src/App.tsx`
+   and their `run*` counterparts in `git show bc0307cb:apps/desktop/src/app/settings-wiring.tsx`;
+   normalization = strip indent, strip `deps.` prefix, drop `const {…} = deps;`
+   preamble lines, drop blank lines; exact list comparison.
+   RESULT:
+   - exportProfileData -> runProfileExport: IDENTICAL (7 lines)
+   - previewRestore -> runRestorePreview: IDENTICAL (14)
+   - confirmRestore -> runRestoreConfirm: IDENTICAL (13)
+   - confirmProfileDelete -> runProfileDelete: IDENTICAL (30)
+   - switchProfile -> runProfileSwitch: IDENTICAL (32)
+   - primeSettingsReads -> runSettingsPrimes: 1 of 27 lines differs:
+     `await soft("language packs", () => refreshLanguages());`
+     vs `await soft("language packs", () => deps.refreshLanguages!());`
+     (redundant non-null assertion; see D1 / spec N1)
+3. **Hook-presence counts** in App.tsx old vs new: useState 51=51,
+   useEffect 16=16, useRef 4=4, useMemo 3=3, useCallback 0=0,
+   useServeProbe 1=1 — no hook moved.
+4. **LOC re-measures**: `git show <rev>:apps/desktop/src/App.tsx | wc -l`:
+   0e66c227 = 4594, bc0307cb = 4509; settings-wiring.tsx at bc0307cb = 235.
+   `git diff --shortstat 0e66c227 bc0307cb` = 2 files, +301/−151. All recorded
+   claims exact.
+5. **Call-site count**: 8 `settingsWiringDeps` mentions = decl(3646) +
+   comment(1655) + prime call(1489) + 5 JSX handlers (4237,4249,4250,4258,4262).
+6. **Removed-symbol sweep**: no stray `exportProfileData(`/`previewRestore(`/
+   `confirmRestore(`/`confirmProfileDelete(`/`switchProfile(` references remain
+   in App.tsx at bc0307cb.
+7. **TDZ check** (003C precedent): `primeSettingsReads` reachable only via
+   `openSettings`, whose only callers are two `onClick={() => void openSettings()}`
+   sites — no mount-time async IIFE reads the bundle. Bundle declared at 3646,
+   immediately pre-return, after all referenced bindings.
+8. `git worktree add --detach <scratch>/rev003b-wt 5738ccf4` then
+   `/home/hunter/game-dev/LTS/.venv/bin/python tools/validate_handoff.py
+   --require-explicit-ledger-records` ->
+   `HANDOFF VALIDATION PASSED (2286 data files checked)` exit 0;
+   WARNs pre-existing (minimal-pack fixture + 5 optional tasks without explicit
+   ledger records + scope note). Worktree removed after.
+9. **Security-scan claim re-run**: grep of `git show bc0307cb` added lines for
+   eval / exec( / child_process / pickle / secret / api[_-]?key / password /
+   token / innerHTML / dangerouslySet / http:// / require( / Function( ->
+   no matches. Claim holds.
+10. **Prettier re-check at committed bytes**: repo config is `.prettierrc.json`
+    = `{ "printWidth": 100 }` (repo root). With
+    `npx prettier --config .prettierrc.json` on the bc0307cb blobs of both
+    touched files: both PASS ("All matched files use Prettier code style!").
+    PITFALL encountered and neutralized: running prettier on a scratch copy
+    OUTSIDE the repo without `--config` silently falls back to the 80-column
+    default and produced a large false-positive diff (13 wrap sites); always
+    pass `--config <repo>/.prettierrc.json` for out-of-tree copies, or check
+    in-tree paths whose bytes are provably unchanged since the target commit.
+
+## Deliberately NOT run (card directive: re-measure, do not re-execute)
+
+- `npx tsc --noEmit` / `npx vitest run` — lane gates.log is the baseline.
+  Cross-lane corroboration only: 003A (reviewer-verified 694), 003C/003D
+  gates.log (77/694 at descendant trees), 003E (79/709 after later test
+  additions). Zero test files touched by bc0307cb or 5738ccf4.
+
+## Verdicts
+
+- SPEC: PASS-WITH-NOTES -> spec-verdict.md (N1 redundant `!`, N2 inherited
+  "six prime reads" prose, N3 intentional setter-type narrowing). No
+  out-of-scope additions.
+- STANDARDS: PASS-WITH-NOTES -> standards-verdict.md (D1 "ALL IDENTICAL" /
+  "token-identical per body" overstated by the one `!` line — evidence
+  accuracy, no FIX card; every numeric claim verified exact; 003A-D1
+  annotation practice adopted correctly).
+- No product-code defect -> no FIX card. No task-state flip (docs/evidence
+  outcome per card body).
