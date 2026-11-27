@@ -3629,6 +3629,17 @@
       "updated": "2026-11-26",
       "notes": "Owner-endorsed 2026-11-26. Free-writing mode, offline dictionary/script feedback + private journal; AI grammar feedback deferred to future WRITE-PRACTICE-002 (AI-001 posture). Contract: state/notes/WRITE-PRACTICE-001.md; board card lts-WRITE-PRACTICE-001.",
       "evidence": []
+    },
+    "LEARNER-REVIEW-M1-001": {
+      "status": "blocked",
+      "attempts": 0,
+      "updated": "2026-11-26",
+      "notes": "Owner directive 2026-11-26: audit days 1-30 of the real learner experience (both packs) after the two practice modes land. Blocked by SPEAK-PRACTICE-001 + WRITE-PRACTICE-001. Chains: on completion create LEARNER-REVIEW-M2-001 (same contract) - never drop the chain. Contract: state/notes/LEARNER-REVIEW-M1-001.md; board card lts-LEARNER-REVIEW-M1-001.",
+      "blocked_by": [
+        "SPEAK-PRACTICE-001",
+        "WRITE-PRACTICE-001"
+      ],
+      "evidence": []
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
