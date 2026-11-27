@@ -3,6 +3,20 @@
   "updated": "2026-11-26",
   "active_task": null,
   "tasks": {
+    "APP-SPLIT-003E": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-26",
+      "notes": "Budgeted slice of APP-SPLIT-001: extract the practice wiring slice (openPractice + choose/check/finishPractice + practice state) from App() - pure move, App.tsx keeps every hook. Contract: card body + the RUN-2 recipe in state/notes/APP-SPLIT-001.md; board card lts-APP-SPLIT-003E.",
+      "evidence": []
+    },
+    "G4-EXPLAIN-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-26",
+      "notes": "G4 first step (2026-11-23 owner scope decision, parent AI-001): explain provider interface off-by-default + explain control on activity cards, information only, never a grade. Contract: state/notes/G4-EXPLAIN-001.md; board card lts-G4-EXPLAIN-001.",
+      "evidence": []
+    },
     "WORD-STATE-COLORING-001": {
       "status": "done",
       "attempts": 2,

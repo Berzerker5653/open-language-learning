@@ -4019,6 +4019,33 @@ tasks:
   - "tsc clean; full desktop vitest green (one checkpoint per slice, never stacked); App.tsx LOC reduced by the slice"
   - "Evidence under state/evidence/APP-SPLIT-003D/gates.log with before/after LOC"
   required_for_desktop_1_0: false
+- id: APP-SPLIT-003E
+  milestone: M11
+  priority: P2
+  title: Budgeted slice of APP-SPLIT-001 - extract the practice wiring slice from App(), zero behavior change
+  dependencies: []
+  read_first:
+  - state/notes/APP-SPLIT-001.md
+  - apps/desktop/src/App.tsx
+  acceptance:
+  - "Practice wiring slice (openPractice + choose/check/finishPractice + practice state) moved into apps/desktop/src/app/practice-wiring.ts as a pure move with App.tsx keeping every hook"
+  - "tsc clean; full desktop vitest green (one checkpoint per slice, never stacked); App.tsx LOC reduced by the slice"
+  - "Evidence under state/evidence/APP-SPLIT-003E/gates.log with before/after LOC"
+  required_for_desktop_1_0: false
+- id: G4-EXPLAIN-001
+  milestone: M8
+  priority: P2
+  title: G4 first step - AI-001 explain provider interface (off by default) plus explain control on activity cards, information only
+  dependencies: []
+  read_first:
+  - state/notes/G4-EXPLAIN-001.md
+  acceptance:
+  - "Provider client behind ai_enabled=false by default with user-typed base URL and model; no cloud vendor baked in"
+  - "First explain gated by an in-app consent notice naming what is sent, stored and revocable in settings"
+  - "Explain panel renders L1-only information on the activity card; honest unavailable state when disabled or on failure"
+  - "Contract test pins that the explain path writes zero scheduler/progress/mastery state"
+  - "tsc and desktop vitest green with new red-first pins; cargo fmt/clippy/test -p lts-desktop green; gates.log under state/evidence/G4-EXPLAIN-001/"
+  required_for_desktop_1_0: false
 - id: APP-SPLIT-001
   milestone: M11
   priority: P2
@@ -4225,6 +4252,8 @@ execution_scope:
   - APP-SPLIT-003B
   - APP-SPLIT-003C
   - APP-SPLIT-003D
+  - APP-SPLIT-003E
+  - G4-EXPLAIN-001
   - README-DOC-DRIFT-001
   - PNPM-AUDIT-MINIMATCH-001
   - LAN-TOGGLE-PIN-001
