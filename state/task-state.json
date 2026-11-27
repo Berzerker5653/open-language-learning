@@ -4,11 +4,13 @@
   "active_task": null,
   "tasks": {
     "APP-SPLIT-003E": {
-      "status": "ready",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 1,
       "updated": "2026-11-26",
-      "notes": "Budgeted slice of APP-SPLIT-001: extract the practice wiring slice (openPractice + choose/check/finishPractice + practice state) from App() - pure move, App.tsx keeps every hook. Contract: card body + the RUN-2 recipe in state/notes/APP-SPLIT-001.md; board card lts-APP-SPLIT-003E.",
-      "evidence": []
+      "notes": "Budgeted slice of APP-SPLIT-001: practice wiring slice extracted pure-move to apps/desktop/src/app/practice-wiring.ts (runOpenPractice/runChoosePractice/runCheckPractice/runFinishPractice; App.tsx keeps every hook). App.tsx 4314 -> 4210 lines (measured via git show faa66d00). Gates: tsc clean; vitest 79 files / 709 tests; eslint set unchanged vs base. Code faa66d00.",
+      "evidence": [
+        "state/evidence/APP-SPLIT-003E/gates.log"
+      ]
     },
     "G4-EXPLAIN-001": {
       "status": "done",
@@ -124,7 +126,7 @@
       "attempts": 2,
       "updated": "2026-11-26",
       "notes": "Split ~5300-line App.tsx into per-surface modules - zero behavior change. Contract: state/notes/APP-SPLIT-001.md; board card lts-APP-SPLIT-001.",
-      "blocker": "Honest partial: pure module-scope helpers (primitives, placement-coverage), walkthrough, serve-probe, session/history (APP-SPLIT-003A) and settings/import (APP-SPLIT-003B) slices extracted (App.tsx 5336 -> 4509 lines; the <= ~1500 goal is NOT met - residual is one ~4509-line stateful App() with ~90 hooks). Gates green (tsc clean; vitest 77 files / 694 tests; validate_handoff PASSED). Codes ea9c188, 040456ae, 75ba816c, 88ce090e, bc0307cb. Resume recipe: state/notes/APP-SPLIT-001.md.",
+      "blocker": "Honest partial: pure module-scope helpers (primitives, placement-coverage), walkthrough, serve-probe, session/history (APP-SPLIT-003A) and settings/import (APP-SPLIT-003B) slices extracted (App.tsx 5336 -> 4210 lines; the <= ~1500 goal is NOT met - residual is one ~4210-line stateful App() with ~90 hooks). Gates green (tsc clean; vitest 77 files / 694 tests; validate_handoff PASSED). Codes ea9c188, 040456ae, 75ba816c, 88ce090e, bc0307cb, 96a3cc1c, ba713af4, faa66d00. Resume recipe: state/notes/APP-SPLIT-001.md.",
       "evidence": [
         "state/evidence/APP-SPLIT-001/gates.log"
       ]

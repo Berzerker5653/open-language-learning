@@ -1,0 +1,44 @@
+# APP-SPLIT-003E — gates log (2026-11-26)
+
+Lane: pure-move extraction of the practice wiring slice from App() into
+apps/desktop/src/app/practice-wiring.ts (runOpenPractice +
+runChoosePractice + runCheckPractice + runFinishPractice). App.tsx keeps
+owning every hook, all practice state and the refs; thin wrappers + a
+per-render practiceWiringDeps bundle keep all call sites unchanged.
+
+## LOC (measured from git, never from memory — REVIEW-003A D1)
+
+- Before (HEAD before this card, a5cabf22): 4314
+  (`git show a5cabf22:apps/desktop/src/App.tsx | wc -l`)
+- After (code commit faa66d00): 4210
+  (`git show faa66d00:apps/desktop/src/App.tsx | wc -l`)
+- Delta: -104 lines moved to app/practice-wiring.ts (234 lines incl.
+  deps interface + doc comments).
+
+## Gates (lane tier)
+
+1. `npx tsc --noEmit` — PASS (exit 0), run in apps/desktop after the move.
+2. `npx vitest run` — PASS: 79 test files / 709 tests, 9.53s.
+3. `npx eslint src/App.tsx` (and the new module) — error SET identical to
+   the a5cabf22 baseline (12 errors both, diff by message is empty): all
+   pre-existing re-export-shim unused-vars. No new lint errors introduced
+   (the two imports the move orphaned, drillStageId and isMediaMissing,
+   were removed in the same commit).
+
+## TDZ check (APP-SPLIT-003C lesson)
+
+practiceWiringDeps is built after sessionWiringDeps, and is read only
+inside the hoisted wrapper functions (openPractice/choosePractice/
+checkPractice/finishPractice), which fire from click handlers and
+home-wiring session code — never from a mount-time effect. No boot-path
+reader exists, so the early-assignment hazard does not apply here; the
+bundle sits at the earliest point where every referenced binding
+(including sessionWiringDeps) is in scope.
+
+## Test-tree sweep
+
+`grep -rn 'from "./App"'` pins only primitives re-exports
+(NO_ACTIVE_PACK, packRequest, …) — untouched by this slice. No test file
+references openPractice/choosePractice/checkPractice/finishPractice
+(journeys included); the journeys mount <App/> and exercise the practice
+runner through the DOM, and all journey suites pass unchanged.
