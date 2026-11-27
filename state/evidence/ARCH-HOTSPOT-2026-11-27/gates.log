@@ -1,0 +1,19 @@
+ARCH-HOTSPOT-2026-11-27 LANE gates (apps/desktop touched only; no Rust touched)
+
+- npx prettier --check apps/desktop/src/App.tsx -> clean (exit 0)
+  NOTE: HEAD's App.tsx was prettier-clean; my hunks briefly violated print
+  width, fixed by prettier --write (diff contained ONLY my hunks — verified).
+- npx tsc --noEmit (apps/desktop) -> exit 0
+- npx vitest run (apps/desktop, full package incl. journeys) -> 725 passed (725), 0 failed
+- npx eslint apps/desktop/src/App.tsx -> exit 0
+
+Cargo gates not applicable (no Rust in lane). src-tauri/src/lib.rs was dirty
+with a sibling lane's WIP at card start — untouched, unstaged, not swept into
+either commit (staged file set: apps/desktop/src/App.tsx; then the two
+evidence files only).
+
+RECORD NOTE: this card's evidence dir carries TWO analyses. note.md = this
+run's scan + the shipped App.tsx story_audio fix (code 0150f827). notes.md =
+preserved option-b analysis of the home.tsx path-module entanglement from an
+earlier run of this card that died before committing (reconciliation section
+appended; that refactor is filed for a future card, not executed).
