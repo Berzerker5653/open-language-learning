@@ -1,0 +1,37 @@
+# REVIEW-SPEAK-PRACTICE-001 — reviewer re-runs at HEAD (2026-11-27, ~10:04 MST)
+
+Main tree was dirty with FIX-M1-PROGRESSION-001 WIP including
+apps/desktop/src-tauri/src/lib.rs — the same file this lane touches — so every Rust
+gate was re-run in a detached worktree at HEAD (media hard-linked with `cp -al -n`,
+gitignored apps/desktop/dist symlinked from the main tree, shared CARGO_TARGET_DIR).
+TS/JS files are clean at HEAD in the main tree (sibling WIP is Rust-only), so the
+frontend gates ran from the main tree directly.
+
+Worktree: /home/hunter/.hermes/cache/scratch/review-speak-head (`git worktree add
+--detach <wt> HEAD`), removed after the run.
+
+== python3 tools/validate_handoff.py --require-explicit-ledger-records (main tree) ==
+HANDOFF VALIDATION PASSED (2355 data files checked); exit 0
+(6 pre-existing WARN rows: minimal-pack fixture + 5 optional tasks without ledger records)
+
+== cargo fmt --all --check (worktree @ HEAD) ==
+exit 0
+
+== cargo test -p lts-desktop --lib free_speaking (worktree @ HEAD, real vendor aligner
+   present under ~/.cache/lts-bench) ==
+running 3 tests
+test tests::free_speaking_check_abstains_when_model_off ... ok
+test tests::free_speaking_check_scores_a_real_recording ... ok
+test tests::free_speaking_check_performs_zero_store_writes ... ok
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 255 filtered out
+(255 filtered = HEAD's suite grew past the lane's 251+2 by later lanes; consistent)
+
+== npx tsc --noEmit (apps/desktop, TS files == HEAD) ==
+exit 0
+
+== npx vitest run src/free-speaking.test.tsx src/journeys/free-speaking.journey.tsx
+   src/session-chrome.test.tsx (apps/desktop, TS files == HEAD) ==
+Test Files  3 passed (3)
+     Tests  28 passed (28)
+
+All reviewer gates GREEN. Verdicts: SPEC PASS-WITH-NOTES, STANDARDS PASS-WITH-NOTES.
