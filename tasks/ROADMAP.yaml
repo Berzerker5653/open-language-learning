@@ -4217,6 +4217,18 @@ tasks:
   - Settings exposes per-language model pickers and a catalog refresh action with honest runtime-gating copy that passes the learner-copy audit.
   - Lane gates green (fmt, clippy on lts-desktop all-targets, desktop lib suite, tsc and vitest on the frontend).
   required_for_desktop_1_0: false
+- id: VENDOR-TEST-SERIAL-001
+  milestone: M8
+  priority: P2
+  title: "Serialize vendor-backed dictation lib tests behind one process-wide lock (ends the whisper-sidecar engine-error flake class)"
+  dependencies: []
+  read_first:
+  - state/notes/VENDOR-TEST-SERIAL-001.md
+  acceptance:
+  - "The 7 dictation_vendor-gated desktop lib tests hold a shared mutex for their whole lifetime (spawn, checks, teardown), so no concurrent libtest thread can race the whisper sidecar start/stop."
+  - "Test-only change: no production code touched, no assertion weakened; full cargo test -p lts-desktop --lib green with zero engine-error failures."
+  - "Lane gates green (fmt --all --check, clippy -p lts-desktop --all-targets -D warnings, desktop lib suite)."
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -4410,4 +4422,9 @@ execution_scope:
   - RU-GOALS-SCRUB-001
   - TODAY-FIRSTSCREEN-001
   - SPEECH-CATALOG-001
+  - VENDOR-TEST-SERIAL-001
+  - FIX-M1-CONTENT-JA-001
+  - FIX-M1-CONTENT-RU-001
+  - FIX-M1-PATH-VIS-001
+  - LEARNER-REVIEW-M2-001
   public_publication_authorized: false

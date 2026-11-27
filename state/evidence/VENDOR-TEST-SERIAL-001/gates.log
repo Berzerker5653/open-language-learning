@@ -1,0 +1,35 @@
+VENDOR-TEST-SERIAL-001 — LANE gates (2026-11-27, controller in-chat)
+
+1) cargo fmt --all --check                     -> exit 0 (FMT_OK)
+2) cargo clippy -p lts-desktop --all-targets -- -D warnings
+                                               -> exit 0, Finished dev profile, 0 diagnostics
+3) cargo test -p lts-desktop --lib (full suite, patched tree, CARGO_TARGET_DIR=~/game-dev/LTS/target)
+                                               -> test result: ok. 264 passed; 0 failed; 2 ignored; 0 measured; finished in 386.90s
+
+Flake baseline being fixed (pre-patch binaries, same day):
+- run proc_0d3045f27855: full-suite failure dictation_check_matches_spoken_target -> assert left: Some("engine-error")
+- earlier in the FIX-M1 review cycle: same engine-error signature on vendor tests, twice
+- run with fix at 16:36 local: green, no vendor failure.
+
+Operational rule recorded with this card: do NOT run lane gate scripts and full `cargo test -p
+lts-desktop --lib` concurrently — cargo does not serialize test EXECUTION across processes, so two
+suites race the same whisper sidecar even though builds are lock-serialized. The in-process mutex
+fixes the intra-suite race; cross-process overlap stays prohibited.
+
+Wall-time note: the suite intentionally got slower (~6.5 min) because the 7 vendor-backed tests
+serialize by design; that is the accepted cost of removing the flake class.
+
+PROVENANCE NOTE (commit sweep): the lib.rs fix landed in commit 0a06ebaf
+(evidence(REVIEW-FIX-M1-PROGRESSION-001)) because the review worker's staging swept the
+controller's staged lib.rs change into its evidence commit. Content is byte-identical to what this
+card shipped; no work lost, no history rewritten (worker still active on the repo). Verify with
+`git show 0a06ebaf -- apps/desktop/src-tauri/src/lib.rs`. Lesson logged: when a lane worker is
+running on the shared tree, commit code FIRST / stage narrowly at the last possible second — a
+worker's `git add -A` will sweep the working tree.
+
+LEDGER HYGIENE bundled with this card's ledger commit: execution_scope.optional_tasks was missing
+4 already-flagged optional cards (FIX-M1-CONTENT-JA-001, FIX-M1-CONTENT-RU-001,
+FIX-M1-PATH-VIS-001, LEARNER-REVIEW-M2-001) — validator red at HEAD (0a06ebaf) before this commit;
+fixed by appending the 4 ids (verified via detached-worktree run of validate_handoff at HEAD).
+
+

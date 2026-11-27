@@ -3684,6 +3684,17 @@
         "state/notes/SPEECH-CATALOG-001.md",
         "docs/adr/0042-per-language-speech-models-with-remote-catalog.md"
       ]
+    },
+    "VENDOR-TEST-SERIAL-001": {
+      "status": "done",
+      "attempts": 1,
+      "updated": "2026-11-27",
+      "summary": "Serialized the 7 dictation_vendor-gated desktop lib tests behind one process-wide mutex (dictation_vendor returns TempDir + guard), ending the whisper-sidecar engine-error full-suite flake class. Test-only; suite 264 passed 0 failed after fix.",
+      "notes": "Landed in commit 0a06ebaf via controller staging swept into the review lane evidence commit (byte-identical content; provenance note + verification command in gates.log). fmt 0, clippy -p lts-desktop --all-targets -D warnings 0, lib 264/0 in 386.9s.",
+      "evidence": [
+        "state/evidence/VENDOR-TEST-SERIAL-001/gates.log",
+        "state/notes/VENDOR-TEST-SERIAL-001.md"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
