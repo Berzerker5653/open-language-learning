@@ -4144,6 +4144,22 @@ tasks:
   - "Lockfile re-synced; install + full desktop suite green"
   - "Evidence under state/evidence/PNPM-AUDIT-MINIMATCH-001/gates.log"
   required_for_desktop_1_0: false
+- id: SPEECH-CATALOG-001
+  milestone: M6
+  priority: P1
+  title: Per-language speech model preferences and a remotely updatable model catalog (ADR-0042)
+  dependencies:
+  - SPEECH-005
+  read_first:
+  - docs/adr/0042-per-language-speech-models-with-remote-catalog.md
+  - state/notes/SPEECH-CATALOG-001.md
+  acceptance:
+  - Catalog v2 parses per-entry language and recommended fields, and a remote catalog is adopted only after full validation (version floor, unique ids, installable urls, no path traversal), failing closed to the last-good or bundled copy on any rejection.
+  - speech.json v2 stores default plus per-language picks with on-load v1 migration, resolution falls back from the per-language entry to the default, and off is honored at both levels, all pinned by tests.
+  - Speech consumption sites resolve the target locale from the installed pack manifest rather than the UI language.
+  - Settings exposes per-language model pickers and a catalog refresh action with honest runtime-gating copy that passes the learner-copy audit.
+  - Lane gates green (fmt, clippy on lts-desktop all-targets, desktop lib suite, tsc and vitest on the frontend).
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -4336,4 +4352,5 @@ execution_scope:
   - FIX-PLACEMENT-COVERAGE-001
   - RU-GOALS-SCRUB-001
   - TODAY-FIRSTSCREEN-001
+  - SPEECH-CATALOG-001
   public_publication_authorized: false
