@@ -1,0 +1,58 @@
+REVIEW-SPEECH-CATALOG-001 reviewer gate re-runs
+commit under review: 873bd3dbccb231dc26d382e2113f614e3a142e1a
+started: 2026-11-27T15:50:05-07:00
+== cargo fmt --all --check ==
+exit=0
+== cargo clippy -p lts-desktop --all-targets -- -D warnings ==
+    Checking wry v0.57.0
+    Checking tauri-runtime-wry v2.12.1
+    Checking tauri v2.12.1
+    Checking tauri-plugin-single-instance v2.5.2
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 13.63s
+clippy_exit=0
+== cargo test -p lts-desktop --lib ==
+test tests::sharded_pack_directories_reach_every_reader ... ok
+test tests::provenance_payload_covers_every_installed_pack_verbatim ... ok
+test tests::writing_targets_are_parsed_once_per_version_root ... ok
+test tests::stress_display_settings_are_data_driven_and_persisted ... ok
+test tests::the_aligner_language_comes_from_the_pack_manifest ... ok
+
+test result: ok. 264 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 331.04s
+
+test_exit=0
+== npm run -s typecheck ==
+exit=0
+== npm run -s test (vitest) ==
+ RUN  v5.0.3 /home/hunter/.hermes/cache/scratch/wt-speech-review/apps/desktop
+
+
+ Test Files  83 passed (83)
+      Tests  725 passed (725)
+   Start at  15:56:54
+   Duration  11.50s (transform 37%, tests 31%, environment 18%, import 13%, worker 1%)
+
+  Transform  |node| transforming modules took 17.82s · 68% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+
+vitest_exit=0
+finished: 2026-11-27T15:57:06-07:00
+
+== reviewer addendum ==
+-- npx prettier --check (changed frontend files) --
+npm notice run 'prettier' --check src/App.tsx src/settings.tsx
+Checking formatting...
+All matched files use Prettier code style!
+prettier_exit=0
+-- npx eslint (changed frontend files) --
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'eslint' src/App.tsx src/settings.tsx
+eslint_exit=0
+-- adversarial gate-defeat probe (throwaway module, not committed) --
+all rejects confirmed: non-numeric version, 201 models, empty id, github.com.evil.com, userinfo host, port, plain http, uppercase sha, size 0, nested '..' path; tampered-cache variants (garbage/partial/numeric-version) all fall back to bundled; unpublished placeholder exempt from pinning but installable()==false.
+HOLE (D6): zero-files entry => validate_remote_catalog Ok + installable()==true (PROBE zero-files validate => Ok(()) installable => true)
+-- python3 tools/validate_handoff.py (this worktree at 873bd3db) --
+PASSED (2293 data files checked) [run before probe edits; WARN lines are standing fixtures note]
+-- tools/audit_learner_copy.py --
+findings: 0 (main-tree run; frontend copy untouched by sibling WIP)
+reviewer done: 2026-11-27T16:00:02-07:00
