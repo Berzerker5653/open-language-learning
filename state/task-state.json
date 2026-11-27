@@ -3621,11 +3621,15 @@
       "notes": "Code+ledger this session 2026-11-25: ServePairingCard (onboarding.tsx) renders before any session exists in serve mode - POST /pair (same shape as LanAccessCard), disabled submit until PIN entered, reload on success, assertive alert on failure. App.tsx probes list_profiles once on mount in serve mode ('pairing required' -> serveUnpaired -> card replaces the wizard). Full desktop suite 667/667 (was 665 with the 2 red contract tests), tsc/prettier/eslint clean, validate_handoff PASSED; live pair flow verified against a real serve was not re-run (see gates.log + notes)."
     },
     "SPEAK-PRACTICE-001": {
-      "status": "ready",
-      "attempts": 0,
-      "updated": "2026-11-26",
-      "notes": "Owner-endorsed 2026-11-26. Free-speaking mode, per-word whisper-sidecar alignment coloring, guided-only zero-write. Contract: state/notes/SPEAK-PRACTICE-001.md; board card lts-SPEAK-PRACTICE-001.",
-      "evidence": []
+      "status": "done",
+      "attempts": 2,
+      "updated": "2026-11-27",
+      "notes": "Owner-endorsed 2026-11-26. Free-speaking mode, per-word whisper-sidecar alignment coloring, guided-only zero-write. Contract: state/notes/SPEAK-PRACTICE-001.md; board card lts-SPEAK-PRACTICE-001. Shipped 2026-11-27 (code 6e5bc83e, after attempt 1 died at iteration budget with uncommitted WIP that this run re-verified and shipped): free_speaking_check command mirroring dictation abstention, FreeSpeakingAttempt with no profile/content id (structural zero-write), 5 Rust pins incl. vendor-gated real-recording scoring on the whisper aligner, vitest 81 files/716 tests + tsc, full desktop lib suite 251 passed/0 failed. GUI mic-recording screenshot deferred to owner manual pass (not claimed); real-recording scoring leg green automated.",
+      "evidence": [
+        "state/evidence/SPEAK-PRACTICE-001/gates.log",
+        "state/evidence/SPEAK-PRACTICE-001/gates-frontend.log",
+        "state/evidence/SPEAK-PRACTICE-001/gates-backend.log"
+      ]
     },
     "WRITE-PRACTICE-001": {
       "status": "ready",

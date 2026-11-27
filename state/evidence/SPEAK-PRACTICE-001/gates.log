@@ -1,0 +1,41 @@
+# SPEAK-PRACTICE-001 — Rust lane gates (worker run 2, 2026-11-27T02:59:07-07:00)
+# Recovery worker re-ran every gate personally on the WIP tree.
+
+== cargo fmt --all --check ==
+fmt exit: 0
+
+== cargo clippy -p lts-desktop --all-targets -- -D warnings ==
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.28s
+clippy exit: 0
+
+== cargo test -p lts-desktop --lib free_speaking (vendor aligner present: /home/hunter/.cache/lts-bench/ggml-tiny.bin /home/hunter/.cache/lts-bench/whisper.cpp/build/bin/whisper-cli ) ==
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.22s
+     Running unittests src/lib.rs (target/debug/deps/lts_desktop-1caef568b73e5b79)
+
+running 3 tests
+test tests::free_speaking_check_abstains_when_model_off ... ok
+test tests::free_speaking_check_scores_a_real_recording ... ok
+test tests::free_speaking_check_performs_zero_store_writes ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 250 filtered out; finished in 0.87s
+
+filtered-test exit: 0
+
+== full desktop lib suite (two independent green runs of this tree) ==
+run A (attempt-1 writer, completed 2026-11-27T02:59:09-07:00 at 02:56) and run B (this worker, exited
+02:59): both report 'test result: ok. 251 passed; 0 failed; 2 ignored'.
+Their interleaved raw output is preserved in gates-backend.log (fd collision between
+the two writers garbled section order; the two 'test result' lines are unambiguous).
+
+== manual acceptance leg (one real recording scored on the aligner build) ==
+The aligner build IS runnable on this machine (whisper-cli + ggml-tiny under
+~/.cache/lts-bench). The real-recording scoring leg is green AUTOMATED:
+tests::free_speaking_check_scores_a_real_recording — a real pack clip
+(media/ja.lex.demo.obaasan.wav) through the real whisper.cpp sidecar against
+its own prompt: abstain_reason None, 1 word colored "matched", score >= 0.9.
+tests::free_speaking_check_performs_zero_store_writes ran the same vendor
+scoring path and asserted the scheduler/mastery/error-ledger/mined/lookup
+stores byte-identical before/after.
+DEFERRED (not claimed): the GUI screenshot of a live mic recording inside the
+desktop app — a headless board worker has no microphone. Owner manual pass.
+Frontend gates: gates-frontend.log (tsc exit 0; vitest 81 files / 716 tests).

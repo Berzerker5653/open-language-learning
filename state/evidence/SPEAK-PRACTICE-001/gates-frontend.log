@@ -1,0 +1,34 @@
+# SPEAK-PRACTICE-001 — frontend lane gates (worker run 2, 2026-11-27)
+
+All commands run from /home/hunter/game-dev/LTS/apps/desktop by the recovery
+worker (attempt 2 took over attempt 1's uncommitted WIP and re-ran every gate
+personally; nothing below is trusted from the dead run's log).
+
+== npx tsc --noEmit ==
+exit 0 (no output)
+
+== npx vitest run free-speaking session-chrome (targeted) ==
+Test Files  3 passed (3)
+     Tests  28 passed (28)
+  Duration  1.81s
+(covers free-speaking.test.tsx, journeys/free-speaking.journey.tsx,
+session-chrome.test.tsx badge-count re-pin)
+
+== npx vitest run (full desktop frontend suite) ==
+Test Files  81 passed (81)
+     Tests  716 passed (716)
+  Duration  14.30s
+
+Pins shipped by this card (red-first, green now):
+- per-word matched/fuzzy/missing coloring inside the prompt (CORRECTION-IN-
+  ARTIFACT-001 inline pattern carried to speech)
+- honest base-build abstain card naming the "whisper.cpp aligner" runtime
+  (data-unavailable="true"), zero coloring, zero percentage
+- abstention renders NO fabricated coloring and no number
+- hub reachability + journey legs (free-speaking reachable from the practice
+  hub via the same encounter-gated dictation_target pool)
+- GUIDED-ONLY zero-write pin: journey denylists every scheduler/mastery/plan/
+  mined/error-ledger write verb around the whole record->score flow; and the
+  Rust FreeSpeakingAttempt struct carries NO profile_id/content_id, so the
+  command cannot even address learner state (contract test
+  free_speaking_check_performs_zero_store_writes).
