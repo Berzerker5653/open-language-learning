@@ -40,6 +40,7 @@ import {
 import { MemoryStatsStrip, ProgressZeroState, type MemoryStats } from "./memory-stats";
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
 import { DictationPractice, type DictationResult, type DictationSentence } from "./dictation";
+import { FreeSpeakingPanel, type FreeSpeakingScore } from "./free-speaking";
 import {
   LanguagePanel,
   installedPacksDeclareSetting,
@@ -199,6 +200,7 @@ export function App() {
     | "progress"
     | "pronunciation"
     | "dictation"
+    | "free-speaking"
     | "writing"
     | "scenarios"
     | "shadowing"
@@ -284,6 +286,13 @@ export function App() {
   const [dictResult, setDictResult] = useState<DictationResult | null>(null);
   const [dictSentence, setDictSentence] = useState<DictationSentence | null>(null);
   const [dictOffset, setDictOffset] = useState(0);
+  // SPEAK-PRACTICE-001: free-speaking — the prompt reuses the SAME
+  // encounter-gated pool as dictation; the score is coaching state held in
+  // this screen only (the mode never touches the scheduler; ADR-0017).
+  const [freePrompt, setFreePrompt] = useState<DictationSentence | null>(null);
+  const [freePromptError, setFreePromptError] = useState<string | null>(null);
+  const [freeOffset, setFreeOffset] = useState(0);
+  const [freeResult, setFreeResult] = useState<FreeSpeakingScore | null>(null);
   const [recording, setRecording] = useState(false);
   const [attemptUrl, setAttemptUrl] = useState<string | null>(null);
   // ACCUMULATION-METERS-001 (U11): null until the world_state read lands —
@@ -2072,6 +2081,9 @@ export function App() {
       case "dictation":
         void openDictation();
         break;
+      case "free-speaking":
+        void openFreeSpeaking();
+        break;
       case "writing":
         void openWriting();
         break;
@@ -2982,6 +2994,91 @@ export function App() {
     void fetchDictation(0);
   }
 
+  // SPEAK-PRACTICE-001: free-speaking opens with a prompt from the same
+  // encounter-gated pool (`dictation_target`) and a cleared score. No write
+  // exists on this route: the score is screen state only.
+  function openFreeSpeaking() {
+    setRoute("free-speaking");
+    setFreeOffset(0);
+    setFreeResult(null);
+    void fetchFreePrompt(0);
+  }
+
+  function newFreePrompt() {
+    const next = freeOffset + 1;
+    setFreeOffset(next);
+    setFreeResult(null);
+    void fetchFreePrompt(next);
+  }
+
+  async function fetchFreePrompt(offset: number) {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      const req = await packRequest<DictationSentence>(inv, selectedPack, "dictation_target", {
+        profileId,
+        offset,
+      });
+      if (!req.ok) {
+        setFreePrompt(null);
+        setFreePromptError(req.error);
+        return;
+      }
+      setFreePrompt(req.value);
+      setFreePromptError(null);
+    } catch (e) {
+      setFreePrompt(null);
+      setFreePromptError(String(e));
+    }
+  }
+
+  // The recording goes to `free_speaking_check` — the engine's own abstention
+  // vocabulary answers (missing aligner, model off, rejected quality, dead
+  // sidecar), and the result lands in state this screen alone renders. The
+  // wire attempt carries no profile/content id: the guided-only invariant is
+  // structural on the Rust side.
+  async function analyzeFreeSpeaking(wav: Uint8Array) {
+    const inv = detectInvoke();
+    const target = freePrompt?.text ?? "";
+    if (!target) {
+      setAudioMsg("No prompt loaded yet — wait for one, or press New prompt.");
+      return;
+    }
+    if (!inv) {
+      setFreeResult({
+        words: [],
+        heard: "",
+        target,
+        score: null,
+        abstain_reason: "aligner-unavailable",
+        mode: "guided",
+      });
+      return;
+    }
+    try {
+      const req = await packAttemptRequest<FreeSpeakingScore>(
+        inv,
+        selectedPack,
+        "free_speaking_check",
+        { target_text: target, wav_b64: toB64(wav) },
+      );
+      if (!req.ok) {
+        setAudioMsg(req.error);
+        return;
+      }
+      setFreeResult(req.value);
+    } catch {
+      setFreeResult({
+        words: [],
+        heard: "",
+        target,
+        score: null,
+        abstain_reason: "aligner-unavailable",
+        mode: "guided",
+      });
+    }
+  }
+
   function newDictationSentence() {
     const next = dictOffset + 1;
     setDictOffset(next);
@@ -3000,9 +3097,9 @@ export function App() {
     rate: number;
   }
   const captureOwner = useRef(new CaptureOwner<Capture>()).current;
-  const captureRouteRef = useRef<"pronunciation" | "dictation" | "practice-speaking">(
-    "pronunciation",
-  );
+  const captureRouteRef = useRef<
+    "pronunciation" | "dictation" | "free-speaking" | "practice-speaking"
+  >("pronunciation");
 
   function recordAttempt() {
     void (async () => {
@@ -3113,6 +3210,8 @@ export function App() {
     setAttemptUrl(URL.createObjectURL(new Blob([wav], { type: "audio/wav" })));
     if (captureRouteRef.current === "dictation") {
       void analyzeDictation(wav);
+    } else if (captureRouteRef.current === "free-speaking") {
+      void analyzeFreeSpeaking(wav);
     } else if (captureRouteRef.current === "practice-speaking") {
       void analyzeSpeaking(wav);
     } else {
@@ -3386,6 +3485,7 @@ export function App() {
               route === "hub" ||
               route === "pronunciation" ||
               route === "dictation" ||
+              route === "free-speaking" ||
               route === "writing" ||
               route === "scenarios" ||
               route === "shadowing" ||
@@ -3521,6 +3621,28 @@ export function App() {
             imeCandidates={imeCandidates}
             acceptedOffers={acceptedOffers}
             onAcceptOffer={(o) => void acceptErrorOffer(o, setAudioMsg)}
+          />
+        </>
+      ) : route === "free-speaking" ? (
+        <>
+          {audioMsg && (
+            <p role="status" className="notice">
+              {audioMsg}
+            </p>
+          )}
+          <FreeSpeakingPanel
+            prompt={freePrompt}
+            promptError={freePromptError}
+            result={freeResult}
+            recording={recording}
+            hasAttempt={attemptUrl !== null}
+            onRecord={() => {
+              captureRouteRef.current = "free-speaking";
+              recordAttempt();
+            }}
+            onStop={stopAndCheck}
+            onPlayAttempt={() => attemptUrl && playBlobUrl(attemptUrl, true)}
+            onNewPrompt={newFreePrompt}
           />
         </>
       ) : route === "shadowing" ? (

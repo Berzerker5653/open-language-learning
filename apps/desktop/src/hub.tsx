@@ -13,6 +13,7 @@ import { EmptyState } from "./empty-state";
 export type HubMode =
   | "pronunciation"
   | "dictation"
+  | "free-speaking"
   | "writing"
   | "scenarios"
   | "shadowing"
@@ -48,6 +49,16 @@ export const HUB_MODES: {
     id: "dictation",
     label: "Speaking",
     blurb: "Read a sentence aloud and see what the local model heard. Guided: nothing is graded.",
+    gradeKind: "formative",
+  },
+  {
+    // SPEAK-PRACTICE-001: free-speaking is the guided sibling of Speaking —
+    // a prompt from the lesson pool, a free attempt, and per-word coloring
+    // from the whisper.cpp aligner. Coaching only; the card says so.
+    id: "free-speaking",
+    label: "Free speaking",
+    blurb:
+      "Say the sentence aloud and see which words came through, word by word. Guided: nothing is graded.",
     gradeKind: "formative",
   },
   {

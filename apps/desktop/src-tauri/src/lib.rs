@@ -5968,6 +5968,41 @@ struct DictationTarget {
     gloss: String,
 }
 
+// ---- SPEAK-PRACTICE-001: free-speaking practice ----
+
+/// A free-speaking attempt. Deliberately NO profile_id or content_id: the
+/// guided-only invariant is structural — this command cannot even address
+/// the learner's scheduler/mastery/plan/error-ledger state (contract pinned
+/// by `free_speaking_check_performs_zero_store_writes`).
+#[derive(serde::Deserialize, Clone)]
+struct FreeSpeakingAttempt {
+    pack_id: String,
+    /// The prompt sentence the learner speaks against.
+    target_text: String,
+    wav_b64: String,
+}
+
+/// One prompt word with its alignment status against the transcript.
+#[derive(Serialize, Clone, Debug, PartialEq)]
+struct FreeSpeakingWord {
+    surface: String,
+    status: &'static str, // "matched" | "fuzzy" | "missing"
+}
+
+#[derive(Serialize)]
+struct FreeSpeakingScore {
+    /// Per-word coloring. Empty exactly when the check abstained — the
+    /// renderer never receives coloring it has to second-guess.
+    words: Vec<FreeSpeakingWord>,
+    heard: String,
+    target: String,
+    /// Coaching fraction 0..1; None exactly when abstained.
+    score: Option<f64>,
+    abstain_reason: Option<String>,
+    /// Free-speaking is coaching, never a grade or mastery; always guided.
+    mode: &'static str,
+}
+
 fn empty_pitch(reason: &str) -> PitchComparison {
     PitchComparison {
         unavailable_reason: Some(reason.into()),
@@ -7093,6 +7128,181 @@ fn dictation_target_at(
         );
     }
     Ok(pool[(offset as usize) % pool.len()].clone())
+}
+
+/// SPEAK-PRACTICE-001: per-word alignment for free-speaking coloring.
+/// Deterministic and language-agnostic: whitespace split, LCS over
+/// normalized token forms for exact `matched` anchors, then unmatched runs
+/// paired in order and scored by character match (`fuzzy` at ratio >= 0.6).
+/// No coloring is ever fabricated — a target word without a plausible heard
+/// counterpart is `missing`, never a guess.
+fn align_free_words(target_text: &str, heard: &str) -> Vec<FreeSpeakingWord> {
+    let target: Vec<&str> = target_text.split_whitespace().collect();
+    let heard_tokens: Vec<&str> = heard.split_whitespace().collect();
+    let norm_t: Vec<Vec<char>> = target.iter().map(|w| normalize_for_match(w)).collect();
+    let norm_h: Vec<Vec<char>> = heard_tokens
+        .iter()
+        .map(|w| normalize_for_match(w))
+        .collect();
+    let (n, m) = (norm_t.len(), norm_h.len());
+    // Classic LCS table over exact normalized tokens.
+    let mut dp = vec![vec![0usize; m + 1]; n + 1];
+    for i in (0..n).rev() {
+        for j in (0..m).rev() {
+            dp[i][j] = if norm_t[i] == norm_h[j] {
+                dp[i + 1][j + 1] + 1
+            } else {
+                dp[i + 1][j].max(dp[i][j + 1])
+            };
+        }
+    }
+    let mut status: Vec<Option<&'static str>> = vec![None; n];
+    let mut anchors: Vec<(usize, usize)> = Vec::new();
+    let (mut i, mut j) = (0usize, 0usize);
+    while i < n && j < m {
+        if norm_t[i] == norm_h[j] {
+            anchors.push((i, j));
+            status[i] = Some("matched");
+            i += 1;
+            j += 1;
+        } else if dp[i + 1][j] >= dp[i][j + 1] {
+            i += 1;
+        } else {
+            j += 1;
+        }
+    }
+    // Pair the unmatched runs between anchors in order; a paired ratio
+    // >= 0.6 is something close (`fuzzy`), anything else is `missing`.
+    let mut ti = 0usize;
+    let mut hi = 0usize;
+    for a in 0..=anchors.len() {
+        let (ta, ha) = anchors.get(a).copied().unwrap_or((n, m));
+        let h_run = ha - hi;
+        for k in 0..(ta - ti) {
+            let idx = ti + k;
+            status[idx] = Some(if k < h_run {
+                let (ratio, _) =
+                    lts_speech_runtime::alignment::char_match(&norm_t[idx], &norm_h[hi + k]);
+                if ratio >= 0.6 { "fuzzy" } else { "missing" }
+            } else {
+                "missing"
+            });
+        }
+        if ta == n {
+            break;
+        }
+        ti = ta + 1;
+        hi = ha + 1;
+    }
+    target
+        .iter()
+        .zip(status)
+        .map(|(surface, st)| FreeSpeakingWord {
+            surface: (*surface).to_string(),
+            status: st.unwrap_or("missing"),
+        })
+        .collect()
+}
+
+/// Free-speaking check (SPEAK-PRACTICE-001): speak a prompt freely, get
+/// per-word coloring back. Mirrors `dictation_check_at`'s abstention
+/// semantics (fail-closed: quality rejection, empty transcript, a dead
+/// sidecar, or a transcript less than 40% like the prompt all ABSTAIN —
+/// no coloring is fabricated, docs/05/SPEECH-007 posture) and never opens
+/// the store: this path is guided coaching with zero learner writes.
+fn free_speaking_check_at(
+    data: &Path,
+    attempt: FreeSpeakingAttempt,
+) -> Result<FreeSpeakingScore, String> {
+    if !packs::valid_pack_id(&attempt.pack_id) {
+        return Err("pack not allowlisted".into());
+    }
+    let abstain = |reason: String, heard: String| FreeSpeakingScore {
+        words: Vec::new(),
+        heard,
+        target: attempt.target_text.clone(),
+        score: None,
+        abstain_reason: Some(reason),
+        mode: "guided",
+    };
+    // The recognizer language comes from the installed pack, never a
+    // hardcoded locale (RU-MODALITY-PRACTICE-001 / ADR-0017).
+    let packs_root = data.join("packs");
+    let version = lts_langpack::archive::current_version(&attempt.pack_id, &packs_root)
+        .ok_or("pack not installed")?;
+    let pack_dir = packs_root.join(&attempt.pack_id).join(&version);
+    let asr_language = match pack_asr_language(&pack_dir) {
+        Ok(lang) => lang,
+        Err(_) => return Ok(abstain("pack-locale-unknown".into(), String::new())),
+    };
+    let src = match aligner_probe(data) {
+        Ok(src) => src,
+        Err(miss) => return Ok(abstain(aligner_miss_reason(&miss), String::new())),
+    };
+    use base64::Engine;
+    let wav_bytes = base64::engine::general_purpose::STANDARD
+        .decode(&attempt.wav_b64)
+        .map_err(|_| "invalid wav payload".to_string())?;
+    if wav_bytes.len() > 10 * 1024 * 1024 {
+        return Err("attempt too large".into());
+    }
+    let audio = lts_speech_runtime::from_wav16(&wav_bytes).map_err(|e| e.to_string())?;
+    let q = lts_speech_runtime::quality::EnergyVad::default().quality(&audio);
+    if matches!(q, lts_speech_api::ProviderOutcome::QualityRejected { .. }) {
+        return Ok(abstain(outcome_reason(&q), String::new()));
+    }
+    let tokens = match lts_speech_runtime::alignment::run_whisper_words(
+        &src.binary,
+        &src.model,
+        &asr_language,
+        &audio,
+        None,
+    ) {
+        Ok(t) => t,
+        Err(r) if r == lts_speech_runtime::sidecar::SIDECAR_TIMEOUT_REASON => {
+            return Ok(abstain(r, String::new()));
+        }
+        // Every other recognizer fault is the app's problem, never a
+        // verdict about the learner (sweep finding 12).
+        Err(_) => return Ok(abstain("engine-error".into(), String::new())),
+    };
+    let heard: String = tokens
+        .iter()
+        .map(|t| t.text.trim())
+        .collect::<Vec<_>>()
+        .join(" ");
+    if heard.trim().is_empty() {
+        return Ok(abstain("asr-no-speech".into(), String::new()));
+    }
+    let target_chars = normalize_for_match(&attempt.target_text);
+    let heard_chars = normalize_for_match(&heard);
+    let (ratio, _) = lts_speech_runtime::alignment::char_match(&target_chars, &heard_chars);
+    // Below 0.4 the transcript is not a rendition of this prompt — coloring
+    // against it would be a fabrication, not coaching.
+    if ratio <= 0.4 {
+        return Ok(abstain("uncertain".into(), heard));
+    }
+    let words = align_free_words(&attempt.target_text, &heard);
+    if words.is_empty() {
+        return Ok(abstain("uncertain".into(), heard));
+    }
+    let points: f64 = words
+        .iter()
+        .map(|w| match w.status {
+            "matched" => 1.0,
+            "fuzzy" => 0.5,
+            _ => 0.0,
+        })
+        .sum();
+    let score = (points / words.len() as f64 * 100.0).round() / 100.0;
+    Ok(FreeSpeakingScore {
+        words,
+        heard,
+        target: attempt.target_text,
+        score: Some(score),
+        abstain_reason: None,
+        mode: "guided",
+    })
 }
 
 /// Reference audio for immediate comparison; served from the installed
@@ -11757,6 +11967,17 @@ fn dictation_target(
     dictation_target_at(&data_dir(), &pack_id, &profile_id, offset)
 }
 
+/// Free-speaking practice (SPEAK-PRACTICE-001): speak a prompt freely and
+/// get per-word matched/fuzzy/missing coloring back. Guided only — this
+/// command never writes scheduler, mastery, plan, or error-ledger state.
+#[tauri::command]
+async fn free_speaking_check(attempt: FreeSpeakingAttempt) -> Result<FreeSpeakingScore, String> {
+    // Recognition runs a whisper subprocess: multi-second work (K-73).
+    tauri::async_runtime::spawn_blocking(move || free_speaking_check_at(&data_dir(), attempt))
+        .await
+        .map_err(|e| format!("free-speaking-check failed: {e}"))?
+}
+
 fn now_secs() -> u64 {
     std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
@@ -11870,6 +12091,7 @@ macro_rules! lts_command_table {
             perf_asr_attempt,
             dictation_check,
             dictation_target,
+            free_speaking_check,
             reference_audio,
             speech_audio,
             world_state,
@@ -15188,6 +15410,198 @@ activities:
         assert_eq!(res.abstain_reason.as_deref(), Some("engine-error"));
         assert_eq!(res.matched, None);
         unsafe { std::env::remove_var("LTS_BENCH_VENDOR") };
+    }
+
+    // ---- SPEAK-PRACTICE-001: free-speaking scoring ----
+    // Card contract pins: per-word coloring derived only from a real
+    // transcript, honest abstention with ZERO fabricated coloring, and the
+    // hard zero-write invariant (G4-EXPLAIN-001 shape). The attempt struct is
+    // deliberately missing profile/content ids — free-speaking cannot even
+    // address the learner's scheduler, mastery, plan, or error-ledger state.
+
+    #[test]
+    fn align_free_words_classifies_matched_fuzzy_and_missing() {
+        let words = align_free_words("я люблю кофе утром", "я люблю кофи");
+        let seen: Vec<(&str, &str)> = words
+            .iter()
+            .map(|w| (w.surface.as_str(), w.status))
+            .collect();
+        assert_eq!(
+            seen,
+            vec![
+                ("я", "matched"),
+                ("люблю", "matched"),
+                ("кофе", "fuzzy"),
+                ("утром", "missing"),
+            ],
+            "word coloring must follow the transcript, never a guess"
+        );
+    }
+
+    #[test]
+    fn align_free_words_never_marks_a_word_matched_without_heard_support() {
+        // A transcript of unrelated speech must not light a target word up:
+        // an absent word is `missing`, which is the only honest state.
+        let words = align_free_words("это моя книга", "совершенно другой звук");
+        assert!(
+            words.iter().all(|w| w.status == "missing"),
+            "unrelated speech produced {:?}",
+            words
+                .iter()
+                .map(|w| (w.surface.as_str(), w.status))
+                .collect::<Vec<_>>()
+        );
+    }
+
+    #[test]
+    fn free_speaking_check_abstains_when_model_off() {
+        use base64::Engine;
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
+        let res = free_speaking_check_at(
+            data,
+            FreeSpeakingAttempt {
+                pack_id: "org.openlanguage.ja-demo".into(),
+                target_text: "おばあさん".into(),
+                wav_b64: base64::engine::general_purpose::STANDARD.encode(b"not-a-wav"),
+            },
+        )
+        .unwrap();
+        assert_eq!(res.abstain_reason.as_deref(), Some("speech-model-off"));
+        assert_eq!(res.score, None);
+        assert!(
+            res.words.is_empty(),
+            "abstention must fabricate no coloring: {:?}",
+            res.words
+        );
+    }
+
+    /// SPEAK-PRACTICE-001 acceptance, the hard invariant: the free-speaking
+    /// path performs ZERO writes to the scheduler, mastery, error-ledger,
+    /// mined, or lookup stores. Where this machine has the vendor aligner the
+    /// real scoring path is exercised (a real pack clip against a real
+    /// prompt); otherwise the abstention path is. The store is unchanged
+    /// either way — the attempt struct carries no profile id to write with.
+    #[test]
+    fn free_speaking_check_performs_zero_store_writes() {
+        use base64::Engine;
+        let (data_tmp, wav) = match dictation_vendor() {
+            Some(tmp) => {
+                let wav = std::fs::read(
+                    tmp.path()
+                        .join("packs/org.openlanguage.ja-demo")
+                        .join(
+                            lts_langpack::archive::current_version(
+                                "org.openlanguage.ja-demo",
+                                &tmp.path().join("packs"),
+                            )
+                            .unwrap(),
+                        )
+                        .join("media/ja.lex.demo.obaasan.wav"),
+                )
+                .unwrap();
+                (tmp, wav)
+            }
+            None => {
+                let tmp = tempfile::TempDir::new().unwrap();
+                install_bundled_pack(tmp.path(), "org.openlanguage.ja-demo").unwrap();
+                (tmp, b"not-a-wav".to_vec())
+            }
+        };
+        let data = data_tmp.path();
+        let id = crate::create_local_profile(data, "FreeSpeakTester")
+            .unwrap()
+            .id;
+        {
+            let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+            // Give the stores non-empty contents so a write would show.
+            store
+                .save_scheduler_state(
+                    &id,
+                    &lts_storage::SchedulerRecord {
+                        item_id: "speak-probe".into(),
+                        scheduler: "fsrs".into(),
+                        params_json: "{}".into(),
+                        due_at: "2026-11-27T00:00:00Z".into(),
+                    },
+                )
+                .unwrap();
+            store
+                .record_word_lookup(
+                    &id,
+                    lts_storage::NewWordLookup {
+                        id: "speak-probe",
+                        surface: "おばあさん",
+                        lemma: None,
+                        story_id: "probe",
+                        sentence_id: "probe",
+                        created_at: "2026-11-27T00:00:00Z",
+                    },
+                )
+                .unwrap();
+            let before_sched = store.scheduler_state(&id).unwrap();
+            let before_mastery = store.latest_mastery(&id).unwrap();
+            let before_errors = store.error_ledger(&id).unwrap();
+            let before_mined = store.mined_items(&id).unwrap();
+            let before_lookups = store.word_lookups(&id).unwrap();
+            free_speaking_check_at(
+                data,
+                FreeSpeakingAttempt {
+                    pack_id: "org.openlanguage.ja-demo".into(),
+                    target_text: "おばあさん".into(),
+                    wav_b64: base64::engine::general_purpose::STANDARD.encode(&wav),
+                },
+            )
+            .unwrap();
+            assert_eq!(store.scheduler_state(&id).unwrap(), before_sched);
+            assert_eq!(store.latest_mastery(&id).unwrap(), before_mastery);
+            assert_eq!(store.error_ledger(&id).unwrap(), before_errors);
+            assert_eq!(store.mined_items(&id).unwrap(), before_mined);
+            assert_eq!(store.word_lookups(&id).unwrap(), before_lookups);
+        }
+    }
+
+    /// The scoring leg on a real recording: a pack clip read against its own
+    /// prompt colors every word matched with a top score. Vendor-gated like
+    /// the dictation legs (skips without the local whisper aligner).
+    #[test]
+    fn free_speaking_check_scores_a_real_recording() {
+        use base64::Engine;
+        let Some(tmp) = dictation_vendor() else {
+            return;
+        };
+        let data = tmp.path();
+        let wav = std::fs::read(
+            data.join("packs/org.openlanguage.ja-demo")
+                .join(
+                    lts_langpack::archive::current_version(
+                        "org.openlanguage.ja-demo",
+                        &data.join("packs"),
+                    )
+                    .unwrap(),
+                )
+                .join("media/ja.lex.demo.obaasan.wav"),
+        )
+        .unwrap();
+        let res = free_speaking_check_at(
+            data,
+            FreeSpeakingAttempt {
+                pack_id: "org.openlanguage.ja-demo".into(),
+                target_text: "おばあさん".into(),
+                wav_b64: base64::engine::general_purpose::STANDARD.encode(&wav),
+            },
+        )
+        .unwrap();
+        assert_eq!(res.abstain_reason, None, "heard {:?}", res.heard);
+        assert_eq!(res.words.len(), 1, "heard {:?}", res.heard);
+        assert_eq!(res.words[0].status, "matched", "heard {:?}", res.heard);
+        assert!(
+            res.score.unwrap_or(0.0) >= 0.9,
+            "score {:?}, heard {:?}",
+            res.score,
+            res.heard
+        );
     }
 
     #[test]

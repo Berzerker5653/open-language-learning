@@ -5,7 +5,7 @@ import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { remainingPlanSeconds, remainingTimeLabel, SessionChrome } from "./session-chrome";
 import { Home, summarizeForms, type PlannedItem, type SessionPlan } from "./home";
-import { PracticeHub } from "./hub";
+import { PracticeHub, HUB_MODES } from "./hub";
 import { MyWordsPanel, previewIntervalLabel, type MineDraft, type MineItem } from "./words";
 
 const item = (id: string, extra: Partial<PlannedItem> = {}): PlannedItem => ({
@@ -203,7 +203,10 @@ describe("PracticeHub graded/formative badges (U3)", () => {
   it("every mode card carries a graded/formative badge, not prose only", () => {
     const html = renderToStaticMarkup(<PracticeHub onOpen={() => undefined} />);
     const badges = html.match(/data-grade-kind="(graded|formative)"/g) ?? [];
-    expect(badges).toHaveLength(8);
+    // SPEAK-PRACTICE-001: the count used to be the literal 8 modes; it now
+    // derives from the mode table so every card (including "Free speaking")
+    // must carry exactly one badge — the same pin, no longer stale on add.
+    expect(badges).toHaveLength(HUB_MODES.length);
     expect(html).toContain(">Graded<");
     expect(html).toContain(">Formative<");
   });

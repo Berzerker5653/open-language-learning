@@ -2419,6 +2419,37 @@ export class LearnerEngine {
         const pack = PACKS[String(args.packId)] ?? this.demofail();
         return pack.sentences[Number(args.offset) % pack.sentences.length];
       }
+      case "free_speaking_check": {
+        // SPEAK-PRACTICE-001: mirrors lib.rs `free_speaking_check_at`. The
+        // RU fixture machine has no aligner sidecar (same posture as
+        // dictation_check above); with the model preference off the check
+        // abstains before any audio is looked at; on the JA fixture with a
+        // model the recognizer hears every prompt word.
+        const attempt = (args.attempt ?? {}) as Record<string, unknown>;
+        const target = String(attempt.target_text ?? "");
+        const abstain = (reason: string) => ({
+          words: [],
+          heard: "",
+          target,
+          score: null,
+          abstain_reason: reason,
+          mode: "guided" as const,
+        });
+        if (String(attempt.pack_id ?? "") === RU) return abstain("aligner-unavailable");
+        if (this.speechModel === "off") return abstain("speech-model-off");
+        const words = target
+          .split(/\s+/)
+          .filter((w) => w.length > 0)
+          .map((surface) => ({ surface, status: "matched" as const }));
+        return {
+          words,
+          heard: target,
+          target,
+          score: 1,
+          abstain_reason: null,
+          mode: "guided" as const,
+        };
+      }
       case "dictation_check": {
         const attempt = (args.attempt ?? {}) as Record<string, unknown>;
         const target = String(attempt.target_text ?? "");

@@ -1835,6 +1835,28 @@ th:last-child {
   border-radius: var(--radius-sm);
 }
 
+/* SPEAK-PRACTICE-001: free-speaking per-word alignment coloring.
+   matched = the recognizer heard it, fuzzy = something close, missing =
+   it did not come through. Semantic feedback tokens only — the mode is
+   coaching, never a grade. */
+.fs-word--matched {
+  background: var(--ok-soft);
+  color: var(--ok-ink);
+  border-radius: var(--radius-sm);
+}
+
+.fs-word--fuzzy {
+  background: var(--warn-soft);
+  color: var(--warn);
+  border-radius: var(--radius-sm);
+}
+
+.fs-word--missing {
+  background: var(--err-soft);
+  color: var(--err);
+  border-radius: var(--radius-sm);
+}
+
 
 /* ------------------------------------------------------ reduced motion */
 @media (prefers-reduced-motion: reduce) {
