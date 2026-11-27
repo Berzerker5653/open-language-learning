@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "updated": "2026-11-27",
-  "active_task": "SPEECH-CATALOG-001",
+  "active_task": null,
   "tasks": {
     "APP-SPLIT-003E": {
       "status": "done",
@@ -3673,11 +3673,14 @@
       ]
     },
     "SPEECH-CATALOG-001": {
-      "status": "in_progress",
+      "status": "done",
       "attempts": 1,
       "updated": "2026-11-27",
-      "notes": "ADR-0042 lane, worked in chat by the controller (owner said proceed with all work). Contract frozen in state/notes/SPEECH-CATALOG-001.md; WIP pre-dates the card and is gated before commit.",
+      "notes": "Landed: code 6626cc73, chore 16acebff. All lane gates green at commit (lib 264/0 retry, vitest 725/0, tsc/eslint/prettier/fmt/clippy/copy-audit clean). Freshness-test ordering bug fixed pre-commit; dictation vendor flakes green standalone x2 + full retry.",
       "evidence": [
+        "state/evidence/SPEECH-CATALOG-001/gates.log",
+        "state/evidence/SPEECH-CATALOG-001/gates-web.log",
+        "state/evidence/SPEECH-CATALOG-001/vitest-retry.log",
         "state/notes/SPEECH-CATALOG-001.md",
         "docs/adr/0042-per-language-speech-models-with-remote-catalog.md"
       ]
