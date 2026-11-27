@@ -98,14 +98,16 @@ def load_records(out: Path, pack: str):
         rec = json.loads(f.read_text())
         day = rec["day"]
         days[day] = rec
+        current = None  # last practice_task record; practice_submit carries no item_id
         for call in rec["calls"]:
             resp = call.get("resp")
             cmd = call["cmd"]
             if cmd == "practice_task" and isinstance(resp, dict) and "item_id" in resp:
                 it = items.setdefault(resp["item_id"], {
+                    "item_id": resp["item_id"],
                     "first_day": day, "surface": None, "reading": None,
                     "furigana": None, "romaji": None, "choices": None,
-                    "typed": False, "shape_days": set(),
+                    "typed": False, "shape_days": set(), "occurrences": [],
                 })
                 it["shape_days"].add(day)
                 for fld in ("surface", "reading", "furigana", "romaji", "typed"):
@@ -113,20 +115,27 @@ def load_records(out: Path, pack: str):
                     if v is not None and it[fld] in (None, False):
                         it[fld] = v
                 ch = resp.get("choices")
+                occ = {"day": day, "choices": ch, "submits": []}
+                it["occurrences"].append(occ)
                 if ch:
                     if it["choices"] is not None and it["choices"] != ch:
                         it["choices_drift"] = True
                     it["choices"] = ch
-            if cmd == "practice_submit" and isinstance(resp, dict):
-                cid = resp.get("item_id") or resp.get("itemId")
+                current = it
+            if cmd == "practice_submit" and isinstance(resp, dict) and current is not None:
                 cc = resp.get("correct_choice") or resp.get("correctChoice")
-                if cid and cc:
-                    keys_seen[cid][cc] = keys_seen[cid].get(cc, 0) + 1
+                current.setdefault("occurrences", [])
+                current["occurrences"][-1]["submits"].append(
+                    {"correct": bool(resp.get("correct")), "correct_choice": cc})
+                if cc:
+                    iid = current["item_id"]
+                    keys_seen[iid][cc] = keys_seen[iid].get(cc, 0) + 1
             if isinstance(resp, (dict, list)):
                 for k, t in iter_texts(resp):
                     if t and t.strip():
                         texts.append((day, cmd, k, t))
     return items, keys_seen, texts
+
 
 
 # ---------------------------------------------------------------- RU checks
@@ -280,40 +289,68 @@ def check_ja_readings(items, jm, failures, warnings):
 
 # ---------------------------------------------------------------- common
 
-def check_items(items, keys_seen, keys_file, pack, failures):
+def check_items(items, keys_seen, keys_file, pack, failures, info=None):
+    # Answer-key integrity is checked PER OCCURRENCE, not per item: the
+    # letter/kana drill (FIX-M1-PROGRESSION-001) rotates prompt family per
+    # day, so the same item_id legitimately serves two prompt shapes
+    # (letter->sound and sound->letter) with different choice sets. The
+    # invariant that matters: every serving had exactly one server-graded
+    # correct choice, and it was a member of that serving's choices.
+    rot = info if info is not None else {}
     for iid, it in items.items():
-        ch = it.get("choices")
+        rotating = iid.split(".")[1] == "orth" if len(iid.split(".")) > 1 else False
         kk = keys_seen.get(iid, {})
-        for cc, n in kk.items():
-            if pack == "ru" and not it.get("typed") and ch and cc not in ch:
-                failures.append({"check": "answer.key-not-in-choices", "item": iid,
-                                 "detail": f"{cc!r} not in {ch!r}"})
-        if len(kk) > 1:
+        if len(kk) > 1 and not rotating:
             failures.append({"check": "answer.key-conflict", "item": iid,
                              "detail": json.dumps(sorted(kk), ensure_ascii=False)})
+        if rotating and len(kk) > 2:
+            failures.append({"check": "answer.key-conflict", "item": iid,
+                             "detail": f"letter drill with >2 distinct keys: {sorted(kk)}"})
+        if rotating and len(kk) == 2:
+            rot[iid] = sorted(kk)
         stored = keys_file.get(iid)
         if stored and kk and stored not in kk:
             failures.append({"check": "answer.keys-file-mismatch", "item": iid,
                              "detail": f"file={stored!r} seen={sorted(kk)!r}"})
-        if ch:
-            if len(set(ch)) != len(ch):
-                failures.append({"check": "distractor.duplicate", "item": iid,
-                                 "detail": json.dumps(ch, ensure_ascii=False)})
-            if any((not c) or (not c.strip()) for c in ch):
-                failures.append({"check": "distractor.empty", "item": iid,
-                                 "detail": json.dumps(ch, ensure_ascii=False)})
-            if pack == "ru" and any(bool(KANA.search(c) or KANJI.search(c)) for c in ch):
-                failures.append({"check": "distractor.wrong-script", "item": iid,
-                                 "detail": json.dumps(ch, ensure_ascii=False)})
-            if pack == "ja":
-                tgt = [c for c in ch if KANA.search(c) or KANJI.search(c)]
-                if tgt and len(tgt) != len(ch):
-                    mixed = [c for c in ch if c not in tgt]
-                    if mixed and iid.split("#")[-1] not in ("romanization", "romaji"):
-                        failures.append({"check": "distractor.wrong-script",
-                                         "item": iid, "note": "partial",
-                                         "detail": json.dumps(mixed, ensure_ascii=False)[:200]})
-        if it.get("choices_drift"):
+        for occ in it.get("occurrences", []):
+            ch = occ.get("choices")
+            subs = occ.get("submits", [])
+            if not any(s["correct"] for s in subs):
+                failures.append({"check": "answer.occurrence-ungraded", "item": iid,
+                                 "day": occ["day"],
+                                 "detail": f"{len(subs)} submits, none graded correct"})
+            ccs = {s["correct_choice"] for s in subs if s["correct_choice"]}
+            if len(ccs) > 1:
+                failures.append({"check": "answer.occurrence-conflict", "item": iid,
+                                 "day": occ["day"],
+                                 "detail": json.dumps(sorted(ccs), ensure_ascii=False)})
+            for cc in ccs:
+                if ch and cc not in ch:
+                    failures.append({"check": "answer.key-not-in-choices", "item": iid,
+                                     "day": occ["day"],
+                                     "detail": f"{cc!r} not in {ch!r}"})
+            if ch:
+                if len(set(ch)) != len(ch):
+                    failures.append({"check": "distractor.duplicate", "item": iid,
+                                     "day": occ["day"],
+                                     "detail": json.dumps(ch, ensure_ascii=False)})
+                if any((not c) or (not c.strip()) for c in ch):
+                    failures.append({"check": "distractor.empty", "item": iid,
+                                     "day": occ["day"],
+                                     "detail": json.dumps(ch, ensure_ascii=False)})
+                if pack == "ru" and any(bool(KANA.search(c) or KANJI.search(c)) for c in ch):
+                    failures.append({"check": "distractor.wrong-script", "item": iid,
+                                     "day": occ["day"],
+                                     "detail": json.dumps(ch, ensure_ascii=False)})
+                if pack == "ja":
+                    tgt = [c for c in ch if KANA.search(c) or KANJI.search(c)]
+                    if tgt and len(tgt) != len(ch):
+                        mixed = [c for c in ch if c not in tgt]
+                        if mixed and iid.split("#")[-1] not in ("romanization", "romaji"):
+                            failures.append({"check": "distractor.wrong-script",
+                                             "item": iid, "day": occ["day"], "note": "partial",
+                                             "detail": json.dumps(mixed, ensure_ascii=False)[:200]})
+        if it.get("choices_drift") and not rotating:
             failures.append({"check": "item.shape-drift", "item": iid,
                              "detail": "choices changed across days"})
 
@@ -358,7 +395,8 @@ def main():
         if kp.exists():
             keys_file = json.loads(kp.read_text())
         failures, warnings = [], []
-        check_items(items, keys_seen, keys_file, pack, failures)
+        rot = {}
+        check_items(items, keys_seen, keys_file, pack, failures, info=rot)
         if pack == "ru":
             if ru_forms is None:
                 ru_forms, ru_lemmas = build_ru_lexicons()
@@ -374,7 +412,9 @@ def main():
         cov = coverage(out, pack, items, texts)
         rep = {"pack": pack, "days_loaded": len({d for d, *_ in texts}),
                "coverage": cov, "failures": failures, "warnings": warnings,
-               "counts": {"failures": len(failures), "warnings": len(warnings)}}
+               "rotating_letter_drills": rot,
+               "counts": {"failures": len(failures), "warnings": len(warnings),
+                          "rotating_letter_drills": len(rot)}}
         rep_path = out.parent / "mech-pass" / f"mech-{pack}.json"
         rep_path.write_text(json.dumps(rep, ensure_ascii=False, indent=1))
         # de-dup warnings by (check, word/surface) for the md summary
