@@ -160,9 +160,9 @@
     "APP-SPLIT-001": {
       "status": "blocked",
       "attempts": 2,
-      "updated": "2026-11-26",
+      "updated": "2026-11-27",
       "notes": "Split ~5300-line App.tsx into per-surface modules - zero behavior change. Contract: state/notes/APP-SPLIT-001.md; board card lts-APP-SPLIT-001.",
-      "blocker": "Honest partial: pure module-scope helpers (primitives, placement-coverage), walkthrough, serve-probe, session/history (APP-SPLIT-003A) and settings/import (APP-SPLIT-003B) slices extracted (App.tsx 5336 -> 4210 lines; the <= ~1500 goal is NOT met - residual is one ~4210-line stateful App() with ~90 hooks). Gates green (tsc clean; vitest 77 files / 694 tests; validate_handoff PASSED). Codes ea9c188, 040456ae, 75ba816c, 88ce090e, bc0307cb, 96a3cc1c, ba713af4, faa66d00. Resume recipe: state/notes/APP-SPLIT-001.md. | 2026-11-27 controller refresh: App.tsx now 4529 lines (product code grew after the 4210 measurement); next slice card created on the board (t_e731e8b7, APP-SPLIT-003F, pick-by-measurement method) and dispatched to a worker.",
+      "blocker": "Honest partial: pure module-scope helpers (primitives, placement-coverage), walkthrough, serve-probe, session/history (APP-SPLIT-003A) and settings/import (APP-SPLIT-003B) slices extracted (App.tsx 5336 -> 4020 lines; the <= ~1500 goal is NOT met - residual is one ~4020-line stateful App() with ~90 hooks). Gates green (tsc clean; vitest 77 files / 694 tests; validate_handoff PASSED). Codes ea9c188, 040456ae, 75ba816c, 88ce090e, bc0307cb, 96a3cc1c, ba713af4, faa66d00, 28aa93a9. Resume recipe: state/notes/APP-SPLIT-001.md. | 2026-11-27 controller refresh: App.tsx now 4529 lines (product code grew after the 4210 measurement); next slice card created on the board (t_e731e8b7, APP-SPLIT-003F, pick-by-measurement method) and dispatched to a worker. | 2026-11-27 APP-SPLIT-003F worker: audio capture & scoring wiring extracted to app/capture-wiring.ts (App.tsx 4526 -> 4020, code 28aa93a9; gates tsc clean + vitest 83 files / 725 tests; evidence state/evidence/APP-SPLIT-003F/gates.log).",
       "evidence": [
         "state/evidence/APP-SPLIT-001/gates.log"
       ]

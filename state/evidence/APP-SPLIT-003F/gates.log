@@ -1,0 +1,93 @@
+# APP-SPLIT-003F — gates log (2026-11-27)
+
+Lane: pure-move extraction of the audio capture & scoring wiring slice from
+App() into apps/desktop/src/app/capture-wiring.ts as `useCaptureWiring(deps)`.
+App.tsx keeps owning every useState hook, all slice state and the render;
+the hook owns the slice's two refs (captureOwner, captureRouteRef), its two
+device-release effects and the handler bodies. Call-site names arrive by
+destructuring — zero JSX/handler edits.
+
+## Measurement + slice pick (card method step 1)
+
+Measured from HEAD (0150f827/dee0af3b, App.tsx 4526 lines) with
+`grep -nE '^\s*(async function|function) ' apps/desktop/src/App.tsx` and
+the JSX-return structure (`return (` at 3631). Largest cohesive wiring
+blocks left inline, by distance between consecutive top-level functions:
+
+- audio capture & scoring (playBlobUrl .. stopAndCheck + the two
+  captureOwner release effects): lines 2844-3404 = **561 lines** — the mic
+  capture owner, the pronunciation/dictation/free-speaking/free-writing
+  openers, prompt fetches, graded submits and the four analyze* scorers.
+- story/reading + my-words handlers (2258-2677): ~420 lines — REJECTED:
+  exactly the region ARCH-HOTSPOT-2026-11-27 was actively editing
+  (playSentenceClip refactor) at lane start; extracting there would collide
+  with a live sibling lane.
+- scenario surface (2678-2846): ~170 lines.
+- placement + kanji handlers (~1945-2140): ~195 lines.
+- navigate/history effects (~3399 region post-move) + remaining JSX
+  surfaces: smaller fragments; JSX surfaces need component extraction
+  (bigger contract than one card's pure-move budget).
+
+Pick: audio capture & scoring — the single largest cohesive slice, one
+closed dependency group (its internals call each other; outside App it is
+touched only by name at JSX/click sites), and disjoint from every other
+lane's in-flight edits.
+
+## LOC (measured from git, never from memory — REVIEW-003A D1)
+
+- Before (HEAD before this card, dee0af3b): 4526
+  (`git show dee0af3b:apps/desktop/src/App.tsx | wc -l`)
+- After (code commit 28aa93a9): 4020
+  (`git show 28aa93a9:apps/desktop/src/App.tsx | wc -l`)
+- Delta: -506 lines moved to app/capture-wiring.ts (733 lines incl.
+  header, deps interface + return).
+
+Pure-move proof: the region re-inserted into the module diffs byte-identical
+against `git show dee0af3b:apps/desktop/src/App.tsx | sed -n '2844,3404p'`
+(verified by script; only a blank line before the new `return` differs).
+App.tsx keeps every hook: zero useState/useMemo/useRef call-sites removed
+from App except the slice's own two refs, which move with their owning
+slice (serve-probe precedent: hooks move only with their slice).
+
+## Gates (lane tier; card names tsc + vitest)
+
+1. `npx tsc --noEmit` — PASS (exit 0), run in apps/desktop after the move
+   (also re-run after the prettier pass).
+2. `npx vitest run` — PASS: 83 test files / 725 tests, 10.55s (re-run after
+   the prettier pass; first run 10.42s, same counts).
+3. `npx eslint src/App.tsx src/app/capture-wiring.ts` — clean (HEAD
+   baseline App.tsx also eslint-clean; zero new errors).
+4. `npx prettier --check` both files — clean (three prettier deltas were
+   inside this lane's own hunks only; applied before the commit).
+
+## TDZ check (APP-SPLIT-003C lesson)
+
+The deps object is built inline at the useCaptureWiring call, placed at the
+earliest point where every referenced binding is in scope (pronDemo's state
++ demo effect sit immediately above; everything else is declared earlier in
+the body). Reads are handler-time only: the hook's own effects read the
+destructured values after mount, and every other reader is a click/JSX
+handler — no mount-time async IIFE in App awaits anything from this slice
+before the render frame assigns the bundle.
+
+## Test-tree sweep
+
+`grep -rn 'from "./App"'` pins only `{ App }` and `{ serveDegradedBadge }`
+— untouched. No test/journey file references any moved function name
+(playBlobUrl/recordAttempt/stopAndCheck/analyze*/fetch*/open*/new*/
+playReference/newDictationSentence/captureRouteRef). The primitives
+re-export shim block is unchanged (the pruned packAttemptRequest/toWav16/
+toB64 were plain imports, not shim exports).
+
+## Concurrency notes (shared tree)
+
+- Lane start found App.tsx dirty with the LIVE ARCH-HOTSPOT-2026-11-27
+  worker's playSentenceClip refactor (board t_b4d255c2). No revert, no
+  touch; the worker committed it (0150f827) mid-lane, and the extraction was
+  re-anchored on the new HEAD before editing — hence "before" is dee0af3b
+  (4526) not dad6fbe5 (4529).
+- Sibling staged/unstaged files (src-tauri/src/lib.rs, docs/18,
+  state/evidence/LEARNER-REVIEW-M1-001/*, state/notes/FIX-M1-CONTENT-*)
+  were left untouched; the code commit was made with an explicit pathspec
+  (`git commit -F msg -- <own two paths>`) and `git diff --cached --stat`
+  verified the staged set was exactly the lane's two files.
