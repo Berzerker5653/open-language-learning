@@ -1,0 +1,35 @@
+== REVIEW-G4-EXPLAIN-001 reviewer gates 2026-11-27T03:35:00-07:00 ==
+Reviewed: code 63f139a8, ledger a5cabf22 (G4-EXPLAIN-001, DONE).
+Re-run on main HEAD (tree includes SPEAK-PRACTICE-001 6e5bc83e and
+WRITE-PRACTICE-001 e858ca0d on top of the reviewed lane — proves the lane is
+still green under current main). No lane gate was re-litigated; these are
+independent targeted re-verifications of the new surface.
+
+--- python3 tools/validate_handoff.py --require-explicit-ledger-records ---
+HANDOFF VALIDATION PASSED (2289 data files checked)
+WARN task-state: optional task STORY-LISTEN-001 has no explicit ledger record (pre-existing, unrelated)
+
+--- npx vitest run src/app/explain-wiring.test.ts src/explain.test.tsx (apps/desktop) ---
+Test Files  2 passed (2)
+     Tests  15 passed (15)
+
+--- cargo test -p lts-desktop explain:: ---
+test explain::tests::defaults_are_off_and_consentless ... ok
+test explain::tests::settings_roundtrip_stores_user_typed_values ... ok
+test explain::tests::disabled_offers_no_network_and_is_honest ... ok
+test explain::tests::empty_base_url_is_unavailable_without_network ... ok
+test explain::tests::first_explain_requires_consent_and_sends_nothing ... ok
+test explain::tests::consented_explain_round_trips_and_names_direction ... ok
+test explain::tests::unreachable_endpoint_is_an_honest_failure ... ok
+test explain::tests::server_error_is_an_honest_failure ... ok
+test explain::tests::empty_explanation_content_is_a_failure_not_blank_ui ... ok
+test explain::tests::explain_path_performs_zero_store_writes ... ok
+test result: ok. 10 passed; 0 failed; 0 ignored; 248 filtered out
+
+--- npx tsc --noEmit (apps/desktop) ---
+tsc exit: 0
+
+== verdicts ==
+SPEC:      PASS-WITH-NOTES (spec-verdict.md; 0 defects, 4 forward notes)
+STANDARDS: PASS-WITH-NOTES (standards-verdict.md; 0 defects, 2 hygiene notes)
+No FIX card created.
