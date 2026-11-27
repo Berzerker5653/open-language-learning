@@ -18,6 +18,7 @@ import type {
 import type { ImportOutcome, ImportPreview, KanaKeyboardMode, RomajiMode } from "../settings";
 import type { ProfileSummary } from "../onboarding";
 import type { Invoke } from "./primitives";
+import type { ExplainSettingsView } from "./explain-wiring";
 import { EMPTY_PLAN } from "./primitives";
 
 /** The session-queue snapshot App keeps in a ref. Mirrors the ref's
@@ -40,6 +41,8 @@ export interface SettingsPrimeDeps {
   setPlaybackDevice: (v: string | null) => void;
   setRomajiMode: (v: RomajiMode) => void;
   setKanaKeyboard: (v: KanaKeyboardMode) => void;
+  /** G4-EXPLAIN-001: explain provider settings for this profile. */
+  setExplainSettings: (v: ExplainSettingsView | null) => void;
   refreshSpeech: () => Promise<unknown>;
   refreshLanguages: (pid?: string) => Promise<unknown>;
   refreshAligner: () => Promise<unknown>;
@@ -97,6 +100,9 @@ export async function runSettingsPrimes(deps: SettingsPrimeDeps): Promise<void> 
     deps.setPlaybackDevice((await inv("get_playback_device", { profileId })) as string | null);
     deps.setRomajiMode((await inv("get_romaji_mode", { profileId })) as RomajiMode);
     deps.setKanaKeyboard((await inv("get_kana_keyboard", { profileId })) as KanaKeyboardMode);
+    deps.setExplainSettings(
+      (await inv("explain_settings", { profileId })) as ExplainSettingsView,
+    );
   });
   // K-77: Settings now hosts language-pack management and the speech
   // runtime status too, so opening it primes the reads the old

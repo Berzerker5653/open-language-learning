@@ -7,6 +7,8 @@
 //! bundled Japanese pack install (allowlisted ids only — the UI never
 //! supplies paths), and an honest privacy notice (docs/08).
 
+mod explain;
+use explain::{explain_card, explain_settings, set_explain_consent, set_explain_settings};
 mod models;
 mod packcache;
 mod packs;
@@ -11875,6 +11877,10 @@ macro_rules! lts_command_table {
             memory_stats,
             display_settings,
             set_display_settings,
+            explain_settings,
+            set_explain_settings,
+            set_explain_consent,
+            explain_card,
             get_microphone_enabled,
             set_microphone_enabled,
             get_microphone_device,

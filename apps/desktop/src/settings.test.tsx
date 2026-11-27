@@ -13,6 +13,10 @@ import { packDeclaresInAppKanaKeyboard } from "./ime";
 const base: SettingsProps = {
   microphoneEnabled: false,
   onSetMicrophone: () => {},
+  explainSettings: null,
+  onSetExplainEnabled: () => {},
+  onSetExplainEndpoint: () => {},
+  onSetExplainConsent: () => {},
   microphoneDevice: null,
   microphoneDevices: [],
   onPickMicrophone: () => {},
@@ -594,7 +598,8 @@ describe("settings", () => {
     // One native disclosure per prose block, and every disclosure carries a
     // summary — no JS toggle, no ARIA re-invention.
     const disclosures = html.match(/<details class="prose-note">/g) ?? [];
-    expect(disclosures.length).toBe(12);
+    // G4-EXPLAIN-001 adds the AI-explanations privacy block as a 13th block.
+    expect(disclosures.length).toBe(13);
     expect((html.match(/<summary>/g) ?? []).length).toBe(disclosures.length);
     // Collapsed by default: the expander starts closed, the learner opts in.
     expect(html).not.toMatch(/<details[^>]*\sopen/);
@@ -634,7 +639,8 @@ describe("settings", () => {
         warnings: [],
       },
     });
-    expect((done.match(/<details class="prose-note">/g) ?? []).length).toBe(13);
+    // +1 from the AI-explanations block (G4-EXPLAIN-001).
+    expect((done.match(/<details class="prose-note">/g) ?? []).length).toBe(14);
     expect(done).toContain('data-testid="settings-restore-note"');
     // The build identity itself never folds — only the instruction around it.
     expect(done.indexOf('data-build-commit="172d2a2"')).toBeLessThan(

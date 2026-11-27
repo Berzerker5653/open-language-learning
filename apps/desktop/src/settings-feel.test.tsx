@@ -41,6 +41,10 @@ function topLevelRuleBody(selector: string): string {
 const base: SettingsProps = {
   microphoneEnabled: false,
   onSetMicrophone: () => {},
+  explainSettings: null,
+  onSetExplainEnabled: () => {},
+  onSetExplainEndpoint: () => {},
+  onSetExplainConsent: () => {},
   microphoneDevice: null,
   microphoneDevices: [],
   onPickMicrophone: () => {},

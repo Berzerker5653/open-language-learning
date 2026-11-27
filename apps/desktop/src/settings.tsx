@@ -18,6 +18,7 @@
 import { useEffect, useState, type ReactNode } from "react";
 import type { Microphone, SpeakerOutput } from "./capture";
 import { inLtsServeMode, postServeJson } from "./ipc";
+import type { ExplainSettingsView } from "./app/explain-wiring";
 import { megabytes, type AlignerStatus, type DeviceTier } from "./language";
 export type RomajiMode = "auto" | "always" | "off";
 
@@ -76,6 +77,11 @@ export interface SettingsProps {
   /** Stored `microphone-enabled` for this profile (false when unset). */
   microphoneEnabled: boolean;
   onSetMicrophone(enabled: boolean): void;
+  /** G4-EXPLAIN-001: the AI explanation settings (null until primed). */
+  explainSettings: ExplainSettingsView | null;
+  onSetExplainEnabled(enabled: boolean): void;
+  onSetExplainEndpoint(baseUrl: string, model: string): void;
+  onSetExplainConsent(granted: boolean): void;
   /** K-64: stored capture device for this profile (null = system default). */
   microphoneDevice: string | null;
   /** Named audio inputs; empty until the browser has granted access once. */
@@ -283,6 +289,7 @@ export function Settings(p: SettingsProps) {
     { id: "settings-mic", label: "Microphone" },
     ...(p.packDeclaresRomanizationDisplay ? [{ id: "settings-romaji", label: "Romaji" }] : []),
     ...(p.packDeclaresKanaKeyboard ? [{ id: "settings-kana", label: "Kana keyboard" }] : []),
+    { id: "settings-ai", label: "AI explanations" },
     { id: "settings-profile", label: "Profile data" },
     { id: "settings-speech", label: "Speech" },
     { id: "settings-runtimes", label: "Speech runtimes" },
@@ -463,6 +470,85 @@ export function Settings(p: SettingsProps) {
           </ProseNote>
         </div>
       )}
+
+      <div className="card" id="settings-ai" data-settings-anchor="settings-ai">
+        <h3>AI explanations</h3>
+        <label htmlFor="ai-enabled" className="radio-row">
+          <input
+            id="ai-enabled"
+            type="checkbox"
+            checked={p.explainSettings?.ai_enabled ?? false}
+            onChange={(e) => p.onSetExplainEnabled(e.target.checked)}
+          />{" "}
+          Instant explanations on exercise cards
+        </label>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            const form = new FormData(e.currentTarget);
+            p.onSetExplainEndpoint(
+              String(form.get("ai-base-url") ?? ""),
+              String(form.get("ai-model") ?? ""),
+            );
+          }}
+        >
+          <label htmlFor="ai-base-url">
+            Explanation model base URL
+            <input
+              id="ai-base-url"
+              name="ai-base-url"
+              type="text"
+              autoComplete="off"
+              key={`url:${p.explainSettings?.ai_base_url ?? ""}`}
+              defaultValue={p.explainSettings?.ai_base_url ?? ""}
+              placeholder="The OpenAI-compatible URL of a model server you run or choose"
+            />
+          </label>
+          <label htmlFor="ai-model">
+            Model name
+            <input
+              id="ai-model"
+              name="ai-model"
+              type="text"
+              autoComplete="off"
+              key={`model:${p.explainSettings?.ai_model ?? ""}`}
+              defaultValue={p.explainSettings?.ai_model ?? ""}
+              placeholder="The model name that endpoint accepts"
+            />
+          </label>
+          <div className="btn-row">
+            <button type="submit" className="btn btn--quiet">
+              Save endpoint
+            </button>
+          </div>
+        </form>
+        {p.explainSettings?.consent_granted ? (
+          <p className="radio-row">
+            You allowed card text to be sent for explanations.{" "}
+            <button
+              type="button"
+              className="btn btn--quiet"
+              data-testid="explain-consent-revoke"
+              onClick={() => p.onSetExplainConsent(false)}
+            >
+              Revoke
+            </button>
+          </p>
+        ) : (
+          <p>
+            <small>
+              The app will ask before sending anything the first time you press Explain.
+            </small>
+          </p>
+        )}
+        <ProseNote summary="Explanations are information only — never a grade — and sending only ever goes to the endpoint you typed.">
+          With this off (the default) the app never contacts any model: the exercise cards behave
+          exactly as they always have. When on, pressing Explain sends only the current card text
+          and the learning direction to the base URL you configured — never your profile, history,
+          or recordings. Nothing the model answers is stored, graded, or allowed to influence your
+          plan; revoke the one-time consent above at any time.
+        </ProseNote>
+      </div>
 
       <div className="card" id="settings-profile" data-settings-anchor="settings-profile">
         <h3>Profile data</h3>

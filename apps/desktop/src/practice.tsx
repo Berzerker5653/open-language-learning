@@ -7,7 +7,7 @@
  * `mode: "guided"` is formative — speak-along only, never a submit, a
  * verdict, or a score.
  */
-import { useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { StressText } from "./stress";
 import { Ruby } from "./ruby";
 import { useKanaIME } from "./kana-ime";
@@ -97,6 +97,10 @@ export interface PracticeRunnerProps {
   onRecord?(): void;
   onStop?(): void;
   onPlayAttempt?(): void;
+  /// G4-EXPLAIN-001: the opt-in Explain affordance for this card, supplied
+  /// by the app only on the activity/exercise runner. Absent = no affordance
+  /// at all (every other PracticeRunner use is byte-identical to before).
+  explain?: ReactNode;
 }
 
 /**
@@ -343,6 +347,7 @@ export function PracticeRunner(p: PracticeRunnerProps) {
               "Not quite — the highlighted choice is the right one."
           : ""}
       </p>
+      {p.explain ? <div className="explain-slot">{p.explain}</div> : null}
       {p.graded && (
         <div className="btn-row">
           <button type="button" className="btn btn--primary" onClick={p.onNext}>

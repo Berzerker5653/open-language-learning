@@ -78,6 +78,14 @@ it may not say anything the full text does not support.
   platform IME still works when you prefer it: the app steps back while an IME
   is composing, and turns no key when this is off. Kanji candidates follow the
   pack's own vocabulary in a later pass; free text outside it stays kana."
+- **AI explanations.** Summary: "Explanations are information only — never a
+  grade — and sending only ever goes to the endpoint you typed." Full: "With
+  this off (the default) the app never contacts any model: the exercise cards
+  behave exactly as they always have. When on, pressing Explain sends only the
+  current card text and the learning direction to the base URL you configured —
+  never your profile, history, or recordings. Nothing the model answers is
+  stored, graded, or allowed to influence your plan; revoke the one-time consent
+  above at any time."
 - **Profile data.** Summary: "Export, restore, and switching all live here; an
   export is a readable JSON file, and no audio is ever part of one." Full:
   "The privacy notice promises you can export or delete your local profile data

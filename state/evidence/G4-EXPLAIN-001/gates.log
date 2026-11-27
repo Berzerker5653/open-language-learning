@@ -1,0 +1,37 @@
+== G4-EXPLAIN-001 gates 2026-11-26T20:49:05-07:00 ==
+
+--- npx tsc --noEmit ---
+tsc exit: 1
+
+--- npx vitest run ---
+ Test Files  79 passed (79)
+      Tests  709 passed (709)
+vitest pipeline done
+
+--- npx tsc --noEmit (rerun, direct exit code) ---
+tsc exit: 0
+
+--- cargo fmt --all --check ---
+fmt exit: 0
+
+--- vitest full suite (final, after count re-pins 12->13/13->14) ---
+Test Files  79 passed (79)
+Tests  709 passed (709)
+
+--- cargo test -p lts-desktop (final) ---
+test result: ok. 246 passed; 0 failed; 2 ignored
+incl. 10 explain:: tests (mock 127.0.0.1 HTTP server; settings roundtrip, consent backstop,
+direction naming, server-error/unreachable/empty-content honest failures, and the
+zero-store-writes contract test explain_path_performs_zero_store_writes)
+
+--- cargo clippy -p lts-desktop --all-targets -- -D warnings ---
+exit 0
+
+--- cargo fmt --all --check ---
+exit 0
+
+NOTE: every provider call in tests answered by a local mock HTTP server on 127.0.0.1
+(ephemeral port) - the suite touches no external network. ureq was already a dependency
+(Cargo.toml:53), no new deps added.
+DEFERRED: live local-model round-trip verification against a real endpoint (e.g. a
+user-run llama.cpp server) did not run in this environment - never claimed.

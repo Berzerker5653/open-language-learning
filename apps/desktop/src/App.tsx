@@ -62,6 +62,8 @@ import {
   type FormErrorOfferView,
 } from "./error-review";
 import { PracticeRunner, type PracticeTaskView } from "./practice";
+import { ExplainPanel } from "./explain";
+import type { ExplainSettingsView } from "./app/explain-wiring";
 import { LessonEncounter, drillStageId, stagePositionLabel, type LessonPlan } from "./lesson";
 import { installHistoryNav, type AppLocation, type HistoryNav } from "./history-nav";
 import { describeKanjiDecomposition } from "./kanji-decomposition";
@@ -519,6 +521,8 @@ export function App() {
   const [canRouteOutput, setCanRouteOutput] = useState(false);
   const [romajiMode, setRomajiMode] = useState<RomajiMode>("auto");
   const [kanaKeyboard, setKanaKeyboard] = useState<KanaKeyboardMode>("off");
+  // G4-EXPLAIN-001: the opt-in explain provider settings (null until primed).
+  const [explainSettings, setExplainSettings] = useState<ExplainSettingsView | null>(null);
   const [settingsExportPath, setSettingsExportPath] = useState<string | null>(null);
   // R06: restoring is preview-first. `restoreChecked` remembers exactly which
   // path was checked, so editing the field drops a stale preview instead of
@@ -1522,6 +1526,31 @@ export function App() {
   // never touches the system layout.
   async function setKanaKeyboardSetting(mode: KanaKeyboardMode) {
     await saveSetting<KanaKeyboardMode>("set_kana_keyboard", { profileId, mode }, setKanaKeyboard);
+  }
+
+  // G4-EXPLAIN-001: the opt-in explanation provider. Off by default; the
+  // endpoint is exactly what the learner typed (no vendor is baked in), the
+  // first send is consent-gated, and consent is revocable right here.
+  async function setExplainEnabledSetting(enabled: boolean) {
+    await saveSetting<ExplainSettingsView>(
+      "set_explain_settings",
+      { profileId, aiEnabled: enabled },
+      setExplainSettings,
+    );
+  }
+  async function setExplainEndpointSetting(baseUrl: string, model: string) {
+    await saveSetting<ExplainSettingsView>(
+      "set_explain_settings",
+      { profileId, aiBaseUrl: baseUrl, aiModel: model },
+      setExplainSettings,
+    );
+  }
+  async function setExplainConsentSetting(granted: boolean) {
+    await saveSetting<ExplainSettingsView>(
+      "set_explain_consent",
+      { profileId, granted },
+      setExplainSettings,
+    );
   }
 
   // IME-TOGGLE-UX-001: resolve the active pack's in-app keyboard from its
@@ -3409,6 +3438,7 @@ export function App() {
     setPlaybackDevice,
     setRomajiMode,
     setKanaKeyboard,
+    setExplainSettings,
     refreshSpeech,
     refreshLanguages,
     refreshAligner,
@@ -3972,6 +4002,10 @@ export function App() {
             onSetRomajiMode={(m) => void setRomajiSetting(m)}
             kanaKeyboard={kanaKeyboard}
             onSetKanaKeyboard={(m) => void setKanaKeyboardSetting(m)}
+            explainSettings={explainSettings}
+            onSetExplainEnabled={(v) => void setExplainEnabledSetting(v)}
+            onSetExplainEndpoint={(url, model) => void setExplainEndpointSetting(url, model)}
+            onSetExplainConsent={(v) => void setExplainConsentSetting(v)}
             packDeclaresKanaKeyboard={packDeclaresKanaKeyboard}
             packDeclaresRomanizationDisplay={packDeclaresRomanizationDisplay}
             micDetectUnavailableReason={micDetectUnavailableReason}
@@ -4104,6 +4138,27 @@ export function App() {
                 onDraft={setPracticeDraft}
                 onCheck={() => void checkPractice()}
                 stress={stressEnabled(display)}
+                explain={
+                  // G4-EXPLAIN-001: the opt-in explain affordance. The app
+                  // UI is English (that is what the learner reads), so L1 is
+                  // a fact about this build's strings, and L2 is the active
+                  // pack's own declared locale — never a guessed constant.
+                  <ExplainPanel
+                    inv={inv}
+                    profileId={profileId}
+                    cardText={
+                      practiceTask.surface ??
+                      practiceTask.reading ??
+                      practiceTask.romaji ??
+                      practiceTask.choices.join("; ")
+                    }
+                    l1="en"
+                    l2={
+                      installed.find((ip) => ip.pack_id === activeIds[0])?.locale ??
+                      "your learning language"
+                    }
+                  />
+                }
                 revealed={practiceRevealed}
                 onReveal={
                   practiceTarget.modality === "orthography-recognition" ||

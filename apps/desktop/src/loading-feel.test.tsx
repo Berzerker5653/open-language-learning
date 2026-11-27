@@ -130,6 +130,10 @@ describe("FEEL-LOADING-001 My Words loading state", () => {
 const settingsBase: SettingsProps = {
   microphoneEnabled: false,
   onSetMicrophone: () => {},
+  explainSettings: null,
+  onSetExplainEnabled: () => {},
+  onSetExplainEndpoint: () => {},
+  onSetExplainConsent: () => {},
   microphoneDevice: null,
   microphoneDevices: [],
   onPickMicrophone: () => {},
