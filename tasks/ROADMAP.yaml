@@ -4074,6 +4074,33 @@ tasks:
   - "README and task-state agree exactly with catalog/packs.json (script compare in gates.log)"
   - "Evidence under state/evidence/README-DOC-DRIFT-001/gates.log"
   required_for_desktop_1_0: false
+- id: SPEAK-PRACTICE-001
+  milestone: M11
+  priority: P1
+  title: Free-speaking practice mode with per-word whisper-sidecar alignment coloring - guided feedback only, offline, free
+  dependencies: []
+  read_first:
+  - state/notes/SPEAK-PRACTICE-001.md
+  - apps/desktop/src/shadowing.tsx
+  acceptance:
+  - "free-speaking mode in the practice hub scores a free recording with per-word matched/fuzzy/missing coloring inside the prompt (whisper sidecar)"
+  - "aligner-less builds show the honest unavailable card; ASR failure abstains with no fabricated coloring"
+  - "contract test pins zero scheduler/mastery/plan writes from the scoring path"
+  - "cargo fmt/clippy/test -p lts-desktop and desktop vitest green with red-first pins; gates.log + one real scored recording screenshot under state/evidence/SPEAK-PRACTICE-001/"
+  required_for_desktop_1_0: false
+- id: WRITE-PRACTICE-001
+  milestone: M11
+  priority: P1
+  title: Free-writing practice mode - use-today's-words prompts with fully offline dictionary/script feedback and a private writing journal
+  dependencies: []
+  read_first:
+  - state/notes/WRITE-PRACTICE-001.md
+  acceptance:
+  - "free-writing mode gives per-word dictionary/script validity flags (ja unknown tokens flagged not-in-dictionary, never wrong) and inflected-form target-word usage chips"
+  - "private per-profile writing journal persists, replays, and is deleted with the profile; nothing leaves the device"
+  - "contract test pins no mastery/scheduler writes beyond the daily-plan completion signal; learner-copy audit finds no grammar-correction promise"
+  - "writing_check Rust command green with ru/ja fixtures; desktop vitest green with red-first pins; gates.log under state/evidence/WRITE-PRACTICE-001/"
+  required_for_desktop_1_0: false
 - id: PNPM-AUDIT-MINIMATCH-001
   milestone: M10
   priority: P3
@@ -4256,6 +4283,8 @@ execution_scope:
   - G4-EXPLAIN-001
   - README-DOC-DRIFT-001
   - PNPM-AUDIT-MINIMATCH-001
+  - SPEAK-PRACTICE-001
+  - WRITE-PRACTICE-001
   - LAN-TOGGLE-PIN-001
   - RU-STORIES-MEDIA-001
   - RU-CONTENT-FREEZE-047-001
