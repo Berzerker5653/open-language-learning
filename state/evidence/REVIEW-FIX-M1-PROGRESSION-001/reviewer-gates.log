@@ -1,0 +1,69 @@
+REVIEW-FIX-M1-PROGRESSION-001 — reviewer gate battery, 2026-11-27 15:2x-15:3x MST
+Method: detached worktrees `git worktree add --detach <scratch> <commit>`, gitignored pack
+media hardlinked from main tree (cp -al -n), apps/desktop/dist symlinked, CARGO_TARGET_DIR
+shared with main tree. Commands run by the reviewer at the exact reviewed commits.
+
+===================== AT 87786961 (code commit) =====================
+1|== fmt ==
+2|fmt_exit=0
+3|== scheduler test ==
+4|test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+5|test every_planned_item_has_a_learning_reason_no_attendance_objective ... ok
+6|test balances_due_review_weak_skills_and_progression ... ok
+7|test invalid_configs_are_rejected ... ok
+8|test fill_phase_terminates_when_nothing_fits_anymore ... ok
+9|test learner_owned_reviews_plan_as_saved_reviews_not_pack_reviews ... ok
+10|test modality_repetition_limit_is_enforced ... ok
+11|test plans_are_reproducible_with_fixed_input_and_seed ... ok
+12|test new_material_keeps_its_share_behind_a_weak_skill_backlog ... ok
+13|test budget_presets_5_10_20_30_plus_all_fit_and_grow ... ok
+14|test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+15|test degenerate_request_ret_still_yields_a_finite_due_date ... ok
+16|test deterministic_under_test_clock ... ok
+17|test items_schedule_by_due_time_not_attendance ... ok
+18|test stability_grows_on_success_and_falls_on_lapse ... ok
+19|test unscored_attempts_are_never_reviews ... ok
+20|test scheduler_state_persists_and_queries_due_items ... ok
+21|test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+22|test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+23|== clippy scheduler ==
+24|    Checking lts-storage v0.1.0 (/home/hunter/.hermes/cache/scratch/rv-fixm1-wt/crates/storage)
+25|    Checking lts-scheduler v0.1.0 (/home/hunter/.hermes/cache/scratch/rv-fixm1-wt/crates/scheduler)
+26|    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.97s
+27|clippy_sched_exit=0
+28|== desktop lib full ==
+29|test tests::provenance_payload_covers_every_installed_pack_verbatim ... ok
+30|test tests::sharded_pack_directories_reach_every_reader ... ok
+31|test tests::the_aligner_language_comes_from_the_pack_manifest ... ok
+32|test tests::writing_targets_are_parsed_once_per_version_root ... ok
+33|test tests::stress_display_settings_are_data_driven_and_persisted ... ok
+34|
+35|test result: ok. 259 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 379.28s
+36|
+37|desktop_exit=0
+38|GATES_DONE
+
+===================== clippy desktop (same worktree) =====================
+cd $WT && cargo clippy -p lts-desktop --all-targets -- -D warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 16.79s
+clippy_desktop_exit=0
+
+===================== validate_handoff at 25757ff3 (ledger commit) =====================
+cd <worktree@25757ff3> && python3 tools/validate_handoff.py --require-explicit-ledger-records
+HANDOFF VALIDATION PASSED (2293 data files checked)
+control: same validator at 935814a2 PASSED; at HEAD d62822da FAILED:
+FAIL roadmap: execution_scope completion_task/required_flag/optional_tasks/publication policy mismatch
+(4 cards added by d62822da missing from execution_scope.optional_tasks — separate FIX card)
+
+===================== sim acceptance recompute (from committed tarballs only) =====================
+state/evidence/FIX-M1-PROGRESSION-001/sim/raw-ru.tar.gz + raw-ja.tar.gz, 30 day files per pack.
+Parse basis: per-day calls[] {cmd,resp}; practice_plan resp.items; home_state resp.plan.items;
+current_offer resp non-null; unit_path list day-30 last-wins. Reviewer results:
+  RU: 30 days | practice_plan unique content_id 94 | home_state item_id 144 | offer first day 1
+      non-letter units refs_done>0 = 803 (of 813 non-letter) | ru.orth.cyrillic.t served days 2,3,14,15
+      unit_path day30: ru.unit.on-ramp.cyrillic-a-o-m-t refs_done 4/4 DONE; ru.unit.on-ramp.greetings-01 5/6 unlocked
+  JA: 30 days | practice_plan unique content_id 237 | home_state item_id 256 | offer first day 1
+      non-letter units refs_done>0 = 49-50 | top: kanji-time-verbs 29, kanji-people-body 14, kanji-numbers 13
+PRE-FIX control (state/evidence/LEARNER-REVIEW-M1-001/sim/raw-ru.tar.gz, engine 355d847c):
+  RU: unique content 6 | offer None | non-letter refs_done>0 = 1 | day5 plan 100% weak-skill of the 6
+  -> RCA table independently reproduced; post-fix thresholds PASS on either metric basis.
