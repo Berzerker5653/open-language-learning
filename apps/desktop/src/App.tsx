@@ -10,7 +10,7 @@ import {
   type ProfileSummary,
 } from "./onboarding";
 import { PracticeHub, type HubMode } from "./hub";
-import { remainingPlanSeconds, SessionChrome, StepDots } from "./session-chrome";
+import { SessionChrome, StepDots } from "./session-chrome";
 import { inLtsServeMode } from "./ipc";
 import {
   Home,
@@ -31,11 +31,9 @@ import {
   type FirstRunStep,
   RUNNABLE_MODALITIES,
   type SessionOutcomeView,
-  type SessionStatus,
   type SessionView,
   type CapstoneResult,
   type LearningFacts,
-  bandHeader,
 } from "./home";
 import { MemoryStatsStrip, ProgressZeroState, type MemoryStats } from "./memory-stats";
 import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./pronunciation";
@@ -125,21 +123,14 @@ import { audioFailureMessage } from "./speech-readiness";
 // serve-banner.test.tsx) keep working unchanged.
 import {
   after,
-  activePackNote,
   detectInvoke,
-  explainPackAbsence,
-  loadSessionPack,
   NO_ACTIVE_PACK,
   packAttemptRequest,
   packRequest,
-  serveDegradedBadge,
   SESSION_BRIDGE_MS,
   EMPTY_PLAN,
   toWav16,
   toB64,
-  type Invoke,
-  type PackRequest,
-  type SessionPack,
 } from "./app/primitives";
 import { PlacementCoverageNote } from "./app/placement-coverage";
 import { runSmokeHandshake } from "./app/walkthrough";
@@ -155,7 +146,6 @@ import {
   type SettingsWiringDeps,
 } from "./app/settings-wiring";
 import {
-  runAdvanceSession,
   runCloseSession,
   runPauseSession,
   runResumeSession,
@@ -1817,10 +1807,6 @@ export function App() {
   // session state and the refs; `sessionWiringDeps` below carries exactly
   // what the old inline closures captured. Thin wrappers keep every JSX and
   // history-wiring call site unchanged.
-  function advanceSession(counted: number) {
-    return runAdvanceSession(sessionWiringDeps, counted);
-  }
-
   function closeSession(reason: "stopped") {
     runCloseSession(sessionWiringDeps, reason);
   }
