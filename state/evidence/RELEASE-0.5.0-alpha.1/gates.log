@@ -1,0 +1,67 @@
+GATES run 2026-11-26 19:52-20:22 MST at release commit 47ad3036 (desktop 0.5.0-alpha.1)
+NOTE: tee failed at job start (evidence dir created after start); reconstructed verbatim from the
+background process session log (proc_6e5cc538b51d) captured by the terminal tool.
+
+GATES 47ad3036 Thu Nov 26 07:52:55 PM MST 2026
+===FLAKE-CHECK-standalone===
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 234 filtered out; finished in 2.40s
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 234 filtered out; finished in 2.16s
+===FULL-RERUN===
+      1 test result: FAILED. 140 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 113.55s
+      1 test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.65s
+      1 test result: ok. 107 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.20s
+      1 test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 27.74s
+      1 test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 31.16s
+      1 test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 33.24s
+      1 test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 39.16s
+      1 test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 53.88s
+      1 test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 62.78s
+      1 test result: ok. 152 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.85s
+      1 test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.65s
+      1 test result: ok. 18 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.00s
+      1 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+      1 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+      1 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.61s
+      1 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.63s
+      1 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.65s
+      1 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 3.30s
+      1 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.23s
+      1 test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.20s
+      1 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.43s
+      1 test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.63s
+      1 test result: ok. 41 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.96s
+      1 test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.18s
+      1 test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+      1 test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.63s
+      1 test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.34s
+      1 test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.78s
+      1 test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.57s
+      1 test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.17s
+      1 test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.31s
+      1 test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.59s
+      1 test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.60s
+      1 test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 22.14s
+      1 test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 22.72s
+      1 test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 36.89s
+===NOTE===
+the full parallel workspace pass showed the dictation_check_matches_spoken_target
+engine-error failure (140/1) — the single failure in 36 suites. Standalone re-runs 2/2 green
+(see flake-note.txt). Documented pre-existing flake rule applied; no second full pass was run
+under this job (one `cargo test --workspace` invocation).
+
+===WEB===
+ Test Files  50 passed (50)
+      Tests  398 passed (398)
+   Duration  11.56s
+
+===GATES===
+FMT-OK
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 2m 36s
+wrote docs/11_CURRICULUM_QUALITY.md::LEARNER-COPY-AUDIT (93 lines)
+PASSED 2081 data files; 23 warnings (allowlist)
+RELEASE-GATES-DONE
+
+# re-confirm at same tree 20:3x:
+FMT-RECONFIRM-OK
+findings: 0
+HANDOFF VALIDATION PASSED (2289 data files checked)

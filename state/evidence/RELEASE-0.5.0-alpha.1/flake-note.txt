@@ -1,0 +1,1 @@
+flake re-check 2026-11-26: tests::dictation_check_* green standalone x2 (4/4, 2.2-2.4s) after engine-error flake in full parallel run at 47ad3036 — documented pre-existing flake, re-run rule applied
