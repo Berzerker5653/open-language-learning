@@ -11,11 +11,13 @@
       "evidence": []
     },
     "G4-EXPLAIN-001": {
-      "status": "ready",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 2,
       "updated": "2026-11-26",
-      "notes": "G4 first step (2026-11-23 owner scope decision, parent AI-001): explain provider interface off-by-default + explain control on activity cards, information only, never a grade. Contract: state/notes/G4-EXPLAIN-001.md; board card lts-G4-EXPLAIN-001.",
-      "evidence": []
+      "notes": "G4 first step (2026-11-23 owner scope decision, parent AI-001): explain provider interface off-by-default + explain control on activity cards, information only, never a grade. Contract: state/notes/G4-EXPLAIN-001.md; board card lts-G4-EXPLAIN-001. Shipped 2026-11-26 (code 63f139a8): explain.rs provider + consent backstop + ExplainPanel on the practice runner + Settings AI card; 10 Rust tests on a 127.0.0.1 mock server incl. zero-store-writes contract; live local-model round-trip deferred (never claimed).",
+      "evidence": [
+        "state/evidence/G4-EXPLAIN-001/gates.log"
+      ]
     },
     "WORD-STATE-COLORING-001": {
       "status": "done",
