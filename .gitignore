@@ -78,3 +78,5 @@ qs-r*.jsonl
 tmp/jmdict
 dist-history/
 .sim-data/
+
+state/evidence/LEARNER-REVIEW-M1-001/sim/raw/

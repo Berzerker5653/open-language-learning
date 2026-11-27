@@ -1,0 +1,26 @@
+{
+ "ru": {
+  "failures": 0,
+  "warnings": 53,
+  "coverage": {
+   "unique_item_ids_served": 6,
+   "unique_texts_seen": 994,
+   "worklist_items": 991,
+   "worklist_items_unchecked": 0,
+   "coverage_pct": 100.0,
+   "sample_missing": []
+  }
+ },
+ "ja": {
+  "failures": 0,
+  "warnings": 0,
+  "coverage": {
+   "unique_item_ids_served": 15,
+   "unique_texts_seen": 971,
+   "worklist_items": 968,
+   "worklist_items_unchecked": 0,
+   "coverage_pct": 100.0,
+   "sample_missing": []
+  }
+ }
+}

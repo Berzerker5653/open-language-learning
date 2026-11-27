@@ -1,0 +1,507 @@
+# JA Month-1 worklist — 968 unique text items across 30 simulated days
+
+## Day 1 — 966 new items
+- [story_view] (particle: marks a question)
+- [story_view] (particle: marks the direct object of a verb)
+- [story_view] (particle: marks the possessive; links a modifier to the noun it describes)
+- [story_view] (particle: marks the topic of the sentence)
+- [story_view] (particle: to, at, in — marks direction, target, time, or place)
+- [story_view] (particle: to, toward — marks the direction or goal of motion)
+- [story_list, story_view] A first day
+- [unit_path] AI and society
+- [unit_path] Accessories
+- [scenario_list] Answering and taking a message
+- [unit_path] Answering the phone
+- [unit_path] Apartment and appliances
+- [unit_path] Applications
+- [unit_path] Appointments
+- [unit_path] Arms, legs, hands
+- [unit_path] Asking for help in a shop
+- [unit_path] Asking where things are
+- [story_view] At night, I sleep.
+- [unit_path] At the clinic
+- [unit_path] At the pharmacy
+- [scenario_list] At the pharmacy counter
+- [scenario_list] At the post office counter
+- [scenario_list, story_list, story_view] At the shop
+- [unit_path] At the shop, on time
+- [scenario_list] At the ward office window
+- [unit_path] At the workplace
+- [unit_path] Ball sports
+- [unit_path] Bank
+- [unit_path] Banking
+- [unit_path] Body and head
+- [unit_path] Bonds and love
+- [unit_path] Busy and free
+- [scenario_list] Calling a client's office in polite register
+- [scenario_list] Calling a colleague about tomorrow's meeting
+- [unit_path] Calling the clinic
+- [scenario_list] Calling to make a doctor appointment
+- [unit_path] Care verbs
+- [scenario_list] Changing plans by text
+- [unit_path] Check-ups
+- [unit_path] Chore verbs
+- [unit_path] Chores
+- [unit_path] City hall
+- [unit_path] Clothes
+- [unit_path] Combat sports
+- [unit_path] Competition
+- [unit_path] Confirming
+- [unit_path] Contact info
+- [unit_path] Cooking steps
+- [unit_path] Counters I
+- [unit_path] Counters II
+- [unit_path] Dairy and sweets
+- [unit_path] Degree adverbs
+- [unit_path] Departures and trips
+- [unit_path] Describing a home
+- [unit_path] Dishes
+- [unit_path] Documents
+- [unit_path] Eating and drinking sentences
+- [unit_path] Entertainment feelings
+- [unit_path] Entertainment venues
+- [unit_path] Every period
+- [unit_path] Everyday adverbs
+- [scenario_list] Exchanging something at the counter
+- [home_state, lesson_plan, practice_plan] Excuse me. / I'm sorry.
+- [unit_path] Explaining
+- [unit_path] Family
+- [unit_path] Family and what they do
+- [unit_path] Family members
+- [unit_path] Feelings
+- [unit_path] Film opinion: concessive が and favor verbs
+- [unit_path] Film talk after the screening
+- [scenario_list] Finding something in a department store
+- [scenario_list] Finding the station
+- [scenario_list] First meeting
+- [unit_path] Fitness
+- [unit_path] Fitting room
+- [unit_path] Food, meals, and table phrases
+- [unit_path] Forecast
+- [unit_path] Formal written style: notices and commentary
+- [unit_path] Four seasons
+- [unit_path] Furniture and storage
+- [unit_path] Games
+- [unit_path] Gear
+- [unit_path] Getting along
+- [unit_path] Getting around town
+- [unit_path] Getting on and off
+- [unit_path] Going out
+- [unit_path] Going places
+- [lesson_plan] Good evening.
+- [home_state, lesson_plan, practice_plan] Good morning.
+- [lesson_plan] Good night.
+- [unit_path] Grandparents and relatives
+- [unit_path] Greetings and intros
+- [lesson_plan, unit_path] Greetings by time of day
+- [unit_path] Gym and training
+- [unit_path] Healthy habits
+- [unit_path] Hearing the difference
+- [story_view] Hello (daytime).
+- [unit_path] Hiragana: H, M, Y, R, W rows and ん
+- [unit_path] Hiragana: S, T, N rows
+- [unit_path] Hiragana: contracted sounds
+- [unit_path] Hiragana: voiced and semi-voiced marks
+- [lesson_plan, unit_path] Hiragana: vowels and K-row
+- [unit_path] Hobbies and routines
+- [unit_path] Holidays
+- [unit_path] Home adverbs
+- [unit_path] Honorific awareness: reporting about superiors
+- [unit_path] Hospital
+- [unit_path] Hot and cold
+- [unit_path] Household
+- [story_view] How much is it?
+- [story_view] I (polite neutral)
+- [story_view] I buy bread.
+- [story_view] I get up at ten every day.
+- [story_view] I go back home.
+- [story_view] I go to school.
+- [unit_path] In and out verbs
+- [unit_path] In the classroom
+- [story_view] In the morning, I eat rice.
+- [unit_path] Insurance
+- [unit_path] Introducing yourself
+- [story_view] It's one hundred yen.
+- [story_view] It's three o'clock.
+- [unit_path] Japanese flavors
+- [unit_path] Job hunting
+- [unit_path] Kanji: numbers
+- [unit_path] Kanji: people, body, basics
+- [lesson_plan, unit_path] Kanji: time, nature, verbs
+- [unit_path] Katakana loanwords in the wild
+- [unit_path] Katakana: the full basic set
+- [unit_path] Keeping the line open: repair and confirmation
+- [unit_path] Kitchen tools
+- [unit_path] Language class
+- [unit_path] Left, right, straight
+- [unit_path] Life events
+- [unit_path] Likes and skills
+- [unit_path] Linking sentences: first, so, however, by-country
+- [unit_path] Losing and finding
+- [unit_path] Lost and found
+- [unit_path] Making and talking
+- [unit_path] Martial arts
+- [unit_path] Meals
+- [unit_path] Medicine and pharmacy
+- [unit_path] Meeting and greeting
+- [unit_path] Meeting notice: informing the team
+- [unit_path] Meeting notice: the follow-up call
+- [unit_path] Meetings and introductions
+- [unit_path] Memories
+- [unit_path] Memory places
+- [unit_path] Mind and body
+- [unit_path] Minor ailments
+- [unit_path] Money
+- [unit_path] Money in
+- [unit_path] Money out
+- [unit_path] More body parts
+- [unit_path] Mountain, river, sea
+- [unit_path] Music events
+- [unit_path] Music, movies, manga
+- [story_list, story_view, unit_path] My day
+- [story_view] My name is Tanaka.
+- [unit_path] Near and far
+- [story_view] Nice to meet you (first meeting).
+- [unit_path] Not ... and ... was: い-adjective endings
+- [unit_path] Numbers and counters
+- [unit_path] Numbers at the shop
+- [unit_path] Office clarification: confirming details politely
+- [unit_path] Once upon a time
+- [unit_path] Online communication
+- [scenario_list, unit_path] Ordering at the cafe counter
+- [scenario_list] Ordering something to eat
+- [unit_path] Parties
+- [unit_path] Paying
+- [unit_path] Paying a bill
+- [scenario_list] Paying a bill at the counter
+- [unit_path] People and voices
+- [unit_path] Phone register: polite and hedged forms for clients
+- [unit_path] Plain-register opinions: ものだ, わけだ, ものか
+- [unit_path] Play, watch, listen
+- [unit_path] Police and fire
+- [unit_path] Post office
+- [unit_path] Prevention
+- [unit_path] Prices
+- [unit_path] Questions
+- [unit_path] Rainy season
+- [unit_path] Reading and media
+- [unit_path] Reading short notices: typhoon and current situation
+- [unit_path] Recovery
+- [unit_path] Repair phrases
+- [scenario_list] Reporting a lost item
+- [unit_path] Reserving a table by phone
+- [scenario_list] Reserving by telephone
+- [unit_path] Reshuffling plans by text
+- [unit_path] Results
+- [unit_path] Returning and exchanging
+- [unit_path] Review: advice opinion language
+- [unit_path] Review: comparison debate language
+- [unit_path] Review: culture tradition language
+- [unit_path] Review: education academic language
+- [unit_path] Review: emotions personality language
+- [unit_path] Review: environment language
+- [unit_path] Review: film evaluation language
+- [unit_path] Review: health wellness language
+- [unit_path] Review: media language
+- [unit_path] Review: office notice language
+- [unit_path] Review: paying a bill
+- [unit_path] Review: society rules language
+- [unit_path] Review: story language
+- [unit_path] Review: technology language
+- [unit_path] Review: travel extended language
+- [unit_path] Review: workplace language
+- [unit_path] Roads and crossings
+- [unit_path] Rooms of the home
+- [unit_path] Running
+- [unit_path] Saying goodbye
+- [unit_path] Saying what things are like
+- [unit_path] School people
+- [unit_path] Seasonings
+- [unit_path] Section review
+- [story_view] See you tomorrow.
+- [unit_path] Sending a parcel
+- [unit_path] Seniors and juniors
+- [unit_path] Sequencing adverbs
+- [unit_path] Shopping and prices
+- [unit_path] Shops
+- [unit_path] Sick or all right
+- [unit_path] Skills and shopping
+- [unit_path] Sleep
+- [unit_path] Small and new
+- [unit_path] Sounds
+- [unit_path] Sports
+- [unit_path] Station and tickets
+- [unit_path] Storms
+- [unit_path] Story actions
+- [unit_path] Story feelings
+- [unit_path] Study and homework
+- [unit_path] Summer things
+- [unit_path] Swimming and singing
+- [unit_path] Symptoms
+- [unit_path] TV programs
+- [scenario_list] Talking about a film after watching it
+- [unit_path] Talking about food
+- [unit_path] Talking about weather
+- [unit_path] Tastes
+- [unit_path] Telling the ward office you moved
+- [unit_path] Temperature
+- [home_state, lesson_plan, practice_plan] Thank you.
+- [lesson_plan, unit_path] Thanks and excuse me
+- [unit_path] The night sky
+- [unit_path] Theater
+- [unit_path] Thinking and remembering
+- [unit_path] This and last
+- [story_view] This book is expensive.
+- [story_view] This is a book.
+- [unit_path] This, that, and over there
+- [unit_path] Time and days
+- [unit_path] Timetables and speed
+- [unit_path] Tired, breathing, warm
+- [unit_path] Together with, and what people said: と
+- [unit_path] Trains and lines
+- [unit_path] Translation
+- [unit_path] Travel and airport
+- [unit_path] Treats
+- [unit_path] Trust and responsibility
+- [unit_path] Walls, windows, doors
+- [unit_path] Ward office
+- [unit_path] Ways of doing
+- [unit_path] Ways to get around
+- [story_view] What is this?
+- [story_view] What time is it now?
+- [unit_path] What you like and don't like
+- [unit_path] Who and what: the subject marker が
+- [unit_path] Winter and water sports
+- [unit_path] Winter things
+- [unit_path] Work and social life
+- [unit_path] Work verbs
+- [unit_path] Writing systems
+- [practice_task] ______。
+- [story_view] a daytime greeting; fits some hello uses but not every English 'hello' situation
+- [unit_path] abstract writing
+- [unit_path] abstraction ladders
+- [unit_path] absurd humor
+- [unit_path] academic email
+- [unit_path] academic hedging
+- [unit_path] academic presentation
+- [unit_path] accepting feedback
+- [unit_path] activism movements
+- [unit_path] adaptation study
+- [unit_path] advertising critique
+- [unit_path] aesthetics essay
+- [unit_path] aesthetics ideas
+- [story_view] again
+- [unit_path] age register
+- [unit_path] aging medicine
+- [unit_path] aging society
+- [unit_path] ai tool talk
+- [unit_path] analogy critique
+- [unit_path] analysis essay
+- [unit_path] anecdote telling
+- [unit_path] animation arts
+- [unit_path] application essay
+- [unit_path] application letters
+- [unit_path] architecture talk
+- [unit_path] archives research
+- [unit_path] argument paragraphs
+- [unit_path] art and culture
+- [unit_path] art market
+- [unit_path] article summary
+- [unit_path] assessment debate
+- [unit_path] assumption hunting
+- [unit_path] attending ceremonies
+- [unit_path] audience studies
+- [unit_path] author context
+- [unit_path] automation impact
+- [unit_path] background setting
+- [unit_path] balanced nutrition
+- [unit_path] behavior change
+- [unit_path] bilingual education
+- [unit_path] bilingualism
+- [unit_path] biodiversity
+- [unit_path] biotechnology
+- [unit_path] booking problems
+- [unit_path] border documentation
+- [unit_path] boundary setting
+- [story_view] bread
+- [unit_path] broadcast style
+- [unit_path] budget comparison
+- [unit_path] building suspense
+- [unit_path] business letters
+- [unit_path] business register
+- [unit_path] camera meaning
+- [unit_path] campaign critique
+- [unit_path] cancel culture
+- [unit_path] carbon economics
+- [unit_path] care and aging
+- [unit_path] career change plans
+- [unit_path] career markets
+- [unit_path] caregiving talk
+- [unit_path] causation correlation
+- [unit_path] ceremony speech
+- [story_view] chapter
+- [story_view] character
+- [unit_path] character description
+- [unit_path] checking misinformation
+- [unit_path] choosing a topic
+- [unit_path] circular economy
+- [unit_path] citation advanced
+- [unit_path] citation basics
+- [unit_path] city culture
+- [unit_path] city history
+- [unit_path] city planning
+- [unit_path] civic participation
+- [unit_path] civil rights
+- [unit_path] class debate
+- [unit_path] classroom methods
+- [unit_path] climate diplomacy
+- [unit_path] climate policy
+- [unit_path] climate science
+- [unit_path] close reading
+- [unit_path] coding basics
+- [unit_path] cognition basics
+- [unit_path] comedy timing
+- [unit_path] comic reading
+- [unit_path] community belonging
+- [unit_path] community bonds
+- [unit_path] community problems
+- [unit_path] comparing gadgets
+- [unit_path] compromise writing
+- [unit_path] conceding points
+- [unit_path] concept definition
+- [unit_path] conference talk
+- [unit_path] conflict feelings
+- [unit_path] conflict mediation
+- [unit_path] conflict resolution
+- [unit_path] connotation awareness
+- [unit_path] consistency checks
+- [unit_path] constitutional ideas
+- [unit_path] consumer behavior
+- [unit_path] consumer protection
+- [unit_path] consumption debate
+- [unit_path] contract law
+- [unit_path] contract terms
+- [unit_path] coping habits
+- [unit_path] corporate responsibility
+- [unit_path] corpus linguistics
+- [unit_path] correspondence portfolio
+- [unit_path] counter arguments
+- [unit_path] counter evidence
+- [unit_path] counterfactual thinking
+- [unit_path] court process
+- [unit_path] craft aesthetics
+- [unit_path] criminal justice
+- [unit_path] critique essay
+- [unit_path] cross-cultural friendship
+- [unit_path] cultural appropriation
+- [unit_path] cultural belonging
+- [unit_path] cultural exchange
+- [unit_path] cultural film
+- [unit_path] cultural pride
+- [unit_path] culture comparison
+- [unit_path] culture essay
+- [unit_path] culture shock
+- [unit_path] current events
+- [unit_path] curriculum design
+- [unit_path] customer escalation
+- [unit_path] daily devices
+- [unit_path] data ethics
+- [unit_path] data presentation
+- [unit_path] deadline negotiation
+- [unit_path] debate basics
+- [unit_path] decision essay
+- [unit_path] decision science
+- [unit_path] decision talk
+- [unit_path] deepened gratitude
+- [unit_path] definition debate
+- [unit_path] degree conversations
+- [unit_path] demographic shift
+- [unit_path] design ethics
+- [unit_path] design principles
+- [unit_path] development goals
+- [unit_path] development stages
+- [unit_path] dialect register
+- [unit_path] dialect variation
+- [unit_path] diet culture
+- [unit_path] digital detox
+- [unit_path] digital discourse
+- [unit_path] digital habits
+- [unit_path] digital medicine
+- [unit_path] diplomacy language
+- [unit_path] diplomatic style
+- [unit_path] director style
+- [unit_path] disaster preparation
+- [unit_path] discourse analysis
+- [unit_path] discussing news
+- [unit_path] documentary critique
+- [unit_path] duty versus good
+- [unit_path] early childhood
+- [unit_path] eco transport
+- [unit_path] economic debate
+- [unit_path] economic history
+- [unit_path] editorial letters
+- [unit_path] education essay
+- [unit_path] education reform
+- [unit_path] electoral systems
+- [unit_path] emotion theory
+- [unit_path] emotion vocabulary
+- [unit_path] emotional advice
+- [unit_path] emotional story
+- [unit_path] emphasis devices
+- [unit_path] employment trends
+- [unit_path] encouragement words
+- [unit_path] energy and crisis
+- [unit_path] energy choices
+- [unit_path] energy technology
+- [unit_path] energy transition
+- [unit_path] environmental ethics
+- [unit_path] environmental justice
+- [unit_path] environmental law
+- [unit_path] environmental policy
+- [unit_path] epidemiology basics
+- [unit_path] equality and gap
+- [unit_path] equity in schools
+- [unit_path] essay on novel
+- [unit_path] essay structure
+- [unit_path] ethical frameworks
+- [unit_path] ethics debate
+- [unit_path] ethics essay
+- [unit_path] ethics of law
+- [unit_path] etiquette rules
+- [story_view] every day
+- [unit_path] everyday laws
+- [unit_path] evidence evaluation
+- [unit_path] exam strategy
+- [lesson_plan] excuse me (polite; leaving or intruding)
+- [lesson_plan] excuse me / I'm sorry (polite)
+- [unit_path] exercise planning
+- [unit_path] exhibition writing
+- [story_view] expensive; tall
+- [unit_path] explaining choices
+- [unit_path] explaining customs
+- [unit_path] explaining preference
+- [unit_path] expressing empathy
+- [unit_path] expressing hope
+- [unit_path] expressing regret
+- [unit_path] fallacy hunting
+- [unit_path] family change
+- [unit_path] family conflict
+- [unit_path] festival culture
+- [unit_path] festival details
+- [unit_path] film ethics
+- [unit_path] film history
+- [unit_path] film language
+- [unit_path] film reviews
+- [unit_path] financial literacy
+- [unit_path] fitness club life
+- [unit_path] folktale reading
+- [unit_path] food waste
+- [unit_path] forgiveness process
+- [unit_path] formal apology
+- [unit_path] formal complaint
+- [unit_path] formal email register
+- [unit_path] formal invitation
+
+## Day 2 — 2 new items
+- [home_state, practice_plan] due-review
+- [home_state, practice_plan] weak-skill

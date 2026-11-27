@@ -1,0 +1,17 @@
+{
+ "ja.kanji.hi#recall-meaning": "day; sun",
+ "ja.kanji.toshi#recall-meaning": "year",
+ "ja.kanji.tsuki#recall-meaning": "month; moon",
+ "ja.orth.hira.a#orthography-recognition": "a",
+ "ja.orth.hira.i#orthography-recognition": "i",
+ "ja.orth.hira.u#orthography-recognition": "u",
+ "ja.sent.excuse-me#comprehension-listening": "Excuse me. / I'm sorry.",
+ "ja.sent.excuse-me#orthographic-encoding": "すみません。",
+ "ja.sent.excuse-me#production-writing": "すみません",
+ "ja.sent.greet-morning#comprehension-listening": "Good morning.",
+ "ja.sent.greet-morning#orthographic-encoding": "おはようございます。",
+ "ja.sent.greet-morning#production-writing": "おはようございます",
+ "ja.sent.thanks-polite#comprehension-listening": "Thank you.",
+ "ja.sent.thanks-polite#orthographic-encoding": "ありがとうございます。",
+ "ja.sent.thanks-polite#production-writing": "ありがとうございます"
+}

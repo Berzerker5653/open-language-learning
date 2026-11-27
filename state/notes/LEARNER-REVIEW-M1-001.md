@@ -54,3 +54,48 @@ per-month checks to continue.
   enumerated set; per-chunk reviewer verdicts; defects ledger with dispositions; residual
   manifest; follow-up cards (if any) created and `ready`; gates.log under the evidence dir;
   M2 card created.
+
+## RUN 2 HANDOFF (2026-11-27, board t_a427ed60 attempt 2)
+
+DONE + committed: full 60-day journey-sim (raw logs + raw-*.tar.gz archives +
+answer-keys), worklist (RU 991 / JA 968), mechanical pass
+scripts/month1_mech_pass.py (0 failures / 100% coverage both packs; RU 53
+warnings -> mech-pass/mech-ru.md), defects.md ledger (D-001 blocker, D-002
+harness known-limit), RCA (rca-progression-starvation.md), gates.log,
+FIX-M1-PROGRESSION-001 board card (t_ead922d2, this card's board PARENT), sim
+harness now leak-free + resumable (day logs skipped when present).
+
+REMAINING RECIPE (run only after FIX-M1-PROGRESSION-001 lands - board
+auto-resumes this card then):
+
+1. Re-run sim fresh: `rm -rf .sim-data state/evidence/LEARNER-REVIEW-M1-001/sim/raw`
+   then `python3 scripts/sim_month1.py --pack ru --days 30` and `--pack ja`
+   (each ~2-5 min; chain them; do NOT delete the tar.gz archives).
+   Rebuild worklist (`--build-worklist`), re-run
+   `.venv/bin/python scripts/month1_mech_pass.py`.
+2. ASR subset: ids = union of practice item content_ids + story/scenario ids
+   from the worklist; run the ASR leg of `scripts/qa-audit.sh` or
+   `scripts/qa-asr.py --ids` with ASR_MODEL/WHISPER (model paths pinned in
+   PACK-AUDIO-VERIFICATION-001 evidence).
+3. Fresh-context review (pass 2): chunk worklist-{ru,ja}.md items into ~40-60
+   prose chunks each; delegate_task children (fresh context; the content
+   authors were prior cards, so any fresh lane is an independent reviewer) -
+   per chunk: grammar / naturalness / level-appropriateness verdicts; ja and
+   ru in SEPARATE children. Save per-chunk verdicts under review/ in this
+   evidence dir; merge findings into defects.md.
+4. Experience review (pass 3): step the fixed sim's per-day logs as a learner
+   - pacing, mode unlock timing vs difficulty, story levels vs pool coverage,
+   quiz repetition, streak/missed-day behavior, next-action quality; findings
+   -> defects.md + FIX cards.
+5. Residual-uncertainty manifest -> known-limits copy (locate via
+   tools/audit_learner_copy.py), re-run that audit after. Create
+   LEARNER-REVIEW-M2-001 with THIS contract (copy the M1 ROADMAP block shape,
+   days 31-60, scoped by M1's defect distribution). Then flip ledger done +
+   kanban_complete.
+
+PITFALLS hit in run 2: (a) `pkill -f <pat>` self-kills the worker when any
+later word of the same command line contains <pat> - enumerate PIDs with
+`pgrep -f 'lts[-]serve'` in one call, kill by PID in the next; (b)
+kanban_create needs workspace_path passed explicitly for dir workspaces;
+(c) a dead run's leaked serves escape `pkill -f faketime` (faketime execs -
+cmdline becomes lts-serve); kill by the `lts[-]serve` pattern.

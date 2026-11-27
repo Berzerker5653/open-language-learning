@@ -1,0 +1,18 @@
+{
+ "pack": "ja",
+ "days_loaded": 30,
+ "coverage": {
+  "unique_item_ids_served": 15,
+  "unique_texts_seen": 971,
+  "worklist_items": 968,
+  "worklist_items_unchecked": 0,
+  "coverage_pct": 100.0,
+  "sample_missing": []
+ },
+ "failures": [],
+ "warnings": [],
+ "counts": {
+  "failures": 0,
+  "warnings": 0
+ }
+}

@@ -1,0 +1,33 @@
+LEARNER-REVIEW-M1-001 — gates.log (run 2, 2026-11-27)
+
+Harness (lane tier):
+  python3 -m py_compile scripts/sim_month1.py scripts/month1_mech_pass.py
+    -> compile-ok (exit 0)
+
+Journey-sim (acceptance: days 1-30 logs for both packs):
+  python3 scripts/sim_month1.py --pack ru --days 30  -> 30/30 days (chain 355d847c-era code)
+  python3 scripts/sim_month1.py --pack ja --days 30  -> 30/30 days
+  raw logs: state/evidence/LEARNER-REVIEW-M1-001/sim/raw/{ru,ja}-day0{01..30}.json
+  archived (git): sim/raw-ru.tar.gz (1.5M), sim/raw-ja.tar.gz (1.1M); raw/ dir
+  kept on disk for downstream passes, gitignored to keep the repo light.
+
+Worklist:
+  python3 scripts/sim_month1.py --build-worklist
+    -> {"ru": 991, "ja": 968} unique text items (sim/worklist.json)
+
+Mechanical pass (acceptance: mechanical 100% coverage of enumerated set):
+  .venv/bin/python scripts/month1_mech_pass.py
+    ru: 0 failures, 53 reviewer-bound warnings, coverage 100.0% (991 items)
+    ja: 0 failures, 0 warnings, coverage 100.0% (968 items)
+  checks: answer-key consistency + re-derivation, distractor legality,
+  RU stress-mark validity, RU lexicon membership (pymorphy3), JA charset/
+  kanji-vs-jmdict, JA reading collision scan. Reports: mech-pass/mech-{ru,ja}.{json,md}
+
+BLOCKER found (see defects.md D-001): the enumerated Month-1 set itself is
+degenerate — the engine feeds the simulated learner 6 (RU) / 15 (JA)
+practice items and then starves. 100% coverage of a starved inventory is
+honest for THIS inventory but the pass must be re-run after
+FIX-M1-PROGRESSION-001. Reviewer passes (2/3) deferred accordingly.
+
+ASR audio re-verification (mech sub-pass): DEFERRED to the post-fix
+re-run — the month-1 audio subset is currently the 6/15-item set.
