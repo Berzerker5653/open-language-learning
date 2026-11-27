@@ -1,0 +1,58 @@
+# REVIEW-APP-SPLIT-003C — reviewer gates log (2026-11-27)
+
+Two-axis review (Pocock pairing) of the pack/session/claims refresh wiring
+slice: code 96a3cc1c (parent 5738ccf4, the 003B ledger), ledger cd82a606.
+
+## Commands run by the reviewer
+
+1. `git show 96a3cc1c` + `git show cd82a606` — full diff read line by line
+   (App.tsx hunks: import block, deps-bundle insert at :801, five delegation
+   bodies + refreshLanguages delegation; new pack-wiring.ts; ledger:
+   gates.log, notes 001 slice table, task-state, KANBAN.md, ROADMAP card +
+   optional_tasks).
+2. **Independent verbatim-body comparison** (python3, stdlib): brace-matched
+   extraction of the six functions from
+   `git show 5738ccf4:apps/desktop/src/App.tsx` and their `run*` counterparts
+   in `git show 96a3cc1c:apps/desktop/src/app/pack-wiring.ts`; normalization =
+   strip indent, drop blanks, strip `deps.` prefix, drop
+   `const { inv } = deps;` preamble, map `runRefreshInstalled(deps)` ->
+   `refreshInstalled()` and `runRefreshLanguages(deps)` ->
+   `refreshLanguages()`. RESULT: ALL SIX IDENTICAL
+   (refreshLanguages 37 / refreshInstalled 12 / updateFromCatalog 25 /
+   installCatalogPack 28 / cancelInstall 6 / importPack 16 normalized body
+   lines).
+3. **Hook-presence counts** in App.tsx old vs new: useState 51=51,
+   useEffect 16=16, useRef 4=4, useMemo 3=3, useCallback 0=0,
+   useServeProbe 1=1 — no hook moved.
+4. **LOC claims from git**: App.tsx 4509 (5738ccf4) -> 4448 (96a3cc1c) —
+   matches ledger claims exactly. pack-wiring.ts = 185 lines (gates.log prose
+   says 187; see D1).
+5. **TDZ placement check**: boot effect is `useEffect(() => {` at line 708,
+   its async path calls `refreshInstalled()` at line 757; `packWiringDeps`
+   declared at :801 — earliest-in-scope placement after `useServeProbe`,
+   effect callbacks run post-render-body, and all six delegation call sites
+   (8 mentions = decl + 6 sites + 1 comment) sit after the declaration.
+6. `git log --oneline 96a3cc1c..HEAD -- apps/desktop/src/app/pack-wiring.ts`
+   -> empty (module untouched since the slice; checkpoint never stacked).
+7. **Reviewer re-run at HEAD (f7637303), apps/desktop**:
+   - `npx tsc --noEmit` -> exit 0 (PASS).
+   - `npx vitest run` -> 83 files / 725 tests passed, exit 0 (PASS)
+     (baseline grew from the lane's 77/694 only via later practice-lane test
+     additions; zero failures).
+   - `npx prettier --check src/App.tsx src/app/pack-wiring.ts` at HEAD ->
+     src/app/pack-wiring.ts PASS; src/App.tsx FAIL on lines 3143-3152 —
+     attributed by content to WRITE-PRACTICE-001 (e858ca0d), a later lane
+     (see standards-verdict.md D2).
+8. **Prettier attribution at the slice commit**: `git worktree add
+   .hermes/cache/scratch/wt-003c-review 96a3cc1c` + root-config
+   `prettier --check src/App.tsx src/app/pack-wiring.ts` -> both PASS;
+   worktree removed + pruned after.
+9. `python3 tools/validate_handoff.py --require-explicit-ledger-records` at
+   HEAD -> HANDOFF VALIDATION PASSED (2289 data files checked; WARNs are the
+   pre-existing optional-task records).
+
+## Cleanup
+
+Worktree /home/hunter/.hermes/cache/scratch/wt-003c-review removed
+(`git worktree remove --force` + `worktree prune`); `git status --short`
+clean before this commit; only state/evidence/REVIEW-APP-SPLIT-003C/ staged.
