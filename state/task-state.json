@@ -3643,10 +3643,10 @@
       ]
     },
     "LEARNER-REVIEW-M1-001": {
-      "status": "blocked",
+      "status": "ready",
       "attempts": 0,
-      "updated": "2026-11-26",
-      "notes": "Owner directive 2026-11-26: audit days 1-30 of the real learner experience (both packs) after the two practice modes land. Blocked by SPEAK-PRACTICE-001 + WRITE-PRACTICE-001. Chains: on completion create LEARNER-REVIEW-M2-001 (same contract) - never drop the chain. Contract: state/notes/LEARNER-REVIEW-M1-001.md; board card lts-LEARNER-REVIEW-M1-001.",
+      "updated": "2026-11-27",
+      "notes": "Owner directive 2026-11-26: audit days 1-30 of the real learner experience (both packs) after the two practice modes land. Blocked by SPEAK-PRACTICE-001 + WRITE-PRACTICE-001. Chains: on completion create LEARNER-REVIEW-M2-001 (same contract) - never drop the chain. Contract: state/notes/LEARNER-REVIEW-M1-001.md; board card lts-LEARNER-REVIEW-M1-001. | UNBLOCKED 2026-11-27: both practice cards verified done (code 6e5bc83e, e858ca0d).",
       "blocked_by": [
         "SPEAK-PRACTICE-001",
         "WRITE-PRACTICE-001"
