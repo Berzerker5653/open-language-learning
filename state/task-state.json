@@ -3,6 +3,42 @@
   "updated": "2026-11-27",
   "active_task": null,
   "tasks": {
+    "FIX-M1-CONTENT-RU-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-27",
+      "notes": "Follow-up of LEARNER-REVIEW-M1-001 (ledger D-008, D-004, D-012, D-013): fix the pinned RU stress marks (audio baked to the wrong marks), the English gloss rewrites, the marked/unmarked duplicate confirmation, and densify thin RU early pools (94 items/month -> sim >=150). Contract: state/notes/FIX-M1-CONTENT-RU-001.md; board card lts-FIX-M1-CONTENT-RU-001. Opened by takeover-B 2026-11-27.",
+      "evidence": [
+        "state/evidence/LEARNER-REVIEW-M1-001/defects.md"
+      ]
+    },
+    "FIX-M1-CONTENT-JA-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-27",
+      "notes": "Follow-up of LEARNER-REVIEW-M1-001 (ledger D-009, D-010): the three wrong kana verb cards, the katakana loanword convention (pinned + enforced), and the reproduced morpheme-slot junk label \"the rest wish\" in languages/ja-JP/lexicon/greetings.jsonl. Its reproduce-or-close precondition is SATISFIED (gates.log V2), so it is dispatchable. Contract: state/notes/FIX-M1-CONTENT-JA-001.md; board card lts-FIX-M1-CONTENT-JA-001. Opened by takeover-B 2026-11-27.",
+      "evidence": [
+        "state/evidence/LEARNER-REVIEW-M1-001/defects.md"
+      ]
+    },
+    "FIX-M1-PATH-VIS-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-27",
+      "notes": "Follow-up of LEARNER-REVIEW-M1-001 (ledger D-003, D-006): the day-1 path payload carries the whole catalog (RU 823 units / 803 locked, JA 819 / 777) including advanced English slugs; collapse bands past the frontier and add a wire-surface rule to tools/audit_learner_copy.py. Contract: state/notes/FIX-M1-PATH-VIS-001.md; board card lts-FIX-M1-PATH-VIS-001. Opened by takeover-B 2026-11-27.",
+      "evidence": [
+        "state/evidence/LEARNER-REVIEW-M1-001/experience-review.md"
+      ]
+    },
+    "LEARNER-REVIEW-M2-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-27",
+      "notes": "Month-2 leg of the owner's per-month learner-experience program (days 31-60, both packs), same frozen contract as LEARNER-REVIEW-M1-001, scoped by M1's defect distribution (catalog visibility, RU pool density, stress/orthography spot-checks). Must chain LEARNER-REVIEW-M3-001 on close - never drop the chain. Contract: state/notes/LEARNER-REVIEW-M2-001.md; board card lts-LEARNER-REVIEW-M2-001. Opened by takeover-B 2026-11-27.",
+      "evidence": [
+        "state/evidence/LEARNER-REVIEW-M1-001/residual-uncertainty.md"
+      ]
+    },
     "APP-SPLIT-003E": {
       "status": "done",
       "attempts": 1,
@@ -3643,10 +3679,10 @@
       ]
     },
     "LEARNER-REVIEW-M1-001": {
-      "status": "ready",
-      "attempts": 2,
+      "status": "done",
+      "attempts": 3,
       "updated": "2026-11-27",
-      "notes": "Owner directive 2026-11-26: audit days 1-30 of the real learner experience (both packs) after the two practice modes land. Blocked by SPEAK-PRACTICE-001 + WRITE-PRACTICE-001. Chains: on completion create LEARNER-REVIEW-M2-001 (same contract) - never drop the chain. Contract: state/notes/LEARNER-REVIEW-M1-001.md; board card lts-LEARNER-REVIEW-M1-001. | UNBLOCKED 2026-11-27: both practice cards verified done (code 6e5bc83e, e858ca0d). | RUN 1 2026-11-27: journey-sim harness scripts/sim_month1.py (lts-serve + libfaketime, real-engine HTTP walk); 30-day RU+JA raw logs + worklists in state/evidence/LEARNER-REVIEW-M1-001/sim/. Mechanical pass + fresh-context reviews in progress - see state/notes/LEARNER-REVIEW-M1-001.md resume recipe. | RUN 2 2026-11-27: both packs fully simulated days 1-30 (raw logs + tar.gz archives committed); worklist built (RU 991 / JA 968 items); mechanical pass 0 failures 100% coverage (RU 53 reviewer-bound warnings; JA 0). BLOCKER D-001 found: engine starves Month-1 content after day 1 (RU 6 / JA 15 items forever, offer null, gate units stuck 3/4) -> RCA + defects ledger committed; board card FIX-M1-PROGRESSION-001 (t_ead922d2) is this card's parent - M1 auto-resumes when it lands, then re-runs mech pass + review passes on the real inventory. Resume recipe: state/notes/LEARNER-REVIEW-M1-001.md RUN 2 HANDOFF. | UNBLOCKED 2026-11-27: FIX-M1-PROGRESSION-001 landed (87786961) with 30-day sim acceptance PASS both packs (erratum: earlier records said 60-day; see state/evidence/REVIEW-FIX-M1-PROGRESSION-001/erratum-60-day.md); re-run mech pass + passes 2-3 (fresh-context + experience review) + ASR subset on the fresh sim/raw logs (archive under state/evidence/FIX-M1-PROGRESSION-001/sim/).",
+      "notes": "Owner directive 2026-11-26: audit days 1-30 of the real learner experience (both packs) after the two practice modes land. Blocked by SPEAK-PRACTICE-001 + WRITE-PRACTICE-001. Chains: on completion create LEARNER-REVIEW-M2-001 (same contract) - never drop the chain. Contract: state/notes/LEARNER-REVIEW-M1-001.md; board card lts-LEARNER-REVIEW-M1-001. | UNBLOCKED 2026-11-27: both practice cards verified done (code 6e5bc83e, e858ca0d). | RUN 1 2026-11-27: journey-sim harness scripts/sim_month1.py (lts-serve + libfaketime, real-engine HTTP walk); 30-day RU+JA raw logs + worklists in state/evidence/LEARNER-REVIEW-M1-001/sim/. Mechanical pass + fresh-context reviews in progress - see state/notes/LEARNER-REVIEW-M1-001.md resume recipe. | RUN 2 2026-11-27: both packs fully simulated days 1-30 (raw logs + tar.gz archives committed); worklist built (RU 991 / JA 968 items); mechanical pass 0 failures 100% coverage (RU 53 reviewer-bound warnings; JA 0). BLOCKER D-001 found: engine starves Month-1 content after day 1 (RU 6 / JA 15 items forever, offer null, gate units stuck 3/4) -> RCA + defects ledger committed; board card FIX-M1-PROGRESSION-001 (t_ead922d2) is this card's parent - M1 auto-resumes when it lands, then re-runs mech pass + review passes on the real inventory. Resume recipe: state/notes/LEARNER-REVIEW-M1-001.md RUN 2 HANDOFF. | UNBLOCKED 2026-11-27: FIX-M1-PROGRESSION-001 landed (87786961) with 30-day sim acceptance PASS both packs (erratum: earlier records said 60-day; see state/evidence/REVIEW-FIX-M1-PROGRESSION-001/erratum-60-day.md); re-run mech pass + passes 2-3 (fresh-context + experience review) + ASR subset on the fresh sim/raw logs (archive under state/evidence/FIX-M1-PROGRESSION-001/sim/). | RUN 3 + TAKEOVER-B 2026-11-27 DONE: fresh 30-day sim post-fix (worklist RU 1153 / JA 1350), mech pass 0 failures + 100% coverage both packs (RU 72 / JA 9 reviewer-bound warnings) - re-run at HEAD by takeover-B byte-identical to the committed reports; ASR subset ru 149/149 ok, ja 115/215 (100 flagged = known-limit D-011, retired ja-JP audio QA); pass 2 = 108 fresh-context verdicts (ru 49+lexwarn, ja 57+lexwarn) verified gap-free against the worklist and spot-checked item-by-item (tallies corrected in the ledger: ru fix 7 / known-limit 57, ja fix 64 / known-limit 561); pass 3 experience review recomputed from the raw logs (94/230 unique items, offers 30/30, path payload 823/803 locked RU + 819/777 JA); residual-uncertainty manifest shipped into known-limits copy (docs/18 §Known limits) with tools/audit_learner_copy.py re-run green (0 findings). Ledger D-001..D-013: D-001 fixed by FIX-M1-PROGRESSION-001, D-010 reproduced (root cause = junk morpheme label in lexicon/greetings.jsonl) and raised to fix. Follow-ups created as ready cards: FIX-M1-CONTENT-RU-001, FIX-M1-CONTENT-JA-001, FIX-M1-PATH-VIS-001. CHAIN: LEARNER-REVIEW-M2-001 (days 31-60, same contract, scoped by M1's defect distribution) is created as ready - M2 must chain M3 on its own close. Verification record: state/evidence/LEARNER-REVIEW-M1-001/gates.log §RUN 3 VERIFICATION + CLOSE. (Takeover-A board t_d37d8ea5 shipped steps 1-2; takeover-B board t_479581f0 verified + closed 3-5.)",
       "blocked_by": [
         "SPEAK-PRACTICE-001",
         "WRITE-PRACTICE-001"
@@ -3654,7 +3690,9 @@
       "evidence": [
         "state/evidence/LEARNER-REVIEW-M1-001/defects.md",
         "state/evidence/LEARNER-REVIEW-M1-001/gates.log",
-        "state/evidence/LEARNER-REVIEW-M1-001/rca-progression-starvation.md"
+        "state/evidence/LEARNER-REVIEW-M1-001/rca-progression-starvation.md",
+        "state/evidence/LEARNER-REVIEW-M1-001/experience-review.md",
+        "state/evidence/LEARNER-REVIEW-M1-001/residual-uncertainty.md"
       ]
     },
     "FIX-M1-PROGRESSION-001": {
