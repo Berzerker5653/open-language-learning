@@ -1,0 +1,18 @@
+FIX-ROADMAP-OPTIONAL-001 gate log — 2026-11-27 (controller-direct)
+
+Card scope: register the 4 d62822da cards in execution_scope.optional_tasks so
+tools/validate_handoff.py is green at main HEAD.
+
+Executed as part of ledger commit f0213ca1 (chore(ledger): VENDOR-TEST-SERIAL-001 done ... + scope
+optional_tasks drift fix) — same surgical fix the card prescribes (text patch appending
+FIX-M1-CONTENT-JA-001, FIX-M1-CONTENT-RU-001, FIX-M1-PATH-VIS-001, LEARNER-REVIEW-M2-001; no yaml
+round-trip; pre-grep confirmed none listed).
+
+Evidence trail:
+- Failure reproduced at HEAD 0a06ebaf in a detached worktree:
+  "FAIL roadmap: execution_scope completion_task/required_flag/optional_tasks/publication policy
+   mismatch" / "HANDOFF VALIDATION FAILED (2295 data files checked)".
+- Diff of set(required_for_desktop_1_0: false) vs execution_scope.optional_tasks showed exactly the
+  4 card ids unlisted (post-fix: 0/0, no duplicates).
+- Post-fix at HEAD f0213ca1: python3 tools/validate_handoff.py --require-explicit-ledger-records ->
+  "HANDOFF VALIDATION PASSED (2358 data files checked)".
