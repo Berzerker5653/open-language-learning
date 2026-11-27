@@ -42,6 +42,14 @@ import { EMPTY_PITCH, PronunciationPractice, type PronunciationResult } from "./
 import { DictationPractice, type DictationResult, type DictationSentence } from "./dictation";
 import { FreeSpeakingPanel, type FreeSpeakingScore } from "./free-speaking";
 import {
+  FreeWritingPanel,
+  WritingMetersStrip,
+  type WritingCheckResult,
+  type WritingJournalEntry,
+  type WritingMeters,
+  type WritingPrompt,
+} from "./free-writing";
+import {
   LanguagePanel,
   installedPacksDeclareSetting,
   packPosture,
@@ -202,6 +210,7 @@ export function App() {
     | "dictation"
     | "free-speaking"
     | "writing"
+    | "free-writing"
     | "scenarios"
     | "shadowing"
     | "reading"
@@ -293,6 +302,21 @@ export function App() {
   const [freePromptError, setFreePromptError] = useState<string | null>(null);
   const [freeOffset, setFreeOffset] = useState(0);
   const [freeResult, setFreeResult] = useState<FreeSpeakingScore | null>(null);
+  // WRITE-PRACTICE-001: free-writing — prompt from the encounter-gated
+  // lexicon pool, the feedback is mechanical/offline, and the journal is
+  // the learner's own (device-local, deleted with the profile).
+  const [fwPrompt, setFwPrompt] = useState<WritingPrompt | null>(null);
+  const [fwPromptError, setFwPromptError] = useState<string | null>(null);
+  const [fwOffset, setFwOffset] = useState(0);
+  const [fwText, setFwText] = useState("");
+  const [fwResult, setFwResult] = useState<WritingCheckResult | null>(null);
+  const [fwSubmitting, setFwSubmitting] = useState(false);
+  const [fwJournal, setFwJournal] = useState<WritingJournalEntry[]>([]);
+  const [fwCheckError, setFwCheckError] = useState<string | null>(null);
+  const [fwJournalError, setFwJournalError] = useState<string | null>(null);
+  // ACCUMULATION pattern: null until the read lands — the Progress meters
+  // strip abstains on a pending read, never invents a zero.
+  const [fwMeters, setFwMeters] = useState<WritingMeters | null>(null);
   const [recording, setRecording] = useState(false);
   const [attemptUrl, setAttemptUrl] = useState<string | null>(null);
   // ACCUMULATION-METERS-001 (U11): null until the world_state read lands —
@@ -1667,6 +1691,13 @@ export function App() {
         } catch {
           setLearningFacts(null);
         }
+        // WRITE-PRACTICE-001: the free-writing accumulation meters ride the
+        // same read; a failed read keeps them null and the strip abstains.
+        try {
+          setFwMeters((await inv("writing_meters", { profileId })) as WritingMeters);
+        } catch {
+          setFwMeters(null);
+        }
       } catch (e) {
         // An honest alert, never an empty "no progress yet" claim: the data
         // may exist; the read is what failed.
@@ -2083,6 +2114,9 @@ export function App() {
         break;
       case "free-speaking":
         void openFreeSpeaking();
+        break;
+      case "free-writing":
+        void openFreeWriting();
         break;
       case "writing":
         void openWriting();
@@ -3032,6 +3066,106 @@ export function App() {
     }
   }
 
+  // WRITE-PRACTICE-001: free writing. The prompt comes from the encounter-
+  // gated lexicon pool (same gate as dictation), the check is purely
+  // mechanical/offline, and the journal + meters are accumulation surfaces
+  // re-read after each attempt. This route performs NO mastery/scheduler
+  // write: the Rust contract test pins the store, the journey denylist pins
+  // the wire — the private journal rows are the only write.
+  function openFreeWriting() {
+    setRoute("free-writing");
+    setFwOffset(0);
+    setFwResult(null);
+    setFwCheckError(null);
+    void fetchWritingPrompt(0);
+    void fetchWritingJournal();
+  }
+
+  function newWritingPrompt() {
+    const next = fwOffset + 1;
+    setFwOffset(next);
+    setFwResult(null);
+    void fetchWritingPrompt(next);
+  }
+
+  async function fetchWritingPrompt(offset: number) {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      const req = await packRequest<WritingPrompt>(inv, selectedPack, "writing_prompt", {
+        profileId,
+        offset,
+      });
+      if (!req.ok) {
+        setFwPrompt(null);
+        setFwPromptError(req.error);
+        return;
+      }
+      setFwPrompt(req.value);
+      setFwPromptError(null);
+    } catch (e) {
+      setFwPrompt(null);
+      setFwPromptError(String(e));
+    }
+  }
+
+  async function fetchWritingJournal() {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      const rows = await inv("writing_journal", { profileId, limit: 20 });
+      setFwJournal(rows as WritingJournalEntry[]);
+      setFwJournalError(null);
+    } catch (e) {
+      // A failed read is an error, never the empty-state story (K-76/K-78).
+      setFwJournal([]);
+      setFwJournalError(`The writing journal could not be loaded: ${String(e)}`);
+    }
+  }
+
+  async function fetchWritingMeters() {
+    const inv = detectInvoke();
+    if (!inv || !profileId) return;
+    try {
+      setFwMeters((await inv("writing_meters", { profileId })) as WritingMeters);
+    } catch {
+      // The Progress strip abstains on a failed read; it never invents a zero.
+      setFwMeters(null);
+    }
+  }
+
+  async function submitFreeWriting() {
+    const inv = detectInvoke();
+    if (!inv || !profileId || fwSubmitting) return;
+    setFwSubmitting(true);
+    setFwCheckError(null);
+    try {
+      const req = await packAttemptRequest<WritingCheckResult>(
+        inv,
+        selectedPack,
+        "writing_check",
+        {
+          profile_id: profileId,
+          targets: (fwPrompt?.targets ?? []).map((t) => t.item_id),
+          text: fwText,
+        },
+      );
+      if (!req.ok) {
+        setFwCheckError(req.error);
+        return;
+      }
+      setFwResult(req.value);
+      // Journal and meters are accumulation surfaces: refresh once the check
+      // lands so the screen never replays a pre-attempt snapshot.
+      await fetchWritingJournal();
+      await fetchWritingMeters();
+    } catch (e) {
+      setFwCheckError(String(e));
+    } finally {
+      setFwSubmitting(false);
+    }
+  }
+
   // The recording goes to `free_speaking_check` — the engine's own abstention
   // vocabulary answers (missing aligner, model off, rejected quality, dead
   // sidecar), and the result lands in state this screen alone renders. The
@@ -3487,6 +3621,7 @@ export function App() {
               route === "dictation" ||
               route === "free-speaking" ||
               route === "writing" ||
+              route === "free-writing" ||
               route === "scenarios" ||
               route === "shadowing" ||
               route === "reading" ||
@@ -3645,6 +3780,20 @@ export function App() {
             onNewPrompt={newFreePrompt}
           />
         </>
+      ) : route === "free-writing" ? (
+        <FreeWritingPanel
+          prompt={fwPrompt}
+          promptError={fwPromptError}
+          value={fwText}
+          onChange={setFwText}
+          onSubmit={() => void submitFreeWriting()}
+          onNewPrompt={newWritingPrompt}
+          result={fwResult}
+          submitting={fwSubmitting}
+          checkError={fwCheckError}
+          journal={fwJournal}
+          journalError={fwJournalError}
+        />
       ) : route === "shadowing" ? (
         <ShadowingPanel
           items={shadowItems}
@@ -3910,6 +4059,7 @@ export function App() {
                 ) : memoryStats ? (
                   <MemoryStatsStrip stats={memoryStats} />
                 ) : null}
+                <WritingMetersStrip meters={fwMeters} />
                 <GoalMap goals={goals} />
                 <ProgressView rows={progress} />
               </>

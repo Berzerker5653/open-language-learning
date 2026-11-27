@@ -426,6 +426,34 @@ interface Pack {
   clozeTargets: Record<string, string[]>;
 }
 
+/** WRITE-PRACTICE-001 fixtures: what the fake `writing_check` knows, per
+ * pack — mirrors the reference packs' lexicon for a tiny hand-picked set,
+ * including the ja kanji VARIANT (美味しい for おいしい) so the usage-chip
+ * leg proves the accepted-form matcher end to end. */
+const RU_FIXTURE_WRITING = {
+  targets: [
+    { item_id: "ru.lex.routines.kofe", surface: "кофе", gloss: "coffee" },
+    { item_id: "ru.lex.routines.utro", surface: "утро", gloss: "morning" },
+  ],
+  cues: ["Write about your morning today.", "Describe your favourite food."],
+  known: new Set(["кофе", "утро"]),
+  forms: {
+    "ru.lex.routines.kofe": ["кофе"],
+    "ru.lex.routines.utro": ["утро"],
+  } as Record<string, string[]>,
+  scriptOk: (t: string) => /^[\u0400-\u04FF]+$/.test(t),
+};
+
+const JA_FIXTURE_WRITING = {
+  targets: [{ item_id: "ja.lex.adjectives.oishii", surface: "おいしい", gloss: "delicious" }],
+  cues: ["Write about food you like.", "Describe your day."],
+  known: new Set(["おいしい", "美味しい"]),
+  forms: {
+    "ja.lex.adjectives.oishii": ["おいしい", "美味しい"],
+  } as Record<string, string[]>,
+  scriptOk: (t: string) => !/[A-Za-z]/.test(t),
+};
+
 const PACKS: Record<string, Pack> = {
   [JA]: {
     id: JA,
@@ -1111,6 +1139,22 @@ export class LearnerEngine {
     }[]
   >();
   private nextMine = 1;
+  /** WRITE-PRACTICE-001: the free-writing journal, device-level keyed by
+   * profile (mirrors the SQLite rows behind `writing_journal_at`), plus
+   * the per-profile set of dictionary-known tokens the meters count. */
+  private readonly writingJournal = new Map<
+    string,
+    {
+      id: string;
+      pack_id: string;
+      text: string;
+      word_count: number;
+      targets_used: number;
+      occurred_at: string;
+    }[]
+  >();
+  private readonly writingKnown = new Map<string, Set<string>>();
+  private nextWritingJournal = 1;
   /** CONTENT-CONFIRM-001: attributed confirmation marks, mirroring the
    * `content_confirmations` table — one row per (profile, pack, content). */
   private confirmRows: {
@@ -2419,6 +2463,78 @@ export class LearnerEngine {
         const pack = PACKS[String(args.packId)] ?? this.demofail();
         return pack.sentences[Number(args.offset) % pack.sentences.length];
       }
+      // WRITE-PRACTICE-001: the free-writing family. The journal lives on
+      // the ENGINE (device-level, like profiles.db), never in a component —
+      // switching profiles and back must show the same rows, exactly like
+      // the SQLite store behind `writing_journal_at` in lib.rs.
+      case "writing_prompt": {
+        const fixture =
+          String(args.packId) === JA ? JA_FIXTURE_WRITING : RU_FIXTURE_WRITING;
+        const offset = Number(args.offset ?? 0);
+        const start = offset % fixture.targets.length;
+        return {
+          targets: fixture.targets
+            .map((_, i) => fixture.targets[(start + i) % fixture.targets.length])
+            .slice(0, Math.min(10, fixture.targets.length)),
+          cue: fixture.cues[offset % fixture.cues.length],
+        };
+      }
+      case "writing_check": {
+        const attempt = (args.attempt ?? {}) as {
+          pack_id: string;
+          profile_id: string;
+          targets?: string[];
+          text: string;
+        };
+        const fixture = attempt.pack_id === JA ? JA_FIXTURE_WRITING : RU_FIXTURE_WRITING;
+        const tokens = String(attempt.text ?? "")
+          .split(/[^\p{L}]+/u)
+          .filter((t) => t.length > 0);
+        const words = tokens.map((token) => ({
+          token,
+          status: fixture.scriptOk(token)
+            ? fixture.known.has(token)
+              ? ("known" as const)
+              : ("unknown" as const)
+            : ("invalid-script" as const),
+        }));
+        const usedTargets = (attempt.targets ?? []).filter((id) => {
+          const forms = fixture.forms[id];
+          return forms ? tokens.some((t) => forms.includes(t)) : false;
+        });
+        const known = [...new Set(tokens.filter((t) => fixture.known.has(t)))];
+        const at = new Date().toISOString().slice(0, 19) + "Z";
+        const rows = this.writingJournal.get(attempt.profile_id) ?? [];
+        rows.unshift({
+          id: `wj-fake-${this.nextWritingJournal++}`,
+          pack_id: attempt.pack_id,
+          text: attempt.text,
+          word_count: tokens.length,
+          targets_used: usedTargets.length,
+          occurred_at: at,
+        });
+        const uniq = this.writingKnown.get(attempt.profile_id) ?? new Set<string>();
+        for (const token of known) uniq.add(token);
+        this.writingKnown.set(attempt.profile_id, uniq);
+        this.writingJournal.set(attempt.profile_id, rows);
+        return {
+          words,
+          used_targets: usedTargets,
+          word_count: tokens.length,
+          dictionary_word_count: known.length,
+        };
+      }
+      case "writing_journal": {
+        return this.writingJournal.get(String(args.profileId)) ?? [];
+      }
+      case "writing_meters": {
+        const rows = this.writingJournal.get(String(args.profileId)) ?? [];
+        const weekAgo = Date.now() - 7 * 86_400_000;
+        return {
+          attempts_this_week: rows.filter((r) => Date.parse(r.occurred_at) >= weekAgo).length,
+          unique_dictionary_words: this.writingKnown.get(String(args.profileId))?.size ?? 0,
+        };
+      }
       case "free_speaking_check": {
         // SPEAK-PRACTICE-001: mirrors lib.rs `free_speaking_check_at`. The
         // RU fixture machine has no aligner sidecar (same posture as
@@ -2657,7 +2773,7 @@ export type Mounted = {
   section(label: string): HTMLElement;
   button(scope: string | HTMLElement, label: string): HTMLButtonElement;
   click(target: Element): Promise<void>;
-  type(input: HTMLInputElement, value: string): Promise<void>;
+  type(input: HTMLInputElement | HTMLTextAreaElement, value: string): Promise<void>;
   unmount(): Promise<void>;
 };
 
@@ -2729,10 +2845,14 @@ export async function mountApp(engine: LearnerEngine): Promise<Mounted> {
       await settle(2);
     },
     type: async (input, value) => {
-      const setter = Object.getOwnPropertyDescriptor(
-        window.HTMLInputElement.prototype,
-        "value",
-      )?.set;
+      // Accept inputs and textareas alike: the native `value` setter lives on
+      // each element's own prototype, so pick it by constructor (calling the
+      // input setter on a textarea is an illegal invocation).
+      const proto =
+        input instanceof window.HTMLTextAreaElement
+          ? window.HTMLTextAreaElement.prototype
+          : window.HTMLInputElement.prototype;
+      const setter = Object.getOwnPropertyDescriptor(proto, "value")?.set;
       await act(async () => {
         setter?.call(input, value);
         input.dispatchEvent(new window.Event("input", { bubbles: true }));

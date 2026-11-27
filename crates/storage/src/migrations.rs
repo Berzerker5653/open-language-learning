@@ -34,7 +34,7 @@
 use crate::error::Error;
 use rusqlite::{Connection, Transaction, TransactionBehavior};
 
-pub const SCHEMA_VERSION: i64 = 11;
+pub const SCHEMA_VERSION: i64 = 12;
 
 struct Migration {
     version: i64,
@@ -347,6 +347,36 @@ CREATE INDEX IF NOT EXISTS idx_capstone_attempts_profile
   ON capstone_attempts(profile_id, pack_id, band);
 ",
     },
+    Migration {
+        version: 12,
+        sql: "
+-- WRITE-PRACTICE-001: the private free-writing journal. A free-writing
+-- attempt is a COMPLETION record, never a scored observation: these rows
+-- deliberately sit OUTSIDE evidence_events / mastery / scheduler / the
+-- error ledger, and the contract test in apps/desktop pins that the check
+-- command writes nothing else. `text` is the learner's own writing — it
+-- never leaves the device and is deleted with the profile (CASCADE).
+-- `writing_journal_words` is the accumulation substrate for the
+-- unique-dictionary-words meter: one row per (profile, known token),
+-- INSERT OR IGNORE, so COUNT(*) is the meter and it can never regress.
+CREATE TABLE IF NOT EXISTS writing_journal (
+  id TEXT PRIMARY KEY,
+  profile_id TEXT NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+  pack_id TEXT NOT NULL,
+  text TEXT NOT NULL,
+  word_count INTEGER NOT NULL,
+  targets_used INTEGER NOT NULL,
+  occurred_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS idx_writing_journal_profile
+  ON writing_journal(profile_id, occurred_at DESC);
+CREATE TABLE IF NOT EXISTS writing_journal_words (
+  profile_id TEXT NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+  token TEXT NOT NULL,
+  PRIMARY KEY (profile_id, token)
+);
+",
+    },
 ];
 
 pub(crate) fn migrate(conn: &Connection) -> Result<(), Error> {
@@ -473,6 +503,9 @@ mod tests {
              DELETE FROM schema_migrations WHERE version = 9;
              DELETE FROM schema_migrations WHERE version = 10;
              DELETE FROM schema_migrations WHERE version = 11;
+             DELETE FROM schema_migrations WHERE version = 12;
+             DROP TABLE IF EXISTS writing_journal;
+             DROP TABLE IF EXISTS writing_journal_words;
              DROP TABLE IF EXISTS capstone_attempts;
              DROP TABLE IF EXISTS error_review_cards;
              DROP TABLE IF EXISTS error_ledger;
@@ -619,6 +652,24 @@ mod tests {
                 )
                 .unwrap()
                     == 1
+            }
+            12 => {
+                // WRITE-PRACTICE-001: the private writing journal (and its
+                // accumulation-token table) is the artifact of v12.
+                conn.query_row(
+                    "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = 'writing_journal'",
+                    [],
+                    |r| r.get::<_, i64>(0),
+                )
+                .unwrap()
+                    == 1
+                    && conn.query_row(
+                        "SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = 'writing_journal_words'",
+                        [],
+                        |r| r.get::<_, i64>(0),
+                    )
+                    .unwrap()
+                        == 1
             }
             _ => panic!("v{version} has no schema artifact"),
         }

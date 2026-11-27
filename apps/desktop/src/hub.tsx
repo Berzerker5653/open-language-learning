@@ -15,6 +15,7 @@ export type HubMode =
   | "dictation"
   | "free-speaking"
   | "writing"
+  | "free-writing"
   | "scenarios"
   | "shadowing"
   | "reading"
@@ -68,6 +69,17 @@ export const HUB_MODES: {
     label: "Writing",
     blurb: "Write the answer the pack asks for; a miss shows the form it expected.",
     gradeKind: "graded",
+  },
+  {
+    // WRITE-PRACTICE-001: free writing is the guided sibling of Writing —
+    // today's words, a free text, and only the checks a dictionary can
+    // make offline. No grammar feedback and no corrections: the card says
+    // so, because v1 ships none (WRITE-PRACTICE-002 is a later card).
+    id: "free-writing",
+    label: "Free writing",
+    blurb:
+      "Use today's words in your own sentences; a dictionary check shows coverage. Guided: nothing is graded.",
+    gradeKind: "formative",
   },
   {
     id: "scenarios",

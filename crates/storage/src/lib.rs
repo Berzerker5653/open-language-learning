@@ -15,6 +15,7 @@ mod error;
 mod error_ledger;
 mod evidence;
 mod export;
+mod journal;
 mod lookups;
 mod mastery;
 mod migrations;
@@ -35,6 +36,7 @@ pub use export::{
     EXPORT_FORMAT_VERSION, ExportBundle, ExportOptions, ImportError, ImportMode,
     MIN_SUPPORTED_FORMAT_VERSION,
 };
+pub use journal::{NewWritingAttempt, WritingJournalEntry, WritingMeters};
 pub use lookups::{NewWordLookup, WordLookup};
 pub use mastery::MasterySnapshot;
 pub use migrations::SCHEMA_VERSION;

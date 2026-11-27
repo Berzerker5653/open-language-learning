@@ -11978,6 +11978,462 @@ async fn free_speaking_check(attempt: FreeSpeakingAttempt) -> Result<FreeSpeakin
         .map_err(|e| format!("free-speaking-check failed: {e}"))?
 }
 
+// ---------------------------------------------------------------------------
+// WRITE-PRACTICE-001: free writing with mechanical, offline feedback.
+// Prompt = today's words (encounter-gated lexicon pool, 6-10 targets) + one
+// L1 situational cue; feedback = per-word script/dictionary status, target
+// usage chips via the typing mode's form matcher, word count, and a private
+// per-profile journal. NO AI, NO grammar feedback (WRITE-PRACTICE-002 is a
+// later card). The usage count is a completion signal only: the only store
+// writes on this path are the journal rows themselves (contract test).
+// ---------------------------------------------------------------------------
+
+/// Target-word window per prompt: the card fixes N at 6-10; a learner who
+/// has met fewer than 6 words gets an honest shorter set rather than
+/// padded targets (never a fabricated count).
+const WRITING_TARGETS_PER_PROMPT: usize = 10;
+
+/// L1 situational cues. v1 ships a fixed, small set — the cue is a topic
+/// invitation, not graded content. L1 is English (every shipped pack
+/// declares source_locales en-US).
+const WRITING_CUES: [&str; 8] = [
+    "Write about your morning today.",
+    "Describe your favourite food and why you like it.",
+    "Write about a person you know well.",
+    "Describe the weather and what you are doing about it.",
+    "Write about something you did yesterday.",
+    "Describe your home or the room you are in.",
+    "Write about a place you like to visit.",
+    "Describe what you usually do after lessons.",
+];
+
+/// Hard cap on a free-writing attempt. Long enough for any reasonable
+/// short text; the cap keeps a pathological payload from turning a
+/// dictionary scan into a hang.
+const WRITING_TEXT_MAX_CHARS: usize = 4_000;
+
+#[derive(Debug, Clone, serde::Serialize)]
+pub struct WritingPromptTarget {
+    pub item_id: String,
+    pub surface: String,
+    pub gloss: String,
+}
+
+#[derive(Debug, Clone, serde::Serialize)]
+pub struct WritingPromptV1 {
+    pub targets: Vec<WritingPromptTarget>,
+    pub cue: String,
+}
+
+/// One learner token with its mechanical status:
+/// - `"known"`: script-valid and present in the pack's lexicon.
+/// - `"unknown"`: script-valid but NOT in the dictionary — coaching only.
+///   The copy calls it "not in dictionary", never "wrong": it could be a
+///   name or a loanword, and v1 makes no claim beyond dictionary coverage.
+/// - `"invalid-script"`: contains characters outside the target language's
+///   writing system (a Latin token in a ja text, a Cyrillic token in ja,
+///   etc.).
+#[derive(Debug, Clone, serde::Serialize)]
+pub struct WritingWordCheck {
+    pub token: String,
+    pub status: &'static str,
+}
+
+#[derive(Debug, Clone, serde::Deserialize)]
+pub struct WritingCheckAttempt {
+    pub pack_id: String,
+    pub profile_id: String,
+    /// The session prompt's target word ids (validated as content ids).
+    #[serde(default)]
+    pub targets: Vec<String>,
+    pub text: String,
+}
+
+#[derive(Debug, Clone, serde::Serialize)]
+pub struct WritingCheckResult {
+    pub words: Vec<WritingWordCheck>,
+    /// Which of the session targets the attempt actually used (inflected
+    /// and variant forms accepted — the same matcher the typing mode
+    /// uses: the entry's primary form plus its accepted variants).
+    pub used_targets: Vec<String>,
+    pub word_count: usize,
+    /// Distinct dictionary-known tokens in this attempt.
+    pub dictionary_word_count: usize,
+}
+
+/// The pack's lexicon in the two shapes this mode needs: the set of all
+/// dictionary forms (normalized), and per-entry accepted surfaces for the
+/// usage chips. Normalization mirrors the typing matcher
+/// (`normalize_typed`: strip whitespace) plus script folding —
+/// case-insensitive and stress-stripped for Cyrillic, where the learner
+/// cannot be expected to type combining accents; exact for kana/kanji,
+/// where okurigana and small kana are meaning-bearing.
+struct WritingLexicon {
+    forms: std::collections::HashSet<String>,
+    by_item: std::collections::HashMap<String, Vec<String>>,
+}
+
+fn normalize_writing_token(script: WritingScript, raw: &str) -> String {
+    let stripped: String = raw.chars().filter(|c| !c.is_whitespace()).collect();
+    match script {
+        WritingScript::Cyrillic => stripped
+            .chars()
+            .filter(|c| *c != '\u{0301}')
+            .flat_map(|c| c.to_lowercase())
+            .collect(),
+        WritingScript::Japanese => stripped,
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum WritingScript {
+    Cyrillic,
+    Japanese,
+}
+
+fn writing_script_for_locale(locale: &str) -> Option<WritingScript> {
+    let base = locale.split(['-', '_']).next().unwrap_or(locale);
+    match base {
+        "ja" => Some(WritingScript::Japanese),
+        "ru" => Some(WritingScript::Cyrillic),
+        _ => None,
+    }
+}
+
+/// Per-version-root lexicon cache: the same reason as WRITING_CACHE — a
+/// pack lexicon parse is tens of milliseconds and the dictionary set is
+/// immutable per version root.
+static WRITING_LEX_CACHE: std::sync::LazyLock<
+    std::sync::Mutex<std::collections::HashMap<PathBuf, std::sync::Arc<WritingLexicon>>>,
+> = std::sync::LazyLock::new(|| std::sync::Mutex::new(Default::default()));
+
+fn writing_lexicon_at(
+    data: &Path,
+    pack_id: &str,
+    version: &str,
+    script: WritingScript,
+) -> Result<std::sync::Arc<WritingLexicon>, String> {
+    let root = data.join("packs").join(pack_id).join(version);
+    let mut cache = WRITING_LEX_CACHE.lock().unwrap_or_else(|e| e.into_inner());
+    if let Some(hit) = cache.get(&root) {
+        return Ok(std::sync::Arc::clone(hit));
+    }
+    let text = lexicon_texts(data, pack_id, version)?.join("\n");
+    let mut lex = WritingLexicon {
+        forms: Default::default(),
+        by_item: Default::default(),
+    };
+    for line in text.lines() {
+        let Ok(entry) = serde_json::from_str::<serde_json::Value>(line) else {
+            continue;
+        };
+        let Some(id) = entry.get("id").and_then(|v| v.as_str()) else {
+            continue;
+        };
+        if lts_domain::ContentId::parse(id).is_err() {
+            continue;
+        }
+        let Some(forms) = entry.get("forms").and_then(|v| v.as_array()) else {
+            continue;
+        };
+        let mut accepted = Vec::new();
+        for f in forms {
+            let Some(t) = f
+                .get("text")
+                .and_then(|v| v.as_str())
+                .filter(|t| !t.is_empty())
+            else {
+                continue;
+            };
+            let norm = normalize_writing_token(script, t);
+            lex.forms.insert(norm.clone());
+            accepted.push(norm);
+        }
+        if !accepted.is_empty() {
+            lex.by_item.insert(id.to_string(), accepted);
+        }
+    }
+    let lex = std::sync::Arc::new(lex);
+    cache.insert(root, std::sync::Arc::clone(&lex));
+    Ok(lex)
+}
+
+fn writing_prompt_at(
+    data: &Path,
+    pack_id: &str,
+    profile_id: &str,
+    offset: u32,
+) -> Result<WritingPromptV1, String> {
+    if !packs::valid_pack_id(pack_id) {
+        return Err("pack not allowlisted".into());
+    }
+    let version = lts_langpack::archive::current_version(pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    // The SAME encounter gate every practiced stream uses
+    // (PRACTICE-GATE-001): the pack's whole lexicon is not a menu.
+    let (met, locked) = practice_pools_at(data, pack_id, profile_id)?;
+    let text = lexicon_texts(data, pack_id, &version)?.join("\n");
+    // Fail early and honestly when the pack's writing system is unknown:
+    // the check command would refuse at submit time anyway, and a prompt
+    // that cannot be checked should never open.
+    let _ = pack_target_locale(&data.join("packs").join(pack_id).join(&version))
+        .ok()
+        .and_then(|l| writing_script_for_locale(&l))
+        .ok_or("pack-locale-unknown")?;
+    let mut pool: Vec<WritingPromptTarget> = Vec::new();
+    for line in text.lines() {
+        let Ok(entry) = serde_json::from_str::<serde_json::Value>(line) else {
+            continue;
+        };
+        let Some(id) = entry.get("id").and_then(|v| v.as_str()) else {
+            continue;
+        };
+        if lts_domain::ContentId::parse(id).is_err() || !practice_eligible(id, &met, &locked) {
+            continue;
+        }
+        let Some(surface) = entry
+            .get("forms")
+            .and_then(|v| v.as_array())
+            .and_then(|a| a.first())
+            .and_then(|f| f.get("text"))
+            .and_then(|v| v.as_str())
+            .filter(|t| !t.is_empty())
+        else {
+            continue;
+        };
+        let gloss = entry
+            .get("glosses")
+            .and_then(|g| g.as_object())
+            .and_then(|o| o.values().next())
+            .and_then(|v| v.as_array())
+            .and_then(|a| a.first())
+            .and_then(|v| v.as_str())
+            .unwrap_or("")
+            .to_string();
+        pool.push(WritingPromptTarget {
+            item_id: id.to_string(),
+            surface: surface.to_string(),
+            gloss,
+        });
+    }
+    if pool.is_empty() {
+        return Err(
+            "no word practice is unlocked yet — finish more lessons to unlock it".to_string(),
+        );
+    }
+    // Deterministic rotation: offset walks the pool so "New prompt"
+    // advances the session set; the window never exceeds the card's 10.
+    let start = (offset as usize) % pool.len();
+    let targets: Vec<WritingPromptTarget> = (0..WRITING_TARGETS_PER_PROMPT.min(pool.len()))
+        .map(|i| pool[(start + i) % pool.len()].clone())
+        .collect();
+    Ok(WritingPromptV1 {
+        targets,
+        cue: WRITING_CUES[(offset as usize) % WRITING_CUES.len()].to_string(),
+    })
+}
+
+fn writing_check_at(
+    data: &Path,
+    attempt: WritingCheckAttempt,
+) -> Result<WritingCheckResult, String> {
+    use std::hash::{Hash, Hasher};
+    if !packs::valid_pack_id(&attempt.pack_id) {
+        return Err("pack not allowlisted".into());
+    }
+    if attempt.text.chars().count() > WRITING_TEXT_MAX_CHARS {
+        return Err("attempt too large".into());
+    }
+    let version = lts_langpack::archive::current_version(&attempt.pack_id, &data.join("packs"))
+        .ok_or("pack not installed")?;
+    let script = pack_target_locale(&data.join("packs").join(&attempt.pack_id).join(&version))
+        .map_err(|_| "pack-locale-unknown".to_string())?;
+    let script = writing_script_for_locale(&script).ok_or("pack-locale-unknown")?;
+    let lex = writing_lexicon_at(data, &attempt.pack_id, &version, script)?;
+
+    // Tokenize: maximal runs of letters (CJK ideographs and kana count as
+    // alphabetic; digits and punctuation split tokens but are never a
+    // learner verdict).
+    let mut words: Vec<WritingWordCheck> = Vec::new();
+    let mut known_tokens: Vec<String> = Vec::new();
+    let mut seen: std::collections::HashSet<String> = Default::default();
+    let mut used_targets: Vec<String> = Vec::new();
+    for raw in attempt.text.split(|c: char| !c.is_alphabetic()) {
+        if raw.is_empty() {
+            continue;
+        }
+        let script_ok = match script {
+            WritingScript::Cyrillic => raw
+                .chars()
+                .all(|c| ('\u{0400}'..='\u{04FF}').contains(&c) || c == '\u{0401}'),
+            WritingScript::Japanese => raw.chars().all(ja_writing_char),
+        };
+        let norm = normalize_writing_token(script, raw);
+        let in_dict = script_ok && lex.forms.contains(&norm);
+        let status: &'static str = if !script_ok {
+            "invalid-script"
+        } else if in_dict {
+            "known"
+        } else {
+            "unknown"
+        };
+        words.push(WritingWordCheck {
+            token: raw.to_string(),
+            status,
+        });
+        if in_dict && seen.insert(norm.clone()) {
+            known_tokens.push(norm);
+        }
+    }
+
+    // Usage chips reuse the typing mode's accepted-form matching: a target
+    // counts when ANY attempt token equals (normalized) one of the entry's
+    // lexicon forms — variants like 美味しい for おいしい included.
+    for target in attempt.targets.iter().take(20) {
+        if lts_domain::ContentId::parse(target).is_err() {
+            continue;
+        }
+        let Some(forms) = lex.by_item.get(target) else {
+            continue;
+        };
+        let used = words.iter().any(|w| {
+            let n = normalize_writing_token(script, &w.token);
+            forms.contains(&n)
+        });
+        if used {
+            used_targets.push(target.clone());
+        }
+    }
+
+    // THE completion record, and the only write: journal + accumulation
+    // rows. No evidence_events, no mastery, no scheduler, no ledger.
+    let word_count = words.len();
+    let dictionary_word_count = known_tokens.len();
+    let now = now_secs();
+    let occurred_at = rfc3339_utc(now);
+    // Two attempts with the same text in the same second are still two
+    // attempts: the id mixes in a process-global sequence.
+    static JOURNAL_SEQ: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+    let seq = JOURNAL_SEQ.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+    let mut hasher = std::hash::DefaultHasher::new();
+    attempt.text.hash(&mut hasher);
+    profile_text_hash(&attempt.profile_id, now, &mut hasher);
+    seq.hash(&mut hasher);
+    let journal_id = format!("wj-{:016x}", hasher.finish());
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    store
+        .record_writing_attempt(
+            &attempt.profile_id,
+            &lts_storage::NewWritingAttempt {
+                id: &journal_id,
+                pack_id: &attempt.pack_id,
+                text: &attempt.text,
+                word_count: word_count as i64,
+                targets_used: used_targets.len() as i64,
+                dictionary_tokens: &known_tokens,
+                occurred_at: &occurred_at,
+            },
+        )
+        .map_err(|e| e.to_string())?;
+    Ok(WritingCheckResult {
+        words,
+        used_targets,
+        word_count,
+        dictionary_word_count,
+    })
+}
+
+fn profile_text_hash(profile_id: &str, now: u64, hasher: &mut impl std::hash::Hasher) {
+    use std::hash::Hash;
+    profile_id.hash(hasher);
+    now.hash(hasher);
+}
+
+/// Script validity for one character of a Japanese token: hiragana
+/// (including the voiced-sound iteration marks), katakana (including the
+/// long-vowel mark), CJK ideographs (incl. extension A), the kanji
+/// iteration marks, the standalone voiced-sound marks, and halfwidth
+/// katakana. Anything else — Latin, Cyrillic, emoji — is outside the
+/// writing system.
+fn ja_writing_char(c: char) -> bool {
+    matches!(c as u32,
+        0x3040..=0x309F |   // hiragana (0x3099..=0x309A are kana voiced-sound marks)
+        0x30A0..=0x30FF |   // katakana (0x30FC is the long-vowel mark)
+        0x31F0..=0x31FF |   // katakana phonetic extensions
+        0x4E00..=0x9FFF |   // CJK unified
+        0x3400..=0x4DBF |   // CJK ext A
+        0x3005 | 0x3031..=0x3035 | // kanji iteration marks
+        0xFF66..=0xFF9F     // halfwidth katakana
+    )
+}
+
+fn writing_journal_at(
+    data: &Path,
+    profile_id: &str,
+    limit: i64,
+) -> Result<Vec<lts_storage::WritingJournalEntry>, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    store
+        .writing_journal(profile_id, limit.clamp(1, 100))
+        .map_err(|e| e.to_string())
+}
+
+#[derive(Debug, Clone, serde::Serialize)]
+struct WritingMetersView {
+    attempts_this_week: i64,
+    unique_dictionary_words: i64,
+}
+
+fn writing_meters_at(data: &Path, profile_id: &str) -> Result<WritingMetersView, String> {
+    let store = lts_storage::Store::open(data.join("profiles.db")).map_err(|e| e.to_string())?;
+    let m = store
+        .writing_meters(profile_id, &rfc3339_utc(now_secs()))
+        .map_err(|e| e.to_string())?;
+    Ok(WritingMetersView {
+        attempts_this_week: m.attempts_this_week,
+        unique_dictionary_words: m.unique_dictionary_words,
+    })
+}
+
+/// Free-writing prompt (WRITE-PRACTICE-001): 6-10 target words from the
+/// encounter-gated lexicon pool plus one L1 situational cue, rotating
+/// deterministically with `offset`.
+#[tauri::command]
+fn writing_prompt(
+    profile_id: String,
+    pack_id: String,
+    offset: u32,
+) -> Result<WritingPromptV1, String> {
+    writing_prompt_at(&data_dir(), &pack_id, &profile_id, offset)
+}
+
+/// Free-writing check (WRITE-PRACTICE-001): mechanical per-word
+/// script/dictionary status, target usage chips, and word count — all
+/// offline, all coaching. The ONLY store writes are the private journal
+/// rows (the contract test pins that mastery/scheduler/evidence are
+/// untouched).
+#[tauri::command]
+fn writing_check(attempt: WritingCheckAttempt) -> Result<WritingCheckResult, String> {
+    writing_check_at(&data_dir(), attempt)
+}
+
+/// The learner's own writing journal, newest-first. Deleted with the
+/// profile; never leaves the device.
+#[tauri::command]
+fn writing_journal(
+    profile_id: String,
+    limit: Option<i32>,
+) -> Result<Vec<lts_storage::WritingJournalEntry>, String> {
+    writing_journal_at(&data_dir(), &profile_id, limit.unwrap_or(20) as i64)
+}
+
+/// Progress-surface accumulation meters for free writing: attempts in the
+/// rolling week and unique dictionary-known words, ever.
+#[tauri::command]
+fn writing_meters(profile_id: String) -> Result<WritingMetersView, String> {
+    writing_meters_at(&data_dir(), &profile_id)
+}
+
 fn now_secs() -> u64 {
     std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
@@ -12092,6 +12548,10 @@ macro_rules! lts_command_table {
             dictation_check,
             dictation_target,
             free_speaking_check,
+            writing_prompt,
+            writing_check,
+            writing_journal,
+            writing_meters,
             reference_audio,
             speech_audio,
             world_state,
@@ -15601,6 +16061,261 @@ activities:
             "score {:?}, heard {:?}",
             res.score,
             res.heard
+        );
+    }
+
+    // -----------------------------------------------------------------
+    // WRITE-PRACTICE-001: free writing (offline mechanical feedback).
+    // -----------------------------------------------------------------
+
+    fn writer_pack(data: &Path, pack_id: &str) -> String {
+        install_reference_pack_fast(data, pack_id).unwrap();
+        let p = create_local_profile(data, "Writer").unwrap();
+        let version = lts_langpack::archive::current_version(pack_id, &data.join("packs")).unwrap();
+        lts_storage::Store::open(data.join("profiles.db"))
+            .unwrap()
+            .set_active_pack(&p.id, pack_id, &version)
+            .unwrap();
+        p.id
+    }
+
+    #[test]
+    fn writing_prompt_gives_targets_and_a_cue_and_rotates() {
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        let pack = "org.openlanguage.ru-ru.reference";
+        let id = writer_pack(data, pack);
+        // Day one, zero encounters: the SAME honest refusal every practiced
+        // stream gives (PRACTICE-GATE-001) — the pack's whole lexicon is not
+        // a menu, and free writing refuses rather than pad targets.
+        let err = writing_prompt_at(data, pack, &id, 0).unwrap_err();
+        assert!(
+            err.contains("no word practice is unlocked yet"),
+            "day-one RU free writing must refuse: {err}"
+        );
+        // Once the letter on-ramp is Independent the ladder opens (same
+        // seeding shape as the dictation gate test).
+        let goals_path = data
+            .join("packs")
+            .join(pack)
+            .join(lts_langpack::archive::current_version(pack, &data.join("packs")).unwrap())
+            .join("curriculum/goals.yaml");
+        let cyrillic: Vec<String> =
+            serde_yaml::from_str::<PackGoals>(&std::fs::read_to_string(&goals_path).unwrap())
+                .unwrap()
+                .goals
+                .iter()
+                .find(|g| g.id == "ru.goal.on-ramp.cyrillic")
+                .unwrap()
+                .required_concepts
+                .clone();
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        for (i, concept) in cyrillic.iter().enumerate() {
+            for family in ["a", "b"] {
+                let mut ev = attempt(
+                    concept,
+                    lts_domain::ActivityModality::OrthographyRecognition,
+                    &format!("ru.expr.gate-w-{i}-{family}"),
+                    0,
+                    &rfc3339_utc(1_795_300_000 + (i as u64) * 10 + u64::from(family == "b")),
+                    &format!("ev-gate-w-{i}-{family}"),
+                    &id,
+                );
+                ev.pack_id = pack.into();
+                store.append_evidence(&ev).unwrap();
+            }
+        }
+        let p = writing_prompt_at(data, pack, &id, 0).unwrap();
+        assert!(!p.targets.is_empty(), "the unlocked ladder serves words");
+        assert!(p.targets.len() <= 10, "never more than the card's N=10");
+        assert!(p.targets.iter().all(|t| !t.surface.is_empty()));
+        assert!(
+            !p.cue.trim().is_empty(),
+            "one L1 situational cue rides with the words"
+        );
+        // Deterministic rotation: offset 0 is stable, offsets advance.
+        let again = writing_prompt_at(data, pack, &id, 0).unwrap();
+        assert_eq!(again.targets[0].item_id, p.targets[0].item_id);
+        let moved = writing_prompt_at(data, pack, &id, 1).unwrap();
+        let big = writing_prompt_at(data, pack, &id, 9_999).unwrap();
+        assert!(
+            !big.targets.is_empty(),
+            "a large offset wraps, never panics"
+        );
+        // Every served target is a real content id.
+        for t in moved.targets.iter().chain(big.targets.iter()) {
+            assert!(lts_domain::ContentId::parse(&t.item_id).is_ok());
+        }
+    }
+
+    #[test]
+    fn writing_check_classifies_ru_tokens_by_script_and_dictionary() {
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        let id = writer_pack(data, "org.openlanguage.ru-ru.reference");
+        let res = writing_check_at(
+            data,
+            WritingCheckAttempt {
+                pack_id: "org.openlanguage.ru-ru.reference".into(),
+                profile_id: id,
+                targets: vec!["ru.lex.routines.kofe".into()],
+                // кофе is in the lexicon; Иvanов is a Latin-script token
+                // (invalid script); a Cyrillic non-word is unknown, never
+                // declared wrong.
+                text: "кофе Зюзя Hello".into(),
+            },
+        )
+        .unwrap();
+        let by_token: std::collections::HashMap<_, _> = res
+            .words
+            .iter()
+            .map(|w| (w.token.as_str(), w.status))
+            .collect();
+        assert_eq!(by_token.get("кофе").copied(), Some("known"));
+        assert_eq!(by_token.get("Зюзя").copied(), Some("unknown"));
+        assert_eq!(by_token.get("Hello").copied(), Some("invalid-script"));
+        assert_eq!(res.word_count, 3);
+        assert_eq!(res.used_targets, vec!["ru.lex.routines.kofe".to_string()]);
+    }
+
+    #[test]
+    fn writing_check_ja_flags_unknown_never_wrong_and_accepts_pack_variants() {
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        let id = writer_pack(data, "org.openlanguage.ja-jp.reference");
+        let res = writing_check_at(
+            data,
+            WritingCheckAttempt {
+                pack_id: "org.openlanguage.ja-jp.reference".into(),
+                profile_id: id,
+                targets: vec!["ja.lex.adjectives.oishii".into()],
+                // The kanji variant counts (typing-mode accepted forms);
+                // an unseen kana word is NOT IN THE DICTIONARY, and a
+                // Latin token is the only thing called out of script.
+                text: "美味しい すっぽん coffee".into(),
+            },
+        )
+        .unwrap();
+        let by_token: Vec<(_, _)> = res
+            .words
+            .iter()
+            .map(|w| (w.token.as_str(), w.status))
+            .collect();
+        assert!(
+            by_token.contains(&("美味しい", "known")),
+            "kanji variant must match: {by_token:?}"
+        );
+        assert!(
+            by_token.contains(&("すっぽん", "unknown")),
+            "unseen kana is 'unknown' (never wrong): {by_token:?}"
+        );
+        assert!(by_token.contains(&("coffee", "invalid-script")));
+        assert_eq!(
+            res.used_targets,
+            vec!["ja.lex.adjectives.oishii".to_string()]
+        );
+    }
+
+    /// THE acceptance contract: the word-usage count is a completion
+    /// signal and NOTHING ELSE. Beyond the private journal rows, this
+    /// command performs zero writes to scheduler, mastery, evidence,
+    /// mined, lookup, or error-ledger state.
+    #[test]
+    fn writing_check_performs_zero_mastery_or_scheduler_writes() {
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        let id = writer_pack(data, "org.openlanguage.ru-ru.reference");
+        let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+        store
+            .save_scheduler_state(
+                &id,
+                &lts_storage::SchedulerRecord {
+                    item_id: "write-probe".into(),
+                    scheduler: "fsrs".into(),
+                    params_json: "{}".into(),
+                    due_at: "2026-11-27T00:00:00Z".into(),
+                },
+            )
+            .unwrap();
+        store
+            .record_word_lookup(
+                &id,
+                lts_storage::NewWordLookup {
+                    id: "write-probe",
+                    surface: "кофе",
+                    lemma: None,
+                    story_id: "probe",
+                    sentence_id: "probe",
+                    created_at: "2026-11-27T00:00:00Z",
+                },
+            )
+            .unwrap();
+        let before_sched = store.scheduler_state(&id).unwrap();
+        let before_mastery = store.latest_mastery(&id).unwrap();
+        let before_errors = store.error_ledger(&id).unwrap();
+        let before_mined = store.mined_items(&id).unwrap();
+        let before_lookups = store.word_lookups(&id).unwrap();
+        let before_journal = store.writing_journal(&id, 100).unwrap();
+        let _ = writing_check_at(
+            data,
+            WritingCheckAttempt {
+                pack_id: "org.openlanguage.ru-ru.reference".into(),
+                profile_id: id.clone(),
+                targets: vec!["ru.lex.routines.kofe".into()],
+                text: "кофе утром".into(),
+            },
+        )
+        .unwrap();
+        assert_eq!(store.scheduler_state(&id).unwrap(), before_sched);
+        assert_eq!(store.latest_mastery(&id).unwrap(), before_mastery);
+        assert_eq!(store.error_ledger(&id).unwrap(), before_errors);
+        assert_eq!(store.mined_items(&id).unwrap(), before_mined);
+        assert_eq!(store.word_lookups(&id).unwrap(), before_lookups);
+        // The journal is the ONLY growth, and it grew by exactly one row.
+        let after_journal = store.writing_journal(&id, 100).unwrap();
+        assert_eq!(after_journal.len(), before_journal.len() + 1);
+        // The meter moved with the journal (accumulation, settle-gated
+        // at the surface): one attempt this week, кофе + утро counted.
+        let meters = store.writing_meters(&id, &rfc3339_utc(now_secs())).unwrap();
+        assert_eq!(meters.attempts_this_week, 1);
+        assert_eq!(meters.unique_dictionary_words, 2);
+    }
+
+    #[test]
+    fn writing_journal_replays_newest_first_and_dies_with_the_profile() {
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        let id = writer_pack(data, "org.openlanguage.ru-ru.reference");
+        for _ in 0..2 {
+            writing_check_at(
+                data,
+                WritingCheckAttempt {
+                    pack_id: "org.openlanguage.ru-ru.reference".into(),
+                    profile_id: id.clone(),
+                    targets: vec![],
+                    text: "кофе".into(),
+                },
+            )
+            .unwrap();
+        }
+        let journal = writing_journal_at(data, &id, 20).unwrap();
+        assert_eq!(journal.len(), 2);
+        assert!(
+            journal[0].occurred_at >= journal[1].occurred_at,
+            "newest first"
+        );
+        assert!(journal.iter().all(|e| e.text == "кофе"));
+        // Deleted with the profile — the journal is part of the person.
+        {
+            let store = lts_storage::Store::open(data.join("profiles.db")).unwrap();
+            store.delete_profile(&id).unwrap();
+        }
+        assert!(writing_journal_at(data, &id, 20).unwrap().is_empty());
+        assert_eq!(
+            writing_meters_at(data, &id)
+                .unwrap()
+                .unique_dictionary_words,
+            0
         );
     }
 
