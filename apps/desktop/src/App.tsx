@@ -64,7 +64,7 @@ import {
 import { PracticeRunner, type PracticeTaskView } from "./practice";
 import { ExplainPanel } from "./explain";
 import type { ExplainSettingsView } from "./app/explain-wiring";
-import { LessonEncounter, drillStageId, stagePositionLabel, type LessonPlan } from "./lesson";
+import { LessonEncounter, stagePositionLabel, type LessonPlan } from "./lesson";
 import { installHistoryNav, type AppLocation, type HistoryNav } from "./history-nav";
 import { describeKanjiDecomposition } from "./kanji-decomposition";
 import { playClip } from "./playback";
@@ -108,7 +108,7 @@ import {
   type Microphone,
   type SpeakerOutput,
 } from "./capture";
-import { audioFailureMessage, isMediaMissing } from "./speech-readiness";
+import { audioFailureMessage } from "./speech-readiness";
 
 // Per-surface extraction (APP-SPLIT-001): the pure helpers below live in
 // ./app/primitives (and ./app/placement-coverage for the placement note).
@@ -163,6 +163,13 @@ import {
   runUpdateFromCatalog,
   type PackWiringDeps,
 } from "./app/pack-wiring";
+import {
+  runOpenPractice,
+  runChoosePractice,
+  runCheckPractice,
+  runFinishPractice,
+  type PracticeWiringDeps,
+} from "./app/practice-wiring";
 
 export {
   after,
@@ -1741,174 +1748,28 @@ export function App() {
     }
   }
 
-  // UX-003: first lessons. Plan items are runnable; grading, evidence,
-  // and scheduling happen natively.
+  // APP-SPLIT-003E: the practice-handler bodies moved to
+  // ./app/practice-wiring (pure move, zero behavior change). App() keeps
+  // owning every hook, all practice state and the refs;
+  // `practiceWiringDeps` below carries exactly what the old inline closures
+  // captured. Thin wrappers keep every JSX and home-wiring call site
+  // unchanged.
   async function openPractice(item: PlannedItem, opts: { showLessonCard?: boolean } = {}) {
-    // Review finding R02: a saved (mined) word is scheduled by its own
-    // scheduler and has no pack content behind it, so it opens the saved
-    // word's review card — a pack practice task on a `mine-…` id could only
-    // fail, and mined practice must never become mastery evidence.
-    if (item.reason === "saved-review") {
-      const miner = detectInvoke();
-      if (!miner || !profileId) return;
-      try {
-        // The engine owns what "due" means (D8): ask it for the due list
-        // and open that word's card instead of re-deriving due-ness here.
-        const due = (await miner("mine_due", { profileId })) as MineItem[];
-        const found = due.find((m) => m.id === item.content_id);
-        setRoute("words");
-        if (!found) {
-          setMineNotice("That saved word is not due right now.");
-          return;
-        }
-        setMineNotice(null);
-        setMineReview({ item: found, revealed: false });
-      } catch (e) {
-        setMineError(String(e));
-      }
-      return;
-    }
-    setPracticeError(null);
-    setPracticeGraded(false);
-    setPracticeCorrectChoice("");
-    setPracticeRevealed(false);
-    setPracticeSpeakCheck(null);
-    setPracticeTarget({ contentId: item.content_id, modality: item.modality });
-    setLesson(null);
-    // SESSION-FLOW-COPY-001: inside a running session only the FIRST
-    // activity shows the lesson encounter card and its Start control —
-    // that click is the session's one start. Later activities arrive
-    // through the bridge and open the runner directly; the card stays one
-    // tap away on the "Show the lesson again" control.
-    setLessonSeen(opts.showLessonCard === false);
-    if (inv && profileId) {
-      try {
-        setLesson(
-          (await inv("lesson_plan", {
-            profileId,
-            contentId: item.content_id,
-          })) as LessonPlan | null,
-        );
-      } catch {
-        // A unit that declares no activities has no lesson to show; the
-        // drill alone is the honest fallback, never a fabricated summary.
-        setLesson(null);
-      }
-    }
-    if (inv && profileId) {
-      setPracticeAudio(null);
-      setPracticeAudioError(null);
-      try {
-        const task = (await inv("practice_task", {
-          profileId,
-          contentId: item.content_id,
-          modality: item.modality,
-          revealReading: false,
-        })) as PracticeTaskView;
-        setPracticeTask(task);
-        if (
-          item.modality === "comprehension-listening" ||
-          item.modality === "phonological-discrimination" ||
-          item.modality === "orthographic-encoding" ||
-          // RU-MODALITY-PRACTICE-001: the guided-speaking card plays the
-          // pack recording of the sentence it shows; the same honest
-          // media miss (K-78) says so when the pack ships none.
-          item.modality === "production-speaking"
-        ) {
-          try {
-            const a = (await inv(
-              item.modality === "phonological-discrimination"
-                ? "contrast_audio"
-                : item.modality === "orthographic-encoding"
-                  ? "dictation_audio"
-                  : "listening_audio",
-              {
-                profileId,
-                contentId: item.content_id,
-              },
-            )) as { wav_b64: string; source: string };
-            setPracticeAudio({ wavB64: a.wav_b64, source: a.source });
-          } catch (e) {
-            // K-78/K-90: the only audio failure left is the pack shipping
-            // no recording; the engine's own sentence says so, and anything
-            // unexpected surfaces its raw text rather than a canned claim.
-            setPracticeAudioError(
-              isMediaMissing(String(e))
-                ? `${audioFailureMessage(String(e))} Text practice still works.`
-                : `Audio failed: ${String(e)}. Text practice still works.`,
-            );
-          }
-        }
-      } catch (e) {
-        setPracticeTask(null);
-        setPracticeError(String(e));
-      }
-    } else {
-      setPracticeTask(null);
-    }
+    return runOpenPractice(practiceWiringDeps, item, opts);
   }
 
   async function choosePractice(index: number) {
-    if (!practiceTarget || !inv || !profileId) return;
-    try {
-      const g = (await inv("practice_submit", {
-        profileId,
-        contentId: practiceTarget.contentId,
-        modality: practiceTarget.modality,
-        choiceIndex: index,
-        revealReading: practiceRevealed,
-        sessionId: activeSessionId(),
-        stageId: drillStageId(lesson),
-      })) as { correct: boolean; correct_choice: string };
-      setPracticeCorrect(g.correct);
-      setPracticeCorrectChoice(g.correct_choice);
-      setPracticeGraded(true);
-    } catch (e) {
-      setPracticeError(String(e));
-    }
+    return runChoosePractice(practiceWiringDeps, index);
   }
 
   // K-12: typed grading. The draft goes native; the expected string was
   // never sent to the UI, so cloze/dictation evidence stays honest.
   async function checkPractice() {
-    if (!practiceTarget || !inv || !profileId) return;
-    try {
-      const g = (await inv("practice_submit", {
-        profileId,
-        contentId: practiceTarget.contentId,
-        modality: practiceTarget.modality,
-        choiceIndex: 0,
-        answer: practiceDraft,
-        revealReading: practiceRevealed,
-        sessionId: activeSessionId(),
-        stageId: drillStageId(lesson),
-      })) as { correct: boolean; correct_choice: string };
-      setPracticeCorrect(g.correct);
-      setPracticeCorrectChoice(g.correct_choice);
-      setPracticeGraded(true);
-    } catch (e) {
-      setPracticeError(String(e));
-    }
+    return runCheckPractice(practiceWiringDeps);
   }
 
   async function finishPractice() {
-    setPracticeTarget(null);
-    setPracticeTask(null);
-    setPracticeAudio(null);
-    setPracticeAudioError(null);
-    setPracticeDraft("");
-    setPracticeRevealed(false);
-    setPracticeSpeakCheck(null);
-    if (inv && profileId) {
-      try {
-        applyPlan((await inv("practice_plan", { profileId, minutes: budget })) as SessionPlan);
-      } catch (e) {
-        setPracticeError(`The plan could not be refreshed: ${String(e)}`);
-      }
-    }
-    // A session keeps working the activities it started with; the refreshed
-    // plan is read the next time Home is, not re-selected mid-session.
-    if (sessionQueueRef.current) void runAdvanceSession(sessionWiringDeps, 1);
+    return runFinishPractice(practiceWiringDeps);
   }
 
   // APP-SPLIT-003D: the session-lifecycle bodies moved to ./app/home-wiring
@@ -1955,6 +1816,41 @@ export function App() {
     openPractice,
     showSessionBridge,
     cancelSessionBridge,
+  };
+
+  // The props bundle (state + setters + refs + callbacks) for the practice
+  // wiring slice. Built per render right after every referenced binding is
+  // in scope (practiceWiringDeps is read only inside the hoisted wrapper
+  // functions above, which fire from handlers well after render, and after
+  // sessionWiringDeps which finishPractice's advance needs).
+  const practiceWiringDeps: PracticeWiringDeps = {
+    inv,
+    profileId,
+    budget,
+    practiceTarget,
+    practiceRevealed,
+    practiceDraft,
+    lesson,
+    setRoute,
+    setMineNotice,
+    setMineReview,
+    setMineError,
+    setPracticeError,
+    setPracticeGraded,
+    setPracticeCorrect,
+    setPracticeCorrectChoice,
+    setPracticeRevealed,
+    setPracticeSpeakCheck,
+    setPracticeTarget,
+    setPracticeTask,
+    setLesson,
+    setLessonSeen,
+    setPracticeAudio,
+    setPracticeAudioError,
+    setPracticeDraft,
+    applyPlan,
+    activeSessionId,
+    sessionWiringDeps,
   };
 
   // K-15: placement — low-stakes diagnosis per pack assessment. Each
