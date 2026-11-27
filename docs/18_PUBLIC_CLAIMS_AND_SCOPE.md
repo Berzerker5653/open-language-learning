@@ -146,3 +146,40 @@ it may not say anything the full text does not support.
   Summary: "When you report a platform problem, quote both lines above." Full:
   "Please quote both lines when you report a platform problem — a report that
   names only 'the latest version' cannot be matched to a build."
+
+## Known limits — Month-1 learner audit (LEARNER-REVIEW-M1-001, 2026-11-27)
+
+The app's learner-facing posture for both shipped packs is `experimental`
+("Built by us; the content may still have mistakes because the checking is
+not finished", `onboarding.tsx`; the Home badge tooltip adds "Content in this
+pack is machine-drafted"). That wording is the ceiling this project may state:
+the first full Month-1 learner audit (days 1-30 simulated daily use, both
+packs — mechanical pass, fresh-context linguistic review, experience review)
+settled the following, and nothing beyond it.
+
+**Settled:** every enumerated Month-1 text item passes the mechanical checks
+(0 failures, 100% coverage; RU 1153 / JA 1350 items); the RU audio subset the
+learner actually meets re-verifies 149/149; every practice answer key and
+distractor set re-derives; new material reaches the learner on all 30 days.
+
+**Still unverified — never claim these as checked:**
+
+1. Native-speaker naturalness of generated RU/JA prose (all reviewers so far
+   were fresh-context agents; `reviews.jsonl` rows are `hermes-default agent`
+   and promote nothing — no qualified human review exists for these packs).
+2. Register and tone at story scale (JA politeness levels, RU colloquial vs
+   bookish narration).
+3. TTS narrator timbre/prosody acceptability (ASR proves what was said, not
+   how it sounds).
+4. Level-fit of each active item relative to what the learner has already met
+   (no per-item teach-order ledger exists yet).
+5. Whether mixed English/Russian unit titles are intended design (curriculum
+   decision, open).
+6. JA loanword/dialect orthography beyond the pinned katakana convention
+   found on 2026-11-27 (no written style rule predates it).
+7. Stress marks a dictionary accepts but natives may contest (the ~72-word
+   RU lexicon-warning list stays open).
+
+Full manifest with why each item resists automation, and what would settle
+it: `state/evidence/LEARNER-REVIEW-M1-001/residual-uncertainty.md`; the
+defect ledger is `state/evidence/LEARNER-REVIEW-M1-001/defects.md`.

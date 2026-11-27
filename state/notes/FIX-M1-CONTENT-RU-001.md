@@ -1,8 +1,10 @@
 # FIX-M1-CONTENT-RU-001 — fix Month-1 RU stress-mark defects + thin early-content supply
 
-Source: LEARNER-REVIEW-M1-001 defect ledger (D-008, D-004). Evidence:
-state/evidence/LEARNER-REVIEW-M1-001/defects.md + review/verdicts/ru-037.md,
-ru-038.md, ru-lexwarn.md.
+Source: LEARNER-REVIEW-M1-001 defect ledger (D-008, D-004, D-012, D-013).
+Evidence: state/evidence/LEARNER-REVIEW-M1-001/defects.md +
+review/verdicts/ru-028.md, ru-030.md, ru-038.md, ru-039.md, ru-lexwarn.md
+(source pointers verified by takeover-B; the ledger's own aggregates and this
+card's earlier ru-037 pointer were corrected in the same pass).
 
 ## Scope
 
@@ -12,6 +14,21 @@ ru-038.md, ru-lexwarn.md.
    - `ru.sent.cp.p26` — В ле́су → В лесу́ (locative)
    - stories/walk-in-the-forest.yaml title ле́су → лесу́;
      stories/shapka-v-parke.yaml title са́ду → саду́
+   - lexicon/stories202611.jsonl `ru.lex.stories202611.baton` reading
+     ба́тон → бато́н (this is the vocab surface the reviewer saw; its media
+     row exists, so the audio follows the wrong reading)
+   - media rows for `ru.sent.cp.p34` spell сто́ит while the sentence text
+     says стои́т, and `media/labels.jsonl` tags пла́чу as `dat.sg` — repair
+     the alignment/label rows in the same pass, not just the stress marks
+     (takeover-B finding, pinned in `gates.log` V2)
+   - **D-012 gloss rewrites (text only, no audio)**: worklist items 670
+     "Supper was already at home, but I was very glad." → "Dinner was already
+     waiting at home, but I was very happy."; 701 "The open-air market works
+     in the morning." → "The open-air market is open in the morning."
+     (verdicts ru-028 / ru-030 carry the suggested text)
+   - **D-013 marked/unmarked duplicate pairs** (items 909/910, 916/919,
+     917/920, 921/922, 923/924, 926/928, 931/932, 934/935): confirm they are
+     intentional during the sweep; if not, the marked form wins
    - Sweep ALL RU story/sentence text for unmarked/mis-marked locatives
      (в лесу, в саду, на дому, вверху́-class) before closing.
 2. **Audio re-bake** for the three sentence ids (TTS follows the marks —

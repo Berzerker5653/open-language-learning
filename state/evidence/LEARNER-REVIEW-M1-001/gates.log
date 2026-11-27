@@ -95,3 +95,155 @@ and killed by TAKEOVER-A; no other orphans (lts[-]serve scan clean).
 RUN 3 raw day logs archived as sim/raw-{ru,ja}-run3-2026-11-27.tar.gz
 (30 logs each; the pre-fix raw-{ru,ja}.tar.gz from run 2 are kept
 untouched for the starvation record; sim/raw/ itself is working data).
+
+========================================================================
+RUN 3 VERIFICATION + CLOSE — TAKEOVER-B (board t_479581f0, 2026-11-27)
+========================================================================
+Scope: verify the pass-2/pass-3 artifacts that d62822da committed as
+UNVERIFIED, and finish step 5 of the frozen RUN 2 HANDOFF contract. main at
+start = 75a43bc4; the only dirty file was apps/desktop/src-tauri/src/lib.rs
+(a sibling lane's WIP — untouched, never staged). No gate script or test was
+modified (GATE INTEGRITY); the mech pass was re-run against a scratch COPY of
+sim/ so the committed mech-pass reports stayed byte-untouched.
+
+V1. Mechanical pass re-run at HEAD (lane tier; acceptance "0 failures, 100%
+    coverage"):
+      .venv/bin/python scripts/month1_mech_pass.py --out <scratch>/sim
+        ru: 0 failures, 72 warnings, coverage 100.0%
+        ja: 0 failures,  9 warnings, coverage 100.0%
+    mech-ru.json / mech-ja.json / mech-ru.md / mech-ja.md / summary.json
+    byte-IDENTICAL to the committed reports (diff -q, 5/5) -> the RUN 3
+    tallies in defects.md REPRODUCE exactly at HEAD.
+
+V2. Pass 2 (fresh-context review) — verdict integrity:
+    - 108 chunk files <-> 108 verdict files (ru 49 prose + lexwarn,
+      ja 57 prose + lexwarn).
+    - Chunking is gap-free: ru-001..ru-049 cover worklist items 1..1153,
+      ja-001..ja-057 cover 1..1350 (checked both against each chunk header
+      and against the item headers actually present; distinct headers == the
+      stated range, contiguous). Nothing reviewed without input, no input
+      without a verdict.
+    - 14 verdicts read against their chunk inputs (ru-001, ru-014, ru-027,
+      ru-028, ru-030, ru-038, ru-039, ru-lexwarn; ja-007, ja-008, ja-012,
+      ja-042, ja-049, ja-050, ja-053) including every fix-flagged lane behind
+      D-008/D-009/D-010: each flagged item exists in its chunk with exactly
+      the quoted surface, and the reasoning matches the input text.
+      Verdicts ACCEPTED as evidence.
+    - AGGREGATE CORRECTION (the ledger's tally did NOT reproduce; defects.md
+      corrected in place). Programmatic re-tally of every FLAG line across
+      all 108 verdicts (severity token = fix|known-limit|blocker, item
+      ranges/lists expanded, deduped per item):
+          ru  fix 7 / known-limit 57   (+4 genuine lexwarn flags W26/W27/W29/W36)
+          ja  fix 64 / known-limit 561 (42 flag lines, mostly item ranges)
+      The ledger previously stated "RU fix 70 / known-limit 54; JA fix 64 /
+      known-limit 343". JA fix 64 reproduces; the other three figures do not.
+      Cause: the 7 RU content fixes use the `FLAG | item N | fix: <suggestion>`
+      shape (severity inline with the suggestion, invisible to a whole-field
+      match), and 66 further RU flags in ru-014..026 carry NO severity token
+      at all ("Re-level past Month-1" A1-fit notes — tallied here in the
+      lanes' own known-limit class). The lexwarn sub-tally reproduces
+      exactly: ru 4/72 real (all D-008), ja 0/9 (all false positives).
+    - Independent source pin-checks of the P1 content claims (languages/
+      data, not reviewer prose) — ALL CONFIRMED:
+        D-008: sentences/content-parity-2026-10-12.jsonl rows p26 "В ле́су
+          тихо и зелено́." / p34 "Ско́лько стои́т батон хле́ба?" / p35 "Я
+          пла́чу за проду́кты ка́рточкой." (cloze_targets carry the same
+          marks); story titles "Прогу́лка в ле́су"
+          (stories/walk-in-the-forest.yaml) and "Ша́пка в са́ду"
+          (stories/shapka-v-parke.yaml); media/words.jsonl AND
+          media/labels.jsonl rows for all three sentence ids carry the same
+          marks (the TTS followed the marks, so audio is baked wrong);
+          lexicon/stories202611.jsonl `ru.lex.stories202611.baton` reading
+          "ба́тон" is the vocab surface the reviewer flagged.
+          EXTRA (beyond the ledger, added to FIX-M1-CONTENT-RU-001 scope):
+          the p34 media rows spell сто́ит while the sentence text says
+          стои́т, and labels.jsonl tags пла́чу as `dat.sg` — the
+          audio-alignment rows are internally inconsistent beyond the stress
+          fix itself.
+        D-009: lexicon/verbs.jsonl — `ja.lex.verbs.kaerimasu` primary form
+          かえりざく (+ kanji 返り咲く, reading kaerizaku) under gloss
+          "to go back; to come back"; `ja.lex.verbs.arukimasu` primary
+          あるきだす under gloss "to walk"; `ja.lex.verbs.nemasu` primary
+          ねかす (+ 寝かす) under gloss "to sleep; to go to bed".
+          Loanword case: lexicon/entertainment.jsonl `ja.lex.ent.konsaato`
+          primary form こんさーと, used by sentences/entries.jsonl
+          `ja.sent.concert-fun`; the pack writes loanwords in katakana
+          (sentence shards: コーヒー x5, テレビ x3, パン x2 vs こんさーと x3).
+          Provenance days re-measured from the raw logs: かえりざく first in
+          lesson_plan day 14 (14 days), あるきだす day 14 (14 days), ねかす
+          day 17 (7 days) -> "day 14-17 lesson_plan" holds. Precision note:
+          返り咲く/かえりざく IS a real Japanese word ("return to one's
+          former glory") — it is simply not the verb the id and gloss
+          promise; D-009 wording corrected accordingly.
+        D-010 REPRODUCED (this was the pre-dispatch gate for
+          FIX-M1-CONTENT-JA-001). practice_task item
+          `ja.lex.greetings.oyasumi-nasai#recall-meaning` carries slots
+          [{text:"おやすみ", label:"the rest wish"}, {text:"なさい",
+          alternatives:["なさい","ませ"], label:"the polite ending",
+          target:true}] — observed on sim days 13, 14, 19. Root cause pinned
+          in DATA, not the engine: that exact `slots` array (label "the rest
+          wish") is stored in languages/ja-JP/lexicon/greetings.jsonl. So it
+          is a corrupted morpheme label on ONE surface, not an item "split
+          across two practice_task surfaces" as the reviewer lane inferred.
+          Learner-visible junk English confirmed -> severity raised
+          known-limit -> fix, disposition FIX-M1-CONTENT-JA-001.
+
+V3. Pass 3 (experience review) recomputed from sim/raw/* (60 day logs) in
+    throwaway code under scratch. The run-3 metrics script died with its
+    worker; `exp-metrics.py` is NOT in the tree, so the experience-review.md
+    provenance line claiming it was committed has been corrected.
+      unique content ids served over 30 days      ru 94, ja 230      MATCHES
+      current_offer non-null                      ru 30/30, ja 30/30 MATCHES
+      unit_path payload day 30                    ru 823 (803 locked),
+                                                  ja 819 (777 locked) MATCHES
+      units done by day 30                        ru 16, ja 15       MATCHES
+      inflow per day                              ru 3.1, ja 7.7  MATCHES ~3/~8
+      writing_task / story_view / drill+listening days  30/30 both   MATCHES
+    NOT reproducible (corrected in experience-review.md):
+      - "RU 16 items/day avg (0-28), JA 27/day avg (0-30)". Measured daily
+        practice_plan size: ru avg 19.3 (min 6, max 38); ja avg 37.8
+        (min 15, max 40). Distinct content/day: ru 14.2 (6-21), ja 29.4
+        (9-37). No day is empty in any measure (the claimed 0 floor does not
+        exist) and nothing reproduces 16/27. The bullet's conclusion (no
+        review-only death spiral) still holds.
+      - The RUN 3 line "unique served content ids per day grow monotonically
+        (ru day1=32 -> day30=122; ja day1=42 -> day30=294)". No metric over
+        the committed raw logs reproduces that figure pair. Measured
+        cumulative growth (ru / ja): practice_plan content ids 6->94 /
+        9->230; distinct item ids 6->185 / 15->533; progress_summary rows
+        6->108 / 15->315. Every measure grows monotonically from day 1 with
+        no plateau, so the D-001-fixed signature (new material every day, no
+        starvation plateau) is CONFIRMED — but the figure pair above, also
+        quoted in the TAKEOVER-A board summary, is superseded by these
+        series.
+
+V4. Step 5 — residual manifest into known-limits copy + copy audit:
+    - Learner-facing confidence surfaces located: apps/desktop/src/home.tsx
+      pack-posture badge (title: "Content in this pack is machine-drafted.
+      The posture states how far human review has actually gone; it never
+      affects your practice or progress.") and apps/desktop/src/onboarding.tsx
+      MATURITY_MEANINGS. Both shipped packs declare
+      `maturity: "experimental"` -> the learner reads "Built by us; the
+      content may still have mistakes because the checking is not finished."
+      No surface claims more than the evidence supports. The residual
+      manifest's unverified classes (R-1..R-7) now ride in
+      docs/18_PUBLIC_CLAIMS_AND_SCOPE.md §Known limits — Month-1 learner
+      audit, which is the release/known-notes copy the honesty contract asks
+      for (no product-code change; the audit pass writes none).
+    - Copy audit re-run AFTER the copy addition:
+        .venv/bin/python tools/audit_learner_copy.py apps/desktop/src packages
+          -> LEARNER COPY AUDIT v1.6.0: 61 source files scanned,
+             87 test files skipped, 0 pack files scanned; findings: 0 (exit 0)
+
+V5. Follow-ups + board: the four contracts (FIX-M1-CONTENT-RU-001,
+    FIX-M1-CONTENT-JA-001, FIX-M1-PATH-VIS-001, LEARNER-REVIEW-M2-001) were
+    checked against this ledger; two documentation defects in them were fixed
+    (a Cyrillic к inside the かえりざく target string in the JA contract, and
+    the RU contract's evidence pointer to ru-037 instead of ru-038/ru-039).
+    D-010's reproduce-or-close gate is now satisfied, so
+    FIX-M1-CONTENT-JA-001 is dispatchable. Board creation could NOT run in
+    this worker (the kanban CLI refuses child contexts: "delegate_task child
+    contexts cannot mutate Kanban tasks via the CLI"), so the four creates
+    plus this card's completion are handed to the controller with the exact
+    commands recorded in state/notes/LEARNER-REVIEW-M1-001.md §RUN 3 VERIFY
+    HANDOFF.

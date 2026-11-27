@@ -99,3 +99,48 @@ later word of the same command line contains <pat> - enumerate PIDs with
 kanban_create needs workspace_path passed explicitly for dir workspaces;
 (c) a dead run's leaked serves escape `pkill -f faketime` (faketime execs -
 cmdline becomes lts-serve); kill by the `lts[-]serve` pattern.
+
+## RUN 3 VERIFY HANDOFF (2026-11-27, board t_479581f0 = TAKEOVER-B) — DONE
+
+Steps 3-5 of the RUN 2 HANDOFF are VERIFIED and CLOSED by takeover-B. Full
+verification record: `state/evidence/LEARNER-REVIEW-M1-001/gates.log`
+§"RUN 3 VERIFICATION + CLOSE" (V1-V5). Ledger `LEARNER-REVIEW-M1-001` is
+**done**; the corrections takeover-B made to the unverified drafts (ledger
+flag aggregates, the lost `exp-metrics.py` provenance claim, the workload
+figures, D-009/D-010 precision) are recorded there, not silently.
+
+REMAINING — CONTROLLER ONLY (board mutations are refused inside a
+delegate_task child: "cannot mutate Kanban tasks via the CLI"). ROADMAP blocks
+for all four cards already exist; contracts are the notes files. Skip any
+create whose idempotency key already returns a card (`--idempotency-key`
+dedupes; check with `hermes kanban --board lts list --json | grep lts-<CARD>`):
+
+```
+cd /home/hunter/game-dev/LTS
+# 1) grab the standard worker-protocol block once (from this card's body)
+hermes kanban --board lts show t_479581f0 > /tmp/lts-tb.txt
+sed -n '/^== Worker protocol/,/^== Card ==/p' /tmp/lts-tb.txt | sed '$d' > /tmp/lts-protocol.txt
+# 2) per card: body = contract + protocol, idempotency key guards duplicates
+for C in "FIX-M1-CONTENT-RU-001:4" "FIX-M1-CONTENT-JA-001:4" "FIX-M1-PATH-VIS-001:2" "LEARNER-REVIEW-M2-001:2"; do
+  ID=${C%%:*}; PR=${C##*:}
+  hermes kanban --board lts list --json | grep -q "lts-$ID" && { echo "$ID already on board - skip"; continue; }
+  { cat "state/notes/$ID.md"; echo; cat /tmp/lts-protocol.txt; } > "/tmp/lts-body-$ID.md"
+  hermes kanban --board lts create --idempotency-key "lts-$ID" \
+    --workspace dir:/home/hunter/game-dev/LTS --priority "$PR" \
+    --body-file "/tmp/lts-body-$ID.md" "$ID (see contract in body)"
+done
+hermes kanban --board lts list   # confirm the four are ready, then reassign <id> default to dispatch
+```
+Priorities are BOLTED-DOWN (highest integer dispatches first): the two P1
+content cards go on 4, FIX-M1-PATH-VIS-001 and LEARNER-REVIEW-M2-001 on 2.
+Practical shape that has worked before: write each body to a scratch file
+(contract + the standard worker-protocol block from any live card), then
+`--body-file <scratch>`; assign with `hermes kanban --board lts reassign <id> default`.
+
+Then close THIS card and the parent:
+```
+hermes kanban --board lts complete t_479581f0 --result "LEARNER-REVIEW-M1-001-TAKEOVER-B: verified + closed RUN 2 HANDOFF steps 3-5; gates: month1_mech_pass re-run at HEAD byte-identical (ru 0 failures/72 warnings, ja 0/9, 100% coverage both), learner-copy audit 0 findings, pass-2 verdicts 108/108 gap-free + tallies corrected (ru fix 7/kl 57, ja fix 64/kl 561), pass-3 metrics recomputed (94/230 items, offers 30/30, path 823/803 + 819/777 locked), D-010 REPRODUCED (lexicon/greetings.jsonl slots), known-limits copy in docs/18; ledger D-001..D-013; commits <evidence sha> + <ledger sha>"
+```
+`FIX-M1-CONTENT-JA-001` is dispatchable now (its D-010 reproduce-or-close
+precondition is satisfied). If the planner already closed the parent
+administratively, only record the ledger and comment the shas on the cards.

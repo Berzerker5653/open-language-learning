@@ -3,8 +3,10 @@
 Method: walked the fixed-engine journey-sim logs (days 1-30, both packs) as
 learner-side evidence: daily plan composition, offer presence, unit unlock
 timeline, mode usage, and roadmap payload size. Metrics computed
-programmatically over `sim/raw/*` (harness: this card; metrics script kept
-in this run's evidence commit as `exp-metrics.py`).
+programmatically over `sim/raw/*`. CORRECTION (takeover-B): the run-3 metrics
+script died with its worker and was never committed (`exp-metrics.py` is not
+in the tree); every figure below was recomputed from the raw day logs by
+takeover-B — the derivation is in `gates.log` V3.
 
 ## What is healthy (verified post-D-001-fix)
 
@@ -14,9 +16,13 @@ in this run's evidence commit as `exp-metrics.py`).
   for both packs.
 - **Six-mode practice is exercised from early on**: story views on every
   sampled week, writing tasks on 30/30 days, drills + listening from day 1-2.
-- **Workload is stable**: RU 16 items/day avg (0-28, day 1 is encounter-only
-  onboarding), JA 27/day avg (0-30). No review-only death spiral (was 100%
-  weak-skill reviews of 6 items from day 2 — fixed).
+- **Workload is stable**: RU 19 items/day avg (6-38 planned; 14 distinct
+  content items/day, 6-21), JA 38/day avg (15-40 planned; 29 distinct, 9-37).
+  No day is empty and no review-only death spiral (was 100% weak-skill
+  reviews of 6 items from day 2 — fixed). CORRECTION (takeover-B): this line
+  originally read "RU 16 items/day avg (0-28, day 1 is encounter-only
+  onboarding), JA 27/day avg (0-30)" — those figures do not reproduce from
+  the logs (no measure yields 16/27 and no day has 0 items).
 - **Pace**: RU 16 units complete by day 30, JA 15 — ~0.5 unit/day, gates
   reachable (letter->greeting gate now completable via rotating drill
   families, per FIX-M1-PROGRESSION-001).
