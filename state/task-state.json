@@ -27,12 +27,15 @@
       ]
     },
     "FIX-M1-PATH-VIS-001": {
-      "status": "ready",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 2,
       "updated": "2026-11-27",
-      "notes": "Follow-up of LEARNER-REVIEW-M1-001 (ledger D-003, D-006): the day-1 path payload carries the whole catalog (RU 823 units / 803 locked, JA 819 / 777) including advanced English slugs; collapse bands past the frontier and add a wire-surface rule to tools/audit_learner_copy.py. Contract: state/notes/FIX-M1-PATH-VIS-001.md; board card lts-FIX-M1-PATH-VIS-001. Opened by takeover-B 2026-11-27.",
+      "notes": "Follow-up of LEARNER-REVIEW-M1-001 (ledger D-003, D-006). CLOSED 2026-11-27 run 2 (board t_23e61c6f; run 1 died at the iteration cap with the lane uncommitted — run 2 verified the WIP, finished acceptance, committed). D-003 shipped: PathView keeps done/open history + PATH_FUTURE_WINDOW=2 locked neighbours (pathTailCutoff) and collapses the rest into counted '+ N later units in <band>' rows (count+band only, 48px opt-in control); the 390x844 capture (scripts/path-far-future-capture.mjs, lts-serve+CDP) is 10/10 green at the lane — 813 locked of 823 payload, 803 hidden, pinned frontier in the fold, zero hidden units rendered (structural data-unit check) — and 5 FAIL at HEAD. D-006 shipped: audit_learner_copy v1.7.0 wire-slug rule (String(x.reason), bare {x.reason} JSX text, enum slugs; *_LABELS lookup allowed) +5 tests green, explain panel reason->notice. Gates: tsc 0, vitest 733/0, audit 0 findings, prettier clean; gates.log in evidence. Vision-model pixel check impossible under Local-Only mode (no --vision engine, no VL model) — substituted DOM/geometry audits + screenshots attached to the board card. Code d9a9ff48, evidence cbbd8141.",
       "evidence": [
-        "state/evidence/LEARNER-REVIEW-M1-001/experience-review.md"
+        "state/evidence/FIX-M1-PATH-VIS-001/gates.log",
+        "state/evidence/FIX-M1-PATH-VIS-001/result-green.json",
+        "state/evidence/FIX-M1-PATH-VIS-001/farfuture-fold0-green.png",
+        "state/evidence/FIX-M1-PATH-VIS-001/farfuture-fullpath-green.png"
       ]
     },
     "LEARNER-REVIEW-M2-001": {
