@@ -3779,12 +3779,14 @@
       ]
     },
     "FIX-LETTER-DRILLS-001": {
-      "status": "ready",
-      "attempts": 0,
-      "updated": "2026-11-27",
-      "notes": "Mainline lib-suite red found during FIX-PACK-K65-001 close-out (board t_703f4b81, assigned default). letter_drills_span_two_prompt_families_and_reach_independent red at clean 6119fd71 (no writers, media materialized): panic 'the drill offers the letter's symbol or sound'. Test derives the drill day from now_secs() - date-dependent. Green window: 264/0 at 576ccccc; only content change before the red run is 04bdd7c8 (RU stress-mark corrections + supply densify) - trigger candidate, bisect on the card. Fix date-robustly at the honest layer (product if a drill day can offer no answerable choice).",
+      "status": "done",
+      "attempts": 1,
+      "updated": "2026-11-28",
+      "notes": "CLOSED 2026-11-28 (board t_703f4b81, code cfaf1538). RCA (state/evidence/FIX-LETTER-DRILLS-001/rca.md): REAL product bug, not the 04bdd7c8 bisect candidate (orthography diff empty across the window) — RU cyrillic rows declared no schema `sound` field (0/34), so form->sound drill days served the prose reading ('sound m — name эм') as choices, letter-name metadata smuggled via data; the wall-clock day rotation (recognize days) decided green/red. Fix: explicit sound on all 34 rows (values verbatim from each row's own reading copy); drill_day() seam in lib.rs (production wall clock, tests thread-local DrillDayGuard); test rewritten to exercise BOTH rotation directions on two simulated days with exact sound/symbol choice pins. Full lib suite 264 passed / 0 failed / 2 ignored at bbc4457d+lane on a clean worktree; red-at-HEAD reproduced first. Deferred: guard-hardening '— name' shape + fuller reading/name/sound split + published 0.5.0 archive republish ride (owner-gated) — see notes.",
       "evidence": [
-        "state/evidence/FIX-PACK-K65-001/controller-suite.md"
+        "state/evidence/FIX-LETTER-DRILLS-001/rca.md",
+        "state/evidence/FIX-LETTER-DRILLS-001/gates.log",
+        "state/notes/FIX-LETTER-DRILLS-001.md"
       ]
     },
     "VENDOR-TEST-SERIAL-001": {

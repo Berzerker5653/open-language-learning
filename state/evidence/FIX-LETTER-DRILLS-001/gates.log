@@ -1,0 +1,32 @@
+FIX-LETTER-DRILLS-001 — gate log (worker run 335, 2026-11-28, code cfaf1538)
+
+ENV: clean detached worktree at bbc4457d + lane changes only (git diff --stat: lib.rs, cyrillic.jsonl);
+     languages media hardlinked (cp -al); apps/desktop/dist symlinked from main tree (gitignored asset, env artifact);
+     CARGO_TARGET_DIR shared with main tree; no concurrent cargo writers during the battery.
+
+== RED AT HEAD (pre-fix) ==
+test tests::letter_drills_span_two_prompt_families_and_reach_independent has been running for over 60 seconds
+test tests::letter_drills_span_two_prompt_families_and_reach_independent ... FAILED
+thread 'tests::letter_drills_span_two_prompt_families_and_reach_independent' (2269159) panicked at apps/desktop/src-tauri/src/lib.rs:23675:14:
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 265 filtered out; finished in 89.02s
+(first attempt also died on missing frontendDist=env artifact, fixed by dist symlink — SETTINGS-SCOPE-001 (d))
+
+== cargo fmt --all --check (worktree) ==
+clean (exit 0)
+
+== targeted: cargo test -p lts-desktop --lib letter_drills_span_two_prompt_families ==
+test tests::letter_drills_span_two_prompt_families_and_reach_independent has been running for over 60 seconds
+test tests::letter_drills_span_two_prompt_families_and_reach_independent ... ok
+NOTE: green covers BOTH simulated rotation days (recognize: sound 'a'; produce: symbol 'а') in one run.
+
+== cargo clippy -p lts-desktop --all-targets -- -D warnings ==
+CLIPPY-EXIT=0
+
+== FULL: cargo test -p lts-desktop --lib ==
+test result: ok. 264 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 337.69s
+FULL-EXIT=0
+
+caveat: gate exits in the chain were measured after '| tail' (always 0); verdicts above are read from the
+test-result lines and clippy 'Finished' line in the captured windows, not from the pipeline exit codes.
+raw logs: /home/hunter/.hermes/cache/scratch/ld-red.log, ld-gates.log
+committed copies: red-at-head.log, gates-full.log (this dir)

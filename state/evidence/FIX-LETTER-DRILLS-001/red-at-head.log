@@ -1,0 +1,24 @@
+   Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/.hermes/cache/scratch/lts-letterdrills-work/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 13.62s
+     Running unittests src/lib.rs (/home/hunter/game-dev/LTS/target/debug/deps/lts_desktop-1caef568b73e5b79)
+
+running 1 test
+test tests::letter_drills_span_two_prompt_families_and_reach_independent has been running for over 60 seconds
+test tests::letter_drills_span_two_prompt_families_and_reach_independent ... FAILED
+
+failures:
+
+---- tests::letter_drills_span_two_prompt_families_and_reach_independent stdout ----
+
+thread 'tests::letter_drills_span_two_prompt_families_and_reach_independent' (2269159) panicked at apps/desktop/src-tauri/src/lib.rs:23675:14:
+the drill offers the letter's symbol or sound
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::letter_drills_span_two_prompt_families_and_reach_independent
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 265 filtered out; finished in 89.02s
+
+error: test failed, to rerun pass `-p lts-desktop --lib`
+EXIT=101

@@ -1,0 +1,29 @@
+     Running unittests src/lib.rs (/home/hunter/game-dev/LTS/target/debug/deps/lts_desktop-1caef568b73e5b79)
+
+running 1 test
+test tests::letter_drills_span_two_prompt_families_and_reach_independent has been running for over 60 seconds
+test tests::letter_drills_span_two_prompt_families_and_reach_independent ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 265 filtered out; finished in 79.48s
+
+TARGETED-EXIT=0
+    Checking lts-langpack v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-letterdrills-work/crates/langpack)
+    Checking lts-learner-model v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-letterdrills-work/crates/learner-model)
+    Checking lts-world v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-letterdrills-work/crates/world)
+    Checking lts-scheduler v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-letterdrills-work/crates/scheduler)
+    Checking lts-storage v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-letterdrills-work/crates/storage)
+    Checking lts-activity v0.1.0 (/home/hunter/.hermes/cache/scratch/lts-letterdrills-work/crates/activity)
+    Checking tao v0.37.1
+    Checking wry v0.57.0
+    Checking tauri-runtime-wry v2.12.1
+    Checking tauri v2.12.1
+    Checking tauri-plugin-single-instance v2.5.2
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 10.37s
+CLIPPY-EXIT=0
+test tests::the_aligner_language_comes_from_the_pack_manifest ... ok
+test tests::stress_display_settings_are_data_driven_and_persisted ... ok
+test tests::provenance_payload_covers_every_installed_pack_verbatim ... ok
+
+test result: ok. 264 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 337.69s
+
+FULL-EXIT=0
