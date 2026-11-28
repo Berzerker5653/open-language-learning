@@ -48,6 +48,21 @@ activities:
   - ru.sent.cp.p01
   - ru.sent.cp.p02
   - ru.sent.cp.p03
+- id: ru.activity.a1.enrich2-personal-details-02
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.routines.chas
+  - ru.lex.food.bliny
+  - ru.lex.shopping.bolshoy
+  - ru.lex.city.biliet
+  - ru.lex.personal.chto
+  - ru.lex.family.dedushka
+  - ru.lex.home.balkon
+  - ru.lex.routines.chasto
+  - ru.lex.food.butylka
+  - ru.lex.shopping.bryuki
 generation_contract:
   allowed_vocab:
   - ru.lex.personal.strana
@@ -63,6 +78,16 @@ generation_contract:
   - ru.sent.cp.p01
   - ru.sent.cp.p02
   - ru.sent.cp.p03
+  - ru.lex.routines.chas
+  - ru.lex.food.bliny
+  - ru.lex.shopping.bolshoy
+  - ru.lex.city.biliet
+  - ru.lex.personal.chto
+  - ru.lex.family.dedushka
+  - ru.lex.home.balkon
+  - ru.lex.routines.chasto
+  - ru.lex.food.butylka
+  - ru.lex.shopping.bryuki
   allowed_grammar:
   - ru.grammar.a1.noun-gender
   new_item_budget: 6

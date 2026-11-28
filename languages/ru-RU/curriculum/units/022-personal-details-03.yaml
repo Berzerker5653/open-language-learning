@@ -56,6 +56,21 @@ activities:
   support_level: 1
   content_refs:
   - ru.sent.cp.p01
+- id: ru.activity.a1.enrich2-personal-details-03
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.city.centr
+  - ru.lex.personal.data-rozhdeniya
+  - ru.lex.family.delo
+  - ru.lex.home.bank
+  - ru.lex.routines.chay
+  - ru.lex.food.cena
+  - ru.lex.shopping.chek
+  - ru.lex.city.chemodan
+  - ru.lex.personal.desyat
+  - ru.lex.family.dengi
 generation_contract:
   allowed_vocab:
   - ru.lex.personal.kto
@@ -71,6 +86,16 @@ generation_contract:
   - ru.sent.on-ramp.this-is-book
   - ru.sent.cp.p03
   - ru.sent.cp.p01
+  - ru.lex.city.centr
+  - ru.lex.personal.data-rozhdeniya
+  - ru.lex.family.delo
+  - ru.lex.home.bank
+  - ru.lex.routines.chay
+  - ru.lex.food.cena
+  - ru.lex.shopping.chek
+  - ru.lex.city.chemodan
+  - ru.lex.personal.desyat
+  - ru.lex.family.dengi
   allowed_grammar:
   - ru.grammar.a1.questions
   - ru.grammar.on-ramp.zero-present-copula

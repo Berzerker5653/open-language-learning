@@ -43,6 +43,21 @@ activities:
   - ru.lex.personal.my
   - ru.lex.personal.vy
   - ru.lex.everyday.kniga
+- id: ru.activity.a1.enrich2-personal-details-04
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.home.bolnitsa
+  - ru.lex.routines.chistit
+  - ru.lex.food.desert
+  - ru.lex.shopping.chernyy
+  - ru.lex.city.daleko
+  - ru.lex.personal.dvenadtsat
+  - ru.lex.family.deti
+  - ru.lex.home.botinki
+  - ru.lex.routines.chitat
+  - ru.lex.food.eda
 generation_contract:
   allowed_vocab:
   - ru.lex.personal.iz
@@ -56,6 +71,16 @@ generation_contract:
   - ru.lex.personal.my
   - ru.lex.personal.vy
   - ru.lex.everyday.kniga
+  - ru.lex.home.bolnitsa
+  - ru.lex.routines.chistit
+  - ru.lex.food.desert
+  - ru.lex.shopping.chernyy
+  - ru.lex.city.daleko
+  - ru.lex.personal.dvenadtsat
+  - ru.lex.family.deti
+  - ru.lex.home.botinki
+  - ru.lex.routines.chitat
+  - ru.lex.food.eda
   allowed_grammar:
   - ru.grammar.a1.genitive-basic
   - ru.grammar.a1.noun-gender

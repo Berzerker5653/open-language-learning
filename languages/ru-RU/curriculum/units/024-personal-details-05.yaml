@@ -48,6 +48,21 @@ activities:
   - ru.lex.personal.vy
   - ru.lex.personal.anna
   - ru.lex.personal.ivan
+- id: ru.activity.a1.enrich2-personal-details-05
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.lex.shopping.deshevy
+  - ru.lex.city.derevo
+  - ru.lex.personal.elektronnaya-pochta
+  - ru.lex.family.devochka
+  - ru.lex.home.chashka
+  - ru.lex.routines.den
+  - ru.lex.food.frukty
+  - ru.lex.shopping.dorogoy
+  - ru.lex.city.dokument
+  - ru.lex.personal.gde
 generation_contract:
   allowed_vocab:
   - ru.lex.personal.god
@@ -63,6 +78,16 @@ generation_contract:
   - ru.lex.personal.vy
   - ru.lex.personal.anna
   - ru.lex.personal.ivan
+  - ru.lex.shopping.deshevy
+  - ru.lex.city.derevo
+  - ru.lex.personal.elektronnaya-pochta
+  - ru.lex.family.devochka
+  - ru.lex.home.chashka
+  - ru.lex.routines.den
+  - ru.lex.food.frukty
+  - ru.lex.shopping.dorogoy
+  - ru.lex.city.dokument
+  - ru.lex.personal.gde
   allowed_grammar:
   - ru.grammar.a1.dative-recipient-age
   - ru.grammar.a1.subject-pronouns
