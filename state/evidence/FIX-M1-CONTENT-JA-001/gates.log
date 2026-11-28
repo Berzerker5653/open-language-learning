@@ -1,0 +1,78 @@
+# FIX-M1-CONTENT-JA-001 — gates.log (run 2, 2026-11-27)
+
+Run 1 died at the iteration cap (80/80) with the lane complete-but-uncommitted;
+run 2 (this card's takeover dispatch t_f1922523) verified and shipped that WIP.
+Everything below was re-measured at this commit, not inherited from run 1.
+
+## Content fixes (measured at diff)
+- 17 verb rows corrected across verbs/city/health/home/leisure/narrative/
+  transport/work shards (3 pinned by D-009 + 14 found by the sweep);
+  root cause provenance: docs/review/ai-screening-2026-10-05/applied.jsonl
+  `fix_reading` pass. Row-by-row table: defects-extension.md.
+- ja.lex.ent.konsaato こんさーと→コンサート + consumers swept:
+  ja.sent.concert-fun (text/reading/cloze_targets) and the
+  ja.grammar.adjectives.i-inflection example that quotes that sentence.
+- ja.lex.greetings.oyasumi-nasai slots (D-010): label
+  'the rest wish'→'the good-night wish'; junk alternative ませ removed.
+- Loanword katakana convention pinned: languages/ja-JP/README.md authoring
+  rule (report-only enforcement in the check script; 186 legacy fields
+  measured pack-wide, follow-up card).
+
+## Gates
+1. JSON round-trip sweep, every languages/ja-JP jsonl line:
+   `python3 /tmp/rt.py` (all shards parse; bad=0).
+2. Manifest↔media integrity for all 19 touched ids: sha256(wav)==row sha256,
+   0 mismatch / 0 missing (script in this dir's flow; wavs gitignored,
+   manifest hashes are the git artifact).
+3. Regression gate (acceptance bullet 2):
+   `python3 -m unittest scripts/test_ja_lexicon_check.py -v` -> Ran 8 tests OK.
+   `python3 scripts/check_ja_lexicon.py` -> 0 hard violations,
+   4 allow-listed pre-existing V2 rows (allowlist pinned by test),
+   report-only loanword-drift line: 186 legacy fields.
+4. langpack build check after manifest rewrite:
+   `cargo run -q -p lts-langpack-cli -- validate languages/ja-JP` -> 0e/0w
+   `... --mode install` -> 0e/0w (langpack-validate.log).
+5. Fresh ASR gate over all 19 touched ids (whisper large-v3-turbo CPU,
+   production scripts/qa-asr.py):
+   `qa-asr.py --pack languages/ja-JP --lang ja --ids touched-ids.txt`
+   -> checked=19 passed=18 MISMATCH=1 (asr-reverify.log).
+   The one failure (ja.lex.health.kuukimasu, heard すいません for すいます)
+   double-audited on the same clip -> same verdict (asr-recheck2.jsonl):
+   genuinely unclear take, not jitter. Remediation: bake-bestof --k 8 below.
+   Final tallies are in the appended FINAL block at the end of this file.
+
+## NAMED GATE CHANGE (GATE INTEGRITY rule)
+scripts/qa-asr.py duration cap: the syllable regex is Cyrillic-only, so for
+lang=ja the cap degenerated to 1.3 s for every clip and flagged whole words
+as duration-suspect — the false-positive class recorded as D-011 (82/100 of
+run-3 ja flags). The cap now counts Japanese morae (kana incl. ー/sokuon,
+small kana absorbed). This relaxes ONLY the duration dimension for ja, to the
+correct unit; phoneme round-trip, hallucination and vocalization reasons are
+unchanged. No test was edited or skipped anywhere in this lane.
+
+## best-of-K remediation (ja.lex.health.kuukimasu)
+`scripts/bake-bestof.py --pack languages/ja-JP --ids restrike-ids.txt --k 8
+--language japanese --speaker ono_anna --worker-python ~/.venvs/qwen-tts/bin/
+python --out bestof-kuukimasu.jsonl` -> SEE RESULT LINE APPENDED BELOW
+
+## Working-tree note
+The shared tree also carries another lane's uncommitted WIP
+(speech-catalog: tauri lib.rs/models.rs/catalog.json/settings.tsx/ci.yml/ADR-0042,
+LEARNER-REVIEW-M2 + FIX-SPEECH-CATALOG-001 task-state records,
+state/evidence/FIX-PACK-K65-001/). None of it is staged in this card's
+commits; the task-state index blob carries HEAD + only this card's entry.
+
+Env note: the first best-of attempt died on missing system `sox` (bake pipeline normalize step); installed pacman sox 14.4.2 on GamingPC 2026-11-27 and re-launched the ladder.
+
+## FINAL (2026-11-27 19:45, run 2 close)
+Lane swept into sibling commit 8f5770c6 (FIX-PACK-K65-001 controller adopted the
+dead lane's whole working-tree WIP verbatim + re-baked the 19 clips); content
+byte-identity of this card's rows verified in that commit (diff review above).
+The sibling bake wave produced the same 18-green/1-red result this run measured
+independently: the shared unclear clip was ja.lex.health.kuukimasu.
+Re-roll (best-of attempts stalled on missing sox -> installed sox 14.4.2; then
+single take via `generate-pack-audio.py --force --only ja.lex.health.kuukimasu`):
+first take PASS at ratio 1.00, heard == expected (asr-recheck3.jsonl).
+FINAL: 19/19 touched ids ASR-green; 19/19 manifest sha256 == disk wav sha256;
+check_ja_lexicon.py 0 hard / 4 allow-listed (green). Residue commit = the single
+rewritten manifest row (new sha for kuukimasu take 3) + this evidence dir.

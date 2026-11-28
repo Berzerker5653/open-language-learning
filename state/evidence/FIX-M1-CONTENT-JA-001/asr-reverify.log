@@ -1,0 +1,3 @@
+audit start: 19 rows x 8 workers -> state/evidence/FIX-M1-CONTENT-JA-001/asr-reverify.jsonl
+checked=19 passed=18 MISMATCH=1 TIMEOUT=0 WAV-MISSING=0 CHECK-ERROR=0
+FAIL ja.lex.health.kuukimasu ratio=0.67 said='すいます' heard='すいません。'

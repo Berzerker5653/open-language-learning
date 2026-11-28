@@ -1,0 +1,13 @@
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Traceback (most recent call last):
+  File "/home/hunter/game-dev/LTS/scripts/qwen3-tts-worker.py", line 73, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/hunter/game-dev/LTS/scripts/qwen3-tts-worker.py", line 68, in main
+    print(json.dumps(answer, ensure_ascii=False), flush=True)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [Errno 32] Broken pipe

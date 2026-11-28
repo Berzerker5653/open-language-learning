@@ -1,0 +1,18 @@
+{"id": "ja.lex.home.fukimasu", "status": "ok", "ratio": 1.0, "text": "ふきけす", "heard": "吹き消す…"}
+{"id": "ja.lex.health.hashirimasu", "status": "ok", "ratio": 0.91, "text": "はしります", "heard": "あ、走ります!"}
+{"id": "ja.lex.city.haraimasu", "status": "ok", "ratio": 0.8, "text": "はらいます", "heard": "洗います"}
+{"id": "ja.lex.city.tasukemasu", "status": "ok", "ratio": 1.0, "text": "たすけます", "heard": "助けます"}
+{"id": "ja.lex.ent.konsaato", "status": "ok", "ratio": 1.0, "text": "コンサート", "heard": "コンサート"}
+{"id": "ja.lex.leisure.miimasu", "status": "ok", "ratio": 1.0, "text": "みます", "heard": "見ます"}
+{"id": "ja.lex.leisure.odorimasu", "status": "ok", "ratio": 1.0, "text": "おどります", "heard": "踊ります。"}
+{"id": "ja.lex.verbs.mimasu", "status": "MISMATCH", "text": "みます", "reasons": ["duration-suspect (2.88s > 2.65s cap)"]}
+{"id": "ja.lex.narrative.mitsukemasu", "status": "ok", "ratio": 1.0, "text": "みつけます", "heard": "見つけます"}
+{"id": "ja.lex.transport.hairimasu", "status": "ok", "ratio": 0.91, "text": "はいります", "heard": "はぁ…入ります…"}
+{"id": "ja.lex.narrative.watarimasu", "status": "ok", "ratio": 1.0, "text": "わたります", "heard": "渡ります。"}
+{"id": "ja.lex.verbs.arukimasu", "status": "ok", "ratio": 1.0, "text": "あるきます", "heard": "歩きます"}
+{"id": "ja.lex.verbs.kaerimasu", "status": "ok", "ratio": 1.0, "text": "かえります", "heard": "帰ります"}
+{"id": "ja.lex.verbs.nemasu", "status": "ok", "ratio": 1.0, "text": "ねます", "heard": "寝ます"}
+{"id": "ja.lex.work.oshiemasu", "status": "ok", "ratio": 0.91, "text": "おしえます", "heard": "教えまーす"}
+{"id": "ja.lex.work.naraimasu", "status": "ok", "ratio": 1.0, "text": "ならいます", "heard": "習います"}
+{"id": "ja.lex.verbs.shigoto-shimasu", "status": "ok", "ratio": 1.0, "text": "しごとをします", "heard": "仕事をします"}
+{"id": "ja.sent.concert-fun", "status": "ok", "ratio": 1.0, "text": "コンサートが たのしかったです。", "heard": "コンサートが楽しかったです"}
