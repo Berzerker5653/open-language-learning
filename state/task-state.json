@@ -5,16 +5,18 @@
   "tasks": {
     "FIX-M1-CONTENT-RU-001": {
       "status": "blocked",
-      "attempts": 2,
+      "attempts": 3,
       "updated": "2026-11-27",
-      "notes": "Follow-up of LEARNER-REVIEW-M1-001 (ledger D-008, D-004, D-012, D-013). RUN 1 shipped the fix lane (committed as 04bdd7c8 in run 2); RUN 2 verified gates (qa_stories, desktop install 14/0, fresh sim 123/150 target) and localized the supply delta. Contract: state/notes/FIX-M1-CONTENT-RU-001.md; board card lts-FIX-M1-CONTENT-RU-001.",
+      "notes": "Follow-up of LEARNER-REVIEW-M1-001 (ledger D-008, D-004, D-012, D-013). RUN 1 fix lane shipped as 04bdd7c8 (verified run 2). RUN 3 shipped pass-2 (9a9fba65) and PROVED the >=150 bullet is engine-pacing-bound (supply-infinite, identical sim). Contract + RUN 3 OUTCOME: state/notes/FIX-M1-CONTENT-RU-001.md; board card t_24484021.",
       "evidence": [
         "state/evidence/FIX-M1-CONTENT-RU-001/gates.log",
         "state/evidence/FIX-M1-CONTENT-RU-001/asr-rebake.jsonl",
         "state/evidence/FIX-M1-CONTENT-RU-001/sim-ru-30d-raw.tar.gz",
-        "state/evidence/FIX-M1-CONTENT-RU-001/serve-ru-run2.log"
+        "state/evidence/FIX-M1-CONTENT-RU-001/serve-ru-run2.log",
+        "state/evidence/FIX-M1-CONTENT-RU-001/sim-ru-30d-run3.tar.gz",
+        "state/evidence/FIX-M1-CONTENT-RU-001/serve-ru-run3.log"
       ],
-      "blocker": "Honest partial at wall-clock budget. ALL defect-scope bullets shipped+gated (commit 04bdd7c8): D-008 stress marks + media alignment + 6-id audio re-bake (ASR 6/6), D-012 glosses, D-013 confirmed intentional, locative sweep; qa_stories 0 FAIL; desktop dev-pack install tests 14/0 green (densify passes the install validator). ONLY the >=150 sim bullet open: fresh 30-day RU sim measures 123 unique content_ids (baseline unchanged) — pass-1's 128 claims landed mostly in units that never unlock in 30 days (learner touches 20 units on the cyrillic->on-ramp->personal-details chain; days 4-15 are a zero-new-material dead zone that is engine scheduling, not content). Run-3 recipe with re-scoped pass-2 plan: state/notes/FIX-M1-CONTENT-RU-001.md."
+      "blocker": "Content lane complete to its proven ceiling; >=150 is an ENGINE pacing target, not supply (RUN 3, gates.log CEILING CONCLUSION). All defect bullets shipped+gated at 04bdd7c8 (D-008 stress+media+6-id re-bake ASR 6/6, D-012 glosses, D-013 confirmed, locative sweep; qa_stories 0 FAIL; desktop dev-pack install 14/0). Pass-2 re-scope shipped at 9a9fba65 (50 band-matched a1 word claims onto the month-1 personal-details chain, allowed_vocab mirrored). Fresh 30-day sim byte-deterministic 123/150 (run-4 controller re-parse; run 3 prose said 122): zero of the new claims surfaced - the plan serves 0-5 new/day from d19 and zero d4-15 while 100+ unseen unlocked words sat in the NEW pool (pacing-bound, RCA under LEARNER-REVIEW-M1-001). Owner decision needed: accept 123 as the content-lane close with the pacing target on the engine lane (related ready card FIX-M2-SUPPLY-RU-001), or re-scope."
     },
     "FIX-M1-CONTENT-JA-001": {
       "status": "done",

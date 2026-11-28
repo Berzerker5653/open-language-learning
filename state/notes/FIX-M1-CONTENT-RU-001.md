@@ -55,3 +55,27 @@
 
 ## Board: card t_24484021 (attempt 2 of board card; attempt 1 = iteration-cap
 death whose entire WIP is the 04bdd7c8 commit above — NEVER re-apply run-1).
+
+## RUN 3 OUTCOME (2026-11-27, board t_24484021 attempt 3) — CEILING PROVEN
+Pass-2 shipped at 9a9fba65 (pd-01..05 +10 under-cap a1 words each, 50
+cross-claims, allowed_vocab mirrored). Fresh 30-day sim: 122 uniques,
+BYTE-DETERMINISTIC identical to run 2 (same curve, same sets); zero of the
+50 pass-2 words surfaced (pd units open only d26+, served old refs).
+CONCLUSION: >=150 is NOT content-reachable — the engine serves 0-5 new
+items/day from d19 and zero d4-15 while 100+ unseen unlocked a1 words sat in
+the NEW pool. Pacing-bound, proven with supply-infinite evidence. Do NOT
+attempt pass-3 content: the lever is the dead-zone/new-item-rate engine lane
+(see gates.log RUN 3 CEILING CONCLUSION + LEARNER-REVIEW-M1-001
+rca-progression-starvation.md; related ready card FIX-M2-SUPPLY-RU-001).
+All other acceptance bullets green at HEAD: qa_stories 0 FAIL, desktop
+install 14/0, re-bake ASR 6/6. Awaiting owner decision (accept content-lane
+ceiling vs re-scope); card blocked needs_input.
+
+## RUN 4 CLOSE-OUT (2026-11-27, controller)
+Run 3 left evidence+ledger uncommitted; run 4 verified and committed them.
+Independent re-parse: 123 uniques both runs, identical sets, 0/50 pass-2
+surfaced (run-3 prose said 122 - corrected everywhere; conclusion unchanged).
+No gates re-run (NO-REVERIFY; code at 9a9fba65 untouched). Board: blocked
+needs_input - owner decision: accept 123 as content-lane close (pacing
+target already carded as FIX-M2-SUPPLY-RU-001) vs re-scope. See gates.log
+RUN 4 section for numbers.

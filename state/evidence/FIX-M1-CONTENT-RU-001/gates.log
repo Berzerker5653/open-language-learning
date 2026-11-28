@@ -55,3 +55,71 @@ only personal-details-01/04/05 are on the month-1 unlock chain. The >=150
 lever is re-scoping claims onto the ACTUAL month-1 chain (on-ramp units +
 personal-details + whatever unlocks after self-intro/everyday) and/or the
 dead-zone scheduling (engine side, see LEARNER-REVIEW-M1-001 rca).
+
+=== RUN 3 (2026-11-27, board t_24484021, pass-2 re-scope + ceiling measurement) ===
+Code commit 9a9fba65: personal-details-01..05 +10 under-cap a1-band lexicon
+words each (50 cross-claims, new enrich2 encounter-read activities,
+allowed_vocab mirrored + asserted pack-wide, activity ids unique, reuse_cap 3
+honored). No sentence claims possible: ALL 945 sentence ids and the a1/cp
+subset are at/over the pass-1 reuse cap 3 (measured census this run).
+
+GATES (run 3):
+  .venv/bin/python tools/qa_stories.py -> 20 stories, 0 FAIL
+  cargo test -p lts-desktop --lib -- reference bundled installs_and_records
+    placement_question -> 14 passed / 0 failed (densified+pass-2 pack passes
+    the install validator; note: tree also carried another card's WIP on
+    manifest/goals.yaml, left untouched)
+  fresh 30-day sim (serve rebuilt from tree --features serve, fresh data dir):
+    scripts/sim_month1.py --pack ru --days 30 -> 30/30 days exit 0
+    raw logs archived: sim-ru-30d-run3.tar.gz (parser + basis identical to
+    this run's re-parse of run-2's archive)
+
+MEASURED (run 3): 122 unique content_ids - BYTE-DETERMINISTIC identical to
+run 2 (same 30-day new-item curve [32,17,14,0x12,24,22,11,5,5,10,0,1,1,0,5,5,
+0,2,0], identical id sets). NONE of the 50 pass-2 words ever surfaced:
+personal-details-01..05 opened only days ~26-30 and served their pre-existing
+refs. Fresh-plan exclusion assertion: day-1 plan (6 items) has ZERO overlap
+with the 50 pass-2 claim ids (pass-2 claimed into a1 units, not on-ramp).
+
+CEILING CONCLUSION (>=150 is NOT content-reachable in 30 days):
+1. Supply is NOT the binding constraint. The NEW pool held 100+ unseen,
+   unlocked, ladder-claimed a1 words from day ~26 on; the plan served 0-5
+   new/day thereafter. Days 4-15 served ZERO new items while on-ramp supply
+   was unlocked and unseen. Both are engine-scheduler pacing behavior
+   (planner: budget 25min x progression share, max_per_modality=3; band-edge
+   stage unlocks; RCA banked under LEARNER-REVIEW-M1-001
+   rca-progression-starvation.md).
+2. Even at the observed peak rate (24/day d16-17) a supply-infinite pack is
+   capped by the schedule; the dead zone alone costs ~12 introduction days.
+3. The card's own run-2 handoff pre-authorized this outcome: "the >=150
+   figure may belong behind the dead-zone fix" (state/notes/
+   FIX-M1-CONTENT-RU-001.md RUN 2 HANDOFF step 3).
+DISPOSITION: all defect bullets (D-008/D-012/D-013 + re-bake + media) shipped
+and gated at 04bdd7c8; pass-2 densify shipped at 9a9fba65 (valid month-2+
+supply, harmless to month 1); the >=150 bullet is blocked on the ENGINE
+pacing lane (dead zone + new-item rate), not on content. Related ready card:
+FIX-M2-SUPPLY-RU-001. Decision for the owner: accept 122 as the content-lane
+ceiling with the pacing target moved to the engine card, or re-scope.
+=== RUN 4 (2026-11-27, board t_24484021, controller close-out of run-3's uncommitted evidence) ===
+Run 3 died at the iteration cap AFTER its sim + gates.log CEILING CONCLUSION,
+leaving evidence + ledger uncommitted. Run 4 = verification + ledger commit +
+board block. No gates re-run (NO-REVERIFY: code commits 04bdd7c8 + 9a9fba65
+unchanged; run-3 gate battery stands as recorded).
+
+INDEPENDENT RE-PARSE of BOTH committed sim archives (own parser over all
+content_id fields in raw/ru-day*.json, cumulative-unique basis):
+  run 2 (sim-ru-30d-raw.tar.gz):        123 unique
+  run 3 (sim-ru-30d-run3.tar.gz):       123 unique
+  unique sets run2 == run3:             TRUE (byte-deterministic claim CONFIRMED)
+  pass-2's 50 claimed lexicon ids (parsed from 9a9fba65 diff) surfaced in run 3: 0/50
+  new/day curve (run 3): [32,17,14, 0x12, 24,22,11,1,0,0,0,1,0,0,0,0,0,1,0]
+CORRECTION: run-3 prose wrote "122"; the measured basis is 123 (matches this
+log's run-2 figure). The ceiling conclusion (>=150 not content-reachable;
+engine pacing) stands — the delta between 122 and 123 does not move it.
+NOTE: run-3's quoted new/day curve in the CEILING CONCLUSION block does not
+sum to its own 122/123 figure; the independent curve above is the one to cite.
+
+LEDGER: task-state attempts 3 -> blocker rewritten with the 123 figure;
+KANBAN.md row -> run-4 owner-decision state. Board: blocked needs_input
+(owner: accept 123 as content-lane close w/ pacing target on
+FIX-M2-SUPPLY-RU-001, or re-scope).
