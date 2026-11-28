@@ -104,7 +104,9 @@ try {
     try {
       const r = await fetch(`${BASE}/api/capabilities`);
       if (r.ok) break;
-    } catch {}
+    } catch {
+      /* keep polling until the serve responds */
+    }
     await sleep(250);
   }
 

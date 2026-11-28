@@ -139,7 +139,7 @@ try {
   }
   const hiddenTitles = [];
   const hiddenIds = [];
-  for (const [band, raw] of byBand) {
+  for (const [, raw] of byBand) {
     // Mirror PATH-LOCK-ORDER-001: the view sorts done -> open -> locked
     // before the tail cutoff — the raw wire order is pack file order.
     const rank = (n) => (n.done ? 0 : n.locked ? 2 : 1);

@@ -86,7 +86,7 @@ describe("Practice hub (no pack installed)", () => {
 });
 
 describe("My words (nothing mined yet)", () => {
-  const items: any[] = [];
+  const items: never[] = [];
   it("renders the designed empty state with an anchor to the add form", () => {
     const html = renderToStaticMarkup(
       <MyWordsPanel

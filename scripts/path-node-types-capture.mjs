@@ -115,7 +115,6 @@ async function api(command, body) {
 
 let serve = null;
 let chrome = null;
-let chromeDir = null;
 try {
   serve = await startServe();
   const imp = await api("install_pack", { packId: PACK_ID });
@@ -258,7 +257,6 @@ try {
 
   // ---- browser: the real app on a phone viewport. ----
   const profileDir = mkdtempSync(join(tmpdir(), "lts-nodekinds-chrome-"));
-  chromeDir = profileDir;
   chrome = spawn(
     process.env.CHROME ?? "google-chrome-stable",
     [

@@ -432,9 +432,8 @@ try {
   // is not needed — the card was scrolled into the viewport first). ----
   await shot("servebanner-settings-about", true);
 
-  result.failures === 0
-    ? console.log("ALL CHECKS PASS")
-    : console.log(`${result.failures} CHECK(S) FAILED`);
+  if (result.failures === 0) console.log("ALL CHECKS PASS");
+  else console.log(`${result.failures} CHECK(S) FAILED`);
 } catch (e) {
   result.error = String(e?.message ?? e);
   console.error(`navigation/measure error: ${result.error}`);

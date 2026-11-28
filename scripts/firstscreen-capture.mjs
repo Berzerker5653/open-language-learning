@@ -350,9 +350,8 @@ try {
   if (inPractice) await shot("firstscreen-after-pill-tap", true);
   await send("Emulation.clearDeviceMetricsOverride", {}, sessionId);
 
-  result.failures === 0
-    ? console.log("ALL CHECKS PASS")
-    : console.log(`${result.failures} CHECK(S) FAILED`);
+  if (result.failures === 0) console.log("ALL CHECKS PASS");
+  else console.log(`${result.failures} CHECK(S) FAILED`);
 } catch (e) {
   result.error = String(e?.message ?? e);
   console.error(`navigation/measure error: ${result.error}`);

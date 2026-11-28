@@ -79,7 +79,7 @@ describe("G4-EXPLAIN-001 explain wiring", () => {
   });
 
   it("declining consent sends nothing and writes nothing", async () => {
-    const { inv, calls } = fakeInv(undefined, { consent_granted: false });
+    const { calls } = fakeInv(undefined, { consent_granted: false });
     const status = runExplainConsentDecline();
     expect(status.kind).toBe("idle");
     expect(calls).toEqual([]);

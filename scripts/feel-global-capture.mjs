@@ -495,7 +495,9 @@ try {
     try {
       const { rmSync } = await import("node:fs");
       rmSync(chromeDir, { recursive: true, force: true });
-    } catch {}
+    } catch {
+      /* best-effort chrome profile cleanup */
+    }
   }
   if (serve) serve.kill();
   process.exit(result.error || failed ? 1 : 0);

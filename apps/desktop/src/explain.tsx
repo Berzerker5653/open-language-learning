@@ -7,7 +7,6 @@
  */
 import { useState } from "react";
 import {
-  explainDirection,
   runExplainConsentAccept,
   runExplainConsentDecline,
   runExplainPress,
@@ -27,7 +26,6 @@ export interface ExplainViewProps {
 
 /** The pure render surface — pinned statically in explain.test.tsx. */
 export function ExplainView(p: ExplainViewProps) {
-  const direction = explainDirection(p);
   return (
     <div className="explain" data-testid="explain">
       {p.status.kind === "idle" && (

@@ -86,11 +86,6 @@ const firstSec = (v) =>
       .split(",")
       .map((s) => toSec(s.trim())),
   );
-const totalSec = (v) =>
-  String(v)
-    .split(",")
-    .reduce((a, s) => a + toSec(s.trim()), 0);
-
 const dataDir = mkdtempSync(join(tmpdir(), "lts-motion-data-"));
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
@@ -359,7 +354,7 @@ try {
     const arc = document.querySelector('.path-node--in-progress .path-node-arc')
       ?? document.querySelector('.path-node-arc');
     const arcCs = arc ? getComputedStyle(arc) : null;
-    const currentRing = document.querySelector('[data-state=\"current\"] .path-node-ring');
+    const currentRing = document.querySelector('[data-state="current"] .path-node-ring');
     const halo = currentRing ? getComputedStyle(currentRing, '::after') : null;
     const ring = currentRing ?? document.querySelector('.path-node-ring');
     const ringCs = ring ? getComputedStyle(ring) : null;
@@ -626,7 +621,7 @@ try {
     const arc = document.querySelector('.path-node--in-progress .path-node-arc')
       ?? document.querySelector('.path-node-arc');
     const arcCs = arc ? getComputedStyle(arc) : null;
-    const currentRing = document.querySelector('[data-state=\"current\"] .path-node-ring');
+    const currentRing = document.querySelector('[data-state="current"] .path-node-ring');
     const halo = currentRing ? getComputedStyle(currentRing, '::after') : null;
     const node = document.querySelector('.path-node');
     const nodeCs = node ? getComputedStyle(node) : null;

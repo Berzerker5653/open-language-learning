@@ -327,9 +327,8 @@ try {
   }
   check("screenshots re-validated: home still pack-loaded and pinned on the path", true, {});
 
-  result.failures === 0
-    ? console.log("ALL CHECKS PASS")
-    : console.log(`${result.failures} CHECK(S) FAILED`);
+  if (result.failures === 0) console.log("ALL CHECKS PASS");
+  else console.log(`${result.failures} CHECK(S) FAILED`);
 } catch (e) {
   result.error = String(e?.message ?? e);
   console.error(`navigation/measure error: ${result.error}`);

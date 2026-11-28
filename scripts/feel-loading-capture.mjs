@@ -103,7 +103,6 @@ async function api(command, body) {
 
 let serve = null;
 let chrome = null;
-let chromeDir = null;
 try {
   serve = await startServe();
   const imp = await api("install_pack", { packId: PACK_ID });
@@ -117,7 +116,6 @@ try {
   result.profileId = profileId;
 
   const profileDir = mkdtempSync(join(tmpdir(), "lts-feel-loading-chrome-"));
-  chromeDir = profileDir;
   chrome = spawn(
     process.env.CHROME ?? "google-chrome-stable",
     [

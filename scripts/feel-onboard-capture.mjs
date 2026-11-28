@@ -131,7 +131,6 @@ const SSE_FAKE = `(() => {
 
 let serve = null;
 let chrome = null;
-let chromeDir = null;
 try {
   serve = await startServe();
   // Real engine: the reference pack is really installed (the wizard's packs
@@ -139,7 +138,7 @@ try {
   const imp = await api("install_pack", { packId: PACK_ID });
   if (imp.status !== 200) throw new Error(`install_pack failed: ${JSON.stringify(imp)}`);
 
-  chromeDir = mkdtempSync(join(tmpdir(), "lts-feel-onboard-chrome-"));
+  const chromeDir = mkdtempSync(join(tmpdir(), "lts-feel-onboard-chrome-"));
   chrome = spawn(
     process.env.CHROME ?? "google-chrome-stable",
     [

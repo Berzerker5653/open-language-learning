@@ -467,7 +467,7 @@ try {
       codepoints: tip ? [...tip.textContent].map((ch) => ch.codePointAt(0)).join(',') : null,
     };
   })()`);
-  kbd.armed = kbdPre.found ? undefined : window.__fpArmed;
+  kbd.armed = kbdPre.found ? undefined : kbdPre.armed;
   check(
     "KEYS: keyboard focus on a cell opens the same date+summary tip",
     kbd.focused && (kbd.tipText ?? "").includes("· 4 exercises") && kbd.label === kbd.tipText,
