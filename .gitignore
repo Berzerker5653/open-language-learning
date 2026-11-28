@@ -80,3 +80,5 @@ dist-history/
 .sim-data/
 
 state/evidence/LEARNER-REVIEW-M1-001/sim/raw/
+state/evidence/LEARNER-REVIEW-M2-001/sim/raw/
+state/evidence/LEARNER-REVIEW-M2-001/sim/raw-seed/

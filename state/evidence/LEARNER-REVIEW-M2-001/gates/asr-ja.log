@@ -1,0 +1,14 @@
+audit start: 307 rows x 5 workers -> /home/hunter/game-dev/LTS/state/evidence/LEARNER-REVIEW-M2-001/asr-ja.jsonl
+... 250/307 checked
+checked=307 passed=275 MISMATCH=32 TIMEOUT=0 WAV-MISSING=0 CHECK-ERROR=0
+Traceback (most recent call last):
+  File "/home/hunter/game-dev/LTS/scripts/qa-asr.py", line 336, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/home/hunter/game-dev/LTS/scripts/qa-asr.py", line 324, in main
+    for r in sorted(mismatches, key=lambda r: r["ratio"]):
+             ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hunter/game-dev/LTS/scripts/qa-asr.py", line 324, in <lambda>
+    for r in sorted(mismatches, key=lambda r: r["ratio"]):
+                                              ~^^^^^^^^^
+KeyError: 'ratio'

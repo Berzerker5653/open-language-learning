@@ -1,0 +1,226 @@
+{
+ "summary": {
+  "ru": {
+   "fix": 0,
+   "known_limit": 39,
+   "fix_items": []
+  },
+  "ja": {
+   "fix": 5,
+   "known_limit": 6,
+   "fix_items": [
+    20,
+    50,
+    181,
+    211,
+    248
+   ]
+  }
+ },
+ "flags": {
+  "fix": [
+   {
+    "chunk": "ja-001",
+    "item": 20
+   },
+   {
+    "chunk": "ja-003",
+    "item": 50
+   },
+   {
+    "chunk": "ja-008",
+    "item": 181
+   },
+   {
+    "chunk": "ja-009",
+    "item": 211
+   },
+   {
+    "chunk": "ja-011",
+    "item": 248
+   }
+  ],
+  "known-limit": [
+   {
+    "chunk": "ja-001",
+    "item": 1
+   },
+   {
+    "chunk": "ja-001",
+    "item": 2
+   },
+   {
+    "chunk": "ja-001",
+    "item": 3
+   },
+   {
+    "chunk": "ja-001",
+    "item": 4
+   },
+   {
+    "chunk": "ja-001",
+    "item": 5
+   },
+   {
+    "chunk": "ja-001",
+    "item": 6
+   },
+   {
+    "chunk": "ru-001",
+    "item": 2
+   },
+   {
+    "chunk": "ru-001",
+    "item": 3
+   },
+   {
+    "chunk": "ru-005",
+    "item": 103
+   },
+   {
+    "chunk": "ru-005",
+    "item": 104
+   },
+   {
+    "chunk": "ru-005",
+    "item": 105
+   },
+   {
+    "chunk": "ru-005",
+    "item": 106
+   },
+   {
+    "chunk": "ru-005",
+    "item": 110
+   },
+   {
+    "chunk": "ru-005",
+    "item": 113
+   },
+   {
+    "chunk": "ru-005",
+    "item": 114
+   },
+   {
+    "chunk": "ru-005",
+    "item": 115
+   },
+   {
+    "chunk": "ru-005",
+    "item": 116
+   },
+   {
+    "chunk": "ru-005",
+    "item": 117
+   },
+   {
+    "chunk": "ru-005",
+    "item": 120
+   },
+   {
+    "chunk": "ru-006",
+    "item": 121
+   },
+   {
+    "chunk": "ru-006",
+    "item": 123
+   },
+   {
+    "chunk": "ru-006",
+    "item": 129
+   },
+   {
+    "chunk": "ru-006",
+    "item": 131
+   },
+   {
+    "chunk": "ru-006",
+    "item": 135
+   },
+   {
+    "chunk": "ru-006",
+    "item": 140
+   },
+   {
+    "chunk": "ru-006",
+    "item": 147
+   },
+   {
+    "chunk": "ru-006",
+    "item": 149
+   },
+   {
+    "chunk": "ru-007",
+    "item": 147
+   },
+   {
+    "chunk": "ru-007",
+    "item": 149
+   },
+   {
+    "chunk": "ru-007",
+    "item": 151
+   },
+   {
+    "chunk": "ru-007",
+    "item": 156
+   },
+   {
+    "chunk": "ru-007",
+    "item": 158
+   },
+   {
+    "chunk": "ru-007",
+    "item": 159
+   },
+   {
+    "chunk": "ru-007",
+    "item": 160
+   },
+   {
+    "chunk": "ru-007",
+    "item": 161
+   },
+   {
+    "chunk": "ru-008",
+    "item": 170
+   },
+   {
+    "chunk": "ru-008",
+    "item": 171
+   },
+   {
+    "chunk": "ru-008",
+    "item": 181
+   },
+   {
+    "chunk": "ru-008",
+    "item": 184
+   },
+   {
+    "chunk": "ru-008",
+    "item": 186
+   },
+   {
+    "chunk": "ru-008",
+    "item": 191
+   },
+   {
+    "chunk": "ru-008",
+    "item": 193
+   },
+   {
+    "chunk": "ru-008",
+    "item": 194
+   },
+   {
+    "chunk": "ru-008",
+    "item": 196
+   },
+   {
+    "chunk": "ru-011",
+    "item": 257
+   }
+  ]
+ }
+}

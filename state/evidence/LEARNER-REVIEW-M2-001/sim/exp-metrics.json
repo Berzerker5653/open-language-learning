@@ -1,0 +1,1868 @@
+{
+ "ru": {
+  "seed_days_1_30": {
+   "new_items_total": 1152,
+   "offer_days": 30
+  },
+  "month2_days_31_60": {
+   "new_items_total": 5,
+   "new_items_per_day_avg": 0.17,
+   "offer_days": 30,
+   "practice_opens_total": 631,
+   "modality_union": [
+    "comprehension-listening",
+    "orthographic-encoding",
+    "orthography-recognition",
+    "phonological-discrimination",
+    "production-writing",
+    "recall-meaning"
+   ],
+   "first_modality_day": {
+    "orthography-recognition": 1,
+    "phonological-discrimination": 1,
+    "comprehension-listening": 16,
+    "orthographic-encoding": 16,
+    "production-writing": 16,
+    "recall-meaning": 16
+   },
+   "path_units_last_day": 823,
+   "path_locked_last_day": 803,
+   "path_units_first_day": 823,
+   "path_locked_first_day": 803
+  },
+  "per_day": {
+   "1": {
+    "new_items": 988,
+    "texts_total": 988,
+    "offers": 1,
+    "practice_opens": 6,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "2": {
+    "new_items": 22,
+    "texts_total": 1010,
+    "offers": 1,
+    "practice_opens": 12,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "3": {
+    "new_items": 16,
+    "texts_total": 1020,
+    "offers": 1,
+    "practice_opens": 14,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "4": {
+    "new_items": 0,
+    "texts_total": 1016,
+    "offers": 1,
+    "practice_opens": 9,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "5": {
+    "new_items": 0,
+    "texts_total": 1022,
+    "offers": 1,
+    "practice_opens": 15,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "6": {
+    "new_items": 0,
+    "texts_total": 1016,
+    "offers": 1,
+    "practice_opens": 12,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "7": {
+    "new_items": 0,
+    "texts_total": 1016,
+    "offers": 1,
+    "practice_opens": 12,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "8": {
+    "new_items": 0,
+    "texts_total": 1016,
+    "offers": 1,
+    "practice_opens": 12,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "9": {
+    "new_items": 0,
+    "texts_total": 1018,
+    "offers": 1,
+    "practice_opens": 13,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "10": {
+    "new_items": 0,
+    "texts_total": 1018,
+    "offers": 1,
+    "practice_opens": 13,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "11": {
+    "new_items": 0,
+    "texts_total": 1016,
+    "offers": 1,
+    "practice_opens": 12,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "12": {
+    "new_items": 0,
+    "texts_total": 1016,
+    "offers": 1,
+    "practice_opens": 10,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "13": {
+    "new_items": 0,
+    "texts_total": 1021,
+    "offers": 1,
+    "practice_opens": 12,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "14": {
+    "new_items": 0,
+    "texts_total": 1015,
+    "offers": 1,
+    "practice_opens": 8,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "15": {
+    "new_items": 1,
+    "texts_total": 1016,
+    "offers": 1,
+    "practice_opens": 7,
+    "modalities": [
+     "orthography-recognition",
+     "phonological-discrimination"
+    ],
+    "path_units": 823,
+    "path_locked": 813
+   },
+   "16": {
+    "new_items": 47,
+    "texts_total": 1065,
+    "offers": 1,
+    "practice_opens": 18,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "17": {
+    "new_items": 44,
+    "texts_total": 1109,
+    "offers": 1,
+    "practice_opens": 28,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "18": {
+    "new_items": 18,
+    "texts_total": 1105,
+    "offers": 1,
+    "practice_opens": 26,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "19": {
+    "new_items": 1,
+    "texts_total": 1109,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "20": {
+    "new_items": 1,
+    "texts_total": 1100,
+    "offers": 1,
+    "practice_opens": 27,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "21": {
+    "new_items": 2,
+    "texts_total": 1111,
+    "offers": 1,
+    "practice_opens": 28,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "22": {
+    "new_items": 2,
+    "texts_total": 1120,
+    "offers": 1,
+    "practice_opens": 25,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "23": {
+    "new_items": 3,
+    "texts_total": 1089,
+    "offers": 1,
+    "practice_opens": 22,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "24": {
+    "new_items": 3,
+    "texts_total": 1083,
+    "offers": 1,
+    "practice_opens": 22,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "25": {
+    "new_items": 1,
+    "texts_total": 1078,
+    "offers": 1,
+    "practice_opens": 22,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "26": {
+    "new_items": 0,
+    "texts_total": 1093,
+    "offers": 1,
+    "practice_opens": 22,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "27": {
+    "new_items": 1,
+    "texts_total": 1087,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "28": {
+    "new_items": 1,
+    "texts_total": 1123,
+    "offers": 1,
+    "practice_opens": 30,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "29": {
+    "new_items": 1,
+    "texts_total": 1096,
+    "offers": 1,
+    "practice_opens": 29,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "30": {
+    "new_items": 0,
+    "texts_total": 1089,
+    "offers": 1,
+    "practice_opens": 25,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "31": {
+    "new_items": 3,
+    "texts_total": 1082,
+    "offers": 1,
+    "practice_opens": 24,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "32": {
+    "new_items": 2,
+    "texts_total": 1099,
+    "offers": 1,
+    "practice_opens": 26,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "33": {
+    "new_items": 0,
+    "texts_total": 1085,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "34": {
+    "new_items": 0,
+    "texts_total": 1098,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "35": {
+    "new_items": 0,
+    "texts_total": 1105,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "36": {
+    "new_items": 0,
+    "texts_total": 1116,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "37": {
+    "new_items": 0,
+    "texts_total": 1097,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "38": {
+    "new_items": 0,
+    "texts_total": 1079,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "39": {
+    "new_items": 0,
+    "texts_total": 1080,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "40": {
+    "new_items": 0,
+    "texts_total": 1080,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "41": {
+    "new_items": 0,
+    "texts_total": 1079,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "42": {
+    "new_items": 0,
+    "texts_total": 1115,
+    "offers": 1,
+    "practice_opens": 22,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "43": {
+    "new_items": 0,
+    "texts_total": 1094,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "44": {
+    "new_items": 0,
+    "texts_total": 1096,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "45": {
+    "new_items": 0,
+    "texts_total": 1080,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "46": {
+    "new_items": 0,
+    "texts_total": 1087,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "47": {
+    "new_items": 0,
+    "texts_total": 1087,
+    "offers": 1,
+    "practice_opens": 21,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "48": {
+    "new_items": 0,
+    "texts_total": 1118,
+    "offers": 1,
+    "practice_opens": 26,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "49": {
+    "new_items": 0,
+    "texts_total": 1100,
+    "offers": 1,
+    "practice_opens": 23,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "50": {
+    "new_items": 0,
+    "texts_total": 1099,
+    "offers": 1,
+    "practice_opens": 24,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "51": {
+    "new_items": 0,
+    "texts_total": 1097,
+    "offers": 1,
+    "practice_opens": 22,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "52": {
+    "new_items": 0,
+    "texts_total": 1077,
+    "offers": 1,
+    "practice_opens": 19,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "53": {
+    "new_items": 0,
+    "texts_total": 1079,
+    "offers": 1,
+    "practice_opens": 22,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "54": {
+    "new_items": 0,
+    "texts_total": 1079,
+    "offers": 1,
+    "practice_opens": 20,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "55": {
+    "new_items": 0,
+    "texts_total": 1077,
+    "offers": 1,
+    "practice_opens": 18,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "56": {
+    "new_items": 0,
+    "texts_total": 1077,
+    "offers": 1,
+    "practice_opens": 19,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "57": {
+    "new_items": 0,
+    "texts_total": 1077,
+    "offers": 1,
+    "practice_opens": 18,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "58": {
+    "new_items": 0,
+    "texts_total": 1077,
+    "offers": 1,
+    "practice_opens": 18,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "59": {
+    "new_items": 0,
+    "texts_total": 1057,
+    "offers": 1,
+    "practice_opens": 18,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   },
+   "60": {
+    "new_items": 0,
+    "texts_total": 1067,
+    "offers": 1,
+    "practice_opens": 18,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "phonological-discrimination",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 823,
+    "path_locked": 803
+   }
+  }
+ },
+ "ja": {
+  "seed_days_1_30": {
+   "new_items_total": 1418,
+   "offer_days": 30
+  },
+  "month2_days_31_60": {
+   "new_items_total": 117,
+   "new_items_per_day_avg": 3.9,
+   "offer_days": 30,
+   "practice_opens_total": 1061,
+   "modality_union": [
+    "comprehension-listening",
+    "orthographic-encoding",
+    "orthography-recognition",
+    "production-writing",
+    "recall-meaning"
+   ],
+   "first_modality_day": {
+    "comprehension-listening": 1,
+    "orthographic-encoding": 1,
+    "orthography-recognition": 1,
+    "production-writing": 1,
+    "recall-meaning": 1
+   },
+   "path_units_last_day": 819,
+   "path_locked_last_day": 776,
+   "path_units_first_day": 819,
+   "path_locked_first_day": 777
+  },
+  "per_day": {
+   "1": {
+    "new_items": 966,
+    "texts_total": 966,
+    "offers": 1,
+    "practice_opens": 15,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "2": {
+    "new_items": 8,
+    "texts_total": 974,
+    "offers": 1,
+    "practice_opens": 27,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "3": {
+    "new_items": 19,
+    "texts_total": 986,
+    "offers": 1,
+    "practice_opens": 26,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "4": {
+    "new_items": 19,
+    "texts_total": 1007,
+    "offers": 1,
+    "practice_opens": 26,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "5": {
+    "new_items": 2,
+    "texts_total": 1007,
+    "offers": 1,
+    "practice_opens": 32,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "6": {
+    "new_items": 20,
+    "texts_total": 1029,
+    "offers": 1,
+    "practice_opens": 33,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "7": {
+    "new_items": 2,
+    "texts_total": 1030,
+    "offers": 1,
+    "practice_opens": 32,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "8": {
+    "new_items": 5,
+    "texts_total": 1031,
+    "offers": 1,
+    "practice_opens": 33,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "9": {
+    "new_items": 37,
+    "texts_total": 1067,
+    "offers": 1,
+    "practice_opens": 35,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "10": {
+    "new_items": 34,
+    "texts_total": 1100,
+    "offers": 1,
+    "practice_opens": 33,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "11": {
+    "new_items": 18,
+    "texts_total": 1118,
+    "offers": 1,
+    "practice_opens": 35,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "12": {
+    "new_items": 13,
+    "texts_total": 1101,
+    "offers": 1,
+    "practice_opens": 35,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "13": {
+    "new_items": 15,
+    "texts_total": 1088,
+    "offers": 1,
+    "practice_opens": 34,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "14": {
+    "new_items": 16,
+    "texts_total": 1094,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "15": {
+    "new_items": 15,
+    "texts_total": 1128,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "16": {
+    "new_items": 38,
+    "texts_total": 1156,
+    "offers": 1,
+    "practice_opens": 38,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "17": {
+    "new_items": 12,
+    "texts_total": 1152,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "18": {
+    "new_items": 24,
+    "texts_total": 1142,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "19": {
+    "new_items": 1,
+    "texts_total": 1145,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "20": {
+    "new_items": 10,
+    "texts_total": 1156,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "21": {
+    "new_items": 1,
+    "texts_total": 1143,
+    "offers": 1,
+    "practice_opens": 36,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "22": {
+    "new_items": 1,
+    "texts_total": 1128,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "23": {
+    "new_items": 1,
+    "texts_total": 1130,
+    "offers": 1,
+    "practice_opens": 38,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "24": {
+    "new_items": 57,
+    "texts_total": 1182,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "25": {
+    "new_items": 22,
+    "texts_total": 1194,
+    "offers": 1,
+    "practice_opens": 36,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "26": {
+    "new_items": 4,
+    "texts_total": 1186,
+    "offers": 1,
+    "practice_opens": 36,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "27": {
+    "new_items": 11,
+    "texts_total": 1181,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "28": {
+    "new_items": 15,
+    "texts_total": 1191,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "29": {
+    "new_items": 17,
+    "texts_total": 1191,
+    "offers": 1,
+    "practice_opens": 36,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "30": {
+    "new_items": 15,
+    "texts_total": 1208,
+    "offers": 1,
+    "practice_opens": 35,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "31": {
+    "new_items": 17,
+    "texts_total": 1192,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "32": {
+    "new_items": 16,
+    "texts_total": 1192,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "33": {
+    "new_items": 6,
+    "texts_total": 1185,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "34": {
+    "new_items": 4,
+    "texts_total": 1187,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 777
+   },
+   "35": {
+    "new_items": 3,
+    "texts_total": 1219,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "36": {
+    "new_items": 3,
+    "texts_total": 1185,
+    "offers": 1,
+    "practice_opens": 36,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "37": {
+    "new_items": 3,
+    "texts_total": 1164,
+    "offers": 1,
+    "practice_opens": 36,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "38": {
+    "new_items": 4,
+    "texts_total": 1236,
+    "offers": 1,
+    "practice_opens": 37,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "39": {
+    "new_items": 3,
+    "texts_total": 1178,
+    "offers": 1,
+    "practice_opens": 39,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "40": {
+    "new_items": 2,
+    "texts_total": 1199,
+    "offers": 1,
+    "practice_opens": 39,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "41": {
+    "new_items": 3,
+    "texts_total": 1193,
+    "offers": 1,
+    "practice_opens": 39,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "42": {
+    "new_items": 3,
+    "texts_total": 1205,
+    "offers": 1,
+    "practice_opens": 39,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "43": {
+    "new_items": 3,
+    "texts_total": 1235,
+    "offers": 1,
+    "practice_opens": 38,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "44": {
+    "new_items": 7,
+    "texts_total": 1244,
+    "offers": 1,
+    "practice_opens": 39,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "45": {
+    "new_items": 10,
+    "texts_total": 1217,
+    "offers": 1,
+    "practice_opens": 35,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "46": {
+    "new_items": 0,
+    "texts_total": 1164,
+    "offers": 1,
+    "practice_opens": 36,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "47": {
+    "new_items": 10,
+    "texts_total": 1208,
+    "offers": 1,
+    "practice_opens": 34,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "48": {
+    "new_items": 0,
+    "texts_total": 1210,
+    "offers": 1,
+    "practice_opens": 36,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "49": {
+    "new_items": 0,
+    "texts_total": 1185,
+    "offers": 1,
+    "practice_opens": 35,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "50": {
+    "new_items": 10,
+    "texts_total": 1250,
+    "offers": 1,
+    "practice_opens": 35,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "51": {
+    "new_items": 0,
+    "texts_total": 1208,
+    "offers": 1,
+    "practice_opens": 35,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "52": {
+    "new_items": 0,
+    "texts_total": 1185,
+    "offers": 1,
+    "practice_opens": 33,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "53": {
+    "new_items": 0,
+    "texts_total": 1178,
+    "offers": 1,
+    "practice_opens": 33,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "54": {
+    "new_items": 0,
+    "texts_total": 1172,
+    "offers": 1,
+    "practice_opens": 33,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "55": {
+    "new_items": 10,
+    "texts_total": 1137,
+    "offers": 1,
+    "practice_opens": 33,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "56": {
+    "new_items": 0,
+    "texts_total": 1153,
+    "offers": 1,
+    "practice_opens": 33,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "57": {
+    "new_items": 0,
+    "texts_total": 1151,
+    "offers": 1,
+    "practice_opens": 33,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "58": {
+    "new_items": 0,
+    "texts_total": 1136,
+    "offers": 1,
+    "practice_opens": 30,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "59": {
+    "new_items": 0,
+    "texts_total": 1147,
+    "offers": 1,
+    "practice_opens": 30,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   },
+   "60": {
+    "new_items": 0,
+    "texts_total": 1117,
+    "offers": 1,
+    "practice_opens": 30,
+    "modalities": [
+     "comprehension-listening",
+     "orthographic-encoding",
+     "orthography-recognition",
+     "production-writing",
+     "recall-meaning"
+    ],
+    "path_units": 819,
+    "path_locked": 776
+   }
+  }
+ }
+}

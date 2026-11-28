@@ -1,0 +1,164 @@
+[
+ {
+  "chunk": "ru-001",
+  "pack": "ru",
+  "first_item": 1,
+  "count": 24
+ },
+ {
+  "chunk": "ru-002",
+  "pack": "ru",
+  "first_item": 25,
+  "count": 24
+ },
+ {
+  "chunk": "ru-003",
+  "pack": "ru",
+  "first_item": 49,
+  "count": 24
+ },
+ {
+  "chunk": "ru-004",
+  "pack": "ru",
+  "first_item": 73,
+  "count": 24
+ },
+ {
+  "chunk": "ru-005",
+  "pack": "ru",
+  "first_item": 97,
+  "count": 24
+ },
+ {
+  "chunk": "ru-006",
+  "pack": "ru",
+  "first_item": 121,
+  "count": 24
+ },
+ {
+  "chunk": "ru-007",
+  "pack": "ru",
+  "first_item": 145,
+  "count": 24
+ },
+ {
+  "chunk": "ru-008",
+  "pack": "ru",
+  "first_item": 169,
+  "count": 24
+ },
+ {
+  "chunk": "ru-009",
+  "pack": "ru",
+  "first_item": 193,
+  "count": 24
+ },
+ {
+  "chunk": "ru-010",
+  "pack": "ru",
+  "first_item": 217,
+  "count": 24
+ },
+ {
+  "chunk": "ru-011",
+  "pack": "ru",
+  "first_item": 241,
+  "count": 21
+ },
+ {
+  "chunk": "ja-001",
+  "pack": "ja",
+  "first_item": 1,
+  "count": 24
+ },
+ {
+  "chunk": "ja-002",
+  "pack": "ja",
+  "first_item": 25,
+  "count": 24
+ },
+ {
+  "chunk": "ja-003",
+  "pack": "ja",
+  "first_item": 49,
+  "count": 24
+ },
+ {
+  "chunk": "ja-004",
+  "pack": "ja",
+  "first_item": 73,
+  "count": 24
+ },
+ {
+  "chunk": "ja-005",
+  "pack": "ja",
+  "first_item": 97,
+  "count": 24
+ },
+ {
+  "chunk": "ja-006",
+  "pack": "ja",
+  "first_item": 121,
+  "count": 24
+ },
+ {
+  "chunk": "ja-007",
+  "pack": "ja",
+  "first_item": 145,
+  "count": 24
+ },
+ {
+  "chunk": "ja-008",
+  "pack": "ja",
+  "first_item": 169,
+  "count": 24
+ },
+ {
+  "chunk": "ja-009",
+  "pack": "ja",
+  "first_item": 193,
+  "count": 24
+ },
+ {
+  "chunk": "ja-010",
+  "pack": "ja",
+  "first_item": 217,
+  "count": 24
+ },
+ {
+  "chunk": "ja-011",
+  "pack": "ja",
+  "first_item": 241,
+  "count": 24
+ },
+ {
+  "chunk": "ja-012",
+  "pack": "ja",
+  "first_item": 265,
+  "count": 24
+ },
+ {
+  "chunk": "ja-013",
+  "pack": "ja",
+  "first_item": 289,
+  "count": 24
+ },
+ {
+  "chunk": "ja-014",
+  "pack": "ja",
+  "first_item": 313,
+  "count": 24
+ },
+ {
+  "chunk": "ja-015",
+  "pack": "ja",
+  "first_item": 337,
+  "count": 24
+ },
+ {
+  "chunk": "ja-016",
+  "pack": "ja",
+  "first_item": 361,
+  "count": 4
+ }
+]

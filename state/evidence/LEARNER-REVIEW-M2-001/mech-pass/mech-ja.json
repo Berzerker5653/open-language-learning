@@ -1,0 +1,484 @@
+{
+ "pack": "ja",
+ "days_loaded": 30,
+ "coverage": {
+  "unique_item_ids_served": 429,
+  "unique_texts_seen": 1589,
+  "worklist_items": 1529,
+  "worklist_items_unchecked": 0,
+  "coverage_pct": 100.0,
+  "sample_missing": []
+ },
+ "failures": [
+  {
+   "check": "answer.keys-file-mismatch",
+   "item": "ja.orth.hira.myo#orthography-recognition",
+   "detail": "file='myo' seen=['みょ']"
+  }
+ ],
+ "warnings": [
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.hira.rya#orthography-recognition",
+   "first_day": 31,
+   "surface": "りゃ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.hira.ryu#orthography-recognition",
+   "first_day": 31,
+   "surface": "りゅ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.kanji.kaeru#recall-meaning",
+   "first_day": 32,
+   "surface": "帰"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.hira.gyu#orthography-recognition",
+   "first_day": 32,
+   "surface": "ぎゅ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.hira.byu#orthography-recognition",
+   "first_day": 34,
+   "surface": "びゅ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.hira.byo#orthography-recognition",
+   "first_day": 34,
+   "surface": "びょ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.hira.hya#orthography-recognition",
+   "first_day": 36,
+   "surface": "ひゃ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.kata.e#orthography-recognition",
+   "first_day": 36,
+   "surface": "エ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.kata.o#orthography-recognition",
+   "first_day": 36,
+   "surface": "オ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.kata.ki#orthography-recognition",
+   "first_day": 37,
+   "surface": "キ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.kata.ku#orthography-recognition",
+   "first_day": 37,
+   "surface": "ク"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.hira.hyo#orthography-recognition",
+   "first_day": 38,
+   "surface": "ひょ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.lex.verbs.tabemasu#recall-meaning",
+   "first_day": 38,
+   "surface": "たべます"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.lex.verbs.nomimasu#recall-meaning",
+   "first_day": 38,
+   "surface": "のみます"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.hira.mya#orthography-recognition",
+   "first_day": 39,
+   "surface": "みゃ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.kata.su#orthography-recognition",
+   "first_day": 39,
+   "surface": "ス"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.lex.verbs.ikimasu#recall-meaning",
+   "first_day": 39,
+   "surface": "いきます"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.lex.verbs.kimasu#recall-meaning",
+   "first_day": 39,
+   "surface": "きます"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.hira.hyu#orthography-recognition",
+   "first_day": 40,
+   "surface": "ひゅ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.kata.ta#orthography-recognition",
+   "first_day": 40,
+   "surface": "タ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.kata.nu#orthography-recognition",
+   "first_day": 42,
+   "surface": "ヌ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.kata.ne#orthography-recognition",
+   "first_day": 42,
+   "surface": "ネ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.kata.fu#orthography-recognition",
+   "first_day": 44,
+   "surface": "フ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.lex.verbs.kaimono-shimasu#recall-meaning",
+   "first_day": 44,
+   "surface": "かいものします"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.kata.mu#orthography-recognition",
+   "first_day": 45,
+   "surface": "ム"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.lex.transport.machimasu#recall-meaning",
+   "first_day": 45,
+   "surface": "まちます"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.kata.yu#orthography-recognition",
+   "first_day": 47,
+   "surface": "ユ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.lex.transport.orimasu#recall-meaning",
+   "first_day": 47,
+   "surface": "おります"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.kata.ru#orthography-recognition",
+   "first_day": 48,
+   "surface": "ル"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.lex.transport.norikaemasu#recall-meaning",
+   "first_day": 48,
+   "surface": "のりかえます"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.lex.transport.tsukimasu#recall-meaning",
+   "first_day": 48,
+   "surface": "つきます"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.kata.wa#orthography-recognition",
+   "first_day": 49,
+   "surface": "ワ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.orth.kata.wo#orthography-recognition",
+   "first_day": 49,
+   "surface": "ヲ"
+  },
+  {
+   "check": "ja.lexicon.not-in-jmdict",
+   "item": "ja.lex.verbs.arimasu#recall-meaning",
+   "first_day": 58,
+   "surface": "あります"
+  }
+ ],
+ "rotating_letter_drills": {
+  "ja.orth.hira.kyo#orthography-recognition": [
+   "kyo",
+   "きょ"
+  ],
+  "ja.orth.hira.rya#orthography-recognition": [
+   "rya",
+   "りゃ"
+  ],
+  "ja.orth.hira.ryu#orthography-recognition": [
+   "ryu",
+   "りゅ"
+  ],
+  "ja.orth.hira.ryo#orthography-recognition": [
+   "ryo",
+   "りょ"
+  ],
+  "ja.orth.hira.gya#orthography-recognition": [
+   "gya",
+   "ぎゃ"
+  ],
+  "ja.orth.hira.cha#orthography-recognition": [
+   "cha",
+   "ちゃ"
+  ],
+  "ja.orth.hira.sho#orthography-recognition": [
+   "sho",
+   "しょ"
+  ],
+  "ja.orth.hira.ju#orthography-recognition": [
+   "ju",
+   "じゅ"
+  ],
+  "ja.orth.hira.jo#orthography-recognition": [
+   "jo",
+   "じょ"
+  ],
+  "ja.orth.hira.bya#orthography-recognition": [
+   "bya",
+   "びゃ"
+  ],
+  "ja.orth.hira.cho#orthography-recognition": [
+   "cho",
+   "ちょ"
+  ],
+  "ja.orth.hira.nya#orthography-recognition": [
+   "nya",
+   "にゃ"
+  ],
+  "ja.orth.hira.byu#orthography-recognition": [
+   "byu",
+   "びゅ"
+  ],
+  "ja.orth.hira.byo#orthography-recognition": [
+   "byo",
+   "びょ"
+  ],
+  "ja.orth.kata.a#orthography-recognition": [
+   "a",
+   "ア"
+  ],
+  "ja.orth.kata.i#orthography-recognition": [
+   "i",
+   "イ"
+  ],
+  "ja.orth.kata.u#orthography-recognition": [
+   "u",
+   "ウ"
+  ],
+  "ja.orth.kata.e#orthography-recognition": [
+   "e",
+   "エ"
+  ],
+  "ja.orth.kata.o#orthography-recognition": [
+   "o",
+   "オ"
+  ],
+  "ja.orth.kata.ka#orthography-recognition": [
+   "ka",
+   "カ"
+  ],
+  "ja.orth.hira.nyu#orthography-recognition": [
+   "nyu",
+   "にゅ"
+  ],
+  "ja.orth.kata.ki#orthography-recognition": [
+   "ki",
+   "キ"
+  ],
+  "ja.orth.kata.ku#orthography-recognition": [
+   "ku",
+   "ク"
+  ],
+  "ja.orth.kata.ke#orthography-recognition": [
+   "ke",
+   "ケ"
+  ],
+  "ja.orth.hira.hyo#orthography-recognition": [
+   "hyo",
+   "ひょ"
+  ],
+  "ja.orth.kata.ko#orthography-recognition": [
+   "ko",
+   "コ"
+  ],
+  "ja.orth.kata.sa#orthography-recognition": [
+   "sa",
+   "サ"
+  ],
+  "ja.orth.kata.shi#orthography-recognition": [
+   "shi",
+   "シ"
+  ],
+  "ja.orth.kata.su#orthography-recognition": [
+   "su",
+   "ス"
+  ],
+  "ja.orth.kata.se#orthography-recognition": [
+   "se",
+   "セ"
+  ],
+  "ja.orth.kata.so#orthography-recognition": [
+   "so",
+   "ソ"
+  ],
+  "ja.orth.hira.hyu#orthography-recognition": [
+   "hyu",
+   "ひゅ"
+  ],
+  "ja.orth.kata.ta#orthography-recognition": [
+   "ta",
+   "タ"
+  ],
+  "ja.orth.kata.chi#orthography-recognition": [
+   "chi",
+   "チ"
+  ],
+  "ja.orth.kata.tsu#orthography-recognition": [
+   "tsu",
+   "ツ"
+  ],
+  "ja.orth.kata.te#orthography-recognition": [
+   "te",
+   "テ"
+  ],
+  "ja.orth.kata.to#orthography-recognition": [
+   "to",
+   "ト"
+  ],
+  "ja.orth.kata.na#orthography-recognition": [
+   "na",
+   "ナ"
+  ],
+  "ja.orth.kata.ni#orthography-recognition": [
+   "ni",
+   "ニ"
+  ],
+  "ja.orth.kata.nu#orthography-recognition": [
+   "nu",
+   "ヌ"
+  ],
+  "ja.orth.kata.ne#orthography-recognition": [
+   "ne",
+   "ネ"
+  ],
+  "ja.orth.kata.no#orthography-recognition": [
+   "no",
+   "ノ"
+  ],
+  "ja.orth.kata.ha#orthography-recognition": [
+   "ha",
+   "ハ"
+  ],
+  "ja.orth.kata.hi#orthography-recognition": [
+   "hi",
+   "ヒ"
+  ],
+  "ja.orth.kata.fu#orthography-recognition": [
+   "fu",
+   "フ"
+  ],
+  "ja.orth.kata.he#orthography-recognition": [
+   "he",
+   "ヘ"
+  ],
+  "ja.orth.kata.ho#orthography-recognition": [
+   "ho",
+   "ホ"
+  ],
+  "ja.orth.kata.ma#orthography-recognition": [
+   "ma",
+   "マ"
+  ],
+  "ja.orth.kata.mi#orthography-recognition": [
+   "mi",
+   "ミ"
+  ],
+  "ja.orth.kata.mu#orthography-recognition": [
+   "mu",
+   "ム"
+  ],
+  "ja.orth.kata.me#orthography-recognition": [
+   "me",
+   "メ"
+  ],
+  "ja.orth.kata.mo#orthography-recognition": [
+   "mo",
+   "モ"
+  ],
+  "ja.orth.kata.ya#orthography-recognition": [
+   "ya",
+   "ヤ"
+  ],
+  "ja.orth.kata.yu#orthography-recognition": [
+   "yu",
+   "ユ"
+  ],
+  "ja.orth.kata.yo#orthography-recognition": [
+   "yo",
+   "ヨ"
+  ],
+  "ja.orth.kata.ra#orthography-recognition": [
+   "ra",
+   "ラ"
+  ],
+  "ja.orth.kata.ri#orthography-recognition": [
+   "ri",
+   "リ"
+  ],
+  "ja.orth.kata.ru#orthography-recognition": [
+   "ru",
+   "ル"
+  ],
+  "ja.orth.kata.re#orthography-recognition": [
+   "re",
+   "レ"
+  ],
+  "ja.orth.kata.ro#orthography-recognition": [
+   "ro",
+   "ロ"
+  ],
+  "ja.orth.kata.wa#orthography-recognition": [
+   "wa",
+   "ワ"
+  ],
+  "ja.orth.kata.wo#orthography-recognition": [
+   "wo",
+   "ヲ"
+  ],
+  "ja.orth.kata.n#orthography-recognition": [
+   "n",
+   "ン"
+  ]
+ },
+ "counts": {
+  "failures": 1,
+  "warnings": 34,
+  "rotating_letter_drills": 63
+ }
+}

@@ -1,0 +1,189 @@
+# LEARNER-REVIEW-M2-001 — gates / run log
+
+Start: 2026-11-27 ~17:55 MST. Board card t_700e2628 (board mutations refused
+from inside this worker — evidence + ledger only; report to controller).
+Contract: state/notes/LEARNER-REVIEW-M2-001.md (frozen M1 method).
+main at start: a4b5f41d.
+
+## Environment / integrity decisions
+
+- Shared-tree discipline: languages/ja-JP/** + scripts/check_ja_lexicon.py
+  were (and remained) another lane's active WIP (FIX-M1-CONTENT-JA-001
+  adoption, "expect churn"). NEVER staged, NEVER reverted.
+- Pack-install provenance: serve's dev install reads the languages/ tree at
+  RUNTIME resolved from the binary's CARGO_MANIFEST_DIR (lib.rs
+  install_bundled_pack_report, "dev repo tree preferred whenever it exists").
+  The main-tree binary therefore serves whatever the live working tree holds,
+  including sibling WIP. To audit exactly HEAD (a4b5f41d):
+  - detached worktree /home/hunter/.hermes/cache/scratch/lts-m2-head at HEAD;
+  - `cargo build -p lts-desktop --bin lts-serve --features serve`
+    (CARGO_TARGET_DIR scratch/m2-target, finished in ~2 min, artifacts reused);
+  - sim harness run as an UNMODIFIED copy of scripts/sim_month1.py in
+    scratch/m2sim/scripts (no source file edited anywhere in this card);
+  - pack media in the worktree FROZEN: all .wav files de-hardlinked to
+    private copies; every row re-verified sha256 == HEAD manifest
+    (ru 5032/5032, ja 4935/4935).
+
+- RACE FOUND AND WORKED AROUND (lane churn, not a HEAD defect): the JA audio
+  lane re-baked 36-38 ja media wavs mid-session; at 18:07 the working tree's
+  wav bytes matched the lane's UNCOMMITTED manifest edits but NOT HEAD's
+  manifest, so the clean-HEAD install failed 422
+  ("media_size_mismatch ... on disk vs manifest declares"). First ja walk
+  attempt died on this (all day logs garbage, discarded). After the
+  HEAD-consistent media freeze (18 wav rows restored from the M1-era
+  installed pack .sim-data/ja/packs/.../0.4.4, sha-verified against HEAD
+  manifest), install_pack: ok=True.
+  NOTE: at walk time the MAIN working tree contained a wav set inconsistent
+  with the committed ja manifest (install would 422 from the main tree).
+  Flagged to the controller in the final report; FIX-M1-CONTENT-JA-001 must
+  land manifest+audio atomically.
+
+## Walk (pass 0: sim days 1-60, fresh profiles, clean-HEAD binary)
+
+- `--from-day` resume flag NOT needed: the card's "seed through day 30" is
+  served by walking days 1-60 from fresh profiles against HEAD (the seeded
+  prefix also re-confirms FIX-M1-PROGRESSION-001 + FIX-M1-CONTENT-RU-001 at
+  days 1-30). Days 1-30 raw logs moved to sim/raw-seed/; the audited
+  worklist/mech-pass scope is days 31-60 exactly.
+- ru: days 1-60 complete. install_pack ok=True. day1 practice 6 (discovery),
+  steady ~18-21 opens/day, correct-first 16-21 (simulated-memory model).
+- ja: days 1-60 (attempt 3 after the 422 race; attempts 1-2 discarded, see
+  RACE above). install_pack ok=True.
+- No leaked serves after finish (scan below).
+
+========================================================================
+RUN 2 (resume, 2026-11-27 ~18:35-19:30 MST) — completion of the chain
+========================================================================
+Run 1 (same worker, budget death at 18:34) had completed the walk only.
+This run resumed from the resume recipe. main was 6119fd71; walk binaries,
+media and manifests all frozen at a4b5f41d in scratch/lts-m2-head
+(the 0.5.0 version bump at HEAD does not touch pack text/media; re-spot-
+checked 8+8 wav sha256 == HEAD manifests, 0 mismatches).
+
+Step (a) split-seed: 60 seed logs (days 1-30 both packs) -> sim/raw-seed/.
+  Audited scope sim/raw/ = days 31-60 exactly.
+
+Step (b) worklist + mech pass:
+  python3 scratch/m2sim/scripts/sim_month1.py --build-worklist
+      --out state/evidence/LEARNER-REVIEW-M2-001/sim
+    -> worklist.json RU 1157 / JA 1529 unique text items, 30 days each.
+  .venv/bin/python scripts/month1_mech_pass.py --out .../sim
+    -> RU 3 failures / 72 warnings / coverage 100.0%
+       JA 1 failure  / 34 warnings / coverage 100.0%
+       (mech-pass/mech-{ru,ja}.{json,md})
+  The 4 failures are ALL 'answer.keys-file-mismatch' on orthography-
+  recognition letter drills (ru.orth.cyrillic.short-i/yo/shch,
+  ja.orth.hira.myo). ROOT-CAUSED + REPRODUCED per occurrence from raw logs:
+  the drill rotates prompt families (gloss-family 'sound yo — name ё' vs
+  glyph-family 'ё'); the keys-file entry was recorded from a SEED-window
+  occurrence (d8/d11/d30) while the audit-window occurrence (d53/d56/d31)
+  served the other family. Per-occurrence checks (exactly one server-graded
+  correct choice, membership in that serving's choices) are CLEAN for every
+  occurrence. NOT a content defect; tooling known-limit -> defect-ledger
+  M2-D-004 (GATE INTEGRITY: month1_mech_pass.py NOT modified).
+  JA warnings (34) = yōon/katakana-kana/verb-stem surfaces + 帰 — the same
+  false-positive class M1 triaged (0/9 real); spot-reviewed, 0 real.
+
+Step (c) ASR (ids documented-reconstruction of M1's lost generator; the
+  generator is NOW committed here: tools/m2_helpers.py asr-ids — rule:
+  manifest row whose text is in the days-31-60 served-texts union, or whose
+  id cid-prefix-matches a practice item id):
+  ids: sim/asr-ids-{ru,ja}.txt + per-id reason sim/asr-ids-*.reason.json
+       (154 ru: contrast 16 / lex 112 / sent 26;
+        307 ja: contrast 4 / expr 1 / lex 237 / sent 65)
+  manifest read pinned to the FROZEN worktree (LTS_REPO env override added
+  to m2_helpers.py) so id selection matches the audio actually audited.
+  judge: whisper.cpp ggml-large-v3-turbo, CPU-FORCED
+  (export CUDA_VISIBLE_DEVICES='' — GPU held by the local engine),
+  workers 5, from scripts/qa-asr.py against the worktree pack dirs.
+  results: asr-ru.jsonl / asr-ja.jsonl (gates/asr-{ru,ja}.log)
+  ru: 154/154 ok.  ja: PENDING-SEE-BELOW (appended by the completion commit).
+
+Step (d) fresh-eyeball pass 2 (THIS worker is the fresh reviewer; content
+  authors were prior cards, no authoring context in this lane):
+  tools/m2_chunker.py (target-script learner items only; ASCII chrome and
+  latin-only label rows stay with mech + experience review)
+    -> ru 261 items / 11 chunks, ja 364 items / 16 chunks.
+  Every item of every chunk read fresh from review/chunks/ against raw-log
+  context spot-checks; verdicts: review/verdicts/{ru,ja}-NNN.md (27 files).
+  Programmatic tally (review/tally.json): RU fix 0 / known-limit 39;
+  JA fix 5 (items 20,50,181,211,248) / known-limit 6.
+  JA fix flags verified against raw payloads: ja.lex.verbs.{arukimasu,
+  kaerimasu,nemasu}#recall-meaning serve あるきだす/かえりざく/ねかす on 19/16/14
+  days of the window (M1 D-009 RECURRING — FIX-M1-CONTENT-JA-001 never
+  shipped); こんさーと (ja.sent.concert-fun class) on 11 days; つくえの 上に
+  mixed-script twin of the all-kana うえ sentence = new defect M2-D-005.
+
+Step (e) pass 3 experience metrics: tools/m2_helpers.py metrics ->
+  sim/exp-metrics.json + experience-review.md.
+  METHOD NOTE (honesty): first metrics pass counted first-seen novelty
+  WINDOW-locally (raw only) which inflated RU month-2 'new' to 1157 (re-
+  serves counted as new). metrics() patched to CHAIN seed days 1-30 from
+  sim/raw-seed/ (sim-changelog-worthy; harness/tooling change on this card):
+  chained RU month-2 new = 5 (per-day [3,2,0x28] — matches the controller's
+  independently-verified starvation figure EXACTLY); JA = 117 (avg 3.9/day).
+  Seed-window totals on the chained method: RU 1152, JA 1418.
+  Path wall: 823/803 RU units first=last audited day (FIX-M1-PATH-VIS-001
+  NOT verifiable as fixed); JA 819/777->776.
+
+Step (f) defect-ledger.md + residual-uncertainty.md; M1 known-limit classes
+  D-003/D-007/D-011/D-013 carried (residual R-5/R-8/R-11/R-9) — promoted
+  NOTHING. D-008's text fixes WERE verified in served content (бато́н хлеба́,
+  лесу́/саду́, плачу́) — that is a real measurement, not a promotion.
+
+Step (g) ledger: ROADMAP LEARNER-REVIEW-M2-001 stays, LEARNER-REVIEW-M3-001
+  block + optional_tasks + task-state (M2 done, M3 ready) + KANBAN row
+  written in the LEDGER commit. state/notes/LEARNER-REVIEW-M3-001.md = the
+  new contract (new file; part of the acceptance bullet "M3 card created"
+  per the M1 close precedent; zero collision risk, not another lane's path).
+  Board mutations (M2 complete, M3 create) are REFUSED from inside this
+  worker -> REPORTED to the controller, ids in the final report.
+
+Gates run this run: validate_handoff.py --require-explicit-ledger-records
+  (see §GATES below), no cargo/touched product code (review card, zero
+  source edits; scripts/month1_mech_pass.py and scripts/sim_month1.py
+  untouched — the sim copy in scratch/m2sim is byte-unmodified).
+
+--- ASR final tallies (step c completion) ---
+ru:  checked=154 passed=154 MISMATCH=0            (gates/asr-ru.log; 154/154 ok)
+ja:  checked=307 passed=275 MISMATCH=32           (gates/asr-ja.log)
+     32 flags = 6 duration-suspect (cap heuristic) + 26 heard-transcript flags, of
+     which 6 are FALSE-POSITIVE CLASS (kanji-orthography sentence lines the kana
+     fold did not rescue: ja.sent.rain-today/today-monday/wake-up/weather-good/
+     hundred-yen + ひゃくえんです '100円です' numeric normalization — clips are
+     CORRECT, whisper wrote kanji/numerals) and 20 are the M1 D-011 short-word
+     profile (1-2 mora: ほん/ペン/えん/ひゃく/あめ/はれ/よん/じゅう/きます…).
+     Posture unchanged: ja-JP human audio QA retired by owner 2026-11-06 -> flags
+     are ADVISORY (defect-ledger M2-D-012), the 20 short-word ids repeat M1-flagged
+     families, no new blocker class.
+  TOOLING NOTE (GATE INTEGRITY — qa-asr.py NOT modified): its final summary print
+  crashed with KeyError 'ratio' sorting duration-flag rows that carry no ratio
+  field; the jsonl itself completed (307/307) BEFORE the print, so data is
+  complete and the nonzero exit is a reporting artifact, recorded honestly.
+
+--- Pass-2 final tally (step d) ---
+27 verdict files (review/verdicts/): RU fix 0 / known-limit 39;
+JA fix 5 (items 20,50,181,211,248 = M2-D-003 x4 + M2-D-005 x1) / known-limit 6.
+review/tally.json holds the enumerated flags + derivation regex (re-runnable).
+
+--- Pass-3 final (step e) ---
+exp-metrics.json (chained novelty): RU seed 1152 / month2 5 [3,2,0x28];
+JA seed 1418 / month2 117. offers 30/30 both. path 823/803 RU, 819/777->776 JA.
+
+--- §GATES (final) ---
+- tools/validate_handoff.py --require-explicit-ledger-records: PASS (0 FAIL) at
+  pure HEAD + THIS lane's changes only, verified in detached worktree
+  scratch/m2val-head (the main working tree carries unrelated uncommitted
+  ROADMAP/task-state edits from FIX-PACK-K65-001 / FIX-SPEECH-CATALOG-001 lanes
+  that red the validator IN-TREE — reproduction at pure HEAD was clean, per the
+  concurrent-lane playbook; shared files staged via update-index cacheinfo with
+  HEAD+own-hunks blobs only).
+- No product source touched; scripts/sim_month1.py + scripts/month1_mech_pass.py
+  + scripts/qa-asr.py unmodified (gate integrity).
+- No leaked lts-serve processes from this run (walk ran in run 1; leak scan ran
+  there; ASR spawns are transient whisper-cli children, none live now:
+  pgrep -f 'lts[-]serve' clean).
+- Board actions for the controller: complete t_700e2628 with the evidence+ledger
+  shas; CREATE board card for LEARNER-REVIEW-M3-001 (idempotency key
+  lts-LEARNER-REVIEW-M3-001, body = state/notes/LEARNER-REVIEW-M3-001.md +
+  worker protocol, priority 2) — creates are refused from inside this worker.

@@ -1,0 +1,87 @@
+# Mechanical pass — RU Month-1 subset
+
+- days loaded: 30
+- unique item ids served: 109
+- unique texts checked: 1164
+- worklist coverage: 100.0% (1157 items, 0 unchecked)
+- mechanical failures: 3
+- reviewer-bound warnings: 72 (deduped)
+
+## Failures
+- {"check": "answer.keys-file-mismatch", "item": "ru.orth.cyrillic.short-i#orthography-recognition", "detail": "file='sound a quick y — name и краткое' seen=['й']"}
+- {"check": "answer.keys-file-mismatch", "item": "ru.orth.cyrillic.yo#orthography-recognition", "detail": "file='sound yo — name ё' seen=['ё']"}
+- {"check": "answer.keys-file-mismatch", "item": "ru.orth.cyrillic.shch#orthography-recognition", "detail": "file='щ' seen=['sound shch — name ща']"}
+
+## Warnings (deduped, reviewer triage)
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "unit_path", "text": "Письмо о неисправности", "word": "неисправности", "guess": ["неисправность", "неисправность"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "unit_path", "text": "Правка по-деловому", "word": "по", "guess": ["по", "по"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "unit_path", "text": "Правка по-деловому", "word": "деловому", "guess": ["деловой", "деловой"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "unit_path", "text": "Перед отправкой", "word": "отправкой", "guess": ["отправка"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "unit_path", "text": "Повтор: правка и отправка", "word": "отправка", "guess": ["отправка"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "practice_plan", "text": "лук", "word": "лук", "guess": ["лук", "лука"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "practice_plan", "text": "До свидания!", "word": "До", "guess": ["до"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound k — name ка", "word": "ка", "guess": ["ка"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound n — name эн", "word": "эн", "guess": ["эн", "эн"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound s — name эс", "word": "эс", "guess": ["эс", "эс"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound m — name эм", "word": "эм", "guess": ["эм", "эм"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound t — name тэ", "word": "тэ", "guess": ["тэ"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "не понима́ю", "word": "не", "guess": ["не"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "не понима́ю", "word": "понима́ю", "guess": ["понима́ть", "понима́я"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "ещё раз", "word": "раз", "guess": ["раз", "раз"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "до́брое у́тро", "word": "до́брое", "guess": ["до́брой", "до́брой"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound a quick y — name и краткое", "word": "краткое", "guess": ["краткий", "краткий"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "practice_submit", "text": "люк", "word": "люк", "guess": ["люк", "люк"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound v — name вэ", "word": "вэ", "guess": ["вэ"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound kh — name ха", "word": "ха", "guess": ["ха"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound b — name бэ", "word": "бэ", "guess": ["бэ"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound p — name пэ", "word": "пэ", "guess": ["пэ"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound d — name дэ", "word": "дэ", "guess": ["дэ"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound g — name гэ", "word": "гэ", "guess": ["гэ"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound l — name эл", "word": "эл", "guess": ["эл"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound z — name зэ", "word": "зэ", "guess": ["зэ"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound zh — name жэ", "word": "жэ", "guess": ["жэ"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound f — name эф", "word": "эф", "guess": ["эф", "эф"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound ts — name цэ", "word": "цэ", "guess": ["цэ"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "sound sh — name ша", "word": "ша", "guess": ["ша"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "lesson_plan", "text": "меня́ зову́т", "word": "зову́т", "guess": ["зову́т", "зову́т"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_list", "text": "На ры́нке", "word": "На", "guess": ["на", "на"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_list", "text": "На ры́нке", "word": "ры́нке", "guess": ["ры́нка", "ры́нка"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_list", "text": "Город без карты", "word": "без", "guess": ["без"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_list", "text": "Ключ от дачи", "word": "от", "guess": ["от"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_list", "text": "Утро А́нны", "word": "А́нны", "guess": ["а́нный", "а́нна"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_list", "text": "Переводчик всё перепутал", "word": "перепутал", "guess": ["перепутать"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_list", "text": "Письмо не тому адресату", "word": "тому", "guess": ["тот", "тот"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_list", "text": "Пода́рок для Ма́рии", "word": "для", "guess": ["для", "длить"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_list", "text": "Пода́рок для Ма́рии", "word": "Ма́рии", "guess": ["ма́рия", "ма́рия"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_list", "text": "Рыбалка зимой", "word": "Рыбалка", "guess": ["рыбалка"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_list", "text": "Ша́пка в саду́", "word": "саду́", "guess": ["саду́"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_list", "text": "Прогу́лка в лесу́", "word": "лесу́", "guess": ["лесу́"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Откры́тый рынок рабо́тает у́тром.", "word": "рабо́тает", "guess": ["рабо́таять", "рабо́тать"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Ско́лько стои́т бато́н хлеба́?", "word": "хлеба́", "guess": ["хлеба́"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Хлеб све́жий и вку́сный.", "word": "све́жий", "guess": ["све́жий", "све́жий"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Хлеб све́жий и вку́сный.", "word": "вку́сный", "guess": ["вку́сный", "вку́сный"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Наку́пим сыра́, ма́сла и я́иц.", "word": "Наку́пим", "guess": ["наку́пим", "наку́пим"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Наку́пим сыра́, ма́сла и я́иц.", "word": "сыра́", "guess": ["сыра́"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Наку́пим сыра́, ма́сла и я́иц.", "word": "ма́сла", "guess": ["ма́снуть", "ма́слый"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Наку́пим сыра́, ма́сла и я́иц.", "word": "я́иц", "guess": ["я́ица", "я́ица"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Я плачу́ за проду́кты ка́рточкой.", "word": "плачу́", "guess": ["плачу́"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Я плачу́ за проду́кты ка́рточкой.", "word": "за", "guess": ["за"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Я плачу́ за проду́кты ка́рточкой.", "word": "проду́кты", "guess": ["проду́кт", "проду́кт"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Я плачу́ за проду́кты ка́рточкой.", "word": "ка́рточкой", "guess": ["ка́рточка"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Ко́фе горя́чий, а молоко́ хо́лодное.", "word": "хо́лодное", "guess": ["хо́лодный", "хо́лодный"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Два коллекционера спорили, не слушая ни цен, ни друг друга.", "word": "ни", "guess": ["ни", "ни"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Цена росла быстро, и продавец поднял молоток.", "word": "поднял", "guess": ["поднять"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Второй предложил не спорить и стал ждать.", "word": "Второй", "guess": ["второй", "второй"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Второй предложил не спорить и стал ждать.", "word": "предложил", "guess": ["предложить"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Картину купил второй, а первый ушёл молча.", "word": "первый", "guess": ["первый", "первый"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Картину купил второй, а первый ушёл молча.", "word": "молча", "guess": ["молча", "молчать"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Через день картину вернули продавцу: краска пахла вчерашним утром.", "word": "Через", "guess": ["через"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Вчера я очень долго ждал автобус.", "word": "очень", "guess": ["очень"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Дома уже был ужин, но я был очень рад.", "word": "но", "guess": ["но", "но"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Дома уже был ужин, но я был очень рад.", "word": "рад", "guess": ["рад", "рада"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Вечером кругом были только фонари и тишина.", "word": "кругом", "guess": ["кругом", "круг"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Потом я писал об этом маме: это был хороший вечер.", "word": "об", "guess": ["о", "об"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 31, "surface": "story_view", "text": "Автобус не пришёл — и всё равно это был хороший вечер.", "word": "равно", "guess": ["равно", "равный"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 32, "surface": "home_state", "text": "бить", "word": "бить", "guess": ["бить"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 32, "surface": "practice_submit", "text": "том", "word": "том", "guess": ["тот", "тот"]}
+- {"check": "ru.lexicon.unknown-lemma", "day": 32, "surface": "practice_submit", "text": "кот", "word": "кот", "guess": ["кот"]}

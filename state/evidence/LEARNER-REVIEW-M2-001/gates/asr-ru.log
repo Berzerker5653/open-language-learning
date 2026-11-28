@@ -1,0 +1,2 @@
+audit start: 154 rows x 5 workers -> /home/hunter/game-dev/LTS/state/evidence/LEARNER-REVIEW-M2-001/asr-ru.jsonl
+checked=154 passed=154 MISMATCH=0 TIMEOUT=0 WAV-MISSING=0 CHECK-ERROR=0
