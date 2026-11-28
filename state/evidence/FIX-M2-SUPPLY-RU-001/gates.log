@@ -1,0 +1,53 @@
+# FIX-M2-SUPPLY-RU-001 controller/takeover gates + acceptance log (2026-11-28 ~03:05-04:05 MST)
+
+## Code commit 8a8b34c6 (takeover of dead runs 1-2 of board t_57092fec)
+Lane gates at this tree (all green BEFORE commit):
+- cargo fmt --all --check: OK
+- cargo test -p lts-langpack: all targets green, incl. NEW tests/goal_ladder_gradeable.rs 2/2
+  (ungradeable_ladder_edges_are_errors, reference_packs_have_no_dead_ladder_edges)
+- cargo clippy -p lts-langpack --all-targets -- -D warnings: 0
+- lts-langpack-cli validate/lint/audit-curriculum/audit-lexicon/audit-licenses/audit-sources
+  for languages/ru-RU and languages/ja-JP: 12/12 OK
+Version rides: ru 0.5.1->0.5.2 (0.5.1 was consumed by sibling commit 8696feb7 after the
+lane died - verified via git log -S), ja 0.4.4->0.4.5.
+
+## Acceptance sim walk (card step 3) - FAILED, honest record
+Clean detached worktree .hermes/cache/scratch/lts-m2supply-head at 8a8b34c6; serve built
+with CARGO_TARGET_DIR=<repo>/target; unmodified scripts/sim_month1.py copy; RU walk days
+1-60 fresh profile; install_pack ok=True status=200 (pack 0.5.2, .sim-data/ru/packs/.../0.5.2).
+Worktree media pitfall found+fixed: languages/ru-RU/media EXISTS in git (jsonl + narrator.json
+tracked), so `cp -al <src>/media <dst>/media` NESTED the wavs into media/media/ and the
+builder refused ('no generated audio is present'); flatten with mv.
+faketime lives in /usr/sbin (missing from headless background PATH).
+
+- BEFORE (committed M2 walk): per-day 31-60 new items [3,2,0x28], days_with_new 2, run 28.
+- AFTER (this walk): identical shape [3,2,0x28]-shaped table in before-after-table.json.
+- Unlock trajectory IDENTICAL to M2-before: unit_path 823 units, locked 813(day1)->803(by d31)
+  ->803(d60); offers days 31-60 all kind:review; 3 units still 5/6.
+- Mech pass (scripts/month1_mech_pass.py over the new sim dir, REPO pinned to worktree copy):
+  ru: 0 failures / 255 warnings / coverage 100.0% (coverage bullet met; starvation bullet NOT).
+- Parser fidelity: the table parser reproduces M2's committed exp-metrics RU month-2 numbers
+  EXACTLY ([3,2,0x28], total 5) from the committed raw logs before being trusted on the new walk.
+
+## Why the shipped fix did not move the trajectory (measured, this run)
+RCA hypothesis 'gradeable required_concepts + runner dimensions => unlock' is STRUCTURALLY
+satisfied but empirically INSUFFICIENT:
+- All 38 distinct required_concepts WERE served as practice items during days 1-60.
+- Every (target-goal concept, edge dimension) pair has served evidence: all 170 hard
+  goal->goal edges pass the concept-coverage test computed from the walk's served
+  (cid, #modality) pairs.
+- Yet prereq_satisfied NEVER fired: engine (apps/desktop/src-tauri/src/lib.rs:2155-2210)
+  requires min over ALL of the target goal's required_concepts to reach required_state
+  (supported/independent) on the edge dimension, evaluated on derive_mastery_in_pack rows.
+  Unlock is therefore gated by derived MASTERY STATE thresholds/decay, not by evidence
+  existence. The 60-day walk unlocked exactly the same 20 units the broken pack unlocked.
+=> Next diagnosis (not this card): instrument goal_derived_state at day 30/60 - dump the
+   derived state of the 38 shared concepts (min per goal); the suspect is that the MIN of 4
+   shared words never reaches the required_state within 60 days (paced spaced-repetition
+   promotion), or unit_goal_locked reads a path distinct from prereq_satisfied's.
+   A pack-data remedy may be legitimate (fewer/thinner required_concepts per goal, or
+   required_state 'supported' instead of 'independent' on ladder edges) - it is pack content,
+   in-scope, and cheap to iterate: goals.yaml is one file, re-walk is ~8 min.
+GATE INTEGRITY: no test, gate script or sim script was modified anywhere on this card.
+Repro: scratch/m2supplysim/{scripts,sim-ru,.sim-data}; walk cmd
+`PATH=/usr/sbin:$PATH python3 scripts/sim_month1.py --pack ru --days 60 --out sim-ru`.
