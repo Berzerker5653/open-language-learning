@@ -1036,7 +1036,6 @@
 {"id": "ja.lex.leisure.manga", "words": [{"w": "まんが", "s": 0.0, "e": 0.54}]}
 {"id": "ja.lex.communication2.kyuu-you", "words": [{"w": "きゅうよう", "s": 0.0, "e": 0.82}]}
 {"id": "ja.lex.leisure.mattaku", "words": [{"w": "まったく", "s": 0.0, "e": 0.36}]}
-{"id": "ja.lex.leisure.miimasu", "words": [{"w": "みす", "s": 0.0, "e": 0.66}]}
 {"id": "ja.lex.leisure.nyuusu", "words": [{"w": "にゅーす", "s": 0.0, "e": 0.6}]}
 {"id": "ja.lex.communication2.mou-ichido", "words": [{"w": "もういちど", "s": 0.0, "e": 1.22}]}
 {"id": "ja.lex.leisure.oboemasu", "words": [{"w": "おぼえる", "s": 0.0, "e": 0.8}]}
@@ -2230,8 +2229,6 @@
 {"id": "ja.lex.verbs.ikimasu", "words": [{"w": "いきます", "s": 0.0, "e": 0.54}]}
 {"id": "ja.lex.verbs.imasu", "words": [{"w": "います", "s": 0.2, "e": 0.58}]}
 {"id": "ja.lex.verbs.masu", "words": [{"w": "ます", "s": 0.0, "e": 0.4}]}
-{"id": "ja.lex.verbs.mimasu", "words": [{"w": "みす", "s": 0.0, "e": 0.44}]}
-{"id": "ja.lex.verbs.nemasu", "words": [{"w": "ねかす", "s": 0.0, "e": 0.46}]}
 {"id": "ja.lex.verbs.shimasu", "words": [{"w": "します", "s": 0.0, "e": 0.6}]}
 {"id": "ja.lex.verbs.tabemasu", "words": [{"w": "たべます", "s": 0.0, "e": 0.84}]}
 {"id": "ja.lex.verbs.wakarimasu", "words": [{"w": "わかります", "s": 0.0, "e": 1.18}]}
@@ -2280,8 +2277,6 @@
 {"id": "ja.lex.work.katsudou", "words": [{"w": "かつどう", "s": 0.0, "e": 0.94}]}
 {"id": "ja.lex.work.kitto", "words": [{"w": "きっと", "s": 0.0, "e": 0.52}]}
 {"id": "ja.lex.work.kyoushi", "words": [{"w": "きょうし", "s": 0.0, "e": 0.44}]}
-{"id": "ja.lex.work.naraimasu", "words": [{"w": "ならわす", "s": 0.0, "e": 0.82}]}
-{"id": "ja.lex.work.oshiemasu", "words": [{"w": "おしえま", "s": 0.0, "e": 0.84}]}
 {"id": "ja.lex.work.saigo", "words": [{"w": "さいご", "s": 0.0, "e": 0.34}]}
 {"id": "ja.lex.work.saisho", "words": [{"w": "さいしょ", "s": 0.0, "e": 0.7}]}
 {"id": "ja.lex.work.semina", "words": [{"w": "せみなー", "s": 0.0, "e": 0.58}]}
@@ -2688,13 +2683,11 @@
 {"id": "ja.lex.city.furikomasu", "words": [{"w": "ふりこみます", "s": 0.08, "e": 1.34}]}
 {"id": "ja.lex.city.genkin", "words": [{"w": "げんきん", "s": 0.48, "e": 1.02}]}
 {"id": "ja.lex.city.hachiji", "words": [{"w": "はちじ", "s": 0.86, "e": 1.9}]}
-{"id": "ja.lex.city.haraimasu", "words": [{"w": "はらいだす", "s": 0.3, "e": 1.66}]}
 {"id": "ja.lex.city.kouban", "words": [{"w": "こうばん", "s": 0.08, "e": 1.42}]}
 {"id": "ja.lex.city.mainen", "words": [{"w": "まいねん", "s": 0.2, "e": 1.26}]}
 {"id": "ja.lex.city.maishuu", "words": [{"w": "まいしゅう", "s": 2.64, "e": 2.86}]}
 {"id": "ja.lex.city.mibai", "words": [{"w": "みばい", "s": 0.22, "e": 0.94}]}
 {"id": "ja.lex.city.shichiji", "words": [{"w": "しちじ", "s": 0.42, "e": 0.86}]}
-{"id": "ja.lex.city.tasukemasu", "words": [{"w": "たすけだす", "s": 0.52, "e": 1.5}]}
 {"id": "ja.lex.city.yubinkyoku", "words": [{"w": "ゆうびんきょく", "s": 0.12, "e": 2.94}]}
 {"id": "ja.lex.city2.danbooru", "words": [{"w": "ダンボール", "s": 0.08, "e": 1.56}]}
 {"id": "ja.lex.city2.dareka", "words": [{"w": "だれか", "s": 1.3, "e": 1.42}]}
@@ -2889,7 +2882,6 @@
 {"id": "ja.lex.ent.hakubutsukan", "words": [{"w": "はくぶつかん", "s": 0.9, "e": 1.82}]}
 {"id": "ja.lex.ent.hyouban", "words": [{"w": "ひょうてん", "s": 0.32, "e": 1.5}]}
 {"id": "ja.lex.ent.kanashimi", "words": [{"w": "かなしみ", "s": 0.24, "e": 1.02}]}
-{"id": "ja.lex.ent.konsaato", "words": [{"w": "こんさーと", "s": 0.68, "e": 2.06}]}
 {"id": "ja.lex.ent.kouhai", "words": [{"w": "こうはい", "s": 0.08, "e": 0.78}]}
 {"id": "ja.lex.ent.make", "words": [{"w": "まけ", "s": 1.66, "e": 1.82}]}
 {"id": "ja.lex.ent.nyuusu-bangumi", "words": [{"w": "にゅーすばんぐみ", "s": 0.16, "e": 1.58}]}
@@ -3042,13 +3034,11 @@
 {"id": "ja.lex.health.atatakai", "words": [{"w": "あたたかい", "s": 0.26, "e": 1.1}]}
 {"id": "ja.lex.health.chanto", "words": [{"w": "ちゃんと", "s": 1.28, "e": 1.74}]}
 {"id": "ja.lex.health.daijoubu", "words": [{"w": "だいじょうぶ", "s": 2.1, "e": 3.26}]}
-{"id": "ja.lex.health.hashirimasu", "words": [{"w": "はしりだす", "s": 0.34, "e": 1.9}]}
 {"id": "ja.lex.health.itai", "words": [{"w": "いたい", "s": 0.54, "e": 0.62}]}
 {"id": "ja.lex.health.itami", "words": [{"w": "いたみ", "s": 0.5, "e": 0.62}]}
 {"id": "ja.lex.health.kangofu", "words": [{"w": "かんごふ", "s": 0.22, "e": 1.02}]}
 {"id": "ja.lex.health.kata", "words": [{"w": "かた", "s": 0.62, "e": 0.7}]}
 {"id": "ja.lex.health.kimochi", "words": [{"w": "きもち", "s": 0.94, "e": 1.1}]}
-{"id": "ja.lex.health.kuukimasu", "words": [{"w": "すいこむ", "s": 0.18, "e": 1.5}]}
 {"id": "ja.lex.health.me", "words": [{"w": "め", "s": 5.18, "e": 5.26}]}
 {"id": "ja.lex.health.shinpai", "words": [{"w": "しんぱい", "s": 0.96, "e": 1.74}]}
 {"id": "ja.lex.health.te", "words": [{"w": "て", "s": 0.82, "e": 0.86}]}
@@ -3176,7 +3166,6 @@
 {"id": "ja.lex.leisure.karate", "words": [{"w": "からて", "s": 0.1, "e": 0.94}]}
 {"id": "ja.lex.leisure.kikiimasu", "words": [{"w": "ききます", "s": 0.06, "e": 0.86}]}
 {"id": "ja.lex.leisure.odori", "words": [{"w": "おどり", "s": 0.6, "e": 0.7}]}
-{"id": "ja.lex.leisure.odorimasu", "words": [{"w": "おどりだす", "s": 1.48, "e": 2.62}]}
 {"id": "ja.lex.leisure.omoshiroi", "words": [{"w": "おもしろい", "s": 0.44, "e": 2.38}]}
 {"id": "ja.lex.leisure.ongaku", "words": [{"w": "おんがく", "s": 0.22, "e": 0.78}]}
 {"id": "ja.lex.leisure.oyogimasu", "words": [{"w": "およぎます", "s": 0.14, "e": 1.26}]}
@@ -3329,7 +3318,6 @@
 {"id": "ja.lex.narrative.kioku", "words": [{"w": "きおく", "s": 0.58, "e": 0.78}]}
 {"id": "ja.lex.narrative.koe", "words": [{"w": "こえ", "s": 0.2, "e": 1.1}]}
 {"id": "ja.lex.narrative.misemasu", "words": [{"w": "みせます", "s": 0.12, "e": 1.02}]}
-{"id": "ja.lex.narrative.mitsukemasu", "words": [{"w": "みつけだす", "s": 0.16, "e": 1.58}]}
 {"id": "ja.lex.narrative.mori", "words": [{"w": "もり", "s": 0.7, "e": 0.78}]}
 {"id": "ja.lex.narrative.mura", "words": [{"w": "むら", "s": 1.1, "e": 1.18}]}
 {"id": "ja.lex.narrative.nakushimasu", "words": [{"w": "なくします", "s": 0.12, "e": 1.18}]}
@@ -3338,7 +3326,6 @@
 {"id": "ja.lex.narrative.tsuki", "words": [{"w": "つき", "s": 0.36, "e": 0.46}]}
 {"id": "ja.lex.narrative.tsutaemasu", "words": [{"w": "つたえる", "s": 0.38, "e": 0.94}]}
 {"id": "ja.lex.narrative.ureshii", "words": [{"w": "うれしい", "s": 0.34, "e": 1.58}]}
-{"id": "ja.lex.narrative.watarimasu", "words": [{"w": "わたりあう", "s": 0.1, "e": 1.5}]}
 {"id": "ja.lex.narrative.yama", "words": [{"w": "やま", "s": 0.62, "e": 0.7}]}
 {"id": "ja.lex.numbers.en", "words": [{"w": "えん", "s": 0.96, "e": 1.02}]}
 {"id": "ja.lex.numbers.go", "words": [{"w": "ご", "s": 0.16, "e": 0.38}]}
@@ -3725,7 +3712,6 @@
 {"id": "ja.lex.transport.chakubatsu", "words": [{"w": "とうちゃく", "s": 1.68, "e": 1.88}]}
 {"id": "ja.lex.transport.chikai", "words": [{"w": "ちかい", "s": 0.12, "e": 1.02}]}
 {"id": "ja.lex.transport.demasu", "words": [{"w": "でる", "s": 0.3, "e": 1.1}]}
-{"id": "ja.lex.transport.hairimasu", "words": [{"w": "はいりなおす", "s": 1.04, "e": 2.38}]}
 {"id": "ja.lex.transport.hashi", "words": [{"w": "はし", "s": 0.28, "e": 1.18}]}
 {"id": "ja.lex.transport.hoomu", "words": [{"w": "ホーム", "s": 0.28, "e": 1.66}]}
 {"id": "ja.lex.transport.jikokuhyou", "words": [{"w": "じこくひょう", "s": 0.08, "e": 0.94}]}
@@ -3801,17 +3787,14 @@
 {"id": "ja.lex.urban3.inaka", "words": [{"w": "いなか", "s": 0.16, "e": 0.94}]}
 {"id": "ja.lex.urban3.isshiki", "words": [{"w": "いっしき", "s": 0.32, "e": 1.02}]}
 {"id": "ja.lex.urban3.shiminkatsu", "words": [{"w": "しみんかつどう", "s": 0.16, "e": 1.82}]}
-{"id": "ja.lex.verbs.arukimasu", "words": [{"w": "あるきだす", "s": 0.14, "e": 1.18}]}
 {"id": "ja.lex.verbs.benkyou-shimasu", "words": [{"w": "べんきょうします", "s": 0.12, "e": 1.26}]}
 {"id": "ja.lex.verbs.iimasu", "words": [{"w": "いいます", "s": 0.12, "e": 0.94}]}
-{"id": "ja.lex.verbs.kaerimasu", "words": [{"w": "かえりざく", "s": 0.8, "e": 2.7}]}
 {"id": "ja.lex.verbs.kaimasu", "words": [{"w": "かいます", "s": 0.4, "e": 1.02}]}
 {"id": "ja.lex.verbs.kaimono-shimasu", "words": [{"w": "かいものします", "s": 0.08, "e": 1.42}]}
 {"id": "ja.lex.verbs.kakimasu", "words": [{"w": "かきます", "s": 0.22, "e": 1.34}]}
 {"id": "ja.lex.verbs.kikimasu", "words": [{"w": "ききます", "s": 0.34, "e": 1.1}]}
 {"id": "ja.lex.verbs.nomimasu", "words": [{"w": "のみます", "s": 0.12, "e": 0.94}]}
 {"id": "ja.lex.verbs.okimasu", "words": [{"w": "おきる", "s": 2.76, "e": 2.86}]}
-{"id": "ja.lex.verbs.shigoto-shimasu", "words": [{"w": "しごとをすます", "s": 1.1, "e": 2.46}]}
 {"id": "ja.lex.verbs.shoukai-shimasu", "words": [{"w": "しょうかいします", "s": 0.12, "e": 1.42}]}
 {"id": "ja.lex.verbs.yomimasu", "words": [{"w": "よみます", "s": 0.28, "e": 0.78}]}
 {"id": "ja.lex.weather.samusa", "words": [{"w": "さむさ", "s": 0.14, "e": 0.7}]}
@@ -4095,7 +4078,6 @@
 {"id": "ja.sent.community-bonds", "words": [{"w": "きょうどう", "s": 0.06, "e": 0.6}, {"w": "の", "s": 0.7, "e": 0.78}, {"w": "じょうほう", "s": 0.9, "e": 1.36}, {"w": "を", "s": 1.46, "e": 1.48}, {"w": "あつめました。", "s": 1.64, "e": 2.46}]}
 {"id": "ja.sent.community-post", "words": [{"w": "こみゅにてぃ", "s": 0.08, "e": 0.8}, {"w": "の", "s": 0.88, "e": 0.98}, {"w": "ぐるーぷ", "s": 1.08, "e": 1.56}, {"w": "に", "s": 1.64, "e": 1.74}, {"w": "はっぴょう", "s": 1.86, "e": 2.24}, {"w": "しました。", "s": 2.3, "e": 3.02}]}
 {"id": "ja.sent.concept-definition", "words": [{"w": "がいねん", "s": 0.1, "e": 0.54}, {"w": "の", "s": 0.58, "e": 0.66}, {"w": "ていぎ", "s": 0.74, "e": 1.04}, {"w": "を", "s": 1.14, "e": 1.16}, {"w": "はっきり", "s": 1.22, "e": 1.66}, {"w": "しました。", "s": 1.72, "e": 2.3}]}
-{"id": "ja.sent.concert-fun", "words": [{"w": "こんさーとが", "s": 0.2, "e": 1.02}, {"w": "たのしかったです。", "s": 1.08, "e": 1.98}]}
 {"id": "ja.sent.conference-talk", "words": [{"w": "はっぴょう", "s": 0.14, "e": 0.88}, {"w": "の", "s": 1.04, "e": 1.14}, {"w": "じゅんび", "s": 1.26, "e": 1.7}, {"w": "を", "s": 1.82, "e": 1.84}, {"w": "しました。", "s": 2.0, "e": 3.1}]}
 {"id": "ja.sent.conflict-resolution", "words": [{"w": "こうしょう", "s": 0.12, "e": 1.14}, {"w": "の", "s": 1.96, "e": 2.12}, {"w": "ほうほう", "s": 4.82, "e": 4.94}, {"w": "を", "s": 6.14, "e": 6.16}, {"w": "べんきょう", "s": 6.44, "e": 7.18}, {"w": "しました。", "s": 7.44, "e": 8.54}]}
 {"id": "ja.sent.constitutional-ideas", "words": [{"w": "ほてい", "s": 0.42, "e": 0.92}, {"w": "の", "s": 1.02, "e": 1.14}, {"w": "ぶんしょう", "s": 1.34, "e": 1.9}, {"w": "を", "s": 1.98, "e": 2.0}, {"w": "よみました。", "s": 2.08, "e": 3.26}]}

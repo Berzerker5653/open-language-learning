@@ -73,3 +73,16 @@ outcome or proficiency level; the thresholds are deliberately reachable at
 unlocked by derived mastery alone — no streaks, no activity counts (ADR-0002).
 
 Use `docs/16_CONTENT_AUTHORING_AND_REVIEW.md` for review promotion and `docs/17_SPEECH_BENCHMARK_PLAN.md` for permissioned evaluation, independent test splits, thresholds, scoring coverage and calibration version binding. Do not create evidence records claiming tests or human approvals that have not occurred.
+
+**Loanword orthography (authoring rule, pinned 2026-11-27, FIX-M1-CONTENT-JA-001).**
+Loanwords (and their long-vowel marks) are written in **katakana**: コンサート, コーヒー,
+テレビ — never the hiragana spelling (~~こんさーと~~). New lexicon rows, sentence texts,
+readings, `cloze_targets` and any learner-visible surface must follow this; the media
+manifest text follows the row it audio-represents. The rule is mechanically visible in
+`scripts/check_ja_lexicon.py` (report-only line: forms carrying the katakana long-vowel
+mark ー while declared non-katakana). The 2026-11 sweep measured **186 such legacy fields**
+pack-wide (mostly older topical shards: めーる, ぷらっとほーむ, せみなー…); this card
+corrected only the Month-1-visible `ja.lex.ent.konsaato` chain — the legacy backlog is a
+separate content card with its own re-bake list. Verb cards carry the companion rule in
+the same script (V1/V2: kana display must equal the reading, and a `-masu` id slug must
+derive the taught reading) — that one is a hard CI failure by design.

@@ -390,6 +390,11 @@ jobs:
       # PACK-AI-001: the scaffold's own invariants (media coverage/hash, script
       # declaration, placeholder-audio honesty) without cargo, network or TTS.
       - run: python -m unittest discover -s scripts -p 'test_new_pack.py'
+      # FIX-M1-CONTENT-JA-001: ja-JP verb-card integrity (kana display == reading;
+      # -masu id slug derives the taught reading) — the ai-screening corruption class
+      # (LEARNER-REVIEW-M1-001 D-009) must never re-enter the lexicon.
+      - run: python scripts/check_ja_lexicon.py
+      - run: python -m unittest discover -s scripts -p 'test_ja_lexicon_check.py'
       # R12: counted template repetition in the shipped packs, plus the
       # auditor's own invariants. A count is a review input, not a claim about
       # teaching quality.

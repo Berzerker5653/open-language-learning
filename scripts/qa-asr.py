@@ -205,7 +205,19 @@ def check(pack: Path, model: str, lang: str, whisper: str, row: dict) -> dict:
     try:
         with wave.open(str(wav), "rb") as w:
             dur = w.getnframes() / float(w.getframerate())
-        n_syll = len(re.findall(r"[аеёиоуыэюя]", row["text"]))
+        if lang == "ja":
+            # FIX-M1-CONTENT-JA-001 gate change (NAMED per the GATE INTEGRITY
+            # rule): the cap counts syllables, but the Cyrillic-vowel regex
+            # matches no kana, so every Japanese clip fell to cap=1.3s and was
+            # flagged duration-suspect — the false-positive class recorded as
+            # D-011 (82 of 100 run-3 ja ASR flags). Mora count is the
+            # Japanese syllable unit: kana characters, long-vowel mark and
+            # sokuon counted, small kana (ゃゅょ etc.) absorbed into the mora
+            # before them.
+            n_syll = len(re.findall(r"[\u3041-\u309f\u30a1-\u30fb\u30fc]",
+                                    row["text"]))
+        else:
+            n_syll = len(re.findall(r"[аеёиоуыэюя]", row["text"]))
         cap = 1.3 + 0.45 * n_syll
         if dur > cap:
             return {"id": row["id"], "status": "MISMATCH", "text": row["text"],
