@@ -31,6 +31,9 @@ const repoRoot = fileURLToPath(new URL("../../../", import.meta.url));
 const css = readFileSync(repoRoot + "packages/ui/src/styles.css", "utf8");
 const appTsx = readFileSync(repoRoot + "apps/desktop/src/App.tsx", "utf8");
 const settingsTsx = readFileSync(repoRoot + "apps/desktop/src/settings.tsx", "utf8");
+// APP-SPLIT-003G: the openWords body moved to the Mine wiring module; the
+// FEEL-LOADING-001 prime/finally invariant is re-pinned across the seam.
+const mineWiring = readFileSync(repoRoot + "apps/desktop/src/app/mine-wiring.ts", "utf8");
 
 function ruleBody(selector: string): string {
   const esc = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -282,8 +285,13 @@ describe("FEEL-LOADING-001 pair result is styled with live semantics", () => {
 
 describe("FEEL-LOADING-001 App container wires the loading flags", () => {
   it("openWords primes with wordsLoading and finally clears it", () => {
-    const fn = /async function openWords\(\) \{[\s\S]*?\n {2}\}/.exec(appTsx);
-    expect(fn, "openWords must exist").not.toBeNull();
+    // APP-SPLIT-003G: App keeps the hoisted wrapper; the body (and the
+    // FEEL-LOADING-001 flag discipline) lives in ./app/mine-wiring.
+    const wrapper = /async function openWords\(\) \{[\s\S]*?\n {2}\}/.exec(appTsx);
+    expect(wrapper, "openWords wrapper must exist").not.toBeNull();
+    expect(wrapper![0]).toContain("runOpenWords(mineWiringDeps)");
+    const fn = /export async function runOpenWords\([\s\S]*?\n\}/.exec(mineWiring);
+    expect(fn, "runOpenWords must exist").not.toBeNull();
     expect(fn![0]).toContain("setWordsLoading(true)");
     expect(fn![0]).toContain("setWordsLoading(false)");
   });

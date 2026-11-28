@@ -29,6 +29,10 @@ const panel = (over: Record<string, unknown> = {}) => (
 const repoRoot = fileURLToPath(new URL("../../../", import.meta.url));
 const css = readFileSync(repoRoot + "packages/ui/src/styles.css", "utf8");
 const appTsx = readFileSync(repoRoot + "apps/desktop/src/App.tsx", "utf8");
+// APP-SPLIT-003G: the Mine handler bodies (incl. the FEEL-MYWORDS-001
+// flash-id store) moved to the wiring module; App keeps the wrapper + the
+// panel wiring. Re-pinned to read both sides of the seam.
+const mineWiring = readFileSync(repoRoot + "apps/desktop/src/app/mine-wiring.ts", "utf8");
 
 function ruleBody(selector: string): string {
   const esc = selector.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -157,7 +161,13 @@ describe("the sheet carries the FEEL-MYWORDS rules", () => {
 
 describe("App wiring carries the add-word flash id", () => {
   it("addMine stores the engine's id and the panel receives flashId", () => {
-    expect(appTsx).toMatch(/setMineFlashId\(/);
+    // APP-SPLIT-003G: the store moved to ./app/mine-wiring; the seam is
+    // App's hoisted wrapper calling it. Assert both sides — the invariant
+    // (engine id -> flashId prop) is unchanged.
+    expect(appTsx).toMatch(
+      /async function addMine\([^)]*\) \{\s*\n\s*return runAddMine\(mineWiringDeps/,
+    );
+    expect(mineWiring).toMatch(/setMineFlashId\(res\.id\)/);
     expect(appTsx).toMatch(/flashId=\{mineFlashId\}/);
   });
 });

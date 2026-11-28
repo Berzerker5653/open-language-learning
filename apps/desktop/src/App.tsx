@@ -157,6 +157,25 @@ import {
   type PracticeWiringDeps,
 } from "./app/practice-wiring";
 import { useCaptureWiring } from "./app/capture-wiring";
+import {
+  startMinePreviewProbe,
+  runRefreshMine,
+  runOpenWords,
+  runAddMine,
+  runMineFromStory,
+  runPlayMineContext,
+  runToggleContentConfirm,
+  runRemoveMine,
+  runGradeMine,
+  runAcceptErrorOffer,
+  runRefreshErrorReviews,
+  runStartErrorReview,
+  runGradeErrorReview,
+  runStartMineReview,
+  runStartNewMineReview,
+  runReviewMineNow,
+  type MineWiringDeps,
+} from "./app/mine-wiring";
 
 export {
   after,
@@ -704,24 +723,7 @@ export function App() {
     good_seconds: number;
   } | null>(null);
   useEffect(() => {
-    const inv = detectInvoke();
-    if (!inv || !profileId || !mineReview) {
-      setMinePreview(null);
-      return;
-    }
-    let live = true;
-    void inv("srs_interval_preview", { profileId, itemId: mineReview.item.id })
-      .then((v) => {
-        if (live) setMinePreview(v as { again_seconds: number; good_seconds: number });
-      })
-      .catch(() => {
-        // A failed preview degrades to plain buttons — the grades
-        // themselves work exactly as before.
-        if (live) setMinePreview(null);
-      });
-    return () => {
-      live = false;
-    };
+    return startMinePreviewProbe({ profileId, mineReview, setMinePreview });
   }, [mineReview?.item.id, profileId]);
   const [shadowError, setShadowError] = useState<string | null>(null);
   // WORD-TIMING-001: the karaoke clock (in-clip seconds, null when nothing
@@ -2397,147 +2399,48 @@ export function App() {
 
   // K-14: learner-owned lexicon. Mined words are device-local, cited,
   // and scheduled by their own SRS rows — never mastery evidence.
+  // APP-SPLIT-003G: the bodies of this whole surface (My words + the
+  // error-review queue) moved to ./app/mine-wiring as a pure move, zero
+  // behavior change. App() keeps these hoisted thin wrappers so every
+  // call site (boot/profile/reading refreshes above, the JSX below) keeps
+  // the exact same names, and owns every hook; the deps bundle below is
+  // plain render values + setters, built once per render after every
+  // referenced binding is in scope (same shape as practiceWiringDeps).
   async function refreshMine() {
-    const inv = detectInvoke();
-    if (!inv || !profileId) return;
-    try {
-      const items = (await inv("mine_list", { profileId })) as typeof mineItems;
-      setMineItems(items);
-      // ACCUMULATION-METERS-001: the kept-words count the Today header shows.
-      setMineCount(items.length);
-      setMineError(null);
-    } catch (e) {
-      setMineError(String(e));
-    }
+    return runRefreshMine(mineWiringDeps);
   }
 
   async function openWords() {
-    setRoute("words");
-    setMineReview(null);
-    setErrReview(null);
-    setErrError(null);
-    setErrNotice(null);
-    setMineFlashId(null);
-    // FEEL-LOADING-001: prime with the flag up so the panel shows skeleton
-    // rows instead of yesterday's list (or a false empty state).
-    setWordsLoading(true);
-    try {
-      await refreshMine();
-      await refreshErrorReviews();
-    } finally {
-      setWordsLoading(false);
-    }
+    return runOpenWords(mineWiringDeps);
   }
 
   async function addMine(sourceCitation?: string) {
-    const inv = detectInvoke();
-    if (!inv || !profileId) return;
-    try {
-      const res = (await inv("mine_add", {
-        profileId,
-        surface: mineSurface,
-        reading: mineReading || null,
-        gloss: mineGloss || null,
-        sourceCitation: (sourceCitation ?? mineSource) || "manual",
-      })) as { id: string; was_new: boolean };
-      // K-61: a repeat mine keeps the original entry (and its review
-      // history). Say so in the learner's own words instead of letting a
-      // database constraint surface as an error.
-      if (!res.was_new) {
-        setMineNotice(`"${mineSurface.trim()}" is already in My words — kept the original entry.`);
-      }
-      // FEEL-MYWORDS-001: the add lands with a pulse on the row that
-      // arrived — or on the kept original when the mine was a repeat.
-      setMineFlashId(res.id);
-      setMineSurface("");
-      setMineReading("");
-      setMineGloss("");
-      setMineSource("");
-      await refreshMine();
-    } catch (e) {
-      setMineError(String(e));
-    }
+    return runAddMine(mineWiringDeps, sourceCitation);
   }
 
   async function mineFromStory(surface: string, reading: string | null, gloss: string | null) {
-    const inv = detectInvoke();
-    if (!inv || !profileId || !storyActive) return;
-    try {
-      const res = (await inv("mine_add", {
-        profileId,
-        surface,
-        reading,
-        gloss,
-        sourceCitation: storyActive.id,
-      })) as { id: string; was_new: boolean };
-      // K-61: mining a word already kept is not an error; the original
-      // entry (and its review history) stays. Note it for when the
-      // learner opens My words — never as a story error.
-      if (!res.was_new) {
-        setMineNotice(`"${surface}" is already in My words — kept the original entry.`);
-      }
-      await refreshMine();
-    } catch (e) {
-      setStoryError(String(e));
-    }
+    return runMineFromStory(mineWiringDeps, surface, reading, gloss);
   }
 
   // VOCAB-BUILDER-001: the My-words drill replays the sentence the word
   // was met in, through the SAME `story_audio` sentence path the reader
   // uses — one audio truth, no second clip mechanism.
   async function playMineContext(sentenceId: string) {
-    await playSentenceClip(sentenceId, setMineError);
+    return runPlayMineContext(mineWiringDeps, sentenceId);
   }
 
   // CONTENT-CONFIRM-001 (ADR-0040): the ONLY way a confirmation mark is
-  // ever created — this explicit click. The engine resolves the pack from
-  // the profile's active selection, attributes the mark to the profile,
-  // and answers with who now stands behind the item; we splice that
-  // attribution straight back into the open view.
+  // ever created — this explicit click.
   async function toggleContentConfirm(contentId: string) {
-    const inv = detectInvoke();
-    if (!inv || !profileId || !storyActive) return;
-    const marks = storyActive.confirmations?.[contentId] ?? [];
-    const mine = marks.some((c) => c.display_name === displayName);
-    try {
-      const res = (await inv(mine ? "content_unconfirm" : "content_confirm", {
-        profileId,
-        contentId,
-      })) as { content_id: string; confirmed_by: { display_name: string; at: string }[] };
-      setStoryActive((prev) =>
-        prev
-          ? {
-              ...prev,
-              confirmations: { ...(prev.confirmations ?? {}), [contentId]: res.confirmed_by },
-            }
-          : prev,
-      );
-    } catch (e) {
-      setStoryError(String(e));
-    }
+    return runToggleContentConfirm(mineWiringDeps, contentId);
   }
 
   async function removeMine(id: string) {
-    const inv = detectInvoke();
-    if (!inv || !profileId) return;
-    try {
-      await inv("mine_remove", { profileId, itemId: id });
-      await refreshMine();
-    } catch (e) {
-      setMineError(String(e));
-    }
+    return runRemoveMine(mineWiringDeps, id);
   }
 
   async function gradeMine(again: boolean) {
-    const inv = detectInvoke();
-    if (!inv || !profileId || !mineReview) return;
-    try {
-      await inv("mine_grade", { profileId, itemId: mineReview.item.id, again });
-      setMineReview(null);
-      await refreshMine();
-    } catch (e) {
-      setMineError(String(e));
-    }
+    return runGradeMine(mineWiringDeps, again);
   }
 
   // FIX-ERR-SRS-LOOP-001-2 (D3): the ONLY front-end call sites of the
@@ -2546,69 +2449,23 @@ export function App() {
   // inside `error_review_accept`, so an unaccepted offer schedules
   // nothing (the never-silent invariant, pinned in error-review.test).
   async function acceptErrorOffer(offer: FormErrorOfferView, fail: (msg: string) => void) {
-    const inv = detectInvoke();
-    if (!inv || !profileId) return;
-    try {
-      await inv("error_review_accept", { profileId, ledgerId: offer.ledger_id });
-      setAcceptedOffers((prev) =>
-        prev.includes(offer.ledger_id) ? prev : [...prev, offer.ledger_id],
-      );
-    } catch (e) {
-      fail(String(e));
-    }
+    return runAcceptErrorOffer(mineWiringDeps, offer, fail);
   }
 
   async function refreshErrorReviews() {
-    const inv = detectInvoke();
-    if (!inv || !profileId) return;
-    try {
-      setErrCards((await inv("error_review_queue", { profileId })) as ErrorReviewCardView[]);
-    } catch (e) {
-      setErrError(String(e));
-    }
+    return runRefreshErrorReviews(mineWiringDeps);
   }
 
   function startErrorReview() {
-    const [first] = errCards;
-    if (!first) {
-      setErrNotice("Nothing is due for review right now.");
-      return;
-    }
-    setErrNotice(null);
-    setErrReview({ card: first, revealed: false });
+    return runStartErrorReview(mineWiringDeps);
   }
 
   async function gradeErrorReview(again: boolean) {
-    const inv = detectInvoke();
-    if (!inv || !profileId || !errReview) return;
-    try {
-      await inv("error_review_grade", { profileId, cardId: errReview.card.card_id, again });
-      setErrReview(null);
-      await refreshErrorReviews();
-    } catch (e) {
-      setErrError(String(e));
-    }
+    return runGradeErrorReview(mineWiringDeps, again);
   }
 
   async function startMineReview() {
-    const inv = detectInvoke();
-    if (!inv || !profileId) return;
-    try {
-      // D8: the engine owns what "due" means (`mine_due` compares the stored
-      // schedule against the same clock the scheduler wrote). Comparing
-      // `due_at` to a client-side clock here could disagree with it, so the
-      // duplicated local filter is gone.
-      const due = (await inv("mine_due", { profileId })) as typeof mineItems;
-      const [first] = due;
-      if (!first) {
-        setMineNotice("Nothing is due for review right now.");
-        return;
-      }
-      setMineNotice(null);
-      setMineReview({ item: first, revealed: false });
-    } catch (e) {
-      setMineError(String(e));
-    }
+    return runStartMineReview(mineWiringDeps);
   }
 
   // U03: the engine answers which saved words were never scheduled; the UI
@@ -2616,28 +2473,46 @@ export function App() {
   // grade then goes through `mine_grade`, which seeds the schedule — the
   // same single grading path due reviews use.
   async function startNewMineReview() {
-    const inv = detectInvoke();
-    if (!inv || !profileId) return;
-    try {
-      const fresh = (await inv("mine_new", { profileId })) as typeof mineItems;
-      const [first] = fresh;
-      if (!first) {
-        setMineNotice("No new words are waiting for their first review.");
-        return;
-      }
-      setMineNotice(null);
-      setMineReview({ item: first, revealed: false });
-    } catch (e) {
-      setMineError(String(e));
-    }
+    return runStartNewMineReview(mineWiringDeps);
   }
 
   function reviewMineNow(id: string) {
-    const item = mineItems.find((m) => m.id === id);
-    if (!item || item.due_at) return;
-    setMineNotice(null);
-    setMineReview({ item, revealed: false });
+    return runReviewMineNow(mineWiringDeps, id);
   }
+
+  const mineWiringDeps: MineWiringDeps = {
+    profileId,
+    displayName,
+    mineItems,
+    mineSurface,
+    mineReading,
+    mineGloss,
+    mineSource,
+    mineReview,
+    errCards,
+    errReview,
+    storyActive,
+    playSentenceClip,
+    setMineItems,
+    setMineCount,
+    setMineFlashId,
+    setWordsLoading,
+    setMineSurface,
+    setMineReading,
+    setMineGloss,
+    setMineSource,
+    setMineError,
+    setMineNotice,
+    setMineReview,
+    setRoute,
+    setErrCards,
+    setErrReview,
+    setErrError,
+    setErrNotice,
+    setStoryError,
+    setStoryActive,
+    setAcceptedOffers,
+  };
 
   // READ-001: revealing a faded scaffold refetches the task with the
   // reading shown; the submit then records it as support (level 3).
