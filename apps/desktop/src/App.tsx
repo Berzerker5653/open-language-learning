@@ -168,7 +168,6 @@ import {
   runRemoveMine,
   runGradeMine,
   runAcceptErrorOffer,
-  runRefreshErrorReviews,
   runStartErrorReview,
   runGradeErrorReview,
   runStartMineReview,
@@ -2450,10 +2449,6 @@ export function App() {
   // nothing (the never-silent invariant, pinned in error-review.test).
   async function acceptErrorOffer(offer: FormErrorOfferView, fail: (msg: string) => void) {
     return runAcceptErrorOffer(mineWiringDeps, offer, fail);
-  }
-
-  async function refreshErrorReviews() {
-    return runRefreshErrorReviews(mineWiringDeps);
   }
 
   function startErrorReview() {
