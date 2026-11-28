@@ -1,5 +1,16 @@
 # FIX-M2-SUPPLY-RU-001 — RUN 3 (takeover) NOTES: partial. Code shipped, acceptance NOT met.
 
+## RUN 4 (takeover-2 t_12a2dc67, 2026-11-28): BRANCH (b) — engine-capped, STOP.
+Decision-tree result in full: state/evidence/FIX-M2-SUPPLY-RU-001/run4-findings.md
+(+ derived-edge-dump-8a8b34c6.tsv, derived-rows-day60-8a8b34c6.tsv, m2probe.rs).
+Headline: the cyrillic/orthography gate now PASSES (8a8b34c6 works), but every ru.lex
+RecallMeaning derived row is capped at Supported even after 30+ drills — the runner
+stamps one prompt family per (content, dimension), policy Independent needs 2 distinct
+prompts. No required_concepts selection can satisfy a recall-meaning edge. Do NOT retry
+the pack-data branch until the prompt-family engine fix (ACTIVITY-MODEL-001 shape; a
+sibling lane was mid-fix on lib.rs lex_drill_family at capture time) lands; then re-run
+m2probe (10 s, no walk) before any re-walk.
+
 State at close (2026-11-28): code commit 8a8b34c6 on main (ladder gradeability guard in
 lts-langpack + ru/ja goals.yaml ladder data fix + fixtures + goal_ladder_gradeable tests;
 ru 0.5.2 / ja 0.4.5). All lane gates green (see state/evidence/FIX-M2-SUPPLY-RU-001/gates.log).

@@ -1,0 +1,135 @@
+== distinct shared required_concepts across hard-edge targets: 38
+== concept | total_served_events | per-dim state @t30 / @t60 (only dims with evidence) ==
+--- derived rows for shared concepts at day30 (2026-02-03T15:31:20Z) ---
+ru.lex.everyday.dom served=3 RecallMeaning=Supported
+ru.lex.everyday.eto served=5 RecallMeaning=Supported
+ru.lex.everyday.mama served=3 RecallMeaning=Supported
+ru.lex.personal.ya served=5 RecallMeaning=Supported
+ru.orth.cyrillic.a served=7 OrthographyRecognition=Retained
+ru.orth.cyrillic.b served=13 OrthographyRecognition=Independent
+ru.orth.cyrillic.ch served=11 OrthographyRecognition=Retained
+ru.orth.cyrillic.d served=3 OrthographyRecognition=Independent
+ru.orth.cyrillic.e served=41 OrthographyRecognition=Retained
+ru.orth.cyrillic.eh served=11 OrthographyRecognition=Independent
+ru.orth.cyrillic.f served=7 OrthographyRecognition=Independent
+ru.orth.cyrillic.g served=11 OrthographyRecognition=Retained
+ru.orth.cyrillic.hard-sign served=53 OrthographyRecognition=Retained
+ru.orth.cyrillic.i served=10 OrthographyRecognition=Retained
+ru.orth.cyrillic.k served=11 OrthographyRecognition=Retained
+ru.orth.cyrillic.kh served=11 OrthographyRecognition=Independent
+ru.orth.cyrillic.l served=3 OrthographyRecognition=Independent
+ru.orth.cyrillic.m served=14 OrthographyRecognition=Retained
+ru.orth.cyrillic.n served=26 OrthographyRecognition=Retained
+ru.orth.cyrillic.o served=21 OrthographyRecognition=Retained
+ru.orth.cyrillic.p served=3 OrthographyRecognition=Independent
+ru.orth.cyrillic.r served=26 OrthographyRecognition=Retained
+ru.orth.cyrillic.s served=66 OrthographyRecognition=Retained
+ru.orth.cyrillic.sh served=7 OrthographyRecognition=Retained
+ru.orth.cyrillic.shch served=3 OrthographyRecognition=Independent
+ru.orth.cyrillic.short-i served=3 OrthographyRecognition=Independent
+ru.orth.cyrillic.soft-sign served=11 OrthographyRecognition=Retained
+ru.orth.cyrillic.stress-mark served=8 OrthographyRecognition=Retained
+ru.orth.cyrillic.t served=4 OrthographyRecognition=Retained
+ru.orth.cyrillic.ts served=65 OrthographyRecognition=Retained
+ru.orth.cyrillic.u served=11 OrthographyRecognition=Independent
+ru.orth.cyrillic.v served=7 OrthographyRecognition=Independent
+ru.orth.cyrillic.y served=14 OrthographyRecognition=Retained
+ru.orth.cyrillic.ya served=7 OrthographyRecognition=Retained
+ru.orth.cyrillic.yo served=3 OrthographyRecognition=Independent
+ru.orth.cyrillic.yu served=17 OrthographyRecognition=Retained
+ru.orth.cyrillic.z served=11 OrthographyRecognition=Retained
+ru.orth.cyrillic.zh served=10 OrthographyRecognition=Retained
+--- derived rows for shared concepts at day60 (2026-03-05T15:30:05Z) ---
+ru.lex.everyday.dom served=3 RecallMeaning=Supported
+ru.lex.everyday.eto served=5 RecallMeaning=Supported
+ru.lex.everyday.mama served=3 RecallMeaning=Supported
+ru.lex.personal.ya served=5 RecallMeaning=Supported
+ru.orth.cyrillic.a served=7 OrthographyRecognition=Retained
+ru.orth.cyrillic.b served=13 OrthographyRecognition=Retained
+ru.orth.cyrillic.ch served=11 OrthographyRecognition=Retained
+ru.orth.cyrillic.d served=3 OrthographyRecognition=Retained
+ru.orth.cyrillic.e served=41 OrthographyRecognition=Retained
+ru.orth.cyrillic.eh served=11 OrthographyRecognition=Retained
+ru.orth.cyrillic.f served=7 OrthographyRecognition=Retained
+ru.orth.cyrillic.g served=11 OrthographyRecognition=Retained
+ru.orth.cyrillic.hard-sign served=53 OrthographyRecognition=Retained
+ru.orth.cyrillic.i served=10 OrthographyRecognition=Retained
+ru.orth.cyrillic.k served=11 OrthographyRecognition=Retained
+ru.orth.cyrillic.kh served=11 OrthographyRecognition=Retained
+ru.orth.cyrillic.l served=3 OrthographyRecognition=Retained
+ru.orth.cyrillic.m served=14 OrthographyRecognition=Retained
+ru.orth.cyrillic.n served=26 OrthographyRecognition=Retained
+ru.orth.cyrillic.o served=21 OrthographyRecognition=Retained
+ru.orth.cyrillic.p served=3 OrthographyRecognition=Retained
+ru.orth.cyrillic.r served=26 OrthographyRecognition=Retained
+ru.orth.cyrillic.s served=66 OrthographyRecognition=Retained
+ru.orth.cyrillic.sh served=7 OrthographyRecognition=Retained
+ru.orth.cyrillic.shch served=3 OrthographyRecognition=Retained
+ru.orth.cyrillic.short-i served=3 OrthographyRecognition=Retained
+ru.orth.cyrillic.soft-sign served=11 OrthographyRecognition=Retained
+ru.orth.cyrillic.stress-mark served=8 OrthographyRecognition=Retained
+ru.orth.cyrillic.t served=4 OrthographyRecognition=Retained
+ru.orth.cyrillic.ts served=65 OrthographyRecognition=Retained
+ru.orth.cyrillic.u served=11 OrthographyRecognition=Retained
+ru.orth.cyrillic.v served=7 OrthographyRecognition=Retained
+ru.orth.cyrillic.y served=14 OrthographyRecognition=Retained
+ru.orth.cyrillic.ya served=7 OrthographyRecognition=Retained
+ru.orth.cyrillic.yo served=3 OrthographyRecognition=Retained
+ru.orth.cyrillic.yu served=17 OrthographyRecognition=Retained
+ru.orth.cyrillic.z served=11 OrthographyRecognition=Retained
+ru.orth.cyrillic.zh served=10 OrthographyRecognition=Retained
+== hard-edge unlock evaluation (unit_goal_locked path: target is a GOAL) ==
+edge(target|dim|required_state) | goal_derived_state t30/t60 | satisfied t30/t60 | bottleneck concept(s) at t60
+ru.goal.a1.basic-messages|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a1.city|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a1.food|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a1.home|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a1.people-family|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a1.personal-details|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a1.routines|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a1.shopping|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a1.time-plans|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a2.comparisons|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a2.connected-messages|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a2.instructions|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a2.past-events|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a2.problems-solutions|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a2.services|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a2.social-plans|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a2.travel|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a2.wellbeing|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.a2.work-study|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b1.culture-media|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b1.experiences|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b1.extended-writing2|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b1.extended-writing|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b1.future-conditions2|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b1.future-conditions|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b1.information-summary2|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b1.information-summary|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b1.learning-work|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b1.narration|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b1.opinions|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b1.practical-problems|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b1.relationships|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b2.academic-study2|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b2.academic-study3|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b2.academic-study|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b2.argumentation2|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b2.argumentation3|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b2.argumentation4|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b2.argumentation|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b2.critical-reading2|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b2.critical-reading3|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b2.critical-reading4|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b2.critical-reading|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b2.synthesis2|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b2.synthesis3|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.b2.synthesis|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.on-ramp.classroom|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.on-ramp.cyrillic|orthography-recognition|independent | Independent/Retained | true/true, req Independent | min@t60: 34 concepts (34 total)
+ru.goal.on-ramp.everyday|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.on-ramp.greetings|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.on-ramp.numbers|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+ru.goal.on-ramp.self-introduction|recall-meaning|independent | Supported/Supported | false/false, req Independent | min@t60: ru.lex.everyday.eto,ru.lex.everyday.dom,ru.lex.everyday.mama,ru.lex.personal.ya
+== hard edges total=52 satisfied@t30=1 satisfied@t60=1
