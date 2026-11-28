@@ -1,0 +1,4 @@
+$ cargo run -q -p lts-langpack-cli -- build languages/ja-JP -o /home/hunter/.hermes/cache/scratch/lts-ja045/work/dist/rc-0.4.5/ja-jp-reference-0.4.5.lpk
+built /home/hunter/.hermes/cache/scratch/lts-ja045/work/dist/rc-0.4.5/ja-jp-reference-0.4.5.lpk (298023520 bytes)
+sha256 a2e5f5bde62a861baf133098b77873163efece35b1511e20164260aa21ddc6c4
+EXIT=0

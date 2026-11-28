@@ -1,0 +1,45 @@
+worktree=/home/hunter/.hermes/cache/scratch/lts-ja045/work (detached at HEAD=c2eed9431c0e1df7fe587eb91dd70584d570d069; built from main HEAD)
+HEAD=c2eed9431c0e1df7fe587eb91dd70584d570d069
+media hardlinked from /home/hunter/game-dev/LTS (gitignored bytes; manifest tracked at HEAD)
+--- manifests as shipped ---
+150a763c267ba0ea1bf68c673adaa6df0c8436f543cc8e7dd932d13cf1a389d5  languages/ja-JP/manifest.yaml
+version: "0.4.5"
+  content_license: "CC-BY-SA-4.0"
+rc-ja-JP-validate                            exit=0
+rc-ja-JP-lint                                exit=0
+rc-ja-JP-test                                exit=0
+rc-ja-JP-audit-curriculum                    exit=0
+rc-ja-JP-audit-lexicon                       exit=0
+rc-ja-JP-audit-licenses                      exit=0
+rc-ja-JP-audit-sources                       exit=0
+rc-build-ja-JP                               exit=0
+archive: /home/hunter/.hermes/cache/scratch/lts-ja045/work/dist/rc-0.4.5/ja-jp-reference-0.4.5.lpk
+bytes=298023520
+a2e5f5bde62a861baf133098b77873163efece35b1511e20164260aa21ddc6c4  /home/hunter/.hermes/cache/scratch/lts-ja045/work/dist/rc-0.4.5/ja-jp-reference-0.4.5.lpk
+rc-inspect-ja-JP                             exit=0
+archive members=5925 media_members=4935
+manifest_rows=4935 media_members=4935 delta=0
+words_sidecar_member=1
+--- ja-JP: PUBLISHED 0.4.4 (SUPERSEDED) -> CANDIDATE 0.4.5 (bytes + 12-hex hash + path) ---
+published 0.4.4 members = 5925   candidate 0.4.5 members = 5925
+identical (size+hash)   = 5861
+added in 0.4.5:
+100111 f3f891b73c9f grammar/concepts.jsonl
+107564 154d12c7426e media/ja.sent.concert-fun.wav
+126764 c8a7fa52b0ef media/ja.lex.transport.hairimasu.wav
+1461 150a763c267b manifest.yaml
+rc-install-ja-JP                             exit=0
+store layout: /home/hunter/.hermes/cache/scratch/lts-ja045/work/dist/rc-0.4.5/store-ja-JP/org.openlanguage.ja-jp.reference /home/hunter/.hermes/cache/scratch/lts-ja045/work/dist/rc-0.4.5/store-ja-JP/org.openlanguage.ja-jp.reference/0.4.5 /home/hunter/.hermes/cache/scratch/lts-ja045/work/dist/rc-0.4.5/store-ja-JP/org.openlanguage.ja-jp.reference/current 
+current pointer: 0.4.5
+media files in installed tree: 4935
+sidecar in installed tree: 1
+rows_checked=4935 installed_mismatches=0
+rc-draft-catalog                             exit=0
+      "license": "CC-BY-SA-4.0",
+      "pack_id": "org.openlanguage.ja-jp.reference",
+      "sha256": "a2e5f5bde62a861baf133098b77873163efece35b1511e20164260aa21ddc6c4",
+      "size_bytes": 298023520,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.5/ja-jp-reference-0.4.5.lpk",
+      "version": "0.4.5"
+install-gate-proof(fetch-script)             exit=0
+RC_JA_045_DONE

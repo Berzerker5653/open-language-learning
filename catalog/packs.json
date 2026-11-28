@@ -1,42 +1,57 @@
 {
   "catalog_version": "0.1.0",
+  "community_confirmed_platforms": [],
   "note": "Maintained community language-pack catalog. Entries point at versioned GitHub release assets (.lpk archives built with `langpack build`). The app fetches this file from the URL configured in LTS_PACK_CATALOG_URL, verifies every entry (https + GitHub release hosts only, pinned SHA-256, pinned size), and installs through the same validation gate as bundled packs. Add an entry only after `langpack test <pack>` passes and licenses/provenance records are complete. review_status is the author's claim ('community' or 'reviewed'); the app never upgrades it to verified trust. Platform status is three-way and never inferred from a successful build: see platform_note.",
   "packs": [
     {
       "author": "Open Language Learning Platform contributors",
+      "community_confirmed_platforms": [],
       "display_name": "Japanese Reference Pack",
       "license": "CC-BY-SA-4.0",
       "locale": "ja-JP",
       "min_sdk_version": "0.1.0",
       "pack_id": "org.openlanguage.ja-jp.reference",
       "review_status": "community",
-      "tested_platforms": ["linux"],
-      "community_confirmed_platforms": [],
-      "untested_platforms": ["windows", "macos"],
-      "sha256": "637d94495eed1a543cd347a7f800c3ad85b5a37f301a741891f87555408ad7f1",
-      "size_bytes": 298271601,
-      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.4/ja-jp-reference-0.4.4.lpk",
-      "version": "0.4.4"
+      "sha256": "a2e5f5bde62a861baf133098b77873163efece35b1511e20164260aa21ddc6c4",
+      "size_bytes": 298023520,
+      "tested_platforms": [
+        "linux"
+      ],
+      "untested_platforms": [
+        "windows",
+        "macos"
+      ],
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ja-jp.reference-0.4.5/ja-jp-reference-0.4.5.lpk",
+      "version": "0.4.5"
     },
     {
       "author": "Open Language Learning Platform contributors",
+      "community_confirmed_platforms": [],
       "display_name": "Russian Reference Pack",
       "license": "CC0-1.0",
       "locale": "ru-RU",
       "min_sdk_version": "0.1.0",
       "pack_id": "org.openlanguage.ru-ru.reference",
       "review_status": "community",
-      "tested_platforms": ["linux"],
-      "community_confirmed_platforms": [],
-      "untested_platforms": ["windows", "macos"],
       "sha256": "a3fd4de204bd1825cb6d8736f429d76d45c150a6500204fe8da149d817a0e113",
       "size_bytes": 293901560,
+      "tested_platforms": [
+        "linux"
+      ],
+      "untested_platforms": [
+        "windows",
+        "macos"
+      ],
       "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.5.2/ru-ru-reference-0.5.2.lpk",
       "version": "0.5.2"
     }
   ],
-  "tested_platforms": ["linux"],
-  "community_confirmed_platforms": [],
-  "untested_platforms": ["windows", "macos"],
-  "platform_note": "Three-way platform status (ADR-0015, docs/13 PLAT-001): tested_platforms is maintainer/owner-run runtime evidence (Linux only today); community_confirmed_platforms comes only from human runtime reports in docs/platform/PLATFORM_REPORTS.yaml bound to the exact app build and archive sha256; everything else is untested. Downloads for untested platforms may exist, but they are labeled untested. Any rebuild of the app or the pack invalidates a confirmation."
+  "platform_note": "Three-way platform status (ADR-0015, docs/13 PLAT-001): tested_platforms is maintainer/owner-run runtime evidence (Linux only today); community_confirmed_platforms comes only from human runtime reports in docs/platform/PLATFORM_REPORTS.yaml bound to the exact app build and archive sha256; everything else is untested. Downloads for untested platforms may exist, but they are labeled untested. Any rebuild of the app or the pack invalidates a confirmation.",
+  "tested_platforms": [
+    "linux"
+  ],
+  "untested_platforms": [
+    "windows",
+    "macos"
+  ]
 }

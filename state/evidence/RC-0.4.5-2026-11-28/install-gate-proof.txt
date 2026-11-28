@@ -1,0 +1,7 @@
+== install-gate proof: fetch-pack-audio.sh against RC archive ==
+$ scripts/fetch-pack-audio.sh --pack-dir /home/hunter/.hermes/cache/scratch/lts-ja045/work/tmp/proof-ja045/pack/ja-JP --catalog /home/hunter/.hermes/cache/scratch/lts-ja045/work/tmp/proof-ja045/catalog.json --work-dir /home/hunter/.hermes/cache/scratch/lts-ja045/work/tmp/proof-ja045/dl
+fetch-pack-audio: restoring org.openlanguage.ja-jp.reference 0.4.5 audio into /home/hunter/.hermes/cache/scratch/lts-ja045/work/tmp/proof-ja045/pack/ja-JP (archive ja-jp-reference-0.4.5.lpk)
+fetch-pack-audio: unpacking through: cargo run -q -p lts-langpack-cli -- install
+installed org.openlanguage.ja-jp.reference v0.4.5 at /home/hunter/.hermes/cache/scratch/lts-ja045/work/tmp/proof-ja045/dl/store/org.openlanguage.ja-jp.reference/0.4.5
+fetch-pack-audio: summary /home/hunter/.hermes/cache/scratch/lts-ja045/work/tmp/proof-ja045/pack/ja-JP: rows checked=4935 files valid=4935 files restored=4935 files already valid=0 rows failing=0
+PROOF_EXIT=0

@@ -1,0 +1,3 @@
+$ cargo run -q -p lts-langpack-cli -- install /home/hunter/.hermes/cache/scratch/lts-ja045/work/dist/rc-0.4.5/ja-jp-reference-0.4.5.lpk --store /home/hunter/.hermes/cache/scratch/lts-ja045/work/dist/rc-0.4.5/store-ja-JP
+installed org.openlanguage.ja-jp.reference v0.4.5 at /home/hunter/.hermes/cache/scratch/lts-ja045/work/dist/rc-0.4.5/store-ja-JP/org.openlanguage.ja-jp.reference/0.4.5
+EXIT=0
