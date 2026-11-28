@@ -3849,6 +3849,6 @@
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
-  "current_release_candidate": "Packs: ja-JP 0.4.4 (published 2026-11-22) and ru-RU 0.4.9 (published 2026-11-23) — manifests and catalog/packs.json pins agree (re-measured 2026-11-25, state/evidence/README-DOC-DRIFT-001/gates.log); the superseded release archives stay live as immutable rollback targets. App: newest published artifact is still open-language-learning-platform-0.4.0-alpha.1 (2026-10-13, Linux pre-release); code identity is 0.4.3-alpha.1 and unpublished — next-artifact decision is owner action O-06. Nothing in the build consumes this field; it is documentation.",
-  "updated_at": "2026-11-27T20:20:36-07:00"
+  "current_release_candidate": "org.openlanguage.ru-ru.reference 0.5.2 PUBLISHED 2026-11-28 (owner-approved, tag a3ed01e7); ja republish pending owner gate (catalog 0.4.4 vs repo pin 0.4.5)",
+  "updated_at": "2026-11-28T09:25:44-07:00"
 }

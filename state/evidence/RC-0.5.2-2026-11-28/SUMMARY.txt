@@ -1,0 +1,45 @@
+worktree=/home/hunter/.hermes/cache/scratch/lts-ru052/work (detached at HEAD=a3ed01e7d8b3d0ee50869288e251dcc54f983bc6; built from main HEAD)
+HEAD=a3ed01e7d8b3d0ee50869288e251dcc54f983bc6
+media hardlinked from /home/hunter/game-dev/LTS (gitignored bytes; manifest tracked at HEAD)
+--- manifests as shipped ---
+c09a4e28fc1311305d56c1ff634a9f584fc7f67fef3d1d826bfa0e94295b7f44  languages/ru-RU/manifest.yaml
+version: "0.5.2"
+  content_license: "CC0-1.0"
+rc-ru-RU-validate                            exit=0
+rc-ru-RU-lint                                exit=0
+rc-ru-RU-test                                exit=0
+rc-ru-RU-audit-curriculum                    exit=0
+rc-ru-RU-audit-lexicon                       exit=0
+rc-ru-RU-audit-licenses                      exit=0
+rc-ru-RU-audit-sources                       exit=0
+rc-build-ru-RU                               exit=0
+archive: /home/hunter/.hermes/cache/scratch/lts-ru052/work/dist/rc-0.5.2/ru-ru-reference-0.5.2.lpk
+bytes=293901560
+a3fd4de204bd1825cb6d8736f429d76d45c150a6500204fe8da149d817a0e113  /home/hunter/.hermes/cache/scratch/lts-ru052/work/dist/rc-0.5.2/ru-ru-reference-0.5.2.lpk
+rc-inspect-ru-RU                             exit=0
+archive members=5987 media_members=5032
+manifest_rows=5032 media_members=5032 delta=0
+words_sidecar_member=1
+--- ru-RU: PUBLISHED 0.4.9 (SUPERSEDED) -> CANDIDATE 0.5.2 (bytes + 12-hex hash + path) ---
+published 0.4.9 members = 5987   candidate 0.5.2 members = 5987
+identical (size+hash)   = 5832
+added in 0.5.2:
+102943 5dc4108007c2 lexicon/neg4.jsonl
+105580 7ae6169674ab lexicon/soc2.jsonl
+11540 152da6949ea3 lexicon/numbers-time.jsonl
+122924 0a0c9ba834c1 media/ru.sent.a1.shapka-v-parke.u004.wav
+rc-install-ru-RU                             exit=0
+store layout: /home/hunter/.hermes/cache/scratch/lts-ru052/work/dist/rc-0.5.2/store-ru-RU/org.openlanguage.ru-ru.reference /home/hunter/.hermes/cache/scratch/lts-ru052/work/dist/rc-0.5.2/store-ru-RU/org.openlanguage.ru-ru.reference/0.5.2 /home/hunter/.hermes/cache/scratch/lts-ru052/work/dist/rc-0.5.2/store-ru-RU/org.openlanguage.ru-ru.reference/current 
+current pointer: 0.5.2
+media files in installed tree: 5032
+sidecar in installed tree: 1
+rows_checked=5032 installed_mismatches=0
+rc-draft-catalog                             exit=0
+      "license": "CC0-1.0",
+      "pack_id": "org.openlanguage.ru-ru.reference",
+      "sha256": "a3fd4de204bd1825cb6d8736f429d76d45c150a6500204fe8da149d817a0e113",
+      "size_bytes": 293901560,
+      "url": "https://github.com/Berzerker5653/open-language-learning/releases/download/org.openlanguage.ru-ru.reference-0.5.2/ru-ru-reference-0.5.2.lpk",
+      "version": "0.5.2"
+install-gate-proof(fetch-script)             exit=0
+RC_050_DONE

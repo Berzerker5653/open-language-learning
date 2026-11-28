@@ -1,0 +1,6 @@
+store layout: /home/hunter/.hermes/cache/scratch/lts-ru052/work/dist/rc-0.5.2/store-ru-RU/org.openlanguage.ru-ru.reference /home/hunter/.hermes/cache/scratch/lts-ru052/work/dist/rc-0.5.2/store-ru-RU/org.openlanguage.ru-ru.reference/0.5.2 /home/hunter/.hermes/cache/scratch/lts-ru052/work/dist/rc-0.5.2/store-ru-RU/org.openlanguage.ru-ru.reference/current 
+current pointer: 0.5.2
+media files in installed tree: 5032
+sidecar in installed tree: 1
+-- installed wav sha256 vs manifest rows --
+rows_checked=5032 installed_mismatches=0

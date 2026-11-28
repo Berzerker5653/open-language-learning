@@ -1,0 +1,782 @@
+--- ru-RU: PUBLISHED 0.4.9 (SUPERSEDED) -> CANDIDATE 0.5.2 (bytes + 12-hex hash + path) ---
+published 0.4.9 members = 5987   candidate 0.5.2 members = 5987
+identical (size+hash)   = 5832
+added in 0.5.2:
+102943 5dc4108007c2 lexicon/neg4.jsonl
+105580 7ae6169674ab lexicon/soc2.jsonl
+11540 152da6949ea3 lexicon/numbers-time.jsonl
+122924 0a0c9ba834c1 media/ru.sent.a1.shapka-v-parke.u004.wav
+12556 0a256fa98e08 lexicon/everyday.jsonl
+138284 0738616aa6e3 media/ru.sent.cp.p34.wav
+138284 eaf55fed4518 media/ru.sent.a2.j2.wav
+1400 5531148c5da1 curriculum/units/016-cyrillic-ya-eh-f.yaml
+1517 1079ddca90e7 curriculum/units/011-cyrillic-k-e-n-s.yaml
+1525 630b1fdd0ef1 curriculum/units/014-cyrillic-l-z-zh-i.yaml
+1525 6ae528816e48 curriculum/units/012-cyrillic-r-v-u-kh.yaml
+1563 3d4038f20b11 curriculum/units/010-cyrillic-a-o-m-t.yaml
+1611 5798260ae472 curriculum/units/028-personal-details-09.yaml
+1629 a5464a883589 curriculum/units/017-cyrillic-ts-ch-sh.yaml
+1650 9863aab8c8ec curriculum/units/026-personal-details-07.yaml
+1653 f378ef251483 curriculum/units/027-personal-details-08.yaml
+16564 689a70fda4ee lexicon/nature.jsonl
+17215 3a15a140c27a sentences/content-parity-2026-10-12.jsonl
+172844 3110fb003072 media/ru.sent.cp.p35.wav
+1737 15de9b9edba0 curriculum/units/018-cyrillic-shch-soft-hard.yaml
+1759 6cbe383447a6 curriculum/units/002-self-introduction-01.yaml
+17669 49387c823b20 orthography/cyrillic.jsonl
+17695 b32038b4fa62 lexicon/classroom.jsonl
+1790 05430c9f7811 curriculum/units/006-everyday-01.yaml
+1821 a11bf8bd8e7e curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+1849 83a13bcee84c curriculum/units/013-cyrillic-b-p-d-g.yaml
+1869 6c4bffbf5886 curriculum/units/000-greetings-01.yaml
+1912 61a334a59ebe curriculum/units/055-routines-06.yaml
+1926 d4c27088bab6 curriculum/units/062-food-03.yaml
+1952 7dd288f1a52c curriculum/units/102-basic-messages-03.yaml
+2015 4a493e1caa56 curriculum/units/101-basic-messages-02.yaml
+2059 608543712d65 curriculum/units/072-shopping-03.yaml
+2068 40d4fc378925 curriculum/units/060-food-01.yaml
+2074 e4e9e93b4e42 curriculum/units/061-food-02.yaml
+2080 0f7e62df3231 curriculum/units/091-time-plans-02.yaml
+2082 f3254ac52985 curriculum/units/090-time-plans-01.yaml
+2086 f3a4ce0a4900 curriculum/units/100-basic-messages-01.yaml
+2090 504339bde749 curriculum/units/008-numbers-01.yaml
+2098 b418185b9f0b curriculum/units/814-b1j-problem-reply.yaml
+2157 09728fc272f6 curriculum/units/004-classroom-01.yaml
+218924 a120a217e315 media/ru.sent.cp.p26.wav
+2197 6155f84e6704 curriculum/units/005-classroom-02.yaml
+2220 d3c24bd60f9f curriculum/units/811-a2j-past-workday.yaml
+2239 6777362c5096 curriculum/units/080-city-01.yaml
+2239 ef7959b3ae0b curriculum/units/081-city-02.yaml
+2251 28e57a7ad478 curriculum/units/003-self-introduction-02.yaml
+2285 5087be7ecc64 curriculum/units/042-home-03.yaml
+2286 566930c23a54 curriculum/units/041-home-02.yaml
+2321 55ea8469ae30 curriculum/units/007-everyday-02.yaml
+2381 34029ae39225 curriculum/units/053-routines-04.yaml
+2421 ff6bb01031df curriculum/units/001-greetings-02.yaml
+2459 232b2ada1c72 curriculum/units/054-routines-05.yaml
+2501 45c6aa15c8e7 curriculum/units/023-personal-details-04.yaml
+2553 49332e59c670 curriculum/units/813-b1j-problem-letter.yaml
+2565 4f11f0700d29 curriculum/units/052-routines-03.yaml
+2577 a2ea4e222b4a curriculum/units/071-shopping-02.yaml
+2595 9bfd3c2d4dab curriculum/units/021-personal-details-02.yaml
+2632 57cc0302590d curriculum/units/051-routines-02.yaml
+2637 d1534d32ad73 curriculum/units/009-numbers-02.yaml
+2720 438b28661163 curriculum/units/024-personal-details-05.yaml
+2757 7011701fe427 curriculum/units/025-personal-details-06.yaml
+2768 790fcb841da2 curriculum/units/020-personal-details-01.yaml
+2971 c57019f2d31b curriculum/units/022-personal-details-03.yaml
+3034 07b1252a2399 curriculum/units/070-shopping-01.yaml
+31244 d652c69d438c media/ru.lex.stories202611.baton.wav
+357953 a859c6f666ca sentences/entries.jsonl
+3824 b36878d26bdb curriculum/units/029-personal-details-10.yaml
+3832 87bfd4685aa2 curriculum/units/019-cyrillic-stress-review.yaml
+4072238 1dfe08f0610e media/manifest.jsonl
+485789 60dc8a9616f0 media/words.jsonl
+5444 679748a4b9b2 sentences/journeys-2026-10-14.jsonl
+59462 82314428ae5e lexicon/argue3.jsonl
+620 3bded2e9abfe stories/walk-in-the-forest.yaml
+62141 5ade573e7b79 lexicon/media.jsonl
+62619 2c07bef31c2c lexicon/summary2.jsonl
+64037 6a2c49911deb lexicon/city.jsonl
+65616 4842d71f186a lexicon/synthesis2.jsonl
+66037 3c063a016c2b lexicon/work.jsonl
+66066 73e854ad981f lexicon/home.jsonl
+66377 6c75003a997c curriculum/goals.yaml
+67303 19b4113be0f4 lexicon/housing.jsonl
+67640 aea376f5f2c0 lexicon/personal.jsonl
+68150 4ca420db2f70 lexicon/respect.jsonl
+68220 1d5065964fa4 lexicon/synthesis4.jsonl
+68796 03407c2f0440 lexicon/food.jsonl
+68902 c04da065cad7 lexicon/culture.jsonl
+68959 365698510f56 lexicon/study.jsonl
+69219 b8c7f8b6084a lexicon/cult2.jsonl
+69435 8cb996d71b40 lexicon/summary.jsonl
+70296 fec813d257a0 lexicon/prof4.jsonl
+71130 0b0d5e407bf2 lexicon/learning.jsonl
+71153 23d8029e6508 lexicon/critical.jsonl
+71238 5ecab0fe9546 lexicon/prof2.jsonl
+71265 c987811e2ea5 lexicon/critical2.jsonl
+71523 897c24fdb0e4 lexicon/style3.jsonl
+71525 caf64d1f5417 lexicon/family.jsonl
+71570 bd5b99725d9f lexicon/cult.jsonl
+71592 6f4e55668876 lexicon/cult4.jsonl
+72405 2ffa1d0f16aa lexicon/narration.jsonl
+72662 61500b43ec66 lexicon/critical3.jsonl
+73305 25d835d95347 lexicon/rel.jsonl
+73487 fb25755bbed7 lexicon/cult3.jsonl
+73635 3ba3c4c9a96c lexicon/opinions.jsonl
+74321 0e1dac2c1100 lexicon/study2.jsonl
+74611 13ad8127a11a lexicon/writing2.jsonl
+748 92d1e5f0ff8c stories/shapka-v-parke.yaml
+74995 481b8d49c8aa lexicon/narration2.jsonl
+75025 9f29edd10904 lexicon/synthesis3.jsonl
+75177 e844a86a45ae lexicon/critical4.jsonl
+75298 db0113e32184 lexicon/travel.jsonl
+75482 de0f7ca54ec8 lexicon/study4.jsonl
+76788 a767a166ff57 lexicon/sci3.jsonl
+76804 77219998935e lexicon/shopping.jsonl
+77083 142b005c45eb lexicon/workstudy.jsonl
+77291 49686ca9946e lexicon/synthesis.jsonl
+78063 019396503e0a lexicon/experiences.jsonl
+78251 8b308cccd6cc lexicon/problems2.jsonl
+79065 dc0b1bc21fea lexicon/timeplans.jsonl
+79728 0493e9251437 lexicon/style2.jsonl
+80367 a2c7fcf215f5 lexicon/wellbeing.jsonl
+80628 1722ecc3aee5 lexicon/messages2.jsonl
+8094 3489940e3132 lexicon/greetings.jsonl
+80982 b9b7530e1cc5 lexicon/pastevents.jsonl
+81469 8ec4534d13b3 lexicon/soc.jsonl
+81573 7e88655d9707 lexicon/prof.jsonl
+81588 43d907aa5f5f lexicon/future2.jsonl
+82046 f536e8115ad1 lexicon/future.jsonl
+82280 40220e95546c lexicon/comparisons.jsonl
+82784 5af8fb20b93f lexicon/feelings.jsonl
+83207 59b13955b5df lexicon/argue2.jsonl
+83703 dfc21ac6944b lexicon/sci2.jsonl
+83887 685faad14825 lexicon/soc3.jsonl
+83933 db864328159c lexicon/writing.jsonl
+84178 b43e1c2510ce lexicon/problems.jsonl
+85142 0f6884e905cc lexicon/travel2.jsonl
+85536 a2514ca66f8a lexicon/sci4.jsonl
+85828 29289e9838d8 lexicon/argue.jsonl
+86102 c59de2e8c9db lexicon/style.jsonl
+86899 96052cb93530 lexicon/argue4.jsonl
+87075 cb24d6dcc4cb lexicon/prof3.jsonl
+87243 55b6dc535c7f lexicon/services.jsonl
+87606 ab2d8137d6f2 lexicon/routines.jsonl
+88370 2abcad5e1893 lexicon/soc4.jsonl
+88456 3fff513d6fec lexicon/messages.jsonl
+88628 d26e31ef520a lexicon/study3.jsonl
+89802 2dc9ce37559c lexicon/neg.jsonl
+90615 a2183ddb4ca9 lexicon/instructions.jsonl
+91622 916493ac679a lexicon/socialplans.jsonl
+91898 231ad574bd76 lexicon/neg2.jsonl
+92298 59c02a5253d5 lexicon/sci.jsonl
+93343 2d7a92fa2744 lexicon/stories202611.jsonl
+946 c09a4e28fc13 manifest.yaml
+95010 0d197279f2a6 lexicon/neg3.jsonl
+95410 6eccab5c2a69 lexicon/style4.jsonl
+96423 081ff323cf09 media/labels.jsonl
+removed in 0.5.2:
+1472 70a4d5b9752b curriculum/units/016-cyrillic-ya-eh-f.yaml
+153644 9f369559c110 media/ru.sent.a2.j2.wav
+1589 3db69ded39cd curriculum/units/011-cyrillic-k-e-n-s.yaml
+1597 cd463da2e38c curriculum/units/012-cyrillic-r-v-u-kh.yaml
+1597 efc1427ad8cf curriculum/units/014-cyrillic-l-z-zh-i.yaml
+1642 cde8ce54a5f8 curriculum/units/010-cyrillic-a-o-m-t.yaml
+165164 1064e6a15b3a media/ru.sent.cp.p26.wav
+1660 b0f413440c42 curriculum/units/062-food-03.yaml
+1676 a61f895a7535 curriculum/units/028-personal-details-09.yaml
+1701 63796c1eba86 curriculum/units/017-cyrillic-ts-ch-sh.yaml
+1705 d6fa4164e7f5 curriculum/units/081-city-02.yaml
+1705 dcb8aa6d072c curriculum/units/080-city-01.yaml
+1709 12133847826a curriculum/units/042-home-03.yaml
+1710 f03d99516949 curriculum/units/041-home-02.yaml
+17111 b25dfc991685 orthography/cyrillic.jsonl
+1713 a4f765c18d64 curriculum/units/072-shopping-03.yaml
+17211 c21e08e574b7 sentences/content-parity-2026-10-12.jsonl
+1724 558d3d9657bb curriculum/units/027-personal-details-08.yaml
+1734 b697ca3cd687 curriculum/units/026-personal-details-07.yaml
+1756 e99645be6b54 curriculum/units/055-routines-06.yaml
+1775 93d0e86f65c9 curriculum/units/071-shopping-02.yaml
+1790 e8c8e04ebad9 curriculum/units/102-basic-messages-03.yaml
+1802 c40b8c5e01e7 curriculum/units/060-food-01.yaml
+180524 4f2fb086d5fa media/ru.sent.cp.p35.wav
+180524 9cea8a8c2713 media/ru.sent.cp.p34.wav
+1808 c9de714871fc curriculum/units/091-time-plans-02.yaml
+1809 de8627a9b9bb curriculum/units/018-cyrillic-shch-soft-hard.yaml
+1810 91b830e48fb4 curriculum/units/090-time-plans-01.yaml
+1811 63b6b6fef215 curriculum/units/021-personal-details-02.yaml
+1815 b7fd63389b24 curriculum/units/101-basic-messages-02.yaml
+1819 81a0dae11db9 curriculum/units/002-self-introduction-01.yaml
+1845 d2173f0993e4 curriculum/units/053-routines-04.yaml
+1868 79075f45f699 curriculum/units/006-everyday-01.yaml
+1883 147a4a31da7c curriculum/units/052-routines-03.yaml
+1884 89b7074f5251 curriculum/units/061-food-02.yaml
+1893 a249c049f688 curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+192044 fe9f6f54e278 media/ru.sent.a1.shapka-v-parke.u004.wav
+1921 c296c2839b19 curriculum/units/013-cyrillic-b-p-d-g.yaml
+1924 2875e497d551 curriculum/units/100-basic-messages-01.yaml
+1950 ca47e329850e curriculum/units/051-routines-02.yaml
+1954 c8cd414378a8 curriculum/units/023-personal-details-04.yaml
+1961 143dda8d3214 curriculum/units/054-routines-05.yaml
+1978 f0f0a7d4745c curriculum/units/000-greetings-01.yaml
+2010 cb1d6f47ca30 curriculum/units/020-personal-details-01.yaml
+2106 6d3d985ee31c curriculum/units/814-b1j-problem-reply.yaml
+2141 3ca87919d25d curriculum/units/024-personal-details-05.yaml
+2178 301dd429d563 curriculum/units/008-numbers-01.yaml
+2217 86ab033bad91 curriculum/units/004-classroom-01.yaml
+2233 a27b5af7e11a curriculum/units/811-a2j-past-workday.yaml
+2252 45ae7f3aba4a curriculum/units/022-personal-details-03.yaml
+2258 4c497ffbfea4 curriculum/units/005-classroom-02.yaml
+2351 c65122a2b53b curriculum/units/003-self-introduction-02.yaml
+2384 2fea28e8a90c curriculum/units/007-everyday-02.yaml
+2450 99c0f1a9c740 curriculum/units/001-greetings-02.yaml
+2460 5c9a145929d7 curriculum/units/070-shopping-01.yaml
+2599 1f514460eec3 curriculum/units/813-b1j-problem-letter.yaml
+2717 dd26f8b3de37 curriculum/units/009-numbers-02.yaml
+28204 2dff9868757e media/ru.lex.stories202611.baton.wav
+2863 4c5d1362d823 curriculum/units/025-personal-details-06.yaml
+33736 13e9b5db4d0c lexicon/comparisons.jsonl
+357942 9a4f572248fb sentences/entries.jsonl
+36107 d0a798a42b5e lexicon/future.jsonl
+36128 669f0bc88808 lexicon/media.jsonl
+36270 20780f8e9611 lexicon/narration.jsonl
+36870 95274515a49f lexicon/prof4.jsonl
+37690 f3f99206ba78 lexicon/soc2.jsonl
+37699 7129fec31bf8 lexicon/soc4.jsonl
+37817 e0ad53e88100 lexicon/neg.jsonl
+37836 015d05c9dd7d lexicon/soc.jsonl
+37871 41df154a6e8f lexicon/sci.jsonl
+37875 81b3d9319306 lexicon/prof3.jsonl
+37990 874ab0469e5f lexicon/summary2.jsonl
+38158 a502c837ab7d lexicon/argue3.jsonl
+38286 8c6f3d39a9c5 lexicon/work.jsonl
+38359 37695eaf0a12 lexicon/sci4.jsonl
+38455 b4aa0e3b62e5 lexicon/sci2.jsonl
+38540 2e028f22ad50 lexicon/pastevents.jsonl
+38540 847338824876 lexicon/prof2.jsonl
+38559 327d7e17b93a lexicon/critical3.jsonl
+38570 31fbddce9dcc lexicon/sci3.jsonl
+38578 fe114ba09445 lexicon/prof.jsonl
+38580 dccdb843faf1 lexicon/future2.jsonl
+38676 8b35ca2917e0 lexicon/neg2.jsonl
+38692 8e759c1032bb lexicon/feelings.jsonl
+38739 a32d0bfbefb2 lexicon/soc3.jsonl
+38760 c74403350297 lexicon/neg3.jsonl
+38766 2376e9e8c2ae lexicon/argue4.jsonl
+38771 6a62d7b3e88a lexicon/culture.jsonl
+38772 16470a2ec179 lexicon/style4.jsonl
+38800 b248bbc930c3 lexicon/synthesis.jsonl
+38846 0c64e1c8a7e2 lexicon/housing.jsonl
+38865 4280d83393f4 lexicon/rel.jsonl
+38915 3bb5bac97741 lexicon/cult4.jsonl
+38951 f39a0494d038 lexicon/cult2.jsonl
+38995 fb980e004f55 lexicon/writing.jsonl
+3901 adb5502ab531 curriculum/units/029-personal-details-10.yaml
+39012 302cf6b1c61a lexicon/study2.jsonl
+39053 b1522d8a10dc lexicon/study.jsonl
+39148 1c3d4f7203b4 lexicon/problems2.jsonl
+39153 3faa7626379f lexicon/synthesis2.jsonl
+39174 b9bd25714acf lexicon/study4.jsonl
+39198 600d11970d9d lexicon/study3.jsonl
+39219 ee72c8b1cf22 lexicon/critical2.jsonl
+39231 1f015313b07e lexicon/neg4.jsonl
+39259 ea2883b88280 lexicon/summary.jsonl
+39297 b9bd7dae16ef lexicon/argue2.jsonl
+39322 bc4575b8d0d9 lexicon/argue.jsonl
+39334 9aee6bbc6f4c lexicon/messages.jsonl
+39349 f502afb55708 lexicon/learning.jsonl
+39355 a9f8481bae41 lexicon/style3.jsonl
+39360 077d29271f26 lexicon/writing2.jsonl
+39390 bdcb5cee02fa lexicon/respect.jsonl
+39403 07315fa475fc lexicon/cult3.jsonl
+39406 de0cd7450a11 lexicon/synthesis4.jsonl
+39429 6f6d622bac73 lexicon/critical4.jsonl
+39450 f375a98c4c1a lexicon/cult.jsonl
+39553 22e3a9ae8d83 lexicon/opinions.jsonl
+39555 b4b47636de71 lexicon/synthesis3.jsonl
+39597 2e4fa39b3505 lexicon/narration2.jsonl
+39621 742a5343cb12 lexicon/critical.jsonl
+39650 8e76a02f14ac lexicon/style2.jsonl
+39671 3f47cd708600 lexicon/style.jsonl
+3968 9b0352006107 curriculum/units/019-cyrillic-stress-review.yaml
+39852 28358d7ac996 lexicon/instructions.jsonl
+39887 7a5147e2bca5 lexicon/routines.jsonl
+40095 21a44bdd9d82 lexicon/family.jsonl
+40295 5e37147b6d97 lexicon/experiences.jsonl
+40386 a42c02cfef67 lexicon/messages2.jsonl
+40475 91330d93ec5f lexicon/socialplans.jsonl
+40564 e2ad14f7cb2a lexicon/timeplans.jsonl
+40573 16bf4789e1c4 lexicon/home.jsonl
+40619 f081f9e74a2f lexicon/problems.jsonl
+40672 d521eaeb67a1 lexicon/city.jsonl
+4072387 df9f6c854566 media/manifest.jsonl
+40756 050f2293f41c lexicon/wellbeing.jsonl
+40775 b2eb0297c23b lexicon/travel2.jsonl
+40883 5ec552cd2f6f lexicon/shopping.jsonl
+40920 e914378cc9c8 lexicon/travel.jsonl
+41004 2933348efc19 lexicon/food.jsonl
+41297 fffbf4ed29fc lexicon/services.jsonl
+41471 c06db8fdd019 lexicon/workstudy.jsonl
+43741 be73dfa2ebf2 lexicon/personal.jsonl
+44612 b0e29b2f6fa5 lexicon/stories202611.jsonl
+485787 288db27d4d6f media/words.jsonl
+5442 dcdb12bd6b4d sentences/journeys-2026-10-14.jsonl
+5957 0d062ae6f4aa lexicon/classroom.jsonl
+620 5c177e22ba3c stories/walk-in-the-forest.yaml
+6365 ff4f81266ea9 lexicon/greetings.jsonl
+67362 251925d66a58 curriculum/goals.yaml
+748 474745b9ae77 stories/shapka-v-parke.yaml
+7694 7953d51dd796 lexicon/numbers-time.jsonl
+7997 b30cbf65b263 lexicon/everyday.jsonl
+8777 388e3f3f8919 lexicon/nature.jsonl
+946 45d184c3d261 manifest.yaml
+96418 17d8431025c9 media/labels.jsonl
+present on both sides with different bytes:
+  curriculum/goals.yaml
+    0.5.2: 67362 251925d66a58 curriculum/goals.yaml
+    0.4.9: 66377 6c75003a997c curriculum/goals.yaml
+  curriculum/units/000-greetings-01.yaml
+    0.5.2: 1978 f0f0a7d4745c curriculum/units/000-greetings-01.yaml
+    0.4.9: 1869 6c4bffbf5886 curriculum/units/000-greetings-01.yaml
+  curriculum/units/001-greetings-02.yaml
+    0.5.2: 2450 99c0f1a9c740 curriculum/units/001-greetings-02.yaml
+    0.4.9: 2421 ff6bb01031df curriculum/units/001-greetings-02.yaml
+  curriculum/units/002-self-introduction-01.yaml
+    0.5.2: 1819 81a0dae11db9 curriculum/units/002-self-introduction-01.yaml
+    0.4.9: 1759 6cbe383447a6 curriculum/units/002-self-introduction-01.yaml
+  curriculum/units/003-self-introduction-02.yaml
+    0.5.2: 2351 c65122a2b53b curriculum/units/003-self-introduction-02.yaml
+    0.4.9: 2251 28e57a7ad478 curriculum/units/003-self-introduction-02.yaml
+  curriculum/units/004-classroom-01.yaml
+    0.5.2: 2217 86ab033bad91 curriculum/units/004-classroom-01.yaml
+    0.4.9: 2157 09728fc272f6 curriculum/units/004-classroom-01.yaml
+  curriculum/units/005-classroom-02.yaml
+    0.5.2: 2258 4c497ffbfea4 curriculum/units/005-classroom-02.yaml
+    0.4.9: 2197 6155f84e6704 curriculum/units/005-classroom-02.yaml
+  curriculum/units/006-everyday-01.yaml
+    0.5.2: 1868 79075f45f699 curriculum/units/006-everyday-01.yaml
+    0.4.9: 1790 05430c9f7811 curriculum/units/006-everyday-01.yaml
+  curriculum/units/007-everyday-02.yaml
+    0.5.2: 2384 2fea28e8a90c curriculum/units/007-everyday-02.yaml
+    0.4.9: 2321 55ea8469ae30 curriculum/units/007-everyday-02.yaml
+  curriculum/units/008-numbers-01.yaml
+    0.5.2: 2178 301dd429d563 curriculum/units/008-numbers-01.yaml
+    0.4.9: 2090 504339bde749 curriculum/units/008-numbers-01.yaml
+  curriculum/units/009-numbers-02.yaml
+    0.5.2: 2717 dd26f8b3de37 curriculum/units/009-numbers-02.yaml
+    0.4.9: 2637 d1534d32ad73 curriculum/units/009-numbers-02.yaml
+  curriculum/units/010-cyrillic-a-o-m-t.yaml
+    0.5.2: 1642 cde8ce54a5f8 curriculum/units/010-cyrillic-a-o-m-t.yaml
+    0.4.9: 1563 3d4038f20b11 curriculum/units/010-cyrillic-a-o-m-t.yaml
+  curriculum/units/011-cyrillic-k-e-n-s.yaml
+    0.5.2: 1589 3db69ded39cd curriculum/units/011-cyrillic-k-e-n-s.yaml
+    0.4.9: 1517 1079ddca90e7 curriculum/units/011-cyrillic-k-e-n-s.yaml
+  curriculum/units/012-cyrillic-r-v-u-kh.yaml
+    0.5.2: 1597 cd463da2e38c curriculum/units/012-cyrillic-r-v-u-kh.yaml
+    0.4.9: 1525 6ae528816e48 curriculum/units/012-cyrillic-r-v-u-kh.yaml
+  curriculum/units/013-cyrillic-b-p-d-g.yaml
+    0.5.2: 1921 c296c2839b19 curriculum/units/013-cyrillic-b-p-d-g.yaml
+    0.4.9: 1849 83a13bcee84c curriculum/units/013-cyrillic-b-p-d-g.yaml
+  curriculum/units/014-cyrillic-l-z-zh-i.yaml
+    0.5.2: 1597 efc1427ad8cf curriculum/units/014-cyrillic-l-z-zh-i.yaml
+    0.4.9: 1525 630b1fdd0ef1 curriculum/units/014-cyrillic-l-z-zh-i.yaml
+  curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+    0.5.2: 1893 a249c049f688 curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+    0.4.9: 1821 a11bf8bd8e7e curriculum/units/015-cyrillic-y-short-i-yo-yu.yaml
+  curriculum/units/016-cyrillic-ya-eh-f.yaml
+    0.5.2: 1472 70a4d5b9752b curriculum/units/016-cyrillic-ya-eh-f.yaml
+    0.4.9: 1400 5531148c5da1 curriculum/units/016-cyrillic-ya-eh-f.yaml
+  curriculum/units/017-cyrillic-ts-ch-sh.yaml
+    0.5.2: 1701 63796c1eba86 curriculum/units/017-cyrillic-ts-ch-sh.yaml
+    0.4.9: 1629 a5464a883589 curriculum/units/017-cyrillic-ts-ch-sh.yaml
+  curriculum/units/018-cyrillic-shch-soft-hard.yaml
+    0.5.2: 1809 de8627a9b9bb curriculum/units/018-cyrillic-shch-soft-hard.yaml
+    0.4.9: 1737 15de9b9edba0 curriculum/units/018-cyrillic-shch-soft-hard.yaml
+  curriculum/units/019-cyrillic-stress-review.yaml
+    0.5.2: 3968 9b0352006107 curriculum/units/019-cyrillic-stress-review.yaml
+    0.4.9: 3832 87bfd4685aa2 curriculum/units/019-cyrillic-stress-review.yaml
+  curriculum/units/020-personal-details-01.yaml
+    0.5.2: 2010 cb1d6f47ca30 curriculum/units/020-personal-details-01.yaml
+    0.4.9: 2768 790fcb841da2 curriculum/units/020-personal-details-01.yaml
+  curriculum/units/021-personal-details-02.yaml
+    0.5.2: 1811 63b6b6fef215 curriculum/units/021-personal-details-02.yaml
+    0.4.9: 2595 9bfd3c2d4dab curriculum/units/021-personal-details-02.yaml
+  curriculum/units/022-personal-details-03.yaml
+    0.5.2: 2252 45ae7f3aba4a curriculum/units/022-personal-details-03.yaml
+    0.4.9: 2971 c57019f2d31b curriculum/units/022-personal-details-03.yaml
+  curriculum/units/023-personal-details-04.yaml
+    0.5.2: 1954 c8cd414378a8 curriculum/units/023-personal-details-04.yaml
+    0.4.9: 2501 45c6aa15c8e7 curriculum/units/023-personal-details-04.yaml
+  curriculum/units/024-personal-details-05.yaml
+    0.5.2: 2141 3ca87919d25d curriculum/units/024-personal-details-05.yaml
+    0.4.9: 2720 438b28661163 curriculum/units/024-personal-details-05.yaml
+  curriculum/units/025-personal-details-06.yaml
+    0.5.2: 2863 4c5d1362d823 curriculum/units/025-personal-details-06.yaml
+    0.4.9: 2757 7011701fe427 curriculum/units/025-personal-details-06.yaml
+  curriculum/units/026-personal-details-07.yaml
+    0.5.2: 1734 b697ca3cd687 curriculum/units/026-personal-details-07.yaml
+    0.4.9: 1650 9863aab8c8ec curriculum/units/026-personal-details-07.yaml
+  curriculum/units/027-personal-details-08.yaml
+    0.5.2: 1724 558d3d9657bb curriculum/units/027-personal-details-08.yaml
+    0.4.9: 1653 f378ef251483 curriculum/units/027-personal-details-08.yaml
+  curriculum/units/028-personal-details-09.yaml
+    0.5.2: 1676 a61f895a7535 curriculum/units/028-personal-details-09.yaml
+    0.4.9: 1611 5798260ae472 curriculum/units/028-personal-details-09.yaml
+  curriculum/units/029-personal-details-10.yaml
+    0.5.2: 3901 adb5502ab531 curriculum/units/029-personal-details-10.yaml
+    0.4.9: 3824 b36878d26bdb curriculum/units/029-personal-details-10.yaml
+  curriculum/units/041-home-02.yaml
+    0.5.2: 1710 f03d99516949 curriculum/units/041-home-02.yaml
+    0.4.9: 2286 566930c23a54 curriculum/units/041-home-02.yaml
+  curriculum/units/042-home-03.yaml
+    0.5.2: 1709 12133847826a curriculum/units/042-home-03.yaml
+    0.4.9: 2285 5087be7ecc64 curriculum/units/042-home-03.yaml
+  curriculum/units/051-routines-02.yaml
+    0.5.2: 1950 ca47e329850e curriculum/units/051-routines-02.yaml
+    0.4.9: 2632 57cc0302590d curriculum/units/051-routines-02.yaml
+  curriculum/units/052-routines-03.yaml
+    0.5.2: 1883 147a4a31da7c curriculum/units/052-routines-03.yaml
+    0.4.9: 2565 4f11f0700d29 curriculum/units/052-routines-03.yaml
+  curriculum/units/053-routines-04.yaml
+    0.5.2: 1845 d2173f0993e4 curriculum/units/053-routines-04.yaml
+    0.4.9: 2381 34029ae39225 curriculum/units/053-routines-04.yaml
+  curriculum/units/054-routines-05.yaml
+    0.5.2: 1961 143dda8d3214 curriculum/units/054-routines-05.yaml
+    0.4.9: 2459 232b2ada1c72 curriculum/units/054-routines-05.yaml
+  curriculum/units/055-routines-06.yaml
+    0.5.2: 1756 e99645be6b54 curriculum/units/055-routines-06.yaml
+    0.4.9: 1912 61a334a59ebe curriculum/units/055-routines-06.yaml
+  curriculum/units/060-food-01.yaml
+    0.5.2: 1802 c40b8c5e01e7 curriculum/units/060-food-01.yaml
+    0.4.9: 2068 40d4fc378925 curriculum/units/060-food-01.yaml
+  curriculum/units/061-food-02.yaml
+    0.5.2: 1884 89b7074f5251 curriculum/units/061-food-02.yaml
+    0.4.9: 2074 e4e9e93b4e42 curriculum/units/061-food-02.yaml
+  curriculum/units/062-food-03.yaml
+    0.5.2: 1660 b0f413440c42 curriculum/units/062-food-03.yaml
+    0.4.9: 1926 d4c27088bab6 curriculum/units/062-food-03.yaml
+  curriculum/units/070-shopping-01.yaml
+    0.5.2: 2460 5c9a145929d7 curriculum/units/070-shopping-01.yaml
+    0.4.9: 3034 07b1252a2399 curriculum/units/070-shopping-01.yaml
+  curriculum/units/071-shopping-02.yaml
+    0.5.2: 1775 93d0e86f65c9 curriculum/units/071-shopping-02.yaml
+    0.4.9: 2577 a2ea4e222b4a curriculum/units/071-shopping-02.yaml
+  curriculum/units/072-shopping-03.yaml
+    0.5.2: 1713 a4f765c18d64 curriculum/units/072-shopping-03.yaml
+    0.4.9: 2059 608543712d65 curriculum/units/072-shopping-03.yaml
+  curriculum/units/080-city-01.yaml
+    0.5.2: 1705 dcb8aa6d072c curriculum/units/080-city-01.yaml
+    0.4.9: 2239 6777362c5096 curriculum/units/080-city-01.yaml
+  curriculum/units/081-city-02.yaml
+    0.5.2: 1705 d6fa4164e7f5 curriculum/units/081-city-02.yaml
+    0.4.9: 2239 ef7959b3ae0b curriculum/units/081-city-02.yaml
+  curriculum/units/090-time-plans-01.yaml
+    0.5.2: 1810 91b830e48fb4 curriculum/units/090-time-plans-01.yaml
+    0.4.9: 2082 f3254ac52985 curriculum/units/090-time-plans-01.yaml
+  curriculum/units/091-time-plans-02.yaml
+    0.5.2: 1808 c9de714871fc curriculum/units/091-time-plans-02.yaml
+    0.4.9: 2080 0f7e62df3231 curriculum/units/091-time-plans-02.yaml
+  curriculum/units/100-basic-messages-01.yaml
+    0.5.2: 1924 2875e497d551 curriculum/units/100-basic-messages-01.yaml
+    0.4.9: 2086 f3a4ce0a4900 curriculum/units/100-basic-messages-01.yaml
+  curriculum/units/101-basic-messages-02.yaml
+    0.5.2: 1815 b7fd63389b24 curriculum/units/101-basic-messages-02.yaml
+    0.4.9: 2015 4a493e1caa56 curriculum/units/101-basic-messages-02.yaml
+  curriculum/units/102-basic-messages-03.yaml
+    0.5.2: 1790 e8c8e04ebad9 curriculum/units/102-basic-messages-03.yaml
+    0.4.9: 1952 7dd288f1a52c curriculum/units/102-basic-messages-03.yaml
+  curriculum/units/811-a2j-past-workday.yaml
+    0.5.2: 2233 a27b5af7e11a curriculum/units/811-a2j-past-workday.yaml
+    0.4.9: 2220 d3c24bd60f9f curriculum/units/811-a2j-past-workday.yaml
+  curriculum/units/813-b1j-problem-letter.yaml
+    0.5.2: 2599 1f514460eec3 curriculum/units/813-b1j-problem-letter.yaml
+    0.4.9: 2553 49332e59c670 curriculum/units/813-b1j-problem-letter.yaml
+  curriculum/units/814-b1j-problem-reply.yaml
+    0.5.2: 2106 6d3d985ee31c curriculum/units/814-b1j-problem-reply.yaml
+    0.4.9: 2098 b418185b9f0b curriculum/units/814-b1j-problem-reply.yaml
+  lexicon/argue.jsonl
+    0.5.2: 39322 bc4575b8d0d9 lexicon/argue.jsonl
+    0.4.9: 85828 29289e9838d8 lexicon/argue.jsonl
+  lexicon/argue2.jsonl
+    0.5.2: 39297 b9bd7dae16ef lexicon/argue2.jsonl
+    0.4.9: 83207 59b13955b5df lexicon/argue2.jsonl
+  lexicon/argue3.jsonl
+    0.5.2: 38158 a502c837ab7d lexicon/argue3.jsonl
+    0.4.9: 59462 82314428ae5e lexicon/argue3.jsonl
+  lexicon/argue4.jsonl
+    0.5.2: 38766 2376e9e8c2ae lexicon/argue4.jsonl
+    0.4.9: 86899 96052cb93530 lexicon/argue4.jsonl
+  lexicon/city.jsonl
+    0.5.2: 40672 d521eaeb67a1 lexicon/city.jsonl
+    0.4.9: 64037 6a2c49911deb lexicon/city.jsonl
+  lexicon/classroom.jsonl
+    0.5.2: 5957 0d062ae6f4aa lexicon/classroom.jsonl
+    0.4.9: 17695 b32038b4fa62 lexicon/classroom.jsonl
+  lexicon/comparisons.jsonl
+    0.5.2: 33736 13e9b5db4d0c lexicon/comparisons.jsonl
+    0.4.9: 82280 40220e95546c lexicon/comparisons.jsonl
+  lexicon/critical.jsonl
+    0.5.2: 39621 742a5343cb12 lexicon/critical.jsonl
+    0.4.9: 71153 23d8029e6508 lexicon/critical.jsonl
+  lexicon/critical2.jsonl
+    0.5.2: 39219 ee72c8b1cf22 lexicon/critical2.jsonl
+    0.4.9: 71265 c987811e2ea5 lexicon/critical2.jsonl
+  lexicon/critical3.jsonl
+    0.5.2: 38559 327d7e17b93a lexicon/critical3.jsonl
+    0.4.9: 72662 61500b43ec66 lexicon/critical3.jsonl
+  lexicon/critical4.jsonl
+    0.5.2: 39429 6f6d622bac73 lexicon/critical4.jsonl
+    0.4.9: 75177 e844a86a45ae lexicon/critical4.jsonl
+  lexicon/cult.jsonl
+    0.5.2: 39450 f375a98c4c1a lexicon/cult.jsonl
+    0.4.9: 71570 bd5b99725d9f lexicon/cult.jsonl
+  lexicon/cult2.jsonl
+    0.5.2: 38951 f39a0494d038 lexicon/cult2.jsonl
+    0.4.9: 69219 b8c7f8b6084a lexicon/cult2.jsonl
+  lexicon/cult3.jsonl
+    0.5.2: 39403 07315fa475fc lexicon/cult3.jsonl
+    0.4.9: 73487 fb25755bbed7 lexicon/cult3.jsonl
+  lexicon/cult4.jsonl
+    0.5.2: 38915 3bb5bac97741 lexicon/cult4.jsonl
+    0.4.9: 71592 6f4e55668876 lexicon/cult4.jsonl
+  lexicon/culture.jsonl
+    0.5.2: 38771 6a62d7b3e88a lexicon/culture.jsonl
+    0.4.9: 68902 c04da065cad7 lexicon/culture.jsonl
+  lexicon/everyday.jsonl
+    0.5.2: 7997 b30cbf65b263 lexicon/everyday.jsonl
+    0.4.9: 12556 0a256fa98e08 lexicon/everyday.jsonl
+  lexicon/experiences.jsonl
+    0.5.2: 40295 5e37147b6d97 lexicon/experiences.jsonl
+    0.4.9: 78063 019396503e0a lexicon/experiences.jsonl
+  lexicon/family.jsonl
+    0.5.2: 40095 21a44bdd9d82 lexicon/family.jsonl
+    0.4.9: 71525 caf64d1f5417 lexicon/family.jsonl
+  lexicon/feelings.jsonl
+    0.5.2: 38692 8e759c1032bb lexicon/feelings.jsonl
+    0.4.9: 82784 5af8fb20b93f lexicon/feelings.jsonl
+  lexicon/food.jsonl
+    0.5.2: 41004 2933348efc19 lexicon/food.jsonl
+    0.4.9: 68796 03407c2f0440 lexicon/food.jsonl
+  lexicon/future.jsonl
+    0.5.2: 36107 d0a798a42b5e lexicon/future.jsonl
+    0.4.9: 82046 f536e8115ad1 lexicon/future.jsonl
+  lexicon/future2.jsonl
+    0.5.2: 38580 dccdb843faf1 lexicon/future2.jsonl
+    0.4.9: 81588 43d907aa5f5f lexicon/future2.jsonl
+  lexicon/greetings.jsonl
+    0.5.2: 6365 ff4f81266ea9 lexicon/greetings.jsonl
+    0.4.9: 8094 3489940e3132 lexicon/greetings.jsonl
+  lexicon/home.jsonl
+    0.5.2: 40573 16bf4789e1c4 lexicon/home.jsonl
+    0.4.9: 66066 73e854ad981f lexicon/home.jsonl
+  lexicon/housing.jsonl
+    0.5.2: 38846 0c64e1c8a7e2 lexicon/housing.jsonl
+    0.4.9: 67303 19b4113be0f4 lexicon/housing.jsonl
+  lexicon/instructions.jsonl
+    0.5.2: 39852 28358d7ac996 lexicon/instructions.jsonl
+    0.4.9: 90615 a2183ddb4ca9 lexicon/instructions.jsonl
+  lexicon/learning.jsonl
+    0.5.2: 39349 f502afb55708 lexicon/learning.jsonl
+    0.4.9: 71130 0b0d5e407bf2 lexicon/learning.jsonl
+  lexicon/media.jsonl
+    0.5.2: 36128 669f0bc88808 lexicon/media.jsonl
+    0.4.9: 62141 5ade573e7b79 lexicon/media.jsonl
+  lexicon/messages.jsonl
+    0.5.2: 39334 9aee6bbc6f4c lexicon/messages.jsonl
+    0.4.9: 88456 3fff513d6fec lexicon/messages.jsonl
+  lexicon/messages2.jsonl
+    0.5.2: 40386 a42c02cfef67 lexicon/messages2.jsonl
+    0.4.9: 80628 1722ecc3aee5 lexicon/messages2.jsonl
+  lexicon/narration.jsonl
+    0.5.2: 36270 20780f8e9611 lexicon/narration.jsonl
+    0.4.9: 72405 2ffa1d0f16aa lexicon/narration.jsonl
+  lexicon/narration2.jsonl
+    0.5.2: 39597 2e4fa39b3505 lexicon/narration2.jsonl
+    0.4.9: 74995 481b8d49c8aa lexicon/narration2.jsonl
+  lexicon/nature.jsonl
+    0.5.2: 8777 388e3f3f8919 lexicon/nature.jsonl
+    0.4.9: 16564 689a70fda4ee lexicon/nature.jsonl
+  lexicon/neg.jsonl
+    0.5.2: 37817 e0ad53e88100 lexicon/neg.jsonl
+    0.4.9: 89802 2dc9ce37559c lexicon/neg.jsonl
+  lexicon/neg2.jsonl
+    0.5.2: 38676 8b35ca2917e0 lexicon/neg2.jsonl
+    0.4.9: 91898 231ad574bd76 lexicon/neg2.jsonl
+  lexicon/neg3.jsonl
+    0.5.2: 38760 c74403350297 lexicon/neg3.jsonl
+    0.4.9: 95010 0d197279f2a6 lexicon/neg3.jsonl
+  lexicon/neg4.jsonl
+    0.5.2: 39231 1f015313b07e lexicon/neg4.jsonl
+    0.4.9: 102943 5dc4108007c2 lexicon/neg4.jsonl
+  lexicon/numbers-time.jsonl
+    0.5.2: 7694 7953d51dd796 lexicon/numbers-time.jsonl
+    0.4.9: 11540 152da6949ea3 lexicon/numbers-time.jsonl
+  lexicon/opinions.jsonl
+    0.5.2: 39553 22e3a9ae8d83 lexicon/opinions.jsonl
+    0.4.9: 73635 3ba3c4c9a96c lexicon/opinions.jsonl
+  lexicon/pastevents.jsonl
+    0.5.2: 38540 2e028f22ad50 lexicon/pastevents.jsonl
+    0.4.9: 80982 b9b7530e1cc5 lexicon/pastevents.jsonl
+  lexicon/personal.jsonl
+    0.5.2: 43741 be73dfa2ebf2 lexicon/personal.jsonl
+    0.4.9: 67640 aea376f5f2c0 lexicon/personal.jsonl
+  lexicon/problems.jsonl
+    0.5.2: 40619 f081f9e74a2f lexicon/problems.jsonl
+    0.4.9: 84178 b43e1c2510ce lexicon/problems.jsonl
+  lexicon/problems2.jsonl
+    0.5.2: 39148 1c3d4f7203b4 lexicon/problems2.jsonl
+    0.4.9: 78251 8b308cccd6cc lexicon/problems2.jsonl
+  lexicon/prof.jsonl
+    0.5.2: 38578 fe114ba09445 lexicon/prof.jsonl
+    0.4.9: 81573 7e88655d9707 lexicon/prof.jsonl
+  lexicon/prof2.jsonl
+    0.5.2: 38540 847338824876 lexicon/prof2.jsonl
+    0.4.9: 71238 5ecab0fe9546 lexicon/prof2.jsonl
+  lexicon/prof3.jsonl
+    0.5.2: 37875 81b3d9319306 lexicon/prof3.jsonl
+    0.4.9: 87075 cb24d6dcc4cb lexicon/prof3.jsonl
+  lexicon/prof4.jsonl
+    0.5.2: 36870 95274515a49f lexicon/prof4.jsonl
+    0.4.9: 70296 fec813d257a0 lexicon/prof4.jsonl
+  lexicon/rel.jsonl
+    0.5.2: 38865 4280d83393f4 lexicon/rel.jsonl
+    0.4.9: 73305 25d835d95347 lexicon/rel.jsonl
+  lexicon/respect.jsonl
+    0.5.2: 39390 bdcb5cee02fa lexicon/respect.jsonl
+    0.4.9: 68150 4ca420db2f70 lexicon/respect.jsonl
+  lexicon/routines.jsonl
+    0.5.2: 39887 7a5147e2bca5 lexicon/routines.jsonl
+    0.4.9: 87606 ab2d8137d6f2 lexicon/routines.jsonl
+  lexicon/sci.jsonl
+    0.5.2: 37871 41df154a6e8f lexicon/sci.jsonl
+    0.4.9: 92298 59c02a5253d5 lexicon/sci.jsonl
+  lexicon/sci2.jsonl
+    0.5.2: 38455 b4aa0e3b62e5 lexicon/sci2.jsonl
+    0.4.9: 83703 dfc21ac6944b lexicon/sci2.jsonl
+  lexicon/sci3.jsonl
+    0.5.2: 38570 31fbddce9dcc lexicon/sci3.jsonl
+    0.4.9: 76788 a767a166ff57 lexicon/sci3.jsonl
+  lexicon/sci4.jsonl
+    0.5.2: 38359 37695eaf0a12 lexicon/sci4.jsonl
+    0.4.9: 85536 a2514ca66f8a lexicon/sci4.jsonl
+  lexicon/services.jsonl
+    0.5.2: 41297 fffbf4ed29fc lexicon/services.jsonl
+    0.4.9: 87243 55b6dc535c7f lexicon/services.jsonl
+  lexicon/shopping.jsonl
+    0.5.2: 40883 5ec552cd2f6f lexicon/shopping.jsonl
+    0.4.9: 76804 77219998935e lexicon/shopping.jsonl
+  lexicon/soc.jsonl
+    0.5.2: 37836 015d05c9dd7d lexicon/soc.jsonl
+    0.4.9: 81469 8ec4534d13b3 lexicon/soc.jsonl
+  lexicon/soc2.jsonl
+    0.5.2: 37690 f3f99206ba78 lexicon/soc2.jsonl
+    0.4.9: 105580 7ae6169674ab lexicon/soc2.jsonl
+  lexicon/soc3.jsonl
+    0.5.2: 38739 a32d0bfbefb2 lexicon/soc3.jsonl
+    0.4.9: 83887 685faad14825 lexicon/soc3.jsonl
+  lexicon/soc4.jsonl
+    0.5.2: 37699 7129fec31bf8 lexicon/soc4.jsonl
+    0.4.9: 88370 2abcad5e1893 lexicon/soc4.jsonl
+  lexicon/socialplans.jsonl
+    0.5.2: 40475 91330d93ec5f lexicon/socialplans.jsonl
+    0.4.9: 91622 916493ac679a lexicon/socialplans.jsonl
+  lexicon/stories202611.jsonl
+    0.5.2: 44612 b0e29b2f6fa5 lexicon/stories202611.jsonl
+    0.4.9: 93343 2d7a92fa2744 lexicon/stories202611.jsonl
+  lexicon/study.jsonl
+    0.5.2: 39053 b1522d8a10dc lexicon/study.jsonl
+    0.4.9: 68959 365698510f56 lexicon/study.jsonl
+  lexicon/study2.jsonl
+    0.5.2: 39012 302cf6b1c61a lexicon/study2.jsonl
+    0.4.9: 74321 0e1dac2c1100 lexicon/study2.jsonl
+  lexicon/study3.jsonl
+    0.5.2: 39198 600d11970d9d lexicon/study3.jsonl
+    0.4.9: 88628 d26e31ef520a lexicon/study3.jsonl
+  lexicon/study4.jsonl
+    0.5.2: 39174 b9bd25714acf lexicon/study4.jsonl
+    0.4.9: 75482 de0f7ca54ec8 lexicon/study4.jsonl
+  lexicon/style.jsonl
+    0.5.2: 39671 3f47cd708600 lexicon/style.jsonl
+    0.4.9: 86102 c59de2e8c9db lexicon/style.jsonl
+  lexicon/style2.jsonl
+    0.5.2: 39650 8e76a02f14ac lexicon/style2.jsonl
+    0.4.9: 79728 0493e9251437 lexicon/style2.jsonl
+  lexicon/style3.jsonl
+    0.5.2: 39355 a9f8481bae41 lexicon/style3.jsonl
+    0.4.9: 71523 897c24fdb0e4 lexicon/style3.jsonl
+  lexicon/style4.jsonl
+    0.5.2: 38772 16470a2ec179 lexicon/style4.jsonl
+    0.4.9: 95410 6eccab5c2a69 lexicon/style4.jsonl
+  lexicon/summary.jsonl
+    0.5.2: 39259 ea2883b88280 lexicon/summary.jsonl
+    0.4.9: 69435 8cb996d71b40 lexicon/summary.jsonl
+  lexicon/summary2.jsonl
+    0.5.2: 37990 874ab0469e5f lexicon/summary2.jsonl
+    0.4.9: 62619 2c07bef31c2c lexicon/summary2.jsonl
+  lexicon/synthesis.jsonl
+    0.5.2: 38800 b248bbc930c3 lexicon/synthesis.jsonl
+    0.4.9: 77291 49686ca9946e lexicon/synthesis.jsonl
+  lexicon/synthesis2.jsonl
+    0.5.2: 39153 3faa7626379f lexicon/synthesis2.jsonl
+    0.4.9: 65616 4842d71f186a lexicon/synthesis2.jsonl
+  lexicon/synthesis3.jsonl
+    0.5.2: 39555 b4b47636de71 lexicon/synthesis3.jsonl
+    0.4.9: 75025 9f29edd10904 lexicon/synthesis3.jsonl
+  lexicon/synthesis4.jsonl
+    0.5.2: 39406 de0cd7450a11 lexicon/synthesis4.jsonl
+    0.4.9: 68220 1d5065964fa4 lexicon/synthesis4.jsonl
+  lexicon/timeplans.jsonl
+    0.5.2: 40564 e2ad14f7cb2a lexicon/timeplans.jsonl
+    0.4.9: 79065 dc0b1bc21fea lexicon/timeplans.jsonl
+  lexicon/travel.jsonl
+    0.5.2: 40920 e914378cc9c8 lexicon/travel.jsonl
+    0.4.9: 75298 db0113e32184 lexicon/travel.jsonl
+  lexicon/travel2.jsonl
+    0.5.2: 40775 b2eb0297c23b lexicon/travel2.jsonl
+    0.4.9: 85142 0f6884e905cc lexicon/travel2.jsonl
+  lexicon/wellbeing.jsonl
+    0.5.2: 40756 050f2293f41c lexicon/wellbeing.jsonl
+    0.4.9: 80367 a2c7fcf215f5 lexicon/wellbeing.jsonl
+  lexicon/work.jsonl
+    0.5.2: 38286 8c6f3d39a9c5 lexicon/work.jsonl
+    0.4.9: 66037 3c063a016c2b lexicon/work.jsonl
+  lexicon/workstudy.jsonl
+    0.5.2: 41471 c06db8fdd019 lexicon/workstudy.jsonl
+    0.4.9: 77083 142b005c45eb lexicon/workstudy.jsonl
+  lexicon/writing.jsonl
+    0.5.2: 38995 fb980e004f55 lexicon/writing.jsonl
+    0.4.9: 83933 db864328159c lexicon/writing.jsonl
+  lexicon/writing2.jsonl
+    0.5.2: 39360 077d29271f26 lexicon/writing2.jsonl
+    0.4.9: 74611 13ad8127a11a lexicon/writing2.jsonl
+  manifest.yaml
+    0.5.2: 946 45d184c3d261 manifest.yaml
+    0.4.9: 946 c09a4e28fc13 manifest.yaml
+  media/labels.jsonl
+    0.5.2: 96418 17d8431025c9 media/labels.jsonl
+    0.4.9: 96423 081ff323cf09 media/labels.jsonl
+  media/manifest.jsonl
+    0.5.2: 4072387 df9f6c854566 media/manifest.jsonl
+    0.4.9: 4072238 1dfe08f0610e media/manifest.jsonl
+  media/ru.lex.stories202611.baton.wav
+    0.5.2: 28204 2dff9868757e media/ru.lex.stories202611.baton.wav
+    0.4.9: 31244 d652c69d438c media/ru.lex.stories202611.baton.wav
+  media/ru.sent.a1.shapka-v-parke.u004.wav
+    0.5.2: 192044 fe9f6f54e278 media/ru.sent.a1.shapka-v-parke.u004.wav
+    0.4.9: 122924 0a0c9ba834c1 media/ru.sent.a1.shapka-v-parke.u004.wav
+  media/ru.sent.a2.j2.wav
+    0.5.2: 153644 9f369559c110 media/ru.sent.a2.j2.wav
+    0.4.9: 138284 eaf55fed4518 media/ru.sent.a2.j2.wav
+  media/ru.sent.cp.p26.wav
+    0.5.2: 165164 1064e6a15b3a media/ru.sent.cp.p26.wav
+    0.4.9: 218924 a120a217e315 media/ru.sent.cp.p26.wav
+  media/ru.sent.cp.p34.wav
+    0.5.2: 180524 9cea8a8c2713 media/ru.sent.cp.p34.wav
+    0.4.9: 138284 0738616aa6e3 media/ru.sent.cp.p34.wav
+  media/ru.sent.cp.p35.wav
+    0.5.2: 180524 4f2fb086d5fa media/ru.sent.cp.p35.wav
+    0.4.9: 172844 3110fb003072 media/ru.sent.cp.p35.wav
+  media/words.jsonl
+    0.5.2: 485787 288db27d4d6f media/words.jsonl
+    0.4.9: 485789 60dc8a9616f0 media/words.jsonl
+  orthography/cyrillic.jsonl
+    0.5.2: 17111 b25dfc991685 orthography/cyrillic.jsonl
+    0.4.9: 17669 49387c823b20 orthography/cyrillic.jsonl
+  sentences/content-parity-2026-10-12.jsonl
+    0.5.2: 17211 c21e08e574b7 sentences/content-parity-2026-10-12.jsonl
+    0.4.9: 17215 3a15a140c27a sentences/content-parity-2026-10-12.jsonl
+  sentences/entries.jsonl
+    0.5.2: 357942 9a4f572248fb sentences/entries.jsonl
+    0.4.9: 357953 a859c6f666ca sentences/entries.jsonl
+  sentences/journeys-2026-10-14.jsonl
+    0.5.2: 5442 dcdb12bd6b4d sentences/journeys-2026-10-14.jsonl
+    0.4.9: 5444 679748a4b9b2 sentences/journeys-2026-10-14.jsonl
+  stories/shapka-v-parke.yaml
+    0.5.2: 748 474745b9ae77 stories/shapka-v-parke.yaml
+    0.4.9: 748 92d1e5f0ff8c stories/shapka-v-parke.yaml
+  stories/walk-in-the-forest.yaml
+    0.5.2: 620 5c177e22ba3c stories/walk-in-the-forest.yaml
+    0.4.9: 620 3bded2e9abfe stories/walk-in-the-forest.yaml
+
