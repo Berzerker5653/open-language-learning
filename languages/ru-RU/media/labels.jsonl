@@ -914,7 +914,7 @@
 {"id":"ru.sent.cp.p23","tokens":[{"t":"окно́м","l":"ins.sg"},{"t":"дождь","l":"nom.sg"},{"t":"ве́тер.","l":"nom.sg"}]}
 {"id":"ru.sent.cp.p24","tokens":[{"t":"Ле́том","l":"ins.sg"},{"t":"быва́ет","l":"impf.pres"},{"t":"гроза́.","l":"nom.sg"}]}
 {"id":"ru.sent.cp.p25","tokens":[{"t":"на́дену","l":"perf.fut"},{"t":"пальто́.","l":"acc.sg"}]}
-{"id":"ru.sent.cp.p26","tokens":[{"t":"ле́су","l":"sg"},{"t":"зелено́.","l":"sg"}]}
+{"id":"ru.sent.cp.p26","tokens":[{"t":"лесу́","l":"sg"},{"t":"зелено́.","l":"sg"}]}
 {"id":"ru.sent.cp.p27","tokens":[{"t":"Пти́цы","l":"nom.pl"},{"t":"пою́т","l":"impf.pres"},{"t":"заре́.","l":"prep.sg"}]}
 {"id":"ru.sent.cp.p28","tokens":[{"t":"Река́","l":"nom.sg"},{"t":"широ́кая","l":"nom.sg"},{"t":"глубо́кая.","l":"nom.sg"}]}
 {"id":"ru.sent.cp.p29","tokens":[{"t":"ве́тке","l":"dat.sg"},{"t":"сиди́т","l":"impf.pres"},{"t":"ма́ленькая","l":"nom.sg"},{"t":"птичка.","l":"nom.sg"}]}
@@ -922,8 +922,8 @@
 {"id":"ru.sent.cp.p31","tokens":[{"t":"Соба́ка","l":"nom.sg"},{"t":"гуля́ет","l":"impf.pres"},{"t":"парке.","l":"dat.sg"}]}
 {"id":"ru.sent.cp.p32","tokens":[{"t":"на́шей","l":"gen.sg"},{"t":"ко́шки","l":"nom.pl"},{"t":"дли́нные","l":"acc.pl"},{"t":"усы́.","l":"acc.pl"}]}
 {"id":"ru.sent.cp.p33","tokens":[{"t":"Ма́льчик","l":"nom.sg"},{"t":"купи́л","l":"perf.past"},{"t":"мо́лочный","l":"nom.sg"},{"t":"йогу́рт.","l":"nom.sg"}]}
-{"id":"ru.sent.cp.p34","tokens":[{"t":"сто́ит","l":"impf.pres"},{"t":"батон","l":"nom.sg"},{"t":"хле́ба?","l":"gen.sg"}]}
-{"id":"ru.sent.cp.p35","tokens":[{"t":"пла́чу","l":"dat.sg"},{"t":"проду́кты","l":"acc.pl"},{"t":"ка́рточкой.","l":"ins.sg"}]}
+{"id":"ru.sent.cp.p34","tokens":[{"t":"стои́т","l":"impf.pres"},{"t":"бато́н","l":"nom.sg"},{"t":"хлеба́?","l":"gen.sg"}]}
+{"id":"ru.sent.cp.p35","tokens":[{"t":"плачу́","l":"impf.pres"},{"t":"проду́кты","l":"acc.pl"},{"t":"ка́рточкой.","l":"ins.sg"}]}
 {"id":"ru.sent.cp.p36","tokens":[{"t":"Откры́тый","l":"nom.sg"},{"t":"рынок","l":"acc.sg"},{"t":"рабо́тает","l":"impf.pres"}]}
 {"id":"ru.sent.cp.p37","tokens":[{"t":"Ко́фе","l":"gen.sg"},{"t":"го́рячий,","l":"nom.sg"},{"t":"мо́локо","l":"nom.sg"},{"t":"хо́лодное.","l":"nom.sg"}]}
 {"id":"ru.sent.cp.p38","tokens":[{"t":"Де́вочка","l":"nom.sg"},{"t":"налива́ет","l":"impf.pres"},{"t":"сок","l":"acc.sg"},{"t":"стака́н.","l":"acc.sg"}]}

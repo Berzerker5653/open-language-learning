@@ -51,6 +51,13 @@ activities:
   - ru.sent.cp.p16
   - ru.sent.cp.p33
   - ru.sent.cp.p38
+- id: ru.activity.a1.enrich-food-02
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.cp.p18
+  - ru.sent.cp.p19
 generation_contract:
   allowed_vocab:
   - ru.lex.food.moloko
@@ -64,6 +71,8 @@ generation_contract:
   - ru.sent.cp.p16
   - ru.sent.cp.p33
   - ru.sent.cp.p38
+  - ru.sent.cp.p18
+  - ru.sent.cp.p19
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

@@ -43,6 +43,13 @@ activities:
   - ru.sent.a1.u101
   - ru.lex.everyday.eto
   - ru.lex.everyday.mama
+- id: ru.activity.a1.enrich-basic-messages-02
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.cp.p04
+  - ru.sent.cp.p13
 generation_contract:
   allowed_vocab:
   - ru.lex.messages.otpravit
@@ -53,6 +60,8 @@ generation_contract:
   - ru.sent.a1.u101
   - ru.lex.everyday.eto
   - ru.lex.everyday.mama
+  - ru.sent.cp.p04
+  - ru.sent.cp.p13
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

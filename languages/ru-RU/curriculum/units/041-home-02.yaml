@@ -43,6 +43,20 @@ activities:
   - ru.sent.a1.u041
   - ru.lex.everyday.eto
   - ru.lex.everyday.mama
+- id: ru.activity.a1.enrich-home-02
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.a1.kot-doma.u001
+  - ru.sent.a1.kot-doma.u002
+  - ru.sent.a1.kot-doma.u003
+  - ru.sent.a1.kot-doma.u004
+  - ru.sent.a1.kot-doma.u005
+  - ru.sent.a1.kot-doma.u006
+  - ru.sent.cp.p14
+  - ru.sent.cp.p30
+  - ru.sent.cp.p32
 generation_contract:
   allowed_vocab:
   - ru.lex.home.okno
@@ -53,6 +67,15 @@ generation_contract:
   - ru.sent.a1.u041
   - ru.lex.everyday.eto
   - ru.lex.everyday.mama
+  - ru.sent.a1.kot-doma.u001
+  - ru.sent.a1.kot-doma.u002
+  - ru.sent.a1.kot-doma.u003
+  - ru.sent.a1.kot-doma.u004
+  - ru.sent.a1.kot-doma.u005
+  - ru.sent.a1.kot-doma.u006
+  - ru.sent.cp.p14
+  - ru.sent.cp.p30
+  - ru.sent.cp.p32
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

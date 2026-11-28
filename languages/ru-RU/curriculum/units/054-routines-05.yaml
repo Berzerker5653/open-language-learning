@@ -49,6 +49,21 @@ activities:
   support_level: 1
   content_refs:
   - ru.sent.cp.p12
+- id: ru.activity.a1.enrich-routines-05
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.cp.p11
+  - ru.sent.cp.p15
+  - ru.sent.cp.p20
+  - ru.sent.cp.p21
+  - ru.sent.cp.p26
+  - ru.sent.cp.p27
+  - ru.sent.cp.p28
+  - ru.sent.cp.p29
+  - ru.sent.cp.p31
+  - ru.sent.cp.p40
 generation_contract:
   allowed_vocab:
   - ru.lex.routines.rabotat
@@ -60,6 +75,16 @@ generation_contract:
   - ru.lex.everyday.eto
   - ru.lex.everyday.mama
   - ru.sent.cp.p12
+  - ru.sent.cp.p11
+  - ru.sent.cp.p15
+  - ru.sent.cp.p20
+  - ru.sent.cp.p21
+  - ru.sent.cp.p26
+  - ru.sent.cp.p27
+  - ru.sent.cp.p28
+  - ru.sent.cp.p29
+  - ru.sent.cp.p31
+  - ru.sent.cp.p40
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

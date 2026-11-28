@@ -43,6 +43,15 @@ activities:
   - ru.sent.a1.u090
   - ru.lex.everyday.eto
   - ru.lex.everyday.mama
+- id: ru.activity.a1.enrich-time-plans-01
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.cp.p22
+  - ru.sent.cp.p23
+  - ru.sent.cp.p24
+  - ru.sent.cp.p25
 generation_contract:
   allowed_vocab:
   - ru.lex.timeplans.ponedelnik
@@ -53,6 +62,10 @@ generation_contract:
   - ru.sent.a1.u090
   - ru.lex.everyday.eto
   - ru.lex.everyday.mama
+  - ru.sent.cp.p22
+  - ru.sent.cp.p23
+  - ru.sent.cp.p24
+  - ru.sent.cp.p25
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

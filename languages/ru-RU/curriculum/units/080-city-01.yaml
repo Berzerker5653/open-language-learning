@@ -43,6 +43,17 @@ activities:
   - ru.sent.a1.u080
   - ru.lex.everyday.eto
   - ru.lex.everyday.mama
+- id: ru.activity.a1.enrich-city-01
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.a1.shapka-v-parke.u001
+  - ru.sent.a1.shapka-v-parke.u002
+  - ru.sent.a1.shapka-v-parke.u003
+  - ru.sent.a1.shapka-v-parke.u004
+  - ru.sent.a1.shapka-v-parke.u005
+  - ru.sent.a1.shapka-v-parke.u006
 generation_contract:
   allowed_vocab:
   - ru.lex.city.ploshchad
@@ -53,6 +64,12 @@ generation_contract:
   - ru.sent.a1.u080
   - ru.lex.everyday.eto
   - ru.lex.everyday.mama
+  - ru.sent.a1.shapka-v-parke.u001
+  - ru.sent.a1.shapka-v-parke.u002
+  - ru.sent.a1.shapka-v-parke.u003
+  - ru.sent.a1.shapka-v-parke.u004
+  - ru.sent.a1.shapka-v-parke.u005
+  - ru.sent.a1.shapka-v-parke.u006
   allowed_grammar:
   - ru.grammar.on-ramp.eto-identification
   - ru.grammar.on-ramp.zero-present-copula

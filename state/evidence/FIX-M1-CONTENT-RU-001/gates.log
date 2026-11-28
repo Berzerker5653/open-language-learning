@@ -1,0 +1,25 @@
+FIX-M1-CONTENT-RU-001 gates (run 1)
+
+GATES RUN:
+  .venv/bin/python tools/qa_stories.py -> 20 stories, 0 FAIL (stress vs lexicon readings green)
+  python3 scripts/qa-asr.py --ids <6 rebaked ids> --out ... -> checked=6 passed=6 MISMATCH=0
+    (per-id rows in asr-rebake.jsonl; baton duration 0.650s under 1.15s word cap)
+  enrich pass1 in-tree assertions: every new ref band==a1(cp->a1), activity id unique,
+    unit yaml parses, allowed_vocab mirror asserted per unit (23 units, 128 refs)
+
+DEFERRED (NOT run before commit): desktop dev-pack install test; fresh 30-day sim.
+  The enrich commit is data-only and labeled unverified; revert it if the install-path
+  validator rejects. See state/notes/FIX-M1-CONTENT-RU-001.md REMAINING RECIPE.
+
+V2 (takeover-B findings honored): media manifest p34 стои́т aligned, labels.jsonl
+  плачу dat.sg -> impf.pres. Shard sweep = 22 semantic rows across sentences/*
+  shards + lexicon + media (manifest/words/labels), json round-trip, formats
+  byte-preserved (compact vs space separators per shard).
+
+D-013: CONFIRMED intentional (forms=unmarked orthography, readings=marked canonical;
+  pack-wide; some cross-topic duplicate lex entries noted as future dedupe candidate).
+
+Audio: 5 x qwen3-tts ono_anna re-bakes (omarchy, --force --only, synced fixed
+  manifest) + 1 x silero v5_6_ru baya baton. Copy-back sha256+bytes verified 1:1
+  against omarchy rows before manifest merge. Old baton piper take kept on omarchy
+  (fixru001b-baton.prev-piper); pack wavs gitignored, recovery= published archives.

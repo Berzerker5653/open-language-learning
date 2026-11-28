@@ -47,6 +47,13 @@ activities:
   support_level: 1
   content_refs:
   - ru.sent.cp.p01
+- id: ru.activity.a1.enrich-personal-details-01
+  type: encounter-read
+  modality: reading
+  support_level: 1
+  content_refs:
+  - ru.sent.cp.p02
+  - ru.sent.cp.p03
 generation_contract:
   allowed_vocab:
   - ru.lex.personal.my
@@ -60,6 +67,8 @@ generation_contract:
   - ru.lex.personal.on
   - ru.lex.personal.ona
   - ru.sent.cp.p01
+  - ru.sent.cp.p02
+  - ru.sent.cp.p03
   allowed_grammar:
   - ru.grammar.a1.subject-pronouns
   - ru.grammar.on-ramp.zero-present-copula
