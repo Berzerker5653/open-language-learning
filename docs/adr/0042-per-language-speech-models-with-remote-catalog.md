@@ -2,7 +2,9 @@
 
 ## Status
 
-Accepted.
+Accepted. Amended 2026-11-27 by FIX-SPEECH-CATALOG-001 (bounded-staleness
+auto-refresh adopted as decision (a); the owner can veto it in favour of the
+explicit-surface alternative, see Alternatives).
 
 Date: 2026-11-27
 
@@ -61,6 +63,22 @@ levels. Consumption sites resolve the locale from the **pack manifest**
 (`pack_target_locale`, the same source as the ASR language) — never from the
 UI language or a guess.
 
+**Bounded-staleness auto-refresh** (amendment, FIX-SPEECH-CATALOG-001 / D1):
+at every startup, when the cached remote catalog is absent or its last write
+is older than 7 days (`remote_catalog_is_stale`), the app fetches the public
+catalog in the background and adopts it on validation success — without a
+click. This deliberately adopts the *bounded* form of the auto-refresh once
+rejected below. Rationale: the model landscape moves fast (this ADR's whole
+premise), a week is a defensible upper bound on how long a learner runs with
+a stale model list, and every adoption path keeps the full validation and
+fail-closed guarantees that make an unattended fetch safe — the update is
+metadata-only, a rejected fetch silently keeps the last-good copy, the cache
+is re-validated on every read, and no model file is ever downloaded without
+an explicit user install. What "surprises the picker" means in practice is a
+new row appearing in the model list; nothing the learner selected changes.
+Decision recorded in `state/evidence/FIX-SPEECH-CATALOG-001-FIX/decision-a.md`;
+if the owner vetoes it, the fallback is option (b) in Alternatives considered.
+
 **Honest runtime gating**: the whisper sidecar runtime in current builds
 carries one pinned model; on the production bundled path the sidecar's pinned
 model executes, and the picker's per-language choice governs every path that
@@ -97,6 +115,17 @@ resolver, remote fetch), `lib.rs` (commands, pack-locale resolution),
 - **Per-profile model choice**: rejected — preference belongs to the
   language being learned, not the learner profile; profiles already switch
   packs.
-- **Silent background auto-refresh on every launch**: rejected — a surprise
-  picker change is worse than an explicit "Check for new models" (the fetch
-  is metadata-only but user-visible either way; explicit is reviewable).
+- **Silent background auto-refresh on every launch**: rejected *in its
+  unbounded form* — an automatic re-fetch on every single start, adopted with
+  no freshness bound, was judged "a surprise picker change worse than an
+  explicit check" (the fetch is metadata-only but user-visible either way;
+  explicit is reviewable). SUPERSEDED for the bounded form: the shipped
+  mechanism (7-day freshness window, validation + fail-closed on every
+  adoption, metadata-only, no automatic model download) is adopted as the
+  amendment above, so the rejection stands only for unbounded per-launch
+  refresh.
+- **Explicit surface instead of bounded auto-refresh** (option (b), the veto
+  path for the amendment): keep the cache manual-only and surface pending
+  updates as an explicit "N new models available" notice in Settings that the
+  learner has to act on. Not implemented; kept live as the fallback if the
+  owner vetoes decision (a).

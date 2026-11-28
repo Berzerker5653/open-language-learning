@@ -1223,9 +1223,10 @@ export function App() {
     return m.id;
   }
 
-  // K-98 (ADR-0042): pull the model list from the internet now. Startup and
-  // the weekly timer do this automatically; this is the "check right now"
-  // affordance the owner asked for — the model may change every release.
+  // K-98 (ADR-0042): pull the model list from the internet now. The automatic
+  // path is the startup check (7-day freshness window) — there is no timer
+  // inside a running session; this is the "check right now" affordance the
+  // owner asked for — the model may change every release.
   async function refreshModelCatalog() {
     if (!inv) return;
     setLangError(null);

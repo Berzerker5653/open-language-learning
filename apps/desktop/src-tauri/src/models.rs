@@ -143,6 +143,15 @@ pub fn validate_remote_catalog(catalog: &Catalog) -> Result<(), String> {
                 entry.id
             ));
         }
+        // FIX-SPEECH-CATALOG-001 (D6): a published entry with no files at all
+        // is a phantom — the pinning loop below would pass it vacuously and
+        // `installable()` would agree. Published payloads must exist.
+        if entry.availability.as_deref() != Some("unpublished") && entry.files.is_empty() {
+            return Err(format!(
+                "remote catalog entry {} lists no payload files",
+                entry.id
+            ));
+        }
         // Every payload must pass the ADR-0042 supply-chain host/format gate
         // (https + github.com/huggingface.co, exact size + sha256), or be an
         // explicitly unpublished placeholder.
@@ -192,10 +201,11 @@ fn is_sha256_hex(s: &str) -> bool {
 const REMOTE_CATALOG_MAX_AGE_DAYS: u64 = 7;
 
 /// True when no validated remote cache exists or its last write is older than
-/// the freshness window — the gate the startup path uses so the UI's
-/// "checks at startup and weekly" promise is a mechanism, not a hope. A failed
-/// check silently keeps the last-good cache (fail-closed), so staleness here
-/// can never take a working catalog away.
+/// the freshness window — the gate the startup path uses so the settings copy's
+/// "when the app starts, if it hasn't checked in a week" is a mechanism, not a
+/// hope (there is no timer inside a running session; a long-open app re-checks
+/// at its next start). A failed check silently keeps the last-good cache
+/// (fail-closed), so staleness here can never take a working catalog away.
 pub fn remote_catalog_is_stale(data: &Path, now: std::time::SystemTime) -> bool {
     let age = match fs::metadata(remote_catalog_path(data)).and_then(|m| m.modified()) {
         Ok(m) => now
@@ -428,10 +438,13 @@ pub fn installable(entry: &ModelEntry) -> bool {
     if entry.availability.as_deref() == Some("unpublished") {
         return false;
     }
-    entry
-        .files
-        .iter()
-        .all(|f| !f.url.contains("PENDING-RELEASE-URL") && !f.url.is_empty())
+    // FIX-SPEECH-CATALOG-001 (D6): a published entry that lists no files is
+    // nothing to install; the vacuous `all()` below would say otherwise.
+    !entry.files.is_empty()
+        && entry
+            .files
+            .iter()
+            .all(|f| !f.url.contains("PENDING-RELEASE-URL") && !f.url.is_empty())
 }
 
 /// Install one model streamed to disk by `fetch(file, part_path, on_chunk)`,
@@ -1247,11 +1260,59 @@ mod tests {
             ..good.clone()
         };
         assert!(validate_remote_catalog(&empty).is_err());
+
+        // FIX-SPEECH-CATALOG-001 (D5): the remaining gate rules, pinned.
+        // Non-numeric version — the floor check is a parse, not a string
+        // prefix, so "two" and "2.1" are both rejects.
+        let mut text_version = good.clone();
+        text_version.catalog_version = "two".into();
+        assert!(validate_remote_catalog(&text_version).is_err());
+        let mut dotted_version = good.clone();
+        dotted_version.catalog_version = "2.1".into();
+        assert!(validate_remote_catalog(&dotted_version).is_err());
+
+        // An empty id is a bad id even when everything else is fine.
+        let mut blank_id = good.clone();
+        blank_id.models[0].id = String::new();
+        assert!(validate_remote_catalog(&blank_id).is_err());
+
+        // The 200-entry cap: 200 valid entries pass, the 201st rejects.
+        let crowded = Catalog {
+            models: (0..200)
+                .map(|i| {
+                    catalog_entry(
+                        &format!("m{i:04}"),
+                        "https://github.com/o/r/releases/download/v/m.bin",
+                    )
+                })
+                .collect(),
+            ..good.clone()
+        };
+        assert!(validate_remote_catalog(&crowded).is_ok());
+        let mut over_cap = crowded.clone();
+        over_cap.models.push(catalog_entry(
+            "m0200",
+            "https://github.com/o/r/releases/download/v/m.bin",
+        ));
+        assert!(validate_remote_catalog(&over_cap).is_err());
+
+        // FIX-SPEECH-CATALOG-001 (D6): a published entry listing no payload
+        // files is a phantom — validation rejects the whole catalog, and the
+        // entry alone must read as not installable (no vacuous all()).
+        let mut no_files = good.clone();
+        no_files.models[0].files = vec![];
+        assert!(validate_remote_catalog(&no_files).is_err());
+        let mut phantom = test_entry();
+        phantom.files = vec![];
+        assert!(
+            !installable(&phantom),
+            "an entry with no files has nothing to install"
+        );
     }
 
     /// The startup freshness gate: absent cache is stale, a fresh cache is
     /// not, and a cache older than the window is — the mechanism behind the
-    /// settings copy's "checks at startup and weekly".
+    /// settings copy's "when the app starts, if it hasn't checked in a week".
     #[test]
     fn remote_catalog_freshness_gate_tracks_cache_age() {
         let tmp = tempfile::tempdir().unwrap();

@@ -180,7 +180,8 @@ export interface SettingsProps {
   /** Target locales of the installed packs, deduped — the override rows. */
   speechPackLocales?: string[];
   onSelectPackSpeechModel?: (locale: string, modelId: string | null) => void;
-  /** Pull the model list from the internet now (startup + weekly are automatic). */
+  /** Pull the model list from the internet now (the automatic path is a
+   *  startup check gated on a 7-day freshness window — no in-session timer). */
   onRefreshCatalog?: () => void;
   catalogBusy?: boolean;
   /** SERVE-BANNER-001: the serve bridge's capability lines (market meta
@@ -756,8 +757,8 @@ export function Settings(p: SettingsProps) {
             >
               {p.catalogBusy ? "Checking…" : "Check for newer models"}
             </button>{" "}
-            New speech models arrive from the model list on the internet — the app checks at startup
-            and weekly, and this button checks right now.
+            New speech models arrive from the model list on the internet — the app checks when it
+            starts, if it hasn&apos;t checked in a week, and this button checks right now.
           </p>
         )}
         {p.speechPref &&

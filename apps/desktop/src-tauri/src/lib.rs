@@ -12908,11 +12908,13 @@ pub fn run() {
             lts_speech_runtime::sidecar::sweep_stale_audio_tmp(std::time::Duration::from_secs(
                 3600,
             ));
-            // ADR-0042: the "checks at startup and weekly" promise. Every
-            // start kicks a background catalog check when the cached public
-            // catalog is missing or older than the freshness window, so a new
-            // model pushed to the public catalog reaches installs within a
-            // week without a rebuild and without a click. Failures keep the
+            // ADR-0042 (as amended by FIX-SPEECH-CATALOG-001, decision (a)):
+            // bounded-staleness auto-refresh. Every start kicks a background
+            // catalog check ONLY when the cached public catalog is missing or
+            // older than the freshness window, so a new model pushed to the
+            // public catalog reaches installs within a week without a rebuild
+            // and without a click. There is no timer inside a running session
+            // — a long-open app re-checks at its next start. Failures keep the
             // last-good cache; the learner never sees a broken state.
             if models::remote_catalog_is_stale(&catalog_check_dir, std::time::SystemTime::now()) {
                 std::thread::spawn(move || {
