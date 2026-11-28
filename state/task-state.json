@@ -36,10 +36,22 @@
       ]
     },
     "LEARNER-REVIEW-M2-001": {
+      "status": "done",
+      "attempts": 2,
+      "updated": "2026-11-27",
+      "notes": "Month-2 leg CLOSED run 2 2026-11-27 (board t_700e2628; run 1 died mid-review, resumed+completed inline). Chain done: sim 60d walk (raw 31-60, seed 1-30 in raw-seed), mech pass 100% coverage both packs, ASR subset (large-v3-turbo CPU), 27 fresh-eyeball verdict files, defect ledger (1 BLOCKER: RU month-2 starvation [3,2,0x28], carry FIX-M2-SUPPLY-RU-001 t_57092fec), residual manifest, M3 created (ROADMAP+task-state+notes; board card create refused from worker - controller). FIX-M1-PATH-VIS-001 and FIX-M1-CONTENT-JA-001 re-verified as still-unshipped (wall 823/803; D-009 verb cards served days 31-60) - NOT counted as fixed. Must chain M4 on M3 close.",
+      "evidence": [
+        "state/evidence/LEARNER-REVIEW-M2-001/defect-ledger.md",
+        "state/evidence/LEARNER-REVIEW-M2-001/residual-uncertainty.md",
+        "state/evidence/LEARNER-REVIEW-M2-001/experience-review.md",
+        "state/evidence/LEARNER-REVIEW-M2-001/gates.log"
+      ]
+    },
+    "LEARNER-REVIEW-M3-001": {
       "status": "ready",
       "attempts": 0,
       "updated": "2026-11-27",
-      "notes": "Month-2 leg of the owner's per-month learner-experience program (days 31-60, both packs), same frozen contract as LEARNER-REVIEW-M1-001, scoped by M1's defect distribution (catalog visibility, RU pool density, stress/orthography spot-checks). Must chain LEARNER-REVIEW-M3-001 on close - never drop the chain. Contract: state/notes/LEARNER-REVIEW-M2-001.md; board card lts-LEARNER-REVIEW-M2-001. Opened by takeover-B 2026-11-27.",
+      "notes": "Month-3 leg of the owner's per-month learner-experience program (days 61-90, both packs), same frozen contract, scoped by M2's defect distribution (RU supply-blocker follow-up FIRST: month-2 RU received 5 new items vs JA 117; re-verify FIX-M2-SUPPLY-RU-001 before content-quality audit; re-verify the never-shipped FIX-M1 cards honestly). Must chain LEARNER-REVIEW-M4-001 on close - never drop the chain. Contract: state/notes/LEARNER-REVIEW-M3-001.md. Created by LEARNER-REVIEW-M2-001 run 2 2026-11-27.",
       "evidence": [
         "state/evidence/LEARNER-REVIEW-M1-001/residual-uncertainty.md"
       ]
@@ -3728,6 +3740,48 @@
         "docs/adr/0042-per-language-speech-models-with-remote-catalog.md"
       ]
     },
+    "FIX-SPEECH-CATALOG-001": {
+      "status": "done",
+      "attempts": 1,
+      "updated": "2026-11-27",
+      "notes": "Review-defect fixes D1-D6 from REVIEW-SPEECH-CATALOG-001 (board t_0dafc90b, CLOSED). Code 54f0dcea, evidence ceff8dfa. D1 DECIDED option (a): ADR-0042 amended to adopt bounded-staleness (7-day window, startup-only, fail-closed) auto-refresh; owner veto flips to option (b) explicit new-models surface - decision-a.md + notes. D2 honest copy (no weekly timer exists), D3 new settings-speech-catalog.test.tsx (5 tests), D4 bundled catalog_version -> 2, D5 cap/empty-id/non-numeric-version pins, D6 empty-files published entry rejected + not installable. Gates: fmt/clippy/tsc/vitest 730-0/prettier/eslint/copy-audit green; lib suite 225 passed / 39 failed where ALL 39 are ja pack-media install failures from the concurrent FIX-PACK-K65-001 audio re-bake (manifest-vs-wav drift mid-run), including the 4 named expected ones; zero failures in the catalog/models surface, 14/14 models:: + targeted D5/D6 tests green; combined-tree re-run later: calibration + pronunciation speech tests green, remainder classified in state/evidence/FIX-PACK-K65-001/controller-suite.md.",
+      "evidence": [
+        "state/evidence/FIX-SPEECH-CATALOG-001-FIX/gates.log",
+        "state/evidence/FIX-SPEECH-CATALOG-001-FIX/decision-a.md",
+        "state/notes/FIX-SPEECH-CATALOG-001.md"
+      ]
+    },
+    "FIX-PACK-K65-001": {
+      "status": "done",
+      "attempts": 2,
+      "updated": "2026-11-27",
+      "notes": "K-65 pack-validation regression closed (board t_dfe6865a, CLOSED; lane run 1 hit iteration cap - controller committed its work + attribution). Code 8f5770c6 + lane residue 1067ff6d. Orphaned FIX-M1-CONTENT-JA-001 WIP adopted in full; langpack validate install mode: 25 errors -> 0 (19 media_text_not_declared_reading + 3 size + 3 hash drift); 19 clips re-baked via generate-pack-audio.py (generator-recorded sha256, no hand-edited manifests); check_ja_lexicon + 8 tests wired into CI; qa-asr mora duration cap (D-011 false-positive class). HONEST CARVE-OUT on the suite-green acceptance: combined-tree run 261/3 on a tree with a live audio writer; quiet-tree re-run 263/1 - the 1 red is letter_drills, proven mainline at clean 6119fd71 (pre-lane, window bisected to 04bdd7c8) and tracked as FIX-LETTER-DRILLS-001 (t_703f4b81). All 4 originally-named lib reds are green. Heads-up: 19 ja clip hashes changed; published ja archive predates the manifest until owner-gated republish.",
+      "evidence": [
+        "state/evidence/FIX-PACK-K65-001/gates.log",
+        "state/evidence/FIX-PACK-K65-001/adopt-notes.md",
+        "state/evidence/FIX-PACK-K65-001/controller-suite.md",
+        "state/notes/FIX-PACK-K65-001.md"
+      ]
+    },
+    "FIX-M2-SUPPLY-RU-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-27",
+      "notes": "BLOCKER from LEARNER-REVIEW-M2-001 (board t_57092fec, assigned default). RU days 31-60 new practice items = [3,2,0x28]: zero new content 28 straight days, cycling ~21 reviews/day; 3 units frozen at refs 5/6; frontier frozen 20 unlocked, 16->17 done days 31-60; current_offer kind:review every day 33-60. FIX-M1-CONTENT-RU-001's densify lifted inflow only WITHIN days 1-30. Root-cause candidates per M2 notes: pool exhaustion vs progression gating vs frontier freeze. Fix before the M3 content audit (M3 board card is parented on this).",
+      "evidence": [
+        "state/evidence/LEARNER-REVIEW-M2-001/defect-ledger.md",
+        "state/notes/LEARNER-REVIEW-M2-001.md"
+      ]
+    },
+    "FIX-LETTER-DRILLS-001": {
+      "status": "ready",
+      "attempts": 0,
+      "updated": "2026-11-27",
+      "notes": "Mainline lib-suite red found during FIX-PACK-K65-001 close-out (board t_703f4b81, assigned default). letter_drills_span_two_prompt_families_and_reach_independent red at clean 6119fd71 (no writers, media materialized): panic 'the drill offers the letter's symbol or sound'. Test derives the drill day from now_secs() - date-dependent. Green window: 264/0 at 576ccccc; only content change before the red run is 04bdd7c8 (RU stress-mark corrections + supply densify) - trigger candidate, bisect on the card. Fix date-robustly at the honest layer (product if a drill day can offer no answerable choice).",
+      "evidence": [
+        "state/evidence/FIX-PACK-K65-001/controller-suite.md"
+      ]
+    },
     "VENDOR-TEST-SERIAL-001": {
       "status": "done",
       "attempts": 1,
@@ -3742,5 +3796,5 @@
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
   "current_release_candidate": "Packs: ja-JP 0.4.4 (published 2026-11-22) and ru-RU 0.4.9 (published 2026-11-23) — manifests and catalog/packs.json pins agree (re-measured 2026-11-25, state/evidence/README-DOC-DRIFT-001/gates.log); the superseded release archives stay live as immutable rollback targets. App: newest published artifact is still open-language-learning-platform-0.4.0-alpha.1 (2026-10-13, Linux pre-release); code identity is 0.4.3-alpha.1 and unpublished — next-artifact decision is owner action O-06. Nothing in the build consumes this field; it is documentation.",
-  "updated_at": "2026-11-27T14:01:09-07:00"
+  "updated_at": "2026-11-27T20:20:36-07:00"
 }

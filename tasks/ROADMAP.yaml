@@ -4159,6 +4159,45 @@ tasks:
   - "split-item artifact reproduced-or-closed with evidence"
   - "gates.log under state/evidence/FIX-M1-CONTENT-JA-001/"
   required_for_desktop_1_0: false
+- id: FIX-PACK-K65-001
+  milestone: M11
+  priority: P1
+  title: Fix the K-65 audio-manifest vs reading regression that reds 4 desktop lib tests (ja-JP extended pack) and adopt the orphaned FIX-M1-CONTENT-JA-001 pack WIP
+  dependencies: []
+  read_first:
+  - state/notes/FIX-PACK-K65-001.md
+  - docs/provenance/ja-jp-greeting-audio-k65.md
+  - state/evidence/FIX-M1-CONTENT-JA-001/defects-extension.md
+  acceptance:
+  - "cargo test -p lts-desktop --lib fully green on main with the extended ja-JP pack installing clean"
+  - "every media_text_not_declared_reading and media drift error resolved by re-baking audio to the declared reading through scripts/generate-pack-audio.py (generator-written sha256, never hand-edited manifests)"
+  - "gates.log under state/evidence/FIX-PACK-K65-001/ with the full error enumeration before/after plus an adopt verdict on the orphaned WIP"
+  required_for_desktop_1_0: false
+- id: FIX-M2-SUPPLY-RU-001
+  milestone: M11
+  priority: P1
+  title: "RU days 31-60 new-content starvation: 0 new practice items for 28 straight days (only ~5 new items across month 2 vs JA 117) - RU unit pool must keep introducing through month 2"
+  dependencies: []
+  read_first:
+  - state/evidence/LEARNER-REVIEW-M2-001/defect-ledger.md
+  - state/notes/LEARNER-REVIEW-M2-001.md
+  acceptance:
+  - "sim walk days 31-60 shows RU new practice items on the majority of days (no >=7-day new-item drought) and unlocked units keep advancing past the month-1 on-ramp units"
+  - "root cause written up (pool exhaustion vs progression gating vs frontier freeze) and fixed at that layer, not by lowering review load"
+  - "re-run of the M2 mechanical pass over days 31-60 with the fix is 0 failures / 100% coverage; evidence under state/evidence/FIX-M2-SUPPLY-RU-001/"
+  required_for_desktop_1_0: false
+- id: FIX-LETTER-DRILLS-001
+  milestone: M11
+  priority: P1
+  title: "letter_drills lib test red on main: date-dependent assertion (now_secs rotation) - last blocker keeping the desktop lib suite from full green; RCA product-vs-test and fix honestly"
+  dependencies: []
+  read_first:
+  - state/evidence/FIX-PACK-K65-001/controller-suite.md
+  acceptance:
+  - "RCA recorded: product bug (a drill day whose choices exclude the letter's symbol/sound) vs test bug (date-dependent expectation), with the observed failing choice set captured"
+  - "the test no longer depends on wall-clock day (injected/faked day), green when re-run on two different simulated days"
+  - "cargo test -p lts-desktop --lib fully green on a quiet tree (no concurrent writers)"
+  required_for_desktop_1_0: false
 - id: FIX-M1-PATH-VIS-001
   milestone: M11
   priority: P2
@@ -4188,6 +4227,22 @@ tasks:
   - "residual-uncertainty manifest shipped; LEARNER-REVIEW-M3-001 created with this same contract"
   - "gates.log under state/evidence/LEARNER-REVIEW-M2-001/"
   required_for_desktop_1_0: false
+- id: LEARNER-REVIEW-M3-001
+  milestone: M11
+  priority: P2
+  title: Audit the full Month-3 learner experience (days 61-90 simulated daily use, RU + JA) - same frozen contract, scoped by M2 defect distribution (RU supply blocker follow-up, never-shipped fix re-verification)
+  dependencies: []
+  read_first:
+  - state/notes/LEARNER-REVIEW-M3-001.md
+  - state/notes/LEARNER-REVIEW-M1-001.md
+  acceptance:
+  - "journey-sim logs enumerate days 61-90 content for both packs and form the audit worklist, with novelty chained across the full 90-day walk"
+  - "mechanical pass (lexicon/stress/kanji/ASR/answer-key) at 100% coverage of the enumerated set with archived logs"
+  - "fresh-context reviewer verdicts per prose chunk, author and reviewer in separate lanes; ja and ru separate"
+  - "defects ledger with severity + disposition; every blocker fixed in-card or in a named follow-up card"
+  - "residual-uncertainty manifest shipped; LEARNER-REVIEW-M4-001 created with this same contract"
+  - "gates.log under state/evidence/LEARNER-REVIEW-M3-001/"
+  required_for_desktop_1_0: false
 - id: PNPM-AUDIT-MINIMATCH-001
   milestone: M10
   priority: P3
@@ -4216,6 +4271,24 @@ tasks:
   - Speech consumption sites resolve the target locale from the installed pack manifest rather than the UI language.
   - Settings exposes per-language model pickers and a catalog refresh action with honest runtime-gating copy that passes the learner-copy audit.
   - Lane gates green (fmt, clippy on lts-desktop all-targets, desktop lib suite, tsc and vitest on the frontend).
+  required_for_desktop_1_0: false
+- id: FIX-SPEECH-CATALOG-001
+  milestone: M6
+  priority: P2
+  title: "Review-defect fixes D1-D6 for the speech-model catalog lane (ADR-0042 amendment, honest weekly-check copy, catalog UI test coverage, bundled catalog version, validation pins, empty-files hole)"
+  dependencies:
+  - SPEECH-CATALOG-001
+  read_first:
+  - state/evidence/REVIEW-SPEECH-CATALOG-001/spec-verdict.md
+  - state/notes/FIX-SPEECH-CATALOG-001.md
+  - docs/adr/0042-per-language-speech-models-with-remote-catalog.md
+  acceptance:
+  - "ADR-0042 is amended to adopt bounded-staleness auto-refresh as decision (a) with the decision and fail-closed mitigation rationale cited, and option (b) (an explicit new-models surface in Settings) recorded as the owner veto path."
+  - "Settings copy and the code comments state the real mechanism - a startup check with a 7-day freshness window, no in-session timer - and the learner-copy audit stays green."
+  - "Vitest covers the Settings catalog UI behaviorally: per-locale rows from the installed pack locales, model/off/clear callbacks, the refresh button disabled with aria-busy while busy, and the error path surfaced."
+  - "The bundled models catalog declares catalog_version 2 with a truthful note."
+  - "The fail-closed validation test pins the 200-entry cap boundary, empty-id rejection, and non-numeric version rejection."
+  - "A published entry listing no payload files is rejected by validation and reads not-installable, pinned by a test."
   required_for_desktop_1_0: false
 - id: VENDOR-TEST-SERIAL-001
   milestone: M8
@@ -4422,9 +4495,14 @@ execution_scope:
   - RU-GOALS-SCRUB-001
   - TODAY-FIRSTSCREEN-001
   - SPEECH-CATALOG-001
+  - FIX-SPEECH-CATALOG-001
   - VENDOR-TEST-SERIAL-001
   - FIX-M1-CONTENT-JA-001
+  - FIX-PACK-K65-001
   - FIX-M1-CONTENT-RU-001
   - FIX-M1-PATH-VIS-001
   - LEARNER-REVIEW-M2-001
+  - LEARNER-REVIEW-M3-001
+  - FIX-M2-SUPPLY-RU-001
+  - FIX-LETTER-DRILLS-001
   public_publication_authorized: false
