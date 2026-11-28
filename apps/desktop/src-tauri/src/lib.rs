@@ -8074,8 +8074,8 @@ fn speaking_sentence_task_build(
 /// family forever, the mastery ladder's `independent` rung (which demands
 /// two distinct families — policy R04/R11) unreachable for the whole
 /// alphabet, and every hard letter-knowledge gate (RU on-ramp greetings)
-/// never completable. Task build and submit both call this with their
-/// own current clock, so they agree except for an attempt open across the
+/// never completable. Task build and submit both take the day through
+/// `drill_day()`, so they agree except for an attempt open across the
 /// UTC midnight — a rare, self-correcting misattribution of the family
 /// on one attempt, never a wrong answer key within one day.
 fn orth_drill_recognize(content_id: &str, day: i64) -> bool {
@@ -8095,6 +8095,51 @@ fn orth_drill_family(content_id: &str, day: i64) -> String {
     )
 }
 
+/// The UTC day the drill rotation keys on. Production reads the wall
+/// clock; tests install a deterministic day through `DrillDayGuard`
+/// (thread-local — parallel test threads never interfere) rather than
+/// letting green/red rotate with the calendar (FIX-LETTER-DRILLS-001:
+/// the letter-drill test was red on every form->sound day).
+fn drill_day() -> i64 {
+    #[cfg(test)]
+    {
+        if let Some(day) = DRILL_DAY_OVERRIDE.with(|cell| cell.get()) {
+            return day;
+        }
+    }
+    (now_secs() / 86_400) as i64
+}
+
+#[cfg(test)]
+thread_local! {
+    static DRILL_DAY_OVERRIDE: std::cell::Cell<Option<i64>> =
+        const { std::cell::Cell::new(None) };
+}
+
+#[cfg(test)]
+/// RAII override of the drill rotation day. Restores the previous value
+/// on drop, so a pool thread shared between tests never inherits a
+/// simulated day.
+struct DrillDayGuard {
+    prev: Option<i64>,
+}
+
+#[cfg(test)]
+impl DrillDayGuard {
+    fn new(day: i64) -> Self {
+        Self {
+            prev: DRILL_DAY_OVERRIDE.with(|c| c.replace(Some(day))),
+        }
+    }
+}
+
+#[cfg(test)]
+impl Drop for DrillDayGuard {
+    fn drop(&mut self) {
+        DRILL_DAY_OVERRIDE.with(|c| c.set(self.prev));
+    }
+}
+
 /// K-04 script-instruction runner: symbol<->reading choice task from
 /// pack-declared orthography units. Direction rotates per letter across
 /// days (`orth_drill_recognize`), stable within a day, so tasks stay
@@ -8111,7 +8156,7 @@ fn orth_task_build(
         .iter()
         .find(|e| e.id == content_id)
         .ok_or("unknown practice target")?;
-    let recognize = orth_drill_recognize(content_id, (now_secs() / 86_400) as i64);
+    let recognize = orth_drill_recognize(content_id, drill_day());
     // LETTER-UNIT-MODEL-001 rule 1: the drill dimensions key on
     // sound↔symbol — `sound` is the pack-declared sound, falling back to
     // the reading when the pack does not separate name from sound.
@@ -10849,7 +10894,7 @@ fn practice_submit_inner(
             .unwrap_or_default()
             .iter()
             .any(|e| e.id == content_id)
-            .then(|| orth_drill_family(content_id, (now.as_secs() / 86_400) as i64))
+            .then(|| orth_drill_family(content_id, drill_day()))
     } else {
         None
     };
@@ -23617,7 +23662,7 @@ transfer_variants:
     }
 
     /// FIX-M1-PROGRESSION-001 (gate completability, measured in the RU sim
-    /// walk): the letter drill is the ONLY source of orthography-recognition
+    /// FIX-M1-PROGRESSION-001: the letter drill is the ONLY source of orthography-recognition
     /// evidence, and with the direction pinned to a content hash every
     /// letter collected exactly one prompt family forever — so no letter
     /// could ever reach `independent` and the hard RU letter->greetings
@@ -23625,6 +23670,14 @@ transfer_variants:
     /// forms over a fortnight, (2) graded evidence records the form that
     /// ran, (3) two clean drill days across the rotation derive
     /// `independent` — a real learner can now open the gate.
+    ///
+    /// FIX-LETTER-DRILLS-001: every runner leg runs on a SIMULATED day
+    /// installed via `DrillDayGuard` — the test used to read the wall
+    /// clock, so it rotated green/red with the calendar (red on every
+    /// form->sound day while the pack declared no `sound` and the drill
+    /// served the prose reading). The choice assertion is tightened to an
+    /// exact match on the letter's own sound/symbol: the drill may never
+    /// offer pack prose or letter-name metadata.
     #[test]
     fn letter_drills_span_two_prompt_families_and_reach_independent() {
         // (1) Rotation property: within ~14 days every letter has drilled
@@ -23651,68 +23704,67 @@ transfer_variants:
         let version = lts_langpack::archive::current_version(pack, &data.join("packs")).unwrap();
         store.set_active_pack(&p.id, pack, &version).unwrap();
 
-        // (2) The runner submit path stamps the evidence with today's
-        // drill form, not the bare content id.
-        let t = practice_task_at(
-            data,
-            &p.id,
-            "ru.orth.cyrillic.a",
-            "orthography-recognition",
-            false,
-        )
-        .unwrap();
-        let today = (now_secs() / 86_400) as i64;
-        let today_family = orth_drill_family("ru.orth.cyrillic.a", today);
-        let answer_wanted = if orth_drill_recognize("ru.orth.cyrillic.a", today) {
-            "a" // form->sound asks for the sound; a unicameral-safe fallback below
-        } else {
-            "а"
-        };
-        let idx = t
-            .choices
-            .iter()
-            .position(|c| c == answer_wanted || c == "а" || c == "a")
-            .expect("the drill offers the letter's symbol or sound");
-        practice_submit_at(
-            data,
-            &p.id,
-            "ru.orth.cyrillic.a",
-            "orthography-recognition",
-            idx,
-            None,
-            false,
-        )
-        .unwrap();
-        let events = store.evidence_for_profile(&p.id).unwrap();
-        let ev = events
-            .iter()
-            .find(|e| {
-                e.modality == lts_domain::ActivityModality::OrthographyRecognition
-                    && e.targets.iter().any(|x| x.as_str() == "ru.orth.cyrillic.a")
-            })
-            .expect("drill evidence recorded");
-        assert_eq!(
-            ev.prompt_family_id.as_ref().map(|f| f.as_str()),
-            Some(today_family.as_str()),
-            "runner evidence must name the drill form that ran"
-        );
+        // (2) The runner submit path stamps the evidence with the
+        // simulated day's drill form — and on BOTH rotation directions,
+        // which used to be calendar luck. FIX-LETTER-DRILLS-001's product
+        // invariant rides here too: a form->sound day must offer the
+        // letter's DECLARED sound ("a"), a sound->form day its symbol
+        // ("а") — exact matches, so smuggled prose fails the pin.
+        let recognize_day = (20_400i64..20_414)
+            .find(|d| orth_drill_recognize("ru.orth.cyrillic.a", *d))
+            .expect("the fortnight rotation must contain a form->sound day");
+        let produce_day = (20_400i64..20_414)
+            .find(|d| !orth_drill_recognize("ru.orth.cyrillic.a", *d))
+            .expect("the fortnight rotation must contain a sound->form day");
+        for (day, answer) in [(recognize_day, "a"), (produce_day, "а")] {
+            let _simulated = DrillDayGuard::new(day);
+            let t = practice_task_at(
+                data,
+                &p.id,
+                "ru.orth.cyrillic.a",
+                "orthography-recognition",
+                false,
+            )
+            .unwrap();
+            let idx = t.choices.iter().position(|c| c == answer).unwrap_or_else(|| {
+                panic!(
+                    "the drill on simulated day {day} must offer exactly the letter's {} {answer:?}, got {:?}",
+                    if orth_drill_recognize("ru.orth.cyrillic.a", day) { "sound" } else { "symbol" },
+                    t.choices
+                )
+            });
+            practice_submit_at(
+                data,
+                &p.id,
+                "ru.orth.cyrillic.a",
+                "orthography-recognition",
+                idx,
+                None,
+                false,
+            )
+            .unwrap();
+            drop(_simulated);
+            let family = orth_drill_family("ru.orth.cyrillic.a", day);
+            let events = store.evidence_for_profile(&p.id).unwrap();
+            assert!(
+                events.iter().any(|e| {
+                    e.modality == lts_domain::ActivityModality::OrthographyRecognition
+                        && e.targets.iter().any(|x| x.as_str() == "ru.orth.cyrillic.a")
+                        && e.prompt_family_id.as_ref().map(|f| f.as_str()) == Some(family.as_str())
+                }),
+                "runner evidence must name the drill form that ran on simulated day {day} ({family}); families present: {:?}",
+                events
+                    .iter()
+                    .filter_map(|e| e.prompt_family_id.as_ref())
+                    .map(|f| f.as_str())
+                    .collect::<Vec<_>>()
+            );
+        }
 
-        // (3) One more clean drill day, recorded under the OTHER form:
-        // two successes across two families is the ladder's whole bar for
-        // `independent` at sup 0 — the rung every RU letter gate waits on.
-        let other_family = orth_drill_family("ru.orth.cyrillic.a", today + 1);
-        let mut ev2 = attempt(
-            "ru.orth.cyrillic.a",
-            lts_domain::ActivityModality::OrthographyRecognition,
-            &other_family,
-            0,
-            &rfc3339_utc(now_secs() + 86_400),
-            "ev-drill-second-form",
-            &p.id,
-        );
-        ev2.pack_id = pack.into();
-        store.append_evidence(&ev2).unwrap();
-        let derived = derive_pairs(&store, &p.id, &rfc3339_utc(now_secs() + 86_400)).unwrap();
+        // (3) The runner's two successes — one per simulated rotation day,
+        // two prompt families — are the ladder's whole bar for
+        // `independent` at sup 0, the rung every RU letter gate waits on.
+        let derived = derive_pairs(&store, &p.id, &rfc3339_utc(now_secs())).unwrap();
         let row = derived
             .iter()
             .find(|d| {
@@ -23723,7 +23775,7 @@ transfer_variants:
         assert_eq!(
             row.state,
             lts_domain::MasteryState::Independent,
-            "two drill successes across the two prompt forms must derive independent"
+            "two runner drill successes across the two prompt forms must derive independent",
         );
     }
 
