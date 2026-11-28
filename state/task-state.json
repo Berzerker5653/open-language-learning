@@ -3799,6 +3799,18 @@
         "state/evidence/VENDOR-TEST-SERIAL-001/gates.log",
         "state/notes/VENDOR-TEST-SERIAL-001.md"
       ]
+    },
+    "FIX-WRITE-PRACTICE-FORMS-001": {
+      "status": "done",
+      "attempts": 1,
+      "updated": "2026-11-28",
+      "notes": "CLOSED 2026-11-28 (board t_a2709e84). Review S-D1 (MAJOR) shipped as a learner-visible broken promise: the usage-chip/accepted-form matchers are forms-LIST-driven but 0 of 4,071 RU lexicon entries carried >1 form, so natural inflections (книгу/доме/утром) could never light a chip and were flagged 'not in dictionary'. Fix shape (a) chosen (decision record: state/notes/FIX-WRITE-PRACTICE-FORMS-001.md): scripts/derive-ru-forms.py appends each entry's dictionary-attested lexeme paradigm (pymorphy3 2.0.6 + pymorphy3-dicts-ru 2.4.417150.4580142, predictive parses refused; deterministic, --check green) — 3,832/4,071 entries, 61,807 forms, per-entry provenance notes, pack 0.5.0->0.5.1. (b) copy softening not needed: learner-visible copy never promised inflection and audit_learner_copy stays 0 findings. Mandatory red-first pin writing_check_ru_inflected_forms_light_usage_chips red at HEAD data (книгу 'unknown'), green after regeneration; full lib suite + clippy/fmt/tsc/vitest/qa_stories/lexicon audits green — see gates.log.",
+      "evidence": [
+        "state/evidence/FIX-WRITE-PRACTICE-FORMS-001/red-at-head.log",
+        "state/evidence/FIX-WRITE-PRACTICE-FORMS-001/generation.log",
+        "state/evidence/FIX-WRITE-PRACTICE-FORMS-001/gates.log",
+        "state/notes/FIX-WRITE-PRACTICE-FORMS-001.md"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",

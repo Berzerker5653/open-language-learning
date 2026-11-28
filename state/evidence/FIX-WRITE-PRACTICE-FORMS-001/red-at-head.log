@@ -1,0 +1,46 @@
+# RED-at-HEAD — FIX-WRITE-PRACTICE-FORMS-001 mandatory pin before data fix
+
+Lane base: c8ab7e14 (HEAD before this lane). Test-only change (lib.rs),
+lexicon untouched. Command run in the main tree:
+
+    cargo test -p lts-desktop --lib writing_check_ru_inflected_forms_light_usage_chips
+
+Captured output (2026-11-28, run 1):
+
+    Compiling lts-langpack v0.1.0 (/home/hunter/game-dev/LTS/crates/langpack)
+    Compiling lts-desktop v0.4.3-alpha.1 (/home/hunter/game-dev/LTS/apps/desktop/src-tauri)
+    Compiling lts-activity v0.1.0 (/home/hunter/game-dev/LTS/crates/activity)
+        Finished `test` profile [unoptimized + debuginfo] target(s) in 14.27s
+         Running unittests src/lib.rs (target/debug/deps/lts_desktop-1caef568b73e5b79)
+
+    running 1 test
+    test tests::writing_check_ru_inflected_forms_light_usage_chips has been running for over 60 seconds
+    test tests::writing_check_ru_inflected_forms_light_usage_chips ... FAILED
+
+    failures:
+
+    ---- tests::writing_check_ru_inflected_forms_light_usage_chips stdout ----
+
+    thread 'tests::writing_check_ru_inflected_forms_light_usage_chips' (2286105) panicked at apps/desktop/src-tauri/src/lib.rs:16466:13:
+    assertion `left == right` failed: книгу is a real inflected form of a pack word
+      left: Some("unknown")
+     right: Some("known")
+    note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+    failures:
+        tests::writing_check_ru_inflected_forms_light_usage_chips
+
+    test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 266 filtered out; finished in 78.96s
+
+    error: test failed, to rerun pass `-p lts-desktop --lib`
+
+Exactly the reviewer-measured failure mode (S-D1): the accusative «книгу» of a
+pack word is classified "unknown" and no chip can light.
+
+After `scripts/derive-ru-forms.py --write` + manifest 0.5.0 -> 0.5.1 the same
+filter run passed:
+
+    running 8 tests (writing_ family)
+    test tests::writing_check_ru_inflected_forms_light_usage_chips ... ok
+    test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 259 filtered out; finished in 150.17s

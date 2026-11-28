@@ -1,0 +1,48 @@
+# Gates — FIX-WRITE-PRACTICE-FORMS-001 (lane base HEAD c8ab7e14)
+
+Lane isolation: concurrent sibling WIP (goals.yaml, crates/langpack/src/graph.rs,
+both pack manifests, tests/fixtures) was NOT touched or staged. All cargo/CLI
+gates below ran in a detached worktree = HEAD + this lane's files only
+(`git worktree add <scratch>/lts-forms-lane --detach HEAD`, lane files copied,
+gitignored pack media hardlink-synced `cp -al -n`, apps/desktop/dist symlinked,
+CARGO_TARGET_DIR=<main>/LTS/target).
+
+## Red-first pin (mandatory, see red-at-head.log)
+tests::writing_check_ru_inflected_forms_light_usage_chips
+- RED at HEAD + test-only: книгу asserted "known", got "unknown".
+- GREEN with regenerated lexicon (writing_ family 8/8, 150s).
+
+## Gate battery (all at lane content, 2026-11-28)
+| gate | command | result |
+| --- | --- | --- |
+| fmt | cargo fmt --all --check | PASS (after cargo fmt of own hunk) |
+| clippy | cargo clippy -p lts-desktop --all-targets -- -D warnings | PASS (lane worktree, exit 0) |
+| lib suite | cargo test -p lts-desktop --lib (full, worktree+media) | **265 passed / 0 failed / 2 ignored**, 382.36s, SUITE-EXIT:0 (baseline 264 at cfaf1538 + this lane's new pin) |
+| pack validate | lts-langpack-cli validate languages/ru-RU | 0 errors 0 warnings |
+| pack lint | lts-langpack-cli lint languages/ru-RU | 0 errors 0 warnings |
+| pack test | lts-langpack-cli test languages/ru-RU | 0 errors 0 warnings |
+| lexicon audit | lts-langpack-cli audit-lexicon languages/ru-RU | 0 errors 0 warnings |
+| stories | tools/qa_stories.py --pack languages/ru-RU | 20 stories, 0 FAIL |
+| copy audit | tools/audit_learner_copy.py | v1.7.0, findings: 0 |
+| content templates | tools/audit_content_templates.py ja+ru | exit 0 |
+| tsc | npx tsc --noEmit (apps/desktop) | PASS |
+| vitest | npx vitest run (apps/desktop) | 84 files / 733 tests passed |
+
+## Known pre-existing red NOT from this lane
+- `build-morphology-table.py --check` fails at CLEAN HEAD (lemmas.jsonl drifts
+  vs sentence regeneration; reproduced in a detached HEAD worktree, exit 1).
+  Not in scripts/ci.sh, this lane never touches sentences/ → its own chore card.
+- Full lib suite baseline at this HEAD is fully green (the card's named
+  letter_drills red shipped fixed via FIX-LETTER-DRILLS-001 before this lane).
+- `validate_handoff.py` fails at HEAD for a reason unrelated to this card:
+  FIX-PACK-K65-001's ledger references state/evidence/FIX-PACK-K65-001/
+  controller-suite.md, which a prior lane left UNTRACKED. Triaged in this
+  lane's evidence commit (file content is that closed card's controller suite
+  attribution; committed under its own label per the evidence-triage rule).
+
+## Collision note
+languages/ru-RU/manifest.yaml was dirty at lane start carrying exactly one
+sibling hunk: version 0.5.0->0.5.1 — byte-identical to what this lane needed.
+Staging that file therefore carried no sibling content. If the sibling lane
+(FIX-M2-SUPPLY-RU-001 WIP) still needs a pack version bump it must re-bump
+onto whatever main carries when it lands (0.5.1 is taken by this lane).

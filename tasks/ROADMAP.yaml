@@ -4198,6 +4198,19 @@ tasks:
   - "the test no longer depends on wall-clock day (injected/faked day), green when re-run on two different simulated days"
   - "cargo test -p lts-desktop --lib fully green on a quiet tree (no concurrent writers)"
   required_for_desktop_1_0: false
+- id: FIX-WRITE-PRACTICE-FORMS-001
+  milestone: M11
+  priority: P1
+  title: "RU free-writing usage chips can never light for inflected forms (0 of 4071 RU lexicon entries carry a second surface); pre-generate dictionary-attested paradigms offline and pin an inflected-sentence chip assertion"
+  dependencies: []
+  read_first:
+  - state/notes/FIX-WRITE-PRACTICE-FORMS-001.md
+  - state/evidence/REVIEW-WRITE-PRACTICE-001/spec-verdict.md
+  acceptance:
+  - "the mandatory red-first pin exists and fails against dictionary-forms-only data (книгу/дома/утром class), then passes with the regenerated lexicon"
+  - "RU lexicon entries carry the dictionary-attested inflection paradigm (predictive parses refused), with per-entry provenance in notes and the pack version bumped"
+  - "lane gates green at the lane commit (fmt, clippy -p lts-desktop all-targets, full lib suite, tsc+vitest, audit_learner_copy 0 findings)"
+  required_for_desktop_1_0: false
 - id: FIX-M1-PATH-VIS-001
   milestone: M11
   priority: P2
@@ -4505,4 +4518,5 @@ execution_scope:
   - LEARNER-REVIEW-M3-001
   - FIX-M2-SUPPLY-RU-001
   - FIX-LETTER-DRILLS-001
+  - FIX-WRITE-PRACTICE-FORMS-001
   public_publication_authorized: false

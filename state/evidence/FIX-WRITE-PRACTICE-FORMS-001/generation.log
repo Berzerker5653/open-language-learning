@@ -1,0 +1,53 @@
+# Generation log — scripts/derive-ru-forms.py (FIX-WRITE-PRACTICE-FORMS-001)
+
+Tool: .venv/bin/python (repo venv; pymorphy3 2.0.6, pymorphy3-dicts-ru
+2.4.417150.4580142 — same pinned authorities as
+scripts/build-morphology-table.py).
+
+Run 1 gate finding (fixed before landing): first token gate accepted
+whitespace-containing keys, so multi-word verbal phrases («не понимаю») produced
+space-bearing forms («не понимав») that the app's token-splitting matcher can
+never match. Gate tightened to single-token keys (Cyrillic + ё + U+0301 + '-'),
+lexicon reset with `git checkout -- languages/ru-RU/lexicon`, regenerated.
+
+Final run (the one landed):
+
+    $ .venv/bin/python scripts/derive-ru-forms.py --write
+    {
+      "entries": 4071,
+      "touched": 3832,
+      "added_forms": 61807,
+      "skipped": {
+        "no-new-forms": 206,
+        "predictive-only": 10,
+        "phrase-or-unparsed": 23
+      },
+      "multi_before": 0,
+      "multi_after": 3832
+    }
+
+Idempotence / determinism:
+
+    $ .venv/bin/python scripts/derive-ru-forms.py --check   # -> exit 0, zero drift
+
+Independent walk over languages/ru-RU/lexicon/*.jsonl after generation:
+3,832 multi-form entries (was 0), 61,807 appended forms, all with keys exactly
+{"text"}, all pure Cyrillic (no spaces, no Latin, no digits), forms[0] primary
+unchanged everywhere. Spot pins from the review's example sentence:
+
+    ru.lex.everyday.dom      ['дом', 'дома', 'домам', 'домами', 'домах', 'доме', 'домов', 'домом', 'дому']
+    ru.lex.everyday.kniga    ['книга', 'книг', 'книгам', 'книгами', 'книгах', 'книге', 'книги', 'книгой', 'книгою', 'книгу']
+    ru.lex.routines.utro     ['утро', 'утр', 'утра', 'утрам', 'утрами', 'утрах', 'утре', 'утром', 'утру']
+
+Reviewer symptom check for «Я читаю книгу дома утром»: accusative книгу,
+prepositional/adverbial дома and instrumental утром are now listed surfaces of
+the three target entries — the usage-chip pin
+`writing_check_ru_inflected_forms_light_usage_chips` asserts exactly this
+end-to-end through writing_check_at (see red-at-head.log).
+
+qa_stories impact review (tools/qa_stories.py consumes lexicon surfaces for
+stress verification): appended forms carry NO stress marks, so the
+`stress_conflict` ERROR path (which requires a marked candidate) is unchanged;
+the additions can only shrink the `stress_unverified` warning set.
+Post-change run: 20 stories, 0 FAIL (`.venv/bin/python tools/qa_stories.py --pack
+languages/ru-RU`).
