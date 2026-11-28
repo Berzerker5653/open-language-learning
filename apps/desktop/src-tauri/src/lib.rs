@@ -16428,6 +16428,60 @@ activities:
         assert_eq!(res.used_targets, vec!["ru.lex.routines.kofe".to_string()]);
     }
 
+    /// FIX-WRITE-PRACTICE-FORMS-001 (review S-D1): the chip promise —
+    /// "inflected/variant forms count" — must hold for RUSSIAN on shipped
+    /// data, not just in the matcher's code comment. Red-first against a
+    /// lexicon whose RU entries carry dictionary forms only: accusative
+    /// книгу, prepositional/adverbial дома and instrumental утром of the
+    /// targets each light their usage chip, and no real Russian inflection
+    /// is flagged "not in dictionary".
+    #[test]
+    fn writing_check_ru_inflected_forms_light_usage_chips() {
+        let tmp = tempfile::TempDir::new().unwrap();
+        let data = tmp.path();
+        let id = writer_pack(data, "org.openlanguage.ru-ru.reference");
+        let res = writing_check_at(
+            data,
+            WritingCheckAttempt {
+                pack_id: "org.openlanguage.ru-ru.reference".into(),
+                profile_id: id,
+                targets: vec![
+                    "ru.lex.everyday.kniga".into(),
+                    "ru.lex.everyday.dom".into(),
+                    "ru.lex.routines.utro".into(),
+                ],
+                text: "Я читаю книгу дома утром".into(),
+            },
+        )
+        .unwrap();
+        let by_token: std::collections::HashMap<_, _> = res
+            .words
+            .iter()
+            .map(|w| (w.token.as_str(), w.status))
+            .collect();
+        // Real inflections of pack words are dictionary-known — never the
+        // "not in dictionary" label the learner sees for a genuinely
+        // unseen token.
+        for tok in ["книгу", "дома", "утром"] {
+            assert_eq!(
+                by_token.get(tok).copied(),
+                Some("known"),
+                "{tok} is a real inflected form of a pack word"
+            );
+        }
+        for target in [
+            "ru.lex.everyday.kniga",
+            "ru.lex.everyday.dom",
+            "ru.lex.routines.utro",
+        ] {
+            assert!(
+                res.used_targets.iter().any(|t| t == target),
+                "the {target} usage chip must light for its inflected form: {:?}",
+                res.used_targets
+            );
+        }
+    }
+
     #[test]
     fn writing_check_ja_flags_unknown_never_wrong_and_accepts_pack_variants() {
         let tmp = tempfile::TempDir::new().unwrap();
