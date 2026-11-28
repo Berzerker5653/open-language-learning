@@ -1,0 +1,18 @@
+[warn] apps/desktop/src/accumulation-screens.tsx
+[warn] apps/desktop/src/app/serve-probe.ts
+[warn] apps/desktop/src/app/settings-wiring.tsx
+[warn] apps/desktop/src/app/walkthrough.tsx
+[warn] apps/desktop/src/dictation.test.tsx
+[warn] apps/desktop/src/dictation.tsx
+[warn] apps/desktop/src/empty-state.tsx
+[warn] apps/desktop/src/empty-states-screens.tsx
+[warn] apps/desktop/src/empty-states.test.tsx
+[warn] apps/desktop/src/free-writing.test.tsx
+[warn] apps/desktop/src/free-writing.tsx
+[warn] apps/desktop/src/home.test.tsx
+[warn] apps/desktop/src/journeys/harness.tsx
+[warn] apps/desktop/src/reading.tsx
+[warn] apps/desktop/src/writing.test.tsx
+[warn] scripts/accumulation-capture.mjs
+[warn] scripts/empty-states-capture.mjs
+[warn] Code style issues found in 17 files. Run Prettier with --write to fix.

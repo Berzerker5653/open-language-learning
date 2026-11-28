@@ -1,0 +1,17 @@
+FIX-PRETTIER-REPO-001 gate battery — GamingPC, 2026-11-27 22:47 MST, base a832bfae, lane commit a28435f2
+
+RED at base (pnpm fmt:check, before): 17 files flagged — see red-at-head.log
+  (15 apps/desktop TS/TSX incl. free-writing.tsx/.test.tsx + journeys/harness.tsx from
+   WRITE-PRACTICE-001, plus scripts/accumulation-capture.mjs, scripts/empty-states-capture.mjs)
+
+AFTER (tree = a28435f2 = base + prettier --write on exactly the 17 flagged paths):
+  pnpm fmt:check   -> "All matched files use Prettier code style!"          GREEN
+  pnpm typecheck   -> tsc --noEmit all workspaces Done                       GREEN
+  pnpm test        -> apps/desktop 84 files / 733 tests passed;
+                      packages/ui 10 passed; packages/shared 2 passed        GREEN
+  cargo gates      -> untouched (no .rs in diff; git show --stat a28435f2:
+                      17 files, only apps/desktop/src + scripts/)            N/A
+
+Race note: shared tree dirty at claim with FIX-M2-SUPPLY-RU-001 WIP
+(langpack/graph.rs, ja/ru goals.yaml, fixtures); zero path overlap with the 17,
+staged only the 17 named paths, committed solo. HEAD unchanged across battery.

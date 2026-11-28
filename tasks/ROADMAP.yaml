@@ -4315,6 +4315,17 @@ tasks:
   - "Test-only change: no production code touched, no assertion weakened; full cargo test -p lts-desktop --lib green with zero engine-error failures."
   - "Lane gates green (fmt --all --check, clippy -p lts-desktop --all-targets -D warnings, desktop lib suite)."
   required_for_desktop_1_0: false
+- id: FIX-PRETTIER-REPO-001
+  milestone: M11
+  priority: P2
+  title: "repo-wide prettier drift makes the CI web job pnpm fmt:check fail (17 flagged files incl. WRITE-PRACTICE-001's three) - one content-neutral chore(fmt) commit"
+  dependencies: []
+  read_first:
+  - state/notes/FIX-PRETTIER-REPO-001.md
+  acceptance:
+  - "pnpm exec prettier --write applied to exactly the flagged files in one content-neutral chore(fmt) commit with no Rust or content changes"
+  - "pnpm fmt:check, pnpm typecheck and pnpm test all green at the lane commit with gates.log recorded"
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -4519,4 +4530,5 @@ execution_scope:
   - FIX-M2-SUPPLY-RU-001
   - FIX-LETTER-DRILLS-001
   - FIX-WRITE-PRACTICE-FORMS-001
+  - FIX-PRETTIER-REPO-001
   public_publication_authorized: false
