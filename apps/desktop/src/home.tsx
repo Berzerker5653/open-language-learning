@@ -1689,9 +1689,7 @@ export function PathView({
           expandedTails.has(s.band) ||
           (focusUnit !== null && s.nodes.slice(cut).some((n) => n.unit_id === focusUnit));
         const visibleNodes = tailExpanded ? s.nodes : s.nodes.slice(0, cut);
-        const laterUnits = bandRendered
-          ? s.nodes.length - visibleNodes.length
-          : s.nodes.length;
+        const laterUnits = bandRendered ? s.nodes.length - visibleNodes.length : s.nodes.length;
         // PATH-VISUAL-001: the counter counts PROVEN-DONE only — refs the
         // learner actually proved — never visits or encounters.
         // UNIT-CAPSTONE-001: every section's capstone node is one of the

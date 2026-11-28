@@ -446,13 +446,14 @@ try {
     }))()`);
     return { before, after };
   };
-  const closedTap = tapTarget ? await tapAndMeasure(tapTarget.band) : { before: { clicked: false } };
+  const closedTap = tapTarget
+    ? await tapAndMeasure(tapTarget.band)
+    : { before: { clicked: false } };
   check(
     "tapping a CLOSED band's counted row opens the band and renders exactly the counted tail",
     closedTap.before.clicked &&
       closedTap.before.rowsInSection === 0 &&
-      closedTap.after.rowsInSection ===
-        closedTap.before.rowsInSection + closedTap.before.counted &&
+      closedTap.after.rowsInSection === closedTap.before.rowsInSection + closedTap.before.counted &&
       closedTap.after.groupGone &&
       closedTap.after.rowsTotal > closedTap.before.rowsTotal,
     {
@@ -472,11 +473,10 @@ try {
     "tapping the OTHER band's counted row (accordion-moved case) also renders its whole tail",
     Boolean(
       reopenTap &&
-        reopenTap.before.clicked &&
-        reopenTap.before.rowsInSection === 0 &&
-        reopenTap.after.rowsInSection ===
-          reopenTap.before.rowsInSection + reopenTap.before.counted &&
-        reopenTap.after.groupGone,
+      reopenTap.before.clicked &&
+      reopenTap.before.rowsInSection === 0 &&
+      reopenTap.after.rowsInSection === reopenTap.before.rowsInSection + reopenTap.before.counted &&
+      reopenTap.after.groupGone,
     ),
     reopenTap
       ? {
