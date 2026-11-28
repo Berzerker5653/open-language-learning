@@ -1,0 +1,172 @@
+{
+  "viewport": "390x844",
+  "tag": "red-at-head",
+  "checks": [
+    {
+      "name": "the day-1 payload really carries the far-future wall (non-vacuous gate)",
+      "pass": true,
+      "measured": {
+        "totalUnits": 823,
+        "lockedUnits": 813,
+        "hiddenTailTitles": 811
+      }
+    },
+    {
+      "name": "zero hidden far-future units render as path rows (structural, data-unit exact)",
+      "pass": false,
+      "measured": {
+        "renderedHiddenRows": [
+          "ru.unit.on-ramp.self-introduction-01",
+          "ru.unit.on-ramp.self-introduction-02",
+          "ru.unit.on-ramp.classroom-01",
+          "ru.unit.on-ramp.classroom-02",
+          "ru.unit.on-ramp.everyday-01",
+          "ru.unit.on-ramp.everyday-02",
+          "ru.unit.on-ramp.numbers-01",
+          "ru.unit.on-ramp.numbers-02"
+        ]
+      }
+    },
+    {
+      "name": "rendered locked nodes stay within PATH_FUTURE_WINDOW neighbours",
+      "pass": false,
+      "measured": {
+        "renderedLocked": 11,
+        "renderedLockedUnits": [
+          "ru.unit.on-ramp.greetings-01",
+          "ru.unit.on-ramp.greetings-02",
+          "ru.unit.on-ramp.self-introduction-01",
+          "ru.unit.on-ramp.self-introduction-02",
+          "ru.unit.on-ramp.classroom-01",
+          "ru.unit.on-ramp.classroom-02",
+          "ru.unit.on-ramp.everyday-01",
+          "ru.unit.on-ramp.everyday-02",
+          "ru.unit.on-ramp.numbers-01",
+          "ru.unit.on-ramp.numbers-02",
+          "capstone.org.openlanguage.ru-ru.reference.on-ramp"
+        ]
+      }
+    },
+    {
+      "name": "the far tail collapses into counted band group(s) carrying the hidden count",
+      "pass": false,
+      "measured": {
+        "groups": [],
+        "collapsedTotal": 0
+      }
+    },
+    {
+      "name": "every counted row names only a count and a band, never a unit title",
+      "pass": true,
+      "measured": {
+        "texts": []
+      }
+    },
+    {
+      "name": "above the fold: zero locked node titles, the pinned frontier node is visible",
+      "pass": true,
+      "measured": {
+        "foldLockedTitles": 0,
+        "pinInFold": true,
+        "pinUnit": "ru.unit.on-ramp.cyrillic-a-o-m-t"
+      }
+    },
+    {
+      "name": "layout integrity: no element exceeds the viewport, no document h-scroll",
+      "pass": true,
+      "measured": {
+        "overflowing": [],
+        "hScroll": false
+      }
+    },
+    {
+      "name": "layout integrity: no two path rows visibly collide",
+      "pass": true,
+      "measured": {
+        "overlaps": 0
+      }
+    },
+    {
+      "name": "layout integrity: counted group rows meet the 44px touch minimum",
+      "pass": false,
+      "measured": {
+        "groupMinHeight": null
+      }
+    },
+    {
+      "name": "tapping the counted row pulls the tail into view (opt-in lookahead)",
+      "pass": false,
+      "measured": {
+        "after": 21
+      }
+    }
+  ],
+  "failures": 5,
+  "error": null,
+  "profileId": "prof-2a87f7e7-666e-4f0d-94ee-151fe714a5d1",
+  "payload": {
+    "totalUnits": 823,
+    "lockedUnits": 813,
+    "bands": {
+      "on-ramp": {
+        "total": 21,
+        "locked": 11
+      },
+      "A1": {
+        "total": 91,
+        "locked": 91
+      },
+      "A2": {
+        "total": 103,
+        "locked": 103
+      },
+      "B1": {
+        "total": 204,
+        "locked": 204
+      },
+      "B2": {
+        "total": 404,
+        "locked": 404
+      }
+    },
+    "hiddenTailTitles": 811
+  },
+  "audit": {
+    "renderedRows": 21,
+    "renderedLocked": 11,
+    "foldLockedTitles": 0,
+    "pinInFold": true,
+    "pinUnit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    "groups": [],
+    "renderedHiddenRows": [
+      "ru.unit.on-ramp.self-introduction-01",
+      "ru.unit.on-ramp.self-introduction-02",
+      "ru.unit.on-ramp.classroom-01",
+      "ru.unit.on-ramp.classroom-02",
+      "ru.unit.on-ramp.everyday-01",
+      "ru.unit.on-ramp.everyday-02",
+      "ru.unit.on-ramp.numbers-01",
+      "ru.unit.on-ramp.numbers-02",
+      "capstone.org.openlanguage.ru-ru.reference.on-ramp"
+    ],
+    "renderedLockedUnits": [
+      "ru.unit.on-ramp.greetings-01",
+      "ru.unit.on-ramp.greetings-02",
+      "ru.unit.on-ramp.self-introduction-01",
+      "ru.unit.on-ramp.self-introduction-02",
+      "ru.unit.on-ramp.classroom-01",
+      "ru.unit.on-ramp.classroom-02",
+      "ru.unit.on-ramp.everyday-01",
+      "ru.unit.on-ramp.everyday-02",
+      "ru.unit.on-ramp.numbers-01",
+      "ru.unit.on-ramp.numbers-02",
+      "capstone.org.openlanguage.ru-ru.reference.on-ramp"
+    ]
+  },
+  "layout": {
+    "overflowing": [],
+    "overlaps": 0,
+    "groupMinHeight": null,
+    "hScroll": false
+  }
+}

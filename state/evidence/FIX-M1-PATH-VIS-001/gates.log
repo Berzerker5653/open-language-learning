@@ -1,0 +1,69 @@
+# FIX-M1-PATH-VIS-001 — gates.log (2026-11-27, board t_23e61c6f, run 2 ship)
+
+Run 1 (this card, 37m ago) died at the iteration cap (80/80) with the lane
+UNCOMMITTED; run 2 verified the WIP in the tree matched the contract,
+completed the remaining acceptance (capture + evidence + ledger), and
+committed. No gate was edited, weakened, or skipped.
+
+## Lane gates (worktree = HEAD + this lane's WIP; frontend + tooling only, no Rust touched)
+
+- `npx tsc --noEmit` (apps/desktop)                        -> 0 errors
+- `npx vitest run` (apps/desktop)                          -> 84 files, 733 passed / 0 failed
+  (path-view.test.tsx +1 describe, 3 new pins; explain tests re-pinned for the
+  reason->notice rename, assertions unchanged in strength)
+- `python3 tools/test_audit_learner_copy.py`               -> 25 tests OK (v1.7.0 wire-slug rule: +5 tests)
+- `python3 tools/audit_learner_copy.py`                    -> v1.7.0, 57 src files scanned, findings: 0
+- `npx prettier --check` (all changed .tsx/.ts + styles.css + harness) -> clean
+- `npx vite build` -> dist rebuilt with the lane (verified: `path-later-units` present in bundle)
+
+## Acceptance capture — scripts/path-far-future-capture.mjs (lts-serve + headless Chrome, CDP 390x844 mobile:true)
+
+GREEN (this tree): `SERVE_BIN=target/debug/lts-serve SERVE_DIST=apps/desktop/dist CAPTURE_TAG=green node scripts/path-far-future-capture.mjs` -> exit 0, 10/10 PASS
+
+    PASS non-vacuous payload gate      total 823 units, 813 locked, 811 hidden-tail titles
+    PASS zero hidden far-future units render as path rows (structural, data-unit exact)
+    PASS rendered locked nodes <= PATH_FUTURE_WINDOW (2: greetings-01/02)
+    PASS far tail collapsed into counted groups    on-ramp:9 A1:89 A2:101 B1:202 B2:402 = 803 hidden
+    PASS counted rows name count+band only         "+ 9 later units in Getting started" ... "+ 402 later units in Upper-intermediate"
+    PASS above the fold: 0 locked titles; pinned frontier node (cyrillic-a-o-m-t) inside the fold
+    PASS layout: no viewport overflow, no h-scroll
+    PASS layout: no row collisions (0 pairs >4px overlap)
+    PASS layout: counted group >= 44px touch target (48)
+    PASS counted row is a real control (tap expands 12 -> 21 rows)
+
+RED AT HEAD (stash-push of the lane files, dist rebuilt from HEAD, same command,
+CAPTURE_TAG=red-at-head) -> exit 1, 5 FAIL — the wall reproduced exactly as D-003
+measured it (11 locked nodes rendered, zero counted groups, no expand control):
+
+    FAIL zero hidden far-future units render as path rows  (8+ hidden rows rendered)
+    FAIL rendered locked nodes <= window                   (11 locked rows)
+    FAIL far tail collapsed into counted groups            (groups: [])
+    FAIL counted group 44px touch minimum                  (no group exists)
+    FAIL counted row tap-to-expand                         (no control)
+
+## Screenshots (vision oracle)
+
+farfuture-fold0-green.png / farfuture-fullpath-green.png / farfuture-expanded-green.png
+(+ the red-at-head pair). NOTE — pixel-level visual inspection by a vision model
+was NOT possible this run: the active inference engine (:11438) serves a
+text-only build (no --vision) and no vision-capable model exists in the lab
+under the Local-Only AI mode. The vision-check acceptance bullet is therefore
+substituted by (a) the DOM/geometry audits above (fold contents, fold locks,
+overflow, collisions, touch sizes — measured, in result-green.json) and (b)
+both shots attached to the board card for a human eye. Pixel claims NOT
+machine-verified are: antialiasing/render quality of the dashed group button.
+
+## Harness design notes (why the text checks changed shape mid-run)
+
+- First leak scan used body.innerText substring matching: false positives from
+  generic single-word catalog titles that also live in nav chrome ("Progress",
+  "Review", "Words" = the PATH_KIND_NAMES kind word). A line-exact pass still
+  collided on the kind word. Final rule: structural check on `data-unit` ids
+  against the server-side hidden set computed from the unit_path payload —
+  exact, immune to title/chrome collisions, and proven non-vacuous by the
+  payload gate above.
+- hidden-set math mirrors the frontend contract exactly: bands sorted by
+  pathOrderRank (done -> open -> locked) before the tail cutoff (the wire
+  order is pack file order — raw-order math silently produced 0 hidden).
+- Screenshots survive in this dir; the harness writes result-<tag>.json next
+  to them. Navigation errors ride INTO the result (MOBILE-UX-001 rule).

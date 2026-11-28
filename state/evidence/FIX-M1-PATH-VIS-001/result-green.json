@@ -1,0 +1,174 @@
+{
+  "viewport": "390x844",
+  "tag": "green",
+  "checks": [
+    {
+      "name": "the day-1 payload really carries the far-future wall (non-vacuous gate)",
+      "pass": true,
+      "measured": {
+        "totalUnits": 823,
+        "lockedUnits": 813,
+        "hiddenTailTitles": 811
+      }
+    },
+    {
+      "name": "zero hidden far-future units render as path rows (structural, data-unit exact)",
+      "pass": true,
+      "measured": {
+        "renderedHiddenRows": []
+      }
+    },
+    {
+      "name": "rendered locked nodes stay within PATH_FUTURE_WINDOW neighbours",
+      "pass": true,
+      "measured": {
+        "renderedLocked": 2,
+        "renderedLockedUnits": [
+          "ru.unit.on-ramp.greetings-01",
+          "ru.unit.on-ramp.greetings-02"
+        ]
+      }
+    },
+    {
+      "name": "the far tail collapses into counted band group(s) carrying the hidden count",
+      "pass": true,
+      "measured": {
+        "groups": [
+          "on-ramp:9",
+          "A1:89",
+          "A2:101",
+          "B1:202",
+          "B2:402"
+        ],
+        "collapsedTotal": 803
+      }
+    },
+    {
+      "name": "every counted row names only a count and a band, never a unit title",
+      "pass": true,
+      "measured": {
+        "texts": [
+          "+ 9 later units in Getting started",
+          "+ 89 later units in Beginner",
+          "+ 101 later units in Elementary",
+          "+ 202 later units in Intermediate",
+          "+ 402 later units in Upper-intermediate"
+        ]
+      }
+    },
+    {
+      "name": "above the fold: zero locked node titles, the pinned frontier node is visible",
+      "pass": true,
+      "measured": {
+        "foldLockedTitles": 0,
+        "pinInFold": true,
+        "pinUnit": "ru.unit.on-ramp.cyrillic-a-o-m-t"
+      }
+    },
+    {
+      "name": "layout integrity: no element exceeds the viewport, no document h-scroll",
+      "pass": true,
+      "measured": {
+        "overflowing": [],
+        "hScroll": false
+      }
+    },
+    {
+      "name": "layout integrity: no two path rows visibly collide",
+      "pass": true,
+      "measured": {
+        "overlaps": 0
+      }
+    },
+    {
+      "name": "layout integrity: counted group rows meet the 44px touch minimum",
+      "pass": true,
+      "measured": {
+        "groupMinHeight": 48
+      }
+    },
+    {
+      "name": "tapping the counted row pulls the tail into view (opt-in lookahead)",
+      "pass": true,
+      "measured": {
+        "before": 12,
+        "after": 21
+      }
+    }
+  ],
+  "failures": 0,
+  "error": null,
+  "profileId": "prof-2d8a290c-8662-40f2-b7e0-247c26e81c5f",
+  "payload": {
+    "totalUnits": 823,
+    "lockedUnits": 813,
+    "bands": {
+      "on-ramp": {
+        "total": 21,
+        "locked": 11
+      },
+      "A1": {
+        "total": 91,
+        "locked": 91
+      },
+      "A2": {
+        "total": 103,
+        "locked": 103
+      },
+      "B1": {
+        "total": 204,
+        "locked": 204
+      },
+      "B2": {
+        "total": 404,
+        "locked": 404
+      }
+    },
+    "hiddenTailTitles": 811
+  },
+  "audit": {
+    "renderedRows": 12,
+    "renderedLocked": 2,
+    "foldLockedTitles": 0,
+    "pinInFold": true,
+    "pinUnit": "ru.unit.on-ramp.cyrillic-a-o-m-t",
+    "groups": [
+      {
+        "band": "on-ramp",
+        "hidden": 9,
+        "text": "+ 9 later units in Getting started"
+      },
+      {
+        "band": "A1",
+        "hidden": 89,
+        "text": "+ 89 later units in Beginner"
+      },
+      {
+        "band": "A2",
+        "hidden": 101,
+        "text": "+ 101 later units in Elementary"
+      },
+      {
+        "band": "B1",
+        "hidden": 202,
+        "text": "+ 202 later units in Intermediate"
+      },
+      {
+        "band": "B2",
+        "hidden": 402,
+        "text": "+ 402 later units in Upper-intermediate"
+      }
+    ],
+    "renderedHiddenRows": [],
+    "renderedLockedUnits": [
+      "ru.unit.on-ramp.greetings-01",
+      "ru.unit.on-ramp.greetings-02"
+    ]
+  },
+  "layout": {
+    "overflowing": [],
+    "overlaps": 0,
+    "groupMinHeight": 48,
+    "hScroll": false
+  }
+}
