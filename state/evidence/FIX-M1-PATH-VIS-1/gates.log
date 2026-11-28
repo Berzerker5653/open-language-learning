@@ -1,0 +1,66 @@
+# FIX-M1-PATH-VIS-1 — gates.log (board t_3d0d42ca, worker 2026-11-28)
+
+ENTANGLED COMMIT (card-sanctioned): code commit b106252b is labeled for BOTH
+FIX-M1-PATH-VIS-1 (t_3d0d42ca, this card) AND FIX-M1-PATH-VIS-2 (t_7a6fb02e).
+The VIS-2 defect (counted row is a dead control on closed bands) is fixed by
+the same counted-row change — the row became a band-opener — so splitting the
+hunks would have been dishonest archaeology (entangled-commit precedent).
+Neither contract was weakened: the open-band history+frontier+2-neighbours
+contract, the count+band-no-titles contract, and all prior pins stand; two
+loose harness checks were TIGHTENED (strict equality; closed-band tap).
+
+== What shipped (b106252b, main) ==
+apps/desktop/src/home.tsx
+  S-D1: a band whose <ol> never mounts (not open, not closing) counts its
+        WHOLE band in the counted row (`bandRendered ? len - visible : len`).
+        Day-1 RU: A1 "+ 91", A2 "+ 103", B1 "+ 204", B2 "+ 404" (was total-2
+        each -> 8 units rendered nowhere / counted nowhere).
+  S-D2: the counted row's tap now opens the band (setClosingBand(null) +
+        setBandOverride(band), the same accordion move as the header toggle)
+        in addition to adding the band to expandedTails — lookahead taps
+        render exactly the units they counted instead of unmounting
+        themselves and showing nothing.
+apps/desktop/src/path-view.test.tsx — new SSR pin (card acceptance 2):
+  fully-locked bands not open -> counted row == band total ("+ 91 later units
+  in Beginner", "+ 403 later units in Upper-intermediate"), and per-band
+  header total == rendered rows + counted row (arithmetic closes).
+apps/desktop/src/path-view-tap.test.tsx — new interactive DOM pin (VIS-2
+  acceptance 3): closed band renders 0 rows + data-hidden=5; tap -> 5 rows
+  render, the counted row unmounts, the section header reports
+  aria-expanded=true. (The interaction IS provable at DOM level; no need for
+  the capture-only fallback.)
+scripts/path-far-future-capture.mjs
+  S-M1: floor check `collapsedTotal >= 400` replaced by strict equality
+        `collapsedTotal === payload.hiddenTailTitles` (card acceptance 3).
+  VIS-2 acceptance 2: the tap-to-expand check now taps a CLOSED band's group
+        and asserts rows-in-section grow by EXACTLY the counted amount, and
+        adds the accordion-moved case (the formerly-open band, tapped back).
+        The old on-ramp-only tap is subsumed, not removed.
+
+== Lane-tier gates (this tree) ==
+npx tsc --noEmit                                  CLEAN
+npx vitest run (apps/desktop)                     735/735 (85 files; was 733, +2 new pins)
+python3 tools/test_audit_learner_copy.py          NOT RUN (no audit tooling touched)
+cargo fmt/clippy/test                             NOT RUN (no Rust touched)
+
+== Capture re-run GREEN at the committed tree (card acceptance 3) ==
+Binary provenance: the serve binary was built in a detached worktree at
+b106252b (CARGO_TARGET_DIR shared) because the main tree held ANOTHER lane's
+uncommitted apps/desktop/src-tauri/src/lib.rs WIP (drill-direction work); the
+dist was built in the main tree, whose TypeScript source == HEAD (only the
+sibling's lib.rs was dirty). The sibling's WIP was NOT touched, staged, or
+committed.
+  SERVE_BIN=target/debug/lts-serve (worktree-at-b106252b build, 04:00)
+  SERVE_DIST=apps/desktop/dist (main tree, clean TS source)
+  CAPTURE_TAG=vis1-green -> state/evidence/FIX-M1-PATH-VIS-001/result-vis1-green.json
+11/11 checks PASS, exit 0. Key numbers:
+  payload: 823 units, 813 locked, hiddenTailTitles=811
+  counted groups: on-ramp:9  A1:91  A2:103  B1:204  B2:404
+  collapsedTotal=811 === hiddenTailTitles=811  (lane's old numbers: 803/811)
+  closed-band tap A1: rowsInSection 0 -> 91 == counted 91; total rows 12 -> 91
+  accordion-moved tap on-ramp: rowsInSection 0 -> 21 == counted 21 (full band)
+  fold audit unchanged: 0 locked titles in fold, pin in fold, 44px min 48.
+Screenshots: farfuture-{fold0,fullpath,expanded}-vis1-green.png (same dir).
+
+== Deferred ==
+None. All three acceptance bullets of this card verified at this tree.
