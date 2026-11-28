@@ -19,7 +19,12 @@ const DIST = join(REPO, "apps/desktop", "dist-accumulation");
 const OUT = join(REPO, "state/evidence/ACCUMULATION-METERS-001");
 mkdirSync(OUT, { recursive: true });
 
-const MIME = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".svg": "image/svg+xml" };
+const MIME = {
+  ".html": "text/html",
+  ".js": "text/javascript",
+  ".css": "text/css",
+  ".svg": "image/svg+xml",
+};
 const server = createServer((req, res) => {
   const path = join(DIST, req.url.split("?")[0].replace(/^\/+/, "") || "index.html");
   try {
@@ -96,7 +101,11 @@ await send(
   { width: 390, height: 844, deviceScaleFactor: 1, mobile: true },
   sessionId,
 );
-await send("Page.navigate", { url: `http://127.0.0.1:${port}/accumulation-capture.html` }, sessionId);
+await send(
+  "Page.navigate",
+  { url: `http://127.0.0.1:${port}/accumulation-capture.html` },
+  sessionId,
+);
 let audit = null;
 for (let i = 0; i < 60 && !audit; i++) {
   await sleep(500);
@@ -112,11 +121,17 @@ writeFileSync(join(OUT, "today-meters.audit.json"), JSON.stringify(parsed, null,
 
 const oneLine = parsed.myWords && parsed.worlds && parsed.myWords.top === parsed.worlds.top;
 const noScroll = parsed.overflow.scrollWidth <= parsed.overflow.clientWidth;
-const stripOneLine = parsed.stripHeight != null && parsed.stripHeight <= 28 && parsed.stripScrollW <= parsed.stripClientW;
+const stripOneLine =
+  parsed.stripHeight != null &&
+  parsed.stripHeight <= 28 &&
+  parsed.stripScrollW <= parsed.stripClientW;
 
 console.log(JSON.stringify(parsed, null, 1));
-console.log(`strip=${parsed.stripRendered ? "rendered" : "MISSING"} oneLine=${oneLine ? "ok" : "WRAPPED"} noScroll=${noScroll ? "ok" : "H-SCROLL!"} stripOneLine=${stripOneLine ? "ok" : "FAIL"}`);
-const pass = parsed.stripRendered && oneLine && noScroll && stripOneLine && parsed.myWords && parsed.worlds;
+console.log(
+  `strip=${parsed.stripRendered ? "rendered" : "MISSING"} oneLine=${oneLine ? "ok" : "WRAPPED"} noScroll=${noScroll ? "ok" : "H-SCROLL!"} stripOneLine=${stripOneLine ? "ok" : "FAIL"}`,
+);
+const pass =
+  parsed.stripRendered && oneLine && noScroll && stripOneLine && parsed.myWords && parsed.worlds;
 ws.close();
 chrome.kill();
 server.close();

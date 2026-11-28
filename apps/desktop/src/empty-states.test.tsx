@@ -41,7 +41,7 @@ describe("EmptyState shared contract", () => {
     for (const kind of EMPTY_GLYPH_KINDS) {
       const html = renderToStaticMarkup(<EmptyGlyph kind={kind} />);
       expect(html).toContain('aria-hidden="true"');
-      expect(html).toContain("stroke=\"currentColor\"");
+      expect(html).toContain('stroke="currentColor"');
       expect(html).toContain('viewBox="0 0 32 32"');
       expect(html).not.toMatch(/emoji|🪙|⭐|🎉/);
     }
@@ -55,7 +55,12 @@ describe("EmptyState shared contract", () => {
 
   it("anchor affordance renders a real link (My Words add-word case)", () => {
     const html = renderToStaticMarkup(
-      <EmptyState glyph="book" title="Nothing mined yet." actionLabel="Add a word" actionHref="#mine-surface" />,
+      <EmptyState
+        glyph="book"
+        title="Nothing mined yet."
+        actionLabel="Add a word"
+        actionHref="#mine-surface"
+      />,
     );
     expect(html).toContain('href="#mine-surface"');
   });

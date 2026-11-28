@@ -100,9 +100,7 @@ export async function runSettingsPrimes(deps: SettingsPrimeDeps): Promise<void> 
     deps.setPlaybackDevice((await inv("get_playback_device", { profileId })) as string | null);
     deps.setRomajiMode((await inv("get_romaji_mode", { profileId })) as RomajiMode);
     deps.setKanaKeyboard((await inv("get_kana_keyboard", { profileId })) as KanaKeyboardMode);
-    deps.setExplainSettings(
-      (await inv("explain_settings", { profileId })) as ExplainSettingsView,
-    );
+    deps.setExplainSettings((await inv("explain_settings", { profileId })) as ExplainSettingsView);
   });
   // K-77: Settings now hosts language-pack management and the speech
   // runtime status too, so opening it primes the reads the old

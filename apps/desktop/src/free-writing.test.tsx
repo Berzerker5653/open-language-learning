@@ -143,7 +143,7 @@ describe("free-writing panel (WRITE-PRACTICE-001)", () => {
     const short = withProps({ result: null, value: "кофе" });
     expect(short).toContain(`about ${WRITING_SOFT_FLOOR_WORDS} words`);
     expect(short).toContain("Check</button>");
-    expect(short).not.toContain("disabled=\"\"");
+    expect(short).not.toContain('disabled=""');
   });
 
   it("counts words the way the engine journals them", () => {

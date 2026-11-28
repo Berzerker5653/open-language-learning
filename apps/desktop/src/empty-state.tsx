@@ -18,7 +18,16 @@ function GlyphLines({ kind }: { kind: EmptyGlyphKind }) {
     case "ring":
       return (
         <>
-          <circle cx="16" cy="16" r="11" fill="none" stroke="currentColor" strokeWidth="1.5" strokeDasharray="3 4" strokeLinecap="round" />
+          <circle
+            cx="16"
+            cy="16"
+            r="11"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeDasharray="3 4"
+            strokeLinecap="round"
+          />
           <circle cx="16" cy="16" r="3.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
         </>
       );
@@ -26,20 +35,44 @@ function GlyphLines({ kind }: { kind: EmptyGlyphKind }) {
       return (
         <>
           <circle cx="16" cy="16" r="11" fill="none" stroke="currentColor" strokeWidth="1.5" />
-          <path d="M21.5 10.5 18 18l-7.5 3.5L14 14z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+          <path
+            d="M21.5 10.5 18 18l-7.5 3.5L14 14z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+          />
         </>
       );
     case "book":
       return (
         <>
-          <path d="M4 8.5c3.5-1.7 7-1.7 12 0 5-1.7 8.5-1.7 12 0v14.5c-3.5-1.7-7-1.7-12 0-5-1.7-8.5-1.7-12 0z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-          <path d="M16 8.5V23" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <path
+            d="M4 8.5c3.5-1.7 7-1.7 12 0 5-1.7 8.5-1.7 12 0v14.5c-3.5-1.7-7-1.7-12 0-5-1.7-8.5-1.7-12 0z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M16 8.5V23"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
         </>
       );
     case "path":
       return (
         <>
-          <path d="M4 26c8-2 4-10 10-13 5-2.5 4-8.5 12-8" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <path
+            d="M4 26c8-2 4-10 10-13 5-2.5 4-8.5 12-8"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
           <circle cx="4" cy="26" r="2.2" fill="none" stroke="currentColor" strokeWidth="1.5" />
           <circle cx="26" cy="5" r="2.2" fill="none" stroke="currentColor" strokeWidth="1.5" />
         </>
@@ -47,9 +80,27 @@ function GlyphLines({ kind }: { kind: EmptyGlyphKind }) {
     case "sprout":
       return (
         <>
-          <path d="M16 27V14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-          <path d="M16 16c0-5 3.5-8 9-8 0 5-3.5 8-9 8z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-          <path d="M16 20c0-4.5-3-7-7.5-7 0 4.5 3 7 7.5 7z" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+          <path
+            d="M16 27V14"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M16 16c0-5 3.5-8 9-8 0 5-3.5 8-9 8z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M16 20c0-4.5-3-7-7.5-7 0 4.5 3 7 7.5 7z"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinejoin="round"
+          />
         </>
       );
   }

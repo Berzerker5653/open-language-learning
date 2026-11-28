@@ -47,10 +47,18 @@ void (async () => {
   const myWords = document.querySelector("[data-testid=meter-my-words]");
   const worlds = document.querySelector("[data-testid=meter-worlds]");
   const r = (el: Element | null) =>
-    el ? { top: Math.round(el.getBoundingClientRect().top), height: Math.round(el.getBoundingClientRect().height) } : null;
+    el
+      ? {
+          top: Math.round(el.getBoundingClientRect().top),
+          height: Math.round(el.getBoundingClientRect().height),
+        }
+      : null;
   const audit = {
     screen: "today-meters",
-    overflow: { scrollWidth: document.documentElement.scrollWidth, clientWidth: document.documentElement.clientWidth },
+    overflow: {
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth: document.documentElement.clientWidth,
+    },
     stripRendered: Boolean(strip),
     myWords: myWords ? { text: myWords.textContent?.trim() ?? null, ...r(myWords) } : null,
     worlds: worlds ? { text: worlds.textContent?.trim() ?? null, ...r(worlds) } : null,

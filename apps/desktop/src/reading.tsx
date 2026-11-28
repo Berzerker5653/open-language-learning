@@ -317,12 +317,7 @@ export function ReadingPanel(p: ReadingPanelProps) {
   };
   // One word token = one button. `word--active` marks the token whose card
   // is open, so the paragraph shows where the card came from.
-  const wordButton = (
-    s: StorySentence,
-    tok: string,
-    content: React.ReactNode,
-    key: string,
-  ) => {
+  const wordButton = (s: StorySentence, tok: string, content: React.ReactNode, key: string) => {
     const state = stateFor(s, tok);
     return (
       <button
@@ -330,7 +325,11 @@ export function ReadingPanel(p: ReadingPanelProps) {
         type="button"
         className={
           "word" +
-          (state === "confirmed" ? " word--confirmed" : state === "learning" ? " word--learning" : "") +
+          (state === "confirmed"
+            ? " word--confirmed"
+            : state === "learning"
+              ? " word--learning"
+              : "") +
           (cardAt(s.content_id, tok) ? " word--active" : "")
         }
         onClick={(e) => {

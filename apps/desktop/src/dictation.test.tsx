@@ -186,7 +186,9 @@ describe("correction inline inside the sentence (U9)", () => {
           mode: "guided",
           error_offers: [OFFER],
         }}
-        onAcceptOffer={(overrides.onAcceptOffer as ((o: FormErrorOfferView) => void) | undefined) ?? (() => {})}
+        onAcceptOffer={
+          (overrides.onAcceptOffer as ((o: FormErrorOfferView) => void) | undefined) ?? (() => {})
+        }
         onNewSentence={() => {}}
         recording={false}
         hasAttempt={true}

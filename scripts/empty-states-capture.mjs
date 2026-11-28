@@ -22,7 +22,12 @@ const DIST = join(REPO, "apps/desktop", "dist-empty-states");
 const OUT = join(REPO, "state/evidence/EMPTY-STATES-001");
 mkdirSync(OUT, { recursive: true });
 
-const MIME = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".svg": "image/svg+xml" };
+const MIME = {
+  ".html": "text/html",
+  ".js": "text/javascript",
+  ".css": "text/css",
+  ".svg": "image/svg+xml",
+};
 const server = createServer((req, res) => {
   const path = join(DIST, req.url.split("?")[0].replace(/^\/+/, "") || "index.html");
   try {
@@ -127,14 +132,22 @@ async function capture(screen) {
 }
 
 const results = [];
-for (const screen of ["hub-empty", "mywords-empty", "progress-zero", "today-no-plan", "path-empty"]) {
+for (const screen of [
+  "hub-empty",
+  "mywords-empty",
+  "progress-zero",
+  "today-no-plan",
+  "path-empty",
+]) {
   results.push(await capture(screen));
 }
 
 const allPass = results.every(
   (r) => r.parsed.emptyState && r.parsed.glyph && r.parsed.title && r.noScroll,
 );
-console.log(allPass ? "ALL SCREENS: contract visible at 390px" : "SOME SCREENS FAILED THE CONTRACT");
+console.log(
+  allPass ? "ALL SCREENS: contract visible at 390px" : "SOME SCREENS FAILED THE CONTRACT",
+);
 ws.close();
 chrome.kill();
 server.close();

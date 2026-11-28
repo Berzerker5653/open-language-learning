@@ -168,11 +168,7 @@ describe("correction inline with the grade (U9)", () => {
   it("rendering the correction never calls the accept handler", () => {
     const calls: string[] = [];
     renderToStaticMarkup(
-      <WritingPractice
-        {...base}
-        offer={OFFER}
-        onAcceptOffer={(o) => calls.push(o.ledger_id)}
-      />,
+      <WritingPractice {...base} offer={OFFER} onAcceptOffer={(o) => calls.push(o.ledger_id)} />,
     );
     expect(calls).toEqual([]);
   });

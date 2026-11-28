@@ -8,11 +8,7 @@
 //    → serve notice lines, the one-line degraded badge, mic-names availability
 // Zero behavior change: identical state names, identical effect bodies.
 import { useEffect, useState } from "react";
-import {
-  fetchCapabilities,
-  inLtsServeMode,
-  subscribeServeProgress,
-} from "../ipc";
+import { fetchCapabilities, inLtsServeMode, subscribeServeProgress } from "../ipc";
 import type { EngineProgress } from "../progress";
 import { serveDegradedBadge, type Invoke } from "./primitives";
 import { progressStages } from "./walkthrough";
@@ -128,5 +124,12 @@ export function useServeProbe(inv: Invoke | null) {
     };
   }, []);
 
-  return { serveUnpaired, engineProgress, setEngineProgress, serveNotice, serveBadge, serveMicNamesAvailable };
+  return {
+    serveUnpaired,
+    engineProgress,
+    setEngineProgress,
+    serveNotice,
+    serveBadge,
+    serveMicNamesAvailable,
+  };
 }

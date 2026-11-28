@@ -95,8 +95,8 @@ export function FreeWritingPanel(p: FreeWritingPanelProps) {
       <p className="prompt">
         Write a few sentences that use today's words. The app checks what a dictionary can check —
         script, dictionary coverage, and which target words you used. Guided feedback, not a grade:
-        v1 never corrects your grammar. Every attempt is a completion signal only — it never
-        changes your plan or your scores.
+        v1 never corrects your grammar. Every attempt is a completion signal only — it never changes
+        your plan or your scores.
       </p>
       {prompt && (
         <div className="card" data-testid="fw-prompt">
@@ -252,8 +252,12 @@ export function WritingMetersStrip({ meters }: { meters: WritingMeters | null })
       aria-label="Free writing progress"
       data-testid="fw-meters"
     >
-      <span data-testid="fw-meter-attempts">{meters.attempts_this_week} writing attempts this week</span>
-      <span data-testid="fw-meter-words">{meters.unique_dictionary_words} unique dictionary words</span>
+      <span data-testid="fw-meter-attempts">
+        {meters.attempts_this_week} writing attempts this week
+      </span>
+      <span data-testid="fw-meter-words">
+        {meters.unique_dictionary_words} unique dictionary words
+      </span>
     </div>
   );
 }

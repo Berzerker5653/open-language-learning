@@ -2468,8 +2468,7 @@ export class LearnerEngine {
       // switching profiles and back must show the same rows, exactly like
       // the SQLite store behind `writing_journal_at` in lib.rs.
       case "writing_prompt": {
-        const fixture =
-          String(args.packId) === JA ? JA_FIXTURE_WRITING : RU_FIXTURE_WRITING;
+        const fixture = String(args.packId) === JA ? JA_FIXTURE_WRITING : RU_FIXTURE_WRITING;
         const offset = Number(args.offset ?? 0);
         const start = offset % fixture.targets.length;
         return {

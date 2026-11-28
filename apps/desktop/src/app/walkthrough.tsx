@@ -58,10 +58,7 @@ export interface WalkthroughHooks {
  * `true` when the app must skip its non-smoke boot path (the smoke branch is
  * final), or `false` when the ordinary app should boot as usual.
  */
-export async function runSmokeHandshake(
-  inv: Invoke,
-  hooks: WalkthroughHooks,
-): Promise<boolean> {
+export async function runSmokeHandshake(inv: Invoke, hooks: WalkthroughHooks): Promise<boolean> {
   let mode: { smoke: boolean; smoke_perf?: boolean } = { smoke: false };
   try {
     mode = (await inv("app_mode")) as { smoke: boolean; smoke_perf?: boolean };
@@ -432,8 +429,7 @@ export async function runSmokeHandshake(
                   (transfer.textContent ?? "").includes("✓"),
                 120,
               );
-              const opened =
-                document.querySelector('[data-testid="transfer-practice"]') !== null;
+              const opened = document.querySelector('[data-testid="transfer-practice"]') !== null;
               const done = (transfer.textContent ?? "").includes("✓");
               await inv("smoke_ack", {
                 note: `scenario-transfer:${scen.scenario_id}:${opened ? "practice-opened" : done ? "done" : "no-visible-change"}`,

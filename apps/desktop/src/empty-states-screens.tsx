@@ -16,7 +16,10 @@ import { MyWordsPanel } from "./words";
 import { ProgressZeroState } from "./memory-stats";
 import { Home } from "./home";
 
-const screen = (new URLSearchParams(window.location.search).get("shot") ?? window.location.hash.replace(/^#/, "")) || "hub-empty";
+const screen =
+  (new URLSearchParams(window.location.search).get("shot") ??
+    window.location.hash.replace(/^#/, "")) ||
+  "hub-empty";
 const noop = () => undefined;
 
 const emptyPlan = { items: [], total_seconds: 0, budget_minutes: 5, seed: 1, planner_version: "v" };
@@ -102,12 +105,17 @@ setTimeout(() => {
   const action = el?.querySelector(".empty-state-action, .progress-zero-action");
   const audit = {
     screen,
-    overflow: { scrollWidth: document.documentElement.scrollWidth, clientWidth: document.documentElement.clientWidth },
+    overflow: {
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth: document.documentElement.clientWidth,
+    },
     emptyState: Boolean(el),
     glyph: Boolean(glyph),
     title: title?.textContent?.trim() ?? null,
     copy: copy?.textContent?.trim() ?? null,
-    action: action ? { tag: action.tagName.toLowerCase(), text: action.textContent?.trim() ?? null } : null,
+    action: action
+      ? { tag: action.tagName.toLowerCase(), text: action.textContent?.trim() ?? null }
+      : null,
     tapTarget: action ? action.getBoundingClientRect().height : null,
   };
   const pre = document.createElement("pre");

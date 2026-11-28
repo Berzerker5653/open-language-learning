@@ -1007,20 +1007,28 @@ describe("accumulation meters (ACCUMULATION-METERS-001 / U11)", () => {
       { noPack: true },
       { packsUnknown: true },
     ] as const) {
-      const html = renderToStaticMarkup(<Home {...base} {...partial} myWordsCount={7} worlds={{ unlocked: 2, total: 5 }} />);
+      const html = renderToStaticMarkup(
+        <Home {...base} {...partial} myWordsCount={7} worlds={{ unlocked: 2, total: 5 }} />,
+      );
       expect(html).not.toContain("accumulation-meters");
     }
-    const pending = renderToStaticMarkup(<Home {...base} packsPending={true} myWordsCount={7} worlds={{ unlocked: 2, total: 5 }} />);
+    const pending = renderToStaticMarkup(
+      <Home {...base} packsPending={true} myWordsCount={7} worlds={{ unlocked: 2, total: 5 }} />,
+    );
     expect(pending).not.toContain('data-testid="meter-my-words"');
     expect(pending).not.toContain('data-testid="meter-worlds"');
     // no pack at all → no strip
-    const noPack = renderToStaticMarkup(<Home {...base} activePack={null} myWordsCount={7} worlds={{ unlocked: 2, total: 5 }} />);
+    const noPack = renderToStaticMarkup(
+      <Home {...base} activePack={null} myWordsCount={7} worlds={{ unlocked: 2, total: 5 }} />,
+    );
     expect(noPack).not.toContain('data-testid="accumulation-meters"');
     // one meter present → the other absent (abstain, never invent)
     const onlyMyWords = renderToStaticMarkup(<Home {...base} myWordsCount={3} worlds={null} />);
     expect(onlyMyWords).toContain('data-testid="meter-my-words"');
     expect(onlyMyWords).not.toContain('data-testid="meter-worlds"');
-    const onlyWorlds = renderToStaticMarkup(<Home {...base} myWordsCount={null} worlds={{ unlocked: 1, total: 4 }} />);
+    const onlyWorlds = renderToStaticMarkup(
+      <Home {...base} myWordsCount={null} worlds={{ unlocked: 1, total: 4 }} />,
+    );
     expect(onlyWorlds).toContain('data-testid="meter-worlds"');
     expect(onlyWorlds).not.toContain('data-testid="meter-my-words"');
   });

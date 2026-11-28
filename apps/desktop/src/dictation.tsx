@@ -110,7 +110,11 @@ function inlineSentenceWithCorrections(text: string, offers: FormErrorOfferView[
         hit = true;
         next.push(remaining.slice(0, idx));
         next.push(
-          <span key={`${offer.ledger_id}-${idx}`} className="inline-correction" data-testid="inline-correction">
+          <span
+            key={`${offer.ledger_id}-${idx}`}
+            className="inline-correction"
+            data-testid="inline-correction"
+          >
             <s className="inline-correction__wrong">{offer.produced}</s>
             <span className="inline-correction__correct">{offer.expected}</span>
           </span>,
