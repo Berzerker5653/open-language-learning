@@ -4326,6 +4326,32 @@ tasks:
   - "pnpm exec prettier --write applied to exactly the flagged files in one content-neutral chore(fmt) commit with no Rust or content changes"
   - "pnpm fmt:check, pnpm typecheck and pnpm test all green at the lane commit with gates.log recorded"
   required_for_desktop_1_0: false
+- id: FIX-M1-PATH-VIS-1
+  milestone: M11
+  priority: P2
+  title: "counted band rows undercount closed bands by PATH_FUTURE_WINDOW - day-1 RU units render nowhere and count nowhere (REVIEW-FIX-M1-PATH-VIS-001 S-D1)"
+  dependencies: []
+  read_first:
+  - state/evidence/REVIEW-FIX-M1-PATH-VIS-001/spec-verdict.md
+  - state/evidence/FIX-M1-PATH-VIS-1/gates.log
+  acceptance:
+  - "a closed band's counted row counts ALL its units (day-1 RU: sum of counted rows equals the server-side hidden set; A1 says '+ 91 later units in Beginner')"
+  - "new vitest pin: a fully-locked band that is not open shows a counted row equal to the band total, and header total equals rendered rows plus counted row"
+  - "capture harness asserts collapsedTotal === payload.hiddenTailTitles (strict equality, replacing the floor) and re-runs green; gates.log under state/evidence/FIX-M1-PATH-VIS-1/"
+  required_for_desktop_1_0: false
+- id: FIX-M1-PATH-VIS-2
+  milestone: M11
+  priority: P2
+  title: "counted band row is a dead control on closed bands - the tap unmounts the control and renders nothing (REVIEW-FIX-M1-PATH-VIS-001 S-D2)"
+  dependencies: []
+  read_first:
+  - state/evidence/REVIEW-FIX-M1-PATH-VIS-001/spec-verdict.md
+  - state/evidence/FIX-M1-PATH-VIS-1/gates.log
+  acceptance:
+  - "tapping a counted row on ANY band opens that band and pulls its tail into view (band-opener via setBandOverride, consistent with the PATH-PIN-CONSISTENCY-001 focus pipeline)"
+  - "capture tap-to-expand check taps a CLOSED band's group and asserts rendered rows in that section grow by exactly the counted amount"
+  - "DOM-level unit pin for the interaction where feasible"
+  required_for_desktop_1_0: false
 execution_scope:
   default_goal: desktop-1.0-release-candidate
   completion_task: REL-001
@@ -4531,4 +4557,6 @@ execution_scope:
   - FIX-LETTER-DRILLS-001
   - FIX-WRITE-PRACTICE-FORMS-001
   - FIX-PRETTIER-REPO-001
+  - FIX-M1-PATH-VIS-1
+  - FIX-M1-PATH-VIS-2
   public_publication_authorized: false

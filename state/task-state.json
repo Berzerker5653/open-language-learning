@@ -3822,6 +3822,29 @@
         "state/evidence/FIX-PRETTIER-REPO-001/gates.log",
         "state/notes/FIX-PRETTIER-REPO-001.md"
       ]
+    },
+    "FIX-M1-PATH-VIS-1": {
+      "status": "done",
+      "attempts": 1,
+      "updated": "2026-11-28",
+      "notes": "CLOSED 2026-11-28 (board t_3d0d42ca, code b106252b - entangled commit also carrying FIX-M1-PATH-VIS-2, card-sanctioned). S-D1 shipped: a band whose list never mounts (closed, not animating) counts its WHOLE band in the counted row; day-1 RU groups on-ramp:9 + A1:91 + A2:103 + B1:204 + B2:404 = 811 == server-side hidden set (strict equality now pinned in scripts/path-far-future-capture.mjs, replacing the old >=400 floor - the 803/811 gap was this defect's fingerprint). New SSR pin in path-view.test.tsx: counted row == band total and header total == rendered rows + counted row. Capture re-run 11/11 green at b106252b (result-vis1-green.json; serve binary built in a detached worktree at the commit because a sibling lane's lib.rs WIP sat in the main tree; that WIP was left untouched).",
+      "evidence": [
+        "state/evidence/FIX-M1-PATH-VIS-1/gates.log",
+        "state/evidence/FIX-M1-PATH-VIS-001/result-vis1-green.json",
+        "state/evidence/FIX-M1-PATH-VIS-001/farfuture-fold0-vis1-green.png",
+        "state/evidence/FIX-M1-PATH-VIS-001/farfuture-fullpath-vis1-green.png",
+        "state/evidence/FIX-M1-PATH-VIS-001/farfuture-expanded-vis1-green.png"
+      ]
+    },
+    "FIX-M1-PATH-VIS-2": {
+      "status": "review",
+      "attempts": 1,
+      "updated": "2026-11-28",
+      "notes": "Code SHIPPED inside FIX-M1-PATH-VIS-1's entangled commit b106252b (board t_7a6fb02e still open for its own verification lane): the counted row's tap now opens the band (setClosingBand(null) + setBandOverride(band), the same accordion move as the header toggle) in addition to expanding the tail. S-D2 acceptance measured: capture taps a CLOSED band's counted row - section rows 0 -> 91 == counted 91 (plus the accordion-moved case, on-ramp 0 -> 21) in result-vis1-green.json; interactive DOM pin path-view-tap.test.tsx. Verification lane: confirm at HEAD, then close.",
+      "evidence": [
+        "state/evidence/FIX-M1-PATH-VIS-1/gates.log",
+        "state/evidence/FIX-M1-PATH-VIS-001/result-vis1-green.json"
+      ]
     }
   },
   "note": "Tasks absent from this map derive readiness from in-scope ROADMAP dependencies as defined in docs/15. Out-of-scope optional tasks are deferred. Explicit ready/retryable never bypass dependencies; done requires acceptance evidence. Since 2026-10-16 (ADR-0033, queue item D5b) CI validates that derivation for the release path: every task flagged required_for_desktop_1_0 must carry an explicit record here, and absence fails the build instead of deriving readiness.",
