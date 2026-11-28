@@ -70,8 +70,10 @@ Do NOT stack slices before a green checkpoint; keep App.tsx owning every hook.
 | home header/Today wiring (APP-SPLIT-003D) | `app/home-wiring.ts` | **4259** (4448 -> 4259) | ba713af4 |
 | practice wiring (APP-SPLIT-003E) | `app/practice-wiring.ts` | **4210** (4314 -> 4210; wc -l at the 003E base read 4314 — G4-EXPLAIN-001 grew App.tsx 4259 -> 4314 after 003D) | faa66d00 |
 | audio capture & scoring wiring (APP-SPLIT-003F) | `app/capture-wiring.ts` | **4020** (4526 -> 4020; wc -l at the 003F base read 4526 — product lanes grew App.tsx 4210 -> 4529 after 003E, ARCH-HOTSPOT 0150f827 brought it to 4526) | 28aa93a9 |
+| Mine / error-review wiring (APP-SPLIT-003G) | `app/mine-wiring.ts` | **3896** (4021 -> 3896) | 15f925c2 |
 
-Slices 003A-F are shipped. Remaining residual is still
+Slices 003A through 003G are shipped (all recorded in the table above).
+Remaining residual is still
 one stateful App() — next-slice candidates if the owner opens follow-ups:
 the navigate/history effect wiring, and the remaining JSX surfaces. Not in
 any current card's scope.

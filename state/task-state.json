@@ -70,6 +70,15 @@
         "state/evidence/APP-SPLIT-003E/gates.log"
       ]
     },
+    "APP-SPLIT-003G": {
+      "status": "done",
+      "attempts": 1,
+      "updated": "2026-11-28",
+      "notes": "Budgeted slice of APP-SPLIT-001: Mine / error-review wiring slice extracted pure-move to apps/desktop/src/app/mine-wiring.ts (15 handlers + the SESSION-CHROME-001 preview probe body; App.tsx keeps every hook). App.tsx 4021 -> 3896 lines. Two source-text pins (mywords-feel flash-id, loading-feel openWords prime/finally) re-pinned across the seam in the same commit; no pin weakened. Gates: tsc clean; vitest 85 files / 735 tests. Code 15f925c2.",
+      "evidence": [
+        "state/evidence/APP-SPLIT-003G/gates.log"
+      ]
+    },
     "G4-EXPLAIN-001": {
       "status": "done",
       "attempts": 2,

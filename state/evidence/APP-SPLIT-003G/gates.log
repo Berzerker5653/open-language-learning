@@ -1,0 +1,59 @@
+APP-SPLIT-003G — gates log (2026-11-28, worker @default)
+
+== Slice ==
+Extracted: the Mine / error-review wiring surface, pure move, zero behavior
+change (measured pick: largest coherent state+handlers+effect closure still
+a pure move; story/scenario/kanji/shadowing clusters measured smaller).
+
+Module: apps/desktop/src/app/mine-wiring.ts
+Moved bodies (15 handlers + 1 effect body):
+  refreshMine, openWords, addMine, mineFromStory, playMineContext,
+  toggleContentConfirm, removeMine, gradeMine, acceptErrorOffer,
+  refreshErrorReviews, startErrorReview, gradeErrorReview,
+  startMineReview, startNewMineReview, reviewMineNow,
+  startMinePreviewProbe (SESSION-CHROME-001 srs_interval_preview effect body)
+App.tsx keeps every hook and all state; hoisted thin wrappers keep the old
+names for the earlier call sites (boot/profile/reading refreshes at
+~lines 980/1419/2254) and the JSX. mineWiringDeps is a per-render plain
+bundle built at the wrapper site (after every referenced binding is in
+scope; the one forward reference, playSentenceClip, is a hoisted function
+declaration) — no TDZ exposure: the bundle is read only by hoisted
+wrappers, which run after render.
+
+== LOC (wc -l) ==
+App.tsx before: 4021 (measured at work start; matches card)
+App.tsx after:  3896  (delta -125)
+mine-wiring.ts: 437 (new module)
+
+== Gates (LANE tier, FE) ==
+1) npx tsc --noEmit                     -> exit 0 (PASS), run twice (pre- and post test re-pin)
+2) npx vitest run  (full desktop suite) -> Test Files 85 passed (85); Tests 735 passed (735)  PASS
+   First run was 2 failed / 733 passed: two SOURCE-TEXT PINS in
+   src/mywords-feel.test.tsx (FEEL-MYWORDS-001 flash-id) and
+   src/loading-feel.test.tsx (FEEL-LOADING-001 openWords
+   prime/finally) read App.tsx text and pointed at the moved bodies.
+   Re-pinned IN THE SAME COMMIT across the seam (wrapper delegates +
+   body invariant at the new location). No assertion weakened: both
+   still assert engine-id->flashId and setWordsLoading(true)/finally
+   (false), just where the code now lives. No test edited otherwise.
+
+== Test-tree sweep (pitfall checklist) ==
+- grep -rn across src/**/*.test.* and src/.journeys for every moved
+  identifier (openWords/refreshMine/addMine/gradeMine/removeMine/
+  mineFromStory/*MineReview/*ErrorReview/ContentConfirm/MineContext/
+  mineFlashId/wordsLoading/mineSurface/srs_interval_preview/
+  toggleContentConfirm/content_confirm/acceptErrorOffer): only the two
+  files above pin App.tsx text for this surface; none in .journeys.
+- No module outside App.tsx calls any moved function (all are App-local
+  closures; verified with a src-wide grep excluding App.tsx).
+- APP-SPLIT-003C TDZ race: deps bundle is not read at mount before
+  assignment (wrappers are `function` declarations, bundle is read only
+  when called; vitest full suite green incl. journeys).
+
+== SIM ==
+Pure product-code card (apps/ only) — no ~/.hermes/sim/lts.md entry per
+the sim hook rule.
+
+== Commits ==
+code:   15f925c2 refactor(desktop): move Mine / error-review wiring out of App.tsx (APP-SPLIT-003G)
+ledger: (this record's commit; see tasks/ROADMAP.yaml APP-SPLIT-003G + task-state + KANBAN.md row)
