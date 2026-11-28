@@ -7,9 +7,11 @@ import { describe, expect, it } from "vitest";
 import { readFileSync } from "node:fs";
 import { renderToStaticMarkup } from "react-dom/server";
 import {
+  PATH_FUTURE_WINDOW,
   PathView,
   pathNodeState,
   pathSections,
+  pathTailCutoff,
   pathTypedLetterGlyph,
   type UnitPathNode,
 } from "./home";
@@ -441,22 +443,31 @@ describe("locked nodes render strictly below the frontier (PATH-LOCK-ORDER-001)"
     ]);
   });
 
+  // Re-pinned by FIX-M1-PATH-VIS-001 (LEARNER-REVIEW-M1-001 D-003): the
+  // third locked sibling now sits past PATH_FUTURE_WINDOW, so it is not in
+  // the DOM at all — its band shows a counted "+ 1 later unit" group instead
+  // of its title. The original assertion (nothing locked rides ABOVE the
+  // pin) stands for every node that does render; the new assertion is
+  // stricter: far-future units never title themselves at all.
   it("renders zero locked nodes above the pinned frontier node", () => {
     const html = renderToStaticMarkup(<PathView nodes={freshProfile()} />);
     const pinNode = html.indexOf('data-testid="path-node-ru.unit.on-ramp.cyrillic-a-o-m-t"');
     const pin = html.indexOf('data-testid="path-pin"');
     expect(pinNode).toBeGreaterThan(-1);
     expect(pin).toBeGreaterThan(pinNode);
-    for (const lockedId of [
-      "ru.unit.on-ramp.greetings-01",
-      "ru.unit.on-ramp.numbers-01",
-      "ru.unit.on-ramp.numbers-02",
-    ]) {
+    for (const lockedId of ["ru.unit.on-ramp.greetings-01", "ru.unit.on-ramp.numbers-01"]) {
       expect(
         html.indexOf(`data-testid="path-node-${lockedId}"`),
         `${lockedId} must render BELOW the pin`,
       ).toBeGreaterThan(pin);
     }
+    expect(
+      html.indexOf('data-testid="path-node-ru.unit.on-ramp.numbers-02"'),
+      "a past-window locked unit may not render its node at all",
+    ).toBe(-1);
+    expect(html, "the collapsed band group counts them, and names no titles").toContain(
+      "+ 1 later unit in",
+    );
   });
 
   it("sibling locked nodes sharing one gate state the unlock reason ONCE", () => {
@@ -1006,5 +1017,82 @@ describe("track connects: pitch, pill overlay, head cap, typed glyphs (PATH-CONN
     expect(html).toContain(">К</span>");
     // The two open letter rings no longer share one identical drawing.
     expect(html.match(/path-node-letter/g)!.length).toBe(2);
+  });
+});
+
+// FIX-M1-PATH-VIS-001 (LEARNER-REVIEW-M1-001 D-003): the pack catalog is 818
+// units, and the open band rendered every one of them — a from-zero learner
+// read "carbon economics" / "thesis defense" as today's roadmap. The market
+// IA rule (docs/design/PROGRESSION-UX-AUDIT-2026-11-22.md) is OPEN AT the
+// frontier, locked strictly BELOW; the locked mass must never BE the screen.
+// These pins hold the line: inside the open band the learner sees their
+// history, the frontier, and PATH_FUTURE_WINDOW locked neighbours; the rest
+// collapses to a counted group that names no future titles.
+describe("the far-future catalog stays collapsed (FIX-M1-PATH-VIS-001)", () => {
+  const catalogBand = (count: number): UnitPathNode[] => [
+    node({
+      unit_id: "ru.unit.a1.done-1",
+      band: "a1",
+      title: "Market morning",
+      done: true,
+      refs_done: 4,
+      refs_total: 4,
+    }),
+    node({ unit_id: "ru.unit.a1.frontier", band: "a1", title: "Numbers to 100" }),
+    ...Array.from({ length: count }, (_, i) =>
+      node({
+        unit_id: `ru.unit.a1.future-${i}`,
+        band: "a1",
+        title: `Carbon economics ${i}`,
+        locked: true,
+      }),
+    ),
+  ];
+
+  it("keeps history + frontier + PATH_FUTURE_WINDOW neighbours, hides the rest", () => {
+    const nodes = catalogBand(40);
+    expect(pathTailCutoff(nodes)).toBe(2 + PATH_FUTURE_WINDOW);
+    const html = renderToStaticMarkup(<PathView nodes={nodes} />);
+    expect(html).toContain('data-testid="path-node-ru.unit.a1.done-1"');
+    expect(html).toContain('data-testid="path-node-ru.unit.a1.frontier"');
+    for (let i = 0; i < PATH_FUTURE_WINDOW; i += 1) {
+      expect(html).toContain(`data-testid="path-node-ru.unit.a1.future-${i}"`);
+    }
+    for (let i = PATH_FUTURE_WINDOW; i < 40; i += 1) {
+      expect(
+        html.indexOf(`data-testid="path-node-ru.unit.a1.future-${i}"`),
+        `future-${i} is beyond the frontier window and must not render`,
+      ).toBe(-1);
+    }
+  });
+
+  it("collapses the hidden units into ONE counted group naming no titles", () => {
+    const html = renderToStaticMarkup(<PathView nodes={catalogBand(741)} />);
+    const group = html.match(/data-testid="path-later-units-a1"[^>]*>\s*([^<]*)/);
+    expect(group, "the counted band group is the only tail row").not.toBeNull();
+    const [, label] = group as unknown as [string, string];
+    expect(label.trim()).toBe("+ 739 later units in Beginner");
+    expect(html.match(/data-hidden="739"/), "the count rides the control").not.toBeNull();
+    expect(html.split("Carbon economics").length - 1).toBe(PATH_FUTURE_WINDOW);
+  });
+
+  it("a band beyond the frontier never renders any of its unit titles", () => {
+    // The collapsed-band contract: a far band is a header with a count, and
+    // a title only ever appears inside the band the learner stands in.
+    const nodes: UnitPathNode[] = [
+      node({ unit_id: "ru.unit.on-ramp.here", band: "on-ramp", title: "First sounds" }),
+      ...Array.from({ length: 403 }, (_, i) =>
+        node({
+          unit_id: `ru.unit.b2.future-${i}`,
+          band: "b2",
+          title: `Thesis defense ${i}`,
+          locked: true,
+        }),
+      ),
+    ];
+    const html = renderToStaticMarkup(<PathView nodes={nodes} />);
+    expect(html).toContain('data-band="b2"');
+    expect(html, "the b2 header counts the tail; it never titles it").toContain("0/403 done");
+    expect(html).not.toContain("Thesis defense");
   });
 });

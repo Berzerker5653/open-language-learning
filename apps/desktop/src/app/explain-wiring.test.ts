@@ -100,8 +100,8 @@ describe("G4-EXPLAIN-001 explain wiring", () => {
     const status = await runExplainPress(deps(inv));
     expect(status.kind).toBe("unavailable");
     if (status.kind === "unavailable") {
-      expect(status.reason).toContain("unreachable");
-      expect(status.reason.toLowerCase()).not.toContain("grade");
+      expect(status.notice).toContain("unreachable");
+      expect(status.notice.toLowerCase()).not.toContain("grade");
     }
     expect(calls.map((c) => c.cmd)).toEqual(["explain_settings", "explain_card"]);
   });

@@ -85,7 +85,7 @@ export function ExplainView(p: ExplainViewProps) {
         <p className="notice" role="status" data-testid="explain-unavailable">
           Explanation unavailable.{" "}
           <small>
-            {p.status.reason} — the card above is unchanged, and nothing was stored about this.
+            {p.status.notice} — the card above is unchanged, and nothing was stored about this.
           </small>
         </p>
       )}
@@ -94,8 +94,8 @@ export function ExplainView(p: ExplainViewProps) {
           <p>{p.status.text}</p>
           <p>
             <small data-testid="explain-info-only">
-              This is information only. It is never a grade, it changes nothing about your plan,
-              and it is not stored.
+              This is information only. It is never a grade, it changes nothing about your plan, and
+              it is not stored.
             </small>
           </p>
         </div>
@@ -104,8 +104,10 @@ export function ExplainView(p: ExplainViewProps) {
   );
 }
 
-export interface ExplainPanelProps
-  extends Pick<ExplainDeps, "profileId" | "cardText" | "l1" | "l2"> {
+export interface ExplainPanelProps extends Pick<
+  ExplainDeps,
+  "profileId" | "cardText" | "l1" | "l2"
+> {
   /** Null bridge (no engine) is honest: pressing Explain reports unavailable. */
   inv: ExplainDeps["inv"] | null;
 }

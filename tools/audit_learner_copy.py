@@ -13,6 +13,11 @@ state so a `//` inside a URL and a `/*` inside prose are handled):
            src/href/key/for/htmlFor attributes, `import`/`from` specifiers, or
            the `testid` argument of `getByTestId`/`querySelector`).
   jsx-text the text between a closing tag and the next tag in a .tsx file.
+  wire-slug  a wire payload's internal enum slug interpolated into a
+             learner-visible string: `String(x.reason)` anywhere, or a bare
+             `{x.reason}` / `{x.slug}` / `{x.tag}` (or a known slug token such
+             as `weak-skill` / `acc.pl`) rendered as JSX text. A lookup into a
+             human-label map is the allowed shape (LEARNER-REVIEW-M1-001 D-006).
 Comment bodies are never findings: they are where those ids *should* live.
 Files named `*.test.*` / `*.spec.*` are skipped: a test name is a developer
 assertion about behaviour, not copy a learner sees.
@@ -40,7 +45,7 @@ import re
 import sys
 from pathlib import Path
 
-VERSION = "1.6.0"
+VERSION = "1.7.0"
 
 DEFAULT_ROOTS = ["apps/desktop/src", "packages/ui/src"]
 
@@ -120,6 +125,31 @@ LOCALE_UK_RE = re.compile(
 # RU-REPUBLISH-046-001 (controller note): internal unit numbers ("unit 000"
 # style bare ids) must never surface as learner copy, in any scanned field.
 UNIT_ID_LEAK_RE = re.compile(r"\bunit\s+\d{3}(?:-[a-z0-9_-]+)?\b", re.IGNORECASE)
+
+# FIX-M1-PATH-VIS-001 (LEARNER-REVIEW-M1-001 D-006): WIRE SURFACE. Internal
+# enum slugs ride the wire payloads — plan `reason` ("weak-skill",
+# "due-review"), item ids, morphology tags ("acc.pl") — and sit exactly one
+# careless `String(item.reason)` or `{item.reason}` away from learner eyes.
+# The renderer's rule is the inverse: a wire field is either compared, keyed
+# or looked up into human labels (home.tsx `REASON_LABELS[item.reason]`), or
+# it stays off the surface. So these shapes are findings in scanned sources:
+#   wire-slug   `String(x.reason)` (any wire-slug field cast to text), and a
+#               bare `{x.reason}` / `{x.slug}` / `{x.tag}` interpolated into
+#               JSX text (a LOOKUP into an *_LABELS map is the allowed shape);
+#               plus a known slug token or morphology tag rendered as JSX text.
+WIRE_SLUG_FIELD = r"(?:reason|slug|tag)"
+WIRE_SLUG_STRING_RE = re.compile(
+    r"String\(\s*[\w.$[\]?!]*\b(?:reason|slug|tag)\b", re.IGNORECASE
+)
+WIRE_SLUG_JSX_RE = re.compile(r"\{\s*([^{}]*\b(?:reason|slug|tag)\b[^{}]*)\}")
+# A label lookup is the sanctioned shape: MAP[x.reason] renders human copy.
+LABEL_LOOKUP_RE = re.compile(r"^[A-Za-z_$][\w$]*\s*\[")
+# The enum vocabulary (engine `reason` slugs) plus morphology case/number
+# tags — the exact strings D-006 found one render away from learner eyes.
+WIRE_ENUM_SLUG_RE = re.compile(
+    r"\b(?:weak-skill|due-review|saved-review|capstone-review"
+    r"|[a-z]{3}\.(?:sg|pl|du)|n(?:om|acc|gen|dat|ins|pre|loc)\.(?:sg|pl))\b"
+)
 
 # A no-space string is normally a wiring token, not sentence copy — but a
 # string that IS exactly a letter-property word ('appearance', 'uppercase')
@@ -233,6 +263,55 @@ def strip_comments(text):
     return "".join(out)
 
 
+# A bare member interpolation (`{p.status.reason}`) is the wire-slug shape.
+# Anything with a comparison, a call or a lookup renders derived copy and is
+# not this finding — that is the REASON_LABELS[item.reason] precedent.
+BARE_MEMBER_RE = re.compile(r"^\s*[\w$]+(?:\.[\w$]+\??)+\s*$")
+
+
+def wire_slug_findings(stripped, path):
+    """D-006: internal wire slugs interpolated toward learner-visible text."""
+    findings = []
+    for m in WIRE_SLUG_STRING_RE.finditer(stripped):
+        findings.append(
+            {
+                "file": str(path),
+                "line": stripped.count("\n", 0, m.start()) + 1,
+                "kind": "wire-slug",
+                "id": "String(wire field)",
+                "text": stripped[m.start() : m.start() + 70].splitlines()[0].strip()[:90],
+            }
+        )
+    if path.suffix != ".tsx":
+        return findings
+    for m in WIRE_SLUG_JSX_RE.finditer(stripped):
+        expr = m.group(1)
+        if not BARE_MEMBER_RE.match(expr) or LABEL_LOOKUP_RE.match(expr):
+            continue
+        findings.append(
+            {
+                "file": str(path),
+                "line": stripped.count("\n", 0, m.start()) + 1,
+                "kind": "wire-slug",
+                "id": expr.strip(),
+                "text": stripped[m.start() : m.start() + 70].splitlines()[0].strip()[:90],
+            }
+        )
+    for line, node in _jsx_text_nodes(stripped):
+        slug = WIRE_ENUM_SLUG_RE.search(node)
+        if slug:
+            findings.append(
+                {
+                    "file": str(path),
+                    "line": line,
+                    "kind": "wire-slug",
+                    "id": slug.group(0),
+                    "text": node[:90],
+                }
+            )
+    return findings
+
+
 def audit_file(path):
     text = path.read_text(encoding="utf-8")
     findings = []
@@ -285,6 +364,7 @@ def audit_file(path):
                         "text": node.strip()[:90],
                     }
                 )
+    findings.extend(wire_slug_findings(strip_comments(text), path))
     return findings
 
 

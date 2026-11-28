@@ -351,16 +351,19 @@ export function Home(p: HomeProps) {
   // (activePack && !packsPending), and each meter abstains on its own
   // unsettled read — a pending counter never renders from stale pre-settle
   // state (the HOME-FLASH-001 / FIX-HOME-POSTURE-PENDING-001 pattern).
-  const metersVisible =
-    Boolean(p.activePack) && !p.packsPending && !p.noPack && !p.packsUnknown;
+  const metersVisible = Boolean(p.activePack) && !p.packsPending && !p.noPack && !p.packsUnknown;
   const meterMyWords = metersVisible && p.myWordsCount != null ? p.myWordsCount : null;
-  const meterWorlds =
-    metersVisible && p.worlds != null && p.worlds.total > 0 ? p.worlds : null;
+  const meterWorlds = metersVisible && p.worlds != null && p.worlds.total > 0 ? p.worlds : null;
   return (
     <section aria-label="Practice">
       <h1>Hi {p.displayName}</h1>
       {metersVisible && (meterMyWords !== null || meterWorlds !== null) ? (
-        <div className="accumulation-strip" role="group" aria-label="Accumulation" data-testid="accumulation-meters">
+        <div
+          className="accumulation-strip"
+          role="group"
+          aria-label="Accumulation"
+          data-testid="accumulation-meters"
+        >
           {meterMyWords !== null ? (
             <span className="accumulation-meter" data-testid="meter-my-words">
               <small>My Words</small> {meterMyWords} forms confirmed
@@ -1184,6 +1187,31 @@ function pathOrderRank(n: UnitPathNode): number {
   return 1;
 }
 
+/** FIX-M1-PATH-VIS-001 (LEARNER-REVIEW-M1-001 D-003): how many locked units
+ * past the frontier stay on screen. The pack catalog is 818 units, and the
+ * open band used to render every one of them: a from-zero learner read
+ * "carbon economics" and "thesis defense" as today's roadmap, so the locked
+ * far-future mass WAS the screen (the IA rule is open AT the frontier,
+ * locked strictly below). Two neighbours is enough to show the road
+ * continues and to carry the honest unlock reason; nothing further ahead may
+ * title itself before its band is within reach. */
+export const PATH_FUTURE_WINDOW = 2;
+
+/** Index of the first HIDDEN node in one open band: all done/open nodes plus
+ * `PATH_FUTURE_WINDOW` immediately-adjacent locked nodes stay visible
+ * (history above is the learner's own record); every node past that is
+ * collapsed into a counted group row that names no future titles. A band
+ * with no open frontier still shows its first gate plus one neighbour.
+ * PATH-LOCK-ORDER-001 guarantees done -> open -> locked order, so the cut is
+ * always a prefix and never hides history. */
+export function pathTailCutoff(nodes: UnitPathNode[]): number {
+  let frontier = -1;
+  nodes.forEach((n, i) => {
+    if (!n.locked) frontier = i;
+  });
+  return Math.max(0, Math.min(nodes.length, frontier + 1 + PATH_FUTURE_WINDOW));
+}
+
 /** One honest state per node for styling and the mobile audit. Locked wins
  * over everything (a locked node is never clickable), the pin over done.
  * PATH-VISUAL-001: `in-progress` (started but unproven) ranks below the
@@ -1440,6 +1468,11 @@ export function PathView({
   //   :active on elements with handlers, and serve mode runs on phones).
   const [closingBand, setClosingBand] = useState<string | null>(null);
   const [pressedUnit, setPressedUnit] = useState<string | null>(null);
+  // FIX-M1-PATH-VIS-001 (D-003): the learner's own taps that pull a band's
+  // far-future tail into view (the "+ N later units" control). A band whose
+  // tail was once opened stays open for the visit — collapsing it again
+  // would hide units the learner is actively reading.
+  const [expandedTails, setExpandedTails] = useState<Set<string>>(new Set());
   useEffect(() => {
     if (closingBand === null) return;
     const t = setTimeout(() => setClosingBand(null), 200);
@@ -1639,6 +1672,17 @@ export function PathView({
       {sections.map((s) => {
         const header = bandHeader(s.band);
         const isOpen = openBand === s.band;
+        // FIX-M1-PATH-VIS-001 (D-003): inside the open band the learner sees
+        // their own history, the frontier, and PATH_FUTURE_WINDOW locked
+        // neighbours — nothing further. The rest collapses to one counted row
+        // that names no future titles (a band whose tail the learner opened
+        // by hand, or a jump target sitting in the tail, stays expanded).
+        const cut = pathTailCutoff(s.nodes);
+        const tailExpanded =
+          expandedTails.has(s.band) ||
+          (focusUnit !== null && s.nodes.slice(cut).some((n) => n.unit_id === focusUnit));
+        const visibleNodes = tailExpanded ? s.nodes : s.nodes.slice(0, cut);
+        const laterUnits = s.nodes.length - visibleNodes.length;
         // PATH-VISUAL-001: the counter counts PROVEN-DONE only — refs the
         // learner actually proved — never visits or encounters.
         // UNIT-CAPSTONE-001: every section's capstone node is one of the
@@ -1673,7 +1717,7 @@ export function PathView({
                 className={`path-nodes${isOpen ? "" : " path-nodes--closing"}`}
                 data-closing={isOpen ? undefined : "true"}
               >
-                {s.nodes.map((n, i) => {
+                {visibleNodes.map((n, i) => {
                   const state = pathNodeState(n);
                   const fill = n.refs_total > 0 ? Math.min(1, n.refs_done / n.refs_total) : 0;
                   // PATH-CONNECT-PILL-001 (R5): a letters unit shows its OWN
@@ -1686,7 +1730,7 @@ export function PathView({
                   const sway = pathSway(i);
                   const dy = PATH_ROW_PITCH_PX;
                   const downDeg =
-                    i + 1 < s.nodes.length
+                    i + 1 < visibleNodes.length
                       ? (Math.atan2(pathSway(i + 1) - sway, dy) * 180) / Math.PI
                       : 0;
                   // PATH-CONNECT-PILL-001: the UP stub must point AT the
@@ -1758,7 +1802,7 @@ export function PathView({
                           </span>
                         ) : null}
                         {i > 0 ? <span className="path-conn path-conn--up" /> : null}
-                        {i + 1 < s.nodes.length ? (
+                        {i + 1 < visibleNodes.length || laterUnits > 0 ? (
                           <span className="path-conn path-conn--down" />
                         ) : null}
                         <svg viewBox="0 0 44 44" className="path-node-dial">
@@ -1890,6 +1934,29 @@ export function PathView({
                   );
                 })}
               </ol>
+            ) : null}
+            {laterUnits > 0 ? (
+              // FIX-M1-PATH-VIS-001 (D-003): the counted band group. Count
+              // and band name only — a future unit's title never renders
+              // before its band is within reach, so the far catalog stops
+              // being the learner's screen. Tapping it is the learner's own
+              // choice to look ahead, and it stays open for the visit.
+              <button
+                type="button"
+                className="path-later-units"
+                data-testid={`path-later-units-${s.band}`}
+                data-hidden={String(laterUnits)}
+                aria-expanded="false"
+                onClick={() =>
+                  setExpandedTails((prev) => {
+                    const next = new Set(prev);
+                    next.add(s.band);
+                    return next;
+                  })
+                }
+              >
+                {`+ ${laterUnits} later ${laterUnits === 1 ? "unit" : "units"} in ${header.friendly ?? header.label}`}
+              </button>
             ) : null}
           </div>
         );

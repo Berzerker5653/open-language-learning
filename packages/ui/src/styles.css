@@ -1857,7 +1857,6 @@ th:last-child {
   border-radius: var(--radius-sm);
 }
 
-
 /* ------------------------------------------------------ reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -2252,6 +2251,36 @@ th:last-child {
   color: var(--ink-faint);
   font-size: 0.875rem;
   white-space: nowrap;
+}
+
+/* FIX-M1-PATH-VIS-001 (D-003): the counted band group that replaces the
+   far-future tail inside an open band. It is deliberately quieter than a
+   band banner — a distance, never a menu of future titles — and it is a
+   real control (48px tall, the same press affordance as the banners). */
+.path-later-units {
+  display: block;
+  width: calc(100% - 2rem);
+  min-height: 3rem;
+  margin: 0.35rem 1rem 0.5rem;
+  padding: 0.6rem 0.9rem;
+  background: none;
+  border: 1px dashed var(--line-strong);
+  border-radius: 0.9rem;
+  color: var(--ink-faint);
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 120ms ease-out,
+    background-color 120ms ease-out,
+    color 120ms ease-out;
+}
+
+.path-later-units:active {
+  transform: translateY(2px);
+  background-color: var(--surface-sunk);
+  color: var(--ink-soft);
 }
 
 /* The winding column: nodes sway along `--path-sway` (computed in the

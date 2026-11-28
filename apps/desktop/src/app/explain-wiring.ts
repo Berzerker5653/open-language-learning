@@ -14,11 +14,15 @@ export interface ExplainSettingsView {
   consent_granted: boolean;
 }
 
+/** The explain panel's state. The unavailable branch carries `notice` —
+ * learner-facing copy — never `reason`: FIX-M1-PATH-VIS-001 (D-006) reserves
+ * `reason` for the engine's wire slugs (`weak-skill`, `due-review`), and
+ * tools/audit_learner_copy.py fails a bare `{x.reason}` on the surface. */
 export type ExplainStatus =
   | { kind: "idle" }
   | { kind: "loading" }
   | { kind: "consent" }
-  | { kind: "unavailable"; reason: string }
+  | { kind: "unavailable"; notice: string }
   | { kind: "ready"; text: string };
 
 export interface ExplainDeps {
@@ -63,28 +67,28 @@ async function request(d: ExplainDeps): Promise<ExplainStatus> {
     });
     const text = typeof out === "string" ? out.trim() : "";
     if (!text) {
-      return { kind: "unavailable", reason: "the provider returned an empty explanation" };
+      return { kind: "unavailable", notice: "the provider returned an empty explanation" };
     }
     return { kind: "ready", text };
   } catch (e) {
     // Honest and quiet: the core app behaves exactly as it did before AI.
-    return { kind: "unavailable", reason: String(e) };
+    return { kind: "unavailable", notice: String(e) };
   }
 }
 
 /** Pressing Explain: read the gate, then either consent-gate, request, or say unavailable. */
 export async function runExplainPress(d: ExplainDeps): Promise<ExplainStatus> {
   if (!d.cardText.trim()) {
-    return { kind: "unavailable", reason: "there is nothing on this card to explain" };
+    return { kind: "unavailable", notice: "there is nothing on this card to explain" };
   }
   const settings = await fetchSettings(d);
   if (!settings) {
-    return { kind: "unavailable", reason: "the explanation settings could not be read" };
+    return { kind: "unavailable", notice: "the explanation settings could not be read" };
   }
   if (!settings.ai_enabled || settings.ai_base_url.trim() === "") {
     return {
       kind: "unavailable",
-      reason: "AI explanations are off — the app is not configured with an explanation model",
+      notice: "AI explanations are off — the app is not configured with an explanation model",
     };
   }
   if (!settings.consent_granted) {
@@ -96,11 +100,11 @@ export async function runExplainPress(d: ExplainDeps): Promise<ExplainStatus> {
 
 /** Accepting the consent notice stores the consent, then runs the request. */
 export async function runExplainConsentAccept(d: ExplainDeps): Promise<ExplainStatus> {
-  if (!d.profileId) return { kind: "unavailable", reason: "no profile is active" };
+  if (!d.profileId) return { kind: "unavailable", notice: "no profile is active" };
   try {
     await d.inv("set_explain_consent", { profileId: d.profileId, granted: true });
   } catch (e) {
-    return { kind: "unavailable", reason: `consent could not be stored: ${String(e)}` };
+    return { kind: "unavailable", notice: `consent could not be stored: ${String(e)}` };
   }
   return request(d);
 }

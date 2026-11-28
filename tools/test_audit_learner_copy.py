@@ -366,5 +366,63 @@ class GoalsScrubTests(unittest.TestCase):
             self.assertEqual(found, [])
 
 
+class WireSlugTests(unittest.TestCase):
+    """FIX-M1-PATH-VIS-001 (LEARNER-REVIEW-M1-001 D-006): internal enum slugs
+    (`weak-skill`, `due-review`, `acc.pl`) must stay off the learner surface."""
+
+    def scan_src(self, src):
+        with tempfile.TemporaryDirectory() as td:
+            write_tree(td, {"app/src/x.tsx": src})
+            _, _, found = alc.audit_roots([td])
+            return found
+
+    def test_string_cast_of_a_wire_field_fails(self):
+        src = (
+            "export function P({ item }: any) {\n"
+            '  const shown = String(item.reason);\n'
+            "  return <p>{shown}</p>;\n"
+            "}\n"
+        )
+        found = [f for f in self.scan_src(src) if f["kind"] == "wire-slug"]
+        self.assertEqual([f["id"] for f in found], ["String(wire field)"])
+
+    def test_bare_wire_field_in_jsx_text_fails(self):
+        src = (
+            "export function P({ status }: any) {\n"
+            "  return <small>{status.reason} — nothing was stored.</small>;\n"
+            "}\n"
+        )
+        found = [f for f in self.scan_src(src) if f["kind"] == "wire-slug"]
+        self.assertEqual([f["id"] for f in found], ["status.reason"])
+
+    def test_lookup_into_a_label_map_is_the_allowed_shape(self):
+        src = (
+            "const REASON_LABELS: Record<string, string> = {\n"
+            '  "due-review": "Due for review",\n'
+            "};\n"
+            "export function P({ item }: any) {\n"
+            "  return <span>{REASON_LABELS[item.reason]}</span>;\n"
+            "}\n"
+        )
+        self.assertEqual(self.scan_src(src), [])
+
+    def test_a_wire_comparison_is_not_an_interpolation(self):
+        src = (
+            "export function P({ item }: any) {\n"
+            "  return <span>{item.reason === \"due-review\" ? \"Due\" : \"New\"}</span>;\n"
+            "}\n"
+        )
+        self.assertEqual(self.scan_src(src), [])
+
+    def test_enum_slug_rendered_as_jsx_text_fails(self):
+        src = (
+            "export function P() {\n"
+            "  return <p>Ranked by weak-skill today.</p>;\n"
+            "}\n"
+        )
+        found = [f for f in self.scan_src(src) if f["kind"] == "wire-slug"]
+        self.assertEqual([f["id"] for f in found], ["weak-skill"])
+
+
 if __name__ == "__main__":
     unittest.main()

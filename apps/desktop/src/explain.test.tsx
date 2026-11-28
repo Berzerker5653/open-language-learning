@@ -52,7 +52,7 @@ describe("G4-EXPLAIN-001 explain view", () => {
 
   it("unavailable is honest and says the card is unchanged", () => {
     const html = render({
-      status: { kind: "unavailable", reason: "AI explanations are off" },
+      status: { kind: "unavailable", notice: "AI explanations are off" },
     });
     expect(html).toContain("Explanation unavailable");
     expect(html).toContain("AI explanations are off");
