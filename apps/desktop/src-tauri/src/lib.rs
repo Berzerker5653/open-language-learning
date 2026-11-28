@@ -15638,7 +15638,7 @@ activities:
     #[test]
     fn pronunciation_check_uses_pack_declared_target_without_media() {
         use base64::Engine;
-        let Some(tmp) = dictation_vendor() else {
+        let Some((tmp, _vendor_guard)) = dictation_vendor() else {
             return;
         };
         let data = tmp.path();
@@ -15831,7 +15831,7 @@ activities:
 
     #[test]
     fn calibration_record_qualified_for_installed_combination_flips_to_automatic() {
-        let Some(tmp) = dictation_vendor() else {
+        let Some((tmp, _vendor_guard)) = dictation_vendor() else {
             return;
         };
         let data = tmp.path();
@@ -15847,7 +15847,7 @@ activities:
 
     #[test]
     fn calibration_record_with_model_version_drift_fails_closed_to_guided() {
-        let Some(tmp) = dictation_vendor() else {
+        let Some((tmp, _vendor_guard)) = dictation_vendor() else {
             return;
         };
         let data = tmp.path();
@@ -15865,7 +15865,13 @@ activities:
         assert_eq!(res.mode_reason.as_deref(), Some("model-version-drift"));
     }
 
-    fn dictation_vendor() -> Option<tempfile::TempDir> {
+    /// Every vendor-backed test drives the same local whisper.cpp sidecar;
+    /// concurrent runs collide on sidecar start/teardown and surface as a
+    /// spurious `engine-error`. Serialize all of them behind one lock, held
+    /// for the test's whole lifetime via the returned guard.
+    static DICTATION_VENDOR_LOCK: std::sync::Mutex<()> = std::sync::Mutex::new(());
+
+    fn dictation_vendor() -> Option<(tempfile::TempDir, std::sync::MutexGuard<'static, ()>)> {
         let vendor = std::env::var("LTS_BENCH_VENDOR")
             .map(PathBuf::from)
             .unwrap_or_else(|_| {
@@ -15877,6 +15883,9 @@ activities:
             eprintln!("SKIP: vendor aligner/model not present");
             return None;
         }
+        let _guard = DICTATION_VENDOR_LOCK
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
         let tmp = tempfile::TempDir::new().unwrap();
         let data = tmp.path();
         install_bundled_pack(data, "org.openlanguage.ja-demo").unwrap();
@@ -15889,7 +15898,7 @@ activities:
             },
         )
         .unwrap();
-        Some(tmp)
+        Some((tmp, _guard))
     }
 
     #[test]
@@ -15913,7 +15922,7 @@ activities:
     #[test]
     fn dictation_check_matches_spoken_target() {
         use base64::Engine;
-        let Some(tmp) = dictation_vendor() else {
+        let Some((tmp, _vendor_guard)) = dictation_vendor() else {
             return;
         };
         let data = tmp.path();
@@ -15947,7 +15956,7 @@ activities:
     #[test]
     fn dictation_check_flags_clear_mismatch() {
         use base64::Engine;
-        let Some(tmp) = dictation_vendor() else {
+        let Some((tmp, _vendor_guard)) = dictation_vendor() else {
             return;
         };
         let data = tmp.path();
@@ -15984,7 +15993,7 @@ activities:
     #[test]
     fn dictation_check_abstains_on_silence() {
         use base64::Engine;
-        let Some(tmp) = dictation_vendor() else {
+        let Some((tmp, _vendor_guard)) = dictation_vendor() else {
             return;
         };
         let data = tmp.path();
@@ -16140,8 +16149,8 @@ activities:
     #[test]
     fn free_speaking_check_performs_zero_store_writes() {
         use base64::Engine;
-        let (data_tmp, wav) = match dictation_vendor() {
-            Some(tmp) => {
+        let (data_tmp, wav, _vendor_guard) = match dictation_vendor() {
+            Some((tmp, guard)) => {
                 let wav = std::fs::read(
                     tmp.path()
                         .join("packs/org.openlanguage.ja-demo")
@@ -16155,12 +16164,12 @@ activities:
                         .join("media/ja.lex.demo.obaasan.wav"),
                 )
                 .unwrap();
-                (tmp, wav)
+                (tmp, wav, Some(guard))
             }
             None => {
                 let tmp = tempfile::TempDir::new().unwrap();
                 install_bundled_pack(tmp.path(), "org.openlanguage.ja-demo").unwrap();
-                (tmp, b"not-a-wav".to_vec())
+                (tmp, b"not-a-wav".to_vec(), None)
             }
         };
         let data = data_tmp.path();
@@ -16222,7 +16231,7 @@ activities:
     #[test]
     fn free_speaking_check_scores_a_real_recording() {
         use base64::Engine;
-        let Some(tmp) = dictation_vendor() else {
+        let Some((tmp, _vendor_guard)) = dictation_vendor() else {
             return;
         };
         let data = tmp.path();
