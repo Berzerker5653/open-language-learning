@@ -23,3 +23,35 @@ Audio: 5 x qwen3-tts ono_anna re-bakes (omarchy, --force --only, synced fixed
   manifest) + 1 x silero v5_6_ru baya baton. Copy-back sha256+bytes verified 1:1
   against omarchy rows before manifest merge. Old baton piper take kept on omarchy
   (fixru001b-baton.prev-piper); pack wavs gitignored, recovery= published archives.
+
+=== RUN 2 (2026-11-27, board t_24484021) ===
+Lane commit: 04bdd7c8 (run-1 WIP re-verified: pinned D-008 rows, D-012
+glosses, media alignment all confirmed in diff; qa_stories re-run green).
+
+GATES RUN (run 2):
+  .venv/bin/python tools/qa_stories.py -> 20 stories, 0 FAIL
+  cargo test -p lts-desktop --lib -- reference bundled installs_and_records
+    placement_question -> 14 passed / 0 failed (incl. the RU reference-pack
+    install path: install_bundled_pack_report -> pack validators green on the
+    DENSIFIED pack; the run-1 revert trigger does NOT fire)
+  fresh 30-day sim: cargo build -p lts-desktop --bin lts-serve --features serve
+    (PITFALL: the lts-serve bin requires --features serve), fresh .sim-data/ru,
+    scripts/sim_month1.py --pack ru --days 30 -> 30/30 days, raw logs
+    archived in sim-ru-30d-raw.tar.gz (18 MB raw).
+
+MEASURED: 123 unique content_ids (parser: structural walk over call['resp']
+collecting content_id fields; call shape is {cmd,args,resp}; day-1 onboarding
+call uses {cmd,value}). Basis = same unique-content_id basis as the
+FIX-REVIEW-PROG-LEDGER-001 erratum. ACCEPTANCE (>=150) NOT MET.
+Composition: lex 50 / orth 34 / sent 28 (cp 6, on-ramp 7, a2/b2 15) /
+contrast 8 / grammar 3.
+
+ROOT CAUSE NARROWED (for run 3): new-per-day = [32,17,14,0*12,4..7 until d30].
+Days 4-15 = pure-review dead zone (cyrillic letter refs stop being served);
+from day 16 the learner walks the on-ramp->personal-details chain (20 units
+unlocked, 16 done by d30). Pass-1's 128 cross-claims landed mostly in units
+that NEVER unlock inside 30 days (home/routines/shopping/city/time-plans) -
+only personal-details-01/04/05 are on the month-1 unlock chain. The >=150
+lever is re-scoping claims onto the ACTUAL month-1 chain (on-ramp units +
+personal-details + whatever unlocks after self-intro/everyday) and/or the
+dead-zone scheduling (engine side, see LEARNER-REVIEW-M1-001 rca).

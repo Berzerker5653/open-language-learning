@@ -4,13 +4,17 @@
   "active_task": null,
   "tasks": {
     "FIX-M1-CONTENT-RU-001": {
-      "status": "ready",
-      "attempts": 0,
+      "status": "blocked",
+      "attempts": 2,
       "updated": "2026-11-27",
-      "notes": "Follow-up of LEARNER-REVIEW-M1-001 (ledger D-008, D-004, D-012, D-013): fix the pinned RU stress marks (audio baked to the wrong marks), the English gloss rewrites, the marked/unmarked duplicate confirmation, and densify thin RU early pools (94 items/month -> sim >=150). Contract: state/notes/FIX-M1-CONTENT-RU-001.md; board card lts-FIX-M1-CONTENT-RU-001. Opened by takeover-B 2026-11-27.",
+      "notes": "Follow-up of LEARNER-REVIEW-M1-001 (ledger D-008, D-004, D-012, D-013). RUN 1 shipped the fix lane (committed as 04bdd7c8 in run 2); RUN 2 verified gates (qa_stories, desktop install 14/0, fresh sim 123/150 target) and localized the supply delta. Contract: state/notes/FIX-M1-CONTENT-RU-001.md; board card lts-FIX-M1-CONTENT-RU-001.",
       "evidence": [
-        "state/evidence/LEARNER-REVIEW-M1-001/defects.md"
-      ]
+        "state/evidence/FIX-M1-CONTENT-RU-001/gates.log",
+        "state/evidence/FIX-M1-CONTENT-RU-001/asr-rebake.jsonl",
+        "state/evidence/FIX-M1-CONTENT-RU-001/sim-ru-30d-raw.tar.gz",
+        "state/evidence/FIX-M1-CONTENT-RU-001/serve-ru-run2.log"
+      ],
+      "blocker": "Honest partial at wall-clock budget. ALL defect-scope bullets shipped+gated (commit 04bdd7c8): D-008 stress marks + media alignment + 6-id audio re-bake (ASR 6/6), D-012 glosses, D-013 confirmed intentional, locative sweep; qa_stories 0 FAIL; desktop dev-pack install tests 14/0 green (densify passes the install validator). ONLY the >=150 sim bullet open: fresh 30-day RU sim measures 123 unique content_ids (baseline unchanged) — pass-1's 128 claims landed mostly in units that never unlock in 30 days (learner touches 20 units on the cyrillic->on-ramp->personal-details chain; days 4-15 are a zero-new-material dead zone that is engine scheduling, not content). Run-3 recipe with re-scoped pass-2 plan: state/notes/FIX-M1-CONTENT-RU-001.md."
     },
     "FIX-M1-CONTENT-JA-001": {
       "status": "ready",
@@ -3728,7 +3732,7 @@
       "attempts": 1,
       "updated": "2026-11-27",
       "summary": "Serialized the 7 dictation_vendor-gated desktop lib tests behind one process-wide mutex (dictation_vendor returns TempDir + guard), ending the whisper-sidecar engine-error full-suite flake class. Test-only; suite 264 passed 0 failed after fix.",
-      "notes": "Landed in commit 0a06ebaf via controller staging swept into the review lane evidence commit (byte-identical content; provenance note + verification command in gates.log). fmt 0, clippy -p lts-desktop --all-targets -D warnings 0, lib 264/0 in 386.9s.",
+      "notes": "On main as commit 576ccccc (RE-APPLIED 2026-11-27: the original landing 0a06ebaf, created via controller staging swept into the review lane evidence commit, was dropped from main by a lane worker's 'git reset HEAD~1' at 15:44; tree copy was byte-identical, sha e0bc9b34, re-verified before recommit — erratum + proof in gates.log). fmt 0, clippy -p lts-desktop --all-targets -D warnings 0, lib 264/0 in 386.9s.",
       "evidence": [
         "state/evidence/VENDOR-TEST-SERIAL-001/gates.log",
         "state/notes/VENDOR-TEST-SERIAL-001.md"

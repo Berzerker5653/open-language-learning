@@ -1,58 +1,57 @@
-# FIX-M1-CONTENT-RU-001 — RUN 1 HANDOFF (2026-11-27, iteration-budget death)
+# FIX-M1-CONTENT-RU-001 — RUN 2 HANDOFF (2026-11-27, partial at wall-clock budget)
 
-## Shipped in commit (code lane, this card):
-1. D-008 stress fixes across shards (json round-trip, minimal 22-row diff):
-   ru.sent.cp.p26 лесу́, p34 бато́н хлеба́, p35 плачу́ (+cloze re-align),
+## SHIPPED (commit 04bdd7c8 = full run-1 WIP, re-verified hunk-by-hunk in run 2):
+1. D-008 stress fixes across shards (json round-trip, 22 semantic rows):
+   ru.sent.cp.p26 лесу́ (cloze re-aligned), p34 бато́н хлеба́, p35 плачу́,
    lexicon baton reading бато́н, story titles лесу́/саду́,
-   media manifest text + words.jsonl tokens + labels.jsonl (incl.
-   плачу dat.sg -> impf.pres, сто́ит->стои́т).
-2. D-012 gloss rewrites: ru.sent.a2.avtobus-ne-prishol.u003 + ru.sent.cp.p36.
-3. Locative sweep found+fixed 2 UNMARKED locatives beyond the pinned list:
-   ru.sent.a1.shapka-v-parke.u004 саду́, ru.sent.a2.j2 году (manifest text too).
-4. D-013 CONFIRMED intentional: forms=unmarked orthography, readings=marked
-   canonical (pack-wide convention, 0 marked primary forms); "pairs" are the
-   two surfaces of the same lexeme (some also cross-topic dup lex entries,
-   106 groups) — no learner-facing error. Marked form wins (it's the reading).
-5. Audio re-bake 6 ids (5 qwen3-tts ono_anna on omarchy + baton via Silero
-   v5_6_ru baya, duration 0.650s): ASR gate checked=6 passed=0-mismatch
-   (asr jsonl in this card's evidence dir). Manifest rows replaced in place
-   with hash-verified copy-back. baton provenance notes corrected (old claim
-   "ба́тон is the only possible stress" was WRONG; бато́н).
-6. D-004 densify pass 1: 23 a1 units + 128 band-matched cross-claims
-   (reuse_cap 3, JA-class target depth 40), allowed_vocab mirrored
-   (asserted per unit). on-ramp units untouched (band protection).
+   media manifest text стои́т + words tokens + labels (плачу dat.sg->impf.pres).
+   Sweep additions: ru.sent.a1.shapka-v-parke.u004 саду́, ru.sent.a2.j2 году́.
+2. D-012 gloss rewrites: ru.sent.cp.p36 + ru.sent.a2.avtobus-ne-prishol.u003.
+3. D-013 CONFIRMED intentional (forms=unmarked orthography, readings=marked
+   canonical; pack-wide convention; marked form wins — it IS the reading).
+4. Audio re-bake 6 ids (5 qwen3-tts ono_anna omarchy + baton Silero v5_6_ru);
+   ASR 6/6 (asr-rebake.jsonl). Manifest rows hash-verified.
+5. D-004 densify pass 1: 23 a1 units + 128 band-matched cross-claims,
+   allowed_vocab mirrored (asserted). On-ramp units untouched.
 
-## Gates actually run:
-- tools/qa_stories.py (.venv/bin/python): 20 stories, 0 FAIL.
-- scripts/qa-asr.py local gate: 6/6 passed.
-- NOT run (deferred): desktop pack-install test, fresh 30-day sim.
+## GATES VERIFIED (run 2, log = state/evidence/FIX-M1-CONTENT-RU-001/gates.log):
+- tools/qa_stories.py: 20 stories, 0 FAIL.
+- DESKTOP INSTALL TEST GREEN: `cargo test -p lts-desktop --lib -- reference
+  bundled installs_and_records placement_question` -> 14 passed / 0 failed.
+  (The `install_bundled_pack_report` name in run-1 recipe is the lib FUNCTION,
+  not a test; the tests that exercise the install validator are the
+  reference/bundled ones above.) Revert trigger did NOT fire — densify stays.
+- Fresh 30-day sim RU: 123 unique content_ids (baseline 123; target >=150).
+  Raw logs in sim-ru-30d-raw.tar.gz. PITFALL: lts-serve bin needs
+  `--features serve`; sim call shape is {cmd,args,resp} (day-1 onboarding
+  uses {cmd,value}) — parser must walk 'resp' with .get fallback.
 
-## REMAINING RECIPE (run 2):
-1. Desktop dev-pack install test FIRST (allowed_vocab/content_ref validator
-   runs in install path, NOT cargo test -p lts-langpack):
-   cargo test -p lts-desktop --lib install_bundled_pack_report (or the test
-   names that install the dev pack). If red -> revert the enrich commit
-   (single commit, data-only) and re-scope densify.
-2. D-004 ROOT CAUSE found by RUN 1 measurement (not what the card assumed):
-   sentence+lex orphan census = ZERO (RU-SENTENCE-CLAIM-001 claimed all).
-   The thinness is UNIT UNLOCK CADENCE: in the fixed 30-day sim RU lessons
-   touched only 20 units (12 cyrillic + 5 on-ramp pairs + a1 personal-details),
-   new-lesson-per-day [2,4,2,0,0,1,...,3@16,...] vs content pool ~132 a1+cp
-   sentences of which 126 were never delivered. Enrichment pass 1 helps only
-   if practice/lesson reaches enriched units. Real lever candidates:
-   (a) on-ramp band sentence pool is only ~7 sentences — author + claim
-   on-ramp-band content into the 20 month-1 units (needs band on-ramp
-   authoring, owner-reviewable), (b) investigate unlock cadence itself
-   (progression gate), see state/evidence/LEARNER-REVIEW-M1-001/rca-
-   progression-starvation.md.
-3. Fresh 30-day sim: rm -rf the .sim-data + sim/raw ru logs (keep tar.gz),
-   python3 scripts/sim_month1.py --pack ru --days 30; measure unique
-   content_id basis (parser: per-day d['calls'], resp dicts, o['content_id']
-   only). Baseline was 123; acceptance >=150. Archive logs under
-   state/evidence/FIX-M1-CONTENT-RU-001/sim/.
-4. gates.log append + ledger commit (task-state FIX-M1-CONTENT-RU-001 done,
-   evidence -> gates.log), KANBAN.md row, board complete.
+## REMAINING RECIPE (run 3) — only the >=150 bullet:
+1. PASS 2 RE-SCOPE (the whole delta): pass-1 claimed into 23 a1 units but the
+   30-day learner unlocks only 20 units on the chain
+   cyrillic goals -> on-ramp greetings/self-intro/everyday -> a1
+   personal-details-01..05 (see gates.log MEASURED block; day-30 in_progress =
+   greetings-01, self-intro-01/02, everyday-01). Home/routines/shopping/city/
+   time-plans claims are dead weight inside month 1.
+   - Move/add band-matched claims onto the ACTUAL chain: the ~60-entry
+     lexicon/personal.jsonl is the biggest unclaimed pool feeding the units
+     that ARE current on d30; check which personal.* ids are already
+     content_refs in 020/021/022 + on-ramp units, claim the rest via new
+     enrich activities (copy the run-1 enrich-activity shape + allowed_vocab
+     mirror). Lexicon rows carry NO band field — band is inherited from the
+     claiming unit's goal band; keep a1 claims in a1 units (band rule).
+   - Story/scenario pools: story_view contributed 21 uniques — cheap.
+   - Days 4-15 dead zone (zero new material, cyrillic refs stop being
+     served) is ENGINE scheduling, NOT content — do not try to fix it in a
+     content lane; if it caps the reach, report the measurement and reference
+     state/evidence/LEARNER-REVIEW-M1-001/rca-progression-starvation.md.
+2. Re-run gates: qa_stories + desktop install filter above + fresh sim
+   (rm .sim-data/ru, build serve --features serve, sim_month1.py --pack ru
+   --days 30 --out .../sim, then tar.gz raw + rm sim/).
+3. Ledger: task-state FIX-M1-CONTENT-RU-001 -> done with gates.log evidence,
+   KANBAN.md row, board complete. If still <150 after honest pass 2: honest
+   partial per lane-skill (status blocked, blocker with numbers, board block
+   needs_input — the >=150 figure may belong behind the dead-zone fix).
 
-## Omarchy artifacts: ~/LTS/fixru001b*.{wav,log,jsonl}, lts-fixru001b unit
-   (baton prev piper take kept as fixru001b-baton.prev-piper on omarchy only;
-   wavs gitignored — recovery path = published archives).
+## Board: card t_24484021 (attempt 2 of board card; attempt 1 = iteration-cap
+death whose entire WIP is the 04bdd7c8 commit above — NEVER re-apply run-1).
