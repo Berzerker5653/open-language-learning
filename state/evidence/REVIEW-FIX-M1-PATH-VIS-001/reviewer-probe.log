@@ -1,0 +1,31 @@
+REVIEWER-PROBE LOG — REVIEW-FIX-M1-PATH-VIS-001 (2026-11-28)
+
+Probe = scratch vitest file apps/desktop/src/reviewer-probe-pathvis.test.tsx (DELETED after
+the run; not committed). It exercised the SHIPPED exports (pathTailCutoff, PathView SSR) with
+a day-1-shaped payload: one open on-ramp unit + a fully-locked b2 band of 403 units.
+
+Command (at HEAD c97ba7c6):
+  cd apps/desktop && npx vitest run src/reviewer-probe-pathvis.test.tsx
+
+Output (relevant lines):
+  PROBE pathTailCutoff(b2 closed band) = 2
+  PROBE band total = 403; counted row says: + 401 later units in Upper-intermediate data-hidden= 401
+  FAIL ... counts every hidden unit of a closed band
+  AssertionError: closed band must count ALL of its units (403): expected 401 to be 403
+
+=> S-D1 reproduced against shipped code at current HEAD: a closed, fully-locked band counts
+   (total - PATH_FUTURE_WINDOW) while rendering none of the PATH_FUTURE_WINDOW phantom nodes.
+   2 units per closed band are neither rendered nor counted.
+
+Cross-check from the lane's OWN committed green capture (state/evidence/FIX-M1-PATH-VIS-001/
+result-green.json): payload.hiddenTailTitles = 811, sum of counted groups (data-hidden)
+= 9+89+101+202+402 = 803; per-band delta exactly 2 for every fully-locked band
+(A1 91->89, A2 103->101, B1 204->202, B2 404->402); on-ramp (the open band) 11-2=9 is correct.
+
+Other reviewer-ran evidence:
+  python3 tools/validate_handoff.py --require-explicit-ledger-records  -> PASSED (3 pre-existing WARNs)
+  cd apps/desktop && npx vitest run                                   -> 733 passed / 0 failed
+  cd apps/desktop && npx tsc --noEmit                                 -> clean
+  python3 tools/test_audit_learner_copy.py                            -> 25/25 OK
+  hermes kanban --board lts show t_23e61c6f                           -> parent contract + run history
+  git show --stat d9a9ff48 / cbbd8141 / 40a5016d                      -> commit separation verified
