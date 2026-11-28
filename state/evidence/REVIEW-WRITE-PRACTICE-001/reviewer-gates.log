@@ -1,0 +1,1416 @@
+REVIEWER GATE RE-RUN @ e858ca0d (detached worktree), 2026-11-27T21:27:45-07:00
+
+== cargo fmt --all --check ==
+exit=0
+
+== cargo clippy -p lts-desktop --all-targets -- -D warnings ==
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 17.06s
+exit=0
+
+== cargo test -p lts-desktop --lib ==
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1m 03s
+     Running unittests src/lib.rs (/home/hunter/game-dev/LTS/target/debug/deps/lts_desktop-1caef568b73e5b79)
+
+running 258 tests
+test models::tests::catalog_entries_are_pinned_and_licensed ... ok
+test models::tests::a_placeholder_url_is_refused_whatever_the_marker_says ... ok
+test packs::tests::a_full_disk_is_named_rather_than_reported_as_a_generic_failure ... ok
+test packs::tests::a_retry_asks_for_the_missing_bytes_and_only_trusts_a_partial_answer ... ok
+test packs::tests::a_cancelled_transfer_stops_at_the_next_byte_boundary ... ok
+test packs::tests::both_pinned_catalog_entries_install_through_the_native_transport ... ignored, downloads both pinned reference packs (~634 MB)
+test packs::tests::entries_are_hardened ... ok
+test packs::tests::every_pinned_catalog_entry_passes_the_download_policy ... ok
+test packs::tests::fetch_progress_counts_the_bytes_actually_read ... ok
+test models::tests::fetch_failure_leaves_no_partial_install ... ok
+test models::tests::unpublished_payloads_are_never_offered_or_fetched ... ok
+test packcache::tests::warming_a_pack_that_cannot_load_caches_nothing ... ok
+test models::tests::speech_pref_defaults_off_and_validates_selection ... ok
+test packs::tests::an_unidentifiable_partial_is_refused_and_cleared ... ok
+test models::tests::a_model_install_reports_received_bytes_and_nothing_invented ... ok
+test packs::tests::redirect_hops_stay_on_allowlisted_hosts_for_downloads ... ok
+test models::tests::model_status_stops_rehashing_until_files_actually_change ... ok
+test packs::tests::scripted_redirect_chains_are_accepted_or_refused_hop_by_hop ... ok
+test models::tests::install_is_checksummed_atomic_and_removable ... ok
+test packs::tests::the_published_catalog_is_the_default_and_explicit_config_overrides_it ... ok
+test packs::tests::manifest_settings_capabilities_travel_to_the_renderer ... ok
+test progress::tests::a_stage_crosses_the_boundary_with_the_field_names_the_renderer_reads ... ok
+test progress::tests::an_unknown_fraction_stays_absent_instead_of_becoming_zero ... ok
+test packs::tests::ja_demo_fixture_declares_the_romanization_setting ... ok
+test scenarios::tests::a_content_gate_names_the_capability_and_where_it_is_practiced ... ok
+test scenarios::tests::a_completed_transfer_survives_every_view_return ... ok
+test scenarios::tests::a_goal_gate_is_labelled_a_later_curriculum_stage_by_its_own_words ... ok
+test scenarios::tests::a_mixed_gate_stays_the_actionable_one_and_lists_every_rung ... ok
+test scenarios::tests::an_unnamed_prerequisite_falls_back_to_an_honest_phrase_not_the_id ... ok
+test models::tests::directory_entry_installs_verifies_and_rejects_unsafe_archives ... ok
+test scenarios::tests::near_rows_sit_between_playable_and_later_rows ... ok
+test scenarios::tests::nothing_is_recommended_while_every_scenario_is_locked ... ok
+test scenarios::tests::playable_rows_lead_later_stage_rows_in_either_input_order ... ok
+test scenarios::tests::readiness_and_lock_kinds_serialize_as_the_ts_union_strings ... ok
+test scenarios::tests::readiness_is_later_for_an_untouched_later_stage_or_an_undefined_goal ... ok
+test scenarios::tests::readiness_is_near_when_the_gate_is_part_open_or_the_same_stage ... ok
+test scenarios::tests::readiness_is_playable_only_when_the_hard_gate_is_met ... ok
+test packs::tests::manifest_scripts_travel_with_the_installed_pack_view ... ok
+test scenarios::tests::scenario_views_serialize_snake_case_keys ... ok
+test scenarios::tests::the_copy_scanner_finds_pack_ids_and_ignores_ordinary_copy ... ok
+test scenarios::tests::the_recommendation_is_the_first_playable_row_and_there_is_one ... ok
+test scenarios::tests::renaming_pack_display_data_renames_the_lock_copy ... ok
+test scenarios::tests::the_step_result_serde_tags_include_partial_accepted ... ok
+test scenarios::tests::transfer_views_show_payload_availability_and_only_payloads_stamp_done ... ok
+test scenarios::tests::within_a_tier_the_band_ladder_then_the_smallest_gate_wins ... ok
+test tests::a_bundled_packs_sidecar_that_fails_closed_yields_no_candidates ... ok
+test tests::a_bundled_payload_whose_bytes_disagree_with_the_manifest_is_refused ... ok
+test packs::tests::tampered_archive_is_rejected ... ok
+test packs::tests::a_rejected_checksum_stops_after_the_stage_that_failed ... ok
+test tests::a_disabled_speech_model_is_reported_as_opted_out ... ok
+test packs::tests::an_interrupted_download_resumes_from_the_bytes_on_disk ... ok
+test packs::tests::catalog_status_is_honest_when_unset_offline_or_cached ... ok
+test packs::tests::import_rejects_garbage_honestly ... ok
+test packs::tests::catalog_cache_roundtrip_and_view ... ok
+test explain::tests::defaults_are_off_and_consentless ... ok
+test tests::a_new_lexicon_version_is_never_answered_with_the_old_versions_rows ... ok
+test tests::a_pack_without_declared_sources_gets_an_empty_provenance_payload ... ok
+test explain::tests::disabled_offers_no_network_and_is_honest ... ok
+test tests::a_payload_the_cpu_cannot_run_says_so_instead_of_claiming_absence ... ok
+test explain::tests::unreachable_endpoint_is_an_honest_failure ... ok
+test explain::tests::empty_base_url_is_unavailable_without_network ... ok
+test explain::tests::first_explain_requires_consent_and_sends_nothing ... ok
+test explain::tests::consented_explain_round_trips_and_names_direction ... ok
+test tests::align_free_words_classifies_matched_fuzzy_and_missing ... ok
+test tests::align_free_words_never_marks_a_word_matched_without_heard_support ... ok
+test tests::a_unit_parse_is_shared_per_version_root_and_never_across_roots ... ok
+test explain::tests::settings_roundtrip_stores_user_typed_values ... ok
+test tests::an_incomplete_payload_never_runs_and_does_not_shadow_the_dev_path ... ok
+test explain::tests::server_error_is_an_honest_failure ... ok
+test tests::band_sort_key_places_unknown_and_missing_bands_after_the_ladder ... ok
+test explain::tests::empty_explanation_content_is_a_failure_not_blank_ui ... ok
+test tests::build_identity_reports_a_version_and_a_quotable_commit ... ok
+test packs::tests::cancelling_after_verify_leaves_no_pack_installed ... ok
+test packs::tests::cancelling_during_unpacking_leaves_no_pack_installed ... ok
+test explain::tests::explain_path_performs_zero_store_writes ... ok
+test packs::tests::a_catalog_install_reports_each_stage_before_doing_it ... ok
+test packs::tests::an_import_reports_only_the_stages_it_can_perform ... ok
+test tests::capstone_pass_rule_holds_the_checkpoint_bar ... ok
+test packs::tests::a_partial_on_disk_is_verified_before_anything_is_installed ... ok
+test tests::a_legacy_earned_review_survives_without_an_encounter_event ... ok
+test tests::an_empty_submission_records_no_ledger_row_and_no_offer ... ok
+test tests::a_letter_is_never_tested_before_its_encounter_completes ... ok
+test tests::a_speaking_attempt_is_refused_before_any_mastery_write ... ok
+test tests::a_profile_with_no_language_can_still_be_entered ... ok
+test packs::tests::import_validates_then_installs_as_community ... ok
+test tests::an_installed_pack_that_is_not_bundled_appears_in_the_wizard_list ... ok
+test tests::a_declared_task_sequence_loads_and_names_a_runner_for_every_stage ... ok
+test tests::device_tier_detection_recommends_by_measured_capacity ... ok
+test tests::a_due_mined_word_reaches_todays_plan_without_touching_mastery ... ok
+test tests::comprehension_listening_runs_over_a_russian_pack_sentence ... ok
+test tests::a_contrast_the_app_cannot_measure_stays_listening_practice ... FAILED
+test tests::dictation_abstains_rather_than_comparing_in_an_undeclared_language ... ok
+test tests::dictation_abstains_fault_honestly_when_the_recognizer_breaks ... ok
+test scenarios::tests::the_shipped_pack_leads_with_an_openable_scenario_for_a_fresh_profile ... ok
+test tests::dictation_check_abstains_when_model_off ... ok
+test scenarios::tests::every_shipped_scenario_offers_wrong_moves_and_records_honest_evidence ... ok
+test packcache::tests::a_new_version_is_never_served_from_the_old_versions_entry ... ok
+test packs::tests::the_receipt_names_the_version_source_and_verified_sha ... ok
+test tests::error_recurrence_breaks_dimension_ties_capped ... ok
+test tests::a_pack_bundled_build_resolves_candidates_from_staged_resources ... ok
+test tests::a_pack_without_environments_gives_an_empty_world ... ok
+test tests::dictation_check_abstains_on_silence ... ok
+test tests::cloze_and_dictation_grade_typed_answers_on_correct_dimensions ... ok
+test packs::tests::a_catalogue_update_moves_every_profile_onto_the_new_version ... ok
+test tests::content_confirmations_are_attributed_and_rendered_in_the_story_view ... ok
+test tests::community_import_installs_and_switches_learning_language ... ok
+test packs::tests::a_stuck_update_click_still_moves_the_learner ... ok
+test packs::tests::installing_an_older_version_does_not_downgrade_the_current_pointer ... ok
+test tests::gate_progress_averages_concept_ladder_weights ... ok
+test tests::finishing_onboarding_rejects_a_pack_that_is_not_installed ... ok
+test tests::error_review_offer_accept_schedule_and_grade_round_trip ... ok
+test packs::tests::the_installed_fact_is_the_profile_selection_then_the_current_pointer ... ok
+test tests::goal_rank_map_follows_the_band_ladder_and_asks_nothing_of_locked_or_unrunnable_content ... ok
+test tests::every_planned_placement_question_survives_the_submit_task_builder ... ok
+test tests::a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order ... FAILED
+test tests::free_speaking_check_abstains_when_model_off ... ok
+test tests::discrimination_runner_records_phonological_dimension_evidence ... ok
+test scenarios::tests::a_fresh_profiles_lock_copy_carries_no_raw_ids_in_either_shipped_pack ... ok
+test tests::learned_kana_folding_folds_marks_and_size_but_not_the_moraic_nasal ... ok
+test tests::duplicate_mine_returns_the_original_id_instead_of_an_error ... ok
+test tests::letter_model_case_guard_and_stagger ... ok
+test tests::dictation_check_flags_clear_mismatch ... ok
+test tests::ime_candidates_aux_fallback_stays_labeled_and_secondary ... ok
+test tests::ime_candidates_come_from_the_pack_lexicon_with_provenance ... ok
+test tests::bundled_japanese_pack_installs_and_records ... FAILED
+test tests::dictation_check_matches_spoken_target ... ok
+test tests::an_installed_pack_that_is_also_bundled_is_listed_exactly_once ... FAILED
+test tests::fresh_user_onramp_flow_persists_and_resumes ... ok
+test tests::first_run_steps_make_no_script_claim_for_a_pack_without_the_declaration ... ok
+test tests::free_speaking_check_scores_a_real_recording ... ok
+test tests::list_and_resume_profiles_round_trip ... ok
+test tests::free_speaking_check_performs_zero_store_writes ... ok
+test tests::kanji_drill_uses_existing_dimensions_and_srs_gates_resurfacing ... ok
+test tests::media_provenance_comes_from_the_pack_manifest_not_file_presence ... ok
+test tests::mine_list_renders_the_drill_context_for_lookup_mined_words ... ok
+test tests::onboarding_can_finish_with_no_pack_and_still_saves_the_mic_choice ... ok
+test tests::pack_sentence_text_resolves_lexicon_context_ids ... ok
+test tests::perf_commands_refuse_without_harness_env ... ok
+test tests::personalize_progression_favors_developing_dimensions ... ok
+test tests::one_sentence_with_two_mismatches_records_two_rows_and_two_offers ... ok
+test tests::pick_reading_ranks_by_structure_and_never_returns_a_transliteration ... ok
+test tests::listening_runner_hides_transcript_and_schedules_listening_row ... ok
+test tests::off_pack_word_tap_also_logs_and_mines_the_token ... ok
+test tests::a_supported_backup_restores_saved_words_and_history ... FAILED
+test tests::installing_a_pack_warms_its_content_for_the_first_visit ... FAILED
+test tests::mined_words_schedule_without_touching_mastery_evidence ... ok
+test tests::new_profile_gets_first_lessons_and_runner_records_evidence ... ok
+test tests::placement_coverage_reports_a_modality_with_no_auto_runner ... ok
+test tests::placement_coverage_names_why_a_rubric_has_no_question ... ok
+test tests::privacy_notice_names_concrete_things_not_ledger_terms ... ok
+test tests::probe_real_store_word_attachment ... ignored, controller probe: set LTS_PROBE_DATA_DIR + LTS_PROBE_PROFILE_ID
+test tests::placement_never_substitutes_or_repeats_a_diagnostic_item ... ok
+test tests::profile_import_path_must_live_inside_the_data_dir ... ok
+test tests::dictation_target_uses_the_surface_when_a_pack_has_no_readings ... ok
+test tests::placement_records_diagnostic_evidence_within_one_prompt ... ok
+test tests::plan_uses_scheduler_values_under_budget ... ok
+test tests::orth_recognition_runner_records_evidence_and_establishes_kana_literacy ... ok
+test tests::progress_shows_modality_differences ... ok
+test tests::beginner_plan_never_serves_a_locked_units_content ... FAILED
+test tests::pronunciation_check_abstains_when_speech_model_is_off ... ok
+test tests::proposed_listening_items_point_at_audio_the_pack_declares ... ok
+test tests::reader_fades_scaffolds_and_reveals_record_support ... ok
+test tests::pronunciation_check_abstains_on_weak_reference_and_mismatch ... ok
+test tests::reading_aware_span_lookup_prefers_closed_class_homophones ... ok
+test tests::bundled_pack_phrase_entries_carry_valid_slots ... FAILED
+test tests::phrase_entries_carry_slots_and_target_the_right_slot ... FAILED
+test tests::provenance_payload_covers_every_installed_pack_verbatim ... FAILED
+test tests::rfc3339_conversion_is_correct ... ok
+test tests::reference_audio_follows_the_manifest_and_refuses_traversal ... ok
+test tests::capstone_node_runs_the_full_ladder_on_the_reference_pack ... FAILED
+test tests::rtl_capability_reaches_the_renderer_through_pack_listing ... ok
+test tests::recorded_attempts_keep_retry_practice_and_genuine_variation_apart ... ok
+test tests::russian_contrast_arrives_as_the_packs_own_pair ... FAILED
+test tests::capstone_plan_is_deterministic_letters_first_and_capped ... FAILED
+test tests::russian_cyrillic_practice_unlocks_the_greetings_gate ... FAILED
+test tests::claimed_orphan_lexicon_words_seed_new_material_for_a_b1_band_profile ... FAILED
+test tests::running_the_authored_stages_makes_independent_reachable ... ok
+test tests::claims_are_one_entry_per_pack_even_with_two_installed_versions ... FAILED
+test tests::sentence_listening_practises_declared_audio_without_the_transcript ... ok
+test tests::shipped_packs_carry_one_orthography_entity_per_letter ... ok
+test tests::scenario_locks_until_prereqs_then_records_interaction_evidence ... ok
+test tests::scenario_rungs_without_payloads_are_refused_without_voiding_the_node ... ok
+test tests::current_offer_flips_to_review_first_when_a_review_is_due ... FAILED
+test tests::settings_microphone_and_romaji_round_trip ... ok
+test tests::speech_audio_reports_an_honest_media_miss_when_the_pack_ships_no_recording ... ok
+test tests::stagger_confusables_spaces_false_friends_but_never_splits_case_forms ... ok
+test tests::story_lookup_returns_spans_not_substrings ... ok
+test tests::speech_audio_serves_pack_media_and_rejects_bad_ids ... ok
+test tests::day_one_never_seeds_katakana_or_words_with_unlearned_kana ... FAILED
+test tests::sharded_pack_directories_reach_every_reader ... FAILED
+test tests::shadowing_items_attach_word_timings_only_when_the_sidecar_ships ... ok
+test tests::shadowing_targets_come_from_pack_and_record_no_evidence ... ok
+test tests::story_word_audio_slices_the_word_span_from_the_sentence_clip ... ok
+test tests::calibration_record_qualified_for_installed_combination_flips_to_automatic ... FAILED
+test tests::story_reader_shows_scaffolds_and_lookup_without_evidence ... ok
+test tests::the_blank_window_workaround_forces_the_fallback_renderer_only_when_unset ... ok
+test tests::the_bundled_sidecar_outranks_the_dev_vendor_tree ... ok
+test tests::story_view_carries_grammar_labels_only_when_the_sidecar_ships ... ok
+test tests::the_dev_repo_tree_beats_staged_resources_when_both_exist ... ok
+test tests::srs_interval_preview_matches_the_grade_it_prices ... ok
+test tests::calibration_record_with_model_version_drift_fails_closed_to_guided ... FAILED
+test tests::the_authored_order_changes_what_the_app_runs ... ok
+test tests::dictation_target_prefers_kana_only_and_rotates ... FAILED
+test tests::the_authored_unit_journey_reaches_the_desktop ... ok
+test tests::the_lesson_plan_names_the_runner_for_every_declared_stage ... ok
+test tests::the_word_filter_checks_only_declared_kana_forms ... ok
+test tests::first_run_steps_lead_with_the_declared_script_in_its_teaching_order ... FAILED
+test tests::the_practice_cursor_skips_stages_no_runner_can_answer ... ok
+test tests::unit_kind_is_derived_from_pack_activity_data_only ... ok
+test tests::the_speaking_pair_builds_a_guided_unscored_task ... ok
+test tests::the_writing_pair_builds_a_typed_cloze_task ... ok
+test tests::unknown_model_id_is_rejected_before_any_download ... ok
+test tests::the_practice_cursor_walks_the_authored_stages_in_order ... ok
+test tests::goal_map_ignores_activity_volume ... FAILED
+test tests::the_hub_gate_for_the_kanji_drill_comes_from_the_pack_not_from_the_card_list ... ok
+test tests::word_card_matches_the_lexicon_surface_directly_without_a_lemma_row ... ok
+test tests::word_card_aux_lookup_goes_through_the_lemma_and_degrades_without_a_slice ... ok
+test tests::word_card_off_pack_token_gets_the_labeled_aux_card ... ok
+test tests::the_russian_reference_packs_first_placement_question_builds ... ok
+test tests::word_card_parses_the_aux_slice_once_not_per_tap ... ok
+test tests::word_card_refuses_a_malformed_story_id_before_logging ... ok
+test tests::word_card_resolves_an_inflected_ru_form_to_its_lemma ... ok
+test tests::word_card_reports_off_pack_words_as_not_in_pack ... ok
+test tests::word_tap_auto_logs_the_lookup_and_enters_the_review_pipeline ... ok
+test tests::goal_map_orders_bands_by_ladder_not_ascii ... FAILED
+test tests::goal_map_surfaces_pack_goals_with_prereqs_and_mastery ... FAILED
+test tests::katakana_and_kana_words_unlock_with_the_letters_they_need ... FAILED
+test tests::learning_facts_counts_days_and_units_and_never_the_capstone ... FAILED
+test tests::writing_targets_are_parsed_once_per_version_root ... FAILED
+test tests::letter_unit_goes_in_progress_then_done_as_its_refs_are_proven ... FAILED
+test tests::lexicon_entries_covers_all_pack_lexicon_files ... FAILED
+test tests::lexicon_words_outside_the_goal_ladder_are_not_seeded ... FAILED
+test tests::memory_stats_reports_only_this_profiles_local_data ... FAILED
+test tests::pack_claims_report_installed_pack_data_without_upgrading_trust ... FAILED
+test tests::plan_generation_stays_fast_on_the_reference_pack ... FAILED
+test tests::practice_queue_is_generated_from_encounter_state_never_a_pack_buffet ... FAILED
+test tests::preview_journey_select_activity_restart_switch_retain ... ok
+test tests::profile_export_writes_bundle_and_delete_is_one_shot ... FAILED
+test tests::pronunciation_demo_comes_from_pack_contrasts ... FAILED
+test tests::pronunciation_check_uses_pack_declared_target_without_media ... FAILED
+test tests::reading_aware_lookup_of_a_ni_particle_span_never_answers_two ... FAILED
+test tests::reading_aware_lookup_of_the_self_intro_shows_the_topic_particle_not_the_tooth ... FAILED
+test tests::reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior ... FAILED
+test tests::shipped_story_function_word_lookup_report_is_empty ... FAILED
+test tests::situation_ids_resolve_to_human_labels ... FAILED
+test tests::stress_display_settings_are_data_driven_and_persisted ... FAILED
+test tests::the_aligner_language_comes_from_the_pack_manifest ... FAILED
+test tests::the_claim_report_survives_a_trust_change_without_lying_about_it ... FAILED
+test tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see ... FAILED
+test tests::unclaimed_contrast_and_sentence_rows_are_not_seeded ... FAILED
+test tests::unit_path_done_never_reads_attendance_only ... FAILED
+test tests::unit_path_names_each_node_kind_on_the_real_pack ... FAILED
+test tests::world_unlocks_follow_pack_declared_capabilities ... FAILED
+test tests::writing_check_classifies_ru_tokens_by_script_and_dictionary ... FAILED
+test tests::writing_check_ja_flags_unknown_never_wrong_and_accepts_pack_variants ... FAILED
+test tests::writing_check_performs_zero_mastery_or_scheduler_writes ... FAILED
+test tests::writing_journal_replays_newest_first_and_dies_with_the_profile ... FAILED
+test tests::writing_prompt_gives_targets_and_a_cue_and_rotates ... FAILED
+
+failures:
+
+---- tests::a_contrast_the_app_cannot_measure_stays_listening_practice stdout ----
+
+thread 'tests::a_contrast_the_app_cannot_measure_stays_listening_practice' (2195186) panicked at apps/desktop/src-tauri/src/lib.rs:13791:10:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- tests::a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order stdout ----
+
+thread 'tests::a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order' (2195204) panicked at apps/desktop/src-tauri/src/lib.rs:19177:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::bundled_japanese_pack_installs_and_records stdout ----
+
+thread 'tests::bundled_japanese_pack_installs_and_records' (2195226) panicked at apps/desktop/src-tauri/src/lib.rs:13048:10:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::an_installed_pack_that_is_also_bundled_is_listed_exactly_once stdout ----
+
+thread 'tests::an_installed_pack_that_is_also_bundled_is_listed_exactly_once' (2195221) panicked at apps/desktop/src-tauri/src/lib.rs:13662:14:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::a_supported_backup_restores_saved_words_and_history stdout ----
+
+thread 'tests::a_supported_backup_restores_saved_words_and_history' (2195215) panicked at apps/desktop/src-tauri/src/lib.rs:18711:81:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::installing_a_pack_warms_its_content_for_the_first_visit stdout ----
+
+thread 'tests::installing_a_pack_warms_its_content_for_the_first_visit' (2195299) panicked at apps/desktop/src-tauri/src/lib.rs:23000:14:
+reference pack installs: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::beginner_plan_never_serves_a_locked_units_content stdout ----
+
+thread 'tests::beginner_plan_never_serves_a_locked_units_content' (2195224) panicked at apps/desktop/src-tauri/src/lib.rs:23126:49:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::bundled_pack_phrase_entries_carry_valid_slots stdout ----
+
+thread 'tests::bundled_pack_phrase_entries_carry_valid_slots' (2195227) panicked at apps/desktop/src-tauri/src/lib.rs:14248:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::phrase_entries_carry_slots_and_target_the_right_slot stdout ----
+
+thread 'tests::phrase_entries_carry_slots_and_target_the_right_slot' (2195536) panicked at apps/desktop/src-tauri/src/lib.rs:23099:54:
+the extended source packs: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::provenance_payload_covers_every_installed_pack_verbatim stdout ----
+
+thread 'tests::provenance_payload_covers_every_installed_pack_verbatim' (2195582) panicked at apps/desktop/src-tauri/src/lib.rs:18345:14:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::capstone_node_runs_the_full_ladder_on_the_reference_pack stdout ----
+
+thread 'tests::capstone_node_runs_the_full_ladder_on_the_reference_pack' (2195234) panicked at apps/desktop/src-tauri/src/lib.rs:17402:47:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::russian_contrast_arrives_as_the_packs_own_pair stdout ----
+
+thread 'tests::russian_contrast_arrives_as_the_packs_own_pair' (2195782) panicked at apps/desktop/src-tauri/src/lib.rs:13764:10:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::capstone_plan_is_deterministic_letters_first_and_capped stdout ----
+
+thread 'tests::capstone_plan_is_deterministic_letters_first_and_capped' (2195236) panicked at apps/desktop/src-tauri/src/lib.rs:17698:47:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::russian_cyrillic_practice_unlocks_the_greetings_gate stdout ----
+
+thread 'tests::russian_cyrillic_practice_unlocks_the_greetings_gate' (2195792) panicked at apps/desktop/src-tauri/src/lib.rs:16992:69:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::claimed_orphan_lexicon_words_seed_new_material_for_a_b1_band_profile stdout ----
+
+thread 'tests::claimed_orphan_lexicon_words_seed_new_material_for_a_b1_band_profile' (2195237) panicked at apps/desktop/src-tauri/src/lib.rs:23399:49:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::claims_are_one_entry_per_pack_even_with_two_installed_versions stdout ----
+
+thread 'tests::claims_are_one_entry_per_pack_even_with_two_installed_versions' (2195238) panicked at apps/desktop/src-tauri/src/lib.rs:18185:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::current_offer_flips_to_review_first_when_a_review_is_due stdout ----
+
+thread 'tests::current_offer_flips_to_review_first_when_a_review_is_due' (2195247) panicked at apps/desktop/src-tauri/src/lib.rs:18002:47:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::day_one_never_seeds_katakana_or_words_with_unlearned_kana stdout ----
+
+thread 'tests::day_one_never_seeds_katakana_or_words_with_unlearned_kana' (2195249) panicked at apps/desktop/src-tauri/src/lib.rs:19252:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::sharded_pack_directories_reach_every_reader stdout ----
+
+thread 'tests::sharded_pack_directories_reach_every_reader' (2195875) panicked at apps/desktop/src-tauri/src/lib.rs:23099:54:
+the extended source packs: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::calibration_record_qualified_for_installed_combination_flips_to_automatic stdout ----
+
+thread 'tests::calibration_record_qualified_for_installed_combination_flips_to_automatic' (2195228) panicked at apps/desktop/src-tauri/src/lib.rs:15648:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::calibration_record_with_model_version_drift_fails_closed_to_guided stdout ----
+
+thread 'tests::calibration_record_with_model_version_drift_fails_closed_to_guided' (2195230) panicked at apps/desktop/src-tauri/src/lib.rs:15664:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::dictation_target_prefers_kana_only_and_rotates stdout ----
+
+thread 'tests::dictation_target_prefers_kana_only_and_rotates' (2195261) panicked at apps/desktop/src-tauri/src/lib.rs:16326:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::first_run_steps_lead_with_the_declared_script_in_its_teaching_order stdout ----
+
+thread 'tests::first_run_steps_lead_with_the_declared_script_in_its_teaching_order' (2195269) panicked at apps/desktop/src-tauri/src/lib.rs:19500:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::goal_map_ignores_activity_volume stdout ----
+
+thread 'tests::goal_map_ignores_activity_volume' (2195282) panicked at apps/desktop/src-tauri/src/lib.rs:18150:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::goal_map_orders_bands_by_ladder_not_ascii stdout ----
+
+thread 'tests::goal_map_orders_bands_by_ladder_not_ascii' (2195284) panicked at apps/desktop/src-tauri/src/lib.rs:18087:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::goal_map_surfaces_pack_goals_with_prereqs_and_mastery stdout ----
+
+thread 'tests::goal_map_surfaces_pack_goals_with_prereqs_and_mastery' (2195285) panicked at apps/desktop/src-tauri/src/lib.rs:17244:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::katakana_and_kana_words_unlock_with_the_letters_they_need stdout ----
+
+thread 'tests::katakana_and_kana_words_unlock_with_the_letters_they_need' (2195308) panicked at apps/desktop/src-tauri/src/lib.rs:19341:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::learning_facts_counts_days_and_units_and_never_the_capstone stdout ----
+
+thread 'tests::learning_facts_counts_days_and_units_and_never_the_capstone' (2195310) panicked at apps/desktop/src-tauri/src/lib.rs:17551:47:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::writing_targets_are_parsed_once_per_version_root stdout ----
+
+thread 'tests::writing_targets_are_parsed_once_per_version_root' (2196160) panicked at apps/desktop/src-tauri/src/lib.rs:23099:54:
+the extended source packs: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::letter_unit_goes_in_progress_then_done_as_its_refs_are_proven stdout ----
+
+thread 'tests::letter_unit_goes_in_progress_then_done_as_its_refs_are_proven' (2195354) panicked at apps/desktop/src-tauri/src/lib.rs:17898:47:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::lexicon_entries_covers_all_pack_lexicon_files stdout ----
+
+thread 'tests::lexicon_entries_covers_all_pack_lexicon_files' (2195368) panicked at apps/desktop/src-tauri/src/lib.rs:14192:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::lexicon_words_outside_the_goal_ladder_are_not_seeded stdout ----
+
+thread 'tests::lexicon_words_outside_the_goal_ladder_are_not_seeded' (2195384) panicked at apps/desktop/src-tauri/src/lib.rs:23288:49:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::memory_stats_reports_only_this_profiles_local_data stdout ----
+
+thread 'tests::memory_stats_reports_only_this_profiles_local_data' (2195423) panicked at apps/desktop/src-tauri/src/lib.rs:16830:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::pack_claims_report_installed_pack_data_without_upgrading_trust stdout ----
+
+thread 'tests::pack_claims_report_installed_pack_data_without_upgrading_trust' (2195532) panicked at apps/desktop/src-tauri/src/lib.rs:18224:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::plan_generation_stays_fast_on_the_reference_pack stdout ----
+
+thread 'tests::plan_generation_stays_fast_on_the_reference_pack' (2195552) panicked at apps/desktop/src-tauri/src/lib.rs:13923:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::practice_queue_is_generated_from_encounter_state_never_a_pack_buffet stdout ----
+
+thread 'tests::practice_queue_is_generated_from_encounter_state_never_a_pack_buffet' (2195562) panicked at apps/desktop/src-tauri/src/lib.rs:16454:49:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::profile_export_writes_bundle_and_delete_is_one_shot stdout ----
+
+thread 'tests::profile_export_writes_bundle_and_delete_is_one_shot' (2195567) panicked at apps/desktop/src-tauri/src/lib.rs:18679:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::pronunciation_demo_comes_from_pack_contrasts stdout ----
+
+thread 'tests::pronunciation_demo_comes_from_pack_contrasts' (2195579) panicked at apps/desktop/src-tauri/src/lib.rs:13732:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::pronunciation_check_uses_pack_declared_target_without_media stdout ----
+
+thread 'tests::pronunciation_check_uses_pack_declared_target_without_media' (2195578) panicked at apps/desktop/src-tauri/src/lib.rs:15459:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::reading_aware_lookup_of_a_ni_particle_span_never_answers_two stdout ----
+
+thread 'tests::reading_aware_lookup_of_a_ni_particle_span_never_answers_two' (2195620) panicked at apps/desktop/src-tauri/src/lib.rs:21373:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::reading_aware_lookup_of_the_self_intro_shows_the_topic_particle_not_the_tooth stdout ----
+
+thread 'tests::reading_aware_lookup_of_the_self_intro_shows_the_topic_particle_not_the_tooth' (2195709) panicked at apps/desktop/src-tauri/src/lib.rs:21335:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior stdout ----
+
+thread 'tests::reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior' (2195754) panicked at apps/desktop/src-tauri/src/lib.rs:14221:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::shipped_story_function_word_lookup_report_is_empty stdout ----
+
+thread 'tests::shipped_story_function_word_lookup_report_is_empty' (2195883) panicked at apps/desktop/src-tauri/src/lib.rs:21457:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::situation_ids_resolve_to_human_labels stdout ----
+
+thread 'tests::situation_ids_resolve_to_human_labels' (2195885) panicked at apps/desktop/src-tauri/src/lib.rs:14301:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::stress_display_settings_are_data_driven_and_persisted stdout ----
+
+thread 'tests::stress_display_settings_are_data_driven_and_persisted' (2195922) panicked at apps/desktop/src-tauri/src/lib.rs:18519:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::the_aligner_language_comes_from_the_pack_manifest stdout ----
+
+thread 'tests::the_aligner_language_comes_from_the_pack_manifest' (2195932) panicked at apps/desktop/src-tauri/src/lib.rs:13831:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::the_claim_report_survives_a_trust_change_without_lying_about_it stdout ----
+
+thread 'tests::the_claim_report_survives_a_trust_change_without_lying_about_it' (2195941) panicked at apps/desktop/src-tauri/src/lib.rs:18429:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see stdout ----
+
+thread 'tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see' (2195927) panicked at apps/desktop/src-tauri/src/lib.rs:21979:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::unclaimed_contrast_and_sentence_rows_are_not_seeded stdout ----
+
+thread 'tests::unclaimed_contrast_and_sentence_rows_are_not_seeded' (2196008) panicked at apps/desktop/src-tauri/src/lib.rs:23330:49:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::unit_path_done_never_reads_attendance_only stdout ----
+
+thread 'tests::unit_path_done_never_reads_attendance_only' (2196038) panicked at apps/desktop/src-tauri/src/lib.rs:17765:47:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::unit_path_names_each_node_kind_on_the_real_pack stdout ----
+
+thread 'tests::unit_path_names_each_node_kind_on_the_real_pack' (2196064) panicked at apps/desktop/src-tauri/src/lib.rs:17368:53:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::world_unlocks_follow_pack_declared_capabilities stdout ----
+
+thread 'tests::world_unlocks_follow_pack_declared_capabilities' (2196114) panicked at apps/desktop/src-tauri/src/lib.rs:16663:79:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::writing_check_classifies_ru_tokens_by_script_and_dictionary stdout ----
+
+thread 'tests::writing_check_classifies_ru_tokens_by_script_and_dictionary' (2196115) panicked at apps/desktop/src-tauri/src/lib.rs:16072:52:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::writing_check_ja_flags_unknown_never_wrong_and_accepts_pack_variants stdout ----
+
+thread 'tests::writing_check_ja_flags_unknown_never_wrong_and_accepts_pack_variants' (2196118) panicked at apps/desktop/src-tauri/src/lib.rs:16072:52:
+called `Result::unwrap()` on an `Err` value: "pack has 38 validation error(s); fix before build (first: media/ja.lex.ent.konsaato.wav is 65324 bytes on disk, manifest declares 99884)"
+
+---- tests::writing_check_performs_zero_mastery_or_scheduler_writes stdout ----
+
+thread 'tests::writing_check_performs_zero_mastery_or_scheduler_writes' (2196119) panicked at apps/desktop/src-tauri/src/lib.rs:16072:52:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::writing_journal_replays_newest_first_and_dies_with_the_profile stdout ----
+
+thread 'tests::writing_journal_replays_newest_first_and_dies_with_the_profile' (2196120) panicked at apps/desktop/src-tauri/src/lib.rs:16072:52:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+---- tests::writing_prompt_gives_targets_and_a_cue_and_rotates stdout ----
+
+thread 'tests::writing_prompt_gives_targets_and_a_cue_and_rotates' (2196140) panicked at apps/desktop/src-tauri/src/lib.rs:16072:52:
+called `Result::unwrap()` on an `Err` value: "pack has 12 validation error(s); fix before build (first: media/ru.lex.stories202611.baton.wav is 31244 bytes on disk, manifest declares 28204)"
+
+
+failures:
+    tests::a_contrast_the_app_cannot_measure_stays_listening_practice
+    tests::a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order
+    tests::a_supported_backup_restores_saved_words_and_history
+    tests::an_installed_pack_that_is_also_bundled_is_listed_exactly_once
+    tests::beginner_plan_never_serves_a_locked_units_content
+    tests::bundled_japanese_pack_installs_and_records
+    tests::bundled_pack_phrase_entries_carry_valid_slots
+    tests::calibration_record_qualified_for_installed_combination_flips_to_automatic
+    tests::calibration_record_with_model_version_drift_fails_closed_to_guided
+    tests::capstone_node_runs_the_full_ladder_on_the_reference_pack
+    tests::capstone_plan_is_deterministic_letters_first_and_capped
+    tests::claimed_orphan_lexicon_words_seed_new_material_for_a_b1_band_profile
+    tests::claims_are_one_entry_per_pack_even_with_two_installed_versions
+    tests::current_offer_flips_to_review_first_when_a_review_is_due
+    tests::day_one_never_seeds_katakana_or_words_with_unlearned_kana
+    tests::dictation_target_prefers_kana_only_and_rotates
+    tests::first_run_steps_lead_with_the_declared_script_in_its_teaching_order
+    tests::goal_map_ignores_activity_volume
+    tests::goal_map_orders_bands_by_ladder_not_ascii
+    tests::goal_map_surfaces_pack_goals_with_prereqs_and_mastery
+    tests::installing_a_pack_warms_its_content_for_the_first_visit
+    tests::katakana_and_kana_words_unlock_with_the_letters_they_need
+    tests::learning_facts_counts_days_and_units_and_never_the_capstone
+    tests::letter_unit_goes_in_progress_then_done_as_its_refs_are_proven
+    tests::lexicon_entries_covers_all_pack_lexicon_files
+    tests::lexicon_words_outside_the_goal_ladder_are_not_seeded
+    tests::memory_stats_reports_only_this_profiles_local_data
+    tests::pack_claims_report_installed_pack_data_without_upgrading_trust
+    tests::phrase_entries_carry_slots_and_target_the_right_slot
+    tests::plan_generation_stays_fast_on_the_reference_pack
+    tests::practice_queue_is_generated_from_encounter_state_never_a_pack_buffet
+    tests::profile_export_writes_bundle_and_delete_is_one_shot
+    tests::pronunciation_check_uses_pack_declared_target_without_media
+    tests::pronunciation_demo_comes_from_pack_contrasts
+    tests::provenance_payload_covers_every_installed_pack_verbatim
+    tests::reading_aware_lookup_of_a_ni_particle_span_never_answers_two
+    tests::reading_aware_lookup_of_the_self_intro_shows_the_topic_particle_not_the_tooth
+    tests::reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior
+    tests::russian_contrast_arrives_as_the_packs_own_pair
+    tests::russian_cyrillic_practice_unlocks_the_greetings_gate
+    tests::sharded_pack_directories_reach_every_reader
+    tests::shipped_story_function_word_lookup_report_is_empty
+    tests::situation_ids_resolve_to_human_labels
+    tests::stress_display_settings_are_data_driven_and_persisted
+    tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see
+    tests::the_aligner_language_comes_from_the_pack_manifest
+    tests::the_claim_report_survives_a_trust_change_without_lying_about_it
+    tests::unclaimed_contrast_and_sentence_rows_are_not_seeded
+    tests::unit_path_done_never_reads_attendance_only
+    tests::unit_path_names_each_node_kind_on_the_real_pack
+    tests::world_unlocks_follow_pack_declared_capabilities
+    tests::writing_check_classifies_ru_tokens_by_script_and_dictionary
+    tests::writing_check_ja_flags_unknown_never_wrong_and_accepts_pack_variants
+    tests::writing_check_performs_zero_mastery_or_scheduler_writes
+    tests::writing_journal_replays_newest_first_and_dies_with_the_profile
+    tests::writing_prompt_gives_targets_and_a_cue_and_rotates
+    tests::writing_targets_are_parsed_once_per_version_root
+
+test result: FAILED. 199 passed; 57 failed; 2 ignored; 0 measured; 0 filtered out; finished in 58.72s
+
+error: test failed, to rerun pass `-p lts-desktop --lib`
+exit=101
+
+== cd apps/desktop: npx tsc --noEmit ==
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'tsc' --noEmit
+src/App.test.tsx(12,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/App.tsx(1,54): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/App.tsx(480,18): error TS7006: Parameter 'proceeded' implicitly has an 'any' type.
+src/App.tsx(1039,14): error TS7006: Parameter 'v' implicitly has an 'any' type.
+src/App.tsx(1050,14): error TS7006: Parameter 'v' implicitly has an 'any' type.
+src/App.tsx(1205,21): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/App.tsx(1206,20): error TS7006: Parameter 'i' implicitly has an 'any' type.
+src/App.tsx(1280,48): error TS7006: Parameter 'x' implicitly has an 'any' type.
+src/App.tsx(1604,36): error TS7006: Parameter 'i' implicitly has an 'any' type.
+src/App.tsx(1622,36): error TS7006: Parameter 'i' implicitly has an 'any' type.
+src/App.tsx(1754,21): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/App.tsx(1916,36): error TS7006: Parameter 'p' implicitly has an 'any' type.
+src/App.tsx(1967,40): error TS7006: Parameter 'c' implicitly has an 'any' type.
+src/App.tsx(2290,23): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/App.tsx(2304,23): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/App.tsx(2473,30): error TS7006: Parameter 'c' implicitly has an 'any' type.
+src/App.tsx(2479,23): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/App.tsx(2525,26): error TS7006: Parameter 'prev' implicitly has an 'any' type.
+src/App.tsx(2608,34): error TS7006: Parameter 'm' implicitly has an 'any' type.
+src/App.tsx(2796,22): error TS7006: Parameter 'm' implicitly has an 'any' type.
+src/App.tsx(3149,51): error TS7006: Parameter 't' implicitly has an 'any' type.
+src/App.tsx(3331,36): error TS7006: Parameter 'n' implicitly has an 'any' type.
+src/App.tsx(3331,39): error TS7006: Parameter 'b' implicitly has an 'any' type.
+src/App.tsx(3376,34): error TS7006: Parameter 'pack' implicitly has an 'any' type.
+src/App.tsx(3378,38): error TS7006: Parameter 'c' implicitly has an 'any' type.
+src/App.tsx(3416,28): error TS7006: Parameter 'target' implicitly has an 'any' type.
+src/App.tsx(3416,36): error TS7006: Parameter 'guarded' implicitly has an 'any' type.
+src/App.tsx(3458,7): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/App.tsx(3504,38): error TS7006: Parameter 'c' implicitly has an 'any' type.
+src/App.tsx(3509,40): error TS7006: Parameter 'i' implicitly has an 'any' type.
+src/App.tsx(3819,27): error TS7006: Parameter 'i' implicitly has an 'any' type.
+src/App.tsx(3841,41): error TS7006: Parameter 'm' implicitly has an 'any' type.
+src/App.tsx(3880,44): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/App.tsx(3888,43): error TS7006: Parameter 'r' implicitly has an 'any' type.
+src/App.tsx(4001,32): error TS7006: Parameter 'c' implicitly has an 'any' type.
+src/App.tsx(4325,39): error TS7006: Parameter 'ip' implicitly has an 'any' type.
+src/App.tsx(4436,52): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/a11y.test.tsx(5,23): error TS2688: Cannot find type definition file for 'vite/client'.
+src/a11y.test.tsx(6,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/a11y.test.tsx(7,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/a11y.test.tsx(17,17): error TS2307: Cannot find module '../../../packages/ui/src/styles.css?raw' or its corresponding type declarations.
+src/a11y.test.tsx(147,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/accumulation-screens.tsx(10,28): error TS2307: Cannot find module 'react-dom/client' or its corresponding type declarations.
+src/accumulation-screens.tsx(11,8): error TS2882: Cannot find module or type declarations for side-effect import of '@openlang/ui/styles.css'.
+src/accumulation-screens.tsx(25,3): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/app/explain-wiring.test.ts(6,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/app/history-wiring.tsx(109,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/app/home-wiring.ts(13,32): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/app/placement-coverage.tsx(29,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/app/primitives.ts(8,24): error TS2307: Cannot find module '@tauri-apps/api/core' or its corresponding type declarations.
+src/app/serve-probe.ts(10,37): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/app/serve-probe.ts(110,12): error TS2307: Cannot find module '@tauri-apps/api/event' or its corresponding type declarations.
+src/app/serve-probe.ts(112,9): error TS2347: Untyped function calls may not accept type arguments.
+src/app/serve-probe.ts(112,52): error TS7006: Parameter 'e' implicitly has an 'any' type.
+src/button-affordance.test.ts(1,43): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/button-affordance.test.ts(2,31): error TS2591: Cannot find name 'node:url'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/button-affordance.test.ts(3,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/button-affordance.test.ts(67,16): error TS7006: Parameter 'f' implicitly has an 'any' type.
+src/button-affordance.test.ts(68,16): error TS7006: Parameter 'f' implicitly has an 'any' type.
+src/capture.test.ts(1,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/dictation.test.tsx(3,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/dictation.test.tsx(4,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/dictation.test.tsx(21,31): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/dictation.tsx(9,32): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/dictation.tsx(113,11): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/dim-progress.tsx(15,36): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/dim-progress.tsx(39,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/drill-feel.test.ts(1,30): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/drill-feel.test.ts(2,31): error TS2591: Cannot find name 'node:url'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/drill-feel.test.ts(3,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/drill-hierarchy.test.ts(1,30): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/drill-hierarchy.test.ts(2,31): error TS2591: Cannot find name 'node:url'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/drill-hierarchy.test.ts(3,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/empty-state.tsx(20,9): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/empty-states-screens.tsx(12,28): error TS2307: Cannot find module 'react-dom/client' or its corresponding type declarations.
+src/empty-states-screens.tsx(13,8): error TS2882: Cannot find module or type declarations for side-effect import of '@openlang/ui/styles.css'.
+src/empty-states-screens.tsx(27,14): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/empty-states.test.tsx(5,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/empty-states.test.tsx(6,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/empty-states.test.tsx(7,30): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/empty-states.test.tsx(8,31): error TS2591: Cannot find name 'node:url'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/empty-states.test.tsx(23,7): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/error-review.test.tsx(8,42): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/error-review.test.tsx(9,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/error-review.test.tsx(62,7): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/error-review.tsx(90,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/explain.test.tsx(6,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/explain.test.tsx(7,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/explain.test.tsx(21,31): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/explain.tsx(8,26): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/explain.tsx(32,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/free-speaking.test.tsx(4,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/free-speaking.test.tsx(5,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/free-speaking.test.tsx(27,31): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/free-speaking.tsx(77,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/free-writing.test.tsx(7,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/free-writing.test.tsx(8,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/free-writing.test.tsx(60,31): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/free-writing.tsx(93,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/history-nav.test.ts(7,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/history-screens.tsx(23,28): error TS2307: Cannot find module 'react-dom/client' or its corresponding type declarations.
+src/history-screens.tsx(24,8): error TS2882: Cannot find module or type declarations for side-effect import of '@openlang/ui/styles.css'.
+src/history-screens.tsx(114,27): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/home.test.tsx(1,42): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/home.test.tsx(2,80): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/home.test.tsx(3,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/home.test.tsx(65,7): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/home.tsx(10,65): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/home.tsx(360,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/home.tsx(1728,58): error TS7006: Parameter 'p' implicitly has an 'any' type.
+src/home.tsx(1729,61): error TS7006: Parameter 'p' implicitly has an 'any' type.
+src/home.tsx(1730,62): error TS7006: Parameter 'p' implicitly has an 'any' type.
+src/hub.test.tsx(3,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/hub.test.tsx(4,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/hub.test.tsx(11,39): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/hub.tsx(146,7): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/ime.test.ts(1,30): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/ime.test.ts(2,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/ipc.test.ts(1,65): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/a11y-focus.journey.tsx(13,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/capstone-wiring.journey.tsx(16,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/content-confirm.journey.tsx(21,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/drill-dots.journey.tsx(12,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/dup-install.journey.tsx(9,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/error-offer-review.journey.tsx(13,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/export-restore.journey.tsx(11,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/first-run.journey.tsx(11,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/free-speaking.journey.tsx(12,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/free-writing.journey.tsx(15,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/harness.tsx(19,21): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/journeys/harness.tsx(20,39): error TS2307: Cannot find module 'react-dom/client' or its corresponding type declarations.
+src/journeys/harness.tsx(2799,17): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/journeys/history-nav.journey.tsx(16,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/idle-stability.journey.tsx(15,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/ime-mode-bubble.journey.tsx(13,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/kana-card-gating.journey.tsx(10,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/kana-kbd.journey.tsx(16,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/kanji-decomp.journey.tsx(12,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/keyboard.journey.tsx(19,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/language-switch.journey.tsx(16,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/new-word-review.journey.tsx(16,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/no-speech-model.journey.tsx(12,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/pack-install.journey.tsx(16,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/progress.journey.tsx(10,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/restart-resume.journey.tsx(14,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/ru-modality.journey.tsx(18,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/ru-placement.journey.tsx(14,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/session.journey.tsx(13,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/settings-prime.journey.tsx(9,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/settings-scope-gating.journey.tsx(14,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/today-firstscreen.journey.tsx(21,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/upperband-sequence.journey.tsx(26,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/journeys/whatsnext.journey.tsx(22,49): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/kana-ime.test.tsx(12,42): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/kana-ime.test.tsx(13,31): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/kana-ime.test.tsx(14,39): error TS2307: Cannot find module 'react-dom/client' or its corresponding type declarations.
+src/kana-ime.test.tsx(72,42): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/kana-ime.tsx(26,24): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/kana-ime.tsx(250,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/kanji-decomposition.test.ts(1,30): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/kanji-decomposition.test.ts(2,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/kanji-decomposition.test.ts(20,16): error TS7006: Parameter 'line' implicitly has an 'any' type.
+src/kanji-decomposition.test.ts(21,13): error TS7006: Parameter 'line' implicitly has an 'any' type.
+src/kanji-mnemonic-elements.test.ts(1,30): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/kanji-mnemonic-elements.test.ts(2,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/kanji-mnemonic-elements.test.ts(36,16): error TS7006: Parameter 'line' implicitly has an 'any' type.
+src/kanji-mnemonic-elements.test.ts(37,13): error TS7006: Parameter 'line' implicitly has an 'any' type.
+src/language.test.tsx(1,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/language.test.tsx(2,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/language.test.tsx(144,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/language.tsx(275,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/lesson.test.tsx(4,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/lesson.test.tsx(5,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/lesson.test.tsx(213,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/lesson.tsx(143,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/loading-feel.test.tsx(17,30): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/loading-feel.test.tsx(18,31): error TS2591: Cannot find name 'node:url'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/loading-feel.test.tsx(19,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/loading-feel.test.tsx(20,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/loading-feel.test.tsx(81,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/main.tsx(1,24): error TS2307: Cannot find module '@tauri-apps/api/core' or its corresponding type declarations.
+src/main.tsx(2,28): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/main.tsx(3,28): error TS2307: Cannot find module 'react-dom/client' or its corresponding type declarations.
+src/main.tsx(5,8): error TS2882: Cannot find module or type declarations for side-effect import of '@openlang/ui/styles.css'.
+src/main.tsx(8,3): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/memory-stats.test.tsx(5,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/memory-stats.test.tsx(6,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/memory-stats.test.tsx(25,39): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/memory-stats.test.tsx(73,30): error TS2307: Cannot find module './memory-stats?raw' or its corresponding type declarations.
+src/memory-stats.tsx(22,26): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/memory-stats.tsx(23,36): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/memory-stats.tsx(114,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/mobile-audit.test.ts(12,43): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/mobile-audit.test.ts(13,22): error TS2591: Cannot find name 'node:path'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/mobile-audit.test.ts(14,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/mobile-audit.test.ts(16,24): error TS2304: Cannot find name '__dirname'.
+src/mobile-audit.test.ts(26,46): error TS7006: Parameter 'f' implicitly has an 'any' type.
+src/mobile-screens.tsx(16,28): error TS2307: Cannot find module 'react-dom/client' or its corresponding type declarations.
+src/mobile-screens.tsx(17,8): error TS2882: Cannot find module or type declarations for side-effect import of '@openlang/ui/styles.css'.
+src/mobile-screens.tsx(250,27): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/motion-contract.test.ts(1,30): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/motion-contract.test.ts(2,31): error TS2591: Cannot find name 'node:url'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/motion-contract.test.ts(3,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/mywords-feel.test.tsx(13,30): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/mywords-feel.test.tsx(14,31): error TS2591: Cannot find name 'node:url'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/mywords-feel.test.tsx(15,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/mywords-feel.test.tsx(16,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/mywords-feel.test.tsx(26,3): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/mywords-undo.test.tsx(9,65): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/mywords-undo.test.tsx(10,21): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/mywords-undo.test.tsx(11,39): error TS2307: Cannot find module 'react-dom/client' or its corresponding type declarations.
+src/mywords-undo.test.tsx(32,3): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/onboard-feel.test.tsx(15,30): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/onboard-feel.test.tsx(16,31): error TS2591: Cannot find name 'node:url'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/onboard-feel.test.tsx(17,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/onboard-feel.test.tsx(18,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/onboard-feel.test.tsx(73,31): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/onboarding.test.tsx(1,42): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/onboarding.test.tsx(2,80): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/onboarding.test.tsx(3,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/onboarding.test.tsx(66,31): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/onboarding.tsx(9,42): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/onboarding.tsx(234,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/path-view.test.tsx(6,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/path-view.test.tsx(7,30): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/path-view.test.tsx(8,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/path-view.test.tsx(744,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/perf-probe.test.ts(1,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/phone-nav.test.ts(17,30): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/phone-nav.test.ts(18,31): error TS2591: Cannot find name 'node:url'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/phone-nav.test.ts(19,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/playback.test.ts(3,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/practice.test.tsx(1,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/practice.test.tsx(2,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/practice.test.tsx(20,31): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/practice.tsx(10,53): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/practice.tsx(143,7): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/progress-feel.test.tsx(16,30): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/progress-feel.test.tsx(17,31): error TS2591: Cannot find name 'node:url'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/progress-feel.test.tsx(18,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/progress-feel.test.tsx(19,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/progress-feel.test.tsx(97,3): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/progress.test.ts(4,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/pronunciation.test.tsx(3,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/pronunciation.test.tsx(4,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/pronunciation.test.tsx(25,39): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/pronunciation.tsx(120,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/reading.test.tsx(22,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/reading.test.tsx(23,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/reading.test.tsx(107,24): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/reading.tsx(23,24): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/reading.tsx(526,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/rtl-direction.test.tsx(6,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/rtl-direction.test.tsx(7,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/rtl-direction.test.tsx(8,32): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/rtl-direction.test.tsx(62,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/ruby.test.tsx(1,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/ruby.test.tsx(2,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/ruby.test.tsx(6,24): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/ruby.tsx(73,12): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/scenario.test.tsx(1,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/scenario.test.tsx(2,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/scenario.test.tsx(85,31): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/scenario.tsx(8,26): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/scenario.tsx(151,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/serve-banner.test.tsx(7,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/serve-pairing.test.tsx(9,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/serve-pairing.test.tsx(10,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/serve-pairing.test.tsx(15,39): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/session-chrome.test.tsx(4,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/session-chrome.test.tsx(5,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/session-chrome.test.tsx(36,7): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/session-chrome.test.tsx(229,16): error TS7006: Parameter 'c' implicitly has an 'any' type.
+src/session-chrome.tsx(76,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/settings-feel.test.tsx(16,30): error TS2591: Cannot find name 'node:fs'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/settings-feel.test.tsx(17,31): error TS2591: Cannot find name 'node:url'. Do you need to install type definitions for node? Try `npm i --save-dev @types/node` and then add 'node' to the types field in your tsconfig.
+src/settings-feel.test.tsx(18,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/settings-feel.test.tsx(19,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/settings-feel.test.tsx(100,31): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/settings.test.tsx(7,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/settings.test.tsx(8,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/settings.test.tsx(72,31): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/settings.tsx(18,53): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/settings.tsx(264,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/settings.tsx(965,18): error TS7006: Parameter 's' implicitly has an 'any' type.
+src/settings.tsx(1029,37): error TS7006: Parameter 'a' implicitly has an 'any' type.
+src/shadowing.tsx(68,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/speech-readiness.test.tsx(5,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/speech-readiness.tsx(54,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/stress.test.tsx(1,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/stress.test.tsx(2,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/stress.test.tsx(20,39): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/stress.tsx(68,21): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/word-timing.test.tsx(9,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/word-timing.test.tsx(10,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/word-timing.test.tsx(73,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/words.tsx(14,45): error TS2307: Cannot find module 'react' or its corresponding type declarations.
+src/words.tsx(181,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/writing.test.tsx(1,38): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/writing.test.tsx(2,38): error TS2307: Cannot find module 'react-dom/server' or its corresponding type declarations.
+src/writing.test.tsx(9,7): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+src/writing.tsx(66,5): error TS2875: This JSX tag requires the module path 'react/jsx-runtime' to exist, but none could be found. Make sure you have types for the appropriate package installed.
+vite.config.ts(1,19): error TS2307: Cannot find module '@vitejs/plugin-react' or its corresponding type declarations.
+vite.config.ts(2,30): error TS2307: Cannot find module 'vitest/config' or its corresponding type declarations.
+exit=1
+
+== npx vitest run ==
+ - Module not found, treating it as an external dependency in vite.config.ts at 388..410
+
+vite.config.ts (2:29) [33m[UNRESOLVED_IMPORT] [0mCould not resolve 'vitest/config' in vite.config.ts
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m vite.config.ts:2:30 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m2 │[0m [38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249m{[0m[38;5;249m [0m[38;5;249md[0m[38;5;249me[0m[38;5;249mf[0m[38;5;249mi[0m[38;5;249mn[0m[38;5;249me[0m[38;5;249mC[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mf[0m[38;5;249mi[0m[38;5;249mg[0m[38;5;249m [0m[38;5;249m}[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m"vitest/config"[38;5;249m;[0m
+ [38;5;240m  │[0m                              ───────┬───────  
+ [38;5;240m  │[0m                                     ╰───────── Module not found, treating it as an external dependency
+[38;5;246m───╯[0m
+
+failed to load config from /home/hunter/.hermes/cache/scratch/lts-rw001-review/apps/desktop/vite.config.ts
+
+⎯⎯⎯⎯⎯⎯⎯ Startup Error ⎯⎯⎯⎯⎯⎯⎯⎯
+Error [ERR_MODULE_NOT_FOUND]: Cannot find package '@vitejs/plugin-react' imported from /home/hunter/.hermes/cache/scratch/lts-rw001-review/apps/desktop/node_modules/.vite-temp/vite.config.ts.timestamp-1795840205950-cb5cc437109d58.mjs
+Did you mean to import "@vitejs/plugin-react/dist/index.js"?
+    at Object.getPackageJSONURL (node:internal/modules/package_json_reader:343:9)
+    at packageResolve (node:internal/modules/esm/resolve:751:25)
+    at moduleResolve (node:internal/modules/esm/resolve:840:18)
+    at defaultResolve (node:internal/modules/esm/resolve:973:11)
+    at #cachedDefaultResolve (node:internal/modules/esm/loader:708:20)
+    at #resolveAndMaybeBlockOnLoaderThread (node:internal/modules/esm/loader:728:38)
+    at ModuleLoader.resolveSync (node:internal/modules/esm/loader:766:56)
+    at #resolve (node:internal/modules/esm/loader:690:17)
+    at ModuleLoader.getOrCreateModuleJob (node:internal/modules/esm/loader:610:35)
+    at ModuleJob.syncLink (node:internal/modules/esm/module_job:277:33) {
+  code: 'ERR_MODULE_NOT_FOUND'
+}
+
+
+
+exit=1
+
+DONE-REVIEWER-GATES 2026-11-27T21:30:05-07:00
+
+######## HEAD RE-RUN @ 80fb8720 2026-11-27T21:32:00-07:00 ########
+== cargo fmt --all --check ==
+exit=0
+
+== cargo clippy -p lts-desktop --all-targets -- -D warnings ==
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 10.28s
+exit=0
+
+== cargo test -p lts-storage ==
+running 11 tests
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.32s
+running 1 test
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.84s
+running 6 tests
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+     Running tests/error_ledger.rs (/home/hunter/game-dev/LTS/target/debug/deps/error_ledger-97fba219baa9fa7b)
+running 6 tests
+test a_pre_v4_bundle_still_imports_and_carries_no_error_rows ... ok
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+running 12 tests
+test failed_import_names_the_import_error ... ok
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+running 5 tests
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+running 11 tests
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.79s
+running 0 tests
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+exit=0
+
+== cargo test -p lts-desktop --lib ==
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 24.37s
+     Running unittests src/lib.rs (/home/hunter/game-dev/LTS/target/debug/deps/lts_desktop-1caef568b73e5b79)
+
+running 266 tests
+test models::tests::a_placeholder_url_is_refused_whatever_the_marker_says ... ok
+test models::tests::catalog_entries_are_pinned_and_licensed ... ok
+test models::tests::speech_pref_per_language_override_resolves ... ok
+test packs::tests::a_full_disk_is_named_rather_than_reported_as_a_generic_failure ... ok
+test packs::tests::a_retry_asks_for_the_missing_bytes_and_only_trusts_a_partial_answer ... ok
+test packs::tests::a_cancelled_transfer_stops_at_the_next_byte_boundary ... ok
+test models::tests::remote_catalog_validation_is_fail_closed ... ok
+test packs::tests::both_pinned_catalog_entries_install_through_the_native_transport ... ignored, downloads both pinned reference packs (~634 MB)
+test models::tests::remote_catalog_freshness_gate_tracks_cache_age ... ok
+test models::tests::fetch_failure_leaves_no_partial_install ... ok
+test packcache::tests::warming_a_pack_that_cannot_load_caches_nothing ... ok
+test packs::tests::entries_are_hardened ... ok
+test models::tests::unpublished_payloads_are_never_offered_or_fetched ... ok
+test packs::tests::every_pinned_catalog_entry_passes_the_download_policy ... ok
+test models::tests::speech_pref_defaults_off_and_validates_selection ... ok
+test models::tests::remote_catalog_cache_wins_when_valid_and_falls_back_when_tampered ... ok
+test packs::tests::fetch_progress_counts_the_bytes_actually_read ... ok
+test models::tests::speech_pref_v1_migrates_on_load ... ok
+test models::tests::install_is_checksummed_atomic_and_removable ... ok
+test models::tests::a_model_install_reports_received_bytes_and_nothing_invented ... ok
+test packs::tests::redirect_hops_stay_on_allowlisted_hosts_for_downloads ... ok
+test packs::tests::scripted_redirect_chains_are_accepted_or_refused_hop_by_hop ... ok
+test packs::tests::an_unidentifiable_partial_is_refused_and_cleared ... ok
+test models::tests::model_status_stops_rehashing_until_files_actually_change ... ok
+test packs::tests::the_published_catalog_is_the_default_and_explicit_config_overrides_it ... ok
+test packs::tests::ja_demo_fixture_declares_the_romanization_setting ... ok
+test progress::tests::a_stage_crosses_the_boundary_with_the_field_names_the_renderer_reads ... ok
+test progress::tests::an_unknown_fraction_stays_absent_instead_of_becoming_zero ... ok
+test scenarios::tests::a_completed_transfer_survives_every_view_return ... ok
+test scenarios::tests::a_content_gate_names_the_capability_and_where_it_is_practiced ... ok
+test packs::tests::manifest_settings_capabilities_travel_to_the_renderer ... ok
+test scenarios::tests::a_goal_gate_is_labelled_a_later_curriculum_stage_by_its_own_words ... ok
+test packs::tests::manifest_scripts_travel_with_the_installed_pack_view ... ok
+test scenarios::tests::a_mixed_gate_stays_the_actionable_one_and_lists_every_rung ... ok
+test scenarios::tests::an_unnamed_prerequisite_falls_back_to_an_honest_phrase_not_the_id ... ok
+test scenarios::tests::near_rows_sit_between_playable_and_later_rows ... ok
+test scenarios::tests::nothing_is_recommended_while_every_scenario_is_locked ... ok
+test scenarios::tests::playable_rows_lead_later_stage_rows_in_either_input_order ... ok
+test models::tests::directory_entry_installs_verifies_and_rejects_unsafe_archives ... ok
+test scenarios::tests::readiness_and_lock_kinds_serialize_as_the_ts_union_strings ... ok
+test scenarios::tests::readiness_is_later_for_an_untouched_later_stage_or_an_undefined_goal ... ok
+test scenarios::tests::readiness_is_near_when_the_gate_is_part_open_or_the_same_stage ... ok
+test scenarios::tests::readiness_is_playable_only_when_the_hard_gate_is_met ... ok
+test scenarios::tests::scenario_views_serialize_snake_case_keys ... ok
+test scenarios::tests::the_copy_scanner_finds_pack_ids_and_ignores_ordinary_copy ... ok
+test scenarios::tests::the_recommendation_is_the_first_playable_row_and_there_is_one ... ok
+test scenarios::tests::renaming_pack_display_data_renames_the_lock_copy ... ok
+test scenarios::tests::the_step_result_serde_tags_include_partial_accepted ... ok
+test scenarios::tests::transfer_views_show_payload_availability_and_only_payloads_stamp_done ... ok
+test scenarios::tests::within_a_tier_the_band_ladder_then_the_smallest_gate_wins ... ok
+test tests::a_bundled_packs_sidecar_that_fails_closed_yields_no_candidates ... ok
+test tests::a_bundled_payload_whose_bytes_disagree_with_the_manifest_is_refused ... ok
+test packs::tests::a_rejected_checksum_stops_after_the_stage_that_failed ... ok
+test packs::tests::tampered_archive_is_rejected ... ok
+test tests::a_disabled_speech_model_is_reported_as_opted_out ... ok
+test packs::tests::catalog_status_is_honest_when_unset_offline_or_cached ... ok
+test packs::tests::catalog_cache_roundtrip_and_view ... ok
+test packs::tests::import_rejects_garbage_honestly ... ok
+test explain::tests::empty_explanation_content_is_a_failure_not_blank_ui ... ok
+test explain::tests::settings_roundtrip_stores_user_typed_values ... ok
+test tests::a_new_lexicon_version_is_never_answered_with_the_old_versions_rows ... ok
+test tests::a_pack_without_declared_sources_gets_an_empty_provenance_payload ... ok
+test explain::tests::unreachable_endpoint_is_an_honest_failure ... ok
+test tests::a_payload_the_cpu_cannot_run_says_so_instead_of_claiming_absence ... ok
+test explain::tests::defaults_are_off_and_consentless ... ok
+test explain::tests::server_error_is_an_honest_failure ... ok
+test packs::tests::an_interrupted_download_resumes_from_the_bytes_on_disk ... ok
+test tests::a_unit_parse_is_shared_per_version_root_and_never_across_roots ... ok
+test tests::align_free_words_classifies_matched_fuzzy_and_missing ... ok
+test tests::align_free_words_never_marks_a_word_matched_without_heard_support ... ok
+test explain::tests::disabled_offers_no_network_and_is_honest ... ok
+test packs::tests::cancelling_during_unpacking_leaves_no_pack_installed ... ok
+test tests::an_incomplete_payload_never_runs_and_does_not_shadow_the_dev_path ... ok
+test packs::tests::cancelling_after_verify_leaves_no_pack_installed ... ok
+test tests::band_sort_key_places_unknown_and_missing_bands_after_the_ladder ... ok
+test explain::tests::consented_explain_round_trips_and_names_direction ... ok
+test explain::tests::explain_path_performs_zero_store_writes ... ok
+test tests::build_identity_reports_a_version_and_a_quotable_commit ... ok
+test explain::tests::empty_base_url_is_unavailable_without_network ... ok
+test explain::tests::first_explain_requires_consent_and_sends_nothing ... ok
+test tests::a_legacy_earned_review_survives_without_an_encounter_event ... ok
+test packcache::tests::a_new_version_is_never_served_from_the_old_versions_entry ... ok
+test tests::capstone_pass_rule_holds_the_checkpoint_bar ... ok
+test packs::tests::an_import_reports_only_the_stages_it_can_perform ... ok
+test packs::tests::a_partial_on_disk_is_verified_before_anything_is_installed ... ok
+test tests::a_letter_is_never_tested_before_its_encounter_completes ... ok
+test packs::tests::the_receipt_names_the_version_source_and_verified_sha ... ok
+test tests::an_empty_submission_records_no_ledger_row_and_no_offer ... ok
+test tests::a_profile_with_no_language_can_still_be_entered ... ok
+test tests::a_speaking_attempt_is_refused_before_any_mastery_write ... ok
+test tests::a_declared_task_sequence_loads_and_names_a_runner_for_every_stage ... ok
+test tests::a_due_mined_word_reaches_todays_plan_without_touching_mastery ... ok
+test tests::device_tier_detection_recommends_by_measured_capacity ... ok
+test packs::tests::import_validates_then_installs_as_community ... ok
+test tests::an_installed_pack_that_is_not_bundled_appears_in_the_wizard_list ... ok
+test tests::comprehension_listening_runs_over_a_russian_pack_sentence ... ok
+test tests::dictation_abstains_rather_than_comparing_in_an_undeclared_language ... ok
+test tests::dictation_abstains_fault_honestly_when_the_recognizer_breaks ... ok
+test scenarios::tests::the_shipped_pack_leads_with_an_openable_scenario_for_a_fresh_profile ... ok
+test scenarios::tests::every_shipped_scenario_offers_wrong_moves_and_records_honest_evidence ... ok
+test packs::tests::a_catalog_install_reports_each_stage_before_doing_it ... ok
+test tests::cloze_and_dictation_grade_typed_answers_on_correct_dimensions ... ok
+test tests::a_pack_bundled_build_resolves_candidates_from_staged_resources ... ok
+test tests::error_recurrence_breaks_dimension_ties_capped ... ok
+test tests::content_confirmations_are_attributed_and_rendered_in_the_story_view ... ok
+test tests::a_pack_without_environments_gives_an_empty_world ... ok
+test tests::dictation_check_abstains_when_model_off ... ok
+test packs::tests::a_catalogue_update_moves_every_profile_onto_the_new_version ... ok
+test packs::tests::a_stuck_update_click_still_moves_the_learner ... ok
+test tests::community_import_installs_and_switches_learning_language ... ok
+test tests::finishing_onboarding_rejects_a_pack_that_is_not_installed ... ok
+test tests::error_review_offer_accept_schedule_and_grade_round_trip ... ok
+test packs::tests::installing_an_older_version_does_not_downgrade_the_current_pointer ... ok
+test tests::gate_progress_averages_concept_ladder_weights ... ok
+test tests::free_speaking_check_abstains_when_model_off ... ok
+test packs::tests::the_installed_fact_is_the_profile_selection_then_the_current_pointer ... ok
+test tests::every_planned_placement_question_survives_the_submit_task_builder ... ok
+test scenarios::tests::a_fresh_profiles_lock_copy_carries_no_raw_ids_in_either_shipped_pack ... ok
+test tests::goal_rank_map_follows_the_band_ladder_and_asks_nothing_of_locked_or_unrunnable_content ... ok
+test tests::discrimination_runner_records_phonological_dimension_evidence ... ok
+test tests::first_run_steps_make_no_script_claim_for_a_pack_without_the_declaration ... ok
+test tests::duplicate_mine_returns_the_original_id_instead_of_an_error ... ok
+test tests::ime_candidates_aux_fallback_stays_labeled_and_secondary ... ok
+test tests::ime_candidates_come_from_the_pack_lexicon_with_provenance ... ok
+test tests::learned_kana_folding_folds_marks_and_size_but_not_the_moraic_nasal ... ok
+test tests::fresh_user_onramp_flow_persists_and_resumes ... ok
+test tests::kanji_drill_uses_existing_dimensions_and_srs_gates_resurfacing ... ok
+test tests::letter_model_case_guard_and_stagger ... ok
+test tests::dictation_target_uses_the_surface_when_a_pack_has_no_readings ... ok
+test tests::a_contrast_the_app_cannot_measure_stays_listening_practice has been running for over 60 seconds
+test tests::a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order has been running for over 60 seconds
+test tests::a_supported_backup_restores_saved_words_and_history has been running for over 60 seconds
+test tests::an_installed_pack_that_is_also_bundled_is_listed_exactly_once has been running for over 60 seconds
+test tests::beginner_plan_never_serves_a_locked_units_content has been running for over 60 seconds
+test tests::bundled_japanese_pack_installs_and_records has been running for over 60 seconds
+test tests::bundled_pack_phrase_entries_carry_valid_slots has been running for over 60 seconds
+test tests::calibration_record_qualified_for_installed_combination_flips_to_automatic has been running for over 60 seconds
+test tests::calibration_record_with_model_version_drift_fails_closed_to_guided has been running for over 60 seconds
+test tests::capstone_node_runs_the_full_ladder_on_the_reference_pack has been running for over 60 seconds
+test tests::capstone_plan_is_deterministic_letters_first_and_capped has been running for over 60 seconds
+test tests::claimed_orphan_lexicon_words_seed_new_material_for_a_b1_band_profile has been running for over 60 seconds
+test tests::claims_are_one_entry_per_pack_even_with_two_installed_versions has been running for over 60 seconds
+test tests::current_offer_flips_to_review_first_when_a_review_is_due has been running for over 60 seconds
+test tests::day_one_never_seeds_katakana_or_words_with_unlearned_kana has been running for over 60 seconds
+test tests::dictation_check_abstains_on_silence has been running for over 60 seconds
+test tests::dictation_check_flags_clear_mismatch has been running for over 60 seconds
+test tests::dictation_check_matches_spoken_target has been running for over 60 seconds
+test tests::dictation_target_prefers_kana_only_and_rotates has been running for over 60 seconds
+test tests::first_run_steps_lead_with_the_declared_script_in_its_teaching_order has been running for over 60 seconds
+test tests::free_speaking_check_performs_zero_store_writes has been running for over 60 seconds
+test tests::free_speaking_check_scores_a_real_recording has been running for over 60 seconds
+test tests::gated_unit_content_never_enters_the_new_selection has been running for over 60 seconds
+test tests::goal_map_ignores_activity_volume has been running for over 60 seconds
+test tests::goal_map_orders_bands_by_ladder_not_ascii has been running for over 60 seconds
+test tests::goal_map_surfaces_pack_goals_with_prereqs_and_mastery has been running for over 60 seconds
+test tests::installing_a_pack_warms_its_content_for_the_first_visit has been running for over 60 seconds
+test tests::katakana_and_kana_words_unlock_with_the_letters_they_need has been running for over 60 seconds
+test tests::learning_facts_counts_days_and_units_and_never_the_capstone has been running for over 60 seconds
+test tests::letter_drills_span_two_prompt_families_and_reach_independent has been running for over 60 seconds
+test tests::letter_unit_goes_in_progress_then_done_as_its_refs_are_proven has been running for over 60 seconds
+test tests::lexicon_entries_covers_all_pack_lexicon_files has been running for over 60 seconds
+test tests::a_contrast_the_app_cannot_measure_stays_listening_practice ... ok
+test tests::an_installed_pack_that_is_also_bundled_is_listed_exactly_once ... ok
+test tests::list_and_resume_profiles_round_trip ... ok
+test tests::listening_runner_hides_transcript_and_schedules_listening_row ... ok
+test tests::media_provenance_comes_from_the_pack_manifest_not_file_presence ... ok
+test tests::a_fresh_ja_jp_plan_is_all_introductions_in_the_packs_goal_order ... ok
+test tests::mine_list_renders_the_drill_context_for_lookup_mined_words ... ok
+test tests::mined_words_schedule_without_touching_mastery_evidence ... ok
+test tests::bundled_japanese_pack_installs_and_records ... ok
+test tests::a_supported_backup_restores_saved_words_and_history ... ok
+test tests::off_pack_word_tap_also_logs_and_mines_the_token ... ok
+test tests::new_profile_gets_first_lessons_and_runner_records_evidence ... ok
+test tests::onboarding_can_finish_with_no_pack_and_still_saves_the_mic_choice ... ok
+test tests::one_sentence_with_two_mismatches_records_two_rows_and_two_offers ... ok
+test tests::installing_a_pack_warms_its_content_for_the_first_visit ... ok
+test tests::pack_sentence_text_resolves_lexicon_context_ids ... ok
+test tests::perf_commands_refuse_without_harness_env ... ok
+test tests::personalize_progression_favors_developing_dimensions ... ok
+test tests::orth_recognition_runner_records_evidence_and_establishes_kana_literacy ... ok
+test tests::pick_reading_ranks_by_structure_and_never_returns_a_transliteration ... ok
+test tests::placement_coverage_names_why_a_rubric_has_no_question ... ok
+test tests::placement_coverage_reports_a_modality_with_no_auto_runner ... ok
+test tests::placement_never_substitutes_or_repeats_a_diagnostic_item ... ok
+test tests::placement_records_diagnostic_evidence_within_one_prompt ... ok
+test tests::lexicon_words_outside_the_goal_ladder_are_not_seeded has been running for over 60 seconds
+test tests::memory_stats_reports_only_this_profiles_local_data has been running for over 60 seconds
+test tests::missing_letter_of_an_unlocked_unit_stays_new_eligible has been running for over 60 seconds
+test tests::pack_claims_report_installed_pack_data_without_upgrading_trust has been running for over 60 seconds
+test tests::phrase_entries_carry_slots_and_target_the_right_slot has been running for over 60 seconds
+test tests::plan_generation_stays_fast_on_the_reference_pack has been running for over 60 seconds
+test tests::bundled_pack_phrase_entries_carry_valid_slots ... ok
+test tests::plan_uses_scheduler_values_under_budget ... ok
+test tests::capstone_plan_is_deterministic_letters_first_and_capped ... ok
+test tests::claimed_orphan_lexicon_words_seed_new_material_for_a_b1_band_profile ... ok
+test tests::privacy_notice_names_concrete_things_not_ledger_terms ... ok
+test tests::probe_real_store_word_attachment ... ignored, controller probe: set LTS_PROBE_DATA_DIR + LTS_PROBE_PROFILE_ID
+test tests::current_offer_flips_to_review_first_when_a_review_is_due ... ok
+test tests::profile_import_path_must_live_inside_the_data_dir ... ok
+test tests::claims_are_one_entry_per_pack_even_with_two_installed_versions ... ok
+test tests::day_one_never_seeds_katakana_or_words_with_unlearned_kana ... ok
+test tests::beginner_plan_never_serves_a_locked_units_content ... ok
+test tests::pronunciation_check_abstains_when_speech_model_is_off ... ok
+test tests::gated_unit_content_never_enters_the_new_selection ... ok
+test tests::progress_shows_modality_differences ... ok
+test tests::calibration_record_qualified_for_installed_combination_flips_to_automatic ... ok
+test tests::pronunciation_check_abstains_on_weak_reference_and_mismatch ... ok
+test tests::proposed_listening_items_point_at_audio_the_pack_declares ... ok
+test tests::dictation_target_prefers_kana_only_and_rotates ... ok
+test tests::reading_aware_span_lookup_prefers_closed_class_homophones ... ok
+test tests::first_run_steps_lead_with_the_declared_script_in_its_teaching_order ... ok
+test tests::goal_map_orders_bands_by_ladder_not_ascii ... ok
+test tests::reader_fades_scaffolds_and_reveals_record_support ... ok
+test tests::rfc3339_conversion_is_correct ... ok
+test tests::reference_audio_follows_the_manifest_and_refuses_traversal ... ok
+test tests::recorded_attempts_keep_retry_practice_and_genuine_variation_apart ... ok
+test tests::goal_map_surfaces_pack_goals_with_prereqs_and_mastery ... ok
+test tests::running_the_authored_stages_makes_independent_reachable ... ok
+test tests::goal_map_ignores_activity_volume ... ok
+test tests::lexicon_words_outside_the_goal_ladder_are_not_seeded ... ok
+test tests::preview_journey_select_activity_restart_switch_retain ... ok
+test tests::missing_letter_of_an_unlocked_unit_stays_new_eligible ... ok
+test tests::letter_drills_span_two_prompt_families_and_reach_independent ... FAILED
+test tests::sentence_listening_practises_declared_audio_without_the_transcript ... ok
+test tests::lexicon_entries_covers_all_pack_lexicon_files ... ok
+test tests::shipped_packs_carry_one_orthography_entity_per_letter ... ok
+test tests::settings_microphone_and_romaji_round_trip ... ok
+test tests::letter_unit_goes_in_progress_then_done_as_its_refs_are_proven ... ok
+test tests::scenario_rungs_without_payloads_are_refused_without_voiding_the_node ... ok
+test tests::scenario_locks_until_prereqs_then_records_interaction_evidence ... ok
+test tests::pack_claims_report_installed_pack_data_without_upgrading_trust ... ok
+test tests::stagger_confusables_spaces_false_friends_but_never_splits_case_forms ... ok
+test tests::story_lookup_returns_spans_not_substrings ... ok
+test tests::memory_stats_reports_only_this_profiles_local_data ... ok
+test tests::shadowing_items_attach_word_timings_only_when_the_sidecar_ships ... ok
+test tests::speech_audio_reports_an_honest_media_miss_when_the_pack_ships_no_recording ... ok
+test tests::speech_audio_serves_pack_media_and_rejects_bad_ids ... ok
+test tests::rtl_capability_reaches_the_renderer_through_pack_listing ... ok
+test tests::story_word_audio_slices_the_word_span_from_the_sentence_clip ... ok
+test tests::story_reader_shows_scaffolds_and_lookup_without_evidence ... ok
+test tests::shadowing_targets_come_from_pack_and_record_no_evidence ... ok
+test tests::the_blank_window_workaround_forces_the_fallback_renderer_only_when_unset ... ok
+test tests::the_bundled_sidecar_outranks_the_dev_vendor_tree ... ok
+test tests::srs_interval_preview_matches_the_grade_it_prices ... ok
+test tests::the_dev_repo_tree_beats_staged_resources_when_both_exist ... ok
+test tests::story_view_carries_grammar_labels_only_when_the_sidecar_ships ... ok
+test tests::capstone_node_runs_the_full_ladder_on_the_reference_pack ... ok
+test tests::the_lesson_plan_names_the_runner_for_every_declared_stage ... ok
+test tests::plan_generation_stays_fast_on_the_reference_pack ... ok
+test tests::the_authored_order_changes_what_the_app_runs ... ok
+test tests::the_authored_unit_journey_reaches_the_desktop ... ok
+test tests::the_word_filter_checks_only_declared_kana_forms ... ok
+test tests::the_practice_cursor_skips_stages_no_runner_can_answer ... ok
+test tests::the_writing_pair_builds_a_typed_cloze_task ... ok
+test tests::unit_kind_is_derived_from_pack_activity_data_only ... ok
+test tests::the_speaking_pair_builds_a_guided_unscored_task ... ok
+test tests::the_hub_gate_for_the_kanji_drill_comes_from_the_pack_not_from_the_card_list ... ok
+test tests::unknown_model_id_is_rejected_before_any_download ... ok
+test tests::the_practice_cursor_walks_the_authored_stages_in_order ... ok
+test tests::word_card_aux_lookup_goes_through_the_lemma_and_degrades_without_a_slice ... ok
+test tests::phrase_entries_carry_slots_and_target_the_right_slot ... ok
+test tests::word_card_matches_the_lexicon_surface_directly_without_a_lemma_row ... ok
+test tests::word_card_off_pack_token_gets_the_labeled_aux_card ... ok
+test tests::the_russian_reference_packs_first_placement_question_builds ... ok
+test tests::word_card_parses_the_aux_slice_once_not_per_tap ... ok
+test tests::word_card_refuses_a_malformed_story_id_before_logging ... ok
+test tests::word_card_reports_off_pack_words_as_not_in_pack ... ok
+test tests::word_card_resolves_an_inflected_ru_form_to_its_lemma ... ok
+test tests::word_tap_auto_logs_the_lookup_and_enters_the_review_pipeline ... ok
+test tests::katakana_and_kana_words_unlock_with_the_letters_they_need ... ok
+test tests::practice_queue_is_generated_from_encounter_state_never_a_pack_buffet ... ok
+test tests::learning_facts_counts_days_and_units_and_never_the_capstone ... ok
+test tests::profile_export_writes_bundle_and_delete_is_one_shot ... ok
+test tests::reading_lookup_of_the_self_intro_sentence_names_the_word_not_its_interior ... ok
+test tests::pronunciation_demo_comes_from_pack_contrasts ... ok
+test tests::calibration_record_with_model_version_drift_fails_closed_to_guided ... ok
+test tests::reading_aware_lookup_of_a_ni_particle_span_never_answers_two ... ok
+test tests::dictation_check_abstains_on_silence ... ok
+test tests::reading_aware_lookup_of_the_self_intro_shows_the_topic_particle_not_the_tooth ... ok
+test tests::dictation_check_flags_clear_mismatch ... ok
+test tests::dictation_check_matches_spoken_target ... ok
+test tests::shipped_story_function_word_lookup_report_is_empty ... ok
+test tests::situation_ids_resolve_to_human_labels ... ok
+test tests::free_speaking_check_performs_zero_store_writes ... ok
+test tests::free_speaking_check_scores_a_real_recording ... ok
+test tests::the_claim_report_survives_a_trust_change_without_lying_about_it ... ok
+test tests::unclaimed_contrast_and_sentence_rows_are_not_seeded ... ok
+test tests::switching_the_studied_pack_changes_what_the_plan_and_mastery_see ... ok
+test tests::unit_path_names_each_node_kind_on_the_real_pack ... ok
+test tests::writing_journal_replays_newest_first_and_dies_with_the_profile ... ok
+test tests::writing_check_performs_zero_mastery_or_scheduler_writes ... ok
+test tests::unit_path_done_never_reads_attendance_only ... ok
+test tests::writing_check_ja_flags_unknown_never_wrong_and_accepts_pack_variants ... ok
+test tests::writing_check_classifies_ru_tokens_by_script_and_dictionary ... ok
+test tests::world_unlocks_follow_pack_declared_capabilities ... ok
+test tests::writing_prompt_gives_targets_and_a_cue_and_rotates ... ok
+test tests::pronunciation_check_uses_pack_declared_target_without_media ... ok
+test tests::provenance_payload_covers_every_installed_pack_verbatim has been running for over 60 seconds
+test tests::russian_contrast_arrives_as_the_packs_own_pair has been running for over 60 seconds
+test tests::russian_cyrillic_practice_unlocks_the_greetings_gate has been running for over 60 seconds
+test tests::sharded_pack_directories_reach_every_reader has been running for over 60 seconds
+test tests::stress_display_settings_are_data_driven_and_persisted has been running for over 60 seconds
+test tests::the_aligner_language_comes_from_the_pack_manifest has been running for over 60 seconds
+test tests::writing_targets_are_parsed_once_per_version_root has been running for over 60 seconds
+test tests::russian_contrast_arrives_as_the_packs_own_pair ... ok
+test tests::russian_cyrillic_practice_unlocks_the_greetings_gate ... ok
+test tests::sharded_pack_directories_reach_every_reader ... ok
+test tests::writing_targets_are_parsed_once_per_version_root ... ok
+test tests::the_aligner_language_comes_from_the_pack_manifest ... ok
+test tests::stress_display_settings_are_data_driven_and_persisted ... ok
+test tests::provenance_payload_covers_every_installed_pack_verbatim ... ok
+
+failures:
+
+---- tests::letter_drills_span_two_prompt_families_and_reach_independent stdout ----
+
+thread 'tests::letter_drills_span_two_prompt_families_and_reach_independent' (2202861) panicked at apps/desktop/src-tauri/src/lib.rs:23675:14:
+the drill offers the letter's symbol or sound
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    tests::letter_drills_span_two_prompt_families_and_reach_independent
+
+test result: FAILED. 263 passed; 1 failed; 2 ignored; 0 measured; 0 filtered out; finished in 378.68s
+
+error: test failed, to rerun pass `-p lts-desktop --lib`
+exit=101
+
+== apps/desktop: npx tsc --noEmit ==
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'tsc' --noEmit
+exit=0
+
+== apps/desktop: npx vitest run ==
+npm notice run @openlang/desktop@0.4.3-alpha.1 npx
+npm notice run 'vitest' run
+
+ RUN  v5.0.3 /home/hunter/.hermes/cache/scratch/lts-rw001-head/apps/desktop
+
+
+ Test Files  84 passed (84)
+      Tests  733 passed (733)
+   Start at  21:39:02
+   Duration  9.51s (tests 38%, transform 28%, environment 22%, import 12%, worker 1%)
+
+  Transform  |node| transforming modules took 6.33s · 57% of tracked time, re-done on every run
+             persist transforms across runs with fsModuleCache: true
+             learn more: https://vitest.dev/guide/improving-performance#caching-between-reruns
+
+exit=0
+
+DONE-HEAD-GATES 2026-11-27T21:39:11-07:00
+
+===== ATTEMPT-2 APPEND (clean-tree re-verification, 2026-11-27 21:47- MST) =====
+Attempt 1 timed out at the iteration budget after writing both verdicts; its
+HEAD run above was performed with probe edits uncommitted in the worktree's
+lib.rs (rw001_probe.rs + modified lib.rs). Attempt 2 reverted the worktree to
+a CLEAN HEAD checkout (git checkout -- lib.rs; rm rw001_probe.rs) and re-ran
+the lib suite alone; see CLEAN-HEAD-LIB block below this log's append point.
+
+== REVIEWER PROBE 1: lexicon multi-form census (independent reproduction of S-D1) ==
+cwd: detached worktree @ clean HEAD 80fb8720
+command: python walk of languages/{ru-RU,ja-JP}/**/lexicon/*.jsonl counting entries with len(forms)>1
+
+ru: [4071, 0]  ja: [4066, 2384]
+
+Matches attempt 1's frozen-commit measurement exactly for ru (4,071 total, 0
+multi-form). ja reads 2,384 here vs 2,374 at the frozen e858ca0d — delta is
+the FIX-PACK-K65-001 JA adoption that landed in between; the defect is
+unchanged either way. The 0/4071 ru figure is the S-D1 MAJOR finding.
+
+== REVIEWER PROBE 2: prettier at clean HEAD (S-S1 reproduction) ==
+cwd: detached worktree @ clean HEAD 80fb8720 (repo-root prettier)
+command: node_modules/.bin/prettier --check apps/desktop/src/free-writing.tsx apps/desktop/src/free-writing.test.tsx apps/desktop/src/journeys/harness.tsx
+
+[warn] apps/desktop/src/free-writing.tsx
+[warn] apps/desktop/src/free-writing.test.tsx
+[warn] apps/desktop/src/journeys/harness.tsx
+[warn] Code style issues found in 3 files. Run Prettier with --write to fix.
+exit=1
+
+== REVIEWER PROBE 3: CI step existence (grounds for FIX-PRETTIER-REPO-001) ==
+grep -n "fmt:check" .github/workflows/ci.yml -> 209:      - run: pnpm fmt:check
+
+== ATTRIBUTION: the 1 HEAD lib red is NOT this lane ==
+tests::letter_drills_span_two_prompt_families_and_reach_independent originates
+in 87786961 (FIX-M1-PROGRESSION-001), which is NOT an ancestor of e858ca0d —
+the lane never ran this test (consistent with its 256-test gate count). The
+failure is already tracked on the board as FIX-LETTER-DRILLS-001 (t_703f4b81),
+proven mainline at clean 6119fd71 with trigger candidate 04bdd7c8, per the
+FIX-PACK-K65-001 close-out notes in tasks/KANBAN.md. No action for this lane.
+
+== CLEAN-HEAD-LIB (attempt 2, clean HEAD checkout, 2026-11-27T21:44:24-07:00 start) ==
+worktree: scratch/lts-rw001-head reverted to pristine 80fb8720 (rm rw001_probe.rs;
+git checkout -- apps/desktop/src-tauri/src/lib.rs) before this run.
+command: CARGO_TARGET_DIR=/home/hunter/game-dev/LTS/target cargo test -p lts-desktop --lib
+
+test result: FAILED. 263 passed; 1 failed; 2 ignored; 0 measured; 0 filtered out; finished in 366.54s
+failures: tests::letter_drills_span_two_prompt_families_and_reach_independent
+(panic 'the drill offers the letter's symbol or sound', lib.rs:23675 — see
+ATTRIBUTION block: pre-existing mainline red, FIX-LETTER-DRILLS-001 / t_703f4b81)
+
+Identical counts to the HEAD battery above -> attempt 1's HEAD numbers stand.
+All six writing_* pins green in this run (writing_prompt_gives_targets_and_a_
+cue_and_rotates, writing_check_classifies_ru_tokens_by_script_and_dictionary,
+writing_check_ja_flags_unknown_never_wrong_and_accepts_pack_variants,
+writing_check_performs_zero_mastery_or_scheduler_writes,
+writing_journal_replays_newest_first_and_dies_with_the_profile,
+writing_targets_are_parsed_once_per_version_root).
+DONE-ATTEMPT-2 21:52 MST
