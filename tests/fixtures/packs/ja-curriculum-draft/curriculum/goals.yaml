@@ -100,7 +100,7 @@ goals:
         required_state: supported
         strength: hard
       - target: ja.goal.onramp.kana-literacy-start
-        dimension: comprehension-reading
+        dimension: comprehension-listening
         required_state: supported
         strength: helpful
     required_concepts:
@@ -200,7 +200,7 @@ goals:
     modalities: [speaking, interaction]
     prerequisites:
       - target: ja.goal.a2.describe-past-day
-        dimension: production-speaking
+        dimension: production-writing
         required_state: supported
         strength: helpful
     required_concepts:
@@ -224,7 +224,7 @@ goals:
     modalities: [reading]
     prerequisites:
       - target: ja.goal.onramp.kana-literacy-start
-        dimension: comprehension-reading
+        dimension: comprehension-listening
         required_state: independent
         strength: hard
     required_concepts:
@@ -249,14 +249,15 @@ goals:
     modalities: [speaking, writing, interaction]
     prerequisites:
       - target: ja.goal.a2.describe-past-day
-        dimension: production-speaking
+        dimension: production-writing
         required_state: independent
         strength: hard
       - target: ja.goal.a2.make-requests-and-invites
-        dimension: interaction
+        dimension: recall-meaning
         required_state: supported
         strength: helpful
     required_concepts:
+      - "ja.lex.person.watashi"
       - ja.grammar.reason-nodekara-ni
       - ja.grammar.opinion-to-omoimasu
     assessment_ids:
@@ -279,10 +280,11 @@ goals:
     modalities: [listening, speaking, interaction]
     prerequisites:
       - target: ja.goal.a2.make-requests-and-invites
-        dimension: interaction
+        dimension: recall-meaning
         required_state: independent
         strength: hard
     required_concepts:
+      - "ja.lex.shopping.ikura"
       - ja.strategy.apology-repair
       - ja.grammar.potential-passive-soft
     assessment_ids: ["ja.assess.b1.service-scenario"]
@@ -303,10 +305,11 @@ goals:
     modalities: [reading]
     prerequisites:
       - target: ja.goal.a2.read-notices-menus
-        dimension: comprehension-reading
+        dimension: comprehension-listening
         required_state: independent
         strength: hard
     required_concepts:
+      - "ja.lex.location.basic"
       - ja.orth.kanji.news-frequency
       - ja.grammar.relative-clauses
     assessment_ids: ["ja.assess.b1.news-read"]
@@ -328,10 +331,11 @@ goals:
     modalities: [speaking, interaction, listening]
     prerequisites:
       - target: ja.goal.b1.explain-opinion-with-reasons
-        dimension: production-speaking
+        dimension: production-writing
         required_state: independent
         strength: hard
     required_concepts:
+      - "ja.lex.person.name-questions"
       - ja.grammar.concession-temo-ni
       - ja.strategy.hedging
     assessment_ids:
@@ -358,6 +362,7 @@ goals:
         required_state: independent
         strength: hard
     required_concepts:
+      - "ja.lex.time.days"
       - ja.grammar.connective-discourse
       - ja.strategy.register-selection
     assessment_ids: ["ja.assess.b2.write-structured"]
@@ -387,6 +392,7 @@ goals:
         required_state: independent
         strength: hard
     required_concepts:
+      - "ja.lex.food.basic"
       - ja.phon.colloquial-reductions
       - ja.grammar.reported-speech
     assessment_ids: ["ja.assess.b2.discourse-follow"]

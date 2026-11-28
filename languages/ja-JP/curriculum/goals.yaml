@@ -158,7 +158,7 @@ goals:
     - speaking
     prerequisites:
     - target: ja.grammar.copula.polite-desu
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: supported
       strength: hard
     required_concepts:
@@ -189,7 +189,7 @@ goals:
     - reading
     prerequisites:
     - target: ja.grammar.particle.topic-wa
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: supported
       strength: hard
     required_concepts:
@@ -251,7 +251,7 @@ goals:
     - reading
     prerequisites:
     - target: ja.grammar.copula.polite-desu
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: supported
       strength: hard
     required_concepts:
@@ -434,7 +434,7 @@ goals:
     - reading
     prerequisites:
     - target: ja.grammar.copula.polite-desu
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: supported
       strength: hard
     required_concepts:
@@ -638,7 +638,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a1.transport
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -669,7 +669,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a1.health-basics
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -700,7 +700,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a1.free-time
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -731,7 +731,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a1.home-life
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -762,7 +762,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a1.work-school
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -793,7 +793,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a1.past-stories
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -824,7 +824,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a2.city-services
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -855,7 +855,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a2.food-cooking
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -886,7 +886,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a2.shopping-services
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -917,7 +917,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a2.health-body
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -948,7 +948,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a2.communication
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -979,7 +979,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a2.weather-seasons
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1011,7 +1011,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a2.entertainment
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1042,7 +1042,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a2.sports-fitness
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1073,7 +1073,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a2.relationships
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1105,7 +1105,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.a2.daily-admin
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1137,7 +1137,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.work-professional
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1168,7 +1168,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.education-academic
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1199,7 +1199,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.media-news
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1230,7 +1230,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.technology
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1261,7 +1261,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.culture-tradition
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1292,7 +1292,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.society-rules
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1324,7 +1324,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.environment
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1356,7 +1356,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.travel-extended
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1388,7 +1388,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.emotions-personality
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1419,7 +1419,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.advice-opinion
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1450,7 +1450,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.comparison-debate
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1481,7 +1481,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.storytelling
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1510,7 +1510,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.health-wellness
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1542,7 +1542,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.repair-clarification
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1574,7 +1574,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.health-wellness
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1605,7 +1605,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.politics-governance
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1636,7 +1636,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.economics-work
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1667,7 +1667,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.law-justice
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1698,7 +1698,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.philosophy-ethics
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1729,7 +1729,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.literature-study
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1760,7 +1760,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.film-analysis
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1791,7 +1791,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.history-critical
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1822,7 +1822,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.society-change
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1853,7 +1853,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.society-change
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1884,7 +1884,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.society-change
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1915,7 +1915,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.literature-study
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1946,7 +1946,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.academic-skills
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -1977,7 +1977,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b1.work-professional
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -2008,7 +2008,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.film-analysis
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -2039,7 +2039,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.society-change
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -2070,7 +2070,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.science-tech-ethics
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -2101,7 +2101,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.science-tech-ethics
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -2132,7 +2132,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.society-change
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -2163,7 +2163,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.global-issues
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -2194,7 +2194,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.academic-skills
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -2225,7 +2225,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.society-change
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -2256,7 +2256,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.academic-skills
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -2287,7 +2287,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.language-linguistics
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -2318,7 +2318,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.nuance-register
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:
@@ -2349,7 +2349,7 @@ goals:
     - writing
     prerequisites:
     - target: ja.goal.b2.culture-identity
-      dimension: grammar-controlled
+      dimension: recall-meaning
       required_state: independent
       strength: hard
     required_concepts:

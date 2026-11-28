@@ -12,7 +12,7 @@ goals:
         dimension: "production-speaking"
         required_state: "supported"
         strength: "helpful"
-    required_concepts: ["es.grammar.gender.noun"]
+    required_concepts: ["es.grammar.gender.noun", "es.lex.greet.hola"]
     assessment_ids: ["es.assess.intro.greet"]
     transfer_required: true
     sources: ["test-source"]

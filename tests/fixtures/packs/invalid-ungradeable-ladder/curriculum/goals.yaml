@@ -1,0 +1,35 @@
+goals:
+  - id: "es.goal.intro.greet"
+    description: "Delivered by the unit"
+    band: "A1"
+    modalities: ["writing"]
+    prerequisites: []
+    required_concepts: []
+    assessment_ids: ["es.assess.intro.greet"]
+    transfer_required: true
+    sources: ["test-source"]
+    review_status: "draft"
+  - id: "es.goal.island.unreferenced"
+    description: "Defined but never delivered and never gates anything"
+    band: "A1"
+    modalities: ["writing"]
+    prerequisites: []
+    required_concepts: []
+    assessment_ids: ["es.assess.island.unreferenced"]
+    transfer_required: true
+    sources: ["test-source"]
+    review_status: "draft"
+  - id: "es.goal.a1.eat"
+    description: "Hard-gated on an ungradeable dimension with grammar-only concepts"
+    band: "A1"
+    modalities: ["writing"]
+    prerequisites:
+      - target: "es.goal.intro.greet"
+        dimension: "comprehension-reading"
+        required_state: "independent"
+        strength: "hard"
+    required_concepts: ["es.grammar.word-order"]
+    assessment_ids: ["es.assess.intro.greet"]
+    transfer_required: true
+    sources: ["test-source"]
+    review_status: "draft"

@@ -22,6 +22,40 @@ pub struct Graph {
     /// Whether the pack uses the 0.2 contract (concept dependency
     /// edges live in the mirror; 0.1 keeps them on concept records).
     pub v2: bool,
+    /// FIX-M2-SUPPLY-RU-001: ids of required_concepts that a practice
+    /// runner can actually grade on a runner dimension (lexicon, sentence,
+    /// story, kanji, orthography). Grammar/phonology concepts are taught by
+    /// authored encounter stages but mint no evidence rows (ADR-0036), so
+    /// they can never satisfy a ladder gate.
+    pub gradeable_concepts: HashSet<String>,
+    /// Goals that carry at least one `strength: hard` prerequisite edge.
+    pub hard_gated_goals: HashSet<String>,
+    /// Hard goal prerequisite edges whose `dimension` has no runner
+    /// (`(goal, target, dimension)`).
+    pub unrunnable_hard_edges: Vec<(String, String, String)>,
+    /// Hard-gated goals with no gradeable `required_concepts` — the ladder
+    /// minimum is `Unseen` forever, so the goal can never unlock.
+    pub unsatisfiable_hard_gated: Vec<String>,
+}
+
+/// The six dimensions the engine's practice runners build and grade
+/// (ADR-0018/ADR-0036 runner table). A goal-prerequisite edge on any other
+/// dimension can never be satisfied by derived evidence.
+pub const RUNNER_DIMENSIONS: [&str; 6] = [
+    "recall-meaning",
+    "comprehension-listening",
+    "orthography-recognition",
+    "phonological-discrimination",
+    "production-writing",
+    "orthographic-encoding",
+];
+
+/// Content schemas whose records can receive gradeable practice evidence.
+fn is_gradeable_schema(schema: &str) -> bool {
+    matches!(
+        schema,
+        "lexicon-entry" | "lexical-entry" | "sentence" | "story" | "kanji" | "orthography-unit"
+    )
 }
 
 /// Collect the graph from loaded instances and structural documents.
@@ -34,10 +68,17 @@ pub(crate) fn build(
     let mut goals = Vec::new();
     let mut delivered = HashSet::new();
     let mut known_ids = HashSet::new();
+    let mut gradeable_concepts = HashSet::new();
+    let mut hard_gated_by_goal_edges: Vec<String> = Vec::new();
+    let mut unrunnable_hard_edges: Vec<(String, String, String)> = Vec::new();
+    let mut goal_required_concepts: HashMap<String, Vec<String>> = HashMap::new();
 
     for inst in instances {
         if let Some(id) = inst.value.get("id").and_then(Value::as_str) {
             known_ids.insert(id.to_string());
+            if is_gradeable_schema(inst.schema) {
+                gradeable_concepts.insert(id.to_string());
+            }
         }
         match inst.schema {
             "goal" => {
@@ -47,7 +88,37 @@ pub(crate) fn build(
                         for p in array(&inst.value, "prerequisites") {
                             if let Some(t) = p.1.get("target").and_then(Value::as_str) {
                                 content_edges.push((id.to_string(), t.to_string()));
+                                let hard =
+                                    p.1.get("strength")
+                                        .and_then(Value::as_str)
+                                        .unwrap_or("hard")
+                                        == "hard";
+                                if hard {
+                                    hard_gated_by_goal_edges.push(id.to_string());
+                                    let dim =
+                                        p.1.get("dimension")
+                                            .and_then(Value::as_str)
+                                            .unwrap_or_default();
+                                    if !RUNNER_DIMENSIONS.contains(&dim) {
+                                        unrunnable_hard_edges.push((
+                                            id.to_string(),
+                                            t.to_string(),
+                                            dim.to_string(),
+                                        ));
+                                    }
+                                }
                             }
+                        }
+                        if let Some(rc) = inst
+                            .value
+                            .get("required_concepts")
+                            .and_then(Value::as_array)
+                        {
+                            let refs: Vec<String> = rc
+                                .iter()
+                                .filter_map(|c| c.as_str().map(String::from))
+                                .collect();
+                            goal_required_concepts.insert(id.to_string(), refs);
                         }
                     } else {
                         for t in strings(&inst.value, "prerequisites") {
@@ -113,6 +184,33 @@ pub(crate) fn build(
         }
     }
 
+    // A goal hard-gated by another GOAL is satisfiable only if at least
+    // one of its required_concepts can receive gradeable evidence (ADR-0031
+    // aggregates the ladder over required_concepts). Edges targeting content
+    // (e.g. a lexicon id) settle on that content's own derived row and are
+    // not subject to this aggregation.
+    let goalset: HashSet<&str> = goals.iter().map(String::as_str).collect();
+    let hard_gated_goals: HashSet<String> = hard_gated_by_goal_edges
+        .iter()
+        .filter(|g| {
+            // edge source goal whose target is itself a goal
+            content_edges
+                .iter()
+                .any(|(from, to)| from == *g && goalset.contains(to.as_str()))
+        })
+        .cloned()
+        .collect();
+    let unsatisfiable_hard_gated: Vec<String> = hard_gated_goals
+        .iter()
+        .filter(|g| {
+            goal_required_concepts
+                .get(g.as_str())
+                .map(|refs| !refs.iter().any(|r| gradeable_concepts.contains(r)))
+                .unwrap_or(true) // hard-gated with no declared concepts
+        })
+        .cloned()
+        .collect();
+
     Graph {
         content_edges,
         mirror_edges,
@@ -120,6 +218,10 @@ pub(crate) fn build(
         delivered,
         known_ids,
         v2,
+        gradeable_concepts,
+        hard_gated_goals,
+        unrunnable_hard_edges,
+        unsatisfiable_hard_gated,
     }
 }
 
@@ -282,6 +384,37 @@ pub(crate) fn check(graph: &Graph) -> Vec<Diagnostic> {
                 Severity::Warning,
             ));
         }
+    }
+
+    // --- ladder gradeability (FIX-M2-SUPPLY-RU-001 recurrence guard) ---
+    // RU days 31-60 starved because every hard goal→goal edge demanded
+    // `comprehension-reading` evidence on grammar-only required_concepts:
+    // a dimension with no runner over concepts no runner can grade. The
+    // ladder unlock is then structurally unsatisfiable and no band past
+    // the on-ramp ever opens. Same shape re-emerges the moment a pack
+    // reintroduces it, so gate it here.
+    for (goal, target, dim) in &graph.unrunnable_hard_edges {
+        diags.push(Diagnostic::new(
+            "curriculum/goals.yaml",
+            "",
+            "goal_ladder_unrunnable_dimension",
+            format!(
+                "goal {goal:?} has a hard prerequisite on {target:?} with dimension {dim:?}, which has no practice runner; the edge can never be satisfied (valid dimensions: {})",
+                RUNNER_DIMENSIONS.join(", ")
+            ),
+            Severity::Error,
+        ));
+    }
+    for goal in &graph.unsatisfiable_hard_gated {
+        diags.push(Diagnostic::new(
+            "curriculum/goals.yaml",
+            "",
+            "goal_ladder_unsatisfiable",
+            format!(
+                "goal {goal:?} is gated by hard prerequisites but none of its required_concepts can receive gradeable practice evidence; the ladder minimum stays Unseen and the goal can never unlock (teach grammar via unit encounter stages, gate the ladder on gradeable refs)"
+            ),
+            Severity::Error,
+        ));
     }
 
     // --- unreachable/dead goal audit ---
