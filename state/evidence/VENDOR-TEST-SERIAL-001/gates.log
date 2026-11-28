@@ -33,3 +33,18 @@ FIX-M1-PATH-VIS-001, LEARNER-REVIEW-M2-001) — validator red at HEAD (0a06ebaf)
 fixed by appending the 4 ids (verified via detached-worktree run of validate_handoff at HEAD).
 
 
+
+## ERRATUM + RE-VERIFICATION 2026-11-27 17:35
+Original landing commit 0a06ebaf was dropped from main by a lane worker's `git reset HEAD~1` at 15:44
+(evidence-only recommit 8049e442 replaced it; the lib.rs fix survived only as a dangling object while the
+working tree kept a byte-identical copy). Fix re-committed as 576ccccc after sha-identity check
+(git show 0a06ebaf:...lib.rs | sha1sum == tree copy). Re-verification on 576ccccc:
+cargo test -p lts-desktop --lib twice: 260/4 and 260/4 (identical failure set). All 3 vendor-tree tests
+(the_bundled_sidecar_outranks_the_dev_vendor_tree + both dictation_vendor serialization tests) pass -
+the lane fix itself is green. The 4 failures are a SEPARATE pack-integrity regression
+(K-65 audio-manifest vs reading mismatches, 17 validation errors, first: ja.lex.ent.konsaato text
+"こんさーと" vs declared reading ["コンサート"]), reproduced identically on both runs; failure names:
+provenance_payload_covers_every_installed_pack_verbatim, letter_drills_span_two_prompt_families_and_reach_independent,
+sharded_pack_directories_reach_every_reader, writing_targets_are_parsed_once_per_version_root.
+Full log: /tmp/vendor-reserial-rerun.log. Pack fix lane already in flight (FIX-M1-CONTENT-JA-001 WIP
+observed: languages/ja-JP/ lexicon+sentences edits + scripts/check_ja_lexicon.py).
