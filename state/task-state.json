@@ -17,12 +17,13 @@
       "blocker": "Honest partial at wall-clock budget. ALL defect-scope bullets shipped+gated (commit 04bdd7c8): D-008 stress marks + media alignment + 6-id audio re-bake (ASR 6/6), D-012 glosses, D-013 confirmed intentional, locative sweep; qa_stories 0 FAIL; desktop dev-pack install tests 14/0 green (densify passes the install validator). ONLY the >=150 sim bullet open: fresh 30-day RU sim measures 123 unique content_ids (baseline unchanged) — pass-1's 128 claims landed mostly in units that never unlock in 30 days (learner touches 20 units on the cyrillic->on-ramp->personal-details chain; days 4-15 are a zero-new-material dead zone that is engine scheduling, not content). Run-3 recipe with re-scoped pass-2 plan: state/notes/FIX-M1-CONTENT-RU-001.md."
     },
     "FIX-M1-CONTENT-JA-001": {
-      "status": "ready",
-      "attempts": 0,
+      "status": "done",
+      "attempts": 2,
       "updated": "2026-11-27",
-      "notes": "Follow-up of LEARNER-REVIEW-M1-001 (ledger D-009, D-010): the three wrong kana verb cards, the katakana loanword convention (pinned + enforced), and the reproduced morpheme-slot junk label \"the rest wish\" in languages/ja-JP/lexicon/greetings.jsonl. Its reproduce-or-close precondition is SATISFIED (gates.log V2), so it is dispatchable. Contract: state/notes/FIX-M1-CONTENT-JA-001.md; board card lts-FIX-M1-CONTENT-JA-001. Opened by takeover-B 2026-11-27.",
+      "notes": "Shipped 2026-11-27 (board t_f1922523; run 1 died at iteration cap, run 2 closed it). Content lane swept+finished by sibling: 8f5770c6 (FIX-PACK-K65-001 adopt, content byte-verified) + 1067ff6d (final clip re-roll ASR 1.00 + gates/evidence). D-009: 17 verb rows fixed (3 pinned + 14 sweep findings; root cause = 2026-10-05 ai-screening fix_reading pass), loanword コンサート chain swept, katakana convention pinned in pack README + CI-wired check; D-010 greetings slots fixed. 19 clips re-baked, ASR green 19/19 at 1067ff6d. Regression: scripts/check_ja_lexicon.py + 8-test suite, 0 hard violations. Gates + named qa-asr.py mora-cap change: state/evidence/FIX-M1-CONTENT-JA-001/gates.log; sweep findings: defects-extension.md.",
       "evidence": [
-        "state/evidence/LEARNER-REVIEW-M1-001/defects.md"
+        "state/evidence/FIX-M1-CONTENT-JA-001/gates.log",
+        "state/evidence/FIX-M1-CONTENT-JA-001/defects-extension.md"
       ]
     },
     "FIX-M1-PATH-VIS-001": {
