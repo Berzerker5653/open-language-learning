@@ -3837,11 +3837,12 @@
       ]
     },
     "FIX-M1-PATH-VIS-2": {
-      "status": "review",
+      "status": "done",
       "attempts": 1,
       "updated": "2026-11-28",
-      "notes": "Code SHIPPED inside FIX-M1-PATH-VIS-1's entangled commit b106252b (board t_7a6fb02e still open for its own verification lane): the counted row's tap now opens the band (setClosingBand(null) + setBandOverride(band), the same accordion move as the header toggle) in addition to expanding the tail. S-D2 acceptance measured: capture taps a CLOSED band's counted row - section rows 0 -> 91 == counted 91 (plus the accordion-moved case, on-ramp 0 -> 21) in result-vis1-green.json; interactive DOM pin path-view-tap.test.tsx. Verification lane: confirm at HEAD, then close.",
+      "notes": "Code SHIPPED inside FIX-M1-PATH-VIS-1's entangled commit b106252b; closed by this card's own verification lane at HEAD aca24b1e. The counted row's tap opens the band (setClosingBand(null) + setBandOverride(band), the same accordion move as the header toggle) in addition to expanding the tail - code-read at HEAD. S-D2 acceptance measured: capture taps a CLOSED band's counted row (closedBands = all-locked filter, strict rowsInSection after == before + counted) - section rows 0 -> 91 == counted 91, plus the accordion-moved case on-ramp 0 -> 21, result-vis1-green.json re-read 11/11 failures 0; interactive DOM pin path-view-tap.test.tsx (real React root, 0 rows -> 5 rows, header aria-expanded true). Lane gates re-run at HEAD: tsc clean from apps/desktop, vitest 735/735, targeted path-view pins 48/48. Nothing touched the measured surface between b106252b and HEAD (git log empty), so the committed capture is current evidence.",
       "evidence": [
+        "state/evidence/FIX-M1-PATH-VIS-2/gates.log",
         "state/evidence/FIX-M1-PATH-VIS-1/gates.log",
         "state/evidence/FIX-M1-PATH-VIS-001/result-vis1-green.json"
       ]

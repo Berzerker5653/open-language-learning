@@ -1,0 +1,59 @@
+# FIX-M1-PATH-VIS-2 — verification-lane gates (close from commit evidence)
+
+Date: 2026-11-28. HEAD at verification: aca24b1e (branch main).
+Code shipped in the parent FIX-M1-PATH-VIS-1's card-sanctioned entangled commit
+b106252b "fix(ux): closed bands count every unit and counted rows open their band
+(FIX-M1-PATH-VIS-1, FIX-M1-PATH-VIS-2)" — verified ancestor of HEAD
+(git merge-base --is-ancestor b106252b HEAD).
+
+This lane did NOT re-implement anything; it verified the shipped fix at HEAD.
+`git log b106252b..HEAD -- apps/desktop/src/home.tsx scripts/path-far-future-capture.mjs
+apps/desktop/src/path-view-tap.test.tsx` is EMPTY — the green evidence captured at
+b106252b measures exactly the bytes on HEAD.
+
+## Defect closed (S-D2, MAJOR, REVIEW-FIX-M1-PATH-VIS-001)
+The "+ N later units" counted row on a CLOSED band was a dead control: onClick only
+added the band to expandedTails, while the band's <ol> renders only when
+isOpen || closingBand === s.band — the tap unmounted its own button and added zero
+rows (4 of 5 day-1 RU counted rows).
+
+## Acceptance mapping (measured)
+1. Tap opens the band on ANY band — SHIPPED, code-read at HEAD:
+   apps/desktop/src/home.tsx path-later-units onClick (L1964-1976):
+   setExpandedTails(...) AND when !isOpen: setClosingBand(null) + setBandOverride(s.band)
+   — the same accordion move as the header toggle, smallest shape consistent with the
+   PATH-PIN-CONSISTENCY-001 focus pipeline (bandOverride is the focus pipeline's own state).
+2. Capture harness taps a CLOSED band — SHIPPED in scripts/path-far-future-capture.mjs:
+   closedBands = bands whose nodes are all locked; tapTarget = first counted group in a
+   closed band; assertion rowsInSection(after) === rowsInSection(before) + counted
+   (strict equality, before === 0), plus groupGone and rowsTotal growth. Committed green
+   run state/evidence/FIX-M1-PATH-VIS-001/result-vis1-green.json re-read at HEAD:
+   11/11 checks, failures 0, tag vis1-green — closed-band tap measured band A1
+   (a closed band): section rows [0, 91] == counted 91; accordion-moved case on-ramp
+   section rows [0, 21]. The on-ramp-only tap that hid this defect is gone.
+   S-D1's strict equality rides the same JSON: collapsedTotal 811 === hiddenTailTitles 811.
+3. DOM-level pin — SHIPPED and interactive, not merely a state effect:
+   apps/desktop/src/path-view-tap.test.tsx renders a real React root with a closed band
+   (5 locked a1 units): section renders 0 li[data-unit], counted row carries
+   data-hidden="5"; after act(btn.click()) the section renders 5 rows, the counted row
+   unmounts, and the section header reports aria-expanded="true".
+
+## Lane-tier gates re-run at HEAD (this lane)
+- npx tsc --noEmit from apps/desktop: exit 0, no diagnostics.
+  (NOTE: run from the repo root it prints tsc help instead of checking — there is no
+  root tsconfig; the correct invocation is from apps/desktop.)
+- npx vitest run from apps/desktop: 85 files, 735/735 passed, exit 0 (~12 s).
+- Targeted re-run of the surface's own pins:
+  npx vitest run src/path-view-tap.test.tsx src/path-view.test.tsx — 48/48 passed, exit 0.
+- validate_handoff.py --require-explicit-ledger-records: see ledger commit.
+
+## Not re-run (declared)
+- scripts/path-far-future-capture.mjs live re-run: not required by this lane's
+  protocol (tsc + vitest + re-read result-vis1-green.json); the JSON was committed at
+  b106252b and nothing in the measured surface changed between b106252b and HEAD, so the
+  committed capture is current evidence for HEAD.
+
+## Working-tree note
+apps/desktop/src-tauri/src/lib.rs was dirty with a sibling lane's drill-direction WIP
+throughout; never staged, never touched. Staged paths for this close:
+state/evidence/FIX-M1-PATH-VIS-2/ and state/task-state.json only.
