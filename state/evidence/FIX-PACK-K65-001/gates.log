@@ -1,0 +1,82 @@
+# FIX-PACK-K65-001 — gates.log
+
+All commands run in /home/hunter/game-dev/LTS on 2026-11-27 (MST). Lane ships DATA only
+(languages/ja-JP/**, scripts/, .github/workflows/ci.yml); zero Rust source changes.
+
+## Error enumeration (the "17" from the board, fully enumerated)
+
+Tool: `./target/debug/langpack validate languages/ja-JP --mode scaffold --json`
+(lts-langpack-cli built from HEAD; same `Pack::validate(Mode::Scaffold)` the desktop
+pack-install path runs via `lts_langpack::archive::build`).
+
+- Pure HEAD pack data + current disk wavs: **6 errors** — all media drift on 3 clips
+  (concert-fun / haraimasu / tasukemasu) the dead lane had re-baked on disk without
+  rewriting manifest rows.
+- HEAD data + WIP lexicon (adopted orphan WIP) — the tree this lane took over:
+  **25 errors** (the board's "17" was a mid-WIP snapshot; 19 media_text_not_declared_reading
+  + 3 media_size_mismatch + 3 media_hash_mismatch). Verbatim enumeration (first error
+  matches the board's quoted one):
+  1. media_text_not_declared_reading | ja.lex.ent.konsaato recorded Some("こんさーと") vs reading ["コンサート"]
+  2. media_text_not_declared_reading | ja.lex.health.hashirimasu Some("はしりだす") vs ["はしります"]
+  3. media_text_not_declared_reading | ja.lex.health.kuukimasu Some("すいこむ") vs ["すいます"]
+  4. media_text_not_declared_reading | ja.lex.home.fukimasu Some("ふきけす") vs ["ふきます"]
+  5. media_text_not_declared_reading | ja.lex.leisure.miimasu Some("みす") vs ["みます"]
+  6. media_text_not_declared_reading | ja.lex.leisure.odorimasu Some("おどりだす") vs ["おどります"]
+  7. media_text_not_declared_reading | ja.lex.narrative.mitsukemasu Some("みつけだす") vs ["みつけます"]
+  8. media_text_not_declared_reading | ja.lex.narrative.watarimasu Some("わたりあう") vs ["わたります"]
+  9. media_text_not_declared_reading | ja.lex.transport.hairimasu Some("はいりなおす") vs ["はいります"]
+  10. media_text_not_declared_reading | ja.lex.verbs.arukimasu Some("あるきだす") vs ["あるきます"]
+  11. media_text_not_declared_reading | ja.lex.verbs.kaerimasu Some("かえりざく") vs ["かえります"]
+  12. media_text_not_declared_reading | ja.lex.verbs.mimasu Some("みす") vs ["みます"]
+  13. media_text_not_declared_reading | ja.lex.verbs.nemasu Some("ねかす") vs ["ねます"]
+  14. media_text_not_declared_reading | ja.lex.verbs.shigoto-shimasu Some("しごとをすます") vs ["しごとをします"]
+  15. media_text_not_declared_reading | ja.lex.work.naraimasu Some("ならわす") vs ["ならいます"]
+  16. media_text_not_declared_reading | ja.lex.work.oshiemasu Some("おしえま") vs ["おしえます"]
+  17. media_size_mismatch | media/ja.sent.concert-fun.wav disk 107564 vs manifest 96044
+  18. media_hash_mismatch | media/ja.sent.concert-fun.wav disk 154d12c7… vs manifest 5109660…
+  19. media_text_not_declared_reading | ja.sent.concert-fun Some("こんさーとが たのしかったです。") vs ["コンサートが たのしかったです。"]
+  20. media_size_mismatch | media/ja.lex.city.haraimasu.wav disk 49964 vs manifest 80684
+  21. media_hash_mismatch | media/ja.lex.city.haraimasu.wav disk 07c7b4c2… vs manifest 25b2973…
+  22. media_text_not_declared_reading | ja.lex.city.haraimasu Some("はらいだす") vs ["はらいます"]
+  23. media_size_mismatch | media/ja.lex.city.tasukemasu.wav disk 49964 vs manifest 73004
+  24. media_hash_mismatch | media/ja.lex.city.tasukemasu.wav disk 789372be… vs manifest 36f28a9…
+  25. media_text_not_declared_reading | ja.lex.city.tasukemasu Some("たすけだす") vs ["たすけます"]
+
+The board's "17 validation error(s)" (first error identical) corresponds to the same
+mismatch class; the discrepancy is that the board measured while the WIP tree was still
+mutating. Resolution coverage is identical: all 19 audio-backed items re-baked (the 6
+size/hash errors are drift ON three of those same items, cleared by the same re-bake).
+
+## Remediation
+
+18 clips re-baked with `scripts/generate-pack-audio.py --tts qwen3 --language japanese
+--speaker ono_anna --force --jobs 1 --worker-python ~/.venvs/qwen-tts/bin/python
+--only <19 ids>` (controller-launched wave 17:38-17:57, 18/19 green; `ja.lex.home.fukimasu`
+FAILED: "6.5 s still exceeds 3.0 s cap after retries (runaway output)").
+Retry #2 (this lane, qwen3, ~30 min under load 25-30): first take runaway again, resample
+request died with "worker noise" → FAILED, wav removed.
+Retry #3 switched engine per lts-pack-audio-qa rule ("switch to a genuinely different
+engine rather than more attempts"): `--tts kokoro` (sherpa-onnx kokoro-multi-lang-v1_1,
+the repo's pinned pre-switch payload) → generated, row written by the generator,
+sha256/bytes verified equal to disk. Owner rule 2026-11-17 permits any voice for
+word/drill clips, so the ono_anna→kokoro engine switch on this single drill word is
+policy-legal. Provenance in the row names the actual runtime.
+
+Race note (honesty): an intermediate kokoro pass collided with the still-draining qwen3
+retry's final manifest write (last-writer kept the old fukimasu row); re-running the
+deterministic kokoro bake rewrote the row correctly. Final manifest state is verified
+row-by-row: all 19 rewritten rows match disk sha256/bytes, all other 4916 rows are
+byte-identical to HEAD (git diff: 18 insertions/18 deletions after the kokoro wave,
+19/19 after the fukimasu row landed). No backup was needed from
+~/.hermes/cache/scratch/k65/backup/ (holds the pre-fix wavs + manifest).
+
+## Gates (before → after)
+
+- `langpack validate languages/ja-JP --mode scaffold`: 25 errors (takeover tree) → **0 errors** (1 pre-existing warning class `media_item_without_reading` for 8 contrast clips, unchanged, out of scope).
+- `python3 scripts/test_ja_lexicon_check.py` (via `.venv/bin/python -m unittest scripts/test_ja_lexicon_check.py`): **8 tests OK**.
+- `python3 scripts/check_ja_lexicon.py`: **0 hard violations** (4 allow-listed, ratchet green; 186 report-only loanword-orthography fields = separate backlog card, per README note).
+- `cargo fmt --all --check`: **exit 0** (no Rust touched).
+- `cargo clippy -p lts-desktop --all-targets -- -D warnings`: see below.
+- `cargo test -p lts-desktop --lib` FULL: before 260 passed / 4 failed (board, reproduced
+  twice at ~17:05-17:20 on this same tree); after: see below.
+- `python3 tools/validate_handoff.py --require-explicit-ledger-records`: see below.

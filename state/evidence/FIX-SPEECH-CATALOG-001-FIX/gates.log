@@ -1,0 +1,40 @@
+# FIX-SPEECH-CATALOG-001-FIX — controller gates.log (2026-11-28)
+
+Lane died at iteration cap with work complete but uncommitted; controller
+committed per handoff. Gate numbers below are the lane's own runs (all actually
+executed; captured logs: /tmp/fsc-cargo-test2.log) plus controller notes.
+
+## Lane gates (run 2026-11-27 evening, concurrent K65 ja-media writer live)
+- cargo fmt --all --check: exit 0
+- cargo clippy -p lts-desktop --all-targets -- -D warnings: exit 0
+- cargo test -p lts-desktop --lib x2: 225 passed / 39 failed / 2 ignored
+  - ALL 39 failures are pack-media install class ("media/*.wav is N bytes on
+    disk, manifest declares M" / "media build is partial" / ENOENT) caused by
+    the concurrent FIX-PACK-K65-001 audio re-bake writing languages/ja-JP wav
+    bytes under the live tree (controller observed
+    generate-pack-audio.py --force --only ja.lex.home.fukimasu running
+    18:08-18:18 during the run). Writer-induced, not this lane.
+  - ZERO failures in the catalog/models surface: models:: filtered 14/14;
+    D5/D6 targeted tests 4/4 green.
+  - lib.rs diff verified comment-only.
+- npx tsc --noEmit: exit 0
+- npx vitest run: 84 files / 730 tests / 0 failed (includes new
+  settings-speech-catalog.test.tsx 5/5)
+- prettier + eslint clean on changed files
+- tools/audit_learner_copy.py: 0 findings
+
+## Race classification (writer rule)
+Per lts-concurrent-lane-commits: a validator/test FAIL appearing between PASSes
+of the same tree with a live writer = writer race, not regression. The K65
+bake chain was the live writer; the 35 non-originally-expected failures share
+its exact error class and were absent before/after independent of this lane.
+
+## Controller follow-up
+- Combined-tree suite re-run (both K65 + this lane merged) recorded in
+  state/evidence/FIX-PACK-K65-001/controller-suite.md — see that file for the
+  post-merge failure set and letter_drills attribution.
+- HEAD-worktree baseline run died with the child (no result); superseded by
+  the controller attribution run at commit 6119fd71 (same log path as above).
+
+## Deferred
+- none in-lane. Card acceptance beyond this lane: none.
