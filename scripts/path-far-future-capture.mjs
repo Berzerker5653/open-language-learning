@@ -25,7 +25,10 @@
  *   5. above-the-fold audit at 844px: zero locked node titles in the fold,
  *      the pinned (frontier) node inside the fold — the first screen opens
  *      AT the frontier;
- *   6. the counted row is a real control: tapping it expands the tail.
+ *   6. the counted row is a real control on EVERY band: tapping it opens the
+ *      band and renders exactly the counted tail (FIX-M1-PATH-VIS-2), and the
+ *      counted rows sum EXACTLY to the server-side hidden set
+ *      (FIX-M1-PATH-VIS-1 strict equality, replacing the old floor check).
  * fold-0 + full-path screenshots (before and after the expand) are the
  * visual oracles. Every measured value lands in result.json; any failed
  * assertion exits non-zero, so this file IS the gate (MOBILE-UX-001:
@@ -344,10 +347,18 @@ try {
     { renderedLocked: audit.renderedLocked, renderedLockedUnits: audit.renderedLockedUnits },
   );
   const collapsedTotal = audit.groups.reduce((a, g) => a + g.hidden, 0);
+  // FIX-M1-PATH-VIS-1 (S-M1): strict equality, not a floor. The old
+  // `collapsedTotal >= 400` check passed on the lane while 8 units were
+  // counted nowhere (811 hidden vs 803 collapsed — the S-D1 fingerprint).
+  // The sum of the counted rows IS the server-side hidden set, exactly.
   check(
     "the far tail collapses into counted band group(s) carrying the hidden count",
-    audit.groups.length >= 1 && collapsedTotal >= 400,
-    { groups: audit.groups.map((g) => `${g.band}:${g.hidden}`), collapsedTotal },
+    audit.groups.length >= 1 && collapsedTotal === result.payload.hiddenTailTitles,
+    {
+      groups: audit.groups.map((g) => `${g.band}:${g.hidden}`),
+      collapsedTotal,
+      hiddenTailTitles: result.payload.hiddenTailTitles,
+    },
   );
   check(
     "every counted row names only a count and a band, never a unit title",
@@ -406,24 +417,74 @@ try {
   await shot("farfuture-fold0", true);
   await shot("farfuture-fullpath", false);
 
-  // ---- the counted row is a real control: the learner's own tap opens it. ----
-  const expanded = await evaluate(`(() => {
-    const btn = document.querySelector('[data-testid^="path-later-units-"]');
-    if (!btn) return { clicked: false };
-    const before = document.querySelectorAll('li[data-unit]').length;
-    btn.click();
-    return { clicked: true, before };
-  })()`);
-  await sleep(500);
-  const afterExpand = await evaluate(`(() => {
-    const rows = document.querySelectorAll('li[data-unit]').length;
-    const groups = document.querySelectorAll('[data-testid^="path-later-units-"]').length;
-    return { rows, groups };
-  })()`);
+  // ---- the counted row is a real control on EVERY band (FIX-M1-PATH-VIS-2 /
+  // S-D2): the old check tapped only the on-ramp group — an already-OPEN band,
+  // which proves nothing about the closed-band case where the tap used to
+  // unmount the control and render zero rows. The shipped contract: tapping a
+  // counted row opens its band AND pulls the whole counted tail into view, so
+  // rows inside that band's section grow by EXACTLY the counted amount. ----
+  const closedBands = [...byBand.entries()]
+    .filter(([, raw]) => raw.every((n) => n.locked))
+    .map(([band]) => band);
+  const tapTarget = audit.groups.find((g) => closedBands.includes(g.band));
+  const tapAndMeasure = async (band) => {
+    const before = await evaluate(`(() => {
+      const btn = document.querySelector('[data-testid="path-later-units-${band}"]');
+      if (!btn) return { clicked: false };
+      const counted = Number(btn.getAttribute('data-hidden'));
+      const rowsInSection = document.querySelectorAll(
+        '[data-band="${band}"] li[data-unit]').length;
+      const rowsTotal = document.querySelectorAll('li[data-unit]').length;
+      btn.click();
+      return { clicked: true, counted, rowsInSection, rowsTotal };
+    })()`);
+    await sleep(500); // the opening re-render + the 200ms closing animation
+    const after = await evaluate(`(() => ({
+      rowsInSection: document.querySelectorAll('[data-band="${band}"] li[data-unit]').length,
+      rowsTotal: document.querySelectorAll('li[data-unit]').length,
+      groupGone: !document.querySelector('[data-testid="path-later-units-${band}"]'),
+    }))()`);
+    return { before, after };
+  };
+  const closedTap = tapTarget ? await tapAndMeasure(tapTarget.band) : { before: { clicked: false } };
   check(
-    "tapping the counted row pulls the tail into view (opt-in lookahead)",
-    expanded.clicked && afterExpand.rows > (expanded.before ?? 0),
-    { before: expanded.before, after: afterExpand.rows },
+    "tapping a CLOSED band's counted row opens the band and renders exactly the counted tail",
+    closedTap.before.clicked &&
+      closedTap.before.rowsInSection === 0 &&
+      closedTap.after.rowsInSection ===
+        closedTap.before.rowsInSection + closedTap.before.counted &&
+      closedTap.after.groupGone &&
+      closedTap.after.rowsTotal > closedTap.before.rowsTotal,
+    {
+      band: tapTarget ? tapTarget.band : null,
+      counted: closedTap.before.counted,
+      rowsInSection: [closedTap.before.rowsInSection, closedTap.after.rowsInSection],
+      rowsTotal: [closedTap.before.rowsTotal, closedTap.after.rowsTotal],
+    },
+  );
+  // The accordion moved: the formerly-open band is now closed and still shows
+  // a (now full-band) counted row — tap it back. This keeps the old on-ramp
+  // tap as an instance of the SAME invariant, at the strongest shape.
+  const movedBand = audit.groups.find((g) => !closedBands.includes(g.band));
+  const reopenTap =
+    closedTap.before.clicked && movedBand ? await tapAndMeasure(movedBand.band) : null;
+  check(
+    "tapping the OTHER band's counted row (accordion-moved case) also renders its whole tail",
+    Boolean(
+      reopenTap &&
+        reopenTap.before.clicked &&
+        reopenTap.before.rowsInSection === 0 &&
+        reopenTap.after.rowsInSection ===
+          reopenTap.before.rowsInSection + reopenTap.before.counted &&
+        reopenTap.after.groupGone,
+    ),
+    reopenTap
+      ? {
+          band: movedBand.band,
+          counted: reopenTap.before.counted,
+          rowsInSection: [reopenTap.before.rowsInSection, reopenTap.after.rowsInSection],
+        }
+      : { clicked: false },
   );
   await shot("farfuture-expanded", false);
 

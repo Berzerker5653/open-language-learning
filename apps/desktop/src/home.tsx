@@ -1677,12 +1677,21 @@ export function PathView({
         // neighbours — nothing further. The rest collapses to one counted row
         // that names no future titles (a band whose tail the learner opened
         // by hand, or a jump target sitting in the tail, stays expanded).
+        // FIX-M1-PATH-VIS-1 (S-D1): the list only mounts for the open band
+        // (or its brief closing animation). A band whose <ol> never mounts
+        // renders ZERO rows, so its counted row must count the WHOLE band —
+        // the old `nodes.length - cut` left PATH_FUTURE_WINDOW units of every
+        // closed band rendered nowhere and counted nowhere, breaking the
+        // learner's header arithmetic (header total = rendered rows + count).
+        const bandRendered = isOpen || closingBand === s.band;
         const cut = pathTailCutoff(s.nodes);
         const tailExpanded =
           expandedTails.has(s.band) ||
           (focusUnit !== null && s.nodes.slice(cut).some((n) => n.unit_id === focusUnit));
         const visibleNodes = tailExpanded ? s.nodes : s.nodes.slice(0, cut);
-        const laterUnits = s.nodes.length - visibleNodes.length;
+        const laterUnits = bandRendered
+          ? s.nodes.length - visibleNodes.length
+          : s.nodes.length;
         // PATH-VISUAL-001: the counter counts PROVEN-DONE only — refs the
         // learner actually proved — never visits or encounters.
         // UNIT-CAPSTONE-001: every section's capstone node is one of the
@@ -1941,19 +1950,30 @@ export function PathView({
               // before its band is within reach, so the far catalog stops
               // being the learner's screen. Tapping it is the learner's own
               // choice to look ahead, and it stays open for the visit.
+              // FIX-M1-PATH-VIS-2 (S-D2): on a CLOSED band the tail only
+              // renders once the band itself is open, so the tap must open
+              // the band too — the old expandedTails-only tap unmounted the
+              // control and added zero rows (the learner's lookahead tap
+              // deleted its own affordance and showed nothing).
               <button
                 type="button"
                 className="path-later-units"
                 data-testid={`path-later-units-${s.band}`}
                 data-hidden={String(laterUnits)}
                 aria-expanded="false"
-                onClick={() =>
+                onClick={() => {
                   setExpandedTails((prev) => {
                     const next = new Set(prev);
                     next.add(s.band);
                     return next;
-                  })
-                }
+                  });
+                  if (!isOpen) {
+                    // Same shape as the header toggle opening a band: the
+                    // accordion moves to the tapped band, tail expanded.
+                    setClosingBand(null);
+                    setBandOverride(s.band);
+                  }
+                }}
               >
                 {`+ ${laterUnits} later ${laterUnits === 1 ? "unit" : "units"} in ${header.friendly ?? header.label}`}
               </button>

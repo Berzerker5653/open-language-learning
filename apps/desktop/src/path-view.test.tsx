@@ -1096,3 +1096,63 @@ describe("the far-future catalog stays collapsed (FIX-M1-PATH-VIS-001)", () => {
     expect(html).not.toContain("Thesis defense");
   });
 });
+
+// FIX-M1-PATH-VIS-1 (REVIEW-FIX-M1-PATH-VIS-001 S-D1, MAJOR): a CLOSED band
+// renders no <ol> at all, yet its counted row used to subtract
+// PATH_FUTURE_WINDOW — 2 units per fully-locked band rendered nowhere and
+// counted nowhere (8 unaccounted units on the day-1 RU screen; the lane's
+// own green capture carried hiddenTailTitles=811 vs counted rows 803). The
+// learner's arithmetic must close: header total == rendered rows + counted
+// row, for EVERY band, open or closed. Inside the OPEN band the existing
+// history + frontier + 2-neighbours contract above is unchanged.
+describe("a closed band's counted row counts every unit (FIX-M1-PATH-VIS-1)", () => {
+  const lockedBand = (band: string, count: number): UnitPathNode[] =>
+    Array.from({ length: count }, (_, i) =>
+      node({
+        unit_id: `ru.unit.${band}.future-${i}`,
+        band,
+        title: `Thesis defense ${i}`,
+        locked: true,
+      }),
+    );
+
+  it("the day-1 shape: every closed band's count is its FULL band total", () => {
+    const nodes: UnitPathNode[] = [
+      node({ unit_id: "ru.unit.on-ramp.here", band: "on-ramp", title: "First sounds" }),
+      ...lockedBand("a1", 91),
+      ...lockedBand("b2", 403),
+    ];
+    const html = renderToStaticMarkup(<PathView nodes={nodes} />);
+    // Not one closed-band unit renders — so nothing may be "already shown".
+    expect(html).not.toContain('data-unit="ru.unit.a1.future-0"');
+    expect(html).not.toContain('data-unit="ru.unit.b2.future-402"');
+    // A1: 91 in the band, 0 rendered, 91 counted (the card's exact wording).
+    const a1 = html.slice(html.indexOf('data-band="a1"'), html.indexOf('data-band="b2"'));
+    const a1Group = a1.match(/data-testid="path-later-units-a1"[^>]*>([^<]*)/);
+    expect(a1Group, "the a1 counted row exists").not.toBeNull();
+    const [, a1Label] = a1Group as unknown as [string, string];
+    expect(a1Label.trim()).toBe("+ 91 later units in Beginner");
+    // B2 (the reviewer probe's fixture): "+ 403", never "+ 401".
+    const b2 = html.slice(html.indexOf('data-band="b2"'));
+    const b2Group = b2.match(/data-testid="path-later-units-b2"[^>]*>([^<]*)/);
+    expect(b2Group, "the b2 counted row exists").not.toBeNull();
+    const [, b2Label] = b2Group as unknown as [string, string];
+    expect(b2Label.trim()).toBe("+ 403 later units in Upper-intermediate");
+    expect(a1, "the count rides the control").toContain('data-hidden="91"');
+    expect(b2, "the count rides the control").toContain('data-hidden="403"');
+    // Learner arithmetic closes per band: header total == rendered + counted.
+    for (const [band, total] of [
+      ["a1", 91],
+      ["b2", 403],
+    ] as const) {
+      const section = html.slice(html.indexOf(`data-band="${band}"`));
+      const header = section.match(new RegExp(`(\\d+)/(\\d+) done`));
+      expect(header, `${band} header shows done/total`).not.toBeNull();
+      const rendered = (section.match(new RegExp(`data-unit="ru\\.unit\\.${band}\\.`, "g")) ?? [])
+        .length;
+      const counted = Number(section.match(/data-hidden="(\d+)"/)?.[1]);
+      expect(Number(header![2]), `${band} header total`).toBe(total);
+      expect(rendered + counted, `${band}: rows + counted row closes`).toBe(total);
+    }
+  });
+});
