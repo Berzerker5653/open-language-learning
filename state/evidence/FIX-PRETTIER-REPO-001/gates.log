@@ -15,3 +15,16 @@ AFTER (tree = a28435f2 = base + prettier --write on exactly the 17 flagged paths
 Race note: shared tree dirty at claim with FIX-M2-SUPPLY-RU-001 WIP
 (langpack/graph.rs, ja/ru goals.yaml, fixtures); zero path overlap with the 17,
 staged only the 17 named paths, committed solo. HEAD unchanged across battery.
+
+--- LINT LEG (same card, fix-on-spot) ---
+First green fmt:check on CI (run 46113792313) advanced the web job to `pnpm lint`,
+which reds with 21 eslint errors — masked for days behind the fmt step.
+(LOCAL NOTE: `pnpm lint` here also flags untracked local capture-build leftovers
+apps/desktop/dist-empty-states/ + dist-accumulation/ (~2267 errors); those dirs are
+gitignored and absent in CI — reproduce CI lint via eslint over `git ls-files *.ts *.tsx *.mjs`.)
+Fix: chore(lint) c2d8d280 — content-neutral mechanical sweep, 17 files, detail in commit body
+(1 real latent bug fixed: feel-progress-capture node-side window.__fpArmed ReferenceError branch).
+Gates at c2d8d280: pnpm fmt:check green; eslint 0 errors over 196 tracked ts/tsx/mjs;
+pnpm typecheck green; pnpm test green (apps/desktop 84 files / 733 tests).
+Acceptance goal (CI web job): fmt:check GREEN proven on CI; lint step proven on CI push below.
+
